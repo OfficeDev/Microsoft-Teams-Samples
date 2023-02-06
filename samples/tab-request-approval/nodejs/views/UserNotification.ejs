@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
+        <script src="https://unpkg.com/@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
             integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
@@ -34,8 +34,8 @@
             <div id="createtask" class="tab-pane fade in active">
                 <div class="mb">
                     <div class="form-group fg">
-                        <mgt-teams-msal2-provider client-id="1b12251c-9467-40b7-9215-fb89ff41df12"
-                            auth-popup-url="/tabAuth" scopes="User.Read,Mail.ReadBasic"></mgt-teams-msal2-provider>
+                        <mgt-teams-msal2-provider client-id="9811a0fb-ea05-46c7-b631-9c24f55ffe0c"
+                            auth-popup-url="/tabAuth" scopes="User.Read,people.read"></mgt-teams-msal2-provider>
                         <mgt-login></mgt-login>
                         <label for="title" class="title">Task Title</label>
                         <br>
@@ -104,7 +104,7 @@
         $(document).ready(function () {
             microsoftTeams.getContext(function (context) {
             upn = context.upn;
-
+            console.log("context is"+JSON.stringify(context));
             if(context.subEntityId != "") {
                 let taskInfo = {
                 title: null,
@@ -322,7 +322,7 @@
             var list = appList.value;
             var i;
             for (i = 0; i < list.length; i++) {
-                if (list[i].teamsApp['displayName'] == "Prithvi Tab Approval") {
+                if (list[i].teamsApp['displayName'] == "Tab Request Approval") {
                     return list[i].teamsApp['id'];
                 }
             }
@@ -333,6 +333,7 @@
             var taskID = taskInfo.id;
             var encodedContext = encodeURI('{"subEntityId": '+taskID+'}');
             var url = 'https://teams.microsoft.com/l/entity/'+appId+'/request?context=' + encodedContext;
+            alert("url is"+url);
             const postData = {
                 "topic": {
                     "source": "text",

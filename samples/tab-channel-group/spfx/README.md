@@ -6,39 +6,31 @@ products:
 - office
 - office-365
 languages:
-- javascript
+- Javascript
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:27 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 ---
 
 # Microsoft Teams tab using SharePoint Framework
 
 Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services.
 
-## Used SharePoint Framework Version
+**Interaction with Sharepoint Teams Tab Application**
+![Teams-Tab-SPFX](images/teams-tab-spfx.gif)
 
-![version](https://img.shields.io/badge/version-1.11-green.svg)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-## Applies to
-
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
+**Channel and group tabs in ASP.NET Core with MVC:** [Manifest](/samples/tab-channel-group/mvc-csharp/demo-manifest/tab-channel-group.zip)
 
 ## Prerequisites
-
-- [App Catalog site](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant#create-app-catalog-site)
+- [App Catalog site](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant#create-app-catalog-site)
 - [Node.js](https://nodejs.org/en/download/releases/) version 10.X
-- Install [glup](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp)
-- Install [Yeoman](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-yeoman)
-- Install [Yeoman SharePoint generator](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-yeoman-sharepoint-generator)
+- Install [glup](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp)
 
-
-
-
-## Minimal Path to Awesome
+### Setup 
 
 1) Clone this repository
 
@@ -76,11 +68,12 @@ Ensure that your console is activated in the root folder of the solution where w
 
 1. Next, you need to deploy the package that was generated to the tenant App Catalog.
 
-    Go to your tenant's SharePoint App Catalog.
-
+    Go to your tenant's SharePoint App Catalog (https://`{Your - tenant}`.sharepoint.com/sites/appcatalog/AppCatalog/Forms/AllItems.aspx)
+    
+    
 1. Upload or drag and drop the **teams-tab-webpart.sppkg** to the App Catalog.
 
-    ![Upload solution to App Catalog](images/AppCatlog.PNG)
+    ![Upload solution to App Catalog](images/1.upload_package.png)
 
     This deploys the client-side solution package. Because this is a full trust client-side solution, SharePoint displays a dialog and asks you to trust the client-side solution to deploy.
 
@@ -88,13 +81,14 @@ Ensure that your console is activated in the root folder of the solution where w
 
     Ensure that the **Make this solution available to all sites in the organization** option is selected, so that the web part can be used from the Microsoft Teams side.
 
-    ![Trust client-side solution deployment](images/teams-tab-client-side-solution.PNG)
-
 1. Select **Deploy**.
+
+   ![Trust client-side solution deployment](images/3.deploy_app.png)
 
     Notice that you can see if there's any exceptions or issues in the package by looking the **App Package Error Message** column in the App Catalog.
 
-At this point, the web part is deployed and is automatically available cross the SharePoint Online sites.
+   At this point, the web part is deployed and is automatically available cross the SharePoint Online sites.
+   ![Successfully Deployed](images/4.upload_successfull.png)
 
 > [!NOTE]
 > In this tutorial, we're using tenant wide deployment option of the SharePoint Framework solution. This will ensure that the development and usage experience is as easy as possible.
@@ -110,50 +104,40 @@ To make your web part available in Microsoft Teams, you'll have synchronize your
 
 1. Select the **teams-tab-client-side-solution** package in the SharePoint tenant App Catalog and select the **Sync to Teams** button at in the ribbon in the **Files** tab.
 
-   ![Sync to Teams button in ribbon](images/Sync-to-teams.PNG)
+    ![Sync to Teams button in ribbon](images/6.successfully_sync.png)
 
 1. Confirm that you can see the status message on the top-right corner.
 
-    ![Sync to Teams button in ribbon](images/Successful.PNG)
+    ![Sync to Teams button in ribbon](images/6.successfully_sync.png)
 
     > [!IMPORTANT]
     > If the synchronization isn't successful, please ensure that you have deleted possible previous version from the Microsoft Team App Catalog. This is the most common reason why the synchronization would fail as existing solution is not overridden currently.
 
+## Running the sample
+
 1. Move to the Microsoft Teams side and check the App Catalog status by selecting **Apps** from the left navigation
+    ![Channel activated](images/7.teams_apps.png)
 
-    ![Channel activated](images/teams-deployment.PNG)
-
-1. Wait until your tenant-specific apps selection is visible:
-
-    ![Channel activated](images/teams-tenant.PNG)
-
-    > [!NOTE]
-    > This can take few minutes based due to caching.
-
-1. Confirm that you can see **MyFirstTeamsTab** app in the catalog:
-
-    ![Channel activated](images/searching-tab-app.PNG)
-
-    > [!NOTE]
+1. Confirm that you can see **helloworld** app in the catalog:
     > This can take few minutes based due to caching.
 
 1. Move to a channel in a team where you want to test the solution. In the below picture, we have activated **General** channel in **Team**:
 
-    ![Channel activated](images/deploy-in-general.PNG)
+    ![Channel activated](images/8.add_to_teams.png)
 
 1. Select **+** to add a new tab on the channel.
-1. Select your custom tab called **MyFirstTeamTab** in the list. You can use the search capability if needed to find your custom tab:
+1. Select your custom tab called **helloworld** in the list. You can use the search capability if needed to find your custom tab:
 
-    ![Add a tab](images/add-tab.PNG)
+    ![Add a tab](images/9.set_up_tab.png)
 
 1. Select **Add** to confirm the tab to be selected.
 1. Select **Save** to confirm the tab to be installed on the channel:
 
-    ![Add a tab](images/save-tab-in-teams.PNG)
+    ![Add a tab](images/10.save.png)
 
 Your custom tab has been added on the Microsoft Teams channel and you can see how the code is reacting that it's in Microsoft Teams context. Theme of the web part is by default coming from the underlying SharePoint site.
 
-![Custom tab added](images/display-in-teams-tab.PNG)
+   ![Custom tab added](images/11.helloworld_tab.png)
 
 > [!NOTE]
 > You can control the initial configuration option visibility from the web part manifest by setting `canUpdateConfiguration` property as `false`. By default this setting is `true` which is taken into account when the Teams manifest is automatically created as part of the *Sync* process.
@@ -176,11 +160,11 @@ You can now sync your new version to Microsoft Teams.
 
 > Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
 
-## References
-
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
+## Further reading
+For more information about getting started with Teams-sharepoint, please review the following resources:
+- [Build Microsoft Teams Tab Using Sharepoint](https://learn.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-web-part-as-ms-teams-tab)
+- [Getting started with SharePoint Framework](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant)
+- [Building for Microsoft teams](https://docs.microsoft.com/sharepoint/dev/spfx/build-for-teams-overview)
+- [Use Microsoft Graph in your solution](https://docs.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
+- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
-

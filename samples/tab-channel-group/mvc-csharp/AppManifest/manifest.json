@@ -1,39 +1,43 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
-  "id": "1aaaaaaa-2bbb-3333-4ccc-5ddddddddddd",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "id": "<<Guid>>",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
   "developer": {
-    "name": "Contoso",
-    "websiteUrl": "https://ToDo",
-    "privacyUrl": "https://ToDo/privacy",
-    "termsOfUseUrl": "https://ToDo/tou",
-    "mpnId": ""
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Tab",
-    "full": "ChannelGroupTab"
+    "short": "Channel Group Tab",
+    "full": "Channel Group Tab"
   },
   "description": {
     "short": "short description here",
     "full": "full description here"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#D85028",
-  "configurableTabs": [],
-  "staticTabs": [],
-  "bots": [],
-  "connectors": [],
-  "composeExtensions": [],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<Base-url>>/tab",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
   "validDomains": [
-    "toDo.ngrok.io"
+    "*.ngrok.io"
   ]
 }

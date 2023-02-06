@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "4d9e95ab-ebe3-4976-82e9-3526d5c54906",
   "packageName": "com.microsoft.tabconversations",
@@ -25,14 +25,14 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-        "configurationUrl": "<<your base url>>/configure",
-        "canUpdateConfiguration": true,
-        "scopes": [
-            "team"
-        ],
-        "context":[
-          "channelTab"
-        ]
+      "configurationUrl": "<<your base url>>/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ],
+      "context": [
+        "channelTab"
+      ]
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],

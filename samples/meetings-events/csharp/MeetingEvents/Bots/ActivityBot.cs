@@ -17,7 +17,6 @@ namespace MeetingEvents.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private BotState _conversationState;
-        private BotState _userState;
 
         public ActivityBot(ConversationState conversationState)
         {
@@ -105,7 +104,7 @@ namespace MeetingEvents.Bots
                 {
                     new AdaptiveOpenUrlAction
                     {
-                        Title = "Join meeting",
+                        Title = "Join meeting Testing YMAL",
                         Url = meeting.JoinUrl,
                     },
                 },

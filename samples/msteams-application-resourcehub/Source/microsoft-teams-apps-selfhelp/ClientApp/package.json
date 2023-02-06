@@ -1,0 +1,54 @@
+{
+  "name": "microsoft-teams-apps-selfhelp",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@fluentui/react": "^8.72.1",
+    "@fluentui/react-northstar": "^0.60.0",
+    "@microsoft/teams-js": "^1.11.0",
+    "@types/node": "^16.11.22",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@uifabric/icons": "^7.7.2",
+    "@uifabric/variants": "^7.2.37",
+    "axios": "^0.21.1",
+    "color-hash": "^1.0.3",
+    "history": "^5.2.0",
+    "http-status-codes": "^2.2.0",
+    "i18next": "19.4.5",
+    "i18next-xhr-backend": "^3.2.2",
+    "moment": "^2.29.1",
+    "msteams-ui-components-react": "^0.8.4",
+    "msteams-ui-icons-core": "^0.4.2",
+    "node-sass": "^7.0.1",
+    "react": "^17.0.2",
+    "react-csv": "^2.2.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.15.4",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.5.5",
+    "typestyle": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

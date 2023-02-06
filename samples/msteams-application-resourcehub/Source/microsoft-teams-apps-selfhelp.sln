@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Apps.Selfhelp", "microsoft-teams-apps-selfhelp\Microsoft.Teams.Apps.Selfhelp.csproj", "{8D2D8F0B-FE37-4BAE-9A41-7FB8B1F7546C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Teams.Apps.Selfhelp.Shared", "Microsoft.Teams.Apps.Selfhelp.Shared\Microsoft.Teams.Apps.Selfhelp.Shared.csproj", "{24DADF16-0263-4B39-B71F-266CC5CB9DE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D2D8F0B-FE37-4BAE-9A41-7FB8B1F7546C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2D8F0B-FE37-4BAE-9A41-7FB8B1F7546C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2D8F0B-FE37-4BAE-9A41-7FB8B1F7546C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2D8F0B-FE37-4BAE-9A41-7FB8B1F7546C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24DADF16-0263-4B39-B71F-266CC5CB9DE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24DADF16-0263-4B39-B71F-266CC5CB9DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24DADF16-0263-4B39-B71F-266CC5CB9DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DADF16-0263-4B39-B71F-266CC5CB9DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {357AC402-F4D2-4580-9AB7-750EB2FD1495}
+	EndGlobalSection
+EndGlobal

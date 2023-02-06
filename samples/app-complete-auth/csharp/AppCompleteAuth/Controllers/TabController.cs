@@ -37,20 +37,26 @@ namespace AppCompleteAuth.Controllers
             {
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                var client = new SimpleGraphClient(accessToken);
-                var me = await client.GetMeAsync();
-                var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                            me.JobTitle : "Unknown";
+                if (accessToken != null)
+                {
+                    var client = new SimpleGraphClient(accessToken);
+                    var me = await client.GetMeAsync();
+                    var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                                me.JobTitle : "Unknown";
 
-                var photo = await client.GetPhotoAsync();
+                    var photo = await client.GetPhotoAsync();
 
-                var userInfo = new UserData() {
-                    User = me,
-                    Photo = photo,
-                    Title = title
-                };
+                    var userInfo = new UserData()
+                    {
+                        User = me,
+                        Photo = photo,
+                        Title = title
+                    };
 
-                return userInfo;
+                    return userInfo;
+                }
+
+                else return null;
             }
             catch (Exception ex)
             {

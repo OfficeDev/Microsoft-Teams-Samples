@@ -62,7 +62,10 @@ adapter.onTurnError = async (context, error) => {
     `${error}`,
     'https://www.botframework.com/schemas/error',
     'TurnError'
-  );
+   );
+
+  // Uncomment below commented line for local debugging.
+  // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
   // Note: Since this Messaging Extension does not have the messageTeamMembers permission
   // in the manifest, the bot will not be allowed to message users.
@@ -111,7 +114,7 @@ server.get('/auth-start', function (req, res) {
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth-end', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
 // Endpoint to facebook auth redirect page.
@@ -129,7 +132,7 @@ server.post('/api/messages', async (req, res) => {
 server.post('/getProfileOnBehalfOf', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
-  var scopes = ["https://graph.microsoft.com/User.Read"];
+  var scopes = ["https://graph.microsoft.com/User.Read", "openid"];
 
   // Creating MSAL client
   const msalClient = new msal.ConfidentialClientApplication({
@@ -148,17 +151,23 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
     }).then(async result => {
       const client = new SimpleGraphClient(result.accessToken);
       const myDetails = await client.getMeAsync();
-      var userImage = await client.getUserPhoto()
-      await userImage.arrayBuffer().then(result => {
-        console.log(userImage.type);
-        imageString = Buffer.from(result).toString('base64');
-        img2 = "data:image/png;base64," + imageString;
-        var userData = {
-          details: myDetails,
-          image: img2
-        }
-        resolve(userData);
-      })
+      try {
+        var userImage = await client.getUserPhoto()
+        await userImage.arrayBuffer().then(result => {
+          console.log(userImage.type);
+          imageString = Buffer.from(result).toString('base64');
+          img2 = "data:image/png;base64," + imageString;
+          var userData = {
+            details: myDetails,
+            image: img2
+          }
+          resolve(userData);
+        });
+      }
+      catch (error) {
+        console.log(error);
+      }
+      
     }).catch(error => {
       reject({ "error": error.errorCode });
     });

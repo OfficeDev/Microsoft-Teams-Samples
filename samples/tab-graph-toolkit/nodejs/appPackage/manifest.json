@@ -1,44 +1,44 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "<<AppId>>",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://xxxxx.ngrok.io",
-        "privacyUrl": "https://xxxxx.ngrok.io/privacy",
-        "termsOfUseUrl": "https://xxxxx.ngrok.io/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "mgt-teams-tab",
-        "full": ""
-    },
-    "description": {
-        "short": "Short description for Personal App.",
-        "full": "Full description of Personal App."
-    },
-    "accentColor": "#FFFFFF",
-    "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Personal Tab",
-            "contentUrl": "https://xxxxx.ngrok.io/tab",
-            "websiteUrl": "https://xxxxx.ngrok.io/tab",
-            "scopes": [
-                "personal"
-            ]
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-"*.ngrok.io"
-    ]
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<AppId>>",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://xxxxx.ngrok.io",
+    "privacyUrl": "https://xxxxx.ngrok.io/privacy",
+    "termsOfUseUrl": "https://xxxxx.ngrok.io/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "mgt-teams-tab",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Personal App.",
+    "full": "Full description of Personal App."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://xxxxx.ngrok.io/tab",
+      "websiteUrl": "https://xxxxx.ngrok.io/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
 }

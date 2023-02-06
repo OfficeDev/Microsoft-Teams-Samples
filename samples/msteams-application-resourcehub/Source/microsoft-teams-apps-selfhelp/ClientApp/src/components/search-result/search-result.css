@@ -1,0 +1,135 @@
+﻿.search {
+    padding: 10px;
+    margin-top: 5rem;
+}
+
+.search-input {
+    margin-left: 3rem !important;
+    margin-right: 4rem !important;
+    background: #FFFFFF !important;
+    
+}
+
+.dark-container .search-input {
+    margin-left: 3rem !important;
+    margin-right: 4rem !important;
+    background: border-box !important;
+}
+
+.search-box-mobile-view {
+    margin-top: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.search-item-view-mobile {
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.footer-hr-text {
+    margin-top: 0.9rem;
+}
+
+.image-size {
+    width: 192px;
+    height: 118px;
+    border-radius:8px;
+}
+
+.image-size-mobile {
+    width: 145px;
+    height: 118px;
+    border-radius: 8px;
+}
+
+.header-text {
+    padding-right: 2rem;
+    word-break: break-all;
+    margin-top: -1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40px;
+    cursor: pointer;
+    width: 530px;
+    position: relative;
+}
+
+.header-text-mobile {
+    padding-right: 2rem;
+    word-break: break-all;
+    margin-top: -1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical;
+}
+
+.description-format {
+    padding-right: 2rem;
+    word-break: break-all;
+    margin-top: -1.5rem;
+}
+
+.search-item-description-format {
+    padding-right: 2rem;
+    word-break: keep-all;
+    height: 50px;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.search-item-description-format-mobile {
+    word-break: keep-all;
+    height: 45px;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.footer-margin {
+    margin-right: 2rem;
+}
+
+.body-width {
+    width: 63.2% !important
+}
+
+.sharePointer {
+    cursor: pointer;
+}
+
+.externalTextTag {
+    padding-left: 12px;
+}
+
+.internalTextTag {
+    padding-left: 12px;
+}
+
+.container {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-text {
+    height: 20px;
+    word-break: keep-all;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}

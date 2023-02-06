@@ -1,6 +1,6 @@
-  
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+// <copyright file="BotLocalizationCultureProvider.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
 namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
 {
@@ -10,7 +10,6 @@ namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Http.Internal;
     using Microsoft.AspNetCore.Localization;
     using Microsoft.Bot.Schema;
     using Newtonsoft.Json;
@@ -46,7 +45,7 @@ namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
             try
             {
                 // Wrap the request stream so that we can rewind it back to the start for regular request processing.
-                httpContext.Request.EnableRewind();
+                httpContext.Request.EnableBuffering();
 
                 // Read the request body, parse out the activity object, and set the parsed culture information.
                 using (var streamReader = new StreamReader(httpContext.Request.Body, Encoding.UTF8, true, 1024, leaveOpen: true))

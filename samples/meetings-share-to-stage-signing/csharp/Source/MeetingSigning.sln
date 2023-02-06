@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Web", "MeetingSigning.Web\Microsoft.Teams.Samples.MeetingSigning.Web.csproj", "{783D6E6F-7339-4D74-89D4-B240496CC7A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C891CF44-0871-4F0E-8EF6-5708C8D243AB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Web.Tests", "MeetingSigning.Web.Tests\Microsoft.Teams.Samples.MeetingSigning.Web.Tests.csproj", "{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Domain", "MeetingSigning.Domain\Microsoft.Teams.Samples.MeetingSigning.Domain.csproj", "{46FB5234-47AC-48D2-AEAF-AB82D27DF16D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Domain.Tests", "MeetingSigning.Domain.Tests\Microsoft.Teams.Samples.MeetingSigning.Domain.Tests.csproj", "{7E4127A8-DEFE-470C-AF6D-57A37AD15098}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Infrastructure", "MeetingSigning.Infrastructure\Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj", "{5C7A78C5-280D-4F7B-BC10-782C758E2828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Tests", "MeetingSigning.Infrastructure.Tests\Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Tests.csproj", "{63C3C49E-306C-45AE-A924-6F02F98D3E07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FB5234-47AC-48D2-AEAF-AB82D27DF16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FB5234-47AC-48D2-AEAF-AB82D27DF16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FB5234-47AC-48D2-AEAF-AB82D27DF16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FB5234-47AC-48D2-AEAF-AB82D27DF16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4127A8-DEFE-470C-AF6D-57A37AD15098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4127A8-DEFE-470C-AF6D-57A37AD15098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4127A8-DEFE-470C-AF6D-57A37AD15098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4127A8-DEFE-470C-AF6D-57A37AD15098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7A78C5-280D-4F7B-BC10-782C758E2828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7A78C5-280D-4F7B-BC10-782C758E2828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7A78C5-280D-4F7B-BC10-782C758E2828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7A78C5-280D-4F7B-BC10-782C758E2828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0264D40-8A26-4CAF-9DE9-0CFF497234D8}
+	EndGlobalSection
+EndGlobal

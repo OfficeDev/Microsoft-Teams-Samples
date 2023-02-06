@@ -1,4 +1,4 @@
-﻿﻿---
+---
 page_type: sample
 description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 products:
@@ -8,27 +8,21 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "16-11-2021 00:15:13"
+ contentType: samples
+ createdDate: "11/16/2021 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-csharp
 ---
 
 # Bot with SharePoint file to view in Teams file viewer
 
 Using this C# sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer
 
-## Key features
-
-![upload file card](BotWithSharePointFileViewer/Images/uploadFileCard.png)
-
-![Upload file](BotWithSharePointFileViewer/Images/uploadFile.png)
-
-![View file card](BotWithSharePointFileViewer/Images/viewFileCard.png)
-
-![view file in teams](BotWithSharePointFileViewer/Images/fileViewer.png)
+- **Interaction with bot**
+![sharepoint-file-viewer ](BotWithSharePointFileViewer/Images/sharepoint-viewer.gif)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -38,30 +32,18 @@ Using this C# sample, a bot with capability to upload files to SharePoint site a
 
 ## Setup
 
-1 Clone the repository
+### 1. Setup for Bot SSO
+Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2 In a terminal, navigate to `samples/bot-sharepoint-file-viewer/csharp`
-
-3 Run ngrok - point to port 3978
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-   Add this permission to app registration
-
-![Permissions](BotWithSharePointFileViewer/Images/permissions.png)
-
-5. SharePoint site configuration
+### 3. Setup SharePoint Site.
+1) SharePoint site configuration
    - Login to [sharepoint](https://www.office.com/launch/sharepoint?auth=2)
    - Click on `Create site` and select `Team site`
    
@@ -71,50 +53,63 @@ Using this C# sample, a bot with capability to upload files to SharePoint site a
    
    ![Site name](BotWithSharePointFileViewer/Images/siteName.png).
    
-   - From site address eg: 'https://m365x357260.sharepoint.com/sites/SharePointTestSite'
+2) From site address eg: 'https://m365x357260.sharepoint.com/sites/SharePointTestSite'
       `m365x357260.sharepoint.com` - value is sharepoint tenant name.
 	  
    - Click on next. (optional step)Add aditional owner and member.
    - Click on Finish.
 
-6. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
-
-7. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 6.
-
-8. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}`,`{{ Connection Name }}` with the id from step 2 and `{{Sharepoint tenant name}}`,`{{Sharepoint site name}}` from step 5 and `{{Appbase-url}}`.
-
-9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams
-
-## To try this sample
-
-- In a terminal, navigate to `BotWithSharePointFileViewer`
+### 4. Setup for code
+1 Clone the repository
 
     ```bash
-    # change into project folder
-    cd # BotWithSharePointFileViewer
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+2 In a terminal, navigate to `samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer`
 
-  A) From a terminal
+3 If you are using Visual Studio
+   - Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to `samples/bot-sharepoint-file-viewer/csharp` folder
+   - Select `BotWithSharePointFileViewer.csproj` or `BotWithSharePointFileViewer.sln`file
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
+4 Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId and ConnectionName generated in Step 1 (Setup for Bot SSO). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+ - `ApplicationBaseUrl` will be your app's base url. For eg `https://xxxx.ngrok.io`.
+ - `SharePointTenantName` will be the tenant name generated in step 3.2.
+ - `SharePointSiteName` will be the site name created in step 3.
 
-  B) Or from Visual Studio
+5 Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-sharepoint-file-viewer/csharp` folder
-  - Select `BotWithSharePointFileViewer.csproj` file
-  - Press `F5` to run the project
+### 5. Setup Manifest for Teams
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+
+
+## Running the sample
+
+You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+
+1) The `viewfile` command will list all the files that are uploaded to sharepoint site.
+![View files](BotWithSharePointFileViewer/Images/viewfile.png)
+
+1) The `uploadfile` command will return a card, which will open a task module from where new files can be uploaded to sharepoint.
+![Upload file](BotWithSharePointFileViewer/Images/uploadFile.png)
+![Upload file page](BotWithSharePointFileViewer/Images/uploadfile-taskmodule.png)
+
+1) The files will be uploaded to sharepoint.
+![File details](BotWithSharePointFileViewer/Images/sharepoint-files.png)
 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)

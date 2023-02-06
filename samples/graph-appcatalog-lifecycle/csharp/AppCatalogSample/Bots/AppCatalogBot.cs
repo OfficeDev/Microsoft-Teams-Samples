@@ -49,20 +49,24 @@ namespace AppCatalogSample.Bots
         }
         protected static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " List" + " \r" + "-" + " Publish" + " \r" + "-" + " Update" + " \r" + "-" + " Delete" + " \r");
+            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " Publish: publish" + " \r" + "-" + " Update: update" + " \r" + "-" + " Delete: delete" + " \r" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
 
             reply.SuggestedActions = new SuggestedActions()
             {
                 Actions = new List<CardAction>()
                 {
-
-                    new CardAction() { Title = "List", Type = ActionTypes.ImBack, Value = "list"},
                     new CardAction() { Title = "Update", Type = ActionTypes.ImBack, Value = "update"},
+                    new CardAction() { Title = "Publish", Type = ActionTypes.ImBack, Value = "publish"},
                     new CardAction() { Title = "Delete", Type = ActionTypes.ImBack, Value = "delete"},
+                    new CardAction() { Title = "ListApp", Type = ActionTypes.ImBack, Value = "listapp"},
+                    new CardAction() { Title = "ListApp by ID", Type = ActionTypes.ImBack, Value = "app" },
+                    new CardAction() { Title = "App based on manifest Id", Type = ActionTypes.ImBack, Value = "findapp"},
+                    new CardAction() { Title = "App Status", Type = ActionTypes.ImBack, Value = "status"},
+                    new CardAction() { Title = "List of bot", Type = ActionTypes.ImBack, Value = "bot" },
                 },
             };
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
     }
-        
+
 }

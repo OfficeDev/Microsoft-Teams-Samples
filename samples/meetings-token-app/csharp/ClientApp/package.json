@@ -1,0 +1,57 @@
+{
+  "name": "meetings-token-app",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui/react-northstar": "^0.63.1",
+    "@microsoft/live-share": "~0.3.1",
+    "@microsoft/teams-js": "^2.5.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^13.5.0",
+    "fluid-framework": "~0.59.0",
+    "jquery": "^3.6.0",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-router-dom": "6.2.2",
+    "react-scripts": "^4.0.0",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@fluidframework/test-client-utils": "~0.59.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "prettier": "^2.5.0",
+    "start-server-and-test": "^1.11.6"
+  },
+  "scripts": {
+    "clean": "npx shx rm -rf build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "proxy": "http://localhost:3000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

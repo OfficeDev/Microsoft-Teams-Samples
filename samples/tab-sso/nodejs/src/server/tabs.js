@@ -1,20 +1,22 @@
 'use strict';
 const fetch = require("node-fetch");
-const querystring = require("querystring");
 var config = require('config');
 const msal = require('@azure/msal-node');
 
 module.exports.setup = function (app) {
   var express = require('express')
 
+  // Creating MSAL client
+  const msalClient = new msal.ConfidentialClientApplication({
+    auth: {
+      clientId: config.get("tab.appId"),
+      clientSecret: config.get("tab.clientSecret")
+    }
+  });
+
   // Configure the view engine, views folder and the statics path
   // Use the JSON middleware
   app.use(express.json());
-
-  // Setup home page
-  app.get('/', function (req, res) {
-    res.render('hello');
-  });
 
     // Setup the configure tab, with first and second as content tabs
   app.get('/configure', function (req, res) {
@@ -23,8 +25,10 @@ module.exports.setup = function (app) {
 
   // ------------------
   // SSO demo page
-  app.get('/ssodemo', function (req, res) {
-    res.render('ssoDemo');
+  app.get('/ssoDemo', function (req, res) {
+    var clientId = config.get("tab.appId");
+    var applicationIdUri = config.get("tab.applicationIdUri");
+    res.render('ssoDemo', { clientId: clientId, applicationIdUri: applicationIdUri });
   });
 
   // Pop-up dialog to ask for additional permissions, redirects to AAD page
@@ -39,26 +43,24 @@ module.exports.setup = function (app) {
     res.render('auth-end', { clientId: clientId });
   });
 
+  app.get('/Home/BrowserRedirect', function (req, res) {
+    var clientId = config.get("tab.appId");
+    var applicationIdUri = config.get("tab.applicationIdUri");
+    res.render('browser-redirect', { clientId: clientId, applicationIdUri: applicationIdUri });
+  });
+
   // On-behalf-of token exchange
   app.post('/getProfileOnBehalfOf', function (req, res) {
     var tid = req.body.tid;
     var token = req.body.token;
     var scopes = ["https://graph.microsoft.com/User.Read"];
-
-    // Creating MSAL client
-    const msalClient = new msal.ConfidentialClientApplication({
-      auth: {
-        clientId: config.get("tab.appId"),
-        clientSecret: config.get("tab.appPassword")
-      }
-    });
     
     var oboPromise = new Promise((resolve, reject) => {
       msalClient.acquireTokenOnBehalfOf({
         authority: `https://login.microsoftonline.com/${tid}`,
         oboAssertion: token,
         scopes: scopes,
-        skipCache: true
+        skipCache: false
       }).then(result => {
             fetch("https://graph.microsoft.com/v1.0/me/",
               {

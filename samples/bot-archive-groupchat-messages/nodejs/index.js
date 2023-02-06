@@ -41,9 +41,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+   // Uncomment below commented line for local debugging.
+   // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
     // Clear out state
     await conversationState.delete(context);
 };
@@ -71,8 +71,9 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 });
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
+server.post('/api/messages', (req, res, next) => {
     adapter.processActivity(req, res, async (context) => {
         await bot.run(context);
+        return next();
     });
 });

@@ -16,22 +16,21 @@ export default class TeamsContextProvider extends Component {
     }
 
     componentDidMount(){
-        microsoftTeams.getContext((context, error) => {
+        microsoftTeams.app.getContext().then((context) => {
             this.setState({
                 teamsContext: context
             });
         });
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (authCode) => {
-                this.setState({
-                    authCode: authCode
-                });
-            },
-            failureCallback: (error) => {
-                console.error("Failed to get auth: ", error)
-                console.log(error);
-            },
+        microsoftTeams.authentication.getAuthToken()
+        .then((authCode) => {
+            this.setState({
+                authCode: authCode
+            });
         })
+        .catch((error) => {
+            console.error("Failed to get auth: ", error)
+            console.log(error);
+        });
     }
 
     render() {

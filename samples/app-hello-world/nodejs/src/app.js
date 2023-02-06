@@ -44,10 +44,12 @@ const bot = new EchoBot();
 const messageExtension = new MessageExtension();
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
+server.post('/api/messages', (req, res, next) => {
     adapter.processActivity(req, res, async (context) => {
         if (context.activity.type === ActivityTypes.Invoke)
             await messageExtension.run(context);
-        else await bot.run(context);
+        else
+            await bot.run(context);
+        return next();
     });
 });

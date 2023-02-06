@@ -1,0 +1,72 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Messaging Extension Authorization",
+  "steps": [
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "The messaging extension authorization uses the activity's tenant and user ids for retriving the user's token",
+      "line": 76
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "the query state will be null, except for when the user is _completing_ the authorization flow. We will ignore this branch for now.",
+      "line": 80
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "We first attempt to retrieve the token for the user",
+      "line": 98
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "if it fails, we generate the PKCE code challenge and code verifier to craft the authorization url",
+      "line": 110,
+      "selection": {
+        "start": {
+          "line": 103,
+          "character": 13
+        },
+        "end": {
+          "line": 110,
+          "character": 15
+        }
+      }
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "We then send back the `auth` result to the teams client.\r\n\r\n![Image of the messaging extension auth prompt](./Docs/Images/SearchAuthPrompt.jpg)",
+      "line": 129,
+      "selection": {
+        "start": {
+          "line": 111,
+          "character": 13
+        },
+        "end": {
+          "line": 129,
+          "character": 15
+        }
+      }
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "When the user completes the authorization the object passed to `notifySuccess` is returned in the `State` object.",
+      "line": 80
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "We then verify the state and claim the code returned from the authorization flow. ",
+      "line": 94,
+      "selection": {
+        "start": {
+          "line": 82,
+          "character": 14
+        },
+        "end": {
+          "line": 94,
+          "character": 33
+        }
+      }
+    }
+  ],
+  "ref": "nibeauli/account-linking-sample"
+}

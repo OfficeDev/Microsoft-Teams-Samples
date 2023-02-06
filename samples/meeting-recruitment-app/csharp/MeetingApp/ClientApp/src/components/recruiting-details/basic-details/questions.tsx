@@ -32,7 +32,7 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/questions`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, questionsJson) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, questionsJson: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
@@ -73,7 +73,7 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/edit?editText=` + editText,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question: string) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, question: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
@@ -160,7 +160,7 @@ const Questions = (): React.ReactElement => {
                     <Header as="h4" content="Questions" className="questionsHeader" />
                     <AddIcon onClick={() => addQuestionsTaskModule()} title="Add new questions" />
                 </Flex>
-                <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
+                <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time - testing YMAL" />
                 <Flex gap="gap.smaller" column className="questionWrapper">
                     {
                         questionDetails.map((questionDetail, index) => {

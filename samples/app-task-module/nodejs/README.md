@@ -11,8 +11,10 @@ description: "A task module allows you to create modal popup experiences in your
 urlFragment: teams-module-node
 extensions:
   contentType: samples
-  createdDate: 9/17/2018 6:53:22 PM
+  createdDate: "09/17/2018 06:53:22 PM"
+urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
+
 
 # Microsoft Teams task module
 
@@ -20,11 +22,75 @@ A task module allows you to create modal popup experiences in your Teams applica
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
-## Try it yourself
+## Interaction with app
 
-This sample is deployed on Microsoft Azure and you can try it yourself by uploading [TaskModule.zip](./TaskModule.zip) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; see [step 6 here](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-tenant#turn-on-microsoft-teams-for-your-organization).) The app is running on the free Azure tier, so it may take a while to load if you haven't used it recently and it goes back to sleep quickly if it's not being used, but once it's loaded it's pretty snappy.
+![adaptivecard](Images/AppTaskModule.gif)
 
-## Overview of this sample
+## Prerequisites
+
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  [NodeJS](https://nodejs.org/en/)
+-  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+   appropriate permissions to install an app.
+   
+ ## Setup
+ 
+ 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+   
+ 2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+
+ - Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  - In a terminal, navigate to `samples/app-task-module/nodejs`
+  
+  - Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, you get by running ngrok it should look something like `https://abc21-hun-12ef.ngrok.io`
+
+  - Install modules
+
+    ```bash
+    npm install
+    ```
+  - Build application:
+
+    ```bash
+    npm run build
+    ```
+
+  - Run your app.
+  
+    ```bash
+    npm start
+    ```
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    -  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-task-module\nodejs\Manifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the `appPackage` folder, copy that file and paste someother folder then zip, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
+   
+ ## Overview of this sample
 
 This sample app was developed in conjunction with the task module feature itself to exercise as much of it as possible. Here's what's included:
 
@@ -34,19 +100,69 @@ This sample app was developed in conjunction with the task module feature itself
 
 The tab shows how to invoke the task module using the Teams SDK. Source code for the tab is found in [TaskModuleTab.ts](src/TaskModuleTab.ts); the view definition is in [taskmodule.pug](src/views/taskmodule.pug). This sample app uses [Pug](https://pugjs.org) (formerly Jade) for HTML rendering.
 
-The following task modules are supported:
+## Running the sample
 
 * YouTube, which is comprised of a [generic template for embedded `<iframe>` experiences](src/views/embed.pug) (also used for the PowerApp task module below) plus a [four-line stub containing the YouTube embed URL](src/views/youtube.pug)
+
+![Youtube TaskModule](Images/YoutubeTaskModule.PNG)
 * [PowerApp](src/views/powerapp.pug) &mdash; unfortunately it doesn't work out of the box; click the button or see the [source code](src/views/powerapp.pug) for details on how you can customize it for your tenant
+
+![PowerApp TaskModule](Images/PowerApp_TaskModule.PNG)
 * [A simple HTML form](src/views/customform.pug)
+
+![Html form](Images/CustomerInfoTaskModule.PNG)
 * There are two Adaptive card examples:
   * Showing the results of an `Action.Submit` button returned to the tab
   * Showing the results returned to the bot as a message
 
-The sample app also contains a bot with cards allowing you to invoke these task modules. You can invoke them from an Adaptive card (using the _tasks_ command) or from a Bot Framework thumbnail card (using the _bfcard_ command). [RootDialog.ts](src/dialogs/RootDialog.ts) contains the code for the _tasks_ and _bfcard_ commands, and [TeamsBot.ts](src/TeamsBot.ts) contains the code for responding to `task/fetch` and `task/submit` messages. The task modules when invoked from a bot are the same as for the tab, except for the Adaptive card examples:
+The sample app also contains a bot with cards allowing you to invoke these task modules.
+
+![Deeplink Invoke](Images/Card_Deeplink.PNG)
+
+![task/fetch Invoke](Images/Card_TaskFetch.PNG)
+
+You can invoke them from an Adaptive card (using the _tasks_ command) or from a Bot Framework thumbnail card (using the _bfcard_ command). 
+
+[RootDialog.ts](src/dialogs/RootDialog.ts) contains the code for the _tasks_ and _bfcard_ commands, and [TeamsBot.ts](src/TeamsBot.ts) contains the code for responding to `task/fetch` and `task/submit` messages. The task modules when invoked from a bot are the same as for the tab, except for the Adaptive card examples:
 
 * _Adaptive Card - Single_ returns the results to the conversation as a message.
 * _Adaptive Card - Sequence_ shows how adaptive cards can be chained together: instead of returning the result to the chat, the result is shown in another Adaptive card.
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+![ClickDeepLink](Images/ClickDeepLink.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png)  
+
+![InstallOutlookCustome](Images/InstallOutlookCustome.png)  
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Implementation notes
 
@@ -66,6 +182,7 @@ The sample app also contains a bot with cards allowing you to invoke these task 
 
 There's also an _actester_ bot command. It's a handy way of seeing what an Adaptive card looks like in Teams - simply copy/paste the JSON of Adaptive cards, e.g. the [Samples page on the Adaptive card site](http://adaptivecards.io/samples/), and the bot will render it as a reply.
 
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
@@ -79,3 +196,7 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further reading
+
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)

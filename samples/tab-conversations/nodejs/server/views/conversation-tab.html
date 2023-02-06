@@ -6,24 +6,23 @@
     </link>
     <link rel="stylesheet" type="text/css" href="/static/styles/custom.css">
     </link>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-        crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         // Method to start a new conversation.
         function startConversation() {
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext().then((context) => {
                 microsoftTeams.conversations.openConversation(
                     {
                         "subEntityId": Date.now(),
-                        "entityId": context.entityId,
-                        "channelId": context.channelId,
+                        "entityId": context.page.id,
+                        "channelId": context.channel.id,
                         "title": "Task Title",
                         "onStartConversation": (conversationResponse) => onStartConversation(conversationResponse)
-                    })
-            })
+                    }
+                );
+            });
         }
 
         // Callback function for open conversation.
@@ -40,22 +39,23 @@
 
         // Method to continue an existing conversation.
         function continueConversation() {
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext().then((context) => {
                 microsoftTeams.conversations.openConversation(
                     {
                         "subEntityId": localStorage.subEntityId,
-                        "entityId": context.entityId,
-                        "channelId": context.channelId,
+                        "entityId": context.page.id,
+                        "channelId": context.channel.id,
                         "title": "Task Title",
                         "conversationId": localStorage.conversationId
-                    })
+                    }
+                );
             })
         }
 
         // Method to execute deeplink to redirect to the subentity/conversation in the channel.
         function deeplinkConversation() {
-            microsoftTeams.getContext(function (context) {
-                microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/message/"+context.channelId+"/" + localStorage.conversationId + "?groupId="+context.groupId+"&tenantId="+context.tid+"&parentMessageId="+localStorage.conversationId);
+            microsoftTeams.app.getContext().then((context) => {
+                microsoftTeams.app.openLink("https://teams.microsoft.com/l/message/"+context.channel.id+"/" + localStorage.conversationId + "?groupId="+context.team.groupId+"&tenantId="+context.user.tenant.id+"&parentMessageId="+localStorage.conversationId);
             })
         }
     </script>

@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Image } from '@fluentui/react-northstar'
-
+import {Text, Button } from '@fluentui/react-components'
+import { Card } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 /**
  * The 'GetNotificationDesktop' component
  * of your app.
@@ -13,15 +13,14 @@ const GetNotificationDesktop = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     // Method to validate and send notification
     function sendNotification() {
-        // Method to ask for validating notification permission and then sending notification.
-
+        // Method to ask for validating notification permission and then sending notification.        
         navigator.permissions.query({ name: 'notifications' }).then(function (result) {
-            if (result.state == 'denied') {
+            if (result.state === 'denied') {
                 alert("failed");
             }
             else {
@@ -46,18 +45,16 @@ const GetNotificationDesktop = () => {
         <>
             {/* Card for sending notification */}
             <Card>
-                <CardHeader>
-                    <Text content="Notifications (Web only)" weight="bold" />
-                </CardHeader>
+            <Text weight='bold' as="h1">Notifications (Web only)</Text>                
                 <CardBody>
-                    <Flex column gap="gap.small">
-                        <Text content="Checks for permission before getting notification." />
-                        <Text content="SDK used: " weight="semibold" />
-                        <Text content="navigator" />
-                        <Text content="Method: " weight="semibold" />
-                        <Text content="Notifications API" />
-                        <Button content="Notify" onClick={sendNotification} />
-                    </Flex>
+                    <div className='flex columngap'>
+                        <Text>Checks for permission before getting notification.</Text>
+                        <Text weight="semibold">SDK used: </Text>
+                        <Text>Navigator</Text>
+                        <Text weight="semibold">Method: </Text>
+                        <Text>Notifications API</Text>
+                        <Button onClick={sendNotification}>Notify</Button>
+                    </div>
                 </CardBody>
             </Card>
         </>

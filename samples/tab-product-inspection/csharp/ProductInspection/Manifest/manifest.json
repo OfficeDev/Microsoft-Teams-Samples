@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "<<manifest-Id>>",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.teams.productinspection",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "TabProductInspection",
       "name": "Capture image tab",
-      "contentUrl": "https://<<base-url>>/index",
-      "websiteUrl": "https://<<base-url>>/index",
+      "contentUrl": "https://{{domain-name}}/index",
+      "websiteUrl": "https://{{domain-name}}/index",
       "scopes": [
         "personal"
       ]
@@ -40,7 +40,7 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "<<appDomain>>"
+    "{{domain-name}}"
   ],
   "devicePermissions": [
     "media"

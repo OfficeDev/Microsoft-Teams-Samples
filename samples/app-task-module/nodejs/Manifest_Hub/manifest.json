@@ -1,0 +1,65 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.13",
+    "version": "1.0.0",
+    "id": "{{Microsoft-App-Id}}",
+    "packageName": "com.microsoft.teams.taskmoduletester",
+    "developer": {
+        "name": "Bill Bliss",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "icons": {
+        "color": "color_icon.png",
+        "outline": "outline_icon.png"
+    },
+    "name": {
+        "short": "Task Module",
+        "full": "Task Module Test App"
+    },
+    "description": {
+        "short": "Demo/test app for the Task Module feature",
+        "full": "This app is used to test the Task Module feature."
+    },
+    "accentColor": "#020081",
+    "staticTabs": [
+        {
+            "entityId": "com.microsoft.teams.taskmoduletester",
+            "name": "Tasks!",
+            "contentUrl": "https://{{domain-name}}/taskmodule",
+            "websiteUrl": "https://{{domain-name}}/taskmodule",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "{{Microsoft-App-Id}}",
+            "canUpdateConfiguration": false,
+            "commands": [
+                {
+                    "id": "getRandomText",
+                    "title": "Get some random text for fun",
+                    "description": "Gets some random text and images that you can insert in messages for fun.",
+                    "initialRun": true,
+                    "parameters": [
+                        {
+                            "name": "cardTitle",
+                            "title": "Card title",
+                            "description": "Card title to use"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "{{domain-name}}"
+    ]
+}

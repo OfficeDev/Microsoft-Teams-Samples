@@ -8,84 +8,112 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:20:00"
+ contentType: samples
+ createdDate: "11/24/2021 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 ---
 
 # Bot task reminder
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-Type command `create-reminder` to get card for scheduling the recurring task.
+## Interaction with app
 
-![Schedule task ](Images/ScheduleTaskCard.png)
+![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminder.gif)
 
-- Click on schedule task button to open task module for scheduling a task.
-![Task Details ](Images/ScheduleTask.png)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-- Once task is scheduled, you will be notified about the task at scheduled time.
-![Task reminder](Images/TaskReminder.png)
+**Bot daily task reminder:** [Manifest](/samples/bot-daily-task-reminder/csharp/demo-manifest/Bot-Daily-Task-Reminder.zip)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+    Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+1) Setup for Bot
+- In Azure portal, create AAD app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### 2. Run your bot sample
-1) Clone the repository
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
+
+2) Setup NGROK  
+ Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+3) Setup for code  
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/bot-daily-task-reminder/nodejs`
+- In the folder where repository is cloned navigate to `samples/bot-daily-task-reminder/nodejs`
 
-3) Install node modules
+- Install node modules
 
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+   Inside nodejs folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
     ```bash
     npm install
     ```
-4) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5) Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created while doing AAD app registration in Azure portal, the MicrosoftAppPassword is referred to as the "client secret" generated while creating Secret in AAD app registration.
+ `BaseUrl` with application base url. For e.g., your ngrok url https://xxx.ngrok.io
 
-6) Run your app
+- Run your app
 
     ```bash
     npm start
     ```
-7) Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+
+4) Setup Manifest for Teams
+
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Relace {{domain-name}} with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Features of this sample
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-daily-task-reminder/nodejs/index.js#L47) line and put your debugger for local debug.
 
-- Type command `create-reminder` to get card for scheduling the recurring task.
+## Running the sample
+
+**Type command create-reminder to get card for scheduling the recurring task:**
 
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
-- Click on schedule task button to open task module for scheduling a task
+**Click on schedule task button to open task module for scheduling a task:**
+
 ![Task Details ](Images/ScheduleTask.png)
 
-- Task reminder
+**Once task is scheduled, you will be notified about the task at scheduled time:**
 
 ![Task reminder](Images/TaskReminder.png)
 
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

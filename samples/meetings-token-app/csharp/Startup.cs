@@ -4,16 +4,15 @@
 
 namespace TokenApp
 {
-    using System.IO;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Integration.AspNet.Core;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
     using Microsoft.IdentityModel.Tokens;
     using TokenApp.Bots;
@@ -48,10 +47,10 @@ namespace TokenApp
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.Authority = "https://login.microsoftonline.com/common";
-                options.Audience = this.Configuration["AzureAd:ApplicationId"];
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
+                    ValidateAudience = false,
                 };
             });
             services.AddControllersWithViews();
@@ -77,6 +76,10 @@ namespace TokenApp
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, TokenBot>();
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         /// <summary>
@@ -91,24 +94,24 @@ namespace TokenApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles(new DefaultFilesOptions
-            {
-                DefaultFileNames = { "index.html" },
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "App/dist")),
-            })
-            .UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "App/dist")),
-            })
-            .UseWebSockets()
-            .UseRouting()
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseRouting()
             .UseAuthentication()
             .UseAuthorization()
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
         }
     }

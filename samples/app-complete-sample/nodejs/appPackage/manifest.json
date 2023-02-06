@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.5",
   "id": "<<REGISTERED_BOT_ID>>",
   "packageName": "com.Template.microsoftteams.completesampleapp",

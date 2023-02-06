@@ -1,20 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
-
+import { Text, Button } from '@fluentui/react-components'
+import { Card} from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 /**
  * The 'captureVideoDesktop' component
  * of your app.
  */
 const CaptureVideoDesktop = () => {
     //  var stream: MediaStream = null;
-    const [capturedVideo, setCapturedVideo] = useState(new MediaStream);
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     function captureVideo() {
@@ -22,7 +22,6 @@ const CaptureVideoDesktop = () => {
             .then(mediaStream => {
                 const videoElement = document.querySelector("video");
                 videoElement!.srcObject = mediaStream;
-                setCapturedVideo(mediaStream);
             })
             .catch(error => console.log(error));
     }
@@ -31,19 +30,18 @@ const CaptureVideoDesktop = () => {
         <>
             {/* Card for showing Video */}
             <Card>
-                <CardHeader>
-                    <Text content="Capture Video (Web only)" weight="bold" />
-                </CardHeader>
+            <Text weight='bold' as="h1">Capture Video (Web only) </Text>                
                 <CardBody>
-                    <Flex column gap="gap.small">
-                        <Text content="Checks for permission to use media input" />
-                        <Text content="SDK used: " weight="semibold" />
-                        <Text content="navigator" />
-                        <Text content="Method: " weight="semibold" />
-                        <Text content="navigator.mediaDevices.getUserMedia" />
-                        <Button content="Capture video" onClick={captureVideo} />
-                        <video controls ></video>
-                    </Flex>
+                    <div className='flex columngap'>
+                        <Text>Checks for permission to use media input</Text>
+                        <Text weight='medium'>SDK used:</Text>
+                        <Text>navigator</Text>
+                        <Text weight='medium'>Method:</Text>
+                        <Text> navigator.mediaDevices.getUserMedia</Text>
+                        <Button onClick={captureVideo}>Capture video </Button>
+                       
+                        <video src="" controls>   </video>
+                    </div>
                 </CardBody>
             </Card>
         </>

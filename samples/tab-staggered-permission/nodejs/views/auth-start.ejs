@@ -1,7 +1,6 @@
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
      <script type="text/javascript">
@@ -11,118 +10,39 @@
         });
        
         // Get auth token.
-        function getAuthToken(clientId){
-          
+        function getAuthToken(clientId) {
+             var clientId = clientId;
+             const scope = data.scope;
             if (clientId != undefined && clientId != null && clientId !== '') {
-                microsoftTeams.initialize();
-                // Get the tab context, and use the information to navigate to Azure AD login page
-                microsoftTeams.getContext(function (context) {
-                    // Generate random state string and store it, so we can verify it in the callback
-                    let state = _guid();
-                    localStorage.setItem("simple.state", state);
-                    localStorage.removeItem("simple.error");
-                    // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
-                    // for documentation on these query parameters
-                    let queryParams = {
-                        client_id: clientId,
-                        response_type: "token",
-                        response_mode: "fragment",
-                        scope: "https://graph.microsoft.com/"+ data.scope,
-                        redirect_uri: window.location.origin + "/auth-end",
-                        nonce: _guid(),
-                        state: state,
-                        // login_hint pre-fills the username/email address field of the sign in page for the user,
-                        // if you know their username ahead of time.
-                        login_hint: context.upn
-                    };
-                   
-                    // Go to the AzureAD authorization endpoint
-                    let authorizeEndpoint =
-                        "https://login.microsoftonline.com/" + context.tid + "/oauth2/v2.0/authorize?" + toQueryString(queryParams);
-                    window.location.assign(authorizeEndpoint);
+                microsoftTeams.app.initialize().then(() => {
+                    // Get the tab context, and use the information to navigate to Azure AD login page
+                    microsoftTeams.app.getContext().then(async (context) => {
+                        var currentURL = new URL(window.location);
+                        var loginHint = context.user.loginHint;
+						
+                        const msalConfig = {
+                            auth: {
+                                clientId: clientId,
+                                authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
+                                navigateToLoginRequestUrl: false
+                            },
+                            cache: {
+                                cacheLocation: "sessionStorage",
+                            },
+                        };
+						
+                        const msalInstance = new msal.PublicClientApplication(msalConfig);
+						
+                        const scopesArray = scope.split(" ");
+                        const scopesRequest = {
+                            scopes: scopesArray,
+                            redirectUri: window.location.origin + `/auth-end`,
+                            loginHint: loginHint
+                        };
+						
+                        await msalInstance.loginRedirect(scopesRequest);
+                    });
                 });
-            }
-        }
-         
-        // Build query string from map of query parameter
-        function toQueryString(queryParams) {
-            let encodedQueryParams = [];
-            for (let key in queryParams) {
-                encodedQueryParams.push(
-                    key + "=" + encodeURIComponent(queryParams[key])
-                );
-            }
-            return encodedQueryParams.join("&");
-        }
-
-        // Converts decimal to hex equivalent
-        // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
-        function _decimalToHex(number) {
-            let hex = number.toString(16);
-            while (hex.length < 2) {
-                hex = "0" + hex;
-            }
-
-            return hex;
-        }
-
-        // Generates RFC4122 version 4 guid (128 bits)
-        // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
-        function _guid() {
-            let cryptoObj = window.crypto || window.msCrypto; // for IE 11
-            if (cryptoObj && cryptoObj.getRandomValues) {
-                let buffer = new Uint8Array(16);
-                cryptoObj.getRandomValues(buffer);
-                buffer[6] |= 0x40; 
-                buffer[6] &= 0x4f; 
-                buffer[8] |= 0x80; 
-                buffer[8] &= 0xbf;
-
-                return (
-                    _decimalToHex(buffer[0]) +
-                        _decimalToHex(buffer[1]) +
-                        _decimalToHex(buffer[2]) +
-                        _decimalToHex(buffer[3]) +
-                        "-" +
-                        _decimalToHex(buffer[4]) +
-                        _decimalToHex(buffer[5]) +
-                        "-" +
-                        _decimalToHex(buffer[6]) +
-                        _decimalToHex(buffer[7]) +
-                        "-" +
-                        _decimalToHex(buffer[8]) +
-                        _decimalToHex(buffer[9]) +
-                        "-" +
-                        _decimalToHex(buffer[10]) +
-                        _decimalToHex(buffer[11]) +
-                        _decimalToHex(buffer[12]) +
-                        _decimalToHex(buffer[13]) +
-                        _decimalToHex(buffer[14]) +
-                        _decimalToHex(buffer[15])
-                );
-            } else {
-                let guidHolder = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-                let hex = "0123456789abcdef";
-                let r = 0;
-                let guidResponse = "";
-                for (let i = 0; i < 36; i++) {
-                    if (guidHolder[i] !== "-" && guidHolder[i] !== "4") {
-                        // each x and y needs to be random
-                        r = (Math.random() * 16) | 0;
-                    }
-                    if (guidHolder[i] === "x") {
-                        guidResponse += hex[r];
-                    } else if (guidHolder[i] === "y") {
-                        // clock-seq-and-reserved first hex is filtered and remaining hex values are random
-                        r &= 0x3; // bit and with 0011 to set pos 2 to zero ?0??
-                        r |= 0x8; // set pos 3 to 1 as 1???
-                        guidResponse += hex[r];
-                    } else {
-                        guidResponse += guidHolder[i];
-                    }
-                }
-                
-                return guidResponse;
             }
         }
     </script>

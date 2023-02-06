@@ -1,48 +1,48 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "6c51807c-f601-4c3c-b6e9-633385ee46db",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://{TODO: hosted domain}",
-        "privacyUrl": "https://{TODO: hosted domain}/privacy",
-        "termsOfUseUrl": "https://{TODO: hosted domain}/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Personal Tab with SSO",
-        "full": ""
-    },
-    "description": {
-        "short": "Short description for Personal Tab SSO.",
-        "full": "Full description of Personal Tab SSO."
-    },
-    "accentColor": "#FFFFFF",
-    "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Personal Tab",
-            "contentUrl": "https://{TODO: hosted domain}/tab",
-            "websiteUrl": "https://{TODO: hosted domain}/tab",
-            "scopes": [
-                "personal"
-            ]
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "{TODO: hosted domain}"
-    ],
-    "webApplicationInfo": {
-        "id": "8345fcbd-810d-4a70-aff6-f2de591a0926",
-        "resource": "api://{TODO: hosted domain}/8345fcbd-810d-4a70-aff6-f2de591a0926"
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "6c51807c-f601-4c3c-b6e9-633385ee46db",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://{TODO: hosted domain}",
+    "privacyUrl": "https://{TODO: hosted domain}/privacy",
+    "termsOfUseUrl": "https://{TODO: hosted domain}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Personal Tab with SSO",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Personal Tab SSO.",
+    "full": "Full description of Personal Tab SSO."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://{TODO: hosted domain}/tab",
+      "websiteUrl": "https://{TODO: hosted domain}/tab",
+      "scopes": [
+        "personal"
+      ]
     }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{TODO: hosted domain}"
+  ],
+  "webApplicationInfo": {
+    "id": "8345fcbd-810d-4a70-aff6-f2de591a0926",
+    "resource": "api://{TODO: hosted domain}/8345fcbd-810d-4a70-aff6-f2de591a0926"
+  }
 }

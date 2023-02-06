@@ -60,76 +60,69 @@
         <button id="btnLogout" onclick="logout()" style="display: none">Logout (Silent)</button>
 
         <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
-        <!-- Check before upgrading your ADAL version, as this sample depends on an internal function to authenticate silently -->
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
-
+            
             // Parse query parameters
             let queryParams = getQueryParameters();
             let loginHint = queryParams["loginHint"];
             let userObjectId = queryParams["userObjectId"];
+            let upn = undefined;
 
             // Use the tenant id of the current organization. For guest users, we want an access token for
             // the tenant we are currently in, not the home tenant of the guest.
             let tenantId = queryParams["tenantId"] || "common";
 
-            // ADAL.js configuration
-            let config = {
-                tenant: tenantId,
-                clientId: "{{appId}}",
-                redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
-                cacheLocation: "localStorage",
-                navigateToLoginRequestUrl: false,
-
-                // Setup extra query parameters for ADAL
-                // - openid and profile scope adds profile information to the id_token
-                // - login_hint provides the expected user name
-                extraQueryParameter: "scope=openid+profile&login_hint=" + encodeURIComponent(loginHint),
-            };
-
-            // Setup extra query parameters for ADAL
-            // - openid and profile scope adds profile information to the id_token
-            // - login_hint provides the expected user name
-            if (loginHint) {
-                config.extraQueryParameter = "scope=openid+profile&login_hint=" + encodeURIComponent(loginHint);
-            } else {
-                config.extraQueryParameter = "scope=openid+profile";
-            }
-
-            let authContext = new AuthenticationContext(config);
-
-            // See if there's a cached user and it matches the expected user
-            let user = authContext.getCachedUser();
-            if (user && (user.profile.oid !== userObjectId)) {
-                // User doesn't match, clear the cache
-                authContext.clearCache();
-            }
-
-            // Get the id token (which is the token for resource = clientId)
-            authContext.acquireToken(config.clientId, function (errDesc, token, err, tokenType) {
-                if (token) {
-                    // When there's no cached user, ADAL.js 1.0.17 returns an access token in the callback even when asked for the id token.
-                    // To work around this bug, check the token type; if it's not an id token, get the id token from cache.
-                    if (tokenType !== authContext.CONSTANTS.ID_TOKEN) {
-                        console.log("ADAL.js bug: requested id_token, got " + tokenType);
-                        token = authContext.getCachedToken(config.clientId);
-                    }
-
-                    showUserInformation(token);
-                } else {
-                    console.log("Failed to get id token silently: " + errDesc);
-
-                    // Failed to get the id token silently; show the login button
-                    $("#btnLogin").show();
-
-                    // You could attempt to launch the login popup here, but in browsers this could be blocked by
-                    // a popup blocker, in which case the login attempt will fail with the reason FailedToOpenWindow.
+            // MSAL.js configuration
+            let msalConfig = {
+                auth: {
+                    clientId: '{{appId}}',
+                    redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
+                    navigateToLoginRequestUrl: false,
+                },
+                cache: {
+                    cacheLocation: "localStorage",
                 }
+            };
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
+            
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.getContext().then((context) => {
+                    upn = context.user.userPrincipalName;
+                    let cachedAccounts =  msalInstance.getAllAccounts();
+                    let accountInfo = cachedAccounts.filter(account => account.username === upn);
+                    if (accountInfo.length > 0) {
+                        const silentRequest = {
+                            account: accountInfo[0]
+                        };
+
+                        // Acquire Token Silently
+                        msalInstance.acquireTokenSilent(silentRequest)
+                        .then((response) => {
+                            if (response.idToken) {
+                                showUserInformation(response.idToken);
+                            } else {
+                                console.error("Error getting cached id token. This should never happen.");
+                                // At this point we have to get the user involved, so show the login button
+                                $("#btnLogin").show();
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            console.error("Error getting cached id token. This should never happen.");
+                            // At this point we have to get the user involved, so show the login button
+                            $("#btnLogin").show();
+                        });
+                    } else {
+                        $("#btnLogin").show();
+                    }
+                });
             });
+            
+            
 
             // To get an access token to a resource like Graph,
             // 1. Provide the resource id to acquireToken()
@@ -140,24 +133,47 @@
             // Interactive login to Azure AD
             function login() {
                 $(".auth-data").hide();
-
-                microsoftTeams.authentication.authenticate({
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.authentication.authenticate({
                     url: window.location.origin + "/tab/silent-start",
                     width: 600,
-                    height: 535,
-                    successCallback: function (result) {
-                        // AuthenticationContext is a singleton
-                        let authContext = new AuthenticationContext();
-                        let idToken = authContext.getCachedToken(config.clientId);
-                        if (idToken) {
-                            showUserInformation(idToken);
-                        } else {
-                            console.error("Error getting cached id token. This should never happen.");
-                            // At this point we have to get the user involved, so show the login button
-                            $("#btnLogin").show();
-                        };
-                    },
-                    failureCallback: function (reason) {
+                    height: 535})
+                    .then((result) => {
+                        microsoftTeams.app.getContext().then((context) => {
+                            upn = context.user.userPrincipalName;
+                            let cachedAccounts =  msalInstance.getAllAccounts();
+                            let accountInfo = cachedAccounts.filter(account => account.username === upn);
+                            if (accountInfo.length > 0) {
+                                const silentRequest = {
+                                    account: accountInfo[0]
+                                };
+
+                                // Acquire Token Silently
+                                msalInstance.acquireTokenSilent(silentRequest)
+                                .then((response) => {
+                                    if (response.idToken) {
+                                        showUserInformation(response.idToken);
+                                    } else {
+                                        console.error("Error getting cached id token. This should never happen.");
+                                        // At this point we have to get the user involved, so show the login button
+                                        $("#btnLogin").show();
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                    console.error("Error getting cached id token. This should never happen.");
+                                    // At this point we have to get the user involved, so show the login button
+                                    $("#btnLogin").show();
+                                });
+                            }
+                            else {
+                                console.error("Error getting cached id token. This should never happen.");
+                                // At this point we have to get the user involved, so show the login button
+                                $("#btnLogin").show();
+                            }
+                        });
+                    })
+                    .catch((reason) => {
                         console.log("Login failed: " + reason);
                         if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
                             console.log("Login was blocked by popup blocker or canceled by user.");
@@ -167,7 +183,7 @@
 
                         $(".auth-data").hide();
                         $("#divError").text(reason).show();
-                    }
+                    });
                 });
             }
 
@@ -304,6 +320,7 @@
 
             // Demonstrates silent logout - simply clears the loginHint, replaces the value of userObjectId with a dummy value, and reloads the page
             function logout() {
+                localStorage.clear();
                 let url = location.href.split("?")[0] + "?";
                 let queryParams = getQueryParameters();
                 delete queryParams["loginHint"];

@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
-  "version": "1.0.5",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
   "id": "<<APP-ID>>",
   "packageName": "com.microsoft.teams.sample.meetingapp",
   "showLoadingIndicator": false,
@@ -12,11 +12,11 @@
     "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
   },
   "name": {
-    "short": "Meeting app"
+    "short": "Details Tab"
   },
   "description": {
-    "short": "Meeting app",
-    "full": "Meeting app"
+    "short": "Details Tab",
+    "full": "Details Tab for Meeting Extensibility"
   },
   "icons": {
     "outline": "icon-outline.png",
@@ -35,9 +35,6 @@
         "meetingChatTab",
         "meetingDetailsTab",
         "meetingSidePanel"
-      ],
-      "meetingSurfaces": [
-        "sidePanel"
       ]
     }
   ],

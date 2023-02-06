@@ -3,7 +3,7 @@
 
 import React from 'react';
 import './App.css';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 
 /**
  * The 'PersonalTab' component renders the main tab content
@@ -21,17 +21,17 @@ class Tab extends React.Component {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context, error) => {
+    app.getContext().then((context) => {
       this.setState({
         context: context
       });
-    });
+    })
     // Next steps: Error handling using the error object
   }
 
   render() {
 
-      let userName = Object.keys(this.state.context).length > 0 ? this.state.context['upn'] : "";
+    let userName = Object.keys(this.state.context).length > 0 ? this.state.context.user.userPrincipalName : "";
 
       return (
       <div>

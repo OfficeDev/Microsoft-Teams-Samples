@@ -1,0 +1,183 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources except qnaMaker which has limited region options."
+            }
+        },
+        "baseResourceName": {
+            "type": "string"
+        },
+        "botAppId": {
+            "type": "string"
+        },
+        "botDisplayName": {
+            "type": "string",
+            "defaultValue": "QBot"
+        },
+        "botHost": {
+            "type": "string"
+        },
+        "botCertName": {
+            "type": "string"
+        },
+        "manifestId": {
+            "type": "string"
+        },
+        "QnAMaker:Endpoint": {
+            "type": "string"
+        },
+        "QnAMaker:EndpointKey": {
+            "type": "string"
+        },
+        "QnAMaker:KnowledgeBaseId": {
+            "type": "string"
+        },
+        "QnAMaker:RuntimeEndpoint": {
+            "type": "string"
+        },
+        "QnAMaker:ScoreThreshold": {
+            "type": "string"
+        },
+        "QnAMaker:SubscriptionKey": {
+            "type": "string"
+        },
+        "keyvaultUrl": {
+            "type": "string"
+        },
+        "graphAppId": {
+            "type": "string"
+        },
+        "graphAppTenantId": {
+            "type": "string"
+        },
+        "graphAppCertName": {
+            "type": "string"
+        },
+        "databaseServer": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "hostingPlanName": "[toLower(concat(parameters('baseResourceName'), '-host'))]",
+        "webAppName": "[concat(parameters('baseResourceName'), '-webapp')]",
+        "botName": "[concat(parameters('baseResourceName'), '-bot')]",
+        "botMessagingEndpoint": "[uri(parameters('botHost'), 'api/bot/messages')]",
+        "appInsightsName": "[concat(parameters('baseResourceName'), '-ai')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2014-04-01",
+            "name": "[variables('appInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.BotService/botServices",
+            "apiVersion": "2021-05-01-preview",
+            "location": "global",
+            "name": "[variables('botName')]",
+            "kind": "bot",
+            "properties": {
+                "displayName": "[parameters('botDisplayName')]",
+                "iconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
+                "msaAppId": "[parameters('botAppId')]",
+                "endpoint": "[variables('botMessagingEndpoint')]",
+                "schemaTransformationVersion": "1.3",
+                "isIsolated": false
+            }
+        },
+        {
+            "apiVersion": "2021-05-01-preview",
+            "type": "Microsoft.BotService/botServices/channels",
+            "name": "[concat(variables('botName'), '/MsTeamsChannel')]",
+            "location": "global",
+            "sku": {
+                "name": "F0"
+            },
+            "properties": {
+                "channelName": "MsTeamsChannel",
+                "properties": {
+                    "enableCalling": false,
+                    "incomingCallRoute": "graphPma",
+                    "isEnabled": true
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.BotService/botServices', variables('botName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2016-08-01",
+            "name": "[variables('webAppName')]",
+            "location": "[parameters('location')]",
+            "kind": "app",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('webAppName'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(variables('webAppName'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[concat('/subscriptions/', subscription().SubscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
+            },
+            "dependsOn": [],
+            "resources": [
+                {
+                    "type": "Microsoft.Web/sites/config",
+                    "apiVersion": "2018-11-01",
+                    "name": "[concat(variables('webAppName'), '/appsettings')]",
+                    "kind": "",
+                    "properties": {
+                        "ApplicationInsights:InstrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]",
+                        "AzureAd:ClientCertificates:0:KeyVaultCertificateName": "[parameters('graphAppCertName')]",
+                        "AzureAd:ClientCertificates:0:KeyVaultUrl": "[parameters('keyvaultUrl')]",
+                        "AzureAd:ClientCertificates:0:SourceType": "KeyVault",
+                        "AzureAd:ClientId": "[parameters('graphAppId')]",
+                        "AzureAd:TenantId": "[parameters('graphAppTenantId')]",
+                        "BackgroundServices:DeleteUserDataFrequencyInDays": 30,
+                        "BackgroundServices:PublishKbFrequencyInMinutes": 15,
+                        "BaseUrl": "[parameters('botHost')]",
+                        "KeyVault:Url": "[parameters('keyvaultUrl')]",
+                        "QnAMaker:Endpoint": "[parameters('QnAMaker:Endpoint')]",
+                        "QnAMaker:EndpointKey": "[parameters('QnAMaker:EndpointKey')]",
+                        "QnAMaker:KnowledgeBaseId": "[parameters('QnAMaker:KnowledgeBaseId')]",
+                        "QnAMaker:RuntimeEndpoint": "[parameters('QnAMaker:RuntimeEndpoint')]",
+                        "QnAMaker:ScoreThreshold": "[parameters('QnAMaker:ScoreThreshold')]",
+                        "QnAMaker:SubscriptionKey": "[parameters('QnAMaker:SubscriptionKey')]",
+                        "SpaConfig:ApplicationInsightsInstrumentationKey": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]",
+                        "TeamsBot:AppId": "[parameters('botAppId')]",
+                        "TeamsBot:AppName": "[parameters('botDisplayName')]",
+                        "TeamsBot:KeyVaultCertificateName": "[parameters('botCertName')]",
+                        "TeamsBot:ManifestAppId": "[parameters('manifestId')]",
+                        "ConnectionStrings:SqlServer": "[concat('Server=', parameters('databaseServer'),'; Initial Catalog=qBot; Authentication=Active Directory Managed Identity; Connection Timeout=120;')]",
+                        "WEBSITE_LOAD_USER_PROFILE": 1
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', variables('webAppName'))]",
+                        "[resourceId('microsoft.insights/components/', variables('appInsightsName'))]"
+                    ]
+                }
+            ]
+        }
+    ],
+    "outputs": {
+    }
+}

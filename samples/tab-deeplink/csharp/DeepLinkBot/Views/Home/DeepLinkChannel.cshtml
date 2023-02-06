@@ -2,28 +2,70 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.7.0/js/MicrosoftTeams.min.js" integrity="sha384-00JbifySIlPvW32u9rSurgu8PujfL6XFdV9iNn4ZWyurJJ33MFvpwPqmCHDq9ADv" crossorigin="anonymous"></script>
+   <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
 <script>
-    microsoftTeams.initialize();
-    microsoftTeams.getContext(function (context) {
-        console.log(context);
-        if (context.subEntityId === "bot1") {
+var deepLinkString = "";
 
+function callSidePanelDeeplink() {
+   microsoftTeams.app.initialize().then(() => {
+       microsoftTeams.app.openLink(deepLinkString);
+   })
+}
+
+function shareAppContentToStage() {
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+            if (result) {
+                // handle success
+                console.log(result);
+            }
+
+            if (err) {
+                // handle error
+                alert(JSON.stringify(err))
+            }
+        }, `${window.location.origin}/DeepLinkChannel`);
+    });
+}
+    microsoftTeams.app.initialize();
+     microsoftTeams.app.getContext().then((context) => {
+        
+         if (context.page.frameContext === "sidePanel") {
+            document.getElementById("side-panel-content").style.display = "block";
+
+             document.getElementById('tableList').style.display = "none";
+            document.getElementById('taskList').style.display = "none";
+            document.getElementById("extended-deeplink").style.display = "none";
+            document.getElementById("side-panel-deeplink").style.display = "none";
+         }
+         else if (context.page.frameContext === "meetingStage") {
+             deepLinkString = `https://teams.microsoft.com/l/entity/@ViewBag.AppId/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
+
+            document.getElementById("side-panel-deeplink").style.display = "block";
+
+            document.getElementById('tableList').style.display = "none";
+            document.getElementById('taskList').style.display = "none";
+            document.getElementById("extended-deeplink").style.display = "none";
+        }
+        else if (context.page.subPageId === "bot1") {
             document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
             document.getElementById("taskContent").innerHTML = "Conversational bots allow users to interact with your web service through text, interactive cards, and task modules. They're incredibly flexible — conversational bots can be scoped to handling a few simple commands or complex, artificial-intelligence-powered and natural-language-processing virtual assistants. They can be one aspect of a larger application, or completely stand-alone."
             var element = document.getElementById('tableList');
             element.style.display = "none";
             context.subEntityId = null;
         }
-        else if (context.subEntityId === "bot2") {
+        else if (context.page.subPageId === "bot2") {
             document.getElementById("taskDiv").innerHTML = "Bot Frawework SDK:";
             document.getElementById("taskContent").innerHTML = "The Microsoft Bot Framework is a rich SDK for building bots using C#, Java, Python, and JavaScript. If you already have a bot that's based on the Bot Framework, you can easily adapt it to work in Microsoft Teams. We recommend you use either C# or Node.js to take advantage of our SDKs."
             var element = document.getElementById('tableList');
             element.style.display = "none";
             context.subEntityId = null;
         }
-
-        else if (context.subEntityId === "bot3") {
+        else if (context.page.subPageId === "bot3") {
             document.getElementById("taskDiv").innerHTML = "Teams Apps:";
             document.getElementById("taskContent").innerHTML = "Teams apps are a combination of capabilities and entry points. For example, people can chat with your app's bot (capability) in a channel (entry point). Some apps are simple(send notifications), while others are complex(manage patient records).When planning your app, remember that Teams is a collaboration hub.The best Teams apps help people express themselves and work better together."
             var element = document.getElementById('tableList');
@@ -57,3 +99,60 @@
         <tr></tr>
     }
 </table>
+
+<div style="margin-top:1rem;">
+    
+    <div id="extended-deeplink">
+        <span class="container" style="font-size:20px;font-weight:700;">
+            Extended Deep link features
+        </span>
+        @{
+            Html.RenderPartial("ExtendedDeepLinks");
+        }
+    </div>
+
+    <div id="side-panel-content" class="container" style="color:white;display:none;margin-top:3rem;">
+        <div>
+            This is a Side Panel tab. 
+        </div>
+        <button 
+            data-id="default"
+            class="callDeeplinkButton"
+            onclick="shareAppContentToStage()"
+            style="width: 162px;margin:1rem 0;"
+        >
+            Share content to stage.
+        </button>
+    </div>
+
+    <div id="side-panel-deeplink" class="container" style="color:white;display:none"> 
+        <div class="card-container-div">
+            <div>
+                <div class="card" style="width:100%">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <b>Open side panel using deeplink</b>
+                        </div>
+                        <div class="configure-header">
+                            To use this, configure the deeplink with following parameters
+                            <!-- Since we are using pre tag for having the code snippet in specified format ignoring the indentation here -->
+                            <pre style="overflow: hidden;">
+microsoftTeams.app.openLink("https://teams.microsoft.com/l/entity/{appId}/{entityId}?context={"chatId": "{meetingId}","contextType":"chat"}")
+                            </pre>
+                        </div>
+                        <div>Click on button to open meeting side panel.</div>
+                    </div>
+                    <button 
+                        data-id="default"
+                        class="callDeeplinkButton"
+                        onclick="callSidePanelDeeplink()"
+                        style="width:210px"
+                    >
+                        Open Teams meeting side panel
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

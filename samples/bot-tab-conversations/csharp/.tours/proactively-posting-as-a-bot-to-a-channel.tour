@@ -1,0 +1,85 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "1. Proactively posting to a channel from a Bot",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "Conversational Tabs are generally described as something that is done from the Tab, where the user creates the conversation themselves.\r\n\r\nThis tour explains how we have flipped that paradigm on it's head, allowing an external service to proactively create a conversation that is can be opened later in the sidebar of a tab."
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Bot/BotActivityHandler.cs",
+      "description": "# Bot Installation\r\n`OnTeamsMembersAddedAsync` is called when a new member is added to a Team or when a bot is installed.  \r\nWe store the ServiceUrl from the `turnContext` so we can use it later to message a channel.  \r\nThis information is indexed on the TeamId. Later when we are creating a Tab we will join this data with channel specific information so we know where to send messages too.",
+      "line": 74
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Infrastructure/Data/Repositories/InMemory/MsTeamsProactiveBotDataRepository.cs",
+      "description": "# Data Store\r\nWe store the Proactive data in a simple In Memory database, in production this should be stored somewhere more reliable. Currently, we lose this data if the service reboots.",
+      "line": 22
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/Configure.tsx",
+      "description": "# Support Department Channel Tab configuration\r\nA user can add a Tab to a channel in the Teams client.\r\n\r\nThey need to provide a department name and description.\r\n\r\nWe default the department name to the name of the channel based on the value in the context",
+      "line": 163
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/Configure.tsx",
+      "description": "# Calling the create support department API\r\nThis information, along with the `channelId`, `teamId` and `groupId` from the Teams context are sent to the create support department API.\r\n\r\nNote: we are using [React Query](https://react-query.tanstack.com/) to handle our API calls, you can see the code this calls [under ../api/supportDepartmentApi.ts](./samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/api/supportDepartmentApi.ts)",
+      "line": 42
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Controllers/SupportDepartmentsController.cs",
+      "description": "# Graph API Authorization\r\nThis is secondary to this code tour, but we use the `GroupId` from the Team Context to join onto a list of the user's Teams returned by the Microsoft Graph API. This is used to ensure users can only see inquiries from support departments they are a member of\r\n",
+      "line": 95
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Controllers/SupportDepartmentsController.cs",
+      "description": "# Creating a new support department\r\nHere, we pass the provided information to a service that will create the support department.",
+      "line": 97
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/SupportDepartmentService.cs",
+      "description": "# Get proactive bot data from data store\r\n[In step #2][#2], when we installed the bot, we stored the bot's serviceUrl.\r\n\r\nIn this function we will save the support department to our data store. We store the Team specific details, and the details passed in from the tab configure call.\r\n\r\nLater when an inquiry is made this information will be used to create the bot conversation.",
+      "line": 25
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Controllers/ExternalController.cs",
+      "description": "# External 'service' creates a new inquiry\r\nIn our proof of concept we have a simple Admin site that allows you to act as an external service that wants to send a message to a channel.\r\n\r\nIn practice this website might be replaced with a service, say a job posting board when there is a new applicant, or an omni-channel support tool when there is a new inquiry.\r\n\r\nHere, we pass the inquiry information to an inquiry service. ",
+      "line": 69
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
+      "description": "# Creating the inquiry (or sub entity)\r\nWe create and store the customer inquiry in a data store, so that we are able to get the details for future display.",
+      "line": 50
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
+      "description": "# Get support department\r\nThe external service tells us which support department to send the inquiry too based on the `entityId`.\r\n\r\nWe fetch that department and use the proactive bot data saved on app install to post the inquiry to the channel",
+      "line": 54
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/BotService.cs",
+      "description": "# Actually posting the inquiry to the channel\r\nHere, we construct a `ConversationParameters` object. This contains the `channelData` and `Activity` that we want to post.\r\n\r\nTo proactively post an Activity to a channel, you need the `botId`, `channelId`, `tenantId` and the bot `serviceUrl`. While objects like TeamsChannelData have other fields they are not used in the `CreateConversationAsync` call.",
+      "line": 50
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
+      "description": "# Adaptive Card\r\nWe create an adaptive card to post to the channel. This card includes a link so the end user is able to navigate directly to the sub-entity inside the tab.",
+      "line": 56
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
+      "description": "# Store the Conversation Activity Id\r\nNow that the inquiry has been posted to the channel, we need to associate the conversation with this inquiry in our datastore. This is how we are able to open the conversation in the side-panel of a channel or personal tab.\r\n\r\nWithout this, we would just be opening a new conversation.",
+      "line": 62
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/InquirySubEntityTab.tsx",
+      "description": "# Get a channel conversation from an inquiry\r\nWe get the conversation id attached to the inquiry from the API",
+      "line": 40
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/InquirySubEntityTab.tsx",
+      "description": "# Open the conversation tab\r\nWith this conversation ID, we use the Teams SDK to open the conversation in the sidebar",
+      "line": 76
+    }
+  ]
+}

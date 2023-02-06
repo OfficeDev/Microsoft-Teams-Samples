@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.7",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "5be69a48-f176-4b3a-9078-2385293cda8b",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.contoso.taskmodule",
   "developer": {
     "name": "Contoso",
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-      "configurationUrl": "https://taskmodulecsharpdemo.azurewebsites.net/configure",
+      "configurationUrl": "https://{{domain-name}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -36,8 +36,8 @@
     {
       "entityId": "com.contoso.taskmodule.task",
       "name": "Tasks!",
-      "contentUrl": "https://taskmodulecsharpdemo.azurewebsites.net/tasks",
-      "websiteUrl": "https://taskmodulecsharpdemo.azurewebsites.net/tasks",
+      "contentUrl": "https://{{domain-name}}/tasks",
+      "websiteUrl": "https://{{domain-name}}/tasks",
       "scopes": [
         "personal"
       ]
@@ -45,7 +45,7 @@
   ],
   "bots": [
     {
-      "botId": "5be69a48-f176-4b3a-9078-2385293cda8b",
+      "botId": "{{Microsoft-App-Id}}",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -72,5 +72,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "taskmodulecsharpdemo.azurewebsites.net" ]
+  "validDomains": [ "{{domain-name}}" ]
 }

@@ -1,0 +1,1025 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build - All Samples
+on:
+  push:
+    #Change the branch name to <<main>>
+    #Change the path to the folder where your code resides. Any change here will start the activity. 
+    branches:
+      - main
+    paths:
+      - '**'
+  workflow_dispatch:
+env:
+    CI: false
+jobs:
+  build-csharp-samples:
+    runs-on: windows-latest
+    #Add project path, name and project runtime version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
+              name: 'meetings-events'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
+              name: 'app-complete-auth'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/Microsoft.Teams.Samples.HelloWorld.Web.csproj'
+              name: 'app-hello-world'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
+              name: 'app-checkin-location'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
+              name: 'app-installation-using-qr-code'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-localization/csharp/Localization/Localization.csproj'
+              name: 'app-localization'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
+              name: 'app-sso'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
+              name: 'app-virtual-assistant'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/FetchGroupChatMessages.csproj'
+              name: 'bot-archive-groupchat-messages'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-calling-meeting/csharp/Source/CallingBotSample/CallingBotSample.csproj'
+              name: 'bot-calling-meeting'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/BotDailyTaskReminder.csproj'
+              name: 'bot-daily-task-reminder'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/JoinTeamByQR.csproj'
+              name: 'bot-join-team-using-qr-code'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
+              name: 'bot-people-picker-adaptive-card'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
+              name: 'bot-receive-channel-messages-withRSC'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval/BotRequestApproval.csproj'
+              name: 'bot-request-approval'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow/SequentialUserSpecificFlow.csproj'
+              name: 'bot-sequential-flow-adaptive-cards'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/BotWithSharePointFileViewer.csproj'
+              name: 'bot-sharepoint-file-viewer'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot/SPListBot.csproj'
+              name: 'bot-sharepoint-list'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch/TypeaheadSearch.csproj'
+              name: 'bot-type-ahead-search-adaptive-cards'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/ActivityFeedBroadcast.csproj'
+              name: 'graph-activity-feed-broadcast'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-app-installation-lifecycle/csharp/AppInstallation/AppInstallation.csproj'
+              name: 'graph-app-installation-lifecycle'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-appcatalog-lifecycle/csharp/AppCatalogSample/AppCatalogSample.csproj'
+              name: 'graph-appcatalog-lifecycle'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
+              name: 'graph-change-notification'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-channel-lifecycle/csharp/ChannelLifecycle/ChannelLifecycle.csproj'
+              name: 'graph-channel-lifecycle'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-chat-lifecycle/csharp/ChatLifecycle/ChatLifecycle.csproj'
+              name: 'graph-chat-lifecycle'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-rsc/csharp/RSCDemo/RSCDemo.csproj'
+              name: 'graph-rsc'
+              version: '6.0.x'
+
+            - project_path: 'samples/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
+              name: 'meeting-recruitment-app'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-notification/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
+              name: 'meetings-notification'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-details-tab/csharp/DetailsTab/DetailsTab.csproj'
+              name: 'meetings-details-tab'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-live-code-interview/csharp/MeetingLiveCoding/MeetingLiveCoding.csproj'
+              name: 'meetings-live-code-interview'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-sidepanel/csharp/SidePanel/SidePanel.csproj'
+              name: 'meetings-sidepanel'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-stage-view/csharp/AppInMeeting/AppInMeeting.csproj'
+              name: 'meetings-stage-view'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-token-app/csharp/TokenApp.csproj'
+              name: 'meetings-token-app'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-link-unfurling-meeting/csharp/Source/Microsoft.Teams.Samples.LinkUnfurling.Web./Microsoft.Teams.Samples.LinkUnfurling.Web.csproj'
+              name: 'msgext-link-unfurling-meeting'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet/RLU.csproj'
+              name: 'msgext-link-unfurling-reddit'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet_user_auth/RLU.csproj'
+              name: 'msgext-link-unfurling-reddit'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
+              name: 'app-region-selection'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-adaptive-cards/csharp/TabWithAdpativeCardFlow/TabWithAdpativeCardFlow.csproj'
+              name: 'tab-adaptive-cards'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
+              name: 'tab-conversations'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
+              name: 'tab-product-inspection'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
+              name: 'tab-request-approval'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-staggered-permission/csharp/StaggeredPermission/StaggeredPermission.csproj'
+              name: 'tab-staggered-permission'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
+              name: 'msgext-message-reminder'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
+              name: 'tab-channel-group-config-page-auth'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-deeplink/csharp/DeepLinkBot/DeepLinkBot.csproj'
+              name: 'tab-deeplink'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
+              name: 'tab-graph-toolkit'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-sso/csharp/TeamsTabSSO/TeamsTabSSO.csproj'
+              name: 'tab-sso'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-stage-view/csharp/TabInStageView/TabInStageView.csproj'
+              name: 'tab-stage-view'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Microsoft.Teams.Samples.UserSpecificViews.csproj'
+              name: 'bot-adaptivecards-user-specific-views'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-proactive-messaging/csharp/proactive-cmd/msteams-app-proactivecmd.csproj'
+              name: 'bot-proactive-messaging'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-release-management/csharp/ReleaseManagement/ReleaseManagement.csproj'
+              name: 'bot-release-management'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-people-picker/csharp/TabPeoplePicker/TabPeoplePicker.csproj'
+              name: 'tab-people-picker'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-personal/mvc-csharp/PersonalTabMVC.csproj'
+              name: 'tab-personal'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-personal/razor-csharp/PersonalTab.csproj'
+              name: 'tab-personal'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
+              name: 'tab-personal-sso-quickstart'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-channel-group/mvc-csharp/ChannelGroupTabMVC.csproj'
+              name: 'tab-channel-group'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-channel-group/razor-csharp/channelGroupTab.csproj'
+              name: 'tab-channel-group'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/GroupTabSSO.csproj'
+              name: 'tab-channel-group-sso-quickstart'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-meeting-notification/csharp/MeetingNotification/MeetingNotification.csproj'
+              name: 'graph-meeting-notification'
+              version: '6.0.x'
+
+            - project_path: 'samples/account-linking/csharp/Source/Microsoft.Teams.Samples.AccountLinking.Sample.csproj'
+              name: 'account-linking'
+              version: '6.0.x'
+             
+            - project_path: 'samples/bot-conversation/csharp/TeamsConversationBot.csproj'
+              name: 'bot-conversation'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload.csproj'
+              name: 'bot-file-upload'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam.csproj'
+              name: 'bot-initiate-thread-in-channel'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-message-reaction/csharp/MessageReaction.csproj'
+              name: 'bot-message-reaction'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
+              name: 'bot-suggested-actions'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-task-module/csharp/TeamsTaskModule.csproj'
+              name: 'bot-task-module'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-teams-authentication/csharp/TeamsAuth.csproj'
+              name: 'bot-teams-authentication'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-teams-catering/csharp/Catering/Catering.csproj'
+              name: 'bot-teams-catering'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-bulk-meetings/csharp/EventMeeting/EventMeeting.csproj'
+              name: 'graph-bulk-meetings'
+              version: '6.0.x' 
+
+            - project_path: 'samples/graph-change-notification-team-channel/csharp/ChangeNotification/ChangeNotification.csproj'
+              name: 'graph-change-notification-team-channel'
+              version: '6.0.x' 
+
+            - project_path: 'samples/graph-pinned-messages/csharp/GraphPinnedMessage/GraphPinnedMessage.csproj'
+              name: 'graph-pinned-messages'
+              version: '6.0.x'
+
+            - project_path: 'samples/graph-teams-tag/csharp/GraphTeamsTag/GraphTeamsTag.csproj'
+              name: 'graph-teams-tag'
+              version: '6.0.x'
+
+            - project_path: 'samples/incoming-webhook/csharp/IncomingWebhook/IncomingWebhook.csproj'
+              name: 'incoming-webhook'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-attendance-report/csharp/MeetingAttendance/MeetingAttendance.csproj'
+              name: 'meetings-attendance-report'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-context-app/csharp/MeetingContextApp/MeetingContextApp.csproj'
+              name: 'meetings-context-app'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-live-caption/csharp/MeetingLiveCaption/MeetingLiveCaption.csproj'
+              name: 'meetings-live-caption'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-transcription/csharp/MeetingTranscription/MeetingTranscription.csproj'
+              name: 'meetings-transcription'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Domain.Tests/Microsoft.Teams.Samples.MeetingSigning.Domain.Tests.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Domain/Microsoft.Teams.Samples.MeetingSigning.Domain.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Infrastructure.Tests/Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Tests.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+              
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Infrastructure/Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Web.Tests/Microsoft.Teams.Samples.MeetingSigning.Web.Tests.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Web/Microsoft.Teams.Samples.MeetingSigning.Web.csproj'
+              name: 'meetings-share-to-stage-signing'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-action-preview/csharp/TeamsMessagingExtensionsActionPreview.csproj'
+              name: 'msgext-action-preview'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-action/csharp/TeamsMessagingExtensionsAction.csproj'
+              name: 'msgext-action'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-link-unfurling/csharp/TeamsLinkUnfurling.csproj'
+              name: 'msgext-link-unfurling'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-search-auth-config/csharp/TeamsMessagingExtensionsSearchAuthConfig.csproj'
+              name: 'msgext-search-auth-config'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-search/csharp/TeamsMessagingExtensionsSearch.csproj'
+              name: 'msgext-search'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
+              name: 'bot-tab-conversations'
+              version: '6.0.x'      
+                    
+            - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
+              name: 'msteams-application-resourcehub'
+              version: '6.0.x' 
+
+            - project_path: 'samples/outgoing-webhook/csharp/WebhookSampleBot.csproj'
+              name: 'outgoing-webhook'
+              version: '6.0.x' 
+
+            - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.App.Domain/Microsoft.Teams.Apps.QBot.Domain.csproj'
+              name: 'msteams-application-qbot'
+              version: '2.0'
+
+            - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Infrastructure/Microsoft.Teams.Apps.QBot.Infrastructure.csproj'
+              name: 'msteams-application-qbot'
+              version: '3.1'
+
+            - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/Microsoft.Teams.Apps.QBot.Web.csproj'
+              name: 'msteams-application-qbot'
+              version: '3.1'    
+
+            - project_path: 'samples/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
+              name: 'graph-activity-feed'
+              version: '6.0.x' 
+
+            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.csproj'
+              name: 'graph-proactive-installation'
+              version: '6.0.x' 
+
+            - project_path: 'samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/BotConversationSsoQuickstart.csproj'
+              name: 'bot-conversation-sso-quickstart'
+              version: '6.0.x'           
+
+            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector.csproj'
+              name: 'connector-todo-notification'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
+              name: 'bot-adaptive-card-actions'
+              version: '6.0.x'
+            
+            - project_path: 'samples/bot-formatting-cards/csharp/BotFormattingCards/BotFormattingCards.csproj'
+              name: 'bot-formatting-cards'
+              version: '6.0.x'
+
+            - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
+              name: 'meeting-tabs'
+              version: '6.0.x'
+
+
+            - project_path: 'samples/tab-deeplink-features/csharp/DeeplinkFeatures/DeeplinkFeatures.csproj'
+              name: 'tab-deeplink-features'
+              version: '6.0.x'  
+              
+            - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
+              name: 'bot-all-cards'
+              version: '6.0.x'
+
+      fail-fast: false
+    name: Build All "${{ matrix.name }}" csharp
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ matrix.version }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ matrix.project_path }}" --configuration Release
+
+  build-dotnet-samples:
+    runs-on: windows-latest
+    #Add project path, name as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp.sln'
+              name: 'app-complete-sample'
+
+      fail-fast: false
+    name: Build "${{ matrix.name }}" csharp
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Restore NuGet packages
+        run: nuget restore ${{ matrix.project_path }}
+      
+      - name: Build
+        run: msbuild ${{ matrix.project_path }} /p:Configuration=Release
+
+
+  build-nodejs-samples:
+    runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/app-checkin-location/nodejs'
+              name: 'app-checkin-location'
+              version: '14.x'
+
+            - project_path: 'samples/app-complete-auth/nodejs'
+              name: 'app-complete-auth'
+              version: '14.x'
+
+            - project_path: 'samples/app-hello-world/nodejs'
+              name: 'app-hello-world'
+              version: '14.x'
+
+            - project_path: 'samples/app-installation-using-qr-code/nodejs'
+              name: 'app-installation-using-qr-code'
+              version: '14.x'
+
+            - project_path: 'samples/app-complete-sample/nodejs'
+              name: 'app-complete-sample'
+              version: '14.x'
+
+            - project_path: 'samples/app-sso/nodejs'
+              name: 'app-sso'
+              version: '14.x'
+
+            - project_path: 'samples/app-task-module/nodejs'
+              name: 'app-task-module'
+              version: '14.x'
+
+            - project_path: 'samples/bot-archive-groupchat-messages/nodejs'
+              name: 'bot-archive-groupchat-messages'
+              version: '14.x'
+
+            - project_path: 'samples/bot-daily-task-reminder/nodejs'
+              name: 'bot-daily-task-reminder'
+              version: '14.x'
+
+            - project_path: 'samples/bot-join-team-using-qr-code/nodejs'
+              name: 'bot-join-team-using-qr-code'
+              version: '14.x'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/nodejs'
+              name: 'bot-people-picker-adaptive-card'
+              version: '14.x'
+
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/nodejs'
+              name: 'bot-receive-channel-messages-withRSC'
+              version: '14.x'
+
+            - project_path: 'samples/bot-request-approval/nodejs'
+              name: 'bot-request-approval'
+              version: '14.x'
+
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/nodejs'
+              name: 'bot-sequential-flow-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/bot-sharepoint-file-viewer/nodejs'
+              name: 'bot-sharepoint-file-viewer'
+              version: '14.x'
+
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/nodejs'
+              name: 'bot-type-ahead-search-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/connector-generic/nodejs'
+              name: 'connector-generic'
+              version: '14.x'
+
+            - project_path: 'samples/connector-github-notification/nodejs'
+              name: 'connector-github-notification'
+              version: '14.x'
+            
+            - project_path: 'samples/graph-activity-feed-broadcast/nodejs'
+              name: 'graph-activity-feed-broadcast'
+              version: '14.x'
+
+            - project_path: 'samples/graph-activity-feed/nodejs'
+              name: 'graph-activity-feed'
+              version: '14.x'
+
+            - project_path: 'samples/graph-app-installation-lifecycle/nodejs'
+              name: 'graph-app-installation-lifecycle'
+              version: '14.x'
+
+            - project_path: 'samples/graph-appcatalog-lifecycle/nodejs'
+              name: 'graph-appcatalog-lifecycle'
+              version: '14.x'
+
+            - project_path: 'samples/graph-change-notification/nodejs'
+              name: 'graph-change-notification'
+              version: '14.x'
+
+            - project_path: 'samples/graph-channel-lifecycle/nodejs'
+              name: 'graph-channel-lifecycle'
+              version: '14.x'
+
+            - project_path: 'samples/graph-chat-lifecycle/nodejs'
+              name: 'graph-chat-lifecycle'
+              version: '14.x'
+
+            - project_path: 'samples/graph-proactive-installation/nodejs'
+              name: 'graph-proactive-installation'
+              version: '14.x'
+
+            - project_path: 'samples/graph-rsc/nodejs'
+              name: 'graph-rsc'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-notification/nodejs'
+              name: 'meetings-notification'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-events/nodejs'
+              name: 'meetings-events'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-sidepanel/nodejs/server'
+              name: 'meetings-sidepanel'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-stage-view/nodejs'
+              name: 'meetings-stage-view'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-token-app/nodejs'
+              name: 'meetings-token-app'
+              version: '14.x'
+
+            - project_path: 'samples/meeting-recruitment-app/nodejs/api'
+              name: 'meeting-recruitment-app'
+              version: '14.x'
+
+            - project_path: 'samples/msgext-message-reminder/nodejs'
+              name: 'msgext-message-reminder'
+              version: '14.x'
+
+            - project_path: 'samples/tab-adaptive-cards/nodejs'
+              name: 'tab-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/tab-conversations/nodejs'
+              name: 'tab-conversations'
+              version: '14.x'
+
+            - project_path: 'samples/tab-deeplink/nodejs'
+              name: 'tab-deeplink'
+              version: '14.x'
+
+            - project_path: 'samples/tab-product-inspection/nodejs'
+              name: 'tab-product-inspection'
+              version: '14.x'
+
+            - project_path: 'samples/tab-request-approval/nodejs'
+              name: 'tab-request-approval'
+              version: '14.x'
+
+            - project_path: 'samples/tab-sso/nodejs'
+              name: 'tab-sso'
+              version: '14.x'
+
+            - project_path: 'samples/tab-stage-view/nodejs'
+              name: 'tab-stage-view'
+              version: '14.x'
+
+            - project_path: 'samples/tab-staggered-permission/nodejs'
+              name: 'tab-staggered-permission'
+              version: '14.x'
+
+            - project_path: 'samples/meetings-live-code-interview/nodejs/api'
+              name: 'meetings-live-code-interview'
+              version: '14.x'
+
+            - project_path: 'samples/msgext-search-sso-config/nodejs'
+              name: 'msgext-search-sso-config'
+              version: '14.x'
+
+            - project_path: 'samples/bot-conversation-quickstart/js'
+              name: 'bot-conversation-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/bot-release-management/nodejs'
+              name: 'bot-release-management'
+              version: '14.x'
+
+            - project_path: 'samples/tab-people-picker/nodejs'
+              name: 'tab-people-picker'
+              version: '14.x'
+
+            - project_path: 'samples/msgext-action-quickstart/js'
+              name: 'msgext-action-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/msgext-search-quickstart/js'
+              name: 'msgext-search-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-quickstart/js'
+              name: 'tab-channel-group-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-quickstart/ts'
+              name: 'tab-channel-group-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-sso-quickstart/js'
+              name: 'tab-channel-group-sso-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-sso-quickstart/ts'
+              name: 'tab-channel-group-sso-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-personal-quickstart/js'
+              name: 'tab-personal-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-personal-quickstart/ts'
+              name: 'tab-personal-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-personal-sso-quickstart/js'
+              name: 'tab-personal-sso-quickstart'
+              version: '18.x'
+
+            - project_path: 'samples/tab-personal-sso-quickstart/ts'
+              name: 'tab-personal-sso-quickstart'
+              version: '18.x'
+
+            - project_path: 'samples/tab-graph-toolkit/nodejs'
+              name: 'tab-graph-toolkit'
+              version: '14.x'
+            
+            - project_path: 'samples/graph-meeting-notification/nodejs'
+              name: 'graph-meeting-notification'
+              version: '14.x'
+
+            - project_path: 'samples/outgoing-webhook/nodejs'
+              name: 'outgoing-webhook'
+              version: '14.x'
+
+            - project_path: 'samples/bot-proactive-messaging-teamsfx'
+              name: 'bot-proactive-messaging-teamsfx'
+              version: '18.x'              
+
+            - project_path: 'samples/app-auth/nodejs'
+              name: 'app-auth'
+              version: '16.x'
+
+            - project_path: 'samples/bot-conversation/nodejs'
+              name: 'bot-conversation'
+              version: '16.x'
+
+            - project_path: 'samples/bot-conversation-sso-quickstart/js'
+              name: 'bot-conversation-sso-quickstart'
+              version: '16.x'
+
+            - project_path: 'samples/bot-file-upload/nodejs'
+              name: 'bot-file-upload'
+              version: '16.x'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/nodejs'
+              name: 'bot-initiate-thread-in-channel'
+              version: '16.x'
+
+            - project_path: 'samples/bot-message-reaction/nodejs'
+              name: 'bot-message-reaction'
+              version: '16.x'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/nodejs'
+              name: 'bot-people-picker-adaptive-card'
+              version: '16.x'
+
+            - project_path: 'samples/bot-suggested-actions/nodejs'
+              name: 'bot-suggested-actions'
+              version: '16.x'
+
+            - project_path: 'samples/bot-task-module/nodejs'
+              name: 'bot-task-module'
+              version: '18.x' 
+
+            - project_path: 'samples/connector-todo-notification/nodejs'
+              name: 'connector-todo-notification'
+              version: '16.x' 
+
+            - project_path: 'samples/graph-bulk-meetings/nodejs'
+              name: 'graph-bulk-meetings'
+              version: '16.x' 
+
+            - project_path: 'samples/graph-change-notification-team-channel/nodejs'
+              name: 'graph-change-notification-team-channel'
+              version: '16.x' 
+
+            - project_path: 'samples/graph-pinned-messages/nodejs'
+              name: 'graph-pinned-messages'
+              version: '16.x'
+
+            - project_path: 'samples/graph-teams-tag/nodejs'
+              name: 'graph-teams-tag'
+              version: '16.x'
+
+            - project_path: 'samples/incoming-webhook/nodejs/ClientApp'
+              name: 'incoming-webhook-client-app'
+              version: '16.x'
+
+            - project_path: 'samples/incoming-webhook/nodejs/api'
+              name: 'incoming-webhook-server-apis'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-attendance-report/nodejs'
+              name: 'meetings-attendance-report'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-context-app/nodejs/client'
+              name: 'meetings-context-app-client'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-context-app/nodejs/server'
+              name: 'meetings-context-app-server'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-details-tab/nodejs'
+              name: 'meetings-details-tab'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-live-caption/nodejs'
+              name: 'meetings-live-caption'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-transcription/nodejs'
+              name: 'meetings-transcription'
+              version: '16.x'
+
+            - project_path: 'samples/msgext-action-preview/nodejs'
+              name: 'msgext-action-preview'
+              version: '16.x'
+
+            - project_path: 'samples/msgext-action/nodejs'
+              name: 'msgext-action'
+              version: '16.x'
+
+            - project_path: 'samples/msgext-link-unfurling/nodejs'
+              name: 'msgext-link-unfurling'
+              version: '16.x'
+
+            - project_path: 'samples/msgext-search/nodejs'
+              name: 'msgext-search'
+              version: '16.x'
+
+            - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
+              name: 'tab-app-monetization'
+              version: '18.x'
+
+            - project_path: 'samples/tab-device-permissions/nodejs'
+              name: 'tab-device-permissions'
+              version: '16.x'
+            
+            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
+              name: 'tab-channel-context'  
+              version: '16.x'
+            
+            - project_path: 'samples/meetings-audio-state/nodejs'
+              name: 'meetings-audio-state'
+              version: '16.x'
+
+            - project_path: 'samples/app-localization/nodejs/client'
+              name: 'app-localization'
+              version: '16.x'
+              
+            - project_path: 'samples/tab-ui-templates/ts'
+              name: 'tab-ui-templates'
+              version: '18.x'
+
+            - project_path: 'samples/bot-adaptive-card-actions/nodejs'
+              name: 'bot-adaptive-card-actions'
+              version: '18.x'
+            
+            - project_path: 'samples/tab-navbar-menu/ts'
+              name: 'tab-navbar-menu'
+              version: '16.x'
+            
+            - project_path: 'samples/bot-formatting-cards/nodejs'
+              name: 'bot-formatting-cards'
+              version: '18.x'
+
+            - project_path: 'samples/meeting-tabs/nodejs'
+              name: 'meeting-tabs'
+              version: '18.x'
+
+            - project_path: 'samples/tab-deeplink-features/nodejs'
+              name: 'tab-deeplink-features'
+              version: '18.x'
+
+            - project_path: 'samples/bot-types-of-cards/nodejs'
+              name: 'bot-types-of-cards'
+              version: '18.x'
+
+            - project_path: 'samples/app-cache-meetings/nodejs'
+              name: 'app-cache-meetings'
+              version: '18.x'
+             
+
+      fail-fast: false
+    name: Build all "${{ matrix.name }}" nodejs
+    defaults:
+      run:
+        working-directory: "${{ matrix.project_path }}"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ matrix.version }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-java-samples:
+    runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/bot-conversation/java'
+              name: 'bot-conversation'
+              version: '18'
+
+            - project_path: 'samples/bot-message-reaction/java'
+              name: 'bot-message-reaction'
+              version: '18'
+
+            - project_path: 'samples/bot-teams-authentication/java'
+              name: 'bot-teams-authentication'
+              version: '18'
+
+            - project_path: 'samples/bot-file-upload/java'
+              name: 'bot-file-upload'
+              version: '18'   
+
+            - project_path: 'samples/bot-task-module/java'
+              name: 'bot-task-module'
+              version: '18'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/java'
+              name: 'bot-initiate-thread-in-channel'
+              version: '18'
+
+            - project_path: 'samples/msgext-search/java'
+              name: 'msgext-search'
+              version: '18'
+
+            - project_path: 'samples/msgext-action/java'
+              name: 'msgext-action'
+              version: '18'  
+
+            - project_path: 'samples/msgext-action-preview/java'
+              name: 'msgext-action-preview'
+              version: '18'
+
+            - project_path: 'samples/msgext-link-unfurling/java'
+              name: 'msgext-link-unfurling'
+              version: '18' 
+
+      fail-fast: false
+    name: Build all "${{ matrix.name }}" java
+    defaults:
+      run:
+        working-directory: "${{ matrix.project_path }}"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 18 version
+        uses: actions/setup-java@v2
+        with:
+          java-version: "${{ matrix.version }}"
+          distribution: 'adopt'
+
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+
+  build-python-samples:
+    runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/bot-conversation/python'
+              name: 'bot-conversation'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-teams-authentication/python'
+              name: 'bot-teams-authentication'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-file-upload/python'
+              name: 'bot-file-upload'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-task-module/python'
+              name: 'bot-task-module'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/python'
+              name: 'bot-initiate-thread-in-channel'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-search/python'
+              name: 'msgext-search'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-action/python'
+              name: 'msgext-action'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-action-preview/python'
+              name: 'msgext-action-preview'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-link-unfurling/python'
+              name: 'msgext-link-unfurling'
+              version: '3.10.x'
+              
+            - project_path: 'samples/msgext-search-auth-config/python'
+              name: 'msgext-search-auth-config'
+              version: '3.10.x'
+
+      fail-fast: false
+    name: Build all "${{ matrix.name }}" python
+    defaults:
+      run:
+        working-directory: "${{ matrix.project_path }}"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ matrix.version }}"
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip install -r requirements.txt

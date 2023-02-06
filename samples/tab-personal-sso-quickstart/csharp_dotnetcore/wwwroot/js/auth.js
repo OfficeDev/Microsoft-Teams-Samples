@@ -1,37 +1,38 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
-   
+    microsoftTeams.app.initialize();
     getClientSideToken()
-        .then((clientSideToken) => {
-            console.log("clientSideToken: " + clientSideToken);
-            return getServerSideToken(clientSideToken);
-        })
-        .catch((error) => {
-            console.log(error);
-            if (error === "invalid_grant") {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-            } else {
-                // Something else went wrong
-            }
-        });
+       .then((clientsidetoken) => {
+           console.log("clientsidetoken: " + clientsidetoken);
+           return getServerSideToken(clientsidetoken);
+       })
+       .catch((error) => {
+           console.log(error);
+           if (error === "invalid_grant") {
+               // display in-line button so user can consent
+               $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+               $("#diverror").show();
+               $("#consent").show();
+           } else {
+               console.log("authentication failed. something went wrong");
+           }
+       });
 });
 
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
-            getUserInfo(context.userPrincipalName);
-            getPhotoAsync(accessToken);
+            $("#consent").hide();
+            $("#divError").hide();
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
-    });
 }
 
 function getToken() {
@@ -40,14 +41,10 @@ function getToken() {
             url: window.location.origin + "/Auth/Start",
             width: 600,
             height: 535,
-            successCallback: result => {
-               
-                resolve(result);
-            },
-            failureCallback: reason => {
-                
-                reject(reason);
-            }
+        }).then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
         });
     });
 }
@@ -55,50 +52,48 @@ function getToken() {
 function getClientSideToken() {
 
     return new Promise((resolve, reject) => {
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {               
-                resolve(result);
-                
-            },
-            failureCallback: function (error) {                
-                reject("Error getting token: " + error);
-            }
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            console.log("error" + error);
+            reject("Error getting token: " + error);
         });
-
     });
 
 }
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.getContext((context) => {
-            var scopes = ["https://graph.microsoft.com/User.Read"];
-            fetch('/GetUserAccessToken', {
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/text",
-                    "Authorization": "Bearer " + clientSideToken
-                },
-                cache: 'default'
-            })
-                .then((response) => {
-                    if (response.ok) {                        
-                        return response.text();
-                    } else {
-                        reject(response.error);
-                    }
+        microsoftTeams.app.getContext().then((context) => {
+            {
+                var scopes = ["https://graph.microsoft.com/User.Read"];
+                fetch('/GetUserAccessToken', {
+                    method: 'get',
+                    headers: {
+                        "Content-Type": "application/text",
+                        "Authorization": "Bearer " + clientSideToken
+                    },
+                    cache: 'default'
                 })
-                .then((responseJson) => {
-                    if (IsValidJSONString(responseJson)) {
-                        if (JSON.parse(responseJson).error)
-                            reject(JSON.parse(responseJson).error);
-                    } else if (responseJson) {
-                        accessToken = responseJson;
-                        console.log("Exchanged token: " + accessToken);
-                        getUserInfo(context.userPrincipalName);
-                        getPhotoAsync(accessToken);
-                    }
-                });
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (IsValidJSONString(responseJson)) {
+                            if (JSON.parse(responseJson).error)
+                                reject(JSON.parse(responseJson).error);
+                        } else if (responseJson) {
+                            accessToken = responseJson;
+                            console.log("Exchanged token: " + accessToken);
+                            getUserInfo(context.user.userPrincipalName);
+                            getPhotoAsync(accessToken);
+                        }
+                    });
+            }
         });
     });
 }
@@ -111,7 +106,6 @@ function IsValidJSONString(str) {
     }
     return true;
 }
-
 
 function getUserInfo(principalName) {
     if (principalName) {

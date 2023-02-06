@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "<<MANIFEST-ID>>",
+  "id": "4203e0ab-fd51-4b07-a0f2-37118bf2b5ee",
   "packageName": "com.microsoft.teams.botrsc",
   "developer": {
     "name": "Microsoft",
@@ -41,9 +41,20 @@
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "https://AnyString",
-    "applicationPermissions": [
-      "ChannelMessage.Read.Group"
-    ]
+    "resource": "https://AnyString"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "ChannelMessage.Read.Group"
+        },
+        {
+          "type": "Application",
+          "name": "ChatMessage.Read.Chat"
+        }
+      ]
+    }
   }
 }

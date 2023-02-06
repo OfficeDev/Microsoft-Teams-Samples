@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script src='https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js'></script>
+<script src='https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -30,7 +30,7 @@
 
 <script>
   
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
     //retrieve accessToken from localstorage saved in auth.js file
     var token = localStorage.getItem("accessToken");
@@ -64,30 +64,31 @@
             })
 
     submitHandler = (err,result) => {
-           microsoftTeams.initialize();
-           microsoftTeams.getContext(function (context) {
-           
-            var userID = context.userObjectId;
-            var Json = JSON.stringify(result);
-            var parsedJson = JSON.parse(Json);
-            var resultJson = parsedJson.users;
-            var title = parsedJson.title;
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
 
-            $.ajax({
-                type: 'POST',
-                url: '/CreateNewTeam',
-                dataType: 'json',
-                data: {token:token,resultJson:resultJson,userID:userID,title:title},
-                success: function (response) {
-                     console.log(response);
-                     showSuccessMessage();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    console.log(resultJson);
-                },
+                var userID = context.user.id;
+                var Json = JSON.stringify(result);
+                var parsedJson = JSON.parse(Json);
+                var resultJson = parsedJson.users;
+                var title = parsedJson.title;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/CreateNewTeam',
+                    dataType: 'json',
+                    data: { token: token, resultJson: resultJson, userID: userID, title: title },
+                    success: function(response) {
+                        console.log(response);
+                        showSuccessMessage();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        console.log(resultJson);
+                    },
+                });
             });
-          })
+        });
     };
 
     function  showSuccessMessage()

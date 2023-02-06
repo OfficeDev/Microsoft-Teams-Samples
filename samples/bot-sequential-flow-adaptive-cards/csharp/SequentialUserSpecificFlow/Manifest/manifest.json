@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.microsoft.sequentialflowbot",
@@ -32,6 +32,26 @@
       "scopes": [
         "groupchat",
         "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "Incident",
+          "type": "action",
+          "title": "Get incidents",
+          "description": "Get list of incidents",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
       ]
     }
   ],

@@ -73,7 +73,7 @@ namespace ChatLifecycle.Controllers
        
         [Route("GetAdaptiveCard")]
         public string GetAdaptiveCard(string token)
-        {            
+        {
             var graphClient = GraphClient.GetGraphClient(token);
             var users = graphClient.Users
             .Request()

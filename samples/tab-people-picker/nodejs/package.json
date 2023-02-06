@@ -1,0 +1,26 @@
+{
+  "name": "graphactivityfeed-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@azure/msal-node": "^1.14.3",
+    "@microsoft/microsoft-graph-client": "^3.0.4",
+    "@microsoft/teams-js": "^2.5.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "q": "^1.5.1",
+    "request": "^2.88.2"
+  }
+}

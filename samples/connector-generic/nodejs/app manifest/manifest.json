@@ -20,13 +20,13 @@
 		"short": "Sample to show how connector works inside teams"
 	},
 	"icons": {
-		"outline": "outline_icon.png",
-		"color": "color_icon.png"
+		"outline": "outline.png",
+		"color": "color.png"
 	},
 	"connectors": [
 		{
-			"connectorId": "3ea203f0-07f0-46d2-8da3-4639b616cf37",
-			"configurationUrl": "https://671872397d19.ngrok.io/connectorconfig",
+			"connectorId": "<<CONNECTOR_ID>>",
+			"configurationUrl": "https://<<AppDomain>>/connectorconfig",
 			"scopes": [
 				"team"
 			]

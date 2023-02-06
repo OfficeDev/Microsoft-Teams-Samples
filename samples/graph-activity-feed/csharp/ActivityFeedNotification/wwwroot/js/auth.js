@@ -1,10 +1,11 @@
-﻿let accessToken;
+﻿let idToken;
+let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
-   
+    microsoftTeams.app.initialize();
+
     getClientSideToken()
-        .then((clientSideToken) => {           
+        .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
@@ -30,13 +31,13 @@ $(document).ready(function () {
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
-            getUserInfo(context.userPrincipalName);
+            $("#consent").hide();
+            $("#divError").hide();
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
-    });
 }
 
 function getToken() {
@@ -46,11 +47,10 @@ function getToken() {
             width: 600,
             height: 535,
             successCallback: result => {
-                debugger;
                 resolve(result);
             },
             failureCallback: reason => {
-                
+
                 reject(reason);
             }
         });
@@ -61,12 +61,11 @@ function getClientSideToken() {
 
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {     ;
-                debugger;
+            successCallback: (result) => {
                 resolve(result);
-                
+
             },
-            failureCallback: function (error) {                
+            failureCallback: function (error) {
                 reject("Error getting token: " + error);
             }
         });
@@ -78,7 +77,6 @@ function getClientSideToken() {
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
         microsoftTeams.getContext((context) => {
-            debugger;
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',

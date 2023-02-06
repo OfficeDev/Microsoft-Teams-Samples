@@ -2,15 +2,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <script>
-    microsoftTeams.initialize();
+        
         function validateForm() {
             var pollnfo = {
                 Title: document.getElementById("title").value,
                 Option1: document.getElementById("option1").value,
                 Option2: document.getElementById("option2").value
             }
-            microsoftTeams.tasks.submitTask(pollnfo);
-            return true;
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.dialog.submit(pollnfo);
+                return true;
+            });
+            return false;
         }
     </script>
     <div class="surface theme-light" style="margin-left: 20%;">
@@ -30,7 +33,7 @@
                     <tr>
                         <td>
                             <label>
-                                <b> Choice 1: </b>
+                                <b> Choice 1 - Testing YMAL</b>
                             </label>
                         </td>
                         <td>

@@ -352,5 +352,4 @@ MigrationBackup/
 .DS_Store
 .vs/
 .vscode/
-dist/
 launchSettings.json

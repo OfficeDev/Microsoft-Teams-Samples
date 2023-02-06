@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0",
+  "id": "<<Your-Microsoft-App-Id>>",
+  "packageName": "com.microsoft.deeplinkbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Deep Link Bot",
+    "full": "Bot for Deep linking to tab"
+  },
+  "description": {
+    "short": "DeepLinkBot for Microsoft Teams",
+    "full": "This sample DeepLink app which demos to navigate to required item in tab."
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{domain-name}}/Configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ],
+      "context": [
+        "channelTab",
+        "privateChatTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "meetingChatTab",
+        "meetingDetailsTab"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/DeepLink.html",
+      "websiteUrl": "https://{{domain-name}}",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "{{domain-name}}"
+  ],
+  "bots": [
+    {
+      "botId": "<<Your-Microsoft-App-Id>>",
+      "scopes": [
+        "groupchat",
+        "personal",
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}

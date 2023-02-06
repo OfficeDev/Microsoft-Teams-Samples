@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.teams.activityfeedbroadcast",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Activity feed broadcast",
+    "full": "Activity feed notification to notify any message to all members of the organisation"
+  },
+  "description": {
+    "short": "Activity feed notification to notify any message to the organisation",
+    "full": "Activity feed notification to notify any message to all members of the organisation"
+  },
+  "accentColor": "#235EA5",
+  "staticTabs": [
+    {
+      "entityId": "broadcast",
+      "name": "BroadcastTab",
+      "contentUrl": "https://<<Domain-name>>/broadcast",
+      "websiteUrl": "https://<<Domain-name>>/broadcast",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<Domain-name>>"
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "approvalRequired",
+        "description": "Required approval",
+        "templateText": "A task created with title {approvalTaskId}"
+      }
+    ]
+  },
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://<<Domain-name>>/<<YOUR-MICROSOFT-APP-ID>>"
+  }
+}

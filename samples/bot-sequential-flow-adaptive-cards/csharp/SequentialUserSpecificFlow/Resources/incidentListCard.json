@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Select a incident to share in chat/team.",
+      "size": "large",
+      "weight": "bolder"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "incidentId",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "value": "",
+      "choices": [
+        {
+          "type": "Input.Choice",
+          "$data": "${incidentList}",
+          "title": "${title}",
+          "value": "${value}"
+        }
+      ],
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "submit",
+      "title": "Send",
+      "data": {
+        "action": "incidentSelector"
+      }
+    }
+  ]
+}

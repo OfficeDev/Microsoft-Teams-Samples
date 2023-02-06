@@ -1,0 +1,30 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-microsoft-contrib/recommended.json"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-banned-terms": true,
+    "no-cookies": true,
+    "no-delete-expression": true,
+    "no-disable-auto-sanitization": true,
+    "no-document-domain": true,
+    "no-document-write": true,
+    "no-eval": true,
+    "no-exec-script": true,
+    "function-constructor": true,
+    "no-http-string": [
+      true,
+      "http://www.example.com/?.*",
+      "http://www.examples.com/?.*"
+    ],
+    "no-inner-html": true,
+    "no-octal-literal": true,
+    "no-string-based-set-immediate": true,
+    "no-string-based-set-interval": true,
+    "no-string-based-set-timeout": true,
+    "react-no-dangerous-html": true
+  },
+  "rulesDirectory": [ "node_modules/tslint-microsoft-contrib" ]
+}

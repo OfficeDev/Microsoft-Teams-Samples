@@ -24,27 +24,27 @@ class Tab extends React.Component {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context, error) => {
+    microsoftTeams.app.getContext().then((context) => {
       console.log(context);
       this.setState({
         context: context
       });
     });
-    var authTokenRequest = {
-      successCallback: (result)=> { 
-        console.log("Success: " + result); 
+
+    microsoftTeams.authentication.getAuthToken().then((result) => {
+        console.log("Success: " + result);
         this.setState({
-          token: result
+            token: result
         });
-      },
-      failureCallback: (error)=> { console.log("Failure: " + error); }
-    };
-    microsoftTeams.authentication.getAuthToken(authTokenRequest);
+    }).catch((error) => {
+        console.log("Failure: " + error);
+    });
+
     setTimeout(
       () => {
         console.log("componentDidMount");
         axios.post('/api/auth/token/', {
-          tid: this.state.context.tid,
+          tid: this.state.context.user.tenant.id,
           token: this.state.token
         })
         .then(function (response) {

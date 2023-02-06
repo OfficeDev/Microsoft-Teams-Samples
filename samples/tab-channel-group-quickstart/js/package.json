@@ -5,13 +5,13 @@
     "teamsAppId": null
   },
   "private": true,
-  "dependencies": {
-    "@microsoft/teams-js": "^1.6.0",
-    "@fluentui/react-northstar": "^0.49.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "react-router-dom": "^5.1.2"
+  "dependencies": { 
+    "@microsoft/teams-js": "^2.0.0",
+    "@fluentui/react-components": "^9.0.0-rc.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.4.4"
   },
   "scripts": {
     "start": "react-scripts start",

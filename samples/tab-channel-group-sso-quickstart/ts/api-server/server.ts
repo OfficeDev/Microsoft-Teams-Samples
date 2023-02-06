@@ -4,11 +4,11 @@
 import fetch from 'node-fetch';
 import * as express from 'express';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-import * as path from 'path';
+const path = require('path');
 import * as msal from '@azure/msal-node';
 const app = express();
 const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
+require('dotenv').config({ path: ENV_FILE.replace('\lib', '') });
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const graphScopes = [']https://graph.microsoft.com/' + process.env.GRAPH_SCOPES];

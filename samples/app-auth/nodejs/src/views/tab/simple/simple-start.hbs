@@ -21,35 +21,35 @@
         <title>Simple Authentication Sample Login</title>
     </head>
     <body>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize().then(() => {
+                // Get the tab context, and use the information to navigate to Azure AD login page
+                microsoftTeams.app.getContext().then((context) => {
+                    // Generate random state string and store it, so we can verify it in the callback
+                    let state = _guid();
+                    localStorage.setItem("simple.state", state);
+                    localStorage.removeItem("simple.error");
 
-            // Get the tab context, and use the information to navigate to Azure AD login page
-            microsoftTeams.getContext(function (context) {
-                // Generate random state string and store it, so we can verify it in the callback
-                let state = _guid();
-                localStorage.setItem("simple.state", state);
-                localStorage.removeItem("simple.error");
+                    // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
+                    // for documentation on these query parameters
+                    let queryParams = {
+                        client_id: "{{appId}}",
+                        response_type: "id_token token",
+                        response_mode: "fragment",
+                        resource: "https://graph.microsoft.com/",
+                        redirect_uri: window.location.origin + "/tab/simple-end",
+                        nonce: _guid(),
+                        state: state,
+                        login_hint: context.user.loginHint,
+                    };
 
-                // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
-                // for documentation on these query parameters
-                let queryParams = {
-                    client_id: "{{appId}}",
-                    response_type: "id_token token",
-                    response_mode: "fragment",
-                    resource: "https://graph.microsoft.com/",
-                    redirect_uri: window.location.origin + "/tab/simple-end",
-                    nonce: _guid(),
-                    state: state,
-                    login_hint: context.loginHint,
-                };
-
-                // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
-                // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest.
-                let authorizeEndpoint = `https://login.microsoftonline.com/${context.tid}/oauth2/authorize?${toQueryString(queryParams)}`;
-                window.location.assign(authorizeEndpoint);
+                    // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
+                    // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest.
+                    let authorizeEndpoint = `https://login.microsoftonline.com/${context.user.tenant.id}/oauth2/authorize?${toQueryString(queryParams)}`;
+                    window.location.assign(authorizeEndpoint);
+                });
             });
 
             // Build query string from map of query parameter
@@ -62,7 +62,6 @@
             }
 
             // Converts decimal to hex equivalent
-            // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
             function _decimalToHex(number) {
                 var hex = number.toString(16);
                 while (hex.length < 2) {
@@ -72,7 +71,6 @@
             }
 
             // Generates RFC4122 version 4 guid (128 bits)
-            // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
             function _guid() {
                 // RFC4122: The version 4 UUID is meant for generating UUIDs from truly-random or
                 // pseudo-random numbers.

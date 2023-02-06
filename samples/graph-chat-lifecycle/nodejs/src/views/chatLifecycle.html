@@ -1,4 +1,4 @@
-<script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous">
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -32,13 +32,13 @@
 
     $(document).ready(function () {
 
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         $("#createGroupChat").on('click', function (e) {
             e.preventDefault();
 
-            microsoftTeams.initialize();
-
-            $.post({ baseURL } + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
+            microsoftTeams.app.initialize();
+            let baseURL = window.location.origin;
+            $.post(baseURL + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
                 let taskInfo = {
                     title: null,
                     height: null,
@@ -63,16 +63,17 @@
                     console.log(err);
                 }
                 if (result) {
-                    microsoftTeams.initialize();
-                    microsoftTeams.getContext(function (context) {
-                        var userId = context.userObjectId;
-                        $.post({ baseURL } + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
-                            console.log(data);
-                            $("#createGroupChat").hide();
-                            $("#welcomeMsg").hide();
-                            showSuccessMessage();
-                        })
-                    })
+                    microsoftTeams.app.initialize().then(() => {
+                        microsoftTeams.app.getContext().then((context) => {
+                            var userId = context.user.id;
+                            $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
+                                console.log(data);
+                                $("#createGroupChat").hide();
+                                $("#welcomeMsg").hide();
+                                showSuccessMessage();
+                            })
+                        });
+                    });
                 }
             };
 

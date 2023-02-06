@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config/default.json');
+var config = require('config');
 console.log(config["port"]);
 var express = require('express');
 const server = express();
@@ -26,7 +26,7 @@ server.set("views", __dirname + "/views");
 
 server.engine('html', require('ejs').renderFile);
 server.use(bodyParser.urlencoded({ extended: false }));
-server.get('/chatLifecycle', (req, res) => { res.render('chatLifecycle.html') });
+server.get('/tab', (req, res) => { res.render('chatLifecycle.html') });
 
 server.post('/api/getAdaptiveCard', Helper.getAdaptiveCard);
 server.post('/api/createGroupChat', Helper.createGroupChat);
@@ -45,14 +45,14 @@ server.post('/CreateAdaptiveCard', function (request, response) {
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth/auth-start', function (req, res) {
-  var clientId = config["tab.appId"];
-  res.render('auth-start.html', { clientId: clientId });
+  var clientId = config["tab"].appId;
+  res.render('auth-start.html', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth/auth-end', function (req, res) {
-  var clientId = config["tab.appId"];
-  res.render('auth-end.html', { clientId: clientId });
+  var clientId = config["tab"].appId;
+  res.render('auth-end.html', { clientId: JSON.stringify(clientId) });
 });
 
 // On-behalf-of token exchange
@@ -60,7 +60,6 @@ server.post('/auth/token', function (req, res) {
   const tid = req.body.tid;
   const token = req.body.token;
   var scopes = ["https://graph.microsoft.com/User.Read"];
-  console.log(config["tab"]["appId"] + " : " + config["tab"]["appPassword"]);
 
   var oboPromise = new Promise((resolve, reject) => {
     const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
