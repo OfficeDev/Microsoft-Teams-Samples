@@ -44,6 +44,10 @@ jobs:
               name: 'app-localization'
               version: '6.0.x'
 
+            - project_path: 'samples/app-link-unfurling-in-share-to-teams/csharp/LinkUnfurlingInShareToTeams/LinkUnfurlingInShareToTeams.csproj'
+              name: 'app-link-unfurling-in-share-to-teams'
+              version: '6.0.x'
+
             - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
               name: 'app-sso'
               version: '6.0.x'
