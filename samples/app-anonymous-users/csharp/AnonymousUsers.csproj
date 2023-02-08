@@ -23,6 +23,14 @@
 		<None Remove="$(SpaRoot)**" />
 		<None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="demo-manifest\" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Include="AnonymousUsers.sln" />
+	</ItemGroup>
 
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
