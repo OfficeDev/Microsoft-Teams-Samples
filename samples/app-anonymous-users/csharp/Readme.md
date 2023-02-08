@@ -95,9 +95,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
  6) Modify the `/appsettings.json` and fill in the following details:
   - `{{ MicrosoftAppType }}` - **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**
-  - `{{ MicrosoftAppId }}` - Generated from Step 1 is the application app id
-  - `{{ MicrosoftAppPassword }}` - Generated from Step 1, also referred to as Client secret
-  - `{{ MicrosoftAppTenantId }}` - Generated from Step 1 is the tenantId id
+  - `{{ MicrosoftAppId }}` - Generated from Step 2 is the application app id
+  - `{{ MicrosoftAppPassword }}` - Generated from Step 2, also referred to as Client secret
+  - `{{ MicrosoftAppTenantId }}` - Generated from Step 2 is the tenantId id
 
  7. __*This step is specific to Teams.*__
 

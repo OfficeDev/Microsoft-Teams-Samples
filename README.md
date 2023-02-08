@@ -254,6 +254,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |27|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
 |28|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |29|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
+|30|Anonymous User Support     | This sample shows Anonymous Users Support In Meeting.|[View][app-anonymous-users#cs]       
 
 ## Application templates
 
@@ -444,6 +445,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
 [meetings-live-caption#cs]:samples/meetings-live-caption/csharp
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
+[app-anonymous-users#cs]:samples/app-anonymous-users/csharp
+
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
 [msteams-app-resource-hub]:samples/msteams-application-resourcehub/
