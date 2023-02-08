@@ -56,16 +56,37 @@ namespace Microsoft.BotBuilderSamples.Bots
                 }
                 else if (text.Contains("createconversation"))
                 {
+                    int usersCount = 0;
+                    int anonymousUsersCount = 0;
                     try
                     {
-                        await MessageAllMembersAsync(turnContext, cancellationToken);
+                        //A conversation reference for the conversation that contains this activity.
+                        await ConversationAsync(turnContext, cancellationToken);
                     }
                     catch (Exception ex)
                     {
-                        await turnContext.SendActivityAsync(((ErrorResponseException)ex).Response.Content);
+                        //Bots aren't allowed to initiate a one-on-one conversation with an anonymous user.
+                        //it will receive a 400 Bad Request status code and the following error response:
+
+                        var membersCount = await GetPagedMembers(turnContext, cancellationToken);
+                        foreach (var teamMemberCount in membersCount)
+                        {
+                            if (teamMemberCount.UserRole != null && teamMemberCount.UserRole == "user")
+                            {
+                                usersCount++;
+                            }
+                            //anonymous, represents anonymous user.
+                            if (teamMemberCount.UserRole != null && teamMemberCount.UserRole == "anonymous")
+                            {
+                                anonymousUsersCount++;
+                            }
+                        }
+
+                        await turnContext.SendActivityAsync(MessageFactory.Text($"Users count: {usersCount} <br> Anonymous users count: {anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user."), cancellationToken);
                     }
                 }
             }
+
             await SendDataOnCardActions(turnContext, cancellationToken);
         }
 
@@ -96,8 +117,8 @@ namespace Microsoft.BotBuilderSamples.Bots
                         throw e;
                     }
                 }
-
                 var message = MessageFactory.Text($"{member.Name} voted successfully.");
+
                 await turnContext.SendActivityAsync(message);
             }
         }
@@ -119,6 +140,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
 
                 }
+                //anonymous, represents anonymous user.
                 else if (teamMember.UserRole == "anonymous" && teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome anonymous users to the team."), cancellationToken);
@@ -154,7 +176,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task ConversationAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
@@ -211,6 +233,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var member in membersRemoved)
             {
+                // AadObjectId property is null represents anonymous user.
                 if (member.AadObjectId == null)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"The anonymous user was removed from team."), cancellationToken);
@@ -221,6 +244,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 }
             }
         }
+
         /// <summary>
         /// Adaptive Card - This card is highly customizable and can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
@@ -235,6 +259,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(cardJSON),
             };
+
             await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
     }

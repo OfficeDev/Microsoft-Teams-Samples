@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace AnonymousUsers.Hubs
 {
+    /// <summary>
+    /// Create a hub by declaring a class that inherits from Hub.
+    /// Add public methods to the class to make them callable from clients.
+    /// </summary>
     public class ChatHub : Hub
     {
         public async Task SendMessage(string description, int count)

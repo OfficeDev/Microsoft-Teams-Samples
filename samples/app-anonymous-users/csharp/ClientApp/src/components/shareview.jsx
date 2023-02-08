@@ -9,6 +9,8 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import { Button } from '@fluentui/react-components';
 
 const ShareView = () => {
+
+    // Declare a new state variable
     const [connection, setConnection] = useState(null);
 
     const [aShowCount, aShowSetCount] = useState(0);
@@ -23,6 +25,7 @@ const ShareView = () => {
     }, [])
 
     // Builds the SignalR connection, mapping it to /chatHub
+    // Initializes a new instance of the HubConnectionBuilder class.
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
             .withUrl(`${window.location.origin}/chatHub`)
@@ -53,6 +56,8 @@ const ShareView = () => {
         if (connection) {
             microsoftTeams.app.getContext().then((context) => {
                 setDisabled(true); // Disable Button
+                // Apps receive the following info for an anonymous user when they call the getContext API from the shared app stage. 
+                // You can recognize anonymous users by checking for a userLicenseType value of Anonymous.
                 if (context.user.licenseType === "Anonymous")
                 {
                     // Update state with incremented value
@@ -70,11 +75,12 @@ const ShareView = () => {
             alert('No connection to server yet.');
         }
     }
+
     return (
         <div className="timerCount">
             <Button appearance="primary" onClick={verifyAnonymousUser} disabled={disabled} >Submit Vote</Button>
             <h1>Anonymous users voted: {aShowCount}</h1>
-            <h1>Tenant user voted: {uShowCount}</h1>
+            <h1>user voted: {uShowCount}</h1>
         </div>
     );
 };

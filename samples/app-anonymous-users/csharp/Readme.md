@@ -111,6 +111,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Add the app to team/groupChat scope (Supported scopes). 
 
+**Note:**
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/7336b195da6ea77299d220612817943551065adb/samples/app-anonymous-users/csharp/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+
 ## Running the sample
 
 You can interact with Teams Tab meeting sidepanel.
