@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
   "version": "1.0.0",
   "id": "<<Microsoft-App-Id>>",
   "packageName": "com.microsoft.teams.linkunfurlingstt",
@@ -24,22 +24,12 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "contentUrl": "https://<base-url>/tab?openInTeams=true",
-      "websiteUrl": "https://<base-url>/tab?openInTeams=false",
+      "contentUrl": "https://<<base-url>>/Tab",
       "entityId": "tab",
       "name": "Tab",
       "scopes": [
         "personal"
       ]
-    }
-  ],
-  "bots": [
-    {
-      "botId": "<<Microsoft-App-Id>>",
-      "scopes": [
-        "personal"
-      ],
-      "isNotificationOnly": false
     }
   ],
   "composeExtensions": [
@@ -58,7 +48,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "<<Domain-name>>"
+              "<<domain-name>>"
             ]
           }
         }
@@ -70,6 +60,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<Domain-name>>"
+    "<<domain-name>>"
   ]
 }
