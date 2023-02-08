@@ -18,24 +18,12 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
 
 ## Interaction with app
 
-![App linkunfurling in share to teams](LinkUnfurlingInShareToTeams/Images/AppLinkUnfurlingStt.gif)
+![App linkunfurling in share to teams](LinkUnfurlingInShareToTeams/Images/app-link-unfurling-stt.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **App link unfurling in share to teams:** [Manifest](/samples/app-link-unfurling-in-share-to-teams/csharp/demo-manifest/app-link-unfurling-stt.zip)
-
-## Key features
-  
-  ![tab](LinkUnfurlingInShareToTeams/Images/Tab.png)
-
-  ![tab-web](LinkUnfurlingInShareToTeams/Images/TabWeb.PNG)
-  
-  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/LinkUnfurlSTT.png)
-
-  ![Link unfurling sdk](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingSdk.png)
-  
-  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.png)
    
 ## Prerequisites
 
@@ -108,15 +96,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Running the sample
 
-  ![tab](LinkUnfurlingInShareToTeams/Images/Tab.png)
-
-  ![tab-web](LinkUnfurlingInShareToTeams/Images/TabWeb.PNG)
+  ![tab](LinkUnfurlingInShareToTeams/Images/tabpage.png)
   
-  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/LinkUnfurlSTT.png)
+  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/linkunfurlscreen.png)
 
-  ![Link unfurling sdk](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingSdk.png)
+  ![Link unfurling success](LinkUnfurlingInShareToTeams/Images/successcard.png)
   
-  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.png)
+  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/channelcard.png)
+
+  ![tab-web](LinkUnfurlingInShareToTeams/Images/tabpageweb.png)
+
+  ![Link unfurling STT web](LinkUnfurlingInShareToTeams/Images/linkunfurlingweb.png)
 
 ## Deploy the bot to Azure
 
