@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-conversation-csharp",
+    "name": "officedev-microsoft-teams-samples-app-anonymous-users-csharp",
     "source": "officeDev",
-    "title": "Conversation Bot using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate the Conversation Bot using Bot Framework v4",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/csharp",
+    "title": "Anonymous User Support",
+    "shortDescription": "This sample shows Anonymous Users Support In Meeting.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-anonymous-users/csharp",
     "longDescription": [
-      "This sample app demonstrate the Conversation Bot using Bot Framework v4"
+      "This sample shows Anonymous Users Support In Meeting."
     ],
-    "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-05",
+    "creationDateTime": "2023-02-06",
+    "updateDateTime": "2023-02-08",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation/csharp/Images/bot-conversations.gif",
-        "alt": "Solution UX showing Conversation Bot using Bot Framework v4"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-anonymous-users/csharp/Images/appanonymoususersGif.gif",
+        "alt": "Solution UX showing Anonymous User Support"
       }
     ],
     "authors": [

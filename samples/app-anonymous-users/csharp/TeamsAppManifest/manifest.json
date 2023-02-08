@@ -15,12 +15,12 @@
     "color": "color.png"
   },
   "name": {
-    "short": "AnonymousUsers",
-    "full": "AnonymousUsers"
+    "short": "Anonymous User Support",
+    "full": "Anonymous User Support"
   },
   "description": {
-    "short": "AnonymousUsers",
-    "full": "AnonymousUsers"
+    "short": "This sample shows Anonymous Users Support In Meeting.",
+    "full": "This sample shows Anonymous Users Support In Meeting."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
