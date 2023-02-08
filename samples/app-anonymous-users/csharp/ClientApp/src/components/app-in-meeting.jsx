@@ -43,7 +43,7 @@ class AppInMeeting extends Component {
     render() {
         return (
             <>
-                <div>
+                <div className="share-specific-part-button">
                     <div className="tag-container">
                         <h3>Share To Stage View</h3>
                         <Button appearance="primary" onClick={this.shareSpecificPart} >Share</Button>

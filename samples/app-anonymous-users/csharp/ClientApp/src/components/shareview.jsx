@@ -80,7 +80,7 @@ const ShareView = () => {
         <div className="timerCount">
             <Button appearance="primary" onClick={verifyAnonymousUser} disabled={disabled} >Submit Vote</Button>
             <h1>Anonymous users voted: {aShowCount}</h1>
-            <h1>user voted: {uShowCount}</h1>
+            <h1>User voted: {uShowCount}</h1>
         </div>
     );
 };

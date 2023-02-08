@@ -12,9 +12,10 @@ code {
     monospace;
 }
 
-.header{
-  background-color: #fff;
-  height: 10rem;
+.header {
+    background-color: #292929;
+    color: #ffffff;
+    height: 10rem;
 }
 
 .tag-container {
@@ -27,8 +28,17 @@ code {
 .timerCount {
     padding: 10rem;
     text-align: center;
+    background-color: #1f1f1f;
+    color: #ffffff;
 }
 
 .ap {
     margin-left: inherit !important;
 }
+
+.share-specific-part-button {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    border: 1px solid #b7b7b7;
+}
+
