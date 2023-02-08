@@ -48,7 +48,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "<<Domain-name>>"
+              "<<domain-name>>"
             ]
           }
         }
@@ -60,6 +60,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<Domain-name>>"
+    "<<domain-name>>"
   ]
 }
