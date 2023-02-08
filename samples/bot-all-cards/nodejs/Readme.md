@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "01/13/2023 05:00:17 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-types-of-cards-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-all-cards-nodejs
 
 ---
 # Types of Cards
@@ -66,8 +66,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK  
@@ -84,11 +84,9 @@ Run ngrok - point to port 3978
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  - In a terminal, navigate to `samples/bot-types-of-cards/nodejs`
+  - In a terminal, navigate to `samples/bot-all-cards/nodejs`
 
   - Update the `.env` configuration file for the bot to use the `{{Microsoft-App-Id}}`, `{{Microsoft-App-Password}}` and `{{ConnectionName}}`.  (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
-
-  **NOTE:** In `index.js` file at line number 40 Uncomment below commented line for local debugging.
 
   - Install modules
 
