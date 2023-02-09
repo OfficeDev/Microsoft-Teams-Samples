@@ -14,7 +14,7 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.BotBuilderSamples;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System;
-using AnonymousUsers.Hubs;
+using AnonymousUsers;
 
 var builder = WebApplication.CreateBuilder(args);
 

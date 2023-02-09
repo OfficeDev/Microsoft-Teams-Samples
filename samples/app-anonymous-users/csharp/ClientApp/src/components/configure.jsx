@@ -33,7 +33,7 @@ const Configure = props => {
         <header className="header">
             <div className="header-inner-container">
                 <div id="divConfig">
-                    <h3>Welcome to the app that support anonymous user support in teams meeting apps.</h3> 
+                    <h4>Welcome to the app that support anonymous user support in teams meeting apps</h4> 
                 </div>
             </div>
         </header>

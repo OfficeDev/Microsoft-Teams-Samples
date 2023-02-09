@@ -137,21 +137,19 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Vote0 ](Images/Vote0.png)
 
+**Vote UI:**
+
 ![VotePage1 ](Images/VotePage1.png)
 
 **Submit vote:**
 
 ![SubmitVote2 ](Images/SubmitVote2.png)
 
-**Vote successfully:**
-
-![SuccessVote3 ](Images/SuccessVote3.png)
-
 **Select CreateConversation:**
 
-![CreateConver4 ](Images/CreateConver4.png)
+![CreateConversation3 ](Images/CreateConversation3.png)
 
-**All message have been send:**
+**All message have been send and user count:**
 
 ![SendConver7 ](Images/SendConver7.png)
 
@@ -159,17 +157,9 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![SendAllUserConver5 ](Images/SendAllUserConver5.png)
 
-**Send next user conversation mmessage:**
-
-![NextuserSendConver6 ](Images/NextuserSendConver6.png)
-
-**Join meeting and Click share invite:**
+**Click the "Share Invite" button, copy the URL, open the URL in a new tab, and set up a guest account:**
 
 ![CopyMeetingLink8 ](Images/CopyMeetingLink8.png)
-
-**Paste the URL and create a guest user:**
-
-![CreateGuestUser9 ](Images/CreateGuestUser9.png)
 
 **Accept guest user:**
 
