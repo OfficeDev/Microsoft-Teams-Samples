@@ -6,11 +6,11 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace AnonymousUsers.Hubs
+namespace AnonymousUsers
 {
     /// <summary>
-    /// Create a hub by declaring a class that inherits from Hub.
-    /// Add public methods to the class to make them callable from clients.
+    /// To make calls to specific clients, use the properties of the Clients object.
+    /// SendMessage sends a message to all connected clients, using Clients.All.
     /// </summary>
     public class ChatHub : Hub
     {

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows Anonymous Users Support In Meeting.
+description: This sample shows anonymous users support in meeting apps.
 products:
 - office-teams
 - office
@@ -14,11 +14,11 @@ urlFragment: officedev-microsoft-teams-samples-app-anonymous-users-csharp
 
 ---
 
-### Anonymous User Support
+## Anonymous User Support
 
-This sample shows Anonymous Users Support In Meeting.
+This sample shows anonymous users support in meeting apps.
 
-**Interaction with bot**
+**Interaction with app**
 ![appanonymoususersGif](Images/appanonymoususersGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -94,7 +94,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```
 
  6) Modify the `/appsettings.json` and fill in the following details:
-  - `{{ MicrosoftAppType }}` - **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**
   - `{{ MicrosoftAppId }}` - Generated from Step 2 is the application app id
   - `{{ MicrosoftAppPassword }}` - Generated from Step 2, also referred to as Client secret
   - `{{ MicrosoftAppTenantId }}` - Generated from Step 2 is the tenantId id

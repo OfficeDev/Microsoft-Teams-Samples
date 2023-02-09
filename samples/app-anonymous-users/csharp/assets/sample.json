@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-anonymous-users-csharp",
     "source": "officeDev",
     "title": "Anonymous User Support",
-    "shortDescription": "This sample shows Anonymous Users Support In Meeting.",
+    "shortDescription": "This sample app shows anonymous users support in teams meeting apps.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-anonymous-users/csharp",
     "longDescription": [
-      "This sample shows Anonymous Users Support In Meeting."
+      "This sample app shows anonymous users support in teams meeting apps."
     ],
     "creationDateTime": "2023-02-06",
     "updateDateTime": "2023-02-08",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-anonymous-users/csharp/Images/appanonymoususersGif.gif",
-        "alt": "Solution UX showing Anonymous User Support"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-anonymous-users/csharp/Images/anonymoususersupport.gif",
+        "alt": "Solution UX showing anonymous user support in teams meeting apps"
       }
     ],
     "authors": [

@@ -10,6 +10,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const Configure = props => {
 
     useEffect(() => {
+
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
@@ -22,19 +23,17 @@ const Configure = props => {
 
                 saveEvent.notifySuccess();
             });
+            microsoftTeams.pages.config.setValidityState(true);
         });
     }, []);
 
-    const onClick = () => {
-        microsoftTeams.pages.config.setValidityState(true);
-    }
+  
 
     return (
         <header className="header">
             <div className="header-inner-container">
                 <div id="divConfig">
-                    <br />
-                    <input type="radio" name="notificationType" value="Create" onClick={onClick} /> Add App in a meeting tab
+                    <h3>Welcome to the app that support anonymous user support in teams meeting apps.</h3> 
                 </div>
             </div>
         </header>

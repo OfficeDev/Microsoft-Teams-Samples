@@ -11,7 +11,6 @@ import ShareToMeeting from "../components/share-to-meeting";
 import * as microsoftTeams from "@microsoft/teams-js";
 import ShareView from "../components/shareview";
 
-
 export const AppRoute = () => {
 
     React.useEffect(() => {

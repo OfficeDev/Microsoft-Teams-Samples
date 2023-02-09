@@ -19,8 +19,8 @@
     "full": "Anonymous User Support"
   },
   "description": {
-    "short": "This sample shows Anonymous Users Support In Meeting.",
-    "full": "This sample shows Anonymous Users Support In Meeting."
+    "short": "This sample shows anonymous users support in meeting apps.",
+    "full": "This sample shows anonymous users support in meeting apps."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
@@ -57,11 +57,11 @@
           "commands": [
             {
               "title": "Vote",
-              "description": "Sends message with @mention of the sender"
+              "description": "Sends vote card message via @mention vote"
             },
             {
               "title": "CreateConversation",
-              "description": "One-on-one conversation with an anonymous user"
+              "description": "Create 1:1 conversation with bot for all the meeting participants via @mention CreateConversation"
             }
           ]
         }

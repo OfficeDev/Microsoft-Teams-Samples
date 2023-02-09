@@ -16,74 +16,62 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
     public class AnonymousUsersBot : TeamsActivityHandler
     {
+        /// <summary>
+        /// Private access appId and appPassword
+        /// </summary>
         private string _appId;
         private string _appPassword;
+
+        /// <summary>
+        /// Assgin_logger error data and the _logger field shouldn't be modified.
+        /// </summary>
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Represents a set of key/value application configuration properties.
         /// </summary>
         /// <param name="config"></param>
-        public AnonymousUsersBot(IConfiguration config)
+        public AnonymousUsersBot(IConfiguration config, ILogger<AnonymousUsersBot> logger)
         {
+            _logger = logger;
             _appId = config["MicrosoftAppId"];
             _appPassword = config["MicrosoftAppPassword"];
         }
 
-        private readonly string _anonymousCardReaderCardTemplate = Path.Combine(".", "Resources", "VoteCard.json");
+        /// <summary>
+        /// Read vote card JSON template
+        /// </summary>
+        private readonly string _voteCardReaderCardTemplate = Path.Combine(".", "Resources", "VoteCard.json");
 
         /// <summary>
-        /// Override this in a derived class to provide logic specific to Message activities, such as the conversational logic.
+        /// Handle when a message is addressed to the bot.
         /// </summary>
-        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns></returns>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Text != null)
             {
+                // Remove bot atmentions for teams/groupchat scope
                 turnContext.Activity.RemoveRecipientMention();
                 var text = turnContext.Activity.Text.Trim().ToLower();
 
                 if (text.Contains("vote"))
                 {
-                    await SendAnonymousCardAsync(turnContext, cancellationToken);
+                    await SendVoteCardAsync(turnContext, cancellationToken);
                 }
                 else if (text.Contains("createconversation"))
                 {
-                    int usersCount = 0;
-                    int anonymousUsersCount = 0;
-                    try
-                    {
-                        //A conversation reference for the conversation that contains this activity.
-                        await ConversationAsync(turnContext, cancellationToken);
-                    }
-                    catch (Exception ex)
-                    {
-                        //Bots aren't allowed to initiate a one-on-one conversation with an anonymous user.
-                        //it will receive a 400 Bad Request status code and the following error response:
-
-                        var membersCount = await GetPagedMembers(turnContext, cancellationToken);
-                        foreach (var teamMemberCount in membersCount)
-                        {
-                            if (teamMemberCount.UserRole != null && teamMemberCount.UserRole == "user")
-                            {
-                                usersCount++;
-                            }
-                            //anonymous, represents anonymous user.
-                            if (teamMemberCount.UserRole != null && teamMemberCount.UserRole == "anonymous")
-                            {
-                                anonymousUsersCount++;
-                            }
-                        }
-
-                        await turnContext.SendActivityAsync(MessageFactory.Text($"Users count: {usersCount} <br> Anonymous users count: {anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user."), cancellationToken);
-                    }
+                    // Create 1:1 bot conversation with users existing in the current meeting.
+                    await CreateConversationWithUsersAsync(turnContext, cancellationToken);
                 }
             }
 
@@ -91,7 +79,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         }
 
         /// <summary>
-        /// Gets the account of a single conversation member. This works in one-on-one, group, and teams scoped conversations.
+        /// Fetching member information and sending a vote success message
         /// </summary>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -100,23 +88,26 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             if (turnContext.Activity.Value != null)
             {
+                // Initializes a new instance of the TeamsChannelAccount class.
                 var member = new TeamsChannelAccount();
+
                 try
                 {
                     member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
                 }
-                catch (ErrorResponseException e)
+                catch (ErrorResponseException exception)
                 {
-                    if (e.Body.Error.Code.Equals("MemberNotFoundInConversation", StringComparison.OrdinalIgnoreCase))
+                    if (exception.Body.Error.Code.Equals("MemberNotFoundInConversation", StringComparison.OrdinalIgnoreCase))
                     {
                         await turnContext.SendActivityAsync("Member not found.");
                         return;
                     }
                     else
                     {
-                        throw e;
+                        throw exception;
                     }
                 }
+
                 var message = MessageFactory.Text($"{member.Name} voted successfully.");
 
                 await turnContext.SendActivityAsync(message);
@@ -124,13 +115,14 @@ namespace Microsoft.BotBuilderSamples.Bots
         }
 
         /// <summary>
-        /// Override this in a derived class to provide logic for when members other than the bot join the channel, such as your bot's welcome logic.
+        /// Invoked when bot (like a user) are added to the conversation.
         /// </summary>
-        /// <param name="membersAdded">Override this in a derived class to provide logic for when members other than the bot join the channel, such as your bot's welcome logic.</param>
+        /// <param name="membersAdded">A list of all the members added to the conversation.</param>
         /// <param name="teamInfo">The team info object representing the team.</param>
-        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
+        /// <remarks>
         protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> membersAdded, TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var teamMember in membersAdded)
@@ -140,16 +132,16 @@ namespace Microsoft.BotBuilderSamples.Bots
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
 
                 }
-                //anonymous, represents anonymous user.
+                // User role 'anonymous' indicates that newly added member is an anonymous user.
                 else if (teamMember.UserRole == "anonymous" && teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome anonymous users to the team."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Welcome anonymous user to the team."), cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        /// Gets a paginated list of members of one-on-one, group, or team conversation.
+        /// Gets a paginated list of members of a team. 
         /// </summary>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -176,8 +168,11 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task ConversationAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task CreateConversationWithUsersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
+            int usersCount = 0;
+            int anonymousUsersCount = 0;
+            bool sendAnonymousCount = false;
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
             var credentials = new MicrosoftAppCredentials(_appId, _appPassword);
@@ -187,7 +182,17 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             foreach (var teamMember in members)
             {
-                var proactiveMessage = MessageFactory.Text($"Hello {teamMember.GivenName} {teamMember.Surname}. I'm a Teams conversation bot.");
+                var proactiveMessage = MessageFactory.Text($"Hello {teamMember.GivenName} {teamMember.Surname}. I'm a Teams conversation bot that support anonymous users.");
+
+                if (teamMember.UserRole != null && teamMember.UserRole == "user")
+                {
+                    usersCount++;
+                }
+
+                if (teamMember.UserRole != null && teamMember.UserRole == "anonymous")
+                {
+                    anonymousUsersCount++;
+                }
 
                 var conversationParameters = new ConversationParameters
                 {
@@ -197,34 +202,48 @@ namespace Microsoft.BotBuilderSamples.Bots
                     TenantId = turnContext.Activity.Conversation.TenantId,
                 };
 
-                await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
-                    credentials.MicrosoftAppId,
-                    teamsChannelId,
-                    serviceUrl,
-                    credentials.OAuthScope,
-                    conversationParameters,
-                    async (t1, c1) =>
-                    {
-                        conversationReference = t1.Activity.GetConversationReference();
-                        await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
-                            _appId,
-                            conversationReference,
-                            async (t2, c2) =>
-                            {
-                                await t2.SendActivityAsync(proactiveMessage, c2);
-                            },
-                            cancellationToken);
-                    },
-                    cancellationToken);
+                try
+                {
+                    // Creates a conversation on the specified groupchat and send file consent card on that conversation.
+                    await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
+                        credentials.MicrosoftAppId,
+                        teamsChannelId,
+                        serviceUrl,
+                        credentials.OAuthScope,
+                        conversationParameters,
+                        async (turnsContextActiT1, cancelTokenC1) =>
+                        {
+                            conversationReference = turnsContextActiT1.Activity.GetConversationReference();
+                            await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
+                                _appId,
+                                conversationReference,
+                                async (turnsContextActiT2, cancelTokenC2) =>
+                                {
+                                    await turnsContextActiT2.SendActivityAsync(proactiveMessage, cancelTokenC2);
+                                },
+                                cancellationToken);
+                        },
+                        cancellationToken);
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError("Error:" + exception.Message);
+                    sendAnonymousCount = true;
+                }
+            }
+
+            if (sendAnonymousCount == true)
+            {
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Users count: {usersCount} <br> Anonymous users count: {anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user."), cancellationToken);
             }
 
             await turnContext.SendActivityAsync(MessageFactory.Text("All messages have been sent."), cancellationToken);
         }
 
         /// <summary>
-        /// Override this in a derived class to provide logic for when members other than the bot leave the channel, such as your bot's good-bye logic.
+        /// Invoked when bot (like a user) are removed to the conversation.
         /// </summary>
-        /// <param name="membersRemoved">A list of all the members removed from the channel, as described by the conversation update activity.</param>
+        /// <param name="membersRemoved">A list of all the members removed from the channel.</param>
         /// <param name="teamInfo">The team info object representing the team.</param>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -233,27 +252,27 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var member in membersRemoved)
             {
-                // AadObjectId property is null represents anonymous user.
+                // If AadObjectId property is null, it means it's an anonymous user otherwise normal user.
                 if (member.AadObjectId == null)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"The anonymous user was removed from team."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("The anonymous user was removed from the teams meeting."), cancellationToken);
                 }
                 else
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"The user was removed from team."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("The user was removed from the teams meeting."), cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        /// Adaptive Card - This card is highly customizable and can contain any combination of text, speech, images, buttons, and input fields.
+        /// Send vote adaptive card template.
         /// </summary>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        private async Task SendAnonymousCardAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task SendVoteCardAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var cardJSON = File.ReadAllText(_anonymousCardReaderCardTemplate);
+            var cardJSON = File.ReadAllText(_voteCardReaderCardTemplate);
             var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
