@@ -59,18 +59,21 @@ const ShareView = () => {
     const submitVote = () => {
         if (connection) {
             microsoftTeams.app.getContext().then((context) => {
+
                 setDisabled(true); // Disable Button
                 // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
                 if (context.user.licenseType === "Anonymous")
                 {
                     // Update the state property for incremented count value.
                     let addAnonymousVal = aShowCount + 1;
+
                     // Sending the updated count to hub signal to show the latest data on stage view.
                     connection.send("SendMessage", "Anonymous", addAnonymousVal);
                 }
                 else {
                     // Update the state property for incremented count value.
                     let addUserVal = uShowCount + 1;
+
                     // Sending the updated count to hub signal to show the latest data on stage view.
                     connection.send("SendMessage", "User", addUserVal);
                 }

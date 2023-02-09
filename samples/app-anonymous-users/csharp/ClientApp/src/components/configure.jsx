@@ -15,9 +15,9 @@ const Configure = props => {
             microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
-                    entityID: "App in Meeting Tab Demo",
+                    entityID: "Anonymous User Support Demo",
                     contentUrl: `${window.location.origin}/appInMeeting`,
-                    suggestedTabName: "App in meeting tab",
+                    suggestedTabName: "Anonymous User Support",
                     websiteUrl: `${window.location.origin}/appInMeeting`,
                 });
 

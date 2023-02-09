@@ -1,6 +1,6 @@
 {
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "devPreview",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.teams.sample.appAnonymousUsers",
@@ -29,7 +29,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "meetingSidePanel",
@@ -41,7 +41,7 @@
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
-        "groupchat",
+        "groupChat",
         "team"
       ],
       "isNotificationOnly": false,
@@ -51,7 +51,7 @@
       "commandLists": [
         {
           "scopes": [
-            "groupchat",
+            "groupChat",
             "team"
           ],
           "commands": [

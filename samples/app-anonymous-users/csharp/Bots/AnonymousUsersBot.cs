@@ -19,14 +19,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Microsoft.BotBuilderSamples.Bots
+namespace AnonymousUsers.Bots
 {
     public class AnonymousUsersBot : TeamsActivityHandler
     {
         /// <summary>
-        /// Private access appId and appPassword
+        /// Get the Microsoft appid and assign the value to the _appId properties.
         /// </summary>
         private string _appId;
+
+        /// <summary>
+        /// Get the Microsoft password and assign the value to the _appPassword properties.
+        /// </summary>
         private string _appPassword;
 
         /// <summary>
@@ -60,7 +64,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             if (turnContext.Activity.Text != null)
             {
-                // Remove bot atmentions for teams/groupchat scope
+                // Remove bot at-mentions for teams/groupchat scope
                 turnContext.Activity.RemoveRecipientMention();
                 var text = turnContext.Activity.Text.Trim().ToLower();
 
@@ -172,7 +176,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             int usersCount = 0;
             int anonymousUsersCount = 0;
-            bool sendAnonymousCount = false;
+            bool IsAnonymousUser = false;
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
             var credentials = new MicrosoftAppCredentials(_appId, _appPassword);
@@ -228,11 +232,16 @@ namespace Microsoft.BotBuilderSamples.Bots
                 catch (Exception exception)
                 {
                     _logger.LogError("Error:" + exception.Message);
-                    sendAnonymousCount = true;
+
+                    //This condition is handling error for anonymous users because "Bot cannot create a conversation with an anonymous user".
+                    if (((ErrorResponseException)exception).Response.Content.Contains("anonymous"))
+                    {
+                        IsAnonymousUser = true;
+                    }
                 }
             }
 
-            if (sendAnonymousCount == true)
+            if (IsAnonymousUser == true)
             {
                 await turnContext.SendActivityAsync(MessageFactory.Text($"Users count: {usersCount} <br> Anonymous users count: {anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user."), cancellationToken);
             }

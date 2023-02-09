@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.BotBuilderSamples.Bots;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.BotBuilderSamples;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System;
 using AnonymousUsers;
+using AnonymousUsers.Bots;
 
 var builder = WebApplication.CreateBuilder(args);
 
