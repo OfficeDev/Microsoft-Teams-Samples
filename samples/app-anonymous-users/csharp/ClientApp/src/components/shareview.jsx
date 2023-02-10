@@ -1,9 +1,9 @@
-﻿// <copyright file="shareview.jsx" company="Microsoft Corporation">
+// <copyright file="shareview.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { Button } from '@fluentui/react-components';
