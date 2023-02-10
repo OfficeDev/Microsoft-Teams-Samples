@@ -1,12 +1,14 @@
 import { Flex, Header, Loader } from '@fluentui/react-northstar';
 import { useEffect, useState } from 'react';
-import { useTeamsContext } from 'utils/TeamsProvider/hooks';
-import { getAllDocuments } from 'api/documentApi';
-import { Document } from 'models';
-import { SidepanelDocumentCard } from 'components/SidepanelDocumentCard';
 import { useQuery } from 'react-query';
 import { useLiveShare, useTakeControl } from 'hooks';
+import { useUserIsAnonymous, useTeamsContext } from 'utils/TeamsProvider/hooks';
+import { getAllDocuments } from 'api/documentApi';
+import { AnonymousPage } from 'components/AnonymousPage';
+import { CreateDocumentButton } from 'components/CreateDocumentButton';
 import { LiveSharePage } from 'components/LiveSharePage';
+import { SidepanelDocumentCard } from 'components/SidepanelDocumentCard';
+import { Document, DocumentListDto } from 'models';
 
 /**
  * List documents for use in a Sidepanel
@@ -17,26 +19,26 @@ import { LiveSharePage } from 'components/LiveSharePage';
 export function SidepanelDocumentCardList() {
   const teamsContext = useTeamsContext();
   const pollingInterval = 5000;
+  const userIsAnonymous = useUserIsAnonymous();
 
-  const { data, error, isError } = useQuery<Document[], Error>(
-    ['getAllDocuments'],
-    () => getAllDocuments(),
+  const { data, error, isError } = useQuery<DocumentListDto, Error>(
+    ['getAllDocuments', userIsAnonymous],
+    () => getAllDocuments(userIsAnonymous),
     { refetchInterval: pollingInterval },
   );
 
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
 
-  const {
-    takeControlState,
-    container,
-    audience,
-  } = useLiveShare();
+  const anonymousUserHasToken = userIsAnonymous && data !== undefined;
+  const userCanTryViewDocumentList = anonymousUserHasToken || !userIsAnonymous;
+  const { takeControlState, container, audience } = useLiveShare();
 
-  const {
-    takeControlStarted,
-    takeControl,
-  } = useTakeControl(takeControlState, teamsContext?.user, audience);
+  const { takeControlStarted, takeControl } = useTakeControl(
+    takeControlState,
+    teamsContext?.user,
+    audience,
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,34 +53,40 @@ export function SidepanelDocumentCardList() {
       context={teamsContext}
       container={container}
       started={takeControlStarted}
+      userIsAnonymous={userIsAnonymous}
     >
-    <Flex column gap="gap.medium">
-      {data && data.length === 0 && (
-        <Header
-          as="h1"
-          content="There are no documents available for you yet."
-        />
-      )}
+      <Flex column gap="gap.medium">
+        {!userCanTryViewDocumentList && <AnonymousPage />}
+        {userCanTryViewDocumentList && (
+          <>
+            <CreateDocumentButton userIsAnonymous={userIsAnonymous} />
+            {data && data.documents.length === 0 && (
+              <Header
+                as="h1"
+                content="There are no documents available for you yet."
+              />
+            )}
 
-      {isError &&
-        ((showLoader && <Loader />) || (
-          <Header
-            as="h1"
-            content="Something went wrong"
-            description={JSON.stringify(error)}
-          />
-        ))}
+            {isError &&
+              ((showLoader && <Loader />) || (
+                <Header
+                  as="h1"
+                  content="Something went wrong"
+                  description={JSON.stringify(error)}
+                />
+              ))}
 
-      {data && data.map((d, index) => (
-        <SidepanelDocumentCard
-          key={index}
-          {...d}
-          // You should not use user information from the context if you need to prove a user's identity.
-          // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
-          loggedInAadId={teamsContext?.user?.id ?? ''}
-          takeControl={takeControl}
-        />
-      ))}
+            {data &&
+              data.documents.map((d, index) => (
+                <SidepanelDocumentCard
+                  key={index}
+                  {...d}
+                  loggedInUser={data.callerUser}
+                  takeControl={takeControl}
+                />
+              ))}
+          </>
+        )}
       </Flex>
     </LiveSharePage>
   );

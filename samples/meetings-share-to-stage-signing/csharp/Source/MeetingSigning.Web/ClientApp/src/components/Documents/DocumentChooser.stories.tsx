@@ -15,12 +15,17 @@ const Template: ComponentStory<typeof DocumentChooser> = (args) => (
 export const PurchaseAgreementDocument = Template.bind({});
 PurchaseAgreementDocument.args = {
   documentType: DocumentType.PurchaseAgreement,
-  loggedInAadId: '00000000-0000-0000-0000-000000000001',
+  loggedInUser: {
+    userId: '00000000-0000-0000-0000-000000000001',
+    name: 'You',
+    email: 'you@live.com',
+  },
   signatures: [
     {
       signer: {
         userId: '00000000-0000-0000-0000-000000000001',
         name: 'Bill Gates',
+        email: 'billg@ms.com',
       },
       text: '',
       id: '10000000-0000-0000-0000-000000000001',
@@ -33,12 +38,17 @@ PurchaseAgreementDocument.args = {
 export const DefaultDocument = Template.bind({});
 DefaultDocument.args = {
   documentType: DocumentType.TaxFilings,
-  loggedInAadId: '00000000-0000-0000-0000-000000000001',
+  loggedInUser: {
+    userId: '00000000-0000-0000-0000-000000000001',
+    name: 'You',
+    email: 'you@live.com',
+  },
   signatures: [
     {
       signer: {
         userId: '00000000-0000-0000-0000-000000000001',
         name: 'Bill Gates',
+        email: 'billg@ms.com',
       },
       text: '',
       id: '10000000-0000-0000-0000-000000000001',
@@ -49,6 +59,7 @@ DefaultDocument.args = {
       signer: {
         userId: '00000000-0000-0000-0000-000000000002',
         name: 'Satya Nadella',
+        email: 'staya@ms.com',
       },
       text: '',
       id: '10000000-0000-0000-0000-000000000002',

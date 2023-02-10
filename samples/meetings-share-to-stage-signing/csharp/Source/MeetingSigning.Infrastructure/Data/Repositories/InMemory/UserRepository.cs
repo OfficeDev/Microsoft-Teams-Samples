@@ -27,32 +27,37 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
         /// <returns>Task</returns>
         public async Task AddUser(User user)
         {
-            if (await UserExists(user.UserId))
+            if (user.UserId == null && user.Email == null)
+            {
+                throw new ApiException(HttpStatusCode.BadRequest, ErrorCode.InvalidOperation, "Unable to add a user which has no UserId or Email.");
+            }
+
+            if (await UserExists(user.Id))
             {
                 return;
             }
 
-            _userDictionary.Add(user.UserId, user);
+            _userDictionary.Add(user.Id, user);
         }
 
         /// <summary>
         /// GetUser tries to find an existing user
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="id"></param>
         /// <returns>User found or null</returns>
-        public Task<User> GetUser(string userId)
+        public Task<User> GetUser(string id)
         {
-            if (_userDictionary.TryGetValue(userId, out User? existingUser))
+            if (_userDictionary.TryGetValue(id, out User? existingUser))
             {
                 return Task.FromResult(existingUser.DeepCopy());
             }
-            throw new ApiException(HttpStatusCode.NotFound, ErrorCode.UserNotFound, $"User with id {userId} was not found.");
+            throw new ApiException(HttpStatusCode.NotFound, ErrorCode.UserNotFound, $"User with id {id} was not found.");
         }
 
         /// <inheritdoc/>
-        public Task<bool> UserExists(string userId)
+        public Task<bool> UserExists(string id)
         {
-            return Task.FromResult(_userDictionary.ContainsKey(userId));
+            return Task.FromResult(_userDictionary.ContainsKey(id));
         }
     }
 }

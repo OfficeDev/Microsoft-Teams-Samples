@@ -124,16 +124,31 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
         /// <returns>Task</returns>
         private async Task AddUsersAsync(ISet<User> viewersSet, ISet<User> signersSet)
         {
+            ISet<User> users = new HashSet<User>(viewersSet);
+            users.UnionWith(signersSet);
+
+            // Check if any users will fail to be added because they are missing UserId or Email.
+            // This prevents some users in a request being added successfully, and some failing
+            if (users.Any(u => u.UserId == null && u.Email == null))
+            {
+                _logger.LogError("Unable to add all users, as at least one was missing a UserId or Email.");
+                throw new ApiException(HttpStatusCode.BadRequest, ErrorCode.InvalidOperation, "Unable to add all users, as at least one was missing a UserId or Email.");
+            }
+
             try
             {
-                ISet<User> users = new HashSet<User>(viewersSet);
-                users.UnionWith(signersSet);
-
-                foreach (User? user in users)
+                foreach (User user in users)
                 {
-                    if (!await _userRepository.UserExists(user.UserId))
+                    if (!await _userRepository.UserExists(user.Id))
                     {
-                        await _userRepository.AddUser(await _userService.GetUser(user.UserId));
+                        if (!string.IsNullOrEmpty(user.Email))
+                        {
+                            await _userRepository.AddUser(new User { Name = user.Email, UserId = null, Email = user.Email });
+                        }
+                        else
+                        {
+                            await _userRepository.AddUser(await _userService.GetUser(user.UserId));
+                        }
                     }
                 }
             }
@@ -154,9 +169,9 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
             try
             {
                 var signatures = new List<Signature>();
-                foreach (User? signer in signersSet)
+                foreach (User signer in signersSet)
                 {
-                    var user = await this._userRepository.GetUser(signer.UserId);
+                    var user = await this._userRepository.GetUser(signer.Id);
                     var signature = new Signature
                     {
                         Signer = user,
@@ -187,9 +202,9 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
             try
             {
                 var viewers = new List<Viewer>();
-                foreach (User? viewer in viewersSet)
+                foreach (User viewer in viewersSet)
                 {
-                    User? user = await this._userRepository.GetUser(viewer.UserId);
+                    User user = await this._userRepository.GetUser(viewer.Id);
                     var newViewer = new Viewer
                     {
                         Observer = user

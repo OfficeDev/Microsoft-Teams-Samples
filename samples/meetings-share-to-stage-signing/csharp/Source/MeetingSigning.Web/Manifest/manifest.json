@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
   "version": "1.0.2",
-  "id": "20685f45-2cb6-4115-9449-f9b34bb40f0c",
+  "id": "<<teams-app-id>>",
   "packageName": "com.microsoft.teams.meetingsigning",
   "developer": {
     "name": "Contoso",
@@ -47,6 +47,9 @@
       "*.ngrok.io",
       "<<deployment-url>>"
   ],
+  "meetingExtensionDefinition": {
+    "supportsAnonymousGuestUsers": true
+  },
   "authorization": {
     "permissions": {
       "resourceSpecific": [
