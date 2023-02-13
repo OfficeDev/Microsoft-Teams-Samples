@@ -13,6 +13,9 @@ on:
     paths:
       - 'samples/tab-personal-quickstart/js/**'
 
+env:
+    PROJECT_PATH: 'samples/tab-personal-quickstart/js'
+
 jobs:
   build:
 
@@ -20,7 +23,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: 'samples/tab-personal-quickstart/js'
+        working-directory: ${{ env.PROJECT_PATH }}
 
     strategy:
       matrix:
