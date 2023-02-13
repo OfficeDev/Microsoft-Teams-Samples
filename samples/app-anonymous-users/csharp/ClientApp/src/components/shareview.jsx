@@ -6,7 +6,8 @@
 import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { Button } from '@fluentui/react-components';
+import { Button, Image, Text } from '@fluentui/react-components';
+import $ from "jquery";
 
 const ShareView = () => {
 
@@ -19,11 +20,20 @@ const ShareView = () => {
     const [uShowCount, uShowSetCount] = useState(0);
 
     // Declare new state variables that are required to disable the submit vote button.
-    const [disabled, setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState(false);
+
+    // Declare new state variables that are required to assgin facebook user details
+    const [facebookUserImage, setfacebookUserImage] = useState("");
+
+    const [facebookUserName, setfacebookUserName] = useState("");
+
+    const [disabledfacebookBtn, setdisabledfacebookBtn] = useState(true);
+
+    const [isLoggedIn, isSetLoggedIn] = useState(false);
+
 
     useEffect(() => {
         microsoftTeams.initialize();
-
     }, [])
 
     // Builds the SignalR connection, mapping it to /chatHub
@@ -37,7 +47,7 @@ const ShareView = () => {
         setConnection(newConnection);
     }, []);
 
-     // Starts the SignalR connection
+    // Starts the SignalR connection
     useEffect(() => {
         if (connection) {
             connection.start()
@@ -62,8 +72,7 @@ const ShareView = () => {
 
                 setDisabled(true); // Disable Button
                 // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
-                if (context.user.licenseType === "Anonymous")
-                {
+                if (context.user.licenseType === "Anonymous") {
                     // Update the state property for incremented count value.
                     let addAnonymousVal = aShowCount + 1;
 
@@ -84,11 +93,91 @@ const ShareView = () => {
         }
     }
 
+    // Initiate facebook login.
+    const facebookLogin = () => {
+        fbAuthentication()
+            .then((result) => {
+                return getServerSideTokenFb(result.idToken);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    // Get client side token for facebook.
+    const fbAuthentication = () => {
+        var facebookAppId = '{{Facebook App Id}}';
+        let redirectUri = window.location.origin + "/facebook-auth-end";
+
+        return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.authenticate({
+                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=1234535`,
+                width: 600,
+                height: 535
+            })
+                .then((result) => {
+                    let data = localStorage.getItem(result);
+                    let tokenDetails = JSON.parse(data);
+                    localStorage.removeItem(result);
+                    resolve(tokenDetails);
+                })
+                .catch((reason) => {
+                    reject(reason);
+                })
+        });
+    }
+
+    // Get face book user profile details.
+    const getServerSideTokenFb = (clientSideToken) => {
+        return new Promise(() => {
+            microsoftTeams.app.getContext().then(() => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/getFbAccessToken',
+                    dataType: 'json',
+                    data: {
+                        'accessToken': clientSideToken,
+                    },
+                    success: function (responseJson) {
+                        let facebookProfile = JSON.parse(responseJson);
+                        let facebookName = facebookProfile.name;
+                        setfacebookUserName("Welcome: " + facebookName);
+                        setfacebookUserImage(facebookProfile.picture);
+                        setdisabledfacebookBtn(false);
+                        isSetLoggedIn(true);
+                    },
+                    error: function (textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
+                });
+            });
+        });
+    }
+
     return (
         <div className="timerCount">
-            <Button appearance="primary" onClick={submitVote} disabled={disabled} >Submit Vote</Button>
-            <h1>Anonymous users voted: {aShowCount}</h1>
-            <h1>Users voted: {uShowCount}</h1>
+            <div className="btnlogin">
+                {disabledfacebookBtn &&
+                    <Button appearance="primary" onClick={facebookLogin}>Login with Facebook</Button>
+                }
+                <Text size={500} weight="semibold">{facebookUserName}</Text>
+                <br />
+                {facebookUserImage &&
+                    <Image width="100" height="100" src={facebookUserImage} />
+                }
+            </div>
+
+            <div>
+                {isLoggedIn &&
+                    <div>
+                        <Button appearance="primary" onClick={submitVote} disabled={disabled} >Submit Vote</Button>
+                        <br />
+                        <Text size={500} weight="semibold">Anonymous users voted : {aShowCount}</Text>
+                        <br />
+                        <Text size={500} weight="semibold">Users voted : {uShowCount}</Text>
+                    </div>
+                }
+            </div>
         </div>
     );
 };

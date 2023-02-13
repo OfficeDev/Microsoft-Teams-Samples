@@ -24,7 +24,7 @@ code {
 }
 
 .timerCount {
-    padding: 10rem;
+    padding: 7rem;
     text-align: center;
     background-color: #1f1f1f;
     color: #ffffff;
@@ -39,4 +39,6 @@ code {
     color: #ffffff;
     border: 1px solid #b7b7b7;
 }
-
+.btnlogin {
+    margin: 0.4rem;
+}

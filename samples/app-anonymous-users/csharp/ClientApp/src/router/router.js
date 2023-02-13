@@ -10,7 +10,7 @@ import Configure from "../components/configure";
 import ShareToMeeting from "../components/share-to-meeting";
 import * as microsoftTeams from "@microsoft/teams-js";
 import ShareView from "../components/shareview";
-
+import FacebookAuthEnd from "../components/facebook-auth-end";
 export const AppRoute = () => {
 
     React.useEffect(() => {
@@ -26,7 +26,8 @@ export const AppRoute = () => {
                     <Route path="/appInMeeting" element={<AppInMeeting />} />
                     <Route path="/configure" element={<Configure />} />
                     <Route path="/shareview" element={<ShareView />} />
-                </Routes>
+                    <Route path="/facebook-auth-end" element={<FacebookAuthEnd />} />
+              </Routes>
             </BrowserRouter>
         </React.Fragment>
     );
