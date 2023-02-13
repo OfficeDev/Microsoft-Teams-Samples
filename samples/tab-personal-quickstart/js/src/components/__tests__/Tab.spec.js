@@ -9,7 +9,7 @@ const appStub = sinon
   .stub(app, "getContext")
   .returns(Promise.resolve({ user: { userPrincipalName: "test@test.com" } }));
 
-const Tab = proxyquire("./Tab", {
+const Tab = proxyquire("../Tab", {
   "@microsoft/teams-js": {
     app: appStub,
   },
