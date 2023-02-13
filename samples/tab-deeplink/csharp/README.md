@@ -69,6 +69,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
    - Update channelID placeholer `<AddYourTeamsChannelId>` value in your `DeepLinkBot.cs` file with your particular channel id from any Team in Teams. (You can get it manually by clicking on 3 dots in any team's channel and fetch it's link and extract the channel id ) like `General` channel) Example: `19:cbe3683f25094106b826c9cada3afbe0@thread.skype`
+
+   - Navigate to `wwwroot/js/env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+    - [TeamsAdminPortal-AppID](DeeplinkFeatures/Images/11.TeamsAdminPortal.png)
    
    - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, BaseURL ,
 	ChannelEntityId is a unique identifier ,TabEntityId as EntityId from Manifest file ,MannifestAppId as manifest ID from manifest file,
@@ -223,4 +226,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
-
