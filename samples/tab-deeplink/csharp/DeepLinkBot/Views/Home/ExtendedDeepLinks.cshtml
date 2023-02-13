@@ -2,75 +2,12 @@
     ViewBag.Title = "Detail";
 }
 
-<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+        crossorigin="anonymous"></script>
+<script src="~/js/deeplinkfeatures.js"></script>
+<script src="~/js/env.js"></script>
 <link rel="stylesheet" href="~/style.css" />
-
-<script type="text/javascript">
-    microsoftTeams.app.initialize();
-
-    function selectPeople() {
-        microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
-            if (people) {
-                document.getElementById("Attendee").value = (people.map((p) => p.email)).join(",");
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
-
-    function onCallDeepLinkButtonClick(callModalities) {
-        microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
-            if (people) {
-                if (microsoftTeams.call.isSupported()) {
-                    microsoftTeams.call.startCall({
-                        targets: people.map((p) => p.email),
-                        requestedModalities: [callModalities]
-                    })
-                        .then((result) => {
-                            console.log(result);
-                        }).catch((error) => {
-                            console.log(error);
-                        });
-                }
-                else {
-                    alert("Call isn't supported");
-                }
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
-
-    function onSchedulingDialogClick() {
-        var subjectInput = document.getElementById("Subject");
-        var startTimeInput = document.getElementById("StartTime");
-        var endTimeInput = document.getElementById("EndTime");
-        var contentInput = document.getElementById("Content");
-        var attendeeInput = document.getElementById("Attendee");
-
-        if (subjectInput.value.trim() !== "" && startTimeInput.value !== "" && endTimeInput.value !== "" && attendeeInput.value !== "") {
-            var meetingDetails =
-            {
-                attendees: attendeeInput.value,
-                content: contentInput.value.trim(),
-                endTime: endTimeInput.value,
-                startTime: startTimeInput.value,
-                subject: subjectInput.value.trim(),
-            };
-
-            // Currently Calendar API is not supported in Microsoft Teams.
-            // microsoftTeams.calendar.composeMeeting(meetingDetails).
-            //    then((result) => { console.log(result); }).
-            //    catch((error) => { console.log(error); });
-
-            microsoftTeams.app.openLink(`https://teams.microsoft.com/l/meeting/new?subject=${meetingDetails.subject}&startTime=${meetingDetails.startTime}&endTime=${meetingDetails.endTime}&content=${meetingDetails.content}&attendees=${meetingDetails.attendees}`)
-        }
-    }
-
-    function onAppInstallDialogClick() {
-        microsoftTeams.app.openLink("https://teams.microsoft.com/l/app/1542629c-01b3-4a6d-8f76-1938b779e48d");
-    }
-</script>
 
 <div>
     <div class="container">
@@ -108,11 +45,9 @@ microsoftTeams.call.startCall({ targets: usersEmailArray,
                         </div>
                         <div>Select members and make a call.</div>
                     </div>
-                    <button 
-                        data-id="default"
-                        class="callDeeplinkButton"
-                        onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Audio)"
-                    >
+                    <button data-id="default"
+                            class="callDeeplinkButton"
+                            onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Audio)">
                         Select
                     </button>
                 </div>
@@ -139,10 +74,8 @@ microsoftTeams.call.startCall({ targets: usersEmailArray,
                         </div>
                         <div>Select members and make a call.</div>
                     </div>
-                    <button 
-                        class="callDeeplinkButton"
-                        onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Video)"
-                    >
+                    <button class="callDeeplinkButton"
+                            onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Video)">
                         Select
                     </button>
                 </div>
@@ -200,13 +133,11 @@ microsoftTeams.app.openLink("https://teams.microsoft.com/l/meeting/new?subject=M
                             </form>
                         </div>
                     </div>
-                    <button 
-                        data-id="singleSelect"
-                        type="submit"
-                        class="callDeeplinkButton"
-                        style="width:130px;margin-left:8.5rem;"
-                        onclick="onSchedulingDialogClick()"
-                    >
+                    <button data-id="singleSelect"
+                            type="submit"
+                            class="callDeeplinkButton"
+                            style="width:130px;margin-left:8.5rem;"
+                            onclick="onSchedulingDialogClick()">
                         Schedule Meeting
                     </button>
                 </div>
@@ -226,10 +157,87 @@ microsoftTeams.app.openLink("https://teams.microsoft.com/l/app/1542629c-01b3-4a6
                             </pre>
                         </div>
                     </div>
-                    <button 
-                        class="callDeeplinkButton"
-                        onclick="onAppInstallDialogClick()"
-                    >
+                    <button class="callDeeplinkButton"
+                            onclick="onAppInstallDialogClick()">
+                        Open
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-container-div">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <b>Start new chat</b>
+                        </div>
+                        <div class="configure-header">
+                            To use this option, configure the function using following
+                            parameters
+                            <!-- Since we are using pre tag for having the code snippet in specified format ignoring the indentation here -->
+                            <pre>
+const chatPromise = chat.openGroupChat({ users: [user] });
+    chatPromise.
+        then((result) => { console.log(result) }).
+        catch((error) => { console.log(error) });
+                            </pre>
+                        </div>
+                    </div>
+                    <button class="callDeeplinkButton"
+                            onclick="startNewChat()">
+                        Open
+                    </button>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <b>Navigate to chat (Personal chat with bot)</b>
+                        </div>
+                        <div class="configure-header">
+                            To use this option, configure the function using following
+                            parameters
+                            <!-- Since we are using pre tag for having the code snippet in specified format ignoring the indentation here -->
+                            <pre>
+microsoftTeams.app.openLink(`https://teams.microsoft.com/l/entity/f6661eaa-0cf9-4eb2-93b1-58278abaf4d4/conversations`);
+                            </pre>
+                        </div>
+                    </div>
+                    <button class="callDeeplinkButton"
+                            onclick="navigateToChatWithApplication()">
+                        Open
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-container-div">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <b>Navigate to teams chat (Works in teams chat only)</b>
+                        </div>
+                        <div class="configure-header">
+                            To use this option, configure the function using following
+                            parameters
+                            <!-- Since we are using pre tag for having the code snippet in specified format ignoring the indentation here -->
+                            <pre>
+const queryParameters = {
+    channelId: context.channel.id,
+    tenantId: context.user.tenant.id,
+    groupId: context.team.groupId,
+    parentMessageId: context.app.parentMessageId,
+    teamName: context.team.displayName,
+    channelName: context.channel.displayName
+            }
+
+microsoftTeams.app.openLink(`https://teams.microsoft.com/l/message/${queryParameters.channelId}/tenantId=${queryParameters.tenantId}&groupId=${queryParameters.groupId}&parentMessageId=${queryParameters.parentMessageId}&teamName=${queryParameters.teamName}&channelName=${queryParameters.channelName}`)
+                            </pre>
+                        </div>
+                    </div>
+                    <button class="callDeeplinkButton"
+                            onclick="navigateToTeamsChat()">
                         Open
                     </button>
                 </div>

@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// <copyright file="DeepLinkBot.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
