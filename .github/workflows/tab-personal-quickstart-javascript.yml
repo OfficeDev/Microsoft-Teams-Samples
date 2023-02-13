@@ -11,12 +11,16 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'samples/tab-personal-quickstart/js/**'  
+      - 'samples/tab-personal-quickstart/js/**'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'samples/tab-personal-quickstart/js'
 
     strategy:
       matrix:
