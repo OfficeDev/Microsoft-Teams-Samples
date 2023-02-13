@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import React from 'react';
-import './App.css';
 
 /**
  * This component is used to display the required

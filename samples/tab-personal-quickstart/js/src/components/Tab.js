@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import React, { useEffect } from "react";
-import "./App.css";
+import { LargeTitle, Title2 } from "@fluentui/react-components";
 import { app } from "@microsoft/teams-js";
 
 /**
@@ -20,9 +20,11 @@ function Tab() {
 
   return (
     <div>
-      <h3>Hello World!</h3>
-      <h1>Congratulations {teamsContext?.user.userPrincipalName ?? "undefined"}!</h1>
-      <h3>This is the tab you made :-)</h3>
+      <Title2 block>Hello World!</Title2>
+      <LargeTitle block>
+        Congratulations {teamsContext?.user.userPrincipalName ?? "undefined"}!
+      </LargeTitle>
+      <Title2 block>This is the tab you made 😀!</Title2>
     </div>
   );
 }

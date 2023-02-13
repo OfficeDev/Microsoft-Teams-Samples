@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import React from 'react';
-import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -17,7 +16,7 @@ import Tab from "./Tab";
 function App() {
 
   // Initialize the Microsoft Teams SDK
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Display the app home page hosted in Teams
   return (
