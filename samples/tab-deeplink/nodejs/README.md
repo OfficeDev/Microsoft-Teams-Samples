@@ -64,6 +64,9 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
         npm install
         ```
 
+    - Navigate to `env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+    - ![TeamsAdminPortal-AppID](Images/TeamsAdminPortal.png)
+
     - Start the bot
 
         ```bash
