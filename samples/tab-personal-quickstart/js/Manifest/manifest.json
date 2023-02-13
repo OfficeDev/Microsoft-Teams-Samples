@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "version": "2.0.0",
+  "id": "e73d0119-027a-449b-8b22-8b1ef3fdf45e",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://{{domain-name}}",
-    "privacyUrl": "https://{{domain-name}}/privacy",
-    "termsOfUseUrl": "https://{{domain-name}}/termsofuse"
+    "websiteUrl": "https://0d6e-198-98-102-205.ngrok.io",
+    "privacyUrl": "https://0d6e-198-98-102-205.ngrok.io/privacy",
+    "termsOfUseUrl": "https://0d6e-198-98-102-205.ngrok.io/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://{{domain-name}}/tab",
-      "websiteUrl": "https://{{domain-name}}/tab",
+      "contentUrl": "https://0d6e-198-98-102-205.ngrok.io/tab",
+      "websiteUrl": "https://0d6e-198-98-102-205.ngrok.io/tab",
       "scopes": [
         "personal"
       ]
@@ -39,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "0d6e-198-98-102-205.ngrok.io"
   ]
 }
