@@ -2,19 +2,18 @@
 // Licensed under the MIT License.
 
 import React from 'react';
-import * as microsoftTeams from "@microsoft/teams-js";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import * as microsoftTeams from '@microsoft/teams-js';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Privacy from "./Privacy";
-import TermsOfUse from "./TermsOfUse";
-import Tab from "./Tab";
+import Privacy from './Privacy';
+import TermsOfUse from './TermsOfUse';
+import Tab from './Tab';
 
 /**
  * The main app which handles the initialization and routing
  * of the app.
  */
 function App() {
-
   // Initialize the Microsoft Teams SDK
   microsoftTeams.app.initialize();
 

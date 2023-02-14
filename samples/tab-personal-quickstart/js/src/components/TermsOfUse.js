@@ -9,13 +9,13 @@ import React from 'react';
  * link in the about tab.
  */
 class TermsOfUse extends React.Component {
-    render() {
-      return (
-        <div>
-          <h1>Terms of Use</h1>
-        </div>
-      );
-    }
+  render() {
+    return (
+      <div>
+        <h1>Terms of Use</h1>
+      </div>
+    );
+  }
 }
 
 export default TermsOfUse;

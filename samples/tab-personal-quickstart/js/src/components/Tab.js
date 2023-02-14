@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React, { useEffect } from "react";
-import { Text, LargeTitle, Title2 } from "@fluentui/react-components";
-import { app } from "@microsoft/teams-js";
+import React, { useEffect } from 'react';
+import { Text, LargeTitle, Title2 } from '@fluentui/react-components';
+import { app } from '@microsoft/teams-js';
 
 /**
  * The 'PersonalTab' component renders the main tab content
@@ -11,7 +11,7 @@ import { app } from "@microsoft/teams-js";
  */
 function Tab() {
   const [teamsContext, setTeamsContext] = React.useState(undefined);
-  const [theme, setTheme] = React.useState("default");
+  const [theme, setTheme] = React.useState('default');
 
   useEffect(() => {
     app.getContext().then((context) => {
@@ -27,7 +27,7 @@ function Tab() {
     <div>
       <Title2 block>Hello World!</Title2>
       <LargeTitle block>
-        Congratulations {teamsContext?.user.userPrincipalName ?? "undefined"}!
+        Congratulations {teamsContext?.user.userPrincipalName ?? 'undefined'}!
       </LargeTitle>
       <Title2 block>This is the tab you made 😀!</Title2>
       <Text as="p" block>
