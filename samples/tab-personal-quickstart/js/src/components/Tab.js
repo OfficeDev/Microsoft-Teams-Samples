@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 import React, { useEffect } from "react";
-import { LargeTitle, Title2 } from "@fluentui/react-components";
+import { Text, LargeTitle, Title2 } from "@fluentui/react-components";
 import { app } from "@microsoft/teams-js";
 
 /**
@@ -11,10 +11,15 @@ import { app } from "@microsoft/teams-js";
  */
 function Tab() {
   const [teamsContext, setTeamsContext] = React.useState(undefined);
+  const [theme, setTheme] = React.useState("default");
 
   useEffect(() => {
     app.getContext().then((context) => {
       setTeamsContext(context);
+      setTheme(context.app.theme);
+    });
+    app.registerOnThemeChangeHandler((theme) => {
+      setTheme(theme);
     });
   }, []);
 
@@ -25,6 +30,9 @@ function Tab() {
         Congratulations {teamsContext?.user.userPrincipalName ?? "undefined"}!
       </LargeTitle>
       <Title2 block>This is the tab you made 😀!</Title2>
+      <Text as="p" block>
+        Theme: {theme}
+      </Text>
     </div>
   );
 }
