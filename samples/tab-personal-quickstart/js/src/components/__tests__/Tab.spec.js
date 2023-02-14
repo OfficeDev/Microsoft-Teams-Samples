@@ -2,10 +2,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import sinon from 'sinon';
-import proxyquire from 'proxyquire';
 import { app } from '@microsoft/teams-js';
+import Tab from "../Tab";
 
-const getContextStub = sinon.stub(app, 'getContext').returns(
+sinon.stub(app, 'getContext').returns(
   Promise.resolve({
     user: { userPrincipalName: 'test@test.com' },
     app: { theme: 'default' },
@@ -14,15 +14,6 @@ const getContextStub = sinon.stub(app, 'getContext').returns(
 const registerOnThemeChangeHandlerStub = sinon
   .stub(app, 'registerOnThemeChangeHandler')
   .returns(Promise.resolve());
-
-const Tab = proxyquire('../Tab', {
-  '@microsoft/teams-js': {
-    app: {
-      getContext: getContextStub,
-      registerOnThemeChangeHandler: registerOnThemeChangeHandlerStub,
-    },
-  },
-}).default;
 
 describe('Tab tests', () => {
   it('Tab contains stubbed contest user principal name', async () => {
