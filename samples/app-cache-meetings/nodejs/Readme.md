@@ -84,6 +84,12 @@ This sample feature shows how to improve the subsequent loading time of an App t
 **AppCache in second tab with Unique Id Loaded :** 
 ![Team Context](Images/3.TabTwo.png)
 
+**AppCache with fetching data from Api :** 
+![Fetching Data](Images/4.FetchingData.png)
+
+**AppCache when data fetched :** 
+![Data Fetched](Images/5.DataFetched.png)
+
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
 
 

@@ -6,6 +6,9 @@
 import { useState } from "react";
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import axios from 'axios';
+import '../index.css';
+const querystring = require('querystring');
 
 /// </summary>
 ///  logitem to show the activity log
@@ -56,6 +59,8 @@ const loadHandler = (
 const AppCacheTab = () => {
     const [items, setItems] = useState<string[]>([]);
     const [title, setTitle] = useState("App Caching Sample");
+    const [searchText] = useState('Angular');
+    const [apiData, setApiData] = useState<string[]>([]);
   
     React.useEffect(() => {
         let app = microsoftTeams.app;
@@ -84,6 +89,20 @@ const AppCacheTab = () => {
 
                 const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
                 setItems((Items) => [...Items, newItem]);
+
+                const fetchApiData = async (searchText_param: any) => {
+                    const result = await axios.get(`https://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchText_param, size: 8 })}`);
+
+                    if (result) {
+                        app.notifyAppLoaded(); //stop loading when data is fetched
+                        const npmPackages = result.data.objects;
+                        Object.values(npmPackages).map((value, index) => {
+                            setApiData((apiData) => [...apiData, (npmPackages[index].package.name)]);
+                        });
+                    }
+                }
+
+                fetchApiData(searchText);
             }
 
         }).catch(function (error: any) {
@@ -102,6 +121,13 @@ const AppCacheTab = () => {
             {items.map((item) => {
                 return <div dangerouslySetInnerHTML={{ __html: item }} />;
             })}
+            <div className="packages">
+                <h3>Most NPM package's download</h3>
+               
+                {apiData.map((item: any) => {
+                    return <li dangerouslySetInnerHTML={{ __html: item }} />;
+                })}
+            </div>
         </div>
     );
 };
