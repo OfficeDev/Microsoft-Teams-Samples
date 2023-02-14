@@ -6,16 +6,15 @@
 import React, { useEffect } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 
-// Handles redirection after successful/failure sign in attempt.
-const Configure = props => {
+const FacebookAuthEnd = props => {
 
     useEffect(() => {
         microsoftTeams.initialize();
         getAuthToken();
     }, []);
 
+    // Get face book client side token.
     const getAuthToken = () => {
-        debugger;
         microsoftTeams.initialize();
         microsoftTeams.app.initialize().then(() => {
             localStorage.removeItem("auth.error");
@@ -31,13 +30,11 @@ const Configure = props => {
 
     // Parse hash parameters into key-value pairs
     const getHashParameters = () => {
-        alert("2");
         var urlString = window.location.href;
         var url = new URL(urlString);
         var code = url.searchParams.get("code");
-
         return code;
     }
 };
 
-export default Configure;
+export default FacebookAuthEnd;

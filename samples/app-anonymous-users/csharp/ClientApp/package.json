@@ -5,6 +5,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
+    "@azure/msal-browser": "^2.33.0",
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/signalr": "6.0.3",
     "@microsoft/teams-js": "^2.7.1",

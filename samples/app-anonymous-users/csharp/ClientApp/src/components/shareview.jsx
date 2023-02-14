@@ -22,14 +22,21 @@ const ShareView = () => {
     // Declare new state variables that are required to disable the submit vote button.
     const [disabled, setDisabled] = useState(false);
 
-    // Declare new state variables that are required to assgin facebook user details
-    const [facebookUserImage, setfacebookUserImage] = useState("");
+    // Declare new state variables that are required to assgin facebook user name
+    const [userName, setUserName] = useState("");
 
-    const [facebookUserName, setfacebookUserName] = useState("");
-
+    // Declare new state variables that are required to disable the Facebook button after login
     const [disabledfacebookBtn, setdisabledfacebookBtn] = useState(true);
 
-    const [isLoggedIn, isSetLoggedIn] = useState(false);
+    // Declare new state variables that are required for login success load the submit vote button
+    const [enableVoteDiv, setEnableVoteDiv] = useState(false);
+
+    const [IsCheckLoggeduser, IsSetCheckLoggeduser] = useState(true);
+
+    const [IsVisibleConsent, IsSetVisibleConsent] = useState(false);
+
+    const [ssoAuthenticationBtn, ssoSetAuthenticationBtn] = useState(true);
+
 
 
     useEffect(() => {
@@ -65,6 +72,15 @@ const ShareView = () => {
         }
     }, [connection]);
 
+    // 
+    useEffect(() => {
+        microsoftTeams.app.getContext().then((context) => {
+            if (context.user.licenseType === "Anonymous") {
+                IsSetCheckLoggeduser(false);
+            }
+        });
+    }, [])
+
     // Click submit vote button
     const submitVote = () => {
         if (connection) {
@@ -95,9 +111,9 @@ const ShareView = () => {
 
     // Initiate facebook login.
     const facebookLogin = () => {
-        fbAuthentication()
+        fbAuthentication() // This method get a client-side token for Facebook
             .then((result) => {
-                return getServerSideTokenFb(result.idToken);
+                return getServerSideTokenFb(result.idToken); // This method get a face book user profile details.
             })
             .catch((error) => {
                 console.log(error);
@@ -106,7 +122,8 @@ const ShareView = () => {
 
     // Get client side token for facebook.
     const fbAuthentication = () => {
-        var facebookAppId = '{{Facebook App Id}}';
+        var facebookAppId = '{{FacebookAppId}}';
+        alert(facebookAppId);
         let redirectUri = window.location.origin + "/facebook-auth-end";
 
         return new Promise((resolve, reject) => {
@@ -140,11 +157,10 @@ const ShareView = () => {
                     },
                     success: function (responseJson) {
                         let facebookProfile = JSON.parse(responseJson);
-                        let facebookName = facebookProfile.name;
-                        setfacebookUserName("Welcome: " + facebookName);
-                        setfacebookUserImage(facebookProfile.picture);
+                        // This variables will load the values to the labels
+                        setUserName("Welcome: " + facebookProfile.name);
                         setdisabledfacebookBtn(false);
-                        isSetLoggedIn(true);
+                        setEnableVoteDiv(true);
                     },
                     error: function (textStatus, errorThrown) {
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -154,21 +170,126 @@ const ShareView = () => {
         });
     }
 
+    // Tab sso authentication.
+    const ssoAuthentication = () => {
+        getClientSideToken()
+            .then((clientSideToken) => {
+                return getServerSideToken(clientSideToken);
+            })
+            .catch((error) => {
+                if (error === "invalid_grant") {
+                    // Display in-line button so user can consent
+                    IsSetVisibleConsent(true);
+                    ssoSetAuthenticationBtn(false);
+                } else {
+                    // Display in-line button so user can consent
+                    IsSetVisibleConsent(true);
+                    ssoSetAuthenticationBtn(false);
+                }
+            });
+    }
+
+    // Get client side token.
+    const getClientSideToken = () => {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.getAuthToken()
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((error) => {
+                    reject("Error getting token: " + error);
+                });
+        });
+    }
+
+    // Get server side token and user profile.
+    const getServerSideToken = (clientSideToken) => {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.app.getContext().then((context) => {
+                fetch('/GetUserAccessToken', {
+                    method: 'get',
+                    headers: {
+                        "Content-Type": "application/text",
+                        "Authorization": "Bearer " + clientSideToken
+                    },
+                    cache: 'default'
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson == "") {
+                            IsSetVisibleConsent(true);
+                            ssoSetAuthenticationBtn(false);
+                        } else {
+                            let userDetails = JSON.parse(responseJson);
+                            let userName = userDetails.user.displayName;
+                            setUserName("Welcome: " + userName);
+                            ssoSetAuthenticationBtn(false);
+                            setEnableVoteDiv(true);
+                        }
+                    });
+            });
+        });
+    }
+
+    // Request consent on implicit grant error.
+    const requestConsent = () => {
+        getToken()
+            .then(data => {
+                IsSetVisibleConsent(false);
+                getClientSideToken()
+                    .then((clientSideToken) => {
+                        return getServerSideToken(clientSideToken);
+                    });
+            });
+    }
+    // Get token for multi tenant.
+    const getToken = () => {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/auth-start",
+                width: 600,
+                height: 535
+            })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((reason) => {
+                    reject(reason);
+                });
+        });
+    }
+
     return (
         <div className="timerCount">
-            <div className="btnlogin">
-                {disabledfacebookBtn &&
-                    <Button appearance="primary" onClick={facebookLogin}>Login with Facebook</Button>
-                }
-                <Text size={500} weight="semibold">{facebookUserName}</Text>
-                <br />
-                {facebookUserImage &&
-                    <Image width="100" height="100" src={facebookUserImage} />
-                }
-            </div>
+            {IsCheckLoggeduser
+                ? <div className="btnlogin">
+                    {ssoAuthenticationBtn &&
+                        <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
 
+                    }
+                    <Text size={500} weight="semibold">{userName}</Text>
+                    {IsVisibleConsent &&
+                        <>
+                            <div id="divError">Please click on consent button</div>
+                            <Button appearance="primary" onClick={requestConsent}>Consent</Button>
+                        </>
+                    }
+                </div>
+                : <div className="btnlogin">
+                    {disabledfacebookBtn &&
+                        <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
+                    }
+                    <Text size={500} weight="semibold">{userName}</Text>
+                </div>
+            }
             <div>
-                {isLoggedIn &&
+                {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
                     <div>
                         <Button appearance="primary" onClick={submitVote} disabled={disabled} >Submit Vote</Button>
                         <br />
