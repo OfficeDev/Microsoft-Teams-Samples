@@ -287,10 +287,7 @@ You can interact with Teams Tab meeting sidepanel.
 ## Further reading
 
 - [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
-- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 
