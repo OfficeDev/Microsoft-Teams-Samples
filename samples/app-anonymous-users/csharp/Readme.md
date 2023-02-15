@@ -21,11 +21,6 @@ This sample shows anonymous users support in meeting apps.
 **Interaction with app**
 ![appanonymoususersGif](Images/anonymoususersupport.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Anonymous Users:** [Manifest](/samples/app-anonymous-users/csharp/demo-manifest/app-anonymous-users.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -216,10 +211,6 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![AddApp12 ](Images/AddApp12.png)
 
-**Add app in a meeting tab:**
-
-![MeetingTab13 ](Images/MeetingTab13.png)
-
 **Share to stage view:**
 
 ![SharePage14 ](Images/SharePage14.png)
@@ -232,21 +223,37 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![AnoUserSharing16 ](Images/AnoUserSharing16.png)
 
-**Tenant user submit vote:**
+**Click sign-in button**
 
-![SubmitVote17 ](Images/SubmitVote17.png)
+![Clicksigninbutton ](Images/Clicksigninbutton.png)
 
-**Anonymous users screen cout auto update:**
+**Click sign-in button anonymous users:**
 
-![AnoUserSubmitVote18 ](Images/AnoUserSubmitVote18.png)
+![ClicksigninbuttonAnoUser ](Images/ClicksigninbuttonAnoUser.png)
 
-**Anonymous user submit vote:**
+**Anonymous user success page:**
 
-![AnoCoutCheck19 ](Images/AnoCoutCheck19.png)
+![AnoUsersigninucess ](Images/AnoUsersigninucess.png)
 
-**Tenant users screen cout auto update:**
+**Click submit vote button:**
 
-![UserCountCheck20 ](Images/UserCountCheck20.png)
+![SubmitVote ](Images/SubmitVote.png)
+
+**Anonymous user showing the count:**
+
+![AnoUserpage ](Images/AnoUserpage.png)
+
+**Click submit vote button anonymous users:**
+
+![submitVoteAno ](Images/submitVoteAno.png)
+
+**User showing the count:**
+
+![Resultscreen ](Images/Resultscreen.png)
+
+**Anonymous user showing the count:**
+
+![Resultscreenano ](Images/Resultscreenano.png)
 
 **Remove guest user:**
 
@@ -280,5 +287,10 @@ You can interact with Teams Tab meeting sidepanel.
 ## Further reading
 
 - [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 
