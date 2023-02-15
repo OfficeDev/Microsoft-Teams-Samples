@@ -19,9 +19,9 @@
   </div>
 </p>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 <script>
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize().then(() => {
     var conextchatId = "";
     // Check the initial theme user chose and respect it
     microsoftTeams.getContext(function (context) {
@@ -54,6 +54,8 @@
         // see an error indicating that the configuration settings could not be saved.
         saveEvent.notifySuccess();
     });
+  });
+
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {

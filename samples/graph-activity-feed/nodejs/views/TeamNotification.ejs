@@ -4,10 +4,7 @@
 <head>
 
     <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
-        </script>
+        <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
@@ -23,7 +20,12 @@
 </head>
 
 <body id=mainDiv>
-    <div>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
+    <div id="feed-container" style="display: none">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel" checked> Send
                 Notification To
@@ -113,15 +115,16 @@
             });
         });
 
-        microsoftTeams.initialize();
         var userId;
         var teamId;
         var channelId;
 
-        microsoftTeams.getContext(function (context) {
-            userId = context.userObjectId;
-            teamId = context.groupId;
-            channelId = context.channelId;
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.getContext(function (context) {
+                userId = context.userObjectId;
+                teamId = context.groupId;
+                channelId = context.channelId;
+            });
         });
 
         var empty = true;
@@ -155,7 +158,7 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskModuleData = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 userId: userId,
@@ -166,7 +169,7 @@
                 url: "/sendNotificationToChannel",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskModuleData),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -200,7 +203,7 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskModuleData = {
                 id: $('#reservationId').val(),
                 title: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -213,7 +216,7 @@
                 url: "/channelTabTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskModuleData),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -247,7 +250,7 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskModuleData = {
                 title: $('#DeployementTitle').val(),
                 description: $('#DeployementDescription').val(),
                 userId: userId,
@@ -259,7 +262,7 @@
                 url: "/customTopicTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskModuleData),
                 success: function (profile) {
                     console.log(profile);
                 },

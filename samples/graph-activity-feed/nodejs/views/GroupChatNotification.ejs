@@ -4,9 +4,7 @@
 <head>
 
     <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
@@ -22,7 +20,12 @@
 </head>
 
 <body id=mainDiv>
-    <div>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
+    <div id="feed-container" style="display: none">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat" checked> Send
                 Notification To User Group Chat</label></br>
@@ -77,15 +80,14 @@
             });
         });
 
-        microsoftTeams.initialize();
-
-        microsoftTeams.initialize();
         var userId;
         var groupchatId;
 
-        microsoftTeams.getContext(function (context) {
-            userId = context.userObjectId;
-            groupchatId = context.chatId;
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.getContext(function (context) {
+                userId = context.userObjectId;
+                groupchatId = context.chatId;
+            });
         });
 
         var empty = true;
@@ -119,7 +121,7 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskModuleData = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 groupchatId: groupchatId,
@@ -130,7 +132,7 @@
                 url: "/sendNotificationToGroupChat",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskModuleData),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -164,7 +166,7 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskModuleData = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 groupchatId: groupchatId,
@@ -174,7 +176,7 @@
             $.ajax({
                 url: "/sendCustomTopicNotificationGroupChat",
                 type: "POST",
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskModuleData),
                 contentType: 'application/json',
                 success: function (profile) {
                     console.log(profile);
