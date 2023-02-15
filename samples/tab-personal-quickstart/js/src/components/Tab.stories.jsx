@@ -10,7 +10,7 @@ sinon.stub(app, "getContext").returns(
     app: { theme: "default" },
   })
 );
-sinon.stub(app, "registerOnThemeChangeHandler").returns(Promise.resolve());
+sinon.stub(app, "registerOnThemeChangeHandler");
 
 export default {
   title: "Tab",
@@ -18,4 +18,3 @@ export default {
 };
 
 export const Template = () => <Tab />;
-

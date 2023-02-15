@@ -12,8 +12,7 @@ sinon.stub(app, 'getContext').returns(
   })
 );
 const registerOnThemeChangeHandlerStub = sinon
-  .stub(app, 'registerOnThemeChangeHandler')
-  .returns(Promise.resolve());
+  .stub(app, 'registerOnThemeChangeHandler');
 
 describe('Tab tests', () => {
   it('Tab contains stubbed contest user principal name', async () => {
