@@ -79,7 +79,13 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
                 authentication = value["authentication"];
             }
 
-            if (authentication == null) {
+            var state = null;
+            // when adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot 
+            if (value["state"] != null) {
+                state = value["state"].toString();
+            }
+
+            if (authentication == null && state == null) {
                 // authToken is absent, handle verb
                 switch (verb) {
                     case "initiateSSO":
@@ -89,7 +95,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
             }
             else {
                 // Send adaptive card with login successful information
-                return this.createAdaptiveCardInvokeResponseAsync(authentication, context);
+                return this.createAdaptiveCardInvokeResponseAsync(authentication,state,context);
             }
         }
 
@@ -99,27 +105,30 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
     /**
     * AuthToken present. Verify token in invoke payload and return AC response
     * @param {authentication} authentication
+    * * @param {state} state
     */
-    async createAdaptiveCardInvokeResponseAsync(authentication) {
-        var auth_Obj = {
-            isTokenPresent: false,
-            isStatePresent: false,
-            isBasicRefresh: false
+    async createAdaptiveCardInvokeResponseAsync(authentication,state) {
+        // declare variables
+        let isTokenPresent = null;
+        let isStatePresent = null;
+        let isBasicRefresh = false;
+       
+        // verify token is present or not
+        if (authentication != null) {
+            isTokenPresent = true;
         }
 
-        // verify token is present or not
-        if (authentication) {
-            auth_Obj.isTokenPresent = true;
-            auth_Obj.isStatePresent = true;
-            auth_Obj.isBasicRefresh = false;
-        };
+        // verify State is present or not
+        if (state != undefined || state != "") {
+            isStatePresent = true
+        }
 
         // Create a Template instance from the template payload
         var template = new ACData.Template(AdaptiveCardResponse);
 
         // Use token or state to perform operation on behalf of user
-        var authResultData = auth_Obj.isTokenPresent ? "SSO success" : auth_Obj.isStatePresent ? "OAuth success" : "SSO/OAuth failed"
-        if (auth_Obj.isBasicRefresh) {
+        var authResultData = isTokenPresent ? "SSO success" : isStatePresent ? "OAuth success" : "SSO/OAuth failed"
+        if (isBasicRefresh) {
             authResultData = "Refresh done";
         }
 
@@ -152,14 +161,24 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
             _connectionName
         );
 
-        var tokenExchangeResponse = await this.exchangedToken(context);
-
-        var OAthCard =
-            CardFactory.oauthCard(
-                _connectionName,
-                signInLink,
-                'OAuth Card'
-            );
+        var OAthCard = {
+            contentType: 'application/vnd.microsoft.card.oauth',
+            content: {
+                buttons: [{
+                    type: 'openUrl',
+                    title: 'Please sign in',
+                    value: signInLink
+                }],
+                connectionName: _connectionName,
+                tokenExchangeResource: {
+                    id: uuid.v1(),
+                    uri: null,
+                    providerId: null
+                },
+                tokenPostResource: null,
+                text: 'SignIn Text'
+            }
+        }
 
         var loginReqResponse = {
             StatusCode: 401,
@@ -170,58 +189,6 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
         return ActivityHandler.createInvokeResponse({
             loginReqResponse
         });
-    }
-
-    /**
-   * Method for tokenexchangeresponse.
-   * @param {turnContext} turnContext
-   */
-    async exchangedToken(turnContext) {
-        let tokenExchangeResponse = null;
-        const tokenExchangeRequest = turnContext._activity.value;
-
-        try {
-            // turnContext.adapter IExtendedUserTokenProvider
-            tokenExchangeResponse = await turnContext.adapter.exchangeToken(
-                turnContext,
-                tokenExchangeRequest.connectionName,
-                turnContext.activity.from.id,
-                { token: tokenExchangeRequest.token });
-
-            console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
-        } catch (err) {
-            console.log(err);
-            // Ignore Exceptions
-            // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
-        }
-
-        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
-            // The token could not be exchanged (which could be due to a consent requirement)
-            // Notify the sender that PreconditionFailed so they can respond accordingly.
-            await turnContext.sendActivity(
-                {
-                    type: ActivityTypes.InvokeResponse,
-                    value:
-                    {
-                        status: StatusCodes.PRECONDITION_FAILED,
-                        // TokenExchangeInvokeResponse
-                        body:
-                        {
-                            id: tokenExchangeRequest.id,
-                            connectionName: tokenExchangeRequest.connectionName,
-                            failureDetail: 'The bot is unable to exchange token. Proceed with regular login.'
-                        }
-                    }
-                });
-
-            return false;
-        } else {
-            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
-            turnContext.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
-            turnContext.turnState.tokenResponse = tokenExchangeResponse;
-        }
-
-        return true;
     }
 
     /**
