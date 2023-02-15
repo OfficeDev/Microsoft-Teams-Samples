@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 
 const FacebookAuthEnd = props => {
@@ -11,7 +11,7 @@ const FacebookAuthEnd = props => {
     useEffect(() => {
         microsoftTeams.initialize();
         getAuthToken();
-    }, []);
+    });
 
     // Get face book client side token.
     const getAuthToken = () => {

@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { Button, Image, Text } from '@fluentui/react-components';
+import { Button, Text } from '@fluentui/react-components';
 import $ from "jquery";
 
 const ShareView = () => {
@@ -224,7 +224,7 @@ const ShareView = () => {
                         }
                     })
                     .then((responseJson) => {
-                        if (responseJson == "") {
+                        if (responseJson === "") {
                             IsSetVisibleConsent(true);
                             ssoSetAuthenticationBtn(false);
                         } else {

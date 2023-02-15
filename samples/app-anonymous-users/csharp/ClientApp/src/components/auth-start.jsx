@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import * as msal from "@azure/msal-browser";
 
