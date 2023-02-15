@@ -28,7 +28,7 @@
         // Check the initial theme user chose and respect it
         microsoftTeams.getContext(function (context) {
             conextchatId = context.chatId;
-            console.log(context);
+
             if (conextchatId != "") {
                 document.getElementById("textConfiguration").innerHTML = "Configure your Group Chat Tab to Send Activity Feed Notification: ";
                 $("#teamsTab").hide();
@@ -39,6 +39,7 @@
                 $("#groupChatTab").hide();
                 $("#teamsTab").show();
             }
+
             if (context && context.theme) {
                 setTheme(context.theme);
             }
@@ -67,7 +68,6 @@
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {
-        alert("true");
         var tabChoice = document.getElementById('tabChoice');
 
         if (tabChoice) {
