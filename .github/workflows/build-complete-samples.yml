@@ -876,8 +876,8 @@ jobs:
               name: 'tab-deeplink-features'
               version: '18.x'
 
-            - project_path: 'samples/bot-types-of-cards/nodejs'
-              name: 'bot-types-of-cards'
+            - project_path: 'samples/bot-all-cards/nodejs'
+              name: 'bot-all-cards'
               version: '18.x'
 
             - project_path: 'samples/app-cache-meetings/nodejs'
