@@ -76,15 +76,15 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
             }
 
             if (authentication == null) {
-                // authToken and state are absent, handle verb
+                // authToken is absent, handle verb
                 switch (verb) {
                     case "initiateSSO":
                         //when token is absent in the invoke.
-                        return this.getInitialAdaptiveCard();
+                        return this.onInitiateSSO(context);
                 }
             }
             else {
-                // when token is present, send authentication token.
+                // Send adaptive card with login successful information
                 return this.createAdaptiveCardInvokeResponseAsync(authentication, context);
             }
         }
@@ -135,6 +135,89 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
         await ActivityHandler.createInvokeResponse({
             adaptiveCardResponse
         });
+    }
+
+    /**
+   * Sends OAuth Card with signlink link
+   * @param {context} context
+   */
+    async onInitiateSSO(context) {
+        // Retrieve the OAuth Sign in Link
+        const signInLink = await context.adapter.getSignInLink(
+            context,
+            connectionName
+        );
+
+        var tokenExchangeResponse = await this.exchangedToken(context);
+
+        var OAthCard =
+            CardFactory.oauthCard(
+                _connectionName,
+                signInLink,
+                'OAuth Card'
+            );
+
+        var loginReqResponse = {
+            StatusCode: 401,
+            Type: "application/vnd.microsoft.card.loginRequest",
+            Value: OAthCard
+        }
+
+        return ActivityHandler.createInvokeResponse({
+            loginReqResponse
+        });
+    }
+
+    /**
+   * Method for tokenexchangeresponse.
+   * @param {turnContext} turnContext
+   */
+    async exchangedToken(turnContext) {
+        let tokenExchangeResponse = null;
+        const tokenExchangeRequest = turnContext._activity.value;
+
+        try {
+            // turnContext.adapter IExtendedUserTokenProvider
+            tokenExchangeResponse = await turnContext.adapter.exchangeToken(
+                turnContext,
+                tokenExchangeRequest.connectionName,
+                turnContext.activity.from.id,
+                { token: tokenExchangeRequest.token });
+
+            console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
+        } catch (err) {
+            console.log(err);
+            // Ignore Exceptions
+            // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
+        }
+
+        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
+            // The token could not be exchanged (which could be due to a consent requirement)
+            // Notify the sender that PreconditionFailed so they can respond accordingly.
+            await turnContext.sendActivity(
+                {
+                    type: ActivityTypes.InvokeResponse,
+                    value:
+                    {
+                        status: StatusCodes.PRECONDITION_FAILED,
+                        // TokenExchangeInvokeResponse
+                        body:
+                        {
+                            id: tokenExchangeRequest.id,
+                            connectionName: tokenExchangeRequest.connectionName,
+                            failureDetail: 'The bot is unable to exchange token. Proceed with regular login.'
+                        }
+                    }
+                });
+
+            return false;
+        } else {
+            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
+            turnContext.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
+            turnContext.turnState.tokenResponse = tokenExchangeResponse;
+        }
+
+        return true;
     }
 
     /**
