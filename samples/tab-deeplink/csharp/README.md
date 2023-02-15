@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID
+description:Microsoft teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 ---
  # DeepLink
 
- This sample displays deeplinks for call, video, chat, navigate to app, navigate withing tab that are supported for tab and bot.
+ This sample displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
 
 - **Interaction with bot**
 
