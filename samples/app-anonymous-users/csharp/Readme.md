@@ -135,8 +135,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
    - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ Facebook Connection Name}}`- Generated from step 16.
-
+   - `{{FacebookAppId}} and {{FacebookAppPassword}}`- Generated from step 16.
+  
+  7) Modify the .env file in your project folder (or in Visual Studio) and fill in below details:
+   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{FacebookAppId}}`- Generated from step 16.
+   
  7. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
