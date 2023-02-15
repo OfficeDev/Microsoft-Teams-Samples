@@ -7,8 +7,6 @@ using AnonymousUsers.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -22,13 +20,12 @@ namespace AnonymousUsers.Controllers
         /// Represents a set of key/value application configuration properties.
         /// </summary>
         public readonly IConfiguration _configuration;
-
-        private readonly System.Net.Http.IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthController(
             IConfiguration configuration,
-            System.Net.Http.IHttpClientFactory httpClientFactory,
+            IHttpClientFactory httpClientFactory,
             IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
@@ -51,8 +48,8 @@ namespace AnonymousUsers.Controllers
 
             var client = new HttpClient();
             string responseBody;
-            var response = await client.GetAsync(string.Format("https://graph.facebook.com/v12.0/oauth/access_token?client_id={0}&redirect_uri={1}&client_secret={2}&code={3}", fbAppId, redirectUrl, fbPassword,accessToken));
-            
+            var response = await client.GetAsync(string.Format("https://graph.facebook.com/v12.0/oauth/access_token?client_id={0}&redirect_uri={1}&client_secret={2}&code={3}", fbAppId, redirectUrl, fbPassword, accessToken));
+
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
@@ -79,7 +76,10 @@ namespace AnonymousUsers.Controllers
             }
         }
 
-        // Get user access token.
+        /// <summary>
+        /// Get user access token
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetUserAccessToken")]
         public async Task<ActionResult<UserData>> GetUserAccessToken()
@@ -111,6 +111,5 @@ namespace AnonymousUsers.Controllers
                 return null;
             }
         }
-
     }
 }

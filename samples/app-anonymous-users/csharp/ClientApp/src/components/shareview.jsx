@@ -31,10 +31,13 @@ const ShareView = () => {
     // Declare new state variables that are required for login success load the submit vote button
     const [enableVoteDiv, setEnableVoteDiv] = useState(false);
 
+    // Declare new state variables that are required for a verified anonymous user or a normal user
     const [IsCheckLoggeduser, IsSetCheckLoggeduser] = useState(true);
 
+    // Declare new state variables that are required for a verified anonymous user or a normal user
     const [IsVisibleConsent, IsSetVisibleConsent] = useState(false);
 
+    // Declare new state variables that are required disable the authentication button after login
     const [ssoAuthenticationBtn, ssoSetAuthenticationBtn] = useState(true);
 
 
@@ -122,8 +125,7 @@ const ShareView = () => {
 
     // Get client side token for facebook.
     const fbAuthentication = () => {
-        var facebookAppId = '{{FacebookAppId}}';
-        alert(facebookAppId);
+        var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
 
         return new Promise((resolve, reject) => {
