@@ -93,12 +93,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-  16. To test facebook auth flow [create a facebookapp](AppCompleteAuth/FacebookDocumentation/README.md) and get client id and secret for facebook app.
-      Now go to your bot channel registartion -> configuration -> Add OAuth connection string
-    - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
-    - Select service provider ad `facebook`
-    - Add clientid and secret of your facebook app that was created using Step 16.
-   
+16. To test facebook auth flow [create a facebookapp](FacebookDocumentation/README.md) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
+   - Select service provider ad `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16.
+      
 3. Clone the repository
 
     ```bash
