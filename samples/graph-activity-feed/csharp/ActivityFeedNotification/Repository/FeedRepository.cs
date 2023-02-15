@@ -5,10 +5,10 @@ namespace TabActivityFeed.Repository
 {
     public class FeedRepository
     {
-        public static List<TaskInfo> Tasks { get; set; } = new List<TaskInfo>();
+        public static List<TaskModuleInfo> Tasks { get; set; } = new List<TaskModuleInfo>();
         static FeedRepository()
         {
-            Tasks.Add(new TaskInfo
+            Tasks.Add(new TaskModuleInfo
             {
                 title = "Get the bills",
                 DeployementTitle = "Get the bills",
@@ -16,7 +16,7 @@ namespace TabActivityFeed.Repository
                 DeploymentDescription = "Get the travel and accommodation bills"
             });
 
-            Tasks.Add(new TaskInfo
+            Tasks.Add(new TaskModuleInfo
             {
                 title = "Get the pay",
                 DeployementTitle = "Get the pay",

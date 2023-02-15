@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace TabActivityFeed.Model
 {
     
-    public class TaskInfo
+    public class TaskModuleInfo
     {
         public Guid taskId { get; set; }
 

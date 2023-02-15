@@ -17,7 +17,7 @@
                 // Get the tab context, and use the information to navigate to Azure AD login page
                 microsoftTeams.app.getContext().then(async (context) => {
                     var currentURL = new URL(window.location);
-                    var scope = "User.Read email openid profile offline_access ChannelMessage.Send ChatMessage.Send Chat.ReadWrite TeamsActivity.Send TeamsAppInstallation.ReadForUser.All TeamsTab.Read.All";
+                    var scope = "User.Read email openid profile offline_access ChannelMessage.Send ChatMessage.Send Chat.ReadWrite TeamsActivity.Send TeamsAppInstallation.ReadForUser TeamsTab.Read.All";
                     var loginHint = context.user.loginHint;
 
                     const msalConfig = {

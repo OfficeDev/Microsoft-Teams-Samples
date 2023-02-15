@@ -1,5 +1,4 @@
-﻿
-@model TabActivityFeed.Model.TaskInfo
+﻿@model TabActivityFeed.Model.TaskModuleInfo
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -47,16 +46,17 @@
             display: none;
         }
 
-         .radioClass {
+        .radioClass {
             padding: 15px;
             margin-top: 10px;
             color: #fff;
-    font-size: 16px;
+            font-size: 16px;
         }
+
         label {
-    color: #fff;
-    font-size: 16px;
-}
+            color: #fff;
+            font-size: 16px;
+        }
     </style>
 
     <title>Screen</title>
@@ -69,7 +69,7 @@
                 $(targetBox).show();
             });
         });
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
@@ -96,7 +96,7 @@
 
         function SendNotificationToChannel() {
             var action = "EntityTopic";
-            let taskInfo = {
+            let taskModuleData = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
@@ -110,15 +110,15 @@
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskModuleData
             });
             return true;
         };
 
         function customTopicTeamNotification() {
-         
+
             var action = "customTopic";
-            let taskInfo = {
+            let taskModuleData = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
@@ -132,15 +132,15 @@
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskModuleData
             });
             return true;
         };
 
-         function channelTabTeamNotification() {
-      
+        function channelTabTeamNotification() {
+
             var action = "channelTab";
-             let taskInfo = {
+            let taskModuleData = {
                 reservationId: $("#reservationId").val(),
                 DeployementTitle: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -148,15 +148,15 @@
                 userName: username,
                 channelId: teamchannelID,
                 access_token: token,
-                 taskItemLink: taskItemUrl,
-                 teamId: teamId
+                taskItemLink: taskItemUrl,
+                teamId: teamId
 
             };
             $.ajax({
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskModuleData
             });
             return true;
         };
@@ -165,11 +165,14 @@
 </head>
 
 <body>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
     <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
-
+    <div id="feed-container" style="display: none;background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To User in Channel</label></br>
             <label><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send Notification with Custom Topic in Channel</label></br>
@@ -249,5 +252,4 @@
     </div>
     @Html.Partial("Details");
 </body>
-
 </html>

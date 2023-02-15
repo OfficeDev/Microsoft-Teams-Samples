@@ -2,7 +2,7 @@
   'use strict';
 
   // Call the initialize API first
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Check the initial theme user chose and respect it
   microsoftTeams.getContext(function (context) {

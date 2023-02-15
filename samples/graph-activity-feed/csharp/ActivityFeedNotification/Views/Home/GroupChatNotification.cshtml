@@ -1,5 +1,4 @@
-﻿
-@model TabActivityFeed.Model.TaskInfo
+﻿@model TabActivityFeed.Model.TaskModuleInfo
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/chatnotification.css">
+    <link rel="stylesheet" type="text/css" href="~/css/chatnotification.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -28,7 +27,7 @@
                 $(targetBox).show();
             });
         });
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
@@ -48,6 +47,7 @@
         });
 
         function SendNotificationToGroupChat() {
+            alert("true");
             var isValid = true;
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
@@ -68,7 +68,7 @@
                 return false;
             }
             var action = "EntityTopic";
-            let taskInfo = {
+            let taskModuleData = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
@@ -80,9 +80,9 @@
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskInfo
+                data: taskModuleData
             });
-            microsoftTeams.tasks.submitTask(taskInfo);
+            microsoftTeams.tasks.submitTask(taskModuleData);
             return true;
         };
         function customTopicNotification() {
@@ -107,7 +107,7 @@
                 return false;
             }
             var action = "customTopic";
-            let taskInfo = {
+            let taskModuleData = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
@@ -119,9 +119,9 @@
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskInfo
+                data: taskModuleData
             });
-            microsoftTeams.tasks.submitTask(taskInfo);
+            microsoftTeams.tasks.submitTask(taskModuleData);
             return true;
         };
 
@@ -129,10 +129,14 @@
 </head>
 
 <body>
-    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="login">
+    <h4>Click on login button to continue</h4>
+    <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
+    <div id="feed-container" style="display: none;background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
 
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat"> Send Notification To User Group Chat</label></br>

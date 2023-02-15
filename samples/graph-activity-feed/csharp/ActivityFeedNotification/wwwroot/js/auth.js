@@ -1,7 +1,7 @@
 ﻿let idToken;
 let accessToken;
 
-$(document).ready(function () {
+function login() {
     microsoftTeams.app.initialize();
 
     getClientSideToken()
@@ -26,7 +26,7 @@ $(document).ready(function () {
                 // Something else went wrong
             }
         });
-});
+}
 
 function requestConsent() {
     getToken()
@@ -101,6 +101,9 @@ function getServerSideToken(clientSideToken) {
                         accessToken = responseJson;
                         localStorage.setItem("accessToken", accessToken);
                         getUserInfo(context.userPrincipalName);
+                        $("#login").hide();
+                        $("#feed-table").show();
+                        $("#feed-container").show();
                     }
                 });
         });
