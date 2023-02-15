@@ -6,6 +6,10 @@ const AdaptiveCardResponse = require('../resources/adaptiveCardResponseJson.json
 const AdaptiveCardWithSSO = require('../resources/AdaptiveCardWithSSOInRefresh.json');
 const Options = require('../resources/options.json');
 var ACData = require("adaptivecards-templating");
+const path = require('path');
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
+const _connectionName = process.env.ConnectionName;
 
 class BotSSOAdativeCard extends TeamsActivityHandler {
     constructor() {
@@ -145,7 +149,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
         // Retrieve the OAuth Sign in Link
         const signInLink = await context.adapter.getSignInLink(
             context,
-            connectionName
+            _connectionName
         );
 
         var tokenExchangeResponse = await this.exchangedToken(context);
