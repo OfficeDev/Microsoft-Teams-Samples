@@ -161,7 +161,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
             _connectionName
         );
 
-        var OAthCard = {
+        var oAuthCard = {
             contentType: 'application/vnd.microsoft.card.oauth',
             content: {
                 buttons: [{
@@ -183,7 +183,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
         var loginReqResponse = {
             StatusCode: 401,
             Type: "application/vnd.microsoft.card.loginRequest",
-            Value: OAthCard
+            Value: oAuthCard
         }
 
         return ActivityHandler.createInvokeResponse({
