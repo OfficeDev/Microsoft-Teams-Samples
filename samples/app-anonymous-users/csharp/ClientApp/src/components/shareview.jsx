@@ -149,11 +149,11 @@ const ShareView = () => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/getFacebookLoginUserInfo', {
                     method: 'POST',
+                    body: JSON.stringify(clientSideToken), 
                     headers: {
-                        "Content-Type": "json",
-                        "accessToken": clientSideToken
-                    },
-                    cache: 'default'
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
                 })
                 .then((response) => {
                     if (response.ok) {
@@ -164,7 +164,8 @@ const ShareView = () => {
                 })
                 .then((responseJson) => {
                     if (responseJson != "") {
-                        let facebookProfile = JSON.parse(responseJson);
+                        let jsonResult = JSON.parse(responseJson);
+                        let facebookProfile = JSON.parse(jsonResult);
 
                         // This variables will load the values to the labels
                         setUserName("Welcome: " + facebookProfile.name);

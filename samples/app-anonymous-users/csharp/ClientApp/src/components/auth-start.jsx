@@ -9,38 +9,37 @@ import * as msal from "@azure/msal-browser";
 
 const AuthStart = props => {
 
-    useEffect(() => {
+    useEffect(async () => {
 
-        microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.app.getContext().then(async (context) => {
-                var scope = "User.Read email openid profile offline_access";
-                var loginHint = context.user.loginHint;
+        await microsoftTeams.app.initialize();
+        const context = await microsoftTeams.app.getContext();
+        var scope = "User.Read email openid profile offline_access";
+        var loginHint = context.user.loginHint;
 
-                const msalConfig = {
-                    auth: {
-                        clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
-                        authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
-                        navigateToLoginRequestUrl: false
-                    },
-                    cache: {
-                        cacheLocation: "sessionStorage",
-                    },
-                };
+        const msalConfig = {
+            auth: {
+                clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
+                authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
+                navigateToLoginRequestUrl: false
+            },
+            cache: {
+                cacheLocation: "sessionStorage",
+            },
+        };
 
-                // Initializing the PublicClientApplication object
-                // In order to use MSAL.js, you need to instantiate a PublicClientApplication object. You must provide the client id (appId) of your application.
-                const msalInstance = new msal.PublicClientApplication(msalConfig);
+        // Initializing the PublicClientApplication object
+        // In order to use MSAL.js, you need to instantiate a PublicClientApplication object. You must provide the client id (appId) of your application.
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-                const scopesArray = scope.split(" ");
-                const scopesRequest = {
-                    scopes: scopesArray,
-                    redirectUri: window.location.origin + `/auth-end`,
-                    loginHint: loginHint
-                };
+        const scopesArray = scope.split(" ");
+        const scopesRequest = {
+            scopes: scopesArray,
+            redirectUri: window.location.origin + `/auth-end`,
+            loginHint: loginHint
+        };
 
-                await msalInstance.loginRedirect(scopesRequest);
-            });
-        });
+        await msalInstance.loginRedirect(scopesRequest);
+
     }, []);
 };
 

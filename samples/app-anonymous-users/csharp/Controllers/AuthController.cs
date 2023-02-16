@@ -40,7 +40,7 @@ namespace AnonymousUsers.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("getFacebookLoginUserInfo")]
-        public async Task<JsonResult> getFacebookLoginUserInfo(string accessToken)
+        public async Task<JsonResult> getFacebookLoginUserInfo([FromBody]string accessToken)
         {
             var fbAppId = _configuration["FacebookAppId"];
             var fbPassword = _configuration["FacebookAppPassword"];
