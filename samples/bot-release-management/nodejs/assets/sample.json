@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-bot-release-management-nodejs",
     "source": "officeDev",
     "title": "Bot to create a group chat and send task notification using Azure webhooks.",
-    "shortDescription": "This is a sample app with capability to send notification when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks.",
+    "shortDescription": "This is a sample app with capability to send notification in teams using bot when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-release-management/nodejs",
     "longDescription": [
       "This is a sample app with capability to send notification when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks."

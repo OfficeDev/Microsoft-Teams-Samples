@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
+description: This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot.
 products:
 - office-teams
 - office

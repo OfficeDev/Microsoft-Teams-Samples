@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the Conversation Bot using Bot Framework v4
+description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
 products:
 - office-teams
 - office

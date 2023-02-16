@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-events-nodejs",
     "source": "officeDev",
     "title": "Realtime meeting events",
-    "shortDescription": "Get real time meeting events",
+    "shortDescription": "This sample demonstrates use of various meeting events which arfe available in bot framework v4",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-events/nodejs",
     "longDescription": [
-      "Get real time meeting events"
+      "This sample demonstrates use of various meeting events which arfe available in bot framework v4"
     ],
     "creationDateTime": "2021-11-10",
     "updateDateTime": "2022-04-20",

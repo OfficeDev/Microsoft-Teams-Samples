@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time using bot.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 
 # Bot task reminder
 
-This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time using bot.
 
 ## Interaction with app
 

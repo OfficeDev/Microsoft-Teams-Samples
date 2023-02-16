@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-complete-auth-csharp",
     "source": "officeDev",
     "title": "Authentication complete sample",
-    "shortDescription": "This sample demos authentication feature in bot,tab and messaging extension.",
+    "shortDescription": "This sample demos Azure AD aand facebook uthentication feature in bot,tab and messaging extension.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-auth/csharp",
     "longDescription": [
-      "This sample demos authentication feature in bot,tab and messaging extension."
+      "This sample demos Azure AD aand facebook uthentication feature in bot,tab and messaging extension."
     ],
     "creationDateTime": "2022-02-25",
     "updateDateTime": "2022-05-17",

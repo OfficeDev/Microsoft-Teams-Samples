@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-message-reaction-csharp",
     "source": "officeDev",
     "title": "Message Reactions Bot",
-    "shortDescription": "This sample app demonstrate how to use message reactions bot",
+    "shortDescription": "This sample app demonstrate how to use message reactions using bot",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-reaction/csharp",
     "longDescription": [
-      "This sample app demonstrate how to use message reactions bot"
+      "This sample app demonstrate how to use message reactions using bot"
     ],
     "creationDateTime": "2019-12-12",
     "updateDateTime": "2022-10-05",

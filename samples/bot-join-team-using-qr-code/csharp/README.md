@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos a feature where user can join a team using QR code containing the team's id.
+description: This sample demos a feature where user can join a team using QR code containing the team's id through bot.
 products:
 - office-teams
 - office

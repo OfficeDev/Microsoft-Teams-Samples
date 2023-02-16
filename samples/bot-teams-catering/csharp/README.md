@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Teams catering bot demonstrating how to use Universal bots in Teams
+description: Teams catering bot demonstrating how to use Universal adaptive cards in Teams
 products:
 - office-teams
 - office

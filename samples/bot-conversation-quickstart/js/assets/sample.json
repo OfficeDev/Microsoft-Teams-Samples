@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-conversation-quickstart-js",
     "source": "officeDev",
     "title": "Starter solution: Sample bot - Teams Toolkit",
-    "shortDescription": "Simple bot quickstart for Teams Toolkit",
+    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/js",
     "longDescription": [
-      "Simple bot quickstart for Teams Toolkit"
+      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

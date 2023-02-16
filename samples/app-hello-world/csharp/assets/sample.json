@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-hello-world-csharp",
     "source": "officeDev",
     "title": "Microsoft Teams C# Helloworld Sample",
-    "shortDescription": "Microsoft Teams \"Hello world\" application for .NET/C#",
+    "shortDescription": "Microsoft Teams \"Hello world\" application for .NET/C# which showcases tab, bot and messaging extension.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/csharp",
     "longDescription": [
-      "Microsoft Teams \"Hello world\" application for .NET/C#"
+      "Microsoft Teams \"Hello world\" application for .NET/C# which showcases tab and messaging extension."
     ],
     "creationDateTime": "2017-10-16",
     "updateDateTime": "2022-04-03",

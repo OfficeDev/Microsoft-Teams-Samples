@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Microsoft Teams NodeJS Helloworld Sample
-description: Microsoft Teams hello world sample app in Node.js
+description: Microsoft Teams hello world sample app in Node.js which showcase tab, bot and messaging extension.
 extensions:
   contentType: samples
   createdDate: 10/19/2022 10:02:21 PM

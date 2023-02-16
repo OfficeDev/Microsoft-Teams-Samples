@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-formatting-cards-nodejs",
     "source": "officeDev",
     "title": "Different Formatting On Cards",
-    "shortDescription": "This sample shows how to use different formatting on adaptive cards using bot.",
+    "shortDescription": "Sample which demonstrates different formatting supported in cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-formatting-cards/nodejs",
     "longDescription": [
-      "This sample shows how to use different formatting on adaptive cards using bot."
+      "Sample which demonstrates different formatting supported in cards using bot."
     ],
     "creationDateTime": "2023-01-28",
     "updateDateTime": "2023-01-28",

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs.
+description: This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab.
 products:
 - office-teams
 - office

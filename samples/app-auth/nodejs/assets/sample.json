@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
     "source": "officeDev",
     "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
+    "shortDescription": "This sample demonstrates authentication in Microsoft Teams using bot and tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This sample demonstrates authentication in Microsoft Teams using bot and tab."
     ],
     "creationDateTime": "2018-02-08",
     "updateDateTime": "2022-06-20",

@@ -230,13 +230,13 @@ The tour files can be found in the `.tours` directory.
 
 ## Running the sample. 
 
-![Image of the app in a channel tab, showcasing a user Mark's support ticket, and and the corresponding channel conversation, where Adele has been asked to provide help](/samples/bot-tab-conversations/csharp/Docs/images/ChannelTabSubPageChat.png)
+![Image of the app in a channel tab, showcasing a user Mark's support ticket, and and the corresponding channel conversation, where Adele has been asked to provide help](Docs/images/ChannelTabSubPageChat.png)
 
-![Image of the app in a personal app, showing the top incidents from the one channel (HR) that the logged in user has access too](/samples/bot-tab-conversations/csharp/Docs/images/PersonalTabList.png)
+![Image of the app in a personal app, showing the top incidents from the one channel (HR) that the logged in user has access too](Docs/images/PersonalTabList.png)
 
-![Image of the app to Added Inquiry for The HR Department](/samples/bot-tab-conversations/csharp/Docs/images/addedinquiry.png)
+![Image of the app to Added Inquiry for The HR Department](Docs/images/addedinquiry.png)
 
-![Image of the app to Added Inquiry Successful for The HR Department](/samples/bot-tab-conversations/csharp/Docs/images/addedinquirysuccessfully.png)
+![Image of the app to Added Inquiry Successful for The HR Department](Docs/images/addedinquirysuccessfully.png)
 
 ### Docker
 *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-share-to-stage-signing/csharp/Docs/installing-podman-on-wsl2.md)*

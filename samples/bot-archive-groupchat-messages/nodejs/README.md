@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating on how a bot can archive groupchat messages and send it to user as a file.
+description: Sample which demonstrates how to archive groupchat messages and send it to user as a file using bot.
 products:
 - office-teams
 - office

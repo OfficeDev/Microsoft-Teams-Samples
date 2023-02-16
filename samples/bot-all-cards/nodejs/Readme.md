@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature where user can send different types of cards using bot.
+description: Sample which demonstrates sending different types cards supported in teams using bot.
 products:
 - office-teams
 - office

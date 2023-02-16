@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app which shows connector authentication and sends notification on task creation.
+description: Sample which demonstrates an Office 365 Connector which generates and sends notifications for teams channel.
 products:
 - office-teams
 - office

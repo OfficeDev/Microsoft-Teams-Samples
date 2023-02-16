@@ -6,7 +6,7 @@
     "shortDescription": "Graph change notification for team and channel",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/csharp",
     "longDescription": [
-      "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel."
+      "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel though teams tab."
     ],
     "creationDateTime": "2022-08-25",
     "updateDateTime": "2022-08-25",

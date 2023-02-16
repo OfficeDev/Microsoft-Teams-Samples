@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
+description: This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
 products:
 - office-teams
 - office

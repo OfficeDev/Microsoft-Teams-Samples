@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app with capability to send notification when user creates a work item in Azure DevOps via service hook.
+description: This is a sample app with capability to send notification in Teams using bot when user creates a workitem in Azure DevOps via service hook.
 products:
 - office-teams
 - office

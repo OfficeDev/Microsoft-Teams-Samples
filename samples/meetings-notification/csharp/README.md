@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting
+description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting notifications
 products:
 - office-teams
 - office
