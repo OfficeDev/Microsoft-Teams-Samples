@@ -28,17 +28,18 @@
                 $(targetBox).show();
             });
         });
+
         microsoftTeams.app.initialize();
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
 
-        microsoftTeams.getContext(function (context) {
-            username = context.upn;
-            userId = context.userObjectId;
-            console.log(context);
+        microsoftTeams.app.getContext().then((context) => {
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
 
         });
+
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -63,10 +64,12 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
             var action = "EntityTopic";
             let taskModuleData = {
                 title: $('#title').val(),
@@ -75,13 +78,14 @@
                 access_token: token,
                 taskInfoAction: action,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToUser',
                 dataType: 'json',
                 data: taskModuleData
             });
-            microsoftTeams.tasks.submitTask(taskModuleData);
+
             return true;
         };
         function customTopicNotification() {
@@ -106,6 +110,7 @@
                 return false;
             }
             var action = "customTopic";
+
             let taskModuleData = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
@@ -113,13 +118,14 @@
                 access_token: token,
                 userName: username,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToUser',
                 dataType: 'json',
                 data: taskModuleData
             });
-            microsoftTeams.tasks.submitTask(taskModuleData);
+
             return true;
         };
 

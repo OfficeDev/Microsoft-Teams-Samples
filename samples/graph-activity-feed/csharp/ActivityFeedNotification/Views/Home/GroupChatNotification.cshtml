@@ -27,18 +27,23 @@
                 $(targetBox).show();
             });
         });
+
         microsoftTeams.app.initialize();
+
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
         var groupchatId = "";
-        microsoftTeams.getContext(function (context) {
-            groupchatId = context.chatId;
-            username = context.upn;
-            userId = context.userObjectId;
+
+        microsoftTeams.app.getContext().then((context) => {
+            groupchatId = context.chat.id;
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
 
         });
+
         var empty = true;
+
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
                 empty = false;
@@ -47,8 +52,8 @@
         });
 
         function SendNotificationToGroupChat() {
-            alert("true");
             var isValid = true;
+
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
@@ -63,10 +68,12 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
             var action = "EntityTopic";
             let taskModuleData = {
                 title: $('#title').val(),
@@ -76,15 +83,19 @@
                 access_token: token,
                 chatId:groupchatId,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
                 data: taskModuleData
             });
+
             microsoftTeams.tasks.submitTask(taskModuleData);
+
             return true;
         };
+
         function customTopicNotification() {
             var isValid = true;
 
@@ -102,10 +113,12 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
             var action = "customTopic";
             let taskModuleData = {
                 DeployementTitle: $('#DeployementTitle').val(),
@@ -115,13 +128,14 @@
                 access_token: token,
                 chatId: groupchatId,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
                 data: taskModuleData
             });
-            microsoftTeams.tasks.submitTask(taskModuleData);
+
             return true;
         };
 

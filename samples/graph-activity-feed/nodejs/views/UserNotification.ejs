@@ -89,10 +89,10 @@
         var channelId;
 
         microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.getContext(function (context) {
-                userId = context.userObjectId;
-                teamId = context.groupId;
-                channelId = context.channelId;
+            microsoftTeams.app.getContext().then((context) => {
+                userId = context.user.id;
+                teamId = context.team.groupId;
+                channelId = context.channel.id;
 
                 if (teamId != "" && teamId != undefined) {
                     $("#customNotification").show();

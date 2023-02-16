@@ -84,9 +84,9 @@
         var groupchatId;
 
         microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.getContext(function (context) {
-                userId = context.userObjectId;
-                groupchatId = context.chatId;
+            microsoftTeams.app.getContext().then((context) => {
+                userId = context.user.id;
+                groupchatId = context.chat.id;
             });
         });
 

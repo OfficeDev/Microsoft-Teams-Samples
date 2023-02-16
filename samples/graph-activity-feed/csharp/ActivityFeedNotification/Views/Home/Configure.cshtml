@@ -24,12 +24,12 @@
 <script>
 
     microsoftTeams.app.initialize().then(() => {
-        var conextchatId = "";
+        var conextChatId = "";
         // Check the initial theme user chose and respect it
-        microsoftTeams.getContext(function (context) {
-            conextchatId = context.chatId;
+        microsoftTeams.app.getContext().then((context) => {
+            conextChatId = context.chat.id;
 
-            if (conextchatId != "") {
+            if (conextChatId != "") {
                 document.getElementById("textConfiguration").innerHTML = "Configure your Group Chat Tab to Send Activity Feed Notification: ";
                 $("#teamsTab").hide();
                 $("#groupChatTab").show();
@@ -46,15 +46,15 @@
         });
 
         // Handle theme changes
-        microsoftTeams.registerOnThemeChangeHandler(function (theme) {
+        microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
             setTheme(theme);
         });
 
         // Save configuration changes
-        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
             // Let the Microsoft Teams platform know what you want to load based on
             // what the user configured on this page
-            microsoftTeams.settings.setSettings({
+            microsoftTeams.pages.config.setConfig({
                 contentUrl: createTabUrl(), // Mandatory parameter
                 entityId: createTabUrl() // Mandatory parameter
             });
@@ -76,7 +76,7 @@
 
                 // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
                 // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification');
+                microsoftTeams.pages.config.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification');
             };
         }
     });

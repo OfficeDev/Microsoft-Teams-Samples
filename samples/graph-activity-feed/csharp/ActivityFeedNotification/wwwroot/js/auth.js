@@ -46,37 +46,28 @@ function getToken() {
             url: window.location.origin + "/Auth/Start",
             width: 600,
             height: 535,
-            successCallback: result => {
-                resolve(result);
-            },
-            failureCallback: reason => {
-
-                reject(reason);
-            }
+        }).then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
         });
     });
 }
 
 function getClientSideToken() {
-
     return new Promise((resolve, reject) => {
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {
-                resolve(result);
-
-            },
-            failureCallback: function (error) {
-                reject("Error getting token: " + error);
-            }
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            console.log("error" + error);
+            reject("Error getting token: " + error);
         });
-
     });
-
 }
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',
