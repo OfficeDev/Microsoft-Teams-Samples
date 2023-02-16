@@ -9,37 +9,43 @@ import * as msal from "@azure/msal-browser";
 
 const AuthEnd = props => {
 
-    useEffect(async () => {
+    useEffect(() => {
 
-        await microsoftTeams.app.initialize();
-        const context = await microsoftTeams.app.getContext();
+        async function AuthenticationEnd() {
 
-        const msalConfig = {
-            auth: {
-                clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
-                authority: `https://login.microsoftonline.com/${context.tid}`,
-                navigateToLoginRequestUrl: false
-            },
-            cache: {
-                cacheLocation: "sessionStorage",
-            },
-        };
+            await microsoftTeams.app.initialize();
+            const context = await microsoftTeams.app.getContext();
 
-        // Initializing the PublicClientApplication object
-        // In order to use MSAL.js, you need to instantiate a PublicClientApplication object. You must provide the client id (appId) of your application.
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
+            const msalConfig = {
+                auth: {
+                    clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
+                    authority: `https://login.microsoftonline.com/${context.tid}`,
+                    navigateToLoginRequestUrl: false
+                },
+                cache: {
+                    cacheLocation: "sessionStorage",
+                },
+            };
 
-        msalInstance.handleRedirectPromise()
-            .then((tokenResponse) => {
-                if (tokenResponse !== null) {
-                    microsoftTeams.authentication.notifySuccess("Authentication succedded");
-                } else {
-                    microsoftTeams.authentication.notifyFailure("Get empty response.");
-                }
-            })
-            .catch((error) => {
-                microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
-            });
+            // Initializing the PublicClientApplication object
+            // In order to use MSAL.js, you need to instantiate a PublicClientApplication object. You must provide the client id (appId) of your application.
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+            msalInstance.handleRedirectPromise()
+                .then((tokenResponse) => {
+                    if (tokenResponse !== null) {
+                        microsoftTeams.authentication.notifySuccess("Authentication succedded");
+                    } else {
+                        microsoftTeams.authentication.notifyFailure("Get empty response.");
+                    }
+                })
+                .catch((error) => {
+                    microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+                });
+        }
+
+        AuthenticationEnd();
+              
     }, []);
 };
 

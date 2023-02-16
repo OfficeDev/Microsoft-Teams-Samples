@@ -163,7 +163,7 @@ const ShareView = () => {
                     }
                 })
                 .then((responseJson) => {
-                    if (responseJson != "") {
+                    if (responseJson !== "") {
                         let jsonResult = JSON.parse(responseJson);
                         let facebookProfile = JSON.parse(jsonResult);
 
