@@ -27,6 +27,8 @@ const AuthStart = props => {
                     },
                 };
 
+                // Initializing the PublicClientApplication object
+                // In order to use MSAL.js, you need to instantiate a PublicClientApplication object. You must provide the client id (appId) of your application.
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
 
                 const scopesArray = scope.split(" ");
@@ -35,6 +37,7 @@ const AuthStart = props => {
                     redirectUri: window.location.origin + `/auth-end`,
                     loginHint: loginHint
                 };
+
                 await msalInstance.loginRedirect(scopesRequest);
             });
         });

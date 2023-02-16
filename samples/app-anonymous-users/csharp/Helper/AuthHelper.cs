@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿// <copyright file="AuthHelper.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Identity.Client;
@@ -32,6 +37,7 @@ namespace AnonymousUsers.Helper
             {
                 var httpContext = httpContextAccessor.HttpContext;
                 httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
+                
                 var idToken = assertion.ToString().Split(" ")[1];
                 UserAssertion assert = new UserAssertion(idToken);
                 List<string> scopes = new List<string>

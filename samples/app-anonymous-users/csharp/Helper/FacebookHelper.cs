@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿// <copyright file="FacebookHelper.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,17 +16,31 @@ namespace AnonymousUsers.Helper
     /// </summary>
     public class FacebookProfile
     {
+        /// <summary>
+        /// Assign facebook username name value in this Name property
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Assign facebook picture in this ProfilePicture property
+        /// </summary>
         [JsonProperty(PropertyName = "picture")]
         public Picture ProfilePicture { get; set; }
 
+        /// <summary>
+        /// Create a class named "Data" with a property url
+        /// Assgin facebook image in this url property. 
+        /// </summary>
         public class Data
         {
             public string url { get; set; }
         }
 
+        /// <summary>
+        /// Create a class named "Picture" with a property data
+        /// Aassgin facebook Picture information in this data property. 
+        /// </summary>
         public class Picture
         {
             public Data data { get; set; }
@@ -41,9 +60,9 @@ namespace AnonymousUsers.Helper
                 Tuple.Create("fields", "name,picture"),
                 Tuple.Create("access_token", accessToken));
 
-            var res = await FacebookRequest<FacebookProfile>(uri);
+            var userProfileInfo = await FacebookRequest<FacebookProfile>(uri);
 
-            return res;
+            return userProfileInfo;
         }
 
         /// <summary>

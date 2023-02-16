@@ -9,20 +9,22 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const FacebookAuthEnd = props => {
 
     useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         getAuthToken();
     });
 
     // Get face book client side token.
     const getAuthToken = () => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         microsoftTeams.app.initialize().then(() => {
+
             localStorage.removeItem("auth.error");
             let code = getHashParameters();
             let key = "auth.result";
             localStorage.setItem(key, JSON.stringify({
                 idToken: code,
             }));
+
             microsoftTeams.authentication.notifySuccess(key);
 
         });

@@ -16,7 +16,7 @@ import AuthEnd from "../components/auth-end";
 export const AppRoute = () => {
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
     }, [])
 

@@ -7,7 +7,6 @@ import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { Button, Text } from '@fluentui/react-components';
-import $ from "jquery";
 
 const ShareView = () => {
 
@@ -20,30 +19,28 @@ const ShareView = () => {
     const [uShowCount, uShowSetCount] = useState(0);
 
     // Declare new state variables that are required to disable the submit vote button.
-    const [disabled, setDisabled] = useState(false);
+    const [isVoteBtnDisabled, setIsVoteBtnDisabled] = useState(false);
 
-    // Declare new state variables that are required to assgin facebook user name
+    // Declare new state variables that are required to set the username of users who sign in using SSO too.
     const [userName, setUserName] = useState("");
 
     // Declare new state variables that are required to disable the Facebook button after login
-    const [disabledfacebookBtn, setdisabledfacebookBtn] = useState(true);
+    const [IsdisabledfacebookButton, setIsdisabledfacebookButton] = useState(true);
 
     // Declare new state variables that are required for login success load the submit vote button
     const [enableVoteDiv, setEnableVoteDiv] = useState(false);
 
     // Declare new state variables that are required for a verified anonymous user or a normal user
-    const [IsCheckLoggeduser, IsSetCheckLoggeduser] = useState(true);
+    const [IsAnonymousUser, setIsAnonymousUser] = useState(true);
 
     // Declare new state variables that are required for a verified anonymous user or a normal user
-    const [IsVisibleConsent, IsSetVisibleConsent] = useState(false);
+    const [IsVisibleConsent, setIsVisibleConsent] = useState(false);
 
     // Declare new state variables that are required disable the authentication button after login
-    const [ssoAuthenticationBtn, ssoSetAuthenticationBtn] = useState(true);
-
-
+    const [ssoAuthenticationBtn, setSsoAuthenticationBtn] = useState(true);
 
     useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
     }, [])
 
     // Builds the SignalR connection, mapping it to /chatHub
@@ -75,11 +72,11 @@ const ShareView = () => {
         }
     }, [connection]);
 
-    // 
+    // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
     useEffect(() => {
         microsoftTeams.app.getContext().then((context) => {
             if (context.user.licenseType === "Anonymous") {
-                IsSetCheckLoggeduser(false);
+                setIsAnonymousUser(false);
             }
         });
     }, [])
@@ -89,7 +86,7 @@ const ShareView = () => {
         if (connection) {
             microsoftTeams.app.getContext().then((context) => {
 
-                setDisabled(true); // Disable Button
+                setIsVoteBtnDisabled(true); // Disable Button
                 // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
                 if (context.user.licenseType === "Anonymous") {
                     // Update the state property for incremented count value.
@@ -116,7 +113,7 @@ const ShareView = () => {
     const facebookLogin = () => {
         fbAuthentication() // This method get a client-side token for Facebook
             .then((result) => {
-                return getServerSideTokenFb(result.idToken); // This method get a face book user profile details.
+                return getFacebookProfileName(result.idToken); // This method get a face book user profile details.
             })
             .catch((error) => {
                 console.log(error);
@@ -130,42 +127,49 @@ const ShareView = () => {
 
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=1234535`,
+                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=state`,
                 width: 600,
                 height: 535
             })
-                .then((result) => {
-                    let data = localStorage.getItem(result);
-                    let tokenDetails = JSON.parse(data);
-                    localStorage.removeItem(result);
-                    resolve(tokenDetails);
-                })
-                .catch((reason) => {
-                    reject(reason);
-                })
+            .then((result) => {
+                let data = localStorage.getItem(result);
+                let tokenDetails = JSON.parse(data);
+                localStorage.removeItem(result);
+                resolve(tokenDetails);
+            })
+            .catch((reason) => {
+                reject(reason);
+            })
         });
     }
 
     // Get face book user profile details.
-    const getServerSideTokenFb = (clientSideToken) => {
-        return new Promise(() => {
-            microsoftTeams.app.getContext().then(() => {
-                $.ajax({
-                    type: 'POST',
-                    url: '/getFbAccessToken',
-                    dataType: 'json',
-                    data: {
-                        'accessToken': clientSideToken,
+    const getFacebookProfileName = (clientSideToken) => {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.app.getContext().then((context) => {
+                fetch('/getFacebookLoginUserInfo', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "json",
+                        "accessToken": clientSideToken
                     },
-                    success: function (responseJson) {
+                    cache: 'default'
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        reject(response.error);
+                    }
+                })
+                .then((responseJson) => {
+                    if (responseJson != "") {
                         let facebookProfile = JSON.parse(responseJson);
+
                         // This variables will load the values to the labels
                         setUserName("Welcome: " + facebookProfile.name);
-                        setdisabledfacebookBtn(false);
+                        setIsdisabledfacebookButton(false);
                         setEnableVoteDiv(true);
-                    },
-                    error: function (textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
                 });
             });
@@ -181,12 +185,12 @@ const ShareView = () => {
             .catch((error) => {
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
-                    IsSetVisibleConsent(true);
-                    ssoSetAuthenticationBtn(false);
+                    setIsVisibleConsent(true);
+                    setSsoAuthenticationBtn(false);
                 } else {
                     // Display in-line button so user can consent
-                    IsSetVisibleConsent(true);
-                    ssoSetAuthenticationBtn(false);
+                    setIsVisibleConsent(true);
+                    setSsoAuthenticationBtn(false);
                 }
             });
     }
@@ -208,7 +212,7 @@ const ShareView = () => {
     const getServerSideToken = (clientSideToken) => {
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
-                fetch('/GetUserAccessToken', {
+                 fetch('/GetLoginUserInformation', {
                     method: 'get',
                     headers: {
                         "Content-Type": "application/text",
@@ -216,25 +220,27 @@ const ShareView = () => {
                     },
                     cache: 'default'
                 })
-                    .then((response) => {
-                        if (response.ok) {
-                            return response.text();
-                        } else {
-                            reject(response.error);
-                        }
-                    })
-                    .then((responseJson) => {
-                        if (responseJson === "") {
-                            IsSetVisibleConsent(true);
-                            ssoSetAuthenticationBtn(false);
-                        } else {
-                            let userDetails = JSON.parse(responseJson);
-                            let userName = userDetails.user.displayName;
-                            setUserName("Welcome: " + userName);
-                            ssoSetAuthenticationBtn(false);
-                            setEnableVoteDiv(true);
-                        }
-                    });
+                .then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        reject(response.error);
+                    }
+                })
+                .then((responseJson) => {
+                    if (responseJson === "") {
+                        setIsVisibleConsent(true);
+                        setSsoAuthenticationBtn(false);
+                    }
+                    else {
+                        let userDetails = JSON.parse(responseJson);
+                        let userName = userDetails.user.displayName;
+                        setUserName("Welcome: " + userName);
+
+                        setSsoAuthenticationBtn(false);
+                        setEnableVoteDiv(true);
+                    }
+                });
             });
         });
     }
@@ -243,7 +249,7 @@ const ShareView = () => {
     const requestConsent = () => {
         getToken()
             .then(data => {
-                IsSetVisibleConsent(false);
+                setIsVisibleConsent(false);
                 getClientSideToken()
                     .then((clientSideToken) => {
                         return getServerSideToken(clientSideToken);
@@ -269,11 +275,10 @@ const ShareView = () => {
 
     return (
         <div className="timerCount">
-            {IsCheckLoggeduser
+            {IsAnonymousUser
                 ? <div className="btnlogin">
                     {ssoAuthenticationBtn &&
                         <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
-
                     }
                     <Text size={500} weight="semibold">{userName}</Text>
                     {IsVisibleConsent &&
@@ -284,23 +289,21 @@ const ShareView = () => {
                     }
                 </div>
                 : <div className="btnlogin">
-                    {disabledfacebookBtn &&
+                    {IsdisabledfacebookButton &&
                         <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
                     }
                     <Text size={500} weight="semibold">{userName}</Text>
                 </div>
             }
-            <div>
-                {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
-                    <div>
-                        <Button appearance="primary" onClick={submitVote} disabled={disabled} >Submit Vote</Button>
-                        <br />
-                        <Text size={500} weight="semibold">Anonymous users voted : {aShowCount}</Text>
-                        <br />
-                        <Text size={500} weight="semibold">Users voted : {uShowCount}</Text>
-                    </div>
-                }
-            </div>
+            {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
+                <div>
+                    <Button appearance="primary" onClick={submitVote} disabled={isVoteBtnDisabled} >Submit Vote</Button>
+                    <br />
+                    <Text size={500} weight="semibold">Anonymous users voted : {aShowCount}</Text>
+                    <br />
+                    <Text size={500} weight="semibold">Users voted : {uShowCount}</Text>
+                </div>
+            }
         </div>
     );
 };

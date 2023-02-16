@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// <copyright file="SimpleGraphClient.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
 
 using System;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Graph;

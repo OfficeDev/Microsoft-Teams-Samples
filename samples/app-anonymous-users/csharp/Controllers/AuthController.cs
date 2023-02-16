@@ -39,8 +39,8 @@ namespace AnonymousUsers.Controllers
         /// <param name="accessToken">Token</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("getFbAccessToken")]
-        public async Task<JsonResult> GetFacebookAuthToken(string accessToken)
+        [Route("getFacebookLoginUserInfo")]
+        public async Task<JsonResult> getFacebookLoginUserInfo(string accessToken)
         {
             var fbAppId = _configuration["FacebookAppId"];
             var fbPassword = _configuration["FacebookAppPassword"];
@@ -59,16 +59,16 @@ namespace AnonymousUsers.Controllers
                 Tuple.Create("fields", "name,picture"),
                 Tuple.Create("access_token", token.Value));
 
-                var res = await FacebookHelper.FacebookRequest<FacebookProfile>(profile);
+                var getFacebookUserDetails = await FacebookHelper.FacebookRequest<FacebookProfile>(profile);
                 var result = new
                 {
-                    name = res.Name,
-                    picture = res.ProfilePicture.data.url
+                    name = getFacebookUserDetails.Name,
+                    picture = getFacebookUserDetails.ProfilePicture.data.url
                 };
 
-                var jsonString = JsonConvert.SerializeObject(result);
+                var returnJsonData = JsonConvert.SerializeObject(result);
 
-                return Json(jsonString);
+                return Json(returnJsonData);
             }
             else
             {
@@ -81,8 +81,8 @@ namespace AnonymousUsers.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetUserAccessToken")]
-        public async Task<ActionResult<UserData>> GetUserAccessToken()
+        [Route("GetLoginUserInformation")]
+        public async Task<ActionResult<UserData>> GetLoginUserInformation()
         {
             try
             {
@@ -95,10 +95,7 @@ namespace AnonymousUsers.Controllers
                     var title = !string.IsNullOrEmpty(me.JobTitle) ?
                                 me.JobTitle : "Unknown";
 
-                    var userInfo = new UserData()
-                    {
-                        User = me,
-                    };
+                    var userInfo = new UserData() { User = me };
 
                     return userInfo;
                 }
