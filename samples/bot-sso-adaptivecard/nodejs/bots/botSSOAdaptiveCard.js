@@ -10,6 +10,7 @@ const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const _connectionName = process.env.ConnectionName;
+const uuid = require('uuid');
 
 class BotSSOAdativeCard extends TeamsActivityHandler {
     constructor() {
