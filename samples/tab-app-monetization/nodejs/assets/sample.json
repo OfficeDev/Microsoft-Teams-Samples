@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-app-monetization-nodejs",
     "source": "officeDev",
     "title": "App monetization in tab",
-    "shortDescription": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk",
+    "shortDescription": "This is an sample tab application which shows how to open purchase dialog and trigger purchase flow using teams-js sdk.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-app-monetization/nodejs",
     "longDescription": [
-      "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk"
+      "This is an sample tab application which shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
     ],
     "creationDateTime": "2022-07-20",
     "updateDateTime": "2022-08-08",

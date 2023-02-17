@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating device permissions
+description: Microsoft Teams tab sample app for demonstrating device permissions (audio, video, location).
 products:
 - office-teams
 - office

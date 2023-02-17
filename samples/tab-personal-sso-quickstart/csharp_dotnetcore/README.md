@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample personal tab with SSO hello world app.
+description: This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab.
 products:
 - office-teams
 - office

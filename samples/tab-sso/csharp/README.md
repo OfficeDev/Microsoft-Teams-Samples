@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using C#.
+description: Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in C#.
 products:
 - office-teams
 - office

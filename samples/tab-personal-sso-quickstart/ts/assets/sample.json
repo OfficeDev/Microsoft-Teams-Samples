@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts",
     "source": "officeDev",
     "title": "Starter solution: Personal tab with SSO in TypeScript",
-    "shortDescription": "Create React App personal tab in TypeScript with Azure AD Single Sign-On",
+    "shortDescription": "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/ts",
     "longDescription": [
-      "Create React App personal tab in TypeScript with Azure AD Single Sign-On"
+      "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

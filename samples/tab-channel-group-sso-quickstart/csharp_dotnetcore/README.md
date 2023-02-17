@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample channel and group tab with SSO hello world app.
+description: This is an sample application which showcases AAD authentication in channel tab.
 products:
 - office-teams
 - office

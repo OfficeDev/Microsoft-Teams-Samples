@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample channel and group tab hello world app.
+description: This is an simple hello world app which showcases channel and group tab.
 products:
 - office-teams
 - office

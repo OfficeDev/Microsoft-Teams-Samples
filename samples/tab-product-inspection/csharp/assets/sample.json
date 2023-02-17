@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-product-inspection-csharp",
     "source": "officeDev",
     "title": "Product Inspection",
-    "shortDescription": "Demonstrating a feature where user can scan a product and mark it as approved/rejected.",
+    "shortDescription": "Demonstrating a feature where user can scan a product from teams tab and mark it as approved/rejected.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-product-inspection/csharp",
     "longDescription": [
-      "Demonstrating a feature where user can scan a product and mark it as approved/rejected."
+      "Demonstrating a feature where user can scan a product from teams tab and mark it as approved/rejected."
     ],
     "creationDateTime": "2021-11-16",
     "updateDateTime": "2021-11-29",

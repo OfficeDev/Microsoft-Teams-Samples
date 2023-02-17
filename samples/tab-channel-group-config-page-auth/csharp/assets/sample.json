@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp",
     "source": "officeDev",
     "title": "Configurable tab using AAD and Silent Authentication",
-    "shortDescription": "Shows pop-up authentication using ADAL, a deprecated auth library",
+    "shortDescription": "This sample demonstrates AAD and Silent Authentication inside teams configurable tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-config-page-auth/csharp",
     "longDescription": [
-      "Shows pop-up authentication using ADAL, a deprecated auth library"
+      "This sample demonstrates AAD and Silent Authentication inside teams configurable tab."
     ],
     "creationDateTime": "2021-03-20",
     "updateDateTime": "2022-06-20",

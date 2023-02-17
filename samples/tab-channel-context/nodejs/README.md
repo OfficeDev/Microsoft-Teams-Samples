@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample shows the contents of tab context object in a private and shared channel."
+description: "This is an sample tab application which shows the contents of tab context object in a private and shared channel."
 products:
 - office-teams
 - office

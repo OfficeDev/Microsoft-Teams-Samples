@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk"
+description: "This is an sample tab application which shows how to open purchase dialog and trigger purchase flow using teams-js sdk"
 products:
 - office-teams
 - office
