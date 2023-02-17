@@ -17,13 +17,23 @@ const FacebookAuthEnd = props => {
         microsoftTeams.app.initialize().then(() => {
 
             localStorage.removeItem("auth.error");
-            let code = getHashParameters();
-            let key = "auth.result";
-            localStorage.setItem(key, JSON.stringify({
-                idToken: code,
-            }));
+            let url = getHashParameters();
+            var code = url.searchParams.get("code");
+            var state = url.searchParams.get("state");
+            let expectedState = localStorage.getItem("simple.state");
+            if (expectedState === state) {
+                // Success -- return token information to the parent page.
+                // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
+                let key = "auth.result";
+                localStorage.setItem(key, JSON.stringify({
+                    idToken: code,
+                }));
 
-            microsoftTeams.authentication.notifySuccess(key);
+                microsoftTeams.authentication.notifySuccess(key);
+            } else {
+                // State does not match, report error
+                microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
+            }
 
         });
     }
@@ -32,8 +42,7 @@ const FacebookAuthEnd = props => {
     const getHashParameters = () => {
         var urlString = window.location.href;
         var url = new URL(urlString);
-        var code = url.searchParams.get("code");
-        return code;
+        return url;
     }
 };
 

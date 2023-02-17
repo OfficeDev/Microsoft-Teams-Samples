@@ -125,10 +125,12 @@ const ShareView = () => {
     const fbAuthentication = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
+        let state = "1234512";
+        localStorage.setItem("simple.state", state);
 
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=state`,
+                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=${state}`,
                 width: 600,
                 height: 535
             })
