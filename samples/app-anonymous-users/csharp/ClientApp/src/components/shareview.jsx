@@ -31,7 +31,7 @@ const ShareView = () => {
     const [enableVoteDiv, setEnableVoteDiv] = useState(false);
 
     // Declare new state variables that are required for a verified anonymous user or a normal user
-    const [IsAnonymousUser, setIsAnonymousUser] = useState(true);
+    const [IsAnonymousUser, setIsAnonymousUser] = useState(false);
 
     // Declare new state variables that are required for a verified anonymous user or a normal user
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
@@ -77,7 +77,7 @@ const ShareView = () => {
     const verifyAnonymousUser = () => {
         microsoftTeams.app.getContext().then((context) => {
             if (context.user.licenseType === "Anonymous") {
-                setIsAnonymousUser(false);
+                setIsAnonymousUser(true);
             }
         });
     }
@@ -125,11 +125,10 @@ const ShareView = () => {
     const fbAuthentication = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
-        let stateValue = localStorage.setItem("stateKey","1234535");
 
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=${stateValue}`,
+                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=state`,
                 width: 600,
                 height: 535
             })
@@ -279,7 +278,14 @@ const ShareView = () => {
     return (
         <div className="timerCount">
             {IsAnonymousUser
-                ? <div className="btnlogin">
+                ? 
+                   <div className="btnlogin">
+                        {IsFacebookButtonDisabled &&
+                            <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
+                        }
+                        <Text size={500} weight="semibold">{userName}</Text>
+                   </div>
+                 : <div className="btnlogin">
                     {ssoAuthenticationBtn &&
                         <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
                     }
@@ -290,13 +296,7 @@ const ShareView = () => {
                             <Button appearance="primary" onClick={requestConsent}>Consent</Button>
                         </>
                     }
-                </div>
-                : <div className="btnlogin">
-                    {IsFacebookButtonDisabled &&
-                        <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
-                    }
-                    <Text size={500} weight="semibold">{userName}</Text>
-                </div>
+                 </div>
             }
             {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
                 <div>
