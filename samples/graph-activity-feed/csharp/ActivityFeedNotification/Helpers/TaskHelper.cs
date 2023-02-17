@@ -10,9 +10,9 @@ namespace TabActivityFeed.Helpers
     public class TaskHelper
     {
 
-        public static FeedRepository AddTaskToFeed(TaskModuleInfo taskModuleData)
+        public static FeedRepository AddTaskToFeed(TaskDetails taskModuleData)
         {
-            FeedRepository.Tasks.Add(new TaskModuleInfo
+            FeedRepository.Tasks.Add(new TaskDetails
             {
                 title = taskModuleData.title,
                 DeployementTitle = taskModuleData.DeployementTitle,

@@ -33,7 +33,7 @@ namespace TabActivityFeed.Controllers
         [Route("hello")]
         public ActionResult Hello()
         {
-            TaskModuleInfo idTask = new TaskModuleInfo();
+            TaskDetails idTask = new TaskDetails();
             idTask.taskId = Guid.NewGuid();
             ViewBag.taskId = idTask.taskId.ToString("N");
 
@@ -69,7 +69,7 @@ namespace TabActivityFeed.Controllers
 
         [HttpPost]
         [Route("SendNotificationToUser")]
-        public async Task<ActionResult> SendNotificationToUser(TaskModuleInfo taskModuleData)
+        public async Task<ActionResult> SendNotificationToUser(TaskDetails taskModuleData)
         {
             TaskHelper.AddTaskToFeed(taskModuleData);
             var graphClient = SimpleGraphClient.GetGraphClient(taskModuleData.access_token);
@@ -164,7 +164,7 @@ namespace TabActivityFeed.Controllers
 
         [HttpPost]
         [Route("SendNotificationToGroupChat")]
-        public async Task<ActionResult> SendNotificationToGroupChat(TaskModuleInfo taskModuleData)
+        public async Task<ActionResult> SendNotificationToGroupChat(TaskDetails taskModuleData)
         {
             TaskHelper.AddTaskToFeed(taskModuleData);
             var graphClient = SimpleGraphClient.GetGraphClient(taskModuleData.access_token);
@@ -255,7 +255,7 @@ namespace TabActivityFeed.Controllers
 
         [HttpPost]
         [Route("sendNotificationToTeam")]
-        public async Task<ActionResult> sendNotificationToTeam(TaskModuleInfo taskModuleData)
+        public async Task<ActionResult> sendNotificationToTeam(TaskDetails taskModuleData)
         {
             TaskHelper.AddTaskToFeed(taskModuleData);
             var graphClient = SimpleGraphClient.GetGraphClient(taskModuleData.access_token);

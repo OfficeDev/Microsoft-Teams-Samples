@@ -1,4 +1,4 @@
-﻿@model TabActivityFeed.Model.TaskModuleInfo
+﻿@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -90,8 +90,6 @@
                 dataType: 'json',
                 data: taskModuleData
             });
-
-            microsoftTeams.tasks.submitTask(taskModuleData);
 
             return true;
         };

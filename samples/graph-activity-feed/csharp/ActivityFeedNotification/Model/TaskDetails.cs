@@ -3,7 +3,7 @@
 namespace TabActivityFeed.Model
 {
     
-    public class TaskModuleInfo
+    public class TaskDetails
     {
         public Guid taskId { get; set; }
 

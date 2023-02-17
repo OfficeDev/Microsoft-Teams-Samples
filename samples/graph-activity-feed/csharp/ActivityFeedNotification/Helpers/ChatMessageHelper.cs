@@ -23,7 +23,7 @@ namespace TabActivityFeed.Helpers
             _configuration = config;
         }
 
-        public async Task<ChatMessage> CreateChatMessageForChannel(TaskModuleInfo taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateChatMessageForChannel(TaskDetails taskModuleData, string accessToken)
         {
             GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage
@@ -50,7 +50,7 @@ namespace TabActivityFeed.Helpers
             return null;
         }
 
-        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskModuleInfo taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskDetails taskModuleData, string accessToken)
         {
             GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
@@ -120,7 +120,7 @@ namespace TabActivityFeed.Helpers
 
         }
 
-        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskModuleInfo taskModuleData, string accessToken)
+        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskModuleData, string accessToken)
         {
             GraphServiceClient graphClientChat= SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
@@ -182,7 +182,7 @@ namespace TabActivityFeed.Helpers
             return getChannelMessage;
         }
 
-        public async Task<ChatMessage> CreateGroupChatMessage(TaskModuleInfo taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateGroupChatMessage(TaskDetails taskModuleData, string accessToken)
         {
             var graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage

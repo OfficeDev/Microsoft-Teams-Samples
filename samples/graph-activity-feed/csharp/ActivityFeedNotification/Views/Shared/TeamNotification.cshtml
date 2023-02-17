@@ -1,4 +1,4 @@
-﻿@model TabActivityFeed.Model.TaskModuleInfo
+﻿@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -78,7 +78,7 @@
         var teamchannelID = "";
         var teamId = "";
 
-        microsoftTeams.getContext(function (context) {
+        microsoftTeams.app.getContext().then((context) => {
             teamchannelID = context.channel.id;
             username = context.user.userPrincipalName;
             userId = context.user,id;
