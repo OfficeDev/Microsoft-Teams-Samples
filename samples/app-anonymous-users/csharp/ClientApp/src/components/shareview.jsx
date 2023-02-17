@@ -21,11 +21,11 @@ const ShareView = () => {
     // Declare new state variables that are required to disable the submit vote button.
     const [isVoteBtnDisabled, setIsVoteBtnDisabled] = useState(false);
 
-    // Declare new state variables that are required to set the username of users who sign in using SSO too.
+    // Variable stores the username of users who login using Facebook or SSO.
     const [userName, setUserName] = useState("");
 
     // Declare new state variables that are required to disable the Facebook button after login
-    const [IsdisabledfacebookButton, setIsdisabledfacebookButton] = useState(true);
+    const [IsFacebookButtonDisabled, setIsFacebookButtonDisabled] = useState(true);
 
     // Declare new state variables that are required for login success load the submit vote button
     const [enableVoteDiv, setEnableVoteDiv] = useState(false);
@@ -34,13 +34,14 @@ const ShareView = () => {
     const [IsAnonymousUser, setIsAnonymousUser] = useState(true);
 
     // Declare new state variables that are required for a verified anonymous user or a normal user
-    const [IsVisibleConsent, setIsVisibleConsent] = useState(false);
+    const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Declare new state variables that are required disable the authentication button after login
     const [ssoAuthenticationBtn, setSsoAuthenticationBtn] = useState(true);
 
     useEffect(() => {
         microsoftTeams.app.initialize();
+        verifyAnonymousUser();
     }, [])
 
     // Builds the SignalR connection, mapping it to /chatHub
@@ -73,13 +74,13 @@ const ShareView = () => {
     }, [connection]);
 
     // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
-    useEffect(() => {
+    const verifyAnonymousUser = () => {
         microsoftTeams.app.getContext().then((context) => {
             if (context.user.licenseType === "Anonymous") {
                 setIsAnonymousUser(false);
             }
         });
-    }, [])
+    }
 
     // Click submit vote button
     const submitVote = () => {
@@ -124,10 +125,11 @@ const ShareView = () => {
     const fbAuthentication = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
+        let stateValue = localStorage.setItem("stateKey","1234535");
 
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=state`,
+                url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=${stateValue}`,
                 width: 600,
                 height: 535
             })
@@ -169,7 +171,7 @@ const ShareView = () => {
 
                         // This variables will load the values to the labels
                         setUserName("Welcome: " + facebookProfile.name);
-                        setIsdisabledfacebookButton(false);
+                        setIsFacebookButtonDisabled(false);
                         setEnableVoteDiv(true);
                     }
                 });
@@ -186,11 +188,11 @@ const ShareView = () => {
             .catch((error) => {
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
-                    setIsVisibleConsent(true);
+                    setIsConsentButtonVisible(true);
                     setSsoAuthenticationBtn(false);
                 } else {
                     // Display in-line button so user can consent
-                    setIsVisibleConsent(true);
+                    setIsConsentButtonVisible(true);
                     setSsoAuthenticationBtn(false);
                 }
             });
@@ -230,7 +232,7 @@ const ShareView = () => {
                 })
                 .then((responseJson) => {
                     if (responseJson === "") {
-                        setIsVisibleConsent(true);
+                        setIsConsentButtonVisible(true);
                         setSsoAuthenticationBtn(false);
                     }
                     else {
@@ -250,7 +252,7 @@ const ShareView = () => {
     const requestConsent = () => {
         getToken()
             .then(data => {
-                setIsVisibleConsent(false);
+                setIsConsentButtonVisible(false);
                 getClientSideToken()
                     .then((clientSideToken) => {
                         return getServerSideToken(clientSideToken);
@@ -282,7 +284,7 @@ const ShareView = () => {
                         <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
                     }
                     <Text size={500} weight="semibold">{userName}</Text>
-                    {IsVisibleConsent &&
+                    {IsConsentButtonVisible &&
                         <>
                             <div id="divError">Please click on consent button</div>
                             <Button appearance="primary" onClick={requestConsent}>Consent</Button>
@@ -290,7 +292,7 @@ const ShareView = () => {
                     }
                 </div>
                 : <div className="btnlogin">
-                    {IsdisabledfacebookButton &&
+                    {IsFacebookButtonDisabled &&
                         <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
                     }
                     <Text size={500} weight="semibold">{userName}</Text>
