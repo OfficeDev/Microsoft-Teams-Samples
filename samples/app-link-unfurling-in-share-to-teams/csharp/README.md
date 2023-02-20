@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "14-12-2022 00:15:13"
 ---
 
-# Link unfruling in Share to teams sample
+# Link unfurling in Share to teams sample
 
 This sample demos the feature of link unfurling for Share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
 
