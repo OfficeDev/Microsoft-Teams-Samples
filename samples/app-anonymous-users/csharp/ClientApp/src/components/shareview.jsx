@@ -24,8 +24,8 @@ const ShareView = () => {
     // Variable stores the username of users who login using Facebook or SSO.
     const [userName, setUserName] = useState("");
 
-    // Declare new state variables that are required to disable the Facebook button after login
-    const [IsFacebookButtonDisabled, setIsFacebookButtonDisabled] = useState(true);
+    // Declare new state variables that are required to enabled the Facebook button after login
+    const [IsFacebookButtonEnabled, setIsFacebookButtonEnabled] = useState(true);
 
     // Declare new state variables that are required for login success load the submit vote button
     const [enableVoteDiv, setEnableVoteDiv] = useState(false);
@@ -37,7 +37,7 @@ const ShareView = () => {
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Declare new state variables that are required disable the authentication button after login
-    const [ssoAuthenticationBtn, setSsoAuthenticationBtn] = useState(true);
+    const [ssoAuthenticationButtonVisible, setIsssoAuthenticationButtonVisible] = useState(true);
 
     useEffect(() => {
         microsoftTeams.app.initialize();
@@ -75,7 +75,7 @@ const ShareView = () => {
 
     // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
     const verifyAnonymousUser = () => {
-        microsoftTeams.app.getContext().then((context) => {
+          microsoftTeams.app.getContext().then((context) => {
             if (context.user.licenseType === "Anonymous") {
                 setIsAnonymousUser(true);
             }
@@ -84,26 +84,23 @@ const ShareView = () => {
 
     // Click submit vote button
     const submitVote = () => {
+
         if (connection) {
-            microsoftTeams.app.getContext().then((context) => {
+            setIsVoteBtnDisabled(true); // Disable Button
+            if (IsAnonymousUser) {
+                // Update the state property for incremented count value.
+                let addAnonymousVal = aShowCount + 1;
 
-                setIsVoteBtnDisabled(true); // Disable Button
-                // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
-                if (context.user.licenseType === "Anonymous") {
-                    // Update the state property for incremented count value.
-                    let addAnonymousVal = aShowCount + 1;
+                // Sending the updated count to hub signal to show the latest data on stage view.
+                connection.send("SendMessage", "Anonymous", addAnonymousVal);
+            }
+            else {
+                // Update the state property for incremented count value.
+                let addUserVal = uShowCount + 1;
 
-                    // Sending the updated count to hub signal to show the latest data on stage view.
-                    connection.send("SendMessage", "Anonymous", addAnonymousVal);
-                }
-                else {
-                    // Update the state property for incremented count value.
-                    let addUserVal = uShowCount + 1;
-
-                    // Sending the updated count to hub signal to show the latest data on stage view.
-                    connection.send("SendMessage", "User", addUserVal);
-                }
-            });
+                // Sending the updated count to hub signal to show the latest data on stage view.
+                connection.send("SendMessage", "User", addUserVal);
+            }
         }
         else {
             alert('No connection to server yet.');
@@ -125,7 +122,7 @@ const ShareView = () => {
     const fbAuthentication = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
-        let state = "1234512";
+        let state = Math.random().toString(36).substring(2, 7);
         localStorage.setItem("simple.state", state);
 
         return new Promise((resolve, reject) => {
@@ -172,7 +169,7 @@ const ShareView = () => {
 
                         // This variables will load the values to the labels
                         setUserName("Welcome: " + facebookProfile.name);
-                        setIsFacebookButtonDisabled(false);
+                        setIsFacebookButtonEnabled(false);
                         setEnableVoteDiv(true);
                     }
                 });
@@ -190,11 +187,11 @@ const ShareView = () => {
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setSsoAuthenticationBtn(false);
+                    setIsssoAuthenticationButtonVisible(false);
                 } else {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setSsoAuthenticationBtn(false);
+                    setIsssoAuthenticationButtonVisible(false);
                 }
             });
     }
@@ -234,14 +231,14 @@ const ShareView = () => {
                 .then((responseJson) => {
                     if (responseJson === "") {
                         setIsConsentButtonVisible(true);
-                        setSsoAuthenticationBtn(false);
+                        setIsssoAuthenticationButtonVisible(false);
                     }
                     else {
                         let userDetails = JSON.parse(responseJson);
                         let userName = userDetails.user.displayName;
                         setUserName("Welcome: " + userName);
 
-                        setSsoAuthenticationBtn(false);
+                        setIsssoAuthenticationButtonVisible(false);
                         setEnableVoteDiv(true);
                     }
                 });
@@ -282,13 +279,13 @@ const ShareView = () => {
             {IsAnonymousUser
                 ? 
                    <div className="btnlogin">
-                        {IsFacebookButtonDisabled &&
+                    {IsFacebookButtonEnabled &&
                             <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
                         }
                         <Text size={500} weight="semibold">{userName}</Text>
                    </div>
                  : <div className="btnlogin">
-                    {ssoAuthenticationBtn &&
+                    {ssoAuthenticationButtonVisible &&
                         <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
                     }
                     <Text size={500} weight="semibold">{userName}</Text>
