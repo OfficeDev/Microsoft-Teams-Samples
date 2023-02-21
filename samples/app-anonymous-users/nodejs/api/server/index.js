@@ -1,6 +1,11 @@
-const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3000;
+const express = require('express');
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
@@ -29,9 +34,9 @@ app.post('/getFacebookLoginUserInfo', function (req, res) {
   var fbPromise = new Promise((resolve, reject) => {
     axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
       params: {
-        client_id: '{{FacebookAppId}}',
-        redirect_uri: '{{domain-name}}/facebook-auth-end',
-        client_secret: '{{Facebook App Password}}',
+        client_id: process.env.FaceBookAppId,
+        redirect_uri: process.env.ApplicationBaseUrl + '/facebook-auth-end',
+        client_secret: process.env.FaceBookAppPassword,
         code: token,
       }
     }).then(response => {
@@ -69,8 +74,8 @@ app.post('/GetLoginUserInformation', function (req, res) {
   // Creating MSAL client
   const msalClient = new msal.ConfidentialClientApplication({
     auth: {
-      clientId: '{{Microsoft-App-id}}',
-      clientSecret: '{{MicrosoftAppPassword}}'
+      clientId: process.env.MicrosoftAppId,
+      clientSecret: process.env.MicrosoftAppPassword
     }
   });
 
@@ -100,6 +105,46 @@ app.post('/GetLoginUserInformation', function (req, res) {
   });
 });
 
+// Import required bot services.
+// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+const { BotFrameworkAdapter } = require('botbuilder');
+
+// Create adapter.
+// See https://aka.ms/about-bot-adapter to learn more about adapters.
+const adapter = new BotFrameworkAdapter({
+  appId: process.env.MicrosoftAppId,
+  appPassword: process.env.MicrosoftAppPassword
+});
+
+adapter.onTurnError = async (context, error) => {
+    // This check writes out errors to console log .vs. app insights.
+    // NOTE: In production environment, you should consider logging this to Azure
+    //       application insights. See https://aka.ms/bottelemetry for telemetry 
+    //       configuration instructions.
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
+
+    // Send a trace activity, which will be displayed in Bot Framework Emulator
+    await context.sendTraceActivity(
+        'OnTurnError Trace',
+        `${error}`,
+        'https://www.botframework.com/schemas/error',
+        'TurnError'
+    );
+
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+};
+
+// Create the bot that will handle incoming messages.
+const { TeamsConversationBot } = require('../bots/teamsConversationBot');
+const bot = new TeamsConversationBot();
+
 server.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+    console.log(`Server listening on http://localhost:${PORT}`);
+});
+
+app.post('/api/messages', (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+        await bot.run(context);
+    });
 });
