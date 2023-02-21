@@ -1,4 +1,4 @@
-# Create and facebook app.
+# Create an Facebook App.
 
 1. Open [Meta for Developers](https://developers.facebook.com/) and login with your facebook credentials.
 

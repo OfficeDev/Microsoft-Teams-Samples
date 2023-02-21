@@ -33,7 +33,7 @@ const AuthEnd = props => {
             msalInstance.handleRedirectPromise()
                 .then((tokenResponse) => {
                     if (tokenResponse !== null) {
-                        microsoftTeams.authentication.notifySuccess("Authentication succedded");
+                        microsoftTeams.authentication.notifySuccess("Authentication succeeded.");
                     } else {
                         microsoftTeams.authentication.notifyFailure("Get empty response.");
                     }
