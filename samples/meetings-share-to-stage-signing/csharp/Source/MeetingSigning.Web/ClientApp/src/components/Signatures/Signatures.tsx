@@ -3,14 +3,15 @@ import { DialogDimension } from '@microsoft/teams-js';
 import * as microsoftTeams from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { SignatureConfirmationCard } from 'adaptive-cards';
-import { postSignDocument, SignDocumentModel } from 'api/signatureApi';
-import { Signature } from 'models';
-import './Signature.css';
 import { useMutation } from 'react-query';
+import { postSignDocument, SignDocumentModel } from 'api/signatureApi';
+import { Signature, User } from 'models';
+import { useUserIsAnonymous } from 'utils/TeamsProvider/hooks';
+import './Signature.css';
 
 type SignatureInputProps = {
   documentId: string;
-  loggedInAadId: string;
+  loggedInUser: User;
   clickable: boolean;
   signature: Signature;
 };
@@ -21,25 +22,29 @@ type SignatureInputProps = {
  * Clicking on the input box will open a Task Dialog confirming the signature.
  *
  * @param documentId used in the call to the Sign API
- * @param loggedInAadId ID of the logged in user, used in logic to allow signing or not
+ * @param loggedInUser ID of the logged in user, used in logic to allow signing or not
  * @param clickable Boolean field to disable signing in specific scenarios. e.g. in the Sidepanel
  * @param signature Signature details
  */
 function SignatureInput({
   documentId,
-  loggedInAadId,
+  loggedInUser,
   clickable,
   signature,
 }: SignatureInputProps) {
+  const userIsAnonymous = useUserIsAnonymous();
+
   // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
   // To post a call we set-up a mutation, which we then call further down when we want
   // to make the call to the API.
   const signDocumentMutation = useMutation<Signature, Error, SignDocumentModel>(
-    (model: SignDocumentModel) => postSignDocument(model),
+    (model: SignDocumentModel) => postSignDocument(model, userIsAnonymous),
   );
 
   const isSignatureForLoggedInPerson: boolean =
-    signature.signer.userId === loggedInAadId;
+    loggedInUser &&
+    (signature.signer.userId === loggedInUser.userId ||
+      signature.signer.email === loggedInUser.email);
 
   const signatureConfirmationTaskModule = () => {
     const template = new ACData.Template(SignatureConfirmationCard);
@@ -116,7 +121,7 @@ function SignatureInput({
 
 export type SignatureListProps = {
   documentId: string;
-  loggedInAadId: string;
+  loggedInUser: User;
   clickable: boolean;
   signatures: Signature[];
 };
@@ -125,13 +130,13 @@ export type SignatureListProps = {
  * List of Signature fields
  *
  * @param documentId used in the call to the Sign API
- * @param loggedInAadId ID of the logged in user, used in logic to allow signing or not
+ * @param loggedInUser ID of the logged in user, used in logic to allow signing or not
  * @param clickable Boolean field to disable signing in specific scenarios. e.g. in the Sidepanel
  * @param signatures Details for all the relevant Signature
  */
 export function SignatureList({
   documentId,
-  loggedInAadId,
+  loggedInUser,
   clickable,
   signatures,
 }: SignatureListProps) {
@@ -142,7 +147,7 @@ export function SignatureList({
         signatures.map((s, index) => (
           <SignatureInput
             documentId={documentId}
-            loggedInAadId={loggedInAadId}
+            loggedInUser={loggedInUser}
             clickable={clickable}
             signature={s}
             key={index}

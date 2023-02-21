@@ -9,7 +9,8 @@
         "hostType": "Azure",
         "azureResources": [],
         "capabilities": [
-            "Bot"
+            "Bot",
+            "BotSSO"
         ],
         "activeResourcePlugins": [
             "fx-resource-identity",
@@ -24,5 +25,39 @@
         "fx-resource-bot": {
             "capabilities": []
         }
-    }
+    },
+    "components": [
+        {
+            "name": "aad-app",
+            "provision": true,
+            "deploy": true
+        },
+        {
+            "hosting": "azure-web-app",
+            "name": "teams-bot",
+            "build": true,
+            "provision": true,
+            "folder": "bot",
+            "capabilities": [],
+            "sso": false,
+            "deploy": true
+        },
+        {
+            "name": "azure-web-app",
+            "connections": [
+                "identity",
+                "aad-app",
+                "teams-bot"
+            ],
+            "provision": true,
+            "scenario": "Bot"
+        },
+        {
+            "name": "bot-service",
+            "provision": true
+        },
+        {
+            "name": "identity"
+        }
+    ]
 }

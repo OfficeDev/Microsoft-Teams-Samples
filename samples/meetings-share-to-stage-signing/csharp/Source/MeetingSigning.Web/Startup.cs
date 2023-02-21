@@ -11,6 +11,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Identity.Web;
+    using Microsoft.IdentityModel.Logging;
     using Microsoft.Teams.Samples.MeetingSigning.Domain;
     using Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data;
     using Microsoft.Teams.Samples.MeetingSigning.Infrastructure.GraphService;
@@ -31,7 +32,16 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddMicrosoftIdentityWebApiAuthentication(Configuration, "AzureAd")
+            services
+                .AddAuthentication()
+                .AddMicrosoftIdentityWebApi(Configuration, "MsaAuth", AuthenticationScheme.Msa, true)
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddMicrosoftGraph(Configuration.GetSection("MsaGraph"))
+                .AddInMemoryTokenCaches();
+
+            services
+                .AddAuthentication(AuthenticationScheme.Aad)
+                .AddMicrosoftIdentityWebApi(Configuration, "AzureAd", AuthenticationScheme.Aad)
                 .EnableTokenAcquisitionToCallDownstreamApi()
                 .AddMicrosoftGraph(Configuration.GetSection("Graph"))
                 .AddInMemoryTokenCaches();
@@ -65,7 +75,11 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web
             if (!env.IsDevelopment())
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseHsts(); 
+            }
+            else
+            {
+                IdentityModelEventSource.ShowPII = true;
             }
 
             app.UseMiddleware<JsonExceptionHandler>();

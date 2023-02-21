@@ -10,16 +10,16 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07/07/2021 13:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
+urlFragment: officedev-microsoft-teams-samples-meetings-notification-nodejs
 ---
 
-# Meetings Content Bubble
+## Targeted In-Meeting Notification
 
-This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
+This sample illustrates how to implement [Targeted In-Meeting Notification](https://review.learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 
 ## Interaction with app
 
-![Meetings Content BubbleGif](Images/MeetingsContentBubble.gif)
+![Targeted In-Meeting Notification](Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -67,10 +67,10 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples\meetings-content-bubble\nodejs`
+- In a terminal, navigate to `samples\meetings-notification\nodejs`
 
     ```bash
-    cd samples/meetings-content-bubble/nodejs
+    cd samples/meetings-notification/nodejs
     ```
 
 - Install modules
@@ -118,6 +118,11 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 **Provide your feedback No:**
 
 ![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
+
+## Send targeted meeting notification
+![Meeting card](Images/MeetingCard.png)
+
+![Target notification](Images/TargetNotification.png)
 
 **Interacting with the app in Teams Meeting**
 

@@ -9,7 +9,7 @@ function ConsentRequest({ callback }: ConsentRequestProps) {
   const callConsentAuth = async () => {
     try {
       const result = await microsoftTeams.authentication.authenticate({
-        url: `${window.location.origin}/auth-start`,
+        url: `${window.location.origin}/auth-start/aad`,
         width: 600,
         height: 535,
       });

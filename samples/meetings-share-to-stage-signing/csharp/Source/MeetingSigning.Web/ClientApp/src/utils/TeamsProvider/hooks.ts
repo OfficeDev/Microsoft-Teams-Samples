@@ -19,3 +19,8 @@ export function useTheme(): ThemeInput {
   const ctx = useTeamsContext();
   return useMemo(() => getTheme(ctx.app.theme), [ctx.app.theme]);
 }
+
+export function useUserIsAnonymous(): boolean {
+  const ctx = useTeamsContext();
+  return ctx?.user?.licenseType === 'Anonymous' ?? false;
+}

@@ -21,6 +21,10 @@ type Choice = {
   value: string;
 };
 
+export type CreateDocumentButtonProps = {
+  userIsAnonymous: boolean;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createTaskInfo = (card: any): TaskInfo => {
   return {
@@ -49,7 +53,7 @@ const createUserArray = (
   return commaArrayOfUsers.split(',').map((u: string) => {
     return {
       userId: isEmail ? undefined : u,
-      name: '',
+      email: isEmail ? u : undefined,
     } as User;
   });
 };
@@ -60,14 +64,18 @@ const createUserArray = (
  *
  * @returns a component with a simple header and button to create a document
  */
-export function CreateDocumentButton() {
+export function CreateDocumentButton({
+  userIsAnonymous,
+}: CreateDocumentButtonProps) {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const [documentInput, setDocumentInput] = useState<DocumentInput | undefined>(
     undefined,
   );
 
   const createDocumentMutation = useMutation<Document, Error, DocumentInput>(
-    (documentInput: DocumentInput) => createDocument(documentInput),
+    ['createDocument', userIsAnonymous],
+    (documentInput: DocumentInput) =>
+      createDocument(documentInput, userIsAnonymous),
     {
       retry: (failureCount: number, error: Error) =>
         apiRetryQuery(
@@ -92,14 +100,41 @@ export function CreateDocumentButton() {
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const createDocumentsSubmitHandler = (error: string, result: any) => {
+    const createDocumentsSubmitHandler = (error: string, resultObj: any) => {
       if (error !== null) {
         console.log(`Document handler - error: '${error}'`);
-      } else if (result !== undefined) {
+      } else if (resultObj !== undefined) {
+        let result = resultObj;
+
+        // There is a bug for task module cards for Anonymous Users that returns a stringified
+        // object to the callback instead of the object. So if the result is a string parse it
+        // to an object.
+        if (typeof result === 'string') {
+          try {
+            result = JSON.parse(result);
+          } catch (error: any) {
+            console.error(
+              `Failed to parse task module result, string may not be a valid object: ${error}`,
+            );
+          }
+        }
+
         const documents: string[] = result.documentsValue.split(',');
 
-        const viewers: User[] = createUserArray(result.viewersValue);
-        const signers: User[] = createUserArray(result.signersValue);
+        const aadViewers: User[] = createUserArray(result.viewersValue);
+        const anonymousViewers: User[] = createUserArray(
+          result.anonymousViewers,
+          true,
+        );
+        // Push anonymous viewers to the Viewers array
+        const viewers: User[] = aadViewers.concat(anonymousViewers);
+
+        const aadSigners: User[] = createUserArray(result.signersValue);
+        const anonymousSigners: User[] = createUserArray(
+          result.anonymousSigners,
+          true,
+        );
+        const signers: User[] = aadSigners.concat(anonymousSigners);
 
         documents.forEach(async (d: string) => {
           const documentInput: DocumentInput = {
