@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos Azure AD aand facebook uthentication feature in bot,tab and messaging extension.
+description: This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 
 # Authentication complete sample
 
-Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
+Using this nodejs sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
 - **Interaction with app**
 ![app-complete-auth-sample ](Images/app-complete-auth.gif)
