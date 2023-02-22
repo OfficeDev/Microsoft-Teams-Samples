@@ -194,8 +194,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|QBot          | QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. |[View][msteams-app-qbot]
 |2|Resource Hub          | Resource Hub is a solution designed for all the help you need to use Teams, all in one place. |[View][msteams-app-resource-hub]
 
-|25|Link unfurling for 'share to teams'|This sample demos the feature of link unfurling for Share to teams.|[View](/demo%20manifest/Link-Unfurling-In-Share-To-Teams.zip) |
-
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
