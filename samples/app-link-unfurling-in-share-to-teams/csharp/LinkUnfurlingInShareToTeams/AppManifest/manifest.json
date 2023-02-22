@@ -6,9 +6,9 @@
   "packageName": "com.microsoft.teams.linkunfurlingstt",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://example.azurewebsites.net",
-    "privacyUrl": "https://example.azurewebsites.net/privacy",
-    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",

@@ -40,7 +40,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-link-unfurling-in-share-to-teams/csharp/LinkUnfurlingInShareToTeams/Images/app-link-unfurling-stt.gif",
-        "alt": "Solution UX showing app check in location"
+        "alt": "Link unfurling in share to teams"
       }
     ],
     "authors": [
