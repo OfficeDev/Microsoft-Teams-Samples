@@ -889,6 +889,10 @@ jobs:
               version: '18.x'
              
 
+            - project_path: 'samples/bot-sso-adaptivecard/nodejs'
+              name: 'bot-sso-adaptivecard'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
