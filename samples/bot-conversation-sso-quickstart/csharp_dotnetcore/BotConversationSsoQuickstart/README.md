@@ -62,6 +62,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
      - `{{TODO: MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
      - `{{ TODO: ClientSecret}}` - Generated from Step 1, also referred to as Client secret
      - `{{ TODO: ConnectionName}}` - Generated from Step 1, Connection Setting.
+     - `MicrosoftAppType` - Set this as MultiTenant to if your bot is supported on multiple tenants; SingleTenant otherwise.
+     - `MicrosoftAppTenantId` - Set your tenantId here if you are using single tenant app registration.
+     
   
   - If you are using Visual Studio
     - Launch Visual Studio
