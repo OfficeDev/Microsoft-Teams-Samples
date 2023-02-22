@@ -158,7 +158,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 userId: userId,
@@ -169,7 +169,7 @@
                 url: "/sendNotificationToChannel",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -203,7 +203,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 id: $('#reservationId').val(),
                 title: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -216,7 +216,7 @@
                 url: "/channelTabTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -250,7 +250,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 title: $('#DeployementTitle').val(),
                 description: $('#DeployementDescription').val(),
                 userId: userId,
@@ -262,7 +262,7 @@
                 url: "/customTopicTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },

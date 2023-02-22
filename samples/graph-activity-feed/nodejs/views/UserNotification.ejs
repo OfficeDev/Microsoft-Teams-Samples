@@ -131,7 +131,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 userId: userId,
@@ -142,7 +142,7 @@
                 url: "/sendNotificationToUser",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -176,7 +176,7 @@
                 return false;
             }
             
-            let taskModuleData = {
+            let taskDetails  = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 userId: userId,
@@ -188,7 +188,7 @@
                 url: "/customTopicNotificationToUser",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
