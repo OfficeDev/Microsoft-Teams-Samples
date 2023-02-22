@@ -24,7 +24,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  ##### Deeplink Tab Flow
 
- ![bot-conversations ](DeepLinkBot/images/Team_DeepLink.gif)
+ ![bot-conversations ](DeepLinkBot/images/Tab_DeepLink.gif)
 
 
  ## Prerequisites
