@@ -121,7 +121,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 groupchatId: groupchatId,
@@ -132,7 +132,7 @@
                 url: "/sendNotificationToGroupChat",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -166,7 +166,7 @@
                 return false;
             }
 
-            let taskModuleData = {
+            let taskDetails  = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 groupchatId: groupchatId,
@@ -176,7 +176,7 @@
             $.ajax({
                 url: "/sendCustomTopicNotificationGroupChat",
                 type: "POST",
-                data: JSON.stringify(taskModuleData),
+                data: JSON.stringify(taskDetails ),
                 contentType: 'application/json',
                 success: function (profile) {
                     console.log(profile);
