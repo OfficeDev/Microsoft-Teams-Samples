@@ -37,7 +37,7 @@ const ShareView = () => {
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Declare new state variables that are required disable the authentication button after login
-    const [ssoAuthenticationButtonVisible, setIsssoAuthenticationButtonVisible] = useState(true);
+    const [ssoAuthenticationButtonVisible, setIsSsoAuthenticationButtonVisible] = useState(true);
 
     useEffect(() => {
         microsoftTeams.app.initialize();
@@ -187,11 +187,11 @@ const ShareView = () => {
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setIsssoAuthenticationButtonVisible(false);
+                    setIsSsoAuthenticationButtonVisible(false);
                 } else {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setIsssoAuthenticationButtonVisible(false);
+                    setIsSsoAuthenticationButtonVisible(false);
                 }
             });
     }
@@ -231,14 +231,14 @@ const ShareView = () => {
                 .then((responseJson) => {
                     if (responseJson === "") {
                         setIsConsentButtonVisible(true);
-                        setIsssoAuthenticationButtonVisible(false);
+                        setIsSsoAuthenticationButtonVisible(false);
                     }
                     else {
                         let userDetails = JSON.parse(responseJson);
                         let userName = userDetails.user.displayName;
                         setUserName("Welcome: " + userName);
 
-                        setIsssoAuthenticationButtonVisible(false);
+                        setIsSsoAuthenticationButtonVisible(false);
                         setEnableVoteDiv(true);
                     }
                 });
