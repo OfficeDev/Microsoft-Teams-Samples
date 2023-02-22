@@ -25,8 +25,6 @@ io.on('connection', (socket) => {
 
 // Facebook Oauth token axchange
 app.post('/getFacebookLoginUserInfo', function (req, res) {
-  console.log("ServerFacebook");
-  debugger;
   var token = req.body.token;
   var accessToken;
   var scopes = ['name','picture'].join(',');

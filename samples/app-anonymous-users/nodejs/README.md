@@ -6,12 +6,10 @@ products:
 - office
 - office-365
 languages:
-- typescript
-- javascript
-- html
+- nodejs
 extensions:
  contentType: samples
- createdDate: "29-02-2023 10:00:01"
+ createdDate: "22-02-2023 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-app-anonymous-users-nodejs
 
 ---
@@ -25,12 +23,12 @@ This sample shows anonymous users support in meeting apps.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [Node.js](https://nodejs.org)
 
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
+    ```bash
+    # determine node version
+    node --version
+    ```
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -102,42 +100,52 @@ This sample shows anonymous users support in meeting apps.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-4. Run the app from a terminal or from Visual Studio, choose option A or B.
-
-    A) From a terminal, navigate to `samples/app-anonymous-users/csharp`
-
-    ```bash
-    # run the app
-    dotnet run
-    ```
-    B) Or from Visual Studio
-
-    - Launch Visual Studio
-    - File -> Open -> Project/Solution
-    - Navigate to `samples/app-anonymous-users/csharp` folder
-    - Select `AnonymousUsers.sln` file
-    - Press `F5` to run the project
-
-5. In a terminal, navigate to `samples/app-anonymous-users/csharp/ClientApp`
-
-    - Inside ClientApp folder execute the below command.
-
-        ```bash
-        # npm install
-        ```
-
- 6) Modify the `/appsettings.json` and fill in the following details:
-  Modify the `appsettings.json` and fill in the following details:
+4. Open .env file from this path folder `samples/app-anonymous-users/nodejs/api/server` and update 
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
-   - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{FacebookAppId}} and {{FacebookAppPassword}}`- Generated from step 16.
-  
-  7) Modify the .env file in your project folder (or in Visual Studio) and fill in below details:
+   - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+
+5. Open .env file from this path folder `samples/app-anonymous-users/nodejs/ClientApp` and update 
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{FacebookAppId}}`- Generated from step 16.
-   
+     
+6. We have two different solutions to run, so follow below steps:
+ 
+- In a terminal, navigate to `samples/app-anonymous-users/nodejs/api` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+If you face any dependency error while installing node modules, try using below command
+
+```bash
+npm install --legacy-peer-deps
+```
+
+- In a different terminal, navigate to `samples/app-anonymous-users/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+```bash
+cd client
+npm install
+```
+
+```bash
+npm start
+```
+
+If you face any dependency error while installing node modules, try using below command
+
+```bash
+npm install --legacy-peer-deps
+```
+
  7. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
