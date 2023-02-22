@@ -11,9 +11,10 @@ languages:
 extensions:
 contentType: samples
 createdDate: "14-12-2022 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-nodejs
 ---
 
-# Link unfruling Share to teams sample
+## Link unfruling Share to teams sample
 
 This sample demos the feature of link unfurling for share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
 

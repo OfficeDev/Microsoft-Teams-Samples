@@ -494,7 +494,7 @@ jobs:
 
             - project_path: 'samples/app-link-unfurling-in-share-to-teams/nodejs'
               name: 'app-link-unfurling-in-share-to-teams'
-              version: '16.x'
+              version: '18.x'
 
             - project_path: 'samples/app-installation-using-qr-code/nodejs'
               name: 'app-installation-using-qr-code'

@@ -1,5 +1,7 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// <copyright file="teamsBot.js" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+// </copyright>
 
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 
