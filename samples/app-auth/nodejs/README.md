@@ -102,7 +102,8 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 10. Select **Add scope**
     - Note: The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end; for example:
         - `api://<your_ngrok_url>/<aad_application_id>/access_as_user`
-
+    - If you are facing any issue in your app, please uncomment [this] line( https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-auth/nodejs/src/AuthBot.ts#L119) and put your debugger for local debug.
+   
 11. In the **Authorized client applications** section, you identify the applications that you want to authorize to your app’s web application. Each of the following IDs needs to be entered:
     - `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     - `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -150,10 +151,10 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
     ```
 
 Notes:
-
 -   The resource for an AAD app will usually just be the root of its site URL and the appID (e.g. api://subdomain.example.com/6789/c6c1f32b-5e55-4997-881a-753cc1d563b7). We also use this value to ensure your request is coming from the same domain. Therefore make sure that your contentURL for your tab uses the same domains as your resource property.
 -   You need to be using manifest version 1.5 or higher for these fields to be used.
 -   Scopes aren’t supported in the manifest and instead should be specified in the API Permissions section in the Azure portal
+-   If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-auth/nodejs/src/AuthBot.ts#L119) line and put your debugger for local debug.
 
 ### Add the Azure AD OAuth connection to the bot
 

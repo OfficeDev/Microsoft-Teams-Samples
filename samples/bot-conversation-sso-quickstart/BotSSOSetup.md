@@ -126,7 +126,7 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 
     - For the Token Exchange URL use the Application ID URL obtained in step 1.3
 
-    - Specify "common" as the Tenant ID
+    - Specify "common" as the Tenant ID. If you are using Single Tenant app registration then set your tenant Id where the bot is registered.
 
     - Add all the scopes configured when specifying permissions to downstream APIs in step 1.3
 

@@ -1,92 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    <title>Auth Start Page </title> 
-</head>
-  <body>
-  </body>
-    <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-    <script>
-       microsoftTeams.app.initialize();
-       var id =  <%-clientId%>
-        // Get the tab context, and use the information to navigate to Azure AD login page
-        microsoftTeams.app.getContext().then((context) => {
-            // Generate random state string and store it, so we can verify it in the callback
-            let state = _guid();
-            localStorage.setItem("auth.state", state);
-            localStorage.removeItem("auth.error");
-            // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
-            // for documentation on these query parameters
-            let queryParams = {
-                client_id: id,
-                response_type: "id_token token",
-                response_mode: "fragment",
-                scope: "https://graph.microsoft.com/User.Read",
-                redirect_uri: window.location.origin + "/auth-end",
-                nonce: _guid(),
-                state: state,
-                login_hint: context.user.loginHint,
-            };
-            // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
-            // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest. 
-            let authorizeEndpoint = `https://login.microsoftonline.com/${context.user.tenant.id}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
-            window.location.assign(authorizeEndpoint);
-        });
-        // Build query string from map of query parameter
-        function toQueryString(queryParams) {
-            let encodedQueryParams = [];
-            for (let key in queryParams) {
-                encodedQueryParams.push(key + "=" + encodeURIComponent(queryParams[key]));
-            }
-            return encodedQueryParams.join("&");
-        }
-        // Converts decimal to hex equivalent
-        function _decimalToHex(number) {
-            var hex = number.toString(16);
-            while (hex.length < 2) {
-                hex = '0' + hex;
-            }
-            return hex;
-        }
-        // Generates RFC4122 version 4 guid (128 bits)
-        function _guid() {
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script type="text/javascript">
+        microsoftTeams.app.initialize().then(() => {
 
-            var cryptoObj = window.crypto || window.msCrypto; // for IE 11
-            if (cryptoObj && cryptoObj.getRandomValues) {
-                var buffer = new Uint8Array(16);
-                cryptoObj.getRandomValues(buffer);
-                //buffer[6] and buffer[7] represents the time_hi_and_version field. We will set the four most significant bits (4 through 7) of buffer[6] to represent decimal number 4 (UUID version number).
-                buffer[6] |= 0x40; //buffer[6] | 01000000 will set the 6 bit to 1.
-                buffer[6] &= 0x4f; //buffer[6] & 01001111 will set the 4, 5, and 7 bit to 0 such that bits 4-7 == 0100 = "4".
-                //buffer[8] represents the clock_seq_hi_and_reserved field. We will set the two most significant bits (6 and 7) of the clock_seq_hi_and_reserved to zero and one, respectively.
-                buffer[8] |= 0x80; //buffer[8] | 10000000 will set the 7 bit to 1.
-                buffer[8] &= 0xbf; //buffer[8] & 10111111 will set the 6 bit to 0.
-                return _decimalToHex(buffer[0]) + _decimalToHex(buffer[1]) + _decimalToHex(buffer[2]) + _decimalToHex(buffer[3]) + '-' + _decimalToHex(buffer[4]) + _decimalToHex(buffer[5]) + '-' + _decimalToHex(buffer[6]) + _decimalToHex(buffer[7]) + '-' +
-                    _decimalToHex(buffer[8]) + _decimalToHex(buffer[9]) + '-' + _decimalToHex(buffer[10]) + _decimalToHex(buffer[11]) + _decimalToHex(buffer[12]) + _decimalToHex(buffer[13]) + _decimalToHex(buffer[14]) + _decimalToHex(buffer[15]);
-            }
-            else {
-                var guidHolder = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-                var hex = '0123456789abcdef';
-                var r = 0;
-                var guidResponse = "";
-                for (var i = 0; i < 36; i++) {
-                    if (guidHolder[i] !== '-' && guidHolder[i] !== '4') {
-                        // each x and y needs to be random
-                        r = Math.random() * 16 | 0;
-                    }
-                    if (guidHolder[i] === 'x') {
-                        guidResponse += hex[r];
-                    } else if (guidHolder[i] === 'y') {
-                        // clock-seq-and-reserved first hex is filtered and remaining hex values are random
-                        r &= 0x3; // bit and with 0011 to set pos 2 to zero ?0??
-                        r |= 0x8; // set pos 3 to 1 as 1???
-                        guidResponse += hex[r];
-                    } else {
-                        guidResponse += guidHolder[i];
-                    }
-                }
-                return guidResponse;
-            }
-        };
-</script>
-        </html>
+            // Get the tab context, and use the information to navigate to Azure AD login page
+            microsoftTeams.app.getContext().then(async (context) => {
+                var currentURL = new URL(window.location);
+                var scope = "User.Read email openid profile offline_access Directory.Read.All Directory.ReadWrite.All TeamsActivity.Send TeamsAppInstallation.ReadForUser TeamsAppInstallation.ReadWriteForUser";
+                var loginHint = context.user.loginHint;
+                
+                const msalConfig = {
+                    auth: {
+                        clientId: <%-clientId%>,
+                        authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
+                        navigateToLoginRequestUrl: false
+                    },
+                    cache: {
+                        cacheLocation: "sessionStorage",
+                    },
+                };
+				
+                const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
+                const scopesArray = scope.split(" ");
+                const scopesRequest = {
+                    scopes: scopesArray,
+                    redirectUri: window.location.origin + `/auth-end`,
+                    loginHint: loginHint
+                };
+                
+                await msalInstance.loginRedirect(scopesRequest);
+            });
+        });
+    </script>
+</head>
+<body class="theme-light">
+</body>

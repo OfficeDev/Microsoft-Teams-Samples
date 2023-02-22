@@ -8,6 +8,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { TeamsProvider } from 'utils/TeamsProvider/TeamsProvider';
 
+declare global {
+  // Used to store the token in memory if we can't store it in local storage
+  // eslint-disable-next-line no-var
+  var anonymousUserAccessToken: string;
+}
+
 const queryClient = new QueryClient();
 
 ReactDOM.render(

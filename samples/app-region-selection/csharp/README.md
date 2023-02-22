@@ -22,6 +22,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 - **Interaction with app**
 ![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Region Selection App:** [Manifest](/samples/app-region-selection/csharp/demo-manifest/app-region-selection.zip)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -38,8 +43,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 ### 1. Setup for Bot
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -86,6 +91,9 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
 ## Running the sample
 
 Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.
@@ -107,7 +115,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 
 ## Further reading
-- [Overview for Microsoft Teams App](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-first-app-overview)
-- [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-channel-tab)
-- [Build a Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-bot)
-
+- [Overview for Microsoft Teams App](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview)
+- [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-channel-tab)
+- [Build a Bot](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-bot)

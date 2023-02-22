@@ -1,19 +1,28 @@
-import { Document, DocumentInput } from 'models';
+import { Document, DocumentListDto, DocumentInput } from 'models';
 import { authFetch } from './fetchClient';
 
-async function getDocument(documentId: string) {
-  return await authFetch<Document>(`document/${documentId}/`, { method: 'GET' });
-};
+async function getDocument(documentId: string, isAnonymousUser: boolean) {
+  return await authFetch<DocumentListDto>(
+    `document/${documentId}/`,
+    isAnonymousUser,
+    { method: 'GET' },
+  );
+}
 
-async function getAllDocuments() {
-  return await authFetch<Document[]>('document', { method: 'GET' });
-};
+async function getAllDocuments(isAnonymousUser: boolean) {
+  return await authFetch<DocumentListDto>('document/', isAnonymousUser, {
+    method: 'GET',
+  });
+}
 
-async function createDocument(document: DocumentInput) {
-  return await authFetch<Document>('document', {
+async function createDocument(
+  document: DocumentInput,
+  isAnonymousUser: boolean,
+) {
+  return await authFetch<Document>('document/', isAnonymousUser, {
     method: 'POST',
     body: JSON.stringify(document),
   });
-};
+}
 
 export { getDocument, getAllDocuments, createDocument };

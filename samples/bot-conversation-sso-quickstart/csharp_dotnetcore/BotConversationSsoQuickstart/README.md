@@ -62,6 +62,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
      - `{{TODO: MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
      - `{{ TODO: ClientSecret}}` - Generated from Step 1, also referred to as Client secret
      - `{{ TODO: ConnectionName}}` - Generated from Step 1, Connection Setting.
+     - `MicrosoftAppType` - Set this as MultiTenant to if your bot is supported on multiple tenants; SingleTenant otherwise.
+     - `MicrosoftAppTenantId` - Set your tenantId here if you are using single tenant app registration.
+     
   
   - If you are using Visual Studio
     - Launch Visual Studio
@@ -74,6 +77,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/AdapterWithErrorHandler.cs#L37) and put your debugger for local debug.
+
 
 ## Running the sample
 

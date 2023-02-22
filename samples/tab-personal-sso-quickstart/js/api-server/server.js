@@ -26,6 +26,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
             clientSecret: clientSecret
         }
     });
+    
     let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
 
     msalClient.acquireTokenOnBehalfOf({

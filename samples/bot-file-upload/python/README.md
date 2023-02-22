@@ -21,22 +21,19 @@ Bot Framework v4 file upload bot sample for Teams.
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to
 upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
 
+- **Interaction with bot**
+![Bot-file-upload](Images/botfileupload.gif)
+
+ ## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Teams File Upload Bot:** [Manifest](/samples/bot-file-upload/csharp/demo-manifest/bot-file-upload.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Concepts introduced in this sample
-![Bot-file-upload](Images/botfileupload.gif)
-
-The bot initialization welcome message
-![WelcomeCard](Images/WelcomeCard.PNG)
-
-The bot will respond to the message when you upload a file
-![FileUploadInMessageSection](Images/FileUploadInMessageSection.PNG)
-
-The bot sends message to download file.
-![ReadyToDownload](Images/ReadyToDownload.PNG)
 
 ## To try this sample
 
@@ -57,10 +54,10 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+1) Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
 1) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\bot-file-upload` folder
 
@@ -85,10 +82,27 @@ Sending a message to the bot will cause it to respond with a card that will prom
 
 You can also send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
 
+## Running the sample
+
+> Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
+
+The bot initialization welcome message
+![WelcomeCard](Images/WelcomeCard.PNG)
+
+The bot will respond to the message when you upload a file
+![FileUploadInMessageSection](Images/FileUploadInMessageSection.PNG)
+
+The bot sends message to download file.
+![ReadyToDownload](Images/ReadyToDownload.PNG)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 # Further reading
 
-- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+- [Upload Files Using Bots](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/bots-filesv4)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

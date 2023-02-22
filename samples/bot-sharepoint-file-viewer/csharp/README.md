@@ -89,6 +89,9 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+
+
 ## Running the sample
 
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.

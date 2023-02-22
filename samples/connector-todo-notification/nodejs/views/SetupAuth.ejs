@@ -97,13 +97,13 @@
             height: 535,
             successCallback: function (result) {
                 console.log("Login succeeded: " + result);
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-                let tokenResult = JSON.parse(data);
-                getUserProfile(tokenResult.accessToken);
-                $("#primary").show();
-                $("#divConfig").show();
-                $("#divLogin").hide();
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    idToken = result;
+                    decodingJWT(result)
+                    $("#primary").show();
+                    $("#divConfig").show();
+                    $("#divLogin").hide();
+            });
             },
             failureCallback: function (reason) {
                 console.log("Login failed: " + reason);
@@ -111,6 +111,23 @@
             }
         });
     }
+
+    function decodingJWT(token) {
+            $.ajax({
+                type: 'POST',
+                url: '/decodeToken',
+                dataType: 'json',
+                data: {
+                    'idToken': token,
+                },
+                success: function (responseJson) {
+                    const userDetails = responseJson;
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
 
     function logOut() {
         hideProfileAndError();

@@ -1,0 +1,14 @@
+{
+    "contentType": "application/vnd.microsoft.card.thumbnail",
+    "content": {
+        "title": "Thumbnail Card",
+        "subtitle": "tale of a robot who dared to love",
+        "text": "Bender Bending Rodríguez is a main character in the animated television series Futurama. He was created by series creators Matt Groening and David X. Cohen, and is voiced by John DiMaggio",
+        "images": [
+            {
+                "url": "https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png",
+                "alt": "Bender Rodríguez"
+            }
+        ]
+    }
+}

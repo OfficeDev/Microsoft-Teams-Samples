@@ -9,6 +9,7 @@ export interface LiveSharePageProps {
   container: IFluidContainer | undefined;
   started: boolean;
   children?: JSX.Element | JSX.Element[];
+  userIsAnonymous: boolean;
 }
 
 /**
@@ -21,8 +22,15 @@ export const LiveSharePage = ({
   context,
   container,
   started,
+  userIsAnonymous,
 }: LiveSharePageProps) => {
   const loadText = useMemo(() => {
+    if (userIsAnonymous)
+    {
+      // Anonymous users do not have an AzureAD account are not supported by Live Share, so skip waiting for it to load
+      return undefined;
+    }
+
     if (!context) {
       return 'Loading Teams Client SDK...';
     }
