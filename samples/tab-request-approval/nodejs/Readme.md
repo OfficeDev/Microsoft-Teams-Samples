@@ -15,17 +15,22 @@ urlFragment: officedev-microsoft-teams-samples-tab-request-approval-nodejs
 
 # Send task approval request using activity feed notification (Graph APIs).
 
-This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how to trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
+This sample has been created using [Microsoft Graph](https://docs.microsoft.com/graph/overview?view=graph-rest-beta), it shows how to trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
 
 - **Interaction with app**
 ![tab-request-approval ](Images/tab-request-approval.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Send task approvals using activity feed notification:** [Manifest](/samples/tab-request-approval/csharp/demo-manifest/Tab-Request-Approval.zip)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -54,16 +59,23 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
     - `Directory.Read.All`
+    - `Directory.ReadWrite.All`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
-    - `TeamsAppInstallation.ReadForUser`
+    - `TeamsAppInstallation.ReadWriteForUser`
+    - `TeamsAppInstallation.ReadWriteSelfForUser`
+    - `TeamsAppInstallation.ReadForUser`.
 
-**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
+-   Select Microsoft Graph -\> Application permissions.
+    - `TeamsActivity.Send`
+    - `Directory.Read.All`
+    - `TeamsAppInstallation.ReadWriteForUser.All`
+    - `TeamsAppInstallation.ReadWriteSelfForUser.All`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
@@ -123,6 +135,8 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 
 **Note:** App should be installed for user's manager also to get task approval notification.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Bot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+
 ## Running the sample
 
 This sample shows a feature where:
@@ -146,3 +160,10 @@ Manager Persona:
 - On click of notification a task module will open, redirecting the user to the request.
 
   ![RequestTaskNotification](Images/request-notification.png)
+
+## Further reading
+
+- [Create Personal Tabs](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=node-java-script)
+- [Send Notification to User in Chat](https://docs.microsoft.com/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
+- [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)

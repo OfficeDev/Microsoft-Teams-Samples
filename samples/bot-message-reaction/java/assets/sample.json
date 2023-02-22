@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Message Reaction in Messaging Extension using Bot Framework v4",
     "shortDescription": "This sample app demonstrate how to use message reaction in Messaging Extension using Bot Framework v4",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-reaction/java",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-reaction/java",
     "longDescription": [
       "This sample app demonstrate how to use Messaging Extension Reaction using Bot Framework v4"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-reaction/java/Images/MessageReaction.gif",
-        "alt": "Solution UX showing Link Unfurling in Messaging Extension using Bot Framework v4"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/java/Images/MessageReaction.gif",
+        "alt": "Solution UX showing how to use message reaction in Messaging Extension using Bot Framework v4"
       }
     ],
     "authors": [

@@ -109,6 +109,8 @@ To include resource data of graph notifications, this Graph API require self-sig
 2. ZIP the manifest and make sure manifest.json and two icon images are at root.
 3. Upload the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
+**Note**: If you are facing any issue in your app, please uncomment [this]https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/nodejs/index.js#L54) line and put your debugger for local debug.
+
 ## Running the sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 ![Welcome Card](Images/MeetingWelcome.png)

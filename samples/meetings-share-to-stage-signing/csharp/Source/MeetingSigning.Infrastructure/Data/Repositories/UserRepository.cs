@@ -25,7 +25,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
             try
             {
                 var userEntity = _mapper.Map<UserEntity>(user);
-                var exists = await UserExists(userEntity.UserId);
+                var exists = await UserExists(userEntity.Id);
                 if (!exists)
                 {
                     _dbContext.Users.Add(userEntity);
@@ -39,24 +39,13 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
             }
         }
 
-        public async Task<UserEntity> GetUserEntity(string userId)
+        public async Task<User> GetUser(string id)
         {
             try
             {
-                var userEntity = await _dbContext.Users.Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
-                return userEntity;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        public async Task<User> GetUser(string userId)
-        {
-            try
-            {
-                var userEntity = await _dbContext.Users.Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
+                var userEntity = await _dbContext.Users
+                    .Where(u => u.UserId.Equals(id, StringComparison.Ordinal) || u.Email.Equals(id, StringComparison.Ordinal))
+                    .FirstOrDefaultAsync();
                 return this._mapper.Map<User>(userEntity);
             }
             catch (Exception ex)
@@ -66,9 +55,9 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
         }
 
         /// <inheritdoc/>
-        public async Task<bool> UserExists(string userId)
+        public async Task<bool> UserExists(string id)
         {
-            var user = await _dbContext.Users.FindAsync(userId);
+            var user = await _dbContext.Users.FindAsync(id);
             //returns a null if a match isn't found
             return user != null;
         }

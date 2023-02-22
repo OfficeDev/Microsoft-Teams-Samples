@@ -37,7 +37,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -54,8 +54,8 @@ This sample illustrates a common scenario where a user shares a link to a resour
     * Choose **Register**.
    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
    - Under **Manage**, select **Expose an API**. 
-   - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+   - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
+    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
   - Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
   - Set **Who can consent?** to `Admins and users`
   - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -88,8 +88,8 @@ This sample illustrates a common scenario where a user shares a link to a resour
       * Select **web**.
       * Enter the **redirect URI** for the app in the following format: 
       - https://token.botframework.com/.auth/web/redirect, 
-      - https://%ngrokDomain%.ngrok.io/AuthEnd
-      - https://%ngrokDomain%.ngrok.io/AuthStart This will be the page where a successful implicit grant flow will redirect the user.
+      - https://%ngrokDomain%.ngrok.io/auth-end
+      - https://%ngrokDomain%.ngrok.io/auth-start This will be the page where a successful implicit grant flow will redirect the user.
     
         Enable implicit grant by checking the following boxes:  
         ✔ ID Token  

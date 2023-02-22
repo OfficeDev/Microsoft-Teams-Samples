@@ -11,14 +11,15 @@ import {
   useScrollOffsetLiveShare,
   useTakeControl,
 } from 'hooks';
-import { useTeamsContext } from 'utils/TeamsProvider/hooks';
+import { useUserIsAnonymous, useTeamsContext } from 'utils/TeamsProvider/hooks';
 import { getDocument } from 'api/documentApi';
 import { DocumentChooser } from 'components/Documents';
 import { LiveSharePage } from 'components/LiveSharePage';
 import { CursorsRenderer } from 'components/Cursor';
 import { StageControls } from 'components/StageControls';
-import { Document } from 'models';
+import { DocumentListDto } from 'models';
 import { useQuery } from 'react-query';
+import { AnonymousPage } from 'components/AnonymousPage';
 import styles from './DocumentStage.module.css';
 
 /**
@@ -32,6 +33,7 @@ export function DocumentStage() {
   const params = useParams();
   const documentId: string = params.documentId ?? 'unknown';
   const pollingInterval = 2000;
+  const userIsAnonymous = useUserIsAnonymous();
   var documentStageRef = useRef<HTMLDivElement>(null!);
 
   const { position, setPosition } = useScrollOffsetDom(
@@ -85,9 +87,9 @@ export function DocumentStage() {
   // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
   // Here when the documentId changes, React Query will fetch the document from the API.
   // We are also using the `refetchInterval` to query the API every 2 seconds.
-  const { data, error } = useQuery<Document, Error>(
-    ['getDocument', { documentId }],
-    () => getDocument(documentId),
+  const { data, error } = useQuery<DocumentListDto, Error>(
+    ['getDocument', { documentId, userIsAnonymous }],
+    () => getDocument(documentId, userIsAnonymous),
     { refetchInterval: pollingInterval },
   );
 
@@ -106,12 +108,16 @@ export function DocumentStage() {
   }, [setShowLoader]);
 
   useEffect(() => {
-    // When position is changed, we need to send the new scrollOffset to the other users via Live Share.
-    sendScrollOffset(position);
+    if (!userIsAnonymous) {
+      // When position is changed, we need to send the new scrollOffset to the other users via Live Share.
+      sendScrollOffset(position);
+    }
   }, [position, sendScrollOffset]);
 
   useEffect(() => {
-    sendCursorLocation(cursorLocation);
+    if (!userIsAnonymous) {
+      sendCursorLocation(cursorLocation);
+    }
   }, [cursorLocation, sendCursorLocation]);
 
   return (
@@ -120,6 +126,7 @@ export function DocumentStage() {
         context={teamsContext}
         container={container}
         started={started}
+        userIsAnonymous={userIsAnonymous}
       >
         <Flex
           className={styles.stageControlsDiv}
@@ -132,25 +139,28 @@ export function DocumentStage() {
             userInControl={takeControlState?.data?.userId !== undefined}
             nameOfUserInControl={takeControlState?.data?.displayName}
             followSuspended={followSuspended}
+            isLiveShareSupported={!userIsAnonymous}
             endSuspension={endSuspension}
             takeControl={takeControl}
             clearControl={clearControl}
           />
         </Flex>
         <Flex styles={stageInlineStyles}>
+          {userIsAnonymous && !data && <AnonymousPage />}
           {error &&
+            !userIsAnonymous &&
             ((showLoader && <Loader />) || (
               <h1>Error loading document: {error.message ?? error}</h1>
             ))}
           {data && (
             <div className={styles.documentChooser} ref={documentStageRef}>
               <DocumentChooser
-                documentId={data.id}
-                documentType={data.documentType}
+                documentId={data.documents[0].id}
+                documentType={data.documents[0].documentType}
                 // You should not use user information from the context if you need to prove a user's identity.
                 // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
-                loggedInAadId={teamsContext?.user?.id ?? ''}
-                signatures={data.signatures}
+                loggedInUser={data.callerUser}
+                signatures={data.documents[0].signatures}
                 clickable
               />
               {cursorLocationsEvent && (

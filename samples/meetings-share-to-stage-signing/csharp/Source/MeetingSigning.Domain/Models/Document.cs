@@ -17,13 +17,13 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Models
 
         /// <summary>
         /// Gets or sets the DocumentType
-        /// A document is classifed into one of the types like Purchase Agreement, Sales Contract
+        /// A document is classified into one of the types like Purchase Agreement, Sales Contract
         /// </summary>
         public string DocumentType { get; set; }
 
         /// <summary>
         /// Gets or sets OwnerId
-        /// The fetched AAD Id of the user creating the document.
+        /// The fetched AzureAD Object Id of the user creating the document.
         /// </summary>
         public string OwnerId { get; set; }
 

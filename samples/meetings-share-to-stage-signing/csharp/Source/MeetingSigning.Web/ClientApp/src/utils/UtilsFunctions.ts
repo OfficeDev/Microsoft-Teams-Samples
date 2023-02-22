@@ -3,7 +3,7 @@ import { SetStateAction } from 'react';
 
 /// Function to determine if React Query should retry a API call when an error is returned
 /// The backend API attempts to get an on-behalf-off token for the newly granted scopes immediately after the user consents.
-/// Rarely, but sometimes, AAD has not propagated the consent completely, so it returns a token without the new scopes.
+/// Rarely, but sometimes, AzureAD has not propagated the consent completely, so it returns a token without the new scopes.
 /// This logic, ensures we retry the call a few seconds later instead of asking the user to re-consent for scopes they already granted.
 const apiRetryQuery = (
   failureCount: number,
@@ -11,7 +11,7 @@ const apiRetryQuery = (
   userHasConsented: boolean,
   setUserHasConsented: (value: SetStateAction<boolean>) => void,
 ): boolean => {
-  if (failureCount < 3) {
+  if (failureCount < 5) {
     return (
       isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
       userHasConsented

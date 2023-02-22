@@ -1,0 +1,39 @@
+pre {
+    overflow-x: scroll;
+}
+
+.callDeeplinkButton {
+    font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+    font-weight: 700;
+    background-color: #444791;
+    cursor: pointer;
+    color: white;
+    width: auto;
+    border-radius: 3px;
+    border: 1px;
+    margin-top: 1rem;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.callDeeplinkButton:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.inputContainer {
+    margin-top: 10px;
+}
+
+.container {
+    font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+    font-size: 14px;
+}
+
+button {
+    margin: 1rem 8.5rem 1rem 11.5rem;
+}
+
+.form-container {
+    margin-left: 1rem;
+}

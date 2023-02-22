@@ -51,7 +51,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
         /// <summary>
         /// GetDocuments tries to find all documents belonging to a user
         /// </summary>
-        /// <param name="ownerId">AAD Id of the user</param>
+        /// <param name="ownerId">AzureAD Object Id of the user</param>
         /// <returns>Document found or an empty list otherwise</returns>
         public async Task<IList<Document>> GetDocuments(string ownerId)
         {

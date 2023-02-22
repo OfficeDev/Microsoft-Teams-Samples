@@ -20,11 +20,11 @@ public class AdapterWithErrorHandler : CloudAdapter
                 // to add telemetry capture to your bot.
                 logger.LogError($"Exception caught : {exception.Message}");
 
-                // Send a catch-all apology to the user.
-                await turnContext.SendActivityAsync("Sorry, it looks like something went wrong.");
-
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
-                await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+               // Uncomment below commented line for local debugging.
+               // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+             
+            // Send a trace activity, which will be displayed in the Bot Framework Emulator
+            await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
         };
     }
 }

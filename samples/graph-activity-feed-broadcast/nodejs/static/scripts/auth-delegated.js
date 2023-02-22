@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
     microsoftTeams.app.initialize();
     // Get auth token
@@ -19,31 +19,30 @@
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        tid: context.user.tenant.id,
-                        token: clientSideToken
-                    }),
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson.error) {
-                        reject(responseJson.error);
-                    }
-                    else {
-                        resolve();
-                    }
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            tid: context.user.tenant.id,
+                            token: clientSideToken
+                        }),
+                    })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } else {
+                            resolve();
+                        }
+                    });
             });
         });
     }
@@ -56,16 +55,14 @@
                 width: 600,
                 height: 535
             }).then(result => {
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-                resolve(data);
+                resolve(result);
             }).catch(reason => {
                 reject(JSON.stringify(reason));
             });
         });
     }
 
-    // method invoked on sso authentication.
+    // Method invoked on sso authentication.
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
@@ -76,15 +73,15 @@
                 // Display in-line button so user can consent
                 requestConsent()
                     .then((result) => {
-                        // Consent succeeded - use the token we got back
-                        let accessToken = JSON.parse(result).accessToken;
-                        console.log(`Received access token ${accessToken}`);
+                        getClientSideToken()
+                            .then((clientSideToken) => {
+                                return getServerSideToken(clientSideToken);
+                            })
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
                     });
-            } 
-            else {
+            } else {
                 // Something else went wrong
                 console.log(`Error from web service: ${error}`);
             }

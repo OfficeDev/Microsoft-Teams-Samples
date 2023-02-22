@@ -1,0 +1,66 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.5",
+  "id": "<<REGISTERED_BOT_ID>>",
+  "packageName": "com.Template.microsoftteams.completesampleapp",
+  "developer": {
+    "name": "Complete Sample App",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
+    "termsOfUseUrl": "https://www.botframework.com/Content/Microsoft-Bot-Framework-Preview-Online-Services-Agreement.htm"
+  },
+  "name": {
+    "short": "Complete Sample App",
+    "full": "Complete Sample App"
+  },
+  "description": {
+    "short": "Bot Template - a template for creating a bot",
+    "full": "The Bot Template is meant to create an environment in which to easily create a bot."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#0079bf",
+  "staticTabs": [
+    {
+      "contentUrl": "<<BASE_URI>>/botInfo",
+      "entityId": "statictab",
+      "name": "Bot Info",
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<REGISTERED_BOT_ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "search123",
+          "description": "Find a card",
+          "title": "Search",
+          "initialRun": true,
+          "parameters": [
+            {
+              "title": "query123",
+              "name": "query",
+              "description": "Search string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "token.botframework.com",
+    "<<BASE_URI_DOMAIN>>"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Welcome to Content Bubble!",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "myReview",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "wrap": true,
+      "value": "1",
+      "choices": [
+        {
+          "title": "Approve 5% dividend payment to shareholders",
+          "value": "Approve 5% dividend payment to shareholders"
+        },
+        {
+          "title": "Increase research budget by 10%",
+          "value": "Increase research budget by 10%"
+        },
+        {
+          "title": "Continue with WFH for next 3 months",
+          "value": "Continue with WFH for next 3 months"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Push Agenda",
+      "data": {
+        "action": "inputselector"
+      }
+    }
+  ]
+}

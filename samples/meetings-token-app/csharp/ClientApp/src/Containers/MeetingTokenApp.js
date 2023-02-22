@@ -5,9 +5,6 @@ import MeetingServiceProvider from '../Context/MeetingServiceProvider';
 import TeamsContextProvider from '../Context/TeamsContextProvider';
 
 class MeetingTokenApp extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

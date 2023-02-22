@@ -28,10 +28,11 @@
     <title>Silent Authentication Sample Login</title>
 </head>
 <body>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
     <script type="text/javascript">
         microsoftTeams.app.initialize().then(() => {
+            
             let msalConfig = {
                 auth: {
                     clientId: '@ViewBag.AuthEndClientId',

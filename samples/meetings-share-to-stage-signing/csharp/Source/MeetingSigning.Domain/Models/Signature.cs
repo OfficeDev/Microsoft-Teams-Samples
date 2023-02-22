@@ -2,7 +2,6 @@
 
 namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Models
 {
-
     /// <summary>
     /// Model for a Signature
     /// </summary>
@@ -16,7 +15,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Models
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Signer object that contains information like AAD User UserId of the Signer
+        /// Signer object that contains information like AzureAD User UserId of the Signer
         /// </summary>
         public User Signer { get; set; }
 
