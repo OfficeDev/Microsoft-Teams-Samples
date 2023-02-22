@@ -54,16 +54,23 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
     - `Directory.Read.All`
+    - `Directory.ReadWrite.All`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
-    - `TeamsAppInstallation.ReadForUser`
+    - `TeamsAppInstallation.ReadWriteForUser`
+    - `TeamsAppInstallation.ReadWriteSelfForUser`
+    - `TeamsAppInstallation.ReadForUser`.
 
-**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
+-   Select Microsoft Graph -\> Application permissions.
+    - `TeamsActivity.Send`
+    - `Directory.Read.All`
+    - `TeamsAppInstallation.ReadWriteForUser.All`
+    - `TeamsAppInstallation.ReadWriteSelfForUser.All`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
