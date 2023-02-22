@@ -115,7 +115,7 @@ Register your application with Azure AD
   - Press `F5` to run the project
 
 1. Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name).
-2. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\adaptiveCardResponseJson.json
+2. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\AdaptiveCardResponse.json
    - On line 32, replace `<<YOUR-MICROSOFT-APP-ID>>`.
 3. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\AdaptiveCardWithSSOInRefresh.json
    - *Update everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and Update On line 12, replace `<<YOUR-CONNECTION-NAME>>`.

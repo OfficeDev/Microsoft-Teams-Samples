@@ -84,15 +84,15 @@ namespace Microsoft.BotBuilderSamples
             {
                 string[] path = { ".", "Resources", "options.json" };
                 var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var initialAdaptiveCard = GetAdaptiveCardWithAuthOptions(path, signInLink, turnContext.Activity.From.Name, member.Id);
+                var initialAdaptiveCard = GetAdaptiveCardFromFileName(path, signInLink, turnContext.Activity.From.Name, member.Id);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
             }
             else if (turnContext.Activity.Text.Contains("PerformSSO"))
             {
-                string[] striPath = { ".", "Resources", "AdaptiveCardWithSSOInRefresh.json" };
-                var varMember = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var varInitialAdaptiveCard = GetAdaptiveCardWithAuthOptions(striPath, signInLink, turnContext.Activity.From.Name, varMember.Id);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(varInitialAdaptiveCard), cancellationToken);
+                string[] path = { ".", "Resources", "AdaptiveCardWithSSOInRefresh.json" };
+                var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
+                var initialAdaptiveCard = GetAdaptiveCardFromFileName(path, signInLink, turnContext.Activity.From.Name, member.Id);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
             }
             else
             {
@@ -122,12 +122,12 @@ namespace Microsoft.BotBuilderSamples
 
                 if (actiondata["verb"] == null)
                     return null;
-
-                //When adaptiveCard/action invoke activity from teams contains sso token
+                                
                 string verb = actiondata["verb"].ToString();
 
                 JObject authentication = null;
 
+                // When adaptiveCard/action invoke activity from teams contains token in response to sso flow from earlier invoke.
                 if (value["authentication"] != null)
                 {
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
@@ -144,7 +144,7 @@ namespace Microsoft.BotBuilderSamples
                 if (authentication == null && state == null)
                 {
                     switch (verb)
-                    {   //when token is absent in the invoke. We can initiate SSO in response to the invoke
+                    {   // when token is absent in the invoke. We can initiate SSO in response to the invoke
                         case "initiateSSO":
                             return await initiateSSOAsync(turnContext, cancellationToken);
                     }
@@ -167,9 +167,9 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <param name="isBasicRefresh">Refresh type</param>
-        /// <param name="fileName">adaptiveCardResponseJson.json</param>
+        /// <param name="fileName">AdaptiveCardResponse.json</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "adaptiveCardResponseJson.json")
+        private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
         {
             // Verify token is present or not.
 
@@ -222,14 +222,14 @@ namespace Microsoft.BotBuilderSamples
                     Id = Guid.NewGuid().ToString()
                 },
                 Buttons = new List<CardAction>
+                {
+                    new CardAction
                     {
-                        new CardAction
-                        {
-                            Type = ActionTypes.Signin,
-                            Value = signInLink,
-                            Title = "Please sign in",
-                        },
-                    }
+                        Type = ActionTypes.Signin,
+                        Value = signInLink,
+                        Title = "Please sign in",
+                    },
+                }
             };
 
             var loginReqResponse = JObject.FromObject(new
@@ -250,7 +250,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="name">createdBy</param>
         /// <param name="userMRI">createdById</param>
         /// <returns></returns>
-        private Attachment GetAdaptiveCardWithAuthOptions(string[] filepath, string signInLink, string name = null, string userMRI = null)
+        private Attachment GetAdaptiveCardFromFileName(string[] filepath, string signInLink, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
