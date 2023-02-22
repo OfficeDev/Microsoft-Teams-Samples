@@ -102,14 +102,8 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
     }
 
     try {
-      //Make the post http call for sending targeted notifications.
-      var response = await axios.post(`${serviceUrl}/v1/meetings/${meetingId}/notification`, notificationInformation, {
-        headers: {
-          "accept": "application/json",
-          "contentType": 'application/json',
-          "authorization": "bearer " + botToken
-        }
-      });
+      
+      await TeamsInfo.sendMeetingNotification(context, notificationInformation, meetingId);
     } catch (exception) {
       console.log(exception);
     }
