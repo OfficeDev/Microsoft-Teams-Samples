@@ -88,7 +88,7 @@ This sample shows anonymous users support in meeting apps.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-  16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
+16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
    - Select service provider ad `facebook`
@@ -113,7 +113,7 @@ This sample shows anonymous users support in meeting apps.
      
 6. We have two different solutions to run, so follow below steps:
  
-   - In a terminal, navigate to `samples/app-anonymous-users/nodejs/api` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+- In a terminal, navigate to `samples/app-anonymous-users/nodejs/api` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 
     ```bash
     npm install
@@ -123,15 +123,16 @@ This sample shows anonymous users support in meeting apps.
     npm start
     ```
 
-   - If you face any dependency error while installing node modules, try using below command
+If you face any dependency error while installing node modules, try using below command
 
     ```bash
     npm install --legacy-peer-deps
     ```
 
-   - In a different terminal, navigate to `samples/app-anonymous-users/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+- In a different terminal, navigate to `samples/app-anonymous-users/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
     ```bash
+    cd client
     npm install
     ```
 
@@ -139,7 +140,7 @@ This sample shows anonymous users support in meeting apps.
     npm start
     ```
 
-   - If you face any dependency error while installing node modules, try using below command
+If you face any dependency error while installing node modules, try using below command
 
     ```bash
     npm install --legacy-peer-deps
