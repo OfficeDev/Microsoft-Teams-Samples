@@ -6,7 +6,7 @@
     "shortDescription": "This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-auth/csharp",
     "longDescription": [
-      "This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension."
+      "This sample demos Azure AD and facebook authentication feature in bot, tab and messaging extension."
     ],
     "creationDateTime": "2022-02-25",
     "updateDateTime": "2022-05-17",

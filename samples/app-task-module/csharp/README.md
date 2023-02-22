@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "Sample which demonstrates launching of task module from tab and bot"
+description: "Sample which demonstrates launching of task module from tab and bot."
 urlFragment: ms-teams-task-sample
 products:
 - dotnet

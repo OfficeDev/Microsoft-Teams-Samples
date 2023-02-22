@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-installation-using-qr-code-csharp",
     "source": "officeDev",
     "title": "Install app using barcode sample",
-    "shortDescription": "This sample demos app installation using QR code of application's app id through bot",
+    "shortDescription": "This sample demos app installation using QR code of application's app id through bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-installation-using-qr-code/csharp",
     "longDescription": [
-      "This sample demos app installation using QR code of application's app id through bot"
+      "This sample demos app installation using QR code of application's app id through bot."
     ],
     "creationDateTime": "2021-11-10",
     "updateDateTime": "2022-05-17",

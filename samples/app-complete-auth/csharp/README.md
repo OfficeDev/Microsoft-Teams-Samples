@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension.
+description: This sample demos Azure AD and facebook authentication feature in bot, tab and messaging extension.
 products:
 - office-teams
 - office

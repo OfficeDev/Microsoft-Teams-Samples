@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos app installation using QR code of application's app id through bot
+description: This sample demos app installation using QR code of application's app id through bot.
 products:
 - office-teams
 - office
