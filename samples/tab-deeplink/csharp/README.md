@@ -185,6 +185,37 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    
 		![Meeting-WelcomeCard-Interaction ](DeepLinkBot/images/04_Meeting_defaultpage.png)
 
+	- **Tab Interactions:**
+   
+		**Deeplink to Audio Call:**
+
+		![Audio-Deeplink](DeepLinkBot/images/16_Team_AudiocallScreen.png)
+
+		**Deeplink to Video Call:**
+   
+		![Video-Deeplink](DeepLinkBot/images/19_Team_VideoStart.png)
+
+		**Deeplink to Meeting schedule:**
+   
+		![Meeting-Schedule](DeepLinkBot/images/22_Team_PostScheduleMeeting.png)
+
+		**Deeplink to Polly app install dialog:**
+   
+		![App-Install-Dialog](DeepLinkBot/images/24_Team_AddApp.png)
+
+		**Deeplink to start new chat:**
+   
+		![Start-New-Chat](DeepLinkBot/images/StartChatDeeplink.png)
+
+		![New-Chat](DeepLinkBot/images/StartNewChat.png)
+
+		**Deeplink to channel conversation:**
+   
+		![Show-Channel-Conversation ](DeepLinkBot/images/GroupChatDeeplink.png)
+   
+		![channel-Conversation](DeepLinkBot/images/GroupChat.png)
+
+
 ## Outlook on the web
 
 - To view your app in Outlook on the web.
