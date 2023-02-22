@@ -19,7 +19,7 @@ Microsoft teams sample which displays deeplinks for call, video, chat, navigate 
 
 ## Interaction with app.
 
-![Preview Image](Images/Preview.gif)
+![Preview Image](Images/TabDeepLink.gif)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -119,6 +119,36 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 5. While it's in stage view, using same [deeplink to open tab](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2#generate-a-deep-link-to-your-tab) will open the meeting side panel tab.
 
 ![Meeting stage view](Images/MeetingStageView.png)
+
+**Tab interaction:**
+   
+**Deeplink to Audio Call:**
+
+![Audio-Deeplink](images/AudioCall.png)
+
+**Deeplink to Video Call:**
+   
+![Video-Deeplink](images/VideoCall.png)
+
+**Deeplink to Meeting schedule:**
+   
+![Meeting-Schedule](images/MeetingSchedule.png)
+
+**Deeplink to Polly app install dialog:**
+   
+![App-Install-Dialog](images/AppInstall.png)
+
+**Deeplink to start new chat:**
+   
+![Start-New-Chat](images/StartChatDeeplink.png)
+
+![New-Chat](images/StartNewChat.png)
+
+**Deeplink to channel conversation:**
+   
+![Show-Channel-Conversation ](images/GroupChatDeeplink.png)
+   
+![channel-Conversation](images/GroupChat.png)
 
 ## Outlook on the web
 
