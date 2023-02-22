@@ -23,7 +23,7 @@ namespace TabActivityFeed.Helpers
             _configuration = config;
         }
 
-        public async Task<ChatMessage> CreateChatMessageForChannel(TaskDetails taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateChatMessageForChannel(TaskDetails taskDetails, string accessToken)
         {
             GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage
@@ -32,13 +32,13 @@ namespace TabActivityFeed.Helpers
                 Body = new ItemBody
                 {
                     ContentType = BodyType.Html,
-                    Content = "New Deployment: " + taskModuleData.DeployementTitle
+                    Content = "New Deployment: " + taskDetails.DeployementTitle
                 },
             };
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
             try
             {
-                var channelMessage = await graphClientChat.Teams[taskModuleData.teamId].Channels[taskModuleData.channelId].Messages
+                var channelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
                      .Request()
                      .AddAsync(chatMessage);
                 return channelMessage;
@@ -50,7 +50,7 @@ namespace TabActivityFeed.Helpers
             return null;
         }
 
-        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskDetails taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskDetails taskDetails, string accessToken)
         {
             GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
@@ -66,21 +66,21 @@ namespace TabActivityFeed.Helpers
                               },
                               new AdaptiveTextBlock()
                               {
-                                  Text=taskModuleData.reservationId,
+                                  Text=taskDetails.reservationId,
                                   Weight = AdaptiveTextWeight.Lighter,
                                   Size = AdaptiveTextSize.Medium,
                                   Id="taskTitle"
                               },
                               new AdaptiveTextBlock()
                               {
-                                  Text=taskModuleData.DeployementTitle,
+                                  Text=taskDetails.DeployementTitle,
                                   Weight = AdaptiveTextWeight.Lighter,
                                   Size = AdaptiveTextSize.Medium,
                                   Id="taskdesc"
                               },
                                new AdaptiveTextBlock()
                               {
-                                  Text=taskModuleData.currentSlot,
+                                  Text=taskDetails.currentSlot,
                                   Weight = AdaptiveTextWeight.Lighter,
                                   Size = AdaptiveTextSize.Medium,
                                   Id="taskslot"
@@ -113,14 +113,14 @@ namespace TabActivityFeed.Helpers
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[taskModuleData.teamId].Channels[taskModuleData.channelId].Messages
+            var getChannelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
                  .Request()
                  .AddAsync(chatMessage);
             return getChannelMessage;
 
         }
 
-        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskModuleData, string accessToken)
+        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskDetails, string accessToken)
         {
             GraphServiceClient graphClientChat= SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
@@ -136,14 +136,14 @@ namespace TabActivityFeed.Helpers
                               },
                               new AdaptiveTextBlock()
                               {
-                                  Text=taskModuleData.title,
+                                  Text=taskDetails.title,
                                   Weight = AdaptiveTextWeight.Lighter,
                                   Size = AdaptiveTextSize.Medium,
                                   Id="taskTitle"
                               },
                               new AdaptiveTextBlock()
                               {
-                                  Text=taskModuleData.description,
+                                  Text=taskDetails.description,
                                   Weight = AdaptiveTextWeight.Lighter,
                                   Size = AdaptiveTextSize.Medium,
                                   Id="taskdesc"
@@ -176,13 +176,13 @@ namespace TabActivityFeed.Helpers
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[taskModuleData.teamId].Channels[taskModuleData.channelId].Messages
+            var getChannelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
                  .Request()
                  .AddAsync(chatMessage);
             return getChannelMessage;
         }
 
-        public async Task<ChatMessage> CreateGroupChatMessage(TaskDetails taskModuleData, string accessToken)
+        public async Task<ChatMessage> CreateGroupChatMessage(TaskDetails taskDetails, string accessToken)
         {
             var graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage
@@ -191,11 +191,11 @@ namespace TabActivityFeed.Helpers
                 Body = new ItemBody
                 {
                     ContentType = BodyType.Html,
-                    Content = "New Deployment: " + taskModuleData.DeployementTitle
+                    Content = "New Deployment: " + taskDetails.DeployementTitle
                 },
             };
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChatMessage = await graphClientChat.Chats[taskModuleData.chatId].Messages
+            var getChatMessage = await graphClientChat.Chats[taskDetails.chatId].Messages
                  .Request()
                  .AddAsync(chatMessage);
             return getChatMessage;

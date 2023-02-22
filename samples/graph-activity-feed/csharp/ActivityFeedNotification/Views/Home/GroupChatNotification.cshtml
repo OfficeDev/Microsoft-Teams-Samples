@@ -75,7 +75,7 @@
             }
 
             var action = "EntityTopic";
-            let taskModuleData = {
+            let taskDetails = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
@@ -88,7 +88,7 @@
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskModuleData
+                data: taskDetails
             });
 
             return true;
@@ -118,7 +118,7 @@
             }
 
             var action = "customTopic";
-            let taskModuleData = {
+            let taskDetails = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
@@ -131,7 +131,7 @@
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskModuleData
+                data: taskDetails
             });
 
             return true;
