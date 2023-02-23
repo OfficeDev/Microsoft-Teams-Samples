@@ -26,9 +26,6 @@ const Configure = props => {
             microsoftTeams.pages.config.setValidityState(true);
         });
     }, []);
-
-  
-
     return (
         <header className="header">
             <div className="header-inner-container">

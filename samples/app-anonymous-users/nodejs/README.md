@@ -124,6 +124,7 @@ This sample shows anonymous users support in meeting apps.
     ```bash
     npm start
     ```
+- The server will start running on 3000 port
 
 - In a different terminal, navigate to `samples/app-anonymous-users/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
@@ -134,6 +135,8 @@ This sample shows anonymous users support in meeting apps.
     ```bash
     npm start
     ```
+- The client will start running on 3978 port
+
 7. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -287,5 +290,3 @@ You can interact with Teams Tab meeting sidepanel.
 - [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
-
-

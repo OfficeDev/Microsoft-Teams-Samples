@@ -21,6 +21,7 @@ const FacebookAuthEnd = props => {
             var code = url.searchParams.get("code");
             var state = url.searchParams.get("state");
             let expectedState = localStorage.getItem("simple.state");
+
             if (expectedState === state) {
                 // Success -- return token information to the parent page.
                 // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
@@ -34,7 +35,6 @@ const FacebookAuthEnd = props => {
                 // State does not match, report error
                 microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
             }
-
         });
     }
 

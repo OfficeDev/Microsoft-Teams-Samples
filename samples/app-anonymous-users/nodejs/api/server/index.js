@@ -1,3 +1,9 @@
+// <copyright file="index.js" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// index.js is used to setup and configure your bot
+// </copyright>
+
 const path = require('path');
 const cors = require('cors');
 const ENV_FILE = path.join(__dirname, '.env');
@@ -29,7 +35,7 @@ app.post('/getFacebookLoginUserInfo', function (req, res) {
   var accessToken;
   var scopes = ['name','picture'].join(',');
 
-  var fbPromise = new Promise((resolve, reject) => {
+  var facebookAuthPromise = new Promise((resolve, reject) => {
     axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
       params: {
         client_id: process.env.FaceBookAppId,
@@ -54,7 +60,7 @@ app.post('/getFacebookLoginUserInfo', function (req, res) {
     });
   });
 
-  fbPromise.then(function (result) {
+  facebookAuthPromise.then(function (result) {
     res.json(result);
     console.log(result);
   }, function (err) {
@@ -85,6 +91,7 @@ app.post('/GetLoginUserInformation', function (req, res) {
       skipCache: true
     }).then(async result => {
       const client = new SimpleGraphClient(result.accessToken);
+      
       const myDetails = await client.getMeAsync();
       var userData = {
         details: myDetails

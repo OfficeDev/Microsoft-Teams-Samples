@@ -37,7 +37,7 @@ const ShareView = () => {
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Declare new state variables that are required disable the authentication button after login
-    const [ssoAuthenticationButtonVisible, setIsssoAuthenticationButtonVisible] = useState(true);
+    const [ssoAuthenticationButtonVisible, setIsSsoAuthenticationButtonVisible] = useState(true);
 
     useEffect(() => {
         microsoftTeams.app.initialize();
@@ -82,6 +82,7 @@ const ShareView = () => {
 
         if (socket) {
             setIsVoteBtnDisabled(true); // Disable Button
+
             if (IsAnonymousUser) {
                 // Update the state property for incremented count value.
                 let addAnonymousVal = aShowCount + 1;
@@ -102,6 +103,7 @@ const ShareView = () => {
                     Key : "User",  
                     Value : addUserVal  
                     };
+                    
                 socket.emit("message", UserCountValue); // send a message to the server
             }
         }
@@ -191,11 +193,11 @@ const ShareView = () => {
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setIsssoAuthenticationButtonVisible(false);
+                    setIsSsoAuthenticationButtonVisible(false);
                 } else {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
-                    setIsssoAuthenticationButtonVisible(false);
+                    setIsSsoAuthenticationButtonVisible(false);
                 }
             });
     }
@@ -239,13 +241,13 @@ const ShareView = () => {
                 .then((responseJson) => {
                     if (responseJson === "") {
                         setIsConsentButtonVisible(true);
-                        setIsssoAuthenticationButtonVisible(false);
+                        setIsSsoAuthenticationButtonVisible(false);
                     }
                     else {
                         let userDetails = JSON.parse(responseJson);
                         setUserName("Welcome: " + userDetails.details.displayName);
 
-                        setIsssoAuthenticationButtonVisible(false);
+                        setIsSsoAuthenticationButtonVisible(false);
                         setEnableVoteDiv(true);
                     }
                 });
