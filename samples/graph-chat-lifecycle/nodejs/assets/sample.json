@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs",
     "source": "officeDev",
     "title": "ChatLifecycle Application",
-    "shortDescription": "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs. .",
+    "shortDescription": "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-chat-lifecycle/nodejs",
     "longDescription": [
-      "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs. ."
+      "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-06-20",

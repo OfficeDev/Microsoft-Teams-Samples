@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs. .
+description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.
 products:
 - office-teams
 - office

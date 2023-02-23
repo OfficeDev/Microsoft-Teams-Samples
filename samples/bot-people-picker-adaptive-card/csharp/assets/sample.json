@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-csharp",
     "source": "officeDev",
     "title": "People picker control in Adaptive Cards",
-    "shortDescription": "Demonstrating the feature of people picker on Adaptive Cards.",
+    "shortDescription": "Demonstrating the feature of people picker on Adaptive Cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-people-picker-adaptive-card/csharp",
     "longDescription": [
-      "Demonstrating the feature of people picker on Adaptive Cards."
+      "Demonstrating the feature of people picker on Adaptive Cards using bot."
     ],
     "creationDateTime": "2022-01-25",
     "updateDateTime": "2022-02-02",

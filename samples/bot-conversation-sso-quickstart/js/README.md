@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging and conversation event handling hello world with SSO.
+description: Sample which demonstrates Azure AD authentication in teams using bot.
 products:
 - office-teams
 - office

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Configurable Tab using AAD and Silent Authentication
+description: This sample demonstrates AAD and Silent Authentication inside teams configurable tab.
 products:
 - office-teams
 - office

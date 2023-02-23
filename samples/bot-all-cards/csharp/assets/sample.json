@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-all-cards-csharp",
     "source": "officeDev",
     "title": "Bot All Cards",
-    "shortDescription": "Demonstrating the feature where user can send different types of cards using bot.",
+    "shortDescription": "Sample which demonstrates sending different types cards supported in teams using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-all-cards/csharp",
     "longDescription": [
-      "Demonstrating the feature where user can send different types of cards using bot."
+      "Sample which demonstrates sending different types cards supported in teams using bot."
     ],
     "creationDateTime": "2022-11-01",
     "updateDateTime": "2022-11-01",

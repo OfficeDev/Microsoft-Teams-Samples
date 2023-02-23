@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use search auth config in Messaging Extension
+description: This sample app demonstrate how to use authentication in search based Messaging Extension
 products:
 - office-teams
 - office

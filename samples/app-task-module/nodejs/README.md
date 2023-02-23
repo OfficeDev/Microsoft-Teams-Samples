@@ -7,7 +7,7 @@ products:
 languages:
 - typescript
 - nodejs
-description: "A task module allows you to create modal popup experiences in your Teams application."
+description: "Sample which demonstrates launching of task module from tab and bot."
 urlFragment: teams-module-node
 extensions:
   contentType: samples

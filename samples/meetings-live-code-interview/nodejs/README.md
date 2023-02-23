@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample demos a live coding in a teams meeting stage."
+description: "This sample demos live coding in a teams meeting stage using live share SDK. The tab is loaded as side panel which contains various coding questions."
 products:
 - office-teams
 - office

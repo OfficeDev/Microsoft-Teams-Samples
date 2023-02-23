@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample illustrates usage of incoming webhook."
+description: "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
 products:
 - office-teams
 - office

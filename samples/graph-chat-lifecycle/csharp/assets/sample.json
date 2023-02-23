@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp",
     "source": "officeDev",
     "title": "Chat LifeCycle Application",
-    "shortDescription": "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs.",
+    "shortDescription": "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-chat-lifecycle/csharp",
     "longDescription": [
       "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs."

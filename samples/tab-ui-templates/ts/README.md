@@ -8,7 +8,7 @@ languages:
   - typescript
   - javascript
   - html
-description: "This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps."
+description: "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)."
 extensions:
   contentType: samples
   createdDate: "12/08/2020 05:06:47 PM"

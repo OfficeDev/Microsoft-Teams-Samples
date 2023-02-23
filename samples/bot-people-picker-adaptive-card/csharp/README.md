@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description:  Demonstrating the feature of people picker on Adaptive Cards.
+description:  Demonstrating the feature of people picker on Adaptive Cards using bot.
 products:
 - office-teams
 - office

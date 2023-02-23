@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-device-permissions-nodejs",
     "source": "officeDev",
     "title": "Tab Device Permission Demo",
-    "shortDescription": "Microsoft Teams tab sample app for demonstrating device permissions",
+    "shortDescription": "Microsoft Teams tab sample app for demonstrating device permissions (audio, video, location).",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-device-permissions/nodejs",
     "longDescription": [
-      "Microsoft Teams tab sample app for demonstrating device permissions"
+      "Microsoft Teams tab sample app for demonstrating device permissions (audio, video, location)."
     ],
     "creationDateTime": "2021-07-27",
     "updateDateTime": "2022-03-06",

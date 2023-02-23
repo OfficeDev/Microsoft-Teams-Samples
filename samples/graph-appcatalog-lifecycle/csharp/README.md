@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .
+description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs through bot.
 products:
 - office-teams
 - office

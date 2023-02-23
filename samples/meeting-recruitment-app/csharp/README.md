@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings."
+description: "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings. This app also uses bot for sending notifications."
 products:
 - office-teams
 - office

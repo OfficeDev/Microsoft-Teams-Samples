@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-adaptivecard-actions-nodejs",
     "source": "officeDev",
     "title": "Send Adaptive Card Including Different Actions - NodeJS",
-    "shortDescription": "Demonstrating the feature where user can send adaptive card with different actions using bot.",
+    "shortDescription": "Sample which demonstrates different Adaptive Card action types using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptive-card-actions/nodejs",
     "longDescription": [
-      "Demonstrating the feature where user can send adaptive card with different actions using bot."
+      "Sample which demonstrates different Adaptive Card action types using bot."
     ],
     "creationDateTime": "2022-12-27",
     "updateDateTime": "2022-12-27",

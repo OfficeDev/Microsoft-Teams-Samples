@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.
 products:
 - office-teams
 - office

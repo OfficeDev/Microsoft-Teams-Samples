@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs.
+description: This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot.
 products:
 - office-teams
 - office

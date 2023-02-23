@@ -1,6 +1,6 @@
 ---
 page_type: ssample
-description: "This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. "
+description: "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
 products:
 - office-teams
 - office

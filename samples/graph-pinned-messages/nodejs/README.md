@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to pin messages in chat using Graph api.
+description: This is a sample tab application which demonstrates how to pin messages in chat using Graph api.
 products:
 - office-teams
 - office

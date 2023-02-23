@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-conversation-nodejs",
     "source": "officeDev",
     "title": "Bot Conversation",
-    "shortDescription": "This sample showcases usage of various conversation events for teams bot for both personal and teams scope.",
+    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/nodejs",
     "longDescription": [
-      "This sample showcases usage of various conversation events for teams bot for both personal and teams scope."
+      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
     ],
     "creationDateTime": "2022-10-04",
     "updateDateTime": "2022-10-04",

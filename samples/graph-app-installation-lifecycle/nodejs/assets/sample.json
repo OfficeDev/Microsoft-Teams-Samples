@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-app-installation-lifecycle-nodejs",
     "source": "officeDev",
     "title": "App Installation",
-    "shortDescription": "This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs. .",
+    "shortDescription": "This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-app-installation-lifecycle/nodejs",
     "longDescription": [
-      "This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs. ."
+      "This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs through teams tab."
     ],
     "creationDateTime": "2021-06-10",
     "updateDateTime": "2021-11-29",

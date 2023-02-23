@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp",
     "source": "officeDev",
     "title": "MVC app creates, updates, deletes Teams channels",
-    "shortDescription": "Shows Graph calls for Channels from C#",
+    "shortDescription": "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-channel-lifecycle/csharp",
     "longDescription": [
-      "Shows Graph calls for Channels from C#"
+      "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-05-17",

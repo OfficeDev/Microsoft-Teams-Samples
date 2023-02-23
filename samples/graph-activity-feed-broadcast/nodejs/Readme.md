@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
+description: This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-nod
 
 # Broadcast message to organization using activity feed notification (Graph APIs)
 
-This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
+This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab.
 
 - **Interaction with app**
 ![activity-feed-app ](Images/feed-broadcast.gif)

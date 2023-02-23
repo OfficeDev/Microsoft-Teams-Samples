@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use Messaging Extensions Reaction
+description: This sample app demonstrate how to use message reactions using bot.
 products:
 - office-teams
 - office

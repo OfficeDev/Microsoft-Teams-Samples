@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-channel-context-nodejs",
     "source": "officeDev",
     "title": "Tab context in channel",
-    "shortDescription": "This sample shows the contents of tab context object in a private and shared channel.",
+    "shortDescription": "This is an sample tab application which shows the contents of tab context object in a private and shared channel.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-context/nodejs",
     "longDescription": [
-      "This sample shows the contents of tab context object in a private and shared channel."
+      "This is an sample tab application which shows the contents of tab context object in a private and shared channel."
     ],
     "creationDateTime": "2022-06-17",
     "updateDateTime": "2022-10-21",

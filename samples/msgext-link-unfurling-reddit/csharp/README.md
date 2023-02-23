@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension with Link Unfurling Samples for Reddit Links
+description: Messaging Extension sample with Link Unfurling feature for Reddit Links
 products:
 - office-teams
 - office

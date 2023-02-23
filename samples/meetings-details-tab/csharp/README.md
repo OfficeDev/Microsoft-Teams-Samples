@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting
+description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.
 products:
 - office-teams
 - office

@@ -6,7 +6,7 @@
     "shortDescription": "ASP.NET MVC personal tab provides a jQuery SPA with an access token using SSO",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "ASP.NET MVC personal tab provides a jQuery SPA with an access token using SSO"
+      "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

@@ -6,7 +6,7 @@
     "shortDescription": "Simple search messaging extension",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-quickstart/js",
     "longDescription": [
-      "Simple search messaging extension"
+      "Hello world Messaging Extension that accepts search requests and returns results."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

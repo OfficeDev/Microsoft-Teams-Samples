@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Samples to create "Custom Bots" to be used in Microsoft Teams.
+description: This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams.
 products:
 - office-teams
 - office

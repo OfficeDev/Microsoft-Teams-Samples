@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-staggered-permission-csharp",
     "source": "officeDev",
     "title": "Staggered Permission sample",
-    "shortDescription": "This sample demos to get staggered graph api permissions.",
+    "shortDescription": "This sample demos to get staggered graph api permissions in teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-staggered-permission/csharp",
     "longDescription": [
-      "This sample demos to get staggered graph api permissions."
+      "This sample demos to get staggered graph api permissions in teams tab."
     ],
     "creationDateTime": "2022-03-17",
     "updateDateTime": "2022-04-03",

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user.
+description: This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.
 products:
 - office-teams
 - office

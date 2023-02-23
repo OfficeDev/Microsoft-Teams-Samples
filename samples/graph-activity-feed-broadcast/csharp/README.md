@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
+description: This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab.
 products:
 - office-teams
 - office

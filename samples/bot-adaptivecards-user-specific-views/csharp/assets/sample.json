@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp",
     "source": "officeDev",
     "title": "User Specific Views in Adaptive Cards",
-    "shortDescription": "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.",
+    "shortDescription": "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptivecards-user-specific-views/csharp",
     "longDescription": [
-      "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards."
+      "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot."
     ],
     "creationDateTime": "2022-03-09",
     "updateDateTime": "2022-06-21",

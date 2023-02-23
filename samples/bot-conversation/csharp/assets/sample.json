@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-conversation-csharp",
     "source": "officeDev",
     "title": "Conversation Bot using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate the Conversation Bot using Bot Framework v4",
+    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/csharp",
     "longDescription": [
-      "This sample app demonstrate the Conversation Bot using Bot Framework v4"
+      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
     ],
     "creationDateTime": "2019-10-17",
     "updateDateTime": "2022-10-05",
