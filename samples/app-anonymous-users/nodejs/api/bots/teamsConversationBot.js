@@ -90,23 +90,21 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     throw e;
                 }
             }
-        }
+    }
 
         async CreateConversationWithUsersAsync(context) {
-
-            const members = await this.GetPagedMembers(context);
-
-            await Promise.all(members.map(async (member) => {
+            const members = await this.getPagedMembers(context);
+                await Promise.all(members.map(async (member) => {
                 const message = MessageFactory.text(
                     `Hello ${ member.givenName } ${ member.surname }. I'm a Teams conversation bot.`
                 );
-
+    
                 const convoParams = {
                     members: [member],
                     tenantId: context.activity.channelData.tenant.id,
                     activity: context.activity
                 };
-
+               try{
                 await context.adapter.createConversationAsync(
                     process.env.MicrosoftAppId,
                     context.activity.channelId,
@@ -115,7 +113,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     convoParams,
                     async (context) => {
                         const ref = TurnContext.getConversationReference(context.activity);
-
+    
                         await context.adapter.continueConversationAsync(
                             process.env.MicrosoftAppId,
                             ref,
@@ -123,29 +121,32 @@ class TeamsConversationBot extends TeamsActivityHandler {
                                 await context.sendActivity(message);
                             });
                     });
+                }catch(Exception){
+                    Exception.message;
+                }
+        
             }));
-
+            
             await context.sendActivity(MessageFactory.text('All messages have been sent.'));
         }
-
-        async GetPagedMembers(context) {
+        async getPagedMembers(context) {
             let continuationToken;
             const members = [];
-
+    
             do {
                 const page = await TeamsInfo.getPagedMembers(
                     context,
                     100,
                     continuationToken
                 );
-
+    
                 continuationToken = page.continuationToken;
-
+    
                 members.push(...page.members);
             } while (continuationToken !== undefined);
-
+    
             return members;
-        }
+    }
 
 }
 
