@@ -18,7 +18,7 @@ const AuthEnd = props => {
             const msalConfig = {
                 auth: {
                     clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
-                    authority: `https://login.microsoftonline.com/${context.tid}`,
+                    authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
                     navigateToLoginRequestUrl: false
                 },
                 cache: {
