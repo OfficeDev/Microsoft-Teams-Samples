@@ -12,7 +12,7 @@ const AuthStart = props => {
     useEffect(() => {
 
         async function AuthenticationStart() {
-            microsoftTeams.app.initialize();
+            
             const context = await microsoftTeams.app.getContext();
             var scope = "User.Read email openid profile offline_access";
             var loginHint = context.user.loginHint;

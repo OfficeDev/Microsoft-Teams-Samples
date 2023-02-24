@@ -6,11 +6,13 @@
 
 const path = require('path');
 const cors = require('cors');
+// Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
+// Create HTTP server.
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
@@ -24,12 +26,14 @@ const msal = require('@azure/msal-node');
 const { polyfills } = require('isomorphic-fetch');
 
 io.on('connection', (socket) => {
+   // receive a message from the client
   socket.on('message', msg => {
+    // send a message to the client
     io.emit('message', msg);
   });
 });
 
-// Facebook Oauth token axchange
+// Get facebook profile of user.
 app.post('/getFacebookLoginUserInfo', function (req, res) {
   var token = req.body.token;
   var accessToken;
@@ -69,7 +73,7 @@ app.post('/getFacebookLoginUserInfo', function (req, res) {
   });
 });
 
-// On-behalf-of token exchange
+// Get user access token
 app.post('/GetLoginUserInformation', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
@@ -150,7 +154,7 @@ adapter.onTurnError = async (context, error) => {
   // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
-// Create the bot instance.
+// Create the bot that will handle incoming messages.
 const bot = new TeamsConversationBot();
 
 server.listen(PORT, () => {
@@ -159,5 +163,6 @@ server.listen(PORT, () => {
 
 // Listen for incoming activities and route them to your bot handler.
 app.post('/api/messages', async (req, res) => {
+   // Route received a request to adapter for processing
   await adapter.process(req, res, (context) => bot.run(context));
 });

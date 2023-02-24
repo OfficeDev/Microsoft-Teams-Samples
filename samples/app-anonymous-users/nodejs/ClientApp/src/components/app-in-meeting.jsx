@@ -8,7 +8,8 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Button } from '@fluentui/react-components';
 
 const AppInMeeting = () => {
-
+    
+ // Allows us to execute the React code when the component is already placed in the DOM.
     useEffect(() => {
         microsoftTeams.app.initialize();
         

@@ -4,18 +4,22 @@
 // </copyright>
 
 const {
+    ActionTypes,
     CardFactory,
     MessageFactory,
     TeamsActivityHandler,
     TeamsInfo,
     TurnContext
 } = require('botbuilder');
+// Read vote card JSON template
 const VoteCardReaderCardTemplate = require('../../resources/VoteCard.json');
 
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
         super();
+        // Handle when a message is addressed to the bot.
         this.onMessage(async (context, next) => {
+             // Remove bot at-mentions for teams/groupchat scope
             TurnContext.removeRecipientMention(context.activity);
             if (context.activity.text !== undefined) {
                 const text = context.activity.text.trim().toLocaleLowerCase();
@@ -23,7 +27,11 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     if (text.includes('vote')) {
                         await context.sendActivity({ attachments: [this.SendVoteCardAsync()] });
                     }
+                    else if (text.includes('createconversation')) {
+                       await this.cardActivityAsync(context);
+                    }
                     else if (text.includes('message')) {
+                        // Create 1:1 bot conversation with users existing in the current meeting.
                         await this.CreateConversationWithUsersAsync(context);
                     }
                     await next();
@@ -35,6 +43,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
         // Invoked when bot (like a user) are added to the conversation.
         this.onTeamsMembersAddedEvent(async (membersAdded, teamInfo, context, next) => {
+
             if (membersAdded[0].userRole != "anonymous" && membersAdded[0].id !== context.activity.recipient.id && context.activity.conversation.conversationType !== 'personal') {
                 await context.sendActivity(
                     `Welcome to the team ${membersAdded[0].givenName} ${membersAdded[0].surname}`
@@ -51,6 +60,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
         // Invoked when bot (like a user) are removed to the conversation.
         this.onTeamsMembersRemovedEvent(async (membersAdded, teamInfo, context, next) => {
+
             // If AadObjectId property is null, it means it's an anonymous user otherwise normal user.
             if (membersAdded[0].aadObjectId == null) {
                 await context.sendActivity(
@@ -65,11 +75,30 @@ class TeamsConversationBot extends TeamsActivityHandler {
             await next();
         });
     }
-
+        async cardActivityAsync(context) {
+            const cardActions = [
+                {
+                    type: ActionTypes.MessageBack,
+                    title: 'Message all members',
+                    value: null,
+                    text: 'message'
+                }
+            ];
+            const card = CardFactory.heroCard(
+                '',
+                '',
+                null,
+                cardActions
+            );
+            await context.sendActivity(MessageFactory.attachment(card));
+        }
+       
+        // Send vote adaptive card template.
         SendVoteCardAsync() {
             return CardFactory.adaptiveCard(VoteCardReaderCardTemplate);
         }
-
+       
+        // Fetching member information and sending a vote success message
         async getSingleMember(context) {
             try {
                 const member = await TeamsInfo.getMember(
@@ -86,8 +115,8 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     throw e;
                 }
             }
-    }
-
+        }
+        // The conversation information to use to create the conversation.
         async CreateConversationWithUsersAsync(context) {
 
             let usersCount = 0;
@@ -115,6 +144,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 };
                try
                {
+                // Creates a conversation on the specified groupchat and send file consent card on that conversation.
                 await context.adapter.createConversationAsync(
                     process.env.MicrosoftAppId,
                     context.activity.channelId,
@@ -134,6 +164,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 }
                 catch(Exception)
                 {
+                    // This condition is handling error for anonymous users because "Bot cannot create a conversation with an anonymous user".
                     if (Exception.message.includes("anonymous"))
                     {
                         isAnonymousUser = true;
@@ -146,6 +177,8 @@ class TeamsConversationBot extends TeamsActivityHandler {
             }
             await context.sendActivity(MessageFactory.text('All messages have been sent.'));
         }
+        
+        // Gets a paginated list of members of a team. 
         async getPagedMembers(context) {
             let continuationToken;
             const members = [];
@@ -164,7 +197,6 @@ class TeamsConversationBot extends TeamsActivityHandler {
     
             return members;
     }
-
 }
 
 module.exports.TeamsConversationBot = TeamsConversationBot;

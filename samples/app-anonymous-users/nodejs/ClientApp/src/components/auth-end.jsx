@@ -12,7 +12,7 @@ const AuthEnd = props => {
     useEffect(() => {
 
         async function AuthenticationEnd() {
-            microsoftTeams.app.initialize();
+            
             const context = await microsoftTeams.app.getContext();
 
             const msalConfig = {
