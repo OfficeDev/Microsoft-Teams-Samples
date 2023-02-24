@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TabActivityFeed.Model
 {
     
-    public class TaskInfo
+    public class TaskDetails
     {
         public Guid taskId { get; set; }
 
