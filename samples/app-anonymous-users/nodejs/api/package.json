@@ -28,8 +28,7 @@
     "node-uuid": "^1.4.8",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2",
-    "botbuilder": "^4.19.1",
-    "restify": "^11.0.0"
+    "botbuilder": "^4.19.1"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
