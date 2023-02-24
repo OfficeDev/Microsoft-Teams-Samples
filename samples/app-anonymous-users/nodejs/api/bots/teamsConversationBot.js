@@ -4,7 +4,6 @@
 // </copyright>
 
 const {
-    ActionTypes,
     CardFactory,
     MessageFactory,
     TeamsActivityHandler,
@@ -16,9 +15,6 @@ const VoteCardReaderCardTemplate = require('../../resources/VoteCard.json');
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
         super();
-        this.state = {
-            IsAnonymousUser: false
-        };
         this.onMessage(async (context, next) => {
             TurnContext.removeRecipientMention(context.activity);
             if (context.activity.text !== undefined) {
@@ -27,7 +23,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     if (text.includes('vote')) {
                         await context.sendActivity({ attachments: [this.SendVoteCardAsync()] });
                     }
-                    else if (text.includes('createconversation')) {
+                    else if (text.includes('message')) {
                         await this.CreateConversationWithUsersAsync(context);
                     }
                     await next();
@@ -93,18 +89,32 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
         async CreateConversationWithUsersAsync(context) {
+
+            let usersCount = 0;
+            let anonymousUsersCount = 0;
+            let isAnonymousUser = false;
+
             const members = await this.getPagedMembers(context);
                 await Promise.all(members.map(async (member) => {
                 const message = MessageFactory.text(
-                    `Hello ${ member.givenName } ${ member.surname }. I'm a Teams conversation bot.`
+                    `Hello ${ member.givenName } ${ member.surname } I'm a Teams conversation bot that support anonymous users.`
                 );
-    
+
+                if (member.userRole != null && member.userRole == "user") {
+                    usersCount++;
+                    }
+                
+                if (member.userRole != null && member.userRole == "anonymous") {
+                    anonymousUsersCount++;
+                    }   
+                
                 const convoParams = {
                     members: [member],
                     tenantId: context.activity.channelData.tenant.id,
                     activity: context.activity
                 };
-               try{
+               try
+               {
                 await context.adapter.createConversationAsync(
                     process.env.MicrosoftAppId,
                     context.activity.channelId,
@@ -121,12 +131,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
                                 await context.sendActivity(message);
                             });
                     });
-                }catch(Exception){
-                    Exception.message;
                 }
-        
+                catch(Exception)
+                {
+                    if (Exception.message.includes("anonymous"))
+                    {
+                        isAnonymousUser = true;
+                    }                    
+                }
             }));
             
+            if (isAnonymousUser) {
+                await context.sendActivity(MessageFactory.text(`Users count: ${usersCount} <br> Anonymous users count: ${anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user.`));
+            }
             await context.sendActivity(MessageFactory.text('All messages have been sent.'));
         }
         async getPagedMembers(context) {
