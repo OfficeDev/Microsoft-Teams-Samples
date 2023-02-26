@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 # DeepLink
 
-Microsoft teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
 
 ## Interaction with app.
 
