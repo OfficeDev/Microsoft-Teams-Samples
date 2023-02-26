@@ -6,7 +6,7 @@
     "shortDescription": "Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink/nodejs",
     "longDescription": [
-      "Microsoft teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot."
+      "Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-01-12",

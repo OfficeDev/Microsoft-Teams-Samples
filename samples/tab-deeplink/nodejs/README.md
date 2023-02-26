@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
+description: Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
 products:
 - office-teams
 - office
