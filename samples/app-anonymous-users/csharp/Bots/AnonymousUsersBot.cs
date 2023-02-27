@@ -74,12 +74,44 @@ namespace AnonymousUsers.Bots
                 }
                 else if (text.Contains("createconversation"))
                 {
+                    await CardActivityAsync(turnContext, cancellationToken);
+                }
+                else if (text.Contains("message"))
+                {
                     // Create 1:1 bot conversation with users existing in the current meeting.
                     await CreateConversationWithUsersAsync(turnContext, cancellationToken);
                 }
             }
+            else
+            {
+                await SendDataOnCardActions(turnContext, cancellationToken);
+            }
+        }
 
-            await SendDataOnCardActions(turnContext, cancellationToken);
+        /// <summary>
+        /// Send message all members card.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns></returns>
+        private async Task CardActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var card = new HeroCard
+            {
+                Buttons = new List<CardAction>
+                {
+                    new CardAction
+                    {
+                        Type = ActionTypes.MessageBack,
+                        Title = "Message all members",
+                        Text = "message"
+                    }
+                }
+            };
+
+            var activity = MessageFactory.Attachment(card.ToAttachment());
+            await turnContext.SendActivityAsync(activity, cancellationToken);
+
         }
 
         /// <summary>
