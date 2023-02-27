@@ -160,7 +160,7 @@ const Questions = (): React.ReactElement => {
                     <Header as="h4" content="Questions" className="questionsHeader" />
                     <AddIcon onClick={() => addQuestionsTaskModule()} title="Add new questions" />
                 </Flex>
-                <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time - testing YMAL" />
+                <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
                 <Flex gap="gap.smaller" column className="questionWrapper">
                     {
                         questionDetails.map((questionDetail, index) => {

@@ -3,7 +3,7 @@ export const IQuestionDetails = {
     questions: [
         {
             questionId : 1,
-            question:"Write a program to accept N numbers and arrange them in an ascending order Testing YMAL",
+            question:"Write a program to accept N numbers and arrange them in an ascending order",
             expectedOuput:"For array with 7 elements containing [6,3,7,4,2,0,8] the output will be [0,2,3,4,6,7,8]",
             language:"csharp",
             defaultValue:"using System;\nnamespace SortAnArray\n{\n public class SortAnArray\n  {\n    static void Main(string[] args) { \n Write your code here \n   }\n  }\n}"

@@ -19,7 +19,7 @@ export function WelcomeTab() {
       }}
     >
       <Text size="large" weight="bold" as="h1">
-        Welcome to our Teams Sample App - Testing YMAL
+        Welcome to our Teams Sample App
       </Text>
       <Text
         as="p"

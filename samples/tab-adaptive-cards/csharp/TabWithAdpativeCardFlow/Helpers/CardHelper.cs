@@ -61,7 +61,7 @@ namespace TabWithAdpativeCardFlow.Helpers
                 {
                     new AdaptiveSubmitAction
                     {
-                        Title = "Show Task Module Testing YMAL",
+                        Title = "Show Task Module",
                         Data = new AdaptiveCardAction
                         {
                             MsteamsCardAction = new CardAction
