@@ -19,8 +19,8 @@
     "full": "Anonymous User Support"
   },
   "description": {
-    "short": "This sample shows anonymous users support in meeting apps.",
-    "full": "This sample shows anonymous users support in meeting apps."
+    "short": "This sample shows anonymous users support in Teams meeting apps.",
+    "full": "This sample shows anonymous users support in Teams meeting apps."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

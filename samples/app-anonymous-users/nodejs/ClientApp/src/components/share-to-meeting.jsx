@@ -9,7 +9,7 @@ const ShareToMeeting = props => {
     return (
         <>
 		    <div class="surface">
-                <h3 id="tabheader">Welcome to the app that support anonymous user support in teams meeting apps.</h3>
+                <h3 id="tabheader">Welcome to the app that support anonymous user support in Teams meeting apps.</h3>
 		    </div>
 		</>
     );

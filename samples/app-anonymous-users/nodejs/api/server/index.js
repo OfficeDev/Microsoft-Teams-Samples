@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 const { SimpleGraphClient } = require('../server/simpleGraphClient');
@@ -50,6 +51,7 @@ app.post('/getFacebookLoginUserInfo', function (req, res) {
     }).then(response => {
       console.log(response);
       accessToken = response.data.access_token;
+
       axios.get('https://graph.facebook.com/v2.6/me', {
         params: {
           fields: scopes,

@@ -12,6 +12,7 @@ const Configure = props => {
     useEffect(() => {
 
         microsoftTeams.app.initialize().then(() => {
+
             microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
@@ -24,13 +25,14 @@ const Configure = props => {
                 saveEvent.notifySuccess();
             });
             microsoftTeams.pages.config.setValidityState(true);
+
         });
     }, []);
     return (
         <header className="header">
             <div className="header-inner-container">
                 <div id="divConfig">
-                    <h4>Welcome to the app that support anonymous user support in teams meeting apps</h4> 
+                    <h4>Welcome to the app that support anonymous user support in Teams meeting apps.</h4> 
                 </div>
             </div>
         </header>

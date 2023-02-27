@@ -12,7 +12,6 @@ const AppInMeeting = () => {
  // Allows us to execute the React code when the component is already placed in the DOM.
     useEffect(() => {
         microsoftTeams.app.initialize();
-        
     }, [])
 
    // Share the content to meeting stage view.
@@ -28,7 +27,7 @@ const AppInMeeting = () => {
 
                 if (err) {
                     // handle error
-                    alert(+JSON.stringify(err))
+                    alert('Error while sharing stage view' + JSON.stringify(err))
                 }
             }, appContentUrl);
         });

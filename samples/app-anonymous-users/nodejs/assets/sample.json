@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-anonymous-users-nodejs",
     "source": "officeDev",
     "title": "Anonymous User Support",
-    "shortDescription": "This sample app shows anonymous users support in teams meeting apps.",
+    "shortDescription": "This sample app shows anonymous users support in Teams meeting apps.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-anonymous-users/nodejs",
     "longDescription": [
-      "This sample app shows anonymous users support in teams meeting apps."
+      "This sample app shows anonymous users support in Teams meeting apps. It also supports Azure AD and Facebook authentications."
     ],
     "creationDateTime": "2023-02-22",
     "updateDateTime": "2023-02-24",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-anonymous-users/nodejs/Images/anonymoususersupport.gif",
-        "alt": "Solution UX showing anonymous user support in teams meeting apps"
+        "alt": "Solution UX showing anonymous user support in Teams meeting apps."
       }
     ],
     "authors": [

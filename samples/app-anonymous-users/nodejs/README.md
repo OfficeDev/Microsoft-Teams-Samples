@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows anonymous users support in meeting apps.
+description: This sample shows anonymous users support in Teams meeting apps.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-anonymous-users-nodejs
 
 ## Anonymous User Support
 
-This sample shows anonymous users support in meeting apps.
+This sample shows anonymous users support in Teams meeting apps.
 
 **Interaction with app**
 ![appanonymoususersGif](Images/anonymoususersupport.gif)
@@ -90,8 +90,8 @@ This sample shows anonymous users support in meeting apps.
 
 16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
-   - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
-   - Select service provider ad `facebook`
+   - Provide connection Name : for eg `facebookconnection`. You will use this name in your bot in the appsettings.json file.
+   - Select service provider as `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
 
 ### Setup code       
@@ -136,6 +136,9 @@ This sample shows anonymous users support in meeting apps.
     npm start
     ```
 - The client will start running on 3978 port
+
+**Note:**
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-anonymous-users/nodejs/api/server/index.js#L154) and put your debugger for local debug.
 
 7. __*This step is specific to Teams.*__
 

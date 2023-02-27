@@ -21,6 +21,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
         this.onMessage(async (context, next) => {
              // Remove bot at-mentions for teams/groupchat scope
             TurnContext.removeRecipientMention(context.activity);
+            
             if (context.activity.text !== undefined) {
                 const text = context.activity.text.trim().toLocaleLowerCase();
                 if (text != null) {
@@ -55,6 +56,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     `Welcome anonymous user to the team.`
                 );
             }
+
             await next();
         });
 
@@ -84,12 +86,14 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     text: 'message'
                 }
             ];
+
             const card = CardFactory.heroCard(
                 '',
                 '',
                 null,
                 cardActions
             );
+
             await context.sendActivity(MessageFactory.attachment(card));
         }
        
@@ -142,6 +146,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     tenantId: context.activity.channelData.tenant.id,
                     activity: context.activity
                 };
+                
                try
                {
                 // Creates a conversation on the specified groupchat and send file consent card on that conversation.
@@ -153,13 +158,12 @@ class TeamsConversationBot extends TeamsActivityHandler {
                     convoParams,
                     async (context) => {
                         const ref = TurnContext.getConversationReference(context.activity);
-    
                         await context.adapter.continueConversationAsync(
-                            process.env.MicrosoftAppId,
-                            ref,
-                            async (context) => {
-                                await context.sendActivity(message);
-                            });
+                        process.env.MicrosoftAppId,
+                        ref,
+                        async (context) => {
+                            await context.sendActivity(message);
+                        });
                     });
                 }
                 catch(Exception)
@@ -175,6 +179,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
             if (isAnonymousUser) {
                 await context.sendActivity(MessageFactory.text(`Users count: ${usersCount} <br> Anonymous users count: ${anonymousUsersCount} <br> Note: Bot cannot create a conversation with an anonymous user.`));
             }
+            
             await context.sendActivity(MessageFactory.text('All messages have been sent.'));
         }
         

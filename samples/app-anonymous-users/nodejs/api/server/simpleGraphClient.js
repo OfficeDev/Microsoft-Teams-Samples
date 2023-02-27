@@ -31,43 +31,6 @@ class SimpleGraphClient {
     async getMeAsync() {
         return await this.graphClient.api('/me').get();
     }
-
-    async getUserPhoto() {
-        return await this.graphClient.api('/me/photo/$value').get();
-    }
-
-    /**
-    * Collects information about the SharePoint drive based on SharePoint id passed.
-    */
-    async getDriveDetails(siteId) {
-        return await this.graphClient
-            .api('/sites/'+siteId+'/drives').version('beta')
-            .get().then((res) => {
-                return res;
-            });
-    }
-
-    /**
-    * Collects information about the documents stored in SharePoint drive.
-    */
-    async getContentList(siteId, driveId) {
-        return await this.graphClient
-            .api('/sites/'+siteId+'/drives/'+driveId+'/root/children').version('beta')
-            .get().then((res) => {
-                return res;
-            });
-    }
-
-    /**
-    * This endpoint will upload the user's file to SharePoint drive.
-    */
-    async uploadFile(siteId, driveId, stream, fileName) {
-        return await this.graphClient
-            .api('/sites/'+siteId+'/drives/'+driveId+'/root:/'+fileName+':/content').version('beta')
-            .put(stream).then((res) => {
-                return res;
-            });
-    }
 }
 
 exports.SimpleGraphClient = SimpleGraphClient;
