@@ -47,6 +47,9 @@ namespace AnonymousUsers.Helper
         }
     }
 
+    /// <summary>
+    /// Retrieved from facebook profile information after a successful authentication process.
+    /// </summary>
     public class FacebookHelper
     {
         /// <summary>

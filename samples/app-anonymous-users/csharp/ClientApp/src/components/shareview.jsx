@@ -188,10 +188,6 @@ const ShareView = () => {
                     // Display in-line button so user can consent
                     setIsConsentButtonVisible(true);
                     setIsSsoAuthenticationButtonVisible(false);
-                } else {
-                    // Display in-line button so user can consent
-                    setIsConsentButtonVisible(true);
-                    setIsSsoAuthenticationButtonVisible(false);
                 }
             });
     }
