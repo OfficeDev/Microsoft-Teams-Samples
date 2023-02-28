@@ -123,19 +123,32 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/csharp/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
+**Note:**
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication\nodejs\index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 
+**Install app:**
+
 ![add-App ](Images/add-App.png)
+
+**Welcome to teamsbot:**
 
 ![added-App ](Images/added-App.png)
 
+**Login UI:**
+
 ![auth-login ](Images/auth-login.png)
+
+**Authentication success:**
 
 ![auth-Success ](Images/auth-Success.png)
 
+**Authentication token:**
+
 ![auth-Token ](Images/auth-Token.png)
+
+**Logout UI:**
 
 ![logout ](Images/logout.png)
 

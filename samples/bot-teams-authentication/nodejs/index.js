@@ -32,25 +32,24 @@ const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(p
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
+    const errorMsg = error.message
+        ? error.message
+        : `Oops. Something went wrong!`;
     // This check writes out errors to console log .vs. app insights.
     // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights. See https://aka.ms/bottelemetry for telemetry
-    //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    //       application insights.
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
-    await context.sendTraceActivity(
-        'OnTurnError Trace',
-        `${ error }`,
-        'https://www.botframework.com/schemas/error',
-        'TurnError'
-    );
-
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
     // Clear out state
     await conversationState.delete(context);
+    // Send a message to the user
+    await context.sendActivity(errorMsg);
+
+    // Note: Since this Messaging Extension does not have the messageTeamMembers permission
+    // in the manifest, the bot will not be allowed to message users.
+
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${errorMsg}`);
 };
 
 // Define the state store for your bot.
