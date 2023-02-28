@@ -187,6 +187,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |28|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |29|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
 |30|Anonymous user support| This sample app shows anonymous users support in teams meeting apps.|[View][app-anonymous-users#cs]       
+31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs]|
 
 ## Application templates
 
@@ -371,6 +372,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel-nodejs/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
+[link-unfurling-stt#nodejs]:samples/app-link-unfurling-in-share-to-teams/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 [tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
