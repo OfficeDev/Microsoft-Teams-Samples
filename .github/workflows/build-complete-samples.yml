@@ -888,9 +888,12 @@ jobs:
               name: 'app-cache-meetings'
               version: '18.x'
              
-
             - project_path: 'samples/bot-sso-adaptivecard/nodejs'
               name: 'bot-sso-adaptivecard'
+              version: '18.x'
+            
+            - project_path: 'samples/bot-teams-authentication/nodejs'
+              name: 'bot-teams-authentication'
               version: '18.x'
 
       fail-fast: false

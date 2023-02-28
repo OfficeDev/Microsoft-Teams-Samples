@@ -59,7 +59,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     -   Select Add a permission
     -   Select Microsoft Graph -\> Delegated permissions.
         - `User.Read` (enabled by default)
-        - `openid` (enabled by default)
+        - `openid`
     -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 5. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
@@ -82,8 +82,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
      1) **Name:** Enter a name for the connection. You'll use this name in your bot in the .env file.
      2) **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
      3) **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
-     4) **Tenant ID**  Enter the Application (tenant) ID that you recorded for your Azure identity provider app in the steps above.
-     5) **Token Exchange Url** Leave it blank because it's used for SSO in Azure AD v2 only.
+     4) **Tenant ID:**  Enter the Application (tenant) ID that you recorded for your Azure identity provider app in the steps above.
+     5) **Token Exchange Url:** Leave it blank because it's used for SSO in Azure AD v2 only.
      6) Provide **Scopes** like "User.Read openid"
 
 8. Setup NGROK
@@ -118,13 +118,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication\nodejs\index.js#L52) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 
