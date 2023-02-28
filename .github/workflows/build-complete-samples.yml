@@ -423,11 +423,6 @@ jobs:
             - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
               name: 'meeting-tabs'
               version: '6.0.x'
-
-
-            - project_path: 'samples/tab-deeplink-features/csharp/DeeplinkFeatures/DeeplinkFeatures.csproj'
-              name: 'tab-deeplink-features'
-              version: '6.0.x'  
               
             - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
               name: 'bot-all-cards'
@@ -874,10 +869,6 @@ jobs:
 
             - project_path: 'samples/meeting-tabs/nodejs'
               name: 'meeting-tabs'
-              version: '18.x'
-
-            - project_path: 'samples/tab-deeplink-features/nodejs'
-              name: 'tab-deeplink-features'
               version: '18.x'
 
             - project_path: 'samples/bot-all-cards/nodejs'
