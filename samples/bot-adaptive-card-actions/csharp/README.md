@@ -21,6 +21,10 @@ This sample shows the feature where user can send Adaptive Card actions using bo
 
 ![Module](AdaptiveCardActions/Images/AdaptiveCardActions.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Cards
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

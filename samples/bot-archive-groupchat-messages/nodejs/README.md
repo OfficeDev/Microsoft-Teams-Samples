@@ -23,6 +23,13 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![Bot Archive Group ChatMessagesGif](Images/botArchiveGroupchatMessages.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Card
+* Teams SSO(Bot)
+* Bot Dialogs
+* Graph API
+
 ## Prerequisites
 
 -  Microsoft Teams is installed and you have an account (not a guest account)

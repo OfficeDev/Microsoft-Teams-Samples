@@ -20,6 +20,10 @@ This sample shows the feature where user can send adaptive card with different a
 
 ![Bot Adaptive ActionsGif](Images/AdaptiveCardActions.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Cards
+
 ## Prerequisites
 
 -  Microsoft Teams is installed and you have an account (not a guest account)

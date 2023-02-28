@@ -26,6 +26,12 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 ![adaptivecard](Images/AppTaskModule.gif)
 
+## Included Features
+* Azure Bot
+* Teams Tab
+* Adaptive Cards
+* Task Module
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)

@@ -23,6 +23,13 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![GroupChatModule](FetchGroupChatMessages/Images/FetchGroupChatModule.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Card
+* Teams SSO(Bot)
+* Bot Dialogs
+* Graph API
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0

@@ -20,6 +20,9 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 - Microsoft Teams hello world sample app.
 
+## Included Features
+* Teams Tab
+
 ## Interaction with app
 
 ![HelloTabGif](Microsoft.Teams.Samples.HelloWorld.Web/Images/AppHelloWorldGif.gif)

@@ -22,6 +22,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 ![BotConversationQuickStart](Images/ezgif.com-gif-maker.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Card
+* Teams Conversation Events
+
 ## Prerequisites
 
 **Dependencies**

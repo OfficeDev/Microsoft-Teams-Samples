@@ -29,6 +29,13 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ![Teams Conversation Bot SSO Sample](Images/BotConversationSsoQuickStart.gif)
 
+## Included Features
+* Azure Bot
+* Adaptive Card
+* Teams SSO (Bot)
+* Bot Dialogs
+* Graph API
+
 ## Prerequisites
 
 -  Microsoft Teams is installed and you have an account (not a guest account)
