@@ -36,7 +36,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [Node.js](https://nodejs.org)
-
    ```bash
     # determine node version
     node --version
@@ -44,29 +43,57 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ## Setup
+### 1. Setup for App Registration
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `.env`.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    -   Select Add a permission
+    -   Select Microsoft Graph -\> Delegated permissions.
+        - `User.Read` (enabled by default)
+        - `openid` (enabled by default)
+    -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+5. Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+- Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** `https://token.botframework.com/.auth/web/redirect`. This will be use for bot authenticaiton. 
+6.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `.env`.
 
-2. Setup for Bot
- - Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+7. Create a Bot Registration
+   - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - Select Configuration section.
+   - Under configuration -> Add OAuth connection string.
+   - Provide connection Name : for eg `ConnectTeamsAuthentication`
+   - Select service provider ad `Azure Active Directory V2`
+   - Complete the form as follows:
 
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+     1) **Name:** Enter a name for the connection. You'll use this name in your bot in the .env file.
+     2) **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+     3) **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
+     4) **Tenant ID**  Enter the Application (tenant) ID that you recorded for your Azure identity provider app in the steps above.
+     5) **Token Exchange Url** Leave it blank because it's used for SSO in Azure AD v2 only.
+     6) Provide **Scopes** like "User.Read openid"
 
-3. Setup NGROK
+8. Setup NGROK
     - Run ngrok - point to port 3978
-
 	```bash
 	# ngrok http -host-header=rewrite 3978
 	```   
-4. Setup for code
+9. Setup for code
 
-  - Clone the repository
+   - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
@@ -78,18 +105,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     npm install
     ```
   - Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-   - `<<YOUR-MICROSOFT-APP-TYPE>>` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-   - `<<YOUR-MICROSOFT-APP-ID>>` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `<<YOUR-MICROSOFT-APP-PASSWORD>>` - Generated from Step 14, also referred to as Client secret
-   - `<<YOUR-MICROSOFT-APP-TENANT-ID>>` - Generated from Step 1(Directory (tenant) ID) is the tenant id
-   - `<<YOUR-CONNECTION-NAME>>` -The AAD ConnectionName from the OAuth Connection Settings on Azure Bot registration
+       1) `<<YOUR-MICROSOFT-APP-TYPE>>` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+       2) `<<YOUR-MICROSOFT-APP-ID>>` - Generated from Step 1 (Application (client) ID)is the application app id
+       3) `<<YOUR-MICROSOFT-APP-PASSWORD>>` - Generated from Step 6, also referred to as Client secret
+       4) `<<YOUR-MICROSOFT-APP-TENANT-ID>>` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+       5) `<<YOUR-CONNECTION-NAME>>` - Generated from step 7.
 
   - Run your app
 
     ```bash
     npm start
     ```
-
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

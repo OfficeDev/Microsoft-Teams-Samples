@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-teams-authentication-java",
+    "name": "officedev-microsoft-teams-samples-bot-teams-authentication-nodejs",
     "source": "officeDev",
     "title": "Teams authentication for bot using Bot Framework v4",
     "shortDescription": "This sample app demonstrate how an Bot can use Teams authentication",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-teams-authentication/java",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-teams-authentication/nodejs",
     "longDescription": [
       "This sample app demonstrate how an Bot can use Teams authentication"
     ],
-    "creationDateTime": "2019-07-10",
-    "updateDateTime": "2022-09-22",
+    "creationDateTime": "2023-02-28",
+    "updateDateTime": "2023-02-28",
     "products": [
       "Teams"
     ],
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "java"
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "maven"
+        "value": "restify"
       },
       {
         "key": "TEAMS-FEATURES",
