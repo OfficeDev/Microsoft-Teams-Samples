@@ -7,7 +7,7 @@ products:
 languages:
 - csharp
 title: Microsoft Teams C# Helloworld Sample
-description: Microsoft Teams "Hello world" application for .NET/C#
+description: Microsoft Teams "Hello world" application for .NET/C# which showcases tab, bot and messaging extension.
 extensions:
   contentType: samples
   platforms:

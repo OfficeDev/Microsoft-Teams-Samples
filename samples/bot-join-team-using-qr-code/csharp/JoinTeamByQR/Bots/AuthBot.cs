@@ -34,7 +34,7 @@ namespace JoinTeamByQR.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can generate QR code for the selected team and the user will be able to join the team by scanning QR code. Please type generate to begin. - Testing YMAL"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can generate QR code for the selected team and the user will be able to join the team by scanning QR code. Please type generate to begin."), cancellationToken);
                 }
             }
         }

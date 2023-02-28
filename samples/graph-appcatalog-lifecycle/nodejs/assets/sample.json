@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-nodejs",
     "source": "officeDev",
     "title": "AppCatalog sample",
-    "shortDescription": "This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .",
+    "shortDescription": "This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs through bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-appcatalog-lifecycle/nodejs",
     "longDescription": [
-      "This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. ."
+      "This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs through bot."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-05-17",

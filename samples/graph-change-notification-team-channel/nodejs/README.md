@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates the use of team/Channel subscription that will post notifications when user create/edit/delete team/channel.
+description: This is a sample application which demonstrates the use of team/Channel subscription that will post notifications when user create/edit/delete team/channel through teams tab.
 products:
 - office-teams
 - office

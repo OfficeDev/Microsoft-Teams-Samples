@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to use different formatting on cards.
+description: Sample which demonstrates different formatting supported in cards using bot.
 products:
 - office-teams
 - office

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-checkin-location-csharp",
     "source": "officeDev",
     "title": "App check in location",
-    "shortDescription": "Demonstrating feature where user can checkin with current location and view all previous checkins.",
+    "shortDescription": "Demonstrating feature where user can checkin with current location and view all previous checkins using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-checkin-location/csharp",
     "longDescription": [
-      "Demonstrating feature where user can checkin with current location and view all previous checkins."
+      "Demonstrating feature where user can checkin with current location and view all previous checkins using bot."
     ],
     "creationDateTime": "2021-11-11",
     "updateDateTime": "2022-06-21",

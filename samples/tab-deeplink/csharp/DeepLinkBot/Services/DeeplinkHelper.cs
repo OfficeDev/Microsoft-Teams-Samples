@@ -1,6 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿// <copyright file="DeeplinkHelper.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+// </copyright>
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Web;
 

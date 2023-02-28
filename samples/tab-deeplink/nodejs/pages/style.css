@@ -3,7 +3,7 @@ pre {
 }
 
 .callDeeplinkButton {
-    font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+    font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
     font-weight: 700;
     background-color: #444791;
     cursor: pointer;
@@ -17,22 +17,22 @@ pre {
     text-decoration: none;
 }
 
-.callDeeplinkButton:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
+    .callDeeplinkButton:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
 
 .inputContainer {
     margin-top: 10px;
 }
 
 .container {
-    font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+    font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
     font-size: 14px;
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-    width: 27rem;
+    width: 33rem;
     min-height: 18rem;
     overflow: hidden;
     margin-left: 2rem;

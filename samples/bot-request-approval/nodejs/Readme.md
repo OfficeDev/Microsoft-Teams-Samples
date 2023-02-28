@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
+description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat through bot.
 products:
 - office-teams
 - office

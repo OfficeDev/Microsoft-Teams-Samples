@@ -1,12 +1,12 @@
 import { Text } from '@fluentui/react-northstar';
 import { ReactNode } from 'react';
 import { Document } from '.';
-import { DocumentType, Signature } from 'models';
+import { DocumentType, Signature, User } from 'models';
 
 type DocumentChooserProps = {
   documentId: string;
   documentType: DocumentType;
-  loggedInAadId: string;
+  loggedInUser: User;
   signatures: Signature[];
   clickable?: boolean;
   className?: string;
@@ -19,7 +19,7 @@ type DocumentChooserProps = {
  * This component takes that documentType, get's it's content and returns a `Document` component
  *
  * @param documentType This is specific to our proof-of-concept, and is used to return the document e.g. PurchaseAgreement
- * @param loggedInAadId The AAD Id of the logged in user
+ * @param loggedInUser The User Id of the logged in user
  * @param signatures The Signatures details of this document
  * @param clickable Should the signatures be clickable. Defaults to `true`
  * @returns
@@ -27,7 +27,7 @@ type DocumentChooserProps = {
 export function DocumentChooser({
   documentId,
   documentType,
-  loggedInAadId,
+  loggedInUser,
   signatures,
   clickable = true,
   className,
@@ -230,7 +230,7 @@ export function DocumentChooser({
       id={documentId}
       title={documentTitle}
       content={documentContent}
-      loggedInAadId={loggedInAadId}
+      loggedInUser={loggedInUser}
       signatures={signatures}
       clickable={clickable}
       className={className}

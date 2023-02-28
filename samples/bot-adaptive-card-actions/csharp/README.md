@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature where user can send adaptive card with different actions using bot.
+description: Sample which demonstrates different Adaptive Card action types using bot.
 products:
 - office-teams
 - office

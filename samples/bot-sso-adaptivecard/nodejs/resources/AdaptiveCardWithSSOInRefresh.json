@@ -1,0 +1,36 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "fallback": "drop",
+      "type": "Action.Execute",
+      "verb": "initiateSSO",
+      "title": "RefreshTitle"
+    }
+  },
+  "authentication": {
+    "text": "Signin Text",
+    "connectionName": "BotSSOAdaptivecardConnection",
+    "tokenExchangeResource": {
+      "id": "<<YOUR-MICROSOFT-APP-ID>>"
+    },
+    "buttons": [
+      {
+        "type": "signin",
+        "title": "Please sign in",
+        "value": "https://token.botframework.com/api/oauth/signin?signin=<<YOUR-MICROSOFT-APP-ID>>"
+      }
+    ]
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Welcome Universal Card",
+      "size": "Medium",
+      "weight": "Bolder"
+    }
+  ],
+  "appId": "<<YOUR-MICROSOFT-APP-ID>>"
+}

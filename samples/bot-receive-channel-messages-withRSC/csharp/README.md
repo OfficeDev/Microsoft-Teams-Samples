@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating on how a bot can receive all channel messages with RSC without @mention.
+description: Sample app which demonstrates how a bot can receive all channel messages with RSC without @mention.
 products:
 - office-teams
 - office

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-deeplink-csharp",
     "source": "officeDev",
     "title": "DeepLink",
-    "shortDescription": "Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID",
+    "shortDescription": "Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink/csharp",
     "longDescription": [
-      "Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID"
+      "Microsoft Teams sample which displsays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-01-12",

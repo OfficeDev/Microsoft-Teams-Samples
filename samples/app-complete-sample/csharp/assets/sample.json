@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-complete-sample-csharp",
     "source": "officeDev",
     "title": "Bot, Tabs, and Messaging Extension",
-    "shortDescription": "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)",
+    "shortDescription": "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4. This sample also features facebook authentication using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-sample/csharp",
     "longDescription": [
-      "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)"
+      "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4. This sample also features facebook authentication using bot."
     ],
     "creationDateTime": "2017-09-22",
     "updateDateTime": "2022-01-12",

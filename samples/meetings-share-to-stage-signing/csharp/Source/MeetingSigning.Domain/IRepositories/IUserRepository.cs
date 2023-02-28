@@ -7,24 +7,24 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.IRepositories
     public interface IUserRepository
     {
         /// <summary>
-        /// AddUser inserts a given user if not already present in the database. 
+        /// AddUser inserts a given user if not already present in the database.
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Task</returns>
         Task AddUser(User user);
 
         /// <summary>
-        /// GetUser finds a given user with the userId.
+        /// GetUser finds a given user with the userId or email.
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="id">AzureAD object ID, or email address for anonymous meeting participants</param>
         /// <returns>User thus found</returns>
-        Task<User> GetUser(string userId);
+        Task<User> GetUser(string id);
 
         /// <summary>
         /// Checks if a User exists in the repository
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="id">AzureAD object ID, or email address for anonymous meeting participants</param>
         /// <returns>If the user exists</returns>
-        Task<bool> UserExists(string userId);
+        Task<bool> UserExists(string id);
     }
 }

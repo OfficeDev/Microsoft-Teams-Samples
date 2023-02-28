@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-rsc-nodeJs",
     "source": "officeDev",
     "title": "Resource Specific Consent with Graph API Javascript",
-    "shortDescription": "Shows how to request RSC permissions and use them to call Microsoft Graph",
+    "shortDescription": "Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-rsc/nodeJs",
     "longDescription": [
-      "Shows how to request RSC permissions and use them to call Microsoft Graph"
+      "Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2021-11-29",

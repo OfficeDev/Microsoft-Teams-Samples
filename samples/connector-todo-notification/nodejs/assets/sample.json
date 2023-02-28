@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-connector-todo-notification-nodejs",
     "source": "officeDev",
     "title": "Microsoft Teams Sample Connector",
-    "shortDescription": "This is a sample app which shows connector authentication and sends notification on task creation.",
+    "shortDescription": "Sample which demonstrates an Office 365 Connector which generates and sends notifications for teams channel.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-todo-notification/nodejs",
     "longDescription": [
-      "This is a sample app which shows connector authentication and sends notification on task creation."
+      "Sample which demonstrates an Office 365 Connector which generates and sends notifications for teams channel."
     ],
     "creationDateTime": "2021-11-11",
     "updateDateTime": "2022-05-17",

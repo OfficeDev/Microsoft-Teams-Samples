@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-context-app-csharp",
     "source": "officeDev",
     "title": "Meeting context",
-    "shortDescription": "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user.",
+    "shortDescription": "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-context-app/csharp",
     "longDescription": [
-      "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user."
+      "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user."
     ],
     "creationDateTime": "2022-02-08",
     "updateDateTime": "2022-08-08",

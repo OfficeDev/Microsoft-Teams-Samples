@@ -182,7 +182,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 ContentUrl = fileConsentCardResponse.UploadInfo.ContentUrl,
             };
 
-            var reply = MessageFactory.Text($"<b>File uploaded.</b> Your file <b>{fileConsentCardResponse.UploadInfo.Name}</b> is ready to download - Testing YMAL");
+            var reply = MessageFactory.Text($"<b>File uploaded.</b> Your file <b>{fileConsentCardResponse.UploadInfo.Name}</b> is ready to download");
             reply.TextFormat = "xml";
             reply.Attachments = new List<Attachment> { asAttachment };
 

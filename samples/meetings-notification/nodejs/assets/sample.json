@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-notification-csharp",
     "source": "officeDev",
     "title": "In-meeting notification app",
-    "shortDescription": "Illustrates how to implement the \"content bubble\" in-meeting experience",
+    "shortDescription": "Illustrates how to implement the \"in-meeting notification\" and \"targeted meeting notification\" experience",
      "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-notification/nodejs",
     "longDescription": [
-      "Illustrates how to implement the \"content bubble\" in-meeting experience"
+      "Illustrate how to implement the \"targeted in-meeting notifications\" experience"
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-10-21",
+    "updateDateTime": "2023-02-03",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
     {
       "type": "image",
       "order": 100,
-      "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-notification/nodejs/Images/MeetingsContentBubble.gif",
+      "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-notification/nodejs/Images/MeetingNotification.gif",
       "alt": "Solution UX showing microsoft teams nodejs meetings-content-bubble sample"
     }
     ],

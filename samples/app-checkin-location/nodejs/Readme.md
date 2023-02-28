@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature where user can checkin with current location and view all previous checkins.
+description: Demonstrating feature where user can checkin with current location and view all previous checkins using bot.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-app-checkin-location-nodejs
 ---
 # Get Checkin info of user
 
-This sample shows feature where user can checkin with current location and view all previous checkins.
+This sample shows feature where user can checkin with current location and view all previous checkins using bot.
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 

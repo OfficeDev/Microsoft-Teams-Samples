@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csharp",
     "source": "officeDev",
     "title": "Broadcast message to organization using activity feed notification (Graph APIs)",
-    "shortDescription": "This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.",
+    "shortDescription": "This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-activity-feed-broadcast/csharp",
     "longDescription": [
-      "This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification."
+      "This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab."
     ],
     "creationDateTime": "2022-01-28",
     "updateDateTime": "2022-03-06",

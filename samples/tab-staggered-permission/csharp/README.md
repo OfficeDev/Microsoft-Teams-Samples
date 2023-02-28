@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos to get staggered graph api permissions.
+description: This sample demos to get staggered graph api permissions in teams tab.
 products:
 - office-teams
 - office

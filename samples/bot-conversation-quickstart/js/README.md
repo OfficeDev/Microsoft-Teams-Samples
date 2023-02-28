@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging and conversation event handling hello world.
+description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
 products:
 - office-teams
 - office

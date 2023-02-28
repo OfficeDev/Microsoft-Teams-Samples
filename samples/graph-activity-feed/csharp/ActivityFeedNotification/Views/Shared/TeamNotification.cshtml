@@ -1,5 +1,4 @@
-﻿
-@model TabActivityFeed.Model.TaskInfo
+﻿@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -47,16 +46,17 @@
             display: none;
         }
 
-         .radioClass {
+        .radioClass {
             padding: 15px;
             margin-top: 10px;
             color: #fff;
-    font-size: 16px;
+            font-size: 16px;
         }
+
         label {
-    color: #fff;
-    font-size: 16px;
-}
+            color: #fff;
+            font-size: 16px;
+        }
     </style>
 
     <title>Screen</title>
@@ -69,24 +69,27 @@
                 $(targetBox).show();
             });
         });
-        microsoftTeams.initialize();
+
+        microsoftTeams.app.initialize();
+
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
         var teamchannelID = "";
         var teamId = "";
-        microsoftTeams.getContext(function (context) {
-            teamchannelID = context.channelId;
-            username = context.upn;
-            userId = context.userObjectId;
-            teamId = context.groupId;
 
-            console.log(context);
+        microsoftTeams.app.getContext().then((context) => {
+            teamchannelID = context.channel.id;
+            username = context.user.userPrincipalName;
+            userId = context.user,id;
+            teamId = context.team.groupId;
         });
+
         var encodedWebUrl = encodeURI('https://6687952db3e0.ngrok.io/123/456&label=Task 456');
         var encodedContext = encodeURI('{"subEntityId": "task456"}');
         var taskItemUrl = 'https://teams.microsoft.com/l/entity/bb56234b-a5f2-4d26-acff-edecce8bf42f/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
         var empty = true;
+
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
                 empty = false;
@@ -96,7 +99,8 @@
 
         function SendNotificationToChannel() {
             var action = "EntityTopic";
-            let taskInfo = {
+
+            let taskDetails = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
@@ -106,19 +110,22 @@
                 taskItemLink: taskItemUrl,
                 teamId: teamId
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
+
             return true;
         };
 
         function customTopicTeamNotification() {
-         
+
             var action = "customTopic";
-            let taskInfo = {
+
+            let taskDetails = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
@@ -128,19 +135,22 @@
                 taskItemLink: taskItemUrl,
                 teamId: teamId
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
+
             return true;
         };
 
-         function channelTabTeamNotification() {
-      
+        function channelTabTeamNotification() {
+
             var action = "channelTab";
-             let taskInfo = {
+
+            let taskDetails = {
                 reservationId: $("#reservationId").val(),
                 DeployementTitle: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -148,16 +158,18 @@
                 userName: username,
                 channelId: teamchannelID,
                 access_token: token,
-                 taskItemLink: taskItemUrl,
-                 teamId: teamId
+                taskItemLink: taskItemUrl,
+                teamId: teamId
 
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/sendNotificationToTeam',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
+
             return true;
         };
 
@@ -165,11 +177,14 @@
 </head>
 
 <body>
-    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
-
+    <div id="feed-container" style="display: none;background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To User in Channel</label></br>
             <label><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send Notification with Custom Topic in Channel</label></br>
@@ -249,5 +264,4 @@
     </div>
     @Html.Partial("Details");
 </body>
-
 </html>

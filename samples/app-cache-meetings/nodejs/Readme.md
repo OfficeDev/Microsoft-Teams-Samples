@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting.
+description: This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting.
 products:
 - office-teams
 - office

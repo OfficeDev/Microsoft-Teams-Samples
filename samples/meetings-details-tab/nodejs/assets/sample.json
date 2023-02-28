@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-details-tab-nodejs",
     "source": "officeDev",
     "title": "Meetings Details Tab",
-    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting",
+    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-details-tab/nodejs",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting"
+      "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-01-12",

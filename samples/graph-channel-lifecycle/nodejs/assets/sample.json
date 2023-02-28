@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-channel-lifecycle-nodejs",
     "source": "officeDev",
     "title": "Channel life cycle using Node js",
-    "shortDescription": "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs.",
+    "shortDescription": "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-channel-lifecycle/nodejs",
     "longDescription": [
-      "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs."
+      "This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2021-11-29",

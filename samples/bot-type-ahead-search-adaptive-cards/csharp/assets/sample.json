@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-csharp",
     "source": "officeDev",
     "title": "Typeahead search control in Adaptive Cards",
-    "shortDescription": "Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards.",
+    "shortDescription": "Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards sent using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-type-ahead-search-adaptive-cards/csharp",
     "longDescription": [
-      "Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards."
+      "Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards sent using bot."
     ],
     "creationDateTime": "2021-12-24",
     "updateDateTime": "2022-03-06",

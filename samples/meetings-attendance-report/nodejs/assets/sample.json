@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-attendance-report-nodejs",
     "source": "officeDev",
     "title": "Bot sent meeting attendance report in chat.",
-    "shortDescription": "This is a sample application which demonstrates how to get attendance reports using Graph API and send it in meeting chat.",
+    "shortDescription": "This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-attendance-report/nodejs",
     "longDescription": [
-      "This is a sample application which demonstrates how to get attendance reports using Graph API and send it in meeting chat."
+      "This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot."
     ],
     "creationDateTime": "2022-20-08",
     "updateDateTime": "2022-20-08",

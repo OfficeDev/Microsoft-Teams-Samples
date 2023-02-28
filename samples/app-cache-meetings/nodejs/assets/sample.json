@@ -6,7 +6,7 @@
     "shortDescription": "This sample shows how to improve the subsequent loading time of an App",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-cache-meetings/nodejs",
     "longDescription": [
-      "This sample shows how to improve the subsequent loading time of an App that the user has visited during the current Meeting."
+      "This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting."
     ],
     "creationDateTime": "2022-11-11",
     "updateDateTime": "2022-11-11",

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CART link to send live captions in the meeting.
+description: This is a sample application which demonstrates how to use CART link to send live captions in the meeting tab.
 products:
 - office-teams
 - office

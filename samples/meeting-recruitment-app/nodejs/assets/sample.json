@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meeting-recruitment-app-nodejs",
     "source": "officeDev",
     "title": "Recruitment App Sample using Apps in Meetings",
-    "shortDescription": "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings.",
+    "shortDescription": "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings. This app also uses bot for sending notifications.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-recruitment-app/nodejs",
     "longDescription": [
-      "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings."
+      "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings. This app also uses bot for sending notifications."
     ],
     "creationDateTime": "2021-10-01",
     "updateDateTime": "2022-01-12",

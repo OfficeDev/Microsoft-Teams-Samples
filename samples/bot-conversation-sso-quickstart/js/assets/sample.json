@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-js",
     "source": "officeDev",
     "title": "Teams Conversation Bot SSO quick-start",
-    "shortDescription": "Messaging and conversation event handling hello world with SSO.",
+    "shortDescription": "Sample which demonstrates Azure AD authentication in teams using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-sso-quickstart/js",
     "longDescription": [
-      "Messaging and conversation event handling hello world with SSO."
+      "Sample which demonstrates Azure AD authentication in teams using bot."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

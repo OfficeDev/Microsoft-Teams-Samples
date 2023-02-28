@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating a feature where user can scan a product and mark it as approved/rejected.
+description: Demonstrating a feature where user can scan a product from teams tab and mark it as approved/rejected.
 products:
 - office-teams
 - office

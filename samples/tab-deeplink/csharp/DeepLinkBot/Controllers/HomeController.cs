@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// <copyright file="HomeController.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+// </copyright>
+
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.BotBuilderSamples.Bots;

@@ -8,7 +8,7 @@ languages:
     - typescript
     - javascript
     - html
-description: 'This sample demonstrates authentication in Microsoft Teams apps.'
+description: 'This sample demonstrates authentication in Microsoft Teams using bot and tab.'
 urlFragment: microsoft-teams-auth
 extensions:
     contentType: samples
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 # Microsoft Teams Authentication Sample
 
-This sample demonstrates authentication in Microsoft Teams apps.
+This sample demonstrates authentication in Microsoft Teams using bot and tab.
 
 ## Interaction with App
 ![app-auth-sample](Images/app-auth.gif)

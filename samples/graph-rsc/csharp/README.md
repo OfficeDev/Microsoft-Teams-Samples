@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Resource Specific Consent (RSC) to call Graph APIs.
+description: Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.
 products:
 - office-teams
 - office

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-auth-config-csharp",
     "source": "officeDev",
     "title": "Search Auth Config In Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use search auth config in Messaging Extension",
+    "shortDescription": "This sample app demonstrate how to use authentication in Search based Messaging Extension.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp",
     "longDescription": [
-      "This sample app demonstrate how to use search authentication configuration in Messaging Extension"
+      "This sample app demonstrate how to use authentication in Search based Messaging Extension."
     ],
     "creationDateTime": "2019-10-17",
     "updateDateTime": "2022-10-05",

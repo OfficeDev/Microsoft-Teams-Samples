@@ -17,10 +17,16 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Authorization
         /// <inheritdoc/>
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, GetDocumentRequirement requirement, Document resource)
         {
-            string userId = context.User.GetUserId();
+            string? userId = context.User.GetUserId();
+            string? userEmail = context.User.GetUserEmail();
+
             if (resource.OwnerId == userId ||
-                resource.Signatures.Any(s => s.Signer.UserId == userId) ||
-                resource.Viewers.Any(v => v.Observer.UserId == userId))
+                resource.Signatures.Any(s =>
+                    (userId != null && s.Signer.UserId == userId) ||
+                    (userEmail != null && s.Signer.Email == userEmail)) ||
+                resource.Viewers.Any(v =>
+                    (userId != null && v.Observer.UserId == userId) ||
+                    (userEmail != null && v.Observer.Email == userEmail)))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;

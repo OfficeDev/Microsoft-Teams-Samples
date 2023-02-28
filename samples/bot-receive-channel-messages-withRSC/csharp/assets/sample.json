@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-csharp",
     "source": "officeDev",
     "title": "Receive Channel messages with RSC permissions",
-    "shortDescription": "Demonstrating on how a bot can receive all channel messages with RSC without @mention.",
+    "shortDescription": "Sample app which demonstrates how a bot can receive all channel messages with RSC without @mention.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-receive-channel-messages-withRSC/csharp",
     "longDescription": [
-      "Demonstrating on how a bot can receive all channel messages with RSC without @mention."
+      "Sample app which demonstrates how a bot can receive all channel messages with RSC without @mention."
     ],
     "creationDateTime": "2021-06-10",
     "updateDateTime": "2022-11-28",

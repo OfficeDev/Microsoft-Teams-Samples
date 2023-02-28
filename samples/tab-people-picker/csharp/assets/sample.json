@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-people-picker-csharp",
     "source": "officeDev",
     "title": "Tab people picker",
-    "shortDescription": "This is an tab app which shows the feature of client sdk people picker.",
+    "shortDescription": "This is an tab app which shows the feature of people picker using teams js client sdk.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-people-picker/csharp",
     "longDescription": [
-      "This is an tab app which shows the feature of client sdk people picker."
+      "This is an tab app which shows the feature of people picker using teams js client sdk."
     ],
     "creationDateTime": "2022-05-17",
     "updateDateTime": "2022-05-17",

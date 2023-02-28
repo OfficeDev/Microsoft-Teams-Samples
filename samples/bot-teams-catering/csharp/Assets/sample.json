@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-teams-catering-csharp",
     "source": "officeDev",
     "title": "Teams Catering Bot",
-    "shortDescription": "Teams catering bot demonstrating how to use Universal bots in Teams",
+    "shortDescription": "Teams catering bot demonstrating how to use Universal adaptive cards in Teams",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-teams-catering/csharp",
     "longDescription": [
-      "Teams catering bot demonstrating how to use Universal bots in Teams"
+      "Teams catering bot demonstrating how to use Universal adaptive cards in Teams"
     ],
     "creationDateTime": "2021-05-25",
     "updateDateTime": "2022-01-12",

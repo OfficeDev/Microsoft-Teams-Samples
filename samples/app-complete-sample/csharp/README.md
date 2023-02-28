@@ -12,7 +12,7 @@ extensions:
   - Microsoft Bot Framework v4
   createdDate: "09/22/2017 05:54:09 PM"
   updateDate: 9/15/2021 
-description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
+description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4. This sample also features facebook authentication using bot."
 urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
 ---
 

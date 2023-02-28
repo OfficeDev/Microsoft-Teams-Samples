@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CRUD Graph operations related to team tags.
+description: This is a sample application which demonstrates how to use CRUD Graph operations within tab related to team tags.
 products:
 - office-teams
 - office
@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 ---
 
-# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
+# Graph teams tag
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 

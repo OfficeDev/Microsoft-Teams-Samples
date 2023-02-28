@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-change-notification-nodejs",
     "source": "officeDev",
     "title": "Change Notification sample using nodejs",
-    "shortDescription": "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.",
+    "shortDescription": "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/nodejs",
     "longDescription": [
-      "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status."
+      "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-19",
