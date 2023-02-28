@@ -2,8 +2,8 @@
 
 <head>
     <title></title>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
         crossorigin="anonymous"></script>
     <script src="DeepLinkModel.js"></script>
     <script src="LinkDescription.js"></script>
@@ -48,8 +48,7 @@
             </span>
         </div>
         <div>
-            <object type="text/html" data="ExtendedDeepLink.html" width="1000rem" height="1000rem"
-                style="overflow:auto;">
+            <object type="text/html" data="ExtendedDeepLink.html" width="1630rem" height="500">
             </object>
         </div>
     </div>
@@ -58,19 +57,15 @@
 
     <div id="side-panel-content" class="container" style="color:white;display:none;margin-top:3rem;">
         <div>
-            This is a Side Panel tab. 
+            This is a Side Panel tab.
         </div>
-        <button 
-            data-id="default"
-            class="callDeeplinkButton"
-            onclick="shareAppContentToStage()"
-            style="width: 162px;margin:1rem 0;"
-        >
+        <button data-id="default" class="callDeeplinkButton" onclick="shareAppContentToStage()"
+            style="width: 162px;margin:1rem 0;">
             Share content to stage.
         </button>
     </div>
 
-    <div id="side-panel-deeplink" class="container" style="color:white;display:none"> 
+    <div id="side-panel-deeplink" class="container" style="color:white;display:none">
         <div class="card-container-div">
             <div>
                 <div class="card" style="width:100%">
@@ -87,18 +82,13 @@ microsoftTeams.app.openLink("https://teams.microsoft.com/l/entity/{appId}/{entit
                         </div>
                         <div>Click on button to open meeting side panel.</div>
                     </div>
-                    <button 
-                        data-id="default"
-                        class="callDeeplinkButton"
-                        onclick="callSidePanelDeeplink()"
-                        style="width:210px"
-                    >
+                    <button data-id="default" class="callDeeplinkButton" onclick="callSidePanelDeeplink()"
+                        style="width:210px">
                         Open Teams meeting side panel
                     </button>
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 
