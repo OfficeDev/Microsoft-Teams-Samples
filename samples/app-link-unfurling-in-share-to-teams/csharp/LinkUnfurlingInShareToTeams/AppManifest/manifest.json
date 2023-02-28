@@ -1,0 +1,65 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
+  "version": "1.0.0",
+  "id": "<<Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.linkunfurlingstt",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Link unfurling STT"
+  },
+  "description": {
+    "short": "Sample to test link unfurling in STT",
+    "full": "This sample demos the feature of link unfurling in share to teams"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://<<base-url>>/Tab",
+      "entityId": "tab",
+      "name": "Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<Microsoft-App-Id>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "<<domain-name>>"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<domain-name>>"
+  ]
+}
