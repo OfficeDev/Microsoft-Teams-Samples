@@ -21,13 +21,12 @@ Bot Framework v4 file upload bot sample for Teams.
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to
 upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
 
-- **Interaction with bot**
-![Bot-file-upload](Images/botfileupload.gif)
-
 ## Included Features
-* Azure Bot
-* Adaptive Card
-* File Upload using Bot
+* Bots
+* Adaptive Cards
+
+## Interaction with bot
+![Bot-file-upload](Images/botfileupload.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).

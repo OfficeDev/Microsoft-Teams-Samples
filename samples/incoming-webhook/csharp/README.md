@@ -15,9 +15,13 @@ urlFragment: officedev-microsoft-teams-samples-incoming-webhook-csharp
 
 # Incoming webhook
 
-This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. 
+This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card.
 
-- **Interaction with tab**
+## Included Features
+* Tabs
+* Incoming Webhooks
+
+## Interaction with tab
 ![webhook-tab ](IncomingWebhook/Images/webhook-app.gif)
 
 

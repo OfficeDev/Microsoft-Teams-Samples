@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
 
 This sample shows the feature where user can [send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions) using bot.
 
+## Included Features
+* Bots
+* Suggested Actions
+
 ## Interaction with app
 
 ![Module](SuggestedActions/Images/botSuggestedActionModule.gif)

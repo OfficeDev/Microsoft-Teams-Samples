@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-sso-adaptivecard-csharp
 
 This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards.
 
+## Included Features
+* Teams SSO (Bots)
+* Adaptive Cards
+
 ## Interaction with app
 
  ![Preview](Images/PreviewAppSSOCsharp.gif)

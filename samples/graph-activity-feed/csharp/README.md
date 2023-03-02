@@ -19,6 +19,11 @@ Bot Framework v4 Activity Feed sample using Tab.
 
 This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
 
+## Included Features
+* Teams SSO (Tabs)
+* Activity Feed Notifications
+* Graph API
+
 ## Interactin with app
 
 ![Broadcast from user](Images/ActivityFeed.gif)

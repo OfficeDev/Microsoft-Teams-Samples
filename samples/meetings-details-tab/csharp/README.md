@@ -17,6 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-csharp
 
 This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
 
+## Included Features
+* Tabs
+* Bots
+* Adaptive Cards
+
+
 ## Interaction with app
 
 ![image](DetailsTab/Images/DetailsTabModule.gif)

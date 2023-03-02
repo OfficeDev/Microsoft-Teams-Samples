@@ -25,16 +25,14 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Included Features
+* Teams SSO (Bots)
+* Adaptive Card
+* Graph API
+
 ## Interaction with app
 
 ![Teams Conversation Bot SSO Sample](Images/BotConversationSsoQuickStart.gif)
-
-## Included Features
-* Azure Bot
-* Adaptive Card
-* Teams SSO (Bot)
-* Bot Dialogs
-* Graph API
 
 ## Prerequisites
 

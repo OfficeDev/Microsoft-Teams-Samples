@@ -19,6 +19,10 @@ This sample illustrates a meeting experience for recruitment.
 
 It has meeting details and in-meeting app that helps in the interview process.
 
+## Included Features
+* Bots
+* Tabs (meeting chat, meeting sidepanel, meeting details)
+
 ## Interaction with app
 
 ![Details](MeetingApp/Images/meetingrecruitment.gif)

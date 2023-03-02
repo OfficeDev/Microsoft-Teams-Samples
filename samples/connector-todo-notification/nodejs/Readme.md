@@ -17,7 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodej
 
 This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 
-**Interaction with bot**
+## Included Features
+* Connectors
+
+## Interaction with bot
 ![Connector_Todo](Images/Connector_Todo_Nodejs.gif) 
 
 ## Prerequisites

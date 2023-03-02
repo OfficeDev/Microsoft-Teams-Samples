@@ -19,7 +19,11 @@ Bot Framework [message reactions](https://docs.microsoft.com/en-us/microsoftteam
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that responds to Message Reactions.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+
+## Interaction with bot
 ![bot-message-reaction ](Images/bot-message-reaction.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

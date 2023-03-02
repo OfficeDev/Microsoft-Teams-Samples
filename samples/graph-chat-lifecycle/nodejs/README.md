@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
+## Included Features
+* Tabs
+* Adaptive Cards
+* Graph API
+
 ## Interaction with app
 
 ![](Images/GraphChatLifecycleGif.gif)

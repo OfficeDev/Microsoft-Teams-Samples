@@ -18,6 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-csha
 This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
 
+## Included Features
+* Tabs (meeting stage, meeting sidepanel)
+* Live Share SDK
+* RSC Permissions
+
 ## Interaction with app
 
 ![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)

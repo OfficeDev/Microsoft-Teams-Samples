@@ -20,15 +20,15 @@ Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversatio
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+* Teams Conversation Events
+* Immersive Reading Support for Cards
+
+## Interaction with bot
 
 ![Conversation Bot](Images/ConversationBot.gif)
-
-## Included Features
-* Azure Bot
-* Adaptive Card
-* Immersive Reading Support for Cards
-* Teams Conversation Events
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).

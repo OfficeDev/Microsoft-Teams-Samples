@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-csharp
 
 This is a sample application which demonstrates how to create meeting in bulk on Teams calendar use to create meeting to upload excel sheet.
 
+## Included Features
+* Tabs
+* Graph API
+
 ## Interact with app
 
 ![Meeting Event](EventMeeting/Images/graph-bulk-meetings.gif)

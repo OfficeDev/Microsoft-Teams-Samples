@@ -18,10 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-csharp
 Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
 ## Included Features
-* Teams SSO (tab, bot, messaging extension, link unfurling)
-* Facebook Authentication (tab, bot, messaging extension, link unfurling)
-* Adaptive Card
-* Task Module
+* Teams SSO (tabs, bots, messaging extensions, link unfurling)
+* Facebook Authentication (tabs, bots, messaging extensions, link unfurling)
+* Adaptive Cards
+* Task Modules
+* Graph API
+* MSAL.js 2.0 support
 
 
 ### **Interaction with app**

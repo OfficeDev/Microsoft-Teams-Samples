@@ -22,11 +22,14 @@ how to incorporate basic conversational flow into a Teams application. It also i
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with bot**
-![BotConversation](Images/BotConversation.gif)
+## Included Features
+* Bots
+* Adaptive Cards
+* Teams Conversation Events
+* Immersive Reading Support for Cards
 
-- **Interaction with bot**
-![bot-conversations ](Images/bot-conversations.gif)
+## Interaction with bot
+![BotConversation](Images/BotConversation.gif)
 
 ## Included Features
 * Azure Bot

@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-nodejs
 
 This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
 
+## Included Features
+* Tabs
+* Bots
+* Adaptive Cards
+
 ## Interaction with app
 
 ![Preview Image](Images/Preview.gif)

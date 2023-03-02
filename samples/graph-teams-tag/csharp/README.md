@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
+## Included Features
+* Teams SSO (Tabs)
+* Graph API
+* Teamwork Tags
+
 ## Interaction with app
 
 **Tag creation flow*

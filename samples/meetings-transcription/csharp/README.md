@@ -17,6 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
 
 This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Task Modules
+* RSC Permissions
+
 ## Interaction with app
 
 ![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)

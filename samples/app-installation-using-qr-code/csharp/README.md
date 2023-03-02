@@ -22,12 +22,12 @@ The user can Generate a new QR code (contains app id information) and then use I
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
 ## Included Features
-* Azure Bot
-* Teams SSO (Bot)
+* Bot
+* Teams SSO (Bots)
 * Adaptive Cards
-* Task Module
-* Bot Dialogs
-* Device Permissions
+* Task Modules
+* Device Permissions (media)
+* Graph API
 
 **Interaction with bot - Desktop View**
 

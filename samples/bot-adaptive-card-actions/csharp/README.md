@@ -17,13 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-bot-adaptivecard-actions-csharp
 
 This sample shows the feature where user can send Adaptive Card actions using bot.
 
+## Included Features
+* Bots
+* Adaptive Cards
+
 ## Interaction with app
 
 ![Module](AdaptiveCardActions/Images/AdaptiveCardActions.gif)
-
-## Included Features
-* Azure Bot
-* Adaptive Cards
 
 ## Prerequisites
 

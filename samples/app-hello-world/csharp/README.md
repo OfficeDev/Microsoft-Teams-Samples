@@ -21,7 +21,9 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 - Microsoft Teams hello world sample app.
 
 ## Included Features
-* Teams Tab
+* Tabs
+* Bots
+* Messaging Extensions
 
 ## Interaction with app
 

@@ -19,13 +19,12 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 Using this nodejs sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
 ## Included Features
-* Azure Bot
+* Teams SSO (tabs, bots, messaging extensions, link unfurling)
+* Facebook Authentication (tabs, bots, messaging extensions, link unfurling)
 * Adaptive Cards
-* Task Module
-* Messaging Extension
-* Teams SSO (tab, bot, messaging extension)
-* Link Unfurling
-* Facebook Authentication (tab, bot, messaging extension)
+* Task Modules
+* Graph API
+* MSAL.js 2.0 support
 
 - **Interaction with app**
 ![app-complete-auth-sample ](Images/app-complete-auth.gif)

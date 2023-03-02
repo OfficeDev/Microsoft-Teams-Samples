@@ -20,6 +20,10 @@ This is a sample meeting side panel application which demonstrates how to enable
 Once the meeting is scheduled, follow this doc to enable [Provide Cart Catptions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
 
+## Included Features
+* Tabs (meeting chat, meeting details, meeting sidepanel)
+* Cart API
+
 ## Interaction with app
 
 ![bot-conversations ](MeetingLiveCaption/Images/MeetingCaption.gif)

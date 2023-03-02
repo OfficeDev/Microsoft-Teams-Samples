@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 This is an sample application which shows how to create teams meetings in bulk using file upload method.
 
+## Included Features
+* Tabs
+* Graph API
+
 ## Interaction with app
 
 ![Bulk Meeting Gif](Images/BulkMeeting.gif)

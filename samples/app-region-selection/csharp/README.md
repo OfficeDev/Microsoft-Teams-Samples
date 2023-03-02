@@ -19,13 +19,13 @@ Bot Framework v4 Region Selection sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), for the region selection for the app's data center using Bot and Tab.
 
-- **Interaction with app**
-![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
-
 ## Included Features
-* Azure Bot
-* Teams Tab
+* Bots
+* Tabs
 * Adaptive Cards
+
+## Interaction with app
+![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).

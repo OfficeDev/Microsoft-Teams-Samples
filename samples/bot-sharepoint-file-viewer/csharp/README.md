@@ -17,7 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-csharp
 
 Using this C# sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer
 
-- **Interaction with bot**
+## Included Features
+* Teams SSO (Bots)
+* Adaptive Cards
+* Graph API
+
+## Interaction with bot
 ![sharepoint-file-viewer ](BotWithSharePointFileViewer/Images/sharepoint-viewer.gif)
 
 ## Prerequisites

@@ -16,7 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-n
 
 This sample shows the feature of people picker on Adaptive Cards.
 
- Use the bot command `peoplepickercard` to get the card with people picker control 
+ Use the bot command `peoplepickercard` to get the card with people picker control
+
+ ## Included Features
+* Bots
+* People Picker in Adaptive Card 
 
 ## Interaction with app
 

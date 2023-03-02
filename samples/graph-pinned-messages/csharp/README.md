@@ -15,9 +15,15 @@ urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-csharp
 
 # This is a sample application which demonstrates how to pin messages in chat using Graph api.
 
-This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat.\
+This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat.
 
-- **Interaction with app**
+## Included Features
+* Teams SSO (Tabs)
+* MSAL.js 2.0 support
+* Pinned Messages
+* Graph API
+
+## Interaction with app
 ![pinned-messages ](GraphPinnedMessage/Images/pinned-messages.gif)
 
 ## Prerequisites

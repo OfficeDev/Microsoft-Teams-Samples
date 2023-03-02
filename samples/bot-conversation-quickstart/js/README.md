@@ -18,14 +18,15 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Teams Conversation Events
+
 ## Interaction with app
 
 ![BotConversationQuickStart](Images/ezgif.com-gif-maker.gif)
 
-## Included Features
-* Azure Bot
-* Adaptive Card
-* Teams Conversation Events
 
 ## Prerequisites
 

@@ -18,7 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-context-app-nodejs
 
 This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Tabs (meeting chat, meeting details)
+* RSC Permissions
+
+## Interaction with bot
 ![meeting-context](Images/meeting-context.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
