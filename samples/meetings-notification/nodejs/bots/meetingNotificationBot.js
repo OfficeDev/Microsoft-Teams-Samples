@@ -10,7 +10,7 @@ const notificationCardJson = require('../resources/SendTargetNotificationCard.js
 const axios = require('axios');
 var ACData = require("adaptivecards-templating");
 
-class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
+class MeetingNotificationBot extends TeamsActivityHandler {
   constructor() {
     super();
     this.baseUrl = process.env.BaseUrl;
@@ -24,7 +24,7 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
       if (context.activity.value == null) {
         TurnContext.removeRecipientMention(context.activity);
 
-        if (context.activity.text.trim() == "SendNotification") {
+        if (context.activity.text.trim() == "SendTargetedNotification") {
           var meetingMembers = await TeamsInfo.getPagedMembers(context);
           let tenantId = context.activity.channelData.tenant.id;
 
@@ -40,8 +40,11 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
           // Send and adaptive card to user to select members for sending targeted notifications.
           await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
         }
-        else {
+        else if (context.activity.text.trim() == "SendContentBubble") {
           await context.sendActivity({ attachments: [this.createAdaptiveCard()] });
+        }
+        else {
+          await context.sendActivity("Please type `SendTargetedNotification` or `SendContentBubble` to send In-meeting notifications.");
         }
       }
       else if (context.activity.value.Type == "SendTargetedMeetingNotification") {
@@ -163,4 +166,4 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
   }
 }
 
-module.exports.TargetedInMeetingNotificationBot = TargetedInMeetingNotificationBot;
+module.exports.MeetingNotificationBot = MeetingNotificationBot;

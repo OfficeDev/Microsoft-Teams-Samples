@@ -1,4 +1,4 @@
-﻿namespace TargetedInMeetingNotificationBot.Models
+﻿namespace InMeetingNotificationsBot.Models
 {
     public class AgendaItem
     {

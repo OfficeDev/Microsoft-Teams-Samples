@@ -1,4 +1,4 @@
-﻿namespace TargetedInMeetingNotificationBot
+﻿namespace InMeetingNotificationsBot
 {
     public static class Titles
     {

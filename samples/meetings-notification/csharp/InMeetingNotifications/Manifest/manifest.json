@@ -43,8 +43,12 @@
           ],
           "commands": [
             {
-              "title": "SendNotification",
+              "title": "SendTargetedNotification",
               "description": "Sends targeted meeting notification to selected members."
+            },
+            {
+              "title": "SendContentBubble",
+              "description": "Sends content bubble in meeting."
             }
           ]
         }
