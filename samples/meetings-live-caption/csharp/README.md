@@ -21,7 +21,9 @@ Once the meeting is scheduled, follow this doc to enable [Provide Cart Catptions
 Copy the CART link it will used while configuring tab for meeting.
 
 ## Included Features
-* Tabs (meeting chat, meeting details, meeting sidepanel)
+* Meeting Chat 
+* Meeting Details
+* Meeting SidePanel
 * Cart API
 
 ## Interaction with app

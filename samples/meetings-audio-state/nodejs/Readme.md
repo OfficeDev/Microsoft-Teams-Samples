@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
 
 ## Included Features
-* Tabs (meeting side panel)
+* Meeting SidePanel
 * RSC Permissions
 
 ## Interaction with bot

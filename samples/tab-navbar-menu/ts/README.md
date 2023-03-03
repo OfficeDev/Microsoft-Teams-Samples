@@ -20,6 +20,10 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 
 **Note:** NaveBar menu is only supported in Mobile Clients.
 
+ ## Included Features
+* Tabs
+* NavBar Menu
+
 ## Interaction with app - Mobile
 
 ![NavBarGif](Images/MenuGif.gif)

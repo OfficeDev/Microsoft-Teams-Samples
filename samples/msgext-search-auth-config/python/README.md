@@ -20,6 +20,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-search-auth-config-pyt
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample is built on sample 50.teams-messaging-extension-search, and illustrates how to build a Search-based Messaging Extension with a configuration page, as well as how to sign in from a search Messaging Extension.
 
+## Included Features
+* Bots
+* Message Extensions (with teams sso)
+* Search Commands
+
 ## Interaction with app
 ![msgext-search-auth-config ](Images/msgext-auth-config-gif.gif)
 

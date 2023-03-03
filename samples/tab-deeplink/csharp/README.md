@@ -16,7 +16,12 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and Tab to Tab.
 
-- **Interaction with bot**
+ ## Included Features
+* Tabs
+* Bots
+* Deep Links
+
+## Interaction with bot
 
  ##### Welcome Card Flow
 

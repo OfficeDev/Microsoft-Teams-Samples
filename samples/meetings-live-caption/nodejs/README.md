@@ -23,7 +23,9 @@ Once the meeting is scheduled. Follow this doc to enable [CART Captions](https:/
 Copy the CART link it will used while configuring tab for meeting.
 
 ## Included Features
-* Tabs (meeting chat, meeting details, meeting sidepanel)
+* Meeting Chat 
+* Meeting Details
+* Meeting SidePanel
 * Cart API
 
 ## Key features

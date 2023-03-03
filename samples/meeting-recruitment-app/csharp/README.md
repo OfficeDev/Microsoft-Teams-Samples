@@ -21,7 +21,9 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ## Included Features
 * Bots
-* Tabs (meeting chat, meeting sidepanel, meeting details)
+* Meeting Chat 
+* Meeting Sidepanel 
+* Meeting Details
 
 ## Interaction with app
 

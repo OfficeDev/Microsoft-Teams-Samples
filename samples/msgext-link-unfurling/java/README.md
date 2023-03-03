@@ -21,7 +21,13 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with Messaging Extension Link Unfurling**
+## Included Features
+* Bots
+* Message Extensions
+* Search Commands
+* Link Unfurling
+
+## Interaction with Messaging Extension Link Unfurling
 ![MsgExtLink](Images/LinkUnfurling.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

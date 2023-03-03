@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 
 This is an tab app which shows the feature of people picker using teams js client sdk.
 
+ ## Included Features
+* Tabs
+* People Picker in tabs
+
 ## Interaction with app
 
 ![Tab People PickerGif](Images/TabPeoplePicker.gif)

@@ -21,6 +21,10 @@ This bot has been created using [Bot Framework v4](https://dev.botframework.com)
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+## Included Features
+* Tabs
+* Adaptive Cards (in tabs)
+
 ## Interaction with Adaptive Cards
 
 ![Tab Adaptive CardsGif](Images/tabAdaptiveCards.gif)

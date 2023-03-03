@@ -18,6 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-quickstart-ts
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
+ ## Included Features
+* Tabs
+
 ## Interaction with app
 
 ![Tab Personal QuickstartGif](Images/TabPersonalQuickstartGif.gif)

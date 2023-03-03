@@ -19,7 +19,13 @@ Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/microsoftteam
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that performs link unfurling in Teams.
 
-- **Interaction with Messaging Extension Link Unfurling**
+## Included Features
+* Bots
+* Message Extensions
+* Search Commands
+* Link Unfurling
+
+## Interaction with Messaging Extension Link Unfurling
 ![MsgExtLink](Images/LinkUnfurling.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

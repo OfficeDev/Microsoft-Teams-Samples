@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
 
+ ## Included Features
+* Tabs
+* Bots
+* Deep Links
+
 ## Interaction with app.
 
 ![Preview Image](Images/Preview.gif)

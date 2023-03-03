@@ -17,7 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling
 
 If you copy and paste a link from `https://www.botframework.com` or your ngrok base url, it wil unfurl inside compose area.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Message Extensions
+* Search Commands
+* Link Unfurling
+
+## Interaction with bot
 ![Link Unfurling](Images/LinkUnfurling.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

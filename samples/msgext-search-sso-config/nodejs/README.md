@@ -18,6 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config
 
 Bot Framework v4 sample for Teams to include a configuration page and Bot Service SSO authentication.
 
+## Included Features
+* Bots
+* Message Extensions (with teams sso)
+* Search Commands
+
+
 ## Interaction with app
 
  ![](Images/MsgextSSO.gif)

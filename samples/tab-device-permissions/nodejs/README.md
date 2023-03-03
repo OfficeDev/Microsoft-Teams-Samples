@@ -25,6 +25,11 @@ only.
 
 This update will be generally available (GA) by February 01, 2022
 ```
+
+ ## Included Features
+* Tabs
+* Device Permissions (geolocation, media)
+
 ## Interaction with app - Desktop View
 
 ![Tab Device PermissionsGif](Images/TabDevicePermissionsGif.gif) 

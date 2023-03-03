@@ -20,7 +20,8 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 
 ## Included Features
 * Bots
-* Tabs (meeting chat, meeting details)
+* Meeting Chat 
+* Meeting Details
 * RSC Permissions
 
 ## Interaction with bot

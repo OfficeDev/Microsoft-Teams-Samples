@@ -19,7 +19,8 @@ This sample demos a live coding in a Teams meeting stage using [Live Share SDK](
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
 
 ## Included Features
-* Tabs (meeting stage, meeting sidepanel)
+* Meeting Stage
+* Meeting SidePanel
 * Live Share SDK
 * RSC Permissions
 

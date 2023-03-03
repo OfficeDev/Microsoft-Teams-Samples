@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-csharp
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 
+ ## Included Features
+* Tabs
+* Graph Toolkit
+
 ## Interaction with app
 
 ![Module](TabGraphToolkit/Images/TabGraphToolKit.gif)

@@ -28,7 +28,13 @@ build a Search-based Messaging Extension.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-- **Interaction with Messaging Extension search functionality**
+## Included Features
+* Bots
+* Message Extensions
+* Search Commands
+
+
+## Interaction with Messaging Extension search functionality
 ![msgext-search ](Images/msgext-search.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

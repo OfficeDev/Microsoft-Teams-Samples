@@ -29,6 +29,9 @@ In this quickstart we'll walk-through creating a custom channel/group tab with A
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+## Included Features
+* Tabs
+
 ## Interaction with app
 
 ![configureteams](Images/ChannelGroupTabModule.gif)
