@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace TargetedInMeetingNotificationBot.Models
+namespace InMeetingNotificationsBot.Models
 {
     public class MeetingNotification
     {   

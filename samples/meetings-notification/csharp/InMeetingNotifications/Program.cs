@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace TargetedInMeetingNotificationBot
+namespace InMeetingNotificationsBot
 {
     public class Program
     {

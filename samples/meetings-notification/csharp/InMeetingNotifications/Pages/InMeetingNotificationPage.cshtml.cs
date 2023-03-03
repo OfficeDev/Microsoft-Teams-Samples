@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace TargetedInMeetingNotificationBot.Pages
+namespace InMeetingNotificationsBot.Pages
 {
     public class InMeetingNotificationModel : PageModel
     {

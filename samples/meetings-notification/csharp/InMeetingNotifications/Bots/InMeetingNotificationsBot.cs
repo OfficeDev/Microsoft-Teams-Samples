@@ -1,11 +1,11 @@
-﻿// <copyright file="TargetedInMeetingNotificationBot.cs" company="Microsoft">
+﻿// <copyright file="InMeetingNotificationsBot.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
 
 using AdaptiveCards;
 using AdaptiveCards.Templating;
-using TargetedInMeetingNotificationBot.Models;
+using InMeetingNotificationsBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector.Authentication;
@@ -26,15 +26,15 @@ using System.Threading.Tasks;
 using System.Web;
 
 
-namespace TargetedInMeetingNotificationBot
+namespace InMeetingNotificationsBot
 {
-    public class TargetedInMeetingNotificationBot : TeamsActivityHandler
+    public class InMeetingNotificationsBot : TeamsActivityHandler
     {
         private readonly IConfiguration _config;
         private readonly MeetingAgenda _agenda;
         private IHttpClientFactory _httpClientFactory;
 
-        public TargetedInMeetingNotificationBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public InMeetingNotificationsBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _config = configuration;
             _httpClientFactory = httpClientFactory;
@@ -62,7 +62,7 @@ namespace TargetedInMeetingNotificationBot
             {
                 turnContext.Activity.RemoveRecipientMention();
 
-                if (turnContext.Activity.Text.Trim() == "SendNotification")
+                if (turnContext.Activity.Text.Trim() == "SendTargetedNotification")
                 {
                     var meetingPartipantsList = new List<ParticipantDetail>();
 
@@ -92,10 +92,14 @@ namespace TargetedInMeetingNotificationBot
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("SendTargetNotificationCard.json", meetingNotificationDetails);
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
                 }
-                else
+                else if (turnContext.Activity.Text.Trim() == "SendContentBubble")
                 {
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("AgendaCard.json", _agenda);
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
+                }
+                else
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Please type `SendTargetedNotification` or `SendContentBubble` to send In-meeting notifications."));
                 }
             }
             else
@@ -156,11 +160,42 @@ namespace TargetedInMeetingNotificationBot
                     {
                         var actionSet = JsonConvert.DeserializeObject<ActionBase>(turnContext.Activity.Value.ToString());
                         var selectedMembers = actionSet.Choice;
-                        var pageUrl = _config["BaseUrl"] + "/SendNotificationPage";
+                        var recipients = JsonConvert.SerializeObject(selectedMembers.Split(","));
+                        var pageUrl = JsonConvert.SerializeObject(_config["BaseUrl"] + "/SendNotificationPage");
                         var meetingId = turnContext.Activity.TeamsGetMeetingInfo()?.Id ?? throw new InvalidOperationException("This method is only valid within the scope of a MS Teams Meeting.");
-                        TargetedMeetingNotification notification = GetTargetedMeetingNotification(selectedMembers.Split(',').ToList(), pageUrl);
-                        
-                        await TeamsInfo.SendMeetingNotificationAsync(turnContext, notification, meetingId); 
+
+                        // Notification payload for meeting target notification API.
+                        string notificationPayload = @"{
+                                 ""type"": ""targetedMeetingNotification"",
+                                 ""value"": {
+                                 ""recipients"": " + recipients + @", 
+                                 ""surfaces"": [{
+                                 ""surface"": ""meetingStage"",
+                                 ""contentType"": ""task"",
+                                 ""content"": { 
+                                   ""value"": { 
+                                     ""height"": ""300"", 
+                                     ""width"": ""400"", 
+                                     ""title"": ""Targeted meeting Notification"",
+                                     ""url"": " + pageUrl + @"
+                                     }
+                                 }
+                         }]}}";
+
+                        var httpClient = _httpClientFactory.CreateClient();
+                        var serviceUrl = turnContext.Activity.ServiceUrl;
+
+                        var url = serviceUrl + "v1/meetings/" + meetingId + "/notification";
+                        HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Post, url);
+
+                        var Client = turnContext.TurnState.Get<IConnectorClient>();
+                        var creds = Client.Credentials as AppCredentials;
+                        var bearerToken = await creds.GetTokenAsync().ConfigureAwait(false);
+                        httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+                        httpRequest.Content = new StringContent(notificationPayload, Encoding.UTF8, "application/json");
+
+                        //Make the post http call for sending targeted notifications.
+                        HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(continueOnCapturedContext: false);
                     }
                     catch (Exception ex)
                     {
@@ -232,42 +267,6 @@ namespace TargetedInMeetingNotificationBot
                 Content = card,
             };
             return adaptiveCardAttachment;
-        }
-
-        /// <summary>
-        /// Create Notification for send to recipients
-        /// </summary>
-        /// <param name="recipients">List of members added to the conversation.</param>
-        /// <param name="pageUrl">page url that will be load in the notification.</param>
-        /// <returns>Target meeting notification object.</returns>
-        private TargetedMeetingNotification GetTargetedMeetingNotification(List<string> recipients, string pageUrl)
-        {
-            TargetedMeetingNotification notification = new TargetedMeetingNotification()
-            {
-                Type = "TargetedMeetingNotification",
-                Value = new TargetedMeetingNotificationValue()
-                {
-                    Recipients = recipients,
-                    Surfaces = new List<Surface>()
-                    {
-                        new MeetingStageSurface<TaskModuleContinueResponse>()
-                        {
-                            ContentType = ContentType.Task,
-                            Content = new TaskModuleContinueResponse
-                            {
-                                Value = new TaskModuleTaskInfo()
-                                {
-                                    Title = "Targeted meeting Notification",
-                                    Height =300,
-                                    Width = 400,
-                                    Url = pageUrl
-                                }
-                            }
-                        }
-                    },
-                }
-            };
-            return notification;
         }
     }
 }

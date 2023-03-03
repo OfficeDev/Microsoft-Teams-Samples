@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.BotBuilderSamples;
 
-namespace TargetedInMeetingNotificationBot
+namespace InMeetingNotificationsBot
 {
     public class Startup
     {
@@ -33,7 +33,7 @@ namespace TargetedInMeetingNotificationBot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, TargetedInMeetingNotificationBot>();
+            services.AddTransient<IBot, InMeetingNotificationsBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
