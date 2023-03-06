@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using System;
 using AnonymousUsers;
 using AnonymousUsers.Bots;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,8 @@ builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>
 
 // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
 builder.Services.AddTransient<IBot, AnonymousUsersBot>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddSignalR();
 

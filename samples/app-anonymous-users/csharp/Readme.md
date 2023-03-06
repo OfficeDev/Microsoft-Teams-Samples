@@ -21,11 +21,6 @@ This sample shows anonymous users support in meeting apps.
 **Interaction with app**
 ![appanonymoususersGif](Images/anonymoususersupport.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Anonymous Users:** [Manifest](/samples/app-anonymous-users/csharp/demo-manifest/app-anonymous-users.zip)
-
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -49,20 +44,56 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 2. Setup
 
-   **Register your application with Azure AD:**
+ ### Register you app with Azure AD.
 
-    - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Under **Manage**, select **Expose an API**. 
+  5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
+      * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+  6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+  7. Set **Who can consent?** to `Admins and users`
+  8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+      * **Admin consent title:** Teams can access the user’s profile.
+      * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+      * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+      * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+  9. Ensure that **State** is set to **Enabled**
+  10. Select **Add scope**
+      * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+          * `api://[ngrokDomain].ngrok.io/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+  11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+      * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+      * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+  12. Navigate to **API Permissions**, and make sure to add the follow permissions:
+  -   Select Add a permission
+  -   Select Microsoft Graph -\> Delegated permissions.
+      - `User.Read` (enabled by default)
+  -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+  13. Navigate to **Authentication**
+      If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+  - Set a redirect URI:
+      * Select **Add a platform**.
+      * Select **Single-page application**.
+      * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
+  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-    - Select **New Registration** and on the *register an application page*, set following values:
-           * Set **name** to your app name.
-           * Choose the **supported account types** (any account type will work)
-           * Leave **Redirect URI** empty.
-           * Choose **Register**.
-
-    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-
+  15. Create a Bot Registration
+    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
+16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
+   - Select service provider ad `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16.
+      
 3. Clone the repository
 
     ```bash
@@ -94,10 +125,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```
 
  6) Modify the `/appsettings.json` and fill in the following details:
-  - `{{ MicrosoftAppId }}` - Generated from Step 2 is the application app id
-  - `{{ MicrosoftAppPassword }}` - Generated from Step 2, also referred to as Client secret
-  - `{{ MicrosoftAppTenantId }}` - Generated from Step 2 is the tenantId id
-
+  Modify the `appsettings.json` and fill in the following details:
+   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+   - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
+   - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{FacebookAppId}} and {{FacebookAppPassword}}`- Generated from step 16.
+  
+  7) Modify the .env file in your project folder (or in Visual Studio) and fill in below details:
+   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{FacebookAppId}}`- Generated from step 16.
+   
  7. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -173,10 +211,6 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![AddApp12 ](Images/AddApp12.png)
 
-**Add app in a meeting tab:**
-
-![MeetingTab13 ](Images/MeetingTab13.png)
-
 **Share to stage view:**
 
 ![SharePage14 ](Images/SharePage14.png)
@@ -189,21 +223,37 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![AnoUserSharing16 ](Images/AnoUserSharing16.png)
 
-**Tenant user submit vote:**
+**Click sign-in button**
 
-![SubmitVote17 ](Images/SubmitVote17.png)
+![Clicksigninbutton ](Images/Clicksigninbutton.png)
 
-**Anonymous users screen cout auto update:**
+**Click sign-in button anonymous users:**
 
-![AnoUserSubmitVote18 ](Images/AnoUserSubmitVote18.png)
+![ClicksigninbuttonAnoUser ](Images/ClicksigninbuttonAnoUser.png)
 
-**Anonymous user submit vote:**
+**Anonymous user success page:**
 
-![AnoCoutCheck19 ](Images/AnoCoutCheck19.png)
+![AnoUsersigninucess ](Images/AnoUsersigninucess.png)
 
-**Tenant users screen cout auto update:**
+**Click submit vote button:**
 
-![UserCountCheck20 ](Images/UserCountCheck20.png)
+![SubmitVote ](Images/SubmitVote.png)
+
+**Anonymous user showing the count:**
+
+![AnoUserpage ](Images/AnoUserpage.png)
+
+**Click submit vote button anonymous users:**
+
+![submitVoteAno ](Images/submitVoteAno.png)
+
+**User showing the count:**
+
+![Resultscreen ](Images/Resultscreen.png)
+
+**Anonymous user showing the count:**
+
+![Resultscreenano ](Images/Resultscreenano.png)
 
 **Remove guest user:**
 
@@ -237,5 +287,7 @@ You can interact with Teams Tab meeting sidepanel.
 ## Further reading
 
 - [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 

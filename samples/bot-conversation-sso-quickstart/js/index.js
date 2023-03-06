@@ -29,17 +29,10 @@ const { env } = require('process');
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
-var conname = env.connectionName;
-
-console.log(`\n${ conname } is the con name`);
-
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 const memoryStorage = new MemoryStorage();
-const tokenExchangeMiddleware = new TeamsSSOTokenExchangeMiddleware(memoryStorage, env.connectionName);
-
-adapter.use(tokenExchangeMiddleware);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.

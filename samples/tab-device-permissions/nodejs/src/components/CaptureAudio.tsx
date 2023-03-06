@@ -46,7 +46,7 @@ const CaptureAudio = () => {
       <Text weight='bold' as="h1">Media</Text>  
        <CardBody>          
           <div className='flex columngap'>
-            <Text>Checks for permission to use media input Testing YMAL</Text>
+            <Text>Checks for permission to use media input</Text>
             <Text weight='medium'>SDK used</Text>
             <Text>navigator, microsoftTeams</Text>
             <Text weight='medium'>Method:</Text>

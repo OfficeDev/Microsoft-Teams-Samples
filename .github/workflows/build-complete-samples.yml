@@ -128,7 +128,7 @@ jobs:
               name: 'meeting-recruitment-app'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-notification/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
+            - project_path: 'samples/meetings-notification/csharp/InMeetingNotifications/InMeetingNotificationsBot.csproj'
               name: 'meetings-notification'
               version: '6.0.x'
 
@@ -423,11 +423,6 @@ jobs:
             - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
               name: 'meeting-tabs'
               version: '6.0.x'
-
-
-            - project_path: 'samples/tab-deeplink-features/csharp/DeeplinkFeatures/DeeplinkFeatures.csproj'
-              name: 'tab-deeplink-features'
-              version: '6.0.x'  
               
             - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
               name: 'bot-all-cards'
@@ -499,6 +494,10 @@ jobs:
             - project_path: 'samples/app-hello-world/nodejs'
               name: 'app-hello-world'
               version: '14.x'
+
+            - project_path: 'samples/app-link-unfurling-in-share-to-teams/nodejs'
+              name: 'app-link-unfurling-in-share-to-teams'
+              version: '18.x'
 
             - project_path: 'samples/app-installation-using-qr-code/nodejs'
               name: 'app-installation-using-qr-code'
@@ -874,10 +873,6 @@ jobs:
 
             - project_path: 'samples/meeting-tabs/nodejs'
               name: 'meeting-tabs'
-              version: '18.x'
-
-            - project_path: 'samples/tab-deeplink-features/nodejs'
-              name: 'tab-deeplink-features'
               version: '18.x'
 
             - project_path: 'samples/bot-all-cards/nodejs'

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID
+description: Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 ---
  # DeepLink
 
- This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and Tab to Tab.
+ This sample displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
 
  ## Included Features
 * Tabs
@@ -29,7 +29,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  ##### Deeplink Tab Flow
 
- ![bot-conversations ](DeepLinkBot/images/Team_DeepLink.gif)
+ ![bot-conversations ](DeepLinkBot/images/Tab_DeepLink.gif)
 
 
  ## Prerequisites
@@ -74,6 +74,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
    - Update channelID placeholer `<AddYourTeamsChannelId>` value in your `DeepLinkBot.cs` file with your particular channel id from any Team in Teams. (You can get it manually by clicking on 3 dots in any team's channel and fetch it's link and extract the channel id ) like `General` channel) Example: `19:cbe3683f25094106b826c9cada3afbe0@thread.skype`
+
+   - Navigate to `wwwroot/js/env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+	- ![personal-AddedBot ](DeepLinkBot/images/TeamsAdminPortal.png)
    
    - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, BaseURL ,
 	ChannelEntityId is a unique identifier ,TabEntityId as EntityId from Manifest file ,MannifestAppId as manifest ID from manifest file,
@@ -187,6 +190,37 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    
 		![Meeting-WelcomeCard-Interaction ](DeepLinkBot/images/04_Meeting_defaultpage.png)
 
+	- **Tab Interactions:**
+   
+		**Deeplink to Audio Call:**
+
+		![Audio-Deeplink](DeepLinkBot/images/16_Team_AudiocallScreen.png)
+
+		**Deeplink to Video Call:**
+   
+		![Video-Deeplink](DeepLinkBot/images/19_Team_VideoStart.png)
+
+		**Deeplink to Meeting schedule:**
+   
+		![Meeting-Schedule](DeepLinkBot/images/22_Team_PostScheduleMeeting.png)
+
+		**Deeplink to Polly app install dialog:**
+   
+		![App-Install-Dialog](DeepLinkBot/images/24_Team_AddApp.png)
+
+		**Deeplink to start new chat:**
+   
+		![Start-New-Chat](DeepLinkBot/images/StartChatDeeplink.png)
+
+		![New-Chat](DeepLinkBot/images/StartNewChat.png)
+
+		**Deeplink to channel conversation:**
+   
+		![Show-Channel-Conversation ](DeepLinkBot/images/GroupChatDeeplink.png)
+   
+		![channel-Conversation](DeepLinkBot/images/GroupChat.png)
+
+
 ## Outlook on the web
 
 - To view your app in Outlook on the web.
@@ -228,4 +262,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
-

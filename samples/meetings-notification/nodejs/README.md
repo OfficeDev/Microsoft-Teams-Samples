@@ -109,6 +109,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ## Running the sample
 
+Type `SendContentBubble` in bot chat to send In-Meeting notifications.
+
 **Hello command interaction:**
 
 ![Meetings AgendaCard](Images/AgendaCard.png)
@@ -126,6 +128,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 ![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
 
 ## Send targeted meeting notification
+
+Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
 ![Meeting card](Images/MeetingCard.png)
 
 ![Target notification](Images/TargetNotification.png)
