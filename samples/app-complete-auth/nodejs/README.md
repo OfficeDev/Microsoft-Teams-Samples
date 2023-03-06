@@ -26,7 +26,7 @@ Using this nodejs sample, you can check authenticate in bot,tab and messaging ex
 * Graph API
 * MSAL.js 2.0 support
 
-- **Interaction with app**
+## Interaction with app
 ![app-complete-auth-sample ](Images/app-complete-auth.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

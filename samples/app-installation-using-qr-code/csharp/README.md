@@ -23,17 +23,17 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Included Features
 * Bot
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Adaptive Cards
 * Task Modules
 * Device Permissions (media)
 * Graph API
 
-**Interaction with bot - Desktop View**
+## Interaction with bot - Desktop View
 
 ![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktop.gif)
 
-**Interaction with bot - Mobile View**
+## Interaction with bot - Mobile View
 
 ![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCode.gif)
 

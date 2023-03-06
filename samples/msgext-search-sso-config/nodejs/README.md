@@ -23,7 +23,6 @@ Bot Framework v4 sample for Teams to include a configuration page and Bot Servic
 * Message Extensions (with teams sso)
 * Search Commands
 
-
 ## Interaction with app
 
  ![](Images/MsgextSSO.gif)

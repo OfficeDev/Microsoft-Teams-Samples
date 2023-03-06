@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-nod
 This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification through teams tab.
 
 ## Included Features
-* Teams SSO (Tabs)
+* Teams SSO (tabs)
 * Activity Feed Notifications
 * Graph API
 

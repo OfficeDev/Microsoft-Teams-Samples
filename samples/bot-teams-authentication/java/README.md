@@ -28,7 +28,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
 ## Included Features
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Graph API
 
 ## Interaction with the bot

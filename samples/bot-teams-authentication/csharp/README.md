@@ -36,7 +36,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - `User.Read`
 
 ## Included Features
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Graph API
 
 ## Interaction with the bot**

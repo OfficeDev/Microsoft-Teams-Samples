@@ -20,7 +20,7 @@ Using this C# sample, a bot can archive chat messages of groupchat and send it t
 This feature shown in this sample is currently available in Public Developer Preview only.
 
 ## Included Features
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Adaptive Cards
 * Graph API
 

@@ -33,7 +33,6 @@ build a Search-based Messaging Extension.
 * Message Extensions
 * Search Commands
 
-
 ## Interaction with Messaging Extension search functionality
 ![msgext-search ](Images/msgext-search.gif)
 

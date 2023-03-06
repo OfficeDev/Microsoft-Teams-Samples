@@ -22,7 +22,6 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 * Bots
 * Adaptive Cards
 
-
 ## Interaction with app
 
 ![image](DetailsTab/Images/DetailsTabModule.gif)

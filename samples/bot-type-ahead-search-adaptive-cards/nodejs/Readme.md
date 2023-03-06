@@ -19,7 +19,7 @@ This sample shows the feature of typeahead search (static and dynamic) control i
 
 ## Included Features
 * Bots
-* Adaptive Cards (Typeahead Search)
+* Adaptive Cards (typeahead search)
 
 ## Interaction with bot
  ![Bot Typeahead Search Adaptive Cards](Images/BotTypeaheadSearchAdaptiveCards.gif)

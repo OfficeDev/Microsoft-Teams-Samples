@@ -25,7 +25,7 @@ This Messaging Extension has been created using [Bot Framework](https://dev.botf
 * Message Extensions
 * Action Commands
 
-- **Interaction with Messaging Extension Action Preview**
+## Interaction with Messaging Extension Action Preview
 ![msgext-action-preview ](Images/msgext-action-preview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

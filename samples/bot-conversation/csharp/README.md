@@ -26,7 +26,6 @@ how to incorporate basic conversational flow into a Teams application. It also i
 * Teams Conversation Events
 * Immersive Reading Support for Cards
 
-
 ## Interaction with bot
 ![bot-conversations ](Images/bot-conversations.gif)
 

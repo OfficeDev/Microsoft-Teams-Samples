@@ -19,7 +19,7 @@ Bot Framework v4 AppCatalog sample for Teams
 This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalog followed by commands given to Bot.
 
 ## Included Features
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Adaptive Cards
 * Graph API
 

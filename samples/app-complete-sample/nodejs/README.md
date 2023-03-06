@@ -26,7 +26,7 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
 * Adaptive Cards
 * Facebook Authentication (bots)
 
-- **Interaction with app**
+## Interaction with app
 ![app-complete-sample ](images/app-complete-sample.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

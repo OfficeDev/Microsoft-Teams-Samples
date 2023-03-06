@@ -23,7 +23,6 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 * Tabs
 * Adaptive Cards (in tabs)
 
-
 ## Interaction with app
 
 ![Adaptive Card](TabWithAdpativeCardFlow/Images/Tabwithadaptivecard.gif)

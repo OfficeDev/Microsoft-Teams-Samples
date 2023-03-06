@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "{{Manifest-id}}",
+  "id": "f3451eaa-0cf9-4eb2-93b1-58295abaf4d4",
   "packageName": "com.teams.meetingtabcontext",
   "developer": {
     "name": "Microsoft",
@@ -15,7 +15,7 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Context App",
+    "short": "Meeting Channel 3",
     "full": "Meeting Context App"
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{Domain Name}}/configure",
+      "configurationUrl": "https://7b3c-118-185-176-154.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -33,14 +33,15 @@
       ],
       "context": [
         "meetingChatTab",
-        "meetingDetailsTab"
+        "meetingDetailsTab",
+		    "meetingSidePanel"
       ]
     }
   ],
-  "bots": [
+   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
-      "scopes": [ "groupchat" ],
+      "botId": "f6661eaa-0cf9-4eb2-93b1-58278abaf4d4",
+      "scopes": ["team", "groupchat" ],
       "commandLists": [
         {
           "commands": [
@@ -56,7 +57,6 @@
           "scopes": ["groupchat"]
         }
       ]
-
     }
   ],
   "permissions": [
@@ -65,10 +65,10 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "{{Domain Name}}"
+    "7b3c-118-185-176-154.ngrok.io"
   ],
     "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
+    "id": "f6661eaa-0cf9-4eb2-93b1-58278abaf4d4",
     "resource": "https://RscBasedStoreApp"
     },
 	"authorization": {

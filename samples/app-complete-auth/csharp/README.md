@@ -25,7 +25,6 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 * Graph API
 * MSAL.js 2.0 support
 
-
 ### **Interaction with app**
 ![app-complete-auth-sample ](AppCompleteAuth/Images/app-complete-auth.gif)
 

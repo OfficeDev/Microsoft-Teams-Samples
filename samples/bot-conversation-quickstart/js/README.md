@@ -25,8 +25,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 ## Interaction with app
 
-![BotConversationQuickStart](Images/ezgif.com-gif-maker.gif)
-
+![BotConversationQuickStart](Images/bot-conversation.gif)
 
 ## Prerequisites
 

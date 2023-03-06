@@ -23,7 +23,7 @@ This sample shows feature where user can checkin with current location and view 
 * Bots
 * Adaptive Cards
 * Task Modules
-* Device Permission API (Location)
+* Device Permission API (location)
 
 ## Interaction with app
 

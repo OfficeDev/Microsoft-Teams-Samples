@@ -24,7 +24,7 @@ build an Action-based Messaging Extension.
 * Message Extensions
 * Action Commands
 
-- **Interaction with Messaging Extension**
+## Interaction with Messaging Extension
 ![msgext-action ](Images/msgext-action.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

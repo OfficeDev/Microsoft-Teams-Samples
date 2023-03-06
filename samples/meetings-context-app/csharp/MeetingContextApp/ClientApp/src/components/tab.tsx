@@ -8,10 +8,9 @@ const Tab = () => {
 
     React.useEffect(() => {
         app.initialize();
-        meeting.getMeetingDetails( (error, meetingDetails: any) =>
-        {
-            console.log(JSON.stringify(meetingDetails));
-            setTabContext(meetingDetails);
+        app.getContext().then((context) => {
+            console.log(JSON.stringify(context));
+            setTabContext(context);
         }); 
     }, [])
 

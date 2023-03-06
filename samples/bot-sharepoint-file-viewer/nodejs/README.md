@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-nodejs
 Using this Nodejs sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 
 ## Included Features
-* Teams SSO (Bots)
+* Teams SSO (bots)
 * Adaptive Cards
 * Graph API
 
