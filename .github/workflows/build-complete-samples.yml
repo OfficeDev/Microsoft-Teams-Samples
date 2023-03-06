@@ -48,10 +48,6 @@ jobs:
               name: 'app-sso'
               version: '6.0.x'
 
-            - project_path: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
-              name: 'app-virtual-assistant'
-              version: '6.0.x'
-
             - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/FetchGroupChatMessages.csproj'
               name: 'bot-archive-groupchat-messages'
               version: '6.0.x'
@@ -124,8 +120,8 @@ jobs:
               name: 'graph-rsc'
               version: '6.0.x'
 
-            - project_path: 'samples/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
-              name: 'meeting-recruitment-app'
+            - project_path: 'samples/meetings-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
+              name: 'meetings-recruitment-app'
               version: '6.0.x'
 
             - project_path: 'samples/meetings-notification/csharp/InMeetingNotifications/InMeetingNotificationsBot.csproj'
@@ -420,8 +416,8 @@ jobs:
               name: 'bot-formatting-cards'
               version: '6.0.x'
 
-            - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
-              name: 'meeting-tabs'
+            - project_path: 'samples/meetings-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
+              name: 'meetings-tabs'
               version: '6.0.x'
               
             - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
@@ -554,10 +550,6 @@ jobs:
             - project_path: 'samples/connector-generic/nodejs'
               name: 'connector-generic'
               version: '14.x'
-
-            - project_path: 'samples/connector-github-notification/nodejs'
-              name: 'connector-github-notification'
-              version: '14.x'
             
             - project_path: 'samples/graph-activity-feed-broadcast/nodejs'
               name: 'graph-activity-feed-broadcast'
@@ -615,8 +607,8 @@ jobs:
               name: 'meetings-token-app'
               version: '14.x'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs/api'
-              name: 'meeting-recruitment-app'
+            - project_path: 'samples/meetings-recruitment-app/nodejs/api'
+              name: 'meetings-recruitment-app'
               version: '14.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
@@ -871,8 +863,8 @@ jobs:
               name: 'bot-formatting-cards'
               version: '18.x'
 
-            - project_path: 'samples/meeting-tabs/nodejs'
-              name: 'meeting-tabs'
+            - project_path: 'samples/meetings-tabs/nodejs'
+              name: 'meetings-tabs'
               version: '18.x'
 
             - project_path: 'samples/bot-all-cards/nodejs'

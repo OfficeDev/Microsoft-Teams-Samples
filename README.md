@@ -169,7 +169,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js]|[View](/samples/app-sso/csharp/demo-manifest/App-SSO.zip)
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |[View](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
-|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|[View](/samples/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
+|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|[View](/samples/meetings-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
 |14|Meeting Transcript App | This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.|[View][meetings-transcription-app#cs] |[View][meetings-transcription-app#nodejs]|
 |15| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]|[View](/samples/app-installation-using-qr-code/csharp/demo-manifest/App-Installation-Using-QR.zip)
 |16| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
@@ -330,8 +330,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-stage-view#cs]:samples/meetings-stage-view/csharp
 [meetings-events#cs]:samples/meetings-events/csharp
 [meetings-events#js]:samples/meetings-events/nodejs
-[meeting-recruitment-app#cs]:samples/meeting-recruitment-app/csharp
-[meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
+[meeting-recruitment-app#cs]:samples/meetings-recruitment-app/csharp
+[meeting-recruitment-app#js]:samples/meetings-recruitment-app/nodejs
 [meetings-transcription-app#cs]:samples/meetings-transcription/csharp
 [meetings-transcription-app#nodejs]:samples/meetings-transcription/nodejs
 [meetings-share-to-stage-signing#csharp]:samples/meetings-share-to-stage-signing/csharp
@@ -340,8 +340,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [qrjointeam#csharp]:samples/bot-join-team-using-qr-code/csharp
 [qrjointeam#nodejs]:samples/bot-join-team-using-qr-code/nodejs
 [incoming-webhook#nodejs]:samples/incoming-webhook/nodejs
-[meetingtabs#csharp]:samples/meeting-tabs/csharp
-[meetingtabs#nodejs]:samples/meeting-tabs/nodejs
+[meetingtabs#csharp]:samples/meetings-tabs/csharp
+[meetingtabs#nodejs]:samples/meetings-tabs/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
