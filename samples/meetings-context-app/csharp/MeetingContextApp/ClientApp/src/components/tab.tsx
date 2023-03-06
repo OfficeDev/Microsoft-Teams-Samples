@@ -8,10 +8,10 @@ const Tab = () => {
 
     React.useEffect(() => {
         app.initialize();
-        app.getContext().then((context) => {
-            console.log(JSON.stringify(context));
-            setTabContext(context);
-        }); 
+        meeting.getMeetingDetails((error, meetingDetails: any) => {
+            console.log(JSON.stringify(meetingDetails));
+            setTabContext(meetingDetails);
+        });
     }, [])
 
     const [tabContext, setTabContext] = React.useState({});

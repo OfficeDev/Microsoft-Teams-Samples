@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "f3451eaa-0cf9-4eb2-93b1-58295abaf4d4",
+  "id": "{{Manifest-id}}",
   "packageName": "com.teams.meetingtabcontext",
   "developer": {
     "name": "Microsoft",
@@ -15,7 +15,7 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Channel 3",
+    "short": "Meeting Context App",
     "full": "Meeting Context App"
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://7b3c-118-185-176-154.ngrok.io/configure",
+      "configurationUrl": "https://{{Domain Name}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -33,15 +33,14 @@
       ],
       "context": [
         "meetingChatTab",
-        "meetingDetailsTab",
-		    "meetingSidePanel"
+        "meetingDetailsTab"
       ]
     }
   ],
-   "bots": [
+  "bots": [
     {
-      "botId": "f6661eaa-0cf9-4eb2-93b1-58278abaf4d4",
-      "scopes": ["team", "groupchat" ],
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [ "groupchat" ],
       "commandLists": [
         {
           "commands": [
@@ -54,9 +53,10 @@
               "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
             }
           ],
-          "scopes": ["groupchat"]
+          "scopes": [ "groupchat" ]
         }
       ]
+
     }
   ],
   "permissions": [
@@ -65,13 +65,13 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "7b3c-118-185-176-154.ngrok.io"
+    "{{Domain Name}}"
   ],
-    "webApplicationInfo": {
-    "id": "f6661eaa-0cf9-4eb2-93b1-58278abaf4d4",
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
     "resource": "https://RscBasedStoreApp"
-    },
-	"authorization": {
+  },
+  "authorization": {
     "permissions": {
       "resourceSpecific": [
         {
