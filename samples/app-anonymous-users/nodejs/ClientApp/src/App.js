@@ -1,18 +1,18 @@
-// <copyright file="router.js" company="Microsoft Corporation">
+// <copyright file="App.js" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
 
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AppInMeeting from "../components/app-in-meeting";
-import Configure from "../components/configure";
-import ShareToMeeting from "../components/share-to-meeting";
+import AppInMeeting from "./components/app-in-meeting";
+import Configure from "./components/configure";
+import ShareToMeeting from "./components/share-to-meeting";
 import * as microsoftTeams from "@microsoft/teams-js";
-import ShareView from "../components/shareview";
-import FacebookAuthEnd from "../components/facebook-auth-end";
-import AuthStart from "../components/auth-start";
-import AuthEnd from "../components/auth-end";
+import ShareView from "./components/shareview";
+import FacebookAuthEnd from "./components/facebook-auth-end";
+import AuthStart from "./components/auth-start";
+import AuthEnd from "./components/auth-end";
 export const AppRoute = () => {
 
     React.useEffect(() => {

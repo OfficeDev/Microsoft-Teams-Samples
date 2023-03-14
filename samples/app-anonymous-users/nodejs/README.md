@@ -39,7 +39,7 @@ This sample shows anonymous users support in Teams meeting apps.
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+     ngrok http --host-header=rewrite 3978
    ```  
 
 2. Setup
@@ -52,7 +52,7 @@ This sample shows anonymous users support in Teams meeting apps.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
   4. Under **Manage**, select **Expose an API**. 
   5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
       * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
@@ -81,7 +81,7 @@ This sample shows anonymous users support in Teams meeting apps.
       * Select **Add a platform**.
       * Select **Single-page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
-  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
   15. Create a Bot Registration
     - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
@@ -90,7 +90,7 @@ This sample shows anonymous users support in Teams meeting apps.
 
 16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
-   - Provide connection Name : for eg `facebookconnection`. You will use this name in your bot in the appsettings.json file.
+   - Provide connection Name : for eg `facebookconnection`. You will use this name in your bot in the .env file.
    - Select service provider as `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
 
