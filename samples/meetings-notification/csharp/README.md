@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting notifications
+description: Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting
 products:
 - office-teams
 - office
@@ -15,10 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 
 # Targeted In-Meeting Notification
 
-This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
+This sample illustrates how to implement [Targeted In-Meeting Notification](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 ## Interaction with app
 
-![Targeted In-Meeting Notification](TargetedNotifications/Images/MeetingNotification.gif)
+![Targeted In-Meeting Notification](InMeetingNotifications/Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -88,19 +88,25 @@ Message the Bot by @ mentioning to interact with the content bubble.
 1. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
 
 ## Running the sample
-![Welcome](TargetedNotifications/Images/Welcome.png)
 
-![Agenda card](TargetedNotifications/Images/AgendaCard.png)
+Type `SendContentBubble` in bot chat to send In-Meeting notifications.
 
-![Feedback submit](TargetedNotifications/Images/FeedbackSubmit.png)
+![Welcome](InMeetingNotifications/Images/Welcome.png)
 
-![Feedback card](TargetedNotifications/Images/FeedbackCard.png)
+![Agenda card](InMeetingNotifications/Images/AgendaCard.png)
+
+![Feedback submit](InMeetingNotifications/Images/FeedbackSubmit.png)
+
+![Feedback card](InMeetingNotifications/Images/FeedbackCard.png)
 
 
 ## Send targeted meeting notification
-![Meeting card](TargetedNotifications/Images/MeetingCard.png)
 
-![Target notification](TargetedNotifications/Images/TargetNotification.png)
+Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
+
+![Meeting card](InMeetingNotifications/Images/MeetingCard.png)
+
+![Target notification](InMeetingNotifications/Images/TargetNotification.png)
 
 
 ## Further Reading

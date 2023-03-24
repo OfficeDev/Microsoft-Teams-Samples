@@ -100,10 +100,3 @@ server.get('/api/getAppId', (req, res) => {
 
 // Static Middleware
 server.use(express.static(path.join(__dirname, './pages')));
-
-
-
-
-
-
-
