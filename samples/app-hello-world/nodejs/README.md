@@ -18,6 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 
 ## Included Features
 * Tabs
+* Bots
+* Messaging Extensions
 
 ## Interaction with app
 

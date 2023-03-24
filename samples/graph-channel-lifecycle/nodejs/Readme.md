@@ -20,10 +20,6 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 ## Included Features
 * Tabs
 * Graph API
-
-## Included Features
-* Tabs
-* Graph API
 * RSC Permissions
 
 ## Interaction with app

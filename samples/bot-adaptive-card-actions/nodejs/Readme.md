@@ -21,7 +21,7 @@ This sample shows the feature where user can send adaptive card with different a
 ![Bot Adaptive ActionsGif](Images/AdaptiveCardActions.gif)
 
 ## Included Features
-* Azure Bot
+* Bots
 * Adaptive Cards
 
 ## Prerequisites
