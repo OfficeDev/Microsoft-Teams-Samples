@@ -47,8 +47,8 @@
               "description": "Sends targeted meeting notification to selected members."
             },
             {
-              "title": "SendContentBubble",
-              "description": "Sends content bubble in meeting."
+              "title": "SendInMeetingNotification",
+              "description": "Sends In-meeting notification in meeting."
             }
           ]
         }
