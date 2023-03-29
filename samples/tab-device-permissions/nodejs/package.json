@@ -20,7 +20,7 @@
     "react-grid": "^4.0.4",
     "react-scripts": "^5.0.1",
     "react-segment-analytics": "^2.0.0",
-    "reactstrap": "^9.1.5",
+    "reactstrap": "9.1.6",
     "rsuite": "^5.23.2",
     "swiper": "^8.4.5",
     "typescript": "^4.9.3",
