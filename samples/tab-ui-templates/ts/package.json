@@ -61,7 +61,7 @@
     "z-schema": "^5.0.0"
   },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts --openssl-legacy-provider start",
+    "start": "set PORT=3978 HTTP=true && react-scripts start",
     "serve": "react-scripts start & gulp start-ngrok",
     "build": "react-scripts build",
     "package": "gulp manifest"
