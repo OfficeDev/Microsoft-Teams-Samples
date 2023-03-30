@@ -886,10 +886,13 @@ jobs:
             - project_path: 'samples/app-anonymous-users/nodejs/ClientApp'
               name: 'app-anonymous-users'
               version: '18.x'
-                                 
 
             - project_path: 'samples/bot-sso-adaptivecard/nodejs'
               name: 'bot-sso-adaptivecard'
+              version: '18.x'
+            
+            - project_path: 'samples/bot-teams-authentication/nodejs'
+              name: 'bot-teams-authentication'
               version: '18.x'
 
       fail-fast: false
