@@ -14,8 +14,7 @@ microsoftTeams.app.initialize().then(() => {
 
         var taskInfo_1 = {
             title: "",
-            height: "",
-            width: "",
+            size: "",
             url: "",
             card: "",
             fallbackUrl: "",
@@ -239,7 +238,7 @@ microsoftTeams.app.initialize().then(() => {
                         };
 
                         //Task modules invoked from a tab
-                        microsoftTeams.tasks.startTask(taskInfo_1, submitHandler);
+                        microsoftTeams.dialog.open(taskInfo_1, submitHandler);
                         break;
 
                     default:

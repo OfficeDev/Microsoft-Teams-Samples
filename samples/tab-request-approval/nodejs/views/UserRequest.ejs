@@ -4,9 +4,7 @@
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
-            crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -59,13 +57,12 @@
     </div>
     <script>
           var data =  <%-data%>
-        microsoftTeams.initialize(()=>{
+        microsoftTeams.app.initialize().then(()=>{
             $("#noRequestFound").hide();
             $("#requestApproved").hide();
             getRequestDetails(); 
-        })
-        // Method to show geo location for given latitude and longitude values.
-        
+        });
+
         function getRequestDetails() {
             if(data == null){
                 $("#productDetails").hide();
@@ -98,14 +95,14 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    microsoftTeams.tasks.submitTask();
+                    microsoftTeams.dialog.submit();
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask();
+            microsoftTeams.dialog.submit();
         };  
 
         function RejectRequest() {
@@ -121,14 +118,14 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    microsoftTeams.tasks.submitTask();
+                    microsoftTeams.dialog.submit();
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask();
+            microsoftTeams.dialog.submit();
         };
     </script>
 </body>
