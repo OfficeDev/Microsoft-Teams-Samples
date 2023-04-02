@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-csharp
 
 Using this csharp sample, you can check how to get staggered graph api permissions
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 ## Interaction with app
 
 ![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)

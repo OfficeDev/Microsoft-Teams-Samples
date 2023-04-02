@@ -17,6 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* Live Share SDK
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![Preview Image](Images/Preview.gif)

@@ -17,6 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time using bot.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Task Modules
+* Quartz Scheduler (for scheduling)
+
 ## Interaction with app
 
 ![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminder.gif)

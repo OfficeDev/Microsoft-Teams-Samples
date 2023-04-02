@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-request-approval-nodejs
 
 This sample has been created using [Microsoft Graph](https://docs.microsoft.com/graph/overview?view=graph-rest-beta), it shows how to trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
 
+## Included Features
+* Teams SSO (tabs)
+* Activity Feed Notifications
+* Graph API
+
 - **Interaction with app**
 ![tab-request-approval ](Images/tab-request-approval.gif)
 

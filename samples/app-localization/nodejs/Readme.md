@@ -16,6 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 # Teams App Localization Node.js
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
+## Included Features
+* Bots
+* Tabs
+* Localization
+
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
 

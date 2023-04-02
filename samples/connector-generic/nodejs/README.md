@@ -16,9 +16,12 @@ urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
 
 # Generic Connector 
 
-This contains the source for a generic connector that's easy to customize for any system which supports webhooks. 
+This contains the source for a generic connector that's easy to customize for any system which supports webhooks.
 
-**Interaction with bot**
+## Included Features
+* Connectors
+
+## Interaction with app
 ![connector_generic](Images/connector_generic.gif) 
  
 ## Prerequisites

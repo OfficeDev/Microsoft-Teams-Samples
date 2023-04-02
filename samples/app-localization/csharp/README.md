@@ -16,6 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 # Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
+## Included Features
+* Bots
+* Tabs
+* Localization
+
 ## Interaction with app
 
 ![Preview Image](Images/Preview.gif)

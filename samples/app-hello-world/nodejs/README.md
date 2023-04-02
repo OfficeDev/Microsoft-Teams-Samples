@@ -16,6 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 
 - Microsoft Teams hello world sample app.
 
+## Included Features
+* Tabs
+* Bots
+* Messaging Extensions
+
 ## Interaction with app
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)

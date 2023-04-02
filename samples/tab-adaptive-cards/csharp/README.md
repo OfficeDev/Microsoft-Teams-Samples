@@ -19,6 +19,10 @@ This App talks about the Teams tab which displays Adaptive card with CSharp.
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+## Included Features
+* Tabs
+* Adaptive Cards (in tabs)
+
 ## Interaction with app
 
 ![Adaptive Card](TabWithAdpativeCardFlow/Images/Tabwithadaptivecard.gif)

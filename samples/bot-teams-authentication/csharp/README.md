@@ -35,7 +35,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - `openid`
 - `User.Read`
 
-- **Interaction with the bot**
+## Included Features
+* Teams SSO (bots)
+* Graph API
+
+## Interaction with the bot**
 ![bot-teams-auth ](Images/bot-teams-auth.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

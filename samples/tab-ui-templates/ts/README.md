@@ -19,7 +19,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 
 This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
 
-- **Interaction with tab**
+ ## Included Features
+* Tabs
+* UI Templates
+
+## Interaction with tab
 ![Tab-page](Images/tab-ui-templates.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

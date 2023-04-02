@@ -17,7 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-no
 
 You can interact with this bot by sending it a message. The bot will respond by sending a reply to the channel, and then responding to that reply.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+* Initiate thread in Teams Channel
+
+## Interaction with bot
  ![Teams Thread](Images/TeamsThread.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client

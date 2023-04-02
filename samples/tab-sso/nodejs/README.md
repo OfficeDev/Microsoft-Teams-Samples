@@ -23,6 +23,11 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 
 3. Call Graph and retrieve the user's profile
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 - **Interaction with app**
 ![tab-sso-sample ](./doc/images/tab-sso.gif)
 

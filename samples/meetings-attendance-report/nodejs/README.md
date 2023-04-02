@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-nodejs
 
 This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
 
+## Included Features
+* Bots
+* Graph API
+
 ## Interaction with app
 
 When meeting ends, attendance report card is sent by the bot.

@@ -16,6 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 ## Interaction with app
 
 ![Config SSO](Images/tabssomodules.gif)

@@ -15,7 +15,13 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 
 # Meetings Notification
 
-This sample illustrates how to implement [In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting?tabs=desktop)  In-Meeting Experience.
+This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
+
+## Included Features
+* Bots
+* In-Meeting Notifications
+* Adaptive Cards
+* RSC Permissions
 
 ## Interaction with app
 

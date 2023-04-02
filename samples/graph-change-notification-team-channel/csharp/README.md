@@ -18,7 +18,13 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
 
-**Interaction with bot**
+## Included Features
+* Tabs
+* Graph API
+* RSC Permissions
+* Change Notifications
+
+## Interaction with bot
 ![Notifications](ChangeNotification/Images/ChangeNotifications.gif)
 
 ## Prerequisites

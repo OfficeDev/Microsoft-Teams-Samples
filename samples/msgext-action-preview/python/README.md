@@ -21,7 +21,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-preview-python
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build an Action Based Messaging Extension and demonstrates creating a simple card based on parameters entered by the user from a Task Module.
 
-- **Interaction with Messaging Extension Action Preview**
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
+## Interaction with Messaging Extension Action Preview
 ![MsgExtAction](Images/MsgExtPreview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

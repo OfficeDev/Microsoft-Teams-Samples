@@ -18,6 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-csharp
 
 This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
 
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* RSC Permissions
+
 **Interaction with bot**
 ![MeetingTabsGif](Images/MeetingTabsGif.gif)
 

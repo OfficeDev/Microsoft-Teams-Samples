@@ -19,7 +19,14 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 
 Sample that shows how to use dialog bot with bot sdk v4, messaging extension, facebook auth flow in Nodejs.
 
-- **Interaction with app**
+## Included Features
+* Bots
+* Tabs
+* Messaging Extensions
+* Adaptive Cards
+* Facebook Authentication (bots)
+
+## Interaction with app
 ![app-complete-sample ](images/app-complete-sample.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

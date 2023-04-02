@@ -21,12 +21,6 @@
 		<Content Remove="wwwroot\**" />
 		<None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
 	</ItemGroup>
-	<ItemGroup> 
-		<None Remove="ClientApp\src\components\tab-config.tsx" />
-	</ItemGroup>
-	<ItemGroup>
-		<TypeScriptCompile Include="ClientApp\src\components\tab-config.ts" />
-	</ItemGroup>
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
 		<Exec Command="node --version" ContinueOnError="true">

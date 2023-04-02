@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-nodejs
 
 This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel.
 
+## Included Features
+* Tabs
+* Graph API
+* RSC Permissions
+
 ## Interaction with app
    
   ![](Images/GraphChannelLifeCycleModule.gif)

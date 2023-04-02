@@ -21,7 +21,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Tabs
+* Task Modules
+
+## Interaction with bot
 ![TaskModule](Images/TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
