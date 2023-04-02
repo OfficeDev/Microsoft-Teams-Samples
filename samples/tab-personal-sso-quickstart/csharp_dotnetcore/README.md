@@ -17,6 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-cshar
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 ## Interaction with app
 
 ![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)  

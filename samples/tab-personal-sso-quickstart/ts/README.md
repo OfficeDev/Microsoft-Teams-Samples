@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
 
 ## Interaction with app
 

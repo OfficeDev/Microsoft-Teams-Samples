@@ -18,6 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
 
 Using this nodejs sample, you can check how to get staggered graph api permissions
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 ## Interaction with app
 
 ![Tab Staggered PermissionGif](Images/TabStaggeredPermissionGif.gif)
