@@ -92,14 +92,14 @@ namespace InMeetingNotificationsBot
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("SendTargetNotificationCard.json", meetingNotificationDetails);
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
                 }
-                else if (turnContext.Activity.Text.Trim() == "SendContentBubble")
+                else if (turnContext.Activity.Text.Trim() == "SendInMeetingNotification")
                 {
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("AgendaCard.json", _agenda);
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
                 }
                 else
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Please type `SendTargetedNotification` or `SendContentBubble` to send In-meeting notifications."));
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Please type `SendTargetedNotification` or `SendInMeetingNotification` to send In-meeting notifications."));
                 }
             }
             else

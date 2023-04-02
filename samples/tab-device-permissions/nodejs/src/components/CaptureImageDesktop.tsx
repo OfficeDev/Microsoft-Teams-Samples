@@ -3,9 +3,8 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Text, Button, Image } from '@fluentui/react-components'
+import { Text, Button, Image, Card } from '@fluentui/react-components'
 import CheckAndAlertForCameraPermission from '../NavigatorPermission';
-import { Card } from "@fluentui/react-components/unstable";
 import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureImageDesktop' component

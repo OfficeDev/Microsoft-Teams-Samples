@@ -3,8 +3,7 @@
 
 import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Text, Button } from '@fluentui/react-components'
-import { Card } from "@fluentui/react-components/unstable"
+import { Text, Button, Card } from '@fluentui/react-components'
 import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureAudioDesktop' component

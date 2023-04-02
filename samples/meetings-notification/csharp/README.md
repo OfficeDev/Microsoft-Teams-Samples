@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 ---
 
-# Targeted In-Meeting Notification
+# Meetings Notification
 
 This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 
@@ -25,7 +25,7 @@ This sample illustrates how to implement [Targeted In-Meeting Notification](http
 
 ## Interaction with app
 
-![Targeted In-Meeting Notification](InMeetingNotifications/Images/MeetingNotification.gif)
+![In-Meeting Notification](InMeetingNotifications/Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -96,7 +96,7 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Running the sample
 
-Type `SendContentBubble` in bot chat to send In-Meeting notifications.
+Type `SendInMeetingNotification` in bot chat to send In-Meeting notifications.
 
 ![Welcome](InMeetingNotifications/Images/Welcome.png)
 
