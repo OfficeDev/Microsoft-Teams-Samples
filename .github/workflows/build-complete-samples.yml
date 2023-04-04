@@ -837,7 +837,7 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
-              version: '18.x'
+              version: '16.x'
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
