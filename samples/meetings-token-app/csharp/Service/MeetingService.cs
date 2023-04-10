@@ -9,6 +9,7 @@ namespace TokenApp.Service
     using System.Net.Http.Headers;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Integration.AspNet.Core;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Bot.Schema;
@@ -23,7 +24,7 @@ namespace TokenApp.Service
     {
         private readonly HttpClient httpClient;
         private readonly AppCredentials botCredentials;
-        private readonly BotFrameworkHttpAdapter botAdapter;
+        private readonly IBotFrameworkHttpAdapter adapter;
         private readonly ITenantInfoRepository tenantInfoRepository;
         private readonly string teamsAppId;
         private readonly string contentBubbleUrl;
@@ -33,18 +34,18 @@ namespace TokenApp.Service
         /// </summary>
         /// <param name="httpClientFactory">The Http client factory.</param>
         /// <param name="botCredentials">The Bot credentials.</param>
-        /// <param name="botAdapter">The Bot Framework HTTP adapter.</param>
+        /// <param name="adapters">The Bot Framework HTTP adapter.</param>
         /// <param name="tenantInfoRepository">The TenantInfo repository.</param>
         /// <param name="meetingServiceOptions">App options related to the meetings service.</param>
         public MeetingService(
             IHttpClientFactory httpClientFactory,
             AppCredentials botCredentials,
-            IBotFrameworkHttpAdapter botAdapter,
+            IBotFrameworkHttpAdapter adapters,
             ITenantInfoRepository tenantInfoRepository,
             IOptions<MeetingServiceOptions> meetingServiceOptions)
         {
             this.botCredentials = botCredentials;
-            this.botAdapter = (BotFrameworkHttpAdapter)botAdapter;
+            adapter = adapters;
             this.httpClient = httpClientFactory.CreateClient();
             this.tenantInfoRepository = tenantInfoRepository;
             this.teamsAppId = meetingServiceOptions.Value.TeamsAppId;
@@ -54,7 +55,7 @@ namespace TokenApp.Service
         /// <inheritdoc/>
         public async Task<UserMeetingRoleServiceResponse> GetMeetingRoleAsync(string meetingId, string userId, string tenantId)
         {
-            var serviceUri = this.tenantInfoRepository.GetServiceUrl(tenantId);
+            var serviceUri = "https://smba.trafficmanager.net/amer/";
             if (serviceUri == null)
             {
                 throw new InvalidOperationException("Service URL is not avaiable for tenant ID " + tenantId);
@@ -114,7 +115,7 @@ namespace TokenApp.Service
             };
 
             // Continue the conversation to get a turn context for the conversation then post the activity
-            await this.botAdapter.ContinueConversationAsync(
+            await ((BotAdapter)adapter).ContinueConversationAsync(
                 this.botCredentials.MicrosoftAppId,
                 conversationReference,
                 async (turnContext, cancellationToken) =>
