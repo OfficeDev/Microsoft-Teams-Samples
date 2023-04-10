@@ -55,10 +55,15 @@ namespace TokenApp.Service
         /// <inheritdoc/>
         public async Task<UserMeetingRoleServiceResponse> GetMeetingRoleAsync(string meetingId, string userId, string tenantId)
         {
-            var serviceUri = "https://smba.trafficmanager.net/amer/";
-            if (serviceUri == null)
+            var serviceUri = string.Empty;
+
+            if (this.tenantInfoRepository.GetServiceUrl(tenantId) != null)
             {
-                throw new InvalidOperationException("Service URL is not avaiable for tenant ID " + tenantId);
+                serviceUri = this.tenantInfoRepository.GetServiceUrl(tenantId);
+            }
+            else
+            {
+                serviceUri = "https://smba.trafficmanager.net/amer/";
             }
 
             using var getRoleRequest = new HttpRequestMessage(HttpMethod.Get, new Uri(new Uri(serviceUri), string.Format("v1/meetings/{0}/participants/{1}?tenantId={2}", meetingId, userId, tenantId)));
