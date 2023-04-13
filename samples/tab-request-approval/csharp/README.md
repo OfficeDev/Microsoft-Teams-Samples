@@ -46,7 +46,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   
   run ngrok locally
   ```bash
-  ngrok http -host-header=localhost 3978
+  ngrok http 3978 --host-header="localhost:3978"
   ```
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
@@ -128,7 +128,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 18. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http 3978 --host-header="localhost:3978"
     ```
  
 19. Setup and run the bot from Visual Studio: 

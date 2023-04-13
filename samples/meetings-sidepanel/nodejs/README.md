@@ -50,7 +50,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 1. Run ngrok - point to port 3001 (pointing to ClientApp)
 
     ```bash
-    # ngrok http -host-header=rewrite 3001
+    # ngrok http 3001 --host-header="localhost:3001"
     ```
 
 2. Clone the repository

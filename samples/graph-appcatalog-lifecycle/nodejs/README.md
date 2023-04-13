@@ -50,7 +50,7 @@ the Teams service needs to call into the bot.
 4) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 5) Update the `.env` configuration with the ```ClientId``` and ```ClientSecret```
 

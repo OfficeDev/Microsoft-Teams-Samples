@@ -151,7 +151,7 @@ sequenceDiagram
     * Run `dotnet run`
 
     ### Locally in Visual Studio
-    * Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
+    * Point Ngrok to port 44326: `ngrok http 44326 --host-header="localhost:44326"`
     * Launch Visual Studio
     * File -> Open -> Project/Solution
     * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder

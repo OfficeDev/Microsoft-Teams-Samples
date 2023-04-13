@@ -71,7 +71,7 @@ the Teams service needs to call into the bot.
 1) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http --host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)

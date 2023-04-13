@@ -36,7 +36,7 @@ This sample shows the contents of tab context object in a private and shared cha
 Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     
     ```
 

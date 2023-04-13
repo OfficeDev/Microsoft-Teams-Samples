@@ -42,7 +42,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
 
       Run ngrok - point to port 3978
       ```bash
-       ngrok http -host-header=rewrite 3978
+       ngrok http 3978 --host-header="localhost:3978"
        ```
    4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok.io` which will be used in later steps.
 

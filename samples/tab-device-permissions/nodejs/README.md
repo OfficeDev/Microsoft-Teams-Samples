@@ -64,7 +64,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - Run ngrok - point to port `3000`
 
     ```bash
-    ngrok http -host-header=localhost 3000
+    ngrok http 3000 --host-header="localhost:3000"
     ```
 3. Setup for code   
 - Clone the repository

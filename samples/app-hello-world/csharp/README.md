@@ -58,7 +58,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1) Run ngrok - point to port 5000
 
     ```bash
-    # ngrok http -host-header=rewrite 5000
+    # ngrok http 5000 --host-header="localhost:5000"
     ```
 ### 3. Setup for code
 - Clone the repository

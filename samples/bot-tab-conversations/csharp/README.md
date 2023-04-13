@@ -132,7 +132,7 @@ There is also a personal tab that will list inquires from all the support depart
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on. Note the port will change depending on how you are deploying.
     ```bash
-    ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
+    ngrok http 44326 --host-header="localhost:44326" # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
 
@@ -218,7 +218,7 @@ The tour files can be found in the `.tours` directory.
 
 ## Deployment
 ### Locally in Visual Studio
-* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
+* Point Ngrok to port 44326: `ngrok http 44326 --host-header="localhost:44326"`
 * Open the solution in Visual Studio.
 * Ensure the start-up project is set to `Microsoft.Teams.Samples.ConversationalTabs.Web`
 * Start Debugging using IIS Express

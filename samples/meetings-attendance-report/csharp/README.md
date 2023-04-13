@@ -89,7 +89,7 @@ When meeting ends, attendance report card is sent by the bot.
  - Run ngrok - point to port 3978
 
   ```bash
-  # ngrok http -host-header=rewrite 3978
+  # ngrok http 3978 --host-header="localhost:3978"
   ```
 - Once started you should see URL  `https://123.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 

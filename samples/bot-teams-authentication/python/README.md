@@ -62,7 +62,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       - Run ngrok - point to port 3978
 
 	```bash
-	# ngrok http -host-header=rewrite 3978
+	# ngrok http 3978 --host-header="localhost:3978"
 	```   
 4. Setup for code
 
@@ -79,7 +79,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http --host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 
   - Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)

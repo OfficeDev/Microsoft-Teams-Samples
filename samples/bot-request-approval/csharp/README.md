@@ -48,7 +48,7 @@ This sample shows a feature where:
   
   run ngrok locally
   ```bash
-  ngrok http -host-header=localhost 3978
+  ngrok http 3978 --host-header="localhost:3978"
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -81,7 +81,7 @@ This sample shows a feature where:
 4. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http 3978 --host-header="localhost:3978"
     ```
  
 5. Setup and run the bot from Visual Studio: 

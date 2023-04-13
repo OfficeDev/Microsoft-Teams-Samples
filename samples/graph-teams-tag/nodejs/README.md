@@ -65,7 +65,7 @@ This is a sample application where user can create, update, add or remove member
    - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 4. Setup for code
 

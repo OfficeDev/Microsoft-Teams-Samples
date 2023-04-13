@@ -66,7 +66,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
  - Run ngrok - point to port 3978
 
  ```bash
-  ngrok http -host-header=rewrite 3978
+  ngrok http 3978 --host-header="localhost:3978"
  ```
 3. Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git

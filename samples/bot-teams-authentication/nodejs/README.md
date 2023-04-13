@@ -89,7 +89,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 8. Setup NGROK
     - Run ngrok - point to port 3978
 	```bash
-	# ngrok http -host-header=rewrite 3978
+	# ngrok http 3978 --host-header="localhost:3978"
 	```   
 9. Setup for code
 

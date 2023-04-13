@@ -41,7 +41,7 @@ This sample shows a feature where user can broadcast a message to all members of
 
 - run ngrok locally
   ```bash
-  ngrok http -host-header=localhost 3978
+  ngrok http 3978 --host-header="localhost:3978"
   ```
 
 - Register your Teams Auth SSO with Azure AD
@@ -109,7 +109,7 @@ This sample shows a feature where user can broadcast a message to all members of
 17. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http 3978 --host-header="localhost:3978"
     ```
  
 18. Setup and run the bot from Visual Studio: 

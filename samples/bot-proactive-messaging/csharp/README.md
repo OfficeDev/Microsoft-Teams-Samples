@@ -53,7 +53,7 @@ Two samples to highlight solutions to two challenges with building proactive mes
 ## Setup
 1. Configure public url to point to http port 5000
 ```bash
-# ngrok http -host-header=rewrite 5000
+# ngrok http 5000 --host-header="localhost:5000"
 ```
 
 2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).

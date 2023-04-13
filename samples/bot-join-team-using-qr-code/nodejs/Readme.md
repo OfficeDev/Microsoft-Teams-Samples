@@ -83,7 +83,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
 4) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the following details:
   - `MicrosoftAppId` - It is the AppId created in previous step (Setup for Bot SSO)

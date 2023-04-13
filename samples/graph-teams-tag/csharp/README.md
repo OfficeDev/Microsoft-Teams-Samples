@@ -60,7 +60,7 @@ This is a sample application where user can create, update, add or remove member
 
 
 5. Start ngrok on localhost:3978
-   - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
+   - Open ngrok and run command `ngrok http 3978 --host-header="localhost:3978"` 
    -  Once started you should see link `https://xxxxx.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
 
    ![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)

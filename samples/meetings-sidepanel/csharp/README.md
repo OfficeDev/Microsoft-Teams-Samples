@@ -42,7 +42,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 ## Setup.
 
 1. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978```
+   ```ngrok http 3978 --host-header="localhost:3978"```
 
 2. Create AAD app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)

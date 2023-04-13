@@ -45,7 +45,7 @@ This sample app demonstrates sending change notifications to user presence in Te
 2) Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+     ngrok http 3978 --host-header="localhost:3978"
    ```
 
 3) Setup App Registration

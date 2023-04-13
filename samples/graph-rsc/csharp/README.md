@@ -60,7 +60,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 4) Setup ngrok
       ```bash
-      ngrok http -host-header=rewrite 3978
+      ngrok http 3978 --host-header="localhost:3978"
       ```
 
 5)  Update appsettings.json

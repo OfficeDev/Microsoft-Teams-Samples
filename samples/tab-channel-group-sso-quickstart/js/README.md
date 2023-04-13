@@ -83,7 +83,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
    - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
  4. Setup for code
    - Clone the repository

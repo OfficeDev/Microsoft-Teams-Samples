@@ -41,7 +41,7 @@ There are example in-memory and Azure implementations of the token persistance.
   
   run ngrok locally
   ```bash
-  ngrok http https://localhost:5001
+  ngrok http 5001 --host-header="localhost:5001"
   ```
 
 ## Setup
@@ -49,7 +49,7 @@ There are example in-memory and Azure implementations of the token persistance.
 If you are running this app locally, you will probably be using some form of tunnel to your local machine. For this sample we use [ngrok](https://ngrok.com)
 
 ```bash
-ngrok http https://localhost:5001
+ngrok http 5001 --host-header="localhost:5001"
 ```
 
 ```bash

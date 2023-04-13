@@ -105,7 +105,7 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
   - Run ngrok - point to port 3978
 
 	```bash
-	# ngrok http -host-header=rewrite 3978
+	# ngrok http 3978 --host-header="localhost:3978"
 	```
 6. Setup for code
 

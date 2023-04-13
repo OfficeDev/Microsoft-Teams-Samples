@@ -57,7 +57,7 @@ For reference please check [Share app content to stage API](https://docs.microso
    - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 3. Setup for code
 
