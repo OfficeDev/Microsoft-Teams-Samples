@@ -43,7 +43,8 @@
     "id": "<<APP-ID>>",
     "resource": "https://AnyString",
     "applicationPermissions": [
-      "OnlineMeeting.ReadBasic.Chat"
+      "OnlineMeeting.ReadBasic.Chat",
+      "ChannelMeeting.ReadBasic.Group"
     ]
   }
 }
