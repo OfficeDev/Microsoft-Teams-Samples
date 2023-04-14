@@ -90,7 +90,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Interacting with the app in Teams Meeting
 
-Message the Bot by @ mentioning to interact with in-meeting notifications.
+Message the Bot by @ mentioning to interact with meetings notifications.
 1. You will see agenda items listed in an Adaptive Card.
 1. Select any option and click on Push Agenda button
 1. You can submit your feedback on either In-meeting notification/Adaptive card sent in chat.
