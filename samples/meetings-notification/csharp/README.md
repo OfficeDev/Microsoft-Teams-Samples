@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting
+description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting notificaion and Targegted Meeting Notifications
 products:
 - office-teams
 - office
@@ -15,22 +15,23 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 
 # Meetings Notification
 
-This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
+This sample illustrates how to implement [In-Meeting Notification](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#send-an-in-meeting-notification) and [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api) for scheduled meetings.
 
 ## Included Features
 * Bots
 * In-Meeting Notifications
+* Targeted In-Meeting Notifications
 * Adaptive Cards
 * RSC Permissions
 
 ## Interaction with app
 
-![In-Meeting Notification](InMeetingNotifications/Images/MeetingNotification.gif)
+![Meetings Notification](InMeetingNotifications/Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Meetings Content Bubble:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-notification.zip)
+**Meetings Notification:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-notification.zip)
 
 ## Prerequisites
 
@@ -85,14 +86,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/csharp/ContentBubble/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-notification/csharp/InMeetingNotifications/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ## Interacting with the app in Teams Meeting
 
-Message the Bot by @ mentioning to interact with the content bubble.
+Message the Bot by @ mentioning to interact with meetings notifications.
 1. You will see agenda items listed in an Adaptive Card.
 1. Select any option and click on Push Agenda button
-1. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
+1. You can submit your feedback on either In-meeting notification/Adaptive card sent in chat.
 
 ## Running the sample
 
@@ -119,6 +120,5 @@ Type `SendTargetedNotification` in bot chat to send Targeted Meeting notificatio
 ## Further Reading
 
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
-- [Meeting content bubble](https://learn.microsoft.com/microsoftteams/platform/sbs-meeting-content-bubble)
 - [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 - [Build in-meeting notification for Teams meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting)
