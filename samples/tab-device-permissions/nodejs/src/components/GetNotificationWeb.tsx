@@ -5,10 +5,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import {Text, Button, Card } from '@fluentui/react-components'
 import { CardBody } from 'reactstrap';
 /**
- * The 'GetNotificationDesktop' component
+ * The 'GetNotificationWeb' component
  * of your app.
  */
-const GetNotificationDesktop = () => {
+const GetNotificationWeb = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
@@ -60,4 +60,4 @@ const GetNotificationDesktop = () => {
     );
 }
 
-export default GetNotificationDesktop;
+export default GetNotificationWeb;

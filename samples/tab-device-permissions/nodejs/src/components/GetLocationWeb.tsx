@@ -7,10 +7,10 @@ import { Text, Button, Card, CardHeader} from '@fluentui/react-components'
 import { CardBody } from 'reactstrap';
 
 /**
- * The 'GetLocationDesktop' component
+ * The 'GetLocationWeb' component
  * of your app.
  */
-const GetLocationDesktop = () => {
+const GetLocationWeb = () => {
     const [geoLocationValue, setGeoLocationValue] = useState('');
     const [showComments, setShowComments] = useState(false);
 
@@ -80,4 +80,4 @@ const GetLocationDesktop = () => {
     );
 }
 
-export default GetLocationDesktop;
+export default GetLocationWeb;

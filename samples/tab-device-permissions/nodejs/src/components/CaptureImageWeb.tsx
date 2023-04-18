@@ -7,10 +7,10 @@ import { Text, Button, Image, Card } from '@fluentui/react-components'
 import CheckAndAlertForCameraPermission from '../NavigatorPermission';
 import { CardBody } from 'reactstrap';
 /**
- * The 'CaptureImageDesktop' component
+ * The 'CaptureImageWeb' component
  * of your app.
  */
-const CaptureImageDesktop = () => {
+const CaptureImageWeb = () => {
     var imageCapture: ImageCapture;
     const [capturedImage, setCapturedImage] = useState('');
 
@@ -59,4 +59,4 @@ const CaptureImageDesktop = () => {
     );
 }
 
-export default CaptureImageDesktop;
+export default CaptureImageWeb;
