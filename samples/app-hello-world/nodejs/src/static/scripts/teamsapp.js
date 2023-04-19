@@ -16,7 +16,7 @@
         setTheme(theme);
     });
 
-
+    // Handle save for configurable tab.
     microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
         const configPromise = microsoftTeams.pages.config.setConfig({
             websiteUrl: createTabUrl(),
