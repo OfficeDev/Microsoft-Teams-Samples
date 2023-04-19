@@ -3,11 +3,17 @@
 /// Licensed under the MIT License.
 /// </summary>
 
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using BotAllCards.Cards;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
@@ -66,9 +72,44 @@ namespace Microsoft.BotBuilderSamples
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             Logger.LogInformation("Running dialog with Message Activity.");
+            if (turnContext.Activity.Text == "MentionSupport")
+            {
+                var member = new TeamsChannelAccount();
 
-            // Run the Dialog with the new message Activity.
-            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+                try
+                {
+                    member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
+                }
+                catch (ErrorResponseException e)
+                {
+                    if (e.Body.Error.Code.Equals("MemberNotFoundInConversation", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await turnContext.SendActivityAsync("Member not found.");
+                        return;
+                    }
+                    else
+                    {
+                        throw e;
+                    }
+                }
+                var attachments = new List<Attachment>();
+
+                // Reply to the activity we received with an activity.
+                var reply = MessageFactory.Attachment(attachments);
+                reply.Attachments.Add(AllCards.sendMentionSupportCardAsync(member.Name));
+                await turnContext.SendActivityAsync(reply, cancellationToken);
+
+                await turnContext.SendActivityAsync(MessageFactory.Text("You have Selected <b>" + turnContext.Activity.Text + "</b>"), cancellationToken);
+
+                // Give the user instructions about what to do next
+                await turnContext.SendActivityAsync(MessageFactory.Text("Type anything to see all card."), cancellationToken);
+                
+            }
+            else
+            {
+                // Run the Dialog with the new message Activity.
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+            }
         }
     }
 }

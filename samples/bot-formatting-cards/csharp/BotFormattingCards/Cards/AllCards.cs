@@ -2,29 +2,37 @@
 /// Copyright(c) Microsoft. All Rights Reserved.
 /// Licensed under the MIT License.
 /// </summary>
-
 using System.IO;
-using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
-
+using AdaptiveCards.Templating;
+using Microsoft.Bot.Schema;
 namespace BotAllCards.Cards
 {
+
     public static class AllCards
     {
+
         /// <summary>
         /// Sends Mention Support Card 
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendMentionSupportCard()
+        public static Attachment sendMentionSupportCardAsync(string name)
         {
             var paths = new[] { ".", "Resources", "mentionSupport.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
+            var templateJSON = adaptiveCardJson;
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(templateJSON);
+            var memberData = new
+            {
+                userName = name
+            };
+            string cardJSON = template.Expand(memberData);
             var mentionSupportAdaptiveCardAttachment = new Attachment()
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+                Content = JsonConvert.DeserializeObject(cardJSON),
             };
 
             return mentionSupportAdaptiveCardAttachment;
@@ -38,7 +46,7 @@ namespace BotAllCards.Cards
         public static Attachment sendInfoMasking()
         {
             var paths = new[] { ".", "Resources", "informationMasking.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var sendsInfoMaskingAdaptiveCardAttachment = new Attachment()
             {
@@ -57,7 +65,7 @@ namespace BotAllCards.Cards
         public static Attachment sendFullWidthCardAdaptiveCard()
         {
             var paths = new[] { ".", "Resources", "sampleAdaptiveWithFullWidth.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var fullWidthAdaptiveCardAttachment = new Attachment()
             {
@@ -76,7 +84,7 @@ namespace BotAllCards.Cards
         public static Attachment sendStageViewImagesCard()
         {
             var paths = new[] { ".", "Resources", "stageViewForImages.json" };
-            var stageViewImagesAdaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var stageViewImagesAdaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var adaptiveCardAttachment = new Attachment()
             {
@@ -95,7 +103,7 @@ namespace BotAllCards.Cards
         public static Attachment sendOverFlowMenuCard()
         {
             var paths = new[] { ".", "Resources", "overflowMenu.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var sendsOverFlowMenuAdaptiveCardAttachment = new Attachment()
             {
@@ -114,7 +122,7 @@ namespace BotAllCards.Cards
         public static Attachment sendHTMLConnectorCard()
         {
             var paths = new[] { ".", "Resources", "formatHTMLConnectorCard.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var htmlConnectorAdaptiveCardAttachment = new Attachment()
             {
@@ -133,7 +141,7 @@ namespace BotAllCards.Cards
         public static Attachment sendCardWithEmoji()
         {
             var paths = new[] { ".", "Resources", "adaptiveCardWithEmoji.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = System.IO.File.ReadAllText(Path.Combine(paths));
 
             var emojiAdaptiveCardAttachment = new Attachment()
             {
@@ -143,5 +151,6 @@ namespace BotAllCards.Cards
 
             return emojiAdaptiveCardAttachment;
         }
+
     }
 }
