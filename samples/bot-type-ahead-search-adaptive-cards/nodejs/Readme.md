@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-ca
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
+## Included Features
+* Bots
+* Adaptive Cards (typeahead search)
+
 ## Interaction with bot
  ![Bot Typeahead Search Adaptive Cards](Images/BotTypeaheadSearchAdaptiveCards.gif)
 

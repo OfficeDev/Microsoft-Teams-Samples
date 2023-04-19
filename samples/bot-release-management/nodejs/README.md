@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-release-management-nodejs
 
 This is a sample application which demonstrates how to create a service hook on Azure DevOps and connect with Teams bot that creates a group chat and send workitems details.
 
+## Included Features
+* Bots
+* Adaptive Cards
+
 ## Interaction with app
 
 ![Workitem card](Images/BotReleaseManagementGif.gif)

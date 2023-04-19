@@ -17,7 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bot's response, and the bot will reply accordingly.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+
+## Interaction with bot
  ![Message Reaction](Images/MessageReactions.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client

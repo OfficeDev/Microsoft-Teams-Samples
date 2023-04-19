@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
 
 This sample feature shows how to use different formatting on cards using bot.
 
+## Included Features
+* Bots
+* Adaptive Cards
+
 ## Interaction with app
 
 ![Types Of Cards](BotFormattingCards/Images/DifferentFormattingCards.gif)

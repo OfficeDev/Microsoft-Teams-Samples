@@ -38,6 +38,9 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `README.md`          | This README file.                                                           |
 | `LICENSE`            | The license for the sample. 
 
+## Included Features
+* Bots
+
 ## Interaction with app
 
  ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)

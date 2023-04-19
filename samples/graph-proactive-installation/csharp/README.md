@@ -19,6 +19,9 @@ This sample app illustartes the proactive installation of app using Graph API an
 
 Language Used : C#
 
+## Included Features
+* Bots
+
 ## Interaction with app
 ![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
 
@@ -38,7 +41,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - Required Microsoft graph Application level permissions to run this sample app
-     - TeamsAppInstallation.ReadWriteForUser.All
+     ![ApiPermission](ProactiveAppInstallation/Images/ApiPermission.png)
   - [Get consent for the Application permissions](https://docs.microsoft.com/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
 
 2. Setup for Bot
@@ -67,6 +70,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - `{{ YOUR-MICROSOFT-APP-PASSWORD}}` - Generated from Step 1, also referred to as Client secret
     - `{{ YOUR-APPCATALOG-TEAM-ID }}` - To get `TeamsappcatalogAppId` you first navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Then search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
   
+    ![MicGraph](ProactiveAppInstallation/Images/MicGraph.png)
+    
   - Run the bot from Visual Studio:
   
     - Launch Visual Studio
@@ -80,9 +85,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - **Edit** the `manifest.json` contained in the ./TeamsAppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)   
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+- Upload the manifest.zip to Teams (in the Apps view click "Upload an app to your org's app catalog")
    - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
+   - From the lower left corner, choose Upload an app to your org's app catalog
    - Go to your project directory, the ./TeamsAppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
@@ -94,12 +99,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
     ![Proactive installation](ProactiveAppInstallation/Images/addtoteams.png)
 
-- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. 
+-  Run Check and install to pro-actively installs the App for all the users in team. 
     ![Proactive installation](ProactiveAppInstallation/Images/CheckandInstall.png)
 
-- **Group Chat**:  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
+-  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
 
    ![Proactive installation](ProactiveAppInstallation/Images/sendmessage.png)
+
+- **Group Chat**
+
+   ![Group](ProactiveAppInstallation/Images/Group.png)
+
+- **Team Scope**
+
+   ![Teams](ProactiveAppInstallation/Images/Teams.png)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/csharp/ProactiveAppInstallation/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
 

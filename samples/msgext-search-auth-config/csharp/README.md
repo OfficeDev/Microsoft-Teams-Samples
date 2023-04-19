@@ -26,7 +26,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - `User.ReadBasic.All`
 - `Mail.Send.Shared`
 
-- **Interaction With Messaging Extension Auth**
+## Included Features
+* Bots
+* Message Extensions (with teams sso)
+* Search Commands
+
+## Interaction With Messaging Extension Auth
 ![msgext-search-auth-config ](Images/msgext-search-auth-config.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

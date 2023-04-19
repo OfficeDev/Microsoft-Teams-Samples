@@ -19,7 +19,12 @@ Bot Framework v4 Region Selection sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), for the region selection for the app's data center using Bot and Tab.
 
-- **Interaction with app**
+## Included Features
+* Bots
+* Tabs
+* Adaptive Cards
+
+## Interaction with app
 ![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

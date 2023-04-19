@@ -17,6 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-nodejs
 
 This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 
+## Included Features
+* Bots
+* In-Meeting Notifications
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![Targeted In-Meeting Notification](Images/MeetingNotification.gif)

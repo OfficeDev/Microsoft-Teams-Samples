@@ -19,7 +19,12 @@ Sample demonstrating an Action Based Messaging Extension with Preview
 
 Click the Messaging Extension icon in the Compose Box's Messaging Extension menu.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
+## Interaction with bot
  ![Messaging Extension Action Preview](Images/MsgExtPreview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

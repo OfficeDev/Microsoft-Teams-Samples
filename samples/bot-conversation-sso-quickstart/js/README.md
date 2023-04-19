@@ -25,6 +25,11 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Included Features
+* Teams SSO (bots)
+* Adaptive Card
+* Graph API
+
 ## Interaction with app
 
 ![Bot Conversation SSO QuickstartGif](sso_media/BotConversationSSOQuickstart.gif)
@@ -76,6 +81,8 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 - Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the step 1 (AAD app registration in Azure portal or from Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step1 and you can always create a new client secret anytime.)
     Also, update `connectionName` as the name of your Azure Bot connection created in step 1.
+     - `MicrosoftAppType` - Set this as MultiTenant to if your bot is supported on multiple tenants, otherwise SingleTenant.
+     - `MicrosoftAppTenantId` - Set your tenantId here if you are using single tenant app registration.
 
 - Run your bot at the command line:
 

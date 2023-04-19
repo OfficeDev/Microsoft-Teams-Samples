@@ -18,6 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
 ## Interaction with app
 
 ![message ext module](Images/msgextactionquickstartModule.gif)

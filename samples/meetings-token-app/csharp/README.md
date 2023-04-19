@@ -22,6 +22,13 @@ This application also shows the implementation of Live Share SDK to update the d
 - [Live-share-sdk-overview](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 - [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 
+## Included Features
+* Meeting Chat
+* Meeting Details
+* Meeting SidePanel
+* Live Share SDK
+* RSC Permissions
+
 **NOTE: This capability is currently available in developer preview only.**
 
 ## Interaction with app

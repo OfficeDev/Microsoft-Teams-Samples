@@ -18,6 +18,16 @@ urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
 
 This sample shows the feature where user can send different types of cards using bot.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Hero Cards
+* List Cards
+* O365 Connector Cards
+* List Cards
+* Thumbnail Cards
+* Collections Cards
+
 ## Interaction with app
 
 ![all-cards-sample ](BotAllCards/Images/allBotCardsGif.gif)

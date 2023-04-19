@@ -17,7 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-node
 
 This sample app illustrates the proactive installation of app using Graph API and sending proactive notification to users from GroupChat or Channel.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+
+## Interaction with bot
 ![graph-proactive-installation ](Images/graph-proactive-installation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

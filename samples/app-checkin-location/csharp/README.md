@@ -19,6 +19,12 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Task Modules
+* Device Permission API (location)
+
 ## Interaction with app
 
 ![App checkin LocationGif](AppCheckinLocation/Images/AppcheckinLocation.gif)

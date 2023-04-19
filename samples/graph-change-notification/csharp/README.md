@@ -19,6 +19,11 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
 
+## Included Features
+* Bots
+* Graph API
+* Change Notifications
+
 ## Interact with app
 
 ![image](ChangeNotification/Images/ChangeNotificationModule.gif)

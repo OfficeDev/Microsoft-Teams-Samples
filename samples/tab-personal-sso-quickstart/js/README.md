@@ -18,6 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 ## Interaction with app
 
 ![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)

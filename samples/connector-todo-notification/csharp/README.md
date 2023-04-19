@@ -18,7 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-cshar
 
 This application simulates a real task management system and allows users to create and view tasks. The content is randomly generated to simulate how notification can be sent into Microsoft Teams channel using connector.
 
-**Interaction with bot**
+## Included Features
+* Connectors
+
+## Interaction with bot
 ![Connector_Todo](Images/connector_todo_notification_csharp.gif) 
 
 ## Prerequisites

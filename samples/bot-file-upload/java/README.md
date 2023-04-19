@@ -22,7 +22,11 @@ upload files to Teams from a bot and how to receive a file sent to a bot as an a
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+
+## Interaction with bot
 ![Bot-file-upload](Images/botfileupload.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

@@ -20,6 +20,11 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 The feature shown in this sample is currently available in public developer preview only.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![Meetings Events](MeetingEvents/Images/MeetingsEvents.gif)

@@ -19,6 +19,9 @@ urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-csharp
 
 Webhooks are a great way for Teams to integrate with external apps. A webhook is essentially a POST request sent to a callback URL. In Teams, outgoing webhooks provide a simple way to allow users to send messages to your web service without having to go through the full process of creating bots via the [Microsoft Bot Framework](https://dev.botframework.com/). Outgoing webhooks post data from Teams to any chosen service capable of accepting a JSON payload. Once an outgoing webhook is added to a team, it acts like bot, listening in channels for messages using @mention, sending notifications to external web services, and responding with rich messages that can include cards and images.
 
+## Included Features
+* Outgoing Webhooks
+
 ## Interaction with app
 
 ![Basic response](WebhookSampleBot/Images/OutgoingWebhook.gif)

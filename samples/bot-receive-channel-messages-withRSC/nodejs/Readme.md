@@ -20,6 +20,11 @@ For reference please check [Receive Channel messages with RSC](https://docs.micr
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![Bot Receive Channel MessagesWithRSCGif](images/BotWithRSCModule.gif)

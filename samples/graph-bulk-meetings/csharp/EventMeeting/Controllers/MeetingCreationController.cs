@@ -1,6 +1,4 @@
-﻿
-
-namespace GraphTeamsTag.Controllers
+﻿namespace GraphTeamsTag.Controllers
 {
     using EventMeeting.Helper;
     using EventMeeting.Models;
