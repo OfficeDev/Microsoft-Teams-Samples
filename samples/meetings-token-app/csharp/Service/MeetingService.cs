@@ -24,7 +24,7 @@ namespace TokenApp.Service
     {
         private readonly HttpClient httpClient;
         private readonly AppCredentials botCredentials;
-        private readonly IBotFrameworkHttpAdapter adapter;
+        private readonly IBotFrameworkHttpAdapter botFrameworkHttpAdapter;
         private readonly ITenantInfoRepository tenantInfoRepository;
         private readonly string teamsAppId;
         private readonly string contentBubbleUrl;
@@ -34,18 +34,18 @@ namespace TokenApp.Service
         /// </summary>
         /// <param name="httpClientFactory">The Http client factory.</param>
         /// <param name="botCredentials">The Bot credentials.</param>
-        /// <param name="adapters">The Bot Framework HTTP adapter.</param>
+        /// <param name="botAdapter">The Bot Framework HTTP adapter.</param>
         /// <param name="tenantInfoRepository">The TenantInfo repository.</param>
         /// <param name="meetingServiceOptions">App options related to the meetings service.</param>
         public MeetingService(
             IHttpClientFactory httpClientFactory,
             AppCredentials botCredentials,
-            IBotFrameworkHttpAdapter adapters,
+            IBotFrameworkHttpAdapter botAdapter,
             ITenantInfoRepository tenantInfoRepository,
             IOptions<MeetingServiceOptions> meetingServiceOptions)
         {
             this.botCredentials = botCredentials;
-            adapter = adapters;
+            this.botFrameworkHttpAdapter = botAdapter;
             this.httpClient = httpClientFactory.CreateClient();
             this.tenantInfoRepository = tenantInfoRepository;
             this.teamsAppId = meetingServiceOptions.Value.TeamsAppId;
@@ -55,11 +55,13 @@ namespace TokenApp.Service
         /// <inheritdoc/>
         public async Task<UserMeetingRoleServiceResponse> GetMeetingRoleAsync(string meetingId, string userId, string tenantId)
         {
-            var serviceUri = string.Empty;
+            string serviceUri;
 
-            if (this.tenantInfoRepository.GetServiceUrl(tenantId) != null)
+            var getServiceURL = this.tenantInfoRepository.GetServiceUrl(tenantId);
+
+            if (getServiceURL != null)
             {
-                serviceUri = this.tenantInfoRepository.GetServiceUrl(tenantId);
+                serviceUri = getServiceURL;
             }
             else
             {
@@ -120,7 +122,7 @@ namespace TokenApp.Service
             };
 
             // Continue the conversation to get a turn context for the conversation then post the activity
-            await ((BotAdapter)adapter).ContinueConversationAsync(
+            await ((BotAdapter)this.botFrameworkHttpAdapter).ContinueConversationAsync(
                 this.botCredentials.MicrosoftAppId,
                 conversationReference,
                 async (turnContext, cancellationToken) =>
