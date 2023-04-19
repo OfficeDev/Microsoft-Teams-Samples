@@ -56,7 +56,6 @@ namespace TokenApp.Service
         public async Task<UserMeetingRoleServiceResponse> GetMeetingRoleAsync(string meetingId, string userId, string tenantId)
         {
             string serviceUri;
-
             var getServiceURL = this.tenantInfoRepository.GetServiceUrl(tenantId);
 
             if (getServiceURL != null)
@@ -79,6 +78,7 @@ namespace TokenApp.Service
             {
                 UserRole = JsonConvert.DeserializeObject<Models.UserRole>(userRole),
             };
+            
             return response;
         }
 
@@ -95,6 +95,7 @@ namespace TokenApp.Service
             {
                 Query = Uri.EscapeDataString($"Token={currentToken}&User={currentUserName}"),
             };
+            
             var activity = new Activity
             {
                 Type = ActivityTypes.Message,
