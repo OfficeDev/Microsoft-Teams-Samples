@@ -6,10 +6,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button, Card} from '@fluentui/react-components'
 import { CardBody } from 'reactstrap';
 /**
- * The 'captureVideoDesktop' component
+ * The 'CaptureVideoWeb' component
  * of your app.
  */
-const CaptureVideoDesktop = () => {
+const CaptureVideoWeb = () => {
     //  var stream: MediaStream = null;
     useEffect(() => {
         // initializing microsoft teams sdk
@@ -47,4 +47,4 @@ const CaptureVideoDesktop = () => {
     );
 }
 
-export default CaptureVideoDesktop;
+export default CaptureVideoWeb;

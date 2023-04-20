@@ -6,10 +6,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button, Card } from '@fluentui/react-components'
 import { CardBody } from 'reactstrap';
 /**
- * The 'CaptureAudioDesktop' component
+ * The 'CaptureAudioWeb' component
  * of your app.
  */
-const CaptureAudioDesktop = () => {
+const CaptureAudioWeb = () => {
     useEffect(() => {
         // initializing microsoft teams sdk
         microsoftTeams.app.initialize()
@@ -43,4 +43,4 @@ const CaptureAudioDesktop = () => {
     );
 }
 
-export default CaptureAudioDesktop;
+export default CaptureAudioWeb;
