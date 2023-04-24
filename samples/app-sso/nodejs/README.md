@@ -73,7 +73,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Run ngrok - point to port `3978`
 
     ```bash
-    ngrok http -host-header=localhost 3978
+    ngrok http --host-header=localhost 3978
     ```
 ### 3. Setup for code   
 - Clone the repository
