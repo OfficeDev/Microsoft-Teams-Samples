@@ -15,12 +15,12 @@ import { Image, Text, Button } from "@fluentui/react-components";
 import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../styles/layouts";
 
 const SidePanel = () => {
-  const flexRowStyle = getFlexRowStyles();
+    const flexRowStyle = getFlexRowStyles();
 
   const shareSpecificPart = (partName) => {
+	microsoftTeams.app.initialize();
     var appContentUrl = "";
     appContentUrl = `${window.location.origin}/question/${partName}`;
-
     microsoftTeams.meeting.shareAppContentToStage((error, result) => {
       if (result) {
         // handle success
