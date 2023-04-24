@@ -92,6 +92,7 @@ namespace Microsoft.BotBuilderSamples
                         throw e;
                     }
                 }
+
                 var attachments = new List<Attachment>();
 
                 // Reply to the activity we received with an activity.
