@@ -8,10 +8,8 @@ using AdaptiveCards.Templating;
 using Microsoft.Bot.Schema;
 namespace BotAllCards.Cards
 {
-
     public static class AllCards
     {
-
         /// <summary>
         /// Sends Mention Support Card 
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
@@ -28,6 +26,7 @@ namespace BotAllCards.Cards
             {
                 userName = name
             };
+            
             string cardJSON = template.Expand(memberData);
             var mentionSupportAdaptiveCardAttachment = new Attachment()
             {
