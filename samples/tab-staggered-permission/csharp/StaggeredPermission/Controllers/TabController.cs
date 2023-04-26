@@ -122,9 +122,9 @@ namespace StaggeredPermission.Controllers
                     decodedValue.Payload.TryGetValue("name", out nameObj);
                 }
 
-                if (decodedValue.Payload.ContainsKey("preferred_username"))
+                if (decodedValue.Payload.ContainsKey("user_principalname"))
                 {
-                    decodedValue.Payload.TryGetValue("preferred_username", out emailObj);
+                    decodedValue.Payload.TryGetValue("user_principalname", out emailObj);
                 }
 
                 var userInfo = new UserData()
