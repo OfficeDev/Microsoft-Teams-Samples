@@ -29,19 +29,7 @@
 		<None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="ClientApp\src\pages\MeetingStage.jsx" />
-		<None Remove="ClientApp\src\pages\SidePanel.jsx" />
-		<None Remove="ClientApp\src\pages\TabConfig.jsx" />
-		<None Remove="ClientApp\src\pages\services\getLatestEditorValue.js" />
-	</ItemGroup>
-	<ItemGroup>
 		<Folder Include="wwwroot\" />
-	</ItemGroup>
-	<ItemGroup>
-		<TypeScriptCompile Include="ClientApp\src\pages\MeetingStage.jsx" />
-		<TypeScriptCompile Include="ClientApp\src\pages\SidePanel.jsx" />
-		<TypeScriptCompile Include="ClientApp\src\pages\TabConfig.jsx" />
-		<TypeScriptCompile Include="ClientApp\src\pages\services\getLatestEditorValue.js" />
 	</ItemGroup>
 	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
 		<!-- Ensure Node.js is installed -->
