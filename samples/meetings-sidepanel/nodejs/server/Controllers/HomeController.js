@@ -54,23 +54,23 @@ async function publishAgenda() {
 
     async function getRole()
     {
-        const token = await credentials.getToken();
-        const getRoleRequest = await fetch(`${sidePanelBot.serviceUrl}/v1/meetings/${meetingId}/participants/${userId}?tenantId=${tenantId}`,         
+         const token = await credentials.getToken();
+         const getRoleRequest = await fetch(`${sidePanelBot.serviceUrl}/v1/meetings/${meetingId}/participants/${userId}?tenantId=${tenantId}`,         
+            {
+             method: 'GET',
+             headers: {              
+               'Authorization': 'Bearer ' + token
+             }
+           });
+           const response = await getRoleRequest.json();
+           const role = response.meeting.role;
+           if(role=='Organizer')
            {
-            method: 'GET',
-            headers: {              
-              'Authorization': 'Bearer ' + token
-            }
-          });
-          const response = await getRoleRequest.json();
-          const role = response.meeting.role;
-          if(role=='Organizer')
-          {
               res.send(true);
           }
-          else{
-              res.send(false);
-          }
+           else{
+               res.send(false);
+           }
     }
 }
 
