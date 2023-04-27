@@ -11,25 +11,25 @@
     },
     {
       "type": "TextBlock",
-      "text": "Hi <at>{{New-Ids}}</at>, <at>{{New-Ids}}</at>"
+      "text": "Hi <at>${userName}</at>"
     }
   ],
   "msteams": {
     "entities": [
       {
         "type": "mention",
-        "text": "<at>{{New-Ids}}</at>",
+        "text": "<at>${userName}</at>",
         "mentioned": {
           "id": "{{Email-Id}}",
-          "name": "{{New-Ids}}"
+          "name": "${userName}"
         }
       },
       {
         "type": "mention",
-        "text": "<at>{{New-Ids}}</at>",
+        "text": "<at>${userName}</at>",
         "mentioned": {
-          "id": "{{Microsoft-App-Id}}", 
-          "name": "{{New-Ids}}"
+          "id": "{{Microsoft-App-Id}}",
+          "name": "${userName}"
         }
       }
     ]
