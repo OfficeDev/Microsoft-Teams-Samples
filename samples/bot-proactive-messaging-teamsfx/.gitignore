@@ -10,3 +10,7 @@ build
 .fx/configs/config.local.json
 .fx/states/state.local.json
 .backup
+env/.env.*.user
+env/.env.local
+.backup/*
+/devTools/

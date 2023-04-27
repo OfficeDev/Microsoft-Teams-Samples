@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "provisionParameters": {
+      "value": {
+        "resourceBaseName": "proactivemdev${{RESOURCE_SUFFIX}}",
+        "botAadAppClientId": "${{BOT_ID}}",
+        "botAadAppClientSecret": "${{SECRET_BOT_PASSWORD}}",
+        "m365ClientId": "${{AAD_APP_CLIENT_ID}}",
+        "m365ClientSecret": "${{SECRET_AAD_APP_CLIENT_SECRET}}",
+        "m365TenantId": "${{AAD_APP_TENANT_ID}}",
+        "m365OauthAuthorityHost": "${{AAD_APP_OAUTH_AUTHORITY_HOST}}"
+      }
+    }
+  }
+}
