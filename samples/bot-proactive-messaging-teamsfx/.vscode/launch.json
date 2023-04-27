@@ -1,0 +1,90 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Remote (Edge)",
+            "type": "pwa-msedge",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${teamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
+            "presentation": {
+                "group": "remote",
+                "order": 1
+            }
+        },
+        {
+            "name": "Launch Remote (Chrome)",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${teamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
+            "presentation": {
+                "group": "remote",
+                "order": 2
+            }
+        },
+        {
+            "name": "Launch Bot (Edge)",
+            "type": "pwa-msedge",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${localTeamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Attach to Bot"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            }
+        },
+        {
+            "name": "Launch Bot (Chrome)",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${localTeamsAppId}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Attach to Bot"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            }
+        },
+        {
+            "name": "Attach to Bot",
+            "type": "pwa-node",
+            "request": "attach",
+            "port": 9239,
+            "restart": true,
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug (Edge)",
+            "configurations": [
+                "Launch Bot (Edge)",
+                "Attach to Bot"
+            ],
+            "preLaunchTask": "Pre Debug Check & Start All",
+            "presentation": {
+                "group": "all",
+                "order": 1
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug (Chrome)",
+            "configurations": [
+                "Launch Bot (Chrome)",
+                "Attach to Bot"
+            ],
+            "preLaunchTask": "Pre Debug Check & Start All",
+            "presentation": {
+                "group": "all",
+                "order": 2
+            },
+            "stopAll": true
+        }
+    ]
+}
