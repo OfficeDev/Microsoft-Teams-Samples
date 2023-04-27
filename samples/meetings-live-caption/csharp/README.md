@@ -67,7 +67,7 @@ Copy the CART link it will used while configuring tab for meeting.
 
 1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
    - `<<AppId>>` with any GUID id value.
-   - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
 1) Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
 

@@ -80,7 +80,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ###  5) Setup Manifest for Teams
 1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{App-id}}` with your application id created in step 1.
-   - `{{Domain-Name}}` with your application's base url domain, e.g. For https://1234.ngrok.io the Domain Name will be 1234.ngrok.io
+   - `{{Domain-Name}}` with your application's base url domain, e.g. For https://1234.ngrok-free.app the Domain Name will be 1234.ngrok-free.app
    - `{{Plan-id}}` with plan id generated in step 2.
 
 2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.

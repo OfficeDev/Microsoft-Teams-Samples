@@ -74,7 +74,7 @@ Run ngrok - point to port 3978
 - **This step is specific to Teams.**
 
     -  Edit the `manifest.json` contained in the `Manifest` folder to replace {{Manifest-id}} with any GUID
-    - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace *everywhere* you see the place holder string `{{base-url}}`
+    - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace *everywhere* you see the place holder string `{{base-url}}`
        Note => Update `validDomains` as per your application domain, if needed.
 
     -  Zip up the contents of the `Manifest` folder to create a `manifest.zip`

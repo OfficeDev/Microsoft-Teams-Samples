@@ -86,7 +86,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 
 - Go to .env file in your project folder and update `MicrosoftAppId`, `MicrosoftAppPassword` with the values received from your AAD app registration.
-  - Update `BaseUrl` as per your domain like ngrok url: https://1234.ngrok.io 
+  - Update `BaseUrl` as per your domain like ngrok url: https://1234.ngrok-free.app 
 
 - Start the bot
 
@@ -97,7 +97,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 4) Setup Manifest for Teams
 
 - Modify the `manifest.json` file placed in `/teamsAppManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing AAD app registration in your Azure Portal.
-    - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.

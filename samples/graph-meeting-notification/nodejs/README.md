@@ -92,7 +92,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 ### Instruction for .env
 1. Provide `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId` in the .env that is created in Azure.
-2. Provide the ngrok url as  `BaseUrl` in appsetting on which application is running on.  E.g. if you are using ngrok it would be something like `https://1234.ngrok.io`.
+2. Provide the ngrok url as  `BaseUrl` in appsetting on which application is running on.  E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app`.
 3. You should be having `Base64EncodedCertificate` from *Create and install Self-Signed certificate* step.
 4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
 

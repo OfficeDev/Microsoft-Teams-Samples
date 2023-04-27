@@ -7,7 +7,7 @@
     * ex: `api://subdomain.example.com/00000000-0000-0000-0000-000000000000`.
     
     The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
-    * ex: `api://f631****.ngrok.io/9051a142-901a-4384-a83c-556c2888b071`.
+    * ex: `api://f631****.ngrok-free.app/9051a142-901a-4384-a83c-556c2888b071`.
  
 5. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 6. Set **Who can consent?** to `Admins and users`

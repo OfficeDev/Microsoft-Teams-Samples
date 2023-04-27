@@ -102,7 +102,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - Modify the `manifest.json` in the `/appPackage` folder and replace the following details
    - `<<App-ID>>` with your AAD app registration id   
-   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - - **Upload** the `manifest.zip` to Teams

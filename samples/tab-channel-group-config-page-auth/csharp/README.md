@@ -58,7 +58,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
   - Create an [AAD application](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
  - Set your application URI to the same URI you've created in Ngrok.
-   - Ex: api://contoso.ngrok.io/{appId} using the application ID that was assigned to your app
+   - Ex: api://contoso.ngrok-free.app/{appId} using the application ID that was assigned to your app
                     
  - Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
    - Visit Manage > Certificates & secrets
@@ -70,7 +70,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 - Set Redirect URIs. Navigate to Authentication from left pane.
     - Click on Add Platform select *Web*.
-    - Add URI as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok.io/SilentAuthEnd
+    - Add URI as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok-free.app/SilentAuthEnd
     - Make sure to check *Access tokens* and *ID tokens* checkbox
     - Add one more URI as https://<<BASE-URI>>/SimpleAuthEnd
     - Again, Click on Add Platform and this time select *Single-page application*
@@ -104,8 +104,8 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-  - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId. E.g. `""api://1235.ngrok.io/0000000000-0000000-000000""`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+  - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId. E.g. `""api://1235.ngrok-free.app/0000000000-0000000-000000""`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")

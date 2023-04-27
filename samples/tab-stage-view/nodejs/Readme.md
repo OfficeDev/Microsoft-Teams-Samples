@@ -101,7 +101,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
    -  Edit the `manifest.json` in the `Manifest` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID or `MicrosoftAppId`
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok-free.app
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId` received from AAD app registration in Azure portal.
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.
    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\Manifest_Hub` folder with the required values.

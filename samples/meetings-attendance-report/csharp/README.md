@@ -91,7 +91,7 @@ When meeting ends, attendance report card is sent by the bot.
   ```bash
   # ngrok http 3978 --host-header="localhost:3978"
   ```
-- Once started you should see URL  `https://123.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+- Once started you should see URL  `https://123.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 5. Setup for code
 
@@ -124,8 +124,8 @@ When meeting ends, attendance report card is sent by the bot.
 
 - **This step is specific to Teams.**
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`) Also replace the <<GUID>> with any valid GUID or with your MicrosoftAppId 
-    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok-free.app>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)

@@ -56,7 +56,7 @@ This sample shows a feature where user can broadcast a message to all members of
 
 4. Under **Manage**, select **Expose an API**.
 5. Click on the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}` and exclude http/https from the domain name.
-    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -67,7 +67,7 @@ This sample shows a feature where user can broadcast a message to all members of
 9. Ensure that **State** is set to **Enabled**
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
 
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
@@ -117,12 +117,12 @@ This sample shows a feature where user can broadcast a message to all members of
    - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID) is the application app id
    - `TenantId` - Generated from Step 3 (Directory (tenant) ID) is the tenant id
    - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
-   - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
    - Press `F5` to run the project
 	 
 19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
 20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 

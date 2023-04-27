@@ -108,7 +108,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 5) Setup Manifest for Teams
 
     - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
-        `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+        `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
          Replace <<MANIFEST-ID>> with any GUID or with your MicrosoftAppId/app id
 
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`

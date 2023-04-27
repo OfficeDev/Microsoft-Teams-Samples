@@ -71,7 +71,7 @@ The minimum prerequisites to run this sample are:
    1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
-   1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
+   1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok-free.app.
    1. Enable the action on connector card by selecting the Yes radio button and enter the update endpoint: `https://[BASE_URI]/Task/Update`
    1. Click on Save. After the save completes, you will see your connector id.
    1. In the Web.config file, set the `configuration.appSettings.Base_Uri` variable to the ngrok https forwarding url from the above.
@@ -84,7 +84,7 @@ The minimum prerequisites to run this sample are:
    
 5. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
  
         Example :
 

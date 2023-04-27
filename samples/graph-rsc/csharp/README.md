@@ -72,7 +72,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 7) Setup the `manifest.json` in the `/AppPackage` folder 
    Replace the following details:
     - Replace `<<Your Microsoft APP Id>>` at all the places with your MicrosoftAppId received while doing AAD app registration in Azure portal
-    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

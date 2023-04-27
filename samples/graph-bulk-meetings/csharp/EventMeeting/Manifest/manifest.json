@@ -46,7 +46,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
     "token.botframework.com"
   ],
   "webApplicationInfo": {

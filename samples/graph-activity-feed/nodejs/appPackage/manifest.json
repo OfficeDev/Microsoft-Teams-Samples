@@ -53,7 +53,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
     "<<BASE-URL-DOMAIN>>"
   ],
   "activities": {

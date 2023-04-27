@@ -39,7 +39,7 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "*.ngrok.io"
+    "*.ngrok-free.app"
   ],
   "webApplicationInfo": {
     "id": "{TODO: MicrosoftAppId}",

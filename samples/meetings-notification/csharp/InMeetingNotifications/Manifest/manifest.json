@@ -60,7 +60,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
     "{{domain-name}}"
   ],
   "webApplicationInfo": {

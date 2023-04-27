@@ -94,7 +94,7 @@ Run ngrok - point to port 3978
 Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
 
    - `<<App-ID>>` with your AAD app registration id   
-   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
    - Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
    - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.

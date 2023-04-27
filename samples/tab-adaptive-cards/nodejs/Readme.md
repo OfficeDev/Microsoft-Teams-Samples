@@ -85,7 +85,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from bot Framework registration. 
-- Update the `BaseUrl` as per your application domain like if you are using ngrok, it would be `https://1234.ngrok.io` 
+- Update the `BaseUrl` as per your application domain like if you are using ngrok, it would be `https://1234.ngrok-free.app` 
 - Update the `ConnectionName` with Azure Bot Registration connection name configured in step 1.
 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
@@ -106,7 +106,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 4) Setup Manifest for Teams (**This step is specific to Teams.**)
 
     - Edit the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
-    - Update the `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - Update the `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - Zip up the contents of the `appPackage` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps

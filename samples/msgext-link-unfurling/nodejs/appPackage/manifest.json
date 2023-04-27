@@ -49,7 +49,7 @@
           "value": {
             "domains": [
               "*.botframework.com",
-			  "*.ngrok.io"
+			  "*.ngrok-free.app"
             ]
           }
         }

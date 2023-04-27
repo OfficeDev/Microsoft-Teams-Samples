@@ -105,7 +105,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
   - Select `App SSO Sample.sln` file
   - Press `F5` to run the project
 
-- Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io), TenantId (We can get from Azure app registration), ClientId (Is same appid), AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the AAD app registration or from Bot Framework registration. SiteUrl as your application base URL.
+- Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name) and SiteUrl eg.(123.ngrok-free.app), TenantId (We can get from Azure app registration), ClientId (Is same appid), AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the AAD app registration or from Bot Framework registration. SiteUrl as your application base URL.
 
 **Bot Configuration:**
 
@@ -126,7 +126,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 4. Under **Manage**, select **Expose an API**. 
 5. Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -137,7 +137,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 9. Ensure that **State** is set to **Enabled**
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -163,7 +163,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     * Select **Add a platform**.
     * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: 
-      1) https://%ngrokDomain%.ngrok.io/Auth/End
+      1) https://%ngrokDomain%.ngrok-free.app/Auth/End
 
     - Set another redirect URI:
     * Select **Add a platform**.
@@ -177,7 +177,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 **This step is specific to Teams.**
    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-   - **Edit** the `manifest.json` for `validDomains` and `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - **Edit** the `manifest.json` for `validDomains` and `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-sso\csharp\App SSO Sample` folder with the required values.
    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)

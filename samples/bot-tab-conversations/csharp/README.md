@@ -134,10 +134,10 @@ There is also a personal tab that will list inquires from all the support depart
     ```bash
     ngrok http 44326 --host-header="localhost:44326" # For Visual Studio
     ```
-    * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
+    * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok-free.app`).
 
 * Create an AAD app registration in Azure Portal and also create Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
-    * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain/api/messages` like your ngrok URL `https://xxxxx.ngrok.io` .
+    * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain/api/messages` like your ngrok URL `https://xxxxx.ngrok-free.app` .
     * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL aginn in your Azure Bot for local running*
     * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -146,7 +146,7 @@ There is also a personal tab that will list inquires from all the support depart
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
     * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
 
-    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok.io/auth-end'
+    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok-free.app/auth-end'
 
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
@@ -185,7 +185,7 @@ There is also a personal tab that will list inquires from all the support depart
 * Setup Manifest for Teams
 
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string ``<<aad-id>>`` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `<<ngrok-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace it at all the places you see in your `mainfest.json`.
+    - **Edit** the `manifest.json` for `<<ngrok-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace it at all the places you see in your `mainfest.json`.
 
 * Deploying
     * There are detailed instructions for deploying locally below.

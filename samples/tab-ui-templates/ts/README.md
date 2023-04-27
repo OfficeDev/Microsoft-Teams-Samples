@@ -86,7 +86,7 @@ You can find the app source code in `./src`:
 
 Teams doesn't display app content unless it's accessible via HTTPS. We recommend using ngrok to establish a secure tunnel to where you're hosting the app locally (for example, `http://localhost:3978`).
 
-1. Install [ngrok](https://ngrok.io).
+1. Install [ngrok](https://ngrok-free.app).
 
 1. Run ngrok - point to port 3978
 
@@ -94,7 +94,7 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 # ngrok http 3978 --host-header="localhost:3978"
 ```
 
-1. Save the HTTPS URL in the output (for example, https://468b9ab725e9.ngrok.io). You may need this later if you plan to register the app with App Studio.
+1. Save the HTTPS URL in the output (for example, https://468b9ab725e9.ngrok-free.app). You may need this later if you plan to register the app with App Studio.
 
 > [!IMPORTANT]
 > If you're using the free version of ngrok and plan to share the app with others, remember that ngrok quits if your machine shuts down or goes to sleep. When you restart ngrok, the URL also will be different. (A paid version of ngrok provides persistent URLs.)
@@ -102,7 +102,7 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 ## Create the app package
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `src/manifest` folder to replace `<<GUID_ID>>` with any GUID value.
-    - **Edit** the `manifest.json` for `staticTabs` inside the `contentUrl` replace `<<HOSTNAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace the same value for `<<HOSTNAME>>` inside `validDomains` section.
+    - **Edit** the `manifest.json` for `staticTabs` inside the `contentUrl` replace `<<HOSTNAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace the same value for `<<HOSTNAME>>` inside `validDomains` section.
     - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-ui-templates\ts\src\Manifest_Hub` folder with the required values.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)

@@ -140,7 +140,7 @@ For example `https://contoso.com/teamsapp/callback`
 {
   "MicrosoftAppId": "",
   "MicrosoftAppPassword": "",
-  "BotBaseUrl": "https://{yourngrok}.ngrok.io",
+  "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
   "AzureAd": {
     "Instance": "https://login.microsoftonline.com/",
     "TenantId": "",
@@ -151,7 +151,7 @@ For example `https://contoso.com/teamsapp/callback`
     "AppId": "",
     "AppSecret": "",
     "PlaceCallEndpointUrl": "https://graph.microsoft.com/v1.0",
-    "BotBaseUrl": "https://{yourngrok}.ngrok.io",
+    "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
     "GraphApiResourceUrl": "https://graph.microsoft.com",
     "MicrosoftLoginUrl": "https://login.microsoftonline.com/"
   },
@@ -179,7 +179,7 @@ For example `https://contoso.com/teamsapp/callback`
 
 2. __*This step is specific to Teams*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-   - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)

@@ -51,14 +51,14 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 1. Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
     * Set your application URI to the same URI you've created in Ngrok. 
-        * Ex: `api://contoso.ngrok.io/{appId}`
+        * Ex: `api://contoso.ngrok-free.app/{appId}`
         using the application ID that was assigned to your app
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
         * Add a platform
         * Select `Single-page application`
-        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
-        * Within same `Single-page-application` add another url in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
+        * Create a redirect URI in the format of: `https://contoso.ngrok-free.app/auth-end`.
+        * Within same `Single-page-application` add another url in the format of: `https://contoso.ngrok-free.app/Home/BrowserRedirect`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
         * Create a new client secret.
@@ -69,7 +69,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 
     * Expose an API that will give the Teams desktop, web and mobile clients access to the permissions above
         * Visit `Manage > Expose an API`
-        * Add a scope and give it a scope name of `access_as_user`. Your API url should look like this: `api://contoso.ngrok.io/{appID}/access_as_user`. In the "who can consent" step, enable it for "Admins and users". Make sure the state is set to "enabled".
+        * Add a scope and give it a scope name of `access_as_user`. Your API url should look like this: `api://contoso.ngrok-free.app/{appID}/access_as_user`. In the "who can consent" step, enable it for "Admins and users". Make sure the state is set to "enabled".
         * Next, add two client applications. This is for the Teams desktop/mobile clients and the web client.
             * 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
             * 1fec8e78-bce4-4aaf-ab1b-5451cc387264
@@ -90,14 +90,14 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
     * Ensure the package name is unique within the tenant where you will run the app
     * Edit the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     * Replace `{ngrokSubdomain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
-    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok.io/{{AppId}}`.
+    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\Manifest_Hub` folder with the required values.
     **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 2. Update your `config/default.json` file
     * Replace the `tab.appId` property with you Azure AD application ID
     * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
-    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok.io/{appID}`
+    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok-free.app/{appID}`
     * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
     * Note : Do not push the `clientId` and `clientSecret` values inside your repo. Instead we recommend to store them at some secure location like Azure key vault.
 

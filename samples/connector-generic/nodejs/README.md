@@ -44,7 +44,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
       ```bash
        ngrok http 3978 --host-header="localhost:3978"
        ```
-   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok.io` which will be used in later steps.
+   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok-free.app` which will be used in later steps.
 
    5. **Configure your own connector**
 
@@ -57,7 +57,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
    - For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
    ![connector_setup](Images/Connector_Setup/3.connector.png)
 
-   - For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
+   - For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok-free.app.
    - Click on Save. After the save completes, you will see your connector ID in address bar.
 
   6. In the `~/views/connectorconfig.jade` file line 27 and replace `ngrokURL` to the ngrok https forwarding url from the above.
@@ -78,7 +78,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
  9. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/app manifest/manifest.json` file with your newly registered
     - **Edit** the `manifest.json` and update `<<AppDomain>>`
-      Example. if you are using ngrok it would be `https://1234.ngrok.io` then your app domain-name will be `1234.ngrok.io`.
+      Example. if you are using ngrok it would be `https://1234.ngrok-free.app` then your app domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes).

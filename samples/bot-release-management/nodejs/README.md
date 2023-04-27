@@ -45,7 +45,7 @@ This is a sample application which demonstrates how to create a service hook on 
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
-2) Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+2) Once started you should see URL  `https://41ed-abcd-e125.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 
 **Register Azure AD application**
@@ -103,7 +103,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - Make sure to select trigger as *Work item created*
 
-- Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is referred to URL we get in step 1*.
+- Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok-free.app/api/workItem. *Here baseUrl is referred to URL we get in step 1*.
 **NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
 **Setup custom work item type**
@@ -147,7 +147,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - **This step is specific to Teams.**
 - Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload an app to your org's app catalog")
 
