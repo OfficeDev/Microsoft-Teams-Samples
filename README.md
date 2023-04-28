@@ -52,9 +52,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs]|
 |20| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs]|
 |21| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
-|22| Deep Links Features | This sample app for demonstrating for deep links features using tab. |[View][DeepLinksFeatures#csharp]|[View][DeepLinksFeatures#nodejs]|
-|23| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs]|
-|24| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
+|22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs]|
+|23| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -66,7 +65,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]| | |
 |3| Teams Conversation Bot | Messaging and conversation event handling. | [View][bot-conversation#cs]| [View][bot-conversation#js]| [View][bot-conversation#python] | [View][bot-conversation#java] |[View](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
 |4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View][bot-message-reaction#cs] |  [View][bot-message-reaction#js] | | [View][bot-message-reaction#java]|[View](/samples/bot-message-reaction/csharp/demo-manifest/bot-message-reaction.zip)
-|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View][bot-teams-authentication#cs]| [View][bot-conversation-sso-quickstart#js] | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java]|[View](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
+|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View][bot-teams-authentication#cs]| [View][bot-teams-authentication#nodejs] | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java]|[View](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 |6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View][bot-file-upload#cs] | [View][bot-file-upload#js] | [View][bot-file-upload#python] | [View][bot-file-upload#java]|[View](/samples/bot-file-upload/csharp/demo-manifest/bot-file-upload.zip)
 |7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View][bot-task-module#cs] | [View][bot-task-module#js] | [View][bot-task-module#python] | [View][bot-task-module#java]|[View](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 |8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View][bot-initiate-thread-in-channel#cs] | [View][bot-initiate-thread-in-channel#js] | [View][bot-initiate-thread-in-channel#python] | [View][bot-initiate-thread-in-channel#java] |[View](/samples/bot-initiate-thread-in-channel/csharp/demo-manifest/bot-initiate-thread-in-channel.zip)
@@ -79,12 +78,13 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Studio Code to provide scaffolding experience. ||[View][bot-proactive-msg-teamsfx#js]
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]| | |[View](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
-|18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
+|18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]| | |[View](/samples/bot-adaptive-card-actions/csharp/demo-manifest/bot-adaptivecard-actions.zip)
 |19| SSO for your Adaptive Cards | Implement SSO authentication for your Adaptive Cards.|[View][AdaptiveCardSSO#csharp]
 |20| SSO On AdaptiveCard Using Bot | This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards Universal Actions in bot. ||[View][BotSSOAdaptiveCard#nodejs]
 |21| Different formatting on cards | This sample feature shows how to use different formatting on cards using bot. |[View][BotFormattingCards#csharp]|[View][BotFormattingCards#nodejs]
 |22| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
 |23| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
+|24|  User specific views in Adaptive cards | This sample shows the different ways developers can consume user specific views in Adaptive cards. |[View][botadaptivecardsuserspecificviews#csharp]| | | |[View](/samples/bot-adaptivecards-user-specific-views/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
 
 #### Additional samples
 
@@ -133,7 +133,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]|[View](/samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |[View][graph#instllationlifecycle#js] |
-|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
+|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]|[View](/samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip)
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | [View][graph-activity-feed#js]| 
 |7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs.                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]|[View](/samples/graph-proactive-installation/csharp/demo-manifest/graph-proactive-installation.zip)
@@ -168,7 +168,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]|[View](/samples/app-localization/csharp/demo-manifest/app-localization.zip)
 |9|Details Tab in Meetings | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]|[View](/samples/meetings-details-tab/csharp/demo-manifest/meetings-details-tab.zip)
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js]|[View](/samples/app-sso/csharp/demo-manifest/App-SSO.zip)
-|11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
+|11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|[View](/samples/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |[View](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|[View](/samples/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
 |14|Meeting Transcript App | This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.|[View][meetings-transcription-app#cs] |[View][meetings-transcription-app#nodejs]|
@@ -188,6 +188,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |28|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |29|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
 |30|Anonymous user support| This sample app shows anonymous users support in teams meeting apps.|[View][app-anonymous-users#cs]       
+31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs]|
 
 ## Application templates
 
@@ -236,8 +237,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
 [bot-request-approval#nodejs]:samples/bot-request-approval/nodejs
 [tab-navbar-menu#ts]:samples/tab-navbar-menu/ts
-[DeepLinksFeatures#csharp]:samples/tab-deeplink-features/csharp
-[DeepLinksFeatures#nodejs]:samples/tab-deeplink-features/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
@@ -313,6 +312,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-code-interview#nodejs]:samples/meetings-live-code-interview/nodejs
 [suggestedactionsbot#csharp]:samples/bot-suggested-actions/csharp
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
+[botadaptivecardsuserspecificviews#csharp]:samples/bot-adaptivecards-user-specific-views/csharp
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
 [BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
@@ -374,6 +374,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel-nodejs/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
+[link-unfurling-stt#nodejs]:samples/app-link-unfurling-in-share-to-teams/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 [tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
@@ -407,6 +408,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-action#js]:samples/msgext-action/nodejs
 [msgext-link-unfurling#js]:samples/msgext-link-unfurling/nodejs
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
+[bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java

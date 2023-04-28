@@ -19,6 +19,11 @@ Bot Framework v4 Conversation Bot sample for Teams.
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
 - **Interaction with bot**
 ![Messaging Extension](Images/MsgExtAction.gif)
 

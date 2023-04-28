@@ -16,7 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
-# Interaction with app
+## Included Features
+* Tabs
+* Graph API
+
+## Interaction with app
 
 ![](Images/GraphAppInstallationLifecycleGif.gif)
 

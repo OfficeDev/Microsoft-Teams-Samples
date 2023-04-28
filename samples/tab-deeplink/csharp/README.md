@@ -16,7 +16,12 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  This sample displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
 
-- **Interaction with bot**
+ ## Included Features
+* Tabs
+* Bots
+* Deep Links
+
+## Interaction with bot
 
  ##### Welcome Card Flow
 

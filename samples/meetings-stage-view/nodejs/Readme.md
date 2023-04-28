@@ -18,6 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-nodejs
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* Live Share SDK
+* RSC Permissions
+
 ## Interact with app- Mobile
 
 ![Preview Image](Images/preview_web.gif)
@@ -26,6 +32,10 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ![Preview Image](Images/preview_mobile.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Realtime meeting stage view:** [Manifest](/samples/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 
 ## Prerequisites
 

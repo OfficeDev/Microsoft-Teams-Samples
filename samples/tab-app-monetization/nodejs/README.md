@@ -18,7 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-app-monetization-nodejs
 
 This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk.
 
-- **Interaction with tab**
+## Included Features
+* Tabs
+* App Monetization
+
+## Interaction with tab
 ![tab-app-monetization](Images/tab-app-monetization.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

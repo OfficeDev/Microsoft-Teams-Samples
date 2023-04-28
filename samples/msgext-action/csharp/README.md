@@ -19,7 +19,12 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-csharp
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build an Action-based Messaging Extension.
 
-- **Interaction with Messaging Extension**
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
+## Interaction with Messaging Extension
 ![msgext-action ](Images/msgext-action.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

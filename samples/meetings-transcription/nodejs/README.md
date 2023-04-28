@@ -18,6 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-transcription-nodejs
 
 This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Task Modules
+* RSC Permissions
+
 ## Interaction with app
 
 ![MeetingTranscript Module](Images/MeetingTranscript.gif)

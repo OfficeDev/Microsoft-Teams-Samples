@@ -34,6 +34,11 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Included Features
+* Teams SSO (bots, tabs, messaging extensions, link unfurling)
+* Adaptive Cards
+* MSAL.js 2.0 support
+
 ## Interaction with app
 
 ![Preview Image](Images/preview_APP_SSO_Node.gif)

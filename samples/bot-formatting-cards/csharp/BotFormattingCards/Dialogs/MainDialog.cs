@@ -80,10 +80,7 @@ namespace Microsoft.BotBuilderSamples
             // Decide which type of card(s) we are going to show the user
             switch (((FoundChoice)stepContext.Result).Value)
             {
-                case "MentionSupport":
-                    // Sends Mention Support Card
-                    reply.Attachments.Add(AllCards.sendMentionSupportCard());
-                    break;
+                
                 case "InfoMasking":
                     // Sends Information masking in Adaptive Cards
                     reply.Attachments.Add(AllCards.sendInfoMasking());
@@ -109,7 +106,6 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendCardWithEmoji());
                     break;
                 default:
-                    reply.Attachments.Add(AllCards.sendMentionSupportCard());
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     reply.Attachments.Add(AllCards.sendFullWidthCardAdaptiveCard());
                     reply.Attachments.Add(AllCards.sendStageViewImagesCard());

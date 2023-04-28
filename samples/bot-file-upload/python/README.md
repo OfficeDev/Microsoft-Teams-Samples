@@ -21,7 +21,11 @@ Bot Framework v4 file upload bot sample for Teams.
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to
 upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+
+## Interaction with bot
 ![Bot-file-upload](Images/botfileupload.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client

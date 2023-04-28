@@ -22,6 +22,11 @@ build an Action-based Messaging Extension.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
 - **Interaction with Messaging Extension action**
 ![MsgExtAction](Images/MsgExtAction.gif)
 

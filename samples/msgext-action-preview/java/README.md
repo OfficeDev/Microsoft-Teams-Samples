@@ -23,7 +23,12 @@ This Messaging Extension has been created using [Bot Framework](https://dev.botf
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with Messaging Extension Action Preview**
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
+## Interaction with Messaging Extension Action Preview
 ![MsgExtAction](Images/MsgExtPreview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

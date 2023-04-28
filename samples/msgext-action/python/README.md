@@ -20,6 +20,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-python
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build an Action-based Messaging Extension.
 
+## Included Features
+* Bots
+* Message Extensions
+* Action Commands
+
 - **Interaction with Messaging Extension**
 ![MsgExtAction](Images/MsgExtAction.gif)
 

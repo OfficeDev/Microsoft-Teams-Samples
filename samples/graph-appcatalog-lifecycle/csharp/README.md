@@ -18,8 +18,18 @@ Bot Framework v4 AppCatalog sample for Teams
 
 This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalog followed by commands given to Bot.
 
-- **Interaction with bot**
+## Included Features
+* Teams SSO (bots)
+* Adaptive Cards
+* Graph API
+
+## Interaction with bot
 ![appcatalog-lifecycle ](AppCatalogSample/Images/appcatalog-lifecycle.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams graph appcatalog lifecycle sample app:** [Manifest](/samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip)
 
 ## Prerequisites
 

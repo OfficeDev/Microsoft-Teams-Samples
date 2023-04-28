@@ -16,6 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-c
 
 This sample shows the feature of people picker on Adaptive Cards.
 
+## Included Features
+* Bots
+* People Picker in Adaptive Card
+
 ## Interaction with app
 
 ![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)

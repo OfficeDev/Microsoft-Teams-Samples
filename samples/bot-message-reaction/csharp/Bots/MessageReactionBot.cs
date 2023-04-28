@@ -20,7 +20,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await SendMessageAndLogActivityId(turnContext, $"echo Testing-YMAL: {turnContext.Activity.Text}", cancellationToken);
+            await SendMessageAndLogActivityId(turnContext, $"echo: {turnContext.Activity.Text}", cancellationToken);
         }
 
         protected override async Task OnReactionsAddedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)

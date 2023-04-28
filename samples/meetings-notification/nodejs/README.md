@@ -17,6 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-nodejs
 
 This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 
+## Included Features
+* Bots
+* In-Meeting Notifications
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![Targeted In-Meeting Notification](Images/MeetingNotification.gif)
@@ -103,6 +109,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ## Running the sample
 
+Type `SendContentBubble` in bot chat to send In-Meeting notifications.
+
 **Hello command interaction:**
 
 ![Meetings AgendaCard](Images/AgendaCard.png)
@@ -120,6 +128,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 ![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
 
 ## Send targeted meeting notification
+
+Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
 ![Meeting card](Images/MeetingCard.png)
 
 ![Target notification](Images/TargetNotification.png)

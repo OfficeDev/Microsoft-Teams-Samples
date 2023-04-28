@@ -18,7 +18,14 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
 
 # Microsoft Teams Bot in C#
 
-Sample that shows how to build a bot for Microsoft Teams in C#. 
+Sample that shows how to build a bot for Microsoft Teams in C#.
+
+## Included Features
+* Bots
+* Tabs
+* Messaging Extensions
+* Adaptive Cards
+* Facebook Authentication (bots)
 
 ## Interaction with app
 

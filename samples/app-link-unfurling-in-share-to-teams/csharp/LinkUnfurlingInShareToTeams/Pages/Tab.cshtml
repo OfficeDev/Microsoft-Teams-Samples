@@ -1,0 +1,60 @@
+﻿@page
+@model LinkUnfurlingInShareToTeams.Pages.TabModel
+@{
+}
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+            crossorigin="anonymous"></script>
+    <script defer src="https://teams.microsoft.com/share/launcher.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/tab.css">
+
+    <script>
+        $(document).ready(function () {
+            var isOpenedInTeams;
+            const params = window.location.search;
+            isOpenedInTeams = params.substring(params.search("=") + 1);
+
+            // If inside teams, open share to teams using sdk.
+            if (isOpenedInTeams == "true") {
+                $("#stt-btn-custom").show();
+            }
+
+            // If outside teams, open share to teams using built in script.
+            else {
+                $("#stt-btn-teams").show();
+                var element = document.getElementById("stt-btn");
+                let uri = `${window.location.origin}?linkunfurling`;
+                let encoded = encodeURI(uri);
+                element.setAttribute("data-href", encoded);
+            }
+        });
+
+        // Custome function that calls share to teams using available sdk method.
+        shareTeamsHandler = () => {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.sharing.shareWebContent({
+                    content: [
+                        {
+                            type: 'URL',
+                            url: `https://github.com/OfficeDev/Microsoft-Teams-Samples/pull/116`,
+                            preview: true
+                        }
+                    ]
+                });
+            });
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <h3 id="tabheader"> Link unfurling in STT</h3>
+        <img id="reportimg" src="/report.png" width="500" height="425" />
+        <div id="stt-btn-teams" class="teams-share-button" data-href="" data-button-type="medium" data-icon-px-size="160"
+             data-preview="true" hidden="true"></div>
+        <Button id="stt-btn-custom" onclick="shareTeamsHandler()" hidden="true"> Share to teams (custom)</Button>
+    </div>
+</body>

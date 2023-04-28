@@ -21,11 +21,19 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
-**Interaction with bot - Desktop View**
+## Included Features
+* Bot
+* Teams SSO (bots)
+* Adaptive Cards
+* Task Modules
+* Device Permissions (media)
+* Graph API
+
+## Interaction with bot - Desktop View
 
 ![App Installation Using QRCodeDesktopGif](Images/AppInstallationUsingQRCodeDesktopGif.gif)
 
-**Interaction with bot - Mobile View**
+## Interaction with bot - Mobile View
 
 ![App Installation Using QRCodeGif](Images/AppInstallationUsingQRCode.gif)
 

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-csharp",
+    "source": "officeDev",
+    "title": "App link unfurling in share to teams",
+    "shortDescription": "Demonstrating the feature of link unfurling in share to teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-link-unfurling-in-share-to-teams/csharp",
+    "longDescription": [
+      "This sample app shows the feature of link unfurling in share to teams."
+    ],
+    "creationDateTime": "2022-12-14",
+    "updateDateTime": "2023-02-08",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      },
+	  {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-link-unfurling-in-share-to-teams/csharp/LinkUnfurlingInShareToTeams/Images/app-link-unfurling-stt.gif",
+        "alt": "Link unfurling in share to teams"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

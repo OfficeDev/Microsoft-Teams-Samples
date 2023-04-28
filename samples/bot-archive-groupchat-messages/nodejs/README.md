@@ -19,6 +19,11 @@ Using this nodejs sample, a bot can archive chat messages of groupchat and send 
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
+## Included Features
+* Teams SSO (bots)
+* Adaptive Cards
+* Graph API
+
 ## Interaction with app
 
 ![Bot Archive Group ChatMessagesGif](Images/botArchiveGroupchatMessages.gif)

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/js/Images/ezgif.com-gif-maker.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/js/Images/bot-conversation.gif",
         "alt": "Solution UX showing starter solution: sample bot - teams toolkit"
       }
     ],

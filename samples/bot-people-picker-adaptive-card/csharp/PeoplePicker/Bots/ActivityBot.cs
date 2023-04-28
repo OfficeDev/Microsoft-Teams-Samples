@@ -65,7 +65,7 @@ namespace PeoplePicker.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card. - Testing YMAL"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card."), cancellationToken);
                 }
             }
         }

@@ -17,8 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-nodejs
 # Teams tab with microsoft graph toolkit
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
-## Interaction with app
 
+ ## Included Features
+* Tabs
+* Graph Toolkit
+
+## Interaction with app
 ![Sign in card](Images/TabGraphToolKitModule.gif)
 
 ## Prerequisites

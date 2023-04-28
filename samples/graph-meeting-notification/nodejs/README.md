@@ -17,7 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-nodejs
 
 This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end.
 
-- **Interaction with app**
+## Included Features
+* Bots
+* Change Notifications
+* Adaptive Cards
+* Graph API
+
+## Interaction with app
 ![Meeting Notification](Images/MeetingNotification.gif)
 
 ## Prerequisites

@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
 
 This sample shows the feature where user can use different formatting on adaptive cards using bot.
 
+## Included Features
+* Bots
+* Adaptive Cards
+
 ## Interaction with app
 
 ![Types Of Cards](Images/DifferentFormattingCards.gif)

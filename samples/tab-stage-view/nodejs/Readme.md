@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 This App talks about the Teams tab in stage view with Nodejs.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling)
 
+## Included Features
+* Bots
+* Stage View (tabs)
+
 ## Interaction with app
 
 ![Tab Stage ViewGif](Images/TabStageView.gif)

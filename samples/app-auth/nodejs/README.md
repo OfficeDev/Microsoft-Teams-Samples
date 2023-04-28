@@ -20,6 +20,11 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 This sample demonstrates authentication in Microsoft Teams using bot and tab.
 
+## Included Features
+* Teams SSO (Using bots and tabs)
+* Bots
+* MSAL.js 2.0 support
+
 ## Interaction with App
 ![app-auth-sample](Images/app-auth.gif)
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID
+description: Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
 products:
 - office-teams
 - office
@@ -15,11 +15,16 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 # DeepLink
 
-This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
+Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+
+ ## Included Features
+* Tabs
+* Bots
+* Deep Links
 
 ## Interaction with app.
 
-![Preview Image](Images/Preview.gif)
+![Preview Image](Images/TabDeepLink.gif)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -63,6 +68,9 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
         ```bash
         npm install
         ```
+
+    - Navigate to `env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+    - ![TeamsAdminPortal-AppID](Images/TeamsAdminPortal.png)
 
     - Start the bot
 
@@ -116,6 +124,36 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 5. While it's in stage view, using same [deeplink to open tab](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2#generate-a-deep-link-to-your-tab) will open the meeting side panel tab.
 
 ![Meeting stage view](Images/MeetingStageView.png)
+
+**Tab interaction:**
+   
+**Deeplink to Audio Call:**
+
+![Audio-Deeplink](images/AudioCall.png)
+
+**Deeplink to Video Call:**
+   
+![Video-Deeplink](images/VideoCall.png)
+
+**Deeplink to Meeting schedule:**
+   
+![Meeting-Schedule](images/MeetingSchedule.png)
+
+**Deeplink to Polly app install dialog:**
+   
+![App-Install-Dialog](images/AppInstall.png)
+
+**Deeplink to start new chat:**
+   
+![Start-New-Chat](images/StartChatDeeplink.png)
+
+![New-Chat](images/StartNewChat.png)
+
+**Deeplink to channel conversation:**
+   
+![Show-Channel-Conversation ](images/GroupChatDeeplink.png)
+   
+![channel-Conversation](images/GroupChat.png)
 
 ## Outlook on the web
 

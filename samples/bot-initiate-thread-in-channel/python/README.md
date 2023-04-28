@@ -26,7 +26,12 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Adaptive Cards
+* Initiate thread in Teams Channel
+
+## Interaction with bot
 ![TeamsThread](Images/TeamsThread.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

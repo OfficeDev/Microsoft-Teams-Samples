@@ -104,7 +104,7 @@ namespace MeetingEvents.Bots
                 {
                     new AdaptiveOpenUrlAction
                     {
-                        Title = "Join meeting Testing YMAL",
+                        Title = "Join meeting",
                         Url = meeting.JoinUrl,
                     },
                 },

@@ -20,6 +20,11 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending notifications to users when presence status is changed.
 
+## Included Features
+* Bots
+* Graph API
+* Change Notifications
+
 ## Interaction with app
 
 ![PreviewImage](Images/Preview.gif)

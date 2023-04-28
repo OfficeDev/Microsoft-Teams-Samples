@@ -20,6 +20,12 @@ This is a sample application which demonstrates use of online meeting subscripti
 ## Concepts introduced in this sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 
+## Included Features
+* Bots
+* Change Notifications
+* Adaptive Cards
+* Graph API
+
 ## Interaction with app
 
 ![Feature](MeetingNotification/Images/MeetingNotificaionAppModule.gif)

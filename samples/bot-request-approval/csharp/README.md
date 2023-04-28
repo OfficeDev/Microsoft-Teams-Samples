@@ -16,6 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
 # Bot request approval
 This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
 
+## Included Features
+* Bots
+* Adaptive Cards
+
 # Interaction with app
 
 ![Preview Image](BotRequestApproval/Images/Preview.gif)

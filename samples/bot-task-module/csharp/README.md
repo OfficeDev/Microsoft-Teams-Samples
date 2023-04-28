@@ -19,7 +19,12 @@ Bot Framework Teams Task Module sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from Hero Card or Adaptive Card buttons and receive input from the Task Module in the bot.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Tabs
+* Task Modules
+
+## Interaction with bot
 ![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client

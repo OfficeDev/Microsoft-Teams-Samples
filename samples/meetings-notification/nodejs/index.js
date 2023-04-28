@@ -17,7 +17,7 @@ const restify = require('restify');
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
-const { TargetedInMeetingNotificationBot } = require('./bots/targetedMeetingNotificationBot');
+const { MeetingNotificationBot } = require('./bots/meetingNotificationBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -47,7 +47,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new TargetedInMeetingNotificationBot();
+const bot = new MeetingNotificationBot();
 
 // Create HTTP server.
 var server = restify.createServer();

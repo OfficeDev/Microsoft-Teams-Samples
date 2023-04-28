@@ -19,6 +19,11 @@ Using this C# sample, a bot can receive all channel messages with RSC without @m
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* RSC Permissions
+
 ## Interaction with app
 
 ![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
