@@ -79,7 +79,6 @@ const SidePanel = (props) => {
     }
 
     var divStart = "<ol type=\"1\">";
-    alert("editor value in populate" + agendaValue);
     agendaValue.forEach(x => {
       divStart += "<li>" + x + "</li>";
     });
