@@ -142,7 +142,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 3. Setup and run the bot from Visual Studio: 
     Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+   - `{{TenantId}}` - Enter value as `common`.
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
    - `{{base-url}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{ Connection Name }}` - Generated from step 15.
