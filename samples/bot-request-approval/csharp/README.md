@@ -48,7 +48,7 @@ This sample shows a feature where:
   
   run ngrok locally
   ```bash
-  ngrok http -host-header=localhost 3978
+  ngrok http 3978 --host-header="localhost:3978"
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -81,7 +81,7 @@ This sample shows a feature where:
 4. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http 3978 --host-header="localhost:3978"
     ```
  
 5. Setup and run the bot from Visual Studio: 
@@ -93,7 +93,7 @@ This sample shows a feature where:
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")

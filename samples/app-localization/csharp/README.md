@@ -52,7 +52,7 @@ Verify you have the right account for building Teams apps and install some recom
       - Run ngrok - point to port 3978
 
 	```bash
-	ngrok http -host-header=rewrite 3978
+	ngrok http 3978 --host-header="localhost:3978"
 	```   
 
 4. Setup for code
@@ -75,7 +75,7 @@ Verify you have the right account for building Teams apps and install some recom
   - Select `Localization.csproj` file
 
 6. This step is related to Microsoft Teams app manifest
-    - **Edit** the `manifest.json` contained in the `Manifest` or `Manifest_hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<1234.ngrok.io>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `Manifest` or `Manifest_hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<1234.ngrok-free.app>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Provide ngrok Url** (turnnelling Url) in `manifest.json` for contentUrl in case of tabs and for messaging endpoint in case of bots if enabled. 
     - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

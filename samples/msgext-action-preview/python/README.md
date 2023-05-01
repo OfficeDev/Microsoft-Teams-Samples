@@ -54,7 +54,7 @@ the Teams service needs to call into the bot.
 1) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http --host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 
 1) Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure

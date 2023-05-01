@@ -89,9 +89,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
   - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
-   - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+   - Once started you should see URL  `https://41ed-abcd-e125.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 5. Setup for code  
    - Clone the repository
@@ -122,7 +122,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 6. Setup Manifest for Teams
  - __*This step is specific to Teams.*__
      - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
      - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
  - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")

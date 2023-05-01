@@ -41,7 +41,7 @@ There are example in-memory and Azure implementations of the token persistance.
   
   run ngrok locally
   ```bash
-  ngrok http https://localhost:5001
+  ngrok http 5001 --host-header="localhost:5001"
   ```
 
 ## Setup
@@ -49,7 +49,7 @@ There are example in-memory and Azure implementations of the token persistance.
 If you are running this app locally, you will probably be using some form of tunnel to your local machine. For this sample we use [ngrok](https://ngrok.com)
 
 ```bash
-ngrok http https://localhost:5001
+ngrok http 5001 --host-header="localhost:5001"
 ```
 
 ```bash
@@ -58,13 +58,13 @@ Account                       {{REDACTED}}
 Version                       2.3.40
 Region                        United States (us)
 Web Interface                 http://127.0.0.1:4040
-Forwarding                    http://590a2d6f8b31.ngrok.io -> https://localhost:5001
-Forwarding                    https://590a2d6f8b31.ngrok.io -> https://localhost:5001
+Forwarding                    http://590a2d6f8b31.ngrok-free.app -> https://localhost:5001
+Forwarding                    https://590a2d6f8b31.ngrok-free.app -> https://localhost:5001
 Connections                   ttl     opn     rt1     rt5     p50     p90
                               0       0       0.00    0.00    0.00    0.00                
 ```
 
-For this example, we'll use the `590a2d6f8b31.ngrok.io` as our domain name.
+For this example, we'll use the `590a2d6f8b31.ngrok-free.app` as our domain name.
 
 ### 2. Provision an Azure AD application for Tab SSO
 Please follow the instructions on [creating an Azure AD application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
@@ -87,7 +87,7 @@ Please save
 ### 4. Provision a GitHub app
 Please follow the instructions on [creating a GitHub App](https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app).
 
-The "callback url" will be `https://{{your-domain}}/oauth/end`, e.g. `https://590a2d6f8b31.ngrok.io/oauth/end`.
+The "callback url" will be `https://{{your-domain}}/oauth/end`, e.g. `https://590a2d6f8b31.ngrok-free.app/oauth/end`.
 
 Please save
 1. The `Client ID`
@@ -100,8 +100,8 @@ Please fill in the following values into the `Manifest/Manifest.json` file (call
 |---|---|
 | Bot Id  | The "Application (client) id" from step 3. |
 | Azure Ad Application Id | the "Application (client) id" from step 2| 
-|Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok.io`.
-|Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok.io`.
+|Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok-free.app`.
+|Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok-free.app`.
 
 ### 6. Clone the repository
 

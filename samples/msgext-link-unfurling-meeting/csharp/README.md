@@ -55,7 +55,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
    - Under **Manage**, select **Expose an API**. 
    - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
   - Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
   - Set **Who can consent?** to `Admins and users`
   - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -66,7 +66,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
   - Ensure that **State** is set to **Enabled**
   - Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
 
   - In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
@@ -88,8 +88,8 @@ This sample illustrates a common scenario where a user shares a link to a resour
       * Select **web**.
       * Enter the **redirect URI** for the app in the following format: 
       - https://token.botframework.com/.auth/web/redirect, 
-      - https://%ngrokDomain%.ngrok.io/auth-end
-      - https://%ngrokDomain%.ngrok.io/auth-start This will be the page where a successful implicit grant flow will redirect the user.
+      - https://%ngrokDomain%.ngrok-free.app/auth-end
+      - https://%ngrokDomain%.ngrok-free.app/auth-start This will be the page where a successful implicit grant flow will redirect the user.
     
         Enable implicit grant by checking the following boxes:  
         ✔ ID Token  
@@ -101,7 +101,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
     * Make sure to copy and save OAuth connection name.
     * For `Scopes`, enter all the delegated graph permissions configured in the app(`TeamsAppInstallation.ReadWriteSelfForChat TeamsTab.ReadWriteForChat Chat.ReadBasic OnlineMeetings.ReadWrite`).
-    * Update Bot messaging endpoint to ngrok url with messaging endpoint. (ex. `https://<randomsubdomain>.ngrok.io/api/messages`
+    * Update Bot messaging endpoint to ngrok url with messaging endpoint. (ex. `https://<randomsubdomain>.ngrok-free.app/api/messages`
 
     **Add OAuth connection:**
 
@@ -117,7 +117,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
   - Run ngrok - point to port 3978
 
   ```bash
-  # ngrok http -host-header=rewrite 3978
+  # ngrok http 3978 --host-header="localhost:3978"
   ```
 
 4. Setup for code
@@ -135,7 +135,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
     * `TeamsBot:AppId` - App ID saved earlier.
     * `MicrosoftAppPassword` - App secret saved earlier.
     * `ClientSecret` - App secret saved earlier.
-    * `AzureAd.domain` - Replace with ngrok domain. (ex. `<randomsubdomain>.ngrok.io`)
+    * `AzureAd.domain` - Replace with ngrok domain. (ex. `<randomsubdomain>.ngrok-free.app`)
     * `ConnectionName` - Connection name 
     * `BaseUrl` - ngrok url saved earlier.
     * `TenantId` - Tenant ID where you wll run the Teams application.
@@ -175,8 +175,8 @@ This sample illustrates a common scenario where a user shares a link to a resour
 - **This step is specific to Teams.**
     - **Edit** the `manifest.json` contained in the  `samples\msgext-link-unfurling-meeting\csharp\Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
-    - **Edit** the `manifest.json` for `websiteUrl`,`privacyUrl`,`termsOfUseUrl` inside `DeveloperTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `websiteUrl`,`privacyUrl`,`termsOfUseUrl` inside `DeveloperTabs` . Replace `<yourNgrok.ngrok-free.app>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
     - **Edit** the `manifest.json` for  `showLoadingIndicator` Replace `false`.
     - **Zip** up the contents of the `samples\msgext-link-unfurling-meeting\csharp\Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
@@ -265,7 +265,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 ### 10. Basic Tests
 * You should be able to install the application to personal scope, group chats and Teams.
-* Share a link say `https://<randomdomain>.ngrok.io/dashboard1` and application should prompt the user to sign-in and unfurl it to an adaptive card post sign-in.
+* Share a link say `https://<randomdomain>.ngrok-free.app/dashboard1` and application should prompt the user to sign-in and unfurl it to an adaptive card post sign-in.
 * You should be able to open stage tab view from adaptive card.
 * You should be able to setup a meeting with everything configured.
 

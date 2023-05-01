@@ -34,7 +34,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
 	"<<DOMAIN-NAME>>"
   ]
 }

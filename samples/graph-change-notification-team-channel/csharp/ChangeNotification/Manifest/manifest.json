@@ -38,7 +38,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok-free.app"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",

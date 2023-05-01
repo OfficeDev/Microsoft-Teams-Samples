@@ -6,9 +6,9 @@
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://xxxxx.ngrok.io",
-    "privacyUrl": "https://xxxxx.ngrok.io/privacy",
-    "termsOfUseUrl": "https://xxxxx.ngrok.io/termsofuse"
+    "websiteUrl": "https://xxxxx.ngrok-free.app",
+    "privacyUrl": "https://xxxxx.ngrok-free.app/privacy",
+    "termsOfUseUrl": "https://xxxxx.ngrok-free.app/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://xxxxx.ngrok.io/tab",
-      "websiteUrl": "https://xxxxx.ngrok.io/tab",
+      "contentUrl": "https://xxxxx.ngrok-free.app/tab",
+      "websiteUrl": "https://xxxxx.ngrok-free.app/tab",
       "scopes": [
         "personal"
       ]
@@ -39,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok-free.app"
   ]
 }

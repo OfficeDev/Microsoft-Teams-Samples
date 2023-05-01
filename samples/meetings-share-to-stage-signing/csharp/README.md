@@ -81,11 +81,11 @@ sequenceDiagram
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup for app registration 
-- Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`)
+- Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok-free.app`)
 
 - Register an App in AzureAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
 
-- Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
+- Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok-free.app/auth-end)
 
 - Ensure the following API permissions are granted to the app for Microsoft Graph access
     - email
@@ -151,7 +151,7 @@ sequenceDiagram
     * Run `dotnet run`
 
     ### Locally in Visual Studio
-    * Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
+    * Point Ngrok to port 44326: `ngrok http 44326 --host-header="localhost:44326"`
     * Launch Visual Studio
     * File -> Open -> Project/Solution
     * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
@@ -173,8 +173,8 @@ sequenceDiagram
 - **This step is specific to Teams.**
 
     - **Edit** the `manifest.json` contained in the  `Source\MeetingSigning.Web\Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok-free.app>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `Source\MeetingSigning.Web\Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 

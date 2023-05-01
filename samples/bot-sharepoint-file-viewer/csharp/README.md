@@ -44,7 +44,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
 1) Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+# ngrok http 3978 --host-header="localhost:3978"
 ```
 
 ### 3. Setup SharePoint Site.
@@ -80,7 +80,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
    - Select `BotWithSharePointFileViewer.csproj` or `BotWithSharePointFileViewer.sln`file
 
 4 Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId and ConnectionName generated in Step 1 (Setup for Bot SSO). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
- - `ApplicationBaseUrl` will be your app's base url. For eg `https://xxxx.ngrok.io`.
+ - `ApplicationBaseUrl` will be your app's base url. For eg `https://xxxx.ngrok-free.app`.
  - `SharePointTenantName` will be the tenant name generated in step 3.2.
  - `SharePointSiteName` will be the site name created in step 3.
 
@@ -89,7 +89,7 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
 ### 5. Setup Manifest for Teams
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)

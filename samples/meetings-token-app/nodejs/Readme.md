@@ -72,7 +72,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
   ```bash
   # run ngrok locally
-  ngrok http -host-header=rewrite 3978
+  ngrok http 3978 --host-header="localhost:3978"
   ```
 
 ### Technologies
@@ -117,7 +117,7 @@ The app uses the Teams extensibility features described on the following pages:
 
 ### Step 3: Run Ngrok
 1. The application (client) will run on port 3978
-2. ngrok http -host-header=rewrite 3978
+2. ngrok http 3978 --host-header="localhost:3978"
   
 ### Step 4: Run Client & the Server
 You can build and run the project from the command line or an IDE:

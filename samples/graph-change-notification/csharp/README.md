@@ -45,7 +45,7 @@ This sample app demonstrates sending change notifications to user presence in Te
 2) Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+     ngrok http 3978 --host-header="localhost:3978"
    ```
 
 3) Setup App Registration
@@ -167,12 +167,12 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 Modify the `appsettings.json` file with the following details:
     - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing AAD app registration.
     - Provide ConnectionName in appsetting that is created in Azure wile creating connect for your Azure bot.
-    - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok.io
+    - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok-free.app
     - Press `F5` to run the project
 
 7) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json`file contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

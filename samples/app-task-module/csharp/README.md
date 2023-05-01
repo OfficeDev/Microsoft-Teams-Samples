@@ -58,7 +58,7 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
  - Run ngrok - point to port 3978
 
 ```bash
-  ngrok http -host-header=rewrite 3978
+  ngrok http 3978 --host-header="localhost:3978"
 ```
 
 4. Setup for code
@@ -70,7 +70,7 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
     ```
 - From a terminal, navigate to `samples/app-task-module/csharp`
     
--  Modify the /web.config in appSettings section and fill in the {{ MicrosoftAppId }},{{ MicrosoftAppPassword }} with the id from step 1 and {{BaseUrl}} we get from previous step. ngrok BaseUrl will look something like `https://abc21-hun-12ef.ngrok.io`.
+-  Modify the /web.config in appSettings section and fill in the {{ MicrosoftAppId }},{{ MicrosoftAppPassword }} with the id from step 1 and {{BaseUrl}} we get from previous step. ngrok BaseUrl will look something like `https://abc21-hun-12ef.ngrok-free.app`.
  
 - Run the bot from a terminal or from Visual Studio:
 
@@ -92,7 +92,7 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-task-module\csharp\Microsoft.Teams.Samples.TaskModule.Web\Manifest_Hub` folder with the required values.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 

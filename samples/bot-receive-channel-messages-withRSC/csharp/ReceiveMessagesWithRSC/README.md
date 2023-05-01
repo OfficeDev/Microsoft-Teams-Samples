@@ -24,7 +24,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 1. Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+# ngrok http 3978 --host-header="localhost:3978"
 ```
 
 2. Create a Bot Registration

@@ -60,8 +60,8 @@ This is a sample application where user can create, update, add or remove member
 
 
 5. Start ngrok on localhost:3978
-   - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
-   -  Once started you should see link `https://xxxxx.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
+   - Open ngrok and run command `ngrok http 3978 --host-header="localhost:3978"` 
+   -  Once started you should see link `https://xxxxx.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
 
    ![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)
 
@@ -84,7 +84,7 @@ This is a sample application where user can create, update, add or remove member
 7. Setup the `manifest.json` in the `/AppPackage` folder 
 Replace the following details:
 - `{{APP-ID}}` with any GUID id value or your MicrosoftAppId.
-- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

@@ -27,13 +27,13 @@
       {
         "entityId": "auth",
         "name": "Auth",
-        "contentUrl": "https://{ngrokSubdomain}.ngrok.io/ssoDemo",
+        "contentUrl": "https://{ngrokSubdomain}.ngrok-free.app/ssoDemo",
         "scopes": [ "personal" ]
       }
     ],
     "configurableTabs": [
       {
-        "configurationUrl": "https://{ngrokSubdomain}.ngrok.io/configure",
+        "configurationUrl": "https://{ngrokSubdomain}.ngrok-free.app/configure",
         "canUpdateConfiguration": true,
         "scopes": [
           "team"
@@ -42,11 +42,11 @@
     ],
     "permissions": [ "identity", "messageTeamMembers" ],
     "validDomains": [
-      "{ngrokSubdomain}.ngrok.io"
+      "{ngrokSubdomain}.ngrok-free.app"
     ],
     "webApplicationInfo": {
       "id": "{appId}",
-      "resource": "api://{ngrokSubdomain}.ngrok.io/{appId}"
+      "resource": "api://{ngrokSubdomain}.ngrok-free.app/{appId}"
     }
   }
   

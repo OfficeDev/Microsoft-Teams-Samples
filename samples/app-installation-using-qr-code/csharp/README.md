@@ -69,7 +69,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 
 3) Setup for code
@@ -88,7 +88,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 from AAD app registration in Azure portal
   - `{{Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
   - `{{ Auth Connection Name }}` - The OAuthConnection setting from step 1, from Azure Bot SSO setup
 
 The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
@@ -111,7 +111,7 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
 
 - Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with AAD app registration Application id, generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
 - Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 

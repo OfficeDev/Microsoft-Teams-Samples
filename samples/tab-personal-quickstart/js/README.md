@@ -45,7 +45,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 - Under **Manage**, select **Expose an API**. 
 - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
 - Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 - Set **Who can consent?** to `Admins and users`
 - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -56,7 +56,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 - Ensure that **State** is set to **Enabled**
 - Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
 - In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -75,7 +75,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://%ngrokDomain%.ngrok.io/Auth/End`. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: `https://%ngrokDomain%.ngrok-free.app/Auth/End`. This will be the page where a successful implicit grant flow will redirect the user.
     
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -86,7 +86,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
   - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
 3. Setup for code
  - Clone the repository
@@ -111,7 +111,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 - **This step is specific to Teams.**
      **Edit** the `manifest.json` contained in the `Manifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-     **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+     **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
      **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-personal-quickstart\js\Manifest_Hub` folder with the required values.
      **Zip** up the contents of the `Manifest/` folder to create a `Manifest.zip` or `Manifest_Hub/` folder to create a `Manifest_Hub.zip`
      **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
