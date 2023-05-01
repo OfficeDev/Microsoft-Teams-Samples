@@ -101,7 +101,6 @@ const SidePanel = (props) => {
     var agendas = editorMap.get(agendaValueKey);
     agendas.push(newAgendaItem);
     editorMap.set(agendaValueKey, agendas);
-
   }
 
   // This method is called to publish the agenda.

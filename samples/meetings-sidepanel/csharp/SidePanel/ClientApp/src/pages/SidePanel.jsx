@@ -44,9 +44,9 @@ const SidePanel = (props) => {
 
             let connection;
             window.localStorage.debug = "fluid:*";
-			await microsoftTeams.app.initialize();
-			const host = LiveShareHost.create();
-			
+            await microsoftTeams.app.initialize();
+            const host = LiveShareHost.create();
+
             // Define Fluid document schema and create container
             const client = new LiveShareClient(host);
             const containerSchema = {

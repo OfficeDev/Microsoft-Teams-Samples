@@ -62,6 +62,7 @@ async function publishAgenda() {
                'Authorization': 'Bearer ' + token
              }
            });
+           
            const response = await getRoleRequest.json();
            const role = response.meeting.role;
            if(role=='Organizer')
