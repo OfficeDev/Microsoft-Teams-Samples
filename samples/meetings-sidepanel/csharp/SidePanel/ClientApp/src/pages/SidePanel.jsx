@@ -6,7 +6,7 @@
 import { useEffect } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
-import { TeamsFluidClient } from "@microsoft/live-share";
+import { LiveShareClient } from "@microsoft/live-share";
 import { setMeetingContext, addAgendaTask, postAgenda } from "./services/agendaAPIHelper"
 
 let containerValue;
@@ -44,9 +44,11 @@ const SidePanel = (props) => {
 
             let connection;
             window.localStorage.debug = "fluid:*";
+            await microsoftTeams.app.initialize();
+            const host = LiveShareHost.create();
 
             // Define Fluid document schema and create container
-            const client = new TeamsFluidClient();
+            const client = new LiveShareClient(host);
             const containerSchema = {
                 initialObjects: { editorMap: SharedMap }
             };
