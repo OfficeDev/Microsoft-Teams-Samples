@@ -62,7 +62,7 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-        "${{PROVISIONOUTPUT__BOTOUTPUT__DOMAIN}}"
+        "${{PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN}}"
     ],
     "webApplicationInfo": {
         "id": "${{AAD_APP_CLIENT_ID}}",
