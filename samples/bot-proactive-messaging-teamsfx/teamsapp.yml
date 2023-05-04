@@ -3,8 +3,6 @@
 # Visit https://aka.ms/teamsfx-actions for details on actions
 version: 1.0.0
 
-projectId: 8e391fef-aec7-4502-a048-4033ad57210c
-
 environmentFolderPath: ./env
 
 # Triggered when 'teamsfx provision' is executed
