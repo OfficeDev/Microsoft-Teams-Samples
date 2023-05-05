@@ -8,6 +8,11 @@
     "scripts": {
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
+        "envsetup": "node ./index.js -e",
+        "clean": "npm i && npm run envsetup && node ./index.js -c", "//": "Clean out build files",
+        "fullclean": "npm i && npm run envsetup && node ./index.js -f",  "//": "Clean out build and cache files",
+        "build": "npm run envsetup && node ./index.js",  "//": "Builds the entire project to the build/ directory",
+        "distpackage": "npm run fullclean && npm run build && node ./index.js -p",  "//": "Cleans out the build/cache files, rebuilds the project.",
         "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -17,7 +22,6 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
-        "adaptivecards-templating": "^2.3.1",
         "botbuilder": "^4.19.0",
         "botbuilder-dialogs": "^4.19.0",
         "dotenv": "^8.2.0",
