@@ -42,7 +42,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for your app. This will be the page where a successful implicit grant flow will redirect the user. 
-    Set it as `https://Base_Url/auth-end`, ex:`https://f631****.ngrok.io/auth-end` 
+    Set it as `https://Base_Url/auth-end`, ex:`https://f631****.ngrok-free.app/auth-end` 
 
     Next, enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -53,7 +53,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
         * ex: `api://subdomain.example.com/00000000-0000-0000-0000-000000000000`.
         
         The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
-        * ex: `api://f631****.ngrok.io/9051a142-901a-4384-a83c-556c2888b071`.
+        * ex: `api://f631****.ngrok-free.app/9051a142-901a-4384-a83c-556c2888b071`.
  
     - Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
     - Set **Who can consent?** to `Admins and users`
@@ -83,7 +83,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
    - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http 3978 --host-header="localhost:3978"
     ```
  4. Setup for code
    - Clone the repository
@@ -112,9 +112,9 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - - **Edit** the `manifest.json` for `validDomains and REACT_APP_BASE_URL replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - - **Edit** the `manifest.json` for `validDomains and REACT_APP_BASE_URL replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     
-     - **Edit** the `manifest.json` for `webApplicationInfo` resource `""api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>""` with MicrosoftAppId. E.g. `""api://<<ngrok.io>><<XXXXXXXXXXXXXXXXXXXxx>>
+     - **Edit** the `manifest.json` for `webApplicationInfo` resource `""api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>""` with MicrosoftAppId. E.g. `""api://<<ngrok-free.app>><<XXXXXXXXXXXXXXXXXXXxx>>
      
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")

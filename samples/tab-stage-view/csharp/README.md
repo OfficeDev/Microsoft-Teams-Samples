@@ -59,7 +59,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Run ngrok - point to port 3978
 
 ```bash
-  ngrok http -host-header=rewrite 3978
+  ngrok http 3978 --host-header="localhost:3978"
 ```
 
 4. Setup for code
@@ -73,7 +73,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{Bot Id}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{ Bot Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base URL }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base URL }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
  
 - In a terminal, navigate to `TabInStageView`
 
@@ -102,7 +102,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id or Bot-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `TabInStageView\Manifest_Hub` folder with the required values.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 

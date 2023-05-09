@@ -5,8 +5,9 @@
 
 import { useEffect } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { LiveShareHost } from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
-import { TeamsFluidClient } from "@microsoft/live-share";
+import { LiveShareClient } from "@microsoft/live-share";
 import { setMeetingContext, postAgenda } from "./services/agendaAPIHelper"
 
 let containerValue;
@@ -21,19 +22,17 @@ const SidePanel = (props) => {
         var userId = context.user.id;
         var meetingId = context.meeting.id;
         var tenantId = context.user.tenant.id;
-        var userData = {meetingId : meetingId,userId:userId,tenantId:tenantId}
+        var userData = { meetingId: meetingId, userId: userId, tenantId: tenantId }
         agendaListPopulate();
         setMeetingContext(userData).then((result) => {
-          if(result.data==true)
-                {
-                    document.getElementById("agendaButtonDiv").style.display="block";
-                    document.getElementById("publishAgendaButton").style.display="block";
-                }
-                else
-                {
-                    document.getElementById("agendaButtonDiv").style.display="none";
-                    document.getElementById("publishAgendaButton").style.display="none";
-                }         
+          if (result.data == true) {
+            document.getElementById("agendaButtonDiv").style.display = "block";
+            document.getElementById("publishAgendaButton").style.display = "block";
+          }
+          else {
+            document.getElementById("agendaButtonDiv").style.display = "none";
+            document.getElementById("publishAgendaButton").style.display = "none";
+          }
         })
       })
     });
@@ -46,9 +45,11 @@ const SidePanel = (props) => {
 
       let connection;
       window.localStorage.debug = "fluid:*";
+      await microsoftTeams.app.initialize();
+      const host = LiveShareHost.create();
 
       // Define Fluid document schema and create container
-      const client = new TeamsFluidClient();
+      const client = new LiveShareClient(host);
       const containerSchema = {
         initialObjects: { editorMap: SharedMap }
       };
@@ -69,7 +70,7 @@ const SidePanel = (props) => {
 
   function agendaListPopulate() {
     var agendaValue;
-    if(containerValue == null || containerValue == "") {
+    if (containerValue == null || containerValue == "") {
       agendaValue = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
     }
 
@@ -78,7 +79,6 @@ const SidePanel = (props) => {
     }
 
     var divStart = "<ol type=\"1\">";
-    alert("editor value in populate"+agendaValue);
     agendaValue.forEach(x => {
       divStart += "<li>" + x + "</li>";
     });
@@ -90,26 +90,25 @@ const SidePanel = (props) => {
     document.getElementById("agendaInputDiv").style.display = "block";
     document.getElementById("agendaButtonDiv").style.display = "none";
     document.getElementById("agendaInput").focus();
-}
-
-function addAgenda() {
-  document.getElementById("agendaInputDiv").style.display = "none";
-  document.getElementById("agendaButtonDiv").style.display = "block";
-  var newAgendaItem = document.getElementById('agendaInput').value;
-
-  var editorMap = containerValue.initialObjects.editorMap;
-  var agendas = editorMap.get(agendaValueKey);
-  agendas.push(newAgendaItem);
-  editorMap.set(agendaValueKey, agendas);
-     
   }
 
-// This method is called to publish the agenda.
- function publishAgenda() {
-  const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-  var publishData = {context: agendaValue};
-  postAgenda(publishData);
- }
+  function addAgenda() {
+    document.getElementById("agendaInputDiv").style.display = "none";
+    document.getElementById("agendaButtonDiv").style.display = "block";
+    var newAgendaItem = document.getElementById('agendaInput').value;
+
+    var editorMap = containerValue.initialObjects.editorMap;
+    var agendas = editorMap.get(agendaValueKey);
+    agendas.push(newAgendaItem);
+    editorMap.set(agendaValueKey, agendas);
+  }
+
+  // This method is called to publish the agenda.
+  function publishAgenda() {
+    const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+    var publishData = { context: agendaValue };
+    postAgenda(publishData);
+  }
 
   // This method is called whenever the shared state is updated.
   const updateEditorState = () => {
@@ -125,7 +124,7 @@ function addAgenda() {
       <div id="agendaButtonDiv">
         <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
       </div>
-      <div id="agendaInputDiv" style={{display:'none'}}>
+      <div id="agendaInputDiv" style={{ display: 'none' }}>
         <input type="text" id="agendaInput" /><br />
         <button id="addAgendaButton" onClick={addAgenda}>Add</button>
       </div>

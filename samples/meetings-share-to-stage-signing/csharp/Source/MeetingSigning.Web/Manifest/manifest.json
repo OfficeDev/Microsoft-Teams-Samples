@@ -44,7 +44,7 @@
   "permissions": [],
   "validDomains": [
       "localhost:44326",
-      "*.ngrok.io",
+      "*.ngrok-free.app",
       "<<deployment-url>>"
   ],
   "meetingExtensionDefinition": {

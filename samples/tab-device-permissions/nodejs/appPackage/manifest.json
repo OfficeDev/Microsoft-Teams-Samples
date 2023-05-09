@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok-free.app"
   ],
   "devicePermissions": [
     "media",

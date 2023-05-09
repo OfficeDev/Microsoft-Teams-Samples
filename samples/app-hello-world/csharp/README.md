@@ -58,7 +58,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1) Run ngrok - point to port 5000
 
     ```bash
-    # ngrok http -host-header=rewrite 5000
+    # ngrok http 5000 --host-header="localhost:5000"
     ```
 ### 3. Setup for code
 - Clone the repository
@@ -90,7 +90,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app`
 
   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
 
@@ -99,7 +99,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
   
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps

@@ -81,7 +81,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1) Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http 3978 --host-header="localhost:3978"
     ```
 4. Setup for code 
 - Clone the repository
@@ -110,7 +110,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app`
 
 2) Zip the contents of `Manifest` folder into a `manifest.zip`.
 

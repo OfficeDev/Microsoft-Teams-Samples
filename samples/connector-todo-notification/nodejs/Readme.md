@@ -36,7 +36,7 @@ This is a sample connector application which demonstarates how to add authentica
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+     ngrok http 3978 --host-header="localhost:3978"
    ```  
 2. Clone the repository
 
@@ -60,7 +60,7 @@ This is a sample connector application which demonstarates how to add authentica
    1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
-   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
+   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok-free.app.
    1. Click on Save. After the save completes, you will see your connector id.
 
 5. [Using Azure AD](#using-azure-ad)
@@ -95,7 +95,7 @@ This is a sample connector application which demonstarates how to add authentica
 
 8. __*This step is specific to Teams.*__
  - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
  
         Example :
 

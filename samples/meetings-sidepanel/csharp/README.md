@@ -42,7 +42,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 ## Setup.
 
 1. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978```
+   ```ngrok http 3978 --host-header="localhost:3978"```
 
 2. Create AAD app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -64,13 +64,13 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    Modify the `appsettings.json` and fill in the following details:
    - `<<Microsoft-App-ID>>` - Generated from Step 2 (Application (client) ID) is the application app id
    - `<<Microsoft-App-Secret>>` - Generated from Step 2, also referred to as Client secret
-   - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
 
 6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - <<Manifest-id>> with any random GUID or your MicrosoftAppId from AAD app registration.
    - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
-   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 

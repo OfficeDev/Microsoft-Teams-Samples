@@ -41,7 +41,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 2. Setup for Bot
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok.io/api/messages`. 
+   - For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok-free.app/api/messages`. 
 
   **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -53,7 +53,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
       - Run ngrok - point to port 3978
 
 	```bash
-	 ngrok http -host-header=rewrite 3978
+	 ngrok http 3978 --host-header="localhost:3978"
 	```   
 4. Setup for code
 

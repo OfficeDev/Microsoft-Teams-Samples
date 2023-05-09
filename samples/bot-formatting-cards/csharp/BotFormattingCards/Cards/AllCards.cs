@@ -2,11 +2,10 @@
 /// Copyright(c) Microsoft. All Rights Reserved.
 /// Licensed under the MIT License.
 /// </summary>
-
 using System.IO;
-using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
-
+using AdaptiveCards.Templating;
+using Microsoft.Bot.Schema;
 namespace BotAllCards.Cards
 {
     public static class AllCards
@@ -16,15 +15,23 @@ namespace BotAllCards.Cards
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendMentionSupportCard()
+        public static Attachment sendMentionSupportCardAsync(string name)
         {
             var paths = new[] { ".", "Resources", "mentionSupport.json" };
             var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
 
+            var templateJSON = adaptiveCardJson;
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(templateJSON);
+            var memberData = new
+            {
+                userName = name
+            };
+            
+            string cardJSON = template.Expand(memberData);
             var mentionSupportAdaptiveCardAttachment = new Attachment()
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+                Content = JsonConvert.DeserializeObject(cardJSON),
             };
 
             return mentionSupportAdaptiveCardAttachment;
@@ -143,5 +150,6 @@ namespace BotAllCards.Cards
 
             return emojiAdaptiveCardAttachment;
         }
+
     }
 }

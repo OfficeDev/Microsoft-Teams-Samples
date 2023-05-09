@@ -114,7 +114,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
     "token.botframework.com",
     "{{Base_URL_Domain}}"
   ]

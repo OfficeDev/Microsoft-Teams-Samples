@@ -17,21 +17,24 @@ import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../sty
 const SidePanel = () => {
   const flexRowStyle = getFlexRowStyles();
 
-  const shareSpecificPart = (partName) => {
+    const shareSpecificPart = (partName) => {
+        
     var appContentUrl = "";
-      appContentUrl = `${window.location.origin}/question/${partName}`;
-    microsoftTeams.app.initialize();
-    microsoftTeams.meeting.shareAppContentToStage((error, result) => {
-      if (result) {
-        // handle success
-        console.log("success")
-      }
+        appContentUrl = `${window.location.origin}/question/${partName}`;
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.meeting.shareAppContentToStage((error, result) => {
+                if (result) {
+                    // handle success
+                    console.log("success")
+                }
 
-      if (error) {
-        // handle error
-        console.log(JSON.stringify(error))
-      }
-    }, appContentUrl);
+                if (error) {
+                    // handle error
+                    console.log(JSON.stringify(error))
+                }
+            }, appContentUrl);
+        });
+
   };
 
   const flexColumnStyles = getFlexColumnStyles();

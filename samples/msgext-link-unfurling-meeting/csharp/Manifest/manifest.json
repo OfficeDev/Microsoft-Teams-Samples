@@ -62,8 +62,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.ngrok.io",
-              "ngrok.io"
+              "*.ngrok-free.app",
+              "ngrok-free.app"
             ]
           }
         }
@@ -93,7 +93,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
+    "*.ngrok-free.app",
     "*.botframework.com",
     "*.microsoft.com"
   ],

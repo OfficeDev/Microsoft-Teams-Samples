@@ -64,5 +64,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "*.ngrok.io" ]
+  "validDomains": [ "*.ngrok-free.app" ]
 }

@@ -54,7 +54,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 4. Under **Manage**, select **Expose an API**. 
 5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -65,7 +65,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 9. Ensure that **State** is set to **Enabled**
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/botid-00000000-0000-0000-0000-000000000000/access_as_user.
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -105,7 +105,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
     c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
     d. **Tenant ID**  Enter value as `common`.
-    e. **Token Exchange Url** Enter the url in format `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`(Refer step 1.5)
+    e. **Token Exchange Url** Enter the url in format `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`(Refer step 1.5)
     f. Provide **Scopes** like "User.Read openid"
   
 
@@ -120,7 +120,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1) Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+# ngrok http 3978 --host-header="localhost:3978"
 ```
 
 ### 3. Setup for code
@@ -144,7 +144,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
-   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
    - `{{AppType}}` - The value for app type will me `MultiTenant`.
@@ -159,7 +159,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `{{MicrosoftAppId}}` with Application id generated from Step 3
-   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok.io the base url domain will be 12345.ngrok.io if you are using ngrok.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok.
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\nodejs` folder with the required values.
 2. Zip the contents of the `appPackage` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 

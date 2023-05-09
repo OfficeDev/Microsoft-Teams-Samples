@@ -6,16 +6,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { LiveShareHost } from "@microsoft/teams-js";
 import { IQuestionDetails } from '../types/question';
 import { SharedMap } from "fluid-framework";
-import { TeamsFluidClient } from "@microsoft/live-share";
+import { LiveShareClient } from "@microsoft/live-share";
 import { getLatestEditorValue, saveEditorState } from "./services/getLatestEditorValue"
 import Editor from '@monaco-editor/react';
 
 let containerValue;
 
 const MeetingStage = (props) => {
-
   let { questionId } = useParams();
   let meetingId;
   const editorValueKey = "editor-value-key";
@@ -36,14 +36,15 @@ const MeetingStage = (props) => {
 
   // Initial setup for using fluid container.
   useEffect(() => {
-    microsoftTeams.app.initialize();
     (async function () {
-
+	  await microsoftTeams.app.initialize();
       let connection;
       window.localStorage.debug = "fluid:*";
 
+    const host = LiveShareHost.create();
+	
       // Define Fluid document schema and create container
-      const client = new TeamsFluidClient();
+      const client = new LiveShareClient(host);
       const containerSchema = {
         initialObjects: { editorMap: SharedMap }
       };
@@ -94,7 +95,7 @@ const MeetingStage = (props) => {
     <>
       {
         IQuestionDetails.questions ? IQuestionDetails.questions.map((question) => {
-          if (question.questionId === questionId) {
+          if (question.questionId == questionId) {
             return <>
               <div>{question.question}</div>
               <div>{question.language}</div>

@@ -27,17 +27,17 @@
       {
         "entityId": "auth",
         "name": "Auth",
-        "contentUrl": "https://{ngrokSubdomain}.ngrok.io/ssoDemo",
+        "contentUrl": "https://{ngrokSubdomain}.ngrok-free.app/ssoDemo",
         "scopes": [ "personal" ]
       }
     ],
     "permissions": [ "identity", "messageTeamMembers" ],
     "validDomains": [
-      "{ngrokSubdomain}.ngrok.io"
+      "{ngrokSubdomain}.ngrok-free.app"
     ],
     "webApplicationInfo": {
       "id": "{{AppId}}",
-      "resource": "api://{ngrokSubdomain}.ngrok.io/{{AppId}}"
+      "resource": "api://{ngrokSubdomain}.ngrok-free.app/{{AppId}}"
     }
   }
   

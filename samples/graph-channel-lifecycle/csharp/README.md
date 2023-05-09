@@ -46,7 +46,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 - Run ngrok - point to port 3978
 
 ```bash
-  ngrok http -host-header=rewrite 3978
+  ngrok http 3978 --host-header="localhost:3978"
 ```
 
 3. Setup for code
@@ -60,7 +60,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{ ClientId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{ ClientSecret}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ BaseUri }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ BaseUri }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
 
 - Run the bot from a terminal or from Visual Studio:
 
@@ -80,7 +80,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
  4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")

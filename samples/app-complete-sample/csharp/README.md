@@ -68,7 +68,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
       - Run ngrok - point to port 3978
 
 	```bash
-	 ngrok http -host-header=rewrite 3978
+	 ngrok http 3978 --host-header="localhost:3978"
 	```   
 4. Setup for code
 
@@ -81,13 +81,13 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
   - `{{BotId}}` - Generated from Step 1 is the application app id
   - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
   - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
 
 	Here is an example for reference:
 		<add key="BotId" value="Bot_Handle_Here" />
 		<add key="MicrosoftAppId" value="88888888-8888-8888-8888-888888888888" />
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
-		<add key="BaseUri" value="https://#####abc.ngrok.io" />
+		<add key="BaseUri" value="https://#####abc.ngrok-free.app" />
 		<add key="FBConnectionName" value="connectionname" />
 		<add key="FBProfileUrl" value="profileurl" />
 		
@@ -114,7 +114,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 7. Setup Manifest for Teams
 	- __*This step is specific to Teams.*__
 	    - **Edit** the `manifest.json` contained in the ./manifest or ./manifest_hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 	    - **Zip** up the contents of the `manifest` or 'manifest_hub.json' folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 	- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
