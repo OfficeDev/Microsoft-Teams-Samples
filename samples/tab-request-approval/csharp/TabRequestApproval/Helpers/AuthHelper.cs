@@ -113,7 +113,6 @@ namespace TabRequestApproval.Helpers
                     return true;
                 }
             }
-
             return false;
         }
 
