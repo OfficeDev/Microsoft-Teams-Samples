@@ -11,7 +11,6 @@ extensions:
  contentType: samples
  createdDate: "21/01/2023 12:54:21 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-sso-adaptivecard-nodejs
-
 ---
 
 # SSO for your Adaptive Cards
