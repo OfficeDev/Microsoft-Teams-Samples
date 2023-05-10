@@ -19,6 +19,8 @@ This App talks about the Teams tab which displays Adaptive card with CSharp.
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+> NOTE: Adaptive Card tabs will be deprecated in the new Microsoft Teams. It's recommended to rebuild the tab as a web-based tab if using adaptive card tabs.
+
 ## Included Features
 * Tabs
 * Adaptive Cards (in tabs)
