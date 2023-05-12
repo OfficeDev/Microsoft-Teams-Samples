@@ -118,7 +118,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Microsoft-App-TenantId }}` - Generated from Step 1 is the tenantId id
-  - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name) 
+  - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name)
+
+4) Navigate to `\Resources\adaptiveCard.json` and add you media file link from OneDrive or SharePoint at placeholder `<< URL >>`
 
   **Bot OAuth Connection:**
 

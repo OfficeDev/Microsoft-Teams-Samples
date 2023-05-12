@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
-  "version": "1.0",
+  "version": "1.6",
   "body": [
     {
       "type": "Container",
@@ -78,6 +78,21 @@
               "value": "Not set"
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Media file Example"
+    },
+    {
+      "type": "Media",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "<< URL >>"
         }
       ]
     }
