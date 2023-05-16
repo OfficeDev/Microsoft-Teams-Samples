@@ -25,6 +25,22 @@ namespace Microsoft.BotBuilderSamples.Bots
             return channelDeepLink;
         }
 
+        public string GetDeepLinkToMeetingSidePanel(string teamsUrl, string appID, string baseUrl, string entityId, string chatId, string contextType)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            sb.Append("\"chatId\":\"" + chatId + "\",");
+            sb.Append("\"contextType\":\"" + contextType + "\"");
+            sb.Append("}");
+
+            string jsoncontext = sb.ToString();
+            string taskContext = HttpUtility.UrlEncode(jsoncontext);
+            string encodedUrl = HttpUtility.UrlEncode(baseUrl + "/appInMeeting");
+            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?webUrl=" + encodedUrl + "&context=";
+            string sidePanelDeepLink = deepLinkURL + taskContext;
+            return sidePanelDeepLink;
+        }
+
         public string GetDeepLinkToChannelTask(string teamsUrl, string appID,string baseUrl,string channelId, string entityId, string subEntityID)
         {
             StringBuilder sb = new StringBuilder();
