@@ -2,11 +2,18 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.IO;
+using AdaptiveCards.Templating;
+using AdaptiveCards;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -41,6 +48,55 @@ namespace Microsoft.BotBuilderSamples
                     await turnContext.SendActivityAsync(reply, cancellationToken);
                 }
             }
+        }
+
+        private InvokeResponse createAdaptiveCardInvokeResponseAsync(string url)
+        {
+            string[] filepath = new[] { ".", "Resources", "adaptiveCardMedia.json" };
+
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            
+
+            var payloadData = new
+            {
+                mediaurl = url,
+            };
+
+            var cardJsonstring = template.Expand(payloadData);
+
+            var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+            {
+                StatusCode = 200,
+                Type = AdaptiveCard.ContentType,
+                Value = JsonConvert.DeserializeObject(cardJsonstring)
+            };
+
+            return CreateInvokeResponse(adaptiveCardResponse);
+        }
+
+        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        {
+            if (turnContext.Activity.Name == "adaptiveCard/action")
+            {
+                if (turnContext.Activity.Value == null)
+                    return null;
+
+                JObject value = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
+
+                if (value["action"] == null)
+                    return null;
+
+                JObject actiondata = JsonConvert.DeserializeObject<JObject>(value["action"]["data"].ToString());
+
+                if (actiondata["url"] == null)
+                    return null;
+
+                string url = actiondata["url"].ToString();
+                return createAdaptiveCardInvokeResponseAsync(url);
+            }
+
+            return null;
         }
     }
 }
