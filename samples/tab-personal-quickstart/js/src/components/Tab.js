@@ -1,44 +1,40 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React from 'react';
-import './App.css';
-import { app } from "@microsoft/teams-js";
+import React, { useEffect } from 'react';
+import { Text, LargeTitle, Title2 } from '@fluentui/react-components';
+import { app } from '@microsoft/teams-js';
 
 /**
  * The 'PersonalTab' component renders the main tab content
  * of your app.
  */
-class Tab extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      context: {}
-    }
-  }
+function Tab() {
+  const [teamsContext, setTeamsContext] = React.useState(undefined);
+  const [theme, setTheme] = React.useState('default');
 
-  //React lifecycle method that gets called once a component has finished mounting
-  //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
-  componentDidMount(){
-    // Get the user context from Teams and set it in the state
+  useEffect(() => {
     app.getContext().then((context) => {
-      this.setState({
-        context: context
-      });
-    })
-    // Next steps: Error handling using the error object
-  }
+      setTeamsContext(context);
+      setTheme(context.app.theme);
+    });
+    app.registerOnThemeChangeHandler((theme) => {
+      setTheme(theme);
+    });
+  }, []);
 
-  render() {
-
-    let userName = Object.keys(this.state.context).length > 0 ? this.state.context.user.userPrincipalName : "";
-
-      return (
-      <div>
-        <h3>Hello World!</h3>
-        <h1>Congratulations {userName}!</h1> <h3>This is the tab you made :-)</h3>
-      </div>
-      );
-  }
+  return (
+    <div>
+      <Title2 block>Hello World!</Title2>
+      <LargeTitle block>
+        Congratulations {teamsContext?.user.userPrincipalName ?? 'undefined'}!
+      </LargeTitle>
+      <Title2 block>This is the tab you made 😀!</Title2>
+      <Text as="p" block>
+        Theme: {theme}
+      </Text>
+    </div>
+  );
 }
+
 export default Tab;

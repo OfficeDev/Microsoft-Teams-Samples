@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import { app } from "@microsoft/teams-js";
 
 /**
@@ -10,35 +10,46 @@ import { app } from "@microsoft/teams-js";
  * of your app.
  */
 class Tab extends React.Component<any, any> {
-  constructor(props: any){
-    super(props)
+  constructor(props: any) {
+    super(props);
     this.state = {
-      context: {}
-    }
+      context: {},
+      theme: "default",
+    };
   }
 
   //React lifecycle method that gets called once a component has finished mounting
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
-  componentDidMount(){
+  componentDidMount() {
     // Get the user context from Teams and set it in the state
     app.getContext().then((context: app.Context) => {
       this.setState({
-        context: context
+        context: context,
+      });
+    });
+
+    app.registerOnThemeChangeHandler((theme) => {
+      this.setState({
+        theme: theme,
       });
     });
     // Next steps: Error handling using the error object
   }
 
   render() {
+    let userName =
+      Object.keys(this.state.context).length > 0
+        ? this.state.context.user.userPrincipalName
+        : "";
 
-    let userName = Object.keys(this.state.context).length > 0 ? this.state.context.user.userPrincipalName : "";
-
-      return (
+    return (
       <div>
         <h3>Hello World!</h3>
-        <h1>Congratulations {userName}!</h1> <h3>This is the tab you made :-)</h3>
+        <h1>Congratulations {userName}!</h1>{" "}
+        <h3>This is the tab you made 😀</h3>
+        <p>Theme: {this.state.theme}</p>
       </div>
-      );
+    );
   }
 }
 export default Tab;
