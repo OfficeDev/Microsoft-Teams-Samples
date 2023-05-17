@@ -120,8 +120,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - `{{ Microsoft-App-TenantId }}` - Generated from Step 1 is the tenantId id
   - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name)
 
-4) Navigate to `\Resources\adaptiveCard.json` and add you media file link from OneDrive or SharePoint at placeholder `<< URL >>`
-
   **Bot OAuth Connection:**
 
   ![Installapp](BotAllCards/Images/OauthConnection.png)
