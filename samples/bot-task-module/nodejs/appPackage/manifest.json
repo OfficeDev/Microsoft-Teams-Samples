@@ -1,61 +1,68 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "{{Manifest-Id}}",
   "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://example.azurewebsites.net",
-    "privacyUrl": "https://example.azurewebsites.net/privacy",
-    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://microsoft.com/privacy",
+    "termsOfUseUrl": "https://microsoft.com/termsofuse"
   },
   "icons": {
-    "color": "color.png",
-    "outline": "outline.png"
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Task Module",
-    "full": "Simple Task Module"
+    "short": "Visual_Indicator",
+    "full": "Targeted Meeting Notification Demo"
   },
   "description": {
-    "short": "Test Task Module Scenario",
-    "full": "Simple Task Module Scenario Test"
+    "short": "Targeted In-Meeting Notification demo",
+    "full": "This sample app shows how to send in meeting targeted notifications."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<Valid-Domain>>/configure.html",
+      "configurationUrl": "https://{{ngrok}}/configure.html",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
         "groupchat"
-      ]
-    }
-  ],
-  "staticTabs": [
-    {
-      "entityId": "com.microsoft.teams.taskmodule.statictab",
-      "name": "Tasks!",
-      "contentUrl": "https://<<Valid-Domain>>/taskmodule.html",
-      "websiteUrl": "https://<<Valid-Domain>>/taskmodule.html",
-      "scopes": [
-        "personal"
+      ],
+      "context": [
+        "meetingSidePanel"
       ]
     }
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "{{MicrosoftAppId}}",
       "scopes": [
         "personal",
         "team",
         "groupchat"
       ],
+      
+      "needsChannelSelector": false,
       "isNotificationOnly": false,
-      "supportsCalling": false,
-      "supportsVideo": false,
-      "supportsFiles": false
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "groupchat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "SendNotification",
+              "description": "Sends targeted meeting notification to selected members."
+            }
+          ]
+        }
+      ]
     }
   ],
   "permissions": [
@@ -64,5 +71,20 @@
   ],
   "validDomains": [
     "*.ngrok-free.app"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "{{MicrosoftAppId}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingNotification.Send.Chat",
+          "type": "Application"
+        }
+      ]
+      
+    }
+  }
 }

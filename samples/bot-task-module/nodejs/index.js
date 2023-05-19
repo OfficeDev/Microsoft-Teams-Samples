@@ -18,7 +18,7 @@ const {
     CloudAdapter,
     ConfigurationBotFrameworkAuthentication
 } = require('botbuilder');
-const { TeamsTaskModuleBot } = require('./bots/teamsTaskModuleBot');
+const { TeamsBot } = require('./bots/teamsBot');
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
@@ -47,7 +47,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new TeamsTaskModuleBot();
+const bot = new TeamsBot();
 
 // Create HTTP server.
 const server = restify.createServer();
