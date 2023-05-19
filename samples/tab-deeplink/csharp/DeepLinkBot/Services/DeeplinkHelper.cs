@@ -12,7 +12,14 @@ namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeeplinkHelper
     {
-        public string GetDeepLinkToTabTask(string teamsUrl, string appID,string entityId, string subEntityID)
+        /// <summary>
+        /// Method to generate deeplink to tab.
+        /// </summary>
+        /// <param name="teamsUrl">Teams deeplink url.</param>
+        /// <param name="appID">Application id of the app.</param>
+        /// <param name="entityId">Entity id of the tab.</param>
+        /// <param name="subEntityID">Sub entity id of the tab.</param>
+        public string GetDeepLinkToTabTask(string teamsUrl, string appID, string entityId, string subEntityID)
         {
             Dictionary<string, string> task1Values = new Dictionary<string, string>
             {
@@ -25,6 +32,15 @@ namespace Microsoft.BotBuilderSamples.Bots
             return channelDeepLink;
         }
 
+        /// <summary>
+        /// Method to generate deeplink to meeting sidepanel.
+        /// </summary>
+        /// <param name="teamsUrl">Teams deeplink url.</param>
+        /// <param name="appID">Application id of the app.</param>
+        /// <param name="baseUrl">Base url of the application.</param>
+        /// <param name="entityId">Entity id of the tab.</param>
+        /// <param name="chatId">Chat id of the meeting group chat.</param>
+        /// <param name="contextType">Chat context where app is installed.</param>
         public string GetDeepLinkToMeetingSidePanel(string teamsUrl, string appID, string baseUrl, string entityId, string chatId, string contextType)
         {
             StringBuilder sb = new StringBuilder();
@@ -41,17 +57,26 @@ namespace Microsoft.BotBuilderSamples.Bots
             return sidePanelDeepLink;
         }
 
-        public string GetDeepLinkToChannelTask(string teamsUrl, string appID,string baseUrl,string channelId, string entityId, string subEntityID)
+        /// <summary>
+        /// Method to generate deeplink to channel tab.
+        /// </summary>
+        /// <param name="teamsUrl">Teams deeplink url.</param>
+        /// <param name="appID">Application id of the app.</param>
+        /// <param name="baseUrl">Base url of the application.</param>
+        /// <param name="channelId">Channel id of teams channel where app is installed.</param>
+        /// <param name="entityId">Entity id of the tab.</param>
+        /// <param name="subEntityID">Sub entity id of the tab.</param>
+        public string GetDeepLinkToChannelTask(string teamsUrl, string appID, string baseUrl, string channelId, string entityId, string subEntityID)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
-            sb.Append("\"subEntityId\":\""+subEntityID+"\",");
+            sb.Append("\"subEntityId\":\"" + subEntityID + "\",");
             sb.Append("\"channelId\":\"" + channelId + "\"");
             sb.Append("}");
             string channelContext = sb.ToString();
             string encodedUrl = HttpUtility.UrlEncode(baseUrl + "/DeepLinkChannel");
             string taskContext = HttpUtility.UrlEncode(channelContext);
-            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?webUrl="+encodedUrl+"&label=Topic&context=";
+            string deepLinkURL = teamsUrl + appID + "/" + entityId + "?webUrl=" + encodedUrl + "&label=Topic&context=";
             string channelDeepLink = deepLinkURL + taskContext;
             return channelDeepLink;
         }
