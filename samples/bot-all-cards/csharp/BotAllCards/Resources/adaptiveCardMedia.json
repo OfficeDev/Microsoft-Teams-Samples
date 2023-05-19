@@ -2,13 +2,6 @@
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
   "version": "1.6",
-  "refresh": {
-    "action": {
-      "type": "Action.Execute",
-      "verb": "basicRefresh",
-      "title": "RefreshTitle"
-    }
-  },
   "body": [
     {
       "type": "Container",
