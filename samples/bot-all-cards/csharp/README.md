@@ -118,7 +118,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Microsoft-App-TenantId }}` - Generated from Step 1 is the tenantId id
-  - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name)
+  - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name) 
 
   **Bot OAuth Connection:**
 
@@ -150,6 +150,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 **Adaptive Card:**
 
 ![AdaptiveCard](BotAllCards/Images/AdaptiveCard.png)
+
+Add media url from sharepoint or onedrive to the text input to get media loaded to the adaptive card. For more information refer [media elements in card.](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop) 
+
+![AdaptiveCardMedia](BotAllCards/Images/AdaptiveCardMedia.png)
+
+![AdaptiveCardMedia2](BotAllCards/Images/AdaptiveCardMedia2.png)
 
 **Hero Card:**
 
@@ -187,4 +193,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Types of cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#receipt-card)
 - [Create bot connection](https://learn.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp)
-- [Media elements](https://review.learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop)
