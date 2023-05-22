@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/Custom.css" />
     <link rel="stylesheet" href="/css/Site.css" />
 
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="theme-light">
     <div class="surface">
@@ -25,14 +25,15 @@
 </head>
 <body>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         function validateForm() {
             var customerInfo = {
                 name: document.forms["customerForm"]["name"].value,
                 email: document.forms["customerForm"]["email"].value,
                 favoriteBook: document.forms["customerForm"]["favoriteBook"].value
             }
-            microsoftTeams.tasks.submitTask(customerInfo, "<<YOUR-MICROSOFT-APP-ID>>");
+            
+            microsoftTeams.dialog.submit(customerInfo, "<<YOUR-MICROSOFT-APP-ID>>");
             return true;
         }
     </script>

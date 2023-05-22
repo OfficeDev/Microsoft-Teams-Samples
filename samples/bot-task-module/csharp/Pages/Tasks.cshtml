@@ -39,50 +39,56 @@
 <p></p>
 <script src="~/Scripts/teamsapp.js"></script>
 <script>
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
-    submitHandler = (err, result) => {
+    submitHandler = (err) => {
             console.log(`Submit handler - err: ${err}`);
         };
 
         function Submit(type) {
             let taskInfo = {
                 title: null,
-                height: null,
-                width: null,
+                size: null,
                 url: null,
                 card: null,
                 fallbackUrl: null,
                 completionBotId: null,
             };
 
+            let taskModuleSize = {
+                height: 400,
+                width: 400,
+            };
+
             taskInfo.title = "Task Module Demo";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
 
             if (type.includes('youtube')) {
             taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/youtube";
                 taskInfo.title = "@(TaskModuleUIConstants.YouTube.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.YouTube.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.YouTube.Width)";
+                taskModuleSize.height = "@(TaskModuleUIConstants.YouTube.Height)";
+                taskModuleSize.width = "@(TaskModuleUIConstants.YouTube.Width)";
+                taskInfo.size = taskModuleSize;
             }
             else if (type.includes('powerapp')) {
             taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/powerapp";
                 taskInfo.title = "@(TaskModuleUIConstants.PowerApp.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.PowerApp.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.PowerApp.Width)";
+                taskModuleSize.height = "@(TaskModuleUIConstants.PowerApp.Height)";
+                taskModuleSize.width = "@(TaskModuleUIConstants.PowerApp.Width)";
+                taskInfo.size = taskModuleSize;
             }
             else if (type.includes('customform')) {
             taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/customform";
                 taskInfo.title = "@(TaskModuleUIConstants.CustomForm.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.CustomForm.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.CustomForm.Width)";
+                taskModuleSize.height = "@(TaskModuleUIConstants.CustomForm.Height)";
+                taskModuleSize.width = "@(TaskModuleUIConstants.CustomForm.Width)";
+                taskInfo.size = taskModuleSize;
             }
             else {
                 taskInfo.card =  @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(AdaptiveCardHelper.GetAdaptiveCard()));
                 taskInfo.title = "@(TaskModuleUIConstants.AdaptiveCard.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.AdaptiveCard.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.AdaptiveCard.Width)";
+                taskModuleSize.height = "@(TaskModuleUIConstants.AdaptiveCard.Height)";
+                taskModuleSize.width = "@(TaskModuleUIConstants.AdaptiveCard.Width)";
+                taskInfo.size = taskModuleSize;
             }
 
             // Set fallback URL
@@ -91,6 +97,6 @@
             if (type.includes('bot'))
             taskInfo.completionBotId = @Json.Serialize(Configuration["MicrosoftAppId"]);
 
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.dialog.open(taskInfo, submitHandler);
         }
 </script>

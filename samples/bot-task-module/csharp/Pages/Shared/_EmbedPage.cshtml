@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
     @RenderSection("scripts", required: false)
 </head>
@@ -32,7 +32,7 @@
         //- Handle the Esc key
         document.onkeyup = function (event) {
             if ((event.key === 27) || (event.key === "Escape")) {
-                microsoftTeams.tasks.submitTask(null); //- this will return an err object to the completionHandler()
+                microsoftTeams.dialog.submit(null); //- this will return an err object to the completionHandler()
             }
         }</script>
     <div id="embed-container">@RenderBody()</div>
