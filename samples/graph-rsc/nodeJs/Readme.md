@@ -1,6 +1,7 @@
 ---
 page_type: sample
 description: Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.
+products:
 - office-teams
 - office
 - office-365
