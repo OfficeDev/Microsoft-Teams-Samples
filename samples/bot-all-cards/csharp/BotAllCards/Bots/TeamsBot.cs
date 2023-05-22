@@ -65,15 +65,17 @@ namespace Microsoft.BotBuilderSamples
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
             var payloadData = new
             {
-                mediaurl = url,
+                mediaUrl = url,
             };
-            var cardJsonstring = template.Expand(payloadData);
+
+            var cardJsonString = template.Expand(payloadData);
             var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
             {
                 StatusCode = 200,
                 Type = AdaptiveCard.ContentType,
-                Value = JsonConvert.DeserializeObject(cardJsonstring)
+                Value = JsonConvert.DeserializeObject(cardJsonString)
             };
+
             return CreateInvokeResponse(adaptiveCardResponse);
         }
 
@@ -90,15 +92,22 @@ namespace Microsoft.BotBuilderSamples
             {
                 if (turnContext.Activity.Value == null)
                     return null;
+
                 JObject value = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
+
                 if (value["action"] == null)
                     return null;
+
                 JObject actiondata = JsonConvert.DeserializeObject<JObject>(value["action"]["data"].ToString());
+
                 if (actiondata["url"] == null)
                     return null;
+
                 string url = actiondata["url"].ToString();
+
                 return createAdaptiveCardInvokeResponseAsync(url);
             }
+
             return null;
         }
     }

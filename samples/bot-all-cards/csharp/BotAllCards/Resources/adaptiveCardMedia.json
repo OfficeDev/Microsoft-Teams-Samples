@@ -126,7 +126,7 @@
       "sources": [
         {
           "mimeType": "video/mp4",
-          "url": "${mediaurl}"
+          "url": "${mediaUrl}"
         }
       ]
     }
