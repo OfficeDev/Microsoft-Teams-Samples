@@ -91,3 +91,5 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [Graph RSC](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
 - [Upload app manifest file](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-rsc-csharp" />

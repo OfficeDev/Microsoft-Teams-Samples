@@ -9,8 +9,8 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "14-12-2022 00:15:13"
+    contentType: samples
+    createdDate: "14-12-2022 00:15:13"
 urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-nodejs
 ---
 
@@ -105,3 +105,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Share to teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-personal-app-or-tab)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-link-unfurling-in-share-to-teams-nodejs" />

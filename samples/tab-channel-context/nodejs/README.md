@@ -97,3 +97,6 @@ Run ngrok - point to port 3978
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
 - [Shared Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/shared-channels)
 - [Private Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/private-channels)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-context-nodejs" />

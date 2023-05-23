@@ -96,3 +96,6 @@ Copy the CART link it will used while configuring tab for meeting.
 ## Further reading
 
 - [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-csharp" />

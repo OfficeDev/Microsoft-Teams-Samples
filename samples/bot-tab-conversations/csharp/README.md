@@ -249,3 +249,6 @@ The tour files can be found in the `.tours` directory.
 
 ## Further reading
 * [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs) 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tab-conversations-csharp" />
