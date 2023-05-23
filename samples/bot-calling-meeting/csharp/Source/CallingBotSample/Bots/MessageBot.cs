@@ -260,7 +260,7 @@ namespace CallingBotSample.Bots
             {
                 TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
 
-                if (participant.Meeting.Role == "Organiser")
+                if (participant.Meeting.Role == "Organizer")
                 {
                     return new Identity
                     {
@@ -285,33 +285,33 @@ namespace CallingBotSample.Bots
 
                 if (meetingCall != null)
                 {
-                    await chatService.InstallApp(meetingCall.ChatInfo.ThreadId, botOptions.CatalogAppId);
+                        await chatService.InstallApp(meetingCall.ChatInfo.ThreadId, botOptions.CatalogAppId);
 
-                    var incidentDetails = new IncidentDetails
-                    {
-                        CallId = meetingCall.Id,
-                        IncidentSubject = incidentSubject,
-                        MeetingInfo = meetingInfo,
-                        ChatInfo = onlineMeeting.ChatInfo,
-                        StartTime = DateTime.Now,
-                        Participants = peoplePickerAadIds.Select(p => new Identity
+                        var incidentDetails = new IncidentDetails
                         {
-                            Id = p,
-                        })
-                    };
-                    incidentCache.Set(meetingCall.Id, incidentDetails);
+                            CallId = meetingCall.Id,
+                            IncidentSubject = incidentSubject,
+                            MeetingInfo = meetingInfo,
+                            ChatInfo = onlineMeeting.ChatInfo,
+                            StartTime = DateTime.Now,
+                            Participants = peoplePickerAadIds.Select(p => new Identity
+                            {
+                                Id = p,
+                            })
+                        };
+                        incidentCache.Set(meetingCall.Id, incidentDetails);
 
-                    await SendActivityToConversation(
-                        turnContext,
-                        onlineMeeting.ChatInfo.ThreadId,
-                        MessageFactory.Attachment(adaptiveCardFactory.CreateIncidentMeetingCard(
-                            incidentDetails.IncidentSubject,
-                            incidentDetails.CallId,
-                            incidentDetails.StartTime,
-                            null
-                        )),
-                        cancellationToken);
-
+                        await SendActivityToConversation(
+                            turnContext,
+                            onlineMeeting.ChatInfo.ThreadId,
+                            MessageFactory.Attachment(adaptiveCardFactory.CreateIncidentMeetingCard(
+                                incidentDetails.IncidentSubject,
+                                incidentDetails.CallId,
+                                incidentDetails.StartTime,
+                                null
+                            )),
+                            cancellationToken);
+                   
                     await turnContext.SendActivityAsync("Created incident call successfully.", cancellationToken: cancellationToken);
                 }
 

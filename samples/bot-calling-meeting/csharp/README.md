@@ -21,7 +21,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 ![bot-calling-meeting ](Images/bot-calling-meeting.gif)
 ## Frameworks
 
-![drop](https://img.shields.io/badge/.NET&nbsp;Core-3.1-green.svg)
+![drop](https://img.shields.io/badge/.NET&nbsp;Core-6.0-green.svg)
 ![drop](https://img.shields.io/badge/Bot&nbsp;Framework-3.0-green.svg)
 
 ## Prerequisites
@@ -134,48 +134,48 @@ For example `https://contoso.com/teamsapp/callback`
 ![EnableCallingEndpoint ](Images/EnableCallingEndpoint.PNG)
 9. Save your changes.
 
-### Configuring the sample:
+## Configuring the sample:
 1. __*Update appsettings.json for calling Bot*__
 ````
 {
-  "MicrosoftAppId": "",
-  "MicrosoftAppPassword": "",
-  "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
+  "MicrosoftAppId": "<<microsoft-app-id>>",
+  "MicrosoftAppPassword": "<<microsoft-app-client-secret>>",
   "AzureAd": {
     "Instance": "https://login.microsoftonline.com/",
-    "TenantId": "",
-    "ClientId": "",
-    "ClientSecret": ""
+    "TenantId": "<<tenant-Id>>",
+    "ClientId": "<<microsoft-app-id>>",
+    "ClientSecret": "<<microsoft-app-client-secret>>"
   },
   "Bot": {
-    "AppId": "",
-    "AppSecret": "",
+    "AppId": "<<microsoft-app-id>>",
+    "AppSecret": "<<microsoft-app-client-secret>>",
     "PlaceCallEndpointUrl": "https://graph.microsoft.com/v1.0",
-    "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
+    "BotBaseUrl": "https://<<subdomain>>.ngrok-free.app",
     "GraphApiResourceUrl": "https://graph.microsoft.com",
-    "MicrosoftLoginUrl": "https://login.microsoftonline.com/"
+    "MicrosoftLoginUrl": "https://login.microsoftonline.com/",
+    "RecordingDownloadDirectory": "temp",
+    "CatalogAppId": "<<microsoft-app-id>>"
   },
-  "UserId": "",
-  "Users": [
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    }
-  ]
+  "CognitiveServices": {
+    "Enabled": false,
+    "SpeechKey": "<<cognitive-speech-key>>",
+    "SpeechRegion": "<<cognitive-speech-region>>",
+    "SpeechRecognitionLanguage": "<<cognitive-speech-language>>" 
+  },
+  "Users": {
+    "UserIdWithAssignedOnlineMeetingPolicy": "<<object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted>>"
+  }
 }
+
 ````
-- Update `microsoft-app-id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
+- Update `microsoft-app-id`, `tenant-Id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
 - Update `BotBaseUrl` with your `ngrok` URL.
 - Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
-- Update `UserId` and `UserName` of the users from where you want to initiate the call and to whom you want to redirect or transfer the call
+**Create a Cognitive Services resource using the Azure portal:**
+- [Create Cognitive Services resource ](https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Canomaly-detector%2Clanguage-service%2Ccomputer-vision%2Cwindows)
+- Update `cognitive-speech-key` replace `your-key `with one of the keys for your resource.
+- Update `cognitive-speech-key` replace `your-region `with one of the regions for your resource.
+- Update `cognitive-speech-language` replace `your-language `with one of the language for your resource.
 
 2. __*This step is specific to Teams*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -218,3 +218,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Register a calling Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/registering-calling-bot#create-new-bot-or-add-calling-capabilities)
 - [Cloud Communications API](https://docs.microsoft.com/en-us/graph/api/resources/call?view=graph-rest-1.0)
+- [Recognize and convert speech to text](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started-speech-to-text?pivots=programming-language-csharp&tabs=windows%2Cterminal)
