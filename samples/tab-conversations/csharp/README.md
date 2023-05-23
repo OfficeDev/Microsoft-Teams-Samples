@@ -110,3 +110,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 -[Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-csharp" />

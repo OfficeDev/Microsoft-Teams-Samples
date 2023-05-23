@@ -110,3 +110,5 @@ This is an tab app which shows the feature of client sdk people picker.
 ## Further Reading
 
 [Tab-people-picker](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/people-picker-capability?tabs=Samplemobileapp%2Cteamsjs-v2)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-people-picker-csharp" />

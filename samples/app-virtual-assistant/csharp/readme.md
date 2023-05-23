@@ -17,3 +17,6 @@ urlFragment: officedev-microsoft-teams-samples-app-virtual-assistant-csharp
 
 Please refer to the [Virtual Assistant Template documentation](https://microsoft.github.io/botframework-solutions/virtual-assistant/tutorials/create-assistant/csharp/1-intro/) for deployment and customization instructions.
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-virtual-assistant-csharp" />

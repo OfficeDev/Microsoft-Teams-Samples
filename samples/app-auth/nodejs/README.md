@@ -313,3 +313,6 @@ As of April 2019, Microsoft Teams mobile clients support the `signin` action pro
 ## Further reading
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-auth-nodejs" />

@@ -145,3 +145,6 @@ The minimum prerequisites to run this sample are:
 - Review [Getting Started with Bot Framework](https://docs.microsoft.com/en-us/bot-framework/bot-builder-overview-getstarted)
 - Review [Testing your bot with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/botsadd)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-csharp" />

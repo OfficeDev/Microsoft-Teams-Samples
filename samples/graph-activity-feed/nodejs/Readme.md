@@ -158,3 +158,5 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 ## Further reading
 
 - [Activity Feed](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-1.0&tabs=http)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-activity-feed-nodejs" />

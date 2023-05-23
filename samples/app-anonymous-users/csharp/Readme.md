@@ -291,3 +291,6 @@ You can interact with Teams Tab meeting sidepanel.
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-anonymous-users-csharp" />

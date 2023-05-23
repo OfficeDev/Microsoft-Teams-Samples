@@ -152,3 +152,6 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ## Further Reading.
 [Tab-personal-quickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-sso-quickstart-js" />

@@ -129,3 +129,5 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 ## Further reading
 
 [Tab-Channel-Group-config-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-config-page-auth-csharp" />
