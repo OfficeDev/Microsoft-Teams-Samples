@@ -134,7 +134,7 @@ For example `https://contoso.com/teamsapp/callback`
 ![EnableCallingEndpoint ](Images/EnableCallingEndpoint.PNG)
 9. Save your changes.
 
-## Configuring the sample:
+### Configuring the sample:
 1. __*Update appsettings.json for calling Bot*__
 ````
 {
@@ -166,13 +166,13 @@ For example `https://contoso.com/teamsapp/callback`
     "UserIdWithAssignedOnlineMeetingPolicy": "<<object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted>>"
   }
 }
-
 ````
 - Update `microsoft-app-id`, `tenant-Id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
 - Update `BotBaseUrl` with your `ngrok` URL.
 - Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
+
 **Create a Cognitive Services resource using the Azure portal:**
-- [Create Cognitive Services resource ](https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Canomaly-detector%2Clanguage-service%2Ccomputer-vision%2Cwindows)
+ [Create Cognitive Services resource ](https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Canomaly-detector%2Clanguage-service%2Ccomputer-vision%2Cwindows)
 - Update `cognitive-speech-key` replace `your-key `with one of the keys for your resource.
 - Update `cognitive-speech-key` replace `your-region `with one of the regions for your resource.
 - Update `cognitive-speech-language` replace `your-language `with one of the language for your resource.
@@ -188,24 +188,83 @@ For example `https://contoso.com/teamsapp/callback`
 
  ## Running the sample
 
-* Install 'Calling Bot' in Teams.
-![CallingBotInstallation ](Images/CallingBotInstallation.PNG)
+* Install app in personal teams.
+![CallingBotInstallation ](Images/BotCallingMeeting1.PNG)
 
-* Bot will send adaptive card as mentioned below.
-![WelcomeCard ](Images/WelcomeCard.PNG)
+* Select welcome card. 
+![BotCallingMeeting2 ](Images/BotCallingMeeting2.PNG)
 
-* User can ask Bot to create a call and can join that call.
-![CreateCall ](Images/CreateCall.PNG)
-![CallPlaced ](Images/CallPlaced.PNG)
-![CallJoined ](Images/CallJoined.PNG)
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting3 ](Images/BotCallingMeeting3.PNG)
 
-* User can ask Bot to transfer the call.
- ![TransferCall ](Images/TransferCall.PNG)
+* Select 'Create Call'. 
+![BotCallingMeeting4 ](Images/BotCallingMeeting4.PNG)
 
-* User can ask Bot to schedule a meeting and invite the participants
+* 'Calling Bot' selected user. 
+![BotCallingMeeting5 ](Images/BotCallingMeeting5.PNG)
 
-   ![JoinScheduledCall ](Images/JoinScheduledCall.PNG)
-   ![InviteParticipant ](Images/InviteParticipant.PNG)
+* User join call. 
+![BotCallingMeeting55 ](Images/BotCallingMeeting55.PNG)
+
+* Successfully call . 
+![BotCallingMeeting6 ](Images/BotCallingMeeting6.PNG)
+
+* Control this meeting. 
+![BotCallingMeeting7 ](Images/BotCallingMeeting7.PNG)
+
+* Create Incident. 
+![BotCallingMeeting8 ](Images/BotCallingMeeting8.PNG)
+
+* Transfer call. 
+![BotCallingMeeting9 ](Images/BotCallingMeeting9.PNG)
+
+* 'Calling Bot' selected user. 
+![BotCallingMeeting10 ](Images/BotCallingMeeting10.PNG)
+
+* Play record prompt. 
+![BotCallingMeeting11 ](Images/BotCallingMeeting11.PNG)
+
+* Hang up. 
+![BotCallingMeeting12 ](Images/BotCallingMeeting12.PNG)
+
+* Install app in team.
+![BotCallingMeeting13 ](Images/BotCallingMeeting13.PNG)
+
+* Add calling bot to a team. 
+![BotCallingMeeting14 ](Images/BotCallingMeeting14.PNG)
+
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting16 ](Images/BotCallingMeeting16.PNG)
+
+* Select 'Create Call'. 
+![BotCallingMeeting17 ](Images/BotCallingMeeting17.PNG)
+
+* User join call. 
+![BotCallingMeeting18 ](Images/BotCallingMeeting18.PNG)
+
+* Control this meeting. 
+![BotCallingMeeting19 ](Images/BotCallingMeeting19.PNG)
+
+* Install app in meeting.
+![BotCallingMeeting20 ](Images/BotCallingMeeting20.PNG)
+
+* Add calling bot to a meeting. 
+![BotCallingMeeting21 ](Images/BotCallingMeeting21.PNG)
+
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting22 ](Images/BotCallingMeeting22.PNG)
+
+* Select 'Create Call'. 
+![BotCallingMeeting23 ](Images/BotCallingMeeting23.PNG)
+
+* User join call.  
+![BotCallingMeeting24 ](Images/BotCallingMeeting24.PNG)
+
+* Control this meeting. 
+![BotCallingMeeting25 ](Images/BotCallingMeeting25.PNG)
+
+* Join scheduled meeting. 
+![BotCallingMeeting26 ](Images/BotCallingMeeting26.PNG)
 
 ## Deploy the bot to Azure
 
