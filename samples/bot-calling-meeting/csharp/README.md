@@ -189,82 +189,82 @@ For example `https://contoso.com/teamsapp/callback`
  ## Running the sample
 
 * Install app in personal teams.
-![CallingBotInstallation ](Images/BotCallingMeeting1.PNG)
+![CallingBotInstallation ](Images/BotCallingMeeting1.png)
 
 * Select welcome card. 
-![BotCallingMeeting2 ](Images/BotCallingMeeting2.PNG)
+![BotCallingMeeting2 ](Images/BotCallingMeeting2.png)
 
 * Bot will send adaptive card as mentioned below. 
-![BotCallingMeeting3 ](Images/BotCallingMeeting3.PNG)
+![BotCallingMeeting3 ](Images/BotCallingMeeting3.png)
 
 * Select 'Create Call'. 
-![BotCallingMeeting4 ](Images/BotCallingMeeting4.PNG)
+![BotCallingMeeting4 ](Images/BotCallingMeeting4.png)
 
 * 'Calling Bot' selected user. 
-![BotCallingMeeting5 ](Images/BotCallingMeeting5.PNG)
+![BotCallingMeeting5 ](Images/BotCallingMeeting5.png)
 
 * User join call. 
-![BotCallingMeeting55 ](Images/BotCallingMeeting55.PNG)
+![BotCallingMeeting55 ](Images/BotCallingMeeting55.png)
 
 * Successfully call . 
-![BotCallingMeeting6 ](Images/BotCallingMeeting6.PNG)
+![BotCallingMeeting6 ](Images/BotCallingMeeting6.png)
 
 * Control this meeting. 
-![BotCallingMeeting7 ](Images/BotCallingMeeting7.PNG)
+![BotCallingMeeting7 ](Images/BotCallingMeeting7.png)
 
 * Create Incident. 
-![BotCallingMeeting8 ](Images/BotCallingMeeting8.PNG)
+![BotCallingMeeting8 ](Images/BotCallingMeeting8.png)
 
 * Transfer call. 
-![BotCallingMeeting9 ](Images/BotCallingMeeting9.PNG)
+![BotCallingMeeting9 ](Images/BotCallingMeeting9.png)
 
 * 'Calling Bot' selected user. 
-![BotCallingMeeting10 ](Images/BotCallingMeeting10.PNG)
+![BotCallingMeeting10 ](Images/BotCallingMeeting10.png)
 
 * Play record prompt. 
-![BotCallingMeeting11 ](Images/BotCallingMeeting11.PNG)
+![BotCallingMeeting11 ](Images/BotCallingMeeting11.png)
 
 * Hang up. 
-![BotCallingMeeting12 ](Images/BotCallingMeeting12.PNG)
+![BotCallingMeeting12 ](Images/BotCallingMeeting12.png)
 
 * Install app in team.
-![BotCallingMeeting13 ](Images/BotCallingMeeting13.PNG)
+![BotCallingMeeting13 ](Images/BotCallingMeeting13.png)
 
 * Add calling bot to a team. 
-![BotCallingMeeting14 ](Images/BotCallingMeeting14.PNG)
+![BotCallingMeeting14 ](Images/BotCallingMeeting14.png)
 
 * Bot will send adaptive card as mentioned below. 
-![BotCallingMeeting16 ](Images/BotCallingMeeting16.PNG)
+![BotCallingMeeting16 ](Images/BotCallingMeeting16.png)
 
 * Select 'Create Call'. 
-![BotCallingMeeting17 ](Images/BotCallingMeeting17.PNG)
+![BotCallingMeeting17 ](Images/BotCallingMeeting17.png)
 
 * User join call. 
-![BotCallingMeeting18 ](Images/BotCallingMeeting18.PNG)
+![BotCallingMeeting18 ](Images/BotCallingMeeting18.png)
 
 * Control this meeting. 
-![BotCallingMeeting19 ](Images/BotCallingMeeting19.PNG)
+![BotCallingMeeting19 ](Images/BotCallingMeeting19.png)
 
 * Install app in meeting.
-![BotCallingMeeting20 ](Images/BotCallingMeeting20.PNG)
+![BotCallingMeeting20 ](Images/BotCallingMeeting20.png)
 
 * Add calling bot to a meeting. 
-![BotCallingMeeting21 ](Images/BotCallingMeeting21.PNG)
+![BotCallingMeeting21 ](Images/BotCallingMeeting21.png)
 
 * Bot will send adaptive card as mentioned below. 
-![BotCallingMeeting22 ](Images/BotCallingMeeting22.PNG)
+![BotCallingMeeting22 ](Images/BotCallingMeeting22.png)
 
 * Select 'Create Call'. 
-![BotCallingMeeting23 ](Images/BotCallingMeeting23.PNG)
+![BotCallingMeeting23 ](Images/BotCallingMeeting23.png)
 
 * User join call.  
-![BotCallingMeeting24 ](Images/BotCallingMeeting24.PNG)
+![BotCallingMeeting24 ](Images/BotCallingMeeting24.png)
 
 * Control this meeting. 
-![BotCallingMeeting25 ](Images/BotCallingMeeting25.PNG)
+![BotCallingMeeting25 ](Images/BotCallingMeeting25.png)
 
 * Join scheduled meeting. 
-![BotCallingMeeting26 ](Images/BotCallingMeeting26.PNG)
+![BotCallingMeeting26 ](Images/BotCallingMeeting26.png)
 
 ## Deploy the bot to Azure
 
