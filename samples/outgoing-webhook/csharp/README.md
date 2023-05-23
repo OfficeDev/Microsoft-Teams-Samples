@@ -93,3 +93,6 @@ Example screenshot to show Hero card (using type of card in message):
 ## Further Reading
 
 [Outgoing webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-outgoing-webhook?tabs=urljsonpayload%2Cdotnet)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/outgoing-webhook-csharp" />

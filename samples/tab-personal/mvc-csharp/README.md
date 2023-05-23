@@ -133,3 +133,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 [Tab-personal](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 [Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-mvc-csharp" />

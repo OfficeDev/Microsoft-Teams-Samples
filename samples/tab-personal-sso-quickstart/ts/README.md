@@ -171,3 +171,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Further Reading.
 [Tab-personal-quickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-sso-quickstart-ts" />

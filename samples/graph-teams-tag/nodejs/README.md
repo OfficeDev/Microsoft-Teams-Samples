@@ -129,3 +129,6 @@ This is a sample application where user can create, update, add or remove member
 
 ## Further reading
 - [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-teams-tag-nodejs" />
