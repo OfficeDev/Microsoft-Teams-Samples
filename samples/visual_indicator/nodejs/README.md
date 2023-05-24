@@ -128,3 +128,5 @@ Type `SendTargetedNotification` in bot chat to send In-Meeting notifications.
 ## Further reading
 
 - [Visual indicator for your Teams app](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/visual-indicator-for-your-app?branch=pr-en-us-8495#enable-visual-indicator-for-your-teams-app)
+
+- [Grant RSC permissions to your app](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent#install-your-app-in-a-team-or-chat)
