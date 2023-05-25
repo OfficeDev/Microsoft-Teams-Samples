@@ -1,0 +1,31 @@
+<head>
+  <script src="https://res.cdn.office.net/teams-js/2.2.0/js/MicrosoftTeams.min.js"
+    integrity="sha384yBjE++eHeBPzIg+IKl9OHFqMbSdrzY2S/LW3qeitc5vqXewEYRWegByWzBN/chRh" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+  <div class="font-semibold font-title">Configure your app here.</div>
+  <h1>
+    Visual indicator for your Teams app
+  </h1>
+  <br>
+  <p>Please click on save to proceed.</p>
+
+  <script>
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+        microsoftTeams.pages.config.setConfig({
+          entityID: "visual_indicator-tab",
+          contentUrl: `${window.location.origin}/hello.html`,
+          suggestedTabName: "Visual_Indicator",
+          websiteUrl: `${window.location.origin}/hello.html`,
+        });
+
+        saveEvent.notifySuccess();
+      });
+      
+      microsoftTeams.pages.config.setValidityState(true);
+    });
+  </script>
+</body>
