@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting notifications
+description: This sample app shows how to send visual indicator in meetings using targeted notifications API.
 products:
 - office-teams
 - office
@@ -13,20 +13,19 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-visual-indicator-nodejs
 ---
 
-## Targeted In-Meeting Notification
+## Visual Indicator In Meeting Notiofication
 
-This sample illustrates how to send visual indicator notification using [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
+This sample illustrates how to send visual indicator notification on tab icon in meetings.
 
 ## Included Features
 * Bots
 * In-Meeting Notifications
-* Adaptive Cards
 * RSC Permissions
 * Visual Indicator
 
 ## Interaction with app
 
-![Targeted In-Meeting Notification](Images/VisualIndicator.gif)
+![Visual Indicator](Images/Visual_Indicator.gif)
 
 ## Prerequisites
 
@@ -39,7 +38,7 @@ This sample illustrates how to send visual indicator notification using [Targete
 - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
 
 - To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+Make sure you've downloaded and installed Ngrok on your local machine. Ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 ## Setup
 
@@ -98,7 +97,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `teamsAppManifest`.
+         - Then select the `manifest.zip` file from `appPackage`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/visual-indicator/nodejs/index.js#L45) line and put your debugger for local debug.
@@ -107,19 +106,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 **Setup Configurable Tab:**
 
-![Setup Tab](Images/1.SetUpConfigTab.png)
+![Setup Tab](Images/1.Set_Up_Config_Tab.png)
 
 **Interacting with the app in Teams Meeting**
 
-Type `SendTargetedNotification` in bot chat to send In-Meeting notifications.
+Type `SendNotification` in bot chat to send In-Meeting notifications.
 
-**Hello command interaction:**
+**Notification On Tab Icon as 'Visual Indicator':**
 
-![Send Visual Indicator](Images/2.VisualIndicator.png)
+![Visual Indicator](Images/2.Visual_Indicator.png)
 
-**Stage and Visual Indicator Notification:**
+**Stage View and Visual Indicator Notification:**
 
-![Stage View and Visual Indicator](Images/3.StageView_and_VI.png)
+![Stage View and Visual Indicator](Images/3.StageView_and_Visual_Indicator.png)
 
 
 ## Further reading

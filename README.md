@@ -189,6 +189,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |29|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
 |30|Anonymous user support| This sample app shows anonymous users support in teams meeting apps.|[View][app-anonymous-users#cs]       
 31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs]|
+32|Visual Indicator|This sample demos the feature of sending visual indicator in meetings||[View][visual-indicator#nodejs]|
 
 ## Application templates
 
@@ -381,6 +382,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#cs]:samples/meetings-live-caption/csharp
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 [app-anonymous-users#cs]:samples/app-anonymous-users/csharp
+[visual-indicator#nodejs]:samples/visual-indicator/nodejs
 
 
 [msteams-app-qbot]:samples/msteams-application-qbot/

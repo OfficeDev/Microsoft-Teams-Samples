@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, TeamsInfo, TurnContext, MessageFactory, CardFactory } = require("botbuilder");
+const { TeamsActivityHandler, TeamsInfo, TurnContext, CardFactory } = require("botbuilder");
 var ACData = require("adaptivecards-templating");
 const notificationCardJson = require('../resources/SendTargetNotificationCard.json');
 
@@ -19,7 +19,7 @@ class TeamsBot extends TeamsActivityHandler {
             if (context.activity.value == null) {
                 TurnContext.removeRecipientMention(context.activity);
 
-                if (context.activity.text.trim() == "SendTargetedNotification") {
+                if (context.activity.text.trim() == "SendNotification") {
                     var meetingMembers = await TeamsInfo.getPagedMembers(context);
                     let tenantId = context.activity.channelData.tenant.id;
 
@@ -36,7 +36,7 @@ class TeamsBot extends TeamsActivityHandler {
                     await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
                 }
                 else {
-                    await context.sendActivity("Please type `SendTargetedNotification` to send In-meeting notifications.");
+                    await context.sendActivity("Please type `SendNotification` to send In-meeting notifications.");
                 }
             }
             else if (context.activity.value.Type == "StageViewNotification") {
@@ -87,6 +87,7 @@ class TeamsBot extends TeamsActivityHandler {
 
     // Custom method for sending Visual Indicator on tab.
     async visualIndicator(context, meetingId, selectedMembers) {
+
         // Notification payload for meeting target notification API.
         let notificationInformation = {
             type: "targetedMeetingNotification",

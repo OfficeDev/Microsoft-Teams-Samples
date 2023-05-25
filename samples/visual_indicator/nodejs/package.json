@@ -1,7 +1,7 @@
 {
-  "name": "teams-bot",
+  "name": "visual-indicator-in-meetings",
   "version": "1.0.0",
-  "description": "Bot Builder v4 Bot Teams sample",
+  "description": "Visual Indicator in meetings notification",
   "author": "Microsoft",
   "license": "MIT",
   "main": "index.js",
