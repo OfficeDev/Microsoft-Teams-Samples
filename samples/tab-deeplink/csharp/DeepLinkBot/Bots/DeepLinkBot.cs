@@ -29,6 +29,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         public string tabUrlTask3;
         public string callingDeeplink;
         public string extendedDeepLink;
+        public string sidePanelLink;
 
         DeeplinkHelper deeplinkHelper = new DeeplinkHelper();
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -64,6 +65,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "topic2");
                 tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "topic3");
                 extendedDeepLink = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "");
+                sidePanelLink = deeplinkHelper.GetDeepLinkToMeetingSidePanel(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], _configuration["ChannelEntityId"], turnContext.Activity.Conversation.Id, "chat");
             }
 
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
@@ -180,6 +182,32 @@ namespace Microsoft.BotBuilderSamples.Bots
                                         {
                                             Url = new Uri(extendedDeepLink),
                                             Title = "Extended Deeplink features"
+                                        }
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Width = AdaptiveColumnWidth.Auto,
+                                        Items = new List<AdaptiveElement>()
+                                        {
+                                            new AdaptiveTextBlock()
+                                            {
+                                                Text = "Side Panel Deeplink",
+                                                Color = AdaptiveTextColor.Accent,
+                                                Size = AdaptiveTextSize.Medium,
+                                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                                Spacing = AdaptiveSpacing.None
+                                            }
+                                        },
+                                        SelectAction = new AdaptiveOpenUrlAction()
+                                        {
+                                            Url = new Uri(sidePanelLink),
+                                            Title = "Deeplink to sidepanel"
                                         }
                                     }
                                 }
