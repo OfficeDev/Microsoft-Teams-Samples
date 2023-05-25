@@ -122,11 +122,13 @@
       ]
     },
     {
-      "type": "TextBlock",
-      "size": "Medium",
-      "wrap": true,
-      "weight": "Bolder",
-      "text": "Please add SharePoint or OneDrive media URL in above input to load the media here"
+      "type": "Media",
+      "sources": [
+        {
+          "mimeType": "video/mp4",
+          "url": "${mediaUrl}"
+        }
+      ]
     }
   ]
 }  
