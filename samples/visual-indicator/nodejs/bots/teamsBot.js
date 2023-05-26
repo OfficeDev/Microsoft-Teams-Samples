@@ -70,7 +70,7 @@ class TeamsBot extends TeamsActivityHandler {
                                 height: "300",
                                 width: "400",
                                 title: "Targeted meeting Notification",
-                                url: `${this.baseUrl + "/youtube.html"}`
+                                url: `${this.baseUrl + "/hello.html"}`
                             }
                         }
                     }
