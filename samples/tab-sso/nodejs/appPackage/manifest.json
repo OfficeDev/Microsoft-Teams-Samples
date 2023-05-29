@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "{{AppId}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.contoso.teamsauthsso",
   "developer": {
     "name": "Microsoft",
@@ -27,13 +27,13 @@
     {
       "entityId": "auth",
       "name": "Auth",
-      "contentUrl": "https://{ngrokSubdomain}.ngrok-free.app/ssoDemo/?inTeams=true",
+      "contentUrl": "${{TAB_ENDPOINT}}/ssoDemo/?inTeams=true",
       "scopes": [ "personal" ]
     }
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://{ngrokSubdomain}.ngrok-free.app/configure/?inTeams=true",
+      "configurationUrl": "${{TAB_ENDPOINT}}/configure/?inTeams=true",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -42,11 +42,11 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{ngrokSubdomain}.ngrok-free.app"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{AppId}}",
-    "resource": "api://{ngrokSubdomain}.ngrok-free.app/{{AppId}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }
   
