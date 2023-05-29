@@ -8,6 +8,7 @@
     "scripts": {
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
+        "build": "node build.js",
         "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -18,7 +19,6 @@
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
         "adaptive-expressions": "^4.19.3",
-        "adaptivecards-templating": "^2.3.1",
         "botbuilder": "^4.19.0",
         "botbuilder-dialogs": "^4.19.0",
         "dotenv": "^8.2.0",
@@ -31,6 +31,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4"
+        "nodemon": "~2.0.4",
+        "esbuild": "^0.17.19"
     }
 }
