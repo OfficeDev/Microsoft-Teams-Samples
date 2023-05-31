@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting.
+description: This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting and in personal tab.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs
 
 ## App Caching In Meetings
 
-This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting).
+This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting and in personal tab).
 
 **Interaction with App**
 ![App-Cache](Images/AppCacheSample.gif)  
