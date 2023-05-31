@@ -38,6 +38,17 @@
       ]
     }
   ],
+  "staticTabs": [
+    {
+      "entityId": "Tab-1",
+      "name": "Personal Tab",
+      "contentUrl": "https://<<Valid_Domain>>/appCacheTab",
+      "websiteUrl": "https://<<Valid_Domain>>/appCacheTab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "validDomains": [ "<<Valid_Domain>>" ],
   "showLoadingIndicator": true
 }

@@ -62,8 +62,8 @@ const AppCacheTab = () => {
         app.initialize().then(app.getContext).then((context: any) => {
             app.notifySuccess();
 
-            // Check if the framecontext is set to sidepanel
-            if (context.page.frameContext === "sidePanel") {
+            // Check if the framecontext is set to sidepanel/content
+            if (context.page.frameContext === "sidePanel" || context.page.frameContext === "content") {
                 const loadContext = logItem("Success", "green", "Loaded Teams context");
                 setItems((Items) => [...Items, loadContext]);
 

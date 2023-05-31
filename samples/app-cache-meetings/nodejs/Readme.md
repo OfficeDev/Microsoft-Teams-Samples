@@ -76,13 +76,16 @@ This sample feature shows how to improve the subsequent loading time of an App t
 ![Set-Up-Tab](Images/1.Set_Up_Tab.png)
 
 **App Caching Sideloaded  :**
-![participant context](Images/2.TabOneInitilized.png)
+![App Cache In Sidepanel](Images/2.TabOneInitilized.png)
 
 **AppCache in first tab with Unique Id Loaded :** 
-![Team Context](Images/2.TabOneInitilized.png)
+![App Cache In Sidepanel](Images/2.TabOneInitilized.png)
 
 **AppCache in second tab with Unique Id Loaded :** 
-![Team Context](Images/3.TabTwo.png)
+![App Cache In Sidepanel](Images/3.TabTwo.png)
+
+**AppCache in personal tab** 
+![Personal Tab](Images/5.appCache-personalTab.png)
 
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
 
@@ -91,6 +94,3 @@ This sample feature shows how to improve the subsequent loading time of an App t
 [Upload your app in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
 [Manage custom and sideloaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
-
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-cache-meetings-nodejs" />

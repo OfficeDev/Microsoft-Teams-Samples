@@ -27,8 +27,8 @@ const Configure = props => {
     }, []);
     return (
         <div>
-            <h2>App Caching</h2>
-            <h3>This sample app only supports app caching in the side panel.</h3>
+            <h2>App Caching</h2><br />
+            <h3>This sample app supports app caching in perosnal tab and side panel in meetings.</h3><br />
             <p>Please click save button to proceed.</p>
         </div>
     );

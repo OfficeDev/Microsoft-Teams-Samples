@@ -9,7 +9,7 @@
       "This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting."
     ],
     "creationDateTime": "2022-11-11",
-    "updateDateTime": "2022-11-11",
+    "updateDateTime": "2022-05-31",
     "products": [
       "Teams"
     ],
