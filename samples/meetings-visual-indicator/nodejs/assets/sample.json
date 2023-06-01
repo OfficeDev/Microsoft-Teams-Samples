@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-visual-indicator-nodejs",
+    "name": "officedev-microsoft-teams-samples-meetings-visual-indicator-nodejs",
     "source": "officeDev",
     "title": "Meetings-Visual-Indicator",
     "shortDescription": "Illustrates how to implement visual indicator \"in-meeting notification\" using \"targeted meeting notification\" API",

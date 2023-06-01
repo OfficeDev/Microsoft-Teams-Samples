@@ -1,7 +1,7 @@
 {
   "name": "visual-indicator-in-meetings",
   "version": "1.0.0",
-  "description": "Visual Indicator in meetings notification",
+  "description": "Visual Indicator in Teams meetings notification",
   "author": "Microsoft",
   "license": "MIT",
   "main": "index.js",
