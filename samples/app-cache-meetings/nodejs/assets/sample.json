@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs",
     "source": "officeDev",
-    "title": "App Caching in Meetings",
+    "title": "App Caching in Team Meetings and Peronal Tab",
     "shortDescription": "This sample shows how to improve the subsequent loading time of an App in meetings and in personal tab",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-cache-meetings/nodejs",
     "longDescription": [
