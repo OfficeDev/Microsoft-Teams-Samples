@@ -895,8 +895,8 @@ jobs:
               name: 'bot-teams-authentication'
               version: '18.x'
 
-            - project_path: 'samples/visual-indicator/nodejs'
-              name: 'visual-indicator'
+            - project_path: 'samples/meetings-visual-indicator/nodejs'
+              name: 'meetings-visual-indicator'
               version: '18.x'
 
       fail-fast: false
