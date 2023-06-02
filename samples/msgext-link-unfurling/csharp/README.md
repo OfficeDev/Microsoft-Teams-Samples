@@ -95,7 +95,22 @@ the Teams service needs to call into the bot.
 If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
 
-**Outlook web output**
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**After opening Outlook web, click the "New mail" button.**
+
+![Open New Mail](Images/OpenNewMail.png)
+
+**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+
+![OpenAppIcon](Images/OpenAppIcon.png)
+
+**Select your app icon to launch your app in Office on the web**
+
 ![Search in Extension](Images/SearchInExtension.PNG)
 
 ## Deploy the bot to Azure
