@@ -28,7 +28,6 @@
       "configurationUrl": "https://<<Valid-Domain>>/configure.html",
       "canUpdateConfiguration": true,
       "scopes": [
-        "team",
         "groupchat"
       ],
       "context": [
@@ -40,8 +39,6 @@
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
-        "personal",
-        "team",
         "groupchat"
       ],
       "needsChannelSelector": false,
@@ -50,9 +47,7 @@
       "commandLists": [
         {
           "scopes": [
-            "personal",
-            "groupchat",
-            "team"
+            "groupchat"
           ],
           "commands": [
             {
