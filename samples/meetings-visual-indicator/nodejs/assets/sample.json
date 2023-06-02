@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-visual-indicator/nodejs/Images/Visual_Indicator.gif",
-        "alt": "Solution UX showing microsoft teams nodejs visual-indicator sample feature"
+        "alt": "Solution UX showing visual indicator in Microsoft Teams meeting - nodejs"
       }
     ],
     "authors": [
