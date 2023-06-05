@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Messaging Extension Action.",
-    "full": "Full description of Messaging Extension Action."
+    "short": "Short description for Messaging Extension Search.",
+    "full": "Full description of Messaging Extension Search."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
@@ -86,6 +86,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "localhost:3000"
+    "<<valid-domain>>"
   ]
 }
