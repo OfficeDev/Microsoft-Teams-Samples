@@ -26,13 +26,13 @@ class TeamsBot extends TeamsActivityHandler {
                     for (var member in meetingMembers) {
                         let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
 
-                        // Select only those members that present when meeting is started.
+                        // Select only those members that are present when the meeting starts.
                         if (participantDetail.meeting.inMeeting) {
                             members.push({ id: participantDetail.user.id, name: participantDetail.user.name })
                         }
                     }
 
-                    // Send and adaptive card to user to select members for sending targeted notifications.
+                    // Send an adaptive card to the user to select members for sending targeted notifications.
                     await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
                 }
                 else {
@@ -109,7 +109,7 @@ class TeamsBot extends TeamsActivityHandler {
         }
     }
 
-    // Create adaptive card for send list of in-meeting participants.
+    // Create an adaptive card to send a list of in-meeting participants
     createMembersAdaptiveCard(members) {
         var templatePayload = notificationCardJson;
         var template = new ACData.Template(templatePayload);
