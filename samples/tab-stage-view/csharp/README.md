@@ -136,6 +136,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Tab View](TabInStageView/Images/viaTabDeeplink.png)
 
+## Collaborative Stage View
+
+- Currently Collaborative Stage view is supported in Teams Desktop only. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+
+![Tab View](TabInStageView/Images/CollaborativeStageView.png)
+
 ## Outlook on the web
 
 - To view your app in Outlook on the web.
