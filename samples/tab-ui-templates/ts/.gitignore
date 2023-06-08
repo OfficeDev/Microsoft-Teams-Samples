@@ -29,7 +29,6 @@ build
 
 # misc
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -52,7 +51,6 @@ yarn-error.log*
 
 # misc
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -76,7 +74,6 @@ yarn-error.log*
 # misc
 .eslintcache
 .DS_Store
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -89,7 +86,6 @@ yarn-error.log*
 
 # TeamsFx files
 env/.env.*.user
-env/.env.local
 .localConfigs
 appPackage/build
 /build
