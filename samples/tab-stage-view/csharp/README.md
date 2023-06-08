@@ -124,9 +124,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Card Actions](TabInStageView/Images/cardActions.png)
 
-- Opening stage view from Adaptive Card Action.
+- Opening Collaborative Stage View. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
-![Stage View](TabInStageView/Images/viaCardAction.png)
+![Tab View](TabInStageView/Images/CollaborativeStageView.png)
 
 - Opening stage view from Adaptive card via deep link.
 
@@ -135,12 +135,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Tab with execute deep link action to open stage view.
 
 ![Tab View](TabInStageView/Images/viaTabDeeplink.png)
-
-## Collaborative Stage View
-
-- Currently Collaborative Stage view is supported in Teams Desktop only. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
-
-![Tab View](TabInStageView/Images/CollaborativeStageView.png)
 
 ## Outlook on the web
 
