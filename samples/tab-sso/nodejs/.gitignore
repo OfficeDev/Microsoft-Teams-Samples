@@ -66,6 +66,7 @@ build/
 # # # # # # # # # # # # # # 
 
 # TeamsFx files
+env/.env.*
 .DS_Store
 .localSettings
 build
