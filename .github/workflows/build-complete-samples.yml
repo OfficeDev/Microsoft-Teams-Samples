@@ -436,6 +436,10 @@ jobs:
               name: 'bot-sso-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/meetings-app-icon-badging/csharp/InMeetingNotifications/InMeetingNotificationsBot.csproj'
+              name: 'meetings-app-icon-badging'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
