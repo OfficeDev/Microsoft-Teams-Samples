@@ -66,21 +66,19 @@ build/
 # # # # # # # # # # # # # # 
 
 # TeamsFx files
-env/.env.*
-.DS_Store
-.localSettings
-build
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
+env/.env.*.user
+env/.env.local
+.localConfigs
+appPackage/build
 /build
 
+# dependencies
+node_modules/
+
 # misc
-.DS_Store
 .env
 .deployment
+.DS_Store
+
+# build
+lib/
