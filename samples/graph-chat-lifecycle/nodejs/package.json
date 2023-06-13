@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node src/app.js",
     "watch": "nodemon src/app.js",
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,6 +38,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-zip": "^4.0.0"
+    "gulp-zip": "^4.0.0",
+    "esbuild": "^0.18.1"
   }
 }
