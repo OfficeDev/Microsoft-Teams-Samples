@@ -106,7 +106,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. Ngrok wil
 
 **Setup Configurable Tab:**
 
-![Setup Tab](Images/1.Set_Up_Config_Tab.png)
+![Setup Tab](Images/1.set_up_config_tab.png)
 
 **Interacting with the app in Teams Meeting**
 
