@@ -132,6 +132,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
 
+- Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
+
+![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
+
+![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
+
+![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+
 - Tab with execute deep link action to open stage view.
 
 ![Tab View](TabInStageView/Images/viaTabDeeplink.png)
@@ -149,6 +157,18 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
 ![AppOutlook](TabInStageView/Images/AppOutlook.png)
+
+**After opening Outlook web, click the "New mail" button.**
+
+![Open New Mail](Images/OpenNewMail.png)
+
+**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+
+![OpenAppIcon](Images/OpenAppIcon.png)
+
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+
+![Outlook Unfurling](Images/OutlookUnfurling.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -177,6 +197,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
-
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-csharp" />
