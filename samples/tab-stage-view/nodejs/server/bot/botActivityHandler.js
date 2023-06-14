@@ -3,6 +3,7 @@
 
 const { TeamsActivityHandler , CardFactory, MessageFactory } = require('botbuilder');
 const adaptiveCards = require('../models/adaptiveCard');
+const adaptiveCardUnfurling = require('../models/adaptiveCardUnfurling');
 
 class BotActivityHandler extends TeamsActivityHandler  {
     constructor() {
@@ -21,6 +22,23 @@ class BotActivityHandler extends TeamsActivityHandler  {
           await next();
       });
     }
+
+    handleTeamsAppBasedLinkQuery(context, query) {
+        const attachment = CardFactory.adaptiveCard(adaptiveCardUnfurling.adaptiveCardForTabStageView());
+        const result = {
+            attachmentLayout: 'list',
+            type: 'result',
+            attachments: [attachment],
+            responseType: "composeExtension"
+        };
+
+        const response = {
+            composeExtension: result
+        };
+
+        return response;
+    }
+
 }
 
 module.exports.BotActivityHandler = BotActivityHandler;
