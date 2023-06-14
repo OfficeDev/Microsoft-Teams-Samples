@@ -10,7 +10,7 @@ GetDeepLinkTabChannel = (subEntityId, ID, Desc, channelId,AppID,EntityID)=>{
    }
 
 GetDeepLinkTabStatic = (subEntityId, ID, Desc,AppID)=>{
-   let taskContext = encodeURI(`{"subEntityId": "${subEntityId}"}`);
+   let taskContext =  encodeURI(`{"subEntityId": "${subEntityId}"}`);
      return {
       linkUrl:"https://teams.microsoft.com/l/entity/"+AppID+"/"+process.env.Tab_Entity_Id +"?context=" + taskContext,
       ID:ID,
@@ -18,8 +18,19 @@ GetDeepLinkTabStatic = (subEntityId, ID, Desc,AppID)=>{
      }    
 }
 
+GetDeepLinkToMeetingSidePanel = (ID, Desc,AppID,baseUrl,chatId,contextType) =>{
+   let jsoncontext = "{"+"\"chatId\":\"" + chatId + "\","+"\"contextType\":\"" + contextType + "\""+"}";
+   let taskContext = encodeURI(jsoncontext);
+   let encodedUrl = encodeURIComponent(baseUrl + "/ChannelDeepLink.html");
+   return {
+      linkUrl:"https://teams.microsoft.com/l/entity/"+AppID+"/"+process.env.Channel_Entity_Id+"?webUrl="+encodedUrl +"&context=" + taskContext,
+      ID:ID,
+      TaskText:Desc
+     }   
+}
+
 module.exports= {
-   GetDeepLinkTabChannel,GetDeepLinkTabStatic
+   GetDeepLinkTabChannel,GetDeepLinkTabStatic, GetDeepLinkToMeetingSidePanel
 }
 
 
