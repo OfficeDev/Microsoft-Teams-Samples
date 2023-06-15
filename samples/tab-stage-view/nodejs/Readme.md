@@ -121,9 +121,9 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Welcome Message](Images/welcomeAction.png)
 
-**Opening stage view from Adaptive Card Action:**
+**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
-![Stage View](Images/viaCardAction.png)
+![Stage View in tab](Images/CollaborativeStageView.png)
 
 **Opening stage view from Adaptive card via deep link:**
 
