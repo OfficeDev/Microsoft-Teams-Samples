@@ -511,6 +511,10 @@ jobs:
               name: 'app-sso'
               version: '14.x'
 
+            - project_path: 'samples/app-sso/nodejs/client'
+              name: 'app-sso-client'
+              version: '14.x'
+
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
               version: '14.x'
@@ -884,7 +888,11 @@ jobs:
               version: '18.x'
 
             - project_path: 'samples/app-anonymous-users/nodejs/ClientApp'
-              name: 'app-anonymous-users'
+              name: 'app-anonymous-users-clientapp'
+              version: '18.x'
+
+            - project_path: 'samples/app-anonymous-users/nodejs/api'
+              name: 'app-anonymous-users-api'
               version: '18.x'
 
             - project_path: 'samples/bot-sso-adaptivecard/nodejs'
