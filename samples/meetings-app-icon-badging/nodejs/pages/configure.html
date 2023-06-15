@@ -1,0 +1,30 @@
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.11.0/js/MicrosoftTeams.min.js"
+            integrity="sha384yBjE++eHeBPzIg+IKl9OHFqMbSdrzY2S/LW3qeitc5vqXewEYRWegByWzBN/chRh" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <div class="font-semibold font-title" style="color:gray">Configure your app here.</div>
+    <h2 style="color:dodgerblue;font-family:sans-serif">
+        Show app icon badging in Teams Meetings app
+    </h2>
+    <p>Please click on save to proceed.</p>
+
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                microsoftTeams.pages.config.setConfig({
+                    entityID: "app-icon-badging-tab",
+                    contentUrl: `${window.location.origin}/hello.html`,
+                    suggestedTabName: "App-Icon-Badging",
+                    websiteUrl: `${window.location.origin}/hello.html`,
+                });
+
+                saveEvent.notifySuccess();
+            });
+
+            microsoftTeams.pages.config.setValidityState(true);
+        });
+    </script>
+</body>
