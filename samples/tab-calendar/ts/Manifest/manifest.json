@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "77611a00-9d06-4e48-8005-4bdad870ee7b",
+  "packageName": "com.teams.meetingaudiocalltoggle",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab Calendar",
+    "full": "Tab Calendar"
+  },
+  "description": {
+    "short": "Tab Calendar",
+    "full": "This sample shows Tab Calendar."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://5c2c-2401-4900-608c-81d8-865-1f95-f3dd-b759.ngrok-free.app/tab",
+      "websiteUrl": "https://5c2c-2401-4900-608c-81d8-865-1f95-f3dd-b759.ngrok-free.app/tab",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Calendar",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok-free.app"
+  ]
+}
