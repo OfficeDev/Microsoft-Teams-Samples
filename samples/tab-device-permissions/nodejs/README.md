@@ -20,7 +20,7 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
 ```
-Currently only capture image is supported in Teams Desktop
+Currently only capture image is supported in Teams Desktop client.
 ```
 
  ## Included Features
