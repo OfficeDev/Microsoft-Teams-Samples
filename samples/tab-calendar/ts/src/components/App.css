@@ -66,6 +66,10 @@ button {
   padding-bottom: 12px;
   text-align: left;
 }
+.tdSubject{
+  width: 83%;
+  word-wrap: break-word;
+}
 .mainDivOpen{
   width: 50%;
   float: left;

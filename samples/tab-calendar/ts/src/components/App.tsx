@@ -5,6 +5,8 @@ import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { BrowserRouter,  Route, Routes } from "react-router-dom";
 import Tab from "./Tab";
+import ConsentPopup from "./ConsentPopup";
+import ClosePopup from "./ClosePopup";
 
 /**
  * The main app which handles the initialization and routing
@@ -13,13 +15,15 @@ import Tab from "./Tab";
 function App() {
 
   // Initialize the Microsoft Teams SDK
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Display the app home page hosted in Teams
   return (
     <BrowserRouter>
     <Routes>       
       <Route path="/tab" element={<Tab />}/>
+      <Route  path="/auth-start" element={<ConsentPopup/>} />
+      <Route  path="/auth-end" element={<ClosePopup/>} />
       </Routes> 
     </BrowserRouter>
   );

@@ -1,0 +1,20 @@
+{
+  "name": "api-server",
+  "version": "0.0.1",
+  "description": "The API server for a Teams tab app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal-node": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "node-fetch": "^2.6.0",
+    "esbuild": "^0.18.1"
+  }
+}

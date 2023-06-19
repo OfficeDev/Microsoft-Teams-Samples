@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "77611a00-9d06-4e48-8005-4bdad870ee7b",
+  "id": "90cc2977-9ae0-4cfc-aed7-4c548c0f9606",
   "packageName": "com.teams.meetingaudiocalltoggle",
   "developer": {
     "name": "Microsoft",
@@ -19,14 +19,14 @@
     "full": "Tab Calendar"
   },
   "description": {
-    "short": "Tab Calendar",
-    "full": "This sample shows Tab Calendar."
+    "short": "Short description for Tab Calendar",
+    "full": "Full description of Tab Calendar."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
     {
-      "contentUrl": "https://5c2c-2401-4900-608c-81d8-865-1f95-f3dd-b759.ngrok-free.app/tab",
-      "websiteUrl": "https://5c2c-2401-4900-608c-81d8-865-1f95-f3dd-b759.ngrok-free.app/tab",
+      "contentUrl": "https://475d-2405-201-e011-6020-ec14-a93c-64ce-dea9.ngrok-free.app/tab",
+      "websiteUrl": "https://475d-2405-201-e011-6020-ec14-a93c-64ce-dea9.ngrok-free.app/tab",
       "entityId": "com.contoso.DeeplLinkBot.help",
       "name": "Calendar",
       "scopes": [
@@ -40,5 +40,9 @@
   ],
   "validDomains": [
     "*.ngrok-free.app"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "90cc2977-9ae0-4cfc-aed7-4c548c0f9606",
+    "resource": "api://475d-2405-201-e011-6020-ec14-a93c-64ce-dea9.ngrok-free.app/90cc2977-9ae0-4cfc-aed7-4c548c0f9606"
+  }
 }
