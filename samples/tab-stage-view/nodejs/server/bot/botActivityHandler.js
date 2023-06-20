@@ -22,7 +22,8 @@ class BotActivityHandler extends TeamsActivityHandler  {
           await next();
       });
     }
-
+    
+    // invoked when an app based link query activity is received
     handleTeamsAppBasedLinkQuery(context, query) {
         const attachment = CardFactory.adaptiveCard(adaptiveCardUnfurling.adaptiveCardForTabStageView());
         const result = {

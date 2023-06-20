@@ -1,4 +1,4 @@
-// Adaptive Card for tab to show in stage view
+// Adaptive Card for link unfurling to show in stage view
 const adaptiveCardForTabStageView = () => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [

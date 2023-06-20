@@ -147,7 +147,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
