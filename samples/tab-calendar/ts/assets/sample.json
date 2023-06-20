@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-personal-quickstart-ts",
+    "name": "officedev-microsoft-teams-samples-tab-calendar-ts",
     "source": "officeDev",
-    "title": "Starter solution: Personal tab in TypeScript",
+    "title": "Tab calendar in Outlook",
     "shortDescription": "Create React App personal tab in TypeScript",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-quickstart/ts",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-calendar/ts",
     "longDescription": [
-      "Create React App personal tab in TypeScript"
+      "This sample app shows interact with the user's calendar, including opening calendar items and composing meetings."
     ],
-    "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "creationDateTime": "2023-06-19",
+    "updateDateTime": "2023-06-10",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-quickstart/ts/Images/TabPersonalQuickstartGif.gif",
-        "alt": "Solution UX showing personal tab in typescript"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-calendar/ts/Images/TabPersonalQuickstartGif.gif",
+        "alt": "Solution UX showing Tab calendar support in Outlook apps."
       }
     ],
     "authors": [

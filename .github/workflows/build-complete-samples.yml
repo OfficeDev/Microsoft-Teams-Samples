@@ -898,6 +898,14 @@ jobs:
             - project_path: 'samples/meetings-app-icon-badging/nodejs'
               name: 'meetings-app-icon-badging'
               version: '18.x'
+            
+            - project_path: 'samples/tab-calendar/ts/api-server'
+              name: 'tab-calendar-api-server'
+              version: '18.x'
+            
+            - project_path: 'samples/tab-calendar/ts'
+              name: 'tab-calendar'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
