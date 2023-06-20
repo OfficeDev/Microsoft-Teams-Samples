@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-calendar-ts
 ---
 
-# Tab calendar in Outlook
+# Tab Calendar in Outlook
 
 Interact with the user's calendar, including opening calendar items and composing meetings.
 
@@ -157,3 +157,5 @@ Interact with the user's calendar, including opening calendar items and composin
 
 ## Further Reading.
 [Calendar Module](https://learn.microsoft.com/en-us/javascript/api/@microsoft/teams-js/calendar?view=msteams-client-js-latest)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-calendar-ts" />

@@ -7,6 +7,7 @@ import { BrowserRouter,  Route, Routes } from "react-router-dom";
 import Tab from "./Tab";
 import ConsentPopup from "./ConsentPopup";
 import ClosePopup from "./ClosePopup";
+import TabCalendar from "./TabCalendarMain";
 
 /**
  * The main app which handles the initialization and routing
@@ -21,6 +22,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>       
+      <Route path="/" element={<TabCalendar />} />
       <Route path="/tab" element={<Tab />}/>
       <Route  path="/auth-start" element={<ConsentPopup/>} />
       <Route  path="/auth-end" element={<ClosePopup/>} />
