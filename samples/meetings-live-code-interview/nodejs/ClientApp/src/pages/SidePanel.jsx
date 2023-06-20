@@ -4,13 +4,8 @@
  */
 
 import * as microsoftTeams from "@microsoft/teams-js";
-import { mergeClasses } from "@fluentui/react-components";
+import { mergeClasses,Card,CardPreview,CardFooter } from "@fluentui/react-components";
 import { IQuestionDetails } from '../types/question';
-import {
-  Card,
-  CardPreview,
-  CardFooter,
-} from "@fluentui/react-components/unstable";
 import { Image, Text, Button } from "@fluentui/react-components";
 import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../styles/layouts";
 
