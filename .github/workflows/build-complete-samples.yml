@@ -675,10 +675,6 @@ jobs:
               name: 'meetings-live-code-interview'
               version: '14.x'
 
-            - project_path: 'samples/meetings-live-code-interview/nodejs/ClientApp'
-              name: 'meetings-live-code-interview-clientapp'
-              version: '14.x'
-
             - project_path: 'samples/msgext-search-sso-config/nodejs'
               name: 'msgext-search-sso-config'
               version: '14.x'
