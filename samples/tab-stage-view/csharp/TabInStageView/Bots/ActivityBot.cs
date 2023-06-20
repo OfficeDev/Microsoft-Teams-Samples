@@ -69,12 +69,12 @@ namespace TabInStageView.Bots
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForStageView()));
         }
 
-        // <summary>
+        /// </summary>
         /// Overriding to invoke when an app based link query activity is received.
         /// </summary>
         protected override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.5"))
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -117,7 +117,6 @@ namespace TabInStageView.Bots
                 Content = card,
                 ContentType = AdaptiveCard.ContentType
             };
-
             return Task.FromResult(new MessagingExtensionResponse
             {
                 ComposeExtension = new MessagingExtensionResult
@@ -131,7 +130,6 @@ namespace TabInStageView.Bots
                              Content = card,
                              ContentType = AdaptiveCard.ContentType,
                              Preview = attachments,
-
                         },
                     },
                 },

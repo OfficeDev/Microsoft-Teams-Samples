@@ -132,7 +132,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
 
-- Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
+- Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
 
 ![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
 
@@ -162,11 +162,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Open New Mail](Images/OpenNewMail.png)
 
-**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
 
 ![OpenAppIcon](Images/OpenAppIcon.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
 
 ![Outlook Unfurling](Images/OutlookUnfurling.png)
 
@@ -197,3 +197,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-csharp" />
