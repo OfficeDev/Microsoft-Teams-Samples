@@ -22,7 +22,7 @@ Interact with the user's calendar, including opening calendar items and composin
 
 ## Interaction with app
 
-![Tab Personal QuickstartGif](Images/TabPersonalQuickstartGif.gif)
+![Tab Personal QuickstartGif](Images/TabcalendarGif.gif)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
