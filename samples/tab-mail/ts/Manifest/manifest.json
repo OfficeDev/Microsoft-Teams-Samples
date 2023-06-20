@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Manifest-Id}}",
+  "packageName": "com.mail.outlook",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab-Mail",
+    "full": "Tab Mail React js"
+  },
+  "description": {
+    "short": "Tab Mail In Outlook",
+    "full": "This sample shows how to compose mail using tab in outlook"
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "entityId": "com.contoso.tabmail.help",
+      "name": "Tab-Mail",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok-free.app"
+  ]
+}

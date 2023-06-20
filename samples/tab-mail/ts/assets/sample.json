@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-mail-ts",
+    "source": "officeDev",
+    "title": "Tab Mail In Outlook",
+    "shortDescription": "This sample helps to compose mail from perosnal tab",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-calendar/ts",
+    "longDescription": [
+      "This sample app shows how to compose mail using perosnal tab."
+    ],
+    "creationDateTime": "2023-06-19",
+    "updateDateTime": "2023-06-10",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "reactjs"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "reactjs"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-mail/ts/Images/tab-mail.gif",
+        "alt": "Solution UX showing Tab Mail support in Outlook apps."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]
