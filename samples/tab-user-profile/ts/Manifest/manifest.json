@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.2.0",
+  "id": "{{Manifest-Id}}",
+  "packageName": "com.teams.tabuserprofile",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "tab-user-profile",
+    "full": "tab-user-profile"
+  },
+  "description": {
+    "short": "Tab User Profile",
+    "full": "This sample shows how to open user profile card using personal tab in outlook."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "entityId": "com.contoso.userprofile.help",
+      "name": "tab-user-profile",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "*.ngrok-free.app"
+  ]
+}
