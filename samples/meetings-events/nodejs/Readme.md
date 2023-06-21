@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which arfe available in bot framework v4
+description: This sample demonstrates use of various meeting events which are available in bot framework v4
 products:
 - office-teams
 - office
