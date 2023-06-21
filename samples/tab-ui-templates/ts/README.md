@@ -57,7 +57,7 @@ You can find the app source code in `./src`:
 - `assets`: Includes the app assets.
 
 
-### Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Teams Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
 
