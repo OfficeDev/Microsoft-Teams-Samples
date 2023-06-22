@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 // </copyright>
 
-namespace InMeetingNotificationsBot.Models
+namespace AppIconBadgingInMeetings.Models
 {
     public class ActionBase
     {

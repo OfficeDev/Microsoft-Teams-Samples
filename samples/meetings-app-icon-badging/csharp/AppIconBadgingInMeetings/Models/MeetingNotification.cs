@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace InMeetingNotificationsBot.Models
+namespace AppIconBadgingInMeetings.Models
 {
     public class MeetingNotification
     {   

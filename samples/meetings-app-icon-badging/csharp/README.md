@@ -25,7 +25,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
 
 ## Interaction with app
 
-![App Icon Badging](InMeetingNotifications/Images/App_Icon_Badging.gif)
+![App Icon Badging](AppIconBadgingInMeetings/Images/App_Icon_Badging.gif)
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `samples\meetings-app-icon-badging\csharp` folder
-  - Select `InMeetingNotifications.sln` file
+  - Select `AppIconBadgingInMeetings.sln` file
 
 
 - Modify the `/appsettings.json` and fill in the following details:
@@ -82,7 +82,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-notification/csharp/InMeetingNotifications/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-notification/csharp/AppIconBadgingInMeetings/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ## Interacting with the app in Teams Meeting
 
@@ -96,7 +96,7 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 **Setup Configurable Tab:**
 
-![Setup Tab](InMeetingNotifications/Images/2.meeting_config_tab.png)
+![Setup Tab](AppIconBadgingInMeetings/Images/2.meeting_config_tab.png)
 
 **Interacting with the app in Teams Meeting**
 
@@ -104,7 +104,7 @@ Type `SendNotification` in bot chat to send In-Meeting notifications.
 
 **Notification On Tab Icon as 'Icon Badging':**
 
-![App Icon Badging](InMeetingNotifications/Images/3.AppIconBadging.png)
+![App Icon Badging](AppIconBadgingInMeetings/Images/3.AppIconBadging.png)
 
 
 ## Further reading
@@ -112,3 +112,5 @@ Type `SendNotification` in bot chat to send In-Meeting notifications.
 - [Enable app icon badging for your Teams app](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/app-icon-badging-for-your-app?branch=pr-en-us-8495)
 
 - [Grant RSC permissions to your app](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent#install-your-app-in-a-team-or-chat)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-icon-badging/csharp" />

@@ -1,11 +1,11 @@
-﻿// <copyright file="InMeetingNotificationsBot.cs" company="Microsoft">
+﻿// <copyright file="AppIconBadgingInMeeting.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
 
 using AdaptiveCards;
 using AdaptiveCards.Templating;
-using InMeetingNotificationsBot.Models;
+using AppIconBadgingInMeetings.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -19,13 +19,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace InMeetingNotificationsBot
+namespace AppIconBadgingInMeetings
 {
-    public class InMeetingNotificationsBot : TeamsActivityHandler
+    public class AppIconBadgingInMeeting : TeamsActivityHandler
     {
         private readonly IConfiguration _config;
 
-        public InMeetingNotificationsBot(IConfiguration configuration)
+        public AppIconBadgingInMeeting(IConfiguration configuration)
         {
             _config = configuration;
         }
@@ -161,6 +161,7 @@ namespace InMeetingNotificationsBot
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
             };
+
             return adaptiveCardAttachment;
         }
 
@@ -183,6 +184,7 @@ namespace InMeetingNotificationsBot
                     },
                 }
             };
+
             return notification;
         }
     }
