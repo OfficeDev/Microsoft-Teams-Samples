@@ -189,23 +189,28 @@ class Tab extends React.Component<ITabProps, ITabState> {
     const dt = ev.target["value"] + ":00Z";
     this.setState({ stateDatetime: dt });
   }
+
   endHandleChange(ev: any) {
     if (!ev.target["validity"].valid) return;
     const dt = ev.target["value"] + ":00Z";
     this.setState({ endDatetime: dt });
   }
+
   subjectHandleChange(ev: any) {
     const subjectData = ev.target.value;
     this.setState({ subject: subjectData });
   }
+
   attendeesHandleChange(ev: any) {
     const attendeesData = ev.target.value;
     this.setState({ attendees: attendeesData });
   }
+  
   contentHandleChange(ev: any) {
     const setContentData = ev.target.value;
     this.setState({ content: setContentData });
   }
+
   openCalendar(itemIds: any) {
     var OpenCalendarItemParams = {
       itemId: itemIds,
