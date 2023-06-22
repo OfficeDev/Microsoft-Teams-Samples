@@ -197,3 +197,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)
 - [App in Catalog](https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-appcatalog-lifecycle-csharp" />

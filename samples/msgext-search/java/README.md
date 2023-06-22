@@ -118,3 +118,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure for Java cloud developers](https://docs.microsoft.com/azure/java/?view=azure-java-stable)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-java" />

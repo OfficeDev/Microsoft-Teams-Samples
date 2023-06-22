@@ -187,3 +187,6 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-csharp" />

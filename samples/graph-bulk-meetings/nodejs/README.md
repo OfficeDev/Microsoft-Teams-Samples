@@ -110,3 +110,6 @@ This is an sample application which shows how to create teams meetings in bulk u
 
 ## Further reading
 - [Create Event](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=javascript)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-bulk-meetings-nodejs" />

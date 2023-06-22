@@ -153,3 +153,6 @@ This is a sample connector application which demonstarates how to add authentica
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />

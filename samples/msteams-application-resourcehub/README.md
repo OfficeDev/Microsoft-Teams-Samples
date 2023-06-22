@@ -130,3 +130,6 @@ Based on the selection the list of Teams or users will populate in the dropdown
 - Click on the Share button to send the details to the other users.
 
  ## ![ShareWithTeamAndUsers](Documentation/ShareWithTeamAndUsers.png)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msteams-application-resourcehub" />

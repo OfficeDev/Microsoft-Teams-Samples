@@ -106,3 +106,6 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
   
  
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-channel-lifecycle-csharp" />

@@ -147,3 +147,5 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 - [Teams tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-device-permissions-nodejs" />

@@ -102,3 +102,5 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Search based messaging extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-search-quickstart-js" />

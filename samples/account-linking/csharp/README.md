@@ -182,3 +182,6 @@ Add the parameters to the
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/account-linking-csharp" />

@@ -129,3 +129,6 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 
 ## Further Reading.
 [Tab-channel-group-sso-quickstart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-sso-quickstart-js" />

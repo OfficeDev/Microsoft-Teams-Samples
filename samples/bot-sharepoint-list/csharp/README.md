@@ -135,3 +135,6 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - [Sharepoint API basic operations](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints)
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sharepoint-list-csharp" />

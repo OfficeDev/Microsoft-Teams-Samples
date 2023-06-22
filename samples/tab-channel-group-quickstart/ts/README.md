@@ -112,3 +112,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 [Create a group tab](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-quickstart-ts" />

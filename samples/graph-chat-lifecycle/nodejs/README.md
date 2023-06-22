@@ -201,3 +201,5 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 ## Further Reading
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-lifecycle-nodejs" />

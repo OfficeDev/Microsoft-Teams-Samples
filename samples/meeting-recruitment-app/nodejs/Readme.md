@@ -188,3 +188,5 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
 - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meeting-recruitment-app-nodejs" />
