@@ -147,7 +147,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -175,7 +175,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Open New Mail](Images/OpenNewMail.png)
 
-**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
 
 ![OpenAppIcon](Images/OpenAppIcon.png)
 
@@ -194,3 +194,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-nodejs" />
