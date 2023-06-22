@@ -26,6 +26,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
             clientSecret: clientSecret
         }
     });
+    
     let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
 
     msalClient.acquireTokenOnBehalfOf({
@@ -33,6 +34,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
         oboAssertion: req.query.ssoToken,
         scopes: graphScopes,
         skipCache: true
+
       })
       .then( async (result) => {     
                 let graphPhotoEndpoint = `https://graph.microsoft.com/v1.0/users/${req.query.upn}/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location`;
@@ -43,7 +45,9 @@ app.get('/getGraphAccessToken', async (req,res) => {
                         "authorization": "bearer " + result.accessToken
                     }
                 }
+                
                 let response = await fetch(graphPhotoEndpoint,graphRequestParams).catch(this.unhandledFetchError);
+                
                 if (response.ok) {
                     let data = await response.json();
                     res.send(data);

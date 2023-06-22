@@ -4,15 +4,13 @@
 import React from "react";
 import "./App.css";
 import * as microsoftTeams from "@microsoft/teams-js";
-/**
- * This tab component renders the main tab content
- * of your app.
- */
 
+// This tab component renders the main tab content of your app.
 export interface IAllItemsDetail {
   id: string;
   subject: string;
 }
+
 export interface ITabProps {}
 interface ITabState {
   context?: microsoftTeams.app.Context;
@@ -28,6 +26,7 @@ interface ITabState {
   content: string;
   allItems: IAllItemsDetail[];
 }
+
 class Tab extends React.Component<ITabProps, ITabState> {
   constructor(props: ITabProps) {
     super(props);
@@ -46,14 +45,13 @@ class Tab extends React.Component<ITabProps, ITabState> {
       allItems: [],
     };
 
-    //Bind any functions that need to be passed as callbacks or used to React components
+    // Bind any functions that need to be passed as callbacks or used to React components
     this.attendeesHandleChange = this.attendeesHandleChange.bind(this);
     this.composeMeeting = this.composeMeeting.bind(this);
     this.startHandleChange = this.startHandleChange.bind(this);
     this.endHandleChange = this.endHandleChange.bind(this);
     this.subjectHandleChange = this.subjectHandleChange.bind(this);
     this.contentHandleChange = this.contentHandleChange.bind(this);
-
     this.consentSuccess = this.consentSuccess.bind(this);
     this.consentFailure = this.consentFailure.bind(this);
     this.unhandledFetchError = this.unhandledFetchError.bind(this);
@@ -61,8 +59,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
     this.showConsentDialog = this.showConsentDialog.bind(this);
   }
 
-  //React lifecycle method that gets called once a component has finished mounting
-  //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
+  // React lifecycle method that gets called once a component has finished mounting
+  // Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount() {
     // Initialize the Microsoft Teams SDK
     microsoftTeams.app.initialize().then(() => {
@@ -85,20 +83,22 @@ class Tab extends React.Component<ITabProps, ITabState> {
     });
   }
 
-  //Exchange the SSO access token for a Graph access token
-  //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
+  // Exchange the SSO access token for a Graph access token
+  // Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
+    
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
+      
       if (!response.ok && data.error === "consent_required") {
-        //A consent_required error means it's the first time a user is logging into to the app, so they must consent to sharing their Graph data with the app.
-        //They may also see this error if MFA is required.
+        // A consent_required error means it's the first time a user is logging into to the app, so they must consent to sharing their Graph data with the app.
+        // They may also see this error if MFA is required.
         this.setState({ consentRequired: true }); //This displays the consent required message.
         this.showConsentDialog(); //Proceed to show the consent dialogue.
       } else if (!response.ok) {
-        //Unknown error
+        // Unknown error
         console.error(data);
         this.setState({ error: true });
       } else {
@@ -107,8 +107,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
     }
   };
 
-  //Show a popup dialogue prompting the user to consent to the required API permissions. This opens ConsentPopup.js.
-  //Learn more: https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#initiate-authentication-flow
+  // Show a popup dialogue prompting the user to consent to the required API permissions. This opens ConsentPopup.js.
+  // Learn more: https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#initiate-authentication-flow
   showConsentDialog() {
     microsoftTeams.authentication
       .authenticate({
@@ -124,9 +124,9 @@ class Tab extends React.Component<ITabProps, ITabState> {
       });
   }
 
-  //Callback function for a successful authorization
+  // Callback function for a successful authorization
   consentSuccess(result: string) {
-    //Save the Graph access token in state
+    // Save the Graph access token in state
     this.setState({
       graphAccessToken: result,
       consentProvided: true,
@@ -138,10 +138,10 @@ class Tab extends React.Component<ITabProps, ITabState> {
     this.setState({ error: true });
   }
 
-  //React lifecycle method that gets called after a component's state or props updates
-  //Learn more: https://reactjs.org/docs/react-component.html#componentdidupdate
+  // React lifecycle method that gets called after a component's state or props updates
+  // Learn more: https://reactjs.org/docs/react-component.html#componentdidupdate
   componentDidUpdate = async (prevProps: ITabProps, prevState: ITabState) => {
-    //Check to see if a Graph access token is now in state AND that it didn't exist previously
+    // Check to see if a Graph access token is now in state AND that it didn't exist previously
     if (
       prevState.graphAccessToken === "" &&
       this.state.graphAccessToken !== ""
@@ -165,8 +165,10 @@ class Tab extends React.Component<ITabProps, ITabState> {
     let response = await fetch(graphEndpoint, graphRequestParams).catch(
       this.unhandledFetchError
     );
+
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
+      
       if (response.ok) {
         this.setState({ allItems: data.value });
       } else {
@@ -175,7 +177,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
       }
     }
   };
-  //Generic error handler ( avoids having to do async fetch in try/catch block )
+
+  // Generic error handler ( avoids having to do async fetch in try/catch block )
   unhandledFetchError(err: string) {
     console.error("Unhandled fetch error: ", err);
     this.setState({ error: true });
@@ -216,8 +219,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
 
   composeMeeting() {
     var isValidation = false;
-    if (
-      this.state.subject !== undefined &&
+    if (this.state.subject !== undefined &&
       this.state.subject !== null &&
       this.state.subject !== "" &&
       this.state.content !== undefined &&
@@ -231,25 +233,27 @@ class Tab extends React.Component<ITabProps, ITabState> {
       this.state.stateDatetime !== "" &&
       this.state.endDatetime !== undefined &&
       this.state.endDatetime !== null &&
-      this.state.endDatetime !== ""
-    ) {
-      isValidation = true;
-    }
-    if (isValidation == true) {
-      var ComposeMeetingParams = {
-        attendees: [this.state.attendees],
-        startTime: this.state.stateDatetime, // MM/DD/YYYY HH:MM:SS format
-        endTime: this.state.endDatetime, // MM/DD/YYYY HH:MM:SS format
-        subject: this.state.subject,
-        content: this.state.content,
-      };
-      if (microsoftTeams.calendar.isSupported()) {
-        microsoftTeams.calendar.composeMeeting(ComposeMeetingParams);
-      } else {
-        alert("Calendar is not supported!!!");
+      this.state.endDatetime !== "" ) 
+      {
+        isValidation = true;
+      }
+
+      if (isValidation == true) {
+        var ComposeMeetingParams = {
+          attendees: [this.state.attendees],
+          startTime: this.state.stateDatetime, // MM/DD/YYYY HH:MM:SS format
+          endTime: this.state.endDatetime, // MM/DD/YYYY HH:MM:SS format
+          subject: this.state.subject,
+          content: this.state.content,
+        };
+
+        if (microsoftTeams.calendar.isSupported()) {
+          microsoftTeams.calendar.composeMeeting(ComposeMeetingParams);
+        } else {
+          alert("Calendar is not supported!!!");
+        }
       }
     }
-  }
   render() {
     return (
       <div>

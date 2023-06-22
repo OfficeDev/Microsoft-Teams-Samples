@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-calendar-ts",
     "source": "officeDev",
-    "title": "Tab calendar in Outlook",
-    "shortDescription": "Create React App personal tab in TypeScript",
+    "title": "Interact with the calendar in Outlook from personal tab.",
+    "shortDescription": "This sample shows how to interact with calendar in Outlook from personal tab",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-calendar/ts",
     "longDescription": [
-      "This sample app shows interact with the user's calendar, including opening calendar items and composing meetings."
+      "This sample app shows how to interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook."
     ],
     "creationDateTime": "2023-06-19",
-    "updateDateTime": "2023-06-10",
+    "updateDateTime": "2023-06-22",
     "products": [
       "Teams"
     ],
@@ -20,15 +20,15 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": ""
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": ""
+        "value": "express"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab"
+        "value": "tab, calendar in outlook"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-calendar/ts/Images/TabPersonalQuickstartGif.gif",
-        "alt": "Solution UX showing Tab calendar support in Outlook apps."
+        "alt": "Solution UX showing how to interact with calendar in Outlook from personal tab."
       }
     ],
     "authors": [

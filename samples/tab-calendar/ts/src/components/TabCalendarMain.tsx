@@ -5,16 +5,12 @@
 import React from 'react';
 import './App.css';
 
-/**
- * This component is used to display the required
- * privacy statement which can be found in a link in the
- * about tab.
- */
+// This component is used to display the required privacy statement which can be found in a link in the about tab.
 class TabCalendar extends React.Component {
     render() {
       return (
         <div>
-          <h1>Welcome to interacting with the user's calendar, including opening calendar items and composing meetings in calendar apps</h1>
+          <h1>Welcome to interacting with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook.</h1>
         </div>
       );
     }

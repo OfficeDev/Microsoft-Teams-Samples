@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows tab calendar in Outlook apps.
+description: This sample shows how to interact with calendar in Outlook from personal tab.
 products:
 - office-teams
 - office
@@ -13,12 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-calendar-ts
 ---
 
-# Tab Calendar in Outlook
+# Interact with Calendar in Outlook from Personal Tab
 
-Interact with the user's calendar, including opening calendar items and composing meetings.
+Interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook.
 
  ## Included Features
 * Tabs
+* Outlook Calendar
 
 ## Interaction with app
 
@@ -156,6 +157,7 @@ Interact with the user's calendar, including opening calendar items and composin
 ![ClickView](Images/ClickView.png)
 
 ## Further Reading.
+[TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#calendar)
 [Calendar Module](https://learn.microsoft.com/en-us/javascript/api/@microsoft/teams-js/calendar?view=msteams-client-js-latest)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-calendar-ts" />

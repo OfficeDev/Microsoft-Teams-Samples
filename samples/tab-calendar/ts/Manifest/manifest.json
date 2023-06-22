@@ -3,7 +3,7 @@
   "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.teams.TabCalendar",
+  "packageName": "com.teams.tabcalendar",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,15 +19,15 @@
     "full": "Tab Calendar"
   },
   "description": {
-    "short": "Short description for Tab Calendar",
-    "full": "Full description of Interact with the user's calendar, including opening calendar items and composing meetings."
+    "short": "Interact with calendar in Outlook from personal tab",
+    "full": "Interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
     {
       "contentUrl": "https://{{domain-name}}/tab",
       "websiteUrl": "https://{{domain-name}}/tab",
-      "entityId": "com.contoso.TabCalendar.help",
+      "entityId": "com.contoso.tabcalendar.help",
       "name": "TabCalendar",
       "scopes": [
         "personal"

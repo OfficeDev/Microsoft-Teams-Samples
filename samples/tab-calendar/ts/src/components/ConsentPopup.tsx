@@ -5,9 +5,7 @@ import React from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import * as msal from "@azure/msal-browser";
 
-/**
- * This component is loaded to grant consent for graph permissions.
- */
+// This component is loaded to grant consent for graph permissions.
 class ConsentPopup extends React.Component {
 
     componentDidMount() {
