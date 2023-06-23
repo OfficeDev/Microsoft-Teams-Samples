@@ -129,6 +129,14 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Stage View Deep Link](Images/viaDeeplink.png)
 
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+
+![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
+
+![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
+
+![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
@@ -162,6 +170,18 @@ Also update `BaseUrl` according to your code runtime environment.
 **Select your app icon to launch your app in Office on the web**
 
 ![AppOffice](Images/AppOffice.png) 
+
+**After opening Outlook web, click the "New mail" button.**
+
+![Open New Mail](Images/OpenNewMail.png)
+
+**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
+
+![OpenAppIcon](Images/OpenAppIcon.png)
+
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+
+![Outlook Unfurling](Images/OutlookUnfurling.png)
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
