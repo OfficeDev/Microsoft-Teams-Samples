@@ -19,8 +19,8 @@
     "full": "tab-user-profile"
   },
   "description": {
-    "short": "Tab User Profile",
-    "full": "This sample shows how to open user profile card using personal tab in outlook."
+    "short": "User profile in Outlook using personal tab app.",
+    "full": "This sample app shows how to open a user profile information card in Outlook using personal tab app."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

@@ -899,6 +899,10 @@ jobs:
               name: 'meetings-app-icon-badging'
               version: '18.x'
 
+            - project_path: 'samples/tab-user-profile/ts'
+              name: 'tab-user-profile'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:

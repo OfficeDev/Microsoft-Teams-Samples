@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-user-profile-ts",
     "source": "officeDev",
-    "title": "Starter solution: Personal tab in TypeScript",
-    "shortDescription": "Create React App personal tab in TypeScript",
+    "title": "Starter solution: User profile in Outlook using personal tab",
+    "shortDescription": "Get user profile information in Outlook using personal tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-user-profile/ts",
     "longDescription": [
-      "Create React App personal tab in TypeScript"
+      "This sample app shows how to open a user profile information card at a specified position in Outlook using personal tab app."
     ],
     "creationDateTime": "2023-06-19",
     "updateDateTime": "2023-06-19",
@@ -20,15 +20,15 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": ""
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": ""
+        "value": "express"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab"
+        "value": "tab,Outlook"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-user-profile/ts/Images/meta-OS-profileGif.gif",
-        "alt": "Solution UX showing personal tab for user profile in outlook"
+        "alt": "Solution UX shows how to open a user profile information card in Outlook using personal tab app."
       }
     ],
     "authors": [

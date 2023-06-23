@@ -6,7 +6,7 @@ import { app, profile } from "@microsoft/teams-js";
 import validator from 'validator';
 import './Tab.css';
 
-// function for opening user profile card
+// Function for opening user profile information card.
 function ProfileTab() {
   const [selectedPeople, setSelectedPeople] = useState("");
   const [requiredValidation, setRequiredValidation] = useState(false);
@@ -15,12 +15,12 @@ function ProfileTab() {
     app.initialize()
   })
 
-  // set the input Email value to a state variable
+  // Set the input Email value to a state variable.
   const setPeople = (e: any) => {
     setSelectedPeople(e.target.value)
   }
 
-  // Checks whether the platform supports Profile Module and shows the Profile card
+  // Checks whether the platform supports Profile Module and shows the user profile card.
   const showProfile = async () => {
     if (profile.isSupported()) {
       if (selectedPeople === "" || !validator.isEmail(selectedPeople)) {
