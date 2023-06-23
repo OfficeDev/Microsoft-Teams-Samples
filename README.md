@@ -190,6 +190,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |30|Anonymous user support| This sample app shows anonymous users support in teams meeting apps.|[View][app-anonymous-users#cs]       
 31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs]|
 32|App Icon Badging In Teams Meetings|This sample demos the feature of sending app icon badging in teams meetings||[View][meetings-app-icon-badging#nodejs]|
+33|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts]|[View][/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip]|
 
 ## Application templates
 
@@ -383,7 +384,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 [app-anonymous-users#cs]:samples/app-anonymous-users/csharp
 [meetings-app-icon-badging#nodejs]:samples/meetings-app-icon-badging/nodejs
-
+[tab-add-in-combined#ts]:samples/tab-add-in-combined/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
 [msteams-app-resource-hub]:samples/msteams-application-resourcehub/
