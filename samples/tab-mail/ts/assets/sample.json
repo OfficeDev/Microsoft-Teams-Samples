@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-mail-ts",
     "source": "officeDev",
-    "title": "Tab Mail In Outlook",
-    "shortDescription": "This sample helps to compose mail from perosnal tab",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-calendar/ts",
+    "title": "Compose Mail in Outlook using Personal Tab app.",
+    "shortDescription": "This sample app shows how to compose mail in Outlook using personal tab app.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-mail/ts",
     "longDescription": [
-      "This sample app shows how to compose mail using perosnal tab."
+      "This sample app shows how to compose mail in Outlook using personal tab app."
     ],
     "creationDateTime": "2023-06-19",
     "updateDateTime": "2023-06-10",
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab"
+        "value": "tab,mail,outlook"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-mail/ts/Images/tab-mail.gif",
-        "alt": "Solution UX showing Tab Mail support in Outlook apps."
+        "alt": "Solution UX shows how to compose Mail in Outlook using Personal Tab app."
       }
     ],
     "authors": [

@@ -20,7 +20,7 @@ function Tab() {
         app.initialize();
     });
 
-  // set value for Recepients
+  // Set value for To Recepients.
   const functionRecepients = (e: any) => {
     let email = e.target.value;
     let flag: boolean = true;
@@ -46,7 +46,7 @@ function Tab() {
     }
   }
 
-  // set value for Cc Recepients
+  // Set value for Cc Recepients
   const functionCcRecepients = (e: any) => {
     let email = e.target.value;
     let flag: boolean = true;
@@ -72,7 +72,7 @@ function Tab() {
     }
   }
 
-  // set value for Subject
+  // Set value for email Subject
   const functionSubject = (e: any) => {
     let subject = e.target.value;
 
@@ -85,7 +85,7 @@ function Tab() {
     }
   }
 
-  // set value for Body
+  // Set value for email body.
   const functionBody = (e: any) => {
     let body = e.target.value;
 
@@ -98,7 +98,7 @@ function Tab() {
     }
   }
 
-  // handleSubmit
+  // Handling the mail values on button click Compose Mail using handleSubmit function
   const handleSubmit = () => {
     var ComposeNewParams: mail.ComposeNewParams =
     {

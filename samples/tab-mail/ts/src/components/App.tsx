@@ -7,10 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Tab from "./Tab";
 import Home from './home';
 
-/**
- * The main app which handles the initialization and routing
- * of the app.
- */
+// The main app which handles the initialization and routing of the app.
 function App() {
 
   // Initialize the Microsoft Teams SDK

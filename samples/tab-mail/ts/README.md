@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample tab-mail app.
+description: This sample app shows how to compose mail in Outlook using personal tab app.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-mail-ts
 
 # Tab-Mail
 
-This sample helps to compose mail from perosnal tab.
+This sample app shows how to compose mail in Outlook using personal tab app.
 
  ## Included Features
 * Tabs
@@ -62,7 +62,7 @@ This sample helps to compose mail from perosnal tab.
 3. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    **Edit** the `manifest.json` contained in the `Manifest/` folder to replace with your Manifest-Id *everywhere* you see the place holder string `{{Manifest-Id}}`.
+    **Edit** the `manifest.json` contained in the `Manifest/`, you can use any GUID Id in place of `{{Manifest-Id}}` or [Generate Guid](https://guidgenerator.com/).
     **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     **Zip** up the contents of the `Manifest/` folder to create a `manifest.zip`.
     **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
@@ -88,6 +88,8 @@ This sample helps to compose mail from perosnal tab.
 
 ## Further Reading.
 [tab-mail](https://learn.microsoft.com/en-us/javascript/api/@microsoft/teams-js/mail?view=msteams-client-js-latest)
+
+[capability support](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#mail)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-mail-ts" />

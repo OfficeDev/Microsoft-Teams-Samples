@@ -19,8 +19,8 @@
     "full": "Tab Mail React js"
   },
   "description": {
-    "short": "Tab Mail In Outlook",
-    "full": "This sample shows how to compose mail using tab in outlook"
+    "short": "Compose Mail in Outlook using Personal Tab app",
+    "full": "This sample app shows how to compose mail in Outlook using personal tab app."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
@@ -39,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ]
 }

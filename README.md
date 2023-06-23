@@ -54,7 +54,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |21| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
 |22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs]|
 |23| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
-|24| Tab Mail In Outlook | This sample app shows how to compose mail using perosnal tab in outlook ||[View][tab-mail#ts]|
+|24| Compose Mail in Outlook using Personal Tab app | This sample app shows how to compose mail in Outlook using personal tab app. ||[View][tab-mail#ts]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
