@@ -62,7 +62,7 @@ Opens a profile card at a specified position to show profile information about a
 3. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    **Edit** the `manifest.json` contained in the `Manifest/` folder to replace with any *everywhere* you see the place holder string `{{Manifest-Id}}`.
+    **Edit** the `manifest.json` contained in the `Manifest/` folder to replace with any GUID *everywhere* you see the place holder string `{{Manifest-Id}}`.
     **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     **Zip** up the contents of the `Manifest/` folder to create a `manifest.zip`.
     **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
@@ -94,8 +94,8 @@ Opens a profile card at a specified position to show profile information about a
 
 
 ## Further Reading.
-[tab-user-profile](https://learn.microsoft.com/javascript/api/@microsoft/teams-js/profile?view=msteams-client-js-latest)
-[Profile capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#profile)
-[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [tab-user-profile](https://learn.microsoft.com/javascript/api/@microsoft/teams-js/profile?view=msteams-client-js-latest)
+- [Profile capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#profile)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-user-profile-ts" />
