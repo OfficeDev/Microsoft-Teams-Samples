@@ -113,6 +113,23 @@ namespace AppIconBadgingInMeetings
                     }
                     break;
 
+                case "SatgeViewNotification":
+                    try
+                    {
+                        var actionSet = JsonConvert.DeserializeObject<ActionBase>(turnContext.Activity.Value.ToString());
+                        var selectedMembers = actionSet.Choice;
+                        var pageUrl = _config["BaseUrl"] + "/hello";
+                        var meetingId = turnContext.Activity.TeamsGetMeetingInfo()?.Id ?? throw new InvalidOperationException("This method is only valid within the scope of a MS Teams Meeting.");
+                        TargetedMeetingNotification notification = GetStageViewNotification(selectedMembers.Split(',').ToList(), pageUrl);
+
+                        await TeamsInfo.SendMeetingNotificationAsync(turnContext, notification, meetingId);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -181,6 +198,43 @@ namespace AppIconBadgingInMeetings
                     Surfaces = new List<Surface>()
                     {
                         new MeetingTabIconSurface()
+                    },
+                }
+            };
+
+            return notification;
+        },
+
+        /// <summary>
+        /// Send Stage View Notification to recipients
+        /// </summary>
+        /// <param name="recipients">List of members added to the conversation.</param>
+        /// <param name="pageUrl">page url that will be load in the notification.</param>
+        /// <returns>Target meeting notification object.</returns>
+        private TargetedMeetingNotification GetStageViewNotification(List<string> recipients, string pageUrl)
+        {
+            TargetedMeetingNotification notification = new TargetedMeetingNotification()
+            {
+                Type = "TargetedMeetingNotification",
+                Value = new TargetedMeetingNotificationValue()
+                {
+                    Recipients = recipients,
+                    Surfaces = new List<Surface>()
+                    {
+                        new MeetingStageSurface<TaskModuleContinueResponse>()
+                        {
+                            ContentType = ContentType.Task,
+                            Content = new TaskModuleContinueResponse
+                            {
+                                Value = new TaskModuleTaskInfo()
+                                {
+                                    Title = "Stage View Notification",
+                                    Height =300,
+                                    Width = 400,
+                                    Url = pageUrl
+                                }
+                            }
+                        }
                     },
                 }
             };

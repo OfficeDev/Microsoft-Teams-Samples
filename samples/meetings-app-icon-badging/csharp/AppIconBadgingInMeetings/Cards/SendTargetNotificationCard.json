@@ -1,7 +1,7 @@
 {
   "type": "AdaptiveCard",
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.2",
+  "version": "1.3",
   "body": [
     {
       "type": "TextBlock",
@@ -26,10 +26,18 @@
   "actions": [
     {
       "type": "Action.Submit",
-      "id": "submit",
-      "title": "AppIconBadging",
+      "id": "submit1",
+      "title": "App Icon Badging",
       "data": {
         "Type": "AppIconBadging"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "id": "submit2",
+      "title": "Stage View",
+      "data": {
+        "Type": "SatgeViewNotification"
       }
     }
   ]
