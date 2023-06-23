@@ -203,7 +203,7 @@ namespace AppIconBadgingInMeetings
             };
 
             return notification;
-        },
+        }
 
         /// <summary>
         /// Send Stage View Notification to recipients
