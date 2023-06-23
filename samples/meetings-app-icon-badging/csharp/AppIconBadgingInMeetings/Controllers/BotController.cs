@@ -25,7 +25,7 @@ namespace InMeetingNotificationsBot
             Bot = bot;
         }
 
-        [HttpPost, HttpGet]
+        [HttpPost]
         public async Task PostAsync()
         {
             // Delegate the processing of the HTTP POST to the adapter.
