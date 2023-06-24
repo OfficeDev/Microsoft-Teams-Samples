@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab,mail,outlook"
+        "value": "tab,outlook mail"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-mail/ts/Images/tab-mail.gif",
-        "alt": "Solution UX shows how to compose Mail in Outlook using Personal Tab app."
+        "alt": "Solution UX shows how to compose mail in Outlook using personal tab app."
       }
     ],
     "authors": [
