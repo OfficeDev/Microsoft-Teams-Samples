@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-app-icon-badging-csharp",
     "source": "officeDev",
     "title": "Meetings-App-Icon-Badging",
-    "shortDescription": "Illustrates how to implement app icon badging \"in-meeting notification\" using \"targeted meeting notification\" API",
+    "shortDescription": "This sample shows how to implement app icon badging \"in-meeting notification\" using \"targeted meeting notification\" API",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-app-icon-badging/csharp",
     "longDescription": [
-      "Illustrate how to send app icon badging using \"targeted in-meeting notifications \" API"
+      "This sample shows how to send app icon badging using \"targeted in-meeting notifications \" API"
     ],
     "creationDateTime": "2023-06-12",
     "updateDateTime": "2023-06-12",
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "bot,tab"
       }
     ],
     "thumbnails": [

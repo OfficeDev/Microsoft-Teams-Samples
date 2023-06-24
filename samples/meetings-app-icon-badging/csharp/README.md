@@ -60,7 +60,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples\meetings-app-icon-badging\csharp` folder
+  - Navigate to `samples/meetings-app-icon-badging/csharp` folder
   - Select `AppIconBadgingInMeetings.sln` file
 
 
@@ -113,4 +113,4 @@ Type `SendNotification` in bot chat to send In-Meeting notifications.
 
 - [Grant RSC permissions to your app](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent#install-your-app-in-a-team-or-chat)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-icon-badging/csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-app-icon-badging/csharp" />
