@@ -126,3 +126,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   
  
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-app-installation-lifecycle-csharp" />

@@ -95,3 +95,6 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-quickstart-js" />

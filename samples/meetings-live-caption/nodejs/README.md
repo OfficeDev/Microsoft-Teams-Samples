@@ -86,3 +86,6 @@ Copy the CART link it will used while configuring tab for meeting.
 4. After clicking on `Submit` button, you will see the caption in the meeting.
 ![Caption in meeting](Images/LiveCaption.png)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-nodejs" />

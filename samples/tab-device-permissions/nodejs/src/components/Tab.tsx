@@ -66,22 +66,20 @@ const Tab = () => {
         // />
         }
       </div>
-      {
-      //   <div>
-      //    <Segment
-      //     /* Component to scan barcode */
-      //     children={<ScanBarCode />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to capture video */
-      //     children={<CaptureVideo />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to show selected people */
-      //     children={<PeoplePicker />} writeKey={''}
-      //   />
-      // </div>
-      }
+      <div>
+         <Segment
+          /* Component to scan barcode */
+          children={<ScanBarCode />} writeKey={''}
+        />
+         <Segment
+          /* Component to capture video */
+          children={<CaptureVideo />} writeKey={''}
+        />
+         <Segment
+          /* Component to show selected people */
+          children={<PeoplePicker />} writeKey={''}
+        />
+      </div>
       </>
     }
     {isWeb &&
@@ -106,17 +104,14 @@ const Tab = () => {
         /* Component to Get notification in browser */
         children={<GetNotificationWeb />} writeKey={''}
       />
-     
-      
       </div>
       <div className='Grid'>
       <Segment 
         /* Component to capture video in browser */
-        children={<CaptureVideoWeb />} writeKey={''}
+        children={<CaptureVideoDesktop />} writeKey={''}
        
       />
       </div>
-      
       </>
     }
   </div>

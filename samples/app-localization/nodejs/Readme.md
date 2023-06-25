@@ -160,3 +160,6 @@ To change the language in Microsoft Teams, please click your profile picture at 
 ## Further reading
 
 - [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-localization-nodejs" />

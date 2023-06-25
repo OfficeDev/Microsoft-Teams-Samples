@@ -137,3 +137,6 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Further Reading.
 [Tab-channel-group-SSO-QuickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-sso-quickstart-csharp_dotnetcore" />

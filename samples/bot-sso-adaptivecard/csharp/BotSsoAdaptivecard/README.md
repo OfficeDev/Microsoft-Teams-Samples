@@ -182,3 +182,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard" />

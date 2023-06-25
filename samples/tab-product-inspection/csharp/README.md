@@ -135,3 +135,6 @@ Interact with Product Inspection by clicking on the App icon.
 [Product inspection](https://learn.microsoft.com/power-apps/teams/inspection)
 
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-product-inspection-csharp" />

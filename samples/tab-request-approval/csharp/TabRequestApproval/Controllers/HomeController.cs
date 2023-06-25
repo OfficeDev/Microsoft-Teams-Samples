@@ -112,7 +112,6 @@ namespace TabRequestApproval.Controllers
                 }
 
                 var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-                var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
                 var user = await graphClient.Users[taskInfo.managerName]
                           .Request()
                           .GetAsync();
@@ -147,7 +146,7 @@ namespace TabRequestApproval.Controllers
                     }
                 };
             
-                await graphClientApp.Users[user.Id].Teamwork
+                await graphClient.Users[user.Id].Teamwork
                     .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
                     .Request()
                     .PostAsync();

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which arfe available in bot framework v4
+description: This sample demonstrates use of various meeting events which are available in bot framework v4
 products:
 - office-teams
 - office
@@ -123,3 +123,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-events-csharp" />

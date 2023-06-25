@@ -119,3 +119,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Further Reading.
 [Tab-graph-toolkit](https://learn.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Chtml)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-graph-toolkit-nodejs" />

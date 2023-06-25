@@ -105,3 +105,6 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 
 ## Further Reading
 [Configure and add multiple actions in NavBar](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/personal-apps?view=msteams-client-js-1.12.1#configure-and-add-multiple-actions-in-navbar)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-navbar-menu-ts" />

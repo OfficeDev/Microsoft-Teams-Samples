@@ -92,6 +92,26 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Result](Images/result.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**After opening Outlook web, click the "New mail" button.**
+
+![Open New Mail](Images/OpenNewMail.png)
+
+**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+
+![OpenAppIcon](Images/OpenAppIcon.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![Search in Extension](Images/SearchInExtension.PNG)
+
+![Output in Outlook](Images/OutputInOutlook.PNG)
+
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
 

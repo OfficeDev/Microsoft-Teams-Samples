@@ -20,10 +20,7 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
 ```
-The latest update on how device permissions are handled in the browser is currently available in public developer preview
-only.
-
-This update will be generally available (GA) by February 01, 2022
+Currently only capture image is supported in Teams Desktop client.
 ```
 
  ## Included Features
@@ -98,17 +95,17 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ![Install App](Images/install.png)
 
-**Device permission tab:** 
+**Device permission tab: (Web View)** 
 
-![desktopHome](Images/desktopHome.png)
+![desktopHome](Images/tab-web.png)
+
+**Device permission tab: (Desktop View)** 
+
+![desktopHome](Images/tab-desktop.png)
 
 **Tab device permission:** 
 
 ![deviceBrowser](Images/deviceBrowser.PNG)
-
-**Device permission tab:** 
-
-![devicePermBrowser](Images/devicePermBrowser.PNG)
 
 ## Running the sample - Mobile View
 
@@ -124,7 +121,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ![mainTab3](Images/mainTab3.png)
 
-**Device permission tab:** 
+**Device permission popup:** 
 
 ![allowPermission](Images/allowPermission.png)
 
@@ -147,3 +144,5 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 - [Teams tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 - [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-device-permissions-nodejs" />

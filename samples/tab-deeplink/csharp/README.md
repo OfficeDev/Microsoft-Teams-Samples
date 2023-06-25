@@ -174,7 +174,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 	- **Meeting Scope Interactions:**
 
-		**Adding bot UI:**
+		**Adding tab UI:**
    
 		![Meeting-AddBot ](DeepLinkBot/images/01_meeting_appopen.png)
 
@@ -182,13 +182,23 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    
 		![Meeting-AddedBot ](DeepLinkBot/images/02_Meeting_selectapp.png)
 
-		**App setup for the specific chat sser:**
+		**App setup for the specific chat user:**
    
 		![Meeting-AddedBot ](DeepLinkBot/images/03_meeting_configuretab.png)
 
 		**Show user instraction tab:**
    
 		![Meeting-WelcomeCard-Interaction ](DeepLinkBot/images/04_Meeting_defaultpage.png)
+
+	 - **Deeplink to meeting side panel:**
+
+	   `@mention` bot in meeting chat to get adaptive card.
+
+	   ![Bot-Adaptive-Card](DeepLinkBot/images/BotAdaptiveCard.png)
+
+	   Click on `Side Panel Deeplink` which will redirect to meeting side panel.
+
+	   ![Meeting-Sidepanel](DeepLinkBot/images/Sidepanel.PNG)
 
 	- **Tab Interactions:**
    
@@ -262,3 +272,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-csharp" />

@@ -186,3 +186,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Further Reading
 [tab-personal-quickstart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
 [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-personal-quickstart-js" />

@@ -83,3 +83,6 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
   [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-channel-lifecycle-nodejs" />

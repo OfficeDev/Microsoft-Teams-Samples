@@ -151,6 +151,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![AdaptiveCard](BotAllCards/Images/AdaptiveCard.png)
 
+Add media url from sharepoint or onedrive to the text input to get media loaded to the adaptive card. For more information refer [media elements in card.](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop) 
+
+![AdaptiveCardMedia](BotAllCards/Images/AdaptiveCardMedia.png)
+
+![AdaptiveCardMedia2](BotAllCards/Images/AdaptiveCardMedia2.png)
+
 **Hero Card:**
 
 ![HeroCard](BotAllCards/Images/HeroCard.png)
@@ -187,3 +193,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Types of cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#receipt-card)
 - [Create bot connection](https://learn.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-all-cards-csharp" />

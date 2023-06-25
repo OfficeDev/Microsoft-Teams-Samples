@@ -31,7 +31,6 @@ function shareAppContentToStage() {
 }
     microsoftTeams.app.initialize();
      microsoftTeams.app.getContext().then((context) => {
-        
          if (context.page.frameContext === "sidePanel") {
             document.getElementById("side-panel-content").style.display = "block";
 
