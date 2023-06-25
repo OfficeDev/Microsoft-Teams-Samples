@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Microsoft Teams Hello World sample app written in ES6 with Bot Framework v4 SDK",
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --exec babel-node --inspect=9239 --signal SIGINT src/app.js",
     "start": "nodemon --exec babel-node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
