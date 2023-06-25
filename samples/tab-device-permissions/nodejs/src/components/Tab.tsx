@@ -42,6 +42,7 @@ const Tab = () => {
       display: 'table', 
     },
   } as const;
+  
   return (
    
     <div style={rowq.rowd} >
@@ -53,8 +54,9 @@ const Tab = () => {
           children={<CaptureImage />} writeKey={''}
         />
         {
-        // Currently Teams js library support these API's in mobile client only. Commenting the code for refernece
-        //   <Segment
+        // Commenting out this code as these API's are currently having bug.
+
+        // <Segment
         //   /* Component to Get/Show geo-Location */
         //   children={<GetGeoLocation />} writeKey={''}
         // />
@@ -63,24 +65,21 @@ const Tab = () => {
         //   children={<CaptureAudio />} writeKey={''}
         // />
         }
-        
       </div>
-      {
-      // <div>
-      //    <Segment
-      //     /* Component to scan barcode */
-      //     children={<ScanBarCode />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to capture video */
-      //     children={<CaptureVideo />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to show selected people */
-      //     children={<PeoplePicker />} writeKey={''}
-      //   />
-      // </div>
-      }
+      <div>
+         <Segment
+          /* Component to scan barcode */
+          children={<ScanBarCode />} writeKey={''}
+        />
+         <Segment
+          /* Component to capture video */
+          children={<CaptureVideo />} writeKey={''}
+        />
+         <Segment
+          /* Component to show selected people */
+          children={<PeoplePicker />} writeKey={''}
+        />
+      </div>
       </>
     }
     {isWeb &&
@@ -109,7 +108,8 @@ const Tab = () => {
       <div className='Grid'>
       <Segment 
         /* Component to capture video in browser */
-        children={<CaptureVideoWeb />} writeKey={''}
+        children={<CaptureVideoDesktop />} writeKey={''}
+       
       />
       </div>
       </>
