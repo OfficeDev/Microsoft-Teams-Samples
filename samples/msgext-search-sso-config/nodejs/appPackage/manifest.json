@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
   "manifestVersion": "1.15",
   "version": "1.0.2",
-  "id": "{TODO: MicrosoftAppId}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.samples.msgExt",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "{TODO: MicrosoftAppId}",
+      "botId": "${{BOT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -94,9 +94,9 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com",
+              "*.botframework.com"
             ],
-	   "supportsAnonymizedPayloads": true
+            "supportsAnonymizedPayloads": true
           }
         }
       ]
@@ -108,10 +108,11 @@
   "validDomains": [
     "*.githubusercontent.com",
     "*.ngrok-free.app",
-    "*.botframework.com"
+    "*.botframework.com",
+    "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{TODO: MicrosoftAppId}",
-    "resource": "api://botid-{TODO: MicrosoftAppId}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
   }
 }
