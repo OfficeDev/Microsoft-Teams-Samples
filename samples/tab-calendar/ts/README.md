@@ -157,7 +157,8 @@ Interact with the user's calendar, including opening calendar items and composin
 ![ClickView](Images/ClickView.png)
 
 ## Further Reading.
-[TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#calendar)
-[Calendar Module](https://learn.microsoft.com/en-us/javascript/api/@microsoft/teams-js/calendar?view=msteams-client-js-latest)
+  
+- [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#calendar)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-calendar-ts" />
