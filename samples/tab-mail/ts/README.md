@@ -87,6 +87,8 @@ This sample app shows how to compose mail in Outlook using personal tab app.
 ![Compose Mail](Images/4.compose_mail.png)
 
 ## Further Reading.
-[TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#mail)
+  
+- [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#mail)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-mail-ts" />
