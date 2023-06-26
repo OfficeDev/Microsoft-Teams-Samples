@@ -202,7 +202,7 @@
                  title: $('#title').val(),
                  description: $('#description').val(),
                  userName: username,
-                managerName: person[0].userPrincipalName,
+                managerName: person[0].scoredEmailAddresses[0].address,
                  access_token: token,
              };
 
