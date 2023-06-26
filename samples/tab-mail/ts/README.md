@@ -91,5 +91,4 @@ This sample app shows how to compose mail in Outlook using personal tab app.
 
 [M365 mail support](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#mail)
 
-
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-mail-ts" />
