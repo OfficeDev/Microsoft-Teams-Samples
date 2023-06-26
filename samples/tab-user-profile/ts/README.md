@@ -94,8 +94,7 @@ Opens a profile card at a specified position to show profile information about a
 
 
 ## Further Reading.
-- [tab-user-profile](https://learn.microsoft.com/javascript/api/@microsoft/teams-js/profile?view=msteams-client-js-latest)
-- [Profile capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#profile)
+- [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#profile)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-user-profile-ts" />
