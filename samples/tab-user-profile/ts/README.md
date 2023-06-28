@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample tab-user-profile app.
+description: This sample app shows how to open a user profile information card in Outlook using personal tab app.
 products:
 - office-teams
 - office
