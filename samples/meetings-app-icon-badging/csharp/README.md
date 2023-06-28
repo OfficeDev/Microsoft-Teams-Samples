@@ -96,7 +96,7 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 **Setup Configurable Tab:**
 
-![Setup Tab](AppIconBadgingInMeetings/Images/2.meeting_config_tab.png)
+![Setup Tab](AppIconBadgingInMeetings/Images/2.Meeting_Config_Tab.png)
 
 **Interacting with the app in Teams Meeting**
 
