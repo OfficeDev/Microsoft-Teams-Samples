@@ -88,7 +88,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
 
 Message the Bot by @ mentioning to interact with meetings notifications.
 1. You will see an Adaptive Card.
-1. Select option and click on AppIconbadging button
+1. Select option and click on `App Icon badging` button
 1. You can send notification with red color icon on your configurable tab.
 
 
