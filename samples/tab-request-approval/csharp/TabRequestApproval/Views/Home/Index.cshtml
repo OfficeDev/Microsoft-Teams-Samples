@@ -93,7 +93,7 @@
                         <td style="margin-left:1px"> ${i+1} </td>
                         <td style="margin-left:1px"> ${userList[i].title} </td>
                         <td style="margin-left:1px"> ${userList[i].description} </td>
-                        <td style="margin-left:1px"> ${userList[i].managerName} </td>
+                        <td style="margin-left:1px"> ${userList[i].personaName} </td>
                         <td style="margin-left:1px"> ${userList[i].status} </td>
                         </tr>`
                       );
@@ -108,7 +108,7 @@
          
              if (list != undefined && list.length > 0) {
                  list.map(item => {
-                     if (item.status == "Pending" && item.managerName == username) {
+                    if (item.status == "Pending" && item.personaName == username) {
                          managerList.push(item);
                      }
                  })
@@ -202,7 +202,7 @@
                  title: $('#title').val(),
                  description: $('#description').val(),
                  userName: username,
-                managerName: person[0].scoredEmailAddresses[0].address,
+                 personaName: person[0].scoredEmailAddresses[0].address,
                  access_token: token,
              };
 

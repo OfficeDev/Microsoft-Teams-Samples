@@ -112,7 +112,7 @@ namespace TabRequestApproval.Controllers
                 }
 
                 var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-                var user = await graphClient.Users[taskInfo.managerName]
+                var user = await graphClient.Users[taskInfo.personaName]
                           .Request()
                           .GetAsync();
 
