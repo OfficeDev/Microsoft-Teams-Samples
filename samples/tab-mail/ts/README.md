@@ -70,19 +70,19 @@ This sample app shows how to compose mail in Outlook using personal tab app.
 
 ## Running the sample
 
-**Install App:**
+**Add/upload the app in Microsoft Teams:**
 
 ![InstallApp](Images/1.add_app_teams.png)
 
-**App In Teams:**
+**App In Outlook:**
 
 ![Tab-Mail](Images/2.teams_mail_form.png)
 
-**App In Outlook**
+**App In Outlook with input values**
 
 ![OpenOutlook](Images/3.app_outlook.png)
 
-**Compose Mail From Tab**
+**Compose Mail From Outlook Personal Tab**
 
 ![Compose Mail](Images/4.compose_mail.png)
 
