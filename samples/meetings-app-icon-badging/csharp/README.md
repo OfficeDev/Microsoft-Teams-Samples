@@ -88,7 +88,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
 
 Message the Bot by @ mentioning to interact with meetings notifications.
 1. You will see an Adaptive Card.
-1. Select option and click on AppIconbadging button
+1. Select option and click on `App Icon badging` button
 1. You can send notification with red color icon on your configurable tab.
 
 
@@ -96,7 +96,7 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 **Setup Configurable Tab:**
 
-![Setup Tab](AppIconBadgingInMeetings/Images/2.meeting_config_tab.png)
+![Setup Tab](AppIconBadgingInMeetings/Images/2.Meeting_Config_Tab.png)
 
 **Interacting with the app in Teams Meeting**
 
@@ -109,7 +109,7 @@ Type `SendNotification` in bot chat to send In-Meeting notifications.
 
 ## Further reading
 
-- [Enable app icon badging for your Teams app](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/app-icon-badging-for-your-app?branch=pr-en-us-8495)
+- [Enable app icon badging for your Teams app](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/app-icon-badging-for-your-app?branch=pr-en-us-8495)
 
 - [Grant RSC permissions to your app](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent#install-your-app-in-a-team-or-chat)
 
