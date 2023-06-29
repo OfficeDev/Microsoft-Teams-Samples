@@ -8,8 +8,8 @@ microsoftTeams.app.initialize().then(() => {
 
         //config your appid and baseurl
         var config = {
-            MicrosoftAppID: "16773ed2-6655-4874-9589-7e6a2b62745f",
-            BaseUrl: "https://2b2h3495-3978.asse.devtunnels.ms"
+            MicrosoftAppID: "<<Microsoft-App-ID>>",
+            BaseUrl: "<<BaseUrl>>"
         }
 
         var taskInfo_1 = {
