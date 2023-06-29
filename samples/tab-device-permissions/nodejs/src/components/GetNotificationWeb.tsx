@@ -44,7 +44,7 @@ const GetNotificationWeb = () => {
         <>
             {/* Card for sending notification */}
             <Card>
-            <Text weight='bold' as="h1">Notifications (Web only)</Text>                
+            <Text weight='bold' as="h1">Notifications</Text>                
                 <CardBody>
                     <div className='flex columngap'>
                         <Text>Checks for permission before getting notification.</Text>

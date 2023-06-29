@@ -125,6 +125,17 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 ![Meeting stage view](Images/MeetingStageView.png)
 
+6. **Deeplink to meeting side panel:**
+
+`@mention` bot in meeting chat to get an adaptive card.
+
+![Bot-Adaptive-Card](DeepLinkBot/images/BotAdaptiveCard.png)
+
+Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
+**Note:** When the deeplink is opened outside meeting, it will redirect to meeting details tab.
+![Meeting-Sidepanel](DeepLinkBot/images/Sidepanel.PNG)
+
+
 **Tab interaction:**
    
 **Deeplink to Audio Call:**
