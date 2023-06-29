@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-calendar-ts
 ---
 
-# Interact with Calendar in Outlook from Personal Tab
+# Interact with Calendar in Outlook from Personal Tab App
 
-Interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook.
+Interact with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook.
 
  ## Included Features
 * Tabs
