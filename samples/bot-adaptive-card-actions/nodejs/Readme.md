@@ -34,19 +34,18 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 -  Microsoft Teams is installed and you have an account (not a guest account)
 -  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 18.12.1)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+-  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
 ## Setup
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-    
+      > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
 2. Setup for Bot
   - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK  
 Run ngrok - point to port 3978
