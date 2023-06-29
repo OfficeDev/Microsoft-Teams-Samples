@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to interact with calendar in Outlook from personal tab.
+description: This sample shows how to interact with calendar in Outlook from personal tab app.
 products:
 - office-teams
 - office
