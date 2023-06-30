@@ -67,3 +67,10 @@ server.post('/api/messages', async (req, res) => {
 server.get('/*', restify.plugins.serveStatic({
     directory: './pages'
 }));
+
+server.get('/AuthTab', (req, res,next) => {
+    var responseMessageData = {
+        MicrosoftAppId: process.env.MicrosoftAppId
+    }
+    res.send(responseMessageData);
+  });

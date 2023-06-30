@@ -1,15 +1,15 @@
 //- Copyright (c) Microsoft Corporation.
 //- All rights reserved.
-
 // microsoftTeams app Initilize
-microsoftTeams.app.initialize().then(() => {
+ microsoftTeams.app.initialize().then(() => {
     var taskModuleButtons = document.getElementsByClassName("taskModuleButton");
     if (taskModuleButtons.length > 0) {
+        fetch(`${window.location.origin}/AuthTab`).then(response => response.json()).then(data => {
 
         //config your appid and baseurl
         var config = {
-            MicrosoftAppID: "<<Microsoft-App-ID>>",
-            BaseUrl: "<<BaseUrl>>"
+            MicrosoftAppID: data.MicrosoftAppId,
+            BaseUrl: `${window.location.origin}`
         }
 
         var taskInfo_1 = {
@@ -221,7 +221,7 @@ microsoftTeams.app.initialize().then(() => {
                         };
 
                         //Allows app to open a url based dialog.
-                        microsoftTeams.dialog.open(taskInfo_1, submitHandler);
+                        microsoftTeams.tasks.startTask(taskInfo_1, submitHandler);
                         break;
 
                     case TaskModuleIds.AdaptiveCard1:
@@ -249,5 +249,6 @@ microsoftTeams.app.initialize().then(() => {
                 console.log("URL: " + taskInfo_1.url);
             });
         }
+    });
     }
 });
