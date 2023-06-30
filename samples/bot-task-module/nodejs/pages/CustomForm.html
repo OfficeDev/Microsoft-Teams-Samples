@@ -27,7 +27,7 @@
     <script>
         microsoftTeams.initialize();
         function validateForm() {
-            fetch(`${window.location.origin}/AuthTab`).then(response => response.json()).then(data => {
+            fetch(`${window.location.origin}/getAppConfig`).then(response => response.json()).then(data => {
             var customerInfo = {
                 name: document.forms["customerForm"]["name"].value,
                 email: document.forms["customerForm"]["email"].value,

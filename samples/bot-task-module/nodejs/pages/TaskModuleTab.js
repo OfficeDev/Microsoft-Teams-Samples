@@ -4,7 +4,7 @@
  microsoftTeams.app.initialize().then(() => {
     var taskModuleButtons = document.getElementsByClassName("taskModuleButton");
     if (taskModuleButtons.length > 0) {
-        fetch(`${window.location.origin}/AuthTab`).then(response => response.json()).then(data => {
+        fetch(`${window.location.origin}/getAppConfig`).then(response => response.json()).then(data => {
 
         //config your appid and baseurl
         var config = {

@@ -68,7 +68,7 @@ server.get('/*', restify.plugins.serveStatic({
     directory: './pages'
 }));
 
-server.get('/AuthTab', (req, res,next) => {
+server.get('/getAppConfig', (req, res,next) => {
     var responseMessageData = {
         MicrosoftAppId: process.env.MicrosoftAppId
     }
