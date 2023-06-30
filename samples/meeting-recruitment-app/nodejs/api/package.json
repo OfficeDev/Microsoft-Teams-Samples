@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "watch": "nodemon server/index.js",
+    "build": "node build.js",
     "lint": "eslint .",
     "server": "npm install && node server/index.js",
     "manifest": "del \"appPackage\\appPackage.zip\" 2> nul && powershell Compress-Archive appPackage/* appPackage/appPackage.zip"
@@ -37,6 +38,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "esbuild": "^0.18.1"
   }
 }

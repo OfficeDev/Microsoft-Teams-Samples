@@ -515,6 +515,10 @@ jobs:
               name: 'app-sso'
               version: '14.x'
 
+            - project_path: 'samples/app-sso/nodejs/client'
+              name: 'app-sso-client'
+              version: '14.x'
+
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
               version: '14.x'
@@ -611,8 +615,16 @@ jobs:
               name: 'meetings-sidepanel'
               version: '14.x'
 
+            - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
+              name: 'meetings-sidepanel-clientapp'
+              version: '14.x'
+
             - project_path: 'samples/meetings-stage-view/nodejs'
               name: 'meetings-stage-view'
+              version: '14.x'
+            
+            - project_path: 'samples/meetings-stage-view/nodejs/ClientApp'
+              name: 'meetings-stage-view-clientapp'
               version: '14.x'
 
             - project_path: 'samples/meetings-token-app/nodejs'
@@ -621,6 +633,10 @@ jobs:
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
+              version: '14.x'
+
+            - project_path: 'samples/meeting-recruitment-app/nodejs/ClientApp'
+              name: 'meeting-recruitment-app-clientapp'
               version: '14.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
@@ -699,7 +715,15 @@ jobs:
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
+            - project_path: 'samples/tab-channel-group-sso-quickstart/js/api-server'
+              name: 'tab-channel-group-sso-quickstart-api-server'
+              version: '14.x'
+
             - project_path: 'samples/tab-channel-group-sso-quickstart/ts'
+              name: 'tab-channel-group-sso-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-sso-quickstart/ts/api-server'
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
@@ -715,8 +739,16 @@ jobs:
               name: 'tab-personal-sso-quickstart'
               version: '18.x'
 
+            - project_path: 'samples/tab-personal-sso-quickstart/js/api-server'
+              name: 'tab-personal-sso-quickstart-api-server'
+              version: '18.x'
+
             - project_path: 'samples/tab-personal-sso-quickstart/ts'
               name: 'tab-personal-sso-quickstart'
+              version: '18.x'
+
+            - project_path: 'samples/tab-personal-sso-quickstart/ts/api-server'
+              name: 'tab-personal-sso-quickstart-api-server'
               version: '18.x'
 
             - project_path: 'samples/tab-graph-toolkit/nodejs'
@@ -779,16 +811,32 @@ jobs:
               name: 'graph-bulk-meetings'
               version: '16.x' 
 
+            - project_path: 'samples/graph-bulk-meetings/nodejs/client'
+              name: 'graph-bulk-meetings-client'
+              version: '16.x' 
+
             - project_path: 'samples/graph-change-notification-team-channel/nodejs'
               name: 'graph-change-notification-team-channel'
+              version: '16.x' 
+
+            - project_path: 'samples/graph-change-notification-team-channel/nodejs/client'
+              name: 'graph-change-notification-team-channel-client'
               version: '16.x' 
 
             - project_path: 'samples/graph-pinned-messages/nodejs'
               name: 'graph-pinned-messages'
               version: '16.x'
 
+            - project_path: 'samples/graph-pinned-messages/nodejs/ClientApp'
+              name: 'graph-pinned-messages-clientapp'
+              version: '16.x'
+
             - project_path: 'samples/graph-teams-tag/nodejs'
               name: 'graph-teams-tag'
+              version: '16.x'
+
+            - project_path: 'samples/graph-teams-tag/nodejs/client'
+              name: 'graph-teams-tag-client'
               version: '16.x'
 
             - project_path: 'samples/incoming-webhook/nodejs/ClientApp'
@@ -888,7 +936,11 @@ jobs:
               version: '18.x'
 
             - project_path: 'samples/app-anonymous-users/nodejs/ClientApp'
-              name: 'app-anonymous-users'
+              name: 'app-anonymous-users-clientapp'
+              version: '18.x'
+
+            - project_path: 'samples/app-anonymous-users/nodejs/api'
+              name: 'app-anonymous-users-api'
               version: '18.x'
 
             - project_path: 'samples/bot-sso-adaptivecard/nodejs'
@@ -919,7 +971,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
+          npm run build
 
   build-java-samples:
     runs-on: windows-latest
