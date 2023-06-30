@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "128714c5-c4a1-44be-8530-3a00c6a9ba42",
   "packageName": "com.microsoft.teams.typesofcards",
   "developer": {
     "name": "Microsoft",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Types Of Cards",
+    "short": "MediaElements_Nodejs",
     "full": "Types Of Cards"
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "<<APP-ID>>",
       "scopes": [
         "personal"
       ],
@@ -33,6 +33,6 @@
     }
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "<<valid-Domains>>"
   ]
 }

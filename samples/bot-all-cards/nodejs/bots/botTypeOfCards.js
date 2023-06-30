@@ -8,11 +8,15 @@ const Office365ConnectorCard = require('../resources/o365ConnectorCard.json');
 const ThumbnailCard = require('../resources/thumbnailCard.json');
 const ListCard = require('../resources/listCard.json');
 const CollectionCard = require('../resources/collectionsCard.json');
+const AdaptiveCardMediaElements = require('../resources/adaptiveCardMedia.json');
+var ACData = require("adaptivecards-templating");
 const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 class BotTypeOfCards extends ActivityHandler {
+
+    url = "";
     constructor() {
         super();
 
@@ -28,7 +32,7 @@ class BotTypeOfCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn','OAuth', 'ThumbnailCard'];
+            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn', 'OAuth', 'ThumbnailCard', 'MediaElements'];
 
             // If the `text` is in the Array, a valid card was selected and send agreement.
             if (suggestedCards.includes(text)) {
@@ -64,6 +68,10 @@ class BotTypeOfCards extends ActivityHandler {
 
                     case "CollectionCard":
                         await context.sendActivity({ attachments: [this.sendCollectionCard()] });
+                        break;
+
+                    case "MediaElements":
+                        await context.sendActivity({ attachments: [this.sendAdaptiveCardWithMediaElements()] });
                         break;
                 }
 
@@ -160,6 +168,13 @@ class BotTypeOfCards extends ActivityHandler {
     }
 
     /**
+    * Sends a Media Elements Card 
+    */
+    sendAdaptiveCardWithMediaElements() {
+        return CardFactory.adaptiveCard(AdaptiveCardMediaElements);
+    }
+
+    /**
    * Send suggested Cards to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
@@ -199,7 +214,18 @@ class BotTypeOfCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'ThumbnailCard',
                 value: 'ThumbnailCard'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'MediaElements',
+                value: 'MediaElements'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'MediaElements',
+                value: 'MediaElements'
             }
+
         ];
 
         // Returns a simple text message.
@@ -207,6 +233,35 @@ class BotTypeOfCards extends ActivityHandler {
         reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
 
         await turnContext.sendActivity(reply);
+    }
+
+    async onInvokeActivity(context) {
+        if (context._activity.name == "adaptiveCard/action") {
+            this.url = context._activity.value.action.data.url;
+
+            var template = new ACData.Template(AdaptiveCardMediaElements);
+
+            var payloadData=
+            {
+                mediaUrl: url,
+            };
+
+            let payload = new Template(payloadData);
+
+            let expandedTemplate = payload.expand(template);
+
+            console.log("--DynamicCardJson--->", expandedTemplate);
+
+            var adaptiveCardResponse = {
+                StatusCode: 200,
+                Type: "application/vnd.microsoft.card.adaptive",
+                Value: cardJsonString
+            }
+
+            await ActivityHandler.createInvokeResponse({
+                adaptiveCardResponse
+            });
+        }
     }
 }
 
