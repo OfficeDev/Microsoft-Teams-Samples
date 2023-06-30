@@ -46,7 +46,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new SuggestedActionsBot();
+const bot = new AdaptiveCardActionsBot();
 
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
