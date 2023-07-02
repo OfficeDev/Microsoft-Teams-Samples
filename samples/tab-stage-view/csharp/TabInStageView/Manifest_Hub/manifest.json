@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
   "version": "1.0.1",
-  "id": "{{Microsoft-App-Id or Bot-id}}",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
@@ -39,9 +39,42 @@
     }
   ],
   "accentColor": "#60A18E",
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [ "commandBox" ],
+          "description": "Test command to run query",
+          "title": "Search Command",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com",
+              "*.ngrok-free.app"
+            ]
+          }
+        }
+      ]
+    }
+  ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{{domain-name}}",
+    "*.ngrok-free.app",
     "token.botframework.com"
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Following people are in meeting. Please select members to send notification.",
+      "wrap": true
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "Choice",
+      "style": "expanded",
+      "isMultiSelect": true,
+      "wrap": true,
+      "choices": [
+        {
+          "$data": "${ParticipantDetails}",
+          "title": "${Name}",
+          "value": "${Id}"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "submit1",
+      "title": "App Icon Badging",
+      "data": {
+        "Type": "AppIconBadging"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "id": "submit2",
+      "title": "Stage View",
+      "data": {
+        "Type": "SatgeViewNotification"
+      }
+    }
+  ]
+}

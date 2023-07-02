@@ -29,7 +29,7 @@ const CaptureVideoWeb = () => {
         <>
             {/* Card for showing Video */}
             <Card>
-            <Text weight='bold' as="h1">Capture Video (Web only) </Text>                
+            <Text weight='bold' as="h1">Capture Video</Text>                
                 <CardBody>
                     <div className='flex columngap'>
                         <Text>Checks for permission to use media input</Text>

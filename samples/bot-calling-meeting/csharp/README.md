@@ -21,7 +21,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 ![bot-calling-meeting ](Images/bot-calling-meeting.gif)
 ## Frameworks
 
-![drop](https://img.shields.io/badge/.NET&nbsp;Core-3.1-green.svg)
+![drop](https://img.shields.io/badge/.NET&nbsp;Core-6.0-green.svg)
 ![drop](https://img.shields.io/badge/Bot&nbsp;Framework-3.0-green.svg)
 
 ## Prerequisites
@@ -138,44 +138,44 @@ For example `https://contoso.com/teamsapp/callback`
 1. __*Update appsettings.json for calling Bot*__
 ````
 {
-  "MicrosoftAppId": "",
-  "MicrosoftAppPassword": "",
-  "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
+  "MicrosoftAppId": "<<microsoft-app-id>>",
+  "MicrosoftAppPassword": "<<microsoft-app-client-secret>>",
   "AzureAd": {
     "Instance": "https://login.microsoftonline.com/",
-    "TenantId": "",
-    "ClientId": "",
-    "ClientSecret": ""
+    "TenantId": "<<tenant-Id>>",
+    "ClientId": "<<microsoft-app-id>>",
+    "ClientSecret": "<<microsoft-app-client-secret>>"
   },
   "Bot": {
-    "AppId": "",
-    "AppSecret": "",
+    "AppId": "<<microsoft-app-id>>",
+    "AppSecret": "<<microsoft-app-client-secret>>",
     "PlaceCallEndpointUrl": "https://graph.microsoft.com/v1.0",
-    "BotBaseUrl": "https://{yourngrok}.ngrok-free.app",
+    "BotBaseUrl": "https://<<subdomain>>.ngrok-free.app",
     "GraphApiResourceUrl": "https://graph.microsoft.com",
-    "MicrosoftLoginUrl": "https://login.microsoftonline.com/"
+    "MicrosoftLoginUrl": "https://login.microsoftonline.com/",
+    "RecordingDownloadDirectory": "temp",
+    "CatalogAppId": "<<microsoft-app-id>>"
   },
-  "UserId": "",
-  "Users": [
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    }
-  ]
+  "CognitiveServices": {
+    "Enabled": false,
+    "SpeechKey": "<<cognitive-speech-key>>",
+    "SpeechRegion": "<<cognitive-speech-region>>",
+    "SpeechRecognitionLanguage": "<<cognitive-speech-language>>" 
+  },
+  "Users": {
+    "UserIdWithAssignedOnlineMeetingPolicy": "<<object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted>>"
+  }
 }
 ````
-- Update `microsoft-app-id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
+- Update `microsoft-app-id`, `tenant-Id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
 - Update `BotBaseUrl` with your `ngrok` URL.
 - Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
-- Update `UserId` and `UserName` of the users from where you want to initiate the call and to whom you want to redirect or transfer the call
+
+**Create a Cognitive Services resource using the Azure portal:**
+ [Create Cognitive Services resource ](https://learn.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Canomaly-detector%2Clanguage-service%2Ccomputer-vision%2Cwindows)
+- Update `cognitive-speech-key` replace `your-key `with one of the keys for your resource.
+- Update `cognitive-speech-key` replace `your-region `with one of the regions for your resource.
+- Update `cognitive-speech-language` replace `your-language `with one of the language for your resource.
 
 2. __*This step is specific to Teams*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -188,24 +188,83 @@ For example `https://contoso.com/teamsapp/callback`
 
  ## Running the sample
 
-* Install 'Calling Bot' in Teams.
-![CallingBotInstallation ](Images/CallingBotInstallation.PNG)
+* Install app in personal teams.
+![CallingBotInstallation ](Images/BotCallingMeeting1.png)
 
-* Bot will send adaptive card as mentioned below.
-![WelcomeCard ](Images/WelcomeCard.PNG)
+* Select welcome card. 
+![BotCallingMeeting2 ](Images/BotCallingMeeting2.png)
 
-* User can ask Bot to create a call and can join that call.
-![CreateCall ](Images/CreateCall.PNG)
-![CallPlaced ](Images/CallPlaced.PNG)
-![CallJoined ](Images/CallJoined.PNG)
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting3 ](Images/BotCallingMeeting3.png)
 
-* User can ask Bot to transfer the call.
- ![TransferCall ](Images/TransferCall.PNG)
+* Select 'Create Call'. 
+![BotCallingMeeting4 ](Images/BotCallingMeeting4.png)
 
-* User can ask Bot to schedule a meeting and invite the participants
+* 'Calling Bot' selected user. 
+![BotCallingMeeting5 ](Images/BotCallingMeeting5.png)
 
-   ![JoinScheduledCall ](Images/JoinScheduledCall.PNG)
-   ![InviteParticipant ](Images/InviteParticipant.PNG)
+* User join call. 
+![BotCallingMeeting55 ](Images/BotCallingMeeting55.png)
+
+* Successfully call . 
+![BotCallingMeeting6 ](Images/BotCallingMeeting6.png)
+
+* Control this meeting. 
+![BotCallingMeeting7 ](Images/BotCallingMeeting7.png)
+
+* Create Incident. 
+![BotCallingMeeting8 ](Images/BotCallingMeeting8.png)
+
+* Transfer call. 
+![BotCallingMeeting9 ](Images/BotCallingMeeting9.png)
+
+* 'Calling Bot' selected user. 
+![BotCallingMeeting10 ](Images/BotCallingMeeting10.png)
+
+* Play record prompt. 
+![BotCallingMeeting11 ](Images/BotCallingMeeting11.png)
+
+* Hang up. 
+![BotCallingMeeting12 ](Images/BotCallingMeeting12.png)
+
+* Install app in team.
+![BotCallingMeeting13 ](Images/BotCallingMeeting13.png)
+
+* Add calling bot to a team. 
+![BotCallingMeeting14 ](Images/BotCallingMeeting14.png)
+
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting16 ](Images/BotCallingMeeting16.png)
+
+* Select 'Create Call'. 
+![BotCallingMeeting17 ](Images/BotCallingMeeting17.png)
+
+* User join call. 
+![BotCallingMeeting18 ](Images/BotCallingMeeting18.png)
+
+* Control this meeting. 
+![BotCallingMeeting19 ](Images/BotCallingMeeting19.png)
+
+* Install app in meeting.
+![BotCallingMeeting20 ](Images/BotCallingMeeting20.png)
+
+* Add calling bot to a meeting. 
+![BotCallingMeeting21 ](Images/BotCallingMeeting21.png)
+
+* Bot will send adaptive card as mentioned below. 
+![BotCallingMeeting22 ](Images/BotCallingMeeting22.png)
+
+* Select 'Create Call'. 
+![BotCallingMeeting23 ](Images/BotCallingMeeting23.png)
+
+* User join call.  
+![BotCallingMeeting24 ](Images/BotCallingMeeting24.png)
+
+* Control this meeting. 
+![BotCallingMeeting25 ](Images/BotCallingMeeting25.png)
+
+* Join scheduled meeting. 
+![BotCallingMeeting26 ](Images/BotCallingMeeting26.png)
 
 ## Deploy the bot to Azure
 
@@ -218,6 +277,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Register a calling Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/registering-calling-bot#create-new-bot-or-add-calling-capabilities)
 - [Cloud Communications API](https://docs.microsoft.com/en-us/graph/api/resources/call?view=graph-rest-1.0)
-
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-calling-meeting-csharp" />
+- [Recognize and convert speech to text](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/get-started-speech-to-text?pivots=programming-language-csharp&tabs=windows%2Cterminal)

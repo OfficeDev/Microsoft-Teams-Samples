@@ -16,7 +16,7 @@ namespace TabRequestApproval.Model
 
         public string userName { get; set; }
 
-        public string managerName { get; set; }
+        public string personaName { get; set; }
 
         public string status { get; set; }
 
