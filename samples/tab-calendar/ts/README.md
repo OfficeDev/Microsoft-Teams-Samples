@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to interact with calendar in Outlook from personal tab.
+description: This sample shows how to interact with calendar in Outlook from personal tab app.
 products:
 - office-teams
 - office
@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-calendar-ts
 ---
 
-# Interact with Calendar in Outlook from Personal Tab
+# Interact with Calendar in Outlook from Personal Tab App
 
-Interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook.
+Interact with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook.
 
  ## Included Features
 * Tabs

@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-calendar-ts",
     "source": "officeDev",
-    "title": "Interact with the calendar in Outlook from personal tab.",
-    "shortDescription": "This sample shows how to interact with calendar in Outlook from personal tab",
+    "title": "Interact with the calendar in Outlook from personal tab app.",
+    "shortDescription": "This sample shows how to interact with calendar in Outlook from personal tab app",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-calendar/ts",
     "longDescription": [
-      "This sample app shows how to interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook."
+      "This sample app shows how to interact with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook."
     ],
     "creationDateTime": "2023-06-19",
     "updateDateTime": "2023-06-22",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-calendar/ts/Images/TabPersonalQuickstartGif.gif",
-        "alt": "Solution UX showing how to interact with calendar in Outlook from personal tab."
+        "alt": "Solution UX showing how to interact with calendar in Outlook from personal tab app."
       }
     ],
     "authors": [

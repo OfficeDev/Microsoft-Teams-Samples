@@ -19,8 +19,8 @@
     "full": "Tab Calendar"
   },
   "description": {
-    "short": "Interact with calendar in Outlook from personal tab",
-    "full": "Interact with the user's calendar, including opening calendar items and composing meetings from personal tab in Outlook."
+    "short": "Interact with calendar in Outlook from personal tab app",
+    "full": "Interact with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
