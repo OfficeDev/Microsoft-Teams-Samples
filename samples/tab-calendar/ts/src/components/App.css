@@ -28,8 +28,8 @@
   color: #61dafb;
 }
 
-button {
-  background-color: #0d64ab;
+.btnSubmit {
+  background-color: #405cf5;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -37,23 +37,20 @@ button {
   cursor: pointer;
 }
 
+.btnprofile{
+  margin-left: 4px;
+}
+
 .mainDiv{
   width: 40%;
   float: left;
-  margin-top: -6%;
+  margin-top: -6.0%;
 }
 .lblText{
   padding: 8px;
 }
-.txtValue{
-  width: 99%;
-}
-.dateTimeValue{
-  width: 100%;
-}
 
 #calendar {
-  border-collapse: collapse;
   width: 60%;
 }
 
@@ -75,6 +72,48 @@ button {
   float: left;
   margin-top: -4.3%;
 }
+  .inputValue {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+   
+  .profileInput{
+    width: 27%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .txtBody {
+    width: 100%;
+    height: 140px;
+    padding: 12px 20px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .moduleDiv{
+    margin-top: -4%;
+  }
+  
+  .lblContent {
+    font-weight: bold;
+  }
+  .note{
+    color: #0d79cb;
+  }
 
 @keyframes App-logo-spin {
   from {

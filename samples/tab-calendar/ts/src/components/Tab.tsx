@@ -213,7 +213,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
 
   openCalendar(itemIds: any) {
     var OpenCalendarItemParams = {
-      itemId: itemIds,
+      itemId: itemIds
     };
     if (microsoftTeams.calendar.isSupported()) {
       microsoftTeams.calendar.openCalendarItem(OpenCalendarItemParams);
@@ -264,7 +264,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
       <div>
         <div>
           <div className="mainDiv">
-            <h2>Add Details for Compose Meeting:</h2>
+            <h3>Add Details for Compose Meeting:</h3>
             <form name="ComposeMeetingForm">
               <table>
                 <tr>
@@ -274,7 +274,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                   <td>
                     <input
                       type="text"
-                      className="txtValue"
+                      className="inputValue"
                       placeholder="Attendees"
                       required
                       value={(this.state.attendees || "").toString()}
@@ -289,7 +289,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                   <td>
                     <input
                       type="datetime-local"
-                      className="dateTimeValue"
+                      className="inputValue"
                       required
                       value={(this.state.stateDatetime || "")
                         .toString()
@@ -305,7 +305,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                   <td>
                     <input
                       type="datetime-local"
-                      className="dateTimeValue"
+                      className="inputValue"
                       required
                       value={(this.state.endDatetime || "")
                         .toString()
@@ -321,7 +321,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                   <td>
                     <input
                       type="text"
-                      className="txtValue"
+                      className="inputValue"
                       placeholder="Subject"
                       value={(this.state.subject || "").toString()}
                       onChange={this.subjectHandleChange.bind(this)}
@@ -336,7 +336,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                   <td>
                     <textarea
                       required
-                      className="dateTimeValue"
+                      className="inputValue"
                       placeholder="Type your meeting content..."
                       rows={4}
                       cols={40}
@@ -348,7 +348,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                 <tr>
                   <td></td>
                   <td>
-                    <button onClick={this.composeMeeting.bind(this)}>
+                    <button className="btnSubmit" onClick={this.composeMeeting.bind(this)}>
                       Compose Meeting!
                     </button>
                   </td>
@@ -357,7 +357,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
             </form>
           </div>
           <div>
-            <h2 className="mainDivOpen">Opens a calendar item:</h2>
+            <h3 className="mainDivOpen">Opens a calendar item:</h3>
             <table id="calendar">
               <tr>
                 <th>Subject</th>
@@ -372,7 +372,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
                         {value.subject.substring(0, 30)}
                       </td>
                       <td>
-                        <button onClick={() => this.openCalendar(value.id)}>
+                        <button className="btnSubmit" onClick={() => this.openCalendar(value.id)}>
                           View!
                         </button>
                       </td>

@@ -8,6 +8,8 @@ import Tab from "./Tab";
 import ConsentPopup from "./ConsentPopup";
 import ClosePopup from "./ClosePopup";
 import TabCalendar from "./TabCalendarMain";
+import ProfileTab from "./profileTab";
+import MailTab from "./MailTab";
 
 /**
  * The main app which handles the initialization and routing
@@ -23,9 +25,11 @@ function App() {
     <BrowserRouter>
     <Routes>       
       <Route path="/" element={<TabCalendar />} />
-      <Route path="/tab" element={<Tab />}/>
+      <Route path="/CalendarTab" element={<Tab />}/>
       <Route  path="/auth-start" element={<ConsentPopup/>} />
       <Route  path="/auth-end" element={<ClosePopup/>} />
+      <Route path="/ProfileTab" element={<ProfileTab />}/>
+      <Route path="/MailTab" element={<MailTab />}/>
       </Routes> 
     </BrowserRouter>
   );
