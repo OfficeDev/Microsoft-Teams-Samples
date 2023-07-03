@@ -6,7 +6,7 @@ version: 1.0.0
 provision:
   - uses: aadApp/create # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
     with:
-      name: bot-all-cards-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
+      name: bot-message-reaction-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
       signInAudience: "AzureADandPersonalMicrosoftAccount" # Multitenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
@@ -21,7 +21,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: bot-all-cards-${{TEAMSFX_ENV}}
+      name: bot-message-reaction-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
