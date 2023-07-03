@@ -15,10 +15,11 @@ function Tab() {
   const [emailCcError, setEmailCcError] = useState(false);
   const [inputSubError, setInputSubError] = useState(false);
   const [inputBodyError, setInputBodyError] = useState(false);
+  const [platformIsSupported, setplatformIsSupported] = useState(false);
 
-    useEffect(() => {
-        app.initialize();
-    });
+  useEffect(() => {
+    app.initialize();
+  });
 
   // Set value for To Recepients.
   const functionRecepients = (e: any) => {
@@ -109,7 +110,13 @@ function Tab() {
       type: mail.ComposeMailType.New
     }
 
-    mail.composeMail(ComposeNewParams)
+    // Check platform is supported or not
+    if (mail.isSupported()) {
+      mail.composeMail(ComposeNewParams);
+    }
+    else {
+      setplatformIsSupported(true);
+    }
   }
 
   return (
@@ -137,6 +144,7 @@ function Tab() {
         <br></br>
 
         <input type="submit" value="Compose Mail" />
+        {platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry !! Platform is not supported.</span> : ""}
       </form>
       <p><b>Note :</b> Please use semi-colon <b>" ; "</b> only for multiple email address</p>
     </div>
