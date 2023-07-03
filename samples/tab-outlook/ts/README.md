@@ -156,7 +156,7 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 
 ![ClickView](Images/ClickView.png)
 
-**App In Outlook::**
+**App In Outlook:**
 
 ![AppInOutlook](Images/6.png)
 
@@ -176,7 +176,7 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 
 ![EnterEmail](Images/10.png)
 
-**Profile UI:**
+**User Profile Details:**
 
 ![ClickView](Images/11.png)
 
