@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
+  "version": "1.0.0",
+  "id": "6b77cf34-44c1-4141-8b7d-469bdbab00bb",
+  "packageName": "com.teams.sample.teamsconversationbot",
+  "developer": {
+    "name": "Tag Mention Bot",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "name": {
+    "short": "Tag Mention",
+    "full": "Tag Mention Bot"
+  },
+  "description": {
+    "short": "Tag Mention",
+    "full": "Tag Mention Bot"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "6b77cf34-44c1-4141-8b7d-469bdbab00bb",
+      "scopes": [
+        "personal",
+        "groupchat",
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "groupchat",
+            "team"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [ "*.ngrok-free.app" ]
+}
