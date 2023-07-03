@@ -144,7 +144,7 @@ function MailTab() {
         <br></br>
 
         <input className="btnSubmit" type="submit" value="Compose Mail" />
-        {platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry !! Platform is not supported.</span> : ""}
+        {platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
       </form>
       <p className="note"><b>Note :</b> Please use semi-colon <b>" ; "</b> only for multiple email address</p>
     </div>

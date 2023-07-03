@@ -898,6 +898,14 @@ jobs:
             - project_path: 'samples/meetings-app-icon-badging/nodejs'
               name: 'meetings-app-icon-badging'
               version: '18.x'
+            
+            - project_path: 'samples/tab-outlook/ts/api-server'
+              name: 'tab-outlook-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/tab-outlook/ts'
+              name: 'tab-outlook'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs

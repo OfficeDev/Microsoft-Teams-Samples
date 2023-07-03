@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to interact with calendar in Outlook from personal tab app.
+description: This sample shows how to interact with Calendar, Mail, Profile in Outlook from personal tabs app.
 products:
 - office-teams
 - office
@@ -10,16 +10,16 @@ languages:
 extensions:
  contentType: samples
  createdDate: "20/06/2023 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-calendar-ts
+urlFragment: officedev-microsoft-teams-samples-tab-outlook-ts
 ---
 
-# Interact with Calendar in Outlook from Personal Tab App
+# Interact with Calendar, Mail, Profile in Outlook from Personal Tabs App
 
-Interact with the user's calendar, including opening calendar items and composing meetings from personal tab app in Outlook.
+Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlook.
 
  ## Included Features
 * Tabs
-* Outlook Calendar
+* Outlook Calendar, Mail, Profile
 
 ## Interaction with app
 
@@ -90,17 +90,17 @@ Interact with the user's calendar, including opening calendar items and composin
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-3. Open .env file from this path folder `samples/tab-calendar/ts/api-server` and update 
+3. Open .env file from this path folder `samples/tab-outlook/ts/api-server` and update 
    - `{{CLIENT_ID}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{CLIENT_SECRET}}` - Generated from Step 1.14, also referred to as Client secret
 
-4. Open .env file from this path folder `samples/tab-calendar/ts` and update 
+4. Open .env file from this path folder `samples/tab-outlook/ts` and update 
    - `{{REACT_APP_AZURE_APP_REGISTRATION_ID}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{REACT_APP_BASE_URL}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
      
 5. We have two different solutions to run, so follow below steps:
  
-- In a terminal, navigate to `samples/tab-calendar/ts/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+- In a terminal, navigate to `samples/tab-outlook/ts/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 
     ```bash
     npm install
@@ -111,7 +111,7 @@ Interact with the user's calendar, including opening calendar items and composin
     ```
 - The server will start running on 5000 port
 
-- In a different terminal, navigate to `samples/tab-calendar/ts` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+- In a different terminal, navigate to `samples/tab-outlook/ts` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
     ```bash
     npm install
@@ -132,33 +132,57 @@ Interact with the user's calendar, including opening calendar items and composin
 
 ## Running the sample
 
-**Install App:**
+**Add/upload the app in Microsoft Teams:**
 
-![InstallApp](Images/Install.png)
+![InstallApp](Images/1.png)
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps:**
 
-![AppOutlook](Images/AppOutlook.png)
+![AppOutlook](Images/2.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the desktop:**
 
-![HomeScreen](Images/HomeScreen.png)
+![HomeScreen](Images/3.png)
 
 **Add Details for Compose Meeting:**
 
-![EnterComposeMeeting](Images/EnterComposeMeeting.png)
+![EnterComposeMeeting](Images/4.png)
 
 **Click ComposeMeeting:**
 
-![ClickComposeMeeting](Images/ClickComposeMeeting.png)
+![ClickComposeMeeting](Images/5.png)
 
 **Click View:**
 
 ![ClickView](Images/ClickView.png)
 
+**App In Outlook::**
+
+![AppInOutlook](Images/6.png)
+
+**App In Outlook with input values:**
+
+![AppInOutlookwithinputvalues](Images/7.png)
+
+**Compose Mail From Outlook Personal Tab:**
+
+![ComposeMail](Images/8.png)
+
+**Profile UI:**
+
+![ProfileUI](Images/9.png)
+
+**Enter any Email to get a profile card at a specified position to show profile information about that persona:**
+
+![EnterEmail](Images/10.png)
+
+**Profile UI:**
+
+![ClickView](Images/11.png)
+
 ## Further Reading.
   
-- [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365#calendar)
+- [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-calendar-ts" />
