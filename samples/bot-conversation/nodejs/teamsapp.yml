@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/1.0.0/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: 1.0.0
+
+environmentFolderPath: ./env
+projectId: 6de929b1-f6b8-4222-9921-6d07757c5eb4
