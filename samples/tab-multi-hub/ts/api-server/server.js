@@ -14,7 +14,7 @@ let handleQueryError = function (err) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
         code: 400,
-        message: 'Stupid network Error'
+        message: 'Bad Request'
     }));
 };
 

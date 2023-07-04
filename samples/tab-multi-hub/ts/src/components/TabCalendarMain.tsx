@@ -10,7 +10,7 @@ class TabCalendar extends React.Component {
     render() {
       return (
         <div>
-          <h2>Welcome to interacting with the user's calendar, mail, profile from personal tabs app in Outlook.</h2>
+          <h2>Welcome to interacting with calendar, mail, profile, geolocation from personal tabs app.</h2>
         </div>
       );
     }

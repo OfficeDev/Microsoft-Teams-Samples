@@ -61,10 +61,13 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
       * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
           * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
   11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
-         * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
-         * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
-         * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
-         * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)  
+         * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams desktop, mobile)
+         * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web)
+         * `4765445b-32c6-49b0-83e6-1d93765276ca` (Microsoft 365 web)
+         * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Microsoft 365 desktop)  
+         * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Microsoft 365 mobile)  
+         * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)  
+         * `27922004-5251-4030-b22d-91ecd9a37ea4` (Outlook mobile)  
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
@@ -251,4 +254,4 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
 - [TeamsJS capability support across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/teamsjs-support-m365)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-calendar-ts" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-multi-hub-ts" />

@@ -12,11 +12,13 @@ function GeolocationTab() {
   useEffect(() => {
     app.initialize()
   })
+
   const getGeolocation = async () => {
     try
     {
       if (geoLocation.isSupported()) {
         const hasPerms = await geoLocation.hasPermission();
+
         if(!hasPerms)
         {
            hasConsent =  await geoLocation.requestPermission();
@@ -24,6 +26,7 @@ function GeolocationTab() {
         else{
           hasConsent = true
         }
+        
         if(hasConsent)
         {
           const location = await geoLocation.getCurrentLocation();
@@ -39,6 +42,7 @@ function GeolocationTab() {
       console.log(`GeoLocation error: ${e}`);
     }
   }
+
   return (
     <div className="moduleDiv">
       <h3>Get Your Geo Location:</h3>

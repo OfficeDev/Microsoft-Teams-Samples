@@ -29,6 +29,7 @@ function MailTab() {
 
     // checking valid email from the list 
     toEmailList.map(e => {
+      
       if (validator.isEmail(e)) {
         return;
       }

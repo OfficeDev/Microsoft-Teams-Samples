@@ -88,6 +88,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   // Exchange the SSO access token for a Graph access token
   // Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
+    
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
     
@@ -223,6 +224,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
       this.setState({ platformIsSupported: true });
     }
   }
+  
   composeMeeting() {
     if (microsoftTeams.calendar.isSupported()) {
     var isValidation = false;
