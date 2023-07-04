@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-outlook-ts
 
 # Interact with Calendar, Mail, Profile in Outlook from Personal Tabs App
 
-Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlook.
+Interact with the user's calendar, mail, profile from personal tabs app in Outlook.
 
  ## Included Features
 * Tabs

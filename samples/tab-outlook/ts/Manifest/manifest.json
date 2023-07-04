@@ -3,7 +3,7 @@
   "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.teams.tabcalendar",
+  "packageName": "com.teams.taboutlook",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",

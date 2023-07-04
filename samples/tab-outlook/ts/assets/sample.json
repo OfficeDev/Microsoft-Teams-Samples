@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-calendar-ts",
+    "name": "officedev-microsoft-teams-samples-tab-outlook-ts",
     "source": "officeDev",
     "title": "Interact with the calendar, mail, profile in Outlook from personal tabs app.",
     "shortDescription": "This sample shows how to interact with calendar, mail, profile in Outlook from personal tabs app",
