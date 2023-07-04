@@ -21,13 +21,13 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
 * Tabs
 * Outlook Calendar, Mail, Profile, geolocation
 
-## Interaction with app - Desktop Outlook
+## Interaction with app - Desktop
 
 ![Tab Personal QuickstartGif](Images/TabOutlookGif.gif)
 
-## Interaction with app - Mobile Outlook
+## Interaction with app - Mobile
 
-![Tab Personal QuickstartGif](Images/mobile/TabOutlookMobileGif.gif)
+![Tab Personal QuickstartGif](Images/mobile/TabOutlookMobilesGif.gif)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
@@ -134,7 +134,7 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
     **Zip** up the contents of the `Manifest/` folder to create a `manifest.zip` or `Manifest_Hub/` folder to create a `manifest_Hub.zip`
     **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Running the sample  - Desktop Outlook
+## Running the sample  - Desktop
 
 **Add/upload the app in Microsoft Teams:**
 
@@ -204,47 +204,47 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
-## Running the sample  - Mobile Outlook
+## Running the sample  - Mobile
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps:**
 
-![InstallApp](Images/mobile/M0.png)
+![InstallApp](Images/mobile/Mobile0.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the desktop and add details for Compose Meeting:**
 
-![M1](Images/mobile/M1.png)
+![M1](Images/mobile/Mobile1.png)
 
 **Click ComposeMeeting:**
 
-![M2](Images/mobile/M2.png)
+![M2](Images/mobile/Mobile2.png)
 
 **Calendar Tab UI:**
 
-![M3](Images/mobile/M3.png)
+![M3](Images/mobile/Mobile3.png)
 
 **Email Tab UI:**
 
-![M4](Images/mobile/M4.png)
+![M4](Images/mobile/Mobile4.png)
 
 **Compose Mail From Outlook Personal Tab:**
 
-![M5](Images/mobile/M5.png)
+![M5](Images/mobile/Mobile5.png)
 
 **Profile Module:**
 
-![M6](Images/mobile/M6.png)
+![M6](Images/mobile/Mobile6.png)
 
 **This app is currently not supported on this platform:**
 
-![M6](Images/mobile/M7.png)
+![M6](Images/mobile/Mobile7.png)
 
 **Select geo location tab:**
 
-![M6](Images/mobile/M8.png)
+![M6](Images/mobile/Mobile8.png)
 
 **Click the button to get your current geolocation:**
 
-![M6](Images/mobile/M9.png)
+![M6](Images/mobile/Mobile9.png)
 
 ## Further Reading.
   
