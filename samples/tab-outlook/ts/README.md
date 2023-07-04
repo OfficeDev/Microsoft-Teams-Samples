@@ -23,11 +23,11 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 
 ## Interaction with app - Desktop Outlook
 
-![Tab Personal QuickstartGif](Images/TabcalendarGif.gif)
+![Tab Personal QuickstartGif](Images/TabOutlookGif.gif)
 
 ## Interaction with app - Mobile Outlook
 
-![Tab Personal QuickstartGif](Images/TabcalendarGif.gif)
+![Tab Personal QuickstartGif](Images/TabOutlookMobileGif.gif)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
@@ -134,7 +134,7 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
     **Zip** up the contents of the `Manifest/` folder to create a `manifest.zip` or `Manifest_Hub/` folder to create a `manifest_Hub.zip`
     **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Running the sample
+## Running the sample  - Desktop Outlook
 
 **Add/upload the app in Microsoft Teams:**
 
@@ -183,6 +183,41 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 **User Profile Details:**
 
 ![ClickView](Images/11.png)
+
+
+## Running the sample  - Mobile Outlook
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps:**
+
+![InstallApp](Images/mobile/M0.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the desktop and add details for Compose Meeting:**
+
+![M1](Images/mobile/M1.png)
+
+**Click ComposeMeeting:**
+
+![M2](Images/mobile/M2.png)
+
+**Calendar Tab UI:**
+
+![M3](Images/mobile/M3.png)
+
+**Email Tab UI:**
+
+![M4](Images/mobile/M4.png)
+
+**Compose Mail From Outlook Personal Tab:**
+
+![M5](Images/mobile/M5.png)
+
+**Profile Module:**
+
+![M6](Images/mobile/M6.png)
+
+**This app is currently not supported on this platform:**
+
+![M6](Images/mobile/M7.png)
 
 ## Further Reading.
   
