@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.sample.teamsconversationbot",
   "developer": {
     "name": "teamsConversationBot",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "groupchat",
@@ -65,6 +65,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-   "*.ngrok-free.app"
+   "*.ngrok-free.app",
+   "${{BOT_DOMAIN}}"
   ]
 }
