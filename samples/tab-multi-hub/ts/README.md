@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-multi-hub-ts
 ---
 
-# Interact with Calendar, Mail, Profile, geolocation in Outlook from Personal Tabs App
+# Interact with Calendar, Mail, Profile, geolocation from Personal Tabs App
 
 Interact with the user's calendar, mail, profile, geolocation from personal tabs app.
 
@@ -184,6 +184,25 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
 
 ![ClickView](Images/11.png)
 
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps:**
+
+![EnterEmail](Images/14.png)
+
+**Select geo location tab:**
+
+![EnterEmail](Images/12.png)
+
+**Click the button to get your current geolocation:**
+
+![EnterEmail](Images/13.png)
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Running the sample  - Mobile Outlook
 
@@ -218,6 +237,14 @@ Interact with the user's calendar, mail, profile, geolocation from personal tabs
 **This app is currently not supported on this platform:**
 
 ![M6](Images/mobile/M7.png)
+
+**Select geo location tab:**
+
+![M6](Images/mobile/M8.png)
+
+**Click the button to get your current geolocation:**
+
+![M6](Images/mobile/M9.png)
 
 ## Further Reading.
   
