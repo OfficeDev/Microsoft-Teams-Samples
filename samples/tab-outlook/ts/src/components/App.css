@@ -13,6 +13,15 @@
   }
 }
 
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -42,12 +51,8 @@
 }
 
 .mainDiv{
-  width: 40%;
   float: left;
   margin-top: -6.0%;
-}
-.lblText{
-  padding: 8px;
 }
 
 #calendar {
@@ -72,54 +77,70 @@
   float: left;
   margin-top: -4.3%;
 }
-  .inputValue {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 4px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
+.inputValue {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
    
-  .profileInput{
-    width: 27%;
-    padding: 12px 20px;
-    margin: 4px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.txtBody {
+  width: 100%;
+  height: 140px;
+  padding: 12px 20px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
   
-  .txtBody {
-    width: 100%;
-    height: 140px;
-    padding: 12px 20px;
-    margin: 4px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .moduleDiv{
-    margin-top: -4%;
-  }
-  
-  .lblContent {
-    font-weight: bold;
-  }
-  .note{
-    color: #0d79cb;
-  }
+.moduleDiv{
+  margin-top: -4%;
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.lblContent {
+  font-weight: bold;
+}
+.note{
+  color: #0d79cb;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+  .tblMain{
+    width: 100%;
   }
 }
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+  .tblMain{
+    width: 100%;
+  }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+  .tblMain{
+    width: 100%;
+  }
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+  .tblMain{
+    width: 60%;
+  }
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+  .tblMain{
+    width: 60%;
+  }
+}
+

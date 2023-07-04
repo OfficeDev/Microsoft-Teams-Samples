@@ -21,7 +21,11 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 * Tabs
 * Outlook Calendar, Mail, Profile
 
-## Interaction with app
+## Interaction with app - Desktop Outlook
+
+![Tab Personal QuickstartGif](Images/TabcalendarGif.gif)
+
+## Interaction with app - Mobile Outlook
 
 ![Tab Personal QuickstartGif](Images/TabcalendarGif.gif)
 

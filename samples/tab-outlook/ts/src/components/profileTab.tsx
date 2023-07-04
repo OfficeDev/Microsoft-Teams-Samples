@@ -9,6 +9,7 @@ import validator from 'validator';
 function ProfileTab() {
   const [selectedPeople, setSelectedPeople] = useState("");
   const [requiredValidation, setRequiredValidation] = useState(false);
+  const [platformIsSupported, setplatformIsSupported] = useState(false);
 
   useEffect(() => {
     app.initialize()
@@ -49,7 +50,7 @@ function ProfileTab() {
       profile.showProfile(ShowProfileRequest)
     }
     else {
-      alert("Profile is not Supported!!")
+      setplatformIsSupported(true);
     }
   }
 
@@ -59,9 +60,10 @@ function ProfileTab() {
       <br />
       <text>Enter E-mail address to get profile details</text>
       <br /><br />
-      <input className="profileInput" name="myInput" onChange={(e) => setPeople(e)} />
+      <input className="inputValue" name="myInput" onChange={(e) => setPeople(e)} />
       <button className="btnSubmit btnprofile" onClick={showProfile}>Show Profile</button><br />
       {requiredValidation ? <text style={{ color: "red" }}>Please enter a valid Email.</text> : <text></text>}
+      {platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
     </div>
   );
 }

@@ -25,6 +25,7 @@ interface ITabState {
   subject: string;
   content: string;
   allItems: IAllItemsDetail[];
+  platformIsSupported:boolean;
 }
 
 class Tab extends React.Component<ITabProps, ITabState> {
@@ -43,6 +44,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
       subject: "",
       content: "",
       allItems: [],
+      platformIsSupported:false
     };
 
     // Bind any functions that need to be passed as callbacks or used to React components
@@ -218,11 +220,11 @@ class Tab extends React.Component<ITabProps, ITabState> {
     if (microsoftTeams.calendar.isSupported()) {
       microsoftTeams.calendar.openCalendarItem(OpenCalendarItemParams);
     } else {
-      alert("Calendar is not supported!!!");
+      this.setState({ platformIsSupported: true });
     }
   }
-
   composeMeeting() {
+    if (microsoftTeams.calendar.isSupported()) {
     var isValidation = false;
     if (this.state.subject !== undefined &&
       this.state.subject !== null &&
@@ -242,7 +244,6 @@ class Tab extends React.Component<ITabProps, ITabState> {
       {
         isValidation = true;
       }
-
       if (isValidation == true) {
         var ComposeMeetingParams = {
           attendees: [this.state.attendees],
@@ -251,138 +252,123 @@ class Tab extends React.Component<ITabProps, ITabState> {
           subject: this.state.subject,
           content: this.state.content,
         };
-
-        if (microsoftTeams.calendar.isSupported()) {
           microsoftTeams.calendar.composeMeeting(ComposeMeetingParams);
-        } else {
-          alert("Calendar is not supported!!!");
-        }
       }
     }
+    else{
+      this.setState({ platformIsSupported: true });
+    }
+  }
   render() {
     return (
+      <div className="moduleDiv">
+      <h3>Compose Meeting Module</h3>
+      <form>
+        <table className="tblMain">
+          <tr>
+            <td>
+            <label className="lblText">Attendees:</label>
+              <input
+                type="text"
+                className="inputValue"
+                placeholder="Attendees"
+                required
+                value={(this.state.attendees || "").toString()}
+                onChange={this.attendeesHandleChange.bind(this)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <label className="lblText">Start Time:</label>
+              <input
+                type="datetime-local"
+                className="inputValue"
+                required
+                value={(this.state.stateDatetime || "")
+                  .toString()
+                  .substring(0, 16)}
+                onChange={this.startHandleChange.bind(this)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <label className="lblText">End Time:</label>
+              <input
+                type="datetime-local"
+                className="inputValue"
+                required
+                value={(this.state.endDatetime || "")
+                  .toString()
+                  .substring(0, 16)}
+                onChange={this.endHandleChange.bind(this)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <label className="lblText">Subject:</label>
+              <input
+                type="text"
+                className="inputValue"
+                placeholder="Subject"
+                value={(this.state.subject || "").toString()}
+                onChange={this.subjectHandleChange.bind(this)}
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <label className="lblText">Content:</label>
+              <textarea
+                required
+                className="inputValue"
+                placeholder="Type your meeting content..."
+                rows={4}
+                cols={40}
+                value={(this.state.content || "").toString()}
+                onChange={this.contentHandleChange.bind(this)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button className="btnSubmit" onClick={this.composeMeeting.bind(this)}>
+                Compose Meeting!
+              </button>
+            </td>
+          </tr>
+        </table>
+        </form>
       <div>
-        <div>
-          <div className="mainDiv">
-            <h3>Add Details for Compose Meeting:</h3>
-            <form name="ComposeMeetingForm">
-              <table>
+        <h3>Opens calendar Module</h3>
+        <table id="calendar">
+          <tr>
+            <th>Subject</th>
+            <th>Event</th>
+          </tr>
+          {this.state.allItems
+            .slice(0, 3)
+            .map((value: IAllItemsDetail, index) => {
+              return (
                 <tr>
-                  <td>
-                    <label className="lblText">Attendees:</label>
+                  <td className="tdSubject">
+                    {value.subject.substring(0, 30)}
                   </td>
                   <td>
-                    <input
-                      type="text"
-                      className="inputValue"
-                      placeholder="Attendees"
-                      required
-                      value={(this.state.attendees || "").toString()}
-                      onChange={this.attendeesHandleChange.bind(this)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className="lblText">Start Time:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="datetime-local"
-                      className="inputValue"
-                      required
-                      value={(this.state.stateDatetime || "")
-                        .toString()
-                        .substring(0, 16)}
-                      onChange={this.startHandleChange.bind(this)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className="lblText">End Time:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="datetime-local"
-                      className="inputValue"
-                      required
-                      value={(this.state.endDatetime || "")
-                        .toString()
-                        .substring(0, 16)}
-                      onChange={this.endHandleChange.bind(this)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className="lblText">Subject:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="inputValue"
-                      placeholder="Subject"
-                      value={(this.state.subject || "").toString()}
-                      onChange={this.subjectHandleChange.bind(this)}
-                      required
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label className="lblText">Content:</label>
-                  </td>
-                  <td>
-                    <textarea
-                      required
-                      className="inputValue"
-                      placeholder="Type your meeting content..."
-                      rows={4}
-                      cols={40}
-                      value={(this.state.content || "").toString()}
-                      onChange={this.contentHandleChange.bind(this)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>
-                    <button className="btnSubmit" onClick={this.composeMeeting.bind(this)}>
-                      Compose Meeting!
+                    <button className="btnSubmit" onClick={() => this.openCalendar(value.id)}>
+                      View!
                     </button>
                   </td>
                 </tr>
-              </table>
-            </form>
-          </div>
-          <div>
-            <h3 className="mainDivOpen">Opens a calendar item:</h3>
-            <table id="calendar">
-              <tr>
-                <th>Subject</th>
-                <th>Event</th>
-              </tr>
-              {this.state.allItems
-                .slice(0, 3)
-                .map((value: IAllItemsDetail, index) => {
-                  return (
-                    <tr>
-                      <td className="tdSubject">
-                        {value.subject.substring(0, 30)}
-                      </td>
-                      <td>
-                        <button className="btnSubmit" onClick={() => this.openCalendar(value.id)}>
-                          View!
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </table>
-          </div>
-        </div>
+              );
+            })}
+        </table>
+        {this.state.platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
       </div>
+    </div>
     );
   }
 }
