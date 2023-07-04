@@ -27,7 +27,7 @@ Interact with the user's calendar, mail, profilecfrom personal tabs app in Outlo
 
 ## Interaction with app - Mobile Outlook
 
-![Tab Personal QuickstartGif](Images/TabOutlookMobileGif.gif)
+![Tab Personal QuickstartGif](Images/mobile/TabOutlookMobileGif.gif)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
