@@ -19,8 +19,8 @@
     "full": "Tab Multi Hub"
   },
   "description": {
-    "short": "Interact with calendar, mail, profile, geoLoca in Outlook from personal tabs app",
-    "full": "Interact with the user's calendar, mail, profile, geoLocation from personal tabs app in Outlook."
+    "short": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
+    "full": "Interact with the user's calendar, mail, profile, geolocation from personal tabs app."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
@@ -52,10 +52,10 @@
       ]
     },
     {
-      "contentUrl": "https://{{domain-name}}/geoLocationTab",
-      "websiteUrl": "https://{{domain-name}}/geoLocationTab",
-      "entityId": "com.contoso.GeoLocation.help",
-      "name": "GeoLocation",
+      "contentUrl": "https://{{domain-name}}/GeolocationTab",
+      "websiteUrl": "https://{{domain-name}}/GeolocationTab",
+      "entityId": "com.contoso.geolocation.help",
+      "name": "geo location",
       "scopes": [
         "personal"
       ]

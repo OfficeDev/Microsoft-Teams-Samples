@@ -63,7 +63,7 @@ function ProfileTab() {
       <input className="inputValue" name="myInput" onChange={(e) => setPeople(e)} />
       <button className="btnSubmit btnprofile" onClick={showProfile}>Show Profile</button><br />
       {requiredValidation ? <text style={{ color: "red" }}>Please enter a valid Email.</text> : <text></text>}
-      {platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
+      {platformIsSupported ? <span style={{ color: 'red',marginLeft:2 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
     </div>
   );
 }

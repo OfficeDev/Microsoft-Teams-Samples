@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows how to interact with Calendar, Mail, Profile in Outlook from personal tabs app.
+description: This sample shows how to interact with Calendar, Mail, Profile, geolocation from personal tabs app.
 products:
 - office-teams
 - office
@@ -10,16 +10,16 @@ languages:
 extensions:
  contentType: samples
  createdDate: "20/06/2023 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-outlook-ts
+urlFragment: officedev-microsoft-teams-samples-tab-multi-hub-ts
 ---
 
-# Interact with Calendar, Mail, Profile in Outlook from Personal Tabs App
+# Interact with Calendar, Mail, Profile, geolocation in Outlook from Personal Tabs App
 
-Interact with the user's calendar, mail, profile from personal tabs app in Outlook.
+Interact with the user's calendar, mail, profile, geolocation from personal tabs app.
 
  ## Included Features
 * Tabs
-* Outlook Calendar, Mail, Profile
+* Outlook Calendar, Mail, Profile, geolocation
 
 ## Interaction with app - Desktop Outlook
 
@@ -94,17 +94,17 @@ Interact with the user's calendar, mail, profile from personal tabs app in Outlo
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-3. Open .env file from this path folder `samples/tab-outlook/ts/api-server` and update 
+3. Open .env file from this path folder `samples/tab-multi-hub/ts/api-server` and update 
    - `{{CLIENT_ID}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{CLIENT_SECRET}}` - Generated from Step 1.14, also referred to as Client secret
 
-4. Open .env file from this path folder `samples/tab-outlook/ts` and update 
+4. Open .env file from this path folder `samples/tab-multi-hub/ts` and update 
    - `{{REACT_APP_AZURE_APP_REGISTRATION_ID}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{REACT_APP_BASE_URL}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
      
 5. We have two different solutions to run, so follow below steps:
  
-- In a terminal, navigate to `samples/tab-outlook/ts/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+- In a terminal, navigate to `samples/tab-multi-hub/ts/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 
     ```bash
     npm install
@@ -115,7 +115,7 @@ Interact with the user's calendar, mail, profile from personal tabs app in Outlo
     ```
 - The server will start running on 5000 port
 
-- In a different terminal, navigate to `samples/tab-outlook/ts` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+- In a different terminal, navigate to `samples/tab-multi-hub/ts` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
     ```bash
     npm install

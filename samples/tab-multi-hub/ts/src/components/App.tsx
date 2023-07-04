@@ -10,6 +10,7 @@ import ClosePopup from "./ClosePopup";
 import TabCalendar from "./TabCalendarMain";
 import ProfileTab from "./profileTab";
 import MailTab from "./MailTab";
+import GeolocationTab from "./GeolocationTab";
 
 /**
  * The main app which handles the initialization and routing
@@ -30,6 +31,7 @@ function App() {
       <Route  path="/auth-end" element={<ClosePopup/>} />
       <Route path="/ProfileTab" element={<ProfileTab />}/>
       <Route path="/MailTab" element={<MailTab />}/>
+      <Route path="/GeolocationTab" element={<GeolocationTab />}/>
       </Routes> 
     </BrowserRouter>
   );

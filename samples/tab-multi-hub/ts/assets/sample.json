@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-outlook-ts",
+    "name": "officedev-microsoft-teams-samples-tab-multi-hub-ts",
     "source": "officeDev",
-    "title": "Interact with the calendar, mail, profile in Outlook from personal tabs app.",
-    "shortDescription": "This sample shows how to interact with calendar, mail, profile in Outlook from personal tabs app",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-outlook/ts",
+    "title": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
+    "shortDescription": "This sample shows how to interact with calendar, mail, profile, geolocation from personal tabs app.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-multi-hub/ts",
     "longDescription": [
-      "This sample app shows how to interact with the user's calendar, mail, profile from personal tabs app in Outlook."
+      "This sample app shows how to interact with the user's calendar, mail, profile, geolocation from personal tabs app."
     ],
     "creationDateTime": "2023-06-19",
-    "updateDateTime": "2023-07-03",
+    "updateDateTime": "2023-07-04",
     "products": [
       "Teams"
     ],
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab, calendar, mail, profile in outlook"
+        "value": "tab, calendar, mail, profile, geolocation from personal tabs app"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-outlook/ts/Images/TabPersonalQuickstartGif.gif",
-        "alt": "Solution UX showing how to interact with calendar, mail, profile in Outlook from personal tabs app."
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-multi-hub/ts/Images/TabPersonalQuickstartGif.gif",
+        "alt": "Solution UX showing how to interact with calendar, mail, profile, geolocation from personal tabs app."
       }
     ],
     "authors": [

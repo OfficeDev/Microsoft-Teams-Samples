@@ -366,7 +366,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
               );
             })}
         </table>
-        {this.state.platformIsSupported ? <span style={{ color: 'red',marginLeft:10 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
+        {this.state.platformIsSupported ? <span style={{ color: 'red',marginLeft:2 }}>Sorry, This app is currently not supported on this platform.</span> : ""}
       </div>
     </div>
     );
