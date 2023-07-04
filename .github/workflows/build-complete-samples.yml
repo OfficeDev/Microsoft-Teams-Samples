@@ -955,6 +955,14 @@ jobs:
               name: 'meetings-app-icon-badging'
               version: '18.x'
 
+            - project_path: 'samples/tab-multi-hub/ts/api-server'
+              name: 'tab-multi-hub-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/tab-multi-hub/ts'
+              name: 'tab-multi-hub'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
