@@ -19,6 +19,7 @@ class AdaptiveCardActionsBot extends ActivityHandler {
 
             if (context.activity.text != null) {
                 const text = context.activity.text;
+
                 if (text.includes("Card Actions")) {
                     const userCard = CardFactory.adaptiveCard(this.adaptiveCardActions());
                     await context.sendActivity({ attachments: [userCard] });
@@ -35,6 +36,7 @@ class AdaptiveCardActionsBot extends ActivityHandler {
                     if (validColors.includes(text)) {
                         await context.sendActivity(`I agree, ${text} is the best color.`);
                     }
+
                     await this.sendSuggestedActions(context);
                 }
                 else if (text.includes("ToggleVisibility")) {
