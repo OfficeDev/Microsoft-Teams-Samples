@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.teams.tabmultihub",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab Multi Hub",
+    "full": "Tab Multi Hub"
+  },
+  "description": {
+    "short": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
+    "full": "Interact with the user's calendar, mail, profile, geolocation from personal tabs app."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/CalendarTab",
+      "websiteUrl": "https://{{domain-name}}/CalendarTab",
+      "entityId": "com.contoso.Calendar.help",
+      "name": "Calendar",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://{{domain-name}}/MailTab",
+      "websiteUrl": "https://{{domain-name}}/MailTab",
+      "entityId": "com.contoso.Mail.help",
+      "name": "Mail",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://{{domain-name}}/ProfileTab",
+      "websiteUrl": "https://{{domain-name}}/ProfileTab",
+      "entityId": "com.contoso.Profile.help",
+      "name": "Profile",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://{{domain-name}}/GeolocationTab",
+      "websiteUrl": "https://{{domain-name}}/GeolocationTab",
+      "entityId": "com.contoso.geolocation.help",
+      "name": "geo location",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "devicePermissions": [
+    "geolocation"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+  }
+}

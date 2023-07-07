@@ -9,7 +9,7 @@
     <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
 </head>
 <body class="theme-light">
-    <div class="surface">
+    <div class="surface" style="height:max-content;">
         <div class="panel">
 
 <html>
@@ -27,12 +27,14 @@
     <script>
         microsoftTeams.initialize();
         function validateForm() {
+            fetch(`${window.location.origin}/getAppConfig`).then(response => response.json()).then(data => {
             var customerInfo = {
                 name: document.forms["customerForm"]["name"].value,
                 email: document.forms["customerForm"]["email"].value,
                 favoriteBook: document.forms["customerForm"]["favoriteBook"].value
             }
-            microsoftTeams.tasks.submitTask(customerInfo, "<<YOUR-MICROSOFT-APP-ID>>");
+            microsoftTeams.tasks.submitTask(customerInfo, data.MicrosoftAppId);
+        });
             return true;
         }
     </script>

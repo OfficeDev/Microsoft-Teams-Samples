@@ -1,0 +1,83 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.appiconbadging",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://microsoft.com/privacy",
+    "termsOfUseUrl": "https://microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meetings-App-Icon-Badging",
+    "full": "Show App Icon Badging In Teams Meetings"
+  },
+  "description": {
+    "short": "App Icon Badging In-Meeting Notification demo",
+    "full": "This sample app shows how to send app icon badging in Microsoft Teams meetings using targeted notifications API."
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{domain-name}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat"
+      ],
+      "context": [
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "SendNotification",
+              "description": "Sends app icon badging notification in Teams meetings."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingNotification.Send.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}

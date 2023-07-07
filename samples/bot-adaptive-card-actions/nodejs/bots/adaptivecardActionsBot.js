@@ -4,7 +4,7 @@
 const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const { ActionTypes } = require('botframework-schema');
 
-class SuggestedActionsBot extends ActivityHandler {
+class AdaptiveCardActionsBot extends ActivityHandler {
     constructor() {
         super();
 
@@ -219,4 +219,4 @@ class SuggestedActionsBot extends ActivityHandler {
     })
 }
 
-module.exports.SuggestedActionsBot = SuggestedActionsBot;
+module.exports.AdaptiveCardActionsBot = AdaptiveCardActionsBot;

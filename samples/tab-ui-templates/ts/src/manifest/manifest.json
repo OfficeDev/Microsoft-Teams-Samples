@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
-  "id": "{{GUID_ID}}",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "id": "${{TEAMS_APP_ID}}",
   "version": "1.0.0",
   "packageName": "com.teams.tabuitemplates",
   "developer": {
     "name": "microsoft",
-    "websiteUrl": "https://{{HOSTNAME}}",
-    "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
-    "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy.html",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/tou.html"
   },
   "name": {
     "short": "Tab UI Templates",
@@ -27,27 +27,27 @@
     {
       "entityId": "sample.app.welcome",
       "name": "Welcome",
-      "contentUrl": "https://{{HOSTNAME}}/welcome",
+      "contentUrl": "https://${{TAB_DOMAIN}}/welcome",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.dashboard",
       "name": "Dashboard",
-      "contentUrl": "https://{{HOSTNAME}}/dashboard",
+      "contentUrl": "https://${{TAB_DOMAIN}}/dashboard",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.list",
       "name": "List",
-      "contentUrl": "https://{{HOSTNAME}}/list",
+      "contentUrl": "https://${{TAB_DOMAIN}}/list",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.boards",
       "name": "Task boards",
-      "contentUrl": "https://{{HOSTNAME}}/board",
+      "contentUrl": "https://${{TAB_DOMAIN}}/board",
       "scopes": [ "personal" ]
     }
   ],
-  "validDomains": [ "{{HOSTNAME}}" ]
+  "validDomains": [ "${{TAB_DOMAIN}}" ]
 }

@@ -35,86 +35,88 @@ const Tab = () => {
       });
     });
   })
-  
+
   const rowq = {
     rowd: {
-      width:'100%',
-      display: 'table', 
+      width: '100%',
+      display: 'table',
     },
   } as const;
+
   return (
-   
+
     <div style={rowq.rowd} >
-    {!isWeb &&
-      <>
-      <div className="Grid"> 
-        <Segment
-          /* Component to capture image(s) */
-          children={<CaptureImage />} writeKey={''}
-        />
-        {
-        // Currently Teams js library support these API's in mobile client only. Commenting the code for refernece
-        //   <Segment
-        //   /* Component to Get/Show geo-Location */
-        //   children={<GetGeoLocation />} writeKey={''}
-        // />
-        //  <Segment 
-        //   /* Component to capture audio */
-        //   children={<CaptureAudio />} writeKey={''}
-        // />
-        }
-        
-      </div>
-      {
-      // <div>
-      //    <Segment
-      //     /* Component to scan barcode */
-      //     children={<ScanBarCode />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to capture video */
-      //     children={<CaptureVideo />} writeKey={''}
-      //   />
-      //    <Segment
-      //     /* Component to show selected people */
-      //     children={<PeoplePicker />} writeKey={''}
-      //   />
-      // </div>
+      {!isWeb &&
+        <>
+          <div className="Grid">
+            <Segment
+              /* Component to capture image(s) */
+              children={<CaptureImage />} writeKey={''}
+            />
+            {
+              // Commenting out this code as these API's are currently having bug.
+
+              // <Segment
+              //   /* Component to Get/Show geo-Location */
+              //   children={<GetGeoLocation />} writeKey={''}
+              // />
+              //  <Segment 
+              //   /* Component to capture audio */
+              //   children={<CaptureAudio />} writeKey={''}
+              // />
+            }
+          </div>
+          <div>
+            {
+              // Component to scan barcode
+              // <Segment
+              //children = {< ScanBarCode />} writeKey={''}
+              ///>
+              //<Segment
+              /* Component to capture video */
+              //children={<CaptureVideo />} writeKey={''}
+              ///>
+            }
+            <Segment
+              /* Component to show selected people */
+              children={<PeoplePicker />} writeKey={''}
+            />
+          </div>
+        </>
       }
-      </>
-    }
-    {isWeb &&
-    <>
-    <div className='Grid'>
-    <Segment 
-        /* Component to capture image in browser */
-        children={<CaptureImageWeb />} writeKey={''}
-      />
-      <Segment
-        /* Component to Get/Show geo-Location in browser */
-        children={<GetLocationWeb />} writeKey={''}
-      />
-     
+      {isWeb &&
+        <>
+          <div className='Grid'>
+            <Segment
+              /* Component to capture image in browser */
+              children={<CaptureImageWeb />} writeKey={''}
+            />
+            <Segment
+              /* Component to Get/Show geo-Location in browser */
+              children={<GetLocationWeb />} writeKey={''}
+            />
+
+          </div>
+          <div className='Grid'>
+            <Segment
+              /* Component to capture audio in browser */
+              children={<CaptureAudioWeb />} writeKey={''}
+            />
+            <Segment
+              /* Component to Get notification in browser */
+              children={<GetNotificationWeb />} writeKey={''}
+            />
+          </div>
+          <div className='Grid'>
+            <Segment
+              /* Component to capture video in browser */
+              children={<CaptureVideoWeb />} writeKey={''}
+
+            />
+          </div>
+        </>
+      }
     </div>
-      <div className='Grid'>
-      <Segment 
-        /* Component to capture audio in browser */
-        children={<CaptureAudioWeb />} writeKey={''}
-      />
-      <Segment 
-        /* Component to Get notification in browser */
-        children={<GetNotificationWeb />} writeKey={''}
-      />
-      </div>
-      <div className='Grid'>
-      <Segment 
-        /* Component to capture video in browser */
-        children={<CaptureVideoWeb />} writeKey={''}
-      />
-      </div>
-      </>
-    }
-  </div>
   );
 }
 

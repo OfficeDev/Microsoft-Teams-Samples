@@ -6,10 +6,17 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "install:bot": "cd bot && npm install",
-        "installAll": "npm run install:bot"
+        "installAll": "npm run install:bot",
+        "build": "node build.js"
+    },
+    "dependencies": {
+        "botbuilder": "^4.18.0",
+        "botbuilder-dialogs": "^4.18.0",
+        "restify": "^11.1.0"
     },
     "devDependencies": {
-        "@microsoft/teamsfx-cli": "0.*"
+        "@microsoft/teamsfx-cli": "0.*",
+        "esbuild": "^0.18.1"
     },
     "license": "MIT"
 }

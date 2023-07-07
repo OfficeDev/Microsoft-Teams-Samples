@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "This sample shows how to implement Azure AD single sign-on support for tabs.",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "^4.0.2",
-    "gulp-zip": "^4.0.0"
+    "gulp-zip": "^4.0.0",
+    "esbuild": "^0.18.1"
   }
 }

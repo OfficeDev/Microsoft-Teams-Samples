@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "nodemon": "^2.0.7",
     "q": "^1.5.1",
     "request": "^2.88.2",
-    "send": "^0.18.0"
+    "send": "^0.18.0",
+    "esbuild": "^0.18.1"
   }
 }
