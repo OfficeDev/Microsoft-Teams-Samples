@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "c69434a5-fc52-471a-af42-ad5706de502f",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://localhost:3000",
-    "privacyUrl": "https://localhost:3000/privacy",
-    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://localhost:3000/config",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -39,6 +39,6 @@
   ],
   "validDomains": [
     "localhost",
-    "localhost:3000"
+    "${{TAB_DOMAIN}}"
   ]
 }
