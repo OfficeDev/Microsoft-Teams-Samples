@@ -27,7 +27,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts start",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+    "start": "set PORT=3978 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -51,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "@types/w3c-image-capture": "^1.0.5"
+    "@types/w3c-image-capture": "^1.0.5",
+    "env-cmd": "^10.1.0"
   }
 }

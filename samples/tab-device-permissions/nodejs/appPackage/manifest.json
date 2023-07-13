@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "7ae8f544-94b4-4a54-b5ce-25dd931c7a4a",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://<<BASE-URL>>",
-    "privacyUrl": "https://<<BASE-URL>>/privacy",
-    "termsOfUseUrl": "https://<<BASE-URL>>/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Device permission tab",
-      "contentUrl": "https://<<BASE-URL>>/tab",
-      "websiteUrl": "https://<<BASE-URL>>/tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ],
   "devicePermissions": [
     "media",
