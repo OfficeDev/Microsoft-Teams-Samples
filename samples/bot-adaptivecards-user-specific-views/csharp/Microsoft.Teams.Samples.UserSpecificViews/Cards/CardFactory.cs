@@ -17,10 +17,10 @@ namespace Microsoft.Teams.Samples.UserSpecificViews.Cards
     /// </summary>
     public class CardFactory : ICardFactory
     {
-        private const string SelectCardTypeCardTemplatePath = "{0}\\assets\\templates\\select-card-type.json";
-        private const string RefreshSpecificUserViewCardTemplatePath = "{0}\\assets\\templates\\refresh-specific-user.json";
-        private const string RefreshAllUsersViewCardTemplatePath = "{0}\\assets\\templates\\refresh-all-users.json";
-        private const string UpdatedBaseCardTemplatePath = "{0}\\assets\\templates\\updated-base-card.json";
+        private static readonly string SelectCardTypeCardTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "templates", "select-card-type.json");
+        private static readonly string RefreshSpecificUserViewCardTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "templates", "refresh-specific-user.json");
+        private static readonly string RefreshAllUsersViewCardTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "templates", "refresh-all-users.json");
+        private static readonly string UpdatedBaseCardTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "templates", "updated-base-card.json");
 
         private const string BaseCardStatus = "Base";
         private const string UpdatedCardStatus = "Updated";
@@ -103,7 +103,7 @@ namespace Microsoft.Teams.Samples.UserSpecificViews.Cards
             return CreateAttachment(serializedJson);
         }
 
-        
+
 
         /// <inheritdoc/>
         public Attachment GetFinalBaseCard(RefreshActionData actionData)
@@ -125,7 +125,6 @@ namespace Microsoft.Teams.Samples.UserSpecificViews.Cards
 
         private static AdaptiveCardTemplate GetCardTemplate(string templatePath)
         {
-            templatePath = string.Format(templatePath, AppDomain.CurrentDomain.BaseDirectory);
             return new AdaptiveCardTemplate(File.ReadAllText(templatePath));
         }
 
