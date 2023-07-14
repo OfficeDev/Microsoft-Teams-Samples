@@ -102,7 +102,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": ".*",
-                    "endsPattern": "App started listening on port"
+                    "endsPattern": "Compiled successfully!"
                 }
             }
         },
@@ -124,7 +124,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "API server is listening on port"
                 }
             }
         }

@@ -16,6 +16,6 @@
     "esbuild": "^0.18.1",
     "express": "^4.17.1",
     "jwt-decode": "^2.2.0",
-    "node-fetch": "^2.6.12"
+    "node-fetch": "^2.2.6"
   }
 }
