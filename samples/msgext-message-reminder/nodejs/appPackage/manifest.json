@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.messagingextensionmessagereminder",
   "developer": {
     "name": "Microsoft",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Message reminder using messaging extension",
+    "short": "Message Reminder",
     "full": "Message reminder setup through messaging extension action command."
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team"
@@ -35,7 +35,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -51,6 +51,6 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{BOT_DOMAIN}}"
   ]
 }
