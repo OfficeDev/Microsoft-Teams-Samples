@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.14",
   "version": "1.0.1",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.staggeredpermission",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "Staggered permission",
       "name": "tab",
-      "contentUrl": "https://{{domain-name}}/tab",
-      "websiteUrl": "https://{{domain-name}}/tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,10 +39,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

@@ -1,25 +1,38 @@
 const express = require('express');
-const bodyparser = require('body-parser');
-const env = require('dotenv')
+// const bodyparser = require('body-parser');
+// const env = require('dotenv');
 const path = require('path');
 const auth = require('./auth');
 const fetch = require("node-fetch");
 const querystring = require("querystring");
-const app = express();
+//const server = express();
 
-app.use(express.static(path.join(__dirname, 'static')));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.set('views', __dirname);
+// server.use(express.static(path.join(__dirname, 'static')));
+// server.engine('html', require('ejs').renderFile);
+// server.set('view engine', 'ejs');
+// server.set('views', __dirname);
+
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 var localdata = [];
 
-// parse application/json
-app.use(express.json());
+const server = express();
 
-app.get('/UserNotification', function (req, res) {
+const port = process.env.port || process.env.PORT || 3978;
+server.listen(port, () => 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);
+
+server.use(express.static(path.join(__dirname, 'static')));
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+
+// parse serverlication/json
+//server.use(express.json());
+
+server.get('/UserNotification', function (req, res) {
   var tenantId = process.env.TenantId;
   
   auth.getAccessToken(tenantId).then(async function (token) {
@@ -33,22 +46,22 @@ app.get('/UserNotification', function (req, res) {
 });
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
-app.get('/auth/auth-start', function (req, res) {
+server.get('/auth/auth-start', function (req, res) {
   var clientId = process.env.ClientId;
   res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
-app.get('/auth/auth-end', function (req, res) {
+server.get('/auth/auth-end', function (req, res) {
   var clientId = process.env.ClientId;
   res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
-app.get('/tabAuth', function (req, res) {
+server.get('/tabAuth', function (req, res) {
   res.render('./views/tabAuth');
 });
 
-app.get('/UserRequest', function (req, res) {
+server.get('/UserRequest', function (req, res) {
   var requestId = req.url.split('=')[1];
   let requestData = {};
   if(requestId != null){
@@ -61,7 +74,7 @@ app.get('/UserRequest', function (req, res) {
   res.render('./views/UserRequest', { data: JSON.stringify(requestData) });
 });
 
-app.post('/ApproveRejectRequest', function (req, res) {
+server.post('/serverroveRejectRequest', function (req, res) {
 localdata.map((item, index) => {
   if(item.id == req.body.taskId){
     item.status = req.body.status;
@@ -69,7 +82,7 @@ localdata.map((item, index) => {
 })
 });
 
-app.post('/SaveRequest', function (req, res) {
+server.post('/SaveRequest', function (req, res) {
   var taskDetails = {
     id: req.body.id,
     title: req.body.title,
@@ -83,7 +96,7 @@ app.post('/SaveRequest', function (req, res) {
  });
 
 // On-behalf-of token exchange
-app.post('/auth/token', function (req, res) {
+server.post('/auth/token', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
   var scopes = ["https://graph.microsoft.com/User.Read"];
@@ -103,8 +116,8 @@ app.post('/auth/token', function (req, res) {
       method: "POST",
       body: querystring.stringify(params),
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
+        Accept: "serverlication/json",
+        "Content-Type": "serverlication/x-www-form-urlencoded"
       }
     }).then(result => {
       
@@ -129,6 +142,6 @@ app.post('/auth/token', function (req, res) {
   });
 });
 
-app.listen(3978, function () {
-  console.log('app listening on port 3978!');
-});
+// server.listen(3978, function () {
+//   console.log('server listening on port 3978!');
+// });

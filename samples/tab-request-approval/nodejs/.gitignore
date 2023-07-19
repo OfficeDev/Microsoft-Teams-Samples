@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.zip
 
 # Runtime data
 pids
@@ -57,3 +58,27 @@ typings/
 # dotenv environment variables file
 .env
 
+# Distributables
+dist/
+manifest/
+build/
+
+#############
+
+# TeamsFx files
+env/.env.*.user
+env/.env.local
+.localConfigs
+appPackage/build
+/build
+
+# dependencies
+node_modules/
+
+# misc
+.env
+.deployment
+.DS_Store
+
+# build
+lib/
