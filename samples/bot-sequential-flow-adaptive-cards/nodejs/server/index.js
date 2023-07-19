@@ -6,7 +6,6 @@ require('dotenv').config({ path: ENV_FILE });
 
 const server = express();
 
-
 server.use('/api', require('./api'));
 
 server.use("/Images", express.static(path.resolve(__dirname, '../Images')));
