@@ -1,16 +1,8 @@
 const express = require('express');
-// const bodyparser = require('body-parser');
-// const env = require('dotenv');
 const path = require('path');
 const auth = require('./auth');
 const fetch = require("node-fetch");
 const querystring = require("querystring");
-//const server = express();
-
-// server.use(express.static(path.join(__dirname, 'static')));
-// server.engine('html', require('ejs').renderFile);
-// server.set('view engine', 'ejs');
-// server.set('views', __dirname);
 
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
@@ -28,9 +20,6 @@ server.use(express.static(path.join(__dirname, 'static')));
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
-
-// parse serverlication/json
-//server.use(express.json());
 
 server.get('/UserNotification', function (req, res) {
   var tenantId = process.env.TenantId;
@@ -141,7 +130,3 @@ server.post('/auth/token', function (req, res) {
     res.json(err);
   });
 });
-
-// server.listen(3978, function () {
-//   console.log('server listening on port 3978!');
-// });
