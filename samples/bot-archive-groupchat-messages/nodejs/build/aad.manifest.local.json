@@ -1,0 +1,115 @@
+{
+    "id": "c2907487-6fcf-4c11-8ab0-34d22cabc46f",
+    "appId": "592b9297-acc7-4056-b3b0-d5ec1326d6b8",
+    "name": "bot-archive-groupchat-messages-aad",
+    "accessTokenAcceptedVersion": 2,
+    "signInAudience": "AzureADandPersonalMicrosoftAccount",
+    "oauth2AllowIdTokenImplicitFlow": true,
+    "oauth2AllowImplicitFlow": true,
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                },
+                {
+                    "id": "9ff7295e-131b-4d94-90e1-69fde507ac11",
+                    "type": "Scope"
+                },
+                {
+                    "id": "cdcdac3a-fd45-410d-83ef-554db620e5c7",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "oauth2Permissions": [
+        {
+            "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
+            "adminConsentDisplayName": "Teams can access app's web APIs",
+            "id": "20a0296d-b393-4cad-8f57-8145828d88ae",
+            "isEnabled": true,
+            "type": "User",
+            "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
+            "userConsentDisplayName": "Teams can access app's web APIs and make requests on your behalf",
+            "value": "access_as_user"
+        }
+    ],
+    "preAuthorizedApplications": [
+        {
+            "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "00000002-0000-0ff1-ce00-000000000000",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        },
+        {
+            "appId": "4345a7b9-9a63-4910-a426-35363201d503",
+            "permissionIds": [
+                "20a0296d-b393-4cad-8f57-8145828d88ae"
+            ]
+        }
+    ],
+    "identifierUris": [
+        "api://botid-592b9297-acc7-4056-b3b0-d5ec1326d6b8"
+    ],
+    "replyUrlsWithType": [
+        {
+            "url": "https://65q2pq4f-3978.asse.devtunnels.ms/auth-end.html",
+            "type": "Web"
+        },
+        {
+            "url": "https://token.botframework.com/.auth/web/redirect",
+            "type": "Web"
+        }
+    ]
+}
