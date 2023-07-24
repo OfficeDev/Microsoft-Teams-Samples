@@ -24,11 +24,11 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 * Live Share SDK
 * RSC Permissions
 
-## Interact with app- Mobile
+## Interact with app - Web
 
 ![Preview Image](Images/preview_web.gif)
 
-## Interact with app- Web
+## Interact with app - Mobile
 
 ![Preview Image](Images/preview_mobile.gif)
 
