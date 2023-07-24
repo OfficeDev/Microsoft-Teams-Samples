@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "0e3317e7-75b5-4930-b12e-605948f147cd",
+  "id": "<<Microsoft-AppId>>",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
@@ -15,7 +15,7 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Messaging Extension Action",
+    "short": "Messaging Extension Search",
     "full": ""
   },
   "description": {
@@ -29,52 +29,22 @@
       "canUpdateConfiguration": true,
       "commands": [
         {
-          "id": "createCard",
-          "type": "action",
-          "title": "Create Card",
-          "description": "Command to run action to create a Card from Compose Box",
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search",
+          "description": "Test command to run query",
           "initialRun": false,
           "fetchTask": false,
           "context": [
-            "compose"
+            "compose",
+            "commandBox"
           ],
           "parameters": [
             {
-              "name": "title",
-              "title": "Card title",
-              "description": "Title for the card",
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
               "inputType": "text"
-            },
-            {
-              "name": "subTitle",
-              "title": "Subtitle",
-              "description": "Subtitle for the card",
-              "inputType": "text"
-            },
-            {
-              "name": "text",
-              "title": "Text",
-              "description": "Text for the card",
-              "inputType": "textarea"
-            }
-          ]
-        },
-        {
-          "id": "shareMessage",
-          "type": "action",
-          "title": "Share Message",
-          "description": "Test command to run action on message context (message sharing)",
-          "initialRun": false,
-          "fetchTask": false,
-          "context": [
-            "message"
-          ],
-          "parameters": [
-            {
-              "name": "includeImage",
-              "title": "Include Image",
-              "description": "Include image in Hero Card",
-              "inputType": "toggle"
             }
           ]
         }
