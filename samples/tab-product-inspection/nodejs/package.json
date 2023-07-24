@@ -2,7 +2,6 @@
   "name": "channellifecycle-nodejs",
   "version": "1.0.0",
   "main": "index.js",
-  "type":"module",
   "scripts": {
     "dev:teamsfx": "npm run dev",
     "dev": "nodemon --inspect=9239 --signal SIGINT ./server.js",
@@ -20,11 +19,13 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
-    "esbuild": "^0.18.1",
     "express": "^4.17.1",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.7",
     "q": "^1.5.1",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.1",
+    "nodemon": "^2.0.7"
   }
 }

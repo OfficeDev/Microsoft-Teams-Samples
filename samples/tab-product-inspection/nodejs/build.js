@@ -1,5 +1,5 @@
-import { build } from 'esbuild'
-build({
+const pkg = require("./package.json")
+require("esbuild").build({
     entryPoints: ['server.js'],
     bundle: true,
     platform: 'node',
