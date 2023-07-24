@@ -105,8 +105,8 @@ server.post('/auth/token', function (req, res) {
       method: "POST",
       body: querystring.stringify(params),
       headers: {
-        Accept: "serverlication/json",
-        "Content-Type": "serverlication/x-www-form-urlencoded"
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
       }
     }).then(result => {
       
