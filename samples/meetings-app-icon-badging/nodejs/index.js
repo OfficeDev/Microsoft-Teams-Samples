@@ -7,7 +7,8 @@
 const path = require('path');
 
 // Read botFilePath and botFileSecret from .env file.
-const ENV_FILE = path.join(__dirname, '.env');
+const ENV_FILE = path.join(__dirname, '..', '.env');
+//const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 const restify = require('restify');
