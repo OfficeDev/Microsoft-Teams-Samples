@@ -7,15 +7,16 @@
   "dependencies": {
     "@azure/msal-browser": "^2.11.0",
     "@fluentui/react-northstar": "^0.63.1",
+    "@microsoft/teams-js": "^2.5.0",
     "axios": "^0.21.1",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "6.2.2",
-    "react-scripts": "^4.0.0",
-    "@microsoft/teams-js": "^2.5.0"
+    "react-scripts": "^4.0.0"
   },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts start",
+    "dev:teamsfx": "npm run start",
+    "start": "set PORT=3978 HTTP=true && react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,5 +36,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
+  }
 }
