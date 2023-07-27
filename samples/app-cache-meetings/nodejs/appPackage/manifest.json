@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
   "version": "1.0.0",
-  "manifestVersion": "1.11",
-  "id": "<<MANIFEST_ID>>",
+  "manifestVersion": "1.13",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.appcache",
   "name": {
     "short": "App Caching In Meeting",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<Valid_Domain>>/configure",
+      "configurationUrl": "${{TAB_ENDPOINT}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [ "groupchat", "team" ],
       "context": [
@@ -38,6 +38,8 @@
       ]
     }
   ],
-  "validDomains": [ "<<Valid_Domain>>" ],
+  "validDomains": [
+    "${{TAB_ENDPOINT}}" 
+  ],
   "showLoadingIndicator": true
 }

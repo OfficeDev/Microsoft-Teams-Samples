@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build": "node build.js"
@@ -19,9 +21,11 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.7",
     "q": "^1.5.1",
-    "request": "^2.88.2",
-    "esbuild": "^0.18.1"
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.1",
+    "nodemon": "^2.0.7"
   }
 }

@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "6c51807c-f601-4c3c-b6e9-633385ee46db",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://{TODO: hosted domain}",
-    "privacyUrl": "https://{TODO: hosted domain}/privacy",
-    "termsOfUseUrl": "https://{TODO: hosted domain}/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://{TODO: hosted domain}/tab",
-      "websiteUrl": "https://{TODO: hosted domain}/tab",
+      "contentUrl": "${{TAB_ENDPOINT}}/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,10 +39,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{TODO: hosted domain}"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "8345fcbd-810d-4a70-aff6-f2de591a0926",
-    "resource": "api://{TODO: hosted domain}/8345fcbd-810d-4a70-aff6-f2de591a0926"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

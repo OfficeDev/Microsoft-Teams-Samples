@@ -9,6 +9,7 @@ const ENV_FILE = path.join(__dirname, '.env');
 
 dotenv.config({ path: ENV_FILE });
 
+const PORT = process.env.PORT || 3978;
 const express = require('express');
 const cors = require('cors');
 
@@ -28,10 +29,8 @@ server.use(express.urlencoded({
     extended: true
 }));
 
-server.listen(process.env.port || process.env.PORT || 3978, () => {
-    console.log(`\n${ server.name } listening to ${ server.url }`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
+server.listen(PORT, () => {
+    console.log('Server listening on port: ' + PORT);
 });
 
 // Create adapter.

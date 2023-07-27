@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.sequentialflowbot",
   "developer": {
     "name": "Microsoft",
@@ -26,7 +26,7 @@
 
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -37,7 +37,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -59,5 +59,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": []
+  "validDomains": ["${{BOT_DOMAIN}}"]
 }
