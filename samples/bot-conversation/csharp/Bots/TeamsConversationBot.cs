@@ -100,6 +100,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                             new CardAction
                             {
                                 Type = ActionTypes.MessageBack,
+                                Title = "Message all members by AadId",
+                                Text = "MessageAllMembersByAADId"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
                                 Title = "Who am I?",
                                 Text = "whoami"
                             },
