@@ -68,7 +68,13 @@ deploy:
       sslCertFile: SSL_CRT_FILE
       sslKeyFile: SSL_KEY_FILE
 
-  # Run npm command
+  # Run npm command for client
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./ClientApp
+      args: install --no-audit
+
+  # Run npm command for server
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit        

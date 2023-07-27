@@ -19,12 +19,64 @@
     "requiredResourceAccess": [
         {
             "resourceAppId": "Microsoft Graph",
-            "resourceAccess": [
-                {
-                    "id": "User.Read",
-                    "type": "Scope"
-                }
-            ]
+          "resourceAccess": [
+            {
+              "id": "User.Read",
+              "type": "Scope"
+            },
+            {
+              "id": "email",
+              "type": "Scope"
+            },
+            {
+              "id": "offline_access",
+              "type": "Scope"
+            },
+            {
+              "id": "openid",
+              "type": "Scope"
+            },
+            {
+              "id": "profile",
+              "type": "Scope"
+            },
+            {
+              "id": "Chat.Create",
+              "type": "Scope"
+            },
+            {
+              "id": "Chat.ReadWrite",
+              "type": "Scope"
+            },
+            {
+              "id": "ChatMember.ReadWrite",
+              "type": "Scope"
+            },
+            {
+              "id": "TeamsAppInstallation.ReadWriteForChat",
+              "type": "Scope"
+            },
+            {
+              "id": "TeamsAppInstallation.ReadWriteSelfForChat",
+              "type": "Scope"
+            },
+            {
+              "id": "TeamsTab.Create",
+              "type": "Scope"
+            },
+            {
+              "id": "TeamsTab.ReadWriteForChat",
+              "type": "Scope"
+            },
+            {
+              "id": "TeamsTab.ReadWrite.All",
+              "type": "Scope"
+            },
+            {
+              "id": "User.Read.All",
+              "type": "Scope"
+            }
+          ]
         }
     ],
     "oauth2Permissions": [
@@ -92,18 +144,26 @@
     "identifierUris": [
         "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
     ],
-    "replyUrlsWithType": [
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html",
-            "type": "Web"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
-            "type": "Spa"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
-            "type": "Spa"
-        }
-    ]
+  "replyUrlsWithType": [
+    {
+      "url": "${{TAB_ENDPOINT}}/auth-end.html",
+      "type": "Web"
+    },
+    {
+      "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
+      "type": "Spa"
+    },
+    {
+      "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
+      "type": "Spa"
+    },
+    {
+      "url": "${{TAB_ENDPOINT}}/auth-end",
+      "type": "Spa"
+    },
+    {
+      "url": "${{TAB_ENDPOINT}}/Home/BrowserRedirect",
+      "type": "Spa"
+    }
+  ]
 }
