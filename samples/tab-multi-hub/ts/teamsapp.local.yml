@@ -94,6 +94,12 @@ deploy:
     with:
       workingDirectory: .
       args: install --no-audit
+
+  # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./api-server
+      args: install --no-audit
       
   # Generate runtime environment variables for tab
   - uses: file/createOrUpdateEnvironmentFile
