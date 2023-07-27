@@ -15,9 +15,9 @@
         microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
             microsoftTeams.pages.config.setConfig({
                 entityID: "Chat Lifecycle App",
-                contentUrl: `${window.location.origin}/chatLifecycle`,
+                contentUrl: `${window.location.origin}/tab`,
                 suggestedTabName: "Chat Lifecycle App",
-                websiteUrl: `${window.location.origin}/chatLifecycle`,
+                websiteUrl: `${window.location.origin}/tab`,
             });
 
             saveEvent.notifySuccess();
