@@ -72,10 +72,17 @@ provision:
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
 deploy:
-  # Run npm command
+  # Run npm command for client
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./client
+      args: install --no-audit
+
+  # Run npm command for server
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit
+
 
   # Generate runtime environment variables For Front End
   - uses: file/createOrUpdateEnvironmentFile
