@@ -100,6 +100,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                             new CardAction
                             {
                                 Type = ActionTypes.MessageBack,
+                                Title = "Message all members using AADId",
+                                Text = "MessageAllMembersUsingAADId"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
                                 Title = "Who am I?",
                                 Text = "whoami"
                             },
@@ -167,7 +173,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             await turnContext.DeleteActivityAsync(turnContext.Activity.ReplyToId, cancellationToken);
         }
 
-        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken,bool isAadID)
+        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken,bool isAadId)
         {
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
@@ -184,7 +190,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 {
                     IsGroup = false,
                     Bot = turnContext.Activity.Recipient,
-                    Members = new ChannelAccount[] { new ChannelAccount(isAadID ? teamMember.AadObjectId : teamMember.Id) },
+                    Members = isAadId? new ChannelAccount[] { new ChannelAccount(teamMember.AadObjectId) } : new ChannelAccount[] { teamMember },
                     TenantId = turnContext.Activity.Conversation.TenantId,
                 };
                 try
