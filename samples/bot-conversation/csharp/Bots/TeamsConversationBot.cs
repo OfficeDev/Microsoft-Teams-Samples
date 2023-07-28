@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -50,9 +50,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             else if (text.Contains("update"))
                 await CardActivityAsync(turnContext, true, cancellationToken);
             else if (text.Contains("aadid"))
-                await MessageAllMembersAsync(turnContext, cancellationToken, true);
+                await MessageAllMembersAsync(turnContext, cancellationToken,true);
             else if (text.Contains("message"))
-                await MessageAllMembersAsync(turnContext, cancellationToken, false);
+                await MessageAllMembersAsync(turnContext, cancellationToken,false);
             else if (text.Contains("immersivereader"))
                 await SendImmersiveReaderCardAsync(turnContext, cancellationToken);
             else if (text.Contains("delete"))
@@ -65,7 +65,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var teamMember in membersAdded)
             {
-                if (teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
+                if(teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
                 }
@@ -74,7 +74,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (turnContext.Activity.Conversation.ConversationType == "channel")
+            if(turnContext.Activity.Conversation.ConversationType == "channel")
             {
                 await turnContext.SendActivityAsync($"Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in {turnContext.Activity.Conversation.Name}");
             }
@@ -96,12 +96,6 @@ namespace Microsoft.BotBuilderSamples.Bots
                                 Type = ActionTypes.MessageBack,
                                 Title = "Message all members",
                                 Text = "MessageAllMembers"
-                            },
-                            new CardAction
-                            {
-                                Type = ActionTypes.MessageBack,
-                                Title = "Message all members by AadId",
-                                Text = "MessageAllMembersByAADId"
                             },
                             new CardAction
                             {
@@ -173,7 +167,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             await turnContext.DeleteActivityAsync(turnContext.Activity.ReplyToId, cancellationToken);
         }
 
-        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken, bool isAadID)
+        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken,bool isAadID)
         {
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
@@ -193,26 +187,34 @@ namespace Microsoft.BotBuilderSamples.Bots
                     Members = new ChannelAccount[] { new ChannelAccount(isAadID ? teamMember.AadObjectId : teamMember.Id) },
                     TenantId = turnContext.Activity.Conversation.TenantId,
                 };
-
-                await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
-                credentials.MicrosoftAppId,
-                teamsChannelId,
-                serviceUrl,
-                credentials.OAuthScope,
-                conversationParameters,
-                async (t1, c1) =>
+                try
                 {
-                    conversationReference = t1.Activity.GetConversationReference();
-                    await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
-                        _appId,
-                        conversationReference,
-                        async (t2, c2) =>
-                        {
-                            await t2.SendActivityAsync(proactiveMessage, c2);
-                        },
-                        cancellationToken);
-                },
-                cancellationToken);
+                    await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
+                   credentials.MicrosoftAppId,
+                   teamsChannelId,
+                   serviceUrl,
+                   credentials.OAuthScope,
+                   conversationParameters,
+                   async (t1, c1) =>
+                   {
+                       conversationReference = t1.Activity.GetConversationReference();
+                       await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
+                           _appId,
+                           conversationReference,
+                           async (t2, c2) =>
+                           {
+                               await t2.SendActivityAsync(proactiveMessage, c2);
+                           },
+                           cancellationToken);
+                   },
+                   cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+
             }
 
             await turnContext.SendActivityAsync(MessageFactory.Text("All messages have been sent."), cancellationToken);
