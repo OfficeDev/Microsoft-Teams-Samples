@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "<<Microsoft-AppId>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://localhost:3000",
-    "privacyUrl": "https://localhost:3000/privacy",
-    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+    "websiteUrl": "https://${{BOT_DOMAIN}}",
+    "privacyUrl": "https://${{BOT_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{BOT_DOMAIN}}/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "{TODO: BOT_ID}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -56,6 +56,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<valid-domain>>"
+    "${{BOT_DOMAIN}}"
   ]
 }

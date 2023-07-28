@@ -73,9 +73,7 @@ server.use(express.urlencoded({
 }));
 
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${process.env.port}`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
+    console.log(`Service listening at:${process.env.port}`);
 });
 
 // Listen for incoming requests.
