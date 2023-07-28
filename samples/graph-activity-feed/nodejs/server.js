@@ -9,10 +9,12 @@ const axios = require('axios');
 
 var delegatedToken = "";
 var applicationToken = "";
+
 app.use(express.static(path.join(__dirname, 'static')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
+
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
