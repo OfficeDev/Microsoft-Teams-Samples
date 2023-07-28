@@ -2,49 +2,62 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "90441173-e948-4296-babf-b215af8e6b78",
-  "packageName": "com.microsoft.teams.extension",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.teams.sample.teamsconversationbot",
   "developer": {
-    "name": "Teams App, Inc.",
-    "websiteUrl": "https://localhost:3000",
-    "privacyUrl": "https://localhost:3000/privacy",
-    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+    "name": "TeamsConversationBot",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
-    "color": "color.png",
-    "outline": "outline.png"
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
   },
   "name": {
-    "short": "Messaging Extension Search",
-    "full": ""
+    "short": "TeamsConversationBot",
+    "full": "TeamsConversationBot"
   },
   "description": {
-    "short": "Short description for Messaging Extension Search.",
-    "full": "Full description of Messaging Extension Search."
+    "short": "TeamsConversationBot",
+    "full": "TeamsConversationBot"
   },
   "accentColor": "#FFFFFF",
-  "composeExtensions": [
+  "bots": [
     {
-      "botId": "{TODO: BOT_ID}",
-      "canUpdateConfiguration": true,
-      "commands": [
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "scopes": [
+        "personal",
+        "groupchat",
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false,
+      "commandLists": [
         {
-          "id": "searchQuery",
-          "type": "query",
-          "title": "Search",
-          "description": "Test command to run query",
-          "initialRun": false,
-          "fetchTask": false,
-          "context": [
-            "compose",
-            "commandBox"
+          "scopes": [
+            "personal",
+            "groupchat",
+            "team"
           ],
-          "parameters": [
+          "commands": [
             {
-              "name": "searchQuery",
-              "title": "Search Query",
-              "description": "Your search query",
-              "inputType": "text"
+              "title": "MentionMe",
+              "description": "Sends message with @mention of the sender"
+            },
+            {
+              "title": "Show Welcome",
+              "description": "Shows the welcome card"
+            },
+            {
+              "title": "MessageAllMembers",
+              "description": "Send 1 to 1 message to all members of the current conversation"
+            },
+            {
+              "title": "MessageAllMembersUsingAadId",
+              "description": "Send 1 to 1 message to all members of the current conversation using their AADId"
             }
           ]
         }
@@ -55,7 +68,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [
-    "<<valid-domain>>"
-  ]
+  "validDomains": [ "*.ngrok-free.app" ]
 }
