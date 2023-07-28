@@ -1,15 +1,73 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome",
+            "name": "Launch App (Edge)",
+            "type": "msedge",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3333",
-            "webRoot": "${workspaceFolder}"
+            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Attach to Local Service"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Launch App (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Attach to Local Service"
+            ],
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Attach to Local Service",
+            "type": "node",
+            "request": "attach",
+            "port": 9239,
+            "restart": true,
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
+            "internalConsoleOptions": "neverOpen"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug (Edge)",
+            "configurations": [
+                "Launch App (Edge)",
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start Teams App Locally",
+            "presentation": {
+                "group": "all",
+                "order": 1
+            },
+            "stopAll": true
+        },
+        {
+            "name": "Debug (Chrome)",
+            "configurations": [
+                "Launch App (Chrome)",
+                "Attach to Local Service"
+            ],
+            "preLaunchTask": "Start Teams App Locally",
+            "presentation": {
+                "group": "all",
+                "order": 2
+            },
+            "stopAll": true
         }
     ]
 }
