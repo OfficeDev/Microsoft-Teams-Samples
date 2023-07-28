@@ -14,7 +14,6 @@ server.listen(port, function () {
   console.log(`App started listening on port ${port}`);
 });
 
-
 const fetch = require("node-fetch");
 const querystring = require("querystring");
 
