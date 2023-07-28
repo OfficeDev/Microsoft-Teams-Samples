@@ -265,8 +265,9 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
             const convoParams = {
                 members: [member],
-                tenantId: context.activity.channelData.tenant.id,
-                activity: context.activity
+                isGroup: false,
+                bot: context.activity.recipient,
+                tenantId: context.activity.conversation.tenantId
             };
 
             await context.adapter.createConversationAsync(
