@@ -9,9 +9,9 @@ const { Client } = require('@microsoft/microsoft-graph-client');
 */
 class SimpleGraphClient {
     constructor(token) {
-        if (!token || !token.trim()) {
-            throw new Error('SimpleGraphClient: Invalid token received.');
-        }
+        // if (!token || !token.trim()) {
+        //     throw new Error('SimpleGraphClient: Invalid token received.');
+        // }
 
         this._token = token;
 
