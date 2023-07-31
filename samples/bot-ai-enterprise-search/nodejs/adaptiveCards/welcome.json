@@ -17,7 +17,7 @@
     {
       "type": "Action.OpenUrl",
       "title": "Azure OpenAI Service Docs",
-      "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/overview"
+      "url": "https://learn.microsoft.com/azure/ai-services/openai/overview"
     },
     {
       "type": "Action.OpenUrl",
@@ -27,7 +27,7 @@
     {
       "type": "Action.OpenUrl",
       "title": "Bot File Upload Docs",
-      "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/bots-filesv4#use-the-teams-bot-apis"
+      "url": "https://learn.microsoft.com/microsoftteams/platform/bots/how-to/bots-filesv4#use-the-teams-bot-apis"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
