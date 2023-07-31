@@ -105,7 +105,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 ![image](Images/MessageAllUsersInTeam.png)
 
 5. **Message A List of Channels**
-- **Result:** The bot will send a message to each corresponding channel from the list of channel IDs provided in the dialog (by default the current channel) abd return the operation ID.
+- **Result:** The bot will send a message to each channel from the list of channel IDs provided in the dialog (by default the current channel) and return the operation ID.
 - **Valid Scopes:** personal, group chat, team chat
 
 ![image](Images/MessageAListOfChannels.png)
@@ -117,7 +117,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 ![image](Images/GetOperationState.png)
 
 7. **Get Failed Entries Paginated**
-- **Result:** The bot will show a list of the failed entries, and provide the continuation token to see multiple pages
+- **Result:** The bot will show a list of the failed entries, and provide the continuation token in case of multiple pages of results
 - **Valid Scopes:** personal, group chat, team chat
 
 ![image](Images/GetFailedEntries.png)
