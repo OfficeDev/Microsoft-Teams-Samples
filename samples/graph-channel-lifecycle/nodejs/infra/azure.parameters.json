@@ -14,6 +14,12 @@
     "botDisplayName": {
       "value": "graph-channel-lifecycle"
     },
+    "aadAppClientId": {
+      "value": "${{AAD_APP_CLIENT_ID}}"
+    },
+    "aadAppClientSecret": {
+      "value": "${{SECRET_AAD_APP_CLIENT_SECRET}}"
+    },
     "microsoftAppType": {
       "value": "${{MICROSOFT_APP_TYPE}}"
     },

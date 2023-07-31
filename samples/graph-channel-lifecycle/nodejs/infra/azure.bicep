@@ -3,16 +3,17 @@
 @description('Used to generate names for all resources in this file')
 param resourceBaseName string
 
-@description('Required when create Azure Bot service')
-param botAadAppClientId string
-
-param botAppDomain string
-
 @maxLength(42)
 param botDisplayName string
 
 param botServiceName string = resourceBaseName
 param botServiceSku string = 'F0'
+param botAadAppClientId string
+param botAppDomain string
+
+param aadAppClientId string
+@secure()
+param aadAppClientSecret string
 param microsoftAppType string
 param microsoftAppTenantId string
 
@@ -42,3 +43,34 @@ resource botServiceMsTeamsChannel 'Microsoft.BotService/botServices/channels@202
     channelName: 'MsTeamsChannel'
   }
 }
+
+resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021-03-01' = {
+  parent: botService
+  name: 'oauthbotsetting'
+  location: 'global'
+  properties: {
+    serviceProviderDisplayName: 'Azure Active Directory v2'
+    serviceProviderId: '30dd229c-58e3-4a48-bdfd-91ec48eb906c'
+    scopes: 'User.Read'
+    parameters: [
+      {
+        key: 'clientId'
+        value: aadAppClientId
+      }
+      {
+        key: 'clientSecret'
+        value: aadAppClientSecret
+      }
+      {
+        key: 'tenantID'
+        value: microsoftAppTenantId
+      }
+      {
+        key: 'tokenExchangeUrl'
+        value: 'api://botid-${aadAppClientId}'
+      }
+    ]
+  }
+}
+
+output CONNECTION_NAME string = botServiceConnection.name
