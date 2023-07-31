@@ -5,8 +5,12 @@
 
 // Import required packages
 const path = require('path');
-
 const express = require('express');
+
+// Read botFilePath and botFileSecret from .env file.
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
+
 const cors = require('cors');
 const MeetingApiHelper = require('./helpers/meetingApiHelper');
 global.MeetingCartUrl = "";
@@ -18,14 +22,16 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
+
 server.use(express.static(path.join(__dirname, 'public')));
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
 
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${server.url}`);
-});
+const port = process.env.port || process.env.PORT || 3978;
+server.listen(port, () => 
+    console.log(`\n${server.name} listening to http://localhost:${port}`)
+);
 
 // Returns view to be open in task module.
 server.get('/Home/Index', async (req, res) => {

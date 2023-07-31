@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+var cors = require('cors');
 const path = require('path');
 const app = express();
 
@@ -12,26 +13,25 @@ const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 // parse application/json
+app.use(cors());
 app.use(express.json());
 
+
 // Gets the meeting data based on status.
-app.get('/getMeetingData', function(req, res) {
-  if(req.query.status === "todo")
-  {
-    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId]: undefined });;
+app.get('/getMeetingData', function (req, res) {
+  if (req.query.status === "todo") {
+    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId] : undefined });;
   }
-  if(req.query.status === "doing")
-  {
-    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId]: undefined });;
+  if (req.query.status === "doing") {
+    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId] : undefined });;
   }
-  if(req.query.status === "done")
-  {
-    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId]: undefined });;
+  if (req.query.status === "done") {
+    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId] : undefined });;
   }
 });
 
 // Saves the meeting data based on status.
-app.post('/saveMeetingData', function(req, res) {
+app.post('/saveMeetingData', function (req, res) {
   let meetingDetails = req.body;
 
   if (meetingDetails.status === "todo") {

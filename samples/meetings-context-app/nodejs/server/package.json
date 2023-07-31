@@ -6,6 +6,7 @@
     "license": "MIT",
     "main": "index.js",
     "scripts": {
+        "dev:teamsfx": "npm run start",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
         "build": "node build.js",

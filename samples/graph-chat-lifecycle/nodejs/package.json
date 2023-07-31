@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Microsoft Teams Node.js Hello World App. Start here to build your first app on the Teams platform.",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "start": "node src/app.js",
     "watch": "nodemon src/app.js",
     "build": "node build.js",
@@ -26,6 +27,7 @@
     "body-parser": "^1.19.0",
     "botbuilder": "^4.18.0",
     "config": "^3.3.8",
+    "cors": "^2.8.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -38,8 +40,8 @@
   },
   "devDependencies": {
     "del": "^3.0.0",
+    "esbuild": "^0.18.1",
     "gulp": "^3.9.1",
-    "gulp-zip": "^4.0.0",
-    "esbuild": "^0.18.1"
+    "gulp-zip": "^4.0.0"
   }
 }

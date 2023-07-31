@@ -29,7 +29,9 @@
       "commands": [
         {
           "id": "searchQuery",
-          "context": [ "commandBox" ],
+          "context": [
+            "commandBox"
+          ],
           "description": "Test command to run query",
           "title": "Search Command",
           "type": "query",
@@ -48,8 +50,9 @@
           "type": "link",
           "value": {
             "domains": [
+              "${{BOT_DOMAIN}}",
               "*.botframework.com",
-              "${{BOT_DOMAIN}}"
+              "*.ngrok-free.app"
             ]
           }
         }
