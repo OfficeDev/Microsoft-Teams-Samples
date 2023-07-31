@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Open AI sample app demonstrates the user search functionality based on Open AI embeddings and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.
+description: This Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings and completion APIs for user queries using Redis DB, and it is based on files uploaded by an admin using a bot.
 products:
 - office-teams
 - office
@@ -12,14 +12,14 @@ extensions:
  createdDate: "07/28/2023 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-open-ai-search-file-upload-nodejs
 ---
-# Teams Open AI Search On Uploaded File Using Bot
+# Teams Azure Open AI Embeddings And Redis Search On Uploaded File Using Bot
 
-This bot has been created using [Bot Builder](https://www.npmjs.com/package/botbuilder) and [Teams Toolkit](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-v4?view=msteams-client-js-latest&pivots=visual-studio-code), this Open AI sample app demonstrates the user search functionality based on Open AI embeddings and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.
+This bot has been created using [Bot Builder](https://www.npmjs.com/package/botbuilder) and [Teams Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-v4?view=msteams-client-js-latest&pivots=visual-studio-code), this Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings, Redis DB search and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.
 
 ## Included Features
 * Bots
 * Adaptive Cards
-* Open AI
+* Azure Open AI
 * Redis Search
 * Blob Storage
 
@@ -36,10 +36,11 @@ This bot has been created using [Bot Builder](https://www.npmjs.com/package/botb
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 - [Node.js](https://nodejs.org/), supported versions: 16, 18
-- An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
+- An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/microsoft-365/dev-program)
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI](https://azure.microsoft.com/en-us/free/)
+- [Azure Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI](https://azure.microsoft.com/free/)
+- [Create a Redis Enterprise cache](https://learn.microsoft.com/azure/azure-cache-for-redis/quickstart-create-redis-enterprise)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -68,29 +69,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Note:** Update the Azure Open API version from 2023-03-15-preview to any specific or public version in all the files wherever applicable.
 
 > Note: If you are deploying the code, make sure that above mentioned values are properly updated at `env/.env.dev` or `env/.env.dev.user` wherever required.
-Also, make sure that below key/values are properly added to the configuration section of web app after code deployement.
-
-`"name": "AZURE_STORAGE_CONNECTION_STRING", "value": 'DefaultEndpointsProtocol=https;AccountName=<Storage Account Name>;AccountKey=<Your Account Key>;EndpointSuffix=core.windows.net'`
-
-`"name": "BOT_ID", "value": "<BOT_ID>"`
-
-`"name": "BOT_PASSWORD", "value": "<BOT_PASSWORD>"`
-
-`"name": "CHAT_COMPLETION_MODEL_NAME", "value": "gpt-35-turbo"`
-
-`"name": "COMPLETION_MODEL_URL", "value": "https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>"`
-
-`"name": "EMBEDDING_MODEL_URL", "value": "https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Embedding Model Name>/embeddings?api-version=2023-03-15-preview"`
-
-`"name": "REDIS_CONNECTION", "value": redis://default:<REDIS_PASSWORD>=@<REDIS_HOST>:<REDIS_PORT>`
-
-`"name": "RUNNING_ON_AZURE", "value": "1"`
-
-`"name": "SECRET_AZURE_OPENAPI_KEY", "value": "<Your Azure Open API Key>"`
-
-`"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~18"`
-
-`"name": "WEBSITE_RUN_FROM_PACKAGE", "value": "1"`
 
 6. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 7. Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button.
@@ -185,10 +163,10 @@ the Teams service needs to call into the bot.
 1. File Uploaded Successfully:
 ![uploaded-file-saved ](Images/Admin/10_UploadedFileSaved.png)
 
-1. Now, admin can ask query based on the uploaded docs and Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
+1. Now, admin can ask query based on the uploaded docs and Azure Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
 ![ask-query ](Images/Admin/11_AskQuery.png)
 
-1. Admin will get the final answer based on the uploaded docs using Open AI completion model:
+1. Admin will get the final answer based on the uploaded docs using Azure Open AI completion model:
 ![final-answer ](Images/Admin/12_FinalResult.png)
 
 ### User Functionalities
@@ -198,10 +176,10 @@ the Teams service needs to call into the bot.
 1. Welcome Card:
 ![welcome-card ](Images/User/6_WelcomeCard.png)
 
-1. User can ask query based on the uploaded docs by admin and Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
+1. User can ask query based on the uploaded docs by admin and Azure Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
 ![ask-query ](Images/User/7_AskQuery.png)
 
-1. User will get the final answer based on the uploaded docs using Open AI completion model:
+1. User will get the final answer based on the uploaded docs using Azure Open AI completion model:
 ![final-answer ](Images/User/8_FinalResult.png)
 
 ## Deploy to Azure
@@ -214,6 +192,33 @@ Deploy your project to Azure by following these steps:
 
 > Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
+**Note:** Once the provisioning and deployment steps are finished please update the `manifest.json` contained in the `appPackage` folders (`appPackage.admin` and `appPackage.user` folders) for `validDomains` with base Url domain. E.g. if your deployed web app service URL is: `https://botaxxxxx.azurewebsites.net/` then your domain-name will be `botaxxxxx.azurewebsites.net`.
+
+
+Also, make sure that below key/values are properly added to the configuration section of web app after code deployement.
+
+`"name": "AZURE_STORAGE_CONNECTION_STRING", "value": 'DefaultEndpointsProtocol=https;AccountName=<Storage Account Name>;AccountKey=<Your Account Key>;EndpointSuffix=core.windows.net'`
+
+`"name": "BOT_ID", "value": "<BOT_ID>"`
+
+`"name": "BOT_PASSWORD", "value": "<BOT_PASSWORD>"`
+
+`"name": "CHAT_COMPLETION_MODEL_NAME", "value": "gpt-35-turbo"`
+
+`"name": "COMPLETION_MODEL_URL", "value": "https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>"`
+
+`"name": "EMBEDDING_MODEL_URL", "value": "https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Embedding Model Name>/embeddings?api-version=2023-03-15-preview"`
+
+`"name": "REDIS_CONNECTION", "value": redis://default:<REDIS_PASSWORD>=@<REDIS_HOST>:<REDIS_PORT>`
+
+`"name": "RUNNING_ON_AZURE", "value": "1"`
+
+`"name": "SECRET_AZURE_OPENAPI_KEY", "value": "<Your Azure Open API Key>"`
+
+`"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~18"`
+
+`"name": "WEBSITE_RUN_FROM_PACKAGE", "value": "1"`
+
 ## Preview
 
 Once the provisioning and deployment steps are finished, you can sideload your app.
@@ -224,17 +229,16 @@ Once the provisioning and deployment steps are finished, you can sideload your a
 
 ### Bot
 
-- [Upload Files Using Bots](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/bots-filesv4)
+- [Upload Files Using Bots](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/bots-filesv4)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 ### AI, Redis And Blob Storage
-- [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
-- [Learn how to generate embeddings with Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/embeddings?tabs=console)
-- [Redis](https://redis.io/docs/clients/nodejs/)
-- [Redis Search](https://redis.io/docs/interact/search-and-query/query/)
-- [Quickstart: Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli)
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
+- [Learn how to generate embeddings with Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/how-to/embeddings?tabs=console)
+- [Quickstart: Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli)
+- [RediSearch](https://learn.microsoft.com/azure/azure-cache-for-redis/cache-redis-modules#redisearch)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-enterprise-search-nodejs" />

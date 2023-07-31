@@ -9,7 +9,7 @@
     },
     {
       "type": "TextBlock",
-      "text": "This Open AI sample app demonstrates the user search functionality based on Open AI embeddings and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.",
+      "text": "This Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings, Redis DB search and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.",
       "wrap": true
     }
   ],
