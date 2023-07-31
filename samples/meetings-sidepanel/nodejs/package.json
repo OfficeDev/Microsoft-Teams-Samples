@@ -6,6 +6,7 @@
     "license": "MIT",
     "main": "index.js",
     "scripts": {
+        "dev:teamsfx": "npm run start",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
         "build": "node build.js",
@@ -38,17 +39,17 @@
         "restify": "~8.5.1",
         "socket.io": "^4.0.0",
         "string-format": "^2.0.0",
-        "url": "^0.11.0",
-        "swiper": "^8.4.5"
+        "swiper": "^8.4.5",
+        "url": "^0.11.0"
     },
     "devDependencies": {
+        "esbuild": "^0.18.1",
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4",
-        "esbuild": "^0.18.1"
+        "nodemon": "~2.0.4"
     }
 }
