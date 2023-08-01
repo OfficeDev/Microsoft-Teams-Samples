@@ -10,6 +10,8 @@ import * as msal from "@azure/msal-browser";
 const AuthEnd = props => {
 
     useEffect(() => {
+        let app = microsoftTeams.app;
+        app.initialize();
 
         async function AuthenticationEnd() {
             const context = await microsoftTeams.app.getContext();

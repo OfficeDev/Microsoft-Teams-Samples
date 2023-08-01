@@ -4,13 +4,15 @@
 // </copyright>
 
 import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+// import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import './index.css';
 import { AppRoute } from './App';
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
     <FluentProvider theme={teamsLightTheme}>
         <AppRoute />
-    </FluentProvider>, document.getElementById('root')
+    </FluentProvider>
 );

@@ -4,8 +4,10 @@
   "description": "This sample shows anonymous users support in meeting apps.",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT server/index.js",
     "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon server/index.js",
     "build": "node build.js",
     "lint": "eslint .",
