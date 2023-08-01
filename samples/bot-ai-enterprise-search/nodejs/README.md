@@ -23,13 +23,13 @@ This bot has been created using [Bot Builder](https://www.npmjs.com/package/botb
 * Redis Search
 * Blob Storage
 
-![SolutionArchitecture](Images/SolutionArchitecture.PNG)
+![SolutionArchitecture](images/SolutionArchitecture.PNG)
 
 ## Interaction with bot - Admin
-![Admin-Functionality-GIF](Images/Admin.gif)
+![Admin-Functionality-GIF](images/Admin.gif)
 
 ## Interaction with bot - User
-![User-Search-Functionality-GIF](Images/User.gif)
+![User-Search-Functionality-GIF](images/User.gif)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account
@@ -152,35 +152,35 @@ the Teams service needs to call into the bot.
 ### Admin Functionalities
 
 1. Adding the bot:
-![add-App ](Images/Admin/5_AddApp.png)
+![add-App ](images/Admin/5_AddApp.png)
 
 1. Welcome Card:
-![welcome-card ](Images/Admin/6_WelcomeCard.png)
+![welcome-card ](images/Admin/6_WelcomeCard.png)
 
 1. Admin can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file in Azure blob and creates the embedding for uploaded file and save it in Redis Cache Database.
-![file-upload-using-bot ](Images/Admin/7_UploadFileUsingBot.png)
+![file-upload-using-bot ](images/Admin/7_UploadFileUsingBot.png)
 
 1. File Uploaded Successfully:
-![uploaded-file-saved ](Images/Admin/10_UploadedFileSaved.png)
+![uploaded-file-saved ](images/Admin/10_UploadedFileSaved.png)
 
 1. Now, admin can ask query based on the uploaded docs and Azure Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
-![ask-query ](Images/Admin/11_AskQuery.png)
+![ask-query ](images/Admin/11_AskQuery.png)
 
 1. Admin will get the final answer based on the uploaded docs using Azure Open AI completion model:
-![final-answer ](Images/Admin/12_FinalResult.png)
+![final-answer ](images/Admin/12_FinalResult.png)
 
 ### User Functionalities
 1. Adding the bot:
-![add-App ](Images/User/5_AddApp.png)
+![add-App ](images/User/5_AddApp.png)
 
 1. Welcome Card:
-![welcome-card ](Images/User/6_WelcomeCard.png)
+![welcome-card ](images/User/6_WelcomeCard.png)
 
 1. User can ask query based on the uploaded docs by admin and Azure Open AI will generate the embedding for query and search the most relevant vectors for user query in the Redis search database based on the embeddings generated for uploaded file contents.
-![ask-query ](Images/User/7_AskQuery.png)
+![ask-query ](images/User/7_AskQuery.png)
 
 1. User will get the final answer based on the uploaded docs using Azure Open AI completion model:
-![final-answer ](Images/User/8_FinalResult.png)
+![final-answer ](images/User/8_FinalResult.png)
 
 ## Deploy to Azure
 
