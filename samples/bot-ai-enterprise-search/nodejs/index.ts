@@ -8,7 +8,9 @@ import {
   ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
   TurnContext,
+  MemoryStorage,
   ActivityTypes,
+  MessageFactory,
 } from "botbuilder";
 
 // This bot's main dialog.
@@ -35,6 +37,7 @@ const azureOpenApiKey = config.azureOpenApiKey;
 var PREFIX = "enterprisedoc";  // Prefix for the document keys
 const INDEX_NAME = "enterprise-docs"; // Name of the search index
 const containerName = 'enterprise-search';
+var errorCode= "200";
 
 // Azure Open AI configuration.
 const configuration = new Configuration({
@@ -99,6 +102,55 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
   console.log(`\nBot Started, ${server.name} listening to ${server.url}`);
 });
 
+/*import { Application, ConversationHistory, DefaultPromptManager, DefaultTurnState, OpenAIModerator, OpenAIPlanner, AI } from '@microsoft/teams-ai';
+import path from "path";
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ConversationState {}
+type ApplicationTurnState = DefaultTurnState<ConversationState>;
+// Create AI components
+const planner = new OpenAIPlanner({
+  apiKey: config.openAIKey,
+  defaultModel: 'text-davinci-003',
+  logRequests: true
+});
+const moderator = new OpenAIModerator({
+  apiKey: config.openAIKey,
+  moderate: 'both'
+});
+const promptManager = new DefaultPromptManager(path.join(__dirname, './prompts' ));
+
+// Define storage and application
+const storage = new MemoryStorage();
+const app = new Application<ApplicationTurnState>({
+  storage,
+  ai: {
+      planner,
+      moderator,
+      promptManager,
+      prompt: 'chat',
+      history: {
+          assistantHistoryType: 'text'
+      }
+  }
+});
+
+app.ai.action(AI.FlaggedInputActionName, async (context, state, data) => {
+  await context.sendActivity(`I'm sorry your message was flagged: ${JSON.stringify(data)}`);
+  return false;
+});
+
+app.ai.action(AI.FlaggedOutputActionName, async (context, state, data) => {
+  await context.sendActivity(`I'm not allowed to talk about such things.`);
+  return false;
+});
+
+app.message('/help', async (context, state) => {
+});
+
+app.message('/history', async (context, state) => {
+  const history = ConversationHistory.toString(state, 2000, '\n\n');
+  await context.sendActivity(history);
+  }); */
 // Listen for incoming requests.
 server.post("/api/messages", async (req, res) => {
   await adapter.process(req, res, async (context) => {
@@ -166,6 +218,7 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
     })();
   } catch (ex) {
     console.log(ex)
+    return true;
   }
 
   var embeddings = "";
@@ -198,14 +251,16 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
         }
       });
   }
-  catch (err) { console.error(err); }
+  catch (err) { console.error(err); 
+  return errorCode;
+  }
 };
 
 // Search user prompt in Redis DB.
 async function SearchInDBAsync(context, userPromptEmbedding, userPrompt) {
   try {
-    // var hybrid_fields = "*";
-    // var k = 15;
+    var hybrid_fields = "*";
+    var k = 15;
 
     var base_query = "*=>[KNN 5 @context_vector $context_vector AS vector_score]";
     var return_fields = ["context_vector", "context", "docUrl", "vector_score"];
@@ -238,38 +293,52 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
     var query = userPrompt;
     var contexttokenlimit = 2000;
     var answertokenlimit = 1000;
-    var completion_model = 'gpt-35-turbo'
+   // var completion_model = 'gpt-35-turbo'
+   var completion_model ='gpt-35-turbo'
 
     // Build prompt with retrieved contexts
-    var prompt_start = "Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.\n\n"
-    var promptText = prompt_start;
+    //var prompt_start = "Give an exhaustive answer from the below contents. If answer is not found in the context below then strictly respond saying I don't know. Context:\n\n"
+   // var prompt_start="Instructions: Compose a comprehensive reply to the query using the search results given.Cite each reference using [ Page Number] notation (every result has this number at the beginning).Citation should be done at the end of each sentence. If the search results mention multiple subjects with the same name, create separate answers for each. Only include information found in the results and don't add any additional information. Make sure the answer is correct and don't output false content. If the text does not relate to the query, simply state 'Text Not Found'. Ignore outlier search results which has nothing to do with the question. Only answer what is asked. The answer should be short and concise. Answer step-by-step.\n\n"
+   var prompt_start="Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.If the text does not relate to the query, simply state 'Text Not Found'\n\n"
+   var promptText = prompt_start;//+ prompt_end
     var links = []
     var sum_of_tokencount = 0
-    var tokencount_strings = ''
-
+   // var tokencount_strings = []
+   var tokencount_strings=''
     // Iterating over the array and printing
     results.documents.forEach(async element => {
+      var index=0;
       var docUrl = element.value['docUrl'];
       var hypelinkTitle = decodeURI(docUrl).split("/").pop();
+     // docUrl = "<a href=" + docUrl + ">" 
       docUrl = "<a href=" + docUrl + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
       links.push(docUrl + "\n\n");
 
       sum_of_tokencount += (element.value['context'].length)
       if (sum_of_tokencount <= contexttokenlimit) {
-        var contextstring = "[" + element.value['docUrl'] + "]" + element.value['context'].toString()
-        tokencount_strings += contextstring
+        var contextstring =  "["+element.value['docUrl']+"]" + element.value['context'].toString() 
+        tokencount_strings+=contextstring
+         
       }
+
+     
     });
 
     // Join the contexts with separator
     var joined_tokencount_string = "\n\n---\n\n" + tokencount_strings;
 
+  /*  promptText = (promptText +
+      "\n\n---\n\n" + joined_tokencount_string + "\n\n---\n\n"
+      // prompt_end - commented and moved in messages
+    ) */
+
     promptText = (prompt_start + "Context: " +
       "\n\n---\n\n" + joined_tokencount_string + "\n\n---\n\n" +
-      "Query:" + userPrompt + "\nAnswer:"
+      "Query:"+ userPrompt +"\nAnswer:"
+      // prompt_end - commented and moved in messages
     )
-
     joined_tokencount_string = joined_tokencount_string.replace('\n', '\n')
+    // console.log("Prompt Text:" + promptText);
 
     // Error handling for API response
     try {
@@ -299,52 +368,74 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
         "answer": completion.data.choices[0].message.content, "source": links
       }
 
-      // console.log("Final Answer: " + finalResult.answer + finalResult.source[0]);
+      console.log("Final Answer: " + finalResult.answer + finalResult.source[0]);
       await sendFinalAnswerAsync(context, finalResult)
 
       return finalResult;
     }
     catch (err) {
       console.log("Error while running the query: " + err.message);
+      return errorCode;
     }
   }
-  catch (err) { console.error(err); }
+  catch (err) { console.error(err); 
+  return errorCode;
+  }
 };
 
 // Send final answer to user.
 async function sendFinalAnswerAsync(context, finalResult) {
+  var relevantDocLinks = "";
+  var uniqueDocLinks = [...new Set(finalResult.source)]; // Get unique links.
 
-  // Convert final result to string.
+  // Prepare hyperlinks to share with final answer.
+  /*uniqueDocLinks.forEach(docLink => {
+    relevantDocLinks += "\n\n" + "<ul><li>" + docLink + "</li></ul>" + "\n\n ";
+  });*/
+
+  //Conver final result to string.
   var finalResultStr = JSON.stringify(finalResult.answer);
-  // Regular expression to match comma-separated values inside square brackets
-  const regex = /\[(.*?)\]/g;
+// Regular expression to match comma-separated values inside square brackets
+const regex = /\[(.*?)\]/g;
 
-  // Array to store all the matches
-  const matches = [];
+// Array to store all the matches
+const matches = [];
 
-  let match;
-  while ((match = regex.exec(finalResultStr))) {
-    // Extract the value inside the square brackets (excluding the brackets)
-    const valueInsideBrackets = match[1];
-    // Split the value by commas to get individual values
-    valueInsideBrackets.split(',').map((value) => {
-      (
-        matches.push(value.trim())
-      )
-    });
+const matches1 = finalResultStr.match(regex);
 
-  }
+let match;
+while ((match = regex.exec(finalResultStr))) {
+  // Extract the value inside the square brackets (excluding the brackets)
+  const valueInsideBrackets = match[1];
+  // Split the value by commas to get individual values
+  const commaSeparatedValues = valueInsideBrackets.split(',').map((value) =>{(
+    matches.push(value.trim())
+    )});
+ 
+ } 
+ var uniqueFileLinks = [...new Set(matches)]; // Get unique links.
+ uniqueFileLinks.forEach(docLink => {
+ var hypelinkTitle = decodeURI(docLink).split("/").pop();
+  var fileUrl = "<a href=" + docLink + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
+  fileUrl += "</a>";
+  var linkToReplace = new RegExp(docLink, 'g');
+  finalResultStr=finalResultStr.replace(linkToReplace, fileUrl);
+ });
 
-  var uniqueFileLinks = [...new Set(matches)]; // Get unique links.
-  uniqueFileLinks.forEach(docLink => {
-    var hypelinkTitle = decodeURI(docLink).split("/").pop();
-    var fileUrl = "<a href=" + docLink + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
-    fileUrl += "</a>";
-    // var linkToReplace = new RegExp(docLink, 'g');
-    finalResultStr = finalResultStr.replace(docLink, fileUrl);
-  });
-
-  await context.sendActivity({ type: ActivityTypes.Message, text: finalResultStr });
+  await context.sendActivity( {type: ActivityTypes.Message,text:finalResultStr});
+  var reply;
+        if(finalResultStr.includes("Text Not Found")){
+          reply = MessageFactory.text(`<i>Sorry, I could not find any answer to your query. Please try again with different query or contact admin.</i>`);
+        }
+        else if(errorCode.includes("404")){
+          reply = MessageFactory.text(`<i>Sorry, Service might be busy or error occurred. Please try after some time.</i>`);
+        }
+        else{
+          reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
+        }
+        reply.textFormat = 'xml';
+        await context.sendActivity(reply);
+ 
 };
 
 // Upload text file to blob container.
@@ -352,7 +443,7 @@ export async function uploadTextFileToBlobAsync(fileContentsAsString, fileName) 
   try {
 
     // Connection string
-    const connString = config.azureStorageConnStr;
+    const connString =config.azureStorageConnStr; // process.env.AZURE_STORAGE_CONNECTION_STRING;
     if (!connString) throw Error('Azure Storage Connection string not found');
 
     // Create the BlobServiceClient object with connection string.
@@ -383,7 +474,7 @@ export async function uploadTextFileToBlobAsync(fileContentsAsString, fileName) 
 
       // Upload text file contents as a blob in Azure storage container.
       const uploadBlobResponse = await blockBlobClient.upload(fileContentsAsString, fileContentsAsString.length, options);
-      // console.log(`Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`);
+      console.log(`Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`);
     }
 
     // Once blob is created, get it's URL and save it.
@@ -514,6 +605,9 @@ async function createEmbeddingForFileAsync(fileContentsAsString, docUrl) {
     } else {
       // Something went wrong, perhaps RediSearch isn't installed...
       console.error(e);
+      // process.exit(1);
     }
   }
 };
+
+

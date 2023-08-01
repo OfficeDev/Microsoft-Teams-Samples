@@ -2,16 +2,21 @@ import {
   TeamsActivityHandler,
   CardFactory,
   TurnContext,
+  AdaptiveCardInvokeValue,
+  AdaptiveCardInvokeResponse,
   MessageFactory,
 } from "botbuilder";
 import rawWelcomeCard from "./adaptiveCards/welcome.json";
+import rawLearnCard from "./adaptiveCards/learn.json";
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 import { uploadTextFileToBlobAsync, uploadPdfFileToBlobAsync, generateEmbeddingForUserPromptAsync } from "./index";
 
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
-const { writeFile } = require('./fileService');
+const os = require('os');
+//const { MicrosoftAppCredentials } = require('botframework-connector');
+const { geneFileName, getFileSize, writeFile } = require('./fileService');
 const FILES_DIR = 'files';
 
 export interface DataInterface {
@@ -36,7 +41,6 @@ export class TeamsBot extends TeamsActivityHandler {
         // Remove the line break
         txt = removedMentionText.toLowerCase().replace(/\n|\r/g, "").trim();
       }
-
       const attachments = context.activity.attachments;
       const imageRegex = /image\/.*/;
       var downloadUrl = "";
@@ -52,24 +56,25 @@ export class TeamsBot extends TeamsActivityHandler {
         downloadUrl = file.content.downloadUrl;
         fileName = file.name;
 
-        localFilePath = path.join(FILES_DIR, file.name);
-        var isFileUploadedSuccessfully = false;
+       // localFilePath = path.join('./Files/', file.name); //path.join(FILES_DIR, file.name);
+       localFilePath = path.join(os.tmpdir(), fileName); 
+       console.log("localFilePath: " + localFilePath);
+       var isFileUploadedSuccessfully = false;
         var isUserQuery = false;
         var isImage = false;
+        var result;
 
         if (file.name.includes(".pdf")) {
           try {
+
             await writeFile(file.content.downloadUrl, config, localFilePath);
 
             // Create embeddings for pdf file contents.
-            var fileContents = await this.ReadPdfContents(localFilePath);
-            var contents = fileContents.replace(/[\n\r]+/g, '');
+            var contents = await this.ReadPdfContents(localFilePath);
 
-            if (contents != null && contents != "" && contents != "undefined") {
-              // Save file as blob in storage container.
-              await uploadPdfFileToBlobAsync(localFilePath, fileName, fileContents);
-              isFileUploadedSuccessfully = true;
-            }
+            // Save file as blob in storage container.
+            await uploadPdfFileToBlobAsync(localFilePath, fileName, contents);
+            isFileUploadedSuccessfully = true;
           } catch (ex) {
             console.log(ex);
           }
@@ -103,7 +108,7 @@ export class TeamsBot extends TeamsActivityHandler {
         await context.sendActivity("<i>Your query: " + context.activity.text + "</i>");
         await context.sendActivity("<i>Please wait while I look up answer to your query...</i>");
         isUserQuery = true;
-        await generateEmbeddingForUserPromptAsync(context, context.activity.text);
+       await generateEmbeddingForUserPromptAsync(context, context.activity.text);
       }
 
       if (isFileUploadedSuccessfully) {
@@ -112,15 +117,12 @@ export class TeamsBot extends TeamsActivityHandler {
         await context.sendActivity(reply);
       }
       else if (isUserQuery) {
-        const reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
-        reply.textFormat = 'xml';
-        await context.sendActivity(reply);
       }
       else if (isImage) {
         // No action required.
       }
       else {
-        const reply = MessageFactory.text(`Failed to save your file: <b>${fileName}</b>. Please try to upload it again or please try with another file.`);
+        const reply = MessageFactory.text(`Failed to save your file: <b>${fileName}</b>. Please try to upload it again.`);
         reply.textFormat = 'xml';
         await context.sendActivity(reply);
       }
@@ -142,27 +144,44 @@ export class TeamsBot extends TeamsActivityHandler {
     });
   }
 
+  // Invoked when an action is taken on an Adaptive Card. The Adaptive Card sends an event to the Bot and this
+  // method handles that event.
+  async onAdaptiveCardInvoke(
+    context: TurnContext,
+    invokeValue: AdaptiveCardInvokeValue
+  ): Promise<AdaptiveCardInvokeResponse> {
+    // The verb "userlike" is sent from the Adaptive Card defined in adaptiveCards/learn.json
+    if (invokeValue.action.verb === "userlike") {
+      this.likeCountObj.likeCount++;
+      const card = AdaptiveCards.declare<DataInterface>(rawLearnCard).render(this.likeCountObj);
+      await context.updateActivity({
+        type: "message",
+        id: context.activity.replyToId,
+        attachments: [CardFactory.adaptiveCard(card)],
+      });
+      return { statusCode: 200, type: undefined, value: undefined };
+    }
+  }
+
   async fileUploadCompleted(context, fileConsentCardResponse) {
     const downloadCard = {
       uniqueId: fileConsentCardResponse.uploadInfo.uniqueId,
       fileType: fileConsentCardResponse.uploadInfo.fileType
     };
-
     const asAttachment = {
       content: downloadCard,
       contentType: 'application/vnd.microsoft.teams.card.file.info',
       name: fileConsentCardResponse.uploadInfo.name,
       contentUrl: fileConsentCardResponse.uploadInfo.contentUrl
     };
-
     const reply = MessageFactory.text(`<b>File uploaded.</b> Your file <b>${fileConsentCardResponse.uploadInfo.name}</b> is ready to download`);
     reply.textFormat = 'xml';
     reply.attachments = [asAttachment];
     await context.sendActivity(reply);
   }
-
+  
   // Function to fetch text file content as a string from a web URL.
-  async fetchTextFileContentAsString(url: string): Promise<string> {
+   async fetchTextFileContentAsString(url: string): Promise<string> {
     try {
       const response = await axios.get(url, { responseType: 'string', });
       return response.data;
@@ -178,9 +197,13 @@ export class TeamsBot extends TeamsActivityHandler {
       var fs = require('fs');
       const pdfParse = require('pdf-parse')
       let readFileSync = fs.readFileSync(localFilePath)
-      let pdfExtract = await pdfParse(readFileSync)
 
+      let pdfExtract = await pdfParse(readFileSync)
+      // console.log('File content: ', pdfExtract.text)
+      // console.log('Total pages: ', pdfExtract.numpages)
+      // console.log('All content: ', pdfExtract.info)
       return pdfExtract.text;
+
     } catch (error) {
       throw new Error(`Failed to fetch file content: ${error}`);
     }
