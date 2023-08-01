@@ -3,9 +3,7 @@
     "appId": "${{AAD_APP_CLIENT_ID}}",
     "name": "graph-channel-lifecycle-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADandPersonalMicrosoftAccount",
-    "oauth2AllowIdTokenImplicitFlow": true,
-	"oauth2AllowImplicitFlow": true,
+    "signInAudience": "AzureADMyOrg",
     "optionalClaims": {
         "idToken": [],
         "accessToken": [
@@ -91,17 +89,29 @@
             ]
         }
     ],
-    "identifierUris":[
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "identifierUris": [
+        "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
     ],
-    "replyUrlsWithType":[
+    "replyUrlsWithType": [
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
+            "url": "${{TAB_ENDPOINT}}/auth-end.html",
+            "type": "Web"
         },
         {
-			"url": "https://token.botframework.com/.auth/web/redirect",
-			"type": "Web"
-		}
+            "url": "${{TAB_ENDPOINT}}/auth-end",
+            "type": "Spa"
+        },
+        {
+            "url": "${{TAB_ENDPOINT}}/Home/BrowserRedirect",
+            "type": "Spa"
+        },
+        {
+            "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
+            "type": "Spa"
+        },
+        {
+            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
+            "type": "Spa"
+        }
     ]
 }
