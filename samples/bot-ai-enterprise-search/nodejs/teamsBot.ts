@@ -36,6 +36,7 @@ export class TeamsBot extends TeamsActivityHandler {
         // Remove the line break
         txt = removedMentionText.toLowerCase().replace(/\n|\r/g, "").trim();
       }
+
       const attachments = context.activity.attachments;
       const imageRegex = /image\/.*/;
       var downloadUrl = "";
@@ -51,23 +52,26 @@ export class TeamsBot extends TeamsActivityHandler {
         downloadUrl = file.content.downloadUrl;
         fileName = file.name;
 
-       localFilePath = path.join(os.tmpdir(), fileName); 
-       console.log("localFilePath: " + localFilePath);
-       var isFileUploadedSuccessfully = false;
+        localFilePath = path.join(os.tmpdir(), fileName);
+        console.log("localFilePath: " + localFilePath);
+        var isFileUploadedSuccessfully = false;
         var isUserQuery = false;
         var isImage = false;
 
         if (file.name.includes(".pdf")) {
           try {
-
+            
             await writeFile(file.content.downloadUrl, config, localFilePath);
 
             // Create embeddings for pdf file contents.
-            var contents = await this.ReadPdfContents(localFilePath);
+            var fileContents = await this.ReadPdfContents(localFilePath);
+            var contents = fileContents.replace(/[\n\r]+/g, '');
 
-            // Save file as blob in storage container.
-            await uploadPdfFileToBlobAsync(localFilePath, fileName, contents);
-            isFileUploadedSuccessfully = true;
+            if (contents != null && contents != "" && contents != "undefined") {
+              // Save file as blob in storage container.
+              await uploadPdfFileToBlobAsync(localFilePath, fileName, fileContents);
+              isFileUploadedSuccessfully = true;
+            }
           } catch (ex) {
             console.log(ex);
           }
@@ -100,7 +104,7 @@ export class TeamsBot extends TeamsActivityHandler {
         await context.sendActivity("<i>Your query: " + context.activity.text + "</i>");
         await context.sendActivity("<i>Please wait while I look up answer to your query...</i>");
         isUserQuery = true;
-       await generateEmbeddingForUserPromptAsync(context, context.activity.text);
+        await generateEmbeddingForUserPromptAsync(context, context.activity.text);
       }
 
       if (isFileUploadedSuccessfully) {
@@ -114,7 +118,7 @@ export class TeamsBot extends TeamsActivityHandler {
         // No action required.
       }
       else {
-        const reply = MessageFactory.text(`Failed to save your file: <b>${fileName}</b>. Please try to upload it again.`);
+        const reply = MessageFactory.text(`Failed to save your file: <b>${fileName}</b>. Please try to upload it again or please try with another file.`);
         reply.textFormat = 'xml';
         await context.sendActivity(reply);
       }
@@ -141,20 +145,22 @@ export class TeamsBot extends TeamsActivityHandler {
       uniqueId: fileConsentCardResponse.uploadInfo.uniqueId,
       fileType: fileConsentCardResponse.uploadInfo.fileType
     };
+
     const asAttachment = {
       content: downloadCard,
       contentType: 'application/vnd.microsoft.teams.card.file.info',
       name: fileConsentCardResponse.uploadInfo.name,
       contentUrl: fileConsentCardResponse.uploadInfo.contentUrl
     };
+
     const reply = MessageFactory.text(`<b>File uploaded.</b> Your file <b>${fileConsentCardResponse.uploadInfo.name}</b> is ready to download`);
     reply.textFormat = 'xml';
     reply.attachments = [asAttachment];
     await context.sendActivity(reply);
   }
-  
+
   // Function to fetch text file content as a string from a web URL.
-   async fetchTextFileContentAsString(url: string): Promise<string> {
+  async fetchTextFileContentAsString(url: string): Promise<string> {
     try {
       const response = await axios.get(url, { responseType: 'string', });
       return response.data;

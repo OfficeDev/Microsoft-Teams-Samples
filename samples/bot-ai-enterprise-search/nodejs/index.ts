@@ -36,7 +36,7 @@ const azureOpenApiKey = config.azureOpenApiKey;
 var PREFIX = "enterprisedoc";  // Prefix for the document keys
 const INDEX_NAME = "enterprise-docs"; // Name of the search index
 const containerName = 'enterprise-search';
-var errorCode= "200";
+var errorCode = "200";
 
 // Azure Open AI configuration.
 const configuration = new Configuration({
@@ -201,8 +201,9 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
         }
       });
   }
-  catch (err) { console.error(err); 
-  return errorCode;
+  catch (err) {
+    console.error(err);
+    return errorCode;
   }
 };
 
@@ -243,18 +244,17 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
     var query = userPrompt;
     var contexttokenlimit = 2000;
     var answertokenlimit = 1000;
-   var completion_model ='gpt-35-turbo'
+    var completion_model = 'gpt-35-turbo'
 
     // Build prompt with retrieved contexts
-   var prompt_start="Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.If the text does not relate to the query, simply state 'Text Not Found'\n\n"
-   var promptText = prompt_start;//+ prompt_end
+    var prompt_start = "Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.If the text does not relate to the query, simply state 'Text Not Found'\n\n"
+    var promptText = prompt_start;//+ prompt_end
     var links = []
     var sum_of_tokencount = 0
 
-   var tokencount_strings=''
+    var tokencount_strings = ''
     // Iterating over the array and printing
     results.documents.forEach(async element => {
-      var index=0;
       var docUrl = element.value['docUrl'];
       var hypelinkTitle = decodeURI(docUrl).split("/").pop();
       docUrl = "<a href=" + docUrl + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
@@ -262,26 +262,20 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
 
       sum_of_tokencount += (element.value['context'].length)
       if (sum_of_tokencount <= contexttokenlimit) {
-        var contextstring =  "["+element.value['docUrl']+"]" + element.value['context'].toString() 
-        tokencount_strings+=contextstring
+        var contextstring = "[" + element.value['docUrl'] + "]" + element.value['context'].toString()
+        tokencount_strings += contextstring
       }
     });
 
     // Join the contexts with separator
     var joined_tokencount_string = "\n\n---\n\n" + tokencount_strings;
 
-  /*  promptText = (promptText +
-      "\n\n---\n\n" + joined_tokencount_string + "\n\n---\n\n"
-      // prompt_end - commented and moved in messages
-    ) */
-
     promptText = (prompt_start + "Context: " +
       "\n\n---\n\n" + joined_tokencount_string + "\n\n---\n\n" +
-      "Query:"+ userPrompt +"\nAnswer:"
-      // prompt_end - commented and moved in messages
+      "Query:" + userPrompt + "\nAnswer:"
     )
+
     joined_tokencount_string = joined_tokencount_string.replace('\n', '\n')
-    // console.log("Prompt Text:" + promptText);
 
     // Error handling for API response
     try {
@@ -311,7 +305,7 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
         "answer": completion.data.choices[0].message.content, "source": links
       }
 
-      console.log("Final Answer: " + finalResult.answer + finalResult.source[0]);
+      // console.log("Final Answer: " + finalResult.answer + finalResult.source[0]);
       await sendFinalAnswerAsync(context, finalResult)
 
       return finalResult;
@@ -321,64 +315,60 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
       return errorCode;
     }
   }
-  catch (err) { console.error(err); 
-  return errorCode;
+  catch (err) {
+    console.error(err);
+    return errorCode;
   }
 };
 
 // Send final answer to user.
 async function sendFinalAnswerAsync(context, finalResult) {
-  var relevantDocLinks = "";
-  var uniqueDocLinks = [...new Set(finalResult.source)]; // Get unique links.
 
-  // Prepare hyperlinks to share with final answer.
-  /*uniqueDocLinks.forEach(docLink => {
-    relevantDocLinks += "\n\n" + "<ul><li>" + docLink + "</li></ul>" + "\n\n ";
-  });*/
-
-  //Conver final result to string.
+  // Convert final result to string.
   var finalResultStr = JSON.stringify(finalResult.answer);
-// Regular expression to match comma-separated values inside square brackets
-const regex = /\[(.*?)\]/g;
 
-// Array to store all the matches
-const matches = [];
+  // Regular expression to match comma-separated values inside square brackets
+  const regex = /\[(.*?)\]/g;
 
-const matches1 = finalResultStr.match(regex);
+  // Array to store all the matches
+  const matches = [];
 
-let match;
-while ((match = regex.exec(finalResultStr))) {
-  // Extract the value inside the square brackets (excluding the brackets)
-  const valueInsideBrackets = match[1];
-  // Split the value by commas to get individual values
-  const commaSeparatedValues = valueInsideBrackets.split(',').map((value) =>{(
-    matches.push(value.trim())
-    )});
- 
- } 
- var uniqueFileLinks = [...new Set(matches)]; // Get unique links.
- uniqueFileLinks.forEach(docLink => {
- var hypelinkTitle = decodeURI(docLink).split("/").pop();
-  var fileUrl = "<a href=" + docLink + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
-  fileUrl += "</a>";
-  var linkToReplace = new RegExp(docLink, 'g');
-  finalResultStr=finalResultStr.replace(linkToReplace, fileUrl);
- });
+  let match;
+  while ((match = regex.exec(finalResultStr))) {
+    // Extract the value inside the square brackets (excluding the brackets)
+    const valueInsideBrackets = match[1];
+    // Split the value by commas to get individual values
+    const commaSeparatedValues = valueInsideBrackets.split(',').map((value) => {
+      (
+        matches.push(value.trim())
+      )
+    });
 
-  await context.sendActivity( {type: ActivityTypes.Message,text:finalResultStr});
+  }
+
+  var uniqueFileLinks = [...new Set(matches)]; // Get unique links.
+  uniqueFileLinks.forEach(docLink => {
+    var hypelinkTitle = decodeURI(docLink).split("/").pop();
+    var fileUrl = "<a href=" + docLink + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
+    fileUrl += "</a>";
+    var linkToReplace = new RegExp(docLink, 'g');
+    finalResultStr = finalResultStr.replace(linkToReplace, fileUrl);
+  });
+
+  await context.sendActivity({ type: ActivityTypes.Message, text: finalResultStr });
   var reply;
-        if(finalResultStr.includes("Text Not Found")){
-          reply = MessageFactory.text(`<i>Sorry, I could not find any answer to your query. Please try again with different query or contact admin.</i>`);
-        }
-        else if(errorCode.includes("404")){
-          reply = MessageFactory.text(`<i>Sorry, Service might be busy or error occurred. Please try after some time.</i>`);
-        }
-        else{
-          reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
-        }
-        reply.textFormat = 'xml';
-        await context.sendActivity(reply);
- 
+
+  if (finalResultStr.includes("Text Not Found")) {
+    reply = MessageFactory.text(`<i>Sorry, I could not find any answer to your query. Please try again with different query or contact admin.</i>`);
+  }
+  else if (errorCode.includes("404")) {
+    reply = MessageFactory.text(`<i>Sorry, Service might be busy or error occurred. Please try after some time.</i>`);
+  }
+  else {
+    reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
+  }
+  reply.textFormat = 'xml';
+  await context.sendActivity(reply);
 };
 
 // Upload text file to blob container.
@@ -386,7 +376,7 @@ export async function uploadTextFileToBlobAsync(fileContentsAsString, fileName) 
   try {
 
     // Connection string
-    const connString =config.azureStorageConnStr; // process.env.AZURE_STORAGE_CONNECTION_STRING;
+    const connString = config.azureStorageConnStr;
     if (!connString) throw Error('Azure Storage Connection string not found');
 
     // Create the BlobServiceClient object with connection string.
@@ -417,7 +407,7 @@ export async function uploadTextFileToBlobAsync(fileContentsAsString, fileName) 
 
       // Upload text file contents as a blob in Azure storage container.
       const uploadBlobResponse = await blockBlobClient.upload(fileContentsAsString, fileContentsAsString.length, options);
-      console.log(`Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`);
+      // console.log(`Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`);
     }
 
     // Once blob is created, get it's URL and save it.
