@@ -89,7 +89,13 @@ provision:
       appId: M365_APP_ID
 
 deploy:
-  # Run npm command
+# Run npm command for client
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./client
+      args: install --no-audit
+
+  # Run npm command for server
   - uses: cli/runNpmCommand
     with:
       workingDirectory: .
@@ -110,6 +116,3 @@ deploy:
           applicationIdUri: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
           MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
           MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          AllowedHosts: ${{TAB_ENDPOINT}}
-          MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
-          port: 3000
