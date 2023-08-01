@@ -84,6 +84,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |21| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
 |22| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
 |23|  User specific views in Adaptive cards | This sample shows the different ways developers can consume user specific views in Adaptive cards. |[View][botadaptivecardsuserspecificviews#csharp]| | | |[View](/samples/bot-adaptivecards-user-specific-views/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
+|24| Bot configuration app with type ahead search control.| Demonstrating the feature of configurable card with type ahead search (static and dynamic) control on Adaptive Cards. ||[View][BotConfigurationApp#nodejs]
 
 #### Additional samples
 
@@ -318,6 +319,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
 [BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
 [BotFormattingCards#nodejs]:samples/bot-formatting-cards/nodejs  
+[BotConfigurationApp#nodejs]:samples/bot-configuration-app/nodejs  
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs
 [AdaptiveCardSSO#csharp]:samples/bot-sso-adaptivecard/csharp
 [BotSSOAdaptiveCard#nodejs]:samples/bot-sso-adaptivecard/nodejs

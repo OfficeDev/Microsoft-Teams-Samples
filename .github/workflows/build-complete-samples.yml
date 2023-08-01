@@ -963,6 +963,10 @@ jobs:
               name: 'tab-multi-hub'
               version: '18.x'
 
+            - project_path: 'samples/bot-configuration-app/nodejs'
+              name: 'bot-configuration-app'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
