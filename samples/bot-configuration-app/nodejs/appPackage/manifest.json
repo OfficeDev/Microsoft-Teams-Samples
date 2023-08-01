@@ -28,7 +28,6 @@
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "needsChannelSelector": false,
       "scopes": [
-        "personal",
         "team",
         "groupchat"
       ],
@@ -43,7 +42,6 @@
       "commandLists": [
         {
           "scopes": [
-            "personal",
             "team",
             "groupchat"
           ],
@@ -102,9 +100,6 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<domain-name>>",
-    "teams.live.com",
-    "teams.microsoft.com",
-    "*.teams.microsoft.com"
+    "<<domain-name>>"
   ]
 }

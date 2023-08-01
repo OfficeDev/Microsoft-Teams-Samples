@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "31-12-2023 23:30:17"
+ createdDate: "31-07-2023 23:30:17"
 urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
 ---
 # Bot Configuration 
@@ -27,25 +27,6 @@ This sample shows the feature of configurable card with type ahead search (stati
 
 ![Configuration Bot](Images/ConfigurationBot.gif)
 
-`Configurable Card:`
-A configurable card is used to modify data even after the bot has been installed. When the bot is added to a Teams or group chat scope, it utilizes 'config/fetch' and 'config/submit' invoke requests.
-
-`Static search:`
- Static typeahead search allows users to search from values specified within `input.choiceset` in the Adaptive Card payload.
-
-![static search card](Images/staticSearchCard.png)
-
-`Dynamic search:`
- Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
-
-![dynamic search card](Images/dynamicSearchCard.png)
-
-`Dynamic search results:`
-
-![dynamic search result](Images/dynamicSearchResult.png)
-
- On `Submit` button click, the bot will return the choice that we have selected.
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -54,7 +35,7 @@ A configurable card is used to modify data even after the bot has been installed
 
 ## Setup
 
-1) Run ngrok - point to port 3978
+ Run ngrok - point to port 3978
 
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
@@ -77,7 +58,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-conversation/nodejs`
+1) In a terminal, navigate to `samples/bot-configuration-app/nodejs`
 
 1) Install modules
 
@@ -85,8 +66,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) 
 
 1) Run your bot at the command line:
 
@@ -99,15 +79,17 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+    - Add the app to team/groupChat scope (Supported scopes)
 
 ## Running the sample
 
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
 
-1. **Configurable Card**
+ **Configurable Card**
+    A configurable card is used to modify data even after the bot has been installed. When the bot is added to a Teams or group chat scope, it utilizes 'config/fetch' and 'config/submit' invoke requests.
+
   - **Result:** The bot will send the configurable adaptive card 
-  - **Valid Scopes:** personal, group chat, team chat
+  - **Valid Scopes:** group chat, team chat
 
   - **Bot Interactions:**
 
@@ -132,13 +114,13 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![Bot-description-card](Images/Bot-description-card.png)
 
    **Click the settings button in the card to invoke configurable card:**
-  ![Bot-description-card-interaction1](Images/Bot-description-card-interaction1)
+  ![Bot-description-card-interaction1](Images/Bot-description-card-interaction1.png)
 
-  ![Bot-description-card-interaction2](Images/Bot-description-card-interaction2)
+  ![Bot-description-card-interaction2](Images/Bot-description-card-interaction2.png)
 
-  ![Bot-description-card-interaction3](Images/Bot-description-card-interaction3)
+  ![Bot-description-card-interaction3](Images/Bot-description-card-interaction3.png)
 
-  ![Bot-description-card-interaction4](Images/Bot-description-card-interaction4)
+  ![Bot-description-card-interaction4](Images/Bot-description-card-interaction4.png)
 
 ## Further reading
 
@@ -147,3 +129,5 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
 - [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-cofiguration-app-nodejs" />
