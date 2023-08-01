@@ -9,6 +9,7 @@ import {
   ConfigurationBotFrameworkAuthentication,
   TurnContext,
   ActivityTypes,
+  MessageFactory,
 } from "botbuilder";
 
 // This bot's main dialog.
@@ -35,6 +36,7 @@ const azureOpenApiKey = config.azureOpenApiKey;
 var PREFIX = "enterprisedoc";  // Prefix for the document keys
 const INDEX_NAME = "enterprise-docs"; // Name of the search index
 const containerName = 'enterprise-search';
+var errorCode = "200";
 
 // Azure Open AI configuration.
 const configuration = new Configuration({
@@ -166,6 +168,7 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
     })();
   } catch (ex) {
     console.log(ex)
+    return true;
   }
 
   var embeddings = "";
@@ -198,7 +201,10 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
         }
       });
   }
-  catch (err) { console.error(err); }
+  catch (err) {
+    console.error(err);
+    return errorCode;
+  }
 };
 
 // Search user prompt in Redis DB.
@@ -241,12 +247,12 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
     var completion_model = 'gpt-35-turbo'
 
     // Build prompt with retrieved contexts
-    var prompt_start = "Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.\n\n"
-    var promptText = prompt_start;
+    var prompt_start = "Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.If the text does not relate to the query, simply state 'Text Not Found'\n\n"
+    var promptText = prompt_start;//+ prompt_end
     var links = []
     var sum_of_tokencount = 0
-    var tokencount_strings = ''
 
+    var tokencount_strings = ''
     // Iterating over the array and printing
     results.documents.forEach(async element => {
       var docUrl = element.value['docUrl'];
@@ -306,9 +312,13 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
     }
     catch (err) {
       console.log("Error while running the query: " + err.message);
+      return errorCode;
     }
   }
-  catch (err) { console.error(err); }
+  catch (err) {
+    console.error(err);
+    return errorCode;
+  }
 };
 
 // Send final answer to user.
@@ -316,6 +326,7 @@ async function sendFinalAnswerAsync(context, finalResult) {
 
   // Convert final result to string.
   var finalResultStr = JSON.stringify(finalResult.answer);
+
   // Regular expression to match comma-separated values inside square brackets
   const regex = /\[(.*?)\]/g;
 
@@ -327,7 +338,7 @@ async function sendFinalAnswerAsync(context, finalResult) {
     // Extract the value inside the square brackets (excluding the brackets)
     const valueInsideBrackets = match[1];
     // Split the value by commas to get individual values
-    valueInsideBrackets.split(',').map((value) => {
+    const commaSeparatedValues = valueInsideBrackets.split(',').map((value) => {
       (
         matches.push(value.trim())
       )
@@ -340,11 +351,24 @@ async function sendFinalAnswerAsync(context, finalResult) {
     var hypelinkTitle = decodeURI(docLink).split("/").pop();
     var fileUrl = "<a href=" + docLink + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
     fileUrl += "</a>";
-    // var linkToReplace = new RegExp(docLink, 'g');
-    finalResultStr = finalResultStr.replace(docLink, fileUrl);
+    var linkToReplace = new RegExp(docLink, 'g');
+    finalResultStr = finalResultStr.replace(linkToReplace, fileUrl);
   });
 
   await context.sendActivity({ type: ActivityTypes.Message, text: finalResultStr });
+  var reply;
+
+  if (finalResultStr.includes("Text Not Found")) {
+    reply = MessageFactory.text(`<i>Sorry, I could not find any answer to your query. Please try again with different query or contact admin.</i>`);
+  }
+  else if (errorCode.includes("404")) {
+    reply = MessageFactory.text(`<i>Sorry, Service might be busy or error occurred. Please try after some time.</i>`);
+  }
+  else {
+    reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
+  }
+  reply.textFormat = 'xml';
+  await context.sendActivity(reply);
 };
 
 // Upload text file to blob container.

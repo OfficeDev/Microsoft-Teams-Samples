@@ -11,8 +11,8 @@ import { uploadTextFileToBlobAsync, uploadPdfFileToBlobAsync, generateEmbeddingF
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const os = require('os');
 const { writeFile } = require('./fileService');
-const FILES_DIR = 'files';
 
 export interface DataInterface {
   likeCount: number;
@@ -52,13 +52,15 @@ export class TeamsBot extends TeamsActivityHandler {
         downloadUrl = file.content.downloadUrl;
         fileName = file.name;
 
-        localFilePath = path.join(FILES_DIR, file.name);
+        localFilePath = path.join(os.tmpdir(), fileName);
+        console.log("localFilePath: " + localFilePath);
         var isFileUploadedSuccessfully = false;
         var isUserQuery = false;
         var isImage = false;
 
         if (file.name.includes(".pdf")) {
           try {
+            
             await writeFile(file.content.downloadUrl, config, localFilePath);
 
             // Create embeddings for pdf file contents.
@@ -96,7 +98,6 @@ export class TeamsBot extends TeamsActivityHandler {
           isImage = true;
         }
       } else if (attachments && attachments[0] && imageRegex.test(attachments[0].contentType)) {
-        // await this.processInlineImage(context);
         await context.sendActivity("**Image upload is not supported. Please upload text or pdf file.**");
         isImage = true;
       } else {
@@ -112,9 +113,6 @@ export class TeamsBot extends TeamsActivityHandler {
         await context.sendActivity(reply);
       }
       else if (isUserQuery) {
-        const reply = MessageFactory.text(`<i>I hope I have answered your query. Let me know if you have any further questions.</i>`);
-        reply.textFormat = 'xml';
-        await context.sendActivity(reply);
       }
       else if (isImage) {
         // No action required.
@@ -178,9 +176,10 @@ export class TeamsBot extends TeamsActivityHandler {
       var fs = require('fs');
       const pdfParse = require('pdf-parse')
       let readFileSync = fs.readFileSync(localFilePath)
-      let pdfExtract = await pdfParse(readFileSync)
 
+      let pdfExtract = await pdfParse(readFileSync)
       return pdfExtract.text;
+
     } catch (error) {
       throw new Error(`Failed to fetch file content: ${error}`);
     }
