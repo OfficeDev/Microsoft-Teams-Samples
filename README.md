@@ -189,6 +189,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |30|Anonymous user support| This sample app shows anonymous users support in teams meeting apps.|[View][app-anonymous-users#cs]       
 |31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs]|
 |32|App Icon Badging In Microsoft Teams Meetings|This sample app shows the feature of sending app icon badging in Teams' meetings.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs]|
+|33|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs]|
+
 
 ## Application templates
 
@@ -382,6 +384,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#cs]:samples/meetings-live-caption/csharp
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 [app-anonymous-users#cs]:samples/app-anonymous-users/csharp
+[bot-ai-enterprise-search#nodejs]:samples/bot-ai-enterprise-search/nodejs
 [meetings-app-icon-badging#csharp]:samples/meetings-app-icon-badging/csharp
 [meetings-app-icon-badging#nodejs]:samples/meetings-app-icon-badging/nodejs
 
