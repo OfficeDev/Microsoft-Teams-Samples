@@ -2,12 +2,9 @@ import {
   TeamsActivityHandler,
   CardFactory,
   TurnContext,
-  AdaptiveCardInvokeValue,
-  AdaptiveCardInvokeResponse,
   MessageFactory,
 } from "botbuilder";
 import rawWelcomeCard from "./adaptiveCards/welcome.json";
-import rawLearnCard from "./adaptiveCards/learn.json";
 import { AdaptiveCards } from "@microsoft/adaptivecards-tools";
 import { uploadTextFileToBlobAsync, uploadPdfFileToBlobAsync, generateEmbeddingForUserPromptAsync } from "./index";
 
@@ -15,9 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const os = require('os');
-//const { MicrosoftAppCredentials } = require('botframework-connector');
-const { geneFileName, getFileSize, writeFile } = require('./fileService');
-const FILES_DIR = 'files';
+const { writeFile } = require('./fileService');
 
 export interface DataInterface {
   likeCount: number;
@@ -56,13 +51,11 @@ export class TeamsBot extends TeamsActivityHandler {
         downloadUrl = file.content.downloadUrl;
         fileName = file.name;
 
-       // localFilePath = path.join('./Files/', file.name); //path.join(FILES_DIR, file.name);
        localFilePath = path.join(os.tmpdir(), fileName); 
        console.log("localFilePath: " + localFilePath);
        var isFileUploadedSuccessfully = false;
         var isUserQuery = false;
         var isImage = false;
-        var result;
 
         if (file.name.includes(".pdf")) {
           try {
@@ -101,7 +94,6 @@ export class TeamsBot extends TeamsActivityHandler {
           isImage = true;
         }
       } else if (attachments && attachments[0] && imageRegex.test(attachments[0].contentType)) {
-        // await this.processInlineImage(context);
         await context.sendActivity("**Image upload is not supported. Please upload text or pdf file.**");
         isImage = true;
       } else {
@@ -144,25 +136,6 @@ export class TeamsBot extends TeamsActivityHandler {
     });
   }
 
-  // Invoked when an action is taken on an Adaptive Card. The Adaptive Card sends an event to the Bot and this
-  // method handles that event.
-  async onAdaptiveCardInvoke(
-    context: TurnContext,
-    invokeValue: AdaptiveCardInvokeValue
-  ): Promise<AdaptiveCardInvokeResponse> {
-    // The verb "userlike" is sent from the Adaptive Card defined in adaptiveCards/learn.json
-    if (invokeValue.action.verb === "userlike") {
-      this.likeCountObj.likeCount++;
-      const card = AdaptiveCards.declare<DataInterface>(rawLearnCard).render(this.likeCountObj);
-      await context.updateActivity({
-        type: "message",
-        id: context.activity.replyToId,
-        attachments: [CardFactory.adaptiveCard(card)],
-      });
-      return { statusCode: 200, type: undefined, value: undefined };
-    }
-  }
-
   async fileUploadCompleted(context, fileConsentCardResponse) {
     const downloadCard = {
       uniqueId: fileConsentCardResponse.uploadInfo.uniqueId,
@@ -199,9 +172,6 @@ export class TeamsBot extends TeamsActivityHandler {
       let readFileSync = fs.readFileSync(localFilePath)
 
       let pdfExtract = await pdfParse(readFileSync)
-      // console.log('File content: ', pdfExtract.text)
-      // console.log('Total pages: ', pdfExtract.numpages)
-      // console.log('All content: ', pdfExtract.info)
       return pdfExtract.text;
 
     } catch (error) {

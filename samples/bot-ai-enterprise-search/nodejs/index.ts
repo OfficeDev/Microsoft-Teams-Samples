@@ -8,7 +8,6 @@ import {
   ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
   TurnContext,
-  MemoryStorage,
   ActivityTypes,
   MessageFactory,
 } from "botbuilder";
@@ -102,55 +101,6 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
   console.log(`\nBot Started, ${server.name} listening to ${server.url}`);
 });
 
-/*import { Application, ConversationHistory, DefaultPromptManager, DefaultTurnState, OpenAIModerator, OpenAIPlanner, AI } from '@microsoft/teams-ai';
-import path from "path";
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ConversationState {}
-type ApplicationTurnState = DefaultTurnState<ConversationState>;
-// Create AI components
-const planner = new OpenAIPlanner({
-  apiKey: config.openAIKey,
-  defaultModel: 'text-davinci-003',
-  logRequests: true
-});
-const moderator = new OpenAIModerator({
-  apiKey: config.openAIKey,
-  moderate: 'both'
-});
-const promptManager = new DefaultPromptManager(path.join(__dirname, './prompts' ));
-
-// Define storage and application
-const storage = new MemoryStorage();
-const app = new Application<ApplicationTurnState>({
-  storage,
-  ai: {
-      planner,
-      moderator,
-      promptManager,
-      prompt: 'chat',
-      history: {
-          assistantHistoryType: 'text'
-      }
-  }
-});
-
-app.ai.action(AI.FlaggedInputActionName, async (context, state, data) => {
-  await context.sendActivity(`I'm sorry your message was flagged: ${JSON.stringify(data)}`);
-  return false;
-});
-
-app.ai.action(AI.FlaggedOutputActionName, async (context, state, data) => {
-  await context.sendActivity(`I'm not allowed to talk about such things.`);
-  return false;
-});
-
-app.message('/help', async (context, state) => {
-});
-
-app.message('/history', async (context, state) => {
-  const history = ConversationHistory.toString(state, 2000, '\n\n');
-  await context.sendActivity(history);
-  }); */
 // Listen for incoming requests.
 server.post("/api/messages", async (req, res) => {
   await adapter.process(req, res, async (context) => {
@@ -259,8 +209,8 @@ export async function generateEmbeddingForUserPromptAsync(context, userPrompt) {
 // Search user prompt in Redis DB.
 async function SearchInDBAsync(context, userPromptEmbedding, userPrompt) {
   try {
-    var hybrid_fields = "*";
-    var k = 15;
+    // var hybrid_fields = "*";
+    // var k = 15;
 
     var base_query = "*=>[KNN 5 @context_vector $context_vector AS vector_score]";
     var return_fields = ["context_vector", "context", "docUrl", "vector_score"];
@@ -293,24 +243,20 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
     var query = userPrompt;
     var contexttokenlimit = 2000;
     var answertokenlimit = 1000;
-   // var completion_model = 'gpt-35-turbo'
    var completion_model ='gpt-35-turbo'
 
     // Build prompt with retrieved contexts
-    //var prompt_start = "Give an exhaustive answer from the below contents. If answer is not found in the context below then strictly respond saying I don't know. Context:\n\n"
-   // var prompt_start="Instructions: Compose a comprehensive reply to the query using the search results given.Cite each reference using [ Page Number] notation (every result has this number at the beginning).Citation should be done at the end of each sentence. If the search results mention multiple subjects with the same name, create separate answers for each. Only include information found in the results and don't add any additional information. Make sure the answer is correct and don't output false content. If the text does not relate to the query, simply state 'Text Not Found'. Ignore outlier search results which has nothing to do with the question. Only answer what is asked. The answer should be short and concise. Answer step-by-step.\n\n"
    var prompt_start="Prompt: \n\n You are a helpful assistant who can help users with answers to their questions. Using only the context below, you have to answer user's question to the best of your ability.When you create the answer, where applicable, you must indicate which file(s) you picked your answer from. You can do this by adding the URLs with hyperlink at the end of the respective sentence within []. If a sentence is derived from multiple sources, include all relevant URLs. If a sentence is based on general knowledge not attributable to a specific source, you do not need to include a URL. Follow the output format shown below -\n\n Example output response: Sentence 1 [source_url1, source_url2]... where source URL1 and URL2 are the URLs mentioned in the respective context.If the text does not relate to the query, simply state 'Text Not Found'\n\n"
    var promptText = prompt_start;//+ prompt_end
     var links = []
     var sum_of_tokencount = 0
-   // var tokencount_strings = []
+
    var tokencount_strings=''
     // Iterating over the array and printing
     results.documents.forEach(async element => {
       var index=0;
       var docUrl = element.value['docUrl'];
       var hypelinkTitle = decodeURI(docUrl).split("/").pop();
-     // docUrl = "<a href=" + docUrl + ">" 
       docUrl = "<a href=" + docUrl + ">" + hypelinkTitle.substring(0, hypelinkTitle.lastIndexOf('.')) || hypelinkTitle + "</a>";
       links.push(docUrl + "\n\n");
 
@@ -318,10 +264,7 @@ async function parseResultAndCallCompletionAsync(context, results, userPrompt) {
       if (sum_of_tokencount <= contexttokenlimit) {
         var contextstring =  "["+element.value['docUrl']+"]" + element.value['context'].toString() 
         tokencount_strings+=contextstring
-         
       }
-
-     
     });
 
     // Join the contexts with separator
@@ -605,9 +548,6 @@ async function createEmbeddingForFileAsync(fileContentsAsString, docUrl) {
     } else {
       // Something went wrong, perhaps RediSearch isn't installed...
       console.error(e);
-      // process.exit(1);
     }
   }
 };
-
-
