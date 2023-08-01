@@ -385,6 +385,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 [app-anonymous-users#cs]:samples/app-anonymous-users/csharp
 [bot-ai-enterprise-search#nodejs]:samples/bot-ai-enterprise-search/nodejs
+[meetings-app-icon-badging#csharp]:samples/meetings-app-icon-badging/csharp
+[meetings-app-icon-badging#nodejs]:samples/meetings-app-icon-badging/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
 [msteams-app-resource-hub]:samples/msteams-application-resourcehub/
