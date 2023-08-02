@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "id": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
         "personal",
         "groupchat",
@@ -54,6 +54,10 @@
             {
               "title": "MessageAllMembers",
               "description": "Send 1 to 1 message to all members of the current conversation"
+            },
+            {
+              "title": "MessageAllMembersUsingAadId",
+              "description": "Send 1 to 1 message to all members of the current conversation using their AADId"
             }
           ]
         }
