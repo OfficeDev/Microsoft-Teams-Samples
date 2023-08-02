@@ -42,5 +42,9 @@
   "validDomains": [
     "token.botframework.com",
     "{{domain-name}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>"
+  }
 }
