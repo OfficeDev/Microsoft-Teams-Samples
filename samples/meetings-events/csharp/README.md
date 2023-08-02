@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which are available in bot framework v4
+description: This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4
 products:
 - office-teams
 - office
@@ -15,8 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
 
 # Realtime meeting events
 
-Using this C# sample, a bot can receive real-time meeting events.
+Using this C# sample, a bot can receive real-time meeting events and meeting participant events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+and [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-8455&tabs=dotnet%2Cparticipant-join-event#get-participant-events)
 
 The feature shown in this sample is currently available in public developer preview only.
 
@@ -32,7 +33,7 @@ The feature shown in this sample is currently available in public developer prev
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Realtime meeting events:** [Manifest](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
+**Realtime meeting and participant events:** [Manifest](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
 
 ## Prerequisites
 
@@ -115,6 +116,14 @@ Once the meeting where the bot is added starts or ends, real-time updates are po
 
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
+**MeetingParticipantEvents command interaction:**   
+
+![Meeting participant added event](MeetingEvents/Images/meeting-participant-added.png)
+
+**End meeting events details:**   
+
+![Meeting participant left event](MeetingEvents/Images/meeting-participant-left.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -123,5 +132,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-8455&tabs=dotnet%2Cparticipant-join-event#get-participant-events)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-events-csharp" />
