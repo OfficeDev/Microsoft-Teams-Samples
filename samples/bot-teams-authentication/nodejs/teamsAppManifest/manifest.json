@@ -42,5 +42,9 @@
   "validDomains": [
     "token.botframework.com",
     "${{BOT_DOMAIN}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+  }
 }
