@@ -30,8 +30,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.cardActivityAsync(context, true);
             } else if (text.includes('delete')) {
                 await this.deleteCardActivityAsync(context);
+            } else if (text.includes('aadid')) {
+                await this.messageAllMembersAsync(context, true);
             } else if (text.includes('message')) {
-                await this.messageAllMembersAsync(context);
+                await this.messageAllMembersAsync(context, false);
             } else if (text.includes('who')) {
                 await this.getSingleMember(context);
             } else if (text.includes('immersivereader')) {
@@ -107,6 +109,12 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 title: 'Message all members',
                 value: null,
                 text: 'MessageAllMembers'
+            },
+            {
+                type: ActionTypes.MessageBack,
+                title: 'Message all members using AADId',
+                value: null,
+                text: 'MessageAllMembersUsingAadId'
             },
             {
                 type: ActionTypes.MessageBack,
@@ -255,7 +263,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
         await context.deleteActivity(context.activity.replyToId);
     }
 
-    async messageAllMembersAsync(context) {
+    async messageAllMembersAsync(context, isAadid) {
         const members = await this.getPagedMembers(context);
 
         await Promise.all(members.map(async (member) => {
@@ -264,9 +272,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
             );
 
             const convoParams = {
-                members: [member],
-                tenantId: context.activity.channelData.tenant.id,
-                activity: context.activity
+                members: [isAadid?{ id: member.aadObjectId } : { id: member.id}],
+                isGroup: false, 
+                bot: context.activity.recipient,
+                tenantId: context.activity.conversation.tenantId
             };
 
             await context.adapter.createConversationAsync(
