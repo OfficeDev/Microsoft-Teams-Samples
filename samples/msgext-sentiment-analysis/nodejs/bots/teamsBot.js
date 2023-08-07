@@ -44,6 +44,10 @@ class TeamsBot extends TeamsActivityHandler {
                         role: 'system',
                         content: `You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative`,
                     },
+                    {
+                        role: 'user',
+                        content: `${tweet}`
+                    }
                 ]
 
                 // CreateChatCompletion api call
