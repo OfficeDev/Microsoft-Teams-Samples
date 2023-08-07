@@ -79,7 +79,7 @@ class TeamsBot extends TeamsActivityHandler {
                 type: 'continue',
                 value: {
                     width: 600,
-                    height: 100,
+                    height: 400,
                     title: 'Sentiment Analysis',
                     url: this.baseUrl + "/sentimentModule?title=" + textToAnalyze + "&result=" + sentimentResponse
                 }
