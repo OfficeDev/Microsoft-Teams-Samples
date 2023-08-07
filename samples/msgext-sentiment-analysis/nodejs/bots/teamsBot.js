@@ -42,7 +42,7 @@ class TeamsBot extends TeamsActivityHandler {
                 const messages = [
                     {
                         role: 'system',
-                        content: `You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative ${tweet}`,
+                        content: `You will be provided with a tweet, and your task is to classify its sentiment as positive, neutral, or negative`,
                     },
                 ]
 
