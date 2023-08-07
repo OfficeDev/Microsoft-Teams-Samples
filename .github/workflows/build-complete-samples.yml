@@ -963,6 +963,10 @@ jobs:
               name: 'tab-multi-hub'
               version: '18.x'
 
+            - project_path: 'samples/msgext-sentiment-analysis/nodejs'
+              name: 'msgext-sentiment-analysis'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:

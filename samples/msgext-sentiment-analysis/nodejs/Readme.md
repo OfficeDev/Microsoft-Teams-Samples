@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-msgext-sentiment-analysis-nodejs
 
 This sample shows a feature where user can check sentiment for teams message by using messaging extension.
 
+## Included Features
+* Bots
+* Open AI
+
 ## Interaction with app
 
 ![Sentiment Analysis](Images/Sentiment_Analysis.gif)
@@ -45,6 +49,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+1. In the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
 
 ## Setup
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -67,7 +72,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-   - Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`, `BaseUrl` and `apiKey` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+   - Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`, `apiKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+
+   - For `apiKey` you need to registered and login to this link(https://platform.openai.com/docs/quickstart/build-your-application) from here you will get an option to create Key.
 
 - In the folder where repository is cloned navigate to `samples/msgext-sentiment-analysis/nodejs`
 - Install modules
@@ -81,13 +88,19 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm start
     ```
 
+6) Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` o replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{BOT_DOMAIN}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-message-reminder/nodejs/index.js#L47) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-message-reminder/nodejs/index.js#L44) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -104,12 +117,8 @@ Its shows Sentiment(positive/negative/neutral) for selected message
 ![Sentiment Analysis Reuslt ](Images/4.Result.PNG)
 
 ## Further reading
-
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-sentiment-analysis-nodejs" />

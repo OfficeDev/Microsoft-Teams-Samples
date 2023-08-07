@@ -107,6 +107,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] |
 |7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]|[View](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
+|9|Messaging Extensions - Sentiment Analysis | Messaging Extension that performs Sentiment Analysis(positive/negative/neutral) for every Teams message |  | [View][msgext-sentiment-analysis#js] |  | |
 
 #### Additional samples
 
@@ -408,6 +409,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-action-preview#js]:samples/msgext-action-preview/nodejs
 [msgext-action#js]:samples/msgext-action/nodejs
 [msgext-link-unfurling#js]:samples/msgext-link-unfurling/nodejs
+[msgext-sentiment-analysis#js]:samples/msgext-sentiment-analysis/nodejs
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 [bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
 
