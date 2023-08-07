@@ -23,6 +23,7 @@ class TeamsBot extends TeamsActivityHandler {
         });
     }
 
+    // fetch and handle message extension task module 
     async handleTeamsMessagingExtensionFetchTask(context, action) {
 
         textToAnalyze = action.messagePayload.body.content;
