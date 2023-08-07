@@ -74,7 +74,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
    - Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`, `apiKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-   - For `apiKey` you need to registered and login to this link(https://platform.openai.com/docs/quickstart/build-your-application) from here you will get an option to create Key.
+   - For `apiKey` you need to registered and login to this link with your personal account (https://platform.openai.com/docs/quickstart/build-your-application) from here you will get an option to create Key.
+   - [Create New Open API Key ](Images/5.Api_Key.PNG)
 
 - In the folder where repository is cloned navigate to `samples/msgext-sentiment-analysis/nodejs`
 - Install modules
