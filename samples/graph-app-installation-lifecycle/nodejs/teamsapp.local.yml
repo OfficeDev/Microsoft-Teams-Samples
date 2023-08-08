@@ -100,7 +100,5 @@ deploy:
     with:
       target: .env
       envs:
-        BROWSER: none
-        HTTPS: true
         ClientId: ${{AAD_APP_CLIENT_ID}}
         ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
