@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "08/07/2023 04:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-sentiment-analysis-nodejs
+urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs
 ---
 
 # Sentiment Analysis with messaging extension
@@ -28,7 +28,6 @@ This sample shows a feature where user can check sentiment for teams message by 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Sentiment Analysis ME:** [Manifest](/samples/)
 
 ## Prerequisites
 
@@ -77,7 +76,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - For `apiKey` you need to registered and login to this link with your personal account (https://platform.openai.com/docs/quickstart/build-your-application) from here you will get an option to create Key.
    -![Create Open Api key](Images/5.Api_Key.PNG)
 
-- In the folder where repository is cloned navigate to `samples/msgext-sentiment-analysis/nodejs`
+- In the folder where repository is cloned navigate to `samples/msgext-ai-sentiment-analysis/nodejs`
 - Install modules
 
     ```bash
@@ -122,4 +121,4 @@ Its shows Sentiment(positive/negative/neutral) for selected message
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-sentiment-analysis-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-nodejs" />

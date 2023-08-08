@@ -1,7 +1,7 @@
 {
     "name": "ME-ai-sentiment-analysis",
     "version": "1.0.0",
-    "description": "Bot Builder v4 Bot Teams sample",
+    "description": "Sentiment analysis using message extension",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",

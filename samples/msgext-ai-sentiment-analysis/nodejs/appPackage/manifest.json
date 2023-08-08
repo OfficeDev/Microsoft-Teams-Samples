@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Sentiment analysis setup through messaging extension.",
-    "full": "This sample shows a feature where user can get sentiment analysis from messaging extension."
+    "full": "This sample shows a feature where user can get sentiment analysis using messaging extension."
   },
   "icons": {
     "outline": "outline.png",
