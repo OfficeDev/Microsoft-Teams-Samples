@@ -168,15 +168,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **After opening Outlook web, click the "New mail" button.**
 
-![Open New Mail](Images/OpenNewMail.png)
+![Open New Mail](TabInStageView/Images/OpenNewMail.png)
 
 **On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
 
-![OpenAppIcon](Images/OpenAppIcon.png)
+![OpenAppIcon](TabInStageView/Images/OpenAppIcon.png)
 
 **Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
 
-![Outlook Unfurling](Images/OutlookUnfurling.png)
+![Outlook Unfurling](TabInStageView/Images/OutlookUnfurling.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
