@@ -24,7 +24,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Interaction with app
 
-![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
+![TabStageView Modules](TabInStageView/Images/TabStageView.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -119,30 +119,38 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Running the sample
+- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-- Opening stage view in tab with Adaptive card action.
+**Install App:**
 
-![Card Actions](TabInStageView/Images/cardActions.png)
+![InstallApp](TabInStageView/Images/Install.png)
 
-- Opening Collaborative Stage View. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+**Welcome message with feature explanation and Adaptive Card with actions:**
 
-![Stage View](TabInStageView/Images/CollaborativeStageView.png)
+![Welcome Message](TabInStageView/Images/welcomeAction.png)
 
-- Opening stage view from Adaptive card via deep link.
+**Open the URL in tab stage view:**
+
+![InstallApp](TabInStageView/Images/ClickButton.png)
+
+**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+
+![Stage View in tab](TabInStageView/Images/CollaborativeStageView.png)
+
+**Opening stage view from Adaptive card via deep link:**
 
 ![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
 
-- Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
+![LinkUnfurlingStageView](TabInStageView/Images/LinkUnfurlingStageView.png)
 
-![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
 
-![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
+![LinkUnfurlingText](TabInStageView/Images/LinkUnfurlingText.png)
 
-![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+**Tab with execute deep link action to open stage view:**
 
-- Tab with execute deep link action to open stage view.
+![Tab View](TabInStageView/Images/viaTabDeeplink.png)  
 
-![Stage View in tab](TabInStageView/Images/viaTabDeeplink.png)
 
 ## Outlook on the web
 
