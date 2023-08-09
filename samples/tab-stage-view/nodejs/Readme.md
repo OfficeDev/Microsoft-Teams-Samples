@@ -132,9 +132,17 @@ Also update `BaseUrl` according to your code runtime environment.
 ## Running the sample
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
+**Install App:**
+
+![InstallApp](Images/Install.png)
+
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
 ![Welcome Message](Images/welcomeAction.png)
+
+**Open the URL in tab stage view:**
+
+![InstallApp](Images/ClickButton.png)
 
 **Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
@@ -144,13 +152,11 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Stage View Deep Link](Images/viaDeeplink.png)
 
+![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
+
 **Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
 
-![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
-
-![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
-
-![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+![LinkUnfurlingText](Images/LinkUnfurlingText.png)
 
 **Tab with execute deep link action to open stage view:**
 
