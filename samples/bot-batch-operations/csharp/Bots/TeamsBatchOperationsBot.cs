@@ -140,13 +140,13 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private async Task MessageListOfUsersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var membersList = new List<object>();
+            var membersList = new List<TeamMember>();
             var tenantId = turnContext.Activity.Conversation.TenantId;
 
             for (int i = 1; i <= 5; i++)
             {
                 var userId = GetId(turnContext.Activity.Value, $"user-id{i}");
-                membersList.Add(new { Id = userId });
+                membersList.Add(new TeamMember(userId));
             }
 
             var message = MessageFactory.Text("Hello user! You are part of the batch.");
@@ -162,13 +162,13 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private async Task MessageListOfChannelsAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var membersList = new List<object>();
+            var membersList = new List<TeamMember>();
             var tenantId = turnContext.Activity.Conversation.TenantId;
 
             for (int i = 1; i <= 5; i++)
             {
                 var channelId = GetId(turnContext.Activity.Value, $"channel-id{i}");
-                membersList.Add(new { Id = channelId });
+                membersList.Add(new TeamMember(channelId));
             }
 
             var message = MessageFactory.Text($"Hello channel user! You are part of the batch.");
@@ -247,7 +247,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             foreach (var entry in failedEntries)
             {
-                message += $"\n id: {entry.Id}, error: {entry.Error} \n\n";
+                message += $"\n id: {entry.EntryId}, error: {entry.Error} \n\n";
             }
 
             await turnContext.SendActivityAsync(MessageFactory.Text(message), cancellationToken);
