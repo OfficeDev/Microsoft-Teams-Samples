@@ -26,7 +26,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript | Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
+|1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon1.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript|Manifest| 
