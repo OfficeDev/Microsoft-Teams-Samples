@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.sample.meetingapp",
   "showLoadingIndicator": false,
   "developer": {
@@ -12,20 +12,21 @@
     "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
   },
   "name": {
-    "short": "Details Tab"
+    "short": "JDDetails Tab",
+    "full": "JDDetails Tab full name"
   },
   "description": {
     "short": "Details Tab",
     "full": "Details Tab for Meeting Extensibility"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "<<BASE-URL>>/configure",
+      "configurationUrl": "https://${{BOT_DOMAIN}}:3000/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -43,11 +44,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<VALID DOMAIN>>"
+      "${{BOT_DOMAIN}}"
   ],
   "bots": [
     {
-      "botId": "<<APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "groupchat"
       ],
