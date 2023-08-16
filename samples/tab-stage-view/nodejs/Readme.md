@@ -130,13 +130,29 @@ Also update `BaseUrl` according to your code runtime environment.
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
 
 ## Running the sample
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
+- From Teams left side bar, select the ellipses ●●● and choose your app from the list.
+
+**Install App:**
+
+![InstallApp](Images/Install.png)
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
 ![Welcome Message](Images/welcomeAction.png)
 
-**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+**Open the URL in tab stage view:**
+
+![InstallApp](Images/ClickButton.png)
+
+ **Click view via card action:**
+
+![Stage View in tab](Images/CollaborativeStageView.png)
+
+ **Click view via deeplink:**
+
+ ![Tab View](Images/viaDeeplink.png)    
+
+**Opening Collaborative- Desktop Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
 
 ![Stage View in tab](Images/CollaborativeStageView.png)
 
@@ -144,17 +160,21 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Stage View Deep Link](Images/viaDeeplink.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Web Stage View:**
 
-![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
+![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
 
-![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area, the link will unfurl.**
 
-![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+![LinkUnfurlingText](Images/LinkUnfurlingText.png)
 
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
+
+**Click deep-link:**
+
+![Tab View](Images/viaDeeplink.png)    
 
 ## Outlook on the web
 
