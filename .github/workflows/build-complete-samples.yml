@@ -635,7 +635,7 @@ jobs:
               name: 'meeting-recruitment-app'
               version: '14.x'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs/ClientApp'
+            - project_path: 'samples/meeting-recruitment-app/nodejs'
               name: 'meeting-recruitment-app-clientapp'
               version: '14.x'
 
