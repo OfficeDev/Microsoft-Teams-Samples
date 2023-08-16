@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+ <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+                getAuthToken();
+        });
+
+        // Get face book client side token.
+        function getAuthToken() {
+            microsoftTeams.app.initialize();
+            localStorage.removeItem("auth.error");
+            let code = getHashParameters();
+            let key = "auth.result";
+            localStorage.setItem(key, JSON.stringify({
+                idToken: code,
+            }));
+
+            microsoftTeams.authentication.notifySuccess(key);
+        }
+
+        // Parse hash parameters into key-value pairs
+        function getHashParameters() {
+            let hashParams = {};
+            var urlString = window.location.href;
+            var url = new URL(urlString);
+            var code = url.searchParams.get("code");
+            return code;
+        }
+    </script>
