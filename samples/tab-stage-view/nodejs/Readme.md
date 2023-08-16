@@ -152,13 +152,15 @@ Also update `BaseUrl` according to your code runtime environment.
 
  ![Tab View](Images/viaDeeplink.png)    
 
-**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
+**Opening Collaborative- Desktop Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
 
 ![Stage View in tab](Images/CollaborativeStageView.png)
 
 **Opening stage view from Adaptive card via deep link:**
 
 ![Stage View Deep Link](Images/viaDeeplink.png)
+
+**Web Stage View:**
 
 ![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
 
