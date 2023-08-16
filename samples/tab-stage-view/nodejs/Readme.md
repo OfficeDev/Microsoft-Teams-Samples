@@ -130,7 +130,7 @@ Also update `BaseUrl` according to your code runtime environment.
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
 
 ## Running the sample
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
+- From Teams left side bar, select the ellipses ●●● and choose your app from the list.
 
 **Install App:**
 
@@ -144,7 +144,15 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![InstallApp](Images/ClickButton.png)
 
-**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+ **Click view via card action:**
+
+![Stage View in tab](Images/CollaborativeStageView.png)
+
+ **Click view via deeplink:**
+
+ ![Tab View](Images/viaDeeplink.png)    
+
+**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
 
 ![Stage View in tab](Images/CollaborativeStageView.png)
 
@@ -154,13 +162,17 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area, the link will unfurl.**
 
 ![LinkUnfurlingText](Images/LinkUnfurlingText.png)
 
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
+
+**Click deep-link:**
+
+![Tab View](Images/viaDeeplink.png)    
 
 ## Outlook on the web
 
