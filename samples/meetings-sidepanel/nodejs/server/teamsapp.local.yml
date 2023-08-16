@@ -86,7 +86,7 @@ deploy:
   # Generate runtime environment variables for server
   - uses: file/createOrUpdateEnvironmentFile
     with:
-      target: ./.env
+      target: ./server/.env
       envs:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
