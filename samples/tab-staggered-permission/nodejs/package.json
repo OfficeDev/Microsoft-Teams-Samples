@@ -15,7 +15,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
         "@azure/msal-node": "^1.6.0",

@@ -16,35 +16,39 @@ class AdaptiveCardActionsBot extends ActivityHandler {
         });
 
         this.onMessage(async (context, next) => {
-            const text = context.activity.text;
 
-            if (text.includes("Card Actions")) {
-                const userCard = CardFactory.adaptiveCard(this.adaptiveCardActions());
-                await context.sendActivity({ attachments: [userCard] });
-            }
-            else if (text.includes("Suggested Actions")) {
-                const userCard = CardFactory.adaptiveCard(this.SuggestedActionsCard());
-                await context.sendActivity({ attachments: [userCard] });
-            }
-            else if (text.includes("Red") || text.includes("Blue") || text.includes("Yellow")) {
-                // Create an array with the valid color options.
-                const validColors = ['Red', 'Blue', 'Yellow'];
+            if (context.activity.text != null) {
+                const text = context.activity.text;
 
-                // If the `text` is in the Array, a valid color was selected and send agreement.
-                if (validColors.includes(text)) {
-                    await context.sendActivity(`I agree, ${text} is the best color.`);
+                if (text.includes("Card Actions")) {
+                    const userCard = CardFactory.adaptiveCard(this.adaptiveCardActions());
+                    await context.sendActivity({ attachments: [userCard] });
                 }
-                await this.sendSuggestedActions(context);
+                else if (text.includes("Suggested Actions")) {
+                    const userCard = CardFactory.adaptiveCard(this.SuggestedActionsCard());
+                    await context.sendActivity({ attachments: [userCard] });
+                }
+                else if (text.includes("Red") || text.includes("Blue") || text.includes("Yellow")) {
+                    // Create an array with the valid color options.
+                    const validColors = ['Red', 'Blue', 'Yellow'];
+
+                    // If the `text` is in the Array, a valid color was selected and send agreement.
+                    if (validColors.includes(text)) {
+                        await context.sendActivity(`I agree, ${text} is the best color.`);
+                    }
+
+                    await this.sendSuggestedActions(context);
+                }
+                else if (text.includes("ToggleVisibility")) {
+                    const userCard = CardFactory.adaptiveCard(this.ToggleVisibleCard());
+                    await context.sendActivity({ attachments: [userCard] });
+                }
+                else {
+                    await context.sendActivity("Please use one of these commands: **Card Actions** for  Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card");
+                }
             }
-            else if (text.includes("ToggleVisibility")) {
-                const userCard = CardFactory.adaptiveCard(this.ToggleVisibleCard());
-                await context.sendActivity({ attachments: [userCard] });
-            }
-            else {
-                await context.sendActivity("Please use one of these commands: **Card Actions** for  Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card");
-            }
-            // By calling next() you ensure that the next BotHandler is run.
-            await next();
+
+            await this.SendDataOnCardActions(context);
         });
     }
 
@@ -65,6 +69,16 @@ class AdaptiveCardActionsBot extends ActivityHandler {
                 await turnContext.sendActivity("Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card");
                 await this.sendSuggestedActions(turnContext);
             }
+        }
+    }
+
+    // Sends the response on card action.submit
+    async SendDataOnCardActions(context) {
+
+        if (context.activity.value != null) {
+            var reply = MessageFactory.text("");
+            reply.text = `Data Submitted : ${context.activity.value.name}`;
+            await context.sendActivity(MessageFactory.text(reply.text));
         }
     }
 
@@ -197,7 +211,6 @@ class AdaptiveCardActionsBot extends ActivityHandler {
 
     // Suggest Actions Card
     SuggestedActionsCard = () => ({
-
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
         "version": "1.0",
