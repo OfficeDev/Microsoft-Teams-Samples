@@ -4,7 +4,8 @@
  */
 
 import * as microsoftTeams from "@microsoft/teams-js";
-import { mergeClasses,Card,CardPreview,CardFooter } from "@fluentui/react-components";
+import { mergeClasses} from "@fluentui/react-components";
+import { Card, CardHeader, CardPreview, CardFooter } from '@fluentui/react-card';
 import { IQuestionDetails } from '../types/question';
 import { Image, Text, Button } from "@fluentui/react-components";
 import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../styles/layouts";
@@ -13,7 +14,7 @@ const SidePanel = () => {
     const flexRowStyle = getFlexRowStyles();
 
   const shareSpecificPart = (partName) => {
-	microsoftTeams.app.initialize();
+	microsoftTeams.app.initialize().then(() => {
     var appContentUrl = "";
     appContentUrl = `${window.location.origin}/question/${partName}`;
     microsoftTeams.meeting.shareAppContentToStage((error, result) => {
@@ -27,7 +28,9 @@ const SidePanel = () => {
         console.log(JSON.stringify(error))
       }
     }, appContentUrl);
+  });
   };
+  
 
   const flexColumnStyles = getFlexColumnStyles();
   const flexItemStyles = getFlexItemStyles();
