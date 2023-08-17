@@ -83,7 +83,7 @@ Run ngrok - point to port 3978
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
-   - Navigate to samples\bot-formatting-cards\nodejs\resources\mentionSupport.json
+  - Navigate to samples\bot-formatting-cards\nodejs\resources\mentionSupport.json
       1) On line 14, replace {{new-Ids}}  
       2) On line 23, replace {{Email-Id}}
       3) On line 31, replace {{Microsoft-App-Id}}
@@ -111,6 +111,46 @@ Run ngrok - point to port 3978
                 }
             }
             ]
+        ```
+
+   **Note: The users are in the card component have to be on the same tenant.**
+  - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
+      1) On line 16, replace {{Object-ID}}  
+      2) On line 17, replace {{User-Display-Name}}
+      3) On line 18, replace {{User-Principal-Name}}
+
+        - E.g. 
+        ```
+        "properties": {
+        "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+        "displayName": "Daniela Mandera",
+        "userPrincipalName": "damandera@microsoft.com"
+         }
+        ```
+  - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
+      1) On line 18, replace {{Object-ID}}  
+      2) On line 19, replace {{User-Display-Name}}
+      3) On line 20, replace {{User-Principal-Name}}
+      4) On line 23, replace {{Object-ID}}  
+      5) On line 24, replace {{User-Display-Name}}
+      6) On line 25, replace {{User-Principal-Name}}
+      
+        - E.g. 
+        ```
+      "properties": {
+        "users": [
+          {
+            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+            "displayName": "Daniela Mandera",
+            "userPrincipalName": "damandera@microsoft.com"
+          },
+          {
+            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+            "displayName": "Daniela Mandera",
+            "userPrincipalName": "damandera@microsoft.com"
+          }
+        ]
+      }
         ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
@@ -178,6 +218,14 @@ Run ngrok - point to port 3978
 
 ![CardWithEmoji](Images/9.CardWithEmoji.png)
 
+**Persona Card Icon:**
+
+![Persona](Images/10.Persona.png)
+
+**Persona Set Icon:**
+
+![PersonaSet](Images/11.PersonaSet.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -185,6 +233,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
+- [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-nodejs" />
