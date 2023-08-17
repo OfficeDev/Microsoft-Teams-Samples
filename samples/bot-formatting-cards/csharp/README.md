@@ -126,11 +126,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             ]
         ```
    
-   **Note:The users are in the card component have to be on the same tenant.**
+   **Note: The users are in the card component have to be on the same tenant.**
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
       3) On line 18, replace {{User-Principal-Name}}
+
         - E.g. 
         ```
         "properties": {
@@ -146,6 +147,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       4) On line 23, replace {{Object-ID}}  
       5) On line 24, replace {{User-Display-Name}}
       6) On line 25, replace {{User-Principal-Name}}
+      
         - E.g. 
         ```
       "properties": {
