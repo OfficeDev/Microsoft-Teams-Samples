@@ -273,7 +273,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-quickstart#js]:samples/msgext-search-quickstart/js
 [msgext-search-sso-config#js]:samples/msgext-search-sso-config
 
-[tab-sso#ts]:samples/tabs-sso/nodejs
+[tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
 
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
