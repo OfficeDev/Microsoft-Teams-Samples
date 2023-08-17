@@ -57,12 +57,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### Tools
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
-
 - [Nodejs](https://nodejs.org/en/download/) version 10.21.0+ (use the LTS version)
   ```bash
   # determine dotnet version
@@ -75,18 +69,29 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ngrok http 3978 --host-header="localhost:3978"
   ```
 
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 ### Technologies
 
 We assume working knowledge of the following technologies to gain full understanding of the app
-- [C#](https://docs.microsoft.com/dotnet/csharp/tutorials/)
-- [ECMAScript6](http://es6-features.org/)
-- [Asp.NET core](https://docs.microsoft.com/aspnet/core/?view=aspnetcore-3.1) version 3.1
 - [React.JS](https://reactjs.org/tutorial/tutorial.html) version 16+ 
 
 The app uses the Teams extensibility features described on the following pages:
 - [Apps in Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
 - [Create apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
-- [Tab single sign-on](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/nodejs/server/api/botController.js#L25) line and put your debugger for local debug.
 
