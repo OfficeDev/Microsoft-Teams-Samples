@@ -87,6 +87,7 @@ Run ngrok - point to port 3978
       1) On line 14, replace {{new-Ids}}  
       2) On line 23, replace {{Email-Id}}
       3) On line 31, replace {{Microsoft-App-Id}}
+         
         - E.g. 
         ```
         "text": "Hi <at>Adele UPN</at>, <at>Adele Azure AD</at>"
@@ -135,9 +136,9 @@ Run ngrok - point to port 3978
       5) On line 24, replace {{User-Display-Name}}
       6) On line 25, replace {{User-Principal-Name}}
       
-        - E.g. 
-        ```
-      "properties": {
+       - E.g.
+     ```
+       "properties": {
         "users": [
           {
             "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
@@ -150,8 +151,8 @@ Run ngrok - point to port 3978
             "userPrincipalName": "damandera@microsoft.com"
           }
         ]
-      }
-        ```
+      },
+    ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
 
