@@ -184,55 +184,51 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![InstallApp](BotFormattingCards/Images/InstallApp.png)
+![InstallApp](BotFormattingCards/Images/1.InstallApp.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](BotFormattingCards/Images/WelcomeMessage.png)
+![WelcomeMessage](BotFormattingCards/Images/2.WelcomeMessage.png)
 
 **Type Of Cards:**
 
-![TypeOfCards](BotFormattingCards/Images/TypeOfCards.png)
+![TypeOfCards](BotFormattingCards/Images/3.TypeOfCards.png)
 
 **Mention Card:**
 
-![MentionCard](BotFormattingCards/Images/MentionCard.png)
+![MentionCard](BotFormattingCards/Images/4.MentionCard.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](BotFormattingCards/Images/InformationMaskCard.png)
+![InformationMaskCard](BotFormattingCards/Images/5.InformationMaskCard.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](BotFormattingCards/Images/FullWidthCard.png)
+![FullWidthCard](BotFormattingCards/Images/6.FullWidthCard.png)
 
 **Stage View Card:**
 
-![StageViewCard](BotFormattingCards/Images/StageViewCard.png)
+![StageViewCard](BotFormattingCards/Images/7.StageViewCard.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](BotFormattingCards/Images/OverflowMenuCard.png)
+![OverflowMenuCard](BotFormattingCards/Images/8.OverflowMenuCard.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](BotFormattingCards/Images/HTMLFormatCard.png)
+![HTMLFormatCard](BotFormattingCards/Images/9.HTMLFormatCard.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](BotFormattingCards/Images/CardWithEmoji.png)
-
-**Persona Card Icon and Persona Set Icon in Adaptive Card:**
-
-![PersonaCards](BotFormattingCards/Images/PersonaCards.png)
+![CardWithEmoji](BotFormattingCards/Images/10.CardWithEmoji.png)
 
 **Persona Card Icon:**
 
-![PersonaCardIcon](BotFormattingCards/Images/PersonaCardIcon.png)
+![PersonaCardIcon](BotFormattingCards/Images/12.PersonaCardIcon.png)
 
 **Persona Set Icon:**
 
-![PersonaCardSetIcon](BotFormattingCards/Images/PersonaCardSetIcon.png)
+![PersonaCardSetIcon](BotFormattingCards/Images/13.PersonaCardSetIcon.png)
 
 ## Deploy the bot to Azure
 
