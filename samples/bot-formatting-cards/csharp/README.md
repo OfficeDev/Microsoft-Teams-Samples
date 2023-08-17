@@ -125,6 +125,44 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             }
             ]
         ```
+   
+   **Note:The users are in the card component have to be on the same tenant.**
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
+      1) On line 16, replace {{Object-ID}}  
+      2) On line 17, replace {{User-Display-Name}}
+      3) On line 18, replace {{User-Principal-Name}}
+        - E.g. 
+        ```
+        "properties": {
+        "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+        "displayName": "Daniela Mandera",
+        "userPrincipalName": "damandera@microsoft.com"
+      }
+        ```
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
+      1) On line 18, replace {{Object-ID}}  
+      2) On line 19, replace {{User-Display-Name}}
+      3) On line 20, replace {{User-Principal-Name}}
+      4) On line 23, replace {{Object-ID}}  
+      5) On line 24, replace {{User-Display-Name}}
+      6) On line 25, replace {{User-Principal-Name}}
+        - E.g. 
+        ```
+      "properties": {
+        "users": [
+          {
+            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+            "displayName": "Daniela Mandera",
+            "userPrincipalName": "damandera@microsoft.com"
+          },
+          {
+            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
+            "displayName": "Daniela Mandera",
+            "userPrincipalName": "damandera@microsoft.com"
+          }
+        ]
+      }
+        ```
 **Note:**
 -   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
@@ -182,6 +220,18 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![CardWithEmoji](BotFormattingCards/Images/CardWithEmoji.png)
 
+**Persona Card Icon and Persona Set Icon in Adaptive Card:**
+
+![PersonaCards](BotFormattingCards/Images/PersonaCards.png)
+
+**Persona Card Icon:**
+
+![PersonaCardIcon](BotFormattingCards/Images/PersonaCardIcon.png)
+
+**Persona Set Icon:**
+
+![PersonaCardSetIcon](BotFormattingCards/Images/PersonaCardSetIcon.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -189,6 +239,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
+- [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />

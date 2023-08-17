@@ -151,5 +151,43 @@ namespace BotAllCards.Cards
             return emojiAdaptiveCardAttachment;
         }
 
+        /// <summary>
+        /// Persona card Icon in an Adaptive Card
+        /// If you want to show a single user in an Adaptive Card, the Adaptive Card displays the people icon and the name of the user.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment sendPersonaCardIcon()
+        {
+            var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardIcon.json" };
+            var adaptiveCardPersonaCardIconJson = File.ReadAllText(Path.Combine(paths));
+
+            var PersonaCardIconAdaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardIconJson),
+            };
+
+          return PersonaCardIconAdaptiveCardAttachment;
+        }
+
+        /// <summary>
+        /// Persona Card Set Icon in an Adaptive Card
+        /// If you want to show multiple users in an Adaptive Card, the Adaptive Card displays only the people icon of the users.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment sendPersonaCardSetIcon()
+        {
+            var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardSetIcon.json" };
+            var adaptiveCardPersonaCardSetIconJson = File.ReadAllText(Path.Combine(paths));
+
+            var PersonaCardSetIconAdaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardSetIconJson),
+            };
+
+            return PersonaCardSetIconAdaptiveCardAttachment;
+        }
+
     }
 }

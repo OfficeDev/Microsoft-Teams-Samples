@@ -1,0 +1,31 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Persona Set",
+      "weight": "bolder"
+    },
+    {
+      "type": "Component",
+      "name": "graph.microsoft.com/users",
+      "view": "compact",
+      "properties": {
+        "users": [
+          {
+            "id": "{{Object-ID}}",
+            "displayName": "{{User-Display-Name}}",
+            "userPrincipalName": "{{User-Principal-Name}}"
+          },
+          {
+            "id": "{{Object-ID}}",
+            "displayName": "{{User-Display-Name}}",
+            "userPrincipalName": "{{User-Principal-Name}}"
+          }
+        ]
+      }
+    }
+  ]
+}
