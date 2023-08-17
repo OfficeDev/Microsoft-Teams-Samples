@@ -323,7 +323,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [AdaptiveCardSSO#csharp]:samples/bot-sso-adaptivecard/csharp
 [BotSSOAdaptiveCard#nodejs]:samples/bot-sso-adaptivecard/nodejs
 [TypesCards#csharp]:samples/bot-all-cards/csharp
-[TypesCards#nodejs]:samples/bot-all-cards/nodejs
+[BotTypesOfCards#nodejs]:samples/bot-types-of-cards/nodejs
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
 [meetings-details-tab#cs]:samples/meetings-details-tab/csharp
