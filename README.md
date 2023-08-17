@@ -29,7 +29,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon1.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript|Manifest| 
+|    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | Manifest| 
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------|:--------|
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) | |[View](/samples/tab-personal/mvc-csharp/demo-manifest/tab-personal.zip) |
 |2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts] ![toolkit-icon](assets/toolkit-icon1.png) |[View][personal-tab-quickstart#js] ![toolkit-icon](assets/toolkit-icon1.png) 
