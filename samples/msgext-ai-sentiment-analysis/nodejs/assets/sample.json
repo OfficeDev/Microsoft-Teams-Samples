@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs",
     "source": "officeDev",
     "title": "Sentiment analysis with messaging extension",
-    "shortDescription": "This sample shows a feature where user can get sentiment analysis from messaging extension.",
+    "shortDescription": "This sample shows a feature where user can check analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-sentiment-analysis/nodejs",
     "longDescription": [
-      "This sample shows a feature where user can can get sentiment analysis using messaging extension."
+      "This sample shows a feature where user can check analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI."
     ],
     "creationDateTime": "2023-08-07",
     "updateDateTime": "2023-08-07",
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot,msgext,ai,toolkit"
+        "value": "bot,msgext,Azure Open AI,toolkit"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/nodejs/Images/Sentiment_Analysis",
-        "alt": "Solution UX showing sentiment analysis using messaging extension"
+        "alt": "Solution UX showing sentiment analysis using messaging extension and Azure Open AI"
       }
     ],
     "authors": [

@@ -13,7 +13,7 @@ const cors = require('cors');
 const { BotFrameworkAdapter } = require('botbuilder');
 
 // Import bot definitions
-const { TeamsBot } = require('./bots/teamsBot');
+const { TeamsBot } = require('./teamsBot');
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
@@ -66,10 +66,6 @@ server.listen(port, () =>
 
 server.get('/sentimentModule', (req, res, next) => {
     res.render('./views/sentimentModule')
-});
-
-server.get('*', (req, res) => {
-    res.json({ error: 'Route not found' });
 });
 
 // Listen for incoming requests.

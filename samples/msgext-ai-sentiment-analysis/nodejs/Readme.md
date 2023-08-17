@@ -1,124 +1,82 @@
----
-page_type: sample
-description: This sample shows a feature where user can check sentiment for teams message by using messaging extension.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "08/07/2023 04:00:00 PM"
-urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs
----
+# How to use this Bot HelloWorld app
 
-# Sentiment Analysis with messaging extension
+A bot, chatbot, or conversational bot is an app that responds to simple commands sent in chat and replies in meaningful ways. Examples of bots in everyday use include: bots that notify about build failures, bots that provide information about the weather or bus schedules, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation. Being a cloud application, a bot can provide valuable and secure access to cloud services and corporate resources.
 
-This sample shows a feature where user can check sentiment for teams message by using messaging extension.
-
-## Included Features
-* Bots
-* Open AI
-
-## Interaction with app
-
-![Sentiment Analysis](Images/Sentiment_Analysis.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
+This is a simple hello world application with Bot capabilities.
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Node.js](https://nodejs.org/), supported versions: 16, 18
+- An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
+- [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Debug
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. In the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
-
-## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
-
-3. Setup NGROK
- - Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
+- From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code.
+- Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button.
+- From TeamsFx CLI:
+  - Install [ngrok](https://ngrok.com/download) and start your local tunnel service by running the command `ngrok http 3978`.
+  - In the `env/.env.local` file, fill in the values for `BOT_DOMAIN` and `BOT_ENDPOINT` with your ngrok URL.
     ```
-4. Setup for code
-   - Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    BOT_DOMAIN=sample-id.ngrok.io
+    BOT_ENDPOINT=https://sample-id.ngrok.io
     ```
-   - Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`, `apiKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Executing the command `teamsfx provision --env local` in your project directory.
+  - Executing the command `teamsfx deploy --env local` in your project directory.
+  - Executing the command `teamsfx preview --env local` in your project directory.
 
-   - For `apiKey` you need to registered and login to this link with your personal account (https://platform.openai.com/docs/quickstart/build-your-application) from here you will get an option to create Key.
-   -![Create Open Api key](Images/5.Api_Key.PNG)
+## Edit the manifest
 
-- In the folder where repository is cloned navigate to `samples/msgext-ai-sentiment-analysis/nodejs`
-- Install modules
+You can find the Teams app manifest in `./appPackage` folder. The folder contains one manifest file:
+* `manifest.json`: Manifest file for Teams app running locally or running remotely (After deployed to Azure).
 
-    ```bash
-    npm install
-    ```
-5) Run your app
+This file contains template arguments with `${{...}}` statements which will be replaced at build time. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
 
-    ```bash
-    npm start
-    ```
+## Deploy to Azure
 
-6) Setup Manifest for Teams
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` o replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{BOT_DOMAIN}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+Deploy your project to Azure by following these steps:
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+| From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From TeamsFx CLI                                                                                                                                                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Open Teams Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Teams Toolkit and click `Provision` from DEPLOYMENT section or open the command palette and select: `Teams: Provision`.</li><li>Open the Teams Toolkit and click `Deploy` or open the command palette and select: `Teams: Deploy`.</li></ul> | <ul> <li>Run command `teamsfx account login azure`.</li> <li>Run command `teamsfx provision --env dev`.</li> <li>Run command: `teamsfx deploy --env dev`. </li></ul> |
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-message-reminder/nodejs/index.js#L44) line and put your debugger for local debug.
+> Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
-## Running the sample
+## Preview
 
-Install Sample to Teams
-![Add Sample ](Images/1.Add_Sample.PNG)
+Once the provisioning and deployment steps are finished, you can preview your app:
 
-Welcome Message then click on 3 dots navigate to ME sentiment analysis
-![Welcome](Images/2.Welcome_SentimentAnalysis.PNG)
+- From Visual Studio Code
 
- Click Continue 
-![Click Continue](Images/3.Click_Continue.PNG)
+  1. Open the `Run and Debug Activity Panel`.
+  1. Select `Launch Remote (Edge)` or `Launch Remote (Chrome)` from the launch configuration drop-down.
+  1. Press the Play (green arrow) button to launch your app - now running remotely from Azure.
 
-Its shows Sentiment(positive/negative/neutral) for selected message
-![Sentiment Analysis Reuslt ](Images/4.Result.PNG)
+- From TeamsFx CLI: execute `teamsfx preview --env dev` in your project directory to launch your application.
+
+## Validate manifest file
+
+To check that your manifest file is valid:
+
+- From Visual Studio Code: open the command palette and select: `Teams: Validate Application`.
+- From TeamsFx CLI: run command `teamsfx validate` in your project directory.
+
+## Package
+
+- From Visual Studio Code: open the Teams Toolkit and click `Zip Teams App Package` or open the command palette and select `Teams: Zip Teams App Package`.
+- Alternatively, from the command line run `teamsfx package` in the project directory.
+
+## Publish to Teams
+
+Once deployed, you may want to distribute your application to your organization's internal app store in Teams. Your app will be submitted for admin approval.
+
+- From Visual Studio Code: open the Teams Toolkit and click `Publish` or open the command palette and select: `Teams: Publish`.
+- From TeamsFx CLI: run command `teamsfx publish` in your project directory.
 
 ## Further reading
-- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
-- [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
+### Bot
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-nodejs" />
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Bot Framework Documentation](https://docs.botframework.com/)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
