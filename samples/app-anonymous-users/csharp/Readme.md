@@ -39,14 +39,14 @@ This sample shows anonymous users support in meeting apps.
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
 
    Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-  ```bash
-  devtunnel host -p 3978 --allow-anonymous
-  ```
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 2. Setup
 
@@ -78,7 +78,7 @@ This sample shows anonymous users support in meeting apps.
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
-  -   Select Microsoft Graph -\> Delegated permissions.
+  -   Select Microsoft Graph -\> Delegated permissions.
       - `User.Read` (enabled by default)
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
   13. Navigate to **Authentication**
