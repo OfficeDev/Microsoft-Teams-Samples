@@ -38,6 +38,7 @@
     "start-server-and-test": "^1.11.6"
   },
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "clean": "npx shx rm -rf build",
     "start": "start-server-and-test start:server 7070 start:client",
     "start:client": "set PORT=3978 HTTP=true && react-scripts start",
