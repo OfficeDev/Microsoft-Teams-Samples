@@ -38,7 +38,7 @@ There are example in-memory and Azure implementations of the token persistance.
   dotnet --version
   ```
 
-- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used).
+- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version version (any other tunneling software can also be used).
   
   run ngrok locally
   ```bash
