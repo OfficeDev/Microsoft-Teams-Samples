@@ -22,6 +22,7 @@ class TeamsBot extends TeamsActivityHandler {
 
         /** Handler invoked on message. */
         this.onMessage(async (context, next) => {
+            debugger
             let meetingId = context.activity.channelData.meeting.id;
             let tenantId = context.activity.channelData.tenant.id;
             let participantId = context.activity.from.aadObjectId;

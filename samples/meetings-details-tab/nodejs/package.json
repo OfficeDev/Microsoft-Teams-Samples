@@ -4,8 +4,9 @@
   "description": "Microsoft Teams conversation bot quickstart",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:teamsfx": "npm run start",
     "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon server/index.js",
     "build": "npm install && node build.js && cd client && npm install && npm run build",
     "server": "npm install && cd client && npm install && npm run build && cd ../ && nodemon server/index.js",

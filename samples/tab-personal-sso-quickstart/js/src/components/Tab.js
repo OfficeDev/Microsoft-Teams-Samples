@@ -21,7 +21,7 @@ class Tab extends React.Component {
       graphAccessToken: "",
       photo: "",
       error: false
-    }
+      }
 
     //Bind any functions that need to be passed as callbacks or used to React components
     this.ssoLoginSuccess = this.ssoLoginSuccess.bind(this);
