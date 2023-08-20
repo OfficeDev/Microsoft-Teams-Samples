@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases google authentication using external auth providers.
+description: Microsoft Teams sample app which showcases Google authentication using external auth providers.
 products:
 - office-teams
 - office
@@ -9,12 +9,12 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "12/03/2021 12:53:17 PM"
+ createdDate: "16/08/2023 11:20:17 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-external-auth-csharp
 ---
 # Tab external auth - C#
 
-This sample illustrates how to implement google auth using external auth providers.
+This sample illustrates how to implement Google auth using external auth providers.
 
 ## Included Features
 * External Auth (Google Oauth2)
@@ -22,7 +22,7 @@ This sample illustrates how to implement google auth using external auth provide
 
 ## Interaction with app
 
-![Config SSO](Images/tab-external-auth-app.gif)
+![tab-external-auth](Images/tab-external-auth-app.gif)
 
 ## Prerequisites
 
@@ -55,9 +55,9 @@ This sample illustrates how to implement google auth using external auth provide
  ![oauthapp2](Images/oauthapp2.png)
 
  - Enable access to the [Google People API](https://developers.google.com/people/).
- ![Config SSO](Images/peopleapi1.png)
+ ![people-api](Images/peopleapi1.png)
 
-  ![Config SSO](Images/peopleapi2.png)
+  ![people-api2](Images/peopleapi2.png)
 
 2. Setup NGROK
 - Run ngrok - point to port 3978
@@ -87,9 +87,8 @@ This sample illustrates how to implement google auth using external auth provide
   - Select `TabExternalAuth.csproj` file
 
 
-4. Setup Manifest for Teams
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace placeholder `{{GUID-ID}}` with any guid id.
+4. Setup Manifest for App
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace placeholder `{{GUID-ID}}` with any guid id.
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip`  (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -108,7 +107,7 @@ This sample illustrates how to implement google auth using external auth provide
 ![tab-auth-page](Images/tab1.png)
 
 ## Further Reading.
-[Google-Oauth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
+[External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
 
 
 

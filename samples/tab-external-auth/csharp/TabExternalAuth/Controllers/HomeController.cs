@@ -30,7 +30,7 @@ namespace TabExternalAuth.Controllers
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="httpContextAccessor">IHttpContextAccessor instance.</param>
         public HomeController(
-            IConfiguration configuration, 
+            IConfiguration configuration,
             IHttpClientFactory httpClientFactory,
             IHttpContextAccessor httpContextAccessor)
         {

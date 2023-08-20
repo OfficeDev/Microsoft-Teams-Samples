@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-tab-external-auth-csharp",
+    "name": "officedev-microsoft-teams-samples-tab-external-auth-csharp",
     "source": "officeDev",
     "title": "Tab External Auth (C#)",
-    "shortDescription": "Microsoft Teams sample app which showcases google authentication using external auth providers (C#).",
+    "shortDescription": "Microsoft Teams sample app which showcases Google authentication using external auth providers (C#).",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-external-auth/csharp",
     "longDescription": [
-      "This sample illustrates how to implement google authentication using external auth providers (C#)."
+      "This sample illustrates how to implement Google authentication using external auth providers (C#)."
     ],
     "creationDateTime": "2023-08-16",
     "updateDateTime": "2023-08-16",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-external-auth/csharp/Images/tab-external-auth-app.gif",
-        "alt": "Solution UX showing teams tab sso authentication (c#)"
+        "alt": "Solution UX showing Google Oauth2 authentication (c#)"
       }
     ],
     "authors": [

@@ -29,6 +29,8 @@
             let hashParams = {};
             var urlString = window.location.href;
             var url = new URL(urlString);
+
+            // Fetch the id token from url parameters
             var code = url.searchParams.get("code");
             return code;
         }
