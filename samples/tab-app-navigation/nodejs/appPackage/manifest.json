@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.16",
+  "id": "4b341eeb-038f-4eed-adbc-cc86bf479323",
+  "packageName": "com.microsoft.teams.tabappnavigation",
+  "name": {
+    "short": "Tab App Navigation",
+    "full": "Tab App Navigation In Teams App"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "description": {
+    "short": "Tab App Navigation",
+    "full": "This sample support types of navigation such as between tabs within the app"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://f81b-43-239-200-201.ngrok-free.app/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "my_app_1",
+      "name": "Navigated Tab",
+      "contentUrl": "https://f81b-43-239-200-201.ngrok-free.app/navigatedTab",
+      "websiteUrl": "https://f81b-43-239-200-201.ngrok-free.app/navigatedTab",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    }
+  ],
+  "validDomains": [
+    "f81b-43-239-200-201.ngrok-free.app"
+  ],
+  "showLoadingIndicator": true
+}
