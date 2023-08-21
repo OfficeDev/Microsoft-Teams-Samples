@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "08-21-2023 20:32s:25"
+ createdDate: "08-21-2023 20:32:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components
 ---
 

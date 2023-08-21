@@ -35,9 +35,11 @@ adapter.onTurnError = async (context, error) => {
   //       configuration instructions.
   console.error(`\n [onTurnError] unhandled error: ${error}`);
 
-  // Send a message to the user
-  await context.sendActivity(`The bot encountered an unhandled error:\n ${error.message}`);
-  await context.sendActivity("To continue to run this bot, please fix the bot source code.");
+  // Uncomment below commented line for local debugging.
+  // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
+  // Note: Since this Messaging Extension does not have the messageTeamMembers permission
+  // in the manifest, the bot will not be allowed to message users.
 };
 
 // Create the bot that will handle incoming messages.
