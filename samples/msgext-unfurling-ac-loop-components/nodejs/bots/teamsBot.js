@@ -36,6 +36,7 @@ class TeamsBot extends TeamsActivityHandler {
          }
         ]
     });
+
     const attachment = card;
 
     attachment.preview = {
@@ -51,6 +52,7 @@ class TeamsBot extends TeamsActivityHandler {
         type: 'result',
         attachments: [attachment]
     };
+
     const response = {
         composeExtension: result
     };
@@ -127,13 +129,14 @@ class TeamsBot extends TeamsActivityHandler {
        }
       ]
   });
-    return {
-      composeExtension: {
-        type: "result",
-        attachmentLayout: "list",
-        attachments: [card],
-      },
-    };
+
+  return {
+    composeExtension: {
+      type: "result",
+      attachmentLayout: "list",
+      attachments: [card],
+    },
+  };
   }
 }
 

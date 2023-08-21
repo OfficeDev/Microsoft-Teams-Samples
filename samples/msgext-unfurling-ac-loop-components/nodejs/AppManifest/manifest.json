@@ -54,7 +54,7 @@
                     "domains": [
                       "${{BOT_DOMAIN}}",
                       "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main",
-                       "Your Tunnel Domain"
+                       "<<Your Tunnel Domain>>"
                     ]
                   }
                 }
@@ -69,6 +69,6 @@
     ],
     "validDomains": [
         "${{BOT_DOMAIN}}",
-        "Your Tunnel Domain"
+        "<<Your Tunnel Domain>>"
     ]
 }
