@@ -962,6 +962,10 @@ jobs:
             - project_path: 'samples/tab-multi-hub/ts'
               name: 'tab-multi-hub'
               version: '18.x'
+            
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/nodejs'
+              name: 'msgext-unfurling-ac-loop-components'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
