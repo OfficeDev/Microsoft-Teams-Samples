@@ -114,45 +114,46 @@ Run ngrok - point to port 3978
             ]
         ```
 
-   **Note: The users are in the card component have to be on the same tenant.**
-  - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
-      1) On line 16, replace {{Object-ID}}  
+  **Note: Mention properly that, In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
+  - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+      1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
       3) On line 18, replace {{User-Principal-Name}}
 
         - E.g. 
         ```
         "properties": {
-        "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
-        "displayName": "Daniela Mandera",
-        "userPrincipalName": "damandera@microsoft.com"
-         }
-        ```
+        "id": "87d349ed-e15d-434a-9e14-87d349ed",
+        "displayName": "Test",
+        "userPrincipalName": "Test@w.com"
+      }
+      ```
   - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
-      1) On line 18, replace {{Object-ID}}  
+      - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+      1) On line 18, replace {{User-Object-ID}}  
       2) On line 19, replace {{User-Display-Name}}
       3) On line 20, replace {{User-Principal-Name}}
-      4) On line 23, replace {{Object-ID}}  
+      4) On line 23, replace {{User-Object-ID}}  
       5) On line 24, replace {{User-Display-Name}}
       6) On line 25, replace {{User-Principal-Name}}
       
-       - E.g.
-     ```
-       "properties": {
+        - E.g. 
+        ```
+      "properties": {
         "users": [
           {
-            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
-            "displayName": "Daniela Mandera",
-            "userPrincipalName": "damandera@microsoft.com"
+            "id": "87d349ed-e15d-434a-9e14-87d349ed",
+            "displayName": "Test",
+            "userPrincipalName": "Test@w.com"
           },
           {
-            "id": "65f50003-e15d-434a-9e14-0fcfeb3d7817",
-            "displayName": "Daniela Mandera",
-            "userPrincipalName": "damandera@microsoft.com"
+            "id": "87d349ed-e15d-434a-9e14-87d349ed",
+            "displayName": "Test",
+            "userPrincipalName": "Test@w.com"
           }
         ]
-      },
-    ```
+      }
+      ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
 

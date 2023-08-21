@@ -64,11 +64,11 @@ class BotFormattingCards extends ActivityHandler {
                         break;
 
                     case "Persona":
-                        await context.sendActivity({ attachments: [this.sendPersonaCardIcon()] });
+                        await context.sendActivity({ attachments: [this.sendPersonaCardIcons()] });
                         break;
 
                     case "PersonaSet":
-                        await context.sendActivity({ attachments: [this.sendPersonaCardSetIcon()] });
+                        await context.sendActivity({ attachments: [this.sendPersonaCardSetIcons()] });
                         break;
                 }
 
@@ -156,7 +156,7 @@ class BotFormattingCards extends ActivityHandler {
     * Persona card Icon in an Adaptive Card
     * If you want to show a single user in an Adaptive Card, the Adaptive Card displays the people icon and the name of the user.
     */
-     sendPersonaCardIcon() {
+     sendPersonaCardIcons() {
         return CardFactory.adaptiveCard(PeoplePersonaCardIcon);
     }
 
@@ -164,7 +164,7 @@ class BotFormattingCards extends ActivityHandler {
     * Persona Card Set Icon in an Adaptive Card
     * If you want to show multiple users in an Adaptive Card, the Adaptive Card displays only the people icon of the users.
     */
-     sendPersonaCardSetIcon() {
+     sendPersonaCardSetIcons() {
         return CardFactory.adaptiveCard(PeoplePersonaCardSetIcon);
     }
 
