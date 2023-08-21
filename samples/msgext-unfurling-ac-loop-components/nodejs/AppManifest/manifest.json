@@ -16,11 +16,11 @@
     },
     "name": {
         "short": "AC Loop Component",
-        "full": "full name for Msgext Unfurling Ac Loop Components"
+        "full": "Adaptive Card based loop components."
     },
     "description": {
-        "short": "short description of Msgext Unfurling Adaptive Card Based Loop Components.",
-        "full": "full description of Messaging Extension Unfurling Adaptive Card Based Loop Components."
+        "short": "This sample shows msgext with adaptive card-based loop components functionality.",
+        "full": "This sample shows messaging extension with adaptive card-based loop components functionality."
     },
     "accentColor": "#FFFFFF",
     "bots": [],
@@ -34,14 +34,14 @@
                         "compose",
                         "commandBox"
                     ],
-                    "description": "Test command to run query",
+                    "description": "Messaging extension with adaptive card-based loop components functionality",
                     "title": "Search",
                     "type": "query",
                     "parameters": [
                         {
                             "name": "searchQuery",
                             "title": "Search Query",
-                            "description": "Your search query",
+                            "description": "Messaging extension with adaptive card-based loop components functionality",
                             "inputType": "text"
                         }
                     ]
@@ -54,7 +54,7 @@
                     "domains": [
                       "${{BOT_DOMAIN}}",
                       "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main",
-                      "*.ngrok-free.app"
+                       "Your Tunnel Domain"
                     ]
                   }
                 }
@@ -69,6 +69,6 @@
     ],
     "validDomains": [
         "${{BOT_DOMAIN}}",
-        "*.ngrok-free.app" 
+        "Your Tunnel Domain"
     ]
 }

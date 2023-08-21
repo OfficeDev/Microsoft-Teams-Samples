@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components-nodejs",
     "source": "officeDev",
-    "title": "Adaptive Card Loop Component",
-    "shortDescription": "This sample showcases messaging extension unfurling adaptive card based loop components.",
+    "title": "Adaptive Card based loop components",
+    "shortDescription": "This sample shows messaging extension with adaptive card-based loop components functionality.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-unfurling-ac-loop-components/nodejs",
     "longDescription": [
-      "This sample showcases messaging extension unfurling adaptive card based loop components."
+      "This sample shows messaging extension with adaptive card-based loop components functionality."
     ],
     "creationDateTime": "2023-08-21",
     "updateDateTime": "2023-08-22",
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "ME, Adaptive Card"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-link-unfurling/nodejs/Images/LinkUnfurling.gif",
-        "alt": "Solution UX showing Adaptive Card Loop Component"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-unfurling-ac-loop-components/nodejs/Images/msgext-unfurling-ac-loop-components.gif",
+        "alt": "Solution UX showing Adaptive Card Loop Component Using ME"
       }
     ],
     "authors": [

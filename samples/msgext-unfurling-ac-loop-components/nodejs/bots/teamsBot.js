@@ -37,6 +37,7 @@ class TeamsBot extends TeamsActivityHandler {
         ]
     });
     const attachment = card;
+
     attachment.preview = {
         content: {
             title: "Thumbnail Card",
@@ -44,6 +45,7 @@ class TeamsBot extends TeamsActivityHandler {
         },
         contentType: "application/vnd.microsoft.card.thumbnail",
     }
+
     const result = {
         attachmentLayout: 'list',
         type: 'result',
@@ -68,6 +70,7 @@ class TeamsBot extends TeamsActivityHandler {
     );
 
     const attachments = [];
+    
     response.data.objects.forEach((obj) => {
       const heroCard = CardFactory.heroCard(obj.package.name);
       const preview = CardFactory.heroCard(obj.package.name);

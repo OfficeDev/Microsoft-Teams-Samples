@@ -4,7 +4,7 @@
   "msteams": {
     "teamsAppId": null
   },
-  "description": "Messaging Extension Unfurling Adaptive Card Based Loop Components",
+  "description": "Messaging Extension For Adaptive Card Based Loop Components",
   "engines": {
     "node": "16 || 18"
   },

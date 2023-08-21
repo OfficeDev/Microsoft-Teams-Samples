@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases messaging extension unfurling adaptive card based loop components.
+description: This sample shows messaging extension with adaptive card-based loop components functionality.
 products:
 - office-teams
 - office
@@ -10,10 +10,10 @@ languages:
 extensions:
  contentType: samples
  createdDate: "08-21-2023 20:32:25"
-urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components
+urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components-nodejs
 ---
 
-# Msgext Unfurling Adaptive Card Loop Components
+# Messaging Extension with Adaptive Card Loop Components
 
 If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main` or your ngrok base url, it wil unfurl inside compose area.
 
@@ -24,7 +24,7 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 * Link Unfurling
 
 ## Interaction with bot
-![Link Unfurling](Images/LinkUnfurling.gif)
+![msgext-unfurling-ac-loop-components](Images/msgext-unfurling-ac-loop-components.gif)
 
 ## Prerequisites
 
@@ -44,6 +44,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Run the sample locally
 
 ### 1. Register you app with Azure AD
 
@@ -103,11 +105,11 @@ the Teams service needs to call into the bot.
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-link-unfurling/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-unfurling-ac-loop-components/nodejs/index.js#L39) line and put your debugger for local debug.
 
 ### 5. Running the sample
 
@@ -131,10 +133,12 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Adaptive Card-based Loop components](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Adaptive Card-based Loop components](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230)
+- [Build message extensions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
+- [Link unfurling]()
+- [Azure Bot Service Introduction](https://review.learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
+- [Universal Actions for Adaptive Cards](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
+- [Extend a Teams message extension across Microsoft 365](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-link-unfurling-nodejs" />
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-unfurling-ac-loop-components-nodejs" />
