@@ -106,12 +106,12 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendCardWithEmoji());
                     break;
                 case "Persona":
-                    // Sends Persona Card Icon
-                    reply.Attachments.Add(AllCards.sendPersonaCardIcon());
+                    // Sends Persona Card Icons
+                    reply.Attachments.Add(AllCards.sendPersonaCardIcons());
                     break;
                 case "PersonaSet":
-                    // Sends Persona Card Set Icon
-                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcon());
+                    // Sends Persona Card Set Icons
+                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcons());
                     break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
@@ -120,8 +120,8 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendOverFlowMenuCard());
                     reply.Attachments.Add(AllCards.sendHTMLConnectorCard());
                     reply.Attachments.Add(AllCards.sendCardWithEmoji());
-                    reply.Attachments.Add(AllCards.sendPersonaCardIcon());
-                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcon());
+                    reply.Attachments.Add(AllCards.sendPersonaCardIcons());
+                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcons());
                     break;
             }
 

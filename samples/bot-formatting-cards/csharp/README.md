@@ -126,7 +126,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             ]
         ```
    
-   **Note: The users are in the card component have to be on the same tenant.**
+   **Note: Mention properly that, In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}

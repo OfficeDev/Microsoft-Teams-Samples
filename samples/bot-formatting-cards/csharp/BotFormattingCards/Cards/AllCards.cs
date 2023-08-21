@@ -11,6 +11,11 @@ namespace BotAllCards.Cards
     public static class AllCards
     {
         /// <summary>
+        /// ContentType:mimetype/Contenttype for the file.
+        /// </summary>
+        public const string contentType = "application/vnd.microsoft.card.adaptive";
+
+        /// <summary>
         /// Sends Mention Support Card 
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
         /// </summary>
@@ -26,11 +31,11 @@ namespace BotAllCards.Cards
             {
                 userName = name
             };
-            
+
             string cardJSON = template.Expand(memberData);
             var mentionSupportAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(cardJSON),
             };
 
@@ -49,7 +54,7 @@ namespace BotAllCards.Cards
 
             var sendsInfoMaskingAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -68,7 +73,7 @@ namespace BotAllCards.Cards
 
             var fullWidthAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -87,7 +92,7 @@ namespace BotAllCards.Cards
 
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(stageViewImagesAdaptiveCardJson),
             };
 
@@ -106,7 +111,7 @@ namespace BotAllCards.Cards
 
             var sendsOverFlowMenuAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -144,7 +149,7 @@ namespace BotAllCards.Cards
 
             var emojiAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -156,18 +161,18 @@ namespace BotAllCards.Cards
         /// If you want to show a single user in an Adaptive Card, the Adaptive Card displays the people icon and the name of the user.
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendPersonaCardIcon()
+        public static Attachment sendPersonaCardIcons()
         {
             var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardIcon.json" };
             var adaptiveCardPersonaCardIconJson = File.ReadAllText(Path.Combine(paths));
 
             var PersonaCardIconAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardIconJson),
             };
 
-          return PersonaCardIconAdaptiveCardAttachment;
+            return PersonaCardIconAdaptiveCardAttachment;
         }
 
         /// <summary>
@@ -175,14 +180,14 @@ namespace BotAllCards.Cards
         /// If you want to show multiple users in an Adaptive Card, the Adaptive Card displays only the people icon of the users.
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendPersonaCardSetIcon()
+        public static Attachment sendPersonaCardSetIcons()
         {
             var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardSetIcon.json" };
             var adaptiveCardPersonaCardSetIconJson = File.ReadAllText(Path.Combine(paths));
 
             var PersonaCardSetIconAdaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = contentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardSetIconJson),
             };
 
