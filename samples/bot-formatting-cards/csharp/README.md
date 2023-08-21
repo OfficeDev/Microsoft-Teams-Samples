@@ -128,7 +128,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    
    **Note: Mention properly that, In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
-       - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+    - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
       3) On line 18, replace {{User-Principal-Name}}
@@ -142,7 +142,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       }
         ```
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
-      - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
       1) On line 18, replace {{User-Object-ID}}  
       2) On line 19, replace {{User-Display-Name}}
       3) On line 20, replace {{User-Principal-Name}}

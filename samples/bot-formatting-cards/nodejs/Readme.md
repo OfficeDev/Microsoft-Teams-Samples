@@ -116,6 +116,7 @@ Run ngrok - point to port 3978
 
   **Note: Mention properly that, In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
   - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+    - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
       3) On line 18, replace {{User-Principal-Name}}
@@ -127,9 +128,8 @@ Run ngrok - point to port 3978
         "displayName": "Test",
         "userPrincipalName": "Test@w.com"
       }
-      ```
-  - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
-      - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+        ```
+    - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
       1) On line 18, replace {{User-Object-ID}}  
       2) On line 19, replace {{User-Display-Name}}
       3) On line 20, replace {{User-Principal-Name}}
@@ -153,7 +153,7 @@ Run ngrok - point to port 3978
           }
         ]
       }
-      ```
+        ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
 
