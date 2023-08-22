@@ -1,5 +1,5 @@
 {
-    "name": "Msgext-ai-sentiment-analysis",
+    "name": "msgext-ai-sentiment-analysis",
     "version": "1.0.0",
     "msteams": {
         "teamsAppId": null
