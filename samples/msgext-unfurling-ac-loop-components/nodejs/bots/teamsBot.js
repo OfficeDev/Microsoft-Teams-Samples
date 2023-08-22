@@ -36,20 +36,10 @@ class TeamsBot extends TeamsActivityHandler {
   // Msgext-link-unfurling
   handleTeamsAppBasedLinkQuery() {
 
-    const attachment = card;
-
-    attachment.preview = {
-        content: {
-            title: "Adaptive Card-based Loop component",
-            text:"These samples are designed to help understand Microsoft Teams platform capabilities and scenarios(Bots,Tabs,Message extensions,Meeting extensions,Personal apps,Webhooks and connectors)",
-        },
-        contentType: "application/vnd.microsoft.card.thumbnail",
-    }
-
     const result = {
         attachmentLayout: 'list',
         type: 'result',
-        attachments: [attachment]
+        attachments: [card]
     };
 
     const response = {
