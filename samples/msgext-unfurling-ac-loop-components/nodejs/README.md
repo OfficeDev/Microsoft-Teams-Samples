@@ -117,11 +117,14 @@ the Teams service needs to call into the bot.
 **If you copy and paste a link from https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main into the compose message area the link will unfurl:**
 ![2.AdaptiveCardLoopComponent](Images/2.AdaptiveCardLoopComponent.png)
 
-**Search Result:**
+**Search:**
 ![3.MsgextSearch ](Images/3.MsgextSearch.png)
 
+**Search Results:**
+![4.MsgextSearchResults ](Images/4.MsgextSearchResults.png)
+
 **Adaptive Card Based Loop Components:**
-![4.AdaptiveCardLoopComponentMsgextSearch](Images/4.AdaptiveCardLoopComponentMsgextSearch.png)
+![5.AdaptiveCardLoopComponentMsgextSearch](Images/5.AdaptiveCardLoopComponentMsgextSearch.png)
 
 ## Deploy the bot to Azure
 
