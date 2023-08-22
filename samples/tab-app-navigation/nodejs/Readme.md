@@ -67,6 +67,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     npm install
     ```
+
 > Note please update `<<Your-Teams-App-Id>>` you will get it by log into teams admin portal `https://admin.teams.microsoft.com/`.
 
 3) Run your app (Either from any local terminal or from Visual Studio Code terminal)
