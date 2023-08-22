@@ -15,12 +15,12 @@
       "properties": {
         "users": [
           {
-            "id": "{{User-Object-ID}}", // Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+            "id": "{{User-Object-ID}}",
             "displayName": "{{User-Display-Name}}",
             "userPrincipalName": "{{User-Principal-Name}}"
           },
           {
-            "id": "{{User-Object-ID}}", // Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+            "id": "{{User-Object-ID}}",
             "displayName": "{{User-Display-Name}}",
             "userPrincipalName": "{{User-Principal-Name}}"
           }
