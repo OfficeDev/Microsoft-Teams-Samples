@@ -83,26 +83,26 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Edit** the `manifest.json` for `<<Valid_Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace it at all the places in your manifest.json.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Sideload the app In meetings (Supported scopes)
+    - Sideload the app in `Teams Scope` (Supported scopes: Teams)
      
 ## Running the sample
 
-**Add the App in Teams**.
+**Add the App in Teams**
 ![Configure Tab](Images/2.ConfigureTab.PNG)
 
-**Tab Menu To Navigate:**
+**Tab Menu To Navigate**
 ![Tab Menu](Images/3.Tab-Menu.PNG)
 
-**Navigated To Personal Tab App:** 
+**Navigated To Personal Tab App** 
 ![Tab Navigation](Images/4.NavigatedToPersonalTabApp.PNG)
 
-**Return to focus forward highlights the search bar:** 
+**Return to focus forward highlights the search bar** 
 ![Tab Navigation](Images/5.ReturnToFocusForward.PNG)
 
-**Return to focus backwards highlights the app bar :** 
+**Return to focus backwards highlights the app bar** 
 ![Tab Navigation](Images/6.ReturnToFocusBackward.PNG)
 
-**Back Button Navigation :** 
+**Back Button Navigation:**  
 ![Back Button Navigation ](Images/7.BackButtonNavigation.PNG)
 
 
