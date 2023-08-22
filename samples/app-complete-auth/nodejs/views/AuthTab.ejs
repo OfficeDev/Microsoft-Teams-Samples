@@ -9,8 +9,9 @@
         let showSSOToggle = false;
         let showFbToggle = false;
         let showUserToggle = false;
-        let clientId =  <%-clientId%>
         let redirectUri = window.location.origin + "/fb-auth";
+        let clientId =  <%-clientId%>
+        
 
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
@@ -24,7 +25,7 @@
         });
 
         microsoftTeams.app.initialize();
-        function ssoAuthentication() {
+         ssoAuthentication = () => {
             getClientSideToken()
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);

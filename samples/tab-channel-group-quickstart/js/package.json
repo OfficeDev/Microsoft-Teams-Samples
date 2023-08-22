@@ -5,15 +5,17 @@
     "teamsAppId": null
   },
   "private": true,
-  "dependencies": { 
-    "@microsoft/teams-js": "^2.0.0",
+  "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
+    "@microsoft/teams-js": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
-    "react-router-dom": "^6.4.4"
+    "scheduler": "^0.23.0"
   },
   "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
@@ -29,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }

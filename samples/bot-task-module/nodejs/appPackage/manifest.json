@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://example.azurewebsites.net",
-    "privacyUrl": "https://example.azurewebsites.net/privacy",
-    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<Valid-Domain>>/configure.html",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure.html",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -37,8 +37,8 @@
     {
       "entityId": "com.microsoft.teams.taskmodule.statictab",
       "name": "Tasks!",
-      "contentUrl": "https://<<Valid-Domain>>/taskmodule.html",
-      "websiteUrl": "https://<<Valid-Domain>>/taskmodule.html",
+      "contentUrl": "https://${{BOT_DOMAIN}}/taskmodule.html",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/taskmodule.html",
       "scopes": [
         "personal"
       ]
@@ -46,7 +46,7 @@
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team",
@@ -63,6 +63,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "${{BOT_DOMAIN}}"
   ]
 }
