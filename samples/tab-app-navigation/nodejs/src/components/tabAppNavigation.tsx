@@ -10,7 +10,7 @@ import './index.css';
 
 function TabAppNavigation() {
     let app = microsoftTeams.app;
-    let appId = "82a4d78a-68ed-4987-8527-0c255f1ce84c";
+    let appId = "<<Your-Teams-App-Id>>";
     
     React.useEffect(() => {
         app.initialize().then(app.getContext).then((context: any) => {
