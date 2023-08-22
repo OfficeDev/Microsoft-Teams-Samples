@@ -126,7 +126,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             ]
         ```
    
-   **Note: Mention properly that, In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
+   **Note: In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
   - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
@@ -136,9 +136,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         - E.g. 
         ```
         "properties": {
-        "id": "87d349ed-e15d-434a-9e14-87d349ed",
-        "displayName": "Test",
-        "userPrincipalName": "Test@w.com"
+        "id": "87d349ed-xxxx-434a-9e14-xxxx",
+        "displayName": "Joe Smith",
+        "userPrincipalName": "Joe Smith@xxxx.com"
       }
         ```
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
@@ -154,14 +154,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       "properties": {
         "users": [
           {
-            "id": "87d349ed-e15d-434a-9e14-87d349ed",
-            "displayName": "Test",
-            "userPrincipalName": "Test@w.com"
+            "id": "87d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Joe Smith",
+            "userPrincipalName": "Joe Smith@xxxx.com"
           },
           {
-            "id": "87d349ed-e15d-434a-9e14-87d349ed",
-            "displayName": "Test",
-            "userPrincipalName": "Test@w.com"
+            "id": "87d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Joe Smith",
+            "userPrincipalName": "Joe Smith@xxxx.com"
           }
         ]
       }
