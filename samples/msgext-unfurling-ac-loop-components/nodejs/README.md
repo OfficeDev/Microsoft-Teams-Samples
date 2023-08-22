@@ -129,11 +129,11 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Adaptive Card-based Loop components](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230)
-- [Build message extensions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
-- [Azure Bot Service Introduction](https://review.learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
-- [Universal Actions for Adaptive Cards](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
-- [Extend a Teams message extension across Microsoft 365](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
+- [Adaptive Card-based Loop components](https://microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230)
+- [Build message extensions](https://microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
+- [Azure Bot Service Introduction](https://microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
+- [Universal Actions for Adaptive Cards](https://microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
+- [Extend a Teams message extension across Microsoft 365](https://microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-unfurling-ac-loop-components-nodejs" />
