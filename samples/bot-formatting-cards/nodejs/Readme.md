@@ -114,8 +114,8 @@ Run ngrok - point to port 3978
             ]
         ```
 
-  **Note: In Adaptive Card what we are defining (User details) should be exist in the same tenant where you are testing the app (teams login) etc...**
-  - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique object ID.
+  **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
+  - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique user object id.
     - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
@@ -126,7 +126,7 @@ Run ngrok - point to port 3978
         "properties": {
         "id": "87d349ed-xxxx-434a-9e14-xxxx",
         "displayName": "Joe Smith",
-        "userPrincipalName": "Joe Smith@xxxx.com"
+        "userPrincipalName": "JoeSmith@xxxx.com"
       }
         ```
     - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
@@ -142,14 +142,14 @@ Run ngrok - point to port 3978
       "properties": {
         "users": [
           {
-            "id": "87d349ed-xxxx-434a-9e14-xxxx",
-            "displayName": "Joe Smith",
-            "userPrincipalName": "Joe Smith@xxxx.com"
+            "id": "95d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Vance Agrawal",
+            "userPrincipalName": "VanceAgrawal@xxxx.com"
           },
           {
-            "id": "87d349ed-xxxx-434a-9e14-xxxx",
-            "displayName": "Joe Smith",
-            "userPrincipalName": "Joe Smith@xxxx.com"
+            "id": "45d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "ku Mao",
+            "userPrincipalName": "kuMao@xxxx.com"
           }
         ]
       }
