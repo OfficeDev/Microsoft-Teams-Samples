@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs",
     "source": "officeDev",
-    "title": "Sentiment analysis with messaging extension",
+    "title": "Sentiment analysis with messaging extension and Azure Open AI",
     "shortDescription": "Sentiment analysis Using Azure Open AI through messaging extension.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-sentiment-analysis/nodejs",
     "longDescription": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/nodejs/Images/Sentiment_Analysis",
-        "alt": "Solution UX showing sentiment analysis using messaging extension and Azure Open AI"
+        "alt": "Solution UX showing sentiment analysis for Team's chat messages using messaging extension and Azure Open AI"
       }
     ],
     "authors": [

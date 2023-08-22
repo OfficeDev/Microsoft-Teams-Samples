@@ -1,36 +1,36 @@
 {
-    "name": "msgext-ai-sentiment-analysis",
-    "version": "1.0.0",
-    "msteams": {
-        "teamsAppId": null
-    },
-    "description": "Sentiment analysis using message extension and Azure Open AI",
-    "engines": {
-        "node": "16 || 18"
-    },
-    "author": "Microsoft",
-    "license": "MIT",
-    "main": "index.js",
-    "scripts": {
-        "dev:teamsfx": "npm run start",
-        "start": "node ./index.js",
-        "watch": "nodemon ./index.js",
-        "build": "node build.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-        "@microsoft/adaptivecards-tools": "^1.0.0",
-        "botbuilder": "^4.18.0",
-        "cors": "^2.8.5",
-        "dotenv": "^16.3.1",
-        "ejs": "^3.1.9",
-        "esbuild": "^0.19.2",
-        "express": "^4.18.2",
-        "openai": "^3.3.0",
-        "path": "^0.12.7"
-    },
-    "devDependencies": {
-        "env-cmd": "^10.1.0",
-        "nodemon": "^2.0.7"
-    }
+  "name": "msgext-ai-sentiment-analysis",
+  "version": "1.0.0",
+  "msteams": {
+    "teamsAppId": null
+  },
+  "description": "Sentiment analysis of Teams chat messages using message extension and Azure Open AI",
+  "engines": {
+    "node": "16 || 18"
+  },
+  "author": "Microsoft",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run start",
+    "start": "node ./index.js",
+    "watch": "nodemon ./index.js",
+    "build": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@microsoft/adaptivecards-tools": "^1.0.0",
+    "botbuilder": "^4.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "esbuild": "^0.19.2",
+    "express": "^4.18.2",
+    "openai": "^3.3.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.7"
+  }
 }

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can check sentiment for teams message by using messaging extension and Azure Open AI.
+description: This sample shows a feature where user can check sentiment for teams' chat messages by using messaging extension and Azure Open AI.
 products:
 - office-teams
 - office
@@ -13,13 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs
 ---
 
-# Sentiment Analysis using Azure Open AI with messaging extension
+# Sentiment Analysis for Teams chat messages using Azure Open AI and messaging extension.
 
-This sample shows a feature where user can check analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI.
+This sample shows a feature where user can analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI.
 
 ## Included Features
 * Bots
-* Azure Open AI
+* Azure Open AI For Sentiment Analysis
 
 ## Interaction with app
 
@@ -48,7 +48,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. In the `env/.env.local` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
 
-`SECRET_OPENAI_API_KEY=<OpenAI Service Key>`
+`SECRET_OPENAI_API_KEY=<<SECRET_OPENAI_API_KEY>>` 
+
+> Note: `Open Api key` is optional, if you dont have access to Azure Open Api Key. 
 
 `SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
 
@@ -96,7 +98,7 @@ the Teams service needs to call into the bot.
     ```bash
     npm install
     ```
-1) Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`, `SECRET_OPENAI_API_KEY`,`AzureOpenAPIKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+1) Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`,`AzureOpenAPIKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 1) Run your app
 
@@ -167,17 +169,7 @@ Also, make sure that below key/values are properly added to the configuration se
 
 Once the provisioning and deployment steps are finished, you can sideload your app.
 
-**Note:** Please refer above `Setup` section for manifest configurations and sideload your packages (Admin/User) in Teams.
-
-## Further reading
-
-### Bot
-
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-
+**Note:** Please refer above `Setup` section for manifest configurations and sideload your packages in Teams.
 
 ## Further reading
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
