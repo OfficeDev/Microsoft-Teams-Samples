@@ -36,10 +36,20 @@ class TeamsBot extends TeamsActivityHandler {
   // Msgext-link-unfurling
   handleTeamsAppBasedLinkQuery() {
 
+    const attachment = JSON.parse(JSON.stringify(card));
+
+    attachment.preview = {
+        content: {
+            title: "Adaptive Card-based Loop component",
+            text:"These samples are designed to help understand Microsoft Teams platform capabilities and scenarios(Bots,Tabs,Message extensions,Meeting extensions,Personal apps,Webhooks and connectors)",
+        },
+        contentType: "application/vnd.microsoft.card.thumbnail",
+    }
+
     const result = {
         attachmentLayout: 'list',
         type: 'result',
-        attachments: [card]
+        attachments: [attachment]
     };
 
     const response = {
@@ -53,7 +63,7 @@ class TeamsBot extends TeamsActivityHandler {
   // Used in creating a Search-based Message Extension
   async handleTeamsMessagingExtensionQuery(context, query) {
    
-   const attachment = card;
+   const attachment = JSON.parse(JSON.stringify(card));
 
     attachment.preview = {
         content: {
@@ -76,12 +86,12 @@ class TeamsBot extends TeamsActivityHandler {
   //Used in creating a Search-based Message Extension. 
   async handleTeamsMessagingExtensionSelectItem(context, obj) {
   
-    return {
-    composeExtension: {
-      type: "result",
-      attachmentLayout: "list",
-      attachments: [card],
-    },
+      return {
+      composeExtension: {
+        type: "result",
+        attachmentLayout: "list",
+        attachments: [JSON.parse(JSON.stringify(card))],
+      },
   };
   }
 }
