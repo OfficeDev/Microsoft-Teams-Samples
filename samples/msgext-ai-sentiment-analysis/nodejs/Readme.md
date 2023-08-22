@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can check sentiment for teams message by using messaging extension.
+description: This sample shows a feature where user can check sentiment for teams message by using messaging extension and Azure Open AI.
 products:
 - office-teams
 - office
@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs
 ---
 
-# Sentiment Analysis with messaging extension
+# Sentiment Analysis using Azure Open AI with messaging extension
 
-This sample shows a feature where user can check analyze sentiments for messages posted in Teams chat using messaging extension.
+This sample shows a feature where user can check analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI.
 
 ## Included Features
 * Bots
@@ -105,8 +105,8 @@ the Teams service needs to call into the bot.
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appPackage` folder (`appPackage.admin` and `appPackage.user` folders) to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Also, update the <TEAMS_APP_ID> with unique Guid for both the `manifest.json` stored in (`appPackage.admin` and `appPackage.user`) as this app has 2 roles: Admin and User.
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Also, update the <TEAMS_APP_ID> with unique Guid in `manifest.json` stored in (`appPackage`).
 
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
     - **Zip** up the contents of the `appPackage` folder (appPackage.admin and appPackage.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
