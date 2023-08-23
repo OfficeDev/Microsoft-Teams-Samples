@@ -127,7 +127,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```
    
    **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
-  - Locate the Basic info section on the user's Profile page. The Object ID that is displayed is the user's unique user object id.
+  - Update the user AAD object ID in your adaptive card JSON from your tenant's AAD users available in the Azure portal.
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}
