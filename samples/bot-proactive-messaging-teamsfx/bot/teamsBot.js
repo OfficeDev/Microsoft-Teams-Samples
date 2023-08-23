@@ -6,7 +6,7 @@ const { TeamsActivityHandler, TurnContext } = require("botbuilder");
 const path = require('path');
 
 // Read botFilePath and botFileSecret from .env file.
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '../env/.env.local' }); // If deploying or provisioning the sample, please replace this with with .env.dev
 
 class TeamsBot extends TeamsActivityHandler {
   constructor(conversationReferences) {
