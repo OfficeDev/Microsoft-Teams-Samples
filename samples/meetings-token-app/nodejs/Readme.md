@@ -62,12 +62,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   # determine dotnet version
   node --version
   ```
-
-- [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http 3978 --host-header="localhost:3978"
-  ```
+- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -120,9 +115,18 @@ The app uses the Teams extensibility features described on the following pages:
     }
     ```
 
-### Step 3: Run Ngrok
+### Step 3: Run Ngrok or Dev Tunnel
 1. The application (client) will run on port 3978
-2. ngrok http 3978 --host-header="localhost:3978"
+
+  ```bash
+  # run ngrok locally
+  ngrok http 3978 --host-header="localhost:3978"
+  ```
+  Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
   
 ### Step 4: Run Client & the Server
 You can build and run the project from the command line or an IDE:
@@ -179,6 +183,16 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 The sample app uses an in-memory store to maintain token information and the service URL for the tenant. If you restart the project, you must run the following command to recapture the service URL: `@[BotName] reset`
 
 In your own projects, please use a durable storage mechanism to store the service URL for the tenant.
+
+## Deploy to Azure
+
+Deploy your project to Azure by following these steps:
+
+| From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From TeamsFx CLI                                                                                                                                                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Open Teams Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Teams Toolkit and click `Provision` from DEPLOYMENT section or open the command palette and select: `Teams: Provision`.</li><li>Open the Teams Toolkit and click `Deploy` or open the command palette and select: `Teams: Deploy`.</li></ul> | <ul> <li>Run command `teamsfx account login azure`.</li> <li>Run command `teamsfx provision --env dev`.</li> <li>Run command: `teamsfx deploy --env dev`. </li></ul> |
+
+> Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
 ## Further reading
 
