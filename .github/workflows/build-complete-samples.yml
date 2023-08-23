@@ -611,9 +611,9 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs/server'
+            - project_path: 'samples/meetings-sidepanel/nodejs'
               name: 'meetings-sidepanel'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
               name: 'meetings-sidepanel-clientapp'
@@ -939,7 +939,7 @@ jobs:
               name: 'app-anonymous-users-clientapp'
               version: '18.x'
 
-            - project_path: 'samples/app-anonymous-users/nodejs/api'
+            - project_path: 'samples/app-anonymous-users/nodejs'
               name: 'app-anonymous-users-api'
               version: '18.x'
 
@@ -961,6 +961,10 @@ jobs:
 
             - project_path: 'samples/tab-multi-hub/ts'
               name: 'tab-multi-hub'
+              version: '18.x'
+            
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/nodejs'
+              name: 'msgext-unfurling-ac-loop-components'
               version: '18.x'
 
             - project_path: 'samples/bot-ai-enterprise-search/nodejs'
