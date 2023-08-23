@@ -10,17 +10,6 @@ class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
     this.baseUrl = process.env.BaseUrl;
-    this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-
-      for (let member = 0; member < membersAdded.length; member++) {
-        if (membersAdded[member].id !== context.activity.recipient.id) {
-          await context.sendActivity("Hello and welcome. This sample helps you to send sentiment for any text message");
-        }
-      }
-
-      await next();
-    });
   }
 
   // fetch and handle message extension task module 

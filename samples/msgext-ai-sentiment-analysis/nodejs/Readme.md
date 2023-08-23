@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-node
 This sample shows a feature where user can analyze sentiments for messages posted in Teams chat using messaging extension and Azure Open AI.
 
 ## Included Features
-* Bots
+* ME
 * Azure Open AI For Sentiment Analysis
 
 ## Interaction with app
@@ -34,7 +34,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
@@ -69,9 +69,15 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 1) Setup for Bot
 
@@ -83,7 +89,7 @@ the Teams service needs to call into the bot.
 
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
 1) Clone the repository
 
@@ -98,7 +104,7 @@ the Teams service needs to call into the bot.
     ```bash
     npm install
     ```
-1) Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`,`AzureOpenAPIKey` and `BaseUrl`  with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+1) Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword`,`AzureOpenAPIKey` and `BaseUrl`  with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 1) Run your app
 
@@ -107,11 +113,11 @@ the Teams service needs to call into the bot.
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Also, update the <TEAMS_APP_ID> with unique Guid in `manifest.json` stored in (`appPackage`).
+    - **Edit** the `manifest.json` contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Also, update the <TEAMS_APP_ID> with unique Guid in `manifest.json` stored in (`AppManifest`).
 
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Zip** up the contents of the `appPackage` folder (appPackage.admin and appPackage.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `AppManifest` folder (AppManifest.admin and AppManifest.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-ai-sentiment-analysis/nodejs/index.js#L44) line and put your debugger for local debug.
@@ -146,7 +152,7 @@ Deploy your project to Azure by following these steps:
 
 > Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
-**Note:** Once the provisioning and deployment steps are finished please update the `manifest.json` contained in the `appPackage` folders (`appPackage.admin` and `appPackage.user` folders) for `validDomains` with base Url domain. E.g. if your deployed web app service URL is: `https://botaxxxxx.azurewebsites.net/` then your domain-name will be `botaxxxxx.azurewebsites.net`.
+**Note:** Once the provisioning and deployment steps are finished please update the `manifest.json` contained in the `AppManifest` folders (`AppManifest.admin` and `AppManifest.user` folders) for `validDomains` with base Url domain. E.g. if your deployed web app service URL is: `https://botaxxxxx.azurewebsites.net/` then your domain-name will be `botaxxxxx.azurewebsites.net`.
 
 
 Also, make sure that below key/values are properly added to the configuration section of web app after code deployement.
