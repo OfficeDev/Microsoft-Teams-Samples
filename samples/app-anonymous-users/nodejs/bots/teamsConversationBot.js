@@ -12,7 +12,7 @@ const {
     TurnContext
 } = require('botbuilder');
 // Read vote card JSON template
-const VoteCardReaderCardTemplate = require('../../resources/VoteCard.json');
+const VoteCardReaderCardTemplate = require('../resources/VoteCard.json');
 
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
