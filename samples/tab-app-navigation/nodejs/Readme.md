@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample support types of navigation such as between tabs within the app.
+description: This sample shows the tab navigation feature such as navigation between tabs within the app.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-app-navigation-nodejs
 
 ## Tab App Navigation
 
-This sample support types of navigation such as between tabs within the app.
+This sample shows the tab navigation feature such as navigation between tabs within the app.
 
 **Interaction with App**
 ![TabAppNavigation](Images/tab-app-navigation.gif)  
