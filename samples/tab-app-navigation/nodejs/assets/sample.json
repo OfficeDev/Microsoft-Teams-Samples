@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-app-navigation-nodejs",
     "source": "officeDev",
     "title": "Tab App Navigation",
-    "shortDescription": "This sample support types of navigation such as between tabs within the app",
+    "shortDescription": "This sample shows the tab navigation feature such as navigation between tabs within the app.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-app-navigation/nodejs",
     "longDescription": [
-      "This sample support types of navigation such as between tabs within the app"
+      "This sample shows the tab navigation feature such as navigation between tabs within the app."
     ],
     "creationDateTime": "2023-08-20",
     "updateDateTime": "2023-08-20",

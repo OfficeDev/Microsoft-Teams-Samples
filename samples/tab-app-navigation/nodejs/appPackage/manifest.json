@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Tab App Navigation",
-    "full": "This sample support types of navigation such as between tabs within the app"
+    "full": "This sample shows the tab navigation feature such as navigation between tabs within the app."
   },
   "icons": {
     "outline": "outline.png",
@@ -35,7 +35,7 @@
   ],
   "staticTabs": [
     {
-      "entityId": "my_app_1",
+      "entityId": "my_tab_1",
       "name": "Navigated Tab",
       "contentUrl": "https://${{TAB_DOMAIN}}/navigatedTab",
       "websiteUrl": "https://${{TAB_DOMAIN}}/navigatedTab",

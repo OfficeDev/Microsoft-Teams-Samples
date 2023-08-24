@@ -30,7 +30,7 @@ const Configure = props => {
     return (
         <div>
             <h2>Navigate within a tab app</h2>
-            <h3>This sample app supports Navigation WithIn Teams App</h3>
+            <h3>This sample shows the tab navigation feature such as navigation between tabs within the app.</h3>
             <p>Please click save button to proceed.</p>
         </div>
     );
