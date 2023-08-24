@@ -23,17 +23,6 @@
       "color": "color.png"
     },
     "accentColor": "#60A18E",
-    "bots": [
-      {
-        "botId": "${{BOT_ID}}",
-        "scopes": [
-          "personal",
-          "groupChat",
-          "team"
-        ],
-        "isNotificationOnly": false
-      }
-    ],
     "composeExtensions": [
       {
         "botId": "${{BOT_ID}}",
