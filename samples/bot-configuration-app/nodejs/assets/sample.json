@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-configuration-app-nodejs",
     "source": "officeDev",
     "title": "Bot configuration app with type ahead search control",
-    "shortDescription": "Demonstrating the feature of configurable card with type ahead search (static and dynamic) control on Adaptive Cards.",
+    "shortDescription": "This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-configuration-app/nodejs",
     "longDescription": [
-      "Demonstrating the feature of configurable card with type ahead search (static and dynamic) control on Adaptive Cards."
+      "This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards."
     ],
-    "creationDateTime": "2023-07-31",
-    "updateDateTime": "2023-07-31",
+    "creationDateTime": "2023-08-23",
+    "updateDateTime": "2023-08-23",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-configuration-app/nodejs/Images/ConfigurationBot.gif",
-        "alt": "Solution UX showing typeahead search control in adaptive cards"
+        "alt": "Solution UX showing the feature of bot configuration and reconfiguration for bots in team and group chat"
       }
     ],
     "authors": [
