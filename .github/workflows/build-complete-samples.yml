@@ -629,15 +629,15 @@ jobs:
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '18.2.0'
+              version: '18.2.x'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
-              version: '16.8.0'
+              version: '16.8.x'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs'
               name: 'meeting-recruitment-app-clientapp'
-              version: '16.8.0'
+              version: '16.8.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
               name: 'msgext-message-reminder'

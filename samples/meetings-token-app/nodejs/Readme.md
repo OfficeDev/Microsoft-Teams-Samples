@@ -119,10 +119,9 @@ The app uses the Teams extensibility features described on the following pages:
 1. The application (client) will run on port 3978
 
   ```bash
-  # run ngrok locally
   ngrok http 3978 --host-header="localhost:3978"
   ```
-  Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+  Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnels with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous

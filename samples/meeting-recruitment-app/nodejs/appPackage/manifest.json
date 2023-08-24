@@ -44,7 +44,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-      "${{BOT_DOMAIN}}"
+      "${{BOT_DOMAIN}}",
+      "<<domain-name>>"
   ],
   "bots": [
     {
