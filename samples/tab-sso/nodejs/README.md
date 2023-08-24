@@ -39,7 +39,8 @@ You will need:
 
 2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine.
 
-3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+3. [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+   If you using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 4. [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
@@ -67,15 +68,15 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 
 1. Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
-    * Set your application URI to the same URI you've created in Ngrok. 
-        * Ex: `api://contoso.ngrok-free.app/{appId}`
+    * Set your application URI to the same URI you've created in tunnelling application. 
+        * Ex: `api://<your_tunnel_domain>/{appId}`
         using the application ID that was assigned to your app
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
         * Add a platform
         * Select `Single-page application`
-        * Create a redirect URI in the format of: `https://contoso.ngrok-free.app/auth-end`.
-        * Within same `Single-page-application` add another url in the format of: `https://contoso.ngrok-free.app/Home/BrowserRedirect`.
+        * Create a redirect URI in the format of: `https://<your_tunnel_domain>/auth-end`.
+        * Within same `Single-page-application` add another url in the format of: `https://<your_tunnel_domain>/Home/BrowserRedirect`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
         * Create a new client secret.
@@ -106,21 +107,21 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
     ~~~
     * Ensure the package name is unique within the tenant where you will run the app
     * Edit the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    * Replace `{ngrokSubdomain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
-    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
+    * Replace `{your_tunnel_domain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
+    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{your_tunnel_domain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\Manifest_Hub` folder with the required values.
     **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 2. Update your `config/default.json` file
     * Replace the `tab.appId` property with you Azure AD application ID
     * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
-    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok-free.app/{appID}`
-    * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
+    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://<your_tunnel_domain>/{appID}`
+    * If you want to use a port other than 3978, fill that in here (and in your tunnel command)
     * Note : Do not push the `clientId` and `clientSecret` values inside your repo. Instead we recommend to store them at some secure location like Azure key vault.
 
 ## Running the app locally
 
-1. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
+1. If you are using Ngrok, run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
     * Win: `./ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
     * Mac: `/ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
 

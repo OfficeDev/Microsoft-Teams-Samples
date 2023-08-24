@@ -36,7 +36,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -55,12 +55,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ## Setup
 
 1) Setup NGROK
-Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 2) Setup for code    
 - Clone the repository
@@ -88,7 +93,7 @@ Run ngrok - point to port 3978
 - **This step is specific to Teams.**
 
     -  Edit the `manifest.json` contained in the `Manifest` folder to replace {{Manifest-id}} with any GUID
-    - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace *everywhere* you see the place holder string `{{base-url}}`
+    - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`. Replace *everywhere* you see the place holder string `{{base-url}}`
        Note => Update `validDomains` as per your application domain, if needed.
 
     -  Zip up the contents of the `Manifest` folder to create a `manifest.zip`

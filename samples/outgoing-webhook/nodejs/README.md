@@ -27,7 +27,7 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -48,11 +48,18 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
     Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
     
  2. Setup NGROK
-- Run ngrok - point to port 3978
+-  Run ngrok - point to port 3978
 
-```bash
-# ngrok http 3978 --host-header="localhost:3978"
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Setup Code
 
 - In a terminal, navigate to `samples/outgoing-webhook/nodejs`

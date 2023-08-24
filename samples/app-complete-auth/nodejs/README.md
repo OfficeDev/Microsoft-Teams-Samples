@@ -38,7 +38,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [NodeJS](https://nodejs.org/en/)
-- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -123,7 +123,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    ngrok http 3978 --host-header="localhost:3978"
    ```  
 
-   Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
@@ -150,7 +150,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
-   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnel, your URL will be https://12345.devtunnels.ms.
+   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
    - `{{AppType}}` - The value for app type will me `MultiTenant`.
@@ -165,7 +165,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `{{MicrosoftAppId}}` with Application id generated from Step 3
-   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnel then your domain will be like: `12345.devtunnels.ms`.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\nodejs` folder with the required values.
 2. Zip the contents of the `appPackage` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 

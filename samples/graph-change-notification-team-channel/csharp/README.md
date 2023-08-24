@@ -35,7 +35,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
         # determine dotnet version
         dotnet --version
     ```
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -45,8 +45,14 @@ This is a sample application which demonstrates use of Team/Channel subscription
 1) Run ngrok - point to port 3978
 
    ```bash
-     ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 2) Setup for Bot
 
@@ -69,7 +75,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
-- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
 ### Create and install Self-Signed certificate
 
@@ -101,7 +107,7 @@ To include resource data of graph notifications, this Graph API require self-sig
   **Instruction for appsetting**
     1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
     (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+    2. Provide the tunnel url as  "BaseUrl" in appsetting on which application is running on.
     3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
 
   - Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
@@ -110,7 +116,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
-- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 

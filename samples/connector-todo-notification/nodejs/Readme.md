@@ -26,7 +26,7 @@ This is a sample connector application which demonstarates how to add authentica
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
@@ -36,8 +36,15 @@ This is a sample connector application which demonstarates how to add authentica
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 2. Clone the repository
 
     ```bash
@@ -68,7 +75,7 @@ This is a sample connector application which demonstarates how to add authentica
    - Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
    - Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<Your_Ngrok_Domain>/SimpleEnd`
+    - `https://<your_tunnel_domain>/SimpleEnd`
 
    - Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
@@ -85,7 +92,7 @@ This is a sample connector application which demonstarates how to add authentica
 6. Setting up .env configuration 
    - Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
-   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
+   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` if you are using ngrok it would be `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 7. Run your app for server and client
 
@@ -95,7 +102,7 @@ This is a sample connector application which demonstarates how to add authentica
 
 8. __*This step is specific to Teams.*__
  - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
  
         Example :
 

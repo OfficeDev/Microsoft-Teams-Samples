@@ -27,7 +27,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -72,7 +72,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
     Set a redirect URI:
      * Select **Add a platform**.
      * Select **web**.
-     * Enter the **redirect URI** for the app in the following format: `https://%ngrokDomain%.ngrok-free.app/Auth/End`. This will be the page where a successful implicit grant flow will redirect the user.
+     * Enter the **redirect URI** for the app in the following format: `https://<your_tunnel_domain>/Auth/End`. This will be the page where a successful implicit grant flow will redirect the user.
     
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -80,11 +80,18 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
  -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `appsettings.json`.
 
 2. Setup NGROK
-- Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-```bash
-  ngrok http 3978 --host-header="localhost:3978"
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Setup for code
 
 - Clone the repository
@@ -107,14 +114,21 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 
 - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    -  **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<YOUR-NGROK-DOMAIN>>/<<YOUR-MICROSOFT-APP-ID>>""` with MicrosoftAppId. E.g. `"api://ngrok-free.app/0000000000-0000000000-0000000"`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    -  **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<your_tunnel_domain>>/<<YOUR-MICROSOFT-APP-ID>>""` with MicrosoftAppId. E.g. `"api://ngrok-free.app/0000000000-0000000000-0000000"`.
     - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")

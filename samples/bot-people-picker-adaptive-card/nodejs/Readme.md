@@ -33,7 +33,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Prerequisites
 
-- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+
+- If you are using Ngrok To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (latest version)
 
 - You'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
@@ -62,16 +64,21 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-2) Setup NGROK  
-Run ngrok - point to port 3978
+2) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3) Setup for code
 - Clone the repository

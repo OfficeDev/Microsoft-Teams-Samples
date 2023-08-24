@@ -39,7 +39,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 -  [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -96,14 +96,21 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
     ```
 4) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the following details:
   - `MicrosoftAppId` - It is the AppId created in previous step (Setup for Bot SSO)
   - `MicrosoftAppPassword` - It is referred to as the "client secret" in step 1.a (Setup for Bot SSO) and you can always create a new client secret anytime
   - `ConnectionName` - Generated from Step 1.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource. Please follow [Add authentication to bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
-  - `BaseUrl` with application base url. For example your ngrok url like `https://12123xxxx.ngrok-free.app`. 
+  - `BaseUrl` with application base url. For example your ngrok url like `https://12123xxxx.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 6) Run your app
 
@@ -114,7 +121,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
 **Manually update the manifest.json**
 - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in previous step while doing AAD app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
-- Also, update {{domain-name}} in your manifest `validDomains` section with your app domain like ngrok domain `1234.ngrok-free.app` excluding http/https.
+- Also, update {{domain-name}} in your manifest `validDomains` section with your app domain like ngrok domain `1234.ngrok-free.app` or dev tunnels domain `12345.devtunnels.ms` excluding http/https.
 
 - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
 

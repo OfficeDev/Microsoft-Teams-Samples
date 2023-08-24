@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://[Your Ngrok Domain]/ConfigureTab",
+      "configurationUrl": "https://[Your tunnel Domain]/ConfigureTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -37,7 +37,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "<<domain-name>>"
   ],
   "webApplicationInfo": {
     "id": "<<Your Microsoft APP Id>>",

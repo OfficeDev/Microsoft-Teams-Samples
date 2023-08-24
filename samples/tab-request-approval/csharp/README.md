@@ -42,12 +42,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   dotnet --version
   ```
 
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http 3978 --host-header="localhost:3978"
-  ```
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -127,10 +123,16 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     
 18. Run ngrok - point to port 3978
 
-    ```bash
-    # ngrok http 3978 --host-header="localhost:3978"
-    ```
- 
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 19. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
@@ -141,8 +143,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 	 
 20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 21. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
