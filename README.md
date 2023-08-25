@@ -106,6 +106,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] ![toolkit-icon](assets/toolkit-icon.png) |
 |7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]|[View](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
+|9|Messaging extensions - Adaptive Card based loop components | Messaging extension with adaptive card-based loop components functionality. |     | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 
 #### Additional samples
 
@@ -272,6 +273,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-action-quickstart#js]:samples/msgext-action-quickstart/js
 [msgext-search-quickstart#js]:samples/msgext-search-quickstart/js
 [msgext-search-sso-config#js]:samples/msgext-search-sso-config
+[msgext-unfurling-ac-loop-components#nodejs]:samples/msgext-unfurling-ac-loop-components/nodejs
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp

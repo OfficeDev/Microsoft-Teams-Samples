@@ -30,7 +30,7 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
-- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
+- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -68,7 +68,7 @@ the Teams service needs to call into the bot.
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
-    Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
