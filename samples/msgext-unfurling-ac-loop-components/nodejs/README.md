@@ -114,17 +114,32 @@ the Teams service needs to call into the bot.
 **Install App:**
 ![1.InstallApp](Images/1.InstallApp.png)
 
+**Add to a chat:**
+![2.SelectAddToChat](Images/2.SelectAddToChat.png)
+
+**Add to a group chat:**
+![3.GroupChat](Images/3.GroupChat.png)
+
 **If you copy and paste a link from https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main into the compose message area the link will unfurl:**
-![2.AdaptiveCardLoopComponent](Images/2.AdaptiveCardLoopComponent.png)
+![4.AdaptiveCardLoopComponent](Images/4.AdaptiveCardLoopComponent.png)
+
+**Search for actions and apps:**
+![5.SelectACloopComponent](Images/5.SelectACloopComponent.png)
 
 **Search:**
-![3.MsgextSearch ](Images/3.MsgextSearch.png)
+![6.MsgextSearch ](Images/6.MsgextSearch.png)
 
 **Search Results:**
-![4.MsgextSearchResults ](Images/4.MsgextSearchResults.png)
+![7.MsgextSearchResults ](Images/7.MsgextSearchResults.png)
 
 **Adaptive Card Based Loop Components:**
-![5.AdaptiveCardLoopComponentMsgextSearch](Images/5.AdaptiveCardLoopComponentMsgextSearch.png)
+![8.AdaptiveCardLoopComponentMsgextSearch](Images/8.AdaptiveCardLoopComponentMsgextSearch.png)
+
+**Click Execute:**
+![9.ClickExecute](Images/9.ClickExecute.png)
+
+**Successfully Execute:**
+![10.SuccessfullyExecute](Images/10.SuccessfullyExecute.png)
 
 ## Deploy the bot to Azure
 
