@@ -23,16 +23,20 @@ app.use('/',indexRouter);
     res.render('./views/configure');
   });
 
-  app.get('/rscdemo', function(req, res) {   
-    var tenantId=req.url.split('=')[1];
+  app.get('/rscdemo', function(req, res) {
+    var tenantId= req.url.split('=')[1];
     auth.getAccessToken(tenantId).then(async function (token) {
-      console.log("token from js file : "+ token);
      res.render('./views/rscdemo',{token:JSON.stringify(token)});
     });
-   
+  });
+
+  app.get('/sendNotification', function(req, res) {
+    var tenantId= process.env.TenantId
+    auth.getAccessToken(tenantId).then(async function (token) {
+     res.render('./views/sendNotification',{token:JSON.stringify(token)});
+    });
   });
 
 app.listen(3978 ||3978, function () {
   console.log('app listening on port 3978!');
 });
-

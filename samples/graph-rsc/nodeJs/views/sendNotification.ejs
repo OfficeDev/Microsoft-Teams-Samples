@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSC Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+
+    <style>
+        #mainDeiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+
+    <script>
+
+        var appId;
+        var token =  <%-token%>;
+
+        // Initialize teams js sdk
+        $(document).ready(function () {
+            microsoftTeams.app.initialize();
+        });
+
+        // People picker api call for selecting reciepient.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+
+                    let reciepientUserId = people[0].objectId;
+
+                    getInstalledAppList(token, reciepientUserId)
+
+
+                }
+            });
+        }
+
+        // Get installed app id.
+        function getAppId(appList) {
+            var list = appList;
+            var i;
+            for (i = 0; i < list.length; i++) {
+                if (list[i].teamsAppDefinition['displayName'] == "RSC-GraphAPI NodeJs") {
+                    return list[i].id;
+                }
+            }
+        }
+
+        // Fetch the list of installed apps for user
+        function getInstalledAppList(accessToken, reciepientUserId) {
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition",
+                type: "GET",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + accessToken);
+                },
+                success: function (result) {
+                    appId = getAppId(result.value);
+                    sendActivityFeedNotification(token, reciepientUserId, appId)
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+
+        }
+
+        // Send activity feed notification to user
+        function sendActivityFeedNotification(accessToken, reciepientUserId, appId) {
+
+            var postData = {
+                topic: {
+                    source: "entityUrl",
+                    value: `https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/installedApps/${appId}`
+                },
+                activityType: "taskCreated",
+                previewText: {
+                    content: "New Task Created"
+                },
+                templateParameters: [
+                    {
+                        name: "taskName",
+                        value: "test"
+                    }
+                ]
+            };
+
+            $.ajax({
+                url: `https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/sendActivityNotification`,
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(postData),
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + accessToken);
+                },
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="mainDeiv">
+        <h4>Select reciepient to send activity feed notification.</h4>
+        <p id="rsclist"></p>
+        <br />
+        <Button data-id="singleSelect" onclick="selectPeople(event,[],false,true)"> Select </Button>
+    </div>
+</body>
+
+</html>

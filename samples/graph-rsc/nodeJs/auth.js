@@ -13,6 +13,8 @@ auth.getAccessToken = function (tenantId) {
       client_secret: process.env.ClientSecret,  
       scope: 'https://graph.microsoft.com/.default'
     };
+
+    console.log(JSON.stringify(requestParams));
   
     var url = "https://login.microsoftonline.com/"+ tenantId+"/oauth2/v2.0/token";
     request.post({ url: url, form: requestParams }, function (err, response, body) {
@@ -20,9 +22,12 @@ auth.getAccessToken = function (tenantId) {
   
       if (err) {
         deferred.reject(err);
+        console.log(err);
       } else if (parsedBody.error) {
+        console.log(parsedBody.error_description);
         deferred.reject(parsedBody.error_description);
       } else {
+        console.log("success");
         // If successful, return the access token.
         deferred.resolve(parsedBody.access_token);
       }
