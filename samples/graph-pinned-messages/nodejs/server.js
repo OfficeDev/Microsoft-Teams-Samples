@@ -4,23 +4,25 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({
+const server = express();
+
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({
   extended: true
 }));
 
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
+const port = process.env.port || process.env.PORT || 3000;
+server.listen(port, function () {
+  console.log(`app listening on port ${port}!`);
+});
+
 // Parse application/json
-app.use(express.json());
+server.use(express.json());
 
 // Define route for the controller.
-app.use('/api/chat', require('./controller'))
-
-app.listen(3000, function () {
-  console.log('app listening on port 3000!');
-});
+server.use('/api/chat', require('./controller'))
