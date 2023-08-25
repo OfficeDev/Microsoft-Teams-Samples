@@ -17,10 +17,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
         this.onMessage(async (context, next) => {
             TurnContext.removeRecipientMention(context.activity);
 
-            const text = context.activity.text.trim().toLocaleLowerCase();
+            const text = context.activity?.text?.trim().toLocaleLowerCase();
 
-            if (text === null) {
-                await sendDataToBatchOperations(turnContext);
+            if (!text) {
+                await this.sendDataToBatchOperations(context);
             } else {
                 if (text.includes('listusers')) {
                     await this.messageListOfUsersInput(context);
@@ -132,7 +132,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
     async messageListOfUsersInput(context) {
-        const inputCard = CardFactory.adaptiveCard(this.getMultipleInputCard("user id"));
+        const inputCard = CardFactory.adaptiveCard(this.getMultipleInputCard("user id", "user-id"));
         await context.sendActivity({ attachments: [inputCard] });
     }
 
@@ -140,41 +140,41 @@ class TeamsConversationBot extends TeamsActivityHandler {
         const membersList = [];
         const tenantId = context.activity.conversation.tenantId;
 
-        for (i = 1; i <= 5; i++) {
-            const userId = context.activity.value[`inputid${i}`];
-            membersList.push({ "Id": userId });
+        for (let i = 1; i <= 5; i++) {
+            const userId = context.activity.value[`user-id${i}`];
+            membersList.push({ "id": userId });
         }
 
-        context.activity = MessageFactory.text("Hello user! You are part of the batch.");
-        var operationId = await TeamsInfo.sendMessageToListOfUsers(context, tenantId, membersList);
+        const message = MessageFactory.text("Hello user! You are part of the batch.");
+        var response = await TeamsInfo.sendMessageToListOfUsers(context, message, tenantId, membersList);
 
-        await context.sendActivity(MessageFactory.Text(`All messages have been sent. OperationId: ${operationId}`));
+        await context.sendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${response.operationId}`));
     }
 
     async messageAllUsersInTenant(context) {
         const tenantId = context.activity.conversation.tenantId;
-        context.activity = MessageFactory.text("Hello user! You received this tenant message from batch.");
-        const operationId = await TeamsInfo.sendMessageToAllUsersInTenant(context, tenantId);
+        const message = MessageFactory.text("Hello user! You received this tenant message from batch.");
+        const response = await TeamsInfo.sendMessageToAllUsersInTenant(context, message, tenantId);
 
-        await turnContext.SendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${operationId}`));
+        await context.sendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${response.operationId}`));
     }
 
     async messageAllUsersInTeamInput(context) {
-        const inputCard = CardFactory.adaptiveCard(this.getInputCard("team-id"));
+        const inputCard = CardFactory.adaptiveCard(this.getInputCard("team", "team-id"));
         await context.sendActivity({ attachments: [inputCard] });
     }
 
     async messageAllUsersInTeam(context) {
-        const teamId = context.activity.value["inputId"];
+        const teamId = context.activity.value["team-id"];
         const tenantId = context.activity.conversation.tenantId;
-        context.activity = MessageFactory.text("Hello user! You received this team message from batch.");
-        const operationId = await TeamsInfo.sendMessageToAllUsersInTeam(context, tenantId, teamId);
+        const message = MessageFactory.text("Hello user! You received this team message from batch.");
+        const response = await TeamsInfo.sendMessageToAllUsersInTeam(context, message, tenantId, teamId);
 
-        await turnContext.SendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${operationId}`));
+        await context.sendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${response.operationId}`));
     }
 
     async messageListOfChannelsInput(context) {
-        const inputCard = CardFactory.adaptiveCard(this.getMultipleInputCard("channel id"));
+        const inputCard = CardFactory.adaptiveCard(this.getMultipleInputCard("channel id", "channel-id"));
         await context.sendActivity({ attachments: [inputCard] });
     }
 
@@ -182,15 +182,15 @@ class TeamsConversationBot extends TeamsActivityHandler {
         const membersList = [];
         const tenantId = context.activity.conversation.tenantId;
 
-        for (i = 1; i <= 5; i++) {
-            const userId = context.activity.value[`inputid${i}`];
-            membersList.push({ "Id": userId });
+        for (let i = 1; i <= 5; i++) {
+            const userId = context.activity.value[`channel-id${i}`];
+            membersList.push({ "id": userId });
         }
 
-        context.activity = MessageFactory.text("Hello user! You are part of the batch.");
-        var operationId = await TeamsInfo.sendMessageToListOfChannels(context, tenantId, membersList);
+        const message = MessageFactory.text("Hello user! You are part of the batch.");
+        var response = await TeamsInfo.sendMessageToListOfChannels(context, message, tenantId, membersList);
 
-        await context.sendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${operationId}`));
+        await context.sendActivity(MessageFactory.text(`All messages have been sent. OperationId: ${response.operationId}`));
     }
 
     async getOperationStateInput(context) {
@@ -202,12 +202,11 @@ class TeamsConversationBot extends TeamsActivityHandler {
         const operationId = context.activity.value["state-operationId"];
         const operationState = await TeamsInfo.getOperationState(context, operationId);
         let statusResponses = "";
+        for (const [key, value] of Object.entries(operationState.statusMap)) {
+            statusResponses += key + ": " + value + ", ";
+        };
 
-        operationState.StatusMap.forEach(statusResponse => {
-            statusResponses += statusResponse.Key + ": " + statusResponse.Value + ", ";
-        });
-
-        var response = `The operation was ${operationState.State} with the status responses: ${statusResponses} and total entries count: ${operationState.TotalEntriesCount}`;
+        var response = `The operation was ${operationState.state} with the status responses: ${statusResponses} and total entries count: ${operationState.totalEntriesCount}`;
 
         await context.sendActivity(MessageFactory.text(response));
     }
@@ -219,19 +218,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
     async getFailedEntries(context) {
         const operationId = context.activity.value["entries-operationId"];
-        const failedEntries = [];
+        let failedEntries = [];
         let continuationToken = null;
         let message = `This is the list of failed entries for the operation ${operationId}`;
 
         do {
             const currentPage = await TeamsInfo.getFailedEntries(context, operationId);
-            continuationToken = currentPage.ContinuationToken;
-            failedEntries = [...failedEntries, ...currentPage.FailedEntries];
+            continuationToken = currentPage.continuationToken;
+            failedEntries = [...failedEntries, ...currentPage.failedEntryResponses];
         }
         while (continuationToken != null);
 
         failedEntries.forEach(entry => {
-            message += `\n id: ${entry.EntryId}, error: ${entry.Error} \n\n`;
+            message += `\n\n id: ${entry.entryId}, error: ${entry.error} \n`;
         });
 
         await context.sendActivity(MessageFactory.text(message));
@@ -248,30 +247,30 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
         try {
             await TeamsInfo.cancelOperation(context, operationId);
-            message += "has been canceled";
+            message += " has been canceled";
         }
         catch (error) {
-            message += `couldn't be canceled. ex: ${error}`;
+            message += ` couldn't be canceled. ex: ${error}`;
         }
 
         await context.sendActivity(MessageFactory.text(message));
     }
 
     async sendDataToBatchOperations(context) {
-        const operation = context.activity.value.ToString();
+        const operation = JSON.stringify(context.activity.value);
 
-        if (operation.Contains("user"))
-            await messageListOfUsers(turnContext, cancellationToken);
-        else if (operation.Contains("channel"))
-            await messageListOfChannels(turnContext, cancellationToken);
-        else if (operation.Contains("team"))
-            await messageAllUsersInTeam(turnContext, cancellationToken);
-        else if (operation.Contains("state"))
-            await getOperationState(turnContext, cancellationToken);
-        else if (operation.Contains("entries"))
-            await getFailedEntries(turnContext, cancellationToken);
-        else if (operation.Contains("cancel"))
-            await cancelOperation(turnContext, cancellationToken);
+        if (operation.includes("user"))
+            await this.messageListOfUsers(context);
+        else if (operation.includes("channel"))
+            await this.messageListOfChannels(context);
+        else if (operation.includes("team"))
+            await this.messageAllUsersInTeam(context);
+        else if (operation.includes("state"))
+            await this.getOperationState(context);
+        else if (operation.includes("entries"))
+            await this.getFailedEntries(context);
+        else if (operation.includes("cancel"))
+            await this.cancelOperation(context);
     }
 
     //Adaptive cards
@@ -282,7 +281,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
         "body": [
             {
                 "type": "Input.Text",
-                "id": `${inputId ?? "inputid"}`,
+                "id": `${inputId}`,
                 "label": `Please enter the ${idName} id:`,
                 "isRequired": true,
                 "errorMessage": "Operation id is required"
@@ -296,42 +295,42 @@ class TeamsConversationBot extends TeamsActivityHandler {
         ]
     });
 
-    getMultipleInputCard = (idName) => ({
+    getMultipleInputCard = (idName, inputId) => ({
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
         "version": "1.5",
         "body": [
             {
                 "type": "Input.Text",
-                "id": "inputid1",
+                "id": `${inputId}1`,
                 "label": `Please enter the ${idName} #1:`,
                 "isRequired": true,
                 "errorMessage": "User id is required"
             },
             {
                 "type": "Input.Text",
-                "id": "inputid2",
+                "id": `${inputId}2`,
                 "label": `Please enter the ${idName} #2:`,
                 "isRequired": true,
                 "errorMessage": "User id is required"
             },
             {
                 "type": "Input.Text",
-                "id": "inputid3",
+                "id": `${inputId}3`,
                 "label": `Please enter the ${idName} #3:`,
                 "isRequired": true,
                 "errorMessage": "User id is required"
             },
             {
                 "type": "Input.Text",
-                "id": "inputid4",
+                "id": `${inputId}4`,
                 "label": `Please enter the ${idName} #4:`,
                 "isRequired": true,
                 "errorMessage": "User id is required"
             },
             {
                 "type": "Input.Text",
-                "id": "inputid5",
+                "id": `${inputId}5`,
                 "label": `Please enter the ${idName} #5:`,
                 "isRequired": true,
                 "errorMessage": "User id is required"
