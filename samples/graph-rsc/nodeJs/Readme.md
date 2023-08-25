@@ -99,6 +99,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Permission list:**
 ![Permissionlist](./Images/PermissionList.png)
 
+## Send activity feed notification
+
+**Tab Page**
+![tab-page](./Images/notify-tab.png)
+
+**Select Reciepient**
+![select-people](./Images/select-people.png)
+
+**Sent Notification**
+![notification](./Images/notification.png)
+
 ## Further Reading.
 
 - [Graph RSC](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
