@@ -42,6 +42,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 ## Workflow
 
 ```mermaid
@@ -99,7 +114,7 @@ sequenceDiagram
 
    Inside node js folder,  navigate to `samples/meetings-live-code-interview/nodejs/api` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
-   - Repeat the same step in folder `samples/meetings-live-code-interview/nodejs/ClientApp`
+   - Repeat the same step in folder `samples/meetings-live-code-interview/nodejs`
 
     ```bash
     npm install
@@ -108,9 +123,9 @@ sequenceDiagram
 
      A) In a terminal, navigate to `samples/meetings-live-code-interview/nodejs/api`
 
-     B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs/ClientApp`
+     B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs`
 
- - Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
+ - Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs`
     ```
     npm start
     ``` 

@@ -37,7 +37,7 @@ function addNote(notesObj, callback) {
     if (notesObj != null) {
         notesObj.PartitionKey = notesObj.CandidateEmail;
         notesObj.RowKey = uuidv4();
-        notesObj.AddedByName = ConversationDataRef != null && ConversationDataRef.members.length > 0 
+        notesObj.AddedByName = ConversationDataRef !== null && ConversationDataRef.members !== undefined && ConversationDataRef.members.length > 0
         ? ConversationDataRef.members.find(entity => entity.email === notesObj.AddedBy).name
         : "Unknown";
         tableClient.insertEntity(tableName, notesObj, function (error, result, response) {
