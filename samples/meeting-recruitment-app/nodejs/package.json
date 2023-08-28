@@ -10,8 +10,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "msteams-ui-components-react": "^0.8.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-meta-tags": "^1.0.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
@@ -20,6 +20,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,8 +46,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^17.0.20",
-    "@types/react-router-dom": "^5.3.0"
+    "@types/react": "^16.8.0",
+    "@types/react-router-dom": "^5.3.0",
+    "nodemon": "^2.0.13"
   },
   "proxy": "http://localhost:3978"
 }
