@@ -141,6 +141,40 @@ the Teams service needs to call into the bot.
 **Successfully Execute:**
 ![10.SuccessfullyExecute](Images/10.SuccessfullyExecute.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**After opening Outlook web, click the "New mail" button.**
+![1.OutlookClickmail](Images/1.OutlookClickmail.png)
+
+**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+![2.OutlookOpenApp](Images/2.OutlookOpenApp.png)
+
+**Select your app icon**
+![3.OutlookSelectApp](Images/3.OutlookSelectApp.PNG)
+
+**Search for actions and apps:**
+![4.OutlookMsgext](Images/4.OutlookMsgext.png)
+
+**Search Results:**
+![5.OutlookSearchCard ](Images/5.OutlookSearchCard.png)
+
+**Adaptive Card Based Loop Components:**
+![6.OutlookClickCard](Images/6.OutlookClickCard.png)
+
+**Click Execute:**
+![7.OutlookClickEx](Images/7.OutlookClickEx.png)
+
+**Successfully Execute:**
+![8.OutlookOutput](Images/8.OutlookOutput.png)
+
+**If you copy and paste a link from https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main into the compose message area the link will unfurl:**
+![9.OutlookAClink](Images/9.OutlookAClink.png)
+
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
