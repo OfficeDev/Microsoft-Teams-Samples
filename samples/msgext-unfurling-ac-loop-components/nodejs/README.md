@@ -154,7 +154,7 @@ the Teams service needs to call into the bot.
 ![2.OutlookOpenApp](Images/2.OutlookOpenApp.png)
 
 **Select your app icon**
-![3.OutlookSelectApp](Images/3.OutlookSelectApp.PNG)
+![3.OutlookSelectApp](Images/3.OutlookSelectApp.png)
 
 **Search for actions and apps:**
 ![4.OutlookMsgext](Images/4.OutlookMsgext.png)
