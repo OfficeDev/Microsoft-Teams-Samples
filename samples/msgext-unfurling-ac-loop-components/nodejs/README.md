@@ -147,13 +147,13 @@ the Teams service needs to call into the bot.
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**After opening Outlook web, click the "New mail" button.**
+**After opening Outlook web, click the "New mail" button:**
 ![1.OutlookClickmail](Images/1.OutlookClickmail.png)
 
-**on the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps**
+**On the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps:**
 ![2.OutlookOpenApp](Images/2.OutlookOpenApp.png)
 
-**Select your app icon**
+**Select your app icon:**
 ![3.OutlookSelectApp](Images/3.OutlookSelectApp.png)
 
 **Search for actions and apps:**
