@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "staticTabs": [
     {
-      "entityId": "?Send Notification",
+      "entityId": "Send Notification",
       "name": "RSC",
       "contentUrl": "https://${{TAB_DOMAIN}}/sendNotification",
       "scopes": [

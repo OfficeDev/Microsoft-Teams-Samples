@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs
 
 # Resource specific consent with Graph API
 
-This sample illustrates you can use [Resource Specific Consent](https://docs.microsoft.com/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph API.
+This sample illustrates you can use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API.
 
 ## Included Features
 * Tabs
@@ -52,7 +52,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Setup
 1) Register your app with Microsoft identity platform via the Azure AD portal (AAD app registration in Azure portal)
-    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2).
+    
+**Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level permission for the app.
 
 2) Clone the repository
 

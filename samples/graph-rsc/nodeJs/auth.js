@@ -13,8 +13,6 @@ auth.getAccessToken = function (tenantId) {
       client_secret: process.env.ClientSecret,  
       scope: 'https://graph.microsoft.com/.default'
     };
-
-    console.log(JSON.stringify(requestParams));
   
     var url = "https://login.microsoftonline.com/"+ tenantId+"/oauth2/v2.0/token";
     request.post({ url: url, form: requestParams }, function (err, response, body) {

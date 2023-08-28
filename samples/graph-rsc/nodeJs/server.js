@@ -17,26 +17,26 @@ app.set('views', __dirname);
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-app.use('/',indexRouter);
+app.use('/', indexRouter);
 
-  app.get('/configure', function(req, res) {
-    res.render('./views/configure');
+app.get('/configure', function (req, res) {
+  res.render('./views/configure');
+});
+
+app.get('/rscdemo', function (req, res) {
+  var tenantId = req.url.split('=')[1];
+  auth.getAccessToken(tenantId).then(async function (token) {
+    res.render('./views/rscdemo', { token: JSON.stringify(token) });
   });
+});
 
-  app.get('/rscdemo', function(req, res) {
-    var tenantId= req.url.split('=')[1];
-    auth.getAccessToken(tenantId).then(async function (token) {
-     res.render('./views/rscdemo',{token:JSON.stringify(token)});
-    });
+app.get('/sendNotification', function (req, res) {
+  var tenantId = process.env.TenantId
+  auth.getAccessToken(tenantId).then(async function (token) {
+    res.render('./views/sendNotification', { token: JSON.stringify(token) });
   });
+});
 
-  app.get('/sendNotification', function(req, res) {
-    var tenantId= process.env.TenantId
-    auth.getAccessToken(tenantId).then(async function (token) {
-     res.render('./views/sendNotification',{token:JSON.stringify(token)});
-    });
-  });
-
-app.listen(3978 ||3978, function () {
+app.listen(3978 || 3978, function () {
   console.log('app listening on port 3978!');
 });
