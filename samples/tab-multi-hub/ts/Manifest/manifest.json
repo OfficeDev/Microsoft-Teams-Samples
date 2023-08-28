@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.tabmultihub",
   "developer": {
     "name": "Microsoft",
@@ -25,8 +25,8 @@
   "accentColor": "#5558AF",
   "staticTabs": [
     {
-      "contentUrl": "https://{{domain-name}}/CalendarTab",
-      "websiteUrl": "https://{{domain-name}}/CalendarTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/CalendarTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/CalendarTab",
       "entityId": "com.contoso.Calendar.help",
       "name": "Calendar",
       "scopes": [
@@ -34,8 +34,8 @@
       ]
     },
     {
-      "contentUrl": "https://{{domain-name}}/MailTab",
-      "websiteUrl": "https://{{domain-name}}/MailTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/MailTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/MailTab",
       "entityId": "com.contoso.Mail.help",
       "name": "Mail",
       "scopes": [
@@ -43,8 +43,8 @@
       ]
     },
     {
-      "contentUrl": "https://{{domain-name}}/ProfileTab",
-      "websiteUrl": "https://{{domain-name}}/ProfileTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/ProfileTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/ProfileTab",
       "entityId": "com.contoso.Profile.help",
       "name": "Profile",
       "scopes": [
@@ -52,8 +52,8 @@
       ]
     },
     {
-      "contentUrl": "https://{{domain-name}}/GeolocationTab",
-      "websiteUrl": "https://{{domain-name}}/GeolocationTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/GeolocationTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/GeolocationTab",
       "entityId": "com.contoso.geolocation.help",
       "name": "geo location",
       "scopes": [
@@ -69,10 +69,10 @@
     "geolocation"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

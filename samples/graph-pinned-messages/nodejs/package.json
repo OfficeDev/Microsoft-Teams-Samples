@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:teamsfx": "npm run start",
     "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@azure/msal-node": "^1.4.0",
     "@azure/identity": "^2.1.0",
+    "@azure/msal-node": "^1.4.0",
     "@microsoft/microsoft-graph-client": "^2.2.1",
     "@microsoft/teams-js": "^1.10.0",
     "axios": "^0.21.1",
@@ -20,12 +21,12 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
+    "esbuild": "^0.18.1",
     "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7",
     "polly-js": "^1.8.3",
-    "request": "^2.88.2",
-    "esbuild": "^0.18.1"
+    "request": "^2.88.2"
   }
 }

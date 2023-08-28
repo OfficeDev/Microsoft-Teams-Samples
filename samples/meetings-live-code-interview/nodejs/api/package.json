@@ -4,6 +4,7 @@
   "description": "App demos functionality to do live coding in teams meeting.",
   "main": "server/index.js",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "watch": "nodemon server/index.js",

@@ -45,6 +45,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
     Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 ## Setup
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
@@ -115,13 +130,29 @@ Also update `BaseUrl` according to your code runtime environment.
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
 
 ## Running the sample
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
+- From Teams left side bar, select the ellipses ●●● and choose your app from the list.
+
+**Install App:**
+
+![InstallApp](Images/Install.png)
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
 ![Welcome Message](Images/welcomeAction.png)
 
-**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
+**Open the URL in tab stage view:**
+
+![InstallApp](Images/ClickButton.png)
+
+ **Click view via card action:**
+
+![Stage View in tab](Images/CollaborativeStageView.png)
+
+ **Click view via deeplink:**
+
+ ![Tab View](Images/viaDeeplink.png)    
+
+**Opening Collaborative- Desktop Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details.
 
 ![Stage View in tab](Images/CollaborativeStageView.png)
 
@@ -129,17 +160,21 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Stage View Deep Link](Images/viaDeeplink.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Web Stage View:**
 
-![Link Unfurling Text](TabInStageView/Images/LinkUnfurlingText.png)
+![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
 
-![Link Unfurling Card](TabInStageView/Images/LinkUnfurlingCard.png)
+**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area, the link will unfurl.**
 
-![Link Unfurling StageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+![LinkUnfurlingText](Images/LinkUnfurlingText.png)
 
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
+
+**Click deep-link:**
+
+![Tab View](Images/viaDeeplink.png)    
 
 ## Outlook on the web
 

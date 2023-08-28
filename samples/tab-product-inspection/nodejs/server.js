@@ -1,8 +1,5 @@
-const express = require('express');
-const bodyparser = require('body-parser');
 const path = require('path');
-const app = express();
-const fs = require("fs");
+const express = require('express');
 let multer = require('multer');
 let upload = multer({ storage: multer.memoryStorage(),
   limits: { fieldSize: 25 * 1024 * 1024 }});
@@ -27,18 +24,19 @@ let productDetailsList = {
   }]
 };
 
-app.use(express.static(__dirname + '/Styles'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.set('views', __dirname);
-app.use(express.json());
-app.use("/Images", express.static(path.resolve(__dirname, 'Images')));
+const server = express();
+server.use(express.static(__dirname + '/Styles'));
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+server.use(express.json());
+server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
-app.get('/tab', function (req, res) {
+server.get('/tab', function (req, res) {
   res.render('./views/tab');
 });
 
-app.get('/productDetails', function (req, res) {
+server.get('/productDetails', function (req, res) {
   var productId = req.url.split('=')[1];
   var productDetails = {
     "productId": null,
@@ -58,15 +56,15 @@ app.get('/productDetails', function (req, res) {
   res.render('./views/productDetail', { productDetails: JSON.stringify(productDetails) });
 });
 
-app.get('/scanProduct', function (req, res) {
+server.get('/scanProduct', function (req, res) {
   res.render('./views/scanProduct');
 });
 
-app.get('/viewProductDetail', function (req, res) {
+server.get('/viewProductDetail', function (req, res) {
   res.render('./views/viewProductDetail');
 });
 
-app.post('/save', upload.single('data'), function(req, res){
+server.post('/save', upload.single('data'), function(req, res){
   var data = req.body.data
   var result = JSON.parse(data);
   var productDetail = {
@@ -90,6 +88,8 @@ app.post('/save', upload.single('data'), function(req, res){
   res.send();
 });
 
-app.listen(3978, function () {
-  console.log('app listening on port 3978!');
-});
+const port = process.env.port || process.env.PORT || 3978;
+
+server.listen(port, () => 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);
