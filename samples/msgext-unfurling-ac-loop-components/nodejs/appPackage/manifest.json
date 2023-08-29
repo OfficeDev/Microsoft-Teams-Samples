@@ -23,7 +23,16 @@
         "full": "This sample shows messaging extension with adaptive card-based loop components functionality."
     },
     "accentColor": "#FFFFFF",
-    "bots": [],
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
     "composeExtensions": [
         {
             "botId": "${{BOT_ID}}",

@@ -26,11 +26,16 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 ## Interaction with teams
 ![msgext-unfurling-ac-loop-components](Images/msgext-unfurling-ac-loop-components.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Msgext-Unfurling-Adaptive-Card-Loop-Components:** [Manifest](/samples/msgext-unfurling-ac-loop-components/nodejs/demo-manifest/msgext-unfurling-ac-loop-components.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
-- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -68,7 +73,7 @@ the Teams service needs to call into the bot.
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
-    Alternatively, you can also use the `dev tunnel`. Please follow [Create and host a Dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
@@ -114,17 +119,66 @@ the Teams service needs to call into the bot.
 **Install App:**
 ![1.InstallApp](Images/1.InstallApp.png)
 
+**Add to a chat:**
+![2.SelectAddToChat](Images/2.SelectAddToChat.png)
+
+**Add to a group chat:**
+![3.GroupChat](Images/3.GroupChat.png)
+
 **If you copy and paste a link from https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main into the compose message area the link will unfurl:**
-![2.AdaptiveCardLoopComponent](Images/2.AdaptiveCardLoopComponent.png)
+![4.AdaptiveCardLoopComponent](Images/4.AdaptiveCardLoopComponent.png)
+
+**Search for actions and apps:**
+![5.SelectACloopComponent](Images/5.SelectACloopComponent.png)
 
 **Search:**
-![3.MsgextSearch ](Images/3.MsgextSearch.png)
+![6.MsgextSearch ](Images/6.MsgextSearch.png)
 
 **Search Results:**
-![4.MsgextSearchResults ](Images/4.MsgextSearchResults.png)
+![7.MsgextSearchResults ](Images/7.MsgextSearchResults.png)
 
 **Adaptive Card Based Loop Components:**
-![5.AdaptiveCardLoopComponentMsgextSearch](Images/5.AdaptiveCardLoopComponentMsgextSearch.png)
+![8.AdaptiveCardLoopComponentMsgextSearch](Images/8.AdaptiveCardLoopComponentMsgextSearch.png)
+
+**Click Execute:**
+![9.ClickExecute](Images/9.ClickExecute.png)
+
+**Successfully Execute:**
+![10.SuccessfullyExecute](Images/10.SuccessfullyExecute.png)
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**After opening Outlook web, click the "New mail" button:**
+![1.OutlookClickmail](Images/1.OutlookClickmail.png)
+
+**On the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps:**
+![2.OutlookOpenApp](Images/2.OutlookOpenApp.png)
+
+**Select your app icon:**
+![3.OutlookSelectApp](Images/3.OutlookSelectApp.png)
+
+**Search for actions and apps:**
+![4.OutlookMsgext](Images/4.OutlookMsgext.png)
+
+**Search Results:**
+![5.OutlookSearchCard ](Images/5.OutlookSearchCard.png)
+
+**Adaptive Card Based Loop Components:**
+![6.OutlookClickCard](Images/6.OutlookClickCard.png)
+
+**Click Execute:**
+![7.OutlookClickEx](Images/7.OutlookClickEx.png)
+
+**Successfully Execute:**
+![8.OutlookOutput](Images/8.OutlookOutput.png)
+
+**If you copy and paste a link from https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main into the compose message area the link will unfurl:**
+![9.OutlookAClink](Images/9.OutlookAClink.png)
+
 
 ## Deploy the bot to Azure
 
@@ -137,6 +191,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
 - [Universal Actions for Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
 - [Extend a Teams message extension across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
-
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-unfurling-ac-loop-components-nodejs" />
