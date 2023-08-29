@@ -29,7 +29,7 @@ This sample shows anonymous users support in Teams meeting apps.
     # determine node version
     node --version
     ```
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup

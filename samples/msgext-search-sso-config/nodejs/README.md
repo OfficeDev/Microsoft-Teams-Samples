@@ -31,7 +31,7 @@ Bot Framework v4 sample for Teams to include a configuration page and Bot Servic
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/) version v16.14.2 or Higher Version
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension.
 

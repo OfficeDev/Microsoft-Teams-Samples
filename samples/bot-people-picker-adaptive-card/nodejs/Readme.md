@@ -33,7 +33,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Prerequisites
 
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
 - If you are using Ngrok To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (latest version)
 

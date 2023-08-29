@@ -40,7 +40,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Setup for Java and Maven [Setup](Setup.md)
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 

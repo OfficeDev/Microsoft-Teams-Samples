@@ -37,7 +37,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
     ```
 - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
 
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. Ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.

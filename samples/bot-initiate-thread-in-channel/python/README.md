@@ -24,7 +24,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Included Features
 * Bots

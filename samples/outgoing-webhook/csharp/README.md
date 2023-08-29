@@ -35,7 +35,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
   # determine dotnet version
   dotnet --version
   ```
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - Visual Studio
 

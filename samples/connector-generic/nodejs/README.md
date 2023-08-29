@@ -31,7 +31,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
 * [Node.js and NPM](https://nodejs.org/)
 * Get any text editor or IDE. You can install and use [Visual Studio Code](https://code.visualstudio.com/download) for free.
 * An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).
-* If you want to run this code locally, use a tunnelling service like [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version. These instructions assume you are using [ngrok](https://ngrok.com/). 
+* If you want to run this code locally, use a tunnelling service like [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version. These instructions assume you are using [ngrok](https://ngrok.com/). 
 
 ### Setup 
 > Note these instructions are for running the sample on your local machine.

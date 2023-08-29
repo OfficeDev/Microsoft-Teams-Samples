@@ -33,7 +33,7 @@ This bot has been created using [Bot Builder](https://www.npmjs.com/package/botb
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - [Node.js](https://nodejs.org/), supported versions: 16, 18
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/microsoft-365/dev-program)

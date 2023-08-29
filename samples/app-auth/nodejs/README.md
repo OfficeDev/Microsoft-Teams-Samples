@@ -30,7 +30,7 @@ This sample demonstrates authentication in Microsoft Teams using bot and tab.
 
 ## Getting started
 
-1. Install some sort of tunnelling service. Eg. [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+1. Install some sort of tunnelling service. Eg. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 2. Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint for the bot registration):<br>
 
     ```bash

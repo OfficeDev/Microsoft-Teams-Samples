@@ -37,7 +37,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
   ```
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [devtunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
 ## Setup.
 
