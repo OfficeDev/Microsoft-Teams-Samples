@@ -130,6 +130,47 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             }
             ]
         ```
+   
+   **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
+  - Update the user AAD object ID in your adaptive card JSON from your tenant's AAD users available in the Azure portal.
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
+      1) On line 16, replace {{User-Object-ID}}  
+      2) On line 17, replace {{User-Display-Name}}
+      3) On line 18, replace {{User-Principal-Name}}
+
+        - E.g. 
+        ```
+        "properties": {
+        "id": "87d349ed-xxxx-434a-9e14-xxxx",
+        "displayName": "Joe Smith",
+        "userPrincipalName": "JoeSmith@xxxx.com"
+      }
+        ```
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
+      1) On line 18, replace {{User-Object-ID}}  
+      2) On line 19, replace {{User-Display-Name}}
+      3) On line 20, replace {{User-Principal-Name}}
+      4) On line 23, replace {{User-Object-ID}}  
+      5) On line 24, replace {{User-Display-Name}}
+      6) On line 25, replace {{User-Principal-Name}}
+      
+        - E.g. 
+        ```
+      "properties": {
+        "users": [
+          {
+            "id": "95d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Vance Agrawal",
+            "userPrincipalName": "VanceAgrawal@xxxx.com"
+          },
+          {
+            "id": "45d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "ku Mao",
+            "userPrincipalName": "kuMao@xxxx.com"
+          }
+        ]
+      }
+        ```
 **Note:**
 -   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
@@ -149,43 +190,51 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![InstallApp](BotFormattingCards/Images/InstallApp.png)
+![InstallApp](BotFormattingCards/Images/1.InstallApp.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](BotFormattingCards/Images/WelcomeMessage.png)
+![WelcomeMessage](BotFormattingCards/Images/2.WelcomeMessage.png)
 
 **Type Of Cards:**
 
-![TypeOfCards](BotFormattingCards/Images/TypeOfCards.png)
+![TypeOfCards](BotFormattingCards/Images/3.TypeOfCards.png)
 
 **Mention Card:**
 
-![MentionCard](BotFormattingCards/Images/MentionCard.png)
+![MentionCard](BotFormattingCards/Images/4.MentionCard.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](BotFormattingCards/Images/InformationMaskCard.png)
+![InformationMaskCard](BotFormattingCards/Images/5.InformationMaskCard.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](BotFormattingCards/Images/FullWidthCard.png)
+![FullWidthCard](BotFormattingCards/Images/6.FullWidthCard.png)
 
 **Stage View Card:**
 
-![StageViewCard](BotFormattingCards/Images/StageViewCard.png)
+![StageViewCard](BotFormattingCards/Images/7.StageViewCard.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](BotFormattingCards/Images/OverflowMenuCard.png)
+![OverflowMenuCard](BotFormattingCards/Images/8.OverflowMenuCard.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](BotFormattingCards/Images/HTMLFormatCard.png)
+![HTMLFormatCard](BotFormattingCards/Images/9.HTMLFormatCard.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](BotFormattingCards/Images/CardWithEmoji.png)
+![CardWithEmoji](BotFormattingCards/Images/10.CardWithEmoji.png)
+
+**Persona Card Icon:**
+
+![PersonaCardIcon](BotFormattingCards/Images/12.PersonaCardIcon.png)
+
+**Persona Set Icon:**
+
+![PersonaCardSetIcon](BotFormattingCards/Images/13.PersonaCardSetIcon.png)
 
 ## Deploy the bot to Azure
 
@@ -194,6 +243,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
+- [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />

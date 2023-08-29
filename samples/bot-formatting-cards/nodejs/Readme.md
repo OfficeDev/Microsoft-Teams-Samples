@@ -88,10 +88,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
-   - Navigate to samples\bot-formatting-cards\nodejs\resources\mentionSupport.json
+  - Navigate to samples\bot-formatting-cards\nodejs\resources\mentionSupport.json
       1) On line 14, replace {{new-Ids}}  
       2) On line 23, replace {{Email-Id}}
       3) On line 31, replace {{Microsoft-App-Id}}
+         
         - E.g. 
         ```
         "text": "Hi <at>Adele UPN</at>, <at>Adele Azure AD</at>"
@@ -116,6 +117,47 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
                 }
             }
             ]
+        ```
+
+  **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
+  - Update the user AAD object ID in your adaptive card JSON from your tenant's AAD users available in the Azure portal.
+    - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
+      1) On line 16, replace {{User-Object-ID}}  
+      2) On line 17, replace {{User-Display-Name}}
+      3) On line 18, replace {{User-Principal-Name}}
+
+        - E.g. 
+        ```
+        "properties": {
+        "id": "87d349ed-xxxx-434a-9e14-xxxx",
+        "displayName": "Joe Smith",
+        "userPrincipalName": "JoeSmith@xxxx.com"
+      }
+        ```
+    - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardSetIcon.json
+      1) On line 18, replace {{User-Object-ID}}  
+      2) On line 19, replace {{User-Display-Name}}
+      3) On line 20, replace {{User-Principal-Name}}
+      4) On line 23, replace {{User-Object-ID}}  
+      5) On line 24, replace {{User-Display-Name}}
+      6) On line 25, replace {{User-Principal-Name}}
+      
+        - E.g. 
+        ```
+      "properties": {
+        "users": [
+          {
+            "id": "95d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Vance Agrawal",
+            "userPrincipalName": "VanceAgrawal@xxxx.com"
+          },
+          {
+            "id": "45d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "ku Mao",
+            "userPrincipalName": "kuMao@xxxx.com"
+          }
+        ]
+      }
         ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
@@ -183,6 +225,14 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![CardWithEmoji](Images/9.CardWithEmoji.png)
 
+**Persona Card Icon:**
+
+![Persona](Images/10.Persona.png)
+
+**Persona Set Icon:**
+
+![PersonaSet](Images/11.PersonaSet.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -190,6 +240,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
+- [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-nodejs" />

@@ -15,7 +15,7 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "RSC-GraphAPI NodeJs ",
+    "short": "RSC-GraphAPI NodeJs",
     "full": "RSC with Graph API"
   },
   "description": {
@@ -23,6 +23,16 @@
     "full": "Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization"
   },
   "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "entityId": "Send Notification",
+      "name": "RSC",
+      "contentUrl": "https://${{TAB_DOMAIN}}/sendNotification",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "configurableTabs": [
     {
       "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
@@ -37,9 +47,17 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<domain-name>>",
     "${{TAB_DOMAIN}}"
   ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "taskCreated",
+        "description": "Task created activity",
+        "templateText": "New created task {taskName} for you"
+      }
+    ]
+  },
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
     "resource": "https://RscBasedStoreApp"
@@ -97,6 +115,10 @@
         },
         {
           "name": "Owner.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsActivity.Send.User",
           "type": "Application"
         }
       ]
