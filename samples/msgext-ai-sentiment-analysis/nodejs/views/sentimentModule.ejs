@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.14.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-+DItxkmrHBjTqyGZe60m2HxjR/eDhdYpaTux8gT9/YqHSMxASoTe+Y66GvNEMT8k"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 2rem;
+            margin-left: 1.5rem;
+        }
+    </style>
+
+    <script>
+        var result = "";
+        var actualMessage = "";
+
+        microsoftTeams.app.initialize().then(() => {
+            var urlParams = new URLSearchParams(window.location.search);
+            actualMessage = urlParams.get("title");
+            result = urlParams.get("result");
+
+            const actualMessageDiv = document.getElementById('actualMessageDiv');
+            actualMessageDiv.innerHTML = `<p>Actual Message : <strong class="card-text text-primary">${actualMessage}</strong></p>`;
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `<p> Result : <strong class="card-text text-success">${result}</strong></p>`;
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header">Sentiment Analysis Result :</h5>
+            <div class="card-body">
+                <div id="actualMessageDiv"></div>
+                <div id="output"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
