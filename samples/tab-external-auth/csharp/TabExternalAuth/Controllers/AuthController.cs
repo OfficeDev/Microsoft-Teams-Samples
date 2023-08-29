@@ -19,6 +19,15 @@ namespace TabExternalAuth.Controllers
         }
 
         /// <summary>
+        /// Authentication Start page for Google
+        /// </summary>
+        /// <returns>current View</returns>
+        public IActionResult GoogleStart()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// Authentication End page for Google
         /// </summary>
         /// <returns>current View</returns>

@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Manifest\" />
+    <Compile Remove="Manifest\**" />
+    <Content Remove="Manifest\**" />
+    <EmbeddedResource Remove="Manifest\**" />
+    <None Remove="Manifest\**" />
   </ItemGroup>
 
   <ItemGroup>

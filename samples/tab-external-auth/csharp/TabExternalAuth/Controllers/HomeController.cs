@@ -42,6 +42,7 @@ namespace TabExternalAuth.Controllers
         public IActionResult Index()
         {
             ViewBag.GoogleAppId = _configuration["GoogleAppId"];
+            ViewBag.AzureAppId = _configuration["AzureAppId"];
             return View();
         }
 

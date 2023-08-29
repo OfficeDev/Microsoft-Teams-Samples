@@ -4,7 +4,9 @@
 }
 
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.4.2/js/MicrosoftTeams.min.js"
+            integrity="sha384-M1BiuUWGXFEu6jscBr/dyRZl4uojmiT5eMSu50lpG3eUyacKjwXE0eWRa2ZIdOmQ"
+            crossorigin="anonymous"></script>
     <style>
         h3 {
             text-align: center;
@@ -72,25 +74,26 @@
         var googleId = "@ViewBag.GoogleAppId"; // Google app client id
 
         // Redirect url path
-        var url = window.location.origin + "/Auth/GoogleEnd"; 
+        var url = window.location.origin + "/Auth/GoogleEnd";
+
+        var authId = "@ViewBag.AzureAppId"; // Azure AAD app id;
+
+        var redirectMethod = "deeplink";
 
         // Fetch id token
         function getGoogleIdToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.app.initialize().then(() => {
                     microsoftTeams.authentication.authenticate({
-                        url: `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${url}&state={"authId": ${googleId},"oauthRedirectMethod":"deeplink"}&client_id=${googleId}&scope=openid email profile&response_type=code`,
-                        width: 600,
-                        height: 535
-                    }).then((result) => {
-                        let data = localStorage.getItem(result);
-                        let tokenDetails = JSON.parse(data);
-                        localStorage.removeItem(result);
-                        resolve(tokenDetails);
-                    }).catch((reason) => {
-                        console.log("failed" + reason);
-                        reject(reason);
-                    })
+                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod=${redirectMethod}&authId=${authId}&hostRedirectUrl=${url}&googleId=${googleId}`,
+                        isExternal: true,
+                        successCallback: function (result) {
+                            alert("Success:" + result);
+                        },
+                        failureCallback: function (reason) {
+                            alert("Failure:" + reason);
+                        }
+                    });
                 })
             })
         }
