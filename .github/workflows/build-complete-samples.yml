@@ -611,9 +611,9 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs/server'
+            - project_path: 'samples/meetings-sidepanel/nodejs'
               name: 'meetings-sidepanel'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
               name: 'meetings-sidepanel-clientapp'
@@ -629,15 +629,15 @@ jobs:
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '14.x'
+              version: '18.2.x'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
-              version: '14.x'
+              version: '16.8.x'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs/ClientApp'
+            - project_path: 'samples/meeting-recruitment-app/nodejs'
               name: 'meeting-recruitment-app-clientapp'
-              version: '14.x'
+              version: '16.8.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
               name: 'msgext-message-reminder'
@@ -939,7 +939,7 @@ jobs:
               name: 'app-anonymous-users-clientapp'
               version: '18.x'
 
-            - project_path: 'samples/app-anonymous-users/nodejs/api'
+            - project_path: 'samples/app-anonymous-users/nodejs'
               name: 'app-anonymous-users-api'
               version: '18.x'
 
@@ -969,6 +969,10 @@ jobs:
 
             - project_path: 'samples/bot-ai-enterprise-search/nodejs'
               name: 'bot-ai-enterprise-search'
+              version: '18.x'
+
+            - project_path: 'samples/msgext-ai-sentiment-analysis/nodejs'
+              name: 'msgext-ai-sentiment-analysis'
               version: '18.x'
 
       fail-fast: false

@@ -4,6 +4,8 @@
   "description": "Sequential Workflows in adaptive card",
   "main": "server/index.js",
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "watch": "nodemon server/index.js",
