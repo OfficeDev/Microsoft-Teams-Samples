@@ -6,7 +6,7 @@
 
 # Sample lists
 
-1. [Ready to try sample manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
+1. [Ready to try sample app manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)

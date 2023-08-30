@@ -155,9 +155,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok.
 
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\csharp\AppCompleteAuth\Manifest_Hub` folder with the required values.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\csharp\AppCompleteAuth\AppManifestHub` folder with the required values.
 
-2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `AppManifestHub` folder into a `AppManifestHub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps

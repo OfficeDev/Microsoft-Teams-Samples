@@ -109,16 +109,16 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
      - Select `QRAppInstallation.csproj` file
      - Press `F5` to run the project 
 
-- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+- Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with AAD app registration Application id, generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
 
-- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+- Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
  - **Note**

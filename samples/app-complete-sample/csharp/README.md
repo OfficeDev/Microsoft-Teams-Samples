@@ -113,17 +113,17 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 7. Setup Manifest for Teams
 	- __*This step is specific to Teams.*__
-	    - **Edit** the `manifest.json` contained in the ./manifest or ./manifest_hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+	    - **Edit** the `manifest.json` contained in the ./appManifest or ./appManifestHub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-	    - **Zip** up the contents of the `manifest` or 'manifest_hub.json' folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+	    - **Zip** up the contents of the `appManifest` or `appManifestHub` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 	- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 	   - Go to Microsoft Teams. From the lower left corner, select Apps
 	   - From the lower left corner, choose Upload a custom App
-	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
+	   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    		
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_hub` folder with the required values.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/appManifestHub` folder with the required values.
 
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
@@ -146,7 +146,7 @@ Most code files that need to be compile reside in the src directory. Most files 
 
 ## Files and Directories
 
-* **manifest**<br><br>
+* **appManifest**<br><br>
 This directory holds the skeleton of a manifest.json file that can be altered in order sideload this application into a team.
 
 * **middleware**<br><br>
