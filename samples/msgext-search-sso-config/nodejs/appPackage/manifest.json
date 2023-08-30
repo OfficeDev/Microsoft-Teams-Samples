@@ -107,7 +107,7 @@
   ],
   "validDomains": [
     "*.githubusercontent.com",
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "*.botframework.com",
     "${{BOT_DOMAIN}}"
   ],

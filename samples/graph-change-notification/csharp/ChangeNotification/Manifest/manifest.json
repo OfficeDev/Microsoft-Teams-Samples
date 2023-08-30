@@ -40,6 +40,6 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "[Your Ngrok Domain]"
+    "[Your tunnel Domain]"
   ]
 }

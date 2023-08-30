@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "${{TAB_DOMAIN}}"
   ],
   "subscriptionOffer": {

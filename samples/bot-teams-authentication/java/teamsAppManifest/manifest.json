@@ -39,8 +39,8 @@
       "identity",
       "messageTeamMembers"
     ],
-    "validDomains": [
-      "token.botframework.com",
-      "*.ngrok-free.app"
-    ]
+  "validDomains": [
+    "token.botframework.com",
+    "<<domain-name>>"
+  ]
   }

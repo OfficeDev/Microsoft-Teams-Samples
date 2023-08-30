@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok-free.app/configure",
+      "configurationUrl": "https://<your_tunnel_domain>/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -37,8 +37,8 @@
     {
       "entityId": "peoplepickertab",
       "name": "Tab",
-      "contentUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok-free.app/index",
-      "websiteUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok-free.app/index",
+      "contentUrl": "https://<your_tunnel_domain>/index",
+      "websiteUrl": "https://<your_tunnel_domain>/index",
       "scopes": [
         "personal"
       ]
@@ -49,6 +49,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ]
 }

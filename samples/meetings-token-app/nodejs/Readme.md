@@ -64,7 +64,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -117,16 +117,18 @@ The app uses the Teams extensibility features described on the following pages:
 
 ### Step 3: Run Ngrok or Dev Tunnel
 1. The application (client) will run on port 3978
+2. Run ngrok - point to port 3978
 
-  ```bash
-  ngrok http 3978 --host-header="localhost:3978"
-  ```
-  Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnels with anonymous user access command as shown below:
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
-  
+
 ### Step 4: Run Client & the Server
 You can build and run the project from the command line or an IDE:
 
