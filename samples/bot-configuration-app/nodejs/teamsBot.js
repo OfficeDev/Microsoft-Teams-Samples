@@ -51,7 +51,7 @@ class TeamsBot extends TeamsActivityHandler {
                                 card: adaptiveCard,
                                 height: 400,
                                 title: 'Task module fetch response',
-                                width: 300
+                                width: 400
                             }
                         }
                     }
@@ -78,7 +78,7 @@ class TeamsBot extends TeamsActivityHandler {
                                 card: adaptiveCard,
                                 height: 400,
                                 title: 'Task module submit response',
-                                width: 300
+                                width: 400
                             }
                         }
                     }
@@ -92,7 +92,7 @@ class TeamsBot extends TeamsActivityHandler {
                         body: {
                             config: {
                                 type: 'message',
-                                value: "end"
+                                value: "Submitted successfully!"
                             }
                         }
                     }
