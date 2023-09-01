@@ -112,7 +112,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-hello-world/nodejs/appManifest_Hub` folder with the required values.
 
-    - **Zip** up the contents of the `app-hello-world/nodejs/appManifest` folder to create a `manifest.zip` or `app-hello-world/nodejs/appManifest_Hub` folder into a `appManifest_Hub.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `app-hello-world/nodejs/appManifest` folder to create a `manifest.zip` or `app-hello-world/nodejs/appManifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
