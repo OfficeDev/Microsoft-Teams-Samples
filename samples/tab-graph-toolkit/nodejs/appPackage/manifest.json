@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<AppId>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://xxxxx.ngrok-free.app",
-    "privacyUrl": "https://xxxxx.ngrok-free.app/privacy",
-    "termsOfUseUrl": "https://xxxxx.ngrok-free.app/termsofuse"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -16,7 +16,7 @@
   },
   "name": {
     "short": "mgt-teams-tab",
-    "full": ""
+    "full": "tab-graph-toolkit"
   },
   "description": {
     "short": "Short description for Personal App.",
@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://xxxxx.ngrok-free.app/tab",
-      "websiteUrl": "https://xxxxx.ngrok-free.app/tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "${{TAB_DOMAIN}}"
   ]
 }
