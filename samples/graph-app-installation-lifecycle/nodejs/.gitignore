@@ -60,7 +60,7 @@ typings/
 
 # Distributables
 dist/
-appManifest/
+manifest/
 build/
 
 #############
