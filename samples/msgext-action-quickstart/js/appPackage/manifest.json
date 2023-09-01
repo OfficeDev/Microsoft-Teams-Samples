@@ -87,7 +87,7 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "*.ngrok.io",
     "${{BOT_DOMAIN}}"
   ]

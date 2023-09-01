@@ -45,7 +45,7 @@
     }
   ],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["*.ngrok-free.app"],
+  "validDomains": [ "<<domain-name>>" ],
   "webApplicationInfo": {
     "id": "<<microsoft-app-id>>",
     "resource": "https://RscString"

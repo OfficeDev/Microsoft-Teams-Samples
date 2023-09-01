@@ -50,7 +50,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -61,16 +61,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- While registering the Azure bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the Azure bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
 2) Setup NGROK
-- Run ngrok - point to port 3978
+-  Run ngrok - point to port 3978
 
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3) Setup for code
 - Clone the repository
@@ -88,7 +93,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 from AAD app registration in Azure portal
   - `{{Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
   - `{{ Auth Connection Name }}` - The OAuthConnection setting from step 1, from Azure Bot SSO setup
 
 The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
@@ -111,7 +116,7 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/m
 
 - Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with AAD app registration Application id, generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 - Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 

@@ -130,7 +130,7 @@
   ],
   "validDomains": [
     "*.githubusercontent.com",
-    "*.ngrok-free.app",
+    "<<DOMAIN-NAME>>",
     "*.botframework.com"
   ]
 }

@@ -30,12 +30,18 @@ This sample demonstrates authentication in Microsoft Teams using bot and tab.
 
 ## Getting started
 
-1. Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
+1. Install some sort of tunnelling service. Eg. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 2. Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint for the bot registration):<br>
 
     ```bash
     ngrok http 3978 --host-header=localhost
     ```
+    Alternatively, you can also use the `dev tunnels`. Please follow this documentation: [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) link  and host the tunnel with anonymous user access as shown below:
+	
+	  ```bash
+	  devtunnel host -p 3978 --allow-anonymous
+	  ```
+
 ### Setup for code
 
  - Clone the repository
@@ -54,7 +60,7 @@ This sample demonstrates authentication in Microsoft Teams using bot and tab.
     
 3. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 > **IMPORTANT**: Do not use the legacy Bot Framework portal, nor App Studio, to create the bot. Your bot MUST be registered with
@@ -87,13 +93,13 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 2. Find your application in the list and click on the name to edit.
 3. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<your_ngrok_url>/tab/simple-end`
+    - `https://<your_tunnel_domain>/tab/simple-end`
     - `https://token.botframework.com/.auth/web/redirect`
-    - Add this URL as *Single-page application* `https://<your_ngrok_url>/tab/silent-end`
+    - Add this URL as *Single-page application* `https://<your_tunnel_domain>/tab/silent-end`
 
 4. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
-5. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_url>/{AppID}
+5. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_tunnel_domain>/{AppID}
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set Who can consent? to Admins and users
 
@@ -106,7 +112,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 
 10. Select **Add scope**
     - Note: The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end; for example:
-        - `api://<your_ngrok_url>/<aad_application_id>/access_as_user`
+        - `api://<your_tunnel_domain>/<aad_application_id>/access_as_user`
     - If you are facing any issue in your app, please uncomment [this] line( https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-auth/nodejs/src/AuthBot.ts#L119) and put your debugger for local debug.
    
 11. In the **Authorized client applications** section, you identify the applications that you want to authorize to your app’s web application. Each of the following IDs needs to be entered:

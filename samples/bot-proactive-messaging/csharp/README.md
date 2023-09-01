@@ -48,13 +48,20 @@ Two samples to highlight solutions to two challenges with building proactive mes
 ## Prerequisites
 - Microsoft Teams account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
 1. Configure public url to point to http port 5000
-```bash
-# ngrok http 5000 --host-header="localhost:5000"
-```
+
+   ```bash
+   ngrok http 5000 --host-header="localhost:5000"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 5000 --allow-anonymous
+   ```
 
 2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
 

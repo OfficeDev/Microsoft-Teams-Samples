@@ -76,7 +76,7 @@
           "value": {
             "domains": [
               "*.botframework.com",
-              "*.ngrok-free.app"
+              "{{domain-name}}"
             ]
           }
         }
@@ -85,7 +85,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "token.botframework.com"
   ]
 }
