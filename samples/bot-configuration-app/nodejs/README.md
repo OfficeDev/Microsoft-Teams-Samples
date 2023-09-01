@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "23-08-2023 23:30:17"
+ createdDate: "01-09-2023 23:30:17"
 urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
 ---
 # Bot Configuration 
@@ -137,6 +137,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    - **Bot description card Interactions:**
 
    **Bot Descrption Card:**
+   **Hover over the bot and a adaptive Card appears**
   ![Bot-description-card](Images/Bot-description-card.png)
 
    **Click the settings button in the card to invoke configurable card:**
@@ -160,6 +161,7 @@ Deploy your project to Azure by following these steps:
 
 ## Further reading
 
+- [Bot configuration](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/bot-configuration-experience?branch=pr-en-us-9089)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)

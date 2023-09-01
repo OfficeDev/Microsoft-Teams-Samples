@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards."
     ],
-    "creationDateTime": "2023-08-23",
-    "updateDateTime": "2023-08-23",
+    "creationDateTime": "2023-09-01",
+    "updateDateTime": "2023-09-01",
     "products": [
       "Teams"
     ],
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "bot, Adaptive card"
       }
     ],
     "thumbnails": [

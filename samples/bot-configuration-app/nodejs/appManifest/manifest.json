@@ -45,9 +45,6 @@
     ],
     "permissions": [ "identity", "messageTeamMembers" ],
     "validDomains": [
-      "${{BOT_DOMAIN}}",
-      "teams.live.com",
-      "teams.microsoft.com",
-      "*.teams.microsoft.com"
+      "${{BOT_DOMAIN}}"
     ]
   }
