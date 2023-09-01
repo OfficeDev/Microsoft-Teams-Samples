@@ -91,10 +91,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 
 8) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `teamsManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Zip** up the contents of the `appManifest` folder to create a `appManifest.zip`
+    - **Upload** the `appManifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ##  Running the sample
 

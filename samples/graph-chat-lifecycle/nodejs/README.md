@@ -154,10 +154,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
   
 4.  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `graph-chat-lifecycle\nodejs\src\Manifest` folder in src folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `graph-chat-lifecycle\nodejs\src\Manifest_Hub` folder with the required values.
-    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Edit** the `manifest.json` contained in the `appManifest` folder in src folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `appManifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `appManifest` folder to create a `appManifest.zip` or `appManifest_Hub` folder to create a `appManifest_Hub.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `appManifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
 
