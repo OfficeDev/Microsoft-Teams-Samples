@@ -52,7 +52,7 @@ yarn-error.log*
 env/.env.*.user
 env/.env.local
 .localConfigs
-appPackage/build
+appManifest/build
 /build
 
 # dependencies
