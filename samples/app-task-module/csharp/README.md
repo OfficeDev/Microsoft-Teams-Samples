@@ -93,8 +93,8 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-task-module\csharp\Microsoft.Teams.Samples.TaskModule.Web\AppManifestHub` folder with the required values.
-    - **Zip** up the contents of the `AppManifest` folder to create a `Manifest.zip` or `AppManifestHub` folder into a `AppManifestHub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-task-module\csharp\Microsoft.Teams.Samples.TaskModule.Web\AppManifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `AppManifest` folder to create a `Manifest.zip` or `AppManifest_Hub` folder into a `AppManifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps

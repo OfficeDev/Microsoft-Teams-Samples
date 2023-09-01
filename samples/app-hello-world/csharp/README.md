@@ -92,9 +92,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app`
 
-  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifestHub` folder with the required values.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
-2) Zip the contents of `AppManifest` or `AppManifestHub` folder into a `manifest.zip`.
+2) Zip the contents of `AppManifest` or `AppManifest_Hub` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id

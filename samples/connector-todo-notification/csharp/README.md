@@ -83,7 +83,7 @@ The minimum prerequisites to run this sample are:
    1. You can try the actionable buttons available on the message card.
    
 5. __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your `ConnectorId` field in `~/AppManifest/manifest.json` file with      your ConnectorId in `connectors` section.
     - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
  
         Example :
@@ -97,7 +97,7 @@ The minimum prerequisites to run this sample are:
         ]
         ```
     
-    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
