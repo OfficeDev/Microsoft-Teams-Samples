@@ -9,7 +9,7 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('generate-manifest', function (done) {
-    gulp.src(['appPackage/color.png', 'appPackage/outline.png', 'appPackage/manifest.json'])
+    gulp.src(['appManifest/color.png', 'appManifest/outline.png', 'appManifest/manifest.json'])
         .pipe(zip('helloworldapp.zip'))
         .pipe(gulp.dest('manifest'), done);
     done();
