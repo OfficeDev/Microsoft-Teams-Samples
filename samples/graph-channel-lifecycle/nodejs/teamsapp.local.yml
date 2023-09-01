@@ -16,8 +16,8 @@ provision:
       # If the value is false, the action will not generate client secret for you
       generateClientSecret: true
       # Authenticate users with a Microsoft work or school account in your
-      # organization's Azure AD tenant (for example, single tenant).
-      signInAudience: AzureADMyOrg
+      # organization's Azure AD tenant (for example, multiple tenant).
+      signInAudience: AzureADMultipleOrgs
     # Write the information of created resources into environment file for the
     # specified environment variable(s).
     writeToEnvironmentFile:
