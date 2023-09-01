@@ -7,7 +7,7 @@ $(document).ready(function () {
 function googleAuth() {
     getGoogleIdToken()
         .then((result) => {
-            //return getGoogleServerSideToken(result.idToken);
+            return getGoogleServerSideToken(result);
         })
         .catch((error) => {
             console.log(error);

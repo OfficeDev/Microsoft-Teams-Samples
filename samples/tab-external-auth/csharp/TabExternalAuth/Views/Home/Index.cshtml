@@ -76,24 +76,19 @@
         // Redirect url path
         var url = window.location.origin + "/Auth/GoogleEnd";
 
-        var authId = "@ViewBag.AzureAppId"; // Azure AAD app id;
-
-        var redirectMethod = "deeplink";
-
         // Fetch id token
         function getGoogleIdToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.app.initialize().then(() => {
                     microsoftTeams.authentication.authenticate({
-                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod=${redirectMethod}&authId=${authId}&hostRedirectUrl=${url}&googleId=${googleId}`,
-                        isExternal: true,
-                        successCallback: function (result) {
-                            alert("Success:" + result);
-                        },
-                        failureCallback: function (reason) {
-                            alert("Failure:" + reason);
-                        }
-                    });
+                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl=${url}&googleId=${googleId}`,
+                        isExternal: true
+                    }).then((result) => {
+                        getGoogleServerSideToken(result);
+                    }).catch((reason) => {
+                        console.log("failed" + reason);
+                        reject(reason);
+                    })
                 })
             })
         }
