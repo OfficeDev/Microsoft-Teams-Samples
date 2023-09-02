@@ -133,16 +133,16 @@ This sample shows a feature where user can broadcast a message to all members of
    - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - Press `F5` to run the project
 	 
-19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+19. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{{Base_URL_Domain}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
+20. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
 21. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
