@@ -1,0 +1,161 @@
+What's new with Bot Framework?
+
+Bot Framework provides the most comprehensive experience for building conversation applications.
+
+With the Bot Framework SDK, developers can build bots that converse free-form or with guided interactions including using simple text or rich cards that contain text, images, and action buttons.
+
+Developers can model and build sophisticated conversation using their favorite programming languages including C#, JS, Python and Java or using Bot Framework Composer, an open-source, visual authoring canvas for developers and multi-disciplinary teams to design and build conversational experiences with Language Understanding, QnA Maker and sophisticated composition of bot replies (Language Generation).
+
+Checkout the Bot Framework ecosystem section to learn more about other tooling and services related to the Bot Framework SDK.
+
+ 
+
+Quicklinks
+
+| Bot Framework Composer | C# Repo | JS Repo | Python Repo | Java Repo | BF CLI |
+
+Bot Framework SDK v4
+
+The Bot Framework SDK v4 is an open source SDK that enable developers to model and build sophisticated conversation using their favorite programming language.
+
+C#	JS	Python	Java
+Stable Release	packages	packages	packages	packages
+Docs	docs	docs	docs	docs
+Samples	.NET Core, WebAPI	Node.js , TypeScript, es6	Python	Java
+Channels and Adapters
+
+There are two ways to connect your bot to a client experience:
+
+Azure Bot Service Channel - Language and SDK independent support via Azure Bot Service
+Bot Framework SDK Adapter - A per language Adapter component
+Client	Azure Channel	C# Adapter	JS Adapter	Python Adapter
+Microsoft Teams	Azure			
+Direct Line	Azure			
+Web Chat	Azure		Botkit	
+Skype	Azure			
+Email	Azure			
+Facebook	Azure	SDK	Botkit	
+Slack	Azure	SDK	Botkit	SDK
+Kik	Azure			
+Telegram	Azure			
+Line	Azure			
+GroupMe	Azure			
+Twilio (SMS)	Azure	SDK	Botkit	
+Alexa Skills		Community	Community	
+Google Actions		Community	Community	
+Google Hangouts			Botkit	
+WebEx		SDK	Botkit	
+WhatsApp (Infobip)		Community		
+Zoom		Community		
+RingCentral		Community		
+Cortana	Azure			
+Console			Community	
+Community Open Source Projects
+
+The following open source communities make various components available to extend your bot application, including adapters, recognizers, dialogs and middleware.
+
+C#	JavaScript	Python	Java
+Bot Framework Community	C#	JavaScript	Python	Java
+Botkit		JavaScript		
+Questions and Help
+
+If you have questions about Bot Framework SDK or using Azure Bot Service, we encourage you to reach out to the community and Azure Bot Service dev team for help.
+
+For questions which fit the Stack Overflow format ("how does this work?"), we monitor the both Azure Bot Service and Bot Framework tags (search both)
+You can also tweet/follow @msbotframework
+Join the conversation on Gitter.
+See all of the available support options here.
+
+Issues and feature requests
+
+We track functional issues and features asks for the Bot Framework SDK, tools and Azure Bot Service in a variety of locations. If you have found an issue or have a feature request, please submit an issue to the below repositories.
+
+Item	Description	Link
+SDK v4 .NET	core bot runtime for .NET, connectors, middleware, dialogs, prompts, LUIS and QnA	File an issue
+SDK v4 JavaScript	core bot runtime for Typescript/Javascript, connectors, middleware, dialogs, prompts, LUIS and QnA	File an issue
+SDK v4 Python	core bot runtime for Python, connectors, middleware, dialogs, prompts, LUIS and QnA	File an issue
+SDK v4 Java	core bot runtime for Java, connectors, middleware, dialogs, prompts, LUIS and QnA	File an issue
+Bot Framework Composer	bot framework composer electron and web app	File an issue
+Bot Framework CLI	bot framework cli tools	File an issue
+Webchat	bot framework web chat tool	File an issue
+Prior releases
+
+Bot Builder v3 SDK has been migrated to the Bot Framework SDK V3 repository.
+Bot Framework ecosystem
+
+Bot Framework Composer
+Botkit
+Azure Bot Service
+Bot Framework Emulator
+Bot Framework Web Chat
+Bot Framework Tools
+Language Understanding
+QnA Maker
+Dispatch
+Speech Services
+Adaptive cards
+Analytics
+Bot Framework Composer
+
+Bot Framework Composer is an integrated development tool for developers and multi-disciplinary teams to build bots and conversational experiences with the Microsoft Bot Framework. Within this tool, you'll find everything you need to build a sophisticated conversational experience.
+
+Botkit
+
+Botkit is a developer tool and SDK for building chat bots, apps and custom integrations for major messaging platforms. Botkit bots hear() triggers, ask() questions and say() replies. Developers can use this syntax to build dialogs - now cross compatible with the latest version of Bot Framework SDK.
+
+In addition, Botkit brings with it 6 platform adapters allowing Javascript bot applications to communicate directly with messaging platforms: Slack, Webex Teams, Google Hangouts, Facebook Messenger, Twilio, and Web chat.
+
+Botkit is part of Microsoft Bot Framework and is released under the MIT Open Source license
+
+Azure Bot Service
+
+Azure Bot Service enables you to host intelligent, enterprise-grade bots with complete ownership and control of your data. Developers can register and connect their bots to users on Skype, Microsoft Teams, Cortana, Web Chat, and more. [Docs]
+
+Direct Line JS Client: If you want to use the Direct Line channel in Azure Bot Service and are not using the WebChat client, the Direct Line JS client can be used in your custom application. [Readme]
+Direct Line Speech Channel: We are bringing together the Bot Framework and Microsoft's Speech Services to provide a channel that enables streamed speech and text bi-directionally from the client to the bot application. To sign up, add the 'Direct Line Speech' channel to your Azure Bot Service.
+Better isolation for your Bot - Direct Line App Service Extension : The Direct Line App Service Extension can be deployed as part of a VNET, allowing IT administrators to have more control over conversation traffic and improved latency in conversations due to reduction in the number of hops. Get started with Direct Line App Service Extension here. A VNET lets you create your own private space in Azure and is crucial to your cloud network as it offers isolation, segmentation, and other key benefits.
+Bot Framework Emulator
+
+The Bot Framework Emulator is a cross-platform desktop application that allows bot developers to test and debug bots built using the Bot Framework SDK. You can use the Bot Framework Emulator to test bots running locally on your machine or to connect to bots running remotely. [Download latest | Docs]
+
+Bot Framework Web Chat
+
+The Bot Framework Web Chat is a highly customizable web-based client chat control for Azure Bot Service that provides the ability for users to interact with your bot directly in a web page. [Stable release | Docs | Samples]
+
+Bot Framework CLI
+
+The Bot Framework CLI Tools hosts the open source cross-platform Bot Framework CLI tool, designed to support building robust end-to-end development workflows. The Bot Framework CLI tool replaced the legacy standalone tools used to manage bots and related services. BF CLI aggregates the collection of cross-platform tools into one cohesive and consistent interface.
+
+Related Services
+
+Language Understanding
+
+A machine learning-based service to build natural language experiences. Quickly create enterprise-ready, custom models that continuously improve. Language Understanding Service(LUIS) allows your application to understand what a person wants in their own words. [Docs | Add language understanding to your bot]
+
+QnA Maker
+
+QnA Maker is a cloud-based API service that creates a conversational, question-and-answer layer over your data. With QnA Maker, you can build, train and publish a simple question and answer bot based on FAQ URLs, structured documents, product manuals or editorial content in minutes. [Docs | Add qnamaker to your bot]
+
+Dispatch
+
+Dispatch tool lets you build language models that allow you to dispatch between disparate components (such as QnA, LUIS and custom code). [Readme]
+
+Speech Services
+
+Speech Services convert audio to text, perform speech translation and text-to-speech with the unified Speech services. With the speech services, you can integrate speech into your bot, create custom wake words, and author in multiple languages. [Docs]
+
+Adaptive Cards
+
+Adaptive Cards are an open standard for developers to exchange card content in a common and consistent way, and are used by Bot Framework developers to create great cross-channel conversatational experiences.
+
+Open framework, native performance - A simple open card format enables an ecosystem of shared tooling, seamless integration between apps, and native cross-platform performance on any device.
+Speech enabled from day one - We live in an exciting era where users can talk to their devices. Adaptive Cards embrace this new world and were designed from the ground up to support these new experiences.
+Contributing
+
+See our contributing guidelines.
+
+Reporting Security Issues
+
+Security issues and bugs should be reported privately, via email, to the Microsoft Security Response Center (MSRC) at secure@microsoft.com. You should receive a response within 24 hours. If for some reason you do not, please follow up via email to ensure we received your original message. Further information, including the MSRC PGP key, can be found in the Security TechCenter.
+
+Copyright (c) Microsoft Corporation. All rights reserved.
