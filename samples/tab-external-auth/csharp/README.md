@@ -70,6 +70,7 @@ This sample illustrates how to implement Google auth using external auth provide
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3. Setup for code
 
@@ -108,6 +109,8 @@ This sample illustrates how to implement Google auth using external auth provide
 ### Google OAuth 2.0
 
 ![tab-page](Images/tab.png)
+
+![redirect-page](Images/redirect-page.png)
 
 ![tab-auth-page](Images/tab1.png)
 
