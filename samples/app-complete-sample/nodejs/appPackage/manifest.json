@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.5",
-  "id": "<<REGISTERED_BOT_ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.Template.microsoftteams.completesampleapp",
   "developer": {
     "name": "Complete Sample App",
@@ -25,14 +25,14 @@
   "accentColor": "#0079bf",
   "configurableTabs": [
     {
-      "configurationUrl": "<<BASE_URI>>/configure",
+      "configurationUrl": "${{BOT_ENDPOINT}}/configure",
       "canUpdateConfiguration": false,
       "scopes": [ "team", "groupchat" ]
     }
   ],
   "staticTabs": [
     {
-      "contentUrl": "<<BASE_URI>>/botInfo",
+      "contentUrl": "${{BOT_ENDPOINT}}/botInfo",
       "entityId": "statictab",
       "name": "Bot Info",
       "scopes": [
@@ -43,7 +43,7 @@
   ],
   "bots": [
     {
-      "botId": "<<REGISTERED_BOT_ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [ "team", "personal", "groupchat" ],
       "commandLists": [
         {
@@ -137,7 +137,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "<<REGISTERED_BOT_ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -162,6 +162,6 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "<<BASE_URI_DOMAIN>>"
+    "${{BOT_DOMAIN}}"
   ]
 }

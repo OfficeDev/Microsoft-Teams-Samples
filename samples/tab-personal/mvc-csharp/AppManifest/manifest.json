@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "id": "<<Guid>>",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
@@ -32,7 +32,16 @@
       "contentUrl": "https://<<Base-url>>/PersonalTab",
       "websiteUrl": "https://<<Base-url>>/PersonalTab",
       "scopes": [
-        "personal"
+        "personal",
+        "groupChat"
+      ],
+      "context": [
+        "personalTab",
+        "privateChatTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage"
       ]
     }
   ],
@@ -44,6 +53,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ]
 }

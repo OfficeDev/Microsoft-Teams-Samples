@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<Manifest-id>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.livecodinginterview",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{Domain Name}}/config",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -42,11 +42,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain-name}}"
+    "${{TAB_DOMAIN}}"
   ],
     "authorization": {
         "permissions": {
-            "orgWide": [],
             "resourceSpecific": [
                 {
                     "name": "MeetingStage.Write.Chat",

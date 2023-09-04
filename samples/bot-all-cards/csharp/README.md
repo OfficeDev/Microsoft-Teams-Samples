@@ -47,7 +47,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
 
 ## Setup
 
@@ -75,14 +75,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 2. Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    # ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup for code 
 - Clone the repository
 
@@ -110,7 +117,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
 
 2) Zip the contents of `Manifest` folder into a `manifest.zip`.
 

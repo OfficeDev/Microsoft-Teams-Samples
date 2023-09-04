@@ -6,7 +6,7 @@
   "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://f7f128cb3e84.ngrok-free.app/api/messages",
+    "websiteUrl": "https://<your_tunnel_domain>/api/messages",
     "privacyUrl": "https://www.techmahindra.com/en-in/privacy-policy/",
     "termsOfUseUrl": "https://www.techmahindra.com/en-in/privacy-policy/e"
   },
@@ -39,6 +39,6 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "*.ngrok-free.app"
+    "<<domain-name>>"
   ]
 }

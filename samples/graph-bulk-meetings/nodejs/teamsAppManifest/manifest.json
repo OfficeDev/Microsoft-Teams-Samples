@@ -25,7 +25,7 @@
     "accentColor": "#5558AF",
     "configurableTabs": [
       {
-        "configurationUrl": "https://<<*ngrok>>/configure",
+        "configurationUrl": "https://<your_tunnel_domain>/configure",
         "canUpdateConfiguration": true,
         "scopes": [
           "team",
@@ -38,6 +38,6 @@
       "messageTeamMembers"
     ],
     "validDomains": [
-      "<<*ngrok>>"
+      "<your_tunnel_domain>"
     ]
   }

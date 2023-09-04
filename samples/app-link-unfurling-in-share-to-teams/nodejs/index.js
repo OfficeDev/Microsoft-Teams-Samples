@@ -53,7 +53,7 @@ adapter.onTurnError = async (context, error) => {
 const bot = new TeamsBot();
 
 server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+    console.log('Server listening on port: ' + PORT);
 });
 
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));

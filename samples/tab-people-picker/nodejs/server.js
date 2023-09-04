@@ -1,21 +1,20 @@
 const express = require('express');
-const app = express();
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.set('views', __dirname);
+const server = express();
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
 
-// parse application/json
-app.use(express.json());
-
-app.get('/configure', function (req, res) {
+server.get('/configure', function (req, res) {
   res.render('./views/configure');
 });
 
-app.get('/tab', function (req, res) {
+server.get('/tab', function (req, res) {
     res.render('./views/tab');
 });
 
-app.listen(3978, function () {
-  console.log('app listening on port 3978!');
-});
+const port = process.env.port || process.env.PORT || 3978;
+
+server.listen(port, () => 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);

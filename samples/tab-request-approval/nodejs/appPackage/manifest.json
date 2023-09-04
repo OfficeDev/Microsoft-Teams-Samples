@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.tabrequestapproval",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "request",
       "name": "Request",
-      "contentUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
-      "websiteUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
+      "contentUrl": "https://${{TAB_DOMAIN}}/UserNotification",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/UserNotification",
       "scopes": [
         "personal"
       ]
@@ -39,8 +39,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app",
-	"<<BASE-URL-DOMAIN>>"
+    "{{domain-name}}",
+	"${{TAB_DOMAIN}}"
   ],
   "activities": {
     "activityTypes": [
@@ -52,7 +52,7 @@
     ]
   },
   "webApplicationInfo": {
-    "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<BASE-URL-DOMAIN>>/<<YOUR-MICROSOFT-APP-ID>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

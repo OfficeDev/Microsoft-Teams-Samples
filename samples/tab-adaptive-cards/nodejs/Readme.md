@@ -46,9 +46,24 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     # determine node version
     node --version
     ```
+3. Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/download) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
-3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+   If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+4. [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -58,18 +73,24 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - Register Azure AD application
     - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your Azure AD application registration, you will create an App ID and App password - make sure you keep these for later.
 
     Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/368ef561bad496948b30ac0c23b38ad207adf891/samples/msgext-search-sso-config/nodejs/BotSSOSetup.md#3-setup-bot-service-connection-tokenstore)
 
 2) Setup NGROK 
-- Run ngrok - point to port `3978`
+- Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3) Setup for code     
 - Clone the repository
@@ -87,7 +108,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from bot Framework registration. 
-- Update the `BaseUrl` as per your application domain like if you are using ngrok, it would be `https://1234.ngrok-free.app` 
+- Update the `BaseUrl` as per your application domain like if you are using ngrok, it would be `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 - Update the `ConnectionName` with Azure Bot Registration connection name configured in step 1.
 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
@@ -108,7 +129,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 4) Setup Manifest for Teams (**This step is specific to Teams.**)
 
     - Edit the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
-    - Update the `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - Update the `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - Zip up the contents of the `appPackage` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps

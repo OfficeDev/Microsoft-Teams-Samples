@@ -31,7 +31,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
 * [Node.js and NPM](https://nodejs.org/)
 * Get any text editor or IDE. You can install and use [Visual Studio Code](https://code.visualstudio.com/download) for free.
 * An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).
-* If you want to run this code locally, use a tunnelling service. These instructions assume you are using [ngrok](https://ngrok.com/). 
+* If you want to run this code locally, use a tunnelling service like [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version. These instructions assume you are using [ngrok](https://ngrok.com/). 
 
 ### Setup 
 > Note these instructions are for running the sample on your local machine.
@@ -41,10 +41,18 @@ To complete this tutorial, you need the following tools. If you don't already ha
    3. In the command prompt
 
       Run ngrok - point to port 3978
-      ```bash
-       ngrok http 3978 --host-header="localhost:3978"
-       ```
-   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok-free.app` which will be used in later steps.
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok-free.app` if you are using Ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms which will be used in later steps
 
    5. **Configure your own connector**
 
@@ -57,10 +65,10 @@ To complete this tutorial, you need the following tools. If you don't already ha
    - For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
    ![connector_setup](Images/Connector_Setup/3.connector.png)
 
-   - For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok-free.app.
+   - For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok-free.app and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
    - Click on Save. After the save completes, you will see your connector ID in address bar.
 
-  6. In the `~/views/connectorconfig.jade` file line 27 and replace `ngrokURL` to the ngrok https forwarding url from the above.
+  6. In the `~/views/connectorconfig.jade` file line 27 and replace `tunnelURL` to the ngrok https forwarding url from the above.
 
    ![connector_setup](Images/Connector_Setup/5.view_update.png)
 
@@ -78,7 +86,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
  9. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/app manifest/manifest.json` file with your newly registered
     - **Edit** the `manifest.json` and update `<<AppDomain>>`
-      Example. if you are using ngrok it would be `https://1234.ngrok-free.app` then your app domain-name will be `1234.ngrok-free.app`.
+      Example. if you are using ngrok it would be `https://1234.ngrok-free.app` then your app domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
     - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes).

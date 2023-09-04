@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling
 
 # Teams Link Unfurl Bot Node.js
 
-If you copy and paste a link from `https://www.botframework.com` or your ngrok base url, it wil unfurl inside compose area.
+If you copy and paste a link from `https://www.botframework.com` or your tunnel base url, it wil unfurl inside compose area.
 
 ## Included Features
 * Bots
@@ -35,7 +35,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -44,9 +58,15 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ## Setup for bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
@@ -56,7 +76,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
 ## Setup for code
 1) Clone the repository

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "0e3317e7-75b5-4930-b12e-605948f147cd",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "{TODO: BOT_ID}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -86,6 +86,9 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "localhost:3000"
+    "token.botframework.com",
+    "{{domain-name}}",
+    "*.ngrok.io",
+    "${{BOT_DOMAIN}}"
   ]
 }

@@ -46,7 +46,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -57,8 +57,8 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
   - Create an [AAD application](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
- - Set your application URI to the same URI you've created in Ngrok.
-   - Ex: api://contoso.ngrok-free.app/{appId} using the application ID that was assigned to your app
+ - Set your application URI to the same URI you've created in the tunnelling application.
+   - Ex: api://<your_tunnel_domain>/{appId} using the application ID that was assigned to your app
                     
  - Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
    - Visit Manage > Certificates & secrets
@@ -79,11 +79,17 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 ![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
 
 2. Setup NGROK
-- Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-```bash
- ngrok http 3978 --host-header="localhost:3978"
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3. Setup for code
 
@@ -104,7 +110,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
   - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId. E.g. `""api://1235.ngrok-free.app/0000000000-0000000-000000""`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 

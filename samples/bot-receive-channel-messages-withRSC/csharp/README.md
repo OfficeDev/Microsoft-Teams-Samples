@@ -41,7 +41,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -53,14 +53,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Register a AAD aap registration in Azure portal.
 - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 3. Setup Ngrok
-- Run ngrok - point to port 3978
+-  Run ngrok - point to port 3978
 
-```bash
- ngrok http 3978 --host-header="localhost:3978"
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 4. Setup for code
 
@@ -86,7 +92,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 
 5. This step is specific to Teams.
-    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL`
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the tunnel URL`
     - **Edit** the `manifest.json` for `<<MANIFEST-ID>>` replace it with any `GUID` using guid generator.
     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with MicrosoftAppId. E.g. `"api://botid-{{MicrosoftAppId}}"`.
     

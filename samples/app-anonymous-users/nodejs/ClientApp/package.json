@@ -17,6 +17,7 @@
     "socket.io-client": "^4.4.1"
   },
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
