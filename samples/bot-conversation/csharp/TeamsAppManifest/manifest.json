@@ -68,5 +68,20 @@
     "identity",
     "messageTeamMembers"
   ],
+  "webApplicationInfo": {
+
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": ""
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "ChatMessageReadReceipt.Read.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  },
   "validDomains": [ "<<domain-name>>" ]
 }
