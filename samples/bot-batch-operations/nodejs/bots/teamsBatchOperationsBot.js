@@ -10,7 +10,7 @@ const {
     TurnContext
 } = require('botbuilder');
 
-class TeamsConversationBot extends TeamsActivityHandler {
+class TeamsBatchOperationsBot extends TeamsActivityHandler {
     constructor() {
         super();
 
@@ -54,13 +54,6 @@ class TeamsConversationBot extends TeamsActivityHandler {
             }));
 
             await next();
-        });
-
-        // This method registers the lambda function, which will be invoked when message sent by user is updated in chat.
-        this.onTeamsMessageEditEvent(async (context, next) => {
-            let editedMessage = context.activity.text;
-            await context.sendActivity(`The edited message is ${editedMessage}"`);
-            next();
         });
     }
 
@@ -345,4 +338,4 @@ class TeamsConversationBot extends TeamsActivityHandler {
     })
 }
 
-module.exports.TeamsConversationBot = TeamsConversationBot;
+module.exports.TeamsBatchOperationsBot = TeamsBatchOperationsBot;

@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-conversation-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-batch-operations-nodejs",
     "source": "officeDev",
-    "title": "Bot Conversation",
-    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/nodejs",
+    "title": "Batch Operations Bot using Bot Framework v4",
+    "shortDescription": "This sample app demonstrates the different batch operations available from Bot Framework v4 for use in personal and teams scope.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-batch-operations/nodejs",
     "longDescription": [
-      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
+      "This sample app demonstrates the different batch operations available from Bot Framework v4 for use in personal and teams scope."
     ],
-    "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "creationDateTime": "2023-24-08",
+    "updateDateTime": "2023-24-08",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation/nodejs/Images/ConversationBot.gif",
-        "alt": "Solution UX showing conversation events for teams bot"
+        "url": "https://raw.githubusercontent.com/southworks/Microsoft-Teams-Samples/bf92bc9c53ed366037c70c51af8432782575cecf/samples/bot-batch-operations/nodejs/Images/GetFailedEntries.png",
+        "alt": "Image showing one of the Batch Operations (Get Failed Entres) available from Bot Framework v4"
       }
     ],
     "authors": [
