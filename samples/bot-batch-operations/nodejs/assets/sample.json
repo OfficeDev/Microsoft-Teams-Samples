@@ -35,8 +35,8 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/southworks/Microsoft-Teams-Samples/bf92bc9c53ed366037c70c51af8432782575cecf/samples/bot-batch-operations/nodejs/Images/GetFailedEntries.png",
-        "alt": "Image showing one of the Batch Operations (Get Failed Entres) available from Bot Framework v4"
+        "url": "`https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-batch-operations/nodejs/Images/GetFailedEntries.png",
+        "alt": "Image showing one of the Batch Operations (Get Failed Entries) available from Bot Framework v4"
       }
     ],
     "authors": [

@@ -47,7 +47,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new TeamsConversationBot();
+const bot = new TeamsBatchOperationsBot();
 
 // Create HTTP server.
 const server = restify.createServer();
