@@ -23,11 +23,11 @@ if (env === undefined) {
 process.env.VERSION = package.version;
 
 /**
- * Replace parameters in the manifest
+ * Replace parameters in the appManifest
  */
 task("generate-manifest", (cb) => {
   return (
-    src("src/manifest/manifest.json")
+    src("src/appManifest/manifest.json")
       .pipe(
         replace({
           tokens: {
@@ -120,7 +120,7 @@ task("schema-validation", (callback) => {
  * Creates the tab manifest
  */
 task("zip", () => {
-  return src("./src/manifest/**/*.*")
+  return src("./src/appManifest/**/*.*")
     .pipe(src("./temp/manifest.json"))
     .pipe(zip(config.manifestFileName))
     .pipe(dest("package"));
