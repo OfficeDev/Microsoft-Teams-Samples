@@ -2,11 +2,11 @@
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
   "version": "1.5",
-  "speak": "This card mentions a user by User Principle Name: Hello ${userName}",
+  "speak": "This card mentions a tag:  ${tagName}",
   "body": [
     {
       "type": "TextBlock",
-      "text": "Mention a Test Tag: Hello <at>Test Tag</at>"
+      "text": "Mention a Tag: <at>Test Tag</at>"
     }
   ],
   "msteams": {
@@ -15,11 +15,11 @@
         "type": "mention",
         "text": "<at>Test Tag</at>",
         "mentioned": {
-          "id": "N2VmMjQwZGUtMjVkYi00YzljLTk1MzQtYTE2ZjNjZjVkMDkzIyM3OGE5NzYxNy1hZDUxLTQ3YjgtOGRkMC0zZGU1MmM0YTQ5YzUjI3RpMlJ3NUlsRg==",
-          "name": "test",
+          "id": "${tagId}",
+          "name": "${tagName}",
           "type": "tag"
         }
-      } 
+      }
     ]
   }
 }

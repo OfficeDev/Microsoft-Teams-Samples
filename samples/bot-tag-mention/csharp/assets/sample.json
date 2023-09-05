@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework."
     ],
-    "creationDateTime": "2022-06-30",
-    "updateDateTime": "2022-06-30",
+    "creationDateTime": "2023-07-06",
+    "updateDateTime": "2023-07-06",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/Tag-Mention-Bot/csharp/Images/Tag-Mention-Bot.gif",
-        "alt": "Solution UX showing Conversation Bot using Bot Framework v4"
+        "alt": "Solution UX showing tag mention Bot using Bot Framework v4"
       }
     ],
     "authors": [

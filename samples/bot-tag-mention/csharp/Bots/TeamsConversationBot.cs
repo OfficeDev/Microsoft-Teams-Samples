@@ -3,40 +3,24 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-using AdaptiveCards.Templating;
-using Newtonsoft.Json;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
-    public class TeamsConversationBot : TeamsActivityHandler
+    public class TeamsConversationBot<T> : DialogBot<T> where T : Dialog 
     {
         private string _appId;
         private string _appPassword;
 
-        public TeamsConversationBot(IConfiguration config)
+        public TeamsConversationBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
+                    : base(conversationState, userState, dialog, logger)
         {
-            _appId = config["MicrosoftAppId"];
-            _appPassword = config["MicrosoftAppPassword"];
-        }
-
-        private readonly string _adaptiveCardTemplate = Path.Combine(".", "Resources", "UserMentionCardTemplate.json");
-
-        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        {
-                await MentionAdaptiveCardActivityAsync(turnContext, cancellationToken);
         }
 
         protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> membersAdded, TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -60,17 +44,6 @@ namespace Microsoft.BotBuilderSamples.Bots
             {
                 await turnContext.SendActivityAsync("Welcome to Microsoft Teams Tag mention demo bot.");
             }
-        }
-
-        private async Task MentionAdaptiveCardActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var templateJSON = File.ReadAllText(_adaptiveCardTemplate);
-            var adaptiveCardAttachment = new Attachment
-            {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(templateJSON),
-            };
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
     }
 }

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
   "manifestVersion": "1.14",
   "version": "1.0.0",
-  "id": "6b77cf34-44c1-4141-8b7d-469bdbab00bb",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.teams.sample.teamsconversationbot",
   "developer": {
     "name": "Tag Mention Bot",
@@ -15,17 +15,17 @@
     "color": "icon-color.png"
   },
   "name": {
-    "short": "Tag Mention",
+    "short": "Tag Mention Bot",
     "full": "Tag Mention Bot"
   },
   "description": {
-    "short": "Tag Mention",
-    "full": "Tag Mention Bot"
+    "short": "This sample app demonstrates the use of tag mention funtionality in teams scope.",
+    "full": "This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework."
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "6b77cf34-44c1-4141-8b7d-469bdbab00bb",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
         "personal",
         "groupchat",
@@ -41,6 +41,12 @@
             "personal",
             "groupchat",
             "team"
+          ],
+          "commands": [
+            {
+              "title": "MentionTag",
+              "description": "Sends message with @mention of a Tag"
+            }
           ]
         }
       ]
@@ -50,5 +56,9 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "*.ngrok-free.app" ]
+  "validDomains": [ "*.ngrok-free.app" ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>"
+  }
 }

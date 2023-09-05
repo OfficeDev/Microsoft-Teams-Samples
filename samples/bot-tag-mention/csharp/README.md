@@ -88,56 +88,16 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
 
-  - **Personal Scope Interactions:**
-
-   **Adding bot UI:**
-  ![personal-AddBot ](Images/personal-AddBot.png)
-
-   **Added bot UI:**
-  ![personal-AddedBot ](Images/personal-AddedBot.png)
-
-   **Show Welcome command interaction:**
-  ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCard-Interaction.png)
-
-   - **Group Chat Scope Interactions:**
-
-   **Adding bot UI:**
-  ![groupChat-AddBot ](Images/groupChat-AddBot.png)
-
-   **Added bot UI:**
-  ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
-
    **Show Welcome command interaction:**
   ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
 
-  - **Team Scope Interactions:**
-
-   **Adding bot UI:**
-  ![team-AddBot ](Images/team-AddBot.png)
-
-   **Added bot UI:**
-  ![team-AddedBot ](Images/team-AddedBot.png)
-
-   **Show Welcome command interaction:**
-  ![team-WelcomeCommand-Card ](Images/team-WelcomeCommand-Card.png)
-
-2. **MentionMe**
+2. **MentionTag**
   - **Result:** The bot will respond to the message and mention the user
-  - **Valid Scopes:** personal, group chat, team chat
-
-  - **Personal Scope Interactions:**
-
-   **MentionMe command interaction:**
-  ![personal-MentionMeCommand ](Images/personal-MentionMeCommand.png)
-
-   - **Group Chat Scope Interactions:**
-
-   **MentionMe command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+  - **Valid Scopes:** team chat
 
   - **Team Scope Interactions:**
 
-   **MentionMe command interaction:**
+   **MentionTag command interaction:**
   ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
 
 ## Deploy the bot to Azure
