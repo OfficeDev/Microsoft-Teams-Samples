@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework."
     ],
-    "creationDateTime": "2023-07-06",
-    "updateDateTime": "2023-07-06",
+    "creationDateTime": "2023-09-06",
+    "updateDateTime": "2023-09-06",
     "products": [
       "Teams"
     ],
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "bot, adaptive card"
       }
     ],
     "thumbnails": [

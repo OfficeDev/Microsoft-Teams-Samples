@@ -27,8 +27,6 @@
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
-        "personal",
-        "groupchat",
         "team"
       ],
       "isNotificationOnly": false,
@@ -38,8 +36,6 @@
       "commandLists": [
         {
           "scopes": [
-            "personal",
-            "groupchat",
             "team"
           ],
           "commands": [
@@ -56,7 +52,7 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "*.ngrok-free.app" ],
+  "validDomains": [ "<<domain-name>>" ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
     "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>"
