@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
-    public class LinkUnfurlingBot : TeamsActivityHandler
+    public class MsgextUnfurlingAcLoopComponents : TeamsActivityHandler
     {
 
         /// <summary>

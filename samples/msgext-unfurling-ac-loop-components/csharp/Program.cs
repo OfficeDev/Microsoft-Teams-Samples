@@ -30,7 +30,7 @@ builder.Services.AddSingleton<IStorage, MemoryStorage>();
 builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
 // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-builder.Services.AddTransient<IBot, LinkUnfurlingBot>();
+builder.Services.AddTransient<IBot, MsgextUnfurlingAcLoopComponents>();
 
 var app = builder.Build();
 
