@@ -121,17 +121,17 @@ Also update `BaseUrl` according to your code runtime environment.
 - Setup Manifest for Teams
 4) **This step is specific to Teams.**
 
-   -  Edit the `manifest.json` in the `Manifest` folder and replace the following details:
+   -  Edit the `manifest.json` in the `appManifest` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID or `MicrosoftAppId`
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok-free.app
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId` received from AAD app registration in Azure portal.
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.
-   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\Manifest_Hub` folder with the required values.
-   - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`
+   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\appManifest_Hub` folder with the required values.
+   - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `appManifest_Hub` folder to create a `appManifest_Hub.zip`
    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
          - From the lower left corner, choose Upload a custom App
-         - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+         - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
