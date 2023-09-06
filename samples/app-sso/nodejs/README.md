@@ -56,9 +56,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     # determine node version
     node --version
     ```
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
-
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution.
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ### 1. Setup for Bot
@@ -69,12 +67,18 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
- ### 2. Setup NGROK  
-    - Run ngrok - point to port `3978`
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ngrok http 3978 --host-header="localhost:3978"
+   ```
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3333 --allow-anonymous
+   ```
+
 ### 3. Setup for code   
 - Clone the repository
 
