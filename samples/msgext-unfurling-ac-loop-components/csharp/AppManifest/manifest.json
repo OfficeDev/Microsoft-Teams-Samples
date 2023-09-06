@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app",
+    "privacyUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app/termofuse",
+    "termsOfUseUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app/privacy"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "AC Loop Component HariSAI",
+    "full": "Adaptive Card based loop components."
+  },
+  "description": {
+    "short": "This sample shows msgext with adaptive card-based loop components functionality.",
+    "full": "This sample shows messaging extension with adaptive card-based loop components functionality."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+      "scopes": [
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "description": "Messaging extension with adaptive card-based loop components functionality",
+          "title": "Search",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Messaging extension with adaptive card-based loop components functionality",
+              "inputType": "text"
+            }
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "configurableTabs": [],
+  "staticTabs": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app",
+    ".ngrok-free.app"
+  ]
+}
