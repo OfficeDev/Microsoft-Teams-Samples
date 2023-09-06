@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -80,21 +80,28 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// Checks the count of members who have read the message sent by MessageAllMembers command
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task CheckReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (teamMemberDetails.Count != 0)
             {
                 int count = 0;
                 List<string> users = new List<string>();
-                foreach (var messageDetail in teamMemberReadDetails)
+                foreach (var memberDetails in teamMemberReadDetails)
                 {
-                    if (teamMemberDetails.ContainsKey(messageDetail.Key))
+                    if (teamMemberDetails.ContainsKey(memberDetails.Key))
                     {
                         count++;
-                        teamMemberDetails.TryGetValue(messageDetail.Key, out TeamsChannelAccount value);
+                        teamMemberDetails.TryGetValue(memberDetails.Key, out TeamsChannelAccount value);
                         users.Add(value.Name);
                     }
                 }
+
                 var userList = string.Join(", ", users);
                 await turnContext.SendActivityAsync(MessageFactory.Text($"Number of members read the message : {count} \n\n Members : {userList}"), cancellationToken);
             }
@@ -105,12 +112,24 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         }
 
+        /// <summary>
+        /// Resets the check count of members who have read the message sent by MessageAllMembers command
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task ResetReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             teamMemberDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
             teamMemberReadDetails = new ConcurrentDictionary<string, ChannelAccount>();
         }
 
+        /// <summary>
+        /// Invoked when user read the message sent by bot in personal scope
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsReadReceiptAsync(ReadReceiptInfo readReceiptInfo, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
             if (teamMemberDetails.Count != 0)
