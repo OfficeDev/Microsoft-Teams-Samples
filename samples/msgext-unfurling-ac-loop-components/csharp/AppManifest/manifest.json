@@ -2,20 +2,20 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+  "id": "`{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app",
-    "privacyUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app/termofuse",
-    "termsOfUseUrl": "https://c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app/privacy"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "AC Loop Component HariSAI",
+    "short": "AC Loop Component",
     "full": "Adaptive Card based loop components."
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+      "botId": "`{{Microsoft-App-Id}}",
       "scopes": [
         "groupchat"
       ],
@@ -35,7 +35,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "95c5dc7a-4dcb-4219-bf60-92d8cdb97923",
+      "botId": "`{{Microsoft-App-Id}}",
       "commands": [
         {
           "id": "searchQuery",
@@ -61,7 +61,9 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main"
+              "{{domain-name}}",
+              "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main",
+              "<<Your Tunnel Domain>>"
             ]
           }
         }
@@ -75,7 +77,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "c620-2401-4900-25bd-937e-c1cd-d1f3-f33f-9cdf.ngrok-free.app",
-    ".ngrok-free.app"
+    "{{domain-name}}",
+    "<<Your Tunnel Domain>>"
   ]
 }

@@ -50,12 +50,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
   4. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
   5. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
-    * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
-    * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
-   **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
-   * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
-   * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
-     
+      * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+      * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+**Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+     * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+     * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+     * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+     * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
+         
 ### 2. Setup
 
 1) Setup for Bot
@@ -98,14 +100,17 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/msgext-unfurling-ac-loop-components/csharp` folder
    - Select `TeamsMsgextUnfurlingAcLoopComponents.csproj` or `TeamsMsgextUnfurlingAcLoopComponents.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-
+1)  Modify the `/appsettings.json` and fill in the following details:
+  - `{{Microsoft-App-Type}}` -  (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+  - `{{Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+  - `{{Microsoft-App-TenantId}}` - Generated from Step 1 is the tenantId id
+ 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{BOT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `<<Your Tunnel Domain>>` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnel then your domain will be like: `12345.devtunnels.ms`.
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
