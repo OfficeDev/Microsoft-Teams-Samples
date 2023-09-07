@@ -19,9 +19,9 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
 
         /// <summary>
-        /// 
+        /// Opens a file, reads all the text in the file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Returns it as a string</returns>
         public static String GetAdaptiveCardJson()
         {
             var paths = new[] { ".", "Resources", "adaptiveCard.json" };
@@ -30,19 +30,23 @@ namespace Microsoft.BotBuilderSamples.Bots
 
 
         /// <summary>
-        /// 
+        /// Invoked when an app based link query activity is received from the connector.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="query">The matched url.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task resolving to either a login card or </returns>
+        /// <remarks>
+        /// For more information on Link Unfurling see the documentation
+        /// https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet
         protected override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
+            // Parse the JSON 
             AdaptiveCardParseResult result = AdaptiveCard.FromJson(GetAdaptiveCardJson());
 
             var attachments = new MessagingExtensionAttachment()
             {
-                Content = result.Card,
+                Content = result.Card, // Get card from result
                 ContentType = AdaptiveCard.ContentType
             };
             return Task.FromResult(new MessagingExtensionResponse
@@ -94,13 +98,13 @@ namespace Microsoft.BotBuilderSamples.Bots
 
 
         /// <summary>
-        /// 
+        /// Handle when the user is searching in the messaging extension query.
+        /// Apps should handle user queries and return appropriate results.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="query"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="query">The messaging extension query.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task that resolves to the list of cards that matched the query.</returns>
         protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
             var card = new ThumbnailCard
@@ -109,11 +113,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                 Text = "These samples are designed to help understand Microsoft Teams platform capabilities and scenarios(Bots,Tabs,Message extensions,Meeting extensions,Personal apps,Webhooks and connectors)",
             };
 
+            // Parse the JSON 
             AdaptiveCardParseResult result = AdaptiveCard.FromJson(GetAdaptiveCardJson());
 
             var attachments = new MessagingExtensionAttachment()
             {
-                Content = result.Card,
+                Content = result.Card, // Get card from result
                 ContentType = AdaptiveCard.ContentType
             };
 
