@@ -27,8 +27,9 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         private string _appId;
         private string _appPassword;
-        private static ConcurrentDictionary<string, TeamsChannelAccount> teamMemberDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
-        private static ConcurrentDictionary<string, ChannelAccount> teamMemberReadDetails = new ConcurrentDictionary<string, ChannelAccount>();
+        private static int _counter = 0;
+        private static List<string> users = new List<string>();
+        private static ConcurrentDictionary<string, TeamsChannelAccount> teamMemberMessageDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
 
         public TeamsConversationBot(IConfiguration config)
         {
@@ -88,22 +89,10 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         private async Task CheckReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (teamMemberDetails.Count != 0)
+            if (teamMemberMessageDetails.Count != 0)
             {
-                int count = 0;
-                List<string> users = new List<string>();
-                foreach (var memberDetails in teamMemberReadDetails)
-                {
-                    if (teamMemberDetails.ContainsKey(memberDetails.Key))
-                    {
-                        count++;
-                        teamMemberDetails.TryGetValue(memberDetails.Key, out TeamsChannelAccount value);
-                        users.Add(value.Name);
-                    }
-                }
-
                 var userList = string.Join(", ", users);
-                await turnContext.SendActivityAsync(MessageFactory.Text($"Number of members read the message : {count} \n\n Members : {userList}"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Number of members read the message : {_counter} \n\n Members : {userList}"), cancellationToken);
             }
             else
             {
@@ -120,8 +109,9 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         private async Task ResetReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            teamMemberDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
-            teamMemberReadDetails = new ConcurrentDictionary<string, ChannelAccount>();
+            teamMemberMessageDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
+            _counter = 0;
+            users = new List<string>();
         }
 
         /// <summary>
@@ -132,8 +122,12 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsReadReceiptAsync(ReadReceiptInfo readReceiptInfo, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (teamMemberDetails.Count != 0)
-                teamMemberReadDetails.TryAdd(turnContext.Activity.From.AadObjectId, turnContext.Activity.From);
+            if (teamMemberMessageDetails.Count != 0 && teamMemberMessageDetails.ContainsKey(readReceiptInfo.LastReadMessageId))
+            {
+                _counter++;
+                teamMemberMessageDetails.TryGetValue(readReceiptInfo.LastReadMessageId, out TeamsChannelAccount member);
+                users.Add(member.Name);
+            }
         }
 
 
@@ -286,8 +280,8 @@ namespace Microsoft.BotBuilderSamples.Bots
                            conversationReference,
                            async (t2, c2) =>
                            {
-                               await t2.SendActivityAsync(proactiveMessage, c2);
-                               teamMemberDetails.TryAdd(teamMember.AadObjectId, teamMember);
+                               var message = await t2.SendActivityAsync(proactiveMessage, c2);
+                               teamMemberMessageDetails.TryAdd(message.Id, teamMember);
                            },
                            cancellationToken);
                    },
@@ -301,7 +295,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             }
 
-            await turnContext.SendActivityAsync(MessageFactory.Text($"All messages have been sent to {teamMemberDetails.Count} members."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text($"All messages have been sent to {teamMemberMessageDetails.Count} members."), cancellationToken);
         }
 
         private static async Task<List<TeamsChannelAccount>> GetPagedMembers(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
