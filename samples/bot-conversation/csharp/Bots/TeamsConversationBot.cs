@@ -246,6 +246,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken, bool isAadId)
         {
+            await ResetReadUserCount(turnContext, cancellationToken);
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
             var credentials = new MicrosoftAppCredentials(_appId, _appPassword);
