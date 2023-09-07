@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "12a485e5-2d50-4aa1-9893-36ebefcfce46",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://<<REACT_APP_BASE_URL>>",
-    "privacyUrl": "https://<<REACT_APP_BASE_URL>>/privacy",
-    "termsOfUseUrl": "https://<<REACT_APP_BASE_URL>>/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<REACT_APP_BASE_URL>>/config",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<REACT_APP_BASE_URL>>"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "<<REACT_APP_AZURE_APP_REGISTRATION_ID>>",
-    "resource": "api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

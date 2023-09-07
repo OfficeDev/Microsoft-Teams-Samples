@@ -42,7 +42,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "<<domain-name>>"
   ],
   "activities": {
     "activityTypes": [

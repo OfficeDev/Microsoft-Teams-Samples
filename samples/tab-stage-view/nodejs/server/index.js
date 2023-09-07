@@ -29,5 +29,5 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+     console.log('Server listening on port: ' + PORT);
 });

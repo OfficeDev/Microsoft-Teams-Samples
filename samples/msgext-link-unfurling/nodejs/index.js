@@ -57,7 +57,7 @@ const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
 server.listen(process.env.port || process.env.PORT || 3978, function() {
-    console.log(`\n${ server.name } listening to ${ server.url }`);
+    console.log(`Server listening on http://localhost:${ server.url }`);
 });
 
 // Listen for incoming requests.

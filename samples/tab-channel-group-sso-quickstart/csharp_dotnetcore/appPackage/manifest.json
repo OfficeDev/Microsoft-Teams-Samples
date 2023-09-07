@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<YOUR-NGROK-DOMAIN>>/Home/Configure",
+      "configurationUrl": "https://<<your_tunnel_domain>>/Home/Configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -35,10 +35,10 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<YOUR-NGROK-DOMAIN>>/<<YOUR-MICROSOFT-APP-ID>>"
+    "resource": "api://<<your_tunnel_domain>>/<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

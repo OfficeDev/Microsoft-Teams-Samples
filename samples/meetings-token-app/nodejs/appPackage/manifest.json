@@ -1,18 +1,18 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "[MicrosoftAppId]",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "webApplicationInfo": {
-    "id": "[MicrosoftAppId]",
-    "resource": "api://[WebAppDomainName]/[MicrosoftAppId]"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   },
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://[WebAppDomainName]",
-    "privacyUrl": "https://[WebAppDomainName]/privacy",
-    "termsOfUseUrl": "https://[WebAppDomainName]/termsofuse"
+    "websiteUrl": "https://${{BOT_DOMAIN}}",
+    "privacyUrl": "https://${{BOT_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{BOT_DOMAIN}}/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -29,7 +29,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://[WebAppDomainName]/config",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -49,8 +49,8 @@
     {
       "entityId": "index",
       "name": "Token App",
-      "contentUrl": "https://[WebAppDomainName]/tab",
-      "websiteUrl": "https://[WebAppDomainName]/tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
       "scopes": [
         "personal",
         "team"
@@ -65,7 +65,7 @@
   ],
   "bots": [
     {
-      "botId": "[MicrosoftAppBotId]",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "groupchat"
       ],
@@ -92,7 +92,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "[WebAppDomainName]"
+    "${{BOT_DOMAIN}}"
   ],
   "authorization": {
     "permissions": {

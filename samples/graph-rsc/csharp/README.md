@@ -58,10 +58,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       - Select `RSCDemo.sln` file
       - Build the solution
 
-4) Setup ngrok
-      ```bash
-      ngrok http 3978 --host-header="localhost:3978"
-      ```
+4) Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 5)  Update appsettings.json
     - Update configuration for `<<Client Id>>` and `<<Client Secret>>` with the ```MicrosoftAppId``` and ```MicrosoftAppPassword``` which was generated while doing AAD pp registration in your Azure Portal.
@@ -72,7 +79,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 7) Setup the `manifest.json` in the `/AppPackage` folder 
    Replace the following details:
     - Replace `<<Your Microsoft APP Id>>` at all the places with your MicrosoftAppId received while doing AAD app registration in Azure portal
-    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

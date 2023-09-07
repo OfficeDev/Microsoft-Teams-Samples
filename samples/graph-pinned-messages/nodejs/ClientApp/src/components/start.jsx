@@ -16,6 +16,7 @@ class Start extends React.Component {
             // Get the tab context, and use the information to navigate to Azure AD login page
             microsoftTeams.app.getContext().then(async (context) => {
                 var currentURL = new URL(window.location);
+                console.log("currentURL---->", currentURL);
                 var scope = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send";
                 var loginHint = context.user.loginHint;
 				
