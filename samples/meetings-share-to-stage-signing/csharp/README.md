@@ -71,7 +71,7 @@ sequenceDiagram
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
@@ -81,11 +81,11 @@ sequenceDiagram
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup for app registration 
-- Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok-free.app`)
+- Make sure to copy and save the `https` url (if you are using Ngrok it should look like `https://<randomsubdomain>.ngrok-free.app`)
 
 - Register an App in AzureAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
 
-- Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok-free.app/auth-end)
+- Once the app is registered update Redirect Uris under the Authentication section with the tunnel url, followed by /auth-end (Eg : https://<randomsubdomain>.ngrok-free.app/auth-end)
 
 - Ensure the following API permissions are granted to the app for Microsoft Graph access
     - email
@@ -112,9 +112,18 @@ sequenceDiagram
     - After you create an AzureAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
 
 ### 3. Setup NGROK
-```bash
-# ngrok http https://localhost:44326 --host-header=localhost:44326
-```
+1) Run ngrok - point to port 44326
+
+   ```bash
+   ngrok http 44326 --host-header="localhost:44326"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 44326 --allow-anonymous
+   ```
+
 ### 4. Project Structure
     - The sample contains 3 projects
         * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
@@ -136,7 +145,7 @@ sequenceDiagram
     npm install
     ```
 - In `appSettings.json`, `manifest.json` and `.env` replace:
-    * `<<deployment-url>>` with your ngrok url, minus the https://.
+    * `<<deployment-url>>` with your tunnel url, minus the https://.
     * `<<aad-id>>` with your AzureAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
     * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AzureAD App for personal users
@@ -146,12 +155,12 @@ sequenceDiagram
 - Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
 
     ### Locally using .NET SDK
-    * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
+    * Point tunnel to port 5001: Eg : `ngrok http -host-header=rewrite 5001`
     * In a terminal, navigate to `samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning`
     * Run `dotnet run`
 
     ### Locally in Visual Studio
-    * Point Ngrok to port 44326: `ngrok http 44326 --host-header="localhost:44326"`
+    * Point tunnel to port 44326: Eg: `ngrok http 44326 --host-header="localhost:44326"`
     * Launch Visual Studio
     * File -> Open -> Project/Solution
     * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
@@ -164,7 +173,7 @@ sequenceDiagram
     * From this directory build the Docker image `podman build -f Deployment/Dockerfile --ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_SCOPE`
     * Wait for the container to build
     * Run `podman images` to view available images, copy the Image ID
-    * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
+    * Point tunnel to port 8080: Eg: `ngrok http -host-header=rewrite 8080`
     * Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
     * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
@@ -173,8 +182,8 @@ sequenceDiagram
 - **This step is specific to Teams.**
 
     - **Edit** the `manifest.json` contained in the  `Source\MeetingSigning.Web\Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok-free.app>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<your_tunnel_domain>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Source\MeetingSigning.Web\Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 

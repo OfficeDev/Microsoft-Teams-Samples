@@ -42,8 +42,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     node --version
     ```
 
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-    Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+   If you using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -67,16 +68,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) Setup for Bot
     - Register Azure AD application
     - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.coms/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
    
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
 2) Setup NGROK
-- Run ngrok - point to port `3978`
+1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3) Setup for code    
 - Clone the repository

@@ -70,7 +70,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "{{domain-name}}"
   ],
   "authorization": {

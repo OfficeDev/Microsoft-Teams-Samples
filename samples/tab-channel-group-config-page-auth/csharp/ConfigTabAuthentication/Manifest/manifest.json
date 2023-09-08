@@ -40,7 +40,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
