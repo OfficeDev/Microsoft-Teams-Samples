@@ -38,8 +38,22 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/) must be installed on your development machine (version 16.14.2  or higher).
-- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -81,6 +95,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
+    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnels with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 5. Setup for code
 
   - Clone the repository
@@ -107,7 +126,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `<<APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `<<BASE-URL>>` and replace `<<BASE-URL>>` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
     - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)    
     
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -182,6 +201,16 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    ![Sidepanel Overview mobile](Images/sidepanel_mobile.png)
 
    ![Sidepanel Question mobile](Images/question_mobile.png)
+
+## Deploy to Azure
+
+Deploy your project to Azure by following these steps:
+
+| From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From TeamsFx CLI                                                                                                                                                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Open Teams Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Teams Toolkit and click `Provision` from DEPLOYMENT section or open the command palette and select: `Teams: Provision`.</li><li>Open the Teams Toolkit and click `Deploy` or open the command palette and select: `Teams: Deploy`.</li></ul> | <ul> <li>Run command `teamsfx account login azure`.</li> <li>Run command `teamsfx provision --env dev`.</li> <li>Run command: `teamsfx deploy --env dev`. </li></ul> |
+
+> Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
 
 ## Further reading
