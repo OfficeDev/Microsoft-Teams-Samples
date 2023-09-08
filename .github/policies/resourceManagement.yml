@@ -109,7 +109,7 @@ configuration:
           label: 'needs-triage :mag:'
       - addReply:
           reply: >-
-            Hi ${issueAuthor}! Thank you for bringing this issue to our attention. We will investigate and if we require further information we will reach out in one business day. Please use [this link](https://aka.ms/DevCommunityEscalationForm) to escalate if you don't get replies. 
+            Hi @${issueAuthor}! Thank you for bringing this issue to our attention. We will investigate and if we require further information we will reach out in one business day. Please use [this link](https://aka.ms/DevCommunityEscalationForm) to escalate if you don't get replies. 
 
 
             Best regards, Teams Platform
@@ -127,7 +127,7 @@ configuration:
             isRegex: True
       then:
       - addReply:
-          reply: Hi ${issueAuthor}! Thanks for attempting to open an issue. Unfortunately, you didn't write anything in the body which makes it impossible to understand your concern. You are welcome to try again by opening a new issue. Best regards, Teams Platform
+          reply: Hi @${issueAuthor}! Thanks for attempting to open an issue. Unfortunately, you didn't write anything in the body which makes it impossible to understand your concern. You are welcome to try again by opening a new issue. Best regards, Teams Platform
       - closeIssue
       description: 
     - if:
@@ -182,7 +182,7 @@ configuration:
           action: Closed
       then:
       - addReply:
-          reply: "### Tell us about your experience! \n\nHi ${issueAuthor}! This issue is closed in our system. We would like your [feedback on your experience with our support team and Platform](https://aka.ms/DevSupportFeedback). \n\nBest regards, \nTeams Platform "
+          reply: "### Tell us about your experience! \n\nHi @${issueAuthor}! This issue is closed in our system. We would like your [feedback on your experience with our support team and Platform](https://aka.ms/DevSupportFeedback). \n\nBest regards, \nTeams Platform "
       description: 
 onFailure: 
 onSuccess: 
