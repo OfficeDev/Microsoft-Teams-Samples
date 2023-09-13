@@ -39,7 +39,7 @@ This bot has been created using [Bot Builder](https://www.npmjs.com/package/botb
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/microsoft-365/dev-program)
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI](https://azure.microsoft.com/free/)
+- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
 - [Create a Redis Enterprise cache](https://learn.microsoft.com/azure/azure-cache-for-redis/quickstart-create-redis-enterprise)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
