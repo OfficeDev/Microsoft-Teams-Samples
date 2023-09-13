@@ -110,7 +110,7 @@ To include resource data of graph notifications, this Graph API require self-sig
    Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword```, ```MicrosoftAppTenantId```,
    ```Base64EncodedCertificate```, ```EncryptionCertificateId```, ```PRIVATE_KEY_PATH```
 
-  > Note ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run appliacation by teams toolkit and when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: https://12345.devtunnels.ms/api/notifications.   
+  > Note ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run appliacation by teams toolkit and when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
 
 ### Instruction for .env
 1. Provide `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId` in the .env that is created in Azure.
