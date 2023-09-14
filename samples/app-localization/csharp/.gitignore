@@ -179,7 +179,7 @@ ecf/
 rcf/
 
 # Windows Store app package directories and files
-AppPackages/
+AppMAnifest/
 BundleArtifacts/
 Package.StoreAssociation.xml
 _pkginfo.txt
