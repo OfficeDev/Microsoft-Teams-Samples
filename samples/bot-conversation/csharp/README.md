@@ -27,7 +27,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 * Immersive Reading Support for Cards
 
 ## Interaction with bot
-![bot-conversations ](Images/bot-conversations.gif)
+![bot-conversations ](Images/bot-conversation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
