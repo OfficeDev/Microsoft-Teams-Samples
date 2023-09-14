@@ -56,15 +56,16 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - Once App is registerd copy the `client_Id` for your app and update in the app.
 
 3. Setup NGROK
- - Run ngrok - point to port 3978
+-  Run ngrok - point to port 3978
 
    ```bash
    ngrok http 3978 --host-header="localhost:3978"
-   ```
+   ```  
+
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3333 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
 4. Setup for code

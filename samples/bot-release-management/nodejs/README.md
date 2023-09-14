@@ -56,16 +56,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Setup NGROK**
 1) Run ngrok - point to port 3978
 
-     ```bash
+   ```bash
    ngrok http 3978 --host-header="localhost:3978"
-   ```
+   ```  
+
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3333 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Once started you should see URL  `https://41ed-abcd-e125.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook and if you are using dev tunnels then your endpoint will be like: `https://41ed-abcd-e125.ngrok-free.app`.
+2) Once started you should see URL  `https://41ed-abcd-e125.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 
 **Register Azure AD application**
@@ -115,7 +116,7 @@ Click on Add Permissions to commit your changes.
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+- If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 **Setup Azure DevOps service hook**

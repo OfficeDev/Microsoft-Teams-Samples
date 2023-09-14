@@ -108,7 +108,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 15. Create a Bot Registration
    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
    - Select Configuration section.
    - Under configuration -> Add OAuth connection string.
    - Provide connection Name : for eg `ssoconnection`
