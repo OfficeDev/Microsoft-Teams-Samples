@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
-    public class TeamsConversationBot<T> : DialogBot<T> where T : Dialog 
+    public class TeamsConversationBot<T> : DialogBot<T> where T : Dialog
     {
         private string _appId;
         private string _appPassword;
@@ -27,7 +27,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var teamMember in membersAdded)
             {
-                if(teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
+                if (teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
                 }
@@ -36,9 +36,9 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            if(turnContext.Activity.Conversation.ConversationType == "channel")
+            if (turnContext.Activity.Conversation.ConversationType == "channel")
             {
-                await turnContext.SendActivityAsync($"Welcome to Microsoft Teams Tag mention demo bot. This bot is configured in {turnContext.Activity.Conversation.Name}");
+                await turnContext.SendActivityAsync($"Welcome to Tag mention Teams bot app. Please follow the below commands for mentioning the tags: \r\n\r\n\r\n1. Command: \"`@<Bot-name> <your-tag-name>`\" - It will work only if you have Graph API permissions to fetch the tags and bot will mention the tag accordingly in team's channel scope.\r\n\r\n\r\n2. Command \"`@<Bot-name> @<your-tag>`\" - It will work without Graph API permissions but you need to provide the tag as command to experience tag mention using bot.");
             }
             else
             {

@@ -23,13 +23,14 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 * Teams Conversation Events
 
 ## Interaction with bot
-![Tag-mention ](Images/Tag-mention.gif)
+![Tag-mention ](Images/Tag-mention-bot.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- Create tags within the team channel prior to utilizing the bot.
 
 ## Setup
 
@@ -92,11 +93,11 @@ the Teams service needs to call into the bot.
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
 
 1. **Show Welcome**
-  - **Result:** The bot will send the welcome card for you to interact with
+  - **Result:** The bot will send the welcome card for you to interact with necessary commands
   - **Valid Scopes:** team chat
 
    **Show Welcome command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/team-BotCommands-interactions.png)
+  ![groupChat-BotCommands-interactions ](Images/team-BotCommands-interaction.png)
 
 2. **MentionTag**
   - **Result:** The bot will respond to the message and mention a tag
@@ -105,13 +106,21 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Team Scope Interactions:**
 
    **MentionTag command interaction:**
+   **Command 1:** `@<Bot-name> <your-tag-name>` - It will work only if you have Graph API permissions to fetch the tags and bot will mention the tag accordingly in team's channel scope.
   ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
 
-  **Show a tag mention adaptive card interaction:**
+   **Command 2:** `@<Bot-name> @<your-tag>` - It will work without Graph API permissions but you need to provide the tag as command to experience tag mention using bot.
+  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction1.png)
+
+   **Hover on the tag to view the details card:**
   ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-2.png)
 
-  **Hover on the tag to view the details card:**
+  **Message interaction:**
+  When you mention the bot in Teams without providing any commands, you will receive the following message.
   ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-3.png)
+
+  If you attempt to use the bot before creating a tag or if you provide an incorrect tag name, you will receive the following message.
+  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-4.png)
 
 ## Deploy the bot to Azure
 
