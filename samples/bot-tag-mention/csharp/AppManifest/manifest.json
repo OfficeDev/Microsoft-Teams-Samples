@@ -32,20 +32,7 @@
       "isNotificationOnly": false,
       "supportsCalling": false,
       "supportsVideo": false,
-      "supportsFiles": false,
-      "commandLists": [
-        {
-          "scopes": [
-            "team"
-          ],
-          "commands": [
-            {
-              "title": "MentionTag",
-              "description": "Sends message with @mention of a Tag"
-            }
-          ]
-        }
-      ]
+      "supportsFiles": false
     }
   ],
   "permissions": [
