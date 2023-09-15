@@ -89,7 +89,7 @@ namespace Microsoft.BotBuilderSamples
                     if (stepContext.Context.Activity.Text.Trim().ToLower().Contains("<at>"))
                     {
                         var tagName = stepContext.Context.Activity.Text.Replace("<at>", string.Empty).Replace("</at>", string.Empty).Trim();
-                        var tagID = stepContext.Context.Activity.Entities[1].Properties.First.First.First.First.ToString();
+                        var tagID = stepContext.Context.Activity.Entities[1].Properties["mentioned"]["id"].ToString();
                         await TagMentionAdaptivecard(stepContext, cancellationToken, tagName, tagID);
 
                     }
