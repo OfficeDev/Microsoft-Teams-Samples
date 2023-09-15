@@ -141,6 +141,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    ```bash
    devtunnel host -p 3333 --allow-anonymous
    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ### 3. Setup for code
 1) Clone the repository
