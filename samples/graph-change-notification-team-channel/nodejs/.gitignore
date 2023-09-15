@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.zip
 
 # Runtime data
 pids
@@ -62,16 +63,13 @@ dist/
 manifest/
 build/
 
-# VS Code config files
-.vs/**
-
 #############
 
 # TeamsFx files
 env/.env.*.user
 env/.env.local
 .localConfigs
-appPackage/build
+appManifest/build
 /build
 
 # dependencies
