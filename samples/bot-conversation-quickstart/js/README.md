@@ -31,7 +31,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 **Dependencies**
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -55,7 +55,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 2. Setup for Bot
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok-free.app/api/messages`. 
+   - For the Messaging endpoint URL, use the current `https` URL you were given by running the tunneling application and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok-free.app/api/messages`. 
 
   **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -64,11 +64,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 3. Setup NGROK
-      - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-	```bash
-	 ngrok http 3978 --host-header="localhost:3978"
-	```   
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup for code
 
   - Clone the repository

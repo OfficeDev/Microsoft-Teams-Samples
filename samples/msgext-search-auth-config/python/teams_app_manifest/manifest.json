@@ -75,7 +75,7 @@
   ],
   "validDomains": [
     "*.botframeworksamples.blob.core.windows.net",
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "*.botframework.com"
   ]
 }

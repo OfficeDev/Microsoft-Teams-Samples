@@ -23,6 +23,10 @@
                 {
                     "id": "User.Read",
                     "type": "Scope"
+                },
+                {
+                    "id": "TeamsAppInstallation.ReadForUser.All",
+                    "type": "Role"
                 }
             ]
         }

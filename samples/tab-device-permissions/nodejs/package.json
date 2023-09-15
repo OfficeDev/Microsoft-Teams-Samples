@@ -2,6 +2,7 @@
   "name": "test-tab",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@fluentui/react-card": "^9.0.0-beta.34",
     "@fluentui/react-components": "^9.0.0-rc.10",

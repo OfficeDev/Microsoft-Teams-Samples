@@ -40,7 +40,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
 
 ## Setup
 
@@ -59,14 +59,19 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 2. Setup for Bot
     - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-3. Setup NGROK  
-   Run ngrok - point to port 3978
+3. Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 4. Setup for code  
    - Clone the repository
@@ -125,13 +130,54 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
             }
             ]
         ```
+   
+   **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
+  - Update the user AAD object ID in your adaptive card JSON from your tenant's AAD users available in the Azure portal.
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
+      1) On line 16, replace {{User-Object-ID}}  
+      2) On line 17, replace {{User-Display-Name}}
+      3) On line 18, replace {{User-Principal-Name}}
+
+        - E.g. 
+        ```
+        "properties": {
+        "id": "87d349ed-xxxx-434a-9e14-xxxx",
+        "displayName": "Joe Smith",
+        "userPrincipalName": "JoeSmith@xxxx.com"
+      }
+        ```
+    - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardSetIcon.json
+      1) On line 18, replace {{User-Object-ID}}  
+      2) On line 19, replace {{User-Display-Name}}
+      3) On line 20, replace {{User-Principal-Name}}
+      4) On line 23, replace {{User-Object-ID}}  
+      5) On line 24, replace {{User-Display-Name}}
+      6) On line 25, replace {{User-Principal-Name}}
+      
+        - E.g. 
+        ```
+      "properties": {
+        "users": [
+          {
+            "id": "95d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "Vance Agrawal",
+            "userPrincipalName": "VanceAgrawal@xxxx.com"
+          },
+          {
+            "id": "45d349ed-xxxx-434a-9e14-xxxx",
+            "displayName": "ku Mao",
+            "userPrincipalName": "kuMao@xxxx.com"
+          }
+        ]
+      }
+        ```
 **Note:**
 -   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your MicrosoftAppId (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -144,43 +190,51 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![InstallApp](BotFormattingCards/Images/InstallApp.png)
+![InstallApp](BotFormattingCards/Images/1.InstallApp.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](BotFormattingCards/Images/WelcomeMessage.png)
+![WelcomeMessage](BotFormattingCards/Images/2.WelcomeMessage.png)
 
 **Type Of Cards:**
 
-![TypeOfCards](BotFormattingCards/Images/TypeOfCards.png)
+![TypeOfCards](BotFormattingCards/Images/3.TypeOfCards.png)
 
 **Mention Card:**
 
-![MentionCard](BotFormattingCards/Images/MentionCard.png)
+![MentionCard](BotFormattingCards/Images/4.MentionCard.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](BotFormattingCards/Images/InformationMaskCard.png)
+![InformationMaskCard](BotFormattingCards/Images/5.InformationMaskCard.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](BotFormattingCards/Images/FullWidthCard.png)
+![FullWidthCard](BotFormattingCards/Images/6.FullWidthCard.png)
 
 **Stage View Card:**
 
-![StageViewCard](BotFormattingCards/Images/StageViewCard.png)
+![StageViewCard](BotFormattingCards/Images/7.StageViewCard.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](BotFormattingCards/Images/OverflowMenuCard.png)
+![OverflowMenuCard](BotFormattingCards/Images/8.OverflowMenuCard.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](BotFormattingCards/Images/HTMLFormatCard.png)
+![HTMLFormatCard](BotFormattingCards/Images/9.HTMLFormatCard.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](BotFormattingCards/Images/CardWithEmoji.png)
+![CardWithEmoji](BotFormattingCards/Images/10.CardWithEmoji.png)
+
+**Persona Card Icon:**
+
+![PersonaCardIcon](BotFormattingCards/Images/12.PersonaCardIcon.png)
+
+**Persona Set Icon:**
+
+![PersonaCardSetIcon](BotFormattingCards/Images/13.PersonaCardSetIcon.png)
 
 ## Deploy the bot to Azure
 
@@ -189,6 +243,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
+- [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />

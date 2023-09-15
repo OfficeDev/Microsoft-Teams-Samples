@@ -37,16 +37,25 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
   ```
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
 ## Setup.
 
-1. Run ngrok - point to port 3978
-   ```ngrok http 3978 --host-header="localhost:3978"```
+1) Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 2. Create AAD app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
         > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 3. Clone the repository
@@ -64,13 +73,13 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    Modify the `appsettings.json` and fill in the following details:
    - `<<Microsoft-App-ID>>` - Generated from Step 2 (Application (client) ID) is the application app id
    - `<<Microsoft-App-Secret>>` - Generated from Step 2, also referred to as Client secret
-   - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
+   - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - <<Manifest-id>> with any random GUID or your MicrosoftAppId from AAD app registration.
    - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
-   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 

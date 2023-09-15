@@ -42,7 +42,7 @@
     "media"
   ],
   "validDomains": [
-    "*.ngrok-free.app",
+    "{{domain-name}}",
     "${{BOT_DOMAIN}}"
   ]
 }
