@@ -1,0 +1,154 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.appcompleteauth",
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "App complete auth"
+  },
+  "description": {
+    "short": "Authentication sample for Microsoft Teams",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "staticTabs": [
+    {
+      "contentUrl": "https://${{BOT_DOMAIN}}/AuthTab",
+      "entityId": "Auth",
+      "name": "Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            },
+            {
+              "title": "usingcredentials",
+              "description": "For User Id/Password signin"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": true
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "SSO",
+          "type": "action",
+          "title": "SSO",
+          "description": "SSO authentication",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutSSO",
+          "type": "action",
+          "title": "Log out sso",
+          "description": "Sign out from authenticated services.",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutFacebook",
+          "description": "Sign out from authenticated services.",
+          "title": "Log out facebook",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "UserCredentials",
+          "description": "Sign in using user credentials",
+          "title": "Using credentials",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "FacebookLogin",
+          "description": "Sign in to facebook",
+          "title": "Facebook sign in",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com",
+              "${{BOT_DOMAIN}}"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "accentColor": "#60A18E",
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "token.botframework.com"
+  ]
+}
