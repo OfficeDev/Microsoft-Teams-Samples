@@ -1,0 +1,188 @@
+id: 
+name: GitOps.PullRequestIssueManagement
+description: GitOps.PullRequestIssueManagement primitive
+owner: 
+resource: repository
+disabled: false
+where: 
+configuration:
+  resourceManagementConfiguration:
+    scheduledSearches:
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: needs-author-feedback
+      - hasLabel:
+          label: 'status-no-recent-activity'
+      - noActivitySince:
+          days: 3
+      actions:
+      - closeIssue
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: needs-author-feedback
+      - noActivitySince:
+          days: 3
+      - isNotLabeledWith:
+          label: 'status-no-recent-activity'
+      actions:
+      - addLabel:
+          label: 'status-no-recent-activity'
+      - addReply:
+          reply: This issue has been automatically marked as stale because it has been marked as requiring author feedback but has not had any activity for **3 days**. It will be closed if no further activity occurs **within 3 days of this comment**.
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 6
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: duplicate
+      - noActivitySince:
+          days: 1
+      actions:
+      - addReply:
+          reply: This issue has been marked as duplicate and has not had any activity for **1 day**. It will be closed for housekeeping purposes.
+      - closeIssue
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 12
+      filters:
+      - isOpen
+      - hasLabel:
+          label: needs-attention
+      - noActivitySince:
+          days: 4
+      - isIssue
+      actions:
+      - assignTo:
+          users:
+          - Meghana-MSFT
+      - assignTo:
+          users:
+          - v-chetsh
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 12
+      filters:
+      - isOpen
+      - hasLabel:
+          label: 'needs-triage :mag:'
+      - noActivitySince:
+          days: 4
+      - isIssue
+      actions:
+      - assignTo:
+          users:
+          - Meghana-MSFT
+      - assignTo:
+          users:
+          - v-chetsh
+    eventResponderTasks:
+    - if:
+      - payloadType: Issues
+      - or:
+        - isAction:
+            action: Opened
+        - isAction:
+            action: Reopened
+      - not:
+          bodyContains:
+            pattern: ^\s*$
+            isRegex: True
+      then:
+      - addLabel:
+          label: 'needs-triage :mag:'
+      - addReply:
+          reply: >-
+            Hi @${issueAuthor}! Thank you for bringing this issue to our attention. We will investigate and if we require further information we will reach out in one business day. Please use [this link](https://aka.ms/DevCommunityEscalationForm) to escalate if you don't get replies. 
+
+
+            Best regards, Teams Platform
+      description: 
+    - if:
+      - payloadType: Issues
+      - or:
+        - isAction:
+            action: Opened
+        - isAction:
+            action: Reopened
+      - or:
+        - bodyContains:
+            pattern: ^\s*$
+            isRegex: True
+      then:
+      - addReply:
+          reply: Hi @${issueAuthor}! Thanks for attempting to open an issue. Unfortunately, you didn't write anything in the body which makes it impossible to understand your concern. You are welcome to try again by opening a new issue. Best regards, Teams Platform
+      - closeIssue
+      description: 
+    - if:
+      - payloadType: Issue_Comment
+      - isAction:
+          action: Created
+      - isActivitySender:
+          issueAuthor: True
+      - hasLabel:
+          label: needs-author-feedback
+      - isOpen
+      then:
+      - addLabel:
+          label: needs-attention
+      - removeLabel:
+          label: needs-author-feedback
+      description: 
+    - if:
+      - payloadType: Issues
+      - not:
+          isAction:
+            action: Closed
+      - hasLabel:
+          label: 'status-no-recent-activity'
+      then:
+      - removeLabel:
+          label: 'status-no-recent-activity'
+      description: 
+    - if:
+      - payloadType: Issue_Comment
+      - hasLabel:
+          label: 'status-no-recent-activity'
+      then:
+      - removeLabel:
+          label: 'status-no-recent-activity'
+      description: 
+    - if:
+      - payloadType: Issues
+      - and:
+        - labelAdded:
+            label: needs-author-feedback
+        - isOpen
+      then:
+      - removeLabel:
+          label: needs attention
+      - removeLabel:
+          label: 'needs-triage :mag:'
+      description: 
+    - if:
+      - payloadType: Issues
+      - isAction:
+          action: Closed
+      then:
+      - addReply:
+          reply: "### Tell us about your experience! \n\nHi @${issueAuthor}! This issue is closed in our system. We would like your [feedback on your experience with our support team and Platform](https://aka.ms/DevSupportFeedback). \n\nBest regards, \nTeams Platform "
+      description: 
+onFailure: 
+onSuccess: 
