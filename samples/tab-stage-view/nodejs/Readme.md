@@ -126,8 +126,8 @@ Also update `BaseUrl` according to your code runtime environment.
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok-free.app
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId` received from AAD app registration in Azure portal.
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.
-   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\appManifest_Hub` folder with the required values.
-   - **Zip** up the contents of the `appManifest` folder to create a `Manifest.zip` or `appManifest_Hub` folder to create a `appManifest_Hub.zip`
+   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\Manifest_Hub` folder with the required values.
+   - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`
    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
          - From the lower left corner, choose Upload a custom App
