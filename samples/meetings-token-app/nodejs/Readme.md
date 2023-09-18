@@ -144,7 +144,7 @@ You can build and run the project from the command line or an IDE:
     - Open new terminal
     - npm run server
     - The server will start running on 3000 port
-5. Update the manifest .zip file under appPackage folder
+5. Update the manifest .zip file under appManifest folder
     - npm run manifest
 6. Now your application is running and ready to upload
 
@@ -156,7 +156,7 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
 ### Step 6: Sideload the app in a Teams desktop client
-1. Create a .zip using the below files, which are in the `appPackage` folder.
+1. Create a .zip using the below files, which are in the `appManifest` folder.
   - manifest.json
   - icon-outline.png
   - icon-color.png

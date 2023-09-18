@@ -118,7 +118,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 ## Instruction for manifest
 1. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
-2. ZIP the manifest and make sure manifest.json and two icon images are at root.
+2. ZIP the appManifest and make sure manifest.json and two icon images are at root.
 3. Upload the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 **Note**: If you are facing any issue in your app, please uncomment [this]https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/nodejs/index.js#L54) line and put your debugger for local debug.

@@ -20,7 +20,7 @@ This is a sample which shows how to save user's conversation reference informati
 
 ## Edit the manifest
 
-You can find the Teams app manifest in `templates/appPackage` folder. The folder contains a manifest template file:
+You can find the Teams app manifest in `templates/appManifest` folder. The folder contains a manifest template file:
 * `manifest.template.json`
 
 Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
