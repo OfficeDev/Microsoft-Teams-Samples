@@ -44,7 +44,7 @@
     {
       "entityId": "com.contoso.localization",
       "name": "English",
-      "contentUrl": "<<Ngrok Url>>?culture={locale}",
+      "contentUrl": "<<Tunnel Url>>?culture={locale}",
       "scopes": [
         "personal"
       ]
@@ -65,5 +65,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "*.ngrok-free.app" ]
+  "validDomains": [ "{{domain-name}}" ]
 }

@@ -40,7 +40,7 @@
   ],
   "validDomains": [
     "${{BOT_DOMAIN}}",
-    "*.ngrok-free.app"
+    "<<domain-name>>"
   ],
   "bots": [
     {

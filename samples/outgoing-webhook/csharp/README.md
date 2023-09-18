@@ -35,7 +35,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
   # determine dotnet version
   dotnet --version
   ```
-- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - Visual Studio
 
@@ -52,9 +52,9 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     - In the resulting popup window complete the required fields:
     - Name - The webhook title and @mention tap.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
-    - **Test Scenarios 1** Callback URL should be like: <ngrokurl>/api/Sample or yourappsiteurl/api/Sample
+    - **Test Scenarios 1** Callback URL should be like: <your_tunnel_URL>/api/Sample or yourappsiteurl/api/Sample
       ![Api Sample](Images/ApiSample.png)
-    - **Test Scenarios 2** Callback URL should be like: <ngrokurl>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
+    - **Test Scenarios 2** Callback URL should be like: <your_tunnel_URL>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
       ![Api Auth](Images/ApiAuthenticated.png)   
     - Description - A detailed string that will appear in the profile card and the team-level App dashboard.
     - Profile Picture (optional) an app icon for your webhook.
@@ -65,9 +65,16 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 2. Setup NGROK
  - Run ngrok - point to port 3978
 
- ```bash
-  ngrok http 3978 --host-header="localhost:3978"
- ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 

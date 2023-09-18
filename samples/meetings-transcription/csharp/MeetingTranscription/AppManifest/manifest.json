@@ -31,7 +31,7 @@
     }
   ],
   "validDomains": [
-    "*.ngrok-free.app",
+    "<<domain-name>>",
     "<<App-Domain>>"
   ],
   "permissions": [ "messageTeamMembers" ],

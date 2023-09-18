@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<yourNgrok.ngrok-free.app>/configure",
+      "configurationUrl": "https://{{domain-name}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -50,6 +50,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ]
 }
