@@ -110,7 +110,7 @@ the Teams service needs to call into the bot.
 3. Selecting the **FetchRoster** command from the Message command list. *Even though this action is being shown on the contextual menu, it's not implemented and is expected to fail.*
 ![FetchRoster](Images/FetchRoster.PNG)
 
-**Note:** Likewise you can try with all other configured commands in you app manifest.
+**Note:** Likewise you can try with all other configured commands in your app manifest.
 
 ## Deploy the bot to Azure
 

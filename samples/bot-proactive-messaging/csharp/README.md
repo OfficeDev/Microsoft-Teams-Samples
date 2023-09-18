@@ -68,7 +68,7 @@ Two samples to highlight solutions to two challenges with building proactive mes
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok-free.app/api/messages`
 
-3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok-free.app` excluding http/https.
+3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok-free.app` or dev tunnels domain: `12345.devtunnels.ms` excluding http/https.
 
 4. Zip the contents of `AppManifest` into a `manifest.zip`.
 
