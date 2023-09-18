@@ -120,6 +120,7 @@ To include resource data of graph notifications, this Graph API require self-sig
     2. Provide the tunnel url as  "BaseUrl" in appsetting on which application is running on.
     3. You should be having Base64EncodedCertificate from *Create and install Self-Signed certificate* step.
     4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
+    **Note** : ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run application by teams toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
 
   - Install node modules
 
