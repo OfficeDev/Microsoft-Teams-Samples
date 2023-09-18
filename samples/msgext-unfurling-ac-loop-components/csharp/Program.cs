@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.BotBuilderSamples;
-using Microsoft.BotBuilderSamples.Bots;
+using MsgextUnfurlingAcLoop;
+using MsgextUnfurlingAcLoop.Bots;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -12,6 +12,7 @@
       "size": "Large",
       "weight": "Bolder"
     },
+
     {
       "type": "Container",
       "items": [
@@ -30,15 +31,17 @@
       "title": "Execute!",
       "verb": "userExecute"
     },
+
     {
       "type": "Action.OpenUrl",
       "title": "Universal Actions for Adaptive Cards",
-      "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards"
+      "url": "https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards"
     },
+
     {
       "type": "Action.OpenUrl",
       "title": "Adaptive Card-based Loop components",
-      "url": "https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230"
+      "url": "https://learn.microsoft.com/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-9230"
     }
   ]
 }

@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample shows messaging extension with adaptive card-based loop components functionality."
     ],
-    "creationDateTime": "2023-08-21",
-    "updateDateTime": "2023-08-22",
+    "creationDateTime": "2023-09-08",
+    "updateDateTime": "2023-09-08",
     "products": [
       "Teams"
     ],
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "ME"
+        "value": "ME and Adaptive Card"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-unfurling-ac-loop-components/csharp/Images/msgext-unfurling-ac-loop-components.gif",
-        "alt": "Solution UX showing Adaptive Card Loop Component Using ME"
+        "alt": "Solution UX showing Adaptive Card Loop Component Using Messaging Extension"
       }
     ],
     "authors": [

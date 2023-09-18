@@ -62,8 +62,7 @@
           "value": {
             "domains": [
               "{{domain-name}}",
-              "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main",
-              "<<Your Tunnel Domain>>"
+              "*.github.com/OfficeDev/Microsoft-Teams-Samples/tree/main"
             ]
           }
         }
@@ -77,7 +76,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}",
-    "<<Your Tunnel Domain>>"
+    "{{domain-name}}"
   ]
 }

@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "09-06-2023 20:32:25"
+ createdDate: "09-08-2023 20:32:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components-csharp
 ---
 
@@ -35,7 +35,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
-- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Run the sample locally
 
@@ -61,7 +61,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - Ensure that you've [enabled the Outlook Channel](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-actionable-email?view=azure-bot-service-4.0)
+    - Ensure that you've [enabled the Outlook Channel](https://learn.microsoft.com/azure/bot-service/bot-service-channel-connect-actionable-email?view=azure-bot-service-4.0)
   ![Outlook Channel enabled](Images/OutlookChannelEnabled.png)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
@@ -73,7 +73,7 @@ the Teams service needs to call into the bot.
     ```bash
     ngrok http 3978 --host-header="localhost:3978"
     ```
-    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
@@ -182,10 +182,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Adaptive Card-based Loop components](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-en-us-9230)
-- [Build message extensions](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
-- [Azure Bot Service Introduction](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
-- [Universal Actions for Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
-- [Extend a Teams message extension across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
+- [Adaptive Card-based Loop components](https://learn.microsoft.com/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-9230)
+- [Build message extensions](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)
+- [Azure Bot Service Introduction](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
+- [Universal Actions for Adaptive Cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards)
+- [Extend a Teams message extension across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-unfurling-ac-loop-components-csharp" />

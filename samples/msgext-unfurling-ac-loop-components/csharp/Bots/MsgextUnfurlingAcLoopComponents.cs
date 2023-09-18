@@ -13,7 +13,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json;
 
-namespace Microsoft.BotBuilderSamples.Bots
+namespace MsgextUnfurlingAcLoop.Bots
 {
     public class MsgextUnfurlingAcLoopComponents : TeamsActivityHandler
     {
@@ -27,7 +27,6 @@ namespace Microsoft.BotBuilderSamples.Bots
             var paths = new[] { ".", "Resources", "adaptiveCard.json" };
             return File.ReadAllText(Path.Combine(paths));
         }
-
 
         /// <summary>
         /// Invoked when an app based link query activity is received from the connector.
@@ -49,6 +48,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 Content = result.Card, // Get card from result
                 ContentType = AdaptiveCard.ContentType
             };
+
             return Task.FromResult(new MessagingExtensionResponse
             {
                 ComposeExtension = new MessagingExtensionResult
@@ -69,7 +69,6 @@ namespace Microsoft.BotBuilderSamples.Bots
             });
         }
 
-
         /// <summary>
         ///  Invoked when an invoke activity is received from the connector.
         /// </summary>
@@ -78,7 +77,6 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext,AdaptiveCardInvokeValue adaptiveCardInvokeValue,  CancellationToken cancellationToken)
         {
-
             if (turnContext.Activity.Name == "adaptiveCard/action")
             {
                 var paths = new[] { ".", "Resources", "adaptiveCardSuccess.json" };
@@ -92,10 +90,10 @@ namespace Microsoft.BotBuilderSamples.Bots
 
                 return adaptiveCardResponse;
             }
+
             return null;
 
         }
-
 
         /// <summary>
         /// Handle when the user is searching in the messaging extension query.
