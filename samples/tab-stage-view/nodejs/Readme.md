@@ -121,7 +121,7 @@ Also update `BaseUrl` according to your code runtime environment.
 - Setup Manifest for Teams
 4) **This step is specific to Teams.**
 
-   -  Edit the `manifest.json` in the `Manifest` folder and replace the following details:
+   -  Edit the `manifest.json` in the `appManifest` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID or `MicrosoftAppId`
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok-free.app
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId` received from AAD app registration in Azure portal.
@@ -131,7 +131,7 @@ Also update `BaseUrl` according to your code runtime environment.
    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
          - From the lower left corner, choose Upload a custom App
-         - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+         - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
