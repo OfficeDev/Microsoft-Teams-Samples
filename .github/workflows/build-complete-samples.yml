@@ -440,7 +440,7 @@ jobs:
               name: 'meetings-app-icon-badging'
               version: '6.0.x'
 
-            - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/TeamsMsgextUnfurlingAcLoopComponents.csproj'
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/MsgextUnfurlingAcLoop.csproj'
               name: 'msgext-unfurling-ac-loop-components'
               version: '6.0.x'
 
