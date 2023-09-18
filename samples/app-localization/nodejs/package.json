@@ -12,7 +12,7 @@
     "build": "npm install && cd client && npm install && npm run build",
     "server": "npm install && cd client && npm install && npm run build && cd ../ && nodemon server/index.js",
     "client": "cd client && npm install && npm run start",
-    "manifest": "del \"appPackage\\appPackage.zip\" 2> nul && powershell Compress-Archive appPackage/* appPackage/appPackage.zip"
+    "manifest": "del \"appManifest\\appManifest.zip\" 2> nul && powershell Compress-Archive appManifest/* appManifest/appManifest.zip"
   },
   "keywords": [],
   "author": "Microsoft",

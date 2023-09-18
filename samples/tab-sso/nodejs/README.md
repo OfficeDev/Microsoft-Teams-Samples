@@ -110,7 +110,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
     * Replace `{your_tunnel_domain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
     * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{your_tunnel_domain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\Manifest_Hub` folder with the required values.
-    **Zip** up the contents of the `appManifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 2. Update your `config/default.json` file
     * Replace the `tab.appId` property with you Azure AD application ID

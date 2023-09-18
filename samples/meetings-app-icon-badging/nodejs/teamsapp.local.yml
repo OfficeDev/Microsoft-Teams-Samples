@@ -48,7 +48,7 @@ provision:
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./appPacappManifestkage/manifest.json
+      manifestPath: ./appManifest/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage

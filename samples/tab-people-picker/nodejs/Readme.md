@@ -92,11 +92,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - **This step is specific to Teams.**
 
-    -  Edit the `manifest.json` contained in the `Manifest` folder to replace {{Manifest-id}} with any GUID
+    -  Edit the `manifest.json` contained in the `appManifest` folder to replace {{Manifest-id}} with any GUID
     - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`. Replace *everywhere* you see the place holder string `{{base-url}}`
        Note => Update `validDomains` as per your application domain, if needed.
 
-    -  Zip up the contents of the `Manifest` folder to create a `manifest.zip`
+    -  Zip up the contents of the `appManifest` folder to create a `manifest.zip`
     -  Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
