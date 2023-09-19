@@ -10,7 +10,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "05/15/2023 01:00:00 PM"
+ createdDate: "09/19/2023 01:00:00 PM"
 urlFragment: officedev-microsoft-teams-samples-multiple-capability-discounts-ts
 ---
 
@@ -50,7 +50,7 @@ Interaction with the tab:
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 - Microsoft Office for Windows
 
-    **Note:** As of 6/20/2023, the add-in capability in a Teams app is only supported on Windows computers.
+    **Note:** The add-in capability in a Teams app is only supported on Windows computers.
 
 - Your Microsoft 365 account has been added as an account in desktop Outlook. See [Add an email account to Outlook](https://support.microsoft.com/office/add-an-email-account-to-outlook-e9da47c4-9b89-4b49-b945-a204aeea6726)
 - [Mockoon](https://mockoon.com/) or another database that can accept HTTP GET and POST requests with JSON payloads.
@@ -161,7 +161,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 4. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365.
 5. Select **View** | **Run** in Visual Studio Code. In the **RUN AND DEBUG** drop down menu, select the option **Launch App and Add-in Outlook Desktop (Edge Chromium)** and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
 
-   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see [Upload your app in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
+   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see [Upload your app in Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
    - Outlook desktop opens.
 
 6. In the Teams prompt, select **Add** and the tab will open.
@@ -178,4 +178,8 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
 ## Further Reading
 
-[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-add-in-combined-nodejs" />

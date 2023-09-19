@@ -41,9 +41,23 @@ deploy:
       sslCertFile: SSL_CRT_FILE
       sslKeyFile: SSL_KEY_FILE
 
-  - uses: cli/runNpmCommand # Run npm command
+   # Run npm command
+  - uses: cli/runNpmCommand
     with:
-      args: run install:tab --no-audit
+      workingDirectory: .
+      args: install --no-audit
+
+   # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./tab
+      args: install --no-audit
+
+   # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./add-in
+      args: install --no-audit
 
   - uses: file/createOrUpdateEnvironmentFile # Generate runtime environment variables
     with:

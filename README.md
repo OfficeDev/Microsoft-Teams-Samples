@@ -191,7 +191,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |31|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |32|App Icon Badging In Microsoft Teams Meetings|This sample app shows the feature of sending app icon badging in Teams' meetings.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |33|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
-|34|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts]|[View][/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip]|
+|34|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png) |
 
 
 ## Application templates
