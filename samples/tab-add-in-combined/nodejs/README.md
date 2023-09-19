@@ -71,6 +71,19 @@ Interaction with the tab:
     ```bash
     npm install
     ```
+   - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/add-in`.
+   - Install modules:
+
+    ```bash
+    npm install
+    ```
+
+    - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/tab`.
+    - Install modules:
+
+    ```bash
+    npm install
+    ```
 
 2. Install a mock customer relations management (CRM) system.
 
