@@ -21,7 +21,7 @@ provision:
       templates:
         - path: ./infra/azure.bicep # Relative path to this file
           parameters: ./infra/azure.parameters.json # Relative path to this file. Placeholders will be replaced with corresponding environment variable before ARM deployment.
-          deploymentName: Create-resources-for-tab # Required when deploy ARM template
+          deploymentName: discounts # Required when deploy ARM template
       bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
 
   - uses: azureStorage/enableStaticWebsite
@@ -30,9 +30,9 @@ provision:
       indexPage: index.html
       errorPage: error.html
 
- # - uses: teamsApp/validateManifest # Validate using manifest schema
- #   with:
- #     manifestPath: ./appManifest/manifest.json # Path to manifest template
+  # - uses: teamsApp/validateManifest # Validate using manifest schema
+  #   with:
+  #     manifestPath: ./appManifest/manifest.json # Path to manifest template
   - uses: teamsApp/zipAppPackage # Build Teams app package with latest env value
     with:
       manifestPath: ./appManifest/manifest.json # Path to manifest template
@@ -66,9 +66,9 @@ deploy:
 
 # Triggered when 'teamsfx publish' is executed
 publish:
- # - uses: teamsApp/validateManifest # Validate using manifest schema
- #   with:
- #     manifestPath: ./appManifest/manifest.json # Path to manifest template
+  # - uses: teamsApp/validateManifest # Validate using manifest schema
+  #   with:
+  #     manifestPath: ./appManifest/manifest.json # Path to manifest template
   - uses: teamsApp/zipAppPackage
     with:
       manifestPath: ./appManifest/manifest.json # Path to manifest template
@@ -86,4 +86,4 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: fb0e75ee-c570-4d6f-a8b2-2f025fc6cfd6
+projectId: f46e7920-552b-4b85-a1bf-15488ff5abdd
