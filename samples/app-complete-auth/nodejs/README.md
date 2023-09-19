@@ -190,7 +190,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be `12345.ngrok-free.app` when you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\nodejs` folder with the required values.
-2. Zip the contents of the `appManifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+
+2. Zip the contents of the `appManifest` folder to create a `manifest.zip` or `appManifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps

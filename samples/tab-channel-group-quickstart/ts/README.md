@@ -90,9 +90,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")```
     
 
