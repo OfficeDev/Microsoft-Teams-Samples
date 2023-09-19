@@ -59,6 +59,13 @@ module.exports = async (env, options) => {
         },
       ],
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: "taskpane.html",
+        template: "./src/taskpane/taskpane.html",
+        chunks: ["polyfill", "vendor", "taskpane"],
+      }),
+    ],
     devServer: {
       headers: {
         "Access-Control-Allow-Origin": "*",
