@@ -61,7 +61,6 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-        "${{ADDIN_DOMAIN}}",
         "${{TAB_DOMAIN}}"
     ],
     "extensions": [
