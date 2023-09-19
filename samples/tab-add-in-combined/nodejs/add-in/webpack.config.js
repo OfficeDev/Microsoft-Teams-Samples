@@ -59,30 +59,6 @@ module.exports = async (env, options) => {
         },
       ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        filename: "taskpane.html",
-        template: "./src/taskpane/taskpane.html",
-        chunks: ["polyfill", "vendor", "taskpane"],
-      }),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: "appManifest/assets/*",
-            to: "assets/[name][ext][query]",
-          },
-          {
-            transform(content) {
-              if (dev) {
-                return content;
-              } else {
-                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
-              }
-            },
-          },
-        ],
-      }),
-    ],
     devServer: {
       headers: {
         "Access-Control-Allow-Origin": "*",
