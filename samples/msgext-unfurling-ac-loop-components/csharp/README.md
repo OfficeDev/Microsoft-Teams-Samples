@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "09-08-2023 20:32:25"
+ createdDate: "09-20-2023 20:32:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-components-csharp
 ---
 
@@ -90,7 +90,7 @@ the Teams service needs to call into the bot.
    - Launch Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to `samples/msgext-unfurling-ac-loop-components/csharp` folder
-   - Select `TeamsMsgextUnfurlingAcLoopComponents.csproj` or `TeamsMsgextUnfurlingAcLoopComponents.sln`file
+   - Select `MsgextUnfurlingAcLoop.csproj` or `MsgextUnfurlingAcLoop.sln`file
 
 1)  Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Type}}` -  (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
