@@ -57,6 +57,7 @@ class MainDialog extends ComponentDialog {
                 const card = CardFactory.heroCard('Login options', undefined,
                     buttons,{"text":"Select a login option"});
                 await stepContext.context.sendActivity({ attachments: [card] });
+                
                 return await stepContext.endDialog();
             }
         } catch (err) {

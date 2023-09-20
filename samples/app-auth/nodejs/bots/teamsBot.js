@@ -32,12 +32,13 @@ class TeamsBot extends DialogBot {
         });
     }
 
+    // Handle token exchange
     async handleTeamsSigninTokenExchange(context, query) {
         console.log('Running dialog with signin/tokenExchange from an Invoke Activity.');
         await this.dialog.run(context, this.dialogState);
     }
 
-
+    // Verify signin state from invoke activity
     async handleTeamsSigninVerifyState(context, query) {
         console.log('Running dialog with signin/verifystate from an Invoke Activity.');
         await this.dialog.run(context, this.dialogState);

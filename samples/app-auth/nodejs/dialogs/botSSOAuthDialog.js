@@ -22,12 +22,14 @@ class BotSSOAuthDialog extends LogoutDialog {
             title: 'Sign In',
             timeout: 300000
         }));
+
         this.addDialog(new TextPrompt(TEXT_PROMPT));
         this.addDialog(new WaterfallDialog(SSOAUTH, [
             this.promptStep.bind(this),
             this.loginStep.bind(this),
             this.userInfoStep.bind(this)
         ]));
+
         this.initialDialogId = SSOAUTH;
     }
 
@@ -51,6 +53,7 @@ class BotSSOAuthDialog extends LogoutDialog {
                 await stepContext.context.sendActivity('Login successful.');
                 return await stepContext.prompt(TEXT_PROMPT, { prompt: msg });
             }
+
             await stepContext.context.sendActivity("Please type 'sso' to begin authentication");
 
             return await stepContext.endDialog();
@@ -75,6 +78,7 @@ class BotSSOAuthDialog extends LogoutDialog {
             const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(myDetails, img2,userName));
             await stepContext.context.sendActivity({ attachments: [userCard] });
         }
+        
         return await stepContext.endDialog();
     }
 

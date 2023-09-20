@@ -68,6 +68,7 @@
                 upn = context.user.userPrincipalName;
                 let cachedAccounts = msalInstance.getAllAccounts();
                 let accountInfo = cachedAccounts.filter(account => account.username === upn);
+
                 if (accountInfo.length > 0) {
                     const silentRequest = {
                         account: accountInfo[0]
@@ -95,8 +96,6 @@
                 }
             });
         });
-
-
 
         // To get an access token to a resource like Graph,
         // 1. Provide the resource id to acquireToken()
@@ -243,6 +242,7 @@
                         v = s[1] && decodeURIComponent(s[1]);
                     queryParams[k] = v;
                 });
+
                 return queryParams;
             }
 
@@ -253,10 +253,12 @@
                 let queryParams = getQueryParameters();
                 delete queryParams["loginHint"];
                 queryParams["userObjectId"] = "00000000-0000-0000-000000000000";
+                
                 for (var k in queryParams) {
                     url = url + k + "=" + encodeURIComponent(queryParams[k]) + "&";
                     console.log(k);
                 }
+
                 location.href = url;
             }
     </script>

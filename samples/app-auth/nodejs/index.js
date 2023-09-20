@@ -156,6 +156,7 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
     }).then(async result => {
       const client = new SimpleGraphClient(result.accessToken);
       const myDetails = await client.getMeAsync();
+      
       try {
         var userImage = await client.getUserPhoto()
         await userImage.arrayBuffer().then(result => {
@@ -191,6 +192,7 @@ server.post('/decodedToken', async (req, res) => {
   var idToken = req.body.idToken;
   const decodedToken = jwt.decode(idToken, { complete: true });
     var responseMessage = Promise.resolve(decodedToken.payload);
+
     responseMessage.then(function (result) {
       res.json(result);
       console.log(result);

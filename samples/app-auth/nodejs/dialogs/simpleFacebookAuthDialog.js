@@ -21,7 +21,9 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
             title: 'Log In',
             timeout: 300000
         }));
+        
         this.addDialog(new TextPrompt(TEXT_PROMPT));
+
         this.addDialog(new WaterfallDialog(FACEBOOKAUTH, [
             this.promptStep.bind(this),
             this.loginStep.bind(this),
@@ -54,6 +56,7 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
  async userInfoStep(stepContext) {
    const userName = stepContext.result
    var facbookProfile = await this.getFacebookUserData(token);
+
         const profileCard = CardFactory.adaptiveCard({
             version: '1.0.0',
             type: 'AdaptiveCard',
@@ -73,6 +76,7 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
                 },
             ],
         });
+
     await stepContext.context.sendActivity({attachments:[profileCard]});
 
     return await stepContext.endDialog();
