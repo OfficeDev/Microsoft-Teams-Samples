@@ -118,13 +118,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  
 4) Setup Manifest for Teams
 
-- Modify the `manifest.json` file placed in `/teamsAppManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing AAD app registration in your Azure Portal.
+- Modify the `manifest.json` file placed in `/appManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing AAD app registration in your Azure Portal.
     - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `teamsAppManifest`.
+         - Then select the `manifest.zip` file from `appManifest`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/nodejs/index.js#L45) line and put your debugger for local debug.

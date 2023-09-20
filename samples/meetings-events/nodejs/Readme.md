@@ -122,15 +122,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 4) Setup Manifest for Teams (**This step is specific to Teams.**)
 
-- Modify the `manifest.json` in the `/appPackage` folder and replace the following details
+- Modify the `manifest.json` in the `/appManifest` folder and replace the following details
    - `<<App-ID>>` with your AAD app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`.
+         - Then select the `manifest.zip` file from `appManifest`.
 
 - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
