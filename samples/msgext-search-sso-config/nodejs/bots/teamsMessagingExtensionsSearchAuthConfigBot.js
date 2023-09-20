@@ -166,7 +166,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'silentAuth',
+                        type: 'auth',
                         suggestedActions: {
                             actions: [
                                 {
@@ -250,7 +250,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'silentAuth',
+                        type: 'auth',
                         suggestedActions: {
                             actions: [
                                 {

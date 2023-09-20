@@ -3,7 +3,7 @@
     "appId": "${{AAD_APP_CLIENT_ID}}",
     "name": "msgext-search-sso-config-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADandPersonalMicrosoftAccount",
+    "signInAudience": "AzureADMultipleOrgs",
     "oauth2AllowIdTokenImplicitFlow": true,
 	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {
@@ -24,6 +24,30 @@
             "resourceAccess": [
                 {
                     "id": "User.Read",
+                    "type": "Scope"
+                },
+                {
+                    "id": "AccessReview.ReadWrite.All",
+                    "type": "Scope"
+                },
+                {
+                    "id": "Mail.Read",
+                    "type": "Scope"
+                },
+                {
+                    "id": "Mail.Send",
+                    "type": "Scope"
+                },
+                {
+                    "id": "openid",
+                    "type": "Scope"
+                },
+                {
+                    "id": "profile",
+                    "type": "Scope"
+                },
+                {
+                    "id": "User.ReadBasic.All",
                     "type": "Scope"
                 }
             ]
