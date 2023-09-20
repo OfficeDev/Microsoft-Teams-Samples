@@ -106,7 +106,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] ![toolkit-icon](assets/toolkit-icon.png) |
 |7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]|[View](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
-|9|Messaging extension - Adaptive Card based loop components | Demonstrates how to create Messaging extension with adaptive card-based loop components. |     | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
+|9|Messaging extension - Adaptive Card based loop components | Demonstrates how to create Messaging extension with adaptive card-based loop components. | [View][msgext-unfurling-ac-loop-components#cs]    | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |   |    |[View](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
 |10|Messaging Extensions AI - Sentiment Analysis | Messaging Extension with AI capability that performs sentiment analysis (positive/negative/neutral) for messages posted in Microsoft Teams chat | | [View][msgext-ai-sentiment-analysis#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
 
 #### Additional samples
@@ -276,6 +276,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-quickstart#js]:samples/msgext-search-quickstart/js
 [msgext-search-sso-config#js]:samples/msgext-search-sso-config
 [msgext-unfurling-ac-loop-components#nodejs]:samples/msgext-unfurling-ac-loop-components/nodejs
+[msgext-unfurling-ac-loop-components#cs]:samples/msgext-unfurling-ac-loop-components/csharp
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
