@@ -78,9 +78,7 @@ To be able to use an identity provider, first you have to register your applicat
 
 ### Changing app settings
 
-This project uses the [config](https://www.npmjs.com/package/config) package. The default configuration is in `config\default.json`.
-
--   Environment variable overrides are defined in `.env`. You can set these environment variables when running node.
+-   Environment variable overrides are defined in `app-auth\nodejs\.env`. You can set these environment variables when running node.
 
 The instructions below assume that you're using environment variables to configure the app, and will specify the name of the variable to set.
 
@@ -131,9 +129,17 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 
 14. The bot uses `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD`, so these should already be set.
 
+### Setup Facebook authentication
+15. To test facebook auth flow [create a facebookapp](FacebookDocumentation/README.md) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
+   - Select service provider ad `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16.
+   - For scopes, add `email public_profile`
+
 ### Update your Microsoft Teams application manifest
 
-15. Add new properties to your Microsoft Teams manifest:
+16. Add new properties to your Microsoft Teams manifest:
 
     - **WebApplicationInfo** - The parent of the following elements.
     - **Id** - The client ID of the application. This is an application ID that you obtain as part of registering the application with Azure AD 1.0 endpoint.
@@ -146,7 +152,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
     }
     ```
 
-16. Add permissions and update validDomains to allow token endpoint used by bot framework. Teams will only show the sign-in popup if its from a whitelisted domain.
+17. Add permissions and update validDomains to allow token endpoint used by bot framework. Teams will only show the sign-in popup if its from a whitelisted domain.
 
     ```json
     "permissions": [
