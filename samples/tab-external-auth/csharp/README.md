@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "16/08/2023 11:20:17 AM"
+ createdDate: "24/08/2023 11:20:17 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-external-auth-csharp
 ---
 # Tab external auth - C#

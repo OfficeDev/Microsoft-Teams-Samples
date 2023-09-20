@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample illustrates how to implement Google authentication using external auth providers (C#)."
     ],
-    "creationDateTime": "2023-08-16",
-    "updateDateTime": "2023-08-16",
+    "creationDateTime": "2023-08-24",
+    "updateDateTime": "2023-09-20",
     "products": [
       "Teams"
     ],
