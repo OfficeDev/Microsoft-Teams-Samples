@@ -76,10 +76,23 @@ provision:
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
 deploy:
-  # Run npm command
+ # Run npm command for client
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./client
+      args: install --no-audit
+
+  # Run npm command for server
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit
+
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: client/.env # Required. The relative path of settings file
+      envs: 
+        port: 3978 
+        
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
     with:
