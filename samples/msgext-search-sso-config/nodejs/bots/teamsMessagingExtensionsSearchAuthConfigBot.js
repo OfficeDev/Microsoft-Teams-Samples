@@ -48,23 +48,24 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
     // Overloaded function. Receives invoke activities with Activity name of 'composeExtension/queryLink'
     async handleTeamsAppBasedLinkQuery(context, query) {
-        const magicCode =
-            query.state && Number.isInteger(Number(query.state))
-                ? query.state
-                : '';
-        const tokenResponse = await context.adapter.getUserToken(
-            context,
-            this.connectionName,
-            magicCode
-        );
+        const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.connectionName,
+                magicCode
+            );
 
         if (!tokenResponse || !tokenResponse.token) {
             // There is no token, so the user has not signed in yet.
-
             // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-            const signInLink = await context.adapter.getSignInLink(
-                context,
-                this.connectionName
+            const { signInLink } = await userTokenClient.getSignInResource(
+                this.connectionName,
+                context.activity
             );
 
             return {
@@ -145,23 +146,24 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
         if (!userSettings || userSettings.includes('profile')) {
             // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =
-                query.state && Number.isInteger(Number(query.state))
-                    ? query.state
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
                     : '';
-            const tokenResponse = await context.adapter.getUserToken(
-                context,
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
                 this.connectionName,
                 magicCode
             );
 
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
-
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                const signInLink = await context.adapter.getSignInLink(
-                    context,
-                    this.connectionName
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
                 );
 
                 return {
@@ -229,12 +231,14 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     // Overloaded function. Receives invoke activities with the name 'composeExtension/fetchTask'
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         if (action.commandId === 'SHOWPROFILE') {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =
-                action.state && Number.isInteger(Number(action.state))
-                    ? action.state
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
                     : '';
-            const tokenResponse = await context.adapter.getUserToken(
-                context,
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
                 this.connectionName,
                 magicCode
             );
@@ -242,10 +246,9 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-
-                const signInLink = await context.adapter.getSignInLink(
-                    context,
-                    this.connectionName
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
                 );
 
                 return {
