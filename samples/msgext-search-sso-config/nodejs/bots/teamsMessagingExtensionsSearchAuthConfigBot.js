@@ -5,7 +5,8 @@ const {
     TeamsActivityHandler,
     CardFactory,
     ActionTypes,
-    ActivityHandler
+    ActivityHandler,
+    ActivityTypes
 } = require('botbuilder');
 
 const {
@@ -70,7 +71,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
             return {
                 composeExtension: {
-                    type: 'auth',
+                    type: 'silentAuth',
                     suggestedActions: {
                         actions: [
                             {
@@ -168,7 +169,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         suggestedActions: {
                             actions: [
                                 {
@@ -253,7 +254,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         suggestedActions: {
                             actions: [
                                 {
@@ -384,7 +385,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return ActivityHandler.createInvokeResponse({
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         attachmentLayout: 'list',
                         attachments: [
                             attachment
@@ -400,24 +401,36 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     async tokenIsExchangeable(context) {
         let tokenExchangeResponse = null;
         try {
+            const userId = context.activity.from.id;
             const valueObj = context.activity.value;
             const tokenExchangeRequest = valueObj.authentication;
             console.log("tokenExchangeRequest.token: " + tokenExchangeRequest.token);
 
-            tokenExchangeResponse = await context.adapter.exchangeToken(context,
-                process.env.connectionName,
-                context.activity.from.id,
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+
+            tokenExchangeResponse = await userTokenClient.exchangeToken(
+                userId,
+                this.connectionName,
+                context.activity.channelId,
                 { token: tokenExchangeRequest.token });
+
             console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
-        } catch (err) {
+        } 
+        catch (err) 
+        {
             console.log('tokenExchange error: ' + err);
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }
-        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
+        if (!tokenExchangeResponse || !tokenExchangeResponse.token)
+        {
             return false;
         }
-
+        else {
+            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
+            context.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
+            context.turnState.tokenResponse = tokenExchangeResponse;
+        }
         console.log('Exchanged token: ' + tokenExchangeResponse.token);
         return true;
     }
