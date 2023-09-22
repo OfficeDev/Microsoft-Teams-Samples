@@ -1,4 +1,4 @@
-﻿// <copyright file="SimpleGraphClient.cs" company="Microsoft">
+// <copyright file="SimpleGraphClient.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
@@ -8,7 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Azure.Identity;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Identity.Client;
+using Azure.Core;
+using System.Threading;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -28,65 +34,65 @@ namespace Microsoft.BotBuilderSamples
             _token = token;
         }
 
-        // Sends an email on the users behalf using the Microsoft Graph API
-        public async Task SendMailAsync(string toAddress, string subject, string content)
+		// Sends an email on the users behalf using the Microsoft Graph API
+		public async Task SendMailAsync(string toAddress, string subject, string content)
+		{
+			if (string.IsNullOrWhiteSpace(toAddress))
+			{
+				throw new ArgumentNullException(nameof(toAddress));
+			}
+
+			if (string.IsNullOrWhiteSpace(subject))
+			{
+				throw new ArgumentNullException(nameof(subject));
+			}
+
+			if (string.IsNullOrWhiteSpace(content))
+			{
+				throw new ArgumentNullException(nameof(content));
+			}
+
+			var graphClient = GetAuthenticatedClient();
+			var recipients = new List<Recipient>
+			{
+				new Recipient
+				{
+					EmailAddress = new EmailAddress
+					{
+						Address = toAddress,
+					},
+				},
+			};
+
+			// Create the message.
+			var email = new Message
+			{
+				Body = new ItemBody
+				{
+					Content = content,
+					ContentType = BodyType.Text,
+				},
+				Subject = subject,
+				ToRecipients = recipients,
+			};
+
+			// Send the message.
+			await graphClient.Me.SendMail.PostAsync(new Graph.Me.SendMail.SendMailPostRequestBody() { Message = email, SaveToSentItems = true});
+		}
+
+		// Gets mail for the user using the Microsoft Graph API
+		public async Task<Message[]> GetRecentMailAsync()
+		{
+			var graphClient = GetAuthenticatedClient();
+			var messages = await graphClient.Me.Messages.GetAsync();
+			return messages.Value.Take(5).ToArray();
+		}
+
+		// Get information about the user.
+		public async Task<User> GetMeAsync()
         {
-            if (string.IsNullOrWhiteSpace(toAddress))
-            {
-                throw new ArgumentNullException(nameof(toAddress));
-            }
-
-            if (string.IsNullOrWhiteSpace(subject))
-            {
-                throw new ArgumentNullException(nameof(subject));
-            }
-
-            if (string.IsNullOrWhiteSpace(content))
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
             var graphClient = GetAuthenticatedClient();
-            var recipients = new List<Recipient>
-            {
-                new Recipient
-                {
-                    EmailAddress = new EmailAddress
-                    {
-                        Address = toAddress,
-                    },
-                },
-            };
-
-            // Create the message.
-            var email = new Message
-            {
-                Body = new ItemBody
-                {
-                    Content = content,
-                    ContentType = BodyType.Text,
-                },
-                Subject = subject,
-                ToRecipients = recipients,
-            };
-
-            // Send the message.
-            await graphClient.Me.SendMail(email, true).Request().PostAsync();
-        }
-
-        // Gets mail for the user using the Microsoft Graph API
-        public async Task<Message[]> GetRecentMailAsync()
-        {
-            var graphClient = GetAuthenticatedClient();
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request().GetAsync();
-            return messages.Take(5).ToArray();
-        }
-
-        // Get information about the user.
-        public async Task<User> GetMeAsync()
-        {
-            var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync();
+            var me = await graphClient.Me.GetAsync();
             return me;
         }
 
@@ -94,7 +100,7 @@ namespace Microsoft.BotBuilderSamples
         public async Task<string> GetPhotoAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var photo = await graphClient.Me.Photo.Content.Request().GetAsync();
+            var photo = await graphClient.Me.Photo.Content.GetAsync();
             if (photo != null)
             {
                 MemoryStream ms = new MemoryStream();
@@ -112,20 +118,27 @@ namespace Microsoft.BotBuilderSamples
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-
+			var authenticationProvider = new BaseBearerTokenAuthenticationProvider(new TokenProvider(_token));
+			var graphClient = new GraphServiceClient(authenticationProvider);
             return graphClient;
         }
     }
+
+	public class TokenProvider : IAccessTokenProvider
+	{
+		readonly string _token;
+
+		public TokenProvider(string token)
+		{
+			_token = token;
+        }
+        public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> additionalAuthenticationContext = default,
+			CancellationToken cancellationToken = default)
+		{
+			return Task.FromResult(_token);
+		}
+
+		public AllowedHostsValidator AllowedHostsValidator { get; }
+	}
 }
