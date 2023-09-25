@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards."
     ],
-    "creationDateTime": "2023-09-01",
-    "updateDateTime": "2023-09-01",
+    "creationDateTime": "2023-09-25",
+    "updateDateTime": "2023-09-25",
     "products": [
       "Teams"
     ],
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }
