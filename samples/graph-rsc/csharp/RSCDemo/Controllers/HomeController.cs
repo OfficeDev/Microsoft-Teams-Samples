@@ -1,18 +1,14 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using RSCWithGraphAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +17,8 @@ namespace RSCWithGraphAPI.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
+
+        public string appId;
 
         public HomeController(IConfiguration configuration)
         {
@@ -106,7 +104,7 @@ namespace RSCWithGraphAPI.Controllers
 
         [HttpPost]
         [Route("GetInstalledAppList")]
-        public async Task<string> GetInstalledAppList(string reciepientUserId)
+        public async Task<JsonResult> GetInstalledAppList(string reciepientUserId)
         {
             // Replace with your Graph API endpoint and access token
             string graphApiEndpoint = $"https://graph.microsoft.com/v1.0/users/{reciepientUserId}/teamwork/installedApps/?$expand=teamsAppDefinition";
@@ -133,24 +131,47 @@ namespace RSCWithGraphAPI.Controllers
                         // Read and display the response content
                         string responseBody = await response.Content.ReadAsStringAsync();
 
-                        var jboject = JsonConvert.DeserializeObject<ResponseData>(responseBody);
-                        await SendNotification(reciepientUserId, jboject.Value.ToString());
-                        return "Message sent successfully";
+                        var responseData = JsonConvert.DeserializeObject<ResponseData>(responseBody);
+                        var installedAppList = responseData.Value;
+
+                        foreach(AppData element in installedAppList)
+                        {
+                            if (element.TeamsAppDefinition.DisplayName == "RSC feed")
+                            {
+                                appId = element.Id;
+                            }
+                        };
+
+                        if(appId != null)
+                        {
+                            await SendNotification(reciepientUserId, appId);
+                            return Json("Message sent successfully");
+                        }
+                        else
+                        {
+                            return Json("App not installed for the user");
+                        }
                     }
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return "Message not sent successfully";
+                        return Json("Error occured");
                     }
                 }
                 catch (Exception ex)
                 {          
                     Console.WriteLine($"Error: {ex.Message}");
-                    return "Error occured"+ ex.Message;
+                    return Json("Error occured"+ ex.Message);
                 }
             }
         }
 
+        /// <summary>
+        /// Send activity feed notification to user.
+        /// </summary>
+        /// <param name="reciepientUserId"> Id of the user whom notification is to be sent</param>
+        /// <param name="appId">App id for rsc app.</param>
+        /// <returns></returns>
         public async Task<string> SendNotification(string reciepientUserId, string appId)
         {
 
@@ -198,13 +219,13 @@ namespace RSCWithGraphAPI.Controllers
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return "false";
+                        return "Notification sent";
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Exception: {ex.Message}");
-                    return "false";
+                    return "Notification failed";
                 }
             }
         }
@@ -214,7 +235,6 @@ namespace RSCWithGraphAPI.Controllers
         /// </summary>
         /// <param name="tenantId"></param>
         /// <returns></returns>
-        [HttpGet]
         public async Task<string> GetToken()
         {
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(_configuration["ClientId"])

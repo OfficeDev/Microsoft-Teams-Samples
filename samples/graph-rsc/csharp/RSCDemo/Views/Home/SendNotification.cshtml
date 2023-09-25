@@ -9,6 +9,7 @@
     <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
 <script>
 
+    // Select the reciepient for activity feed notifications
     function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
         microsoftTeams.app.initialize();
         microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
@@ -19,6 +20,7 @@
         });
     }
 
+    // Get installed app list and send activity feed notification to the user
     function getInstalledAppList(reciepientUserId) {
 
         $.ajax({
@@ -30,10 +32,11 @@
             },
             success: function (responseJson) {
                 console.log("Message send successfully");
+                document.getElementById("message-status").innerHTML = "Message sent successfully";
             },
             error: function (xhr, textStatus, errorThrown) {
-                alert("failed");
                 console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                document.getElementById("message-status").innerHTML = "textStatus: " + textStatus + ", errorThrown:" + errorThrown;
             }
         });
     }
@@ -46,5 +49,6 @@
         <p id="rsclist"></p>
         <br />
         <Button data-id="singleSelect" onclick="selectPeople(event,[],false,true)"> Select </Button>
+        <div id="message-status"></div>
     </div>
 </body>
