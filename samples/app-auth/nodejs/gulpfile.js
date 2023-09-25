@@ -84,7 +84,7 @@ gulp.task('rebuild', gulp.series('clean', gulp.parallel('ts:lint', 'ts', 'static
  * Build manifest
  */
 gulp.task('generate-manifest', function() {
-    gulp.src(['./manifest/*.png', 'manifest/manifest.json'])
+    gulp.src(['./appManifest/*.png', 'appManifest/manifest.json'])
         .pipe(zip('AuthBot.zip'))
         .pipe(gulp.dest('manifest'));
 });
