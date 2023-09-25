@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RSCWithGraphAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RSCWithGraphAPI.Controllers
@@ -44,6 +51,15 @@ namespace RSCWithGraphAPI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Send Notification Tab
+        /// </summary>
+        [Route("SendNotification")]
+        public IActionResult SendNotification()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -71,7 +87,7 @@ namespace RSCWithGraphAPI.Controllers
         /// </summary>
         private async Task<GraphServiceClient> GetAuthenticatedClient(string tenantId)
         {
-            var accessToken = await GetToken(tenantId);
+            var accessToken = await GetToken();
             var graphClient = new GraphServiceClient(
                 new DelegateAuthenticationProvider(
                     requestMessage =>
@@ -88,17 +104,122 @@ namespace RSCWithGraphAPI.Controllers
             return graphClient;
         }
 
+        [HttpPost]
+        [Route("GetInstalledAppList")]
+        public async Task<string> GetInstalledAppList(string reciepientUserId)
+        {
+            // Replace with your Graph API endpoint and access token
+            string graphApiEndpoint = $"https://graph.microsoft.com/v1.0/users/{reciepientUserId}/teamwork/installedApps/?$expand=teamsAppDefinition";
+
+            var accessToken = await GetToken();
+
+            // Create an HttpClient instance
+            using (HttpClient client = new HttpClient())
+            {
+                // Set the base address for the Graph API
+                client.BaseAddress = new Uri(graphApiEndpoint);
+
+                // Set the authorization header with the access token
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                try
+                {
+                    // Make a GET request to retrieve user data
+                    HttpResponseMessage response = await client.GetAsync(graphApiEndpoint);
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read and display the response content
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        var jboject = JsonConvert.DeserializeObject<ResponseData>(responseBody);
+                        await SendNotification(reciepientUserId, jboject.Value.ToString());
+                        return "Message sent successfully";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode}");
+                        return "Message not sent successfully";
+                    }
+                }
+                catch (Exception ex)
+                {          
+                    Console.WriteLine($"Error: {ex.Message}");
+                    return "Error occured"+ ex.Message;
+                }
+            }
+        }
+
+        public async Task<string> SendNotification(string reciepientUserId, string appId)
+        {
+
+            // Set your Graph API endpoint and access token
+            string graphApiEndpoint = $"https://graph.microsoft.com/beta/users/{reciepientUserId}/teamwork/sendActivityNotification";
+
+            var accessToken = await GetToken();
+
+            // Create a JSON payload for the activity feed notification
+            string jsonPayload = @"{
+            ""topic"": {
+                ""source"": ""entityUrl"",
+                ""value"": ""https://graph.microsoft.com/beta/users/" + reciepientUserId + "/teamwork/installedApps/" + appId + @"""
+            },
+            ""activityType"": ""taskCreated"",
+            ""previewText"": {
+                ""content"": ""New Task Created""
+            },
+            ""templateParameters"": [{
+                ""name"": ""taskName"",
+                ""value"": ""test""
+                }]
+            }";
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                // Set the base URL for the Graph API
+                httpClient.BaseAddress = new Uri(graphApiEndpoint);
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                try
+                {
+                    // Create a POST request with the JSON payload
+                    HttpResponseMessage response = await httpClient.PostAsync(graphApiEndpoint, new StringContent(jsonPayload, Encoding.UTF8, "application/json"));
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Parse and print the response content
+                        string content = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(content);
+                        return "true";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode}");
+                        return "false";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                    return "false";
+                }
+            }
+        }
+
         /// <summary>
         /// Get Token for given tenant.
         /// </summary>
         /// <param name="tenantId"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<string> GetToken(string tenantId)
+        public async Task<string> GetToken()
         {
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(_configuration["ClientId"])
                                                   .WithClientSecret(_configuration["ClientSecret"])
-                                                  .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
+                                                  .WithAuthority($"https://login.microsoftonline.com/{_configuration["TenantId"]}")
                                                   .WithRedirectUri("https://daemon")
                                                   .Build();
 
@@ -108,6 +229,5 @@ namespace RSCWithGraphAPI.Controllers
 
             return result.AccessToken;
         }
-
     }
 }
