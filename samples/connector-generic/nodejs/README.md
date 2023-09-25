@@ -84,10 +84,10 @@ To complete this tutorial, you need the following tools. If you don't already ha
    ```
 
  9. __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/app manifest/manifest.json` file with your newly registered
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/appManifest/manifest.json` file with your newly registered
     - **Edit** the `manifest.json` and update `<<AppDomain>>`
       Example. if you are using ngrok it would be `https://1234.ngrok-free.app` then your app domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes).
    

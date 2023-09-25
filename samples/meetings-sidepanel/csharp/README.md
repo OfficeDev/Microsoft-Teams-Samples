@@ -75,7 +75,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    - `<<Microsoft-App-Secret>>` - Generated from Step 2, also referred to as Client secret
    - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
-6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+6. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
    - <<Manifest-id>> with any random GUID or your MicrosoftAppId from AAD app registration.
    - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
    - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -92,7 +92,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
 
 **Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/csharp/SidePanel/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
 

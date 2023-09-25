@@ -1,0 +1,167 @@
+{
+    "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+    "manifestVersion": "devPreview",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name":  "OP Developer Content Team",
+        "websiteUrl": "${{TAB_ENDPOINT}}",
+        "privacyUrl": "${{TAB_ENDPOINT}}/about.html",
+        "termsOfUseUrl": "${{TAB_ENDPOINT}}/about.html"
+    },
+    "icons": {
+        "outline": "BlueYonderDiscountIcon64.png",
+        "color": "BlueYonderDiscountIcon128.png"
+    },
+    "name": {
+        "short": "Discounts",
+        "full": "Blue Yonder Airlines Discounts"
+    },
+    "description": {
+        "short": "Insert discount offers in Outlook email and view data about the offers in Teams.",
+        "full": "Insert discount offers in Outlook email and view data about the offers in Teams."
+    },
+    "accentColor": "#FFFFFF",
+    "authorization": {
+        "permissions": {
+            "resourceSpecific": [
+                {
+                    "name": "MailboxItem.ReadWrite.User",
+                    "type": "Delegated"
+                }
+            ]
+        }
+    },
+    "bots": [],
+    "composeExtensions": [],
+    "configurableTabs": [
+        {
+            "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/config",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupChat"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "index0",
+            "name": "Discount History",
+            "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+            "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "${{ADDIN_DOMAIN}}",
+        "${{TAB_DOMAIN}}"
+    ],
+    "extensions": [
+        {
+            "requirements": {
+                "scopes": [
+                    "mail"
+                ],
+                "capabilities": [
+                    {
+                        "name": "Mailbox",
+                        "minVersion": "1.3"
+                    }
+                ]
+            },
+            "runtimes": [
+                {
+                    "requirements": {
+                        "capabilities": [
+                            {
+                                "name": "Mailbox",
+                                "minVersion": "1.3"
+                            }
+                        ]
+                    },
+                    "id": "TaskPaneRuntime",
+                    "type": "general",
+                    "code": {
+                        "page": "https://localhost:3000/taskpane.html"
+                    },
+                    "lifetime": "short",
+                    "actions": [
+                        {
+                            "id": "TaskPaneRuntimeShow",
+                            "type": "openPage",
+                            "pinnable": false,
+                            "view": "dashboard"
+                        }
+                    ]
+                }
+            ],
+            "ribbons": [
+                {
+                    "contexts": [
+                        "mailRead", "mailCompose"
+                    ],
+                    "tabs": [
+                        {
+                            "builtInTabId": "TabDefault",
+                            "groups": [
+                                {
+                                    "id": "msgReadGroup",
+                                    "label": "Blue Yonder",
+                                    "icons": [
+                                        {
+                                            "size": 16,
+                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
+                                        },
+                                        {
+                                            "size": 32,
+                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
+                                        },
+                                        {
+                                            "size": 80,
+                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
+                                        }
+                                    ],
+                                    "controls": [
+                                        {
+                                            "id": "msgReadOpenPaneButton",
+                                            "type": "button",
+                                            "label": "Offer Discount",
+                                            "icons": [
+                                                {
+                                                    "size": 16,
+                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
+                                                },
+                                                {
+                                                    "size": 32,
+                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
+                                                },
+                                                {
+                                                    "size": 80,
+                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
+                                                }
+                                            ],
+                                            "supertip": {
+                                                "title": "Open Discount pane",
+                                                "description": "Opens a pane that you use to insert a discount offer."
+                                            },
+                                            "actionId": "TaskPaneRuntimeShow"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+
+}

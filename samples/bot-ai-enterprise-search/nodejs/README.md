@@ -39,7 +39,7 @@ This bot has been created using [Bot Builder](https://www.npmjs.com/package/botb
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/microsoft-365/dev-program)
 - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [TeamsFx CLI](https://aka.ms/teamsfx-cli)
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [Azure Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI](https://azure.microsoft.com/free/)
+- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
 - [Create a Redis Enterprise cache](https://learn.microsoft.com/azure/azure-cache-for-redis/quickstart-create-redis-enterprise)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -144,11 +144,11 @@ the Teams service needs to call into the bot.
     ```
 
 8) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appPackage` folder (`appPackage.admin` and `appPackage.user` folders) to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Also, update the <TEAMS_APP_ID> with unique Guid for both the `manifest.json` stored in (`appPackage.admin` and `appPackage.user`) as this app has 2 roles: Admin and User.
+    - **Edit** the `manifest.json` contained in the `appManifest` folder (`appManifest.admin` and `appManifest.user` folders) to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Also, update the <TEAMS_APP_ID> with unique Guid for both the `manifest.json` stored in (`appManifest.admin` and `appManifest.user`) as this app has 2 roles: Admin and User.
 
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appPackage` folder (appPackage.admin and appPackage.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appManifest` folder (appManifest.admin and appManifest.user folders separately) to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported app scope)
 
@@ -198,7 +198,7 @@ Deploy your project to Azure by following these steps:
 
 > Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
-**Note:** Once the provisioning and deployment steps are finished please update the `manifest.json` contained in the `appPackage` folders (`appPackage.admin` and `appPackage.user` folders) for `validDomains` with base Url domain. E.g. if your deployed web app service URL is: `https://botaxxxxx.azurewebsites.net/` then your domain-name will be `botaxxxxx.azurewebsites.net`.
+**Note:** Once the provisioning and deployment steps are finished please update the `manifest.json` contained in the `appManifest` folders (`appManifest.admin` and `appManifest.user` folders) for `validDomains` with base Url domain. E.g. if your deployed web app service URL is: `https://botaxxxxx.azurewebsites.net/` then your domain-name will be `botaxxxxx.azurewebsites.net`.
 
 
 Also, make sure that below key/values are properly added to the configuration section of web app after code deployement.
