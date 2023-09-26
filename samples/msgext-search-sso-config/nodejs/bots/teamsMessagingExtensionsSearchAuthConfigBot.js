@@ -5,8 +5,7 @@ const {
     TeamsActivityHandler,
     CardFactory,
     ActionTypes,
-    ActivityHandler,
-    ActivityTypes
+    ActivityHandler
 } = require('botbuilder');
 
 const {
@@ -16,7 +15,6 @@ const {
 const axios = require('axios');
 const querystring = require('querystring');
 const { SimpleGraphClient } = require('..\\simpleGraphClient.js');
-const { polyfills } = require('isomorphic-fetch');
 
 // User Configuration property name
 const USER_CONFIGURATION = 'userConfigurationProperty';
@@ -58,6 +56,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const tokenResponse = await userTokenClient.getUserToken(
                 context.activity.from.id,
                 this.connectionName,
+                context.activity.channelId,
                 magicCode
             );
 
@@ -156,6 +155,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const tokenResponse = await userTokenClient.getUserToken(
                 context.activity.from.id,
                 this.connectionName,
+                context.activity.channelId,
                 magicCode
             );
 
@@ -241,6 +241,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const tokenResponse = await userTokenClient.getUserToken(
                 context.activity.from.id,
                 this.connectionName,
+                context.activity.channelId,
                 magicCode
             );
 
@@ -349,15 +350,17 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const authObj = valueObj.authentication;
             if (authObj.token) {
                 // If the token is NOT exchangeable, then do NOT deduplicate requests.
-                if (await this.tokenIsExchangeable(context)) {
-                    return await super.onInvokeActivity(context);
-                }
-                else {
-                    const response = {
+                 if (await this.tokenIsExchangeable(context)) 
+                 {
+                     return await super.onInvokeActivity(context);
+                 }
+                 else {
+                        const response = 
+                        {
                         status: 412
-                    };
+                        };
                     return response;
-                }
+                 }
             }
         }
 
@@ -422,16 +425,12 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }
-        if (!tokenExchangeResponse || !tokenExchangeResponse.token)
+        if (!tokenExchangeResponse || !tokenExchangeResponse.token) 
         {
             return false;
         }
-        else {
-            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
-            context.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
-            context.turnState.tokenResponse = tokenExchangeResponse;
-        }
-        console.log('Exchanged token: ' + tokenExchangeResponse.token);
+
+        console.log('Exchanged token: ' + JSON.stringify(tokenExchangeResponse));
         return true;
     }
 }
