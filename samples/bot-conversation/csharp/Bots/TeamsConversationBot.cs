@@ -99,7 +99,6 @@ namespace Microsoft.BotBuilderSamples.Bots
             {
                 await turnContext.SendActivityAsync(MessageFactory.Text("Read count is zero. Please make sure to send message to all members firstly to check the count of members who have read your message."), cancellationToken);
             }
-
         }
 
         /// <summary>
