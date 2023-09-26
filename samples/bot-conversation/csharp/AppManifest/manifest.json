@@ -70,7 +70,7 @@
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": ""
+    "resource": "https://RscBasedStoreApp"
   },
   "authorization": {
     "permissions": {

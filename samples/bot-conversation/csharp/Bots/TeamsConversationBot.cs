@@ -246,6 +246,13 @@ namespace Microsoft.BotBuilderSamples.Bots
             await turnContext.DeleteActivityAsync(turnContext.Activity.ReplyToId, cancellationToken);
         }
 
+        /// <summary>
+        /// Using proactive messaging, messages sent to all members of the chat.
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="isAadId"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken, bool isAadId)
         {
             await ResetReadUserCount(turnContext, cancellationToken);
