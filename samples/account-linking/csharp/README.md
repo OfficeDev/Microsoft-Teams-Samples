@@ -77,7 +77,7 @@ For this example, we'll use the `590a2d6f8b31.ngrok-free.app` as our domain name
 Please follow the instructions on [creating an Azure AD application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
 
 #### 2.1 Configure the app for v2 tokens
-**IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `Manifest` blade is set to `2`.
+**IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `AppManifest` blade is set to `2`.
 
 
 Please save for a future step
@@ -101,7 +101,7 @@ Please save
 2. A `client secret` 
 
 ### 5. Filling in the Manifest file
-Please fill in the following values into the `Manifest/Manifest.json` file (called out using the `{{ }}` fences)
+Please fill in the following values into the `AppManifest/manifest.json` file (called out using the `{{ }}` fences)
 
 | Parameter  | Value |
 |---|---|
@@ -140,7 +140,7 @@ dotnet run
 ### 9. Installing the app
 Please follow the documentation on [creating a Microsoft Teams app package](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package) and [sideloading your app in Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package). 
 
-The "manifest" in question is the `Manifest` directory filled out in step 5.
+The "manifest" in question is the `AppManifest` directory filled out in step 5.
 
 ### 10. (Optional) Enable the Azure Ad version of the integration
 If you want to try out the implementation using Azure you will need to provision a few resources first

@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.zip
 
 # Runtime data
 pids
@@ -61,9 +62,6 @@ typings/
 dist/
 manifest/
 build/
-
-# VS Code config files
-.vs/**
 
 #############
 

@@ -203,7 +203,6 @@ namespace ActivityFeedBroadcast.Controllers
         }
 
         // Get user access token.
-        [Authorize]
         [HttpGet("/GetUserAccessToken")]
         public async Task<ActionResult<string>> GetUserAccessToken()
         {
