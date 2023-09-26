@@ -102,6 +102,11 @@ namespace RSCWithGraphAPI.Controllers
             return graphClient;
         }
 
+        /// <summary>
+        /// Get the list of installed app for the user.
+        /// </summary>
+        /// <param name="reciepientUserId"> Id of the user whom notification is to be sent</param>
+        /// <returns>Status which indicates notification sent of failed</returns>
         [HttpPost]
         [Route("GetInstalledAppList")]
         public async Task<JsonResult> GetInstalledAppList(string reciepientUserId)
@@ -174,7 +179,6 @@ namespace RSCWithGraphAPI.Controllers
         /// <returns></returns>
         public async Task<string> SendNotification(string reciepientUserId, string appId)
         {
-
             // Set your Graph API endpoint and access token
             string graphApiEndpoint = $"https://graph.microsoft.com/beta/users/{reciepientUserId}/teamwork/sendActivityNotification";
 

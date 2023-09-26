@@ -27,7 +27,6 @@ namespace RSCWithGraphAPI.Models
         /// Teams app defination of the installed app
         /// </summary>
         public AppDefination TeamsAppDefinition { get; set; }
-
     }
 
     /// <summary>
