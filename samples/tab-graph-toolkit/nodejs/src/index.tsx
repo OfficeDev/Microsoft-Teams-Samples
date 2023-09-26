@@ -9,7 +9,7 @@ import './index.css';
 TeamsMsal2Provider.microsoftTeamsLib = MicrosoftTeams;
 
 Providers.globalProvider = new TeamsMsal2Provider({
-  clientId: '2c865108-9c5e-456c-94c3-bb792a77576b',
+  clientId: '<<Client-Id>>',
   authPopupUrl: window.location.origin + '/tabauth',
   scopes: ['calendars.read', 'user.read', 'openid', 'profile', 'people.read', 'user.readbasic.all'],
 });

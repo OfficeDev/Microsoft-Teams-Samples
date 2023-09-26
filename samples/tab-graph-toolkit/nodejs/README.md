@@ -87,6 +87,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
      npm start
      ```
 
+**Note :** Navigate to path `src/index.ts` file and replace `<<Client-Id>>` placeholder at line `No.12` with your clientId that was created when you registered your app registration in step 1.
+
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
