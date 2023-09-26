@@ -98,7 +98,7 @@ Under the root of this sample folder, build and run by commands:
 - **Interacting with the Message Extension in Teams
     Once the Messaging Extension is installed, find the icon for **Config Auth Search** in the Compose Box's Messaging Extension menu. Right click to choose **Settings** and view the Config page. Click the icon to display the search window, type anything it will show your profile picture.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-search-sso-config/nodejs/index.js#L43) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-search-sso-config/nodejs/index.js#L57) line and put your debugger for local debug.
     
 ## Deploy the bot to Azure
 
