@@ -22,6 +22,7 @@
     "botbuilder": "~4.15.0",
     "botbuilder-dialogs": "~4.5.0",
     "isomorphic-fetch": "^3.0.0",
+    "dotenv": "^16.3.1",
     "restify": "^10.0.0"
   },
   "devDependencies": {
