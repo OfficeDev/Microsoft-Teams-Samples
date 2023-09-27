@@ -4,9 +4,6 @@ const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const urlDev = "https://localhost:3000/";
-const urlProd = "https://www.blueyonderairlines.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
-
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
   return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
@@ -64,25 +61,6 @@ module.exports = async (env, options) => {
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
         chunks: ["polyfill", "vendor", "taskpane"],
-      }),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: "appPackage/assets/*",
-            to: "assets/[name][ext][query]",
-          },
-          {
-            from: "../appPackage/build/manifest*.json",
-            to: "[name]" + "[ext]",
-            transform(content) {
-              if (dev) {
-                return content;
-              } else {
-                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
-              }
-            },
-          },
-        ],
       }),
     ],
     devServer: {

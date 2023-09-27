@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OfficeDev/Office-Addin-TaskPane.git"
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
   },
   "license": "MIT",
   "config": {
@@ -20,9 +20,9 @@
     "signin": "office-addin-dev-settings m365-account login",
     "signout": "office-addin-dev-settings m365-account logout",
     "prettier": "office-addin-lint prettier",
-    "start": "office-addin-debugging start ../appPackage/build/appPackage.local.zip",
-    "stop": "office-addin-debugging stop ../appPackage/build/manifest.local.json",
-    "validate": "office-addin-manifest validate ../appPackage/build//manifest.local.json",
+    "start": "office-addin-debugging start ../appManifest/build/appManifest.local.zip",
+    "stop": "office-addin-debugging stop ../appManifest/build/manifest.local.json",
+    "validate": "office-addin-manifest validate ../appManifest/build//manifest.local.json",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {

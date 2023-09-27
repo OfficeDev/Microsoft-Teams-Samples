@@ -21,7 +21,7 @@ provision:
       templates:
         - path: ./infra/azure.bicep # Relative path to this file
           parameters: ./infra/azure.parameters.json # Relative path to this file. Placeholders will be replaced with corresponding environment variable before ARM deployment.
-          deploymentName: Create-resources-for-tab # Required when deploy ARM template
+          deploymentName: discounts # Required when deploy ARM template
       bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
 
   - uses: azureStorage/enableStaticWebsite
@@ -30,20 +30,20 @@ provision:
       indexPage: index.html
       errorPage: error.html
 
- # - uses: teamsApp/validateManifest # Validate using manifest schema
- #   with:
- #     manifestPath: ./appPackage/manifest.json # Path to manifest template
+  # - uses: teamsApp/validateManifest # Validate using manifest schema
+  #   with:
+  #     manifestPath: ./appManifest/manifest.json # Path to manifest template
   - uses: teamsApp/zipAppPackage # Build Teams app package with latest env value
     with:
-      manifestPath: ./appPackage/manifest.json # Path to manifest template
-      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appManifest/manifest.json # Path to manifest template
+      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
   - uses: teamsApp/validateAppPackage # Validate app package using validation rules
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
   - uses: teamsApp/update # Apply the Teams app manifest to an existing Teams app in Teams Developer Portal. Will use the app id in manifest file to determine which Teams app to update.
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
 
 # Triggered when 'teamsfx deploy' is executed
 deploy:
@@ -66,24 +66,24 @@ deploy:
 
 # Triggered when 'teamsfx publish' is executed
 publish:
- # - uses: teamsApp/validateManifest # Validate using manifest schema
- #   with:
- #     manifestPath: ./appPackage/manifest.json # Path to manifest template
+  # - uses: teamsApp/validateManifest # Validate using manifest schema
+  #   with:
+  #     manifestPath: ./appManifest/manifest.json # Path to manifest template
   - uses: teamsApp/zipAppPackage
     with:
-      manifestPath: ./appPackage/manifest.json # Path to manifest template
-      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appManifest/manifest.json # Path to manifest template
+      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
   - uses: teamsApp/validateAppPackage # Validate app package using validation rules
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
   - uses: teamsApp/update # Apply the Teams app manifest to an existing Teams app in Teams Developer Portal. Will use the app id in manifest file to determine which Teams app to update.
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
   - uses: teamsApp/publishAppPackage # Publish the app to Teams Admin Center (https://admin.teams.microsoft.com/policies/manage-apps) for review and approval
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: fb0e75ee-c570-4d6f-a8b2-2f025fc6cfd6
+projectId: f46e7920-552b-4b85-a1bf-15488ff5abdd

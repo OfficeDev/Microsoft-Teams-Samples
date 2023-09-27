@@ -19,18 +19,18 @@ provision:
       run: echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:53000"
   #- uses: teamsApp/validateManifest # Validate using manifest schema
   #  with:
-  #    manifestPath: ./appPackage/manifest.json # Path to manifest template
+  #    manifestPath: ./appManifest/manifest.json # Path to manifest template
   - uses: teamsApp/zipAppPackage # Build Teams app package with latest env value
     with:
-      manifestPath: ./appPackage/manifest.json # Path to manifest template
-      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appManifest/manifest.json # Path to manifest template
+      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
   - uses: teamsApp/validateAppPackage # Validate app package using validation rules
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
   - uses: teamsApp/update # Apply the Teams app manifest to an existing Teams app in Teams Developer Portal. Will use the app id in manifest file to determine which Teams app to update.
     with:
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
 
 deploy:
   - uses: devTool/install # Install development tool(s)
@@ -41,9 +41,23 @@ deploy:
       sslCertFile: SSL_CRT_FILE
       sslKeyFile: SSL_KEY_FILE
 
-  - uses: cli/runNpmCommand # Run npm command
+   # Run npm command
+  - uses: cli/runNpmCommand
     with:
-      args: run install:tab --no-audit
+      workingDirectory: .
+      args: install --no-audit
+
+   # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./tab
+      args: install --no-audit
+
+   # Run npm command
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./add-in
+      args: install --no-audit
 
   - uses: file/createOrUpdateEnvironmentFile # Generate runtime environment variables
     with:

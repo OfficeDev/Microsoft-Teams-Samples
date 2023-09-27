@@ -978,6 +978,10 @@ jobs:
             - project_path: 'samples/msgext-ai-sentiment-analysis/nodejs'
               name: 'msgext-ai-sentiment-analysis'
               version: '18.x'
+            
+            - project_path: 'samples/tab-add-in-combined/nodejs'
+              name: 'tab-add-in-combined'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
