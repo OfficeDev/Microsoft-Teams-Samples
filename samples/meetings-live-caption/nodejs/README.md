@@ -89,8 +89,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 ### 2. Manually update the manifest.json
 1. Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace the `<<AppId>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.com` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the  `appManifest/` folder to replace the `<<AppId>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.com` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
+    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Manage your apps -> Upload an app -> Upload a custom app")
 
 **NOTE: If you are unable to send caption, try configuring tab again.**

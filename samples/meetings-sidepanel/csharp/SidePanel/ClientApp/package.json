@@ -26,7 +26,8 @@
     "react-scripts": "^5.0.1",
     "use-resize-observer": "^8.0.0",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "assert": "2.0.0"
   },
   "devDependencies": {
     "@fluidframework/test-client-utils": "~0.59.0",

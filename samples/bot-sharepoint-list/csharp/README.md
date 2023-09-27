@@ -98,7 +98,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ### This steps is specific to Microsoft Teams
 
-- Navigate to `teamsAppManifest` folder
+- Navigate to `AppManifest` folder
 - Select the `Manifest.json` and update it with your `Your Bot Id`
 - Now zip the manifest.json along with icons
 - Go to teams and do `Upload a Custom App` 

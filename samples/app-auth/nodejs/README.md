@@ -66,11 +66,11 @@ This sample demonstrates authentication in Microsoft Teams using bot and tab.
 > **IMPORTANT**: Do not use the legacy Bot Framework portal, nor App Studio, to create the bot. Your bot MUST be registered with
 > Azure Bot Service to use the authentication functionality provided by Azure Bot Service.
 
-4. Create an app manifest. Navigate to the file, manifest/manifest.json - Change:
+4. Create an app manifest. Navigate to the file, appManifest/manifest.json - Change:
     1. <<REGISTERED_BOT_ID>> (there are 3) change to your registered bot's app ID
-    2. <<BASE_URI_DOMAIN>> (there are 5) change to your https endpoint from tunnel excluding the "https://" part
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-auth\nodejs\Manifest_Hub` folder with the required values.
-    3. Zip up the contents of the `manifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    2. <<BASE_URI_DOMAIN>> (there are 5) change to your https endpoint from ngrok excluding the "https://" part
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-auth\nodejs\appManifestHub` folder with the required values.
+    3. Zip up the contents of the `appManifest` folder to create a `manifest.zip` or `appManifestHub` folder into a `appManifestHub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 ## Setup
 
@@ -139,7 +139,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 
 ### Update your Microsoft Teams application manifest
 
-16. Add new properties to your Microsoft Teams manifest:
+15. Add new properties to your Microsoft Teams app manifest:
 
     - **WebApplicationInfo** - The parent of the following elements.
     - **Id** - The client ID of the application. This is an application ID that you obtain as part of registering the application with Azure AD 1.0 endpoint.
