@@ -217,9 +217,9 @@ Tab authentication
 
 Bot authentication
 
-![Bot SSO](Images/appbot.png)
+![Bot SSO](Images/login-card.png)
 
-![Bot AAD login](Images/appbot2.png)
+![Bot AAD login](Images/sso-bot.png)
 
 ## Outlook on the web
 
