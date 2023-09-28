@@ -172,6 +172,10 @@ jobs:
               name: 'tab-adaptive-cards'
               version: '6.0.x'
 
+            - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
+              name: 'tab-external-auth'
+              version: '6.0.x'
+
             - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
               name: 'tab-conversations'
               version: '6.0.x'

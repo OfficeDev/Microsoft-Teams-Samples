@@ -54,6 +54,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |21| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts] ![toolkit-icon](assets/toolkit-icon.png) |
 |22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |23| Tab Multi Hub | Interact with the user's calendar, mail, profile, geolocation from personal tabs app. ||[View][tab-multi-hub#ts] ![toolkit-icon](assets/toolkit-icon.png) |
+|24| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
+
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -238,6 +240,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bot-request-approval#nodejs]:samples/bot-request-approval/nodejs
 [tab-navbar-menu#ts]:samples/tab-navbar-menu/ts
 [tab-multi-hub#ts]:samples/tab-multi-hub/ts
+[tab-external-auth#csharp]:samples/tab-external-auth/csharp
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
