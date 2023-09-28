@@ -38,7 +38,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 -  Microsoft Teams is installed and you have an account (not a guest account)
 -  [.Net](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) version 6.0
--  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -50,12 +50,18 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
-2. Setup NGROK
-      - Run ngrok - point to port 3978
+2. Run ngrok - point to port 3978
 
-	```bash
-	# ngrok http 3978 --host-header="localhost:3978"
-	```   
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Setup for code
 
   - Clone the repository
@@ -79,8 +85,8 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Press `F5` to run this project
     
 4.  Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the  `AppManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
+    - Zip up the contents of the `AppManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/AdapterWithErrorHandler.cs#L37) and put your debugger for local debug.

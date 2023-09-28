@@ -26,14 +26,14 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 ![ProductInspection](ProductInspection/Images/PreviewImg.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Product Inspection:** [Manifest](/samples/tab-product-inspection/csharp/demo-manifest/Tab-Product-Inspection.zip)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup.
@@ -43,11 +43,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 
 2. Setup NGROK
-  - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-	```bash
-	# ngrok http 3978 --host-header="localhost:3978"
-	```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3. Setup for code
 
@@ -66,20 +72,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Config changes
    - Press F5 to run the project
-   - Update the ngrok in manifest
+   - Update the tunnel URL in manifest
    - Zip all three files present in manifest folder
    
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-product-inspection\csharp\ProductInspection\Manifest_Hub` folder with the required values.
-    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or  `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-product-inspection\csharp\ProductInspection\AppManifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or  `AppManifest_Hub` folder to create a `AppManifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample.

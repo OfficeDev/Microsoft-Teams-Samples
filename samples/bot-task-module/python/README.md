@@ -22,7 +22,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-python
 ![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Task Module:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 
@@ -30,7 +30,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) version 3.7
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## To try this sample
 
@@ -45,12 +45,18 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 1) Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+    - Use the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
@@ -65,8 +71,8 @@ the Teams service needs to call into the bot.
 1) Update `CustomForm.html` to replace your Microsoft App Id *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>`
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 1) Run your bot with `python app.py`

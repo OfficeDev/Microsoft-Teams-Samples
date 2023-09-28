@@ -36,7 +36,7 @@ Verify you have the right account for building Teams apps and install some recom
 
 - You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -46,14 +46,20 @@ Verify you have the right account for building Teams apps and install some recom
 	
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK
-      - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-	```bash
-	ngrok http 3978 --host-header="localhost:3978"
-	```   
+    ```bash
+    ngrok http 3978 --host-header="localhost:3978"
+    ```
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 4. Setup for code
 
@@ -75,12 +81,13 @@ Verify you have the right account for building Teams apps and install some recom
   - Select `Localization.csproj` file
 
 6. This step is related to Microsoft Teams app manifest
-    - **Edit** the `manifest.json` contained in the `Manifest` or `Manifest_hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<1234.ngrok-free.app>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Provide ngrok Url** (turnnelling Url) in `manifest.json` for contentUrl in case of tabs and for messaging endpoint in case of bots if enabled. 
+    - **Edit** the `manifest.json` contained in the `AppManifest` or `AppManifest_Hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<Tunnel Url>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+   - **Provide turnnelling Url** in `manifest.json` for contentUrl in case of tabs and for messaging endpoint in case of bots if enabled
+   - replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/csharp/Localization/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 

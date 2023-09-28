@@ -105,6 +105,14 @@ namespace Microsoft.BotBuilderSamples
                     // Sends Card With Emoji
                     reply.Attachments.Add(AllCards.sendCardWithEmoji());
                     break;
+                case "Persona":
+                    // Sends Persona Card Icons
+                    reply.Attachments.Add(AllCards.sendPersonaCardIcons());
+                    break;
+                case "PersonaSet":
+                    // Sends Persona Card Set Icons
+                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcons());
+                    break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     reply.Attachments.Add(AllCards.sendFullWidthCardAdaptiveCard());
@@ -112,6 +120,8 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendOverFlowMenuCard());
                     reply.Attachments.Add(AllCards.sendHTMLConnectorCard());
                     reply.Attachments.Add(AllCards.sendCardWithEmoji());
+                    reply.Attachments.Add(AllCards.sendPersonaCardIcons());
+                    reply.Attachments.Add(AllCards.sendPersonaCardSetIcons());
                     break;
             }
 
@@ -143,6 +153,8 @@ namespace Microsoft.BotBuilderSamples
                     new Choice() { Value = "OverflowMenu", Synonyms = new List<string>() { "OverflowMenu" } },
                     new Choice() { Value = "HTMLConnector", Synonyms = new List<string>() { "HTMLConnector" } },
                     new Choice() { Value = "CardWithEmoji", Synonyms = new List<string>() { "CardWithEmoji" } },
+                    new Choice() { Value = "Persona", Synonyms = new List<string>() { "Persona" } },
+                    new Choice() { Value = "PersonaSet", Synonyms = new List<string>() { "PersonaSet" } },
                 };
 
                 return returncardOptions;

@@ -30,7 +30,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
-- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -53,11 +53,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 2. Setup NGROK
-  -  Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Setup for code
   - Clone the repository
 
@@ -81,9 +88,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `teamsManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
    
-    - Zip up the contents of the `teamsManifest/` folder to create a `manifest.zip`
+    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
  
 ## Running the sample.

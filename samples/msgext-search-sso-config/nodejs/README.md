@@ -31,7 +31,7 @@ Bot Framework v4 sample for Teams to include a configuration page and Bot Servic
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/) version v16.14.2 or Higher Version
-- [ngrok](https://ngrok.com/download   ) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension.
 
@@ -56,11 +56,18 @@ the Teams service needs to call into the bot.
     Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md). 
  
 2. Setup NGROK
-   - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Setup for code
 
   - Clone the repository
@@ -78,14 +85,14 @@ Under the root of this sample folder, build and run by commands:
 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 - **Interacting with the Message Extension in Teams

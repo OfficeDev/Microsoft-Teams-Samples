@@ -32,7 +32,7 @@ This sample app demonstrates sending change notifications to user presence in Te
 
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -45,7 +45,13 @@ This sample app demonstrates sending change notifications to user presence in Te
 2) Run ngrok - point to port 3978
 
    ```bash
-     ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
 3) Setup App Registration
@@ -124,7 +130,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
 4) Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -167,13 +173,13 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 Modify the `appsettings.json` file with the following details:
     - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing AAD app registration.
     - Provide ConnectionName in appsetting that is created in Azure wile creating connect for your Azure bot.
-    - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok-free.app
+    - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
     - Press `F5` to run the project
 
 7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json`file contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.

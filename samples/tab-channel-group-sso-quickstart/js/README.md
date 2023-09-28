@@ -25,7 +25,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 
--  [ngrok](https://ngrok.com/download)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
@@ -92,20 +92,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
     
  3. Setup NGROK
-   - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
  4. Setup for code
    - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` and `REACT_APP_BASE_URL`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the REACT_APP_AZURE_APP_REGISTRATION_ID created in step 1.
+  - Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` and `REACT_APP_BASE_URL`, `BaseUrl` with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the REACT_APP_AZURE_APP_REGISTRATION_ID created in step 1.
 
  - In a terminal, navigate to `tab-channel-group-sso-quickstart/js`
  - Install modules
@@ -126,12 +133,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 5. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - - **Edit** the `manifest.json` for `validDomains and REACT_APP_BASE_URL replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - - **Edit** the `manifest.json` for validDomains and REACT_APP_BASE_URL replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     
      - **Edit** the `manifest.json` for `webApplicationInfo` resource `""api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>""` with MicrosoftAppId. E.g. `""api://<<ngrok-free.app>><<XXXXXXXXXXXXXXXXXXXxx>>
      
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 ## Running the sample

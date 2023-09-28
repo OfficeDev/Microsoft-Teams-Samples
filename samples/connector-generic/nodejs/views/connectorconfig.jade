@@ -24,7 +24,7 @@ html(lang="en")
         microsoftTeams.settings.registerOnSaveHandler(function(saveEvent) {
             microsoftTeams.settings.setSettings({
               entityId: "bing",
-              contentUrl: "[ngrokURL]/connectorconfig",
+              contentUrl: "[tunnelURL]/connectorconfig",
               configName: "bing"
             });
             saveEvent.notifySuccess();

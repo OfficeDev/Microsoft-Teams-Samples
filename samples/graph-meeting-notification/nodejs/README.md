@@ -30,8 +30,22 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Register your application with Azure AD
 
@@ -52,7 +66,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
 ### Create and install Self-Signed certificate
 
@@ -70,9 +84,15 @@ To include resource data of graph notifications, this Graph API require self-sig
 ###  Setup NGROK
 1) Run ngrok - point to port 3978
 
-```bash
-# ngrok http 3978 --host-header="localhost:3978"
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ### Setup code.
 1) Clone the repository
@@ -90,9 +110,11 @@ To include resource data of graph notifications, this Graph API require self-sig
    Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword```, ```MicrosoftAppTenantId```,
    ```Base64EncodedCertificate```, ```EncryptionCertificateId```, ```PRIVATE_KEY_PATH```
 
+ **Note** : ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run application by teams toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
+
 ### Instruction for .env
 1. Provide `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId` in the .env that is created in Azure.
-2. Provide the ngrok url as  `BaseUrl` in appsetting on which application is running on.  E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app`.
+2. Provide the ngrok url as  `BaseUrl` in appsetting on which application is running on.  E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 3. You should be having `Base64EncodedCertificate` from *Create and install Self-Signed certificate* step.
 4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
 
@@ -112,7 +134,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 ## Instruction for manifest
 1. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
-2. ZIP the manifest and make sure manifest.json and two icon images are at root.
+2. ZIP the appManifest and make sure manifest.json and two icon images are at root.
 3. Upload the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 **Note**: If you are facing any issue in your app, please uncomment [this]https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/nodejs/index.js#L54) line and put your debugger for local debug.

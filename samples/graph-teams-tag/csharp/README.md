@@ -38,7 +38,7 @@ This is a sample application where user can create, update, add or remove member
         # determine dotnet version
         dotnet --version
     ```
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
@@ -59,9 +59,15 @@ This is a sample application where user can create, update, add or remove member
 > the Teams service needs to call into the app.
 
 
-5. Start ngrok on localhost:3978
-   - Open ngrok and run command `ngrok http 3978 --host-header="localhost:3978"` 
+5. Start tunnel on localhost:3978
+   - If you are using Ngrok, Open ngrok and run command `ngrok http 3978 --host-header="localhost:3978"` 
    -  Once started you should see link `https://xxxxx.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
+   
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
    ![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)
 
@@ -81,11 +87,11 @@ This is a sample application where user can create, update, add or remove member
  - Run the bot from Visual Studio: 
    - Press `F5` to run the project
 
-7. Setup the `manifest.json` in the `/AppPackage` folder 
+7. Setup the `manifest.json` in the `/AppManifest` folder 
 Replace the following details:
 - `{{APP-ID}}` with any GUID id value or your MicrosoftAppId.
-- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+- **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
