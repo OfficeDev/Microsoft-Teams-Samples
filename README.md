@@ -55,6 +55,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |23| Tab Multi Hub | Interact with the user's calendar, mail, profile, geolocation from personal tabs app. ||[View][tab-multi-hub#ts] ![toolkit-icon](assets/toolkit-icon.png) |
 |24| tab-ui-templates | This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms). ||[View][tab-ui-templates#ts] ![toolkit-icon](assets/toolkit-icon.png) |
+|25| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
+
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -84,6 +86,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |20| Different formatting on cards | This sample feature shows how to use different formatting on cards using bot. |[View][BotFormattingCards#csharp]|[View][BotFormattingCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) 
 |21| Different types of cards using bot | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp] | [View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png) 
 |22| User specific views in Adaptive cards | This sample shows the different ways developers can consume user specific views in Adaptive cards. |[View][botadaptivecardsuserspecificviews#csharp]| | | |[View](/samples/bot-adaptivecards-user-specific-views/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
+|23| Bot configuration app with type ahead search control.|This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.||[View][BotConfigurationApp#nodejs]
 
 #### Additional samples
 
@@ -245,6 +248,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-navbar-menu#ts]:samples/tab-navbar-menu/ts
 [tab-multi-hub#ts]:samples/tab-multi-hub/ts
 [tab-ui-templates#ts]:samples/tab-ui-templates/ts
+[tab-external-auth#csharp]:samples/tab-external-auth/csharp
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
@@ -327,6 +331,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
 [BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
 [BotFormattingCards#nodejs]:samples/bot-formatting-cards/nodejs  
+[BotConfigurationApp#nodejs]:samples/bot-configuration-app/nodejs  
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs
 [AdaptiveCardSSO#csharp]:samples/bot-sso-adaptivecard/csharp
 [BotSSOAdaptiveCard#nodejs]:samples/bot-sso-adaptivecard/nodejs
