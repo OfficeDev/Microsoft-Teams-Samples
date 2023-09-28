@@ -97,17 +97,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 
 ###  5) Setup Manifest for Teams
-1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+1. Modify the `manifest.json` in the `/appManifest` folder and replace the following details
    - `{{App-id}}` with your application id created in step 1.
    - `{{Domain-Name}}` with your application's base url domain, e.g. For https://1234.ngrok-free.app the Domain Name will be 1234.ngrok-free.app and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
    - `{{Plan-id}}` with plan id generated in step 2.
 
-2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+2. Zip the contents of `appManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
     
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Apps -> Manage your apps -> Upload an app.
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
 4. Add the tab in personal scope.

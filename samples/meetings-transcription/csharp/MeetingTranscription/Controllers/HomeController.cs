@@ -41,7 +41,7 @@ namespace MeetingTranscription.Controllers
         {
             ViewBag.Transcripts = "Transcript not found.";
 
-            if (string.IsNullOrEmpty(meetingId))
+            if (!string.IsNullOrEmpty(meetingId))
             {
                 var isFound = transcriptsDictionary.TryGetValue(meetingId, out string transcripts);
                 if (isFound)
@@ -51,7 +51,7 @@ namespace MeetingTranscription.Controllers
                 else
                 {
                     var result = await this.graphHelper.GetMeetingTranscriptionsAsync(meetingId);
-                    if (string.IsNullOrEmpty(meetingId))
+                    if (!string.IsNullOrEmpty(meetingId))
                     {
                         transcriptsDictionary.AddOrUpdate(meetingId, result, (key, newValue) => result);
                         ViewBag.Transcripts = $"Format: {result}";
