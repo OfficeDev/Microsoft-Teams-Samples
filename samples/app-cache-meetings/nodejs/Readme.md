@@ -20,6 +20,9 @@ This sample feature shows how to improve the subsequent loading time of an App t
 
 **Interaction with App**
 ![App-Cache](Images/AppCacheSample.gif)  
+
+**Change of Teams theme**.
+![App-Cache-ChangeTheme](Images/AppCacheThemeChange.gif) 
  
 ## Prerequisites
 
@@ -104,7 +107,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **AppCache in second tab with Unique Id Loaded :** 
 ![Team Context](Images/3.TabTwo.png)
 
+**Teams Theme Changes To Dark :** 
+![Team Context](Images/T1-dark-Theme.PNG)
+
+**Teams Theme Changes To Light :** 
+![Team Context](Images/T2.light-theme.PNG)
+
+**Teams Theme Changes To Contrast :** 
+![Team Context](Images/T1-contrast-theme.PNG)
+
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
+
+**Note** In Teams T1, there is no `light theme`, only we get two themes in meetings (`dark` and `contrast`). By default Teams T1 default theme is `dark`. and where as in Teams T2 we get three themes. Default theme is light and remaining other two themes are `dark` and `contrast`.
 
 
 ## Further reading
