@@ -1,0 +1,54 @@
+﻿@model DemoViewModel;
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSC Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+<script>
+
+    // Select the reciepient for activity feed notifications
+    function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+        microsoftTeams.app.initialize();
+        microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+            if (people) {
+                let reciepientUserId = people[0].objectId;
+                getInstalledAppList(reciepientUserId)
+            }
+        });
+    }
+
+    // Get installed app list and send activity feed notification to the user
+    function getInstalledAppList(reciepientUserId) {
+
+        $.ajax({
+            type: 'POST',
+            url: '/GetInstalledAppList',
+            dataType: 'json',
+            data: {
+                'reciepientUserId': reciepientUserId,
+            },
+            success: function (responseJson) {
+                console.log("Message send successfully");
+                document.getElementById("message-status").innerHTML = "Message sent successfully";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                document.getElementById("message-status").innerHTML = "textStatus: " + textStatus + ", errorThrown:" + errorThrown;
+            }
+        });
+    }
+</script>
+    </head>
+
+<body>
+    <div id="mainDeiv">
+        <h4>Select reciepient to send activity feed notification.</h4>
+        <p id="rsclist"></p>
+        <br />
+        <Button data-id="singleSelect" onclick="selectPeople(event,[],false,true)"> Select </Button>
+        <div id="message-status"></div>
+    </div>
+</body>
