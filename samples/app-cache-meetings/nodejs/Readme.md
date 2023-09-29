@@ -126,5 +126,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 [Manage custom and sideloaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
 
+[Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
+
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-cache-meetings-nodejs" />
