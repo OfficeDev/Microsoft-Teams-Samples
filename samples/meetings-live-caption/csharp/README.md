@@ -80,7 +80,7 @@ Copy the CART link it will used while configuring tab for meeting.
 1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Manage your apps -> Upload an app -> Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **NOTE: If you are not able to send caption, try configuring tab again.**

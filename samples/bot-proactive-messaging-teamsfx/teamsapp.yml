@@ -22,7 +22,7 @@ provision:
       authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
   - uses: teamsApp/create # Creates a Teams app
     with:
-      name: ${{CONFIG__MANIFEST__APPNAME__SHORT}} # Teams app name
+      name: proactive-messages-demo-${{TEAMSFX_ENV}} # Teams app name
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       teamsAppId: TEAMS_APP_ID
@@ -103,4 +103,3 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 50e830d7-2c4b-4de9-8e7d-17e4100e43e1

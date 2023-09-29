@@ -17,26 +17,22 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="Resources\Bots\LocalizerBot.fr-CA.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Bots\LocalizerBot.hi-IN.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Views\Home\Index.es-MX.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
-    </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="powershell.exe Compress-Archive -Path \&quot;$(ProjectDir)Manifest\*\&quot; -DestinationPath \&quot;$(TargetDir)helloworldapp.zip\&quot; -Force" />
-    </Target>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Bots\LocalizerBot.fr-CA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Bots\LocalizerBot.hi-IN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\Index.es-MX.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>
