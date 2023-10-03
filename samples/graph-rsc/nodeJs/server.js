@@ -34,13 +34,12 @@ app.get('/rscdemo', function (req, res) {
 });
 
 app.get('/sendNotification', function (req, res) {
-  var tenantId = process.env.TenantId;
-    res.render('./views/sendNotification');
+  res.render('./views/sendNotification');
 });
 
 app.post('/sendFeedNotification', function (req, res) {
-    recipientId = req.data.reciepientUserId;
-    token = auth.getAccessToken(tenantId).then(async function (token) {
+  recipientId = req.data.reciepientUserId;
+  token = auth.getAccessToken(tenantId).then(async function (token) {
     await getInstalledAppList(token, recipientId);
   })
 });
@@ -58,20 +57,18 @@ function getAppId(appList) {
 
 // Fetch the list of installed apps for user
 async function getInstalledAppList(accessToken, reciepientUserId) {
-  $.ajax({
-    url: "https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition",
-    type: "GET",
-    beforeSend: function (request) {
-      request.setRequestHeader("Authorization", "Bearer " + accessToken);
-    },
-    success: function (result) {
-      var appId = getAppId(result.value);
-      sendActivityFeedNotification(token, reciepientUserId, appId)
-    },
-    error: function (xhr, textStatus, errorThrown) {
-      console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-    },
-  });
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + accessToken
+    }
+  };
+  axios.get("https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition", config)
+    .then(async (res) => {
+      var appId = getAppId(res.value);
+      await sendActivityFeedNotification(token, reciepientUserId, appId);
+    })
+    .catch(err => console.log(err))
 }
 
 // Send activity feed notification to user
@@ -94,23 +91,17 @@ async function sendActivityFeedNotification(accessToken, reciepientUserId, appId
     ]
   };
 
-  $.ajax({
-    url: `https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/sendActivityNotification`,
-    type: "POST",
-    contentType: 'application/json',
-    data: JSON.stringify(postData),
-    beforeSend: function (request) {
-      request.setRequestHeader("Authorization", "Bearer " + accessToken);
-    },
-    success: function (profile) {
-      console.log(profile);
-    },
-    error: function (xhr, textStatus, errorThrown) {
-      console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-    },
-  });
+  const config = {
+    headers: {
+      Authorization: "Bearer " + accessToken
+    }
+  };
+  axios.get(`https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/sendActivityNotification`, postData, config)
+    .then((res) => {
+      console.log("Success");
+    })
+    .catch(err => console.log(err))
 }
-
 
 app.listen(3978 || 3978, function () {
   console.log('app listening on port 3978!');
