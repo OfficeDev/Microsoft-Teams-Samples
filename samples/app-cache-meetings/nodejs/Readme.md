@@ -21,7 +21,7 @@ This sample feature shows how to improve the subsequent loading time of an App t
 **Interaction with App**
 ![App-Cache](Images/AppCacheSample.gif)  
 
-**Change of Teams theme**.
+**Change of App theme when teams theme changes to (light,dark and contrast)**.
 ![App-Cache-ChangeTheme](Images/AppCacheThemeChange.gif) 
  
 ## Prerequisites
