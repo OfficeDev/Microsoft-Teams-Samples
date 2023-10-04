@@ -26,36 +26,29 @@ namespace MeetingEvents.Bots
         }
 
         /// <summary>
-        /// Activity Handler for Meeting Participant event
+        /// Activity Handler for Meeting Participant join event
         /// </summary>
+        /// <param name="meeting"></param>
         /// <param name="turnContext"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
+        protected override async Task OnTeamsMeetingParticipantsJoinAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " has joined the meeting.")));
+            return;
+        }
 
-            if (turnContext.Activity.Type == "event" && turnContext.Activity.Name == "application/vnd.microsoft.meetingParticipantJoin" || turnContext.Activity.Name == "application/vnd.microsoft.meetingParticipantLeave")
-            {
-                JObject value = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
-
-                if (value["members"] == null)
-                {
-                    return;
-                }
-                JObject user = JsonConvert.DeserializeObject<JObject>(value["members"]["user"].ToString());
-                string userName = user["name"].ToString();
-
-                if (turnContext.Activity.Name == "application/vnd.microsoft.meetingParticipantJoin")
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(userName, "has joined the meeting.")));
-                }
-
-                if (turnContext.Activity.Name == "application/vnd.microsoft.meetingParticipantLeave")
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(userName, "left the meeting.")));
-                }
-            }
-
+        /// <summary>
+        /// Activity Handler for Meeting Participant leave event
+        /// </summary>
+        /// <param name="meeting"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override async Task OnTeamsMeetingParticipantsLeaveAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " left the meeting.")));
+            return;
         }
 
         /// <summary>
@@ -63,15 +56,28 @@ namespace MeetingEvents.Bots
         /// </summary>
         private Attachment createAdaptiveCardInvokeResponseAsync(string userName, string action)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.4"))
             {
                 Body = new List<AdaptiveElement>
                 {
-                    new AdaptiveTextBlock
+                    new AdaptiveRichTextBlock
                     {
-                        Text = userName + action,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
+                        Inlines = new List<AdaptiveInline>
+                        {
+                            new AdaptiveTextRun
+                            {
+                                Text = userName,
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Default,
+                            },
+                            new AdaptiveTextRun
+                            {
+                                Text = action,
+                                Weight = AdaptiveTextWeight.Default,
+                                Size = AdaptiveTextSize.Default,
+                            }
+                        },
+                    Spacing = AdaptiveSpacing.Medium,
                     }
                 }
             };

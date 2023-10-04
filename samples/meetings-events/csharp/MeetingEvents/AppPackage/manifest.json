@@ -56,11 +56,7 @@
         },
         {
           "name": "OnlineMeetingParticipant.Read.Chat",
-          "type": "Delegated"
-        },
-        {
-          "name": "ChannelMeetingParticipant.Read.Group",
-          "type": "Delegated"
+          "type": "Application"
         }
       ]
     }
