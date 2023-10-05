@@ -6,19 +6,20 @@
 import { useState } from "react";
 import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import "../components/index.css";
 
 /// </summary>
 ///  logitem to show the activity log
 /// </summary>
 function logItem(action: string, actionColor: string, message: string) {
-   
+
     return ("<span style='font-weight:bold;color:" +
-    actionColor +
-    "'>" +
-    action +
-    "</span> " +
-    message +
-    "</br>");
+        actionColor +
+        "'>" +
+        action +
+        "</span> " +
+        message +
+        "</br>");
 }
 
 /// </summary>
@@ -44,7 +45,7 @@ const beforeUnloadHandler = (
 /// </summary>
 const loadHandler = (
     setItems: React.Dispatch<React.SetStateAction<string[]>>,
-    data: microsoftTeams.LoadContext) => { 
+    data: microsoftTeams.LoadContext) => {
     setItems((Items) => [...Items, logItem("OnLoad", "blue", "Started for " + data.entityId)]);
 
     // Use the entityId, contentUrl to route to the correct page within your App and then invoke notifySuccess
@@ -54,13 +55,42 @@ const loadHandler = (
 };
 
 const AppCacheTab = () => {
+    let app = microsoftTeams.app;
     const [items, setItems] = useState<string[]>([]);
     const [title, setTitle] = useState("App Caching Sample");
-  
+    const [appTheme, setAppTheme] = useState("");
+
     React.useEffect(() => {
-        let app = microsoftTeams.app;
         app.initialize().then(app.getContext).then((context: any) => {
             app.notifySuccess();
+
+            // Get default theme from app context and set app-theme
+            let defaultTheme = context.app.theme;
+
+            switch (defaultTheme) {
+                case 'dark':
+                    setAppTheme("theme-dark");
+                    break;
+                default:
+                    setAppTheme('theme-light');
+            }
+
+            // Handle app theme when 'Teams' theme changes
+            microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                switch (theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-dark');
+                }
+            });
 
             // Check if the framecontext is set to sidepanel
             if (context.page.frameContext === "sidePanel") {
@@ -72,7 +102,7 @@ const AppCacheTab = () => {
 
                 microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload: any) => {
                     const result = beforeUnloadHandler(setItems, readyToUnload);
-                   
+
                     return result;
                 });
 
@@ -97,7 +127,7 @@ const AppCacheTab = () => {
     }, []);
 
     return (
-        <div>
+        <div className={appTheme}>
             <h3>{title}</h3>
             {items.map((item) => {
                 return <div dangerouslySetInnerHTML={{ __html: item }} />;
