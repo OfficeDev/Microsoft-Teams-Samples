@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-Tag-Mention-Bot-csharp",
+    "name": "officedev-microsoft-teams-samples-bot-tag-mention-csharp",
     "source": "officeDev",
     "title": "Tag Mention Bot using Bot Framework",
     "shortDescription": "This sample app demonstrates the use of tag mention funtionality in teams scope.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-tag-mention/csharp",
     "longDescription": [
       "This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework."
     ],
-    "creationDateTime": "2023-09-06",
-    "updateDateTime": "2023-09-06",
+    "creationDateTime": "2023-10-06",
+    "updateDateTime": "2023-10-06",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/Tag-Mention-Bot/csharp/Images/Tag-Mention-Bot.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-tag-mention/csharp/Images/Tag-mention-bot.gif",
         "alt": "Solution UX showing tag mention Bot using Bot Framework v4"
       }
     ],

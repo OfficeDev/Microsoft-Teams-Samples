@@ -9,8 +9,8 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "09/06/2023 20:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-Tag-Mention-Bot-csharp
+ createdDate: "10/06/2023 20:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-tag-mention-csharp
 ---
 
 # Tag mention bot
@@ -34,14 +34,69 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 
 ## Setup
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
+### Register you app with Azure AD.
 
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Under **Manage**, select **Expose an API**. 
+5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
+    * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
+6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+7. Set **Who can consent?** to `Admins and users`
+8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+    * **Admin consent title:** Teams can access the user’s profile.
+    * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+    * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+    * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+9. Ensure that **State** is set to **Enabled**
+10. Select **Add scope**
+    * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+        * `api://[ngrokDomain].ngrok-free.app/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+    * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+    * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+12. Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -\> Delegated permissions.
+    - `TeamworkTag.Read` 
+    - `TeamworkTag.ReadWrite`
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+13. Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+- Set redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** `https://token.botframework.com/.auth/web/redirect`. This will be use for bot authenticaiton. 
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+
+15. Create a Bot Registration
+   - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+   - Select Configuration section.
+   - Under configuration -> Add OAuth connection string.
+   - Provide connection Name : for eg `ssoconnection`
+   - Select service provider ad `Azure Active Directory V2`
+   - Complete the form as follows:
+
+    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file.
+    b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    d. **Tenant ID**  Enter value as `common`.
+    e. **Token Exchange Url** Enter the url in format `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`(Refer step 1.5)
+    f. Provide **Scopes** like "User.Read openid"
+
+### 2. Setup NGROK
 1) Run ngrok - point to port 3978
 
    ```bash
    ngrok http 3978 --host-header="localhost:3978"
-   ```
+   ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
@@ -49,48 +104,52 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Setup for Bot
+### 3. Setup for code
+  
+1. Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
 
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
-
-3) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-4) If you are using Visual Studio
-   - Launch Visual Studio
+2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/Tag-Mention-Bot/csharp` folder
-   - Select `TagMentionBot.csproj` or `TagMentionBot.sln`file
+   - Navigate to folder where repository is cloned then `samples\meetings-events\csharp\MeetingEvents.sln`
+ 
+3. Setup and run the bot from Visual Studio: 
+    Modify the `appsettings.json` and fill in the following details:
+   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{MicrosoftAppTenantId}}` - Enter value as `common`.
+   - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
+   - `{{ ConnectionName }}` - Generated from step 15.
+   - Press `F5` to run the project
 
-5) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+### 4. Setup Manifest for Teams
 
-6) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+1. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 3
+   - `<<domain-name>>` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `AppManifest_Hub` folder into a `AppManifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/Tag-Mention-Bot/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams and then go to side panel, select Apps
+   - Choose Upload a custom App
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 
 ## Running the sample
 
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+
+>Note : Before using the Tag Mention sample in a team channel scope, please install this app in your Personal scope to enable Single Sign-On (SSO) login.
+
+**Personal Scope**
+
+1. **SSO Login**
+   ![groupChat-BotCommands-interactions ](Images/personal-sso-interaction.png)
+
+**Team channel Scope**
 
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with necessary commands
@@ -128,11 +187,11 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
+- [Tag mention](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-and-group-conversations?tabs=dotnet#tag-mention)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
-- [Tag mention](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-and-group-conversations?tabs=dotnet#tag-mention)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/Tag-Mention-Bot-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-tag-mention-csharp" />

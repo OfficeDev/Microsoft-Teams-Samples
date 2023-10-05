@@ -7,11 +7,11 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.BotBuilderSamples.Bots;
+using TagMentionBot.Bots;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Bot.Connector.Authentication;
 
-namespace Microsoft.BotBuilderSamples
+namespace TagMentionBot
 {
     public class Startup
     {

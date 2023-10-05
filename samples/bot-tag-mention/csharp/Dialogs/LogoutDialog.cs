@@ -9,7 +9,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 
-namespace Microsoft.BotBuilderSamples
+namespace TagMentionBot
 {
     public class LogoutDialog : ComponentDialog
     {
@@ -43,25 +43,6 @@ namespace Microsoft.BotBuilderSamples
             }
 
             return await base.OnBeginDialogAsync(innerDc, options, cancellationToken);
-        }
-
-        /// <summary>
-        /// Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.
-        /// </summary>
-        /// <param name="innerDc">The inner DialogContext for the current turn of conversation.</param>
-        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>A task representing the asynchronous operation.</returns>
-        protected override async Task<DialogTurnResult> OnContinueDialogAsync(
-            DialogContext innerDc,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            var result = await InterruptAsync(innerDc, cancellationToken);
-            if (result != null)
-            {
-                return result;
-            }
-
-            return await base.OnContinueDialogAsync(innerDc, cancellationToken);
         }
 
         /// <summary>

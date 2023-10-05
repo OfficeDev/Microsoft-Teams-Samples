@@ -11,7 +11,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.BotBuilderSamples.Bots
+namespace TagMentionBot.Bots
 {
     public class TeamsConversationBot<T> : DialogBot<T> where T : Dialog
     {
@@ -23,6 +23,14 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
         }
 
+        /// <summary>
+        /// Called when a new user is joins the team, or when the application is first installed
+        /// </summary>
+        /// <param name="membersAdded"></param>
+        /// <param name="teamInfo"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> membersAdded, TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var teamMember in membersAdded)
@@ -34,6 +42,12 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// This is triggered during the app installation update activity
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Conversation.ConversationType == "channel")
@@ -42,7 +56,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
             else
             {
-                await turnContext.SendActivityAsync("Welcome to Microsoft Teams Tag mention demo bot.");
+                await turnContext.SendActivityAsync("Welcome to Tag mention demo bot. Type anything to get logged in. Type 'logout' to sign-out");
             }
         }
     }

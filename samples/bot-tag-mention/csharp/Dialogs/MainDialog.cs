@@ -16,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Microsoft.BotBuilderSamples
+namespace TagMentionBot
 {
     public class MainDialog : LogoutDialog
     {
@@ -50,12 +50,14 @@ namespace Microsoft.BotBuilderSamples
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+        // Method to invoke auth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             _logger.LogInformation("PromptStepAsync() called.");
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
+        // Sends tag mention adaptive card.
         private async Task<ResourceResponse> TagMentionAdaptivecard(WaterfallStepContext stepContext, CancellationToken cancellationToken, string tagName, string tagId)
         {
             var adaptiveCardTemplate = Path.Combine(".", "Resources", "UserMentionCardTemplate.json");
@@ -66,75 +68,86 @@ namespace Microsoft.BotBuilderSamples
                 tagId = tagId,
                 tagName = tagName
             };
+
             string cardJSON = template.Expand(memberData);
             var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(cardJSON),
             };
+
             return await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
 
+        // Method to invoke Tag mention functionality flow.
         private async Task<DialogTurnResult> MentionTagAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            // Get the token from the previous step. Note that we could also have gotten the
-            // token directly from the prompt itself. There is an example of this in the next method.
             var tokenResponse = (TokenResponse)stepContext.Result;
-            bool tagExists = false;
-            if (tokenResponse?.Token != null)
+            if (stepContext.Context.Activity.Conversation.ConversationType == "personal" && tokenResponse?.Token != null)
             {
-                try
-                {
-                    stepContext.Context.Activity.RemoveRecipientMention();
-                    if (stepContext.Context.Activity.Text.Trim().ToLower().Contains("<at>"))
-                    {
-                        var tagName = stepContext.Context.Activity.Text.Replace("<at>", string.Empty).Replace("</at>", string.Empty).Trim();
-                        var tagID = stepContext.Context.Activity.Entities[1].Properties["mentioned"]["id"].ToString();
-                        await TagMentionAdaptivecard(stepContext, cancellationToken, tagName, tagID);
-
-                    }
-                    else if (stepContext.Context.Activity.Text.Trim().ToLower() != "")
-                    {
-                        SimpleGraphClient client = null;
-                        TeamDetails teamDetails = null;
-                        try
-                        {
-                            // Pull in the data from the Microsoft Graph.
-                            client = new SimpleGraphClient(tokenResponse.Token);
-                            teamDetails = await TeamsInfo.GetTeamDetailsAsync(stepContext.Context, stepContext.Context.Activity.TeamsGetTeamInfo().Id, cancellationToken);
-                        }
-                        catch (Exception ex)
-                        {
-                            await stepContext.Context.SendActivityAsync("You don't have Graph API permissions to fetch tag's information. Please use this command to mention a tag: \"`@<Bot-name>  @<your-tag>`\" to experience tag mention using bot.");
-                        }
-                        var result = await client.GetTag(teamDetails.AadGroupId);
-                        foreach (var tagDetails in result.CurrentPage)
-                        {
-                            if (tagDetails.DisplayName == stepContext.Context.Activity.Text.Trim().ToLower())
-                            {
-                                tagExists = true;
-                                await TagMentionAdaptivecard(stepContext, cancellationToken, tagDetails.DisplayName, tagDetails.Id);
-                                break;
-                            }
-                        }
-                        if (!tagExists)
-                        {
-                            await stepContext.Context.SendActivityAsync("Provided tag name is not available in this team. Please try with another tag name or create a new tag.");
-                        }
-                    }
-                    else
-                    {
-                        await stepContext.Context.SendActivityAsync("Please provide a tag name while mentioning the bot as \"`@<Bot-name> <your-tag-name>`\" or mention a tag as \"`@<Bot-name> @<your-tag>`\"");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError("Error occurred while processing your request.", ex.Message);
-                }
+                await stepContext.Context.SendActivityAsync("You have successfully logged in. Please install the app in the team scope to use the Tag mention functionality.");
             }
             else
             {
-                _logger.LogInformation("Response token is null or empty.");
+                // Get the token from the previous step. Note that we could also have gotten the
+                // token directly from the prompt itself. There is an example of this in the next method.
+                bool tagExists = false;
+                if (tokenResponse?.Token != null)
+                {
+                    try
+                    {
+                        stepContext.Context.Activity.RemoveRecipientMention();
+                        if (stepContext.Context.Activity.Text.Trim().ToLower().Contains("<at>"))
+                        {
+                            var tagName = stepContext.Context.Activity.Text.Replace("<at>", string.Empty).Replace("</at>", string.Empty).Trim();
+                            var tagID = stepContext.Context.Activity.Entities[1].Properties["mentioned"]["id"].ToString();
+                            await TagMentionAdaptivecard(stepContext, cancellationToken, tagName, tagID);
+
+                        }
+                        else if (stepContext.Context.Activity.Text.Trim().ToLower() != "")
+                        {
+                            SimpleGraphClient client = null;
+                            TeamDetails teamDetails = null;
+                            try
+                            {
+                                // Pull in the data from the Microsoft Graph.
+                                client = new SimpleGraphClient(tokenResponse.Token);
+                                teamDetails = await TeamsInfo.GetTeamDetailsAsync(stepContext.Context, stepContext.Context.Activity.TeamsGetTeamInfo().Id, cancellationToken);
+                            }
+                            catch (Exception ex)
+                            {
+                                await stepContext.Context.SendActivityAsync("You don't have Graph API permissions to fetch tag's information. Please use this command to mention a tag: \"`@<Bot-name>  @<your-tag>`\" to experience tag mention using bot.");
+                            }
+                            var result = await client.GetTag(teamDetails.AadGroupId);
+                            foreach (var tagDetails in result.CurrentPage)
+                            {
+                                if (tagDetails.DisplayName == stepContext.Context.Activity.Text.Trim().ToLower())
+                                {
+                                    tagExists = true;
+                                    await TagMentionAdaptivecard(stepContext, cancellationToken, tagDetails.DisplayName, tagDetails.Id);
+                                    break;
+                                }
+                            }
+                            if (!tagExists)
+                            {
+                                await stepContext.Context.SendActivityAsync("Provided tag name is not available in this team. Please try with another tag name or create a new tag.");
+                            }
+                        }
+                        else
+                        {
+                            await stepContext.Context.SendActivityAsync("Please provide a tag name while mentioning the bot as \"`@<Bot-name> <your-tag-name>`\" or mention a tag as \"`@<Bot-name> @<your-tag>`\"");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError("Error occurred while processing your request.", ex.Message);
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("Response token is null or empty.");
+                }
             }
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
