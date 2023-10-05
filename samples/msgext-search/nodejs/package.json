@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
   },
   "dependencies": {
     "axios": "^0.21.2",

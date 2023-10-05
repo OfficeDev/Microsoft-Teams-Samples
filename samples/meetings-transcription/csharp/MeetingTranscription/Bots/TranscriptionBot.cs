@@ -80,7 +80,7 @@ namespace MeetingTranscription.Bots
             var meetingInfo = await TeamsInfo.GetMeetingInfoAsync(turnContext);
 
             var result = await graphHelper.GetMeetingTranscriptionsAsync(meetingInfo.Details.MsGraphResourceId);
-            if (string.IsNullOrEmpty(result))
+            if (!string.IsNullOrEmpty(result))
             {
                 transcriptsDictionary.AddOrUpdate(meetingInfo.Details.MsGraphResourceId, result, (key, newValue) => result);
 

@@ -16,7 +16,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",

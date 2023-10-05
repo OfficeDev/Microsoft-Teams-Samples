@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.appauth",
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{Base_URL_Domain}/botid-{{Microsoft-App-Id}}"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "App auth"
+  },
+  "description": {
+    "short": "Authentication sample for Microsoft Teams",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "staticTabs": [
+    {
+      "contentUrl": "https://{Base_URL_Domain}/AuthTab",
+      "entityId": "Auth",
+      "name": "Auth",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://{Base_URL_Domain}/silent-tab?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+      "entityId": "silentAuth",
+      "name": "Silent Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": true
+    }
+  ],
+  "accentColor": "#60A18E",
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "{Base_URL_Domain}",
+    "token.botframework.com"
+  ]
+}

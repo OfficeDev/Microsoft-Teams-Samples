@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "contoso.com",
+  "developer": {
+    "name": "contoso",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Both Silent and Simple",
+    "full": "Both Silent and Simple"
+  },
+  "description": {
+    "short": "Both Silent and Simple",
+    "full": "Both Silent and Simple"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<BASE-URI>>/ChooseAuth",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ],
+      "context": [
+        "channelTab"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"
+  }
+}

@@ -28,8 +28,8 @@ class MeetingNotificationBot extends TeamsActivityHandler {
           var meetingMembers = await TeamsInfo.getPagedMembers(context);
           let tenantId = context.activity.channelData.tenant.id;
 
-          for (var member in meetingMembers) {
-            let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
+          for (var member in meetingMembers.members) {
+            let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, meetingMembers.members[member].aadObjectId, tenantId);
 
             // Select only those members that present when meeting is started.
             if (participantDetail.meeting.inMeeting) {

@@ -27,7 +27,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 * Immersive Reading Support for Cards
 
 ## Interaction with bot
-![bot-conversations ](Images/bot-conversations.gif)
+![bot-conversations ](Images/bot-conversation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -38,7 +38,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 
@@ -47,9 +47,15 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 1) Setup for Bot
 
@@ -60,7 +66,7 @@ the Teams service needs to call into the bot.
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 1) Clone the repository
 
@@ -81,7 +87,7 @@ the Teams service needs to call into the bot.
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains`, replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
@@ -106,7 +112,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![personal-AddedBot ](Images/personal-AddedBot.png)
 
    **Show Welcome command interaction:**
-  ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCard-Interaction.png)
+  ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCommand-Cards.png)
 
    - **Group Chat Scope Interactions:**
 
@@ -117,7 +123,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
    **Show Welcome command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interaction.png)
 
   - **Team Scope Interactions:**
 
@@ -161,14 +167,45 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    - **Group Chat Scope Interactions:**
 
    **MessageAllMembers command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+  ![groupChat-MessageAllMembers-interaction ](Images/groupChat-MessageAllMembers-interaction.png)
 
   - **Team Scope Interactions:**
 
    **MessageAllMembers command interaction:**
-  ![team-MessageAllMembers-interaction ](Images/team-MessageAllMembers-interaction.png)
+  ![team-MessageAllMembers-interactions ](Images/team-MessageAllMembers-interactions.png)
 
-4. **ImmersiveReader**
+4.**Read Receipt**
+
+  **Check Read count**
+  - **Result:** The bot will check the count of members who have read your message which sent through `MessageAllMembers`. User can also reset the count using `Reset read count` command
+  - **Valid Scopes:** personal, group chat, team chat
+
+  - **Personal Scope Interactions:**
+
+   **Check Read count command interaction:**
+  ![personal-CheckReadCount-interaction2 ](Images/personal-CheckReadCount-interaction2.png)
+
+   **Reset Read count command interaction:**
+  ![personal-ResetReadCount-interaction1 ](Images/personal-ResetReadCount-interaction1.png)
+
+   - **Group Chat Scope Interactions:**
+
+   **Check Read count command interaction:**
+  ![groupChat-CheckReadCount-interaction ](Images/groupChat-CheckReadCount-interaction.png)
+
+   **Reset Read count command interaction:**
+  ![groupChat-ResetReadCount-interaction ](Images/groupChat-ResetReadCount-interaction.png)
+
+  - **Team Scope Interactions:**
+
+  **Check Read count command interaction:**
+  ![team-CheckReadCount-interaction ](Images/team-CheckReadCount-interaction.png)
+
+   **Reset Read count command interaction:**
+  ![team-ResetReadCount-interaction ](Images/team-ResetReadCount-interaction.png)
+
+
+5. **ImmersiveReader**
 - You can use the immersive reader property of adaptive cards by using the speak property.
 `immersivereader` command will send an adpative card in teams chat.
 ![immersive-reader-card](Images/immersiveReaderCard.png)
@@ -179,7 +216,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
 ![immersive-reader-screen](Images/immersiveReaderScreen.png)
 
- 5. **Message update events for user messages**
+ 6. **Message update events for user messages**
 - You will recieve event updates for message edit/delete features.
 
 - Message is edited
@@ -204,5 +241,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
+- [Receive a read receipt](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?branch=pr-en-us-9184&tabs=dotnet1%2Capp-manifest-v112-or-later%2Cdotnet2%2Cdotnet3%2Cdotnet4%2Cdotnet5%2Cdotnet#receive-a-read-receipt)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-csharp" />

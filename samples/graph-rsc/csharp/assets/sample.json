@@ -9,7 +9,7 @@
       "Shows how to request RSC permissions, use them to call Microsoft Graph, and hos to enumerate permission grants through teams tab."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2023-09-25",
     "products": [
       "Teams"
     ],
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }

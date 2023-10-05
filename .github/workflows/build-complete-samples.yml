@@ -172,6 +172,10 @@ jobs:
               name: 'tab-adaptive-cards'
               version: '6.0.x'
 
+            - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
+              name: 'tab-external-auth'
+              version: '6.0.x'
+
             - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
               name: 'tab-conversations'
               version: '6.0.x'
@@ -370,11 +374,7 @@ jobs:
 
             - project_path: 'samples/msgext-search/csharp/TeamsMessagingExtensionsSearch.csproj'
               name: 'msgext-search'
-              version: '6.0.x'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
-              name: 'bot-tab-conversations'
-              version: '6.0.x'      
+              version: '6.0.x'   
                     
             - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
               name: 'msteams-application-resourcehub'
@@ -438,6 +438,10 @@ jobs:
 
             - project_path: 'samples/meetings-app-icon-badging/csharp/AppIconBadgingInMeetings/AppIconBadgingInMeetings.csproj'
               name: 'meetings-app-icon-badging'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/MsgextUnfurlingAcLoop.csproj'
+              name: 'msgext-unfurling-ac-loop-components'
               version: '6.0.x'
 
       fail-fast: false
@@ -611,9 +615,9 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs/server'
+            - project_path: 'samples/meetings-sidepanel/nodejs'
               name: 'meetings-sidepanel'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
               name: 'meetings-sidepanel-clientapp'
@@ -629,15 +633,15 @@ jobs:
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '14.x'
+              version: '18.2.x'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
-              version: '14.x'
+              version: '16.8.x'
 
-            - project_path: 'samples/meeting-recruitment-app/nodejs/ClientApp'
+            - project_path: 'samples/meeting-recruitment-app/nodejs'
               name: 'meeting-recruitment-app-clientapp'
-              version: '14.x'
+              version: '16.8.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
               name: 'msgext-message-reminder'
@@ -939,7 +943,7 @@ jobs:
               name: 'app-anonymous-users-clientapp'
               version: '18.x'
 
-            - project_path: 'samples/app-anonymous-users/nodejs/api'
+            - project_path: 'samples/app-anonymous-users/nodejs'
               name: 'app-anonymous-users-api'
               version: '18.x'
 
@@ -962,9 +966,25 @@ jobs:
             - project_path: 'samples/tab-multi-hub/ts'
               name: 'tab-multi-hub'
               version: '18.x'
+            
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/nodejs'
+              name: 'msgext-unfurling-ac-loop-components'
+              version: '18.x'
 
             - project_path: 'samples/bot-ai-enterprise-search/nodejs'
               name: 'bot-ai-enterprise-search'
+              version: '18.x'
+
+            - project_path: 'samples/msgext-ai-sentiment-analysis/nodejs'
+              name: 'msgext-ai-sentiment-analysis'
+              version: '18.x'
+            
+            - project_path: 'samples/bot-configuration-app/nodejs'
+              name: 'bot-configuration-app'
+              version: '18.x'
+
+            - project_path: 'samples/tab-add-in-combined/nodejs'
+              name: 'tab-add-in-combined'
               version: '18.x'
 
       fail-fast: false

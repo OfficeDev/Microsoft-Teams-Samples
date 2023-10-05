@@ -32,7 +32,7 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 ![ Module ](template-bot-master-csharp/Images/Sample.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams Bot:** [Manifest](/samples/app-complete-sample/csharp/demo-manifest/Complete-Sample.zip)
 
@@ -46,7 +46,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
     
@@ -60,16 +60,22 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 	- Register a AAD aap registration in Azure portal.
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
-      - Run ngrok - point to port 3978
+3. Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
 	```bash
-	 ngrok http 3978 --host-header="localhost:3978"
-	```   
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup for code
 
   - Clone the repository
@@ -81,7 +87,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
   - `{{BotId}}` - Generated from Step 1 is the application app id
   - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
   - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
+  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
 
 	Here is an example for reference:
 		<add key="BotId" value="Bot_Handle_Here" />
@@ -113,17 +119,17 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 7. Setup Manifest for Teams
 	- __*This step is specific to Teams.*__
-	    - **Edit** the `manifest.json` contained in the ./manifest or ./manifest_hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
-	    - **Zip** up the contents of the `manifest` or 'manifest_hub.json' folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+	    - **Edit** the `manifest.json` contained in the ./AppManifest or ./AppManifest_Hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+	    - **Zip** up the contents of the `AppManifest` or `AppManifest_Hub` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 	- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 	   - Go to Microsoft Teams. From the lower left corner, select Apps
 	   - From the lower left corner, choose Upload a custom App
-	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
+	   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    		
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_hub` folder with the required values.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
@@ -146,7 +152,7 @@ Most code files that need to be compile reside in the src directory. Most files 
 
 ## Files and Directories
 
-* **manifest**<br><br>
+* **appManifest**<br><br>
 This directory holds the skeleton of a manifest.json file that can be altered in order sideload this application into a team.
 
 * **middleware**<br><br>

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -18,6 +18,8 @@ using Newtonsoft.Json.Linq;
 using AdaptiveCards.Templating;
 using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using System.Collections.Concurrent;
+using System.Collections;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -25,6 +27,10 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         private string _appId;
         private string _appPassword;
+        private static int _counter = 0;
+        private static List<string> users = new List<string>();
+        private static ConcurrentDictionary<string, TeamsChannelAccount> teamMemberDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
+        private static ConcurrentDictionary<string, string> teamMemberMessageIdDetails = new ConcurrentDictionary<string, string>();
 
         public TeamsConversationBot(IConfiguration config)
         {
@@ -49,12 +55,18 @@ namespace Microsoft.BotBuilderSamples.Bots
                 await GetSingleMemberAsync(turnContext, cancellationToken);
             else if (text.Contains("update"))
                 await CardActivityAsync(turnContext, true, cancellationToken);
+            else if (text.Contains("aadid"))
+                await MessageAllMembersAsync(turnContext, cancellationToken, true);
             else if (text.Contains("message"))
-                await MessageAllMembersAsync(turnContext, cancellationToken);
+                await MessageAllMembersAsync(turnContext, cancellationToken, false);
             else if (text.Contains("immersivereader"))
                 await SendImmersiveReaderCardAsync(turnContext, cancellationToken);
             else if (text.Contains("delete"))
                 await DeleteCardActivityAsync(turnContext, cancellationToken);
+            else if (text.Contains("check"))
+                await CheckReadUserCount(turnContext, cancellationToken);
+            else if (text.Contains("reset"))
+                await ResetReadUserCount(turnContext, cancellationToken);
             else
                 await CardActivityAsync(turnContext, false, cancellationToken);
         }
@@ -63,16 +75,67 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var teamMember in membersAdded)
             {
-                if(teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
+                if (teamMember.Id != turnContext.Activity.Recipient.Id && turnContext.Activity.Conversation.ConversationType != "personal")
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
                 }
             }
         }
 
+        /// <summary>
+        /// Checks the count of members who have read the message sent by MessageAllMembers command
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        private async Task CheckReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            if (teamMemberDetails.Count != 0)
+            {
+                var userList = string.Join(", ", users);
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Number of members read the message : {_counter} \n\n Members : {userList}"), cancellationToken);
+            }
+            else
+            {
+                await turnContext.SendActivityAsync(MessageFactory.Text("Read count is zero. Please make sure to send message to all members firstly to check the count of members who have read your message."), cancellationToken);
+            }
+        }
+
+        /// <summary>
+        /// Resets the check count of members who have read the message sent by MessageAllMembers command
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        private async Task ResetReadUserCount(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            teamMemberDetails = new ConcurrentDictionary<string, TeamsChannelAccount>();
+            _counter = 0;
+            users = new List<string>();
+            teamMemberMessageIdDetails = new ConcurrentDictionary<string, string>();
+        }
+
+        /// <summary>
+        /// Invoked when user read the message sent by bot in personal scope
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        protected override async Task OnTeamsReadReceiptAsync(ReadReceiptInfo readReceiptInfo, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            teamMemberMessageIdDetails.TryGetValue(turnContext.Activity.From.AadObjectId, out string messageId);
+            if (readReceiptInfo.IsMessageRead(messageId))
+            {
+                teamMemberDetails.TryGetValue(turnContext.Activity.From.AadObjectId, out TeamsChannelAccount memberDetails);
+                _counter++;
+                users.Add(memberDetails.Name);
+                teamMemberMessageIdDetails.TryRemove(turnContext.Activity.From.AadObjectId, out string valueRemoved);
+            }
+        }
+
         protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            if(turnContext.Activity.Conversation.ConversationType == "channel")
+            if (turnContext.Activity.Conversation.ConversationType == "channel")
             {
                 await turnContext.SendActivityAsync($"Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in {turnContext.Activity.Conversation.Name}");
             }
@@ -98,6 +161,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                             new CardAction
                             {
                                 Type = ActionTypes.MessageBack,
+                                Title = "Message all members using AADId",
+                                Text = "MessageAllMembersUsingAADId"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
                                 Title = "Who am I?",
                                 Text = "whoami"
                             },
@@ -118,6 +187,18 @@ namespace Microsoft.BotBuilderSamples.Bots
                                 Type = ActionTypes.MessageBack,
                                 Title = "Delete card",
                                 Text = "Delete"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Check read count",
+                                Text = "check"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Reset read count",
+                                Text = "reset"
                             }
                         }
             };
@@ -165,8 +246,16 @@ namespace Microsoft.BotBuilderSamples.Bots
             await turnContext.DeleteActivityAsync(turnContext.Activity.ReplyToId, cancellationToken);
         }
 
-        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        /// <summary>
+        /// Using proactive messaging, messages sent to all members of the chat.
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="isAadId"></param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        private async Task MessageAllMembersAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken, bool isAadId)
         {
+            await ResetReadUserCount(turnContext, cancellationToken);
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
             var serviceUrl = turnContext.Activity.ServiceUrl;
             var credentials = new MicrosoftAppCredentials(_appId, _appPassword);
@@ -182,32 +271,42 @@ namespace Microsoft.BotBuilderSamples.Bots
                 {
                     IsGroup = false,
                     Bot = turnContext.Activity.Recipient,
-                    Members = new ChannelAccount[] { teamMember },
+                    Members = isAadId ? new ChannelAccount[] { new ChannelAccount(teamMember.AadObjectId) } : new ChannelAccount[] { teamMember },
                     TenantId = turnContext.Activity.Conversation.TenantId,
                 };
+                try
+                {
+                    await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
+                   credentials.MicrosoftAppId,
+                   teamsChannelId,
+                   serviceUrl,
+                   credentials.OAuthScope,
+                   conversationParameters,
+                   async (t1, c1) =>
+                   {
+                       conversationReference = t1.Activity.GetConversationReference();
+                       await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
+                           _appId,
+                           conversationReference,
+                           async (t2, c2) =>
+                           {
+                               var message = await t2.SendActivityAsync(proactiveMessage, c2);
+                               teamMemberDetails.TryAdd(teamMember.AadObjectId, teamMember);
+                               teamMemberMessageIdDetails.TryAdd(teamMember.AadObjectId, message.Id);
+                           },
+                           cancellationToken);
+                   },
+                   cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
 
-                await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
-                    credentials.MicrosoftAppId,
-                    teamsChannelId,
-                    serviceUrl,
-                    credentials.OAuthScope,
-                    conversationParameters,
-                    async (t1, c1) =>
-                    {
-                        conversationReference = t1.Activity.GetConversationReference();
-                        await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
-                            _appId,
-                            conversationReference,
-                            async (t2, c2) =>
-                            {
-                                await t2.SendActivityAsync(proactiveMessage, c2);
-                            },
-                            cancellationToken);
-                    },
-                    cancellationToken);
+
             }
 
-            await turnContext.SendActivityAsync(MessageFactory.Text("All messages have been sent."), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text($"All messages have been sent to {teamMemberDetails.Count} members."), cancellationToken);
         }
 
         private static async Task<List<TeamsChannelAccount>> GetPagedMembers(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)

@@ -34,7 +34,7 @@ The minimum prerequisites to run this sample are:
   ```bash
   dotnet --version
   ```
-* [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+* [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 * [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account 
 
@@ -46,8 +46,15 @@ The minimum prerequisites to run this sample are:
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 2. Clone the repository
 
     ```bash
@@ -84,7 +91,7 @@ The minimum prerequisites to run this sample are:
    
 5. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
  
         Example :
 
@@ -97,7 +104,7 @@ The minimum prerequisites to run this sample are:
         ]
         ```
     
-    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 

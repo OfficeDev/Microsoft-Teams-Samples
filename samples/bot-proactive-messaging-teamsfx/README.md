@@ -16,9 +16,11 @@ This is a sample which shows how to save user's conversation reference informati
 - Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button.
 - From TeamsFx CLI: Start debugging the project by executing the command `teamsfx preview --local` in your project directory.
 
+**Note**: If deploying or provisioning the sample, please replace line 9 of file `bot/teamsBot.js` with .env.dev. (By default its set to `.env.local`)
+
 ## Edit the manifest
 
-You can find the Teams app manifest in `templates/appPackage` folder. The folder contains a manifest template file:
+You can find the Teams app manifest in `templates/appManifest` folder. The folder contains a manifest template file:
 * `manifest.template.json`
 
 Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
@@ -87,5 +89,3 @@ This sample provides following functionality:
 - [Bots in Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots)
 - [Proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages?tabs=dotnet)
 - [Step by step guide to send proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/sbs-send-proactive)
-
-

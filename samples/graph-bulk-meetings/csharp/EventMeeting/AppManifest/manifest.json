@@ -1,0 +1,59 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
+  "id": "<<Your Microsoft App Id>>",
+  "packageName": "com.microsoft.teams.botmeetingevents",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Meeting Events",
+    "full": "Sample for meeting events"
+  },
+  "description": {
+    "short": "Access real-time meeting events",
+    "full": "This sample demos a bot with access to meeting events"
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{BASE-URL}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "bots": [
+    {
+      "botId": "<<Your Microsoft App Id>>",
+      "scopes": [
+        "team",
+        "personal",
+        "groupchat"
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "<<domain-name>>",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "<<Your Microsoft App Id>>",
+    "resource": "https://{{BASE-URL}}",
+    "applicationPermissions": [
+      "OnlineMeeting.ReadBasic.Chat"
+    ]
+  }
+}

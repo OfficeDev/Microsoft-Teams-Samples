@@ -42,7 +42,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
 
 ## Setup
 
@@ -51,15 +51,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
 1) Run ngrok - point to port 5000
 
     ```bash
-    # ngrok http 5000 --host-header="localhost:5000"
+    ngrok http 5000 --host-header="localhost:5000"
     ```
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 5000 --allow-anonymous
+   ```
+
 ### 3. Setup for code
 - Clone the repository
 
@@ -88,23 +94,23 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - **This step is specific to Teams.**
 
-1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
+1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
-2) Zip the contents of `Manifest` or `Manifest_Hub` folder into a `manifest.zip`.
+2) Zip the contents of `AppManifest` or `AppManifest_Hub` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
   
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.

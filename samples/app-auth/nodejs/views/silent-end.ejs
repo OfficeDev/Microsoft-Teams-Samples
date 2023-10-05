@@ -1,0 +1,36 @@
+<script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    microsoftTeams.app.initialize();
+
+    // MSAL.js configuration
+    let msalConfig = {
+        auth: {
+            clientId: <%-clientId%>,
+            redirectUri: window.location.origin + "/silent-end",     // This should be in the list of redirect uris for the AAD app
+            navigateToLoginRequestUrl: false,
+        },
+        cache: {
+            cacheLocation: "localStorage",
+        }
+    };
+
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
+        const currentAccounts = msalInstance.getAllAccounts();
+        if (!currentAccounts || currentAccounts.length === 0) {
+            microsoftTeams.authentication.notifyFailure("Unable to login");
+            return;
+        } else {
+            microsoftTeams.authentication.notifySuccess();
+        }
+    })
+        .catch((error) => {
+            console.log(error);
+            microsoftTeams.authentication.notifyFailure(error);
+            return;
+        });
+</script>

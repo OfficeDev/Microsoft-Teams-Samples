@@ -8,35 +8,7 @@ $(document).ready(function () {
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
-        .catch((error) => {
-            console.log(error);
-            if (error === "invalid_grant") {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-                $("#adaptiveBtn").hide();
-            } else {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-                $("#adaptiveBtn").hide();
-            }
-        });
 });
-
-function requestConsent() {
-    getToken()
-        .then(data => {
-            $("#consent").hide();
-            $("#divError").hide();
-            getClientSideToken()
-                .then((clientSideToken) => {
-                    return getServerSideToken(clientSideToken);
-                })
-        });
-}
 
 function getToken() {
     return new Promise((resolve, reject) => {
@@ -67,9 +39,22 @@ function getClientSideToken() {
     });
 }
 
+function grantConsent() {
+    getToken()
+        .then(data => {
+            $("#consent").hide();
+            $("#grant-consent").hide();
+
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                });
+        });
+}
+
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-         microsoftTeams.app.getContext().then((context) => {
+        microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',
@@ -87,23 +72,15 @@ function getServerSideToken(clientSideToken) {
                     }
                 })
                 .then((responseJson) => {
-                    if (IsValidJSONString(responseJson)) {
-                        if (JSON.parse(responseJson).error)
-                            reject(JSON.parse(responseJson).error);
-                    } else if (responseJson) {
+                    if (responseJson == "") {
+                        $("#send-notification").hide();
+                        $("#consent").show();
+                        $("#grant-consent").show();
+                    } else {
                         accessToken = responseJson;
                         localStorage.setItem("accessToken", accessToken);
                     }
                 });
         });
     });
-}
-
-function IsValidJSONString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
 }

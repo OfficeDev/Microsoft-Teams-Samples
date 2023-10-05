@@ -1,0 +1,59 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.deeplinkbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Deep Link Bot",
+    "full": "Bot for Deep linking to tab"
+  },
+  "description": {
+    "short": "DeepLinkBot for Microsoft Teams",
+    "full": "This sample DeepLink app which demos to navigate to required item in tab."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/DeepLink",
+      "websiteUrl": "https://{{domain-name}}",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}",
+    "{{domain-name}}"
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}

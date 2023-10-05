@@ -27,7 +27,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
 ![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Staggered Permission sample:** [Manifest](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
  
@@ -39,7 +39,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -89,12 +89,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 2. Setup NGROK
+ - Run ngrok - point to port 3978
 
-- Run ngrok - point to port 3978
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
-```bash
- ngrok http 3978 --host-header="localhost:3978"
-```
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3. Setup for code
 
@@ -107,8 +112,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
-  - `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI. * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`..
+  - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+  - `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI. * ex: `api://<your_tunnel_domain>/00000000-0000-0000-0000-000000000000`..
   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
   
 - Open the code in Visual Studio
@@ -118,16 +123,16 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 	 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://{{domain-name}}/{{Microsoft-App-Id}}"` with MicrosoftAppId. E.g. `"api://ngrok-free.app/00000000-0000-0000-0000-000000000000"`
-    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-staggered-permission\csharp\StaggeredPermission\Manifest_Hub` folder with the required values.
-    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-staggered-permission\csharp\StaggeredPermission\AppManifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `AppManifest_Hub` folder to create a `AppManifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample

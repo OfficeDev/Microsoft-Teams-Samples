@@ -30,7 +30,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 
 * Microsoft Teams is installed and you have an account
 * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-* [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+* [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 
@@ -50,9 +50,15 @@ the Teams service needs to call into the bot.
 
 3) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http 3978 --host-header="localhost:3978"
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ## Register Azure AD application
 Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
@@ -128,8 +134,8 @@ Click on Add Permissions to commit your changes.
 4. Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
 5. Click on 'Create' on the Azure bot.   
 6. Go to the created resource, ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`     
-8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/callback`) where you receive incoming notifications.
+7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running the tunneling application. Append with the path `/api/messages`     
+8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://<your_tunnel_domain>/callback`) where you receive incoming notifications.
 For example `https://contoso.com/teamsapp/callback`
 ![EnableCallingEndpoint ](Images/EnableCallingEndpoint.PNG)
 9. Save your changes.
@@ -168,7 +174,7 @@ For example `https://contoso.com/teamsapp/callback`
 }
 ````
 - Update `microsoft-app-id`, `tenant-Id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
-- Update `BotBaseUrl` with your `ngrok` URL.
+- Update `BotBaseUrl` with your `tunnel` URL.
 - Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
 
 **Create a Cognitive Services resource using the Azure portal:**
@@ -179,7 +185,7 @@ For example `https://contoso.com/teamsapp/callback`
 
 2. __*This step is specific to Teams*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-   - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`.
+    - **Edit** the `manifest.json` for `validDomains`, replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)

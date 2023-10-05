@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.samples",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://microsoft.com/privacy",
+    "termsOfUseUrl": "https://microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Targeted In-Meeting",
+    "full": "Targeted Meeting Notification Demo"
+  },
+  "description": {
+    "short": "Targeted In-Meeting Notification demo",
+    "full": "This sample app shows how to send in meeting targeted notifications."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "groupchat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "SendNotification",
+              "description": "Sends targeted meeting notification to selected members."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<domain-name>>",
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingNotification.Send.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}
