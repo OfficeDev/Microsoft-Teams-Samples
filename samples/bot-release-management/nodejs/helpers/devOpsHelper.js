@@ -11,7 +11,7 @@ class DevOpsHelper {
     static async MapToReleaseManagementTask (workItem) {
         var graphHelper = new GraphHelper();
         var isAssignedToPresent = workItem.resource.fields.hasOwnProperty(Constant.AssignedTo);
-        var emailList = workItem.resource.fields[Constant.StakeHolderTeamKey].split(',');
+        var emailList = [];
         emailList.push(DevOpsHelper.GetEmailOrName(workItem.resource.fields[Constant.CreatedByKey], false));
 
         if (isAssignedToPresent)
@@ -28,7 +28,6 @@ class DevOpsHelper {
             AssignedToProfileImage: isAssignedToPresent ? await graphHelper.GetProfilePictureByUserPrincipalNameAsync(DevOpsHelper.GetEmailOrName(workItem.resource.fields[Constant.AssignedTo], false)) : "",
             CreatedByName: DevOpsHelper.GetEmailOrName(workItem.resource.fields[Constant.CreatedByKey], true),
             CreatedByProfileImage: image,
-            StakeholderTeam: DevOpsHelper.ValidateMails(workItem.resource.fields[Constant.StakeHolderTeamKey].split(',')),
             NotificationId: workItem.notificationId,
             GroupChatMembers: validEmailList,
             State: workItem.resource.fields[Constant.StateKey],

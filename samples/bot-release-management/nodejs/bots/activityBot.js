@@ -60,10 +60,6 @@ class ActivityBot extends ActivityHandler {
                                 "type": "TextBlock",
                                 "text": "**Assigned to:**",
                                 "height": "stretch"
-                              },
-                              {
-                                "type": "TextBlock",
-                                "text": "**Stakeholders:**"
                               }
                             ],
                             "width": "stretch"
@@ -141,10 +137,6 @@ class ActivityBot extends ActivityHandler {
                                     "verticalContentAlignment": "Top"
                                   }
                                 ]
-                              },
-                              {
-                                "type": "TextBlock",
-                                "text": details.StakeholderTeam.join(", ")
                               }
                             ],
                             "width": "stretch"
