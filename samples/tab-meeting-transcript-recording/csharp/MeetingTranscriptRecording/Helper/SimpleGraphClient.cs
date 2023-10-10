@@ -27,47 +27,5 @@ namespace MeetingTranscriptRecording.Helper
             _token = token;
         }
 
-        // Get information about the user.
-        public async Task<User> GetMeAsync()
-        {
-            var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync();
-            return me;
-        }
-
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
-        private GraphServiceClient GetAuthenticatedClient()
-        {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
-
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-
-            return graphClient;
-        }
-
-
-        public static GraphServiceClient GetGraphClient(string accessToken)
-        {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
-            {
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
-
-                requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                return Task.CompletedTask;
-            }));
-
-            return graphClient;
-        }
-
     }
 }
