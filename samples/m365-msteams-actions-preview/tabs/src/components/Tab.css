@@ -1,0 +1,246 @@
+.flex-container {
+  display: flex;
+  margin: auto;
+  background-color: #f3f2f1;
+  flex-direction: column;
+}
+
+.todo-col {
+  width: 100%;
+}
+
+.todo {
+  min-height: 95vh;
+  margin: 10px 20px 20px;
+  background-color: #fff;
+  box-shadow: 0px 1.2px 3.6px rgba(0, 0, 0, 0.11),
+    0px 1.2px 14.4px rgba(0, 0, 0, 0.13);
+  border-radius: 4px;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin: 20px;
+}
+
+.title h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.title span {
+  margin: 3px 0;
+  font-size: 12px;
+  line-height: 12px;
+  color: #8a8886;
+}
+
+.add-button {
+  margin: 24px 20px auto auto;
+}
+
+.header-container {
+  display: flex;
+}
+
+.header-container span {
+  font-size: 12px;
+}
+
+.attachments {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100px;
+  padding-left: 10px;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding-left: 10px;
+}
+
+.created-by {
+  display: flex;
+  align-items: center;
+  max-width: 250px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.item {
+  margin: 10px 20px;
+  padding-bottom: 10px;
+  display: flex;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #e0e0e0;
+  align-items: center;
+}
+
+span {
+  display: inline-block;
+}
+
+.complete {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  max-width: 100px;
+}
+
+.is-completed-input {
+  margin-left: 10px;
+  vertical-align: middle;
+  height: 18px;
+  width: 18px;
+}
+
+.is-completed-input>div {
+  border-radius: 50%;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.attachment {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.fui-TableCellLayout__content,
+.fui-Input {
+  width: 100%;
+  font-size: 12px;
+}
+
+.fui-Input input {
+  font-size: 12px;
+}
+
+.description span {
+  width: 100%;
+}
+
+.text input:not(:focus) {
+  background-color: #fff;
+}
+
+.action button {
+  border-width: 0px;
+  box-shadow: none;
+}
+
+.action button:hover {
+  background-color: #fff;
+}
+
+.action button[aria-expanded="true"] {
+  margin-right: -10px;
+}
+
+.action button span {
+  font-size: 20px;
+  margin-top: -8px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.no-item {
+  margin-top: 10vh;
+}
+
+.no-item img {
+  display: block;
+  margin: auto;
+  width: 200px;
+}
+
+.no-item h2,
+.no-item p {
+  text-align: center;
+}
+
+.auth {
+  margin-top: 30vh;
+}
+
+.auth .profile {
+  margin: auto;
+}
+
+.auth h2 {
+  text-align: center;
+}
+
+.auth button {
+  display: block;
+  margin: 32px auto;
+}
+
+th,
+td {
+  font-size: 12px;
+}
+
+th:first-child,
+td:first-child,
+th:last-child,
+td:last-child {
+  width: 100px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 200px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 300px;
+}
+
+.spinner {
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  position: absolute;
+}
+
+@media only screen and (max-width: 820px) {
+  .flex-container {
+    display: block;
+  }
+
+  .created-by {
+    width: 210px;
+  }
+
+  .profile-col {
+    height: auto;
+  }
+}

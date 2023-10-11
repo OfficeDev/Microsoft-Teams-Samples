@@ -1,0 +1,19 @@
+{
+    "name": "m365-msteams-actions-preview",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "engines": {
+        "node": "16 || 18"
+    },
+    "scripts": {
+        "install:api": "cd api && npm install",
+        "install:tabs": "cd tabs && npm install",
+        "postinstall": "npm run install:api && npm run install:tabs",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "@microsoft/teamsfx-cli": "1.*"
+    },
+    "license": "MIT"
+}
