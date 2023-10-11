@@ -1,7 +1,10 @@
-# yaml-language-server: $schema=https://developer.microsoft.com/json-schemas/teams-toolkit/teamsapp-yaml/1.0.0/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: 1.0.0
+version: v1.2
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:bot-proactive-messaging-teamsfx
 
 environmentFolderPath: ./env
 
@@ -103,3 +106,4 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
+projectId: 2db2149e-2da7-4351-9fdd-1f9e9d04bdb0
