@@ -44,3 +44,8 @@ code {
 .main1Card {
     padding: 1rem;
 }
+
+.divMainCard {
+    padding: 5px;
+    background-color: #e5e2e2;
+}

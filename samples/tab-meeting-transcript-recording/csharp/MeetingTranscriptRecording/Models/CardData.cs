@@ -19,8 +19,10 @@ namespace MeetingTranscriptRecording.Models
 
         public string onlineMeetingId { get; set; }
 
-        public string TranscriptsId { get; set; }
+        public string transcriptsId { get; set; }
 
         public string recordingId { get; set; }
+
+        public string organizer { get; set; }
     }
 }
