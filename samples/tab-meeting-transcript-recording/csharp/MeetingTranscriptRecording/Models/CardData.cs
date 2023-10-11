@@ -24,5 +24,7 @@ namespace MeetingTranscriptRecording.Models
         public string recordingId { get; set; }
 
         public string organizer { get; set; }
+
+        public bool condition { get; set; }
     }
 }

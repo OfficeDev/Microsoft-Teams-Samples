@@ -12,18 +12,17 @@ import { CardBody } from 'reactstrap';
 
 const MeetingTranscriptRecording = () => {
 
-    // Variable stores the username of users who login using Facebook or SSO.
-    const [userName, setUserName] = useState("");
-
+    // Define an array state variable with an initial value
     const [cardData, setData] = useState([]);
 
-    // Declare new state variables that are required for a verified anonymous user or a normal user
+   // Define a state variable to manage the visibility of the consent button
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
+    // Define a state variable to manage the visibility of the login button
     const [IsLoginVisible, setIsLoginVisible] = useState(true);
 
+    // Define a state variable to manage the visibility of the card visible
     const [IsCardVisible, setIsCardVisible] = useState(false);
-
 
     useEffect(() => {
         microsoftTeams.app.initialize();
@@ -119,7 +118,7 @@ const MeetingTranscriptRecording = () => {
         });
     }
 
-    // Request consent on implicit grant error.
+    // Open stage view
     const fetchrecordingtranscript = (onlineMeetingId, transcriptsId, recordingId) => () => {
         alert(recordingId);
     }
@@ -132,7 +131,6 @@ const MeetingTranscriptRecording = () => {
                         <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
                     </>
                 }
-                {/*<Text size={500} weight="semibold">{userName}</Text>*/}
                 {IsConsentButtonVisible &&
                     <>
                         <div id="divError">Please click on consent button</div>
@@ -143,7 +141,7 @@ const MeetingTranscriptRecording = () => {
             <div className="mainCard">
                 {IsCardVisible &&
                     <>
-                        {cardData.map((element, index) => {
+                        {cardData.length > 0 && cardData.map((element, index) => {
                             return (
                                 <div key={index} className="divMainCard">
                                     <Card>
@@ -159,7 +157,7 @@ const MeetingTranscriptRecording = () => {
                                                 <Text className="organizerName">{element.organizer}</Text>
                                             </div>
                                             <div className="btnCard">
-                                                <Button appearance="primary" onClick={fetchrecordingtranscript(element.onlineMeetingId,element.transcriptsId,element.recordingId)}>Fetch Recording & Transcript</Button>
+                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchrecordingtranscript(element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
                                             </div>
                                         </CardBody>
                                     </Card>

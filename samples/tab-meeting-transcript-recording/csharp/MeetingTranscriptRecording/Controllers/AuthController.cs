@@ -115,6 +115,7 @@ namespace MeetingTranscriptRecording.Controllers
                                                                 foreach (RecordingId RecordingsData in responseRecordingsData.Value)
                                                                 {
                                                                     Obj.recordingId = RecordingsData.id;
+                                                                    Obj.condition = true;
 
                                                                     //-------------Get recordings Id--------------
                                                                     string RecordingId = RecordingsData.id;
