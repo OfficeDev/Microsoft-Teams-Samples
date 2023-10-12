@@ -9,13 +9,11 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Button, Text, Card } from '@fluentui/react-components';
 import { CardBody } from 'reactstrap';
 
-
 const MeetingTranscriptRecording = () => {
-
     // Define an array state variable with an initial value
     const [cardData, setData] = useState([]);
 
-   // Define a state variable to manage the visibility of the consent button
+    // Define a state variable to manage the visibility of the consent button
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Define a state variable to manage the visibility of the login button
@@ -25,6 +23,7 @@ const MeetingTranscriptRecording = () => {
     const [IsCardVisible, setIsCardVisible] = useState(false);
 
     useEffect(() => {
+        // Initialize the Microsoft Teams SDK
         microsoftTeams.app.initialize();
     }, [])
 
@@ -37,13 +36,13 @@ const MeetingTranscriptRecording = () => {
             })
             .catch((error) => {
                 if (error === "invalid_grant") {
-                    // Display in-line button so user can consent
+                    // Display an in-line button so the user can consent
                     setIsConsentButtonVisible(true);
                 }
             });
     }
 
-    // Get client side token.
+    // Get client-side token.
     const getClientSideToken = () => {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken()
@@ -56,7 +55,7 @@ const MeetingTranscriptRecording = () => {
         });
     }
 
-    // Get server side token and user profile.
+    // Get server-side token and user profile.
     const getServerSideToken = (clientSideToken) => {
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
@@ -83,7 +82,7 @@ const MeetingTranscriptRecording = () => {
                             setIsLoginVisible(false);
                             setIsCardVisible(true);
                             let userDetails = JSON.parse(responseJson);
-                            setData(userDetails)
+                            setData(userDetails);
                         }
                     });
             });
@@ -101,7 +100,8 @@ const MeetingTranscriptRecording = () => {
                     });
             });
     }
-    // Get token for multi tenant.
+
+    // Get token for multi-tenant.
     const getToken = () => {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
@@ -119,7 +119,7 @@ const MeetingTranscriptRecording = () => {
     }
 
     // Open stage view
-    const fetchrecordingtranscript = (subject,onlineMeetingId, transcriptsId, recordingId) => () => {
+    const fetchrecordingtranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
         var submitHandler = function (err, result) { console.log("Err: ".concat(err, "; Result:  + ").concat(result)); };
         let taskInfo = {
             title: null,
