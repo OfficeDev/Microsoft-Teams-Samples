@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
+using Azure.Core;
 using MeetingTranscriptRecording.Helper;
 using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -140,6 +141,28 @@ namespace MeetingTranscriptRecording.Controllers
                 Console.WriteLine(ex);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Get facebook profile of user.
+        /// </summary>
+        /// <param name="accessToken">Token</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("getMeetingTranscripts")]
+        public async Task<JsonResult> getMeetingTranscripts([FromBody] TranscriptsRequestBody MeetingTranscriptsIds)
+        {
+            var accessToke = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+
+            string graphApiEndpointOnlineTranscriptsData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingTranscriptsIds.meetingId + "/transcripts/" + MeetingTranscriptsIds.transcriptsId + "/content?$format=text/vtt";
+
+            var responseBody = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscriptsData, accessToke);
+
+            if (responseBody != null)
+            {
+                return Json(responseBody);
+            }
+            return null;
         }
 
         /// <summary>

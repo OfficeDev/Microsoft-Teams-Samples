@@ -119,8 +119,25 @@ const MeetingTranscriptRecording = () => {
     }
 
     // Open stage view
-    const fetchrecordingtranscript = (onlineMeetingId, transcriptsId, recordingId) => () => {
-        alert(recordingId);
+    const fetchrecordingtranscript = (subject,onlineMeetingId, transcriptsId, recordingId) => () => {
+        var submitHandler = function (err, result) { console.log("Err: ".concat(err, "; Result:  + ").concat(result)); };
+        let taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+        };
+        taskInfo.url = `${window.location.origin}/RecordingTranscript?subject=${subject}&onlineMeetingId=${onlineMeetingId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}';`;
+        taskInfo.title = "Recording and Transcript Form";
+        taskInfo.height = 510;
+        taskInfo.width = 1300;
+        submitHandler = (err, result) => {
+            console.log(`Submit handler - err: ${err}`);
+        };
+        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
     }
 
     return (
@@ -157,7 +174,7 @@ const MeetingTranscriptRecording = () => {
                                                 <Text className="organizerName">{element.organizer}</Text>
                                             </div>
                                             <div className="btnCard">
-                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchrecordingtranscript(element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
+                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchrecordingtranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
                                             </div>
                                         </CardBody>
                                     </Card>

@@ -27,4 +27,12 @@ namespace MeetingTranscriptRecording.Models
 
         public bool condition { get; set; }
     }
+
+    public class TranscriptsRequestBody
+    {
+        public string meetingId { get; set; }
+
+        public string transcriptsId { get; set; }
+    }
+
 }

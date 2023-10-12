@@ -49,3 +49,38 @@ code {
     padding: 5px;
     background-color: #e5e2e2;
 }
+
+.divRecording {
+    width: 80%;
+    float: left;
+}
+
+.divTranscripts {
+    width: 20%;
+    float: right;
+    border: 1px solid #ccc;
+    overflow-y: scroll;
+    height: 23rem;
+}
+
+.txtSubject {
+    margin-left: 3.2rem;
+    margin-top: -1.3rem;
+}
+.svgCalender {
+    margin-top: 1rem;
+    margin-left: 2rem;
+}
+.mainRecordTrans {
+    padding: 1.6rem;
+}
+.divRecording {
+    width: 70%;
+    float: left;
+    border: 1px solid #ccc;
+}
+.divTranscripts {
+    width: 28%;
+    float: right;
+    border: 1px solid #ccc;
+}

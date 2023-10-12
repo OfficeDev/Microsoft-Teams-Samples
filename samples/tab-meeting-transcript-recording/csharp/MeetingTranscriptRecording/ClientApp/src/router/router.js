@@ -7,6 +7,7 @@ import {
 import MeetingTranscriptRecording from "../components/meetingtranscriptrecording";
 import AuthStart from "../components/auth-start";
 import AuthEnd from "../components/auth-end";
+import RecordingTranscript from "../components/viewRecordingTranscript ";
 import * as microsoftTeams from "@microsoft/teams-js";
 
 export const AppRoute = () => {
@@ -23,6 +24,7 @@ export const AppRoute = () => {
                     <Route path="/meetingtranscriptrecording" element={<MeetingTranscriptRecording />} />
                     <Route path="/auth-start" element={<AuthStart />} />
                     <Route path="/auth-end" element={<AuthEnd />} />
+                    <Route path="/RecordingTranscript" element={<RecordingTranscript />} />
                 </Routes>
             </BrowserRouter>
         </React.Fragment>
