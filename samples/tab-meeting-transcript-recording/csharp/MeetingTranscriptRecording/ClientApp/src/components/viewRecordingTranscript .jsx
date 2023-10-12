@@ -3,14 +3,19 @@ import * as microsoftTeams from "@microsoft/teams-js";
 
 function RecordingTranscript() {
 
+    // State variable for query parameter: subject
     const [querySubject, setQuerySubject] = useState();
 
+    // State variable for query parameter: online meeting ID
     const [queryOnlineMeetingId, setQueryOnlineMeetingId] = useState();
 
+    // State variable for query parameter: transcripts ID
     const [queryTranscriptsId, setQueryTranscriptsId] = useState();
 
+    // State variable for query parameter: recording ID
     const [queryRecordingId, setQueryRecordingId] = useState();
 
+    // State variable to control the loading of transcripts data
     const [loadTranscriptsData, setLoadTranscriptsData] = useState();
 
     const videoRef = useRef(null);
@@ -21,34 +26,45 @@ function RecordingTranscript() {
         extractQueryParameters();
     }, [])
 
+    // Effect Hook 1: Triggered when `queryOnlineMeetingId` or `queryTranscriptsId` change
     useEffect(() => {
+        // Perform Single Sign-On (SSO) authentication for meeting transcripts
         ssoAuthenticationMeetingTranscripts();
     }, [queryOnlineMeetingId, queryTranscriptsId])
 
 
+    // Effect Hook 2: Triggered when `queryOnlineMeetingId` or `queryRecordingId` change
     useEffect(() => {
+        // Perform Single Sign-On (SSO) authentication for meeting recording
         ssoAuthenticationMeetingRecording();
     }, [queryOnlineMeetingId, queryRecordingId])
 
 
-    // Tab sso authentication.
+    // Function for Single Sign-On (SSO) authentication related to meeting transcripts
     const ssoAuthenticationMeetingTranscripts = () => {
+        // Obtain a client-side token for authentication
         getClientSideToken()
             .then((clientSideToken) => {
+                 // Retrieve meeting transcripts using the obtained client-side token
                 return getMeetingTranscriptsValue(clientSideToken);
             })
             .catch((error) => {
+            // Handle any errors that occur during the authentication process
+            // This section can include error handling logic or error reporting
             });
     }
 
-    // Get client side token.
+    // Function for obtaining a client-side token using Microsoft Teams authentication
     const getClientSideToken = () => {
         return new Promise((resolve, reject) => {
+            // Use the Microsoft Teams SDK to request an authentication token
             microsoftTeams.authentication.getAuthToken()
                 .then((result) => {
+                     // Resolve the promise with the obtained token
                     resolve(result);
                 })
                 .catch((error) => {
+                    // Reject the promise with an error message if token retrieval fails
                     reject("Error getting token: " + error);
                 });
         });
@@ -59,28 +75,42 @@ function RecordingTranscript() {
 
         // Function to extract and display query parameters
         const queryParams = new URLSearchParams(window.location.search);
-
-        // Access individual query parameters
+       
+        // Set the 'querySubject' state variable with the value from the 'subject' query parameter
         setQuerySubject(queryParams.get('subject'));
+
+        // Set the 'queryOnlineMeetingId' state variable with the value from the 'onlineMeetingId' query parameter
         setQueryOnlineMeetingId(queryParams.get('onlineMeetingId'));
+
+        // Set the 'queryTranscriptsId' state variable with the value from the 'transcriptsId' query parameter
         setQueryTranscriptsId(queryParams.get('transcriptsId'));
+
+        // Set the 'queryRecordingId' state variable with the value from the 'recordingId' query parameter
         setQueryRecordingId(queryParams.get('recordingId'));
 
     };
 
-    // Tab sso authentication.
+    // Function for Single Sign-On (SSO) authentication related to meeting recording
     const ssoAuthenticationMeetingRecording = () => {
+        // Obtain a client-side token for authentication
         getClientSideToken()
             .then((clientSideToken) => {
+                // Retrieve meeting recording using the obtained client-side token
                 return getMeetingRecordingValue(clientSideToken);
             })
             .catch((error) => {
+                // Handle any errors that occur during the authentication process
+                // This section can include error handling logic or error reporting
             });
     }
 
+    // Function for fetching meeting transcripts using a client-side token
     const getMeetingTranscriptsValue = (clientSideToken) => {
+        // Check if both 'queryOnlineMeetingId' and 'queryTranscriptsId' are not null
         if (queryOnlineMeetingId != null && queryTranscriptsId != null) {
+            // Retrieve the context from Microsoft Teams
             microsoftTeams.app.getContext().then(() => {
+                // Make a POST request to the '/getMeetingTranscripts' endpoint
                 fetch('/getMeetingTranscripts', {
                     method: 'POST',
                     body: JSON.stringify({ 'meetingId': queryOnlineMeetingId, 'transcriptsId': queryTranscriptsId }),
@@ -90,24 +120,31 @@ function RecordingTranscript() {
                         'Authorization': "Bearer " + clientSideToken
                     }
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.text();
-                    }
+                    .then((response) => {
+                        // Check if the response is OK
+                        if (response.ok) {
+                            return response.text();
+                        }
                     })
-                .then((responseJson) => {
-                    if (responseJson !== "") {
-                        let jsonResult = JSON.parse(responseJson);
-                        setLoadTranscriptsData(jsonResult);
-                    }
-                });
+                    .then((responseJson) => {
+                        // Check if the response JSON is not empty
+                        if (responseJson !== "") {
+                            // Parse the JSON response and update the 'loadTranscriptsData' state
+                            let jsonResult = JSON.parse(responseJson);
+                            setLoadTranscriptsData(jsonResult);
+                        }
+                    });
             });
         }
     }
 
+    // Function for fetching meeting recordings using a client-side token
     const getMeetingRecordingValue = (clientSideToken) => {
+        // Check if both 'queryOnlineMeetingId' and 'queryRecordingId' are not null
         if (queryOnlineMeetingId != null && queryRecordingId != null) {
+            // Retrieve the context from Microsoft Teams
             microsoftTeams.app.getContext().then(() => {
+                // Make a POST request to the '/getMeetingRecording' endpoint
                 fetch('/getMeetingRecording', {
                     method: 'POST',
                     body: JSON.stringify({ 'meetingId': queryOnlineMeetingId, 'recordingId': queryRecordingId }),
@@ -117,11 +154,12 @@ function RecordingTranscript() {
                         'Authorization': "Bearer " + clientSideToken
                     }
                 })
-                .then(response => response.blob())
-                .then(blob => {
-                    const videoUrl = URL.createObjectURL(blob);
-                    videoRef.current.src = videoUrl;
-                })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Create a URL for the video blob and set it as the source of 'videoRef'
+                        const videoUrl = URL.createObjectURL(blob);
+                        videoRef.current.src = videoUrl;
+                    })
             });
         }
     }
