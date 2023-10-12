@@ -8,6 +8,8 @@ using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Graph;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace MeetingTranscriptRecording.Controllers
 {
@@ -31,7 +33,7 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// Get user access token
+        /// 
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -144,25 +146,80 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// Get facebook profile of user.
+        /// 
         /// </summary>
-        /// <param name="accessToken">Token</param>
+        /// <param name="MeetingTranscriptsIds"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("getMeetingTranscripts")]
         public async Task<JsonResult> getMeetingTranscripts([FromBody] TranscriptsRequestBody MeetingTranscriptsIds)
         {
-            var accessToke = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
-
-            string graphApiEndpointOnlineTranscriptsData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingTranscriptsIds.meetingId + "/transcripts/" + MeetingTranscriptsIds.transcriptsId + "/content?$format=text/vtt";
-
-            var responseBody = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscriptsData, accessToke);
-
-            if (responseBody != null)
+            try
             {
-                return Json(responseBody);
+                var accessToke = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+
+                string graphApiEndpointOnlineTranscriptsData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingTranscriptsIds.meetingId + "/transcripts/" + MeetingTranscriptsIds.transcriptsId + "/content?$format=text/vtt";
+
+                var responseBody = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscriptsData, accessToke);
+
+                if (responseBody != null)
+                {
+                    return Json(responseBody);
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="MeetingRecordingIds"></param>
+       /// <returns></returns>
+        [HttpPost]
+        [Route("getMeetingRecording")]
+        public async Task<IActionResult> getMeetingRecording([FromBody] RecordingRequestBody MeetingRecordingIds)
+        {
+            try
+            {
+                var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+
+                string graphApiEndpointOnlineRecordData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingRecordingIds.meetingId + "/recordings/" + MeetingRecordingIds.recordingId + "/content";
+
+                using (HttpClient clientRecording = new HttpClient())
+                {
+                    // Set the base address for the Graph API
+                    clientRecording.BaseAddress = new Uri(graphApiEndpointOnlineRecordData);
+
+                    // Set the authorization header with the access token
+                    clientRecording.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                    // Make a GET request to retrieve user data
+                    HttpResponseMessage response = await clientRecording.GetAsync(graphApiEndpointOnlineRecordData);
+
+                    // Check the status code
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var videoContent = await response.Content.ReadAsByteArrayAsync();
+                            return File(videoContent, "video/mp4");
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
         }
 
         /// <summary>

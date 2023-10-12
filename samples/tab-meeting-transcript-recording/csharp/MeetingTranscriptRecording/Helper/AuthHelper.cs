@@ -5,6 +5,7 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using System.Net;
 using System.Net.Http.Headers;

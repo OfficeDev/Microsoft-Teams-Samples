@@ -77,10 +77,16 @@ code {
 .divRecording {
     width: 70%;
     float: left;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
 }
 .divTranscripts {
     width: 28%;
     float: right;
     border: 1px solid #ccc;
+}
+
+.videoPlay {
+    width: 43rem;
+    height: 21rem;
+    padding: 1rem
 }

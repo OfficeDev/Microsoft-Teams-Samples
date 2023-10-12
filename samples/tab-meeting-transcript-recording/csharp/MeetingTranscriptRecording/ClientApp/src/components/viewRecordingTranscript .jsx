@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 function RecordingTranscript() {
@@ -13,6 +13,8 @@ function RecordingTranscript() {
 
     const [loadTranscriptsData, setLoadTranscriptsData] = useState();
 
+    const videoRef = useRef(null);
+
     // Initialize the component and extract query parameters when it mounts
     useEffect(() => {
         microsoftTeams.app.initialize();
@@ -20,12 +22,17 @@ function RecordingTranscript() {
     }, [])
 
     useEffect(() => {
-        ssoAuthentication();
+        ssoAuthenticationMeetingTranscripts();
     }, [queryOnlineMeetingId, queryTranscriptsId])
 
 
+    useEffect(() => {
+        ssoAuthenticationMeetingRecording();
+    }, [queryOnlineMeetingId, queryRecordingId])
+
+
     // Tab sso authentication.
-    const ssoAuthentication = () => {
+    const ssoAuthenticationMeetingTranscripts = () => {
         getClientSideToken()
             .then((clientSideToken) => {
                 return getMeetingTranscriptsValue(clientSideToken);
@@ -61,6 +68,16 @@ function RecordingTranscript() {
 
     };
 
+    // Tab sso authentication.
+    const ssoAuthenticationMeetingRecording = () => {
+        getClientSideToken()
+            .then((clientSideToken) => {
+                return getMeetingRecordingValue(clientSideToken);
+            })
+            .catch((error) => {
+            });
+    }
+
     const getMeetingTranscriptsValue = (clientSideToken) => {
         if (queryOnlineMeetingId != null && queryTranscriptsId != null) {
             microsoftTeams.app.getContext().then(() => {
@@ -88,6 +105,27 @@ function RecordingTranscript() {
         }
     }
 
+    const getMeetingRecordingValue = (clientSideToken) => {
+        if (queryOnlineMeetingId != null && queryRecordingId != null) {
+            microsoftTeams.app.getContext().then(() => {
+                fetch('/getMeetingRecording', {
+                    method: 'POST',
+                    body: JSON.stringify({ 'meetingId': queryOnlineMeetingId, 'recordingId': queryRecordingId }),
+                    headers: {
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': "Bearer " + clientSideToken
+                    }
+                })
+                .then(response => response.blob())
+                .then(blob => {
+                    const videoUrl = URL.createObjectURL(blob);
+                    videoRef.current.src = videoUrl;
+                })
+            });
+        }
+    }
+
     return (
 
         <div>
@@ -99,8 +137,7 @@ function RecordingTranscript() {
             </div>
             <div class="mainRecordTrans">
                 <div className="divRecording">
-                    <h2>Column 1</h2>
-                    <p>This is the content of the first column.</p>
+                    <video ref={videoRef} className="videoPlay" controls />
                 </div>
                 <div className="divTranscripts">
                     <h4>Transcripts</h4>

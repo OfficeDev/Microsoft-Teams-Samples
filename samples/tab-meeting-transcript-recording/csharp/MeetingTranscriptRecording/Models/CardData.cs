@@ -7,7 +7,7 @@ using Microsoft.Graph;
 namespace MeetingTranscriptRecording.Models
 {
     /// <summary>
-    /// User data model class.
+    /// 
     /// </summary>
     public class CardData
     {
@@ -33,6 +33,13 @@ namespace MeetingTranscriptRecording.Models
         public string meetingId { get; set; }
 
         public string transcriptsId { get; set; }
+    }
+
+    public class RecordingRequestBody
+    {
+        public string meetingId { get; set; }
+
+        public string recordingId { get; set; }
     }
 
 }

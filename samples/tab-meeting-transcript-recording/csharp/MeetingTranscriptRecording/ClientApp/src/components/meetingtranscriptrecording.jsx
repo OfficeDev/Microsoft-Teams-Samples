@@ -130,7 +130,7 @@ const MeetingTranscriptRecording = () => {
             fallbackUrl: null,
             completionBotId: null,
         };
-        taskInfo.url = `${window.location.origin}/RecordingTranscript?subject=${subject}&onlineMeetingId=${onlineMeetingId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}';`;
+        taskInfo.url = `${window.location.origin}/RecordingTranscript?subject=${subject}&onlineMeetingId=${onlineMeetingId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}`;
         taskInfo.title = "Recording and Transcript Form";
         taskInfo.height = 510;
         taskInfo.width = 1300;
