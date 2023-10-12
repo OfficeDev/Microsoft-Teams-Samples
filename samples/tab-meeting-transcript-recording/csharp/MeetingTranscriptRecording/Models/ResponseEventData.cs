@@ -1,15 +1,11 @@
-﻿// <copyright file="EventsData.cs" company="Microsoft">
+﻿// <copyright file="ResponseEventData.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
-
-using MeetingTranscriptRecording.Models;
-using Microsoft.Graph;
-using System.Xml.Linq;
 
 namespace MeetingTranscriptRecording.Models
 {
     /// <summary>
-    /// 
+    /// Represents a response containing a list of EventData objects.
     /// </summary>
     public class ResponseEventData
     {
@@ -17,7 +13,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    /// Represents a response containing a list of JoinWebUrl objects.
     /// </summary>
     public class JoinUrlData
     {
@@ -25,7 +21,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    /// Represents a response containing a list of transcriptsId objects.
     /// </summary>
     public class transcriptsData
     {
@@ -33,7 +29,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    /// Represents an object with a single property, id.
     /// </summary>
     public class transcriptsId
     {
@@ -41,7 +37,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    /// Represents a response containing a list of RecordingId objects.
     /// </summary>
     public class RecordingData
     {
@@ -49,7 +45,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    ///  Represents an object with a single property, id.
     /// </summary>
     public class RecordingId
     {
@@ -57,7 +53,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    ///  Represents an object with a single property, id.
     /// </summary>
     public class JoinWebUrl
     {
@@ -65,7 +61,7 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    /// 
+    /// Represents data related to an event, potentially an online meeting.
     /// </summary>
     public class EventData
     {
@@ -82,9 +78,9 @@ namespace MeetingTranscriptRecording.Models
         public OnlineMeeting onlineMeeting { get; set; }
 
     }
-    
+
     /// <summary>
-    /// 
+    /// Represents an email address, with name and address properties.
     /// </summary>
     public class EmailAddress
     {

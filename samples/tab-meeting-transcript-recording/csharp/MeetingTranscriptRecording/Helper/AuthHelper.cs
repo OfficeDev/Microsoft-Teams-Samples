@@ -14,7 +14,13 @@ namespace MeetingTranscriptRecording.Helper
 {
     public class AuthHelper
     {
-
+        /// <summary>
+        /// Makes a GET request to a specified URL with an access token.
+        /// </summary>
+        /// <param name="url">The URL to fetch data from.</param>
+        /// <param name="accessToken">The access token for authentication.</param>
+        /// <returns>The response content as a string.</returns>
+        /// <exception cref="HttpRequestException">Thrown if there's an issue with the HTTP request.</exception>
         public static async Task<string> GetApiData(string url, string accessToken)
         {
             try

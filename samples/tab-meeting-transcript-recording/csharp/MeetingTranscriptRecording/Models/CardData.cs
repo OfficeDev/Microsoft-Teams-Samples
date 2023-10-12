@@ -7,7 +7,7 @@ using Microsoft.Graph;
 namespace MeetingTranscriptRecording.Models
 {
     /// <summary>
-    /// 
+    /// Represents data related to online meetings and associated resources, such as transcripts and recordings.
     /// </summary>
     public class CardData
     {
@@ -28,6 +28,9 @@ namespace MeetingTranscriptRecording.Models
         public bool condition { get; set; }
     }
 
+    /// <summary>
+    /// Represents a request body for fetching meeting transcripts.
+    /// </summary>
     public class TranscriptsRequestBody
     {
         public string meetingId { get; set; }
@@ -35,6 +38,9 @@ namespace MeetingTranscriptRecording.Models
         public string transcriptsId { get; set; }
     }
 
+    /// <summary>
+    ///  Represents a request body for fetching meeting recordings.
+    /// </summary>
     public class RecordingRequestBody
     {
         public string meetingId { get; set; }

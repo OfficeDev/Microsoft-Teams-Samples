@@ -33,7 +33,10 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// 
+        /// This method retrieves information about the login user.
+        /// It obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
+        /// It constructs a JSON response with data related to online meetings.
+        /// Error handling is included in case of exceptions.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -146,7 +149,10 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// 
+        /// This method is used to fetch meeting transcripts.
+        /// It constructs a Graph API endpoint based on the provided meeting and transcript IDs.
+        /// The method retrieves and returns the content of the transcripts in VTT format.
+        /// Error handling is included for exceptions.
         /// </summary>
         /// <param name="MeetingTranscriptsIds"></param>
         /// <returns></returns>
@@ -176,11 +182,14 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="MeetingRecordingIds"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// This method fetches meeting recordings.
+        /// It constructs the Graph API endpoint to get the content of a specific meeting recording.
+        /// It downloads the recording content and returns it as a video file (MP4 format).
+        /// Error handling is included for exceptions.
+        /// </summary>
+        /// <param name="MeetingRecordingIds"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("getMeetingRecording")]
         public async Task<IActionResult> getMeetingRecording([FromBody] RecordingRequestBody MeetingRecordingIds)
