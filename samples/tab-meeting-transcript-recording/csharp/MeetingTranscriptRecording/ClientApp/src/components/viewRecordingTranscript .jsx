@@ -210,7 +210,7 @@ function RecordingTranscript() {
                                     <Spinner label="Loading..." size="small" />
                                 </div>
                             ) : (
-                                <p>{loadTranscriptsData}</p>
+                                <p className="transcription">{loadTranscriptsData}</p>
                             )}
                         </div>
                     </div>
