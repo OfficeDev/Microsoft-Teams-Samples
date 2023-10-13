@@ -90,3 +90,10 @@ code {
     height: 21rem;
     padding: 1rem
 }
+.loadingIcon {
+    width: 69rem;
+}
+
+.loadingIconRecordings {
+    width: 68%;
+}

@@ -6,7 +6,7 @@
 
 import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Button, Text, Card } from '@fluentui/react-components';
+import { Button, Text, Card, Spinner } from '@fluentui/react-components';
 import { CardBody } from 'reactstrap';
 
 const MeetingTranscriptRecording = () => {
@@ -22,6 +22,8 @@ const MeetingTranscriptRecording = () => {
     // Define a state variable to manage the visibility of the card visible
     const [IsCardVisible, setIsCardVisible] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         // Initialize the Microsoft Teams SDK
         microsoftTeams.app.initialize();
@@ -29,7 +31,7 @@ const MeetingTranscriptRecording = () => {
 
     // Tab sso authentication.
     const ssoAuthentication = () => {
-        alert("Click");
+        setLoading(true);
         getClientSideToken()
             .then((clientSideToken) => {
                 return getServerSideToken(clientSideToken);
@@ -83,6 +85,7 @@ const MeetingTranscriptRecording = () => {
                             setIsCardVisible(true);
                             let userDetails = JSON.parse(responseJson);
                             setData(userDetails);
+                            setLoading(false);
                         }
                     });
             });
@@ -156,6 +159,13 @@ const MeetingTranscriptRecording = () => {
                 }
             </div>
             <div className="mainCard">
+                {loading &&
+                    <>
+                        <div className="loadingIcon">
+                            <Spinner label="Loading..." size="large" />
+                        </div>
+                    </>
+                }
                 {IsCardVisible &&
                     <>
                         {cardData.length > 0 && cardData.map((element, index) => {
