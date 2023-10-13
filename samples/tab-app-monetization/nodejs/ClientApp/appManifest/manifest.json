@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.appmonetization",
@@ -23,7 +23,7 @@
     "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
   },
   "accentColor": "#5558AF",
-    "staticTabs": [
+  "staticTabs": [
     {
       "entityId": "index",
       "name": "App purchase tab",
@@ -43,12 +43,12 @@
     "${{TAB_DOMAIN}}"
   ],
   "subscriptionOffer": {
-     "offerId": "{{Plan-id}}"  
-     },
-    "webApplicationInfo": {
+    "offerId": "{{Plan-id}}"
+  },
+  "webApplicationInfo": {
     "id": "${{TEAMS_APP_ID}}",
     "resource": "https://RscBasedStoreApp"
-    },
+  },
   "authorization": {
     "permissions": {
       "resourceSpecific": [

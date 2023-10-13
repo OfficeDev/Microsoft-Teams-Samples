@@ -28,7 +28,9 @@
       "entityId": "auth",
       "name": "Auth",
       "contentUrl": "https://{{domain-name}}/Home/Index",
-      "scopes": [ "personal" ]
+      "scopes": [
+        "personal"
+      ]
     }
   ],
   "validDomains": [
