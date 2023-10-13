@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 This sample shows meeting transcripts and recordings.
 
 **Interaction with app**
-![appanonymoususersGif](Images/anonymoususersupport.gif)
+![MeetingTranscriptRecordingGif](MeetingTranscriptRecording/Images/MeetingTranscriptRecordingGif.gif)
 
 ## Prerequisites
 
@@ -79,7 +79,9 @@ This sample shows meeting transcripts and recordings.
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
-      - `User.Read` (enabled by default)
+
+      ![Login-In ](MeetingTranscriptRecording/Images/Permissions.png)
+
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
   13. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
@@ -145,15 +147,25 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Install app:**
 
-![InstallApp ](Images/InstallApp.png)
+![InstallApp ](MeetingTranscriptRecording/Images/Install.png)
 
+**Install app:**
+
+![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
+
+**Home Page:**
+
+![Home](MeetingTranscriptRecording/Images/Home.png)
+
+**Recording and Transcript Form:**
+
+![RecordingTranscriptForm](MeetingTranscriptRecording/Images/RecordingTranscriptForm.png)
 
 ## Further reading
 
-- [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
-- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
-- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
-
+- [Azure AD application using Microsoft Graph](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
+- [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
+- [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)
 
 
 
