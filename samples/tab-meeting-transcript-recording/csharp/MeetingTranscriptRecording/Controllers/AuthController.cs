@@ -33,15 +33,15 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// This method retrieves information about the login user.
+        /// This method retrieves information about the event details.
         /// It obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
         /// It constructs a JSON response with data related to online meetings.
         /// Error handling is included in case of exceptions.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetLoginUserInformation")]
-        public async Task<JsonResult> GetLoginUserInformation()
+        [Route("GetEventInformation")]
+        public async Task<JsonResult> GetEventInformation()
         {
             try
             {

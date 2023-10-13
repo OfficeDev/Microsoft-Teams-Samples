@@ -61,7 +61,7 @@ const MeetingTranscriptRecording = () => {
     const getServerSideToken = (clientSideToken) => {
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
-                fetch('/GetLoginUserInformation', {
+                fetch('/GetEventInformation', {
                     method: 'get',
                     headers: {
                         "Content-Type": "application/text",
