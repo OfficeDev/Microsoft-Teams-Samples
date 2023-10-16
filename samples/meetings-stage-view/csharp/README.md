@@ -32,6 +32,10 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ![Preview Image](Images/preview_mobile.gif)
 
+## Interaction with app theme
+
+![Preview Image](Images/app-theme.gif)
+
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
@@ -209,6 +213,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![Share specific part](Images/share_specific_part_sidepanel.png)
 
+## Interaction with App theme when Teams Theme changes.
+
+![light](Images/light.PNG)
+
+![dark](Images/dark.PNG)
+
+![contrast](Images/contrast.PNG)
+
 ## Further reading
 
 - [Build apps for Teams meeting stage](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage)
@@ -216,6 +228,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Meeting stage view](https://learn.microsoft.com/microsoftteams/platform/sbs-meetings-stage-view)
 - [Enable Share to Meeting](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-in-meeting?tabs=method-1#enable-share-in-meeting)
 - [Deeplink to meeting share to stage](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-in-meeting?tabs=method-1#generate-a-deep-link-to-share-content-to-stage-in-meetings)
-
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-stage-view-csharp" />

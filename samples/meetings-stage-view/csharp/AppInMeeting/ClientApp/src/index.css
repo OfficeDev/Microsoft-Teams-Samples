@@ -206,3 +206,18 @@ code {
   margin-top: 5px;
 }
 
+/* Theme styles */
+.theme-contrast {
+    background-color: black;
+    color: chartreuse;
+}
+
+.theme-light {
+    background-color: white;
+    color: #242424;
+}
+
+.theme-dark {
+    background-color: #242424;
+    color: white;
+}

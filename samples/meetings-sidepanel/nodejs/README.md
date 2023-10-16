@@ -23,10 +23,15 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 * Live Share SDK
 * Adaptive Cards
 * RSC Permissions
+* App Theme
 
 ## Interaction with app
 
 ![Preview Image](Images/Preview.gif)
+
+## Interaction with app theme
+
+![Preview Image](Images/app-theme-sidepanel.gif)
 
 ## Prerequisites
 
@@ -161,6 +166,15 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 - **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
 - **Publish Agenda** - Sends the agenda list to the meeting chat.
 
+
+## Interaction with app theme when Teams theme changes.
+
+![Preview Image](Images/light.PNG)
+
+![Preview Image](Images/dark.PNG)
+
+![Preview Image](Images/contrast.PNG)
+
 ## Deploy the bot to Azure
 
 -  To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -171,6 +185,6 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 - [Meeting Side Panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
 - [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
-
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-sidepanel-nodejs" />

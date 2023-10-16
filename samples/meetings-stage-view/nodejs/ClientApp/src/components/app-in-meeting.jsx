@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import $ from "jquery";
 import Doing from "./doing";
@@ -12,10 +12,43 @@ import Done from "./done";
 
 // Handles redirection after successful/failure sign in attempt.
 const AppInMeeting = props => {
+    const [appTheme, setAppTheme] = useState("");
+    const [defaultStyle] = useState("part-container");
 
     useEffect(() => {
         microsoftTeams.app.initialize();
         microsoftTeams.app.getContext().then((context) => {
+
+            // Applying default theme from app context property
+            switch (context.app.theme) {
+                case 'dark':
+                    setAppTheme("theme-dark");
+                    break;
+                case 'contrast':
+                    setAppTheme('theme-contrast');
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+            }
+
+            // Handle app theme when 'Teams' theme changes
+            microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                switch (theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
+                }
+            });
+
             if (context.page.frameContext === "sidePanel") {
                 // Adding and removing classes based on screen width, to show app in stage view and in side panel
                 $("#todo, #doing, #done").addClass("grid-item-sidepanel");
@@ -59,6 +92,7 @@ const AppInMeeting = props => {
                     // handle success
                     console.log(result);
                 }
+
                 if (err) {
                     // handle error
                     alert(JSON.stringify(err))
@@ -68,18 +102,18 @@ const AppInMeeting = props => {
     };
 
     return (
-        <div id="chatSection" className="chatSection">
+        <div id="chatSection" className={appTheme}>
             <div className="label">
                 Sprint Status
             </div>
             <div id="boardDiv" className="chat-window">
-                <div className="part-container">
+                <div className={defaultStyle + ' ' + appTheme}>
                     <Todo shareSpecificPart={shareSpecificPart} />
                 </div>
-                <div className="part-container">
+                <div className={defaultStyle + ' ' + appTheme}>
                     <Doing shareSpecificPart={shareSpecificPart} />
                 </div>
-                <div className="part-container">
+                <div className={defaultStyle + ' ' + appTheme}>
                     <Done shareSpecificPart={shareSpecificPart} />
                 </div>
                 <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
