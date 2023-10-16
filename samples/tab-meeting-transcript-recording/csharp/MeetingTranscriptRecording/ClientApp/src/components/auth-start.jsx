@@ -12,7 +12,7 @@ const AuthStart = props => {
     useEffect(() => {
 
         async function AuthenticationStart() {
-            microsoftTeams.app.initialize();
+            await microsoftTeams.app.initialize();
             const context = await microsoftTeams.app.getContext();
             var scope = "User.Read Calendars.Read Calendars.ReadBasic Calendars.ReadWrite OnlineMeetingArtifact.Read.All OnlineMeetingRecording.Read.All OnlineMeetings.Read OnlineMeetings.ReadWrite OnlineMeetingTranscript.Read.All";
             var loginHint = context.user.loginHint;

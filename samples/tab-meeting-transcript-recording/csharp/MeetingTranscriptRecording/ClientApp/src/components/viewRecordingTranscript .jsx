@@ -144,7 +144,22 @@ function RecordingTranscript() {
                         if (responseJson !== "") {
                             // Parse the JSON response and update the 'loadTranscriptsData' state
                             let jsonResult = JSON.parse(responseJson);
-                            setLoadTranscriptsData(jsonResult);
+
+                            const lines = jsonResult.split('\n');
+                            const formattedLines = [];
+                            for (let i = 0; i < lines.length; i++) {
+                                const line = lines[i];
+                                const match = line.match(/<v\s([^>]*)>(.*?)<\/v>/);
+                                if (match) {
+                                    const speaker = match[1];
+                                    const text = match[2];
+                                    formattedLines.push(`<b>${speaker}</b> : ${text}`);
+                                }
+                            }
+                            const formattedOutput = formattedLines.join('<br/>')
+
+                            setLoadTranscriptsData(formattedOutput);
+
                             setLoadingTranscripts(false);
                         }
                     });
@@ -210,7 +225,7 @@ function RecordingTranscript() {
                                     <Spinner label="Loading..." size="small" />
                                 </div>
                             ) : (
-                                <p className="transcription">{loadTranscriptsData}</p>
+                                <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />
                             )}
                         </div>
                     </div>

@@ -3,9 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { AppRoute } from './router/router';
+import * as microsoftTeams from "@microsoft/teams-js";
 
-ReactDOM.render(
-    <FluentProvider theme={teamsLightTheme}>
-        <AppRoute />
-    </FluentProvider>, document.getElementById('root')
-);
+microsoftTeams.app.initialize().then(() => {
+    ReactDOM.render(
+        <FluentProvider theme={teamsLightTheme}>
+            <AppRoute />
+        </FluentProvider>, document.getElementById('root')
+    );
+});

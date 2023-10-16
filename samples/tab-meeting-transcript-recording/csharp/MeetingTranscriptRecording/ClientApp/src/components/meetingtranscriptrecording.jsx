@@ -26,10 +26,7 @@ const MeetingTranscriptRecording = () => {
 
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
-    useEffect(() => {
-        // Initialize the Microsoft Teams SDK
-        microsoftTeams.app.initialize();
-    }, [])
+    
 
     // Tab sso authentication.
     const ssoAuthentication = () => {

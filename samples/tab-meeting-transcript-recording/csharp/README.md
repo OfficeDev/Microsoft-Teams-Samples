@@ -132,7 +132,6 @@ This sample shows meeting transcripts and recordings.
    
 
 6. Modify the `/appsettings.json` and fill in the following details:
-  Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret

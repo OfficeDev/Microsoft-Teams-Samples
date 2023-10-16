@@ -51,7 +51,9 @@ namespace MeetingTranscriptRecording.Controllers
 
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                string graphApiEndpointEvents = $"https://graph.microsoft.com/beta/me/events?$orderby=start/dateTime desc";
+                var BaseURL = _configuration["AzureAd:BaseURL"];
+
+                string graphApiEndpointEvents = BaseURL + $"me/events?$orderby=start/dateTime desc";
 
                 var responseBody = await AuthHelper.GetApiData(graphApiEndpointEvents, accessToken);
 
@@ -96,7 +98,7 @@ namespace MeetingTranscriptRecording.Controllers
                                                 //----------- Get OnlineMeetingId---------------
                                                 string onlineMeetingId = JoinWebUrlData.id;
 
-                                                string graphApiEndpointOnlineTranscripts = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/transcripts";
+                                                string graphApiEndpointOnlineTranscripts = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/transcripts";
 
                                                 var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
 
@@ -113,7 +115,7 @@ namespace MeetingTranscriptRecording.Controllers
                                                             //-------------Get transcripts Id--------------
                                                             string TranscriptsId = TranscriptsData.id;
 
-                                                            string graphApiEndpointOnlineRecordings = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/recordings";
+                                                            string graphApiEndpointOnlineRecordings = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/recordings";
 
                                                             var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
 
@@ -174,7 +176,7 @@ namespace MeetingTranscriptRecording.Controllers
             {
                 var accessToke = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                string graphApiEndpointOnlineTranscriptsData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingTranscriptsIds.meetingId + "/transcripts/" + MeetingTranscriptsIds.transcriptsId + "/content?$format=text/vtt";
+                string graphApiEndpointOnlineTranscriptsData = _configuration["AzureAd:BaseURL"] + $"me/onlineMeetings/" + MeetingTranscriptsIds.meetingId + "/transcripts/" + MeetingTranscriptsIds.transcriptsId + "/content?$format=text/vtt";
 
                 var responseBody = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscriptsData, accessToke);
 
@@ -208,7 +210,7 @@ namespace MeetingTranscriptRecording.Controllers
             {
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                string graphApiEndpointOnlineRecordData = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + MeetingRecordingIds.meetingId + "/recordings/" + MeetingRecordingIds.recordingId + "/content";
+                string graphApiEndpointOnlineRecordData = _configuration["AzureAd:BaseURL"] + $"me/onlineMeetings/" + MeetingRecordingIds.meetingId + "/recordings/" + MeetingRecordingIds.recordingId + "/content";
 
                 using (HttpClient clientRecording = new HttpClient())
                 {

@@ -8,14 +8,8 @@ import MeetingTranscriptRecording from "../components/meetingtranscriptrecording
 import AuthStart from "../components/auth-start";
 import AuthEnd from "../components/auth-end";
 import RecordingTranscript from "../components/viewRecordingTranscript ";
-import * as microsoftTeams from "@microsoft/teams-js";
 
 export const AppRoute = () => {
-
-    React.useEffect(() => {
-        microsoftTeams.app.initialize();
-
-    }, [])
 
     return (
         <React.Fragment>
