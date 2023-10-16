@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "f844cd97-926e-48b7-86fb-8cc3c6e70673",
+  "id": "{{Microsoft-App-id}}",
   "packageName": "com.teams.meetingtranscriptrecording",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "meetingtranscriptrecording",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://ad43-2401-4900-606c-8175-6dac-969c-1977-75ab.ngrok-free.app/meetingtranscriptrecording",
-      "websiteUrl": "https://ad43-2401-4900-606c-8175-6dac-969c-1977-75ab.ngrok-free.app/meetingtranscriptrecording",
+      "contentUrl": "https://{{domain-name}}/meetingtranscriptrecording",
+      "websiteUrl": "https://{{domain-name}}/meetingtranscriptrecording",
       "scopes": [
         "personal"
       ]
@@ -42,7 +42,7 @@
     "*.ngrok-free.app"
   ],
   "webApplicationInfo": {
-    "id": "f844cd97-926e-48b7-86fb-8cc3c6e70673",
-    "resource": "api://ad43-2401-4900-606c-8175-6dac-969c-1977-75ab.ngrok-free.app/botid-f844cd97-926e-48b7-86fb-8cc3c6e70673"
+    "id": "{{Microsoft-App-id}}",
+    "resource": "api://{{domain-name}}/botid-{{Microsoft-App-id}}"
   }
 }

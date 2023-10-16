@@ -76,6 +76,12 @@ This sample shows meeting transcripts and recordings.
   11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
       * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+      * `4765445b-32c6-49b0-83e6-1d93765276ca` (Microsoft 365 web application)
+      * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Microsoft 365 desktop application)
+      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Microsoft 365 mobile application)
+      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop application)
+      * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web application)
+      * `27922004-5251-4030-b22d-91ecd9a37ea4` (Outlook mobile application)
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
@@ -131,7 +137,7 @@ This sample shows meeting transcripts and recordings.
    
  7. __*This step is specific to Teams.*__
 
-- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `{{Microsoft-App-id}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
@@ -149,11 +155,11 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![InstallApp ](MeetingTranscriptRecording/Images/Install.png)
 
-**Install app:**
+**Click Sign-In:**
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
 
-**Home Page:**
+**Meeting Detail Page:**
 
 ![Home](MeetingTranscriptRecording/Images/Home.png)
 
@@ -166,7 +172,6 @@ You can interact with Teams Tab meeting sidepanel.
 - [Azure AD application using Microsoft Graph](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
 - [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
 - [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-meeting-transcript-recording-csharp" />
