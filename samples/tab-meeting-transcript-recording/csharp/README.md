@@ -125,9 +125,13 @@ This sample shows meeting transcripts and recordings.
 
         ```bash
         # npm install
+
         ```
 
- 6) Modify the `/appsettings.json` and fill in the following details:
+ 6) Open .env file from this path folder `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp` and update:
+   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+
+ 7) Modify the `/appsettings.json` and fill in the following details:
   Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
