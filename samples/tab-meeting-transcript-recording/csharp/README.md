@@ -43,8 +43,8 @@ This sample shows meeting transcripts and recordings.
       * Choose **Register**.
   3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
   4. Under **Manage**, select **Expose an API**. 
-  5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-      * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
+  5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
+      * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
   6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
   7. Set **Who can consent?** to `Admins and users`
   8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -55,7 +55,7 @@ This sample shows meeting transcripts and recordings.
   9. Ensure that **State** is set to **Enabled**
   10. Select **Add scope**
       * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-          * `api://[ngrokDomain].ngrok-free.app/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+          * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
   11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
       * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)

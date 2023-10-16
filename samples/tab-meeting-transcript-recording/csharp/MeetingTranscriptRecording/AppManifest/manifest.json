@@ -39,10 +39,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok-free.app"
+    "{{domain-name}}"
   ],
   "webApplicationInfo": {
     "id": "{{Microsoft-App-id}}",
-    "resource": "api://{{domain-name}}/botid-{{Microsoft-App-id}}"
+    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
   }
 }
