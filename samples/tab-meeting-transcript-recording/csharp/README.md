@@ -163,6 +163,14 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
 
+**Click Consent:**
+
+![Login-In ](MeetingTranscriptRecording/Images/LoginConsent.png)
+
+**Permissions Requested:**
+
+![Login-In ](MeetingTranscriptRecording/Images/PermissionsRequested.png)
+
 **Meeting Detail Page:**
 
 ![Home](MeetingTranscriptRecording/Images/Home.png)

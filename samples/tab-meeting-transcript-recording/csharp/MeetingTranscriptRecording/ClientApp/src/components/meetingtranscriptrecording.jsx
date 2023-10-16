@@ -24,6 +24,8 @@ const MeetingTranscriptRecording = () => {
 
     const [loading, setLoading] = useState(false);
 
+    const [loginAdminAccount, setloginAdminAccount] = useState(false);
+
     useEffect(() => {
         // Initialize the Microsoft Teams SDK
         microsoftTeams.app.initialize();
@@ -77,8 +79,10 @@ const MeetingTranscriptRecording = () => {
                         }
                     })
                     .then((responseJson) => {
-                        if (responseJson === "") {
+                        if (responseJson === "" || responseJson === "[]") {
                             setIsConsentButtonVisible(true);
+                            setIsLoginVisible(false);
+                            setLoading(false);
                         }
                         else {
                             setIsLoginVisible(false);
@@ -112,12 +116,15 @@ const MeetingTranscriptRecording = () => {
                 width: 600,
                 height: 535
             })
-                .then((result) => {
-                    resolve(result);
-                })
-                .catch((reason) => {
-                    reject(reason);
-                });
+            .then((result) => {
+                resolve(result);
+            })
+            .catch((reason) => {
+                setloginAdminAccount(true);
+                setIsConsentButtonVisible(false);
+                setIsLoginVisible(false);
+                setLoading(false);
+            });
         });
     }
 
@@ -155,6 +162,12 @@ const MeetingTranscriptRecording = () => {
                     <>
                         <div id="divError">Please click on consent button</div>
                         <Button appearance="primary" onClick={requestConsent}>Consent</Button>
+                    </>
+                }
+
+                {loginAdminAccount &&
+                    <>
+                    <h3>Please login with admin account.</h3>
                     </>
                 }
             </div>
