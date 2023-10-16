@@ -47,9 +47,11 @@ namespace MeetingTranscriptRecording.Controllers
             {
                 var CardResults = new List<CardData>();
 
+                var eventCount = 0;
+
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                string graphApiEndpointEvents = $"https://graph.microsoft.com/beta/me/events";
+                string graphApiEndpointEvents = $"https://graph.microsoft.com/beta/me/events?$orderby=start/dateTime desc";
 
                 var responseBody = await AuthHelper.GetApiData(graphApiEndpointEvents, accessToken);
 
@@ -64,67 +66,71 @@ namespace MeetingTranscriptRecording.Controllers
                         {
                             if (element.isOnlineMeeting == true)
                             {
-                                var Obj = new CardData();
-
-                                Obj.subject = element.subject;
-                                Obj.start = element.start.dateTime.ToString("MMM dd h:mm tt");
-                                Obj.end = element.end.dateTime.ToString("MMM dd h:mm tt");
-                                Obj.organizer = element.organizer.emailAddress.name;
-
-                                //---------------Get Join URL---------------
-                                string joinUrl = element.onlineMeeting.joinUrl;
-
-                                string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
-
-                                var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
-
-                                var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
-
-                                if (responseJoinUrlData != null)
+                                if (eventCount <= 9)
                                 {
-                                    if (responseJoinUrlData.Value.Count > 0)
+                                    var Obj = new CardData();
+                                    Obj.subject = element.subject;
+                                    Obj.start = element.start.dateTime.ToString("MMM dd h:mm tt");
+                                    Obj.end = element.end.dateTime.ToString("MMM dd h:mm tt");
+                                    Obj.organizer = element.organizer.emailAddress.name;
+
+                                    eventCount++;
+
+                                    //---------------Get Join URL---------------
+                                    string joinUrl = element.onlineMeeting.joinUrl;
+
+                                    string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
+
+                                    var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
+
+                                    var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
+
+                                    if (responseJoinUrlData != null)
                                     {
-                                        foreach (JoinWebUrl JoinWebUrlData in responseJoinUrlData.Value)
+                                        if (responseJoinUrlData.Value.Count > 0)
                                         {
-                                            Obj.onlineMeetingId = JoinWebUrlData.id;
-
-                                            //----------- Get OnlineMeetingId---------------
-                                            string onlineMeetingId = JoinWebUrlData.id;
-
-                                            string graphApiEndpointOnlineTranscripts = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/transcripts";
-
-                                            var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
-
-                                            var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
-
-                                            if (responseTranscriptsData != null)
+                                            foreach (JoinWebUrl JoinWebUrlData in responseJoinUrlData.Value)
                                             {
-                                                if (responseTranscriptsData.Value.Count > 0)
+                                                Obj.onlineMeetingId = JoinWebUrlData.id;
+
+                                                //----------- Get OnlineMeetingId---------------
+                                                string onlineMeetingId = JoinWebUrlData.id;
+
+                                                string graphApiEndpointOnlineTranscripts = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/transcripts";
+
+                                                var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
+
+                                                var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
+
+                                                if (responseTranscriptsData != null)
                                                 {
-                                                    foreach (transcriptsId TranscriptsData in responseTranscriptsData.Value)
+                                                    if (responseTranscriptsData.Value.Count > 0)
                                                     {
-                                                        Obj.transcriptsId = TranscriptsData.id;
-
-                                                        //-------------Get transcripts Id--------------
-                                                        string TranscriptsId = TranscriptsData.id;
-
-                                                        string graphApiEndpointOnlineRecordings = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/recordings";
-
-                                                        var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
-
-                                                        var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
-
-                                                        if (responseRecordingsData != null)
+                                                        foreach (transcriptsId TranscriptsData in responseTranscriptsData.Value)
                                                         {
-                                                            if (responseRecordingsData.Value.Count > 0)
-                                                            {
-                                                                foreach (RecordingId RecordingsData in responseRecordingsData.Value)
-                                                                {
-                                                                    Obj.recordingId = RecordingsData.id;
-                                                                    Obj.condition = true;
+                                                            Obj.transcriptsId = TranscriptsData.id;
 
-                                                                    //-------------Get recordings Id--------------
-                                                                    string RecordingId = RecordingsData.id;
+                                                            //-------------Get transcripts Id--------------
+                                                            string TranscriptsId = TranscriptsData.id;
+
+                                                            string graphApiEndpointOnlineRecordings = $"https://graph.microsoft.com/beta/me/onlineMeetings/" + onlineMeetingId + "/recordings";
+
+                                                            var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
+
+                                                            var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
+
+                                                            if (responseRecordingsData != null)
+                                                            {
+                                                                if (responseRecordingsData.Value.Count > 0)
+                                                                {
+                                                                    foreach (RecordingId RecordingsData in responseRecordingsData.Value)
+                                                                    {
+                                                                        Obj.recordingId = RecordingsData.id;
+                                                                        Obj.condition = true;
+
+                                                                        //-------------Get recordings Id--------------
+                                                                        string RecordingId = RecordingsData.id;
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -133,8 +139,12 @@ namespace MeetingTranscriptRecording.Controllers
                                             }
                                         }
                                     }
+                                    CardResults.Add(Obj);
                                 }
-                                CardResults.Add(Obj);
+                                else
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
