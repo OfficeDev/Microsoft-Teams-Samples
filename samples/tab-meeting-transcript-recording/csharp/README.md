@@ -32,25 +32,8 @@ This sample shows meeting transcripts and recordings.
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## Setup
 
-> Note these instructions are for running the sample on your local machine.
-
-1. Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3978 --allow-anonymous
-   ```
-
-2. Setup
-
- ### Register you app with Azure AD.
+### Setup Register you app with Azure AD.
 
   1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
@@ -96,14 +79,30 @@ This sample shows meeting transcripts and recordings.
       * Select **Single-page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
   14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-      
-3. Clone the repository
+
+## Setup 
+
+> Note these instructions are for running the sample on your local machine.
+
+1. Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+2. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-4. Run the app from a terminal or from Visual Studio, choose option A or B.
+3. Run the app from a terminal or from Visual Studio, choose option A or B.
 
     A) From a terminal, navigate to `samples/tab-meeting-transcript-recording/csharp`
 
@@ -119,7 +118,7 @@ This sample shows meeting transcripts and recordings.
     - Select `MeetingTranscriptRecording.sln` file
     - Press `F5` to run the project
 
-5. In a terminal, navigate to `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp`
+4. In a terminal, navigate to `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp`
 
     - Inside ClientApp folder execute the below command.
 
@@ -128,10 +127,11 @@ This sample shows meeting transcripts and recordings.
 
         ```
 
- 6) Open .env file from this path folder `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp` and update:
-   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+5. Open .env file from this path folder `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp` and update:
+   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id\
+   
 
- 7) Modify the `/appsettings.json` and fill in the following details:
+6. Modify the `/appsettings.json` and fill in the following details:
   Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
@@ -139,7 +139,7 @@ This sample shows meeting transcripts and recordings.
    - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   
    
- 7. __*This step is specific to Teams.*__
+**This step is specific to Teams:**
 
 - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `{{Microsoft-App-id}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
