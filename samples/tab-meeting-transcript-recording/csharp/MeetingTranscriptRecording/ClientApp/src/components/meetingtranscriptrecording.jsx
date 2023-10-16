@@ -118,6 +118,7 @@ const MeetingTranscriptRecording = () => {
             })
             .then((result) => {
                 resolve(result);
+                setLoading(true);
             })
             .catch((reason) => {
                 setloginAdminAccount(true);
