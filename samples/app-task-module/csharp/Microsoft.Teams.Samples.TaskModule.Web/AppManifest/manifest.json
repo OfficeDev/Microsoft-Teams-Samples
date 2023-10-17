@@ -19,8 +19,8 @@
     "full": "This is a sample app for the Task Module feature written in C#."
   },
   "icons": {
-    "outline": "outline_icon.png",
-    "color": "color_icon.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#60A18E",
   "configurableTabs": [

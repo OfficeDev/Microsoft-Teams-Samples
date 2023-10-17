@@ -32,8 +32,8 @@
     "full": "This sample app provides a very simple localization app. You can extend this to add more content and capabilities."
   },
   "icons": {
-    "outline": "contoso20x20.png",
-    "color": "contoso96x96.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#60A18E",
   "staticTabs": [

@@ -19,10 +19,19 @@
     "full": "This is a sample app for the Task Module feature written in C#."
   },
   "icons": {
-    "outline": "outline_icon.png",
-    "color": "color_icon.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#60A18E",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{domain-name}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
   "staticTabs": [
     {
       "entityId": "com.contoso.taskmodule.task",
@@ -31,6 +40,31 @@
       "websiteUrl": "https://{{domain-name}}/tasks",
       "scopes": [
         "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "tasks",
+              "description": "Test the task module with an Adaptive & Thumbnail card"
+            }
+          ]
+        }
       ]
     }
   ],
