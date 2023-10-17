@@ -4,6 +4,8 @@
 
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
 
+The easy way to browse through all the samples is to visit the [Microsoft 365 Sample Solution Gallery](https://adoption.microsoft.com/en-us/sample-solution-gallery/?keyword=&sort-by=updateDateTime-true&page=1&product=Teams)
+
 # Sample lists
 
 1. [Ready to try sample app manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
