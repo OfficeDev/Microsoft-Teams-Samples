@@ -2,6 +2,7 @@ body {
     background-color: black;
     color: white;
     font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
+    display: contents
 }
 
 .submit-button {
@@ -58,7 +59,6 @@ body {
     display: grid;
     align-content: center;
     grid-row: column gap 50px;
-    ;
     justify-content: center;
     padding-top: 1.5em;
     padding-bottom: 1.5em;
@@ -90,6 +90,7 @@ body {
 }
 
 /* Theme styles */
+
 .theme-dark {
     background-color: #242424;
     color: white;

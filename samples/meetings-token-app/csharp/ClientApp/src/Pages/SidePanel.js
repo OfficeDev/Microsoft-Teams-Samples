@@ -211,7 +211,9 @@ const SidePanel = props => {
                     title={`Your Token: ${userToken.status}`}
                 />
             </div>
-            <UserList items={participants} />
+            <div className={appTheme}>
+                <UserList items={participants} />
+            </div>
         </Fragment>
     );
 }
