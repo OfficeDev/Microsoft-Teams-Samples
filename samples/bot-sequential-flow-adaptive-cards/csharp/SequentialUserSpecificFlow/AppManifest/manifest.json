@@ -23,7 +23,6 @@
     "color": "color.png"
   },
   "accentColor": "#60A18E",
-
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",

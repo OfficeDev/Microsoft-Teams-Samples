@@ -19,8 +19,8 @@
     "full": "Demonstrates authorization in Teams."
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#abcdef",
   "bots": [
