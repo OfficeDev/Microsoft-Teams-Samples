@@ -42,10 +42,7 @@ app.get('/getGraphAccessToken', async (req, res) => {
                 name = resData.data.names[0].displayName;
                 photo = resData.data.photos[0].url;
                 email = resData.data.emailAddresses[0].value;
-
-                console.log(name);
-                console.log(photo);
-
+                
                 var data = {
                     name: name,
                     photo: photo,
