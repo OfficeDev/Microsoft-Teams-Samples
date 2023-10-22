@@ -3,9 +3,9 @@
   "manifestVersion": "1.15",
   "version": "1.0.2",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples.msgExt",
+  "packageName": "com.microsoft.teams.msgExt.search",
   "developer": {
-    "name": "Microsoft",
+    "name": "TCS",
     "websiteUrl": "https://dev.botframework.com",
     "privacyUrl": "https://dev.botframework.com",
     "termsOfUseUrl": "https://dev.botframework.com"
@@ -15,12 +15,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Messaging Extension SSO",
-    "full": "ME SSO for Search, Action and link unfurling"
+    "short": "Messaging Extension Search",
+    "full": "ME search with SSO"
   },
   "description": {
-    "short": "ME Authentication for Search, Action and Link unfurling",
-    "full": "ME Authentication sample code for all authentication merged"
+    "short": "ME search with SSO",
+    "full": "ME search with SharePoint list"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
@@ -48,56 +48,6 @@
               "inputType": "text"
             }
           ]
-        },
-        {
-          "id": "SHOWPROFILE",
-          "type": "action",
-          "title": "Compose",
-          "description": "Compose and send email",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose",
-            "message"
-          ],
-          "parameters": [
-            {
-              "name": "param",
-              "title": "param",
-              "description": ""
-            }
-          ]
-        },
-        {
-          "id": "SignOutCommand",
-          "type": "action",
-          "title": "Sign Out",
-          "description": "Sign out from authenticated services.",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ],
-          "parameters": [
-            {
-              "name": "param",
-              "title": "param",
-              "description": ""
-            }
-          ]
-        }
-      ],
-      "messageHandlers": [
-        {
-          "type": "link",
-          "value": {
-            "domains": [
-              "*.botframework.com"
-            ],
-            "supportsAnonymizedPayloads": true
-          }
         }
       ]
     }
@@ -106,9 +56,6 @@
     "identity"
   ],
   "validDomains": [
-    "*.githubusercontent.com",
-    "{{domain-name}}",
-    "*.botframework.com",
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {

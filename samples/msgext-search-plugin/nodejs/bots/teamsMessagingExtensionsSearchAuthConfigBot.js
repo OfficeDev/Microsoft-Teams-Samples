@@ -4,20 +4,12 @@
 const {
     TeamsActivityHandler,
     CardFactory,
-    ActionTypes,
-    ActivityHandler
 } = require('botbuilder');
 
 const {
-    ExtendedUserTokenProvider
 } = require('botbuilder-core')
 
 const axios = require('axios');
-const querystring = require('querystring');
-const { SimpleGraphClient } = require('..\\simpleGraphClient.js');
-
-// User Configuration property name
-const USER_CONFIGURATION = 'userConfigurationProperty';
 
 class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     /**
@@ -26,11 +18,6 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
      */
     constructor(userState) {
         super();
-        // Creates a new user property accessor.
-        // See https://aka.ms/about-bot-state-accessors to learn more about the bot state and state accessors.
-        this.userConfigurationProperty = userState.createProperty(
-            USER_CONFIGURATION
-        );
         this.connectionName = process.env.ConnectionName;
         this.userState = userState;
     }
@@ -45,8 +32,12 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         await this.userState.saveChanges(context);
     }
 
-    // Overloaded function. Receives invoke activities with Activity name of 'composeExtension/queryLink'
-    async handleTeamsAppBasedLinkQuery(context, query) {
+    // Overloaded function. Receives invoke activities with the name 'composeExtension/query'.
+    async handleTeamsMessagingExtensionQuery(context, query) {
+        const searchQuery = query.parameters[0].value;
+        const attachments = [];
+
+        // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
         const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
         const magicCode =
             context.state && Number.isInteger(Number(context.state))
@@ -84,298 +75,118 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             };
         }
 
-        const graphClient = new SimpleGraphClient(tokenResponse.token);
-        const profile = await graphClient.GetMyProfile();
-        const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
-        const attachment = CardFactory.thumbnailCard(profile.displayName, CardFactory.images([userPhoto]));
+        // The user is signed in, so use the token to create a Graph Clilent and show profile
+        console.log(tokenResponse.token);
 
-        const result = {
-            attachmentLayout: 'list',
-            type: 'result',
-            attachments: [attachment]
-        };
+        // const graphClient = new SimpleGraphClient(tokenResponse.token);
 
-        const response = {
-            composeExtension: result
-        };
+        //==============
+        //     axios.post('https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}', {
+        //     "requests": [
+        //         {
+        //             "entityTypes": [
+        //                 "listItem"
+        //             ],
+        //             "query": {
+        //                 "queryString": "Kent"
+        //             }
+        //         }
+        //     ]
+        // }, {
+        //     headers: {
+        //         'Authorization': 'Bearer '+ tokenResponse.token,
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
-        return response;
-    }
-    async handleTeamsMessagingExtensionConfigurationQuerySettingUrl(
-        context,
-        query
-    ) {
-        // The user has requested the Messaging Extension Configuration page settings url.
-        const userSettings = await this.userConfigurationProperty.get(
-            context,
-            ''
-        );
-        const escapedSettings = userSettings
-            ? querystring.escape(userSettings)
-            : '';
+        const filterQuery = searchQuery + " path:\"https://" + process.env.SharePointDomain + "/sites/" + process.env.SharePointSiteName + "/Lists/" + process.env.SharePointListName + "\"";
 
-        return {
-            composeExtension: {
-                type: 'config',
-                suggestedActions: {
-                    actions: [
-                        {
-                            type: ActionTypes.OpenUrl,
-                            value: `${process.env.SiteUrl}/public/searchSettings.html?settings=${escapedSettings}`
-                        },
+        const response = await axios.post('https://graph.microsoft.com/v1.0/search/query', {
+            "requests": [
+                {
+                    "entityTypes": [
+                        "listItem"
                     ],
-                },
-            },
-        };
-    }
-
-    // Overloaded function. Receives invoke activities with the name 'composeExtension/setting
-    async handleTeamsMessagingExtensionConfigurationSetting(context, settings) {
-        // When the user submits the settings page, this event is fired.
-        if (settings.state != null) {
-            await this.userConfigurationProperty.set(context, settings.state);
-        }
-    }
-
-    // Overloaded function. Receives invoke activities with the name 'composeExtension/query'.
-    async handleTeamsMessagingExtensionQuery(context, query) {
-        const searchQuery = query.parameters[0].value;
-        const attachments = [];
-        const userSettings = await this.userConfigurationProperty.get(
-            context,
-            ''
-        );
-
-        if (!userSettings || userSettings.includes('profile')) {
-            // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
-            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
-            const magicCode =
-                context.state && Number.isInteger(Number(context.state))
-                    ? context.state
-                    : '';
-
-            const tokenResponse = await userTokenClient.getUserToken(
-                context.activity.from.id,
-                this.connectionName,
-                context.activity.channelId,
-                magicCode
-            );
-
-            if (!tokenResponse || !tokenResponse.token) {
-                // There is no token, so the user has not signed in yet.
-                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                const { signInLink } = await userTokenClient.getSignInResource(
-                    this.connectionName,
-                    context.activity
-                );
-
-                return {
-                    composeExtension: {
-                        type: 'silentAuth',
-                        suggestedActions: {
-                            actions: [
-                                {
-                                    type: 'openUrl',
-                                    value: signInLink,
-                                    title: 'Bot Service OAuth'
-                                },
-                            ],
-                        },
+                    "query": {
+                        "queryString": filterQuery
                     },
-                };
-            }
-
-            // The user is signed in, so use the token to create a Graph Clilent and show profile
-            console.log(tokenResponse.token);
-
-            const graphClient = new SimpleGraphClient(tokenResponse.token);
-
-            //==============
-                axios.post('https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}', {
-                "requests": [
-                    {
-                        "entityTypes": [
-                            "listItem"
-                        ],
-                        "query": {
-                            "queryString": "Kent"
-                        }
-                    }
-                ]
-            }, {
-                headers: {
-                    'Authorization': 'Bearer '+ tokenResponse.token,
-                    'Content-Type': 'application/json'
+                    "fields": [
+                        "id",
+                        "title",
+                        "contentclass",
+                        "last_name",
+                        "field_2",
+                        "address"
+                    ]
                 }
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            //===============
-
-            const profile = await graphClient.GetMyProfile();
-            const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
-            const thumbnailCard = CardFactory.thumbnailCard(profile.displayName, CardFactory.images([userPhoto]));
-            attachments.push(thumbnailCard);
-        } else {
-            const response = await axios.get(
-                `http://registry.npmjs.com/-/v1/search?${querystring.stringify({
-                    text: searchQuery,
-                    size: 8
-                })}`
-            );
-
-            response.data.objects.forEach((obj) => {
-                const heroCard = CardFactory.heroCard(obj.package.name);
-                const preview = CardFactory.heroCard(obj.package.name);
-                preview.content.tap = {
-                    type: 'invoke',
-                    value: { description: obj.package.description }
-                };
-                attachments.push({ ...heroCard, preview });
-            });
-        }
-
-        return {
-            composeExtension: {
-                type: 'result',
-                attachmentLayout: 'list',
-                attachments: attachments
-            },
-        };
-    }
-
-    // Overloaded function. Receives invoke activities with the name 'composeExtension/selectItem'.
-    async handleTeamsMessagingExtensionSelectItem(context, obj) {
-        return {
-            composeExtension: {
-                type: 'result',
-                attachmentLayout: 'list',
-                attachments: [CardFactory.thumbnailCard(obj.description)]
-            },
-        };
-    }
-
-    // Overloaded function. Receives invoke activities with the name 'composeExtension/fetchTask'
-    async handleTeamsMessagingExtensionFetchTask(context, action) {
-        if (action.commandId === 'SHOWPROFILE') {
-            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
-            const magicCode =
-                context.state && Number.isInteger(Number(context.state))
-                    ? context.state
-                    : '';
-
-            const tokenResponse = await userTokenClient.getUserToken(
-                context.activity.from.id,
-                this.connectionName,
-                context.activity.channelId,
-                magicCode
-            );
-
-            if (!tokenResponse || !tokenResponse.token) {
-                // There is no token, so the user has not signed in yet.
-                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                const { signInLink } = await userTokenClient.getSignInResource(
-                    this.connectionName,
-                    context.activity
-                );
-
-                return {
-                    composeExtension: {
-                        type: 'silentAuth',
-                        suggestedActions: {
-                            actions: [
-                                {
-                                    type: 'openUrl',
-                                    value: signInLink,
-                                    title: 'Bot Service OAuth'
-                                },
-                            ],
-                        },
-                    },
-                };
+            ]
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + tokenResponse.token,
+                'Content-Type': 'application/json'
             }
+        });
 
-            const graphClient = new SimpleGraphClient(tokenResponse.token);
-            const profile = await graphClient.GetMyProfile();
-            const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
-            const profileCard = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: 'TextBlock',
-                        text: 'Hello: ' + profile.displayName,
-                    },
-                    {
-                        type: 'Image',
-                        url: userPhoto,
-                    },
-                ],
-            });
-            return {
-                task: {
-                    type: 'continue',
-                    value: {
-                        card: profileCard,
-                        heigth: 250,
-                        width: 400,
-                        title: 'Show Profile Card'
-                    },
-                },
-            };
-        }
-        if (action.commandId === 'SignOutCommand') {
-            const adapter = context.adapter;
-            await adapter.signOutUser(context, this.connectionName);
+        if (response != null && response !== "undefined" && response.data != null && response.data !== "undefined") {
+            if (response.data.value != null) {
+                var hits = response.data.value[0].hitsContainers[0].hits;
 
-            const card = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: 'TextBlock',
-                        text: 'You have been signed out.'
-                    },
-                ],
-                actions: [
-                    {
-                        type: 'Action.Submit',
-                        title: 'Close',
-                        data: {
-                            key: 'close'
-                        },
-                    },
-                ],
-            });
+                if (hits != null && hits != "undefined") {
+                    var finalDetails = hits.flatMap(arr => arr.resource.fields);
 
-            return {
-                task: {
-                    type: 'continue',
-                    value: {
-                        card: card,
-                        heigth: 200,
-                        width: 400,
-                        title: 'Adaptive Card: Inputs'
-                    },
-                },
-            };
+                    finalDetails.forEach(obj => {
+
+                        const thumbnailCard = CardFactory.thumbnailCard(
+                            obj.title, obj.title,
+                            CardFactory.images([
+                                "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                            ]));
+
+                        // const heroCard = CardFactory.heroCard(obj.title);
+                        const preview = CardFactory.thumbnailCard(obj.title, obj.title,
+                            CardFactory.images([
+                                "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                            ])
+                        );
+
+                        // preview.content.tap = { type: 'invoke', value: { description: obj.title } };
+                        const attachment = { ...thumbnailCard, preview };
+                        attachments.push(attachment);
+                    });
+
+                    return {
+                        composeExtension: {
+                            type: 'result',
+                            attachmentLayout: 'list',
+                            attachments: attachments
+                        }
+                    };
+                }
+                else {
+                    return null;
+                }
+            }
         }
 
-        return null;
-    }
-
-    async handleTeamsMessagingExtensionSubmitAction(context, action) {
-        // This method is to handle the 'Close' button on the confirmation Task Module after the user signs out.
-        return {};
+        return {
+            composeExtension: {
+                type: 'result',
+                attachmentLayout: 'list',
+                attachments: [CardFactory.thumbnailCard("No Data Found.")]
+            }
+        };
     }
 
     async onInvokeActivity(context) {
         console.log('onInvoke, ' + context.activity.name);
         const valueObj = context.activity.value;
+
         if (valueObj.authentication) {
             const authObj = valueObj.authentication;
             if (authObj.token) {
@@ -388,46 +199,13 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     {
                         status: 412
                     };
+
                     return response;
                 }
             }
         }
 
-        if (context.activity.name === "composeExtension/anonymousQueryLink") {
-            const card = CardFactory.adaptiveCard({
-                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                "type": "AdaptiveCard",
-                "version": "1.5",
-                "body": [
-                    {
-                        "type": "TextBlock",
-                        "text": "Zero Link unfurling card",
-                        "weight": "bolder",
-                        "size": "extraLarge"
-                    },
-                    {
-                        "type": "TextBlock",
-                        "text": "Install the app to view full content of the card.",
-                        "size": "large"
-                    }
-                ]
-            });
-
-            const attachment = { ...card, card };
-
-            return ActivityHandler.createInvokeResponse({
-                composeExtension: {
-                    type: 'silentAuth',
-                    attachmentLayout: 'list',
-                    attachments: [
-                        attachment
-                    ]
-                }
-            });
-        }
-        else {
-            return await super.onInvokeActivity(context);
-        }
+        return await super.onInvokeActivity(context);
     }
 
     async tokenIsExchangeable(context) {

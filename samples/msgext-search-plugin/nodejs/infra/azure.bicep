@@ -49,7 +49,7 @@ resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021
   properties: {
     serviceProviderDisplayName: 'Azure Active Directory v2'
     serviceProviderId: '30dd229c-58e3-4a48-bdfd-91ec48eb906c'
-    scopes: 'User.Read AccessReview.ReadWrite.All Mail.Read Mail.Send openid profile User.ReadBasic.All'
+    scopes: 'User.Read openid profile User.ReadBasic.All Sites.Read.All'
     parameters: [
       {
         key: 'clientId'
