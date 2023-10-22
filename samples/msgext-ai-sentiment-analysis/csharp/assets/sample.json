@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-csharp",
+    "source": "officeDev",
+    "title": "Sentiment analysis of Teams chat message using messaging extension and Azure Open AI",
+    "shortDescription": "Sentiment analysis of Teams chat message using messaging extension and Azure Open AI",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-sentiment-analysis/csharp",
+    "longDescription": [
+      "This sample shows a feature where user can get sentiment analysis for posted messages in Teams chat using messaging extension and Azure Open AI."
+    ],
+    "creationDateTime": "2023-10-17",
+    "updateDateTime": "2023-10-17",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "ME, Azure Open AI"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/csharp/Images/Sentiment_Analysis",
+        "alt": "Solution UX showing sentiment analysis for Team's chat messages using messaging extension and Azure Open AI"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
