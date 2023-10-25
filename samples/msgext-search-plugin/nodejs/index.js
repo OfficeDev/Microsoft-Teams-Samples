@@ -28,7 +28,8 @@ const { TeamsMessagingExtensionsSearchAuthConfigBot } = require('./bots/teamsMes
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
   MicrosoftAppId: process.env.MicrosoftAppId,
   MicrosoftAppPassword: process.env.MicrosoftAppPassword,
-  MicrosoftAppType: "MultiTenant"
+  MicrosoftAppType: "SingleTenant",
+  MicrosoftAppTenantId: process.env.TenantId
 });
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
