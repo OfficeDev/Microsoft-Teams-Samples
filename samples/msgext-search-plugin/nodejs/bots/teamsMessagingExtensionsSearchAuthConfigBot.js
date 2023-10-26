@@ -116,14 +116,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     "query": {
                         "queryString": filterQuery
                     },
-                    "fields": [
-                        "id",
-                        "title",
-                        "contentclass",
-                        "last_name",
-                        "field_2",
-                        "address"
-                    ]
+                    "size": 10
                 }
             ]
         }, {
@@ -138,21 +131,40 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 var hits = response.data.value[0].hitsContainers[0].hits;
 
                 if (hits != null && hits != "undefined") {
-                    var finalDetails = hits.flatMap(arr => arr.resource.fields);
+                    var finalDetails = hits.map(function (obj, index) {
+                        return {
+                            id: index + 1,
+                            method: "GET",
+                            url: "/sites/" + obj.resource.parentReference.siteId + "/lists/" + obj.resource.sharepointIds.listId + "/items/" + obj.resource.sharepointIds.listItemId + "?expand=fields"
+                        }
+                    });
 
-                    finalDetails.forEach(obj => {
+                    const responseListItems = await axios.post('https://graph.microsoft.com/v1.0/$batch', {
+                        "requests": finalDetails
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + tokenResponse.token,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    responseListItems.data.responses.forEach(obj => {
 
                         const thumbnailCard = CardFactory.thumbnailCard(
-                            obj.title, obj.title,
-                            CardFactory.images([
-                                "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-                            ]));
+                            obj.body.fields.field_1,
+                            obj.body.fields.field_2
+                            // ,CardFactory.images([
+                            //     "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                            // ])
+                        );
 
                         // const heroCard = CardFactory.heroCard(obj.title);
-                        const preview = CardFactory.thumbnailCard(obj.title, obj.title,
-                            CardFactory.images([
-                                "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-                            ])
+                        const preview = CardFactory.thumbnailCard(
+                            obj.body.fields.field_1.substring(0,100),
+                            obj.body.fields.field_2.substring(0,100)
+                            // ,CardFactory.images([
+                            //     "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                            // ])
                         );
 
                         // preview.content.tap = { type: 'invoke', value: { description: obj.title } };
