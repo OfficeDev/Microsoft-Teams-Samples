@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoftn-Teams-Samples:app-anonymous-users-nodejs
+  sampleTag: Microsoft-Teams-Samples:app-anonymous-users-nodejs
 
 environmentFolderPath: ./env
