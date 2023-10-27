@@ -1,6 +1,6 @@
 function ssoAuth() {
     'use strict';
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
 
     // 1. Get auth token
     // Ask Teams to get us a token from AAD
@@ -136,5 +136,5 @@ function ssoAuth() {
             console.error(error);
         });
     });
-
+ });
 }

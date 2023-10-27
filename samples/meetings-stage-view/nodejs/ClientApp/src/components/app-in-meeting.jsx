@@ -14,39 +14,40 @@ import Done from "./done";
 const AppInMeeting = props => {
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        microsoftTeams.app.getContext().then((context) => {
-            if (context.page.frameContext === "sidePanel") {
-                // Adding and removing classes based on screen width, to show app in stage view and in side panel
-                $("#todo, #doing, #done").addClass("grid-item-sidepanel");
-                $("#todo, #doing, #done").removeClass("grid-item");
-                $("#boardDiv").addClass("chat-window-sidepanel");
-                $("#boardDiv").removeClass("chat-window");
-            }
-            else {
-                // Adding and removing classes based on screen width, to show app in stage view and in side panel
-                $("#todo, #doing, #done").addClass("grid-item");
-                $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
-                $("#boardDiv").addClass("chat-window");
-                $("#boardDiv").removeClass("chat-window-sidepanel");
-            }
+         microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                if (context.page.frameContext === "sidePanel") {
+                    // Adding and removing classes based on screen width, to show app in stage view and in side panel
+                    $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+                    $("#todo, #doing, #done").removeClass("grid-item");
+                    $("#boardDiv").addClass("chat-window-sidepanel");
+                    $("#boardDiv").removeClass("chat-window");
+                }
+                else {
+                    // Adding and removing classes based on screen width, to show app in stage view and in side panel
+                    $("#todo, #doing, #done").addClass("grid-item");
+                    $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+                    $("#boardDiv").addClass("chat-window");
+                    $("#boardDiv").removeClass("chat-window-sidepanel");
+                }
+            });
         });
     }, []);
 
     // Method to open share to stage content using deep link.
     const openDeepLink = () => {
-        microsoftTeams.app.initialize();
-        var appContext = JSON.stringify({
-            "appSharingUrl": `${window.location.origin}/todoView`,
-            "appId": "<<App id>>", "useMeetNow": false
-        });
+        microsoftTeams.app.initialize().then(() => {
+            var appContext = JSON.stringify({
+                "appSharingUrl": `${window.location.origin}/todoView`,
+                "appId": "<<App id>>", "useMeetNow": false
+            });
 
-        var encodedContext = encodeURIComponent(appContext).replace(/'/g, "%27").replace(/"/g, "%22");
+            var encodedContext = encodeURIComponent(appContext).replace(/'/g, "%27").replace(/"/g, "%22");
 
-        var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
+            var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
 
-        microsoftTeams.app.openLink(shareToStageLink);
-
+            microsoftTeams.app.openLink(shareToStageLink);
+      });
     }
 
     // Share the content to meeting stage view.

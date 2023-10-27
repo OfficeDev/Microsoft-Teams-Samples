@@ -2,8 +2,7 @@
 let accessToken;
 
 function login() {
-    microsoftTeams.app.initialize();
-
+    microsoftTeams.app.initialize().then(() => {
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
@@ -26,7 +25,9 @@ function login() {
                 // Something else went wrong
             }
         });
+    });
 }
+
 
 function requestConsent() {
     getToken()

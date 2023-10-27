@@ -45,8 +45,8 @@ const Todo = props => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-         microsoftTeams.app.initialize();
-        (async function () {            
+        (async function () {  
+            await microsoftTeams.app.initialize();          
             window.localStorage.debug = "fluid:*";
             // Define Fluid document schema and create container
             const client = new TeamsFluidClient();

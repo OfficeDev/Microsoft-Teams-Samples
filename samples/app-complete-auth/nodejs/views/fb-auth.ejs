@@ -8,7 +8,7 @@
         integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI" ,
         crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         localStorage.removeItem("auth.error");
         let code = getHashParameters();
         let key = "auth.result";
@@ -24,6 +24,7 @@
             var code = url.searchParams.get("code");
             return code;
         }
+    });   
     </script>
 </body>
 </html>

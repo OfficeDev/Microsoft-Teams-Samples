@@ -40,14 +40,16 @@ const ShareView = () => {
     const [ssoAuthenticationButtonVisible, setIsSsoAuthenticationButtonVisible] = useState(true);
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        verifyAnonymousUser();
+        microsoftTeams.app.initialize().then(() => {
+            verifyAnonymousUser();
+        });
     }, [])
 
     // Builds the socket connection, mapping it to /io
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        setSocket(io());     
+        microsoftTeams.app.initialize().then(() => {
+            setSocket(io());   
+        });  
     }, []);
 
      // subscribe to the socket event

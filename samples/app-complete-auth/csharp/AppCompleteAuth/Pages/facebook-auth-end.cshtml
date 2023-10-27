@@ -12,15 +12,16 @@
 
         // Get face book client side token.
         function getAuthToken() {
-            microsoftTeams.app.initialize();
-            localStorage.removeItem("auth.error");
-            let code = getHashParameters();
-            let key = "auth.result";
-            localStorage.setItem(key, JSON.stringify({
-                idToken: code,
-            }));
+            microsoftTeams.app.initialize().then(() => {
+                localStorage.removeItem("auth.error");
+                let code = getHashParameters();
+                let key = "auth.result";
+                localStorage.setItem(key, JSON.stringify({
+                    idToken: code,
+                }));
 
-            microsoftTeams.authentication.notifySuccess(key);
+                microsoftTeams.authentication.notifySuccess(key);
+         });
         }
 
         // Parse hash parameters into key-value pairs

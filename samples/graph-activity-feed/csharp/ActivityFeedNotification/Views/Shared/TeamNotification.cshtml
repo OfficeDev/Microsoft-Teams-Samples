@@ -70,8 +70,7 @@
             });
         });
 
-        microsoftTeams.app.initialize();
-
+        microsoftTeams.app.initialize().then(() => {    
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
@@ -172,7 +171,7 @@
 
             return true;
         };
-
+     });
     </script>
 </head>
 

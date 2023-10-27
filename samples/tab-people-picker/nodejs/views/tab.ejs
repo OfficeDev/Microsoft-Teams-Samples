@@ -13,49 +13,50 @@
         });
 
         let aadId;
-        microsoftTeams.app.initialize();
-        microsoftTeams.app.getContext().then(function (context) {
-            aadId = context.user.id
-        })
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then(function (context) {
+                aadId = context.user.id
+            })
 
-        // People picker api call.
-        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
-            var id = $(e.currentTarget).attr('data-id');
+            // People picker api call.
+            function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+                var id = $(e.currentTarget).attr('data-id');
 
-            if (setSelected == "default") {
-                setSelected = [aadId];
+                if (setSelected == "default") {
+                    setSelected = [aadId];
+                }
+
+                microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                        if (people) {
+                        let peopleData = JSON.stringify(people);
+
+                        if (id == "default") {
+                            $("#defaultSelected").empty();
+                            $("#defaultSelected").append("Selected member: " + peopleData)
+                            $("#defaultSelected").show();
+                        }
+
+                        if (id == "singleSelect") {
+                            $("#singleSelected").empty();
+                            $("#singleSelected").append("Selected member: " + peopleData)
+                            $("#singleSelected").show();
+                        }
+
+                        if (id == "allMemberOfOrganisation") {
+                            $("#allMemberOfOrganisationSelected").empty();
+                            $("#allMemberOfOrganisationSelected").append("Selected member: " + peopleData)
+                            $("#allMemberOfOrganisationSelected").show();
+                        }
+
+                        if (id == "defaultSelect") {
+                            $("#defaultMemberSelected").empty();
+                            $("#defaultMemberSelected").append("Selected member: " + peopleData)
+                            $("#defaultMemberSelected").show();
+                        }
+                        }
+                    });
             }
-
-             microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
-                    if (people) {
-                    let peopleData = JSON.stringify(people);
-
-                    if (id == "default") {
-                        $("#defaultSelected").empty();
-                        $("#defaultSelected").append("Selected member: " + peopleData)
-                        $("#defaultSelected").show();
-                    }
-
-                    if (id == "singleSelect") {
-                        $("#singleSelected").empty();
-                        $("#singleSelected").append("Selected member: " + peopleData)
-                        $("#singleSelected").show();
-                    }
-
-                    if (id == "allMemberOfOrganisation") {
-                        $("#allMemberOfOrganisationSelected").empty();
-                        $("#allMemberOfOrganisationSelected").append("Selected member: " + peopleData)
-                        $("#allMemberOfOrganisationSelected").show();
-                    }
-
-                    if (id == "defaultSelect") {
-                        $("#defaultMemberSelected").empty();
-                        $("#defaultMemberSelected").append("Selected member: " + peopleData)
-                        $("#defaultMemberSelected").show();
-                    }
-                    }
-                });
-        }
+    });
     </script>
     <style>
         #mainDiv {
