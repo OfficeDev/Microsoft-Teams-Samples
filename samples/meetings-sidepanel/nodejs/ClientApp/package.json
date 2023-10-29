@@ -38,7 +38,7 @@
   },
   "scripts": {
     "dev:teamsfx": "npm run start",
-    "start": "set PORT=3978 HTTPS=true && react-scripts start",
+    "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
     "clean": "npx shx rm -rf build",
     "start:client": "set PORT=3978 HTTP=true && react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",

@@ -1,14 +1,16 @@
 const {CardFactory } = require('botbuilder');
 const AdaptiveCards = require("adaptivecards");
 const sidePanelBot = require('../bots/SidePanelBot');
-const configuration = require('dotenv').config();
+const path = require('path');
+const ENV_FILE = path.join(__dirname, '..', '.env');
+const configuration = require('dotenv').config({ path: ENV_FILE });
 const env = configuration.parsed;
 const appID = env.MicrosoftAppId;
 const appPassword = env.MicrosoftAppPassword;
 const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector');
 const credentials = new MicrosoftAppCredentials(appID,appPassword);
 
-getAgenda = (req) =>{
+getAgenda = (req, res, next) =>{
        
     publishAgenda();
     
@@ -45,7 +47,7 @@ async function publishAgenda() {
         }
     }   
 
-    setContext = (req, res) => {
+    setContext = (req, res, next) => {
 
     const meetingId = req.body.meetingId;
     const userId = req.body.userId;
