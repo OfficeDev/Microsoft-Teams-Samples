@@ -78,7 +78,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         // The user is signed in, so use the token to create a Graph Clilent and show profile
         console.log(tokenResponse.token);
 
-        const filterQuery = searchQuery + " path:\"https://" + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + "\"";
+        const filterQuery = searchQuery + ' path:"https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '"';
         const response = await axios.post('https://graph.microsoft.com/v1.0/search/query', {
             'requests': [
                 {
