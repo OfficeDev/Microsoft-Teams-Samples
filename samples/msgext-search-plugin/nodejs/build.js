@@ -6,9 +6,9 @@ esbuild.build({
     outfile: 'dist/index.js'
 })
     .then((r) => {
-        console.log(`Build succeeded.`);
+        console.log('Build succeeded.');
     })
     .catch((e) => {
-        console.log("Error building:", e.message);
+        console.log('Error building:', e.message);
         process.exit(1);
     });

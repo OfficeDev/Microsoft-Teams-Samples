@@ -25,13 +25,14 @@
         "restify": "^10.0.0"
     },
     "devDependencies": {
-        "eslint": "^7.0.0",
-        "eslint-config-standard": "^14.1.1",
-        "eslint-plugin-import": "^2.20.2",
+        "esbuild": "^0.18.1",
+        "eslint": "^8.52.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-n": "^16.2.0",
         "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-promise": "^6.1.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4",
-        "esbuild": "^0.18.1"
+        "nodemon": "~2.0.4"
     }
 }

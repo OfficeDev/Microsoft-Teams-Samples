@@ -3,11 +3,11 @@
 
 const {
     TeamsActivityHandler,
-    CardFactory,
+    CardFactory
 } = require('botbuilder');
 
 const {
-} = require('botbuilder-core')
+} = require('botbuilder-core');
 
 const axios = require('axios');
 
@@ -68,55 +68,27 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                                 type: 'openUrl',
                                 value: signInLink,
                                 title: 'Bot Service OAuth'
-                            },
-                        ],
-                    },
-                },
+                            }
+                        ]
+                    }
+                }
             };
         }
 
         // The user is signed in, so use the token to create a Graph Clilent and show profile
         console.log(tokenResponse.token);
 
-        // const graphClient = new SimpleGraphClient(tokenResponse.token);
-
-        //==============
-        //     axios.post('https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}', {
-        //     "requests": [
-        //         {
-        //             "entityTypes": [
-        //                 "listItem"
-        //             ],
-        //             "query": {
-        //                 "queryString": "Kent"
-        //             }
-        //         }
-        //     ]
-        // }, {
-        //     headers: {
-        //         'Authorization': 'Bearer '+ tokenResponse.token,
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-        const filterQuery = searchQuery + " path:\"https://" + process.env.SharePointDomain + "/sites/" + process.env.SharePointSiteName + "/Lists/" + process.env.SharePointListName + "\"";
-
+        const filterQuery = searchQuery + " path:\"https://" + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + "\"";
         const response = await axios.post('https://graph.microsoft.com/v1.0/search/query', {
-            "requests": [
+            'requests': [
                 {
-                    "entityTypes": [
-                        "listItem"
+                    'entityTypes': [
+                        'listItem'
                     ],
-                    "query": {
-                        "queryString": filterQuery
+                    'query': {
+                        'queryString': filterQuery
                     },
-                    "size": 10
+                    'size': 10
                 }
             ]
         }, {
@@ -126,21 +98,21 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             }
         });
 
-        if (response != null && response !== "undefined" && response.data != null && response.data !== "undefined") {
+        if (response != null && response !== 'undefined' && response.data != null && response.data !== 'undefined') {
             if (response.data.value != null) {
-                var hits = response.data.value[0].hitsContainers[0].hits;
+                const hits = response.data.value[0].hitsContainers[0].hits;
 
-                if (hits != null && hits != "undefined") {
-                    var finalDetails = hits.map(function (obj, index) {
+                if (hits != null && hits !== 'undefined') {
+                    const finalDetails = hits.map(function(obj, index) {
                         return {
                             id: index + 1,
-                            method: "GET",
-                            url: "/sites/" + obj.resource.parentReference.siteId + "/lists/" + obj.resource.sharepointIds.listId + "/items/" + obj.resource.sharepointIds.listItemId + "?expand=fields"
-                        }
+                            method: 'GET',
+                            url: '/sites/' + obj.resource.parentReference.siteId + '/lists/' + obj.resource.sharepointIds.listId + '/items/' + obj.resource.sharepointIds.listItemId + '?expand=fields'
+                        };
                     });
 
                     const responseListItems = await axios.post('https://graph.microsoft.com/v1.0/$batch', {
-                        "requests": finalDetails
+                        'requests': finalDetails
                     }, {
                         headers: {
                             'Authorization': 'Bearer ' + tokenResponse.token,
@@ -149,26 +121,18 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     });
 
                     responseListItems.data.responses.forEach(obj => {
+                        const userCard = CardFactory.adaptiveCard(
+                            this.getLinkUnfurlingCard(
+                                obj.body.fields.Title,
+                                obj.body.fields.SurveyStatus
+                            ));
 
-                        const thumbnailCard = CardFactory.thumbnailCard(
-                            obj.body.fields.field_1,
-                            obj.body.fields.field_2
-                            // ,CardFactory.images([
-                            //     "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-                            // ])
-                        );
-
-                        // const heroCard = CardFactory.heroCard(obj.title);
                         const preview = CardFactory.thumbnailCard(
-                            obj.body.fields.field_1.substring(0,100),
-                            obj.body.fields.field_2.substring(0,100)
-                            // ,CardFactory.images([
-                            //     "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-                            // ])
+                            obj.body.fields.Title.substring(0, 100),
+                            obj.body.fields.SurveyStatus.substring(0, 100)
                         );
 
-                        // preview.content.tap = { type: 'invoke', value: { description: obj.title } };
-                        const attachment = { ...thumbnailCard, preview };
+                        const attachment = { ...userCard, preview };
                         attachments.push(attachment);
                     });
 
@@ -179,8 +143,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                             attachments: attachments
                         }
                     };
-                }
-                else {
+                } else {
                     return null;
                 }
             }
@@ -190,7 +153,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             composeExtension: {
                 type: 'result',
                 attachmentLayout: 'list',
-                attachments: [CardFactory.thumbnailCard("No Data Found.")]
+                attachments: [CardFactory.thumbnailCard('No Data Found.')]
             }
         };
     }
@@ -205,8 +168,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 // If the token is NOT exchangeable, then do NOT deduplicate requests.
                 if (await this.tokenIsExchangeable(context)) {
                     return await super.onInvokeActivity(context);
-                }
-                else {
+                } else {
                     const response =
                     {
                         status: 412
@@ -226,7 +188,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const userId = context.activity.from.id;
             const valueObj = context.activity.value;
             const tokenExchangeRequest = valueObj.authentication;
-            console.log("tokenExchangeRequest.token: " + tokenExchangeRequest.token);
+            console.log('tokenExchangeRequest.token: ' + tokenExchangeRequest.token);
 
             const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
 
@@ -237,8 +199,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 { token: tokenExchangeRequest.token });
 
             console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
-        }
-        catch (err) {
+        } catch (err) {
             console.log('tokenExchange error: ' + err);
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
@@ -249,6 +210,39 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
         console.log('Exchanged token: ' + JSON.stringify(tokenExchangeResponse));
         return true;
+    }
+
+    // Adaptive card for link unfurling.
+    getLinkUnfurlingCard(Title, SurveyStatus) {
+        const card =
+        {
+            '$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+            'type': 'AdaptiveCard',
+            'version': '1.4',
+            'body': [
+                {
+                    'type': 'TextBlock',
+                    'size': 'Medium',
+                    'weight': 'Bolder',
+                    'text': 'Title: ' + Title
+                },
+                {
+                    'type': 'TextBlock',
+                    'size': 'Medium',
+                    'weight': 'Bolder',
+                    'text': 'Survey Status: ' + SurveyStatus
+                }
+            ],
+            'actions': [
+                {
+                    'type': 'Action.OpenUrl',
+                    'title': 'Open SharePoint List',
+                    'url': 'https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '/AllItems.aspx'
+                }
+            ]
+        };
+
+        return card;
     }
 }
 
