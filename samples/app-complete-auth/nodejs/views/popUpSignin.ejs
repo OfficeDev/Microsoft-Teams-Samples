@@ -10,10 +10,11 @@
     <script>
         var requestFrom;
         $(document).ready(function () {
-            const params = window.location.search;
-            requestFrom = params.substring(params.search("=") + 1);
+            microsoftTeams.app.initialize().then(() => {
+                const params = window.location.search;
+                requestFrom = params.substring(params.search("=") + 1);
+            });
         });
-        microsoftTeams.app.initialize();
         function submit() {
             var isValid = true;
             $('#userName,#password').each(function () {
