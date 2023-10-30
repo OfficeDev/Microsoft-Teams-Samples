@@ -29,53 +29,53 @@ function shareAppContentToStage() {
         }, `${window.location.origin}/DeepLinkChannel`);
     });
 }
-    microsoftTeams.app.initialize().then(() => {
-        microsoftTeams.app.getContext().then((context) => {
-            if (context.page.frameContext === "sidePanel") {
-                document.getElementById("side-panel-content").style.display = "block";
+microsoftTeams.app.initialize().then(() => {
+    microsoftTeams.app.getContext().then((context) => {
+        if (context.page.frameContext === "sidePanel") {
+            document.getElementById("side-panel-content").style.display = "block";
 
-                document.getElementById('tableList').style.display = "none";
-                document.getElementById('taskList').style.display = "none";
-                document.getElementById("extended-deeplink").style.display = "none";
-                document.getElementById("side-panel-deeplink").style.display = "none";
-            }
-            else if (context.page.frameContext === "meetingStage") {
-                deepLinkString = `https://teams.microsoft.com/l/entity/@ViewBag.AppId/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
+            document.getElementById('tableList').style.display = "none";
+            document.getElementById('taskList').style.display = "none";
+            document.getElementById("extended-deeplink").style.display = "none";
+            document.getElementById("side-panel-deeplink").style.display = "none";
+        }
+        else if (context.page.frameContext === "meetingStage") {
+            deepLinkString = `https://teams.microsoft.com/l/entity/@ViewBag.AppId/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
 
-                document.getElementById("side-panel-deeplink").style.display = "block";
+            document.getElementById("side-panel-deeplink").style.display = "block";
 
-                document.getElementById('tableList').style.display = "none";
-                document.getElementById('taskList').style.display = "none";
-                document.getElementById("extended-deeplink").style.display = "none";
-            }
-            else if (context.page.subPageId === "bot1") {
-                document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
-                document.getElementById("taskContent").innerHTML = "Conversational bots allow users to interact with your web service through text, interactive cards, and task modules. They're incredibly flexible — conversational bots can be scoped to handling a few simple commands or complex, artificial-intelligence-powered and natural-language-processing virtual assistants. They can be one aspect of a larger application, or completely stand-alone."
-                var element = document.getElementById('tableList');
-                element.style.display = "none";
-                context.subEntityId = null;
-            }
-            else if (context.page.subPageId === "bot2") {
-                document.getElementById("taskDiv").innerHTML = "Bot Frawework SDK:";
-                document.getElementById("taskContent").innerHTML = "The Microsoft Bot Framework is a rich SDK for building bots using C#, Java, Python, and JavaScript. If you already have a bot that's based on the Bot Framework, you can easily adapt it to work in Microsoft Teams. We recommend you use either C# or Node.js to take advantage of our SDKs."
-                var element = document.getElementById('tableList');
-                element.style.display = "none";
-                context.subEntityId = null;
-            }
-            else if (context.page.subPageId === "bot3") {
-                document.getElementById("taskDiv").innerHTML = "Teams Apps:";
-                document.getElementById("taskContent").innerHTML = "Teams apps are a combination of capabilities and entry points. For example, people can chat with your app's bot (capability) in a channel (entry point). Some apps are simple(send notifications), while others are complex(manage patient records).When planning your app, remember that Teams is a collaboration hub.The best Teams apps help people express themselves and work better together."
-                var element = document.getElementById('tableList');
-                element.style.display = "none";
-                context.subEntityId = null;
-            }
-            else {
-                $('#tableList').show();
-                var element = document.getElementById('taskList');
-                element.style.display = "none";
-            }
-        })
-  });
+            document.getElementById('tableList').style.display = "none";
+            document.getElementById('taskList').style.display = "none";
+            document.getElementById("extended-deeplink").style.display = "none";
+        }
+        else if (context.page.subPageId === "bot1") {
+            document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
+            document.getElementById("taskContent").innerHTML = "Conversational bots allow users to interact with your web service through text, interactive cards, and task modules. They're incredibly flexible — conversational bots can be scoped to handling a few simple commands or complex, artificial-intelligence-powered and natural-language-processing virtual assistants. They can be one aspect of a larger application, or completely stand-alone."
+            var element = document.getElementById('tableList');
+            element.style.display = "none";
+            context.subEntityId = null;
+        }
+        else if (context.page.subPageId === "bot2") {
+            document.getElementById("taskDiv").innerHTML = "Bot Frawework SDK:";
+            document.getElementById("taskContent").innerHTML = "The Microsoft Bot Framework is a rich SDK for building bots using C#, Java, Python, and JavaScript. If you already have a bot that's based on the Bot Framework, you can easily adapt it to work in Microsoft Teams. We recommend you use either C# or Node.js to take advantage of our SDKs."
+            var element = document.getElementById('tableList');
+            element.style.display = "none";
+            context.subEntityId = null;
+        }
+        else if (context.page.subPageId === "bot3") {
+            document.getElementById("taskDiv").innerHTML = "Teams Apps:";
+            document.getElementById("taskContent").innerHTML = "Teams apps are a combination of capabilities and entry points. For example, people can chat with your app's bot (capability) in a channel (entry point). Some apps are simple(send notifications), while others are complex(manage patient records).When planning your app, remember that Teams is a collaboration hub.The best Teams apps help people express themselves and work better together."
+            var element = document.getElementById('tableList');
+            element.style.display = "none";
+            context.subEntityId = null;
+        }
+        else {
+            $('#tableList').show();
+            var element = document.getElementById('taskList');
+            element.style.display = "none";
+        }
+    })
+});
 </script>
 
 <div id="taskDiv" style="margin-top:10px;width:180px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;"></div>
