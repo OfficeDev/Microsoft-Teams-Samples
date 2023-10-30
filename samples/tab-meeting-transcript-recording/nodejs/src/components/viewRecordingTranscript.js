@@ -9,13 +9,13 @@ function RecordingTranscript() {
 
     // State variable for query parameter: online meeting ID
     const [queryOnlineMeetingId, setQueryOnlineMeetingId] = useState(null);
- 
+
     // State variable for query parameter: transcripts ID
     const [queryTranscriptsId, setQueryTranscriptsId] = useState(null);
- 
+
     // State variable for query parameter: recording ID
     const [queryRecordingId, setQueryRecordingId] = useState(null);
- 
+
     // State variable to control the loading of transcripts data
     const [loadTranscriptsData, setLoadTranscriptsData] = useState(null);
 
@@ -44,8 +44,8 @@ function RecordingTranscript() {
     const ssoAuthentication = () => {
         getClientSideToken()
             .then((clientSideToken) => {
-                    getMeetingRecordingValue(clientSideToken);
-                    getMeetingTranscriptsValue(clientSideToken);
+                getMeetingRecordingValue(clientSideToken);
+                getMeetingTranscriptsValue(clientSideToken);
             })
             .catch((error) => {
             });
@@ -81,54 +81,54 @@ function RecordingTranscript() {
     // Retrieve meeting transcripts using client-side token
     const getMeetingTranscriptsValue = (clientSideToken) => {
         if (queryOnlineMeetingId != null && queryTranscriptsId != null)
-        microsoftTeams.app.getContext().then(() => {
-            setLoadingTranscripts(true);
-            fetch(`/getMeetingTranscripts?transcriptId=${queryTranscriptsId}&meetingId=${queryOnlineMeetingId}&ssoToken=${clientSideToken}`, {
-                method: 'get',
-                headers: {
-                    'Accept': 'application/json; charset=utf-8',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    setLoadingTranscripts(false);
-                    const lines = data.split('\n');
-                    const formattedLines = [];
-                    for (let i = 0; i < lines.length; i++) {
-                        const line = lines[i];
-                        const match = line.match(/<v\s([^>]*)>(.*?)<\/v>/);
-                        if (match) {
-                            const speaker = match[1];
-                            const text = match[2];
-                            formattedLines.push(`<b>${speaker}</b> : ${text}`);
-                        }
+            microsoftTeams.app.getContext().then(() => {
+                setLoadingTranscripts(true);
+                fetch(`/getMeetingTranscripts?transcriptId=${queryTranscriptsId}&meetingId=${queryOnlineMeetingId}&ssoToken=${clientSideToken}`, {
+                    method: 'get',
+                    headers: {
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json;charset=UTF-8'
                     }
-                    const formattedOutput = formattedLines.join('<br/>')
-                    setLoadTranscriptsData(formattedOutput);
                 })
-        });
+                    .then(response => response.json())
+                    .then(data => {
+                        setLoadingTranscripts(false);
+                        const lines = data.split('\n');
+                        const formattedLines = [];
+                        for (let i = 0; i < lines.length; i++) {
+                            const line = lines[i];
+                            const match = line.match(/<v\s([^>]*)>(.*?)<\/v>/);
+                            if (match) {
+                                const speaker = match[1];
+                                const text = match[2];
+                                formattedLines.push(`<b>${speaker}</b> : ${text}`);
+                            }
+                        }
+                        const formattedOutput = formattedLines.join('<br/>')
+                        setLoadTranscriptsData(formattedOutput);
+                    })
+            });
     }
 
     // Retrieve meeting recording using client-side token
     const getMeetingRecordingValue = (clientSideToken) => {
         if (queryOnlineMeetingId != null && queryRecordingId != null)
-        microsoftTeams.app.getContext().then(() => {
-            setLoadingRecording(true)
-            fetch(`/getMeetingRecordings?recordingId=${queryRecordingId}&meetingId=${queryOnlineMeetingId}&ssoToken=${clientSideToken}`, {
-                method: 'get',
-                headers: {
-                    'Accept': 'application/json; charset=utf-8',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
-            })
-            .then(response => response.blob())
-            .then(blob => {
-                setLoadingRecording(false)
-                const videoUrl = URL.createObjectURL(blob);
-                videoRef.current.src = videoUrl;
-            })
-        });
+            microsoftTeams.app.getContext().then(() => {
+                setLoadingRecording(true)
+                fetch(`/getMeetingRecordings?recordingId=${queryRecordingId}&meetingId=${queryOnlineMeetingId}&ssoToken=${clientSideToken}`, {
+                    method: 'get',
+                    headers: {
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        setLoadingRecording(false)
+                        const videoUrl = URL.createObjectURL(blob);
+                        videoRef.current.src = videoUrl;
+                    })
+            });
     }
 
     return (
@@ -142,21 +142,21 @@ function RecordingTranscript() {
             </div>
             <div class="mainRecordTrans">
                 <div className="divRecording">
-                {loadingRecording ? (
-                            <div style={{ paddingTop: '20%' }}>
-                                <Spinner label="Loading..." size="small" />
-                            </div>
-                        ) :
-                    <video ref={videoRef} className="videoPlay" controls />}
+                    {loadingRecording ? (
+                        <div style={{ paddingTop: '20%' }}>
+                            <Spinner label="Loading..." size="small" />
+                        </div>
+                    ) :
+                        <video ref={videoRef} className="videoPlay" controls />}
                 </div>
                 <div className="divTranscripts">
                     <h4>Transcripts</h4>
                     {loadingTranscripts ? (
-                                <div className='container'>
-                                    <Spinner label="Loading..." size="small" />
-                                </div>
-                            ) :
-                    <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData}}/>}
+                        <div className='container'>
+                            <Spinner label="Loading..." size="small" />
+                        </div>
+                    ) :
+                   <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />}
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ const MeetingTranscriptRecording = () => {
     // Define an array state variable with an initial value
     const [cardData, setCardData] = useState([]);
 
-   // Define a state variable to manage the visibility of the consent button
+    // Define a state variable to manage the visibility of the consent button
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Define a state variable to manage the visibility of the login button
@@ -26,13 +26,47 @@ const MeetingTranscriptRecording = () => {
 
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
+    useEffect(() => {
+        // Set up an interval to call refreshData every 1000 milliseconds (1 second)
+        const intervalId = setInterval(getUpdatedData, 60000);
+        // Clear the interval when the component unmounts
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
+
+    const getUpdatedData = () => {
+        return new Promise((resolve, reject) => {
+            setLoading(true);
+            microsoftTeams.app.getContext().then((context) => {
+                fetch('/getUpdatedEvents', {
+                    method: 'get',
+                    headers: {
+                        "Content-Type": "application/text"
+                    },
+                    cache: 'default'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length != 0) {
+                            debugger;
+                            setCardData(data);
+                            setLoading(false);
+                        } else {
+                            setLoading(false);
+                        }
+                    })
+            });
+        });
+    }
+
     // Tab sso authentication.
     const ssoAuthentication = () => {
         setLoading(true);
         setIsLoginVisible(false);
         getClientSideToken()
             .then((clientSideToken) => {
-                return getServerSideToken(clientSideToken);
+                getServerSideToken(clientSideToken);
             })
             .catch((error) => {
                 if (error === "invalid_grant") {
@@ -59,7 +93,7 @@ const MeetingTranscriptRecording = () => {
     const getServerSideToken = (clientSideToken) => {
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
-                fetch('/GetLoginUserInformation?ssoToken='+clientSideToken, {
+                fetch('/GetLoginUserInformation?ssoToken=' + clientSideToken, {
                     method: 'get',
                     headers: {
                         "Content-Type": "application/text",
@@ -67,18 +101,18 @@ const MeetingTranscriptRecording = () => {
                     },
                     cache: 'default'
                 })
-                .then(response => response.json())
-                .then(data => {
-                        if(data.error=="consent_required"){
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error == "consent_required") {
                             setIsConsentButtonVisible(true);
                             setIsLoginVisible(false);
                             setLoading(false);
                         }
                         if (data) {
-                          setCardData(data);
-                          setIsLoginVisible(false);
-                          setLoading(false);
-                          setIsCardVisible(true);
+                            setCardData(data);
+                            setIsLoginVisible(false);
+                            setLoading(false);
+                            setIsCardVisible(true);
                         } else {
                             setLoading(false);
                             reject(response.error);
@@ -101,7 +135,7 @@ const MeetingTranscriptRecording = () => {
                     });
             });
     }
-    
+
     // Get token for multi tenant.
     const getToken = () => {
         return new Promise((resolve, reject) => {
@@ -162,7 +196,7 @@ const MeetingTranscriptRecording = () => {
                 }
                 {loginAdminAccount &&
                     <>
-                    <h3>Please login with admin account.</h3>
+                        <h3>Please login with admin account.</h3>
                     </>
                 }
             </div>
