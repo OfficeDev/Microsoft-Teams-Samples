@@ -4,15 +4,16 @@
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
-        microsoftTeams.app.initialize();
-        return new Promise((resolve, reject) => {
-            microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    resolve(result);
-                },
-                failureCallback: function (error) {
-                    reject("Error getting token: " + error);
-                }
+        microsoftTeams.app.initialize().then(() => {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.getAuthToken({
+                    successCallback: (result) => {
+                        resolve(result);
+                    },
+                    failureCallback: function (error) {
+                        reject("Error getting token: " + error);
+                    }
+                });
             });
         });
     }

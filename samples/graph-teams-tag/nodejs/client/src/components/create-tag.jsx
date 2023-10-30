@@ -21,8 +21,10 @@ const CreateTag = props => {
 
     // Initialize the SDK.
     useEffect(() => {
-        microsoftTeams.app.initialize();
-    }, []);
+        (async function () {
+            await microsoftTeams.app.initialize();
+            })();
+        }, []);
 
     // Handler when user updates the name.
     const onTagNameChange = (data) => {

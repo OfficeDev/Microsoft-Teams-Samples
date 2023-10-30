@@ -10,9 +10,11 @@ import { Button } from '@fluentui/react-components';
 const AppInMeeting = () => {
     
  // Allows us to execute the React code when the component is already placed in the DOM.
-    useEffect(() => {
-        microsoftTeams.app.initialize();
-    }, [])
+ useEffect(() => {
+    (async function () {
+        await microsoftTeams.app.initialize();
+    })();
+  }, []);
 
    // Share the content to meeting stage view.
     const shareSpecificPart = () => {

@@ -14,7 +14,7 @@ import Done from "./done";
 const AppInMeeting = props => {
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then((context) => {
             if (context.page.frameContext === "sidePanel") {
                 // Adding and removing classes based on screen width, to show app in stage view and in side panel
@@ -31,11 +31,12 @@ const AppInMeeting = props => {
                 $("#boardDiv").removeClass("chat-window-sidepanel");
             }
         });
+      });
     }, []);
 
     // Method to open share to stage content using deep link.
     const openDeepLink = () => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         var appContext = JSON.stringify({
             "appSharingUrl": `${window.location.origin}/todoView`,
             "appId": "<<App id>>", "useMeetNow": false
@@ -46,6 +47,7 @@ const AppInMeeting = props => {
         var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
 
         microsoftTeams.app.openLink(shareToStageLink);
+    });
 
     }
 
