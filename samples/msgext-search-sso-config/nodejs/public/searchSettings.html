@@ -34,21 +34,21 @@
     <script type="text/javascript">
         
         microsoftTeams.app.initialize().then(() => {
-            function onSubmit() {
-                var newSettings = [];
+        });
+        
+        function onSubmit() {
+            var newSettings = [];
 
-                var options = document.getElementsByName("includeInSearch");
+            var options = document.getElementsByName("includeInSearch");
 
-                for (var i = 0; i < options.length; i++) {
-                    if (options[i].checked) {
-                        newSettings.push(options[i].value);
-                    }
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    newSettings.push(options[i].value);
                 }
-
-                microsoftTeams.authentication.notifySuccess(JSON.stringify(newSettings));
             }
-    });
 
+            microsoftTeams.authentication.notifySuccess(JSON.stringify(newSettings));
+        }
     </script>
 </body>
 </html>

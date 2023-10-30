@@ -9,6 +9,7 @@
         crossorigin="anonymous"></script>
     <script>
         microsoftTeams.app.initialize().then(() => {
+        });   
         localStorage.removeItem("auth.error");
         let code = getHashParameters();
         let key = "auth.result";
@@ -24,7 +25,6 @@
             var code = url.searchParams.get("code");
             return code;
         }
-    });   
     </script>
 </body>
 </html>

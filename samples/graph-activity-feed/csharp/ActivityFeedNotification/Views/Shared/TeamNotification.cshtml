@@ -62,15 +62,16 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
-            $('input[type="radio"]').click(function () {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".desc").not(targetBox).hide();
-                $(targetBox).show();
+            microsoftTeams.app.initialize().then(() => {  
+                $('input[type="radio"]').click(function () {
+                    var inputValue = $(this).attr("value");
+                    var targetBox = $("." + inputValue);
+                    $(".desc").not(targetBox).hide();
+                    $(targetBox).show();
+                });
             });
         });
 
-        microsoftTeams.app.initialize().then(() => {    
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
@@ -171,7 +172,6 @@
 
             return true;
         };
-     });
     </script>
 </head>
 

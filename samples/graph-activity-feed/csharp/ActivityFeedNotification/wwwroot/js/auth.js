@@ -3,28 +3,28 @@ let accessToken;
 
 function login() {
     microsoftTeams.app.initialize().then(() => {
+    });
     getClientSideToken()
-        .then((clientSideToken) => {
-            return getServerSideToken(clientSideToken);
-        })
-        .catch((error) => {
-            console.log(error);
-            if (error === "invalid_grant") {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-                $("#adaptiveBtn").hide();
-            } else {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-                $("#adaptiveBtn").hide();
+    .then((clientSideToken) => {
+        return getServerSideToken(clientSideToken);
+    })
+    .catch((error) => {
+        console.log(error);
+        if (error === "invalid_grant") {
+            // Display in-line button so user can consent
+            $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+            $("#divError").show();
+            $("#consent").show();
+            $("#adaptiveBtn").hide();
+        } else {
+            // Display in-line button so user can consent
+            $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+            $("#divError").show();
+            $("#consent").show();
+            $("#adaptiveBtn").hide();
 
-                // Something else went wrong
-            }
-        });
+            // Something else went wrong
+        }
     });
 }
 

@@ -1,6 +1,6 @@
-(function() {
+(async function() {
     'use strict';
-    microsoftTeams.app.initialize().then(() => {
+    await microsoftTeams.app.initialize();
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
@@ -86,5 +86,4 @@
             console.log(`Error from web service: ${error}`);
         }
     });
- });
 })();
