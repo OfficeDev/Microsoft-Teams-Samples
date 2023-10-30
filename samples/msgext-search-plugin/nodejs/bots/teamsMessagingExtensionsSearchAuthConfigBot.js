@@ -120,20 +120,41 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                         }
                     });
 
+                    const Field1 = process.env.SharePointMappingField1;
+                    const Field2 = process.env.SharePointMappingField2;
+                    const Field3 = process.env.SharePointMappingField3;
+                    const Field4 = process.env.SharePointMappingField4;
+                    const FieldDisplayName1 = process.env.FieldDisplayName1;
+                    const FieldDisplayName2 = process.env.FieldDisplayName2;
+                    const FieldDisplayName3 = process.env.FieldDisplayName3;
+                    const FieldDisplayName4 = process.env.FieldDisplayName4;
+
                     responseListItems.data.responses.forEach(obj => {
-                        const userCard = CardFactory.adaptiveCard(
-                            this.getLinkUnfurlingCard(
-                                obj.body.fields.Title,
-                                obj.body.fields.SurveyStatus
-                            ));
+                        if (obj.body.fields.Status !== undefined && obj.body.fields.Status === 'Approved') {
+                            const listItemUrl = 'https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '/DispForm.aspx?ID=' + obj.body.id;
+                            const userCard = CardFactory.adaptiveCard(
+                                this.getLinkUnfurlingCard(
+                                    obj.body.fields[Field1],
+                                    obj.body.fields[Field2],
+                                    obj.body.fields[Field3],
+                                    obj.body.fields[Field4],
+                                    listItemUrl,
+                                    FieldDisplayName1,
+                                    FieldDisplayName2,
+                                    FieldDisplayName3,
+                                    FieldDisplayName4
+                                ));
 
-                        const preview = CardFactory.thumbnailCard(
-                            obj.body.fields.Title.substring(0, 100),
-                            obj.body.fields.SurveyStatus.substring(0, 100)
-                        );
+                            const preview = CardFactory.thumbnailCard(
+                                FieldDisplayName2 + ': ' + (obj.body.fields[process.env.SharePointMappingField2] !== undefined ? obj.body.fields[process.env.SharePointMappingField2]?.substring(0, 100) : 'NA'),
+                                FieldDisplayName3 + ': ' + (obj.body.fields[process.env.SharePointMappingField3] !== undefined ? obj.body.fields[process.env.SharePointMappingField3]?.substring(0, 100) : 'NA')
+                                // obj.body.fields[process.env.SharePointMappingField2]?.substring(0, 100),
+                                // obj.body.fields[process.env.SharePointMappingField3]?.substring(0, 100)
+                            );
 
-                        const attachment = { ...userCard, preview };
-                        attachments.push(attachment);
+                            const attachment = { ...userCard, preview };
+                            attachments.push(attachment);
+                        }
                     });
 
                     return {
@@ -213,7 +234,16 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     }
 
     // Adaptive card for link unfurling.
-    getLinkUnfurlingCard(Title, SurveyStatus) {
+    getLinkUnfurlingCard(
+        FieldValue1,
+        FieldValue2,
+        FieldValue3,
+        FieldValue4,
+        listItemUrl,
+        FieldDisplayName1,
+        FieldDisplayName2,
+        FieldDisplayName3,
+        FieldDisplayName4) {
         const card =
         {
             '$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -223,21 +253,37 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 {
                     'type': 'TextBlock',
                     'size': 'Medium',
-                    'weight': 'Bolder',
-                    'text': 'Title: ' + Title
+                    // 'weight': 'Bolder',
+                    'text': '**' + FieldDisplayName1 + ':' + '**' + ' ' + (FieldValue1 !== undefined ? FieldValue1 : 'NA'),
+                    'wrap': true
                 },
                 {
                     'type': 'TextBlock',
                     'size': 'Medium',
-                    'weight': 'Bolder',
-                    'text': 'Survey Status: ' + SurveyStatus
+                    // 'weight': 'Bolder',
+                    'text': '**' + FieldDisplayName2 + ':' + '**' + ' ' + (FieldValue2 !== undefined ? FieldValue2 : 'NA'),
+                    'wrap': true
+                },
+                {
+                    'type': 'TextBlock',
+                    'size': 'Medium',
+                    // 'weight': 'Bolder',
+                    'text': '**' + FieldDisplayName3 + ':' + '**' + ' ' + (FieldValue3 !== undefined ? FieldValue3 : 'NA'),
+                    'wrap': true
+                },
+                {
+                    'type': 'TextBlock',
+                    'size': 'Medium',
+                    // 'weight': 'Bolder',
+                    'text': '**' + FieldDisplayName4 + ':' + '**' + ' ' + (FieldValue4 !== undefined ? FieldValue4 : 'NA'),
+                    'wrap': true
                 }
             ],
             'actions': [
                 {
                     'type': 'Action.OpenUrl',
-                    'title': 'Open SharePoint List',
-                    'url': 'https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '/AllItems.aspx'
+                    'title': 'View more details',
+                    'url': listItemUrl
                 }
             ]
         };
