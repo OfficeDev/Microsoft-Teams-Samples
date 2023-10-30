@@ -6,11 +6,12 @@
         integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
         crossorigin="anonymous"></script>
 <script>
-    microsoftTeams.app.initialize();
-    microsoftTeams.app.getContext().then((context) => {
-        console.log(context);
-            $('#tableList').show();
-    })
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then((context) => {
+            console.log(context);
+                $('#tableList').show();
+        })
+    });
 </script>
 
 <table id="tableList" style="margin-left:50px;margin-top:30px">

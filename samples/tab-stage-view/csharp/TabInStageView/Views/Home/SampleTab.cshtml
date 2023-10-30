@@ -8,7 +8,9 @@
           crossorigin="anonymous">
     </script>
     <script>
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
+
         function createLink() {
             // Client id
             var appId = '@(ViewBag.AppId)';
@@ -19,7 +21,7 @@
             // Passing the values and encoding the url while implementing the deeplink from tab
             let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context={\"contentUrl\":\"" + contentUrl + "\",\"websiteUrl\":\"" + contentUrl +"\",\"name\":\"DemoStageView\"}";
             microsoftTeams.app.openLink(url);
-        };
+            };
     </script>
 </head>
 
