@@ -6,8 +6,8 @@ import { MsalAuth } from 'utils/MsalAuth';
  * It checks the response from AAD, and notifies Teams
  */
 export function AuthEndAad() {
-  (function () {
-    microsoftTeams.app.initialize();
+  (async function () {
+    await microsoftTeams.app.initialize();
 
     const hashParams = getHashParameters();
 
@@ -51,8 +51,8 @@ export function AuthEndAad() {
 }
 
 export function AuthEndMsa() {
-  (function () {
-    microsoftTeams.app.initialize();
+  (async function () {
+    await microsoftTeams.app.initialize();
 
     const msalAuth = new MsalAuth();
     msalAuth.loadAuthModule();

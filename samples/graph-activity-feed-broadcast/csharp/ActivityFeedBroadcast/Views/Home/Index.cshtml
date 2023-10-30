@@ -21,10 +21,11 @@
 
       <script>
          $(document).ready(function () {
-             $('#task-submitted').hide();
+            microsoftTeams.app.initialize().then(() => {
+                $('#task-submitted').hide();
+            });
          }); 
 
-          microsoftTeams.app.initialize();
             var token = localStorage.getItem("accessToken");
             var userId = "";
             var userName = "";

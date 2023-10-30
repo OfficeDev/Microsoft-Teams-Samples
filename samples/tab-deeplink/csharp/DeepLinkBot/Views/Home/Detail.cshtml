@@ -7,7 +7,8 @@
         crossorigin="anonymous"></script>
 
 <script>
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
+    });
     microsoftTeams.app.openLink("@Model.linkUrl")
 </script>
 

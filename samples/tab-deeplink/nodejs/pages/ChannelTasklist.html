@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            microsoftTeams.app.initialize();
+            microsoftTeams.app.initialize().then(() => {
             var deepLinkInfo = DeepLinkModel;
             var html = '';
             deepLinkInfo.forEach(deepLink => {
@@ -24,6 +24,7 @@
                 listContent.appendChild(anchorTag);
                 listContent.appendChild(lineBreakTag);
             });
+          });
         });
     </script>
 </head>
