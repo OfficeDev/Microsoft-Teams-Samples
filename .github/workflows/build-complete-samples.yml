@@ -374,11 +374,7 @@ jobs:
 
             - project_path: 'samples/msgext-search/csharp/TeamsMessagingExtensionsSearch.csproj'
               name: 'msgext-search'
-              version: '6.0.x'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
-              name: 'bot-tab-conversations'
-              version: '6.0.x'      
+              version: '6.0.x'   
                     
             - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
               name: 'msteams-application-resourcehub'
