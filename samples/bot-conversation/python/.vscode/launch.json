@@ -6,6 +6,9 @@
             "type": "msedge",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Python: Run App Locally"
+            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
@@ -17,6 +20,9 @@
             "type": "chrome",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
+            "cascadeTerminateToConfigurations": [
+                "Python: Run App Locally"
+            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
