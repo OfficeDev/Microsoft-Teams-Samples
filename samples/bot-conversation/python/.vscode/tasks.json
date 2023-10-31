@@ -5,7 +5,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Teams App Locally",
+            "label": "Prepare Teams App Resources",
             "dependsOn": [
                 "Validate prerequisites",
                 "Start local tunnel",
@@ -27,7 +27,6 @@
                 ],
                 "portOccupancy": [
                     3978, // app service port
-                    9239 // app inspector port for Node.js debugger
                 ]
             }
         },

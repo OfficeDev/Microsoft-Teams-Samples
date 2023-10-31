@@ -45,7 +45,7 @@
                 "Launch App (Edge)",
                 "Python: Run App Locally"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Prepare Teams App Resources",
             "presentation": {
                 "group": "all",
                 "order": 1
@@ -58,7 +58,7 @@
                 "Launch App (Chrome)",
                 "Python: Run App Locally"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Prepare Teams App Resources",
             "presentation": {
                 "group": "all",
                 "order": 2
