@@ -88,7 +88,7 @@ const MeetingTranscriptRecording = () => {
                             setIsLoginVisible(false);
                             setIsCardVisible(true);
                             let userDetails = JSON.parse(responseJson);
-                            if (userDetails !== "undefined") {
+                            if (userDetails != null && userDetails !== undefined) {
                                 setData(userDetails);
                                 setLoading(false);
                             }
