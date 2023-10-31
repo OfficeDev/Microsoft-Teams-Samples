@@ -26,7 +26,10 @@ const MeetingTranscriptRecording = () => {
 
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
-    
+    const intervalId = setInterval(() => {
+        ssoAuthentication();
+    }, 300000);
+
 
     // Tab sso authentication.
     const ssoAuthentication = () => {
@@ -85,8 +88,10 @@ const MeetingTranscriptRecording = () => {
                             setIsLoginVisible(false);
                             setIsCardVisible(true);
                             let userDetails = JSON.parse(responseJson);
-                            setData(userDetails);
-                            setLoading(false);
+                            if (userDetails !== "undefined") {
+                                setData(userDetails);
+                                setLoading(false);
+                            }
                         }
                     });
             });
@@ -113,16 +118,16 @@ const MeetingTranscriptRecording = () => {
                 width: 600,
                 height: 535
             })
-            .then((result) => {
-                resolve(result);
-                setLoading(true);
-            })
-            .catch((reason) => {
-                setloginAdminAccount(true);
-                setIsConsentButtonVisible(false);
-                setIsLoginVisible(false);
-                setLoading(false);
-            });
+                .then((result) => {
+                    resolve(result);
+                    setLoading(true);
+                })
+                .catch((reason) => {
+                    setloginAdminAccount(true);
+                    setIsConsentButtonVisible(false);
+                    setIsLoginVisible(false);
+                    setLoading(false);
+                });
         });
     }
 
@@ -165,7 +170,7 @@ const MeetingTranscriptRecording = () => {
 
                 {loginAdminAccount &&
                     <>
-                    <h3>Please login with admin account.</h3>
+                        <h3>Please login with admin account.</h3>
                     </>
                 }
             </div>
@@ -179,9 +184,10 @@ const MeetingTranscriptRecording = () => {
                 }
                 {IsCardVisible &&
                     <>
-                        {cardData.length > 0 && cardData.map((element, index) => {
+                        {Object.keys(cardData).map((key) => {
+                            const element = cardData[key]
                             return (
-                                <div key={index} className="divMainCard">
+                                <div className="divMainCard">
                                     <Card>
                                         <CardBody className="main1Card">
                                             <div>
