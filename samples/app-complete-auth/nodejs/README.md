@@ -38,8 +38,22 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [NodeJS](https://nodejs.org/en/)
-- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -119,9 +133,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ### 2. Setup NGROK
 1) Run ngrok - point to port 3978
 
-   ```bash
+    ```bash
    ngrok http 3978 --host-header="localhost:3978"
-   ```  
+   ```
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
@@ -150,7 +164,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
-   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
+   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your base url will be like: `https://12345.devtunnels.ms`.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
    - `{{AppType}}` - The value for app type will me `MultiTenant`.
@@ -163,17 +177,18 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### 4. Setup Manifest for Teams
 
-1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
+1. Modify the `manifest.json` in the `/appManifest` folder and replace the following details:
    - `{{MicrosoftAppId}}` with Application id generated from Step 3
-   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be `12345.ngrok-free.app` when you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\nodejs` folder with the required values.
-2. Zip the contents of the `appPackage` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+
+2. Zip the contents of the `appManifest` folder to create a `manifest.zip` or `appManifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.

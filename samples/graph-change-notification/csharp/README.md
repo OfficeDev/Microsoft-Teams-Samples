@@ -177,9 +177,9 @@ Modify the `appsettings.json` file with the following details:
     - Press `F5` to run the project
 
 7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json`file contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.

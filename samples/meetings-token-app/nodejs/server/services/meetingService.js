@@ -212,7 +212,7 @@ postNotification = async (user, token)=>{
         // console.log(context);
         let teamsAppId = process.env.clientId
         // let teamsAppId = process.env.BotId
-        let baseUrl = require('../../appPackage/manifest.json')['developer']['websiteUrl']
+        let baseUrl = require('../../appManifest/manifest.json')['developer']['websiteUrl']
 
         // let contentBubbleUrlWithParam = `${baseUrl}/bubble?user%3D${user}%26token%3D${token}`
         let contentBubbleUrlWithParam = `${baseUrl}/bubble?user=${user}&token=${token}`

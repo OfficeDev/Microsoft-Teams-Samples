@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which are available in bot framework v4
+description: This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4
 products:
 - office-teams
 - office
@@ -15,8 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
 
 # Realtime meeting events
 
-Using this C# sample, a bot can receive real-time meeting events.
+Using this C# sample, a bot can receive real-time meeting events and meeting participant events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+and [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-8455&tabs=dotnet%2Cparticipant-join-event#get-participant-events)
 
 The feature shown in this sample is currently available in public developer preview only.
 
@@ -30,9 +31,9 @@ The feature shown in this sample is currently available in public developer prev
 ![Meetings Events](MeetingEvents/Images/MeetingsEvents.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Realtime meeting events:** [Manifest](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
+**Realtime meeting and participant events:** [Manifest](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
 
 ## Prerequisites
 
@@ -97,15 +98,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 4) Setup Manifest for Teams
 
-Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+Modify the `manifest.json` in the `/AppManifest` folder and replace the following details
 
    - `<<App-ID>>` with your AAD app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-   - Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
+   - Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
    - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `AppPackage`.
+         - Then select the `manifest.zip` file from `AppManifest`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-events/csharp/MeetingEvents/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
@@ -121,6 +122,16 @@ Once the meeting where the bot is added starts or ends, real-time updates are po
 
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
+**MeetingParticipantEvents command interaction:**   
+
+To utilize this feature, please enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot, following the guidance outlined in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events) documentation
+
+![Meeting participant added event](MeetingEvents/Images/meeting-participant-added.png)
+
+**End meeting events details:**   
+
+![Meeting participant left event](MeetingEvents/Images/meeting-participant-left.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -129,5 +140,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-events-csharp" />

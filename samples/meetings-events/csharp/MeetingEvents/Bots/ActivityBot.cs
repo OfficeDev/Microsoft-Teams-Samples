@@ -13,6 +13,8 @@ namespace MeetingEvents.Bots
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
 
     public class ActivityBot : TeamsActivityHandler
     {
@@ -21,6 +23,70 @@ namespace MeetingEvents.Bots
         public ActivityBot(ConversationState conversationState)
         {
             _conversationState = conversationState;
+        }
+
+        /// <summary>
+        /// Activity Handler for Meeting Participant join event
+        /// </summary>
+        /// <param name="meeting"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override async Task OnTeamsMeetingParticipantsJoinAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " has joined the meeting.")));
+            return;
+        }
+
+        /// <summary>
+        /// Activity Handler for Meeting Participant leave event
+        /// </summary>
+        /// <param name="meeting"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override async Task OnTeamsMeetingParticipantsLeaveAsync(MeetingParticipantsEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(createAdaptiveCardInvokeResponseAsync(meeting.Members[0].User.Name, " left the meeting.")));
+            return;
+        }
+
+        /// <summary>
+        /// Sample Adaptive card for Meeting participant events.
+        /// </summary>
+        private Attachment createAdaptiveCardInvokeResponseAsync(string userName, string action)
+        {
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.4"))
+            {
+                Body = new List<AdaptiveElement>
+                {
+                    new AdaptiveRichTextBlock
+                    {
+                        Inlines = new List<AdaptiveInline>
+                        {
+                            new AdaptiveTextRun
+                            {
+                                Text = userName,
+                                Weight = AdaptiveTextWeight.Bolder,
+                                Size = AdaptiveTextSize.Default,
+                            },
+                            new AdaptiveTextRun
+                            {
+                                Text = action,
+                                Weight = AdaptiveTextWeight.Default,
+                                Size = AdaptiveTextSize.Default,
+                            }
+                        },
+                    Spacing = AdaptiveSpacing.Medium,
+                    }
+                }
+            };
+
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
 
         /// <summary>

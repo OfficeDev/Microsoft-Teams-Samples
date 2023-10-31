@@ -20,6 +20,9 @@ This sample feature shows how to improve the subsequent loading time of an App t
 
 **Interaction with App**
 ![App-Cache](Images/AppCacheSample.gif)  
+
+**Change of App theme when Teams theme changes to (light,dark and contrast)**.
+![App-Cache-ChangeTheme](Images/AppCacheThemeChange.gif) 
  
 ## Prerequisites
 
@@ -83,9 +86,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - Your App will start running on 3978 PORT.
 
 4) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your `<<MANIFEST-ID>>`, You can use any GUID Id in place of `<<Manifest-ID>>` or [Generate Guid](https://guidgenerator.com/)
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your `<<MANIFEST-ID>>`, You can use any GUID Id in place of `<<Manifest-ID>>` or [Generate Guid](https://guidgenerator.com/)
     - **Edit** the `manifest.json` for `<<Valid_Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`. Replace it at all the places in your manifest.json.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Sideload the app In meetings (Supported scopes)
      
@@ -104,13 +107,26 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **AppCache in second tab with Unique Id Loaded :** 
 ![Team Context](Images/3.TabTwo.png)
 
+**Teams Theme Changes To Dark :** 
+![Team Context](Images/T1-dark-Theme.PNG)
+
+**Teams Theme Changes To Light :** 
+![Team Context](Images/T2.light-theme.PNG)
+
+**Teams Theme Changes To Contrast :** 
+![Team Context](Images/T1-contrast-theme.PNG)
+
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
+
+**Note** In Teams T1, there is no `light theme`, only we get two themes in meetings (`dark` and `contrast`). By default Teams T1 default theme is `dark`. and where as in Teams T2 we get three themes. Default theme is light and remaining other two themes are `dark` and `contrast`.
 
 
 ## Further reading
 [Upload your app in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
 [Manage custom and sideloaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
+
+[Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-cache-meetings-nodejs" />
