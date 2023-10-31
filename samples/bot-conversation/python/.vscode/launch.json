@@ -6,9 +6,6 @@
             "type": "msedge",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "cascadeTerminateToConfigurations": [
-                "Attach to Local Service"
-            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
@@ -20,9 +17,6 @@
             "type": "chrome",
             "request": "launch",
             "url": "https://teams.microsoft.com/l/app/${{local:TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "cascadeTerminateToConfigurations": [
-                "Attach to Local Service"
-            ],
             "presentation": {
                 "group": "all",
                 "hidden": true
