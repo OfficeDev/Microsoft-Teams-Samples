@@ -78,7 +78,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         // The user is signed in, so use the token to create a Graph Clilent and show profile
         console.log(tokenResponse.token);
 
-        const filterQuery = searchQuery + ' path:"https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '"';
+        const filterQuery = searchQuery + ' ' + 'Approved' + ' path:"https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '"';
         const response = await axios.post('https://graph.microsoft.com/v1.0/search/query', {
             'requests': [
                 {
@@ -130,31 +130,27 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     const FieldDisplayName4 = process.env.FieldDisplayName4;
 
                     responseListItems.data.responses.forEach(obj => {
-                        if (obj.body.fields.Status !== undefined && obj.body.fields.Status === 'Approved') {
-                            const listItemUrl = 'https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '/DispForm.aspx?ID=' + obj.body.id;
-                            const userCard = CardFactory.adaptiveCard(
-                                this.getLinkUnfurlingCard(
-                                    obj.body.fields[Field1],
-                                    obj.body.fields[Field2],
-                                    obj.body.fields[Field3],
-                                    obj.body.fields[Field4],
-                                    listItemUrl,
-                                    FieldDisplayName1,
-                                    FieldDisplayName2,
-                                    FieldDisplayName3,
-                                    FieldDisplayName4
-                                ));
+                        const listItemUrl = 'https://' + process.env.SharePointDomain + '/sites/' + process.env.SharePointSiteName + '/Lists/' + process.env.SharePointListName + '/DispForm.aspx?ID=' + obj.body.id;
+                        const userCard = CardFactory.adaptiveCard(
+                            this.getLinkUnfurlingCard(
+                                obj.body.fields[Field1],
+                                obj.body.fields[Field2],
+                                obj.body.fields[Field3],
+                                obj.body.fields[Field4],
+                                listItemUrl,
+                                FieldDisplayName1,
+                                FieldDisplayName2,
+                                FieldDisplayName3,
+                                FieldDisplayName4
+                            ));
 
-                            const preview = CardFactory.thumbnailCard(
-                                FieldDisplayName2 + ': ' + (obj.body.fields[process.env.SharePointMappingField2] !== undefined ? obj.body.fields[process.env.SharePointMappingField2]?.substring(0, 100) : 'NA'),
-                                FieldDisplayName3 + ': ' + (obj.body.fields[process.env.SharePointMappingField3] !== undefined ? obj.body.fields[process.env.SharePointMappingField3]?.substring(0, 100) : 'NA')
-                                // obj.body.fields[process.env.SharePointMappingField2]?.substring(0, 100),
-                                // obj.body.fields[process.env.SharePointMappingField3]?.substring(0, 100)
-                            );
+                        const preview = CardFactory.thumbnailCard(
+                            FieldDisplayName2 + ': ' + (obj.body.fields[process.env.SharePointMappingField2] !== undefined ? obj.body.fields[process.env.SharePointMappingField2]?.substring(0, 100) : 'NA'),
+                            FieldDisplayName3 + ': ' + (obj.body.fields[process.env.SharePointMappingField3] !== undefined ? obj.body.fields[process.env.SharePointMappingField3]?.substring(0, 100) : 'NA')
+                        );
 
-                            const attachment = { ...userCard, preview };
-                            attachments.push(attachment);
-                        }
+                        const attachment = { ...userCard, preview };
+                        attachments.push(attachment);
                     });
 
                     return {

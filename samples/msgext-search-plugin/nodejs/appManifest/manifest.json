@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.15",
-  "version": "1.0.2",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
   "id": "{TODO: MicrosoftAppId}",
   "packageName": "com.microsoft.teams.msgExt.search",
   "developer": {
@@ -15,12 +15,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Messaging Extension Search",
-    "full": "ME search with SSO"
+    "short": "EngineeringLessons",
+    "full": "Find information for engineering lessons learned"
   },
   "description": {
-    "short": "ME search with SSO",
-    "full": "ME search with SharePoint list"
+    "short": "Find information related to engineering lessons learned",
+    "full": "This is an AI driven app that can help identify applicable lessons learned withing the engineering lessons learned database. Users can ask the bot to identify lessons based on key words or project descriptions."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
@@ -32,7 +32,7 @@
           "id": "searchQuery",
           "type": "query",
           "title": "Search",
-          "description": "Perform a search",
+          "description": "Find in lessons learned by providing search string",
           "initialRun": false,
           "fetchTask": false,
           "context": [
@@ -44,7 +44,7 @@
             {
               "name": "searchQuery",
               "title": "Search",
-              "description": "Your search query",
+              "description": "Lessons learned",
               "inputType": "text"
             }
           ]
