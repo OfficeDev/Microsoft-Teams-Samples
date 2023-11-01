@@ -1,7 +1,8 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-import xmlrpc.client
+import requests
+from bs4 import BeautifulSoup
 
 from botbuilder.core import CardFactory, MessageFactory, TurnContext
 from botbuilder.schema import HeroCard, CardAction
@@ -68,6 +69,12 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
         )
 
     def _get_search_results(self, query: str):
-        client = xmlrpc.client.ServerProxy("https://pypi.org/pypi")
-        search_results = client.search({"name": query})
+        url = f"https://pypi.org/search/?q={query}&c=Programming+Language"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, "html.parser")
+        search_results = []
+        for result in soup.find_all("a", class_="package-snippet"):
+            name = result.find("span", class_="package-snippet__name").text.strip()
+            description = result.find("p", class_="package-snippet__description").text.strip()
+            search_results.append({"name": name, "summary": description})
         return search_results[:10] if len(search_results) > 10 else search_results
