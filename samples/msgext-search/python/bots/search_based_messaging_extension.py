@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 
 import requests
-# from bs4 import BeautifulSoup
 
 from botbuilder.core import CardFactory, MessageFactory, TurnContext
 from botbuilder.schema import HeroCard, CardAction
