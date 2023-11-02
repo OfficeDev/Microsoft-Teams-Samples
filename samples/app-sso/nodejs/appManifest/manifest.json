@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.bottabmesso",
   "webApplicationInfo": {
-    "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<DOMAIN-NAME>>/botid-<<YOUR-MICROSOFT-APP-ID>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
   },
   "developer": {
     "name": "Microsoft",
@@ -31,7 +31,7 @@
     {
       "entityId": "com.contoso.tabsso",
       "name": "SSO Tab",
-      "contentUrl": "https://<<DOMAIN-NAME>>/tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,7 @@
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -49,7 +49,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -117,7 +117,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "${{BOT_DOMAIN}}"
             ]
           }
         }
@@ -132,6 +133,6 @@
     "*.githubusercontent.com",
     "*.botframework.com",
     "*.ngrok-free.app",
-    "<<DOMAIN-NAME>>"
+    "${{BOT_DOMAIN}}"
   ]
 }

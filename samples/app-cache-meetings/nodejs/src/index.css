@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Styles for App theme depending on 'Teams' theme change */
+.theme-dark{
+  background-color: #242424;
+  color: white;
+}
+
+.theme-light{
+  background-color: white;
+  color: #242424;
+}
+
+.theme-contrast{
+  background-color: black;
+  color: chartreuse;
+}
