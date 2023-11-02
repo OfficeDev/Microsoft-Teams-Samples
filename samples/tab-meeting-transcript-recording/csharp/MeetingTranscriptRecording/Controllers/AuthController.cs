@@ -682,8 +682,6 @@ namespace MeetingTranscriptRecording.Controllers
                     {
                         if (responseData.isOnlineMeeting == true)
                         {
-
-                            
                             string joinUrl = responseData.onlineMeeting.joinUrl;
 
                             string pattern = @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
@@ -713,6 +711,20 @@ namespace MeetingTranscriptRecording.Controllers
                                     if (OldEventDetails.subject != responseData.subject)
                                     {
                                         EventDetails.subject = responseData.subject;
+
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+
+                                    if (OldEventDetails.start.ToString() != responseData.start.dateTime.ToString("MMM dd h:mm tt"))
+                                    {
+                                        EventDetails.start = responseData.start.dateTime.ToString("MMM dd h:mm tt");
+
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+
+                                    if (OldEventDetails.end.ToString() != responseData.end.dateTime.ToString("MMM dd h:mm tt"))
+                                    {
+                                        EventDetails.end = responseData.end.dateTime.ToString("MMM dd h:mm tt");
 
                                         TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
                                     }
