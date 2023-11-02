@@ -54,7 +54,7 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
             subtitle=query["summary"],
             buttons=[
                 CardAction(
-                    type="openUrl", value=f"https://pypi.org/project/{query['name']}"
+                    type="openUrl", value=query['url']
                 )
             ],
         )
@@ -76,7 +76,8 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
         for result in response.json()["items"]:
             name = result["name"]
             description = result["description"]
-            search_results.append({"name": name, "description": description})
+            url = result["html_url"]
+            search_results.append({"name": name, "summary": description, "url": url})
         return search_results[:10] if len(search_results) > 10 else search_results
     # def _get_search_results(self, query: str):
     #     url = f"https://pypi.org/search/?q={query}&c=Programming+Language"
