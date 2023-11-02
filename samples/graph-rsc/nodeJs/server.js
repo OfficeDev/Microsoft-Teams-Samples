@@ -63,6 +63,7 @@ async function getInstalledAppList(accessToken, reciepientUserId) {
       Authorization: "Bearer " + accessToken
     }
   };
+
   axios.get("https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition", config)
     .then(async (res) => {
       var appId = getAppId(res.value);
@@ -96,6 +97,7 @@ async function sendActivityFeedNotification(accessToken, reciepientUserId, appId
       Authorization: "Bearer " + accessToken
     }
   };
+  
   axios.get(`https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/sendActivityNotification`, postData, config)
     .then((res) => {
       console.log("Success");
