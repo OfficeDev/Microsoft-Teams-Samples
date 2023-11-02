@@ -19,8 +19,8 @@
       "full": "Sample Search Messaging Extension Bot using V4 Bot Builder SDK and V4 Microsoft Teams Extension SDK"
     },
     "icons": {
-      "outline": "icon-outline.png",
-      "color": "icon-color.png"
+      "outline": "outline.png",
+      "color": "color.png"
     },
     "accentColor": "#abcdef",
     "composeExtensions": [
