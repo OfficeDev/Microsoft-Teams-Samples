@@ -27,7 +27,6 @@ function RecordingTranscript() {
 
     const videoRef = useRef(null);
 
-
     // Initialize the component and extract query parameters when it mounts
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
@@ -156,7 +155,7 @@ function RecordingTranscript() {
                             <Spinner label="Loading..." size="small" />
                         </div>
                     ) :
-                   <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />}
+                        <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />}
                 </div>
             </div>
         </div>

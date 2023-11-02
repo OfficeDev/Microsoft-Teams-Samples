@@ -48,13 +48,12 @@ const MeetingTranscriptRecording = () => {
                 })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.length != 0) {
-                            debugger;
-                            setCardData(data);
+                        if (data.CardResults.length !== 0) {
+                            setCardData(data.CardResults);
                             setLoading(false);
-                        } else {
-                            setLoading(false);
-                        }
+                        } if (data.eventUpdated) {
+                            ssoAuthentication();
+                        } 
                     })
             });
         });
@@ -67,6 +66,7 @@ const MeetingTranscriptRecording = () => {
         getClientSideToken()
             .then((clientSideToken) => {
                 getServerSideToken(clientSideToken);
+                createSubscription(clientSideToken);
             })
             .catch((error) => {
                 if (error === "invalid_grant") {
@@ -124,6 +124,35 @@ const MeetingTranscriptRecording = () => {
         });
     }
 
+    const createSubscription = (clientSideToken) => {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.app.getContext().then((context) => {
+                fetch('/createsubscription?ssoToken=' + clientSideToken, {
+                    method: 'post',
+                    headers: {
+                        "Content-Type": "application/text",
+                        "Authorization": "Bearer " + clientSideToken
+                    },
+                    cache: 'default'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error == "consent_required") {
+                            setIsConsentButtonVisible(true);
+                            setIsLoginVisible(false);
+                            setLoading(false);
+                        }
+                        if (data) {
+                            debugger;
+                            return;
+                        } else {
+                            return;
+                        }
+                    })
+            });
+        });
+    }
+
     // Request consent on implicit grant error.
     const requestConsent = () => {
         getToken()
@@ -159,7 +188,7 @@ const MeetingTranscriptRecording = () => {
     }
 
     // Open stage view
-    const fetchrecordingtranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
+    const fetchRecordingTranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
         var submitHandler = function (err, result) { console.log("Err: ".concat(err, "; Result:  + ").concat(result)); };
         let taskInfo = {
             title: null,
@@ -226,7 +255,7 @@ const MeetingTranscriptRecording = () => {
                                                 <Text className="organizerName">{element.organizer}</Text>
                                             </div>
                                             <div className="btnCard">
-                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchrecordingtranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
+                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchRecordingTranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
                                             </div>
                                         </CardBody>
                                     </Card>

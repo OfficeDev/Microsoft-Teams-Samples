@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const express = require('express');
 const jwt_decode = require('jwt-decode');
 const msal = require('@azure/msal-node');
@@ -12,37 +11,35 @@ require('dotenv').config({ path: ENV_FILE });
 
 const clientId = process.env.APP_REGISTRATION_ID;
 const clientSecret = process.env.CLIENT_SECRET;
+const baseUrl = process.env.BASE_URL;
 const graphScopes = ['https://graph.microsoft.com/User.Read'];
-let CardResults = [];
+let eventDetails = [];
 let token = null;
+let eventUpdated = false;
 
 //This method obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
 app.get('/GetLoginUserInformation', async (req, res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-    })
-        .then(async (result) => {
-            var result = await getData(result.accessToken)
-            res.send(result);
-        })
-        .catch(error => {
-            console.log("error" + error.errorCode);
-            res.status(403).json({ error: 'consent_required' });
-        });
+    try {
+        const accessToken = await getToken(req);
+        const result = await getData(accessToken);
+        res.send(result);
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
+//handles incoming webhook events related to changes in calendar events.
+app.post('/webhookEvents', async (req, res, next) => {
+    if (req.query && req.query.validationToken) {
+        res.send(req.query.validationToken);
+    }
+    else {
+        eventUpdated = true;
+        res.status(200).send('OK');
+    }
+});
+
+//handles incoming webhook events related to changes in meeting transcripts.
 app.post('/webhookTranscripts', async (req, res, next) => {
     if (req.query && req.query.validationToken) {
         res.send(req.query.validationToken);
@@ -53,7 +50,7 @@ app.post('/webhookTranscripts', async (req, res, next) => {
             const graphApiEndpointOnlineTranscripts = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/transcripts`;
             const responseBodyTranscripts = await getApiData(graphApiEndpointOnlineTranscripts, token);
             const responseTranscriptsData = JSON.parse(responseBodyTranscripts);
-            CardResults = CardResults.map(event => {
+            eventDetails = eventDetails.map(event => {
                 if (event.onlineMeetingId === onlineMeetingId) {
                     if (event.recordingId) {
                         return {
@@ -74,6 +71,7 @@ app.post('/webhookTranscripts', async (req, res, next) => {
     }
 });
 
+//handles incoming webhook events related to changes in meeting recordings.
 app.post('/webhookRecordings', async (req, res, next) => {
     if (req.query && req.query.validationToken) {
         res.send(req.query.validationToken);
@@ -84,7 +82,7 @@ app.post('/webhookRecordings', async (req, res, next) => {
             const graphApiEndpointOnlineRecordings = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/recordings`;
             const responseBodyRecordings = await getApiData(graphApiEndpointOnlineRecordings, token);
             const responseRecordingsData = JSON.parse(responseBodyRecordings);
-            CardResults = CardResults.map(event => {
+            eventDetails = eventDetails.map(event => {
                 if (event.onlineMeetingId === onlineMeetingId) {
                     if (event.transcriptsId) {
                         return {
@@ -103,156 +101,113 @@ app.post('/webhookRecordings', async (req, res, next) => {
     }
 });
 
+//This method sends back updated events.
 app.get('/getUpdatedEvents', async (req, res) => {
-    res.send(CardResults);
+    res.send({ eventDetails, eventUpdated });
 });
 
 // This method is used to fetch meeting transcripts.
 app.get('/getMeetingTranscripts', async (req, res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-    })
-        .then(async (result) => {
-            const graphApiEndpointOnlineTranscriptsData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/transcripts/${req.query.transcriptId}/content?$format=text/vtt`;
-            const response = await getApiData(graphApiEndpointOnlineTranscriptsData, result.accessToken);
-            res.send(response);
-        })
-        .catch(error => {
-            console.log("error" + error.errorCode);
-            res.status(403).json({ error: 'consent_required' });
-        });
+    try {
+        const accessToken = await getToken(req);
+        const graphApiEndpointOnlineTranscriptsData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/transcripts/${req.query.transcriptId}/content?$format=text/vtt`;
+        const response = await getApiData(graphApiEndpointOnlineTranscriptsData, accessToken);
+        res.send(response);
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
 // This method fetches meeting recordings and passes it as a streamable content
 app.get('/getMeetingRecordings', async (req, res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-    })
-        .then(async (result) => {
-            const graphApiEndpointOnlineRecordData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/recordings/${req.query.recordingId}/content`;
-            const response = await axios.get(graphApiEndpointOnlineRecordData, {
-                headers: {
-                    Authorization: `Bearer ${result.accessToken}`
-                },
-                responseType: 'arraybuffer'
-            });
-
-            if (response.status === 200) {
-                // Set the appropriate response headers for video content
-                res.set('Content-Type', 'video/mp4');
-                res.set('Content-Disposition', 'inline; filename=video.mp4');
-
-                // Create a Readable stream from the video content
-                const videoStream = new Readable();
-                videoStream._read = () => { };
-                videoStream.push(response.data);
-                videoStream.push(null);
-
-                // Pipe the video stream to the response
-                videoStream.pipe(res);
-            } else {
-                console.error('Failed to retrieve video content.');
-                res.status(500).send('Failed to retrieve video content.');
-            }
-        })
-        .catch(error => {
-            console.log("error" + error.errorCode);
-            res.status(403).json({ error: 'consent_required' });
+    try {
+        const accessToken = await getToken(req);
+        const graphApiEndpointOnlineRecordData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/recordings/${req.query.recordingId}/content`;
+        const response = await axios.get(graphApiEndpointOnlineRecordData, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            responseType: 'arraybuffer'
         });
+
+        if (response.status === 200) {
+            // Set the appropriate response headers for video content
+            res.set('Content-Type', 'video/mp4');
+            res.set('Content-Disposition', 'inline; filename=video.mp4');
+
+            // Create a Readable stream from the video content
+            const videoStream = new Readable();
+            videoStream._read = () => { };
+            videoStream.push(response.data);
+            videoStream.push(null);
+
+            // Pipe the video stream to the response
+            videoStream.pipe(res);
+        } else {
+            console.error('Failed to retrieve video content.');
+            res.status(500).send('Failed to retrieve video content.');
+        }
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
+//creates subscriptions for Microsoft Graph calendar events and fetches existing subscriptions.
 app.post('/createsubscription', async (req, res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
+    try {
+        const accessToken = await getToken(req);
+        let existingSubscriptions = null;
+        let resource = '/me/events';
+        let notificationUrl = baseUrl + '/webhookEvents'
+
+        try {
+            var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
+                headers: {
+                    "accept": "application/json",
+                    "contentType": 'application/json',
+                    "authorization": "bearer " + accessToken
+                }
+            });
+            existingSubscriptions = apiResponse.data.value;
         }
-    });
+        catch (ex) {
+            return null;
+        }
 
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
+        var existingSubscription = existingSubscriptions.find(subscription => subscription.resource === resource);
 
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-    })
-        .then(async (result) => {
-            let existingSubscriptions = null;
-            let resource = '/me/events';
-            let notificationUrl = 'https://31e2-103-176-167-37.ngrok-free.app/webhookLifecyle'
+        if (existingSubscription != null && existingSubscription.notificationUrl != notificationUrl) {
+            console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
+            deleteSubscription(existingSubscription.id, accessToken);
+            existingSubscription = null;
+        }
 
-            try {
-                var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
-                    headers: {
-                        "accept": "application/json",
-                        "contentType": 'application/json',
-                        "authorization": "bearer " + result.accessToken
-                    }
-                });
-                existingSubscriptions = apiResponse.data.value;
-            }
-            catch (ex) {
-                return null;
-            }
-
-            var existingSubscription = existingSubscriptions.find(subscription => subscription.Resource === resource);
-
-            if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl) {
-                console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
-                deleteSubscription(existingSubscription.id, result.accessToken);
-                existingSubscription = null;
-            }
-
+        if (existingSubscription == null || existingSubscription.notificationUrl != notificationUrl) {
             const subscription = {
                 changeType: 'created,updated,deleted',
-                notificationUrl: 'https://31e2-103-176-167-37.ngrok-free.app/webhookLifecyle',
+                notificationUrl: notificationUrl,
                 resource: resource,
-                expirationDateTime: new Date(Date.now() + 43200000).toISOString() // 12 hours
+                expirationDateTime: new Date(Date.now() + 3600000).toISOString() // 12 hours
             };
 
             const response = await axios.post(`https://graph.microsoft.com/v1.0/subscriptions`, subscription, {
                 headers: {
-                    Authorization: `Bearer ${result.accessToken}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             });
 
             console.log('Subscription created:', response.data);
             return response.data;
-        })
-        .catch(error => {
-            console.log("error" + error.errorCode);
-            res.status(403).json({ error: 'consent_required' });
-        });
+        }
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
 // This method retrieves information about the event details.
 async function getData(accessToken) {
-    CardResults = [];
+    eventDetails = [];
+    eventUpdated = false;
     try {
         const graphApiEndpointEvents = 'https://graph.microsoft.com/beta/me/events';
         const response = await axios.get(graphApiEndpointEvents, {
@@ -318,12 +273,13 @@ async function getData(accessToken) {
                                 }
                             }
                         }
-                        CardResults.push(Obj);
+                        eventDetails.push(Obj);
                     }
                 }
             }
         }
-        return CardResults;
+
+        return eventDetails;
     } catch (error) {
         console.error('Error fetching event data:', error);
         throw error;
@@ -345,11 +301,12 @@ async function getApiData(url, accessToken) {
     }
 }
 
+//creates subscriptions for meeting transcripts
 async function createTranscriptSubscription(onlineMeetingId, accessToken) {
     try {
         let existingSubscriptions = null;
         let resource = "communications/onlineMeetings/" + onlineMeetingId + "/transcripts";
-        let notificationUrl = 'https://31e2-103-176-167-37.ngrok-free.app/webhookTranscripts?meetingId=' + onlineMeetingId;
+        let notificationUrl = baseUrl + '/webhookTranscripts?meetingId=' + onlineMeetingId;
         try {
             var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
                 headers: {
@@ -395,11 +352,12 @@ async function createTranscriptSubscription(onlineMeetingId, accessToken) {
     }
 }
 
+//creates subscriptions for meeting recording
 async function createRecordingSubscription(onlineMeetingId, accessToken) {
     try {
         let existingSubscriptions = null;
         let resource = "communications/onlineMeetings/" + onlineMeetingId + "/recordings";
-        let notificationUrl = 'https://31e2-103-176-167-37.ngrok-free.app/webhookRecordings?meetingId=' + onlineMeetingId;
+        let notificationUrl = baseUrl + '/webhookRecordings?meetingId=' + onlineMeetingId;
         try {
             var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
                 headers: {
@@ -445,7 +403,33 @@ async function createRecordingSubscription(onlineMeetingId, accessToken) {
     }
 }
 
+// Define a function to get the access token
+async function getToken(req) {
+    const msalClient = new msal.ConfidentialClientApplication({
+        auth: {
+            clientId: clientId,
+            clientSecret: clientSecret
+        }
+    });
 
+    let tenantId = jwt_decode(req.query.ssoToken)['tid']; // Get the tenant ID from the decoded token
+
+    try {
+        const result = await msalClient.acquireTokenOnBehalfOf({
+            authority: `https://login.microsoftonline.com/${tenantId}`,
+            oboAssertion: req.query.ssoToken,
+            scopes: graphScopes,
+            skipCache: true
+        });
+
+        return result.accessToken;
+    } catch (error) {
+        console.log("error: " + error.errorCode);
+        throw new Error('consent_required');
+    }
+}
+
+//used to delete a subscription by its subscriptionId in the Microsoft Graph API
 async function deleteSubscription(subscriptionId, accessToken) {
     try {
         await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
