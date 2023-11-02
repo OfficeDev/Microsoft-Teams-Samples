@@ -67,6 +67,7 @@ This sample shows meeting transcripts and recordings.
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
+  -   Select Microsoft Graph -\> Application permissions.
 
       ![Permissions ](MeetingTranscriptRecording/Images/Permissions.png)
 
