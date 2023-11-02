@@ -83,7 +83,7 @@ This sample shows meeting transcripts and recordings.
   17.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
   -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
-      ![Policy ](MeetingTranscriptRecording/Images/UserPermissions.png)
+      ![Policy ](MeetingTranscriptRecording/Images/Policy.png)
 
 ## Setup 
 
