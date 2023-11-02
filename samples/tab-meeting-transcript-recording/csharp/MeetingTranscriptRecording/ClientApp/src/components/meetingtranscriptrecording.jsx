@@ -74,8 +74,6 @@ const MeetingTranscriptRecording = () => {
                     .then((response) => {
                         if (response.ok) {
                             return response.text();
-                        } else {
-                            reject(response.error);
                         }
                     })
                     .then((responseJson) => {
@@ -85,10 +83,10 @@ const MeetingTranscriptRecording = () => {
                             setLoading(false);
                         }
                         else {
-                            setIsLoginVisible(false);
-                            setIsCardVisible(true);
-                            let userDetails = JSON.parse(responseJson);
-                            if (userDetails != null && userDetails !== undefined) {
+                            if (responseJson !== undefined) {
+                                setIsLoginVisible(false);
+                                setIsCardVisible(true);
+                                let userDetails = JSON.parse(responseJson);
                                 setData(userDetails);
                                 setLoading(false);
                             }
