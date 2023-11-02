@@ -81,13 +81,13 @@
         microsoftTeams.app.getContext().then((context) => {
             teamchannelID = context.channel.id;
             username = context.user.userPrincipalName;
-            userId = context.user,id;
+            userId = context.user.id;
             teamId = context.team.groupId;
         });
 
-        var encodedWebUrl = encodeURI('https://6687952db3e0.ngrok-free.app/123/456&label=Task 456');
+        var encodedWebUrl = encodeURI(window.location.origin
         var encodedContext = encodeURI('{"subEntityId": "task456"}');
-        var taskItemUrl = 'https://teams.microsoft.com/l/entity/bb56234b-a5f2-4d26-acff-edecce8bf42f/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
+        var taskItemUrl = 'https://teams.microsoft.com/l/entity/<appid>/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
         var empty = true;
 
         $('input[type="text"]').each(function () {
@@ -100,22 +100,29 @@
         function SendNotificationToChannel() {
             var action = "EntityTopic";
 
-            let taskDetails = {
-                title: $('#title').val(),
-                description: $('#description').val(),
-                userName: username,
-                taskInfoAction: action,
-                channelId: teamchannelID,
-                access_token: token,
-                taskItemLink: taskItemUrl,
-                teamId: teamId
-            };
+            var id = "";
 
-            $.ajax({
-                type: 'POST',
-                url: '/sendNotificationToTeam',
-                dataType: 'json',
-                data: taskDetails
+            microsoftTeams.app.getContext().then((context) => {
+                id = context.team.groupId;
+
+                let taskDetails = {
+                    title: $('#title').val(),
+                    description: $('#description').val(),
+                    userName: username,
+                    taskInfoAction: action,
+                    channelId: teamchannelID,
+                    access_token: token,
+                    taskItemLink: taskItemUrl,
+                    teamId: id
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
+
             });
 
             return true;
@@ -139,6 +146,27 @@
             $.ajax({
                 type: 'POST',
                 url: '/sendNotificationToTeam',
+                dataType: 'json',
+                data: taskDetails
+            });
+
+            return true;
+        };
+
+
+        function SendDefaultNotification() {
+            alert("hello");
+            let taskDetails = {
+                userName: username,
+                channelId: teamchannelID,
+                access_token: token,
+                taskItemLink: taskItemUrl,
+                teamId: teamId
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/sendDefaultNotifications',
                 dataType: 'json',
                 data: taskDetails
             });
@@ -188,7 +216,8 @@
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To User in Channel</label></br>
             <label><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send Notification with Custom Topic in Channel</label></br>
-            <label><input type="radio" name="notificationRadio" value="notificationChannelTab"> Notify User about a channel Tab</label>
+            <label><input type="radio" name="notificationRadio" value="notificationChannelTab"> Notify User about a channel Tab</label></br>
+            <label><input type="radio" name="notificationRadio" value="sendDefaultNotification"> Send default notification to user</label>
         </div></br>
         <div class="sendNotificationChannel desc">
             <div class="mb">
@@ -261,7 +290,12 @@
                 <button type="button" class="btn-send save" onclick="return channelTabTeamNotification()">Notify User for channel Tab</button>
             </div>
         </div>
+        <div class="sendDefaultNotification desc">
+            <div class="modal-footer mf">
+                <button type="button" class="btn-send save" onclick="return SendDefaultNotification()">Send default notification to Channel</button>
+            </div>
+        </div>
     </div>
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 </body>
 </html>

@@ -81,7 +81,7 @@
                 userName: username,
                 taskInfoAction: action,
                 access_token: token,
-                chatId:groupchatId,
+                chatId: groupchatId,
             };
 
             $.ajax({
@@ -142,8 +142,8 @@
 
 <body>
     <div id="login">
-    <h4>Click on login button to continue</h4>
-    <button onclick="login()">Login</button>
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
     </div>
     <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
@@ -194,7 +194,7 @@
         </div>
     </div>
 
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 
 </body>
 
