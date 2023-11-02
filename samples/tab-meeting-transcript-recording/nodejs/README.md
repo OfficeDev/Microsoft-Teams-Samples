@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 This sample shows meeting transcripts and recordings.
 
 **Interaction with app**
-![MeetingTranscriptRecordingGif](MeetingTranscriptRecording/Images/MeetingTranscriptRecordingGif.gif)
+![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecordingGif.gif)
 
 ## Prerequisites
 
@@ -61,7 +61,6 @@ This sample shows meeting transcripts and recordings.
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
       * `4765445b-32c6-49b0-83e6-1d93765276ca` (Microsoft 365 web application)
       * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Microsoft 365 desktop application)
-      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Microsoft 365 mobile application)
       * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop application)
       * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web application)
       * `27922004-5251-4030-b22d-91ecd9a37ea4` (Outlook mobile application)
@@ -69,7 +68,7 @@ This sample shows meeting transcripts and recordings.
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
 
-      ![Login-In ](MeetingTranscriptRecording/Images/Permissions.png)
+      ![Login-In ](Images/Permissions.png)
 
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
   13. Navigate to **Authentication**
@@ -118,7 +117,7 @@ This sample shows meeting transcripts and recordings.
     - Select `MeetingTranscriptRecording.sln` file
     - Press `F5` to run the project
 
-4. In a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs/MeetingTranscriptRecording/ClientApp`
+4. In a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs`
 
     - Inside ClientApp folder execute the below command.
 
@@ -127,7 +126,7 @@ This sample shows meeting transcripts and recordings.
 
         ```
 
-5. Open .env file from this path folder `samples/tab-meeting-transcript-recording/nodejs/MeetingTranscriptRecording/ClientApp` and update:
+5. Open .env file from this path folder `samples/tab-meeting-transcript-recording/nodejs` and update:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id\
    
 
@@ -155,27 +154,27 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Install app:**
 
-![InstallApp ](MeetingTranscriptRecording/Images/Install.png)
+![InstallApp ](Images/Install.png)
 
 **Click Sign-In:**
 
-![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
+![Login-In ](Images/LoginIn.png)
 
 **Click Consent:**
 
-![Login-In ](MeetingTranscriptRecording/Images/LoginConsent.png)
+![Login-In ](Images/LoginConsent.png)
 
 **Permissions Requested:**
 
-![Login-In ](MeetingTranscriptRecording/Images/PermissionsRequested.png)
+![Login-In ](Images/PermissionsRequested.png)
 
 **Meeting Detail Page:**
 
-![Home](MeetingTranscriptRecording/Images/Home.png)
+![Home](Images/Home.png)
 
 **Recording and Transcript Form:**
 
-![RecordingTranscriptForm](MeetingTranscriptRecording/Images/RecordingTranscriptForm.png)
+![RecordingTranscriptForm](Images/RecordingTranscriptForm.png)
 
 ## Further reading
 

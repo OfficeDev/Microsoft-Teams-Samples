@@ -125,7 +125,7 @@ const MeetingTranscriptRecording = () => {
     }
 
     // Open stage view
-    const fetchrecordingtranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
+    const fetchRecordingTranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
         var submitHandler = function (err, result) { console.log("Err: ".concat(err, "; Result:  + ").concat(result)); };
         let taskInfo = {
             title: null,
@@ -192,7 +192,7 @@ const MeetingTranscriptRecording = () => {
                                                 <Text className="organizerName">{element.organizer}</Text>
                                             </div>
                                             <div className="btnCard">
-                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchrecordingtranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
+                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchRecordingTranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
                                             </div>
                                         </CardBody>
                                     </Card>

@@ -14,110 +14,61 @@ const clientId = process.env.APP_REGISTRATION_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const graphScopes = ['https://graph.microsoft.com/User.Read'];
 
-
 //This method obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
-app.get('/GetLoginUserInformation', async (req,res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-    
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-      })
-      .then( async (result) => {    
-        var result = await getData(result.accessToken)
+app.get('/GetLoginUserInformation', async (req, res) => {
+    try {
+        const accessToken = await getToken(req);
+        const result = await getData(accessToken);
         res.send(result);
-      })
-      .catch(error => {
-        console.log("error"+ error.errorCode);
-        res.status(403).json({ error: 'consent_required' });
-    });
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
 // This method is used to fetch meeting transcripts.
-app.get('/getMeetingTranscripts', async (req,res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-    
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-      })
-      .then( async (result) => {    
+app.get('/getMeetingTranscripts', async (req, res) => {
+    try {
+        const accessToken = await getToken(req);
         const graphApiEndpointOnlineTranscriptsData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/transcripts/${req.query.transcriptId}/content?$format=text/vtt`;
-        const response = await getApiData(graphApiEndpointOnlineTranscriptsData, result.accessToken);
+        const response = await getApiData(graphApiEndpointOnlineTranscriptsData, accessToken);
         res.send(response);
-      })
-      .catch(error => {
-        console.log("error"+ error.errorCode);
-        res.status(403).json({ error: 'consent_required' });
-    });
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
 // This method fetches meeting recordings and passes it as a streamable content
-app.get('/getMeetingRecordings', async (req,res) => {
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: clientId,
-            clientSecret: clientSecret
-        }
-    });
-    
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
-
-    msalClient.acquireTokenOnBehalfOf({
-        authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken,
-        scopes: graphScopes,
-        skipCache: true
-      })
-      .then( async (result) => {    
+app.get('/getMeetingRecordings', async (req, res) => {
+    try {
+        const accessToken = await getToken(req);
         const graphApiEndpointOnlineRecordData = `https://graph.microsoft.com/beta/me/onlineMeetings/${req.query.meetingId}/recordings/${req.query.recordingId}/content`;
         const response = await axios.get(graphApiEndpointOnlineRecordData, {
-          headers: {
-            Authorization: `Bearer ${result.accessToken}`
-          },
-          responseType: 'arraybuffer'
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            responseType: 'arraybuffer'
         });
-    
+
         if (response.status === 200) {
-           // Set the appropriate response headers for video content
-          res.set('Content-Type', 'video/mp4');
-          res.set('Content-Disposition', 'inline; filename=video.mp4');
+            // Set the appropriate response headers for video content
+            res.set('Content-Type', 'video/mp4');
+            res.set('Content-Disposition', 'inline; filename=video.mp4');
 
             // Create a Readable stream from the video content
-          const videoStream = new Readable();
-          videoStream._read = () => {};
-          videoStream.push(response.data);
-          videoStream.push(null);
+            const videoStream = new Readable();
+            videoStream._read = () => { };
+            videoStream.push(response.data);
+            videoStream.push(null);
 
-      // Pipe the video stream to the response
-      videoStream.pipe(res);
+            // Pipe the video stream to the response
+            videoStream.pipe(res);
         } else {
-          console.error('Failed to retrieve video content.');
-          res.status(500).send('Failed to retrieve video content.');
+            console.error('Failed to retrieve video content.');
+            res.status(500).send('Failed to retrieve video content.');
         }
-      })
-      .catch(error => {
-        console.log("error"+ error.errorCode);
-        res.status(403).json({ error: 'consent_required' });
-    });
+    } catch (error) {
+        res.status(403).json({ error: error.message });
+    }
 });
 
 // This method retrieves information about the event details.
@@ -193,6 +144,7 @@ async function getData(accessToken) {
             }
           }
         }
+
         return CardResults;
       } catch (error) {
         console.error('Error fetching event data:', error);
@@ -214,6 +166,32 @@ async function getData(accessToken) {
       //throw error;
     }
   }
+
+// Define a function to get the access token
+async function getToken(req) {
+    const msalClient = new msal.ConfidentialClientApplication({
+        auth: {
+            clientId: clientId,
+            clientSecret: clientSecret
+        }
+    });
+
+    let tenantId = jwt_decode(req.query.ssoToken)['tid']; // Get the tenant ID from the decoded token
+
+    try {
+        const result = await msalClient.acquireTokenOnBehalfOf({
+            authority: `https://login.microsoftonline.com/${tenantId}`,
+            oboAssertion: req.query.ssoToken,
+            scopes: graphScopes,
+            skipCache: true
+        });
+
+        return result.accessToken;
+    } catch (error) {
+        console.log("error: " + error.errorCode);
+        throw new Error('consent_required');
+    }
+}
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
