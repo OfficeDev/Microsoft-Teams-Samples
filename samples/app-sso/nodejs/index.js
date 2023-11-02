@@ -1,14 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 // index.js is used to setup and configure your bot
 
 // Import required pckages
 const path = require('path');
 const express = require('express');
-
 const cors = require('cors');
-
 const { CloudAdapter, MemoryStorage,ConfigurationBotFrameworkAuthentication,TeamsSSOTokenExchangeMiddleware } = require('botbuilder');
 
 // Read botFilePath and botFileSecret from .env file.
@@ -16,11 +13,8 @@ const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 const { env } = require('process');
-
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-
 var conname = env.connectionName;
-
 console.log(`\n${conname} is the con name`);
 
 // Create adapter.
