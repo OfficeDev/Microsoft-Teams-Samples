@@ -243,10 +243,10 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Creates a subscription for Microsoft Graph API events.
         /// </summary>
-        /// <param name="accessToken"></param>
-        /// <returns></returns>
+        /// <param name="accessToken">The access token for authentication.</param>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
         public async Task<IActionResult> CreateSubscriptionMeEvents(string accessToken)
         {
             try
@@ -648,7 +648,11 @@ namespace MeetingTranscriptRecording.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Handles incoming notifications for subscription events.
+        /// </summary>
+        /// <param name="validationToken">The validation token for subscription validation.</param>
+        /// <returns>An ActionResult representing the result of the operation.</returns>
         [Route("CreateSubscriptionMeEventsPost")]
         [HttpPost]
         public async Task<ActionResult<string>> CreateSubscriptionMeEventsPost([FromQuery] string validationToken = null)
