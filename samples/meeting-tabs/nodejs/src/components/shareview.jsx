@@ -34,7 +34,7 @@ class ShareView extends Component {
             }
         });
 
-        // counts times 
+        // counts time
         this.timer();
     }
 
