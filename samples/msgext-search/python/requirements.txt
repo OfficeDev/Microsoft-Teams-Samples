@@ -1,3 +1,2 @@
-botbuilder-integration-aiohttp>=4.14.0
+botbuilder-integration-aiohttp>=4.14.5
 requests==2.31.0
-bs4>=0.0.1
