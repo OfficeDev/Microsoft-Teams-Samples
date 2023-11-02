@@ -79,13 +79,3 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
             url = result["html_url"]
             search_results.append({"name": name, "summary": description, "url": url})
         return search_results[:10] if len(search_results) > 10 else search_results
-    # def _get_search_results(self, query: str):
-    #     url = f"https://pypi.org/search/?q={query}&c=Programming+Language"
-    #     response = requests.get(url)
-    #     soup = BeautifulSoup(response.content, "html.parser")
-    #     search_results = []
-    #     for result in soup.find_all("a", class_="package-snippet"):
-    #         name = result.find("span", class_="package-snippet__name").text.strip()
-    #         description = result.find("p", class_="package-snippet__description").text.strip()
-    #         search_results.append({"name": name, "summary": description})
-    #     return search_results[:10] if len(search_results) > 10 else search_results
