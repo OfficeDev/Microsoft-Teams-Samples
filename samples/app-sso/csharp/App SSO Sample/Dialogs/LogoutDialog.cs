@@ -46,17 +46,22 @@ namespace Microsoft.BotBuilderSamples
         {
             if (innerDc.Context.Activity.Type == ActivityTypes.Message)
             {
-                var text = innerDc.Context.Activity.Text.ToLowerInvariant();
 
-                // Allow logout anywhere in the command
-                if (text.IndexOf("logout") >= 0)
+                var text = innerDc.Context.Activity.Text;
+                if (text != null)
                 {
-                    // The bot adapter encapsulates the authentication processes.
-                    var botAdapter = innerDc.Context.Adapter;
-                    var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
-                    await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken);
-                    await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
-                    return await innerDc.CancelAllDialogsAsync(cancellationToken);
+                    text = innerDc.Context.Activity.Text.ToLowerInvariant();
+
+                    // Allow logout anywhere in the command
+                    if (text.IndexOf("logout") >= 0)
+                    {
+                        // The bot adapter encapsulates the authentication processes.
+                        var botAdapter = innerDc.Context.Adapter;
+                        var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
+                        await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken);
+                        await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
+                        return await innerDc.CancelAllDialogsAsync(cancellationToken);
+                    }
                 }
             }
 
