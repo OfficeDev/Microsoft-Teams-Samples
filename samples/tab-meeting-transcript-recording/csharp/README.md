@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "10-13-2023 10:00:01"
+ createdDate: "11-03-2023 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-csharp
 
 ---
@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 This sample shows meeting transcripts and recordings.
 
 **Interaction with app**
-![MeetingTranscriptRecordingGif](MeetingTranscriptRecording/Images/MeetingTranscriptRecordingGif.gif)
+![MeetingTranscriptRecording](MeetingTranscriptRecording/Images/MeetingTranscriptRecording.gif)
 
 ## Prerequisites
 
@@ -127,17 +127,17 @@ This sample shows meeting transcripts and recordings.
         ```
 
 5. Open .env file from this path folder `samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/ClientApp` and update:
-   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id\
+   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id\
    
 
 6. Modify the `/appsettings.json` and fill in the following details:
-   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
   
 **This step is specific to Teams:**
 
-- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `{{Microsoft-App-id}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `{{MicrosoftAppId}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{MicrosoftAppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 

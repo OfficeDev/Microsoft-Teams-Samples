@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-id}}",
+  "id": "{{MicrosoftAppId}}",
   "packageName": "com.teams.meetingtranscriptrecording",
   "developer": {
     "name": "Microsoft",
@@ -42,7 +42,7 @@
     "{{domain-name}}"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
+    "id": "{{MicrosoftAppId}}",
+    "resource": "api://{{domain-name}}/{{MicrosoftAppId}}"
   }
 }
