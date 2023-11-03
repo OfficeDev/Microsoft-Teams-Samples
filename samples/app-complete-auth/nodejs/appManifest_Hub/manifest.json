@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
- "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "{{MicrosoftAppId}}",
   "packageName": "com.microsoft.teams.appcompleteauth",
@@ -19,7 +19,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "App complete auth"
+    "short": "App complete auth",
+    "full": "Authentication sample for Microsoft Teams"
   },
   "description": {
     "short": "Authentication sample for Microsoft Teams",
@@ -112,7 +113,10 @@
     }
   ],
   "accentColor": "#60A18E",
-  "permissions": [ "identity", "messageTeamMembers" ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
     "*.ngrok-free.app",
     "token.botframework.com",

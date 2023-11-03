@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0",
   "id": "<<MANIFEST-ID>>",
   "packageName": "com.microsoft.teams.fileupload",
@@ -19,8 +19,8 @@
     "full": "Sample bot using V4 Bot Builder SDK and V4 Microsoft Teams Extension SDK to demo bot file features"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#abcdef",
   "bots": [
