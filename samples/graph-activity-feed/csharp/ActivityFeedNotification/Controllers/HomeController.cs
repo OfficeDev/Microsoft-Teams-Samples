@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
@@ -169,7 +168,7 @@ namespace TabActivityFeed.Controllers
             TaskHelper.AddTaskToFeed(taskDetails);
             var graphClient = SimpleGraphClient.GetGraphClient(taskDetails.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-             
+
             if (taskDetails.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
@@ -185,7 +184,7 @@ namespace TabActivityFeed.Controllers
                 var CustomPreviewText = new ItemBody
                 {
                     Content = "Deployment requires your approval"
-                }; 
+                };
                 var customRecipient = new ChatMembersNotificationRecipient
                 {
                     ChatId = taskDetails.chatId
@@ -224,7 +223,7 @@ namespace TabActivityFeed.Controllers
                 var previewText = new ItemBody
                 {
                     Content = "Hello:"
-                }; 
+                };
                 var recipient = new ChatMembersNotificationRecipient
                 {
                     ChatId = taskDetails.chatId
@@ -322,7 +321,7 @@ namespace TabActivityFeed.Controllers
                 var previewText = new ItemBody
                 {
                     Content = "Your Reservation Updated:"
-                }; 
+                };
                 var recipient = new TeamMembersNotificationRecipient
                 {
                     TeamId = taskDetails.teamId
@@ -396,7 +395,64 @@ namespace TabActivityFeed.Controllers
             return View("teamnotification");
         }
 
-        [Authorize]
+        [HttpPost]
+        [Route("sendDefaultNotifications")]
+        public async Task<ActionResult> sendDefaultNotifications(TaskDetails taskDetails)
+        {
+            TaskHelper.AddTaskToFeed(taskDetails);
+            var graphClient = SimpleGraphClient.GetGraphClient(taskDetails.access_token);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
+
+            try
+            {
+                var tabs = await graphClient.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Tabs
+                .Request()
+                .Expand("teamsApp")
+                .GetAsync();
+
+                var tabId = tabs.Where(a => a.DisplayName == "NotifyFeedApp").Select(x => x.Id).ToArray()[0];
+
+                var topic = new TeamworkActivityTopic
+                {
+                    Source = TeamworkActivityTopicSource.EntityUrl,
+                    Value = "https://graph.microsoft.com/beta/teams/" + taskDetails.teamId + "/channels/" + taskDetails.channelId + "/tabs/" + tabId
+                };
+
+                var activityType = "systemDefault";
+
+                var previewText = new ItemBody
+                {
+                    Content = "Default activity feed",
+
+                };
+
+                var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
+                    {
+                         new Microsoft.Graph.KeyValuePair
+                            {
+                                Name = "systemDefaultText",
+                                Value = "Default feed notification sent to channel",
+                            }
+                    };
+
+                var recipient = new TeamMembersNotificationRecipient
+                {
+                    TeamId = taskDetails.teamId
+                };
+
+                await graphClientApp.Teams[taskDetails.teamId]
+                    .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
+                    .Request()
+                    .PostAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return View("teamnotification");
+        }
+
         [HttpGet("/GetUserAccessToken")]
         public async Task<ActionResult<string>> GetUserAccessToken()
         {

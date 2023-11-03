@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.Localization.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.Localization.schema.json",
   "name.short": "स्थानीयकरण",
   "name.full": "स्थानीयकरण अनुप्रयोग",
   "description.short": "माइक्रोसॉफ्ट टीमों के लिए स्थानीयकरण ऐप",

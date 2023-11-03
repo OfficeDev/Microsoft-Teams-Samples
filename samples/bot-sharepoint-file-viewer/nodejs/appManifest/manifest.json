@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
- "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.botsharepointfileviewer",
@@ -50,7 +50,10 @@
     }
   ],
   "accentColor": "#60A18E",
-  "permissions": [ "identity", "messageTeamMembers" ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
     "${{BOT_DOMAIN}}",
     "token.botframework.com"

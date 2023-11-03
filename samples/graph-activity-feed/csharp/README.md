@@ -92,12 +92,9 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
       * Select **Add a platform**.
-      * Select **web**.
+      * Select **Single page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-    
-    Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+
    - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup for Bot
@@ -209,6 +206,7 @@ Teams Activity feed notification API uses activity to which user want a notifica
 - [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
 - [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Send Default feed notification to User](https://review.learn.microsoft.com/en-us/graph/teams-send-activityfeednotifications?branch=main&branchFallbackFrom=pr-en-us-9593&tabs=csharp#example-8-send-a-notification-to-a-user-using-the-systemdefault-activity-type)
 
 
 

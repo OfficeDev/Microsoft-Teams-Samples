@@ -308,7 +308,7 @@ namespace Microsoft.BotBuilderSamples
             }
 
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken);
+            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
 
             return tokenResponse;
         }

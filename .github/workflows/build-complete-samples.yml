@@ -440,8 +440,16 @@ jobs:
               name: 'meetings-app-icon-badging'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-tag-mention/csharp/TagMentionBot.csproj'
+              name: 'bot-tag-mention'
+              version: '6.0.x'
+
             - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/MsgextUnfurlingAcLoop.csproj'
               name: 'msgext-unfurling-ac-loop-components'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/MeetingTranscriptRecording.csproj'
+              name: 'tab-meeting-transcript-recording'
               version: '6.0.x'
 
       fail-fast: false
