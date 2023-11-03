@@ -1,4 +1,4 @@
-﻿@model TabActivityFeed.Model.TaskDetails
+@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,131 +20,132 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
-          microsoftTeams.app.initialize().then(() => {  
-                $('input[type="radio"]').click(function () {
-                    var inputValue = $(this).attr("value");
-                    var targetBox = $("." + inputValue);
-                    $(".desc").not(targetBox).hide();
-                    $(targetBox).show();
-                });
+          microsoftTeams.app.initialize().then(() => {
+            $('input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".desc").not(targetBox).hide();
+                $(targetBox).show();
+            });
           });
         });
 
-        
-            var token = localStorage.getItem("accessToken");
-            var username = "";
-            var userId = "";
-            var groupchatId = "";
+        microsoftTeams.app.initialize();
 
-            microsoftTeams.app.getContext().then((context) => {
-                groupchatId = context.chat.id;
-                username = context.user.userPrincipalName;
-                userId = context.user.id;
+        var token = localStorage.getItem("accessToken");
+        var username = "";
+        var userId = "";
+        var groupchatId = "";
 
-            });
+        microsoftTeams.app.getContext().then((context) => {
+            groupchatId = context.chat.id;
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
 
-            var empty = true;
+        });
 
-            $('input[type="text"]').each(function () {
-                if ($(this).val() != "") {
-                    empty = false;
-                    return false;
+        var empty = true;
+
+        $('input[type="text"]').each(function () {
+            if ($(this).val() != "") {
+                empty = false;
+                return false;
+            }
+        });
+
+        function SendNotificationToGroupChat() {
+            var isValid = true;
+
+            $('#title,#description').each(function () {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
                 }
             });
 
-            function SendNotificationToGroupChat() {
-                var isValid = true;
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
 
-                $('#title,#description').each(function () {
-                    if ($.trim($(this).val()) == '') {
-                        isValid = false;
-                        $(this).css({
-                            "border": "1px solid red"
-                        });
-                    }
-                    else {
-                        $(this).css({
-                            "border": "",
-                            "background": ""
-                        });
-                    }
-                });
-
-                if (isValid == false) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                var action = "EntityTopic";
-                let taskDetails = {
-                    title: $('#title').val(),
-                    description: $('#description').val(),
-                    userName: username,
-                    taskInfoAction: action,
-                    access_token: token,
-                    chatId:groupchatId,
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/SendNotificationToGroupChat',
-                    dataType: 'json',
-                    data: taskDetails
-                });
-
-                return true;
+            var action = "EntityTopic";
+            let taskDetails = {
+                title: $('#title').val(),
+                description: $('#description').val(),
+                userName: username,
+                taskInfoAction: action,
+                access_token: token,
+                chatId: groupchatId,
             };
 
-            function customTopicNotification() {
-                var isValid = true;
+            $.ajax({
+                type: 'POST',
+                url: '/SendNotificationToGroupChat',
+                dataType: 'json',
+                data: taskDetails
+            });
 
-                $('#DeployementTitle,#DeploymentDescription').each(function () {
-                    if ($.trim($(this).val()) == '') {
-                        isValid = false;
-                        $(this).css({
-                            "border": "1px solid red"
-                        });
-                    }
-                    else {
-                        $(this).css({
-                            "border": "",
-                            "background": ""
-                        });
-                    }
-                });
+            return true;
+        };
 
-                if (isValid == false) {
-                    e.preventDefault();
-                    return false;
+        function customTopicNotification() {
+            var isValid = true;
+
+            $('#DeployementTitle,#DeploymentDescription').each(function () {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
                 }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
 
-                var action = "customTopic";
-                let taskDetails = {
-                    DeployementTitle: $('#DeployementTitle').val(),
-                    DeploymentDescription: $('#DeploymentDescription').val(),
-                    taskInfoAction: action,
-                    userName: username,
-                    access_token: token,
-                    chatId: groupchatId,
-                };
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/SendNotificationToGroupChat',
-                    dataType: 'json',
-                    data: taskDetails
-                });
-
-                return true;
+            var action = "customTopic";
+            let taskDetails = {
+                DeployementTitle: $('#DeployementTitle').val(),
+                DeploymentDescription: $('#DeploymentDescription').val(),
+                taskInfoAction: action,
+                userName: username,
+                access_token: token,
+                chatId: groupchatId,
             };
+
+            $.ajax({
+                type: 'POST',
+                url: '/SendNotificationToGroupChat',
+                dataType: 'json',
+                data: taskDetails
+            });
+
+            return true;
+        };
 
     </script>
 </head>
 
 <body>
     <div id="login">
-    <h4>Click on login button to continue</h4>
-    <button onclick="login()">Login</button>
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
     </div>
     <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
@@ -195,7 +196,7 @@
         </div>
     </div>
 
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 
 </body>
 
