@@ -5,7 +5,6 @@ import React from 'react';
 import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { BrowserRouter,  Route, Routes } from "react-router-dom";
-
 import Privacy from "./Privacy";
 import TermsOfUse from "./TermsOfUse";
 import MeetingTranscriptRecording from "./meetingtranscriptrecording";
