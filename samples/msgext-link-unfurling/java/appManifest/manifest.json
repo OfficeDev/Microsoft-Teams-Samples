@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.teams.sample.linkunfurling",
@@ -29,7 +29,9 @@
       "commands": [
         {
           "id": "searchQuery",
-          "context": [ "commandBox" ],
+          "context": [
+            "commandBox"
+          ],
           "description": "Test command to run query",
           "title": "Search Command",
           "type": "query",

@@ -26,7 +26,11 @@
   "bots": [
     {
       "botId": "<<microsoft-app-id>>",
-      "scopes": ["personal", "team", "groupchat"],
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
       "commandLists": [
         {
           "commands": [
@@ -35,7 +39,9 @@
               "description": "Resend welcome card of this Bot"
             }
           ],
-          "scopes": ["personal"]
+          "scopes": [
+            "personal"
+          ]
         }
       ],
       "supportsFiles": false,
@@ -44,8 +50,13 @@
       "supportsVideo": true
     }
   ],
-  "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": [ "<<domain-name>>" ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<domain-name>>"
+  ],
   "webApplicationInfo": {
     "id": "<<microsoft-app-id>>",
     "resource": "https://RscString"

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.contoso.teamsauthsso",
@@ -28,7 +28,9 @@
       "entityId": "auth",
       "name": "Auth",
       "contentUrl": "${{TAB_ENDPOINT}}/ssoDemo/?inTeams=true",
-      "scopes": [ "personal" ]
+      "scopes": [
+        "personal"
+      ]
     }
   ],
   "configurableTabs": [
@@ -40,7 +42,10 @@
       ]
     }
   ],
-  "permissions": [ "identity", "messageTeamMembers" ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
     "${{TAB_DOMAIN}}"
   ],
@@ -49,4 +54,3 @@
     "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }
-  

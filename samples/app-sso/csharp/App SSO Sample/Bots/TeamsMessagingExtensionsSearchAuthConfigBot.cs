@@ -327,7 +327,8 @@ namespace Microsoft.BotBuilderSamples.Bots
                     magicCode = parsed.ToString();
                 }
             }
-            var tokenResponse = await (turnContext.Adapter as IUserTokenProvider).GetUserTokenAsync(turnContext, _connectionName, magicCode, cancellationToken: cancellationToken);
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
             return tokenResponse;
         }
 
