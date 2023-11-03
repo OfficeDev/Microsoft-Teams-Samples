@@ -8,8 +8,8 @@
     "longDescription": [
       "This sample shows meeting transcripts and recordings."
     ],
-    "creationDateTime": "2023-10-17",
-    "updateDateTime": "2023-10-17",
+    "creationDateTime": "2023-11-03",
+    "updateDateTime": "2023-11-03",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-meeting-transcript-recording/nodejs/MeetingTranscriptRecording/Images/MeetingTranscriptRecordingGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-meeting-transcript-recording/nodejs/Images/MeetingTranscriptRecordingGif.gif",
         "alt": "Solution UX showing gif meeting transcripts and recordings."
       }
     ],

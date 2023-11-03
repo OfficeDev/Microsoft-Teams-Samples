@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "10-17-2023 10:00:01"
+ createdDate: "11-03-2023 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-nodejs
 
 ---
@@ -118,36 +118,31 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-3. Run the app from a terminal or from Visual Studio, choose option A or B.
-
-    A) From a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs`
+3. We have two different solutions to run, so follow below steps:
+ 
+- In a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 
     ```bash
-    # run the app
-    dotnet run
+    npm install
     ```
-    B) Or from Visual Studio
 
-    - Launch Visual Studio
-    - File -> Open -> Project/Solution
-    - Navigate to `samples/tab-meeting-transcript-recording/nodejs` folder
-    - Select `MeetingTranscriptRecording.sln` file
-    - Press `F5` to run the project
+    ```bash
+    npm start
+    ```
+- The server will start running on 5000 port
 
-4. In a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs`
+- In a different terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
-    - Inside ClientApp folder execute the below command.
+    ```bash
+    npm install
+    ```
 
-        ```bash
-        # npm install
+    ```bash
+    npm start
+    ```
+- The client will start running on 3978 port
 
-        ```
-
-5. Open .env file from this path folder `samples/tab-meeting-transcript-recording/nodejs` and update:
-   - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id\
-   
-
-6. Modify the `/.env` and fill in the following details:
+4. Open .env file from this path folders `samples/tab-meeting-transcript-recording/nodejs` and `samples/tab-meeting-transcript-recording/nodejs/api-server` update:
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
