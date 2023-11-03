@@ -991,6 +991,14 @@ jobs:
               name: 'tab-add-in-combined'
               version: '18.x'
 
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs'
+              name: 'tab-meeting-transcript-recording'
+              version: '18.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
+              name: 'tab-meeting-transcript-recording-api-server'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
