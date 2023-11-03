@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Find information related to engineering lessons learned",
-    "full": "This is an AI driven app that can help identify applicable lessons learned withing the engineering lessons learned database. Users can ask the bot to identify lessons based on key words or project descriptions."
+    "full": "This messaging extension is used to find data from Engineering Lessons learned Sharepoint list. The command will find data by keywords specified. The parameter will be the value in one of the columns in Sharepoint list"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
@@ -32,7 +32,7 @@
           "id": "searchQuery",
           "type": "query",
           "title": "Search",
-          "description": "Find in lessons learned by providing search string",
+          "description": "Find in lessons learned by providing projectId, projectName, group",
           "initialRun": false,
           "fetchTask": false,
           "context": [
@@ -42,9 +42,21 @@
           ],
           "parameters": [
             {
-              "name": "searchQuery",
-              "title": "Search",
-              "description": "Lessons learned",
+              "name": "projectId",
+              "title": "Project ID",
+              "description": "Id of the project that you want to find in SharePoint list columns like: 241",
+              "inputType": "text"
+            },
+            {
+              "name": "projectName",
+              "title": "Project Name",
+              "description": "The name of the project you want to find in SharePoint list columns. For example BMW",
+              "inputType": "text"
+            },
+            {
+              "name": "group",
+              "title": "Group",
+              "description": "Group of the project that you want to find in SharePoint list columns like: JPS",
               "inputType": "text"
             }
           ]
