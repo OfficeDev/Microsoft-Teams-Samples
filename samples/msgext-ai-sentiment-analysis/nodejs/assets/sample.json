@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/nodejs/Images/Sentiment_Analysis",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/nodejs/Images/Sentiment_Analysis.gif",
         "alt": "Solution UX showing sentiment analysis for Team's chat messages using messaging extension and Azure Open AI"
       }
     ],
