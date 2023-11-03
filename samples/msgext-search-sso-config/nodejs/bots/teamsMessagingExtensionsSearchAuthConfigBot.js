@@ -31,7 +31,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         this.userConfigurationProperty = userState.createProperty(
             USER_CONFIGURATION
         );
-        this.connectionName = process.env.ConnectionName;
+        this.connectionName = process.env.connectionName;
         this.userState = userState;
     }
 

@@ -88,6 +88,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     ```bash
     # npx @fluidframework/azure-local-service@latest
     ```
+**Note**: Please Check the `nodemodules` in ClientApp folder, Navigate to ```samples\meetings-sidepanel\csharp\ClientApp``` if not exists, please install nodemodules using this command `npm install`.
 
 9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps

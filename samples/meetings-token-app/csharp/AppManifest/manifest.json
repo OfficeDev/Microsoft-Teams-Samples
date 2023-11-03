@@ -22,8 +22,8 @@
     "full": "Token app optimized for meetings to generate sequential tokens for paticipants"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#ffffff",
   "configurableTabs": [

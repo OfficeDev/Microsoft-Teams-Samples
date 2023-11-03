@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.1",
   "id": "<<Azure Application ID>>",
   "packageName": "com.contoso.localization",
@@ -36,8 +36,8 @@
     "full": "This sample app provides a very simple localization app. You can extend this to add more content and capabilities."
   },
   "icons": {
-    "outline": "contoso20x20.png",
-    "color": "contoso96x96.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#60A18E",
   "staticTabs": [
@@ -65,5 +65,7 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "{{domain-name}}" ]
+  "validDomains": [
+    "{{domain-name}}"
+  ]
 }

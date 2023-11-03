@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "<<Your Microsoft App Id>>",
   "packageName": "com.contoso.helloworld",
@@ -19,7 +19,7 @@
     "full": "This sample app provides a very simple app for Microsoft Teams. You can extend this to add more content and capabilities."
   },
   "icons": {
-     "outline": "outline.png",
+    "outline": "outline.png",
     "color": "color.png"
   },
   "accentColor": "#60A18E",

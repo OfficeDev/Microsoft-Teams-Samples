@@ -43,6 +43,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [
-  ]
+  "validDomains": []
 }
