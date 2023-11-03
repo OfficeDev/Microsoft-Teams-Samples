@@ -34,7 +34,17 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
     // Overloaded function. Receives invoke activities with the name 'composeExtension/query'.
     async handleTeamsMessagingExtensionQuery(context, query) {
-        const searchQuery = query.parameters[0].value;
+
+        let searchQuery = '';
+        for (const parameter of query.parameters) {
+            if (parameter !== undefined && parameter !='') {
+                searchQuery += parameter.value + ' ';
+                console.log(parameter);
+            }
+        }
+
+        searchQuery = searchQuery.trim();
+        console.log('Search Query: ' + searchQuery);
         const attachments = [];
 
         // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
