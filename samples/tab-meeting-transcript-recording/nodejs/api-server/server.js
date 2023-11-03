@@ -136,7 +136,7 @@ async function getData(accessToken) {
           if (responseData.value.length > 0) {
             const allEvents = responseData.value;
             for (const element of allEvents) {
-              if (element.isOnlineMeeting === true) {
+              if (element.isOnlineMeeting === true && element.subject!="" && DateTime.now().minus({ months: 1 }) <= DateTime.fromISO(element.start.dateTime)) {
                 const Obj = {
                   subject: element.subject,
                   start: DateTime.fromISO(element.start.dateTime).toFormat('MMM dd h:mm a'),
@@ -224,4 +224,4 @@ app.get('*', (req,res) =>{
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log('API server is listening on port ' + port);
+console.log('API server is listening on port' + port);

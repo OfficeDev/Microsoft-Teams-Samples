@@ -4,6 +4,7 @@
   "description": "The API server for a Teams tab app",
   "main": "app.js",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "start": "node server.js",
     "build": "node build.js"
   },
