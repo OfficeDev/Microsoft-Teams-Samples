@@ -20,7 +20,6 @@
     <script>
 
         var appId;
-        var token =  <%-token%>;
 
         // Initialize teams js sdk
         $(document).ready(function () {
@@ -33,75 +32,26 @@
             microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
                 if (people) {
                     let reciepientUserId = people[0].objectId;
-                    getInstalledAppList(token, reciepientUserId)
+                    sendNotification(reciepientUserId)
                 }
             });
         }
 
-        // Get installed app id.
-        function getAppId(appList) {
-            var list = appList;
-            var i;
-            for (i = 0; i < list.length; i++) {
-                if (list[i].teamsAppDefinition['displayName'] == "RSC-GraphAPI NodeJs") {
-                    return list[i].id;
-                }
+        function sendNotification(reciepientUserId) {
+            $.ajax({
+            type: 'POST',
+            url: '/sendFeedNotification',
+            dataType: 'json',
+            data: {
+                'reciepientUserId': reciepientUserId,
+            },
+            success: function (responseJson) {
+                console.log("Message send successfully");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
             }
-        }
-
-        // Fetch the list of installed apps for user
-        function getInstalledAppList(accessToken, reciepientUserId) {
-            $.ajax({
-                url: "https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition",
-                type: "GET",
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + accessToken);
-                },
-                success: function (result) {
-                    appId = getAppId(result.value);
-                    sendActivityFeedNotification(token, reciepientUserId, appId)
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                },
-            });
-        }
-
-        // Send activity feed notification to user
-        function sendActivityFeedNotification(accessToken, reciepientUserId, appId) {
-
-            var postData = {
-                topic: {
-                    source: "entityUrl",
-                    value: `https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/installedApps/${appId}`
-                },
-                activityType: "taskCreated",
-                previewText: {
-                    content: "New Task Created"
-                },
-                templateParameters: [
-                    {
-                        name: "taskName",
-                        value: "test"
-                    }
-                ]
-            };
-
-            $.ajax({
-                url: `https://graph.microsoft.com/beta/users/${reciepientUserId}/teamwork/sendActivityNotification`,
-                type: "POST",
-                contentType: 'application/json',
-                data: JSON.stringify(postData),
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + accessToken);
-                },
-                success: function (profile) {
-                    console.log(profile);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                },
-            });
+        });
         }
     </script>
 
