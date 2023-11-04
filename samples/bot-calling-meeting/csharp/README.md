@@ -31,6 +31,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 * Microsoft Teams is installed and you have an account
 * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 * [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+* [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) if on macOS (`brew install --cask powershell`)
 
 ## Setup
 
@@ -103,18 +104,22 @@ Click on Add Permissions to commit your changes.
 11.  If you are logged in as the Global Administrator, click on the "Grant admin consent for <%tenant-name%>" button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
     
 12.  Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
-13. Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
-
+13.  [Install Microsoft Teams PowerShell Module](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-install). For basic install, run `Import-Module MicrosoftTeams` in PowerShell, or check the link for detailed other advanced installs.
+     - For macOS, the following command should be executed in [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) (`brew install --cask powershell`).
+14.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
+```powershell
+# Import-Module MicrosoftTeams
+# Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
+Connect-MicrosoftTeams
+New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
 ```
-	Import-Module MicrosoftTeams
-	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
-	Connect-MicrosoftTeams
 
-	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
 
-  eg:
-  Import-Module MicrosoftTeams
+e.g.:
+
+```powershell
+  # Import-Module MicrosoftTeams
 	Connect-MicrosoftTeams
 
 	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
@@ -122,10 +127,10 @@ Click on Add Permissions to commit your changes.
 ```
 ![PolicySetup](Images/PolicySetup.PNG)
 
-14. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
-15. Run `Windows Powershell PSI` as an administrator and execute above script.
-16. Run following command to verify policy is create successfully or not
-`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<microsoft-app-id>>"`
+15. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
+16. Run `Windows Powershell PSI` as an administrator and execute above script.
+17. Run following command to verify policy is create successfully or not: `Get-CsApplicationAccessPolicy -Identity Meeting-policy-dev`
+
 ## Setup Bot Service
 
 1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration)
@@ -138,7 +143,7 @@ Click on Add Permissions to commit your changes.
 8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://<your_tunnel_domain>/callback`) where you receive incoming notifications.
 For example `https://contoso.com/teamsapp/callback`
 ![EnableCallingEndpoint ](Images/EnableCallingEndpoint.PNG)
-9. Save your changes.
+1. Save your changes.
 
 ### Configuring the sample:
 1. __*Update appsettings.json for calling Bot*__
@@ -184,9 +189,9 @@ For example `https://contoso.com/teamsapp/callback`
 - Update `cognitive-speech-language` replace `your-language `with one of the language for your resource.
 
 2. __*This step is specific to Teams*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains`, replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
