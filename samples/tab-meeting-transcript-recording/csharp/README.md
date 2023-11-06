@@ -166,10 +166,6 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
 
-**Sign-In Loading:**
-
-![Login-In ](MeetingTranscriptRecording/Images/LoginInLoading.png)
-
 **Click Consent:**
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginConsent.png)
@@ -177,6 +173,10 @@ You can interact with Teams Tab meeting sidepanel.
 **Permissions Requested:**
 
 ![Login-In ](MeetingTranscriptRecording/Images/PermissionsRequested.png)
+
+**Sign-In Loading:**
+
+![Login-In ](MeetingTranscriptRecording/Images/LoginInLoading.png)
 
 **Meeting Detail Page:**
 
