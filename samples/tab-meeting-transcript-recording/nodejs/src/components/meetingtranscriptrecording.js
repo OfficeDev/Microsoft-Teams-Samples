@@ -13,7 +13,7 @@ const MeetingTranscriptRecording = () => {
     // Define an array state variable with an initial value
     const [cardData, setCardData] = useState([]);
 
-    // Define a state variable to manage the visibility of the consent button
+   // Define a state variable to manage the visibility of the consent button
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
 
     // Define a state variable to manage the visibility of the login button
@@ -31,9 +31,9 @@ const MeetingTranscriptRecording = () => {
         const intervalId = setInterval(getUpdatedData, 60000);
         // Clear the interval when the component unmounts
         return () => {
-            clearInterval(intervalId);
+          clearInterval(intervalId);
         };
-    }, []);
+      }, []);
 
     const getUpdatedData = () => {
         return new Promise((resolve, reject) => {
@@ -46,14 +46,14 @@ const MeetingTranscriptRecording = () => {
                     },
                     cache: 'default'
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.CardResults.length !== 0) {
-                            setCardData(data.CardResults);
-                            setLoading(false);
+                .then(response => response.json())
+                .then(data => {
+                        if (data.eventDetails.length !== 0) {
+                          setCardData(data.eventDetails);
+                          setLoading(false);
                         } if (data.eventUpdated) {
                             ssoAuthentication();
-                        } 
+                        }
                     })
             });
         });
@@ -101,18 +101,18 @@ const MeetingTranscriptRecording = () => {
                     },
                     cache: 'default'
                 })
-                    .then(response => response.json())
-                    .then(data => {
+                .then(response => response.json())
+                .then(data => {
                         if (data.error == "consent_required") {
                             setIsConsentButtonVisible(true);
                             setIsLoginVisible(false);
                             setLoading(false);
                         }
                         if (data) {
-                            setCardData(data);
-                            setIsLoginVisible(false);
-                            setLoading(false);
-                            setIsCardVisible(true);
+                          setCardData(data);
+                          setIsLoginVisible(false);
+                          setLoading(false);
+                          setIsCardVisible(true);
                         } else {
                             setLoading(false);
                             reject(response.error);
@@ -135,8 +135,8 @@ const MeetingTranscriptRecording = () => {
                     },
                     cache: 'default'
                 })
-                    .then(response => response.json())
-                    .then(data => {
+                .then(response => response.json())
+                .then(data => {
                         if (data.error == "consent_required") {
                             setIsConsentButtonVisible(true);
                             setIsLoginVisible(false);
@@ -164,7 +164,7 @@ const MeetingTranscriptRecording = () => {
                     });
             });
     }
-
+    
     // Get token for multi tenant.
     const getToken = () => {
         return new Promise((resolve, reject) => {
@@ -225,7 +225,7 @@ const MeetingTranscriptRecording = () => {
                 }
                 {loginAdminAccount &&
                     <>
-                        <h3>Please login with admin account.</h3>
+                    <h3>Please login with admin account.</h3>
                     </>
                 }
             </div>
@@ -233,7 +233,7 @@ const MeetingTranscriptRecording = () => {
                 {loading &&
                     <>
                         <div className="loadingIcon">
-                            <Spinner label="Loading..." size="large" />
+                            <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
                         </div>
                     </>
                 }

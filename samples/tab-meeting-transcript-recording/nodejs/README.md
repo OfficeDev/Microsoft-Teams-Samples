@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 This sample shows meeting transcripts and recordings.
 
 **Interaction with app**
-![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecordingGif.gif)
+![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecording.gif)
 
 ## Prerequisites
 
@@ -181,9 +181,17 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](Images/PermissionsRequested.png)
 
+**Sign-In Loading:**
+
+![Login-In ](Images/LoginInLoading.png)
+
 **Meeting Detail Page:**
 
 ![Home](Images/Home.png)
+
+**Loading Meetings, Fetching Transcript and Recordings:**
+
+![RecordingTranscriptForm](Images/RecordingTranscriptFormLoading.png)
 
 **Recording and Transcript Form:**
 
