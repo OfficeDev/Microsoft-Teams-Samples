@@ -176,7 +176,7 @@ const MeetingTranscriptRecording = () => {
                 {loading &&
                     <>
                         <div className="loadingIcon">
-                            <Spinner label="Loading..." size="large" />
+                        <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
                         </div>
                     </>
                 }

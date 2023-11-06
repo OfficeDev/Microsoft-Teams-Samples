@@ -202,7 +202,7 @@ function RecordingTranscript() {
         <div>
             {loading ? (
                 <div className="loadingIcon">
-                    <Spinner label="Loading..." size="large" />
+                    <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
                 </div>
             ) : (
                 <div>
@@ -215,7 +215,7 @@ function RecordingTranscript() {
                     <div class="mainRecordTrans">
                         {loadingRecording ? (
                             <div className="loadingIconRecordings">
-                                <Spinner label="Loading..." size="small" />
+                                    <Spinner label="Loading Recordings..." size="small" />
                             </div>
                         ) : (
                             <div className="divRecording">
@@ -226,7 +226,7 @@ function RecordingTranscript() {
                             <h4>Transcripts</h4>
                             {loadingTranscripts ? (
                                 <div>
-                                    <Spinner label="Loading..." size="small" />
+                                        <Spinner label="Loading Transcript..." size="small" />
                                 </div>
                             ) : (
                                 <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />

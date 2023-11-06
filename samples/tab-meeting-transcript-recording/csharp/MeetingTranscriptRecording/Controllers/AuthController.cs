@@ -49,31 +49,42 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
+                // Initialize a list to store event data
                 var CardResults = new List<CardData>();
 
+                // Initialize a counter for the number of events
                 var eventCount = 0;
 
+                // Get an access token for making API requests
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
+                // Create subscription for user events
                 await CreateSubscriptionMeEvents(accessToken);
 
+                // Retrieve the base URL from configuration
                 var BaseURL = _configuration["AzureAd:BaseURL"];
 
+                // Construct the Graph API endpoint to get user events sorted by start date
                 string graphApiEndpointEvents = BaseURL + $"me/events?$orderby=start/dateTime desc";
 
+                // Make an authenticated API request to get event data
                 var responseBody = await AuthHelper.GetApiData(graphApiEndpointEvents, accessToken);
 
+                // Deserialize the response into a list of events
                 var responseData = JsonConvert.DeserializeObject<ResponseEventData>(responseBody);
 
+                // Check if there are events and process them
                 if (responseData != null && responseData.Value.Count > 0)
                 {
                     var allEvents = responseData.Value;
                     foreach (EventData element in allEvents)
                     {
+                        // Check if it's an online meeting event with a subject and within the last month
                         if (element.isOnlineMeeting == true && !string.IsNullOrEmpty(element.subject) && DateTime.Now.AddMonths(-1) <= element.start.dateTime)
                         {
                             if (eventCount <= 9)
                             {
+                                // Create a CardData object to store event details
                                 var Obj = new CardData();
                                 Obj.subject = element.subject;
                                 Obj.start = element.start.dateTime.ToString("MMM dd h:mm tt");
@@ -82,38 +93,49 @@ namespace MeetingTranscriptRecording.Controllers
 
                                 eventCount++;
 
-                                //---------------Get Join URL---------------
+                                // Get the join URL for the online meeting
                                 string joinUrl = element.onlineMeeting.joinUrl;
 
+                                // Construct the Graph API endpoint to retrieve online meeting details
                                 string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
 
+                                // Make an authenticated API request to get online meeting details
                                 var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
 
+                                // Deserialize the response into JoinUrlData
                                 var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
 
                                 if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
                                 {
+                                    // Update the CardData object with the online meeting ID
                                     Obj.onlineMeetingId = responseJoinUrlData.Value[0].id;
 
                                     string onlineMeetingId = responseJoinUrlData.Value[0].id;
 
                                     if (onlineMeetingId != null)
                                     {
+                                        // Construct the Graph API endpoint to retrieve online transcripts
                                         string graphApiEndpointOnlineTranscripts = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/transcripts";
 
+                                        // Make an authenticated API request to get online transcripts
                                         var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
 
+                                        // Deserialize the response into transcriptsData
                                         var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
 
                                         if (responseTranscriptsData != null && responseTranscriptsData.Value.Count > 0 && responseTranscriptsData.Value[0].id != null)
                                         {
+                                            // Update the CardData object with the transcripts ID and set a condition
                                             Obj.transcriptsId = responseTranscriptsData.Value[0].id;
+                                            Obj.condition = true;
                                         }
                                         else
                                         {
+                                            // If there are no transcripts, create a subscription for them
                                             await CreateTranscriptsSubscription(onlineMeetingId, accessToken);
                                         }
 
+                                        // Construct the Graph API endpoint to retrieve online recordings
                                         string graphApiEndpointOnlineRecordings = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/recordings";
 
                                         var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
@@ -122,11 +144,13 @@ namespace MeetingTranscriptRecording.Controllers
 
                                         if (responseRecordingsData != null && responseRecordingsData.Value.Count > 0 && responseRecordingsData.Value[0].id != null)
                                         {
+                                            // Update the CardData object with the recording ID and set a condition
                                             Obj.recordingId = responseRecordingsData.Value[0].id;
                                             Obj.condition = true;
                                         }
                                         else
                                         {
+                                            // If there are no transcripts, create a subscription for them
                                             await CreateRecordingsSubscription(onlineMeetingId, accessToken);
                                         }
                                     }
@@ -628,23 +652,26 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
-
+                // Create a ConfidentialClientApplication to acquire an access token
                 IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(_configuration["AzureAd:MicrosoftAppId"])
                                                   .WithClientSecret(_configuration["AzureAd:MicrosoftAppPassword"])
                                                   .WithAuthority($"https://login.microsoftonline.com/{_configuration["AzureAd:TenantId"]}")
                                                   .WithRedirectUri("https://daemon")
                                                   .Build();
 
+                // Define the required scopes for accessing Microsoft Graph API
                 string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
 
+                // Acquire an access token for the specified scopes
                 var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
 
+                // Return the access token obtained from the authentication process
                 return result.AccessToken;
             }
             catch (Exception ex)
             {
-                return null;
-
+                // Handle any exceptions that may occur during token acquisition
+                return null; // Return null to indicate failure in obtaining the token
             }
         }
 
@@ -657,29 +684,36 @@ namespace MeetingTranscriptRecording.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> CreateSubscriptionMeEventsPost([FromQuery] string validationToken = null)
         {
-            // handle validation
+            // Handle validation token
             if (!string.IsNullOrEmpty(validationToken))
             {
                 return Ok(validationToken);
             }
 
-            // handle notifications
+            // Handle notifications received in the request body
             using (StreamReader reader = new StreamReader(Request.Body))
             {
                 string content = await reader.ReadToEndAsync();
 
+                // Deserialize the received JSON notifications
                 var notifications = JsonConvert.DeserializeObject<MeetingTranscriptRecording.Model.Notifications>(content);
 
+                // Get an access token for making API requests
                 var accessToken = await GetToken();
 
+                // Retrieve the base URL from configuration
                 var BaseURL = _configuration["AzureAd:BaseURL"];
 
+                // Check if there are valid notifications and resources in them
                 if (notifications != null && notifications.Items[0].Resource != null)
                 {
+                    // Construct the Graph API endpoint for events
                     string graphApiEndpointEvents = BaseURL + notifications.Items[0].Resource;
 
+                    // Make an authenticated API request to get event data
                     var responseBody = await AuthHelper.GetApiData(graphApiEndpointEvents, accessToken);
 
+                    // Deserialize the event data
                     var responseData = JsonConvert.DeserializeObject<EventData>(responseBody);
 
                     if (responseData != null)
@@ -688,30 +722,37 @@ namespace MeetingTranscriptRecording.Controllers
                         {
                             string joinUrl = responseData.onlineMeeting.joinUrl;
 
+                            // Define a regex pattern to extract a user ID
                             string pattern = @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
-                            // Use Regex.Match to find the first match
+                            // Use Regex.Match to find the user ID in the resource URL
                             Match match = Regex.Match(notifications.Items[0].Resource, pattern);
 
+                            // Extract the user ID
                             string userId = match.Value;
 
+                            // Construct the Graph API endpoint to retrieve online meeting details
                             string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/users/" + userId + "/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
 
                             var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
 
+                            // Make an authenticated API request to get online meeting details
                             var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
 
                             if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
                             {
-                                // MeetingId
+                                // Get the online meeting ID
                                 string onlineMeetingId = responseJoinUrlData.Value[0].id;
 
+                                // Retrieve event details from a dictionary
                                 TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetails);
 
                                 if (EventDetails != null)
                                 {
+                                    // Store the old event details for comparison
                                     var OldEventDetails = EventDetails;
 
+                                    // Update event details if they have changed
                                     if (OldEventDetails.subject != responseData.subject)
                                     {
                                         EventDetails.subject = responseData.subject;
@@ -734,22 +775,29 @@ namespace MeetingTranscriptRecording.Controllers
                                     }
                                 }
 
+                                // Construct the Graph API endpoint to retrieve online transcripts
                                 string graphApiEndpointOnlineTranscripts = BaseURL + $"users/" + userId + $"/onlineMeetings/" + onlineMeetingId + "/transcripts";
 
+                                // Make an authenticated API request to get online transcripts
                                 var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
 
+                                // Deserialize the response data for online transcripts
                                 var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
 
                                 if (responseTranscriptsData != null && responseTranscriptsData.Value.Count > 0 && responseTranscriptsData.Value[0].id != null)
                                 {
+                                    // Get the transcripts ID
                                     string getTranscriptsId = responseTranscriptsData.Value[0].id;
 
+                                    // Retrieve event details for transcripts from a dictionary
                                     TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetailsTranscript);
 
                                     if (EventDetailsTranscript != null)
                                     {
+                                        // Store the old event details for transcripts for comparison
                                         var OldEventDetailsTranscript = EventDetailsTranscript;
 
+                                        // Update transcripts ID if it has changed
                                         if (OldEventDetailsTranscript.transcriptsId != getTranscriptsId)
                                         {
                                             EventDetailsTranscript.transcriptsId = getTranscriptsId;
@@ -759,22 +807,29 @@ namespace MeetingTranscriptRecording.Controllers
                                     }
                                 }
 
+                                // Construct the Graph API endpoint to retrieve online recordings
                                 string graphApiEndpointOnlineRecordings = BaseURL + $"users/" + userId + $"/onlineMeetings/" + onlineMeetingId + "/recordings";
 
+                                // Make an authenticated API request to get online recordings
                                 var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
 
+                                // Deserialize the response data for online recordings
                                 var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
 
                                 if (responseRecordingsData != null && responseRecordingsData.Value.Count > 0 && responseRecordingsData.Value[0].id != null)
                                 {
+                                    // Get the recording ID
                                     string getRecordingId = responseRecordingsData.Value[0].id;
 
+                                    // Retrieve event details for recordings from a dictionary
                                     TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetailsRecord);
 
                                     if (EventDetailsRecord != null)
                                     {
+                                        // Store the old event details for recordings for comparison
                                         var OldEventDetailsRecord = EventDetailsRecord;
 
+                                        // Update recording ID if it has changed
                                         if (OldEventDetailsRecord.recordingId != getRecordingId)
                                         {
                                             EventDetailsRecord.recordingId = getRecordingId;

@@ -166,6 +166,10 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginIn.png)
 
+**Sign-In Loading:**
+
+![Login-In ](MeetingTranscriptRecording/Images/LoginInLoading.png)
+
 **Click Consent:**
 
 ![Login-In ](MeetingTranscriptRecording/Images/LoginConsent.png)
@@ -177,6 +181,10 @@ You can interact with Teams Tab meeting sidepanel.
 **Meeting Detail Page:**
 
 ![Home](MeetingTranscriptRecording/Images/Home.png)
+
+**Loading Meetings, Fetching Transcript and Recordings:**
+
+![RecordingTranscriptForm](MeetingTranscriptRecording/Images/RecordingTranscriptFormLoading.png)
 
 **Recording and Transcript Form:**
 
