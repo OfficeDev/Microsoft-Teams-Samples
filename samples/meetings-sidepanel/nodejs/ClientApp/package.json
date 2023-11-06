@@ -6,7 +6,6 @@
   "author": "Microsoft",
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@fluentui/react-northstar": "^0.58.0",
     "@microsoft/live-share": "1.0.0-preview.8",
     "@microsoft/live-share-media": "1.0.0-preview.8",
     "@microsoft/teams-js": "^2.5.0",
@@ -42,7 +41,7 @@
     "clean": "npx shx rm -rf build",
     "start:client": "set PORT=3978 HTTP=true && react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
