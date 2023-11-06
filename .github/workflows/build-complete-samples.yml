@@ -629,7 +629,7 @@ jobs:
 
             - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
               name: 'meetings-sidepanel-clientapp'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/meetings-stage-view/nodejs'
               name: 'meetings-stage-view'
