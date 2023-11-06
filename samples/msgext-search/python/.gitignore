@@ -1,7 +1,7 @@
 # TeamsFx files
 env/.env.*.user
 env/.env.local
-appPackage/build/
+appManifest/build/
 
 # python virtual environment
 .venv/
