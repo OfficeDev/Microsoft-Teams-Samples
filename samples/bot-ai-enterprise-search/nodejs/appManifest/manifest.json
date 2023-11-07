@@ -33,9 +33,7 @@
             ],
             "supportsFiles": true,
             "isNotificationOnly": false,
-            "commandLists": [
-                
-            ]
+            "commandLists": []
         }
     ],
     "composeExtensions": [],

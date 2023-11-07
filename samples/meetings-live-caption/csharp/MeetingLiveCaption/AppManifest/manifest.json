@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "<<AppId>>",
   "packageName": "com.microsoft.teams.meetingslivecaption",
@@ -26,7 +26,9 @@
   "configurableTabs": [
     {
       "configurationUrl": "https://<<App-Domain>>/Home/Configure",
-      "scopes": [ "groupchat" ],
+      "scopes": [
+        "groupchat"
+      ],
       "canUpdateConfiguration": true,
       "context": [
         "meetingChatTab",
@@ -39,5 +41,7 @@
     "<<domain-name>>",
     "<<App-Domain>>"
   ],
-  "permissions": [ "messageTeamMembers" ]
+  "permissions": [
+    "messageTeamMembers"
+  ]
 }

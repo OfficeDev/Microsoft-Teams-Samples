@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.mgtteamstab",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Mgt-teams-tab",
+    "full": "Microsoft graph toolkit teams tab."
+  },
+  "description": {
+    "short": "Microsoft graph toolkit teams tab",
+    "full": "This sample demos building teams tab using microsoft graph toolkit."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}",
+    "{{domain-name}}"
+  ]
+}

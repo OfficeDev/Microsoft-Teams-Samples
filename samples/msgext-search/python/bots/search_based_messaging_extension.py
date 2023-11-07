@@ -1,7 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-import xmlrpc.client
+import requests
 
 from botbuilder.core import CardFactory, MessageFactory, TurnContext
 from botbuilder.schema import HeroCard, CardAction
@@ -53,7 +53,7 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
             subtitle=query["summary"],
             buttons=[
                 CardAction(
-                    type="openUrl", value=f"https://pypi.org/project/{query['name']}"
+                    type="openUrl", value=query['url']
                 )
             ],
         )
@@ -68,6 +68,13 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
         )
 
     def _get_search_results(self, query: str):
-        client = xmlrpc.client.ServerProxy("https://pypi.org/pypi")
-        search_results = client.search({"name": query})
+        url = f"https://api.github.com/search/repositories?q={query}"
+        headers = {"Accept": "application/vnd.github.v3+json"}
+        response = requests.get(url, headers=headers)
+        search_results = []
+        for result in response.json()["items"]:
+            name = result["name"]
+            description = result["description"]
+            url = result["html_url"]
+            search_results.append({"name": name, "summary": description, "url": url})
         return search_results[:10] if len(search_results) > 10 else search_results

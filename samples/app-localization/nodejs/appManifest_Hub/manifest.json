@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.1",
-  "id": "[MicrosoftAppId]",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.contoso.localization",
   "localizationInfo": {
     "defaultLanguageTag": "en-us",
@@ -32,15 +32,15 @@
     "full": "This sample app provides a very simple localization app. You can extend this to add more content and capabilities."
   },
   "icons": {
-    "outline": "contoso20x20.png",
-    "color": "contoso96x96.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#60A18E",
   "staticTabs": [
     {
       "entityId": "com.contoso.localization",
       "name": "English",
-      "contentUrl": "https://[WebAppDomainName]?culture={locale}",
+      "contentUrl": "https://${{BOT_DOMAIN}}?culture={locale}",
       "scopes": [
         "personal"
       ]
@@ -60,7 +60,7 @@
   ],
   "bots": [
     {
-      "botId": "[MicrosoftAppId]",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team"
@@ -75,6 +75,6 @@
   ],
   "validDomains": [
     "*.ngrok-free.app",
-    "localhost"
+    "${{BOT_DOMAIN}}"
   ]
 }

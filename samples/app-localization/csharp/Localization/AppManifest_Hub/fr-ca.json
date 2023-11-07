@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.Localization.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.Localization.schema.json",
   "name.short": "Localisation",
   "name.full": "Application de localisation",
   "description.short": "Application de localisation pour Microsoft Teams",
