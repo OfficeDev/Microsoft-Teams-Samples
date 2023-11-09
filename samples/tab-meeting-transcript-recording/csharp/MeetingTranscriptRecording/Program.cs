@@ -3,6 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
+using MeetingTranscriptRecording;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ builder.Services.AddSpaStaticFiles(configuration =>
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -33,6 +36,7 @@ app.UseDefaultFiles()
     .UseEndpoints(endpoints =>
     {
         endpoints.MapControllers();
+        endpoints.MapHub<ChatHub>("/chatHub");
     });
 
 app.UseSpa(spa =>

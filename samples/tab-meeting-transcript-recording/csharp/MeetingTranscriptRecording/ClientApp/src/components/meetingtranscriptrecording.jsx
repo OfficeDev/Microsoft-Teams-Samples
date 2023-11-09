@@ -7,9 +7,14 @@
 import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Button, Text, Card, Spinner } from '@fluentui/react-components';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 import { CardBody } from 'reactstrap';
 
 const MeetingTranscriptRecording = () => {
+
+    // Declare new state variables that are required to get and set the connection.
+    const [connection, setConnection] = useState(null);
+
     // Define an array state variable with an initial value
     const [cardData, setData] = useState([]);
 
@@ -26,9 +31,34 @@ const MeetingTranscriptRecording = () => {
 
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
-    const intervalId = setInterval(() => {
-        ssoAuthentication();
-    }, 300000);
+
+    // Builds the SignalR connection, mapping it to /chatHub
+    // Initializes a new instance of the HubConnectionBuilder class.
+    useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl(`${window.location.origin}/chatHub`)
+            .withAutomaticReconnect()
+            .build();
+
+        setConnection(newConnection);
+    }, []);
+
+
+    // Starts the SignalR connection
+    useEffect(() => {
+        if (connection) {
+            connection.start()
+                .then(result => {
+                    connection.on("ReceiveMessage", (description: any, cardData: any) => {
+                        if (description === "TranscriptRecording") {
+                            setData(cardData);
+                        }
+                    });
+                })
+                .catch(e => console.log('Connection failed: ', e));
+        }
+    }, [connection]);
+
 
 
     // Tab sso authentication.
@@ -89,6 +119,10 @@ const MeetingTranscriptRecording = () => {
                                 let userDetails = JSON.parse(responseJson);
                                 setData(userDetails);
                                 setLoading(false);
+                                Object.keys(userDetails).map((key) => {
+                                    const element = userDetails[key]
+                                    meetingTranscriptsIdRecordingId(clientSideToken, element.onlineMeetingId);
+                                })
                             }
                         }
                     });
@@ -106,6 +140,44 @@ const MeetingTranscriptRecording = () => {
                         return getServerSideToken(clientSideToken);
                     });
             });
+    }
+
+
+    const meetingTranscriptsIdRecordingId = (clientSideToken, onlineMeetingId) => {
+        microsoftTeams.app.getContext().then((context) => {
+            fetch('/getMeetingTranscriptsIdRecordingId', {
+                method: 'POST',
+                body: JSON.stringify({ 'MeetingId': onlineMeetingId }),
+                headers: {
+                    'Accept': 'application/json; charset=utf-8',
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': "Bearer " + clientSideToken
+                }
+            })
+                .then((response) => {
+                    // Check if the response is OK
+                    if (response.ok) {
+                        return response.text();
+                    }
+                })
+                .then((responseJson) => {
+                    if (responseJson === "" || responseJson === "[]") {
+                        setIsConsentButtonVisible(true);
+                        setIsLoginVisible(false);
+                        setLoading(false);
+                    }
+                    else {
+                        if (responseJson !== undefined) {
+                            setIsLoginVisible(false);
+                            setIsCardVisible(true);
+                            let userDetails = JSON.parse(responseJson);
+                            setData(userDetails);
+                            setLoading(false);
+                        }
+                    }
+                });
+        });
+
     }
 
     // Get token for multi-tenant.
@@ -176,7 +248,7 @@ const MeetingTranscriptRecording = () => {
                 {loading &&
                     <>
                         <div className="loadingIcon">
-                        <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
+                            <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
                         </div>
                     </>
                 }
@@ -189,6 +261,11 @@ const MeetingTranscriptRecording = () => {
                                     <Card>
                                         <CardBody className="main1Card">
                                             <div>
+                                                {element.signalRCondition ? (
+                                                    <svg className="calendarSVG" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M12.0009 5C13.4331 5 14.8066 5.50571 15.8193 6.40589C16.832 7.30606 17.4009 8.52696 17.4009 9.8C17.4009 11.7691 17.846 13.2436 18.4232 14.3279C19.1606 15.7133 19.5293 16.406 19.5088 16.5642C19.4849 16.7489 19.4544 16.7997 19.3026 16.9075C19.1725 17 18.5254 17 17.2311 17H6.77066C5.47638 17 4.82925 17 4.69916 16.9075C4.54741 16.7997 4.51692 16.7489 4.493 16.5642C4.47249 16.406 4.8412 15.7133 5.57863 14.3279C6.1558 13.2436 6.60089 11.7691 6.60089 9.8C6.60089 8.52696 7.16982 7.30606 8.18251 6.40589C9.19521 5.50571 10.5687 5 12.0009 5ZM12.0009 5V3M9.35489 20C10.0611 20.6233 10.9888 21.0016 12.0049 21.0016C13.0209 21.0016 13.9486 20.6233 14.6549 20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                                                ) : (
+                                                    <div></div>
+                                                )}
                                                 <svg className="calendarSVG" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M7 4V2.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M21.5 9H16.625H10.75M2 9H5.875" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#1C274C"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#1C274C"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#1C274C"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#1C274C"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#1C274C"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#1C274C"></path> </g></svg>
                                                 <Text className="txtMeetingTitle" weight='bold' as="h1">{element.subject}</Text>
                                             </div>
