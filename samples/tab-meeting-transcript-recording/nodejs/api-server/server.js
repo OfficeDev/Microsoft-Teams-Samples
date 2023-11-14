@@ -16,6 +16,8 @@ const graphScopes = ['https://graph.microsoft.com/User.Read'];
 let eventDetails = [];
 let token = null;
 let eventUpdated = false;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, { cors: { origin: "*" } });
 
 //This method obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
 app.get('/GetLoginUserInformation', async (req, res) => {
@@ -46,18 +48,20 @@ app.post('/webhookTranscripts', async (req, res, next) => {
   }
   else {
     var onlineMeetingId = req.query.meetingId;
-        if (token != null) {
+    if (token != null) {
     const graphApiEndpointOnlineTranscripts = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/transcripts`;
     const responseBodyTranscripts = await getApiData(graphApiEndpointOnlineTranscripts, token);
     const responseTranscriptsData = JSON.parse(responseBodyTranscripts);
     eventDetails = eventDetails.map(event => {
       if (event.onlineMeetingId === onlineMeetingId) {
-          return { ...event, transcriptsId: responseTranscriptsData.value[0].id,
+          return { ...event, transcriptsId: responseTranscriptsData.value[0].id, notify: true, 
             condition: true
           };
       }
       return event;
     });
+    io.emit('message', eventDetails);
+
     res.status(200).send('OK');
     }
 }
@@ -70,18 +74,20 @@ app.post('/webhookRecordings', async (req, res, next) => {
   }
   else {
     var onlineMeetingId = req.query.meetingId;
-        if (token != null) {
+    if (token != null) {
     const graphApiEndpointOnlineRecordings = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/recordings`;
     const responseBodyRecordings = await getApiData(graphApiEndpointOnlineRecordings, token);
     const responseRecordingsData = JSON.parse(responseBodyRecordings);
     eventDetails = eventDetails.map(event => {
       if (event.onlineMeetingId === onlineMeetingId) {
-          return { ...event, recordingId: responseRecordingsData.value[0].id,
+          return { ...event, recordingId: responseRecordingsData.value[0].id,notify: true, 
             condition: true
           };
       }
       return event;
     });
+    io.emit('message', eventDetails);
+
     res.status(200).send('OK');
   }
 }
@@ -193,7 +199,7 @@ app.post('/createsubscription', async (req, res) => {
 // This method retrieves information about the event details.
 async function getData(accessToken) {
   eventDetails = [];
-    eventUpdated = false;
+  eventUpdated=false;
     try {
         const graphApiEndpointEvents = 'https://graph.microsoft.com/beta/me/events';
         const response = await axios.get(graphApiEndpointEvents, {
@@ -212,53 +218,9 @@ async function getData(accessToken) {
                   subject: element.subject,
                   start: DateTime.fromISO(element.start.dateTime).toFormat('MMM dd h:mm a'),
                   end: DateTime.fromISO(element.end.dateTime).toFormat('MMM dd h:mm a'),
-                  organizer: element.organizer.emailAddress.name
+                  organizer: element.organizer.emailAddress.name,
+                  joinUrl: decodeURIComponent(element.onlineMeeting.joinUrl)
                 };
-    
-                // Get Join URL
-                const joinUrl = element.onlineMeeting.joinUrl;
-                const graphApiEndpointJoinUrl = `https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'${joinUrl}'`;
-    
-                const responseBodyJoinUrl = await getApiData(graphApiEndpointJoinUrl, accessToken);
-                const responseJoinUrlData = JSON.parse(responseBodyJoinUrl);
-    
-                if (responseJoinUrlData && responseJoinUrlData.value.length > 0) {
-                  for (const JoinWebUrlData of responseJoinUrlData.value) {
-                    Obj.onlineMeetingId = JoinWebUrlData.id;
-    
-                    // Get OnlineMeetingId
-                    const onlineMeetingId = JoinWebUrlData.id;
-                    const graphApiEndpointOnlineTranscripts = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/transcripts`;
-    
-                    const responseBodyTranscripts = await getApiData(graphApiEndpointOnlineTranscripts, accessToken);
-                    const responseTranscriptsData = JSON.parse(responseBodyTranscripts);
-
-                    const graphApiEndpointOnlineRecordings = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/recordings`;
-    
-                    const responseBodyRecordings = await getApiData(graphApiEndpointOnlineRecordings, accessToken);
-                    const responseRecordingsData = JSON.parse(responseBodyRecordings);
-    
-                    if (responseTranscriptsData && responseTranscriptsData.value.length > 0) {
-                      for (const TranscriptsData of responseTranscriptsData.value) {
-                        Obj.transcriptsId = TranscriptsData.id;
-                        Obj.condition = true;
-                      }
-                    }
-                    else {
-                      createTranscriptSubscription(Obj.onlineMeetingId, accessToken);
-                    }
-    
-                    if (responseRecordingsData && responseRecordingsData.value.length > 0) {
-                      for (const RecordingsData of responseRecordingsData.value) {
-                            Obj.recordingId = RecordingsData.id;
-                            Obj.condition = true;
-                      }
-                    }
-                    else {
-                      createRecordingSubscription(Obj.onlineMeetingId, accessToken);
-                    }
-                  }
-                }
                 eventDetails.push(Obj);
               }
             }
@@ -272,6 +234,72 @@ async function getData(accessToken) {
       }
   }
 
+app.get('/getMeetingTranscriptsIdRecordingId', async (req,res) => {
+    try{
+      const accessToken = await getToken(req);
+      const Obj={};
+      const joinUrl = req.query.joinUrl;
+      const graphApiEndpointJoinUrl = `https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'${joinUrl}'`;
+    
+      const responseBodyJoinUrl = await getApiData(graphApiEndpointJoinUrl, accessToken);
+      const responseJoinUrlData = JSON.parse(responseBodyJoinUrl);
+    
+      if (responseJoinUrlData && responseJoinUrlData.value.length > 0) {
+        for (const JoinWebUrlData of responseJoinUrlData.value) {
+          Obj.onlineMeetingId = JoinWebUrlData.id;
+
+          // Get OnlineMeetingId
+          const onlineMeetingId = JoinWebUrlData.id;
+          const graphApiEndpointOnlineTranscripts = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/transcripts`;
+
+          const responseBodyTranscripts = await getApiData(graphApiEndpointOnlineTranscripts, accessToken);
+          const responseTranscriptsData = JSON.parse(responseBodyTranscripts);
+
+          const graphApiEndpointOnlineRecordings = `https://graph.microsoft.com/beta/me/onlineMeetings/${onlineMeetingId}/recordings`;
+
+          const responseBodyRecordings = await getApiData(graphApiEndpointOnlineRecordings, accessToken);
+          const responseRecordingsData = JSON.parse(responseBodyRecordings);
+
+          if (responseTranscriptsData && responseTranscriptsData.value.length > 0) {
+            for (const TranscriptsData of responseTranscriptsData.value) {
+              Obj.transcriptsId = TranscriptsData.id;
+              Obj.condition = true;
+            }
+          }
+          else {
+              createTranscriptSubscription(Obj.onlineMeetingId, accessToken);
+          }
+
+          if (responseRecordingsData && responseRecordingsData.value.length > 0) {
+            for (const RecordingsData of responseRecordingsData.value) {
+                  Obj.recordingId = RecordingsData.id;
+                  Obj.condition = true;
+            }
+          }
+          else {
+            createRecordingSubscription(Obj.onlineMeetingId, accessToken);
+          }
+
+          eventDetails = eventDetails.map(event => {
+            if (event.joinUrl === joinUrl) {
+                return { ...event, onlineMeetingId: Obj.onlineMeetingId, recordingId: Obj.recordingId,transcriptsId: Obj.transcriptsId,
+                  condition: Obj.condition
+                };
+            }
+
+            return event;
+          });
+        }
+
+        res.send(eventDetails);
+      }
+    }
+    catch (error) {
+      console.error('Error fetching API data:', error);
+      //throw error;
+    }
+});
+  
   //uses Axios to make an HTTP GET request to the specified URL with the provided access token
   async function getApiData(url, accessToken) {
     try {
@@ -309,12 +337,13 @@ async function getData(accessToken) {
 
       var existingSubscription = existingSubscriptions.find(subscription => subscription.resource === resource);
 
-      if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl) {
+      if (existingSubscription != null && existingSubscription.notificationUrl != notificationUrl) {
         console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
         deleteSubscription(existingSubscription.id, accessToken);
         existingSubscription = null;
       }
 
+      if (existingSubscription == null || existingSubscription.notificationUrl != notificationUrl){
       const subscription = {
         changeType: 'created',
         notificationUrl: notificationUrl,
@@ -332,6 +361,7 @@ async function getData(accessToken) {
 
       console.log('Subscription created:', response.data);
       return response.data;
+    }
     } catch (error) {
       console.error('Error fetching API data:', error);
       //throw error;
@@ -360,12 +390,13 @@ async function getData(accessToken) {
 
       var existingSubscription = existingSubscriptions.find(subscription => subscription.resource === resource);
 
-      if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl) {
+      if (existingSubscription != null && existingSubscription.notificationUrl != notificationUrl) {
         console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
         deleteSubscription(existingSubscription.id, accessToken);
         existingSubscription = null;
       }
 
+      if (existingSubscription == null || existingSubscription.notificationUrl != notificationUrl){
       const subscription = {
         changeType: 'created',
         notificationUrl: notificationUrl,
@@ -383,6 +414,7 @@ async function getData(accessToken) {
 
       console.log('Subscription created:', response.data);
       return response.data;
+    }
     } catch (error) {
       console.error('Error fetching API data:', error);
       //throw error;
@@ -438,6 +470,6 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port);
+server.listen(port);
 
 console.log('API server is listening on port ' + port);

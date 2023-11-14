@@ -146,8 +146,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
-  
-> Note : Global Administrator can grant consent using following link: https://login.microsoftonline.com/common/adminconsent?client_id=<%appId%>
    
 **This step is specific to Teams:**
 
@@ -188,6 +186,10 @@ You can interact with Teams Tab meeting sidepanel.
 **Meeting Detail Page:**
 
 ![Home](Images/Home.png)
+
+**Get Notification:**
+
+![Notification](MeetingTranscriptRecording/Images/GetNotification.png)
 
 **Loading Meetings, Fetching Transcript and Recordings:**
 
