@@ -823,6 +823,11 @@ namespace MeetingTranscriptRecording.Controllers
 
                                         TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
                                     }
+
+                                    var hubConnection = new HubConnectionBuilder().WithUrl(_configuration["AzureAd:BaseUrlNgrok"] + "/chatHub").Build();
+                                    await hubConnection.StartAsync();
+                                    await hubConnection.InvokeAsync("SendMessage", "TranscriptRecording", TranscriptRecordingEventDetails);
+                                    await hubConnection.StopAsync();
                                 }
 
                                 // Construct the Graph API endpoint to retrieve online transcripts
@@ -851,8 +856,15 @@ namespace MeetingTranscriptRecording.Controllers
                                         if (OldEventDetailsTranscript.transcriptsId != getTranscriptsId)
                                         {
                                             EventDetailsTranscript.transcriptsId = getTranscriptsId;
+                                            EventDetailsTranscript.signalRCondition = true;
+                                            EventDetailsTranscript.condition = true;
 
                                             TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetailsTranscript, OldEventDetailsTranscript);
+
+                                            var hubConnection = new HubConnectionBuilder().WithUrl(_configuration["AzureAd:BaseUrlNgrok"] + "/chatHub").Build();
+                                            await hubConnection.StartAsync();
+                                            await hubConnection.InvokeAsync("SendMessage", "TranscriptRecording", TranscriptRecordingEventDetails);
+                                            await hubConnection.StopAsync();
                                         }
                                     }
                                 }
@@ -883,8 +895,15 @@ namespace MeetingTranscriptRecording.Controllers
                                         if (OldEventDetailsRecord.recordingId != getRecordingId)
                                         {
                                             EventDetailsRecord.recordingId = getRecordingId;
+                                            EventDetailsRecord.signalRCondition = true;
+                                            EventDetailsRecord.condition = true;
 
                                             TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetailsRecord, OldEventDetailsRecord);
+
+                                            var hubConnection = new HubConnectionBuilder().WithUrl(_configuration["AzureAd:BaseUrlNgrok"] + "/chatHub").Build();
+                                            await hubConnection.StartAsync();
+                                            await hubConnection.InvokeAsync("SendMessage", "TranscriptRecording", TranscriptRecordingEventDetails);
+                                            await hubConnection.StopAsync();
                                         }
                                     }
                                 }
