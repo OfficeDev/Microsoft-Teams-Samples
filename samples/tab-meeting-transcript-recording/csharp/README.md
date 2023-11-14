@@ -182,6 +182,10 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Home](MeetingTranscriptRecording/Images/Home.png)
 
+**Get Notification:**
+
+![Notification](MeetingTranscriptRecording/Images/GetNotification.png)
+
 **Loading Meetings, Fetching Transcript and Recordings:**
 
 ![RecordingTranscriptForm](MeetingTranscriptRecording/Images/RecordingTranscriptFormLoading.png)
