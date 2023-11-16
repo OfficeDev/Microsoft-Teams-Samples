@@ -68,6 +68,20 @@
     "identity",
     "messageTeamMembers"
   ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "ChatMessageReadReceipt.Read.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  },
   "validDomains": [
    "*.ngrok-free.app",
    "${{BOT_DOMAIN}}"
