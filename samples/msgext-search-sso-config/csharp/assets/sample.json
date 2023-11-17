@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs",
+    "name": "officedev-microsoft-teams-samples-samples-msgext-search-sso-config-csharp",
     "source": "officeDev",
     "title": "Messaging Extension SSO Config Bot",
     "shortDescription": "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-sso-config/nodejs",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search/csharp",
     "longDescription": [
       "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO."
     ],
-    "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-05-17",
+    "creationDateTime": "2023-11-17",
+    "updateDateTime": "2023-11-17",
     "products": [
       "Teams"
     ],
@@ -20,23 +20,23 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": ""
+        "value": "csharp"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": ""
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "msgext"
+        "value": "ME"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/nodejs/Images/MsgextSSO.gif",
-        "alt": "Search driven messaging extension in Teams"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/csharp/Images/me-sso.gif",
+        "alt": "Solution UX showing search based messaging extension"
       }
     ],
     "authors": [
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/community/videos/m365powerplatform"
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
       }
     ]
   }

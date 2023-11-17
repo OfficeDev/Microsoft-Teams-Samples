@@ -195,6 +195,10 @@ jobs:
             - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
               name: 'msgext-message-reminder'
               version: '6.0.x'
+              
+            - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO/TeamsMessagingExtensionsSearchSSO.csproj'
+              name: 'msgext-search-sso-config'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
               name: 'tab-channel-group-config-page-auth'

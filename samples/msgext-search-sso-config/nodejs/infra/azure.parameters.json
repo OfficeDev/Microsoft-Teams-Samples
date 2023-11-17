@@ -6,25 +6,19 @@
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
     "botAadAppClientId": {
-      "value": "${{AAD_APP_CLIENT_ID}}"
+      "value": "${{BOT_ID}}"
     },
     "botAppDomain": {
       "value": "${{BOT_DOMAIN}}"
     },
     "botDisplayName": {
-      "value": "msgext-search-sso-config"
+      "value": "bot-conversation-quickstart"
     },
     "aadAppClientId": {
       "value": "${{AAD_APP_CLIENT_ID}}"
     },
     "aadAppClientSecret": {
       "value": "${{SECRET_AAD_APP_CLIENT_SECRET}}"
-    },
-    "microsoftAppType": {
-      "value": "${{MICROSOFT_APP_TYPE}}"
-    },
-    "microsoftAppTenantId": {
-      "value": "${{MICROSOFT_APP_TENANT_ID}}"
     }
   }
 }

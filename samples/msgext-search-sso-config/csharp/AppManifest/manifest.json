@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
-  "version": "1.0.2",
-  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.0.0",
+  "id": "${{AAD_APP_CLIENT_ID}}",
   "packageName": "com.microsoft.teams.samples.msgExt",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "${{BOT_ID}}",
+      "botId": "59727dd2-1fae-417c-9035-3abd23172ff3",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -49,13 +49,13 @@
             }
           ]
         },
-        {
-          "id": "SHOWPROFILE",
-          "type": "action",
-          "title": "Compose",
-          "description": "Compose and send email",
+		{
+          "id": "mailQuery",
+          "type": "query",
+          "title": "Mail",
+          "description": "Perform a mail search",
           "initialRun": false,
-          "fetchTask": true,
+          "fetchTask": false,
           "context": [
             "commandBox",
             "compose",
@@ -63,41 +63,12 @@
           ],
           "parameters": [
             {
-              "name": "param",
-              "title": "param",
-              "description": ""
+              "name": "mailQuery",
+              "title": "Mail",
+              "description": "Perform a mail search",
+              "inputType": "text"
             }
           ]
-        },
-        {
-          "id": "SignOutCommand",
-          "type": "action",
-          "title": "Sign Out",
-          "description": "Sign out from authenticated services.",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ],
-          "parameters": [
-            {
-              "name": "param",
-              "title": "param",
-              "description": ""
-            }
-          ]
-        }
-      ],
-      "messageHandlers": [
-        {
-          "type": "link",
-          "value": {
-            "domains": [
-              "*.botframework.com"
-            ],
-            "supportsAnonymizedPayloads": true
-          }
         }
       ]
     }
@@ -107,12 +78,11 @@
   ],
   "validDomains": [
     "*.githubusercontent.com",
-    "{{domain-name}}",
     "*.botframework.com",
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{BOT_ID}}"
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
   }
 }
