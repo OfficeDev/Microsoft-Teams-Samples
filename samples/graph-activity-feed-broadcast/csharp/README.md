@@ -99,6 +99,8 @@ This sample shows a feature where user can broadcast a message to all members of
     * Select **Add a platform**.
     * Select **Single Page Application**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url_Domain}/Auth/End`.
+    * Select Add URI and enter `https://{Base_Url_Domain}/Auth/Start`.
+    ![Preview Image](ActivityFeedBroadcast/Images/add-uri.png)
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 15. Clone the repository
