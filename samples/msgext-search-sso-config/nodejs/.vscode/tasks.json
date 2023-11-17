@@ -69,7 +69,7 @@
         },
         {
             // Build project.
-            // See See https://aka.ms/teamsfx-tasks/deploy to know the details and how to customize the args.
+            // See https://aka.ms/teamsfx-tasks/deploy to know the details and how to customize the args.
             "label": "Deploy",
             "type": "teamsfx",
             "command": "deploy",

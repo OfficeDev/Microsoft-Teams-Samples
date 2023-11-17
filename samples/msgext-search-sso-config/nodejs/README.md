@@ -11,7 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07/07/2021 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config
+urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs
 ---
 
 # Messaging Extension SSO Config Bot
