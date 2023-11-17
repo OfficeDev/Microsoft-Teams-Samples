@@ -196,7 +196,7 @@ jobs:
               name: 'msgext-message-reminder'
               version: '6.0.x'
               
-            - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO/TeamsMessagingExtensionsSearchSSO.csproj'
+            - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO.csproj'
               name: 'msgext-search-sso-config'
               version: '6.0.x'
 
