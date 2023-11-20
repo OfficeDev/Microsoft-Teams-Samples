@@ -90,8 +90,7 @@ class Tab extends React.Component {
   //Show a popup dialogue prompting the user to consent to the required API permissions. This opens ConsentPopup.js.
   //Learn more: https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#initiate-authentication-flow
   showConsentDialog(){ 
-
-    microsoftTeams.authentication.authenticate({
+    authentication.authenticate({
       url: window.location.origin + "/auth-start",
       width: 600,
       height: 535
