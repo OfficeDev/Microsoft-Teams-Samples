@@ -1,0 +1,127 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "extraLarge",
+                                    "weight": "lighter",
+                                    "text": "${CompanyName}",
+                                    "wrap": true
+                                }
+                            ],
+                            "bleed": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "spacing": "none",
+                            "style": "emphasis",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "small",
+                                    "text": "${Address}",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "${City} ${Region} ${PostalCode} ${Country}",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "${Phone}",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "large",
+                                    "text": "Contact:",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "${ContactName}",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "${ContactTitle}",
+                                    "wrap": true
+                                }
+                            ],
+                            "bleed": true,
+                            "height": "stretch"
+                        }
+                    ],
+                    "width": 25
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "height": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "verticalContentAlignment": "center",
+                                            "items": [
+                                                {
+                                                    "type": "Image",
+                                                    "url": "${imageUrl}"
+                                                }
+                                            ],
+                                            "width": "stretch"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ActionSet",
+                                    "separator": true,
+                                    "actions": [
+                                        {
+                                            "type": "Action.OpenUrl",
+                                            "title": "Web site",
+                                            "url": "https://adaptivecards.io"
+                                        }
+                                    ],
+                                    "spacing": "medium"
+                                }
+                            ]
+                        }
+                    ],
+                    "width": 25
+                }
+            ],
+            "height": "stretch"
+        }
+    ]
+}
