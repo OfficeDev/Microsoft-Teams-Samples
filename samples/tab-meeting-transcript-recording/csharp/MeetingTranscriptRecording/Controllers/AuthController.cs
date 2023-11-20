@@ -89,6 +89,7 @@ namespace MeetingTranscriptRecording.Controllers
                             Obj.condition = false;
                             Obj.transcriptsId = null;
                             Obj.recordingId = null;
+                            Obj.signalRCondition = false;
 
                             // Get the join URL for the online meeting
                             string joinUrl = element.onlineMeeting.joinUrl;
@@ -169,6 +170,7 @@ namespace MeetingTranscriptRecording.Controllers
                             var OldEventDetailsTranscriptsIds = EventDetailsTranscriptsIds;
                             EventDetailsTranscriptsIds.transcriptsId = TranscriptsId;
                             EventDetailsTranscriptsIds.condition = true;
+                            EventDetailsTranscriptsIds.signalRCondition = false;
                             TranscriptRecordingEventDetails.TryUpdate(MeetingId.meetingId, EventDetailsTranscriptsIds, OldEventDetailsTranscriptsIds);
 
                         }
@@ -197,6 +199,7 @@ namespace MeetingTranscriptRecording.Controllers
                             var OldEventDetailsRecordingIds = EventDetailsRecordingIds;
                             EventDetailsRecordingIds.recordingId = RecordingId;
                             EventDetailsRecordingIds.condition = true;
+                            EventDetailsRecordingIds.signalRCondition = false;
                             TranscriptRecordingEventDetails.TryUpdate(MeetingId.meetingId, EventDetailsRecordingIds, OldEventDetailsRecordingIds);
                         }
                     }
