@@ -63,7 +63,7 @@ namespace Microsoft.BotBuilderSamples
                 Console.Write(ex);
             }
         }
-       
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Running dialog with Message Activity.");
@@ -77,8 +77,8 @@ namespace Microsoft.BotBuilderSamples
             {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
+                var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
+
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
@@ -87,14 +87,14 @@ namespace Microsoft.BotBuilderSamples
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
-                                {
-                                    new CardAction
                                     {
-                                        Type = ActionTypes.OpenUrl,
-                                        Value = resource.SignInLink,
-                                        Title = "Bot Service OAuth",
+                                        new CardAction
+                                        {
+                                            Type = ActionTypes.OpenUrl,
+                                            Value = signInLink,
+                                            Title = "Bot Service OAuth",
+                                        },
                                     },
-                                },
                         },
                     },
                 };
@@ -153,6 +153,13 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
+        private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken).ConfigureAwait(false);
+            return resource.SignInLink;
+        }
+
         protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery action, CancellationToken cancellationToken)
         {
             var tokenResponse = await GetTokenResponse(turnContext, action.State, cancellationToken);
@@ -160,13 +167,13 @@ namespace Microsoft.BotBuilderSamples
             {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
+                var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
+
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
                     {
-                        Type = "auth",
+                        Type = "silentAuth",
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
@@ -174,7 +181,7 @@ namespace Microsoft.BotBuilderSamples
                                     new CardAction
                                     {
                                         Type = ActionTypes.OpenUrl,
-                                        Value = resource.SignInLink,
+                                        Value = signInLink,
                                         Title = "Bot Service OAuth",
                                     },
                                 },
@@ -232,7 +239,7 @@ namespace Microsoft.BotBuilderSamples
                     {
                         ComposeExtension = new MessagingExtensionResult
                         {
-                            Type = "auth",
+                            Type = "silentAuth",
                             SuggestedActions = new MessagingExtensionSuggestedAction
                             {
                                 Actions = new List<CardAction>
