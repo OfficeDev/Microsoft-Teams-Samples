@@ -46,7 +46,9 @@
     <script>
         var data =  <%-data%>
 
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => { 
+        });
+
         getRequestDetails(); 
         
         function getRequestDetails() {

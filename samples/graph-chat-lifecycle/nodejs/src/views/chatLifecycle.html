@@ -32,11 +32,9 @@
 
     $(document).ready(function () {
 
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         $("#createGroupChat").on('click', function (e) {
             e.preventDefault();
-
-            microsoftTeams.app.initialize();
             let baseURL = window.location.origin;
             $.post(baseURL + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
                 let taskInfo = {
@@ -81,6 +79,7 @@
                 document.getElementById("successMsg").innerHTML = "Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
             }
         })
+        });
     })
 
 </script>

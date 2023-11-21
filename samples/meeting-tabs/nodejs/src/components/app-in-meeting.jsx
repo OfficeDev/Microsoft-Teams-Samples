@@ -17,8 +17,8 @@ class AppInMeeting extends Component {
     }
 
      //Allows us to execute the React code when the component is already placed in the DOM.
-    componentDidMount() {
-        microsoftTeams.app.initialize();
+     async componentDidMount() {
+        await microsoftTeams.app.initialize();
     }
 
     // First callback

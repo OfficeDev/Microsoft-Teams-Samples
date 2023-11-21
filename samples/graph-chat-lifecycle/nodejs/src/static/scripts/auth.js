@@ -1,5 +1,6 @@
 let button;
-microsoftTeams.app.initialize();
+microsoftTeams.app.initialize().then(() => {
+});
 
 getClientSideToken()
     .then((clientSideToken) => {

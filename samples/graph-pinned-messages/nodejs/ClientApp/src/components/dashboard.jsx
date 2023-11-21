@@ -57,10 +57,11 @@ class Dashboard extends Component {
     // Callback function for successfull authorization
     consentSuccess = async (result) => {
         this.setState({ ssoError: false });
-        microsoftTeams.app.initialize();
-        microsoftTeams.authentication.getAuthToken().then((result) => {
-            this.ssoLoginSuccess(result);
-        })
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                this.ssoLoginSuccess(result);
+            })
+        });
     }
 
     // Callback function for failure authorization

@@ -2,12 +2,12 @@
 let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-
+    microsoftTeams.app.initialize().then(() => {
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
+    });
 });
 
 function getToken() {

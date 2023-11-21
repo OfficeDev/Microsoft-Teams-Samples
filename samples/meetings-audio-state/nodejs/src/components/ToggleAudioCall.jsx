@@ -12,8 +12,8 @@ class ToggleAudioCall extends Component {
         }
     }
 
-    componentDidMount() {
-        microsoftTeams.app.initialize();
+    async componentDidMount() {
+        await microsoftTeams.app.initialize();
     }
 
     callback = (errcode, bln) => {

@@ -8,7 +8,8 @@
     </link>
     <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
 
         // Method to start a new conversation.
         function startConversation() {

@@ -8,7 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/static/styles/custom.css"/>
     <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        }); 
 
         // Method to start a new conversation.
         function startConversation() {
@@ -54,11 +55,11 @@
         }
 
         // Method to execute deeplink to redirect to the subentity/conversation in the channel.
-        function deeplinkConversation() {
-            microsoftTeams.app.getContext().then((context) => {
-                microsoftTeams.app.openLink("https://teams.microsoft.com/l/message/" + context.channel.id + "/" + localStorage.conversationId + "?groupId=" + context.team.groupId + "&tenantId=" + context.user.tenant.id + "&parentMessageId=" + localStorage.conversationId);
-            })
-        }
+            function deeplinkConversation() {
+                microsoftTeams.app.getContext().then((context) => {
+                    microsoftTeams.app.openLink("https://teams.microsoft.com/l/message/" + context.channel.id + "/" + localStorage.conversationId + "?groupId=" + context.team.groupId + "&tenantId=" + context.user.tenant.id + "&parentMessageId=" + localStorage.conversationId);
+                })
+            }
     </script>
 </head>
 

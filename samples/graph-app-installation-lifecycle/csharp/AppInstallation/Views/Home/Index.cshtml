@@ -86,7 +86,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
         var teamAppInstallationId = '';
 
             $(".btngetApp").on('click', function (e) {
@@ -256,6 +257,6 @@
             });
         }
 
-            
+     
 });
 </script>

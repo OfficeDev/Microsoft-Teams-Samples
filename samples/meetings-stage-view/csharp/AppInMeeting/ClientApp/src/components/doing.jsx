@@ -45,7 +45,6 @@ const Doing = props => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-        microsoftTeams.app.initialize();
         (async function () {
             await microsoftTeams.app.initialize();
             window.localStorage.debug = "fluid:*";

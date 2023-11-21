@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import * as React from "react";
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppInMeeting from "./components/app-in-meeting";
 import Configure from "./components/configure";
@@ -15,10 +15,11 @@ import AuthStart from "./components/auth-start";
 import AuthEnd from "./components/auth-end";
 export const AppRoute = () => {
 
-    React.useEffect(() => {
-        microsoftTeams.app.initialize();
-
-    }, [])
+    useEffect(() => {
+        (async function () {
+            await microsoftTeams.app.initialize();
+        })();
+    }, []);
 
     return (
         <React.Fragment>
