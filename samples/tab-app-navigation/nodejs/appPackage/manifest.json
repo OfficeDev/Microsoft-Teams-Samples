@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.16",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.tabappnavigation",
+  "name": {
+    "short": "Tab App Navigation",
+    "full": "Tab App Navigation In Teams App"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "description": {
+    "short": "Tab App Navigation",
+    "full": "This sample support types of navigation such as between tabs within the app"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "default_tab",
+      "name": "Default Tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/default_tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/default_tab",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_One",
+      "name": "Tab One",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab_One",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab_One",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_two",
+      "name": "Tab Two",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab_two",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab_two",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_three",
+      "name": "Tab Three",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab_three",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab_three",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ]
+}
