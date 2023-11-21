@@ -107,7 +107,35 @@ const adaptiveCardForMeetingEnd = (meetingObject, meetingDurationText) => ({
     version: '1.4'
 });
 
+const adaptiveCardForMeetingParticipantEvents = (userName, action) =>(
+{
+    $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+    type: "AdaptiveCard",
+    version: "1.4",
+    body: [
+        {
+            type: "RichTextBlock",
+            inlines: [
+                {
+                    type: "TextRun",
+                    text: userName,
+                    weight: "Bolder",
+                    size: "Default"
+                },
+                {
+                    type: "TextRun",
+                    text: action,
+                    weight: "Default",
+                    size: "Default"
+                }
+            ],
+            spacing: "Medium"
+        }
+    ]
+});
+
 module.exports = {
     adaptiveCardForMeetingStart,
-    adaptiveCardForMeetingEnd
+    adaptiveCardForMeetingEnd,
+    adaptiveCardForMeetingParticipantEvents
 };

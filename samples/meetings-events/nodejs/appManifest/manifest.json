@@ -1,9 +1,9 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.botmeetingevents",
+  "packageName": "com.microsoft.teams.botallmeetingevents",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -12,11 +12,11 @@
   },
   "name": {
     "short": "Meeting Events",
-    "full": "Sample for meeting events"
+    "full": "Sample for meeting events and meeting participant events"
   },
   "description": {
-    "short": "Access real-time meeting events",
-    "full": "This sample demos a bot with access to meeting events"
+    "short": "Access real-time meeting events and meeting participant events",
+    "full": "This sample demos a bot with access to meeting events and meeting participant events"
   },
   "icons": {
     "outline": "outline.png",
@@ -41,10 +41,24 @@
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "https://AnyString",
-    "applicationPermissions": [
-      "OnlineMeeting.ReadBasic.Chat",
-      "ChannelMeeting.ReadBasic.Group"
-    ]
+    "resource": "https://AnyString"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMeeting.ReadBasic.Group",
+          "type": "Application"
+        },
+        {
+          "name": "OnlineMeetingParticipant.Read.Chat",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }
