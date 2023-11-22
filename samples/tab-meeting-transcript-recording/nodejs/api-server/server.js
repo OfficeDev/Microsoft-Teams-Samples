@@ -243,7 +243,8 @@ app.get('/getMeetingTranscriptsIdRecordingId', async (req,res) => {
     
       const responseBodyJoinUrl = await getApiData(graphApiEndpointJoinUrl, accessToken);
       const responseJoinUrlData = JSON.parse(responseBodyJoinUrl);
-    
+      
+      token = accessToken;
       if (responseJoinUrlData && responseJoinUrlData.value.length > 0) {
         for (const JoinWebUrlData of responseJoinUrlData.value) {
           Obj.onlineMeetingId = JoinWebUrlData.id;
@@ -277,7 +278,7 @@ app.get('/getMeetingTranscriptsIdRecordingId', async (req,res) => {
             }
           }
           else {
-            //createRecordingSubscription(Obj.onlineMeetingId, accessToken);
+            createRecordingSubscription(Obj.onlineMeetingId, accessToken);
           }
 
           eventDetails = eventDetails.map(event => {
