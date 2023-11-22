@@ -30,15 +30,12 @@
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
                         if (tokenResponse !== null) {
-                            alert("success");
                             microsoftTeams.authentication.notifySuccess("Authentication succeeded");
                         } else {
-                            alert("empty");
                             microsoftTeams.authentication.notifyFailure("Get empty response.");
                         }
                     })
                     .catch((error) => {
-                        alert("error");
                         microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
                     });
             });
