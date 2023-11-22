@@ -146,6 +146,16 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Meeting end event](images/meeting-end.png)
 
+**MeetingParticipantEvents command interaction:**   
+
+To utilize this feature, please enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot, following the guidance outlined in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events) documentation
+
+![Meeting participant added event](MeetingEvents/Images/meeting-participant-added.png)
+
+**End meeting events details:**   
+
+![Meeting participant left event](MeetingEvents/Images/meeting-participant-left.png)
+
  ## Interacting with the bot in Teams
 
 Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
@@ -158,5 +168,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 - [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-events-nodejs" />
