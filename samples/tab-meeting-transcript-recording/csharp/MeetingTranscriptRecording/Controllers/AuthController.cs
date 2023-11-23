@@ -2,7 +2,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
-using Azure.Core;
 using MeetingTranscriptRecording.Helper;
 using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,9 @@ using Microsoft.Graph;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net;
+using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
+using Microsoft.Identity.Client;
 
 namespace MeetingTranscriptRecording.Controllers
 {
@@ -21,6 +23,8 @@ namespace MeetingTranscriptRecording.Controllers
         public readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
+
+        private static ConcurrentDictionary<string, CardData> TranscriptRecordingEventDetails = new ConcurrentDictionary<string, CardData>();
 
         public AuthController(
             IConfiguration configuration,
@@ -51,6 +55,8 @@ namespace MeetingTranscriptRecording.Controllers
 
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
+                await CreateSubscriptionMeEvents(accessToken);
+
                 var BaseURL = _configuration["AzureAd:BaseURL"];
 
                 string graphApiEndpointEvents = BaseURL + $"me/events?$orderby=start/dateTime desc";
@@ -59,99 +65,92 @@ namespace MeetingTranscriptRecording.Controllers
 
                 var responseData = JsonConvert.DeserializeObject<ResponseEventData>(responseBody);
 
-                if (responseData != null)
+                if (responseData != null && responseData.Value.Count > 0)
                 {
-                    if (responseData.Value.Count > 0)
+                    var allEvents = responseData.Value;
+                    foreach (EventData element in allEvents)
                     {
-                        var allEvents = responseData.Value;
-                        foreach (EventData element in allEvents)
+                        if (element.isOnlineMeeting == true && !string.IsNullOrEmpty(element.subject) && DateTime.Now.AddMonths(-1) <= element.start.dateTime)
                         {
-                            if (element.isOnlineMeeting == true)
+                            if (eventCount <= 9)
                             {
-                                if (eventCount <= 9)
+                                var Obj = new CardData();
+                                Obj.subject = element.subject;
+                                Obj.start = element.start.dateTime.ToString("MMM dd h:mm tt");
+                                Obj.end = element.end.dateTime.ToString("MMM dd h:mm tt");
+                                Obj.organizer = element.organizer.emailAddress.name;
+
+                                eventCount++;
+
+                                //---------------Get Join URL---------------
+                                string joinUrl = element.onlineMeeting.joinUrl;
+
+                                string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
+
+                                var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
+
+                                var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
+
+                                if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
                                 {
-                                    var Obj = new CardData();
-                                    Obj.subject = element.subject;
-                                    Obj.start = element.start.dateTime.ToString("MMM dd h:mm tt");
-                                    Obj.end = element.end.dateTime.ToString("MMM dd h:mm tt");
-                                    Obj.organizer = element.organizer.emailAddress.name;
+                                    Obj.onlineMeetingId = responseJoinUrlData.Value[0].id;
 
-                                    eventCount++;
+                                    string onlineMeetingId = responseJoinUrlData.Value[0].id;
 
-                                    //---------------Get Join URL---------------
-                                    string joinUrl = element.onlineMeeting.joinUrl;
-
-                                    string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
-
-                                    var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
-
-                                    var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
-
-                                    if (responseJoinUrlData != null)
+                                    if (onlineMeetingId != null)
                                     {
-                                        if (responseJoinUrlData.Value.Count > 0)
+                                        string graphApiEndpointOnlineTranscripts = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/transcripts";
+
+                                        var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
+
+                                        var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
+
+                                        if (responseTranscriptsData != null && responseTranscriptsData.Value.Count > 0 && responseTranscriptsData.Value[0].id != null)
                                         {
-                                            foreach (JoinWebUrl JoinWebUrlData in responseJoinUrlData.Value)
-                                            {
-                                                Obj.onlineMeetingId = JoinWebUrlData.id;
+                                            Obj.transcriptsId = responseTranscriptsData.Value[0].id;
+                                        }
+                                        else
+                                        {
+                                            await CreateTranscriptsSubscription(onlineMeetingId, accessToken);
+                                        }
 
-                                                //----------- Get OnlineMeetingId---------------
-                                                string onlineMeetingId = JoinWebUrlData.id;
+                                        string graphApiEndpointOnlineRecordings = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/recordings";
 
-                                                string graphApiEndpointOnlineTranscripts = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/transcripts";
+                                        var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
 
-                                                var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
+                                        var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
 
-                                                var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
-
-                                                if (responseTranscriptsData != null)
-                                                {
-                                                    if (responseTranscriptsData.Value.Count > 0)
-                                                    {
-                                                        foreach (transcriptsId TranscriptsData in responseTranscriptsData.Value)
-                                                        {
-                                                            Obj.transcriptsId = TranscriptsData.id;
-
-                                                            //-------------Get transcripts Id--------------
-                                                            string TranscriptsId = TranscriptsData.id;
-
-                                                            string graphApiEndpointOnlineRecordings = BaseURL + $"me/onlineMeetings/" + onlineMeetingId + "/recordings";
-
-                                                            var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
-
-                                                            var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
-
-                                                            if (responseRecordingsData != null)
-                                                            {
-                                                                if (responseRecordingsData.Value.Count > 0)
-                                                                {
-                                                                    foreach (RecordingId RecordingsData in responseRecordingsData.Value)
-                                                                    {
-                                                                        Obj.recordingId = RecordingsData.id;
-                                                                        Obj.condition = true;
-
-                                                                        //-------------Get recordings Id--------------
-                                                                        string RecordingId = RecordingsData.id;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                        if (responseRecordingsData != null && responseRecordingsData.Value.Count > 0 && responseRecordingsData.Value[0].id != null)
+                                        {
+                                            Obj.recordingId = responseRecordingsData.Value[0].id;
+                                            Obj.condition = true;
+                                        }
+                                        else
+                                        {
+                                            await CreateRecordingsSubscription(onlineMeetingId, accessToken);
                                         }
                                     }
-                                    CardResults.Add(Obj);
+                                    else
+                                    {
+                                        return null;
+                                    }
                                 }
                                 else
                                 {
-                                    break;
+                                    return null;
                                 }
+
+                                TranscriptRecordingEventDetails.TryAdd(Obj.onlineMeetingId, Obj);
+                            }
+                            else
+                            {
+                                break;
                             }
                         }
                     }
                 }
-                return Json(CardResults);
+
+                return Json(TranscriptRecordingEventDetails);
             }
             catch (Exception ex)
             {
@@ -244,26 +243,559 @@ namespace MeetingTranscriptRecording.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Creates a subscription for Microsoft Graph API events.
         /// </summary>
-        /// <param name="events"></param>
-        /// <returns></returns>
-        [Route("TestEvent")]
-        [HttpPost]
-        public async Task<IActionResult> TestEvent([FromBody] Event events)
+        /// <param name="accessToken">The access token for authentication.</param>
+        /// <returns>An IActionResult representing the result of the operation.</returns>
+        public async Task<IActionResult> CreateSubscriptionMeEvents(string accessToken)
         {
             try
             {
-                if (events != null)
-                {
+                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
 
+                var graphClient = GraphClient.GetGraphClient(accessToken);
+                try
+                {
+                    // Retrieve existing subscriptions using the Graph API.
+                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
                 }
-                return Ok();
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+                // Define the notification URL for the subscription, typically an endpoint for handling notifications.
+                var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionMeEventsPost";
+
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "me/events");
+
+                // Check if an existing subscription with the same resource already exists and has a different notification URL.
+                if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
+                {
+                    // If an existing subscription with a different notification URL is found, delete it.
+                    await DeleteSubscription(existingSubscription);
+                    existingSubscription = null;
+                }
+
+                // Get the current time and calculate an expiration time (typically 1 hour from now).
+                DateTime currentTime = DateTime.UtcNow; // Get the current time
+                DateTime newTime = currentTime.AddHours(2); // Add 2 hours
+
+                if (existingSubscription == null)
+                {
+                    // Create a new subscription and add it using the Graph API.
+                    var sub = new Subscription
+                    {
+                        Resource = "me/events",
+                        ChangeType = "created,updated",
+                        NotificationUrl = notificationUrl,
+                        ClientState = "ClientState",
+                        ExpirationDateTime = newTime
+                    };
+                    try
+                    {
+                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+                return Ok(); // Return an HTTP 200 OK response to indicate a successful subscription creation.
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Creates or updates a subscription for online meeting transcripts in Microsoft Graph API.
+        /// </summary>
+        /// <param name="onlineMeetingId">The ID of the online meeting for which the subscription is created.</param>
+        /// <param name="accessToken">The access token for making Graph API requests.</param>
+        /// <returns>An IActionResult representing the HTTP response.</returns>
+        public async Task<IActionResult> CreateTranscriptsSubscription(string onlineMeetingId, string accessToken)
+        {
+            try
+            {
+                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+
+                var graphClient = GraphClient.GetGraphClient(accessToken);
+                try
+                {
+                    // Retrieve existing subscriptions using the Graph API.
+                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+                // Define the notification URL for the subscription, typically an endpoint for handling notifications.
+                var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionTranscripts";
+
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/transcripts");
+
+                // Check if an existing subscription with the same resource already exists and has a different notification URL.
+                if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
+                {
+                    // If an existing subscription with a different notification URL is found, delete it.
+                    await DeleteSubscription(existingSubscription);
+                    existingSubscription = null;
+                }
+
+                // Get the current time and calculate an expiration time (typically 1 hour from now).
+                DateTime currentDateTime = DateTime.UtcNow;
+                DateTime expirationDateTime = currentDateTime + TimeSpan.FromHours(1);
+
+                // Format the "expirationDateTime" as an ISO 8601 string with "Z" indicating UTC
+                string expirationDateTimeString = expirationDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ");
+
+                if (existingSubscription == null)
+                {
+                    // Create a new subscription and add it using the Graph API.
+                    var sub = new Subscription
+                    {
+                        Resource = "communications/onlineMeetings/" + onlineMeetingId + "/transcripts",
+                        ChangeType = "created",
+                        NotificationUrl = notificationUrl,
+                        ClientState = "ClientState",
+                        ExpirationDateTime = DateTimeOffset.Parse(expirationDateTimeString).UtcDateTime
+                    };
+                    try
+                    {
+                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+                return Ok(); // Return an HTTP 200 OK response to indicate a successful subscription creation.
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Creates or updates a subscription for online meeting recordings in Microsoft Graph API.
+        /// </summary>
+        /// <param name="onlineMeetingId">The ID of the online meeting for which the subscription is created.</param>
+        /// <param name="accessToken">The access token for making Graph API requests.</param>
+        /// <returns>An IActionResult representing the HTTP response.</returns>
+        public async Task<IActionResult> CreateRecordingsSubscription(string onlineMeetingId, string accessToken)
+        {
+            try
+            {
+                // Initialize a variable to hold existing subscriptions.
+                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+
+                var graphClient = GraphClient.GetGraphClient(accessToken);
+                try
+                {
+                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+                var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionRecordings";
+
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/recordings");
+
+                if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
+                {
+                    // If an existing subscription with a different notification URL is found, delete it.
+                    await DeleteSubscription(existingSubscription);
+                    existingSubscription = null;
+                }
+
+                // Get the current time and calculate an expiration time (typically 1 hour from now).
+                DateTime currentDateTime = DateTime.UtcNow;
+                DateTime expirationDateTime = currentDateTime + TimeSpan.FromHours(1);
+
+                // Format the "expirationDateTime" as an ISO 8601 string with "Z" indicating UTC
+                string expirationDateTimeString = expirationDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ");
+
+                if (existingSubscription == null)
+                {
+                    var sub = new Subscription
+                    {
+                        Resource = "communications/onlineMeetings/" + onlineMeetingId + "/recordings",
+                        ChangeType = "created",
+                        NotificationUrl = notificationUrl,
+                        ClientState = "ClientState",
+                        ExpirationDateTime = DateTimeOffset.Parse(expirationDateTimeString).UtcDateTime
+                    };
+                    try
+                    {
+                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+                return Ok(); // Return an HTTP 200 OK response to indicate a successful subscription creation.
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /// <summary>
+        /// Deletes a subscription in Microsoft Graph API on behalf of a user.
+        /// </summary>
+        /// <param name="subscription">The subscription to be deleted.</param>
+        /// <returns>A Task representing the asynchronous operation.</returns>
+        private async Task DeleteSubscription(Subscription subscription)
+        {
+            // Obtain an access token on behalf of a user for making Graph API requests.
+            var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+
+            // Create a Graph API client using the obtained access token.
+            var graphClient = GraphClient.GetGraphClient(accessToken);
+
+            try
+            {
+                // Attempt to delete the specified subscription using the Graph API.
+                await graphClient
+                     .Subscriptions[subscription.Id]
+                     .Request()
+                     .DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// This action handles incoming HTTP POST requests for the "CreateSubscriptionTranscripts" route.
+        /// It is responsible for processing validation tokens and notifications related to online meeting transcripts.
+        /// </summary>
+        /// <param name="validationToken">An optional validation token provided as a query parameter.</param>
+        /// <returns>An ActionResult representing the HTTP response.</returns>
+        [Route("CreateSubscriptionTranscripts")]
+        [HttpPost]
+        public async Task<ActionResult<string>> CreateSubscriptionTranscripts([FromQuery] string validationToken = null)
+        {
+            // Handle validation: Check if a validation token is provided in the query parameter.
+            if (!string.IsNullOrEmpty(validationToken))
+            {
+                // Return the validation token as an OK response.
+                return Ok(validationToken);
+            }
+
+            // Handle notifications: Read and process incoming notifications.
+            using (StreamReader reader = new StreamReader(Request.Body))
+            {
+                string content = await reader.ReadToEndAsync();
+
+                // Deserialize the JSON content into a C# object of type "Notifications."
+                var notifications = JsonConvert.DeserializeObject<MeetingTranscriptRecording.Model.Notifications>(content);
+
+                if (notifications != null)
+                {
+                    // Check if notifications are not null and if the first item has "ODataId."
+
+                    if (notifications.Items[0].ResourceData.ODataId != null)
+                    {
+                        int startIndex = notifications.Items[0].ResourceData.ODataId.IndexOf("communications/onlineMeetings('");
+
+                        int endIndex = notifications.Items[0].ResourceData.ODataId.IndexOf("')/transcripts('");
+
+                        if (startIndex >= 0 && endIndex >= 0)
+                        {
+                            string onlineMeetingId = notifications.Items[0].ResourceData.ODataId.Substring(startIndex + "communications/onlineMeetings('".Length, endIndex - startIndex - "communications/onlineMeetings('".Length);
+
+                            string TranscriptsId = notifications.Items[0].ResourceData.Id;
+
+                            if (onlineMeetingId != null && TranscriptsId != null)
+                            {
+                                // Retrieve the event details for "onlineMeetingId" from the data store.
+                                TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetails);
+
+                                // If event details are found, update the "transcriptsId" and store them back.
+                                if (EventDetails != null)
+                                {
+                                    var OldEventDetails = EventDetails;
+
+                                    if (OldEventDetails.transcriptsId != TranscriptsId)
+                                    {
+                                        // Update the "transcriptsId" in the event details.
+                                        EventDetails.transcriptsId = TranscriptsId;
+
+                                        // Try to update the event details in the data store.
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// This action handles incoming HTTP POST requests for the "CreateSubscriptionRecordings" route.
+        /// It processes validation tokens and notifications related to online meetings and recordings.
+        /// </summary>
+        /// <param name="validationToken">A validation token, if provided as a query parameter.</param>
+        /// <returns>An ActionResult representing the HTTP response.</returns>
+        [Route("CreateSubscriptionRecordings")]
+        [HttpPost]
+        public async Task<ActionResult<string>> CreateSubscriptionRecordings([FromQuery] string validationToken = null)
+        {
+            // Handle validation: Check if a validation token is provided in the query parameter.
+            if (!string.IsNullOrEmpty(validationToken))
+            {
+                // Return the validation token as an OK response.
+                return Ok(validationToken);
+            }
+
+            // Handle notifications: Read and process incoming notifications.
+            using (StreamReader reader = new StreamReader(Request.Body))
+            {
+                string content = await reader.ReadToEndAsync();
+
+                // Deserialize the JSON content into a C# object of type "Notifications."
+                var notifications = JsonConvert.DeserializeObject<MeetingTranscriptRecording.Model.Notifications>(content);
+
+                if (notifications != null)
+                {
+                    // Check if notifications are not null and if the first item has "ODataId."
+                    if (notifications.Items[0].ResourceData.ODataId != null)
+                    {
+                        // Extract the start and end indexes for "onlineMeetingId" and "RecordingsId" in "ODataId."
+                        int startIndex = notifications.Items[0].ResourceData.ODataId.IndexOf("communications/onlineMeetings('");
+
+                        int endIndex = notifications.Items[0].ResourceData.ODataId.IndexOf("')/recordings('");
+
+                        // Ensure valid start and end indexes are found.
+                        if (startIndex >= 0 && endIndex >= 0)
+                        {
+                            // Extract "onlineMeetingId" from "ODataId."
+                            string onlineMeetingId = notifications.Items[0].ResourceData.ODataId.Substring(startIndex + "communications/onlineMeetings('".Length, endIndex - startIndex - "communications/onlineMeetings('".Length);
+
+                            // Extract "RecordingsId" from the notifications data.
+                            string RecordingsId = notifications.Items[0].ResourceData.Id;
+
+                            // Check if both "onlineMeetingId" and "RecordingsId" are not null.
+                            if (onlineMeetingId != null && RecordingsId != null)
+                            {
+                                // Retrieve the event details for "onlineMeetingId" from the data store.
+                                TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetails);
+
+                                // If event details are found, update the "recordingId" and store them back.
+                                if (EventDetails != null)
+                                {
+                                    var OldEventDetails = EventDetails;
+
+                                    if (OldEventDetails.recordingId != RecordingsId)
+                                    {
+                                        EventDetails.recordingId = RecordingsId;
+
+                                        // Try to update the event details in the data store.
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+            return Ok(); // Return an OK response to indicate that the processing was successful.
+        }
+
+
+        /// <summary>
+        /// Get Token for given tenant.
+        /// </summary>
+        /// <param name="tenantId"></param>
+        /// <returns></returns>
+        public async Task<string> GetToken()
+        {
+            try
+            {
+
+                IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(_configuration["AzureAd:MicrosoftAppId"])
+                                                  .WithClientSecret(_configuration["AzureAd:MicrosoftAppPassword"])
+                                                  .WithAuthority($"https://login.microsoftonline.com/{_configuration["AzureAd:TenantId"]}")
+                                                  .WithRedirectUri("https://daemon")
+                                                  .Build();
+
+                string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
+
+                var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+
+                return result.AccessToken;
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        /// <summary>
+        /// Handles incoming notifications for subscription events.
+        /// </summary>
+        /// <param name="validationToken">The validation token for subscription validation.</param>
+        /// <returns>An ActionResult representing the result of the operation.</returns>
+        [Route("CreateSubscriptionMeEventsPost")]
+        [HttpPost]
+        public async Task<ActionResult<string>> CreateSubscriptionMeEventsPost([FromQuery] string validationToken = null)
+        {
+            // handle validation
+            if (!string.IsNullOrEmpty(validationToken))
+            {
+                return Ok(validationToken);
+            }
+
+            // handle notifications
+            using (StreamReader reader = new StreamReader(Request.Body))
+            {
+                string content = await reader.ReadToEndAsync();
+
+                var notifications = JsonConvert.DeserializeObject<MeetingTranscriptRecording.Model.Notifications>(content);
+
+                var accessToken = await GetToken();
+
+                var BaseURL = _configuration["AzureAd:BaseURL"];
+
+                if (notifications != null && notifications.Items[0].Resource != null)
+                {
+                    string graphApiEndpointEvents = BaseURL + notifications.Items[0].Resource;
+
+                    var responseBody = await AuthHelper.GetApiData(graphApiEndpointEvents, accessToken);
+
+                    var responseData = JsonConvert.DeserializeObject<EventData>(responseBody);
+
+                    if (responseData != null)
+                    {
+                        if (responseData.isOnlineMeeting == true)
+                        {
+                            string joinUrl = responseData.onlineMeeting.joinUrl;
+
+                            string pattern = @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+
+                            // Use Regex.Match to find the first match
+                            Match match = Regex.Match(notifications.Items[0].Resource, pattern);
+
+                            string userId = match.Value;
+
+                            string graphApiEndpointJoinUrl = $"https://graph.microsoft.com/v1.0/users/" + userId + "/onlineMeetings?$filter=JoinWebUrl%20eq%20'" + joinUrl + "'";
+
+                            var responseBodyJoinUrl = await AuthHelper.GetApiData(graphApiEndpointJoinUrl, accessToken);
+
+                            var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
+
+                            if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
+                            {
+                                // MeetingId
+                                string onlineMeetingId = responseJoinUrlData.Value[0].id;
+
+                                TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetails);
+
+                                if (EventDetails != null)
+                                {
+                                    var OldEventDetails = EventDetails;
+
+                                    if (OldEventDetails.subject != responseData.subject)
+                                    {
+                                        EventDetails.subject = responseData.subject;
+
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+
+                                    if (OldEventDetails.start.ToString() != responseData.start.dateTime.ToString("MMM dd h:mm tt"))
+                                    {
+                                        EventDetails.start = responseData.start.dateTime.ToString("MMM dd h:mm tt");
+
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+
+                                    if (OldEventDetails.end.ToString() != responseData.end.dateTime.ToString("MMM dd h:mm tt"))
+                                    {
+                                        EventDetails.end = responseData.end.dateTime.ToString("MMM dd h:mm tt");
+
+                                        TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
+                                    }
+                                }
+
+                                string graphApiEndpointOnlineTranscripts = BaseURL + $"users/" + userId + $"/onlineMeetings/" + onlineMeetingId + "/transcripts";
+
+                                var responseBodyTranscripts = await AuthHelper.GetApiData(graphApiEndpointOnlineTranscripts, accessToken);
+
+                                var responseTranscriptsData = JsonConvert.DeserializeObject<transcriptsData>(responseBodyTranscripts);
+
+                                if (responseTranscriptsData != null && responseTranscriptsData.Value.Count > 0 && responseTranscriptsData.Value[0].id != null)
+                                {
+                                    string getTranscriptsId = responseTranscriptsData.Value[0].id;
+
+                                    TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetailsTranscript);
+
+                                    if (EventDetailsTranscript != null)
+                                    {
+                                        var OldEventDetailsTranscript = EventDetailsTranscript;
+
+                                        if (OldEventDetailsTranscript.transcriptsId != getTranscriptsId)
+                                        {
+                                            EventDetailsTranscript.transcriptsId = getTranscriptsId;
+
+                                            TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetailsTranscript, OldEventDetailsTranscript);
+                                        }
+                                    }
+                                }
+
+                                string graphApiEndpointOnlineRecordings = BaseURL + $"users/" + userId + $"/onlineMeetings/" + onlineMeetingId + "/recordings";
+
+                                var responseBodyRecordings = await AuthHelper.GetApiData(graphApiEndpointOnlineRecordings, accessToken);
+
+                                var responseRecordingsData = JsonConvert.DeserializeObject<RecordingData>(responseBodyRecordings);
+
+                                if (responseRecordingsData != null && responseRecordingsData.Value.Count > 0 && responseRecordingsData.Value[0].id != null)
+                                {
+                                    string getRecordingId = responseRecordingsData.Value[0].id;
+
+                                    TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetailsRecord);
+
+                                    if (EventDetailsRecord != null)
+                                    {
+                                        var OldEventDetailsRecord = EventDetailsRecord;
+
+                                        if (OldEventDetailsRecord.recordingId != getRecordingId)
+                                        {
+                                            EventDetailsRecord.recordingId = getRecordingId;
+
+                                            TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetailsRecord, OldEventDetailsRecord);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+            return Ok();
+        }
+
+
+
     }
+
 }

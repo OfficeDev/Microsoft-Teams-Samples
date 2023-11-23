@@ -19,12 +19,16 @@ function RecordingTranscript() {
     // State variable to control the loading of transcripts data
     const [loadTranscriptsData, setLoadTranscriptsData] = useState();
 
+    // State variable to manage loading state for a general operation.
     const [loading, setLoading] = useState(false);
 
+    // State variable to manage loading state specifically for transcripts.
     const [loadingTranscripts, setLoadingTranscripts] = useState(false);
 
+    // State variable to manage loading state specifically for recordings.
     const [loadingRecording, setLoadingRecording] = useState(false);
 
+    // A ref to store a reference to a video element, allowing direct manipulation in the DOM.
     const videoRef = useRef(null);
 
     // Initialize the component and extract query parameters when it mounts
