@@ -88,10 +88,17 @@ function getServerSideToken(clientSideToken) {
                             if (JSON.parse(responseJson).error)
                                 reject(JSON.parse(responseJson).error);
                         } else if (responseJson) {
-                            accessToken = responseJson;
-                            console.log("Exchanged token: " + accessToken);
-                            getUserInfo(context.user.userPrincipalName);
-                            getPhotoAsync(accessToken);
+                            if (responseJson == "invalid_grant") {
+                                console.log("error" + responseJson);
+                                $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+                                $("#diverror").show();
+                                $("#consent").show();
+                            }
+                            else {
+                                accessToken = responseJson;
+                                getUserInfo(context.user.userPrincipalName);
+                                getPhotoAsync(accessToken);
+                            }
                         }
                     });
             }
