@@ -1,0 +1,103 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+      {
+          "type": "TextBlock",
+          "text": "[${post.title}](${post.link})",
+          "size": "Large",
+          "wrap": true,
+          "maxLines": 2
+      },
+      {
+          "type": "ColumnSet",
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": "Auto",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "↑ ${post.score}"
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": "Auto",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "🗨️ [${post.numComments}](https://www.reddit.com/r/${post.subreddit}/comments/${post.id})"
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": "Stretch",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "/r/${post.subreddit}",
+                          "horizontalAlignment": "Right",
+                          "size": "Default",
+                          "weight": "Bolder"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "type": "Image",
+          "$when": "${post.thumbnail!=null}",
+          "url": "${post.thumbnail}",
+          "horizontalAlignment": "Center",
+          "separator": true
+      },
+      {
+          "type": "TextBlock",
+          "$when": "${post.thumbnail==null}",
+          "text": "${if(post.selfText, post.selfText, 'Preview Not Available')}",
+          "wrap": true,
+          "separator": true
+      },
+      {
+          "type": "ColumnSet",
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": "Auto",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "Posted by [/u/${post.author}](https://www.reddit.com/u/${post.author})",
+                          "size": "Small",
+                          "weight": "Lighter"
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": "Auto",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "DATE(${post.created})",
+                          "horizontalAlignment": "Right",
+                          "size": "Small",
+                          "weight": "Lighter"
+                      }
+                  ]
+              }
+          ]
+      }
+  ],
+  "actions": [
+      {
+          "type": "Action.OpenUrl",
+          "title": "Open in Reddit",
+          "url": "${post.link}"
+      }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

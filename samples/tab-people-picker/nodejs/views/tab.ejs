@@ -7,18 +7,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#defaultSelected").hide();
-            $("#allMemberOfOrganisationSelected").hide();
-            $("#singleSelected").hide();
+            microsoftTeams.app.initialize().then(() => {
+                $("#defaultSelected").hide();
+                $("#allMemberOfOrganisationSelected").hide();
+                $("#singleSelected").hide();
+            });
         });
 
         let aadId;
-        microsoftTeams.app.initialize();
+        
         microsoftTeams.app.getContext().then(function (context) {
             aadId = context.user.id
         })
 
-        // People picker api call.
+            // People picker api call.
         function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
             var id = $(e.currentTarget).attr('data-id');
 
@@ -26,7 +28,7 @@
                 setSelected = [aadId];
             }
 
-             microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
                     if (people) {
                     let peopleData = JSON.stringify(people);
 
@@ -56,6 +58,7 @@
                     }
                 });
         }
+    
     </script>
     <style>
         #mainDiv {

@@ -195,6 +195,10 @@ jobs:
             - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
               name: 'msgext-message-reminder'
               version: '6.0.x'
+              
+            - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO.csproj'
+              name: 'msgext-search-sso-config'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
               name: 'tab-channel-group-config-page-auth'
@@ -446,6 +450,10 @@ jobs:
 
             - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/MsgextUnfurlingAcLoop.csproj'
               name: 'msgext-unfurling-ac-loop-components'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/MeetingTranscriptRecording.csproj'
+              name: 'tab-meeting-transcript-recording'
               version: '6.0.x'
 
       fail-fast: false
@@ -989,6 +997,14 @@ jobs:
 
             - project_path: 'samples/tab-add-in-combined/nodejs'
               name: 'tab-add-in-combined'
+              version: '18.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs'
+              name: 'tab-meeting-transcript-recording'
+              version: '18.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
+              name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
 
       fail-fast: false

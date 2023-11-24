@@ -1,7 +1,7 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
     getClientSideToken()
         .then((clientSideToken) => {    
             return getServerSideToken(clientSideToken);
@@ -17,6 +17,7 @@ $(document).ready(function () {
                 console.log("Authentication failed.")
             }
         });
+    });
 });
 
 function requestConsent() {

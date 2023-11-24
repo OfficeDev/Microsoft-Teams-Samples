@@ -6,7 +6,7 @@
 }
 
 <script>
-    microsoftTeams.app.initialize();
+microsoftTeams.app.initialize().then(() => {
     function validateForm() {
         var feedbackInfo = {
             Topic: '@Model.Topic',
@@ -15,6 +15,7 @@
         microsoftTeams.tasks.submitTask(feedbackInfo);
         return true;
     }
+ });
 </script>
 
 <div class="login"  style="color:aliceblue;font-family:'Segoe UI';text-align:left">

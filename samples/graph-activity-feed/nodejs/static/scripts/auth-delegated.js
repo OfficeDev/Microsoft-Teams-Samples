@@ -1,7 +1,8 @@
 
 // method invoked on sso authentication.
 function login() {
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
+    });
 
     getClientSideToken()
         .then((clientSideToken) => {

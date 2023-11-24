@@ -11,12 +11,13 @@
 
     // Select the reciepient for activity feed notifications
     function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
-        microsoftTeams.app.initialize();
-        microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
-            if (people) {
-                let reciepientUserId = people[0].objectId;
-                getInstalledAppList(reciepientUserId)
-            }
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+                    let reciepientUserId = people[0].objectId;
+                    getInstalledAppList(reciepientUserId)
+                }
+            });
         });
     }
 

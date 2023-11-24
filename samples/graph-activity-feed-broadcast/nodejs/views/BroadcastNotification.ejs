@@ -58,7 +58,8 @@
                 $('#task-submitted').hide();
             });
 
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
         var userId;
         var userName;
 

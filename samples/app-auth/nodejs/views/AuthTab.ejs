@@ -36,7 +36,8 @@
         crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
 
         // Trying to silently login using SSO
         showUserInformationUsingSSO();

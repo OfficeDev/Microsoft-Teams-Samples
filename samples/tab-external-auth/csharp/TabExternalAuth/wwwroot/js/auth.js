@@ -1,6 +1,7 @@
 ﻿// Initialize the teams js sdk
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
+    });
 });
 
 // Function to fetch user's google profile details

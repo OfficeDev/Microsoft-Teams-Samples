@@ -72,7 +72,6 @@ const SidePanel = (props) => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-        microsoftTeams.app.initialize();
         (async function () {
 
             let connection;

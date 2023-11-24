@@ -36,10 +36,9 @@
         "npm-auth": "^1.1.0",
         "q": "^1.5.1",
         "request": "^2.88.2",
-        "restify": "~8.5.1",
+        "restify": "^10.0.0",
         "socket.io": "^4.0.0",
         "string-format": "^2.0.0",
-        "swiper": "^8.4.5",
         "url": "^0.11.0"
     },
     "devDependencies": {

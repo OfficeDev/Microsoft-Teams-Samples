@@ -1,5 +1,6 @@
 // Initialize the library.
-microsoftTeams.app.initialize();
+microsoftTeams.app.initialize().then(() => {
+});
 
 // Select people for fetching the attendees.
 function selectPeople() {

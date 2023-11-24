@@ -1,6 +1,6 @@
-(function() {
+(async function() {
     'use strict';
-    microsoftTeams.app.initialize();
+    await microsoftTeams.app.initialize();
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
@@ -64,26 +64,26 @@
 
     // Method invoked on sso authentication.
     getClientSideToken()
-        .then((clientSideToken) => {
-            return getServerSideToken(clientSideToken);
-        })
-        .catch((error) => {
-            if (error === "invalid_grant") {
-                console.log(`Error: ${error} - user or admin consent required`);
-                // Display in-line button so user can consent
-                requestConsent()
-                    .then((result) => {
-                        getClientSideToken()
-                            .then((clientSideToken) => {
-                                return getServerSideToken(clientSideToken);
-                            })
-                    })
-                    .catch((error) => {
-                        console.log(`ERROR ${error}`);
-                    });
-            } else {
-                // Something else went wrong
-                console.log(`Error from web service: ${error}`);
-            }
-        });
+    .then((clientSideToken) => {
+        return getServerSideToken(clientSideToken);
+    })
+    .catch((error) => {
+        if (error === "invalid_grant") {
+            console.log(`Error: ${error} - user or admin consent required`);
+            // Display in-line button so user can consent
+            requestConsent()
+                .then((result) => {
+                    getClientSideToken()
+                        .then((clientSideToken) => {
+                            return getServerSideToken(clientSideToken);
+                        })
+                })
+                .catch((error) => {
+                    console.log(`ERROR ${error}`);
+                });
+        } else {
+            // Something else went wrong
+            console.log(`Error from web service: ${error}`);
+        }
+    });
 })();

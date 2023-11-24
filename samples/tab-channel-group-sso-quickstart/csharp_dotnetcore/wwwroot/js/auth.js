@@ -1,9 +1,8 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-
-    getClientSideToken()
+    microsoftTeams.app.initialize().then(() => {
+        getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
@@ -21,6 +20,7 @@ $(document).ready(function () {
                 $("#consent").show();
             }
         });
+    });
 });
 
 function requestConsent() {
