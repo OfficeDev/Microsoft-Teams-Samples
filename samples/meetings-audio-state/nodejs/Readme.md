@@ -21,9 +21,13 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
 ## Included Features
 * Meeting SidePanel
 * RSC Permissions
+* Teams Themes handler 
 
-## Interaction with bot
+## Interaction with Tab
 ![mute-unmute](Images/mute-unmute-audiostate.gif)
+
+## Handling Themes (Light/Dark/Contrast)
+![mute-unmute](Images/ThemesHandler.gif)
 
 ## Prerequisites
 
@@ -124,12 +128,22 @@ Toggle button to mute state its looks like below.
 Toggle button to Unmute state it will unmute client audio.
 ![Stage 3](Images/ToggleUnMute.png)
 
+4. **Dark Theme**
+App theme changes to dark when Teams theme switch to dark .
+![Dark](Images/dark.PNG)
+
+5. **Light Theme**
+App theme changes to light when Teams theme switch to light .
+![Light](Images/light.PNG)
+
+6. **Contrast Theme**
+App theme changes to contrast when Teams theme switch to contrast .
+![Contrast](Images/contrast.PNG)
 
 ## Further reading
 
 - [Toggle incoming audio](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#toggle-incoming-audio)
 - [Get incoming audio speaker](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#get-incoming-audio-speaker)
-
-
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-audio-state-nodejs" />

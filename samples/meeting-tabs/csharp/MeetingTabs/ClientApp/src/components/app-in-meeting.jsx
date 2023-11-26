@@ -3,33 +3,27 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Button } from '@fluentui/react-components';
+import "../index.css";
 
-class AppInMeeting extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            errorCode: "",
-            result: ""
-        }
-    }
+const AppInMeeting = () => {
+    let app = microsoftTeams.app;
+    app.initialize();
 
-    //Allows us to execute the React code when the component is already placed in the DOM.
-    async componentDidMount() {
-        await microsoftTeams.app.initialize();
-    }
+    const [appTheme, setAppTheme] = useState("");
+    const [result, setResult] = useState(false);
 
     // First callback
     // function with two
     // arguments error and data
-    callback = (errcode, bln) => {
+    const callback = (errcode, bln) => {
         if (errcode) {
-            this.setState({ errorCode: JSON.stringify(errcode) })
+            setResult(JSON.stringify(errcode))
         }
         else {
-            this.setState({ result: JSON.stringify(bln) })
+            setResult(JSON.stringify(bln))
         }
     }
 
@@ -37,20 +31,20 @@ class AppInMeeting extends Component {
     /// This method getIncomingClientAudioState returns the current state of client audio.
     /// The incoming audio is muted if the result is true and unmuted if the result is false.
     /// </summary>
-    ClientAudioState = () => {
-        microsoftTeams.meeting.getIncomingClientAudioState(this.callback);
+    const ClientAudioState = () => {
+        microsoftTeams.meeting.getIncomingClientAudioState(callback);
     }
 
     /// <summary>
     /// This method toggleIncomingClientAudio which toggles mute/unmute to client audio.
     /// Setting for the meeting user from mute to unmute or vice-versa.
     /// </summary>
-    toggleState = () => {
-        microsoftTeams.meeting.toggleIncomingClientAudio(this.callback);
+    const toggleState = () => {
+        microsoftTeams.meeting.toggleIncomingClientAudio(callback);
     }
 
     // Share the content to meeting stage view.
-    shareSpecificPart = () => {
+    const shareSpecificPart = () => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
             appContentUrl = `${window.location.origin}/shareview?meetingId=${context.meeting.id}`;
@@ -68,24 +62,59 @@ class AppInMeeting extends Component {
         });
     };
 
-    render() {
-        return (
-            <>
-                <div>
-                    <div className="tag-container">
-                        <h3>Share To Stage View</h3>
-                        <Button appearance="primary" onClick={this.shareSpecificPart} >Share</Button>
-                    </div>
-                </div>
-                <div>
-                    <div className="tag-container">
-                        <h3>Mute/Unmute Audio Call </h3>
-                        <Button appearance="primary" onClick={this.toggleState} >Mute/Un-Mute</Button>
-                        <li className="break"> Mute State: <b>{this.state.result}</b></li>
-                    </div>
-                </div>
-            </>
-        )
-    }
+    React.useEffect(() => {
+        app.initialize().then(app.getContext).then((context) => {
+            app.notifySuccess();
+
+            // Applying default theme from app context property
+            switch (context.app.theme) {
+                case 'dark':
+                    setAppTheme("theme-dark");
+                    break;
+                case 'contrast':
+                    setAppTheme("theme-contrast");
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+                default:
+                    return setAppTheme('theme-dark');
+            }
+
+            // Handle app theme when 'Teams' theme changes
+            microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                switch (theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
+                }
+            });
+        }).catch(function (error) {
+            console.log(error, "Could not register handlers.");
+        });
+    }, []);
+
+    return (
+        <div className={appTheme}>
+            <div>
+                <h3>Share To Stage View</h3>
+                <Button appearance="primary" onClick={shareSpecificPart} >Share</Button>
+            </div>
+            <div>
+                <h3>Mute/Unmute Audio Call </h3>
+                <Button appearance="primary" onClick={toggleState} >Mute/Un-Mute</Button>
+                <li className="break"> Mute State: <b>{result}</b></li>
+            </div>
+        </div>
+    )
 }
+
 export default AppInMeeting
