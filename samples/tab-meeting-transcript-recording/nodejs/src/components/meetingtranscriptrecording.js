@@ -199,9 +199,6 @@ const MeetingTranscriptRecording = () => {
                             setIsConsentButtonVisible(true);
                             setIsLoginVisible(false);
                             setLoading(false);
-                        }
-                        if (data) {
-                            return;
                         } else {
                             return;
                         }
