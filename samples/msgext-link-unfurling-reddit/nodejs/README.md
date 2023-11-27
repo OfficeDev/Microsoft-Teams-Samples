@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- csharp
+- nodejs
 extensions:
  contentType: samples
  createdDate: "10/27/2023 01:38:27 PM"
