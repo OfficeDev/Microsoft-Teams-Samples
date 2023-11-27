@@ -31,7 +31,6 @@ const MeetingTranscriptRecording = () => {
 
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
-
     // Builds the SignalR connection, mapping it to /chatHub
     // Initializes a new instance of the HubConnectionBuilder class.
     useEffect(() => {
@@ -42,7 +41,6 @@ const MeetingTranscriptRecording = () => {
 
         setConnection(newConnection);
     }, []);
-
 
     // Starts the SignalR connection
     useEffect(() => {
@@ -58,8 +56,6 @@ const MeetingTranscriptRecording = () => {
                 .catch(e => console.log('Connection failed: ', e));
         }
     }, [connection]);
-
-
 
     // Tab sso authentication.
     const ssoAuthentication = () => {
@@ -141,7 +137,6 @@ const MeetingTranscriptRecording = () => {
                     });
             });
     }
-
 
     const meetingTranscriptsIdRecordingId = (clientSideToken, onlineMeetingId) => {
         microsoftTeams.app.getContext().then((context) => {
