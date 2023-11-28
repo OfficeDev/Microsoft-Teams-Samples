@@ -77,13 +77,6 @@ namespace TabRequestApproval.Controllers
             return View("Request");
         }
 
-        // Redirect to auth page.
-        [Route("TabAuth")]
-        public ActionResult Auth()
-        {
-            return View("TabAuth");
-        }
-
         // Send notification to manager about request.
         [HttpPost]
         [Route("SendNotificationToManager")]
