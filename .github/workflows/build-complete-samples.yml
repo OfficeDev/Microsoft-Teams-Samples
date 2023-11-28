@@ -1007,6 +1007,10 @@ jobs:
               name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
 
+            - project_path: 'samples/bot-tag-mention/nodejs'
+              name: 'bot-tag-mention-nodejs'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
