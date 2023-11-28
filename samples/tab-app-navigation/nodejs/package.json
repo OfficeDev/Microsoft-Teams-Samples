@@ -1,6 +1,6 @@
 {
   "name": "tabappnavigation",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.9.1",
