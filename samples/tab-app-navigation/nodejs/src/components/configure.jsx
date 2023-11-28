@@ -25,6 +25,7 @@ const Configure = props => {
             });
 
             microsoftTeams.pages.config.setValidityState(true);
+
         });
     }, []);
     return (
