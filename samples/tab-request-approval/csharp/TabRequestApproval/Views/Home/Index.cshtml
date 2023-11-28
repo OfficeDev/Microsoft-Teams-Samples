@@ -26,14 +26,15 @@
             $('#task-submitted').hide();
         });
 
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
 
-        microsoftTeams.getContext(function (context) {
-            username = context.upn;
-            userId = context.userObjectId;
+        microsoftTeams.app.getContext().then((context) => {
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
 
             if(context.subEntityId!="" && context.subEntityId!= undefined)
             {
@@ -89,12 +90,12 @@
                 var i;
                 for (i = 0; i < userList.length; i++) {
                     $('#task-list-table-user').append(`<tr style="padding:1px" >
-                                                                                                <td style="margin-left:1px"> ${i+1} </td>
-                                                                                                <td style="margin-left:1px"> ${userList[i].title} </td>
-                                                                                                <td style="margin-left:1px"> ${userList[i].description} </td>
-                                                                                                <td style="margin-left:1px"> ${userList[i].personaName} </td>
-                                                                                                <td style="margin-left:1px"> ${userList[i].status} </td>
-                                                                                                </tr>`
+                        <td style="margin-left:1px"> ${i+1} </td>
+                        <td style="margin-left:1px"> ${userList[i].title} </td>
+                        <td style="margin-left:1px"> ${userList[i].description} </td>
+                        <td style="margin-left:1px"> ${userList[i].personaName} </td>
+                        <td style="margin-left:1px"> ${userList[i].status} </td>
+                        </tr>`
                     );
                 };
             }
@@ -122,17 +123,17 @@
                 var i;
                 for (i = 0; i < managerList.length; i++) {
                     $('#task-list-table-manager').append(`<tr style="padding:1px">
-                                                                                                 <td>${i+1}</td>
-                                                                                                 <td>${managerList[i].title}</td>
-                                                                                                 <td>${managerList[i].description}</td>
-                                                                                                 <td>${managerList[i].userName}</td>
-                                                                                                 <td style="padding:5px">
-                                                                                                 <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "ApproveRequest(event)"> Approve </button>
-                                                                                                 </td>
-                                                                                                 <td style="padding:5px">
-                                                                                                 <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "RejectRequest(event)"> Reject </button>
-                                                                                                 </td>
-                                                                                                 </tr>`
+                        <td>${i+1}</td>
+                        <td>${managerList[i].title}</td>
+                        <td>${managerList[i].description}</td>
+                        <td>${managerList[i].userName}</td>
+                        <td style="padding:5px">
+                        <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "ApproveRequest(event)"> Approve </button>
+                        </td>
+                        <td style="padding:5px">
+                        <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "RejectRequest(event)"> Reject </button>
+                        </td>
+                        </tr>`
                     );
                 };
             }
@@ -222,7 +223,6 @@
     <script>
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
-                //$("#defaultSelected").hide();
             });
         });
 
