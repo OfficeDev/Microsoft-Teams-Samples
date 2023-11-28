@@ -132,14 +132,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 19. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
-   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
-   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
+   - `{MicrosoftAppId}` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `{TenantId}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `{MicrosoftAppPassword}` - Generated from Step 14, also referred to as Client secret
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
    - Press `F5` to run the project
 	 
 20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
+   - `{MicrosoftAppId}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
