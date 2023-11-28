@@ -35,7 +35,9 @@
         microsoftTeams.app.getContext().then((context) => {
             username = context.user.userPrincipalName;
             userId = context.user.id;
+        });
 
+        microsoftTeams.getContext(function (context) {
             if(context.subEntityId!="" && context.subEntityId!= undefined)
             {
                 let taskInfo = {

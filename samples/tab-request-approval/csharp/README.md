@@ -157,26 +157,53 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Running the sample
 
-User Persona:
+- Install App User-1
 
-- Send request to the manger for task approval.
+![InstallAppUser1](TabRequestApproval/Images/1.InstallAppUser.png)
 
-![Request from user](TabRequestApproval/Images/TaskRequest.png)
+- Create Task
 
-- Request status
+![CreateTask](TabRequestApproval/Images/3.CreateTask.png)
 
-![Request status](TabRequestApproval/Images/RequestStatus.png)
+- Task Details
 
-Manager Persona:
+![TaskDetails](TabRequestApproval/Images/4.RequestTo.png)
 
-- Activity feed notification of approval request.
+- All Person
 
-![Notification](TabRequestApproval/Images/RequestNotification.png)
+![TaskDetails](TabRequestApproval/Images/5.SelectPerson.png)
 
-- Pending task approval request.
+- Select a Person
 
-![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+![TaskDetails](TabRequestApproval/Images/6.SelectOnePerson.png)
 
+- Create task Details
+
+![CreateTaskDetails](TabRequestApproval/Images/7.CreateTaskDetails.png)
+
+- Install App User-2
+
+![InstallAppUser2](TabRequestApproval/Images/2.InstallAppUser.png)
+
+- Send Request
+
+![SendRequest](TabRequestApproval/Images/12.SendReq.png)
+
+- On click of notification a task module will open, redirecting the user to the request.
+
+![SendRequest](TabRequestApproval/Images/8.Activity.png)
+
+- User-1 My Request 
+
+![SendRequest](TabRequestApproval/Images/9.User1MyRequestDetails.png)
+
+- User-2 My Pending Approvals 
+
+![SendRequest](TabRequestApproval/Images/10.User2PendingRequestDetails.png)
+
+- User-1 Approved Status
+
+![SendRequest](TabRequestApproval/Images/11.ApprovedReq.png)
 
 ## Further reading
 
