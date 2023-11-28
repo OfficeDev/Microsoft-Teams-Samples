@@ -10,6 +10,8 @@ import './index.css';
 
 function TabAppNavigation() {
     let app = microsoftTeams.app;
+    let externalAppId = "<<External-App-Id>>"; // Optional - you can get the external appId from teams admin portal.
+
 
     React.useEffect(() => {
         app.initialize().then(app.getContext).then((context: any) => {
@@ -28,7 +30,7 @@ function TabAppNavigation() {
             }
             else {
                 const navPromise = pages.navigateToApp({
-                    appId: "", pageId: "tab_one"
+                    appId: externalAppId, pageId: "tab_one" 
                 });
                 navPromise.
                     then((result) => console.log("Navigation Successfull", result)).

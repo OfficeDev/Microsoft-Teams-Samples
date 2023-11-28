@@ -9,6 +9,7 @@ import { pages } from "@microsoft/teams-js";
 
 function TabOne() {
     let app = microsoftTeams.app;
+    let externalAppId = "<<External-App-Id>>"; // Optional - you can get the external appId from teams admin portal. 
 
     React.useEffect(() => {
         app.initialize().then(app.getContext).then((context: any) => {
@@ -27,7 +28,7 @@ function TabOne() {
             }
             else {
                 const navPromise = pages.navigateToApp({
-                    appId: "", pageId: "tab_two"
+                    appId: externalAppId, pageId: "tab_two"
                 });
                 navPromise.
                     then((result) => console.log("Navigation Successfull", result)).
@@ -47,7 +48,7 @@ function TabOne() {
             }
             else {
                 console.log("Capability is not supported");
-                const navPromise = pages.navigateToApp({ appId: "", pageId: "default_tab", subPageId: "" });
+                const navPromise = pages.navigateToApp({ appId: externalAppId, pageId: "default_tab", subPageId: "" });
                 navPromise.
                     then((result) => { console.log("Navigation Successfull", result) }).
                     catch((error) => { console.log("error", error) });
