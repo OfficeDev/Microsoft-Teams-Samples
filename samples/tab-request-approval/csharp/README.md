@@ -103,11 +103,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-	Again
-	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
+    * Select **Single page application**.
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token
     ✔ Access Token
