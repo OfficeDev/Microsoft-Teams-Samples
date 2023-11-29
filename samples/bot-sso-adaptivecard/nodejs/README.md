@@ -97,7 +97,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 2. Navigate to samples\bot-sso-adaptivecard\nodejs\Resources\AdaptiveCardWithSSOInRefresh.json
    - *Update everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and Update On line 12, replace `<<YOUR-CONNECTION-NAME>>`.
 3. Navigate to samples\bot-sso-adaptivecard\nodejs\Resources\options.json and replace `<<YOUR-MICROSOFT-APP-ID>>`.
-4. Navigate to samples\bot-sso-adaptivecard\nodejs\index.js file uncomment the code at line number 32 for local debugging.
+4. Navigate to samples\bot-sso-adaptivecard\nodejs\index.js file uncomment the code at line number 46 for local debugging.
 
 - Run your bot at the command line:
 
