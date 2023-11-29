@@ -27,7 +27,6 @@ function RecordingTranscript() {
 
     const videoRef = useRef(null);
 
-
     // Initialize the component and extract query parameters when it mounts
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
@@ -144,7 +143,7 @@ function RecordingTranscript() {
                 <div className="divRecording">
                 {loadingRecording ? (
                             <div style={{ paddingTop: '20%' }}>
-                                <Spinner label="Loading..." size="small" />
+                                <Spinner label="Loading Recordings..." size="small" />
                             </div>
                         ) :
                     <video ref={videoRef} className="videoPlay" controls />}
@@ -153,10 +152,10 @@ function RecordingTranscript() {
                     <h4>Transcripts</h4>
                     {loadingTranscripts ? (
                                 <div className='container'>
-                                    <Spinner label="Loading..." size="small" />
+                                    <Spinner label="Loading Transcript..." size="small" />
                                 </div>
                             ) :
-                    <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData}}/>}
+                    <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />}
                 </div>
             </div>
         </div>
