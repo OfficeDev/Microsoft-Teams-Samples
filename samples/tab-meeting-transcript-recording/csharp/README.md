@@ -67,6 +67,7 @@ This sample shows meeting transcripts and recordings.
   12. Navigate to **API Permissions**, and make sure to add the follow permissions:
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
+  -   Select Microsoft Graph -\> Application permissions.
 
       ![Login-In ](MeetingTranscriptRecording/Images/Permissions.png)
 
@@ -78,6 +79,10 @@ This sample shows meeting transcripts and recordings.
       * Select **Single-page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
   14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+  15.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
+  -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+
+      ![Policy ](MeetingTranscriptRecording/Images/Policy.png)
 
 ## Setup 
 
@@ -167,9 +172,21 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](MeetingTranscriptRecording/Images/PermissionsRequested.png)
 
+**Sign-In Loading:**
+
+![Login-In ](MeetingTranscriptRecording/Images/LoginInLoading.png)
+
 **Meeting Detail Page:**
 
 ![Home](MeetingTranscriptRecording/Images/Home.png)
+
+**Get Notification:**
+
+![Notification](MeetingTranscriptRecording/Images/GetNotification.png)
+
+**Loading Meetings, Fetching Transcript and Recordings:**
+
+![RecordingTranscriptForm](MeetingTranscriptRecording/Images/RecordingTranscriptFormLoading.png)
 
 **Recording and Transcript Form:**
 

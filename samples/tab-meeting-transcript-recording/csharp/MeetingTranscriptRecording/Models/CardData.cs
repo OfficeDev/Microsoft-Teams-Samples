@@ -26,6 +26,8 @@ namespace MeetingTranscriptRecording.Models
         public string organizer { get; set; }
 
         public bool condition { get; set; }
+
+        public bool signalRCondition { get; set; }
     }
 
     /// <summary>
@@ -36,6 +38,11 @@ namespace MeetingTranscriptRecording.Models
         public string meetingId { get; set; }
 
         public string transcriptsId { get; set; }
+    }
+
+    public class MeetingIdRequestBody
+    {
+        public string meetingId { get; set; }
     }
 
     /// <summary>

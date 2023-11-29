@@ -19,12 +19,16 @@ function RecordingTranscript() {
     // State variable to control the loading of transcripts data
     const [loadTranscriptsData, setLoadTranscriptsData] = useState();
 
+    // State variable to manage loading state for a general operation.
     const [loading, setLoading] = useState(false);
 
+    // State variable to manage loading state specifically for transcripts.
     const [loadingTranscripts, setLoadingTranscripts] = useState(false);
 
+    // State variable to manage loading state specifically for recordings.
     const [loadingRecording, setLoadingRecording] = useState(false);
 
+    // A ref to store a reference to a video element, allowing direct manipulation in the DOM.
     const videoRef = useRef(null);
 
     // Initialize the component and extract query parameters when it mounts
@@ -198,7 +202,7 @@ function RecordingTranscript() {
         <div>
             {loading ? (
                 <div className="loadingIcon">
-                    <Spinner label="Loading..." size="large" />
+                    <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
                 </div>
             ) : (
                 <div>
@@ -211,7 +215,7 @@ function RecordingTranscript() {
                     <div class="mainRecordTrans">
                         {loadingRecording ? (
                             <div className="loadingIconRecordings">
-                                <Spinner label="Loading..." size="small" />
+                                    <Spinner label="Loading Recordings..." size="small" />
                             </div>
                         ) : (
                             <div className="divRecording">
@@ -222,7 +226,7 @@ function RecordingTranscript() {
                             <h4>Transcripts</h4>
                             {loadingTranscripts ? (
                                 <div>
-                                    <Spinner label="Loading..." size="small" />
+                                        <Spinner label="Loading Transcript..." size="small" />
                                 </div>
                             ) : (
                                 <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />
