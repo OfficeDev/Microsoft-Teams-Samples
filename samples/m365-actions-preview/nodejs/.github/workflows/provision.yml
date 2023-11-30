@@ -1,0 +1,69 @@
+# This is just an example workflow for provisioning resources.
+# You should customize it to meet your own requirements.
+name: 'Provision Resources'
+on:
+  workflow_dispatch:
+
+jobs:
+  provisionResources:
+    runs-on: ubuntu-latest
+    # You can uncomment the line below to use environments (refer to https://docs.github.com/en/actions/reference/environments). 
+    # environment: test_environment
+    env:
+      M365_ACCOUNT_NAME: ${{secrets.M365_ACCOUNT_NAME}}
+      M365_ACCOUNT_PASSWORD: ${{secrets.M365_ACCOUNT_PASSWORD}}
+      # To specify the env name for multi-env feature.
+      TEAMSFX_ENV_NAME: dev
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Login Azure by service principal 
+        uses: OfficeDev/teamsfx-cli-action@v1
+        with:
+          commands: account login azure 
+          service-principal: true
+          username: ${{secrets.AZURE_SERVICE_PRINCIPAL_NAME}}
+          password: ${{secrets.AZURE_SERVICE_PRINCIPAL_PASSWORD}}
+          tenant: ${{secrets.AZURE_TENANT_ID}}
+
+      # We suggest to do the `teamsfx provision` step manually or in a separate workflow. The following steps are for your reference.
+      # After provisioning, you should commit necessary files into the repository which is automated in this workflow.
+      - name: Provision hosting environment
+        uses: OfficeDev/teamsfx-cli-action@v1
+        with:
+          commands: provision
+          env: ${{env.TEAMSFX_ENV_NAME}} 
+          subscription: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          sql-admin-name: ${{secrets.SQL_ADMIN_NAME}}
+          sql-password: ${{secrets.SQL_PASSWORD}}
+
+      # Create Todo Table if not existing
+      # Install sqlcmd
+      - name: Install a SQL Server suite of tools
+        uses: potatoqualitee/mssqlsuite@v1
+        with:
+          install: sqlclient
+
+      - name: Set SQL_ENDPOINT and DB_NAME
+        id: set-sql
+        run: |
+          sqlEndpoint=`node ./extract.js ${TEAMSFX_ENV_NAME} fx-resource-azure-sql sqlEndpoint`
+          echo "::set-output name=SQL_ENDPOINT::${sqlEndpoint}"
+          databaseName=`node ./extract.js ${TEAMSFX_ENV_NAME} fx-resource-azure-sql databaseName`
+          echo "::set-output name=DB_NAME::${databaseName}"
+ 
+      - name: Create Todo Table
+        env:
+          SQL_ADMIN_NAME: ${{ secrets.SQL_ADMIN_NAME }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+          SQL_ENDPOINT: ${{ steps.set-sql.outputs.SQL_ENDPOINT}}
+          DB_NAME: ${{ steps.set-sql.outputs.DB_NAME}}
+        run: |
+           sqlcmd -S ${SQL_ENDPOINT} -d ${DB_NAME} -U ${SQL_ADMIN_NAME} -P ${SQL_PASSWORD} -i ./create_table.sql
+
+      - name: Commit necessary files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: commit provision configs"
+          file_pattern: .fx/states/state.${{env.TEAMSFX_ENV_NAME}}.json

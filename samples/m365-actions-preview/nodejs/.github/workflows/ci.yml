@@ -1,0 +1,34 @@
+# This is just an example workflow for continuous integration.
+# You should customize it to meet your own requirements.
+name: 'Continuous Integration'
+on:
+  # When new commits are pushed onto the dev branch.
+  push:
+    branches:
+      - dev
+jobs:
+  buildAndTest:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Setup environment.
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        
+      # Build the project.
+      # The way to build the current project depends on how you scaffold it.
+      # Different folder structures require different commands set.
+      # 'npm ci' is used here to install dependencies and it depends on package-lock.json.
+      # If you prefer to use 'npm ci', please make sure to commit package-lock.json first, or just change it to 'npm install'.
+      - name: Build the project
+        run: cd tabs && npm install && npm run build 
+
+      # Run unit test.
+      # Currently, no opinioned solution for unit test provided during scaffolding, so,
+      # set up any unit test framework you prefer (for example, mocha or jest) and update the commands accordingly in below.
+      - name: Run Unit Test
+        run: echo "Run your unit test" 

@@ -1,0 +1,74 @@
+# This is just an example workflow for continuous deployment.
+# You should customize it to meet your own requirements.
+name: 'Continuous Deployment'
+on:
+  # When new commits are pushed onto the main branch.
+  push:
+    branches:
+      - main
+
+jobs:
+  buildAndDeploy:
+    runs-on: ubuntu-latest
+    # You can uncomment the line below to use environments (refer to https://docs.github.com/en/actions/reference/environments). 
+    # environment: test_environment
+    env:
+      # To specify the env name for multi-env feature.
+      TEAMSFX_ENV_NAME: dev
+    steps:
+      # Setup environment.
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        
+      # Build the project.
+      # The way to build the current project depends on how you scaffold it.
+      # Different folder structures require different commands set.
+      # 'npm ci' is used here to install dependencies and it depends on package-lock.json.
+      # If you prefer to use 'npm ci', please make sure to commit package-lock.json first, or just change it to 'npm install'.
+      - name: Build the project
+        run: cd tabs && npm install && npm run build 
+
+      # Run unit test.
+      # Currently, no opinioned solution for unit test provided during scaffolding, so,
+      # set up any unit test framework you prefer (for example, mocha or jest) and update the commands accordingly in below.
+      - name: Run Unit Test
+        run: echo "Run your unit test" 
+
+      - name: Login Azure by service principal 
+        uses: OfficeDev/teamsfx-cli-action@v1
+        with:
+          commands: account login azure 
+          service-principal: true
+          username: ${{secrets.AZURE_SERVICE_PRINCIPAL_NAME}}
+          password: ${{secrets.AZURE_SERVICE_PRINCIPAL_PASSWORD}}
+          tenant: ${{secrets.AZURE_TENANT_ID}}
+
+      # We suggest to do the `teamsfx provision` step manually or in a separate workflow. The following steps are for your reference.
+      # After provisioning, you should commit .fx/env.default.json into the repository.
+      #- name: Provision hosting environment
+      #  uses: OfficeDev/teamsfx-cli-action@v1
+      #  env:
+      #     SQL_ADMIN_NAME: ${{secrets.SQL_ADMIN_NAME}}
+      #     SQL_PASSWORD: ${{secrets.SQL_PASSWORD}}
+      #  with:
+      #    commands: provision
+      #    env: ${{env.TEAMSFX_ENV_NAME}}
+      #    subscription: ${{env.AZURE_SUBSCRIPTION_ID}}
+      #    sql-admin-name: ${{env.SQL_ADMIN_NAME}}
+      #    sql-password: ${{env.SQL_PASSWORD}}
+
+      #- name: Commit provision configs if necessary
+      #  uses: stefanzweifel/git-auto-commit-action@v4
+      #  with:
+      #    commit_message: "chore: commit provision configs"
+      #    file_pattern: .fx/states/state.${{env.TEAMSFX_ENV_NAME}}.json
+      
+      - name: Deploy to hosting environment
+        uses: OfficeDev/teamsfx-cli-action@v1
+        with:
+          commands: deploy
+          env: ${{env.TEAMSFX_ENV_NAME}} 
