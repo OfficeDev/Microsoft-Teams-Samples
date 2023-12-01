@@ -112,16 +112,16 @@ sequenceDiagram
     - After you create an AzureAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
 
 ### 3. Setup NGROK
-1) Run ngrok - point to port 44326
+1) Run ngrok - point to port 3978
 
    ```bash
-   ngrok http 44326 --host-header="localhost:44326"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 44326 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
 ### 4. Project Structure
@@ -160,7 +160,7 @@ sequenceDiagram
     * Run `dotnet run`
 
     ### Locally in Visual Studio
-    * Point tunnel to port 44326: Eg: `ngrok http 44326 --host-header="localhost:44326"`
+    * Point tunnel to port 3978: Eg: `ngrok http 44326 --host-header="localhost:3978"`
     * Launch Visual Studio
     * File -> Open -> Project/Solution
     * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
