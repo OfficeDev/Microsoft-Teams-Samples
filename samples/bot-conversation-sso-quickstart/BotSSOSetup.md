@@ -99,7 +99,7 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 - Click on Create on the Azure bot.
 - Go to the created resource, navigate to channels and ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- Go to the created resource, navigate to and update the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
+- Go to the created resource, navigate to "Configuration" and update the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
     ![Create Azure Bot](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotCreate.png)
 
