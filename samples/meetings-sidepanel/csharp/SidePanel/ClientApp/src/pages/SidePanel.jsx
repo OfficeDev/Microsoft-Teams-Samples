@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
+import { LiveShareHost } from "@microsoft/teams-js";
 import { LiveShareClient } from "@microsoft/live-share";
 import { setMeetingContext, addAgendaTask, postAgenda } from "./services/agendaAPIHelper"
 
