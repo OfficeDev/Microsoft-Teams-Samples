@@ -1007,6 +1007,14 @@ jobs:
               name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
 
+            - project_path: 'samples/m365-actions-preview/nodejs/tabs'
+              name: 'm365-actions-preview'
+              version: '18.x'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/api'
+              name: 'm365-actions-preview-api'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
