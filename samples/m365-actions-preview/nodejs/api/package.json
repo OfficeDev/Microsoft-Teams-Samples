@@ -9,13 +9,15 @@
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
     "dev": "func start --javascript --language-worker=\"--inspect=9229\" --port \"7071\" --cors \"*\"",
     "start": "npx func start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
   },
   "dependencies": {
     "@azure/functions": "^1.2.2",
     "@microsoft/teamsfx": "^2.0.0",
     "isomorphic-fetch": "^3.0.0",
-    "tedious": "^9.2.1"
+    "tedious": "^9.2.1",
+    "esbuild": "^0.18.1"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0"
