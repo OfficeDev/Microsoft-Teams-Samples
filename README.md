@@ -17,6 +17,8 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Webhooks and Connectors samples](#Webhooks-and-Connectors-samples)
 1. [Graph APIs](#Graph-APIs)
 1. [Calls and online meetings bots](#Calls-and-online-meetings-bots)
+1. [Meetings samples](#Meetings-samples)
+1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
