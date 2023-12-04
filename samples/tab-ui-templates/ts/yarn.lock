@@ -1248,6 +1248,14 @@
     "@uifabric/set-version" "^7.0.23"
     tslib "^1.10.0"
 
+"@fluentui/date-time-utilities@^8.5.14":
+  version "8.5.14"
+  resolved "https://registry.npmjs.org/@fluentui/date-time-utilities/-/date-time-utilities-8.5.14.tgz"
+  integrity sha512-Kc64ZBj0WiaSW/Bsh4fMy9oM2FIk1TgIqBV6+OgOtdKx9cXwLdmgGk8zuQTcuRnwv5WCk2M6wvW1M+eK3sNRGA==
+  dependencies:
+    "@fluentui/set-version" "^8.2.12"
+    tslib "^2.1.0"
+
 "@fluentui/dom-utilities@^1.1.1":
   version "1.1.1"
   resolved "https://registry.npmjs.org/@fluentui/dom-utilities/-/dom-utilities-1.1.1.tgz"
@@ -1256,12 +1264,56 @@
     "@uifabric/set-version" "^7.0.23"
     tslib "^1.10.0"
 
+"@fluentui/dom-utilities@^2.2.12":
+  version "2.2.12"
+  resolved "https://registry.npmjs.org/@fluentui/dom-utilities/-/dom-utilities-2.2.12.tgz"
+  integrity sha512-safCKQPJTnshYG13/U2Zx1KWhOhU4vl5RAKqW7HEBfLOHds/fAR+EzTvKgO6OgxJq59JAKJvpH2QujkLXZZQ3A==
+  dependencies:
+    "@fluentui/set-version" "^8.2.12"
+    tslib "^2.1.0"
+
+"@fluentui/font-icons-mdl2@^8.5.27":
+  version "8.5.27"
+  resolved "https://registry.npmjs.org/@fluentui/font-icons-mdl2/-/font-icons-mdl2-8.5.27.tgz"
+  integrity sha512-u6J9SmdWsr3WjC7zog930IWWySA+mxLfIqfyux9oATJQPUs+76juYYbolDTJTvndVEmb+piA7qBhEubUoaXJjQ==
+  dependencies:
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/style-utilities" "^8.9.20"
+    "@fluentui/utilities" "^8.13.21"
+    tslib "^2.1.0"
+
+"@fluentui/foundation-legacy@^8.2.47":
+  version "8.2.47"
+  resolved "https://registry.npmjs.org/@fluentui/foundation-legacy/-/foundation-legacy-8.2.47.tgz"
+  integrity sha512-El/8/makZh2fqd2YdLSTy3T2oJ3N6WCsPzkud9CdMF98Oby0jny4EAtzjBNRbAwL4/gppOYIIchVuzRL4V2rcw==
+  dependencies:
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/style-utilities" "^8.9.20"
+    "@fluentui/utilities" "^8.13.21"
+    tslib "^2.1.0"
+
 "@fluentui/keyboard-key@^0.2.7":
   version "0.2.12"
   resolved "https://registry.npmjs.org/@fluentui/keyboard-key/-/keyboard-key-0.2.12.tgz"
   integrity sha512-t3yIbbPKJubb22vQ/FIWwS9vFAzaPYzFxKWPHVWLtxs/P+5yL+LD3B16DRtYreWAdl9CZvEbos58ChLZ0KHwSQ==
   dependencies:
     tslib "^1.10.0"
+
+"@fluentui/keyboard-key@^0.4.12":
+  version "0.4.12"
+  resolved "https://registry.npmjs.org/@fluentui/keyboard-key/-/keyboard-key-0.4.12.tgz"
+  integrity sha512-9nPglM58ThbOEQ88KijdYl64hiTAQQ0o60HRc0vboibmr41mJ322FoBz5Q5S5QLIEbBZajrAkrDMs3PKW4CCSw==
+  dependencies:
+    tslib "^2.1.0"
+
+"@fluentui/merge-styles@^8.5.13":
+  version "8.5.13"
+  resolved "https://registry.npmjs.org/@fluentui/merge-styles/-/merge-styles-8.5.13.tgz"
+  integrity sha512-ocgwNlQcQwn5mNlZKFazrFVbYDEQ6BptoW4GyEv6U5TEHE8HKKYuPRf340NXCRGiacSpz3vLkyDjp+L431qUXg==
+  dependencies:
+    "@fluentui/set-version" "^8.2.12"
+    tslib "^2.1.0"
 
 "@fluentui/react-bindings@^0.51.3":
   version "0.51.3"
@@ -1328,6 +1380,28 @@
   integrity sha512-fsCkCJxQ0OCH+asOo8uiNXSkxTaXrpZ8q4klJlVyZ/zE7fLAxUiBLg8vRVj8m+WhGVZ0Kb3TMGOBV5O2IOzZIQ==
   dependencies:
     "@babel/runtime" "^7.10.4"
+
+"@fluentui/react-focus@^8.8.34":
+  version "8.8.34"
+  resolved "https://registry.npmjs.org/@fluentui/react-focus/-/react-focus-8.8.34.tgz"
+  integrity sha512-GNi8MqQRdoIaYpiz5kWIQaX1mNzFz3X+UShezA3gohrXnkONUvrPBuFDyYgQXoqk67juEZ+oGxl2PpKjz08HCA==
+  dependencies:
+    "@fluentui/keyboard-key" "^0.4.12"
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/style-utilities" "^8.9.20"
+    "@fluentui/utilities" "^8.13.21"
+    tslib "^2.1.0"
+
+"@fluentui/react-hooks@^8.6.33":
+  version "8.6.33"
+  resolved "https://registry.npmjs.org/@fluentui/react-hooks/-/react-hooks-8.6.33.tgz"
+  integrity sha512-3P9RA34QhhjFwHwCvfOqMDgCwvks4hgMsEGvQVTdrcya4uskxBx4FqCLzoMxkXcAJjJCiTJmPx/mZQqQpgoyoA==
+  dependencies:
+    "@fluentui/react-window-provider" "^2.2.16"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/utilities" "^8.13.21"
+    tslib "^2.1.0"
 
 "@fluentui/react-icons-northstar@^0.51.0", "@fluentui/react-icons-northstar@^0.51.3":
   version "0.51.3"
@@ -1397,6 +1471,13 @@
     react-is "^16.6.3"
     react-transition-group "^4.3.0"
 
+"@fluentui/react-portal-compat-context@^9.0.10":
+  version "9.0.10"
+  resolved "https://registry.npmjs.org/@fluentui/react-portal-compat-context/-/react-portal-compat-context-9.0.10.tgz"
+  integrity sha512-l38C+tGb76yyFQ9sxUrY8DDyp2hoYru3pISFivPitFgkP6nqlnZPNd8yPE48RuVWjMhTKQ/1uCdE6ymBH9wBZQ==
+  dependencies:
+    "@swc/helpers" "^0.5.1"
+
 "@fluentui/react-proptypes@^0.51.3":
   version "0.51.3"
   resolved "https://registry.npmjs.org/@fluentui/react-proptypes/-/react-proptypes-0.51.3.tgz"
@@ -1415,12 +1496,59 @@
     lodash "^4.17.15"
     react-beautiful-dnd "^13.0.0"
 
+"@fluentui/react-window-provider@^2.2.16":
+  version "2.2.16"
+  resolved "https://registry.npmjs.org/@fluentui/react-window-provider/-/react-window-provider-2.2.16.tgz"
+  integrity sha512-4gkUMSAUjo3cgCGt+0VvTbMy9qbF6zo/cmmfYtfqbSFtXz16lKixSCMIf66gXdKjovqRGVFC/XibqfrXM2QLuw==
+  dependencies:
+    "@fluentui/set-version" "^8.2.12"
+    tslib "^2.1.0"
+
+"@fluentui/react@*":
+  version "8.112.9"
+  resolved "https://registry.npmjs.org/@fluentui/react/-/react-8.112.9.tgz"
+  integrity sha512-mSu++f/TA+en+pIiWJE8s2+L6TtIdUpULkh4/knsQ+4NTBjvFnve0bK936VBHK8ff6ypLa0HqiQKFIMlQyH/iw==
+  dependencies:
+    "@fluentui/date-time-utilities" "^8.5.14"
+    "@fluentui/font-icons-mdl2" "^8.5.27"
+    "@fluentui/foundation-legacy" "^8.2.47"
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/react-focus" "^8.8.34"
+    "@fluentui/react-hooks" "^8.6.33"
+    "@fluentui/react-portal-compat-context" "^9.0.10"
+    "@fluentui/react-window-provider" "^2.2.16"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/style-utilities" "^8.9.20"
+    "@fluentui/theme" "^2.6.38"
+    "@fluentui/utilities" "^8.13.21"
+    "@microsoft/load-themed-styles" "^1.10.26"
+    tslib "^2.1.0"
+
+"@fluentui/set-version@^8.2.12":
+  version "8.2.12"
+  resolved "https://registry.npmjs.org/@fluentui/set-version/-/set-version-8.2.12.tgz"
+  integrity sha512-I4uXIg9xkL2Heotf1+7CyGcHQskdtMSH0B5mSV0TL3w7WI2qpnzrpKuP2Kq6DHZN6Xrsg4ORFNJSjLxq/s9cUQ==
+  dependencies:
+    tslib "^2.1.0"
+
 "@fluentui/state@^0.51.3":
   version "0.51.3"
   resolved "https://registry.npmjs.org/@fluentui/state/-/state-0.51.3.tgz"
   integrity sha512-UX4Ul+QtcRPRwa+W+ay9mXk2OPf+fk0ztlIVrZPGv1j7BXUSBehLW17nzkEp5EWOaqkl6cYl0I73GMvTyslNzA==
   dependencies:
     "@babel/runtime" "^7.10.4"
+
+"@fluentui/style-utilities@^8.9.20":
+  version "8.9.20"
+  resolved "https://registry.npmjs.org/@fluentui/style-utilities/-/style-utilities-8.9.20.tgz"
+  integrity sha512-oj0ghn21DnqCardlcEp+zob3IEAfA/Z7ZjzuYqlHuPUItwRqGmpr1wErssRC4R1kHsH6gq9ALxVgMa4/FvdzGg==
+  dependencies:
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/theme" "^2.6.38"
+    "@fluentui/utilities" "^8.13.21"
+    "@microsoft/load-themed-styles" "^1.10.26"
+    tslib "^2.1.0"
 
 "@fluentui/styles@^0.51.3":
   version "0.51.3"
@@ -1430,6 +1558,26 @@
     "@babel/runtime" "^7.10.4"
     csstype "^2.6.7"
     lodash "^4.17.15"
+
+"@fluentui/theme@^2.6.38":
+  version "2.6.38"
+  resolved "https://registry.npmjs.org/@fluentui/theme/-/theme-2.6.38.tgz"
+  integrity sha512-LObK/mZOQFb3aTcDlKBSLpPV0BOp5BOuNqg0Wps51b1RlisI6oS3STmw3BkcAe6jOi/p4cgLpwHMkYHh2o8PmQ==
+  dependencies:
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/set-version" "^8.2.12"
+    "@fluentui/utilities" "^8.13.21"
+    tslib "^2.1.0"
+
+"@fluentui/utilities@^8.13.21":
+  version "8.13.21"
+  resolved "https://registry.npmjs.org/@fluentui/utilities/-/utilities-8.13.21.tgz"
+  integrity sha512-YPWsRAL1jgbPxf+wAY8p6LjIG4em0NReqgU8ZCFnQx9wpQbe/ZRjQcaU06pD1tYtRGvyCutwhnWDaQHDw843Xg==
+  dependencies:
+    "@fluentui/dom-utilities" "^2.2.12"
+    "@fluentui/merge-styles" "^8.5.13"
+    "@fluentui/set-version" "^8.2.12"
+    tslib "^2.1.0"
 
 "@humanwhocodes/config-array@^0.11.6":
   version "0.11.7"
@@ -1749,6 +1897,11 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@microsoft/load-themed-styles@^1.10.26":
+  version "1.10.295"
+  resolved "https://registry.npmjs.org/@microsoft/load-themed-styles/-/load-themed-styles-1.10.295.tgz"
+  integrity sha512-W+IzEBw8a6LOOfRJM02dTT7BDZijxm+Z7lhtOAz1+y9vQm1Kdz9jlAO+qCEKsfxtUOmKilW8DIRqFw2aUgKeGg==
+
 "@microsoft/teams-js@^2.0.0":
   version "2.4.2"
   resolved "https://registry.npmjs.org/@microsoft/teams-js/-/teams-js-2.4.2.tgz"
@@ -1982,6 +2135,13 @@
     "@svgr/plugin-jsx" "^5.5.0"
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
+
+"@swc/helpers@^0.5.1":
+  version "0.5.3"
+  resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.3.tgz"
+  integrity sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==
+  dependencies:
+    tslib "^2.4.0"
 
 "@testing-library/dom@^7.28.1", "@testing-library/dom@>=7.21.4":
   version "7.28.1"
@@ -2270,7 +2430,7 @@
   resolved "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@^17.0.0", "@types/react-dom@>=16.8.0 <17.0.0":
+"@types/react-dom@^17.0.0", "@types/react-dom@>=16.8.0 <17.0.0", "@types/react-dom@>=16.8.0 <19.0.0":
   version "17.0.0"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.0.tgz"
   integrity sha512-lUqY7OlkF/RbNtD5nIq7ot8NquXrdFrjSOR6+w9a9RFQevGi1oZO1dcJbXMeONAPKtZ2UrZOEJ5UOCVsxbLk/g==
@@ -2294,7 +2454,7 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0", "@types/react@>=16.8.0 <17.0.0":
+"@types/react@*", "@types/react@^17.0.0", "@types/react@>=16.14.0 <19.0.0", "@types/react@>=16.8.0 <17.0.0", "@types/react@>=16.8.0 <19.0.0":
   version "17.0.0"
   resolved "https://registry.npmjs.org/@types/react/-/react-17.0.0.tgz"
   integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
@@ -9687,7 +9847,7 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dom@*, react-dom@^16.8.0, react-dom@^16.8.5, react-dom@>=16.6.0, "react-dom@>=16.8.0 <17.0.0":
+react-dom@*, react-dom@^16.8.0, react-dom@^16.8.5, react-dom@>=16.6.0, "react-dom@>=16.8.0 <17.0.0", "react-dom@>=16.8.0 <19.0.0":
   version "16.14.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -9836,7 +9996,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@*, "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", react@^16.14.0, react@^16.3.0, react@^16.8.0, "react@^16.8.3 || ^17", react@^16.8.5, "react@>= 16", react@>=0.14.9, react@>=15, react@>=16.6.0, "react@>=16.8.0 <17.0.0":
+react@*, "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", react@^16.14.0, react@^16.3.0, react@^16.8.0, "react@^16.8.3 || ^17", react@^16.8.5, "react@>= 16", react@>=0.14.9, react@>=15, "react@>=16.14.0 <19.0.0", react@>=16.6.0, "react@>=16.8.0 <17.0.0", "react@>=16.8.0 <19.0.0":
   version "16.14.0"
   resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
@@ -11414,6 +11574,16 @@ tslib@^2.0.3:
   version "2.4.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
+tslib@^2.1.0:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
+
+tslib@^2.4.0:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 tsutils@^3.21.0:
   version "3.21.0"

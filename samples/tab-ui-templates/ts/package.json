@@ -29,6 +29,7 @@
     "teams toolkit"
   ],
   "dependencies": {
+    "@fluentui/react": "^8.112.9",
     "@fluentui/react-northstar": "^0.51.3",
     "@fluentui/react-teams": "0.1.0-alpha.10",
     "@microsoft/teams-js": "^2.0.0",
