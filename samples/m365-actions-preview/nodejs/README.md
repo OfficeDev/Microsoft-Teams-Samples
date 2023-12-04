@@ -38,46 +38,67 @@ To debug the app
 
 ## Running the sample
 
+**Select app:**
 ![App](images/0.SelectApp.png)
 
+**Welcome to todo list app!:**
 ![Login](images/1.Login.png)
 
+**Accept permissions:**
 ![Permissons](images/2.Permissons.png)
 
+**No task added:**
 ![NoTask](images/3.NoTask.png)
 
+**Click more options:**
 ![SelectMoreOptions](images/4.SelectMoreOptions.png)
 
+**Add todo task and Mark complete UI:**
 ![AddDoTaskComple](images/5.AddDoTaskComple.png)
 
+**Add your notes here:**
 ![AddNotes](images/6.AddNotes.png)
 
+**Notes docx:**
 ![AddNodesData](images/7.AddNodesData.png)
 
+**Notes pdf:**
 ![PDFNodes](images/8.PDFNodes.png)
 
+**To do list:**
 ![MainTaskGrid](images/9.MainTaskGrid.png)
 
+**Click Edit:**
 ![Edit](images/10.Edit.png)
 
+**Edit value:**
 ![EditValueUI](images/11.EditValueUI.png)
 
+**Delete:**
 ![Delete](images/12.Delete.png)
 
+**Mark task complete:**
 ![MarkComplete](images/13.MarkComplete.png)
 
+**Mark complete UI:**
 ![CheckMarkComplete](images/14.CheckMarkComplete.png)
 
+**Select task:**
 ![SelectCheckBoxMarkCom](images/15.SelectCheckBoxMarkCom.png)
 
+**Status mark:**
 ![SelectedUI](images/16.SelectedUI.png)
 
+**Mark task complete:**
 ![PDFMarkComple](images/17.PDFMarkComple.png)
 
+**Mark complete UI:**
 ![MarkUI](images/18.MarkUI.png)
 
+**Status mark:**
 ![SelectCheck](images/19.SelectCheck.png)
 
+**To do list:**
 ![MainGrid](images/20.MainGrid.png)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/m365-actions-preview-nodejs" />
