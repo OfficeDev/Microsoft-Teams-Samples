@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TabRequestApproval</title>
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
+            crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+            crossorigin="anonymous"></script>
+    <script src="~/js/auth.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
