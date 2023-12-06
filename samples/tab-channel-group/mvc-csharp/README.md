@@ -31,7 +31,7 @@ In this quickstart we'll walk-through creating a custom channel/group tab with A
 
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
 1. Install Visual Studio 2022 version 17.8 Preview 4 or higher [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-notes-preview#1790-pre10--visual-studio-2022-version-179-preview-1)
 1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7#install-teams-toolkit-for-visual-studio)
 1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
