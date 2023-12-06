@@ -4,28 +4,26 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Graph;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using NuGet.Protocol;
-    using TabActivityFeed.Helpers;
-    using TabActivityFeed.Models;
-    using TabRequestApproval.Helpers;
-    using User = TabActivityFeed.Models.User;
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Security.Cryptography;
+	using System.Security.Cryptography.X509Certificates;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Logging;
+	using Microsoft.Graph;
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using NuGet.Protocol;
+	using TabActivityFeed.Helpers;
+	using TabActivityFeed.Models;
+	using User = TabActivityFeed.Models.User;
 
-    /// <summary>
-    /// Responsible for managing and processing change notifications.
-    /// </summary>
-    public class ChangeNotificationProvider : IChangeNotificationProvider
+	/// <summary>
+	/// Responsible for managing and processing change notifications.
+	/// </summary>
+	public class ChangeNotificationProvider : IChangeNotificationProvider
     {
         /// <summary>
         /// Represents the certificate path.
@@ -58,11 +56,6 @@ namespace TabActivityFeed.Providers
         private const string MemberDeletedEvent = "#microsoft.graph.membersDeletedEventMessageDetail";
 
         /// <summary>
-        /// Represents the appsettings.json file.
-        /// </summary>
-        private readonly IConfiguration configuration;
-
-        /// <summary>
         /// Represents the logger to use in this provider.
         /// </summary>
         private readonly ILogger<SubscriptionProvider> logger;
@@ -88,14 +81,11 @@ namespace TabActivityFeed.Providers
         /// </summary>
         /// <param name="logger">Represents the logger.</param>
         /// <param name="containerProvider">Represents the container provider.</param>
-        /// <param name="configuration">Represents the appsettings details.</param>
         /// <param name="authProvider">Represents the auth provider.</param>
         /// <param name="containerPermissionProvider">Represents the container permission provider.</param>
-        public ChangeNotificationProvider(IConfiguration configuration, IAuthProvider authProvider, ILogger<SubscriptionProvider> logger, IContainerProvider containerProvider, IContainerPermissionProvider containerPermissionProvider)
+        public ChangeNotificationProvider(IAuthProvider authProvider, ILogger<SubscriptionProvider> logger, IContainerProvider containerProvider, IContainerPermissionProvider containerPermissionProvider)
         {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
             this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
             this.containerProvider = containerProvider ?? throw new ArgumentNullException(nameof(containerProvider));
             this.containerPermissionProvider = containerPermissionProvider ?? throw new ArgumentNullException(nameof(containerPermissionProvider));

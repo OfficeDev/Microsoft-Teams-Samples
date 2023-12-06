@@ -30,23 +30,18 @@ namespace TabActivityFeed.Controllers
         // Variable representing the change notification provider.
         private readonly IChangeNotificationProvider changeNotificationProvider;
 
-        // Variable representing the auth provider.
-        private readonly IAuthProvider authProvider;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationController"/> class.
         /// </summary>
         /// <param name="configuration">Represents the configuration settings.</param>
         /// <param name="subscriptionProvider">Represents the subscription provider.</param>
         /// <param name="changeNotificationProvider">Represents the change notification provider.</param>
-        /// <param name="authProvider">Represents the auth provider.</param>
         /// <exception cref="ArgumentNullException">Represents the exception thrown when arguments are null.</exception>
-        public NotificationController(IConfiguration configuration, ISubscriptionProvider subscriptionProvider, IChangeNotificationProvider changeNotificationProvider, IAuthProvider authProvider)
+        public NotificationController(IConfiguration configuration, ISubscriptionProvider subscriptionProvider, IChangeNotificationProvider changeNotificationProvider)
         {
             this.configuration = configuration;
             this.subscriptionProvider = subscriptionProvider ?? throw new ArgumentNullException(nameof(subscriptionProvider));
             this.changeNotificationProvider = changeNotificationProvider ?? throw new ArgumentNullException(nameof(changeNotificationProvider));
-            this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
         }
 
         /// <summary>

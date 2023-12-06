@@ -4,30 +4,20 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Net.Http.Json;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Graph;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using TabActivityFeed.Helpers;
-    using TabActivityFeed.Models;
-    using TabRequestApproval.Helpers;
-    using Container = TabActivityFeed.Models.Container;
+	using System;
+	using System.Collections.Concurrent;
+	using System.Collections.Generic;
+	using System.Net.Http;
+	using System.Net.Http.Json;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Configuration;
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using TabActivityFeed.Helpers;
+	using Container = TabActivityFeed.Models.Container;
 
-    /// <summary>Provides helper methods built over MS Graph SDK.</summary>
-    public class ContainerProvider : IContainerProvider
+	/// <summary>Provides helper methods built over MS Graph SDK.</summary>
+	public class ContainerProvider : IContainerProvider
     {
         /// <summary>
         /// Represents appsettings.json file.
@@ -38,16 +28,6 @@ namespace TabActivityFeed.Providers
         /// Represents the HTTP client factory.
         /// </summary>
         private readonly IHttpClientFactory httpClientFactory;
-
-        /// <summary>
-        /// Represents the auth provider.
-        /// </summary>
-        private readonly IAuthProvider authProvider;
-
-        /// <summary>
-        /// Represents the logger to use in this provider.
-        /// </summary>
-        private readonly ILogger<ContainerProvider> logger;
 
         /// <summary>
         /// Represents the graph container endpoint.
@@ -62,12 +42,10 @@ namespace TabActivityFeed.Providers
         /// <param name="httpClientFactory">Represents the HTTP Client Factory.</param>
         /// <param name="logger">Represents the logger to be used in this provider.</param>
         /// <param name="authProvider">Represents the auth provider.</param>
-        public ContainerProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<ContainerProvider> logger, IAuthProvider authProvider)
+        public ContainerProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
             this.AppInstallationScopeDetailsDictionary = new ConcurrentDictionary<string, string>();
         }
 

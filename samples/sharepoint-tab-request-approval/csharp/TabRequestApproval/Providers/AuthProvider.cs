@@ -4,18 +4,15 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Graph;
-    using Microsoft.Identity.Client;
+	using System;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Identity.Client;
 
-    /// <summary>
-    /// Authentication provider.
-    /// </summary>
-    public class AuthProvider : IAuthProvider
+	/// <summary>
+	/// Authentication provider.
+	/// </summary>
+	public class AuthProvider : IAuthProvider
     {
         /// <summary>
         /// Represents the appsettings.json file.
@@ -23,20 +20,13 @@ namespace TabActivityFeed.Providers
         private readonly IConfiguration configuration;
 
         /// <summary>
-        /// Represents the HTTP client factory.
-        /// </summary>
-        private readonly IHttpClientFactory httpClientFactory;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AuthProvider"/> class.
         /// Creates an auth provider object.
         /// </summary>
         /// <param name="configuration">Represents the appsettings.json file details.</param>
-        /// <param name="httpClientFactory">Represents the HTTP client factory.</param>
-        public AuthProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public AuthProvider(IConfiguration configuration)
         {
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            this.httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
         }
 
         /// <summary>

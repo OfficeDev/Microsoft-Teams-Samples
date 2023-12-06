@@ -4,40 +4,22 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Buffers.Text;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Graph;
-    using Microsoft.Graph.TermStore;
-    using Microsoft.VisualBasic;
-    using Newtonsoft.Json;
-    using NuGet.Protocol;
-    using TabActivityFeed.Models;
-    using TabRequestApproval.Model;
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+	using Microsoft.Graph;
+	using Newtonsoft.Json;
+	using NuGet.Protocol;
+	using TabRequestApproval.Model;
 
-    /// <summary>
-    /// Represents the request provider.
-    /// </summary>
-    public class RequestProvider : IRequestProvider
+	/// <summary>
+	/// Represents the request provider.
+	/// </summary>
+	public class RequestProvider : IRequestProvider
     {
-        /// <summary>
-        /// Represents the appsettings.json file details.
-        /// </summary>
-        private readonly IConfiguration configuration;
-
-        /// <summary>
-        /// Represents the logger.
-        /// </summary>
-        private readonly ILogger<RequestProvider> logger;
-
         /// <summary>
         /// Represents the auth provider.
         /// </summary>
@@ -56,15 +38,11 @@ namespace TabActivityFeed.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestProvider"/> class.
         /// </summary>
-        /// <param name="configuration">Represents the appsettings.json file details.</param>
-        /// <param name="logger">Represents the logger.</param>
         /// <param name="authProvider">Represents the auth provider.</param>
         /// <param name="containerProvider">Represents the container provider.</param>
         /// <param name="driveItemProvider">Represents the drive item provider.</param>
-        public RequestProvider(IConfiguration configuration, ILogger<RequestProvider> logger, IAuthProvider authProvider, IContainerProvider containerProvider, IDriveItemProvider driveItemProvider)
+        public RequestProvider(IAuthProvider authProvider, IContainerProvider containerProvider, IDriveItemProvider driveItemProvider)
         {
-            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
             this.containerProvider = containerProvider ?? throw new ArgumentNullException(nameof(containerProvider));
             this.driveItemProvider = driveItemProvider ?? throw new ArgumentNullException(nameof(driveItemProvider));

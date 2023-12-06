@@ -33,16 +33,6 @@ namespace TabActivityFeed.Providers
         private readonly IHttpClientFactory httpClientFactory;
 
         /// <summary>
-        /// Represents the auth provider.
-        /// </summary>
-        private readonly IAuthProvider authProvider;
-
-        /// <summary>
-        /// Represents the logger to use in this provider.
-        /// </summary>
-        private readonly ILogger<ContainerPermissionProvider> logger;
-
-        /// <summary>
         /// Represents the graph container endpoint.
         /// </summary>
         private readonly string graphContainersEndpoint = "beta/storage/fileStorage/containers";
@@ -53,14 +43,10 @@ namespace TabActivityFeed.Providers
         /// </summary>
         /// <param name="configuration">Represents the appsettings.json file details.</param>
         /// <param name="httpClientFactory">Represents the HTTP client factory.</param>
-        /// <param name="logger">Represents the logger to be used in this provider.</param>
-        /// <param name="authProvider">Represents the auth provider.</param>
-        public ContainerPermissionProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<ContainerPermissionProvider> logger, IAuthProvider authProvider)
+        public ContainerPermissionProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
         }
 
         /// <summary>

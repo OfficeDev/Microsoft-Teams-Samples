@@ -4,24 +4,19 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.IO.Pipes;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Graph;
-    using NuGet.Protocol;
-    using TabActivityFeed.Helpers;
-    using TabRequestApproval.Helpers;
-    using TabRequestApproval.Model;
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Graph;
+	using TabActivityFeed.Helpers;
 
-    /// <summary>
-    /// Represents the drive item provider.
-    /// </summary>
-    public class DriveItemProvider : IDriveItemProvider
+	/// <summary>
+	/// Represents the drive item provider.
+	/// </summary>
+	public class DriveItemProvider : IDriveItemProvider
     {
         /// <summary>
         /// Represents the small file size boundary.
@@ -34,11 +29,6 @@ namespace TabActivityFeed.Providers
         private readonly IConfiguration configuration;
 
         /// <summary>
-        /// Represents the auth provider.
-        /// </summary>
-        private readonly IAuthProvider authProvider;
-
-        /// <summary>
         /// Represents the HTTP client factory.
         /// </summary>
         private readonly IHttpClientFactory httpClientFactory;
@@ -46,12 +36,10 @@ namespace TabActivityFeed.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="DriveItemProvider"/> class.
         /// </summary>
-        /// <param name="authProvider">Represents the auth provider.</param>
         /// <param name="configuration">Represents the appsettings.json file settings.</param>
         /// <param name="httpClientFactory">Represents the HTTP client factory.</param>
-        public DriveItemProvider(IAuthProvider authProvider, IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public DriveItemProvider(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
-            this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             this.httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
         }

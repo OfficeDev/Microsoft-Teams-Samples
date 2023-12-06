@@ -60,11 +60,6 @@ namespace TabActivityFeed.Providers
         private readonly IConfiguration configuration;
 
         /// <summary>
-        /// Represents the logger to use in this provider.
-        /// </summary>
-        private readonly ILogger<SubscriptionProvider> logger;
-
-        /// <summary>
         /// Represents the resource to subscribe to in-order to obtain all messages in a chat that a certain app is installed in.
         /// </summary>
         private readonly string chatSubscriptionResource;
@@ -75,33 +70,17 @@ namespace TabActivityFeed.Providers
         private readonly IAuthProvider authProvider;
 
         /// <summary>
-        /// Represents the container provider.
-        /// </summary>
-        private readonly IContainerProvider containerProvider;
-
-        /// <summary>
-        /// Represents container permission provider.
-        /// </summary>
-        private readonly IContainerPermissionProvider containerPermissionProvider;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionProvider"/> class.
         /// Creates a subscription provider object.
         /// </summary>
-        /// <param name="logger">Represents the logger.</param>
-        /// <param name="containerProvider">Represents the container provider.</param>
         /// <param name="configuration">Represents the appsettings details.</param>
         /// <param name="authProvider">Represents the auth provider.</param>
-        /// <param name="containerPermissionProvider">Represents the container permission provider.</param>
-        public SubscriptionProvider(IConfiguration configuration, IAuthProvider authProvider, ILogger<SubscriptionProvider> logger, IContainerProvider containerProvider, IContainerPermissionProvider containerPermissionProvider)
+        public SubscriptionProvider(IConfiguration configuration, IAuthProvider authProvider)
         {
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             this.chatSubscriptionResource = $"/appCatalogs/teamsApps/{this.configuration["AzureAd:TeamsAppId"]}/installedToChats/getAllMessages";
             this.authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
-            this.containerProvider = containerProvider ?? throw new ArgumentNullException(nameof(containerProvider));
-            this.containerPermissionProvider = containerPermissionProvider ?? throw new ArgumentNullException(nameof(containerPermissionProvider));
         }
 
         /// <summary>
