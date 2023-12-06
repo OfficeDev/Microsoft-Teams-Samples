@@ -16,11 +16,11 @@
     },
     "name": {
         "short": "SharePoint-Tab-Request-Approval",
-        "full": "App using SharePoint repository service for storage of task approvals being sent to the manager."
+        "full": "App using SharePoint Embedded for storage of task approvals being sent to the manager."
     },
     "description": {
         "short": "App helps user to raise a request and notify manager for approve or reject it.",
-        "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection. Data is stored using SharePoint repository service."
+        "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection. Data is stored using SharePoint Embedded."
     },
     "accentColor": "#235EA5",
     "configurableTabs": [
