@@ -1,6 +1,6 @@
 # TeamsFx files
 build
-appPackage/build
+AppManifest/build
 env/.env.*.user
 env/.env.local
 appsettings.Development.json
