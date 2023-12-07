@@ -4,23 +4,21 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using TabActivityFeed.Helpers;
-    using TabActivityFeed.Models;
-    using TabRequestApproval.Helpers;
+	using System;
+	using System.Collections.Generic;
+	using System.Net.Http;
+	using System.Text;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Configuration;
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using TabActivityFeed.Helpers;
+	using TabActivityFeed.Models;
 
-    /// <summary>
-    /// Container permissions provider.
-    /// </summary>
-    public class ContainerPermissionProvider : IContainerPermissionProvider
+	/// <summary>
+	/// Container permissions provider.
+	/// </summary>
+	public class ContainerPermissionProvider : IContainerPermissionProvider
     {
         /// <summary>
         /// Represents appsettings.json file.

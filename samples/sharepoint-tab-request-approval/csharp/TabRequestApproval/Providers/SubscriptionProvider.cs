@@ -4,35 +4,17 @@
 
 namespace TabActivityFeed.Providers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.Metrics;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Security.Cryptography.Xml;
-    using System.Threading.Tasks;
-    using System.Xml;
-    using System.Xml.Linq;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Graph;
-    using Microsoft.Online.AggregatorService.Encryptor;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using NuGet.Protocol;
-    using TabActivityFeed.Helpers;
-    using TabActivityFeed.Models;
-    using TabRequestApproval.Helpers;
-    using User = TabActivityFeed.Models.User;
+	using System;
+	using System.Security.Cryptography.X509Certificates;
+	using System.Threading.Tasks;
+	using Microsoft.Extensions.Configuration;
+	using Microsoft.Graph;
+	using TabActivityFeed.Helpers;
 
-    /// <summary>
-    /// Subscription Provider.
-    /// </summary>
-    public class SubscriptionProvider : ISubscriptionProvider
+	/// <summary>
+	/// Subscription Provider.
+	/// </summary>
+	public class SubscriptionProvider : ISubscriptionProvider
     {
         /// <summary>
         /// Represents the resource to subscribe to in-order to obtain all messages in all teams in a tenant.
