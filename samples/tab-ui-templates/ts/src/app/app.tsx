@@ -5,7 +5,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import { Provider } from "@fluentui/react-teams";
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
+
+//import { Provider } from "@fluentui/react-teams";
 import { themeNames } from "@fluentui/react-teams";
 import { About } from "./about";
 import { Privacy } from "./privacy";
@@ -48,25 +50,25 @@ function App() {
   }, []);
 
   return (
-    <Provider themeName={appAppearance} lang="en-US">
-       <Router>
-          {/* 
+    <FluentProvider theme={teamsLightTheme}>
+      <Router>
+        {/* 
           Default app pages     
         */}
-          <Route exact path="/privacy" component={Privacy} />
-          <Route exact path="/termsofuse" component={TermsOfUse} />
+        <Route exact path="/privacy" component={Privacy} />
+        <Route exact path="/termsofuse" component={TermsOfUse} />
 
-          {/* 
+        {/* 
           Static Tabs 
           To configure it use manifest.json "staticTabs"
         */}
-          <Route path="/welcome" component={WelcomeTab} />
-          <Route path="/dashboard" component={DashboardTab} />
-          <Route path="/list" component={ListTab} />
-          <Route path="/board" component={BoardsTab} />
-          <Route path="/" component={About} />
-        </Router>
-    </Provider>
+        <Route path="/welcome" component={WelcomeTab} />
+        <Route path="/dashboard" component={DashboardTab} />
+        <Route path="/list" component={ListTab} />
+        <Route path="/board" component={BoardsTab} />
+        <Route path="/" component={About} />
+      </Router>
+    </FluentProvider>
   );
 }
 

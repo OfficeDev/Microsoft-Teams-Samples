@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "@fluentui/react": "^8.112.9",
+    "@fluentui/react-components": "^9.42.0",
     "@fluentui/react-northstar": "^0.51.3",
     "@fluentui/react-teams": "0.1.0-alpha.10",
     "@microsoft/teams-js": "^2.0.0",
@@ -64,7 +65,7 @@
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
-    "start": "react-scripts start",
+    "start": "set PORT=3978 && react-scripts start",
     "serve": "react-scripts start & gulp start-ngrok",
     "build": "react-scripts build",
     "package": "gulp manifest"
