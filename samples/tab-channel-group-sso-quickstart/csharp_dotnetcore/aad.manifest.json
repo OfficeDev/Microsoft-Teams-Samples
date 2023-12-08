@@ -33,7 +33,7 @@
           "type": "Scope"
         },
         {
-          "id": "OpenId",
+          "id": "openid",
           "type": "Scope"
         },
         {
@@ -114,10 +114,6 @@
       "type": "Web"
     },
     {
-      "url": "${{TAB_ENDPOINT}}//Auth/End",
-      "type": "Web"
-    },
-    {
       "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
       "type": "Spa"
     },
@@ -127,7 +123,7 @@
     },
     {
       "url": "${{TAB_ENDPOINT}}/Auth/End",
-      "type": "Spa"
+      "type": "Web"
     }
   ]
 }
