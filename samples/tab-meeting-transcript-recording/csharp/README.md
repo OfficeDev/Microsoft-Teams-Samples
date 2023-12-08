@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows meeting transcripts and recordings.
+description: This sample code demonstrates fetching transcripts and recordings via the Graph API for meeting. Also utilizing subscriptions for change notifications
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 
 ## Meeting Transcripts Recordings
 
-This sample shows meeting transcripts and recordings.
+This sample code demonstrates fetching transcripts and recordings via the Graph API for meeting. Also utilizing subscriptions for change notifications.
 
 **Interaction with app**
 ![MeetingTranscriptRecording](MeetingTranscriptRecording/Images/MeetingTranscriptRecording.gif)
@@ -194,6 +194,9 @@ You can interact with Teams Tab meeting sidepanel.
 
 ## Further reading
 
+- [Call Transcript API](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
+- [Call Recording API](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
+- [Create subscription](https://learn.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http)
 - [Azure AD application using Microsoft Graph](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
 - [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
 - [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)

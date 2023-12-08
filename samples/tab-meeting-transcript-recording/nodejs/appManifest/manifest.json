@@ -19,8 +19,8 @@
     "full": "Meeting Transcripts Recordings"
   },
   "description": {
-    "short": "Sample Teams Meeting Transcripts and Recordings.",
-    "full": "Sample Teams Meeting Transcripts and Recordings."
+    "short": "Meeting Transcripts Recordings",
+    "full": "This sample code demonstrates fetching transcripts and recordings via the Graph API for meeting. Also utilizing subscriptions for change notifications"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

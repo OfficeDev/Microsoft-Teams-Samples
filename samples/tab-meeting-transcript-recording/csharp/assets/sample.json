@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-meeting-transcript-recording-csharp",
     "source": "officeDev",
     "title": "This sample shows meeting transcripts and recordings.",
-    "shortDescription": "This sample shows meeting transcripts and recordings.",
+    "shortDescription": "This sample code demonstrates fetching transcripts and recordings via the Graph API for meeting. Also utilizing subscriptions for change notifications",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-meeting-transcript-recording/csharp",
     "longDescription": [
-      "This sample shows meeting transcripts and recordings."
+      "This sample code demonstrates fetching transcripts and recordings via the Graph API for meeting. Also utilizing subscriptions for change notifications"
     ],
     "creationDateTime": "2023-10-13",
     "updateDateTime": "2023-11-03",
