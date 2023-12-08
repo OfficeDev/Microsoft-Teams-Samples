@@ -58,7 +58,7 @@ provision:
         AzureAd:
           ClientId: ${{AAD_APP_CLIENT_ID}}
           AppSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          ApplicationIdURI: api://${{TAB_DOMAIN}}/${{AAD_APP_TENANT_ID}}
+          ApplicationIdURI: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
 
   # Apply the AAD manifest to an existing AAD app. Will use the object id in
   # manifest file to determine which AAD app to update.
