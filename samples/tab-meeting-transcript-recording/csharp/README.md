@@ -35,13 +35,12 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 ### Design Flow and Implementation.
 ![Designflow](MeetingTranscriptRecording/Images/Designflow.png)
 
-1.	Implement a webhook http endpoint to listen to change notifications (CN). 
-
-1.1	Create a local web server. Expose it to the internet using ngrok/devtunnel.
-1.2	Register Application in Azure AD to obtain App ID and App Secret
-1.3	Initialise a subscription to Microsoft Graph Webhooks
-[Receive change notifications through webhooks - Microsoft Graph | Microsoft Learn](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
-1.4	Your server will now receive change notifications from Microsoft Graph whenever the specified events occur
+1.	Implement a webhook http endpoint to listen to change notifications (CN).
+ 1.1 Create a local web server. Expose it to the internet using ngrok/devtunnel.
+ 1.2 Register Application in Azure AD to obtain App ID and App Secret
+ 1.3 Initialise a subscription to Microsoft Graph Webhooks
+ [Receive change notifications through webhooks - Microsoft Graph | Microsoft Learn](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
+ 1.4 Your server will now receive change notifications from Microsoft Graph whenever the specified events occur
 
 2.	Setup subscription for Calendar event change notification (user-added):
 [Create subscription - Microsoft Graph v1.0 | Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http) (refer to Event)
@@ -50,7 +49,7 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 GET me/events
 
 4.	Check if event is OnlineMeeting.
-IsOnlineMeeting : true/false
+`IsOnlineMeeting : true/false`
 5.	If IsOnlineMeeting: true, then fetch joinWebUrl from onlineMeeting.joinUrl
 6.	Fetch onlineMeetingId=id, meetingName=subject, startDateTime, endDateTime, OrganizerId=participants.organizer.user.id using
 ```bash
@@ -65,16 +64,14 @@ GET /me/onlineMeetings/{online-meeting-id}/transcripts
 GET /me/onlineMeetings/{online-meeting-id}/recordings
 ```
 
-(ii)Fetch the latest transcript and recording if they exist to populate meeting card with meetingId and transcriptId, recordingId
+   (ii)Fetch the latest transcript and recording if they exist to populate meeting card with meetingId and transcriptId, recordingId
+
 8.	Setup subscription for the following meeting content change notifications with resource data:
-a.	callRecording
-  
-```bash
+ 1. callRecording
+ ```bash
 communications/onlineMeetings/{onlineMeetingId}/recordings
 ```
-
-b.	callTranscript
-  
+ 1. callTranscript
 ```bash
 communications/onlineMeetings/{onlineMeetingId}/transcripts
 ```
