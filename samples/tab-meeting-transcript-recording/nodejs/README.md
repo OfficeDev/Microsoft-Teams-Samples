@@ -33,7 +33,7 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ### Design Flow and Implementation.
-![Designflow](MeetingTranscriptRecording/Images/Designflow.png)
+![Designflow](Images/Designflow.png)
 
 1.	Implement a webhook http endpoint to listen to change notifications (CN). 
 1.1	Create a local web server. Expose it to the internet using ngrok/devtunnel.
