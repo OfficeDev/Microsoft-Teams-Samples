@@ -36,6 +36,7 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 ![Designflow](MeetingTranscriptRecording/Images/Designflow.png)
 
 1.	Implement a webhook http endpoint to listen to change notifications (CN). 
+
 1.1	Create a local web server. Expose it to the internet using ngrok/devtunnel.
 1.2	Register Application in Azure AD to obtain App ID and App Secret
 1.3	Initialise a subscription to Microsoft Graph Webhooks
@@ -63,16 +64,20 @@ Check if a card for meeting already exists. If not, create one.
 GET /me/onlineMeetings/{online-meeting-id}/transcripts
 GET /me/onlineMeetings/{online-meeting-id}/recordings
 ```
+
 (ii)Fetch the latest transcript and recording if they exist to populate meeting card with meetingId and transcriptId, recordingId
 8.	Setup subscription for the following meeting content change notifications with resource data:
 a.	callRecording
-    ```bash
-	communications/onlineMeetings/{onlineMeetingId}/recordings
-    ```
+  
+```bash
+communications/onlineMeetings/{onlineMeetingId}/recordings
+```
+
 b.	callTranscript
-    ```bash
-	communications/onlineMeetings/{onlineMeetingId}/transcripts
-    ```
+  
+```bash
+communications/onlineMeetings/{onlineMeetingId}/transcripts
+```
 
 9.	When a change notification arrives, for certain meetingId, populate the meeting card with recording and transcript ids. Also, give a pop-up notification on the right specifying transcript/recording ready for a certain meeting.
 
