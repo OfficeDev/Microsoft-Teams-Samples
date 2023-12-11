@@ -20,7 +20,7 @@ namespace StaggeredPermission.helper
         /// <returns>Valid Audiences.</returns>
         public static IEnumerable<string> GetValidAudiences(IConfiguration configuration)
         {
-            var clientId = configuration["AzureAd:ClientId"];
+            var clientId = configuration["AzureAd:MicrosoftAppId"];
             var applicationIdUri = configuration["AzureAd:ApplicationIdURI"];
             var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
             return validAudiences;
@@ -83,8 +83,8 @@ namespace StaggeredPermission.helper
         public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor, string idToken)
         {
             var tenantId = configuration["AzureAd:TenantId"];
-            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
-                                                .WithClientSecret(configuration["AzureAd:AppSecret"])
+            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:MicrosoftAppId"])
+                                                .WithClientSecret(configuration["AzureAd:MicrosoftAppPassword"])
                                                 .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
                                                 .Build();
 
