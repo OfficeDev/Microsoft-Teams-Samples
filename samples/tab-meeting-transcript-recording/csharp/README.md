@@ -67,11 +67,13 @@ GET /me/onlineMeetings/{online-meeting-id}/recordings
    (ii)Fetch the latest transcript and recording if they exist to populate meeting card with meetingId and transcriptId, recordingId
 
 8.	Setup subscription for the following meeting content change notifications with resource data:
- 1. callRecording
+
+ a. callRecording
  ```bash
 communications/onlineMeetings/{onlineMeetingId}/recordings
 ```
- 1. callTranscript
+
+ b. callTranscript
 ```bash
 communications/onlineMeetings/{onlineMeetingId}/transcripts
 ```
