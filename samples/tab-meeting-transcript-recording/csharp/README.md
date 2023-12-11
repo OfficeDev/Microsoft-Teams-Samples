@@ -36,11 +36,11 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 ![Designflow](MeetingTranscriptRecording/Images/Designflow.png)
 
 1.	Implement a webhook http endpoint to listen to change notifications (CN).
- 1.1 Create a local web server. Expose it to the internet using ngrok/devtunnel.
- 1.2 Register Application in Azure AD to obtain App ID and App Secret
- 1.3 Initialise a subscription to Microsoft Graph Webhooks
- [Receive change notifications through webhooks - Microsoft Graph | Microsoft Learn](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
- 1.4 Your server will now receive change notifications from Microsoft Graph whenever the specified events occur
+ - Create a local web server. Expose it to the internet using ngrok/devtunnel.
+ - Register Application in Azure AD to obtain App ID and App Secret
+ - Initialise a subscription to Microsoft Graph Webhooks
+ - [Receive change notifications through webhooks - Microsoft Graph | Microsoft Learn](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
+ - Your server will now receive change notifications from Microsoft Graph whenever the specified events occur
 
 2.	Setup subscription for Calendar event change notification (user-added):
 [Create subscription - Microsoft Graph v1.0 | Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http) (refer to Event)
