@@ -32,6 +32,63 @@ This sample code demonstrates fetching transcripts and recordings via the Graph 
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+### Design Flow and Implementation.
+![Designflow](MeetingTranscriptRecording/Images/Designflow.png)
+
+1.	Implement a webhook http endpoint to listen to change notifications (CN). 
+1.1	Create a local web server. Expose it to the internet using ngrok/devtunnel.
+1.2	Register Application in Azure AD to obtain App ID and App Secret
+1.3	Initialise a subscription to Microsoft Graph Webhooks
+[Receive change notifications through webhooks - Microsoft Graph | Microsoft Learn](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
+1.4	Your server will now receive change notifications from Microsoft Graph whenever the specified events occur
+
+2.	Setup subscription for Calendar event change notification (user-added):
+[Create subscription - Microsoft Graph v1.0 | Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http) (refer to Event)
+
+3.	Populate the app with adaptive cards where each card represents a meeting. Fetch all existing meetings that the user is added to (Organizer/Participant) using:
+GET me/events
+
+4.	Check if event is OnlineMeeting.
+IsOnlineMeeting : true/false
+5.	If IsOnlineMeeting: true, then fetch joinWebUrl from onlineMeeting.joinUrl
+6.	Fetch onlineMeetingId=id, meetingName=subject, startDateTime, endDateTime, OrganizerId=participants.organizer.user.id using
+```bash
+GET https://graph.microsoft.com/v1.0/me/onlineMeetings?$filter=JoinWebUrl%20eq%20'{joinWebUrl}'
+```
+
+Check if a card for meeting already exists. If not, create one.
+
+7.	(i) Fetch existing Recordings and Transcripts using:
+```bash
+GET /me/onlineMeetings/{online-meeting-id}/transcripts
+GET /me/onlineMeetings/{online-meeting-id}/recordings
+```
+(ii)Fetch the latest transcript and recording if they exist to populate meeting card with meetingId and transcriptId, recordingId
+8.	Setup subscription for the following meeting content change notifications with resource data:
+a.	callRecording
+    ```bash
+	communications/onlineMeetings/{onlineMeetingId}/recordings
+    ```
+b.	callTranscript
+    ```bash
+	communications/onlineMeetings/{onlineMeetingId}/transcripts
+    ```
+
+9.	When a change notification arrives, for certain meetingId, populate the meeting card with recording and transcript ids. Also, give a pop-up notification on the right specifying transcript/recording ready for a certain meeting.
+
+10.	If the view recording and transcript button is clicked, use the following to fetch recording and transcript content:
+```bash
+GET me/onlineMeetings/{meetingId}/transcripts/{transcriptId}/content
+GET me/onlineMeetings/{meetingId}/recordings/{recordingId}/content
+```
+
+11.	Case: Transcript gets ready before recording
+In such a case, fetch and show the transcript. For the recording, show a buffering symbol.
+	
+12.	Receive an event at webhook listener from the subscription created for Calendar event change notification. Repeat steps 6-10.
+
+13.	Show at most 10 meeting cards at once.
+
 ### Setup Register you app with Azure AD.
 
   1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
