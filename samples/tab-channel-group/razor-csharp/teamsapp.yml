@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-channel-group-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-channel-group-razor-csharp
 
 environmentFolderPath: ./env
