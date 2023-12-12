@@ -44,13 +44,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
-
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.8 Preview 4 or higher** [Visual Studio](https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-notes-preview#1790-pre10--visual-studio-2022-version-179-preview-1)
+1. Install Visual Studio 2022 **Version 17.8 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
