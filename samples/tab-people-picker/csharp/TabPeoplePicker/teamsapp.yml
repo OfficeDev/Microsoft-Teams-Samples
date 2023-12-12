@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-people-picker-csharp
+  sampleTag: tab-people-picker-csharp
 
 environmentFolderPath: ./env

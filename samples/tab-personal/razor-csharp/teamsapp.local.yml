@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-personal-csharp
+  sampleTag: tab-personal-razor-csharp
 
 provision:
   # Set TAB_DOMAIN and TAB_ENDPOINT for local launch
