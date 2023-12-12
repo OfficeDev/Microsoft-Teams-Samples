@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: tab-personal-mvc-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-personal-mvc-csharp
 
 environmentFolderPath: ./env

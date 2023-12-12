@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: tab-channel-group-mvc-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-channel-group-mvc-csharp
 
 environmentFolderPath: ./env

@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: tab-channel-group-mvc-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-channel-group-mvc-csharp
 
 provision:
   # Set TAB_DOMAIN and TAB_ENDPOINT for local launch

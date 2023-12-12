@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: tab-people-picker-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-people-picker-csharp
 
 provision:
   # Set TAB_DOMAIN and TAB_ENDPOINT for local launch
