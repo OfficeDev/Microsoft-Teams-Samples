@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -72,11 +73,18 @@ namespace Microsoft.BotBuilderSamples
                     await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
 
                     var photo = await client.GetPhotoAsync();
-                    var cardImage = new CardImage(photo);
-                    var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
-                    var reply = MessageFactory.Attachment(card.ToAttachment());
 
-                    await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+                    if (photo !="") {
+                        var cardImage = new CardImage(photo);
+                        var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
+                        var reply = MessageFactory.Attachment(card.ToAttachment());
+                        await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+                    }
+                    else
+                    {
+                        var profile_Message = "Sorry !! User doesn't have a profile picture to display";
+                        await stepContext.Context.SendActivityAsync(profile_Message);
+                    }
 
                     return await stepContext.PromptAsync(
                         nameof(ConfirmPrompt),
