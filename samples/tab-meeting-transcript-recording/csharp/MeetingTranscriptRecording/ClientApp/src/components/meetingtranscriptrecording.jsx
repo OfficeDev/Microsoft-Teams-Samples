@@ -103,7 +103,7 @@ const MeetingTranscriptRecording = () => {
                         }
                     })
                     .then((responseJson) => {
-                        if (responseJson === "" || responseJson === "[]") {
+                        if (responseJson === "" || responseJson === "[]" || responseJson === "{}") {
                             setIsConsentButtonVisible(true);
                             setIsLoginVisible(false);
                             setLoading(false);
@@ -156,7 +156,7 @@ const MeetingTranscriptRecording = () => {
                     }
                 })
                 .then((responseJson) => {
-                    if (responseJson === "" || responseJson === "[]") {
+                    if (responseJson === "" || responseJson === "[]" || responseJson === "{}") {
                         setIsConsentButtonVisible(true);
                         setIsLoginVisible(false);
                         setLoading(false);
