@@ -178,7 +178,7 @@ Notes:
 4. Fill in the form as follows:
 
     1. For **Name**, enter a name for your connection (e.g., "AzureADv2")
-    2. For **Service Provider**, select **Azure Active Directory v2**. Once you select this, the Azure AD-specific fields will be displayed.
+    2. For **Service Provider**, select **Microsoft Entra ID v2**. Once you select this, the Azure AD-specific fields will be displayed.
     3. For **Client id**, enter your bot's client ID.
     4. For **Client secret**, enter your bot's client secret.
     5. For **Tenant ID**, enter `common`.

@@ -48,7 +48,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.  
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.  
     
   - Navigate to **API Permissions**, and make sure to add the follow permissions:
    - Select Add a permission
@@ -71,7 +71,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   -In the Azure Portal, navigate back to the Azure Bot resource created (https://learn.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
   -Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
   - Enter a name for your new Connection setting.  
-    - In the Service Provider dropdown, select Azure Active Directory V2
+    - In the Service Provider dropdown, select Microsoft Entra ID V2
     - Enter in the client id and client secret obtained in step 1 and 1
     - For the Token Exchange URL use the Application ID URL obtained in step 1
     - Specify "common" as the Tenant ID

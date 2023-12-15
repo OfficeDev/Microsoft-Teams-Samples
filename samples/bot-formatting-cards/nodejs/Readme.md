@@ -54,7 +54,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -83,7 +83,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 
   - In a terminal, navigate to `samples/bot-formatting-cards/nodejs`
-  - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
@@ -120,7 +120,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
         ```
 
   **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
-  - Update the user AAD object ID in your adaptive card JSON from your tenant's AAD users available in the Azure portal.
+  - Update the user Microsoft Entra object ID in your adaptive card JSON from your tenant's Microsoft Entra users available in the Azure portal.
     - Navigate to samples\bot-formatting-cards\nodejs\resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}

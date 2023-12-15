@@ -36,7 +36,7 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 
 ### Register you app with Azure AD.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -81,7 +81,7 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
    - Select Configuration section.
    - Under configuration -> Add OAuth connection string.
    - Provide connection Name : for eg `ssoconnection`
-   - Select service provider ad `Azure Active Directory V2`
+   - Select service provider ad `Microsoft Entra ID V2`
    - Complete the form as follows:
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file.

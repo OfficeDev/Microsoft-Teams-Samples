@@ -41,7 +41,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.   
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.   
    
     *Enter the following  to Click Expose An API Menu and add a scope details to configure the admin and user consent prompts with values that are appropriate for the access_as_user scope.*
    - Added the WebApplication Info Resource and Application ID URI in expose and API like: api://Tunnelbaseurl/App-id"
@@ -59,7 +59,7 @@ This feature shown in this sample is currently available in Public Developer Pre
    - Complete the form as follows:
 
     - **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-    - **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
+    - **Service Provider:** Select Microsoft Entra ID v2. Once you select this, the Azure AD-specific fields will be displayed.
     - **Client id:** Enter the Application (client) ID .
     - **Client secret:** Enter the Application (client) secret.
     -  Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
@@ -108,7 +108,7 @@ This feature shown in this sample is currently available in Public Developer Pre
     ```
   - Modify the `/appsettings.json` and fill in the following details:
   
-  - `{{MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{MICROSOFT-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ MICROSOFT-APP-PASSWORD}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Connection Name }}` - Generated from Step 1, also referred as Instruction on setting connection.
   
