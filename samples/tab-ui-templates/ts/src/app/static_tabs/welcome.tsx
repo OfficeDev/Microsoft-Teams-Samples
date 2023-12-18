@@ -94,17 +94,6 @@ const ResourceCard = ({ imageUrl, title, desc, links }: IResourceCard) => {
       >
         {desc}
       </Text>
-      {links.map((link: IResourceCardLink, key: number) => (
-        <Text
-          key={key}
-          href={link.href}
-          target="_blank"
-          content={link.label}
-          size={500}
-          color="brand"
-          styles={{ textDecoration: "none", marginBottom: ".5rem" }}
-        />
-      ))}
     </div>
   );
 };
