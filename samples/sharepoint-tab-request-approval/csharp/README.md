@@ -1,16 +1,16 @@
-﻿---
+---
 page_type: sample
-products:
-    - office-teams
-    - office
-    - office-365
-    - sharepoint-repository-service
-languages:
-    - csharp
 description: This sample app demonstrates the usage of SharePoint Embedded for storage in teams.
+products:
+- office-teams
+- office
+- office-365
+- sharepoint-repository-service
+languages:
+- csharp
 extensions:
-    contentType: samples
-    createdDate: "12/19/2023 12:00:01 PM"
+ contentType: samples
+ createdDate: "12/19/2023 12:00:01 PM"
 urlFragment: officedev-microsoft-teams-samples-sharepoint-tab-request-approval-csharp
 ---
 
@@ -24,7 +24,7 @@ Welcome to the documentation for the Tab Request Approval app leveraging the Sha
 * Graph API
 
 ## Interaction with app
-![Tab-page](Images/SharepointEmbedded.gif)
+![Tab-page](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/SharepointEmbedded.gif)
 
 ## Overview
 This is a modified version of the pre-existing [Tab Request Approval](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp) app that has been integrated with [SharePoint Embedded](https://learn.microsoft.com/en-us/sharepoint/dev/embedded/overview). 
@@ -124,7 +124,7 @@ Installation and uninstallation events are simulated by entering the following r
 ![teamInstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/InstallationSimulationInTeam.png)
 
 - Simulating uninstallation in chat
-![teamUninstallation](/TabRequestApproval/Images/UninstallationSimulationInChat.png)
+![teamUninstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInChat.png)
 
 - Simulating uninstallation in team
 ![teamUninstallation](/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/UninstallationSimulationInTeam.png)
