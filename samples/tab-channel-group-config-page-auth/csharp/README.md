@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates AAD and Silent Authentication inside teams configurable tab.
+description: This sample demonstrates Microsoft Entra and Silent Authentication inside teams configurable tab.
 products:
 - office-teams
 - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-aut
 
 ## Summary
 
-There are many services that you may wish to consume inside your Teams app, and most of those services require authentication and authorization to get access to the service. Services include Facebook, Twitter, and of course Teams. Users of Teams have user profile information stored in Azure Active Directory (Azure AD) using Microsoft Graph and this article will focus on authentication using Azure AD to get access to this information.
+There are many services that you may wish to consume inside your Teams app, and most of those services require authentication and authorization to get access to the service. Services include Facebook, Twitter, and of course Teams. Users of Teams have user profile information stored in Microsoft Entra ID (Azure AD) using Microsoft Graph and this article will focus on authentication using Azure AD to get access to this information.
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
@@ -30,7 +30,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Config Tab Authentication:** [Manifest](/samples/tab-channel-group-config-page-auth/csharp/demo-manifest/tab-channel-group-config-page-auth.zip)
 
-## Initiate Silent and Simple Authentication ConfigurableTab using AAD
+## Initiate Silent and Simple Authentication ConfigurableTab using Microsoft Entra ID
 
 Authentication flow should be triggered by a user action. You should not open the authentication pop-up automatically because this is likely to trigger the browser's pop-up blocker as well as confuse the user.
 
@@ -52,10 +52,10 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams   permission to obtain access tokens on its behalf.
 
-  - Create an [AAD application](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
+  - Create an [Microsoft Entra ID application](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
  - Set your application URI to the same URI you've created in the tunnelling application.
    - Ex: api://<your_tunnel_domain>/{appId} using the application ID that was assigned to your app

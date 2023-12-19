@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab.
+description: This is an sample tab application which demonstrates Azure Microsoft Entra authentication using OBO flow in personal teams tab.
 products:
 - office-teams
 - office
@@ -42,7 +42,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ### Register your Teams Auth SSO with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  - Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -108,8 +108,8 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal Directory (tenant) ID.
-  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Directory (tenant) ID.
+  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ YOUR-CLIENT-SECRET}}` - Generated from Step 1, also referred to as Client secret
   - `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI. E.g. api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000.,
   

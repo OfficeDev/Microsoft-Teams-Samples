@@ -39,7 +39,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 

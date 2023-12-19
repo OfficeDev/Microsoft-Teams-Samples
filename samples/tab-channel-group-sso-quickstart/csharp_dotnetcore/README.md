@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample application which showcases AAD authentication in channel tab.
+description: This is an sample application which showcases Microsoft Entra authentication in channel tab.
 products:
 - office-teams
 - office
@@ -34,7 +34,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 ## Setup
 ### Register your Teams Auth SSO with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -101,8 +101,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal Directory (tenant) ID.
-  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal Application (client) ID.
+  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Directory (tenant) ID.
+  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Application (client) ID.
   - `{{ YOUR-CLIENT-SECRET}}` - Generated from Step 1, also referred to as Client secret
   - `{{ ApplicationIdURI}}` - Your application's ApplicationIdURI. E.g. api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`
 

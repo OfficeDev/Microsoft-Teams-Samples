@@ -39,7 +39,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - Select **New Registration** and on the *register an application page*, set following values:
      * Set **name** to your app name.
@@ -116,7 +116,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{AzureAD Client Id}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{AzureAD Client Id}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ Azure App secret}}` - Generated from Step 1, also referred to as Client secret
   - `{{ AzureAD Tenant Id}}` - Generated from Step 1, also referred to as Directory Tenant Id
   - `{{ Application ID URI }}` - Your Application ID URI.  ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`

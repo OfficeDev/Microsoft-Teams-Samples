@@ -107,7 +107,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm install
     ```
 
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from bot Framework registration. 
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Microsoft Entra ID app registration in Azure portal or from bot Framework registration. 
 - Update the `BaseUrl` as per your application domain like if you are using ngrok, it would be `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 - Update the `ConnectionName` with Azure Bot Registration connection name configured in step 1.
 
