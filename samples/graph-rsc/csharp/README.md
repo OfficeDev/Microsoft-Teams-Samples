@@ -43,7 +43,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1) Register your app with Microsoft identity platform via the Azure AD portal (AAD app registration)
+1) Register your app with Microsoft identity platform via the Azure AD portal (Microsoft Entra ID app registration)
     - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
 **Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level 
 
@@ -72,14 +72,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    ```
 
 5)  Update appsettings.json
-    - Update configuration for `<<Client Id>>`, `<<Client Secret>>` and ``<<Tenant Id>>`` with the ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```TenantId``` which was generated while doing AAD pp registration in your Azure Portal.
+    - Update configuration for `<<Client Id>>`, `<<Client Secret>>` and ``<<Tenant Id>>`` with the ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```TenantId``` which was generated while doing Microsoft Entra ID pp registration in your Azure Portal.
 
 6) Run the bot from Visual Studio: 
     - Press `F5` to run the project
 
 7) Setup the `manifest.json` in the `/AppManifest` folder 
    Replace the following details:
-    - Replace `<<Your Microsoft APP Id>>` at all the places with your MicrosoftAppId received while doing AAD app registration in Azure portal
+    - Replace `<<Your Microsoft APP Id>>` at all the places with your MicrosoftAppId received while doing Microsoft Entra ID app registration in Azure portal
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
