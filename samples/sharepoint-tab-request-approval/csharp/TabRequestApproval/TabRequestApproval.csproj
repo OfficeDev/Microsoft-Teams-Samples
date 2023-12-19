@@ -19,7 +19,6 @@
     <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.6" />
     <PackageReference Include="Microsoft.Graph.Beta" Version="0.35.0-preview" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
-    <PackageReference Include="Microsoft.Online.AggregatorService.Encryptor" Version="1.2.804" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
