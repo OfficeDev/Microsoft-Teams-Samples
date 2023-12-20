@@ -38,9 +38,12 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.9.0",
     "del": "^5.1.0",
-    "gulp": "^3.9.1",
-    "gulp-zip": "^5.0.1",
-    "nodemon": "^2.0.3",
-    "esbuild": "^0.18.1"
+    "esbuild": "^0.18.1",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.33.2",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^6.0.0",
+    "nodemon": "^2.0.3"
   }
 }
