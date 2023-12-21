@@ -101,7 +101,7 @@ It offers the following benefits:
 - Be able to perform operations on containers individually.
 - Reduced time complexity by a factor of N (N is the number of containers).
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L35) line and put your debugger for local debug.
 
 #### Subscription Flow
 This app provides users with the ability to establish [change notification subscription](https://learn.microsoft.com/en-us/graph/api/resources/webhooks?view=graph-rest-1.0). Subscriptions can be made to messages in teams or chats.
