@@ -101,6 +101,8 @@ It offers the following benefits:
 - Be able to perform operations on containers individually.
 - Reduced time complexity by a factor of N (N is the number of containers).
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+
 #### Subscription Flow
 This app provides users with the ability to establish [change notification subscription](https://learn.microsoft.com/en-us/graph/api/resources/webhooks?view=graph-rest-1.0). Subscriptions can be made to messages in teams or chats.
 
@@ -142,5 +144,6 @@ The purpose of providing these simulations is to show you how storage can be pro
     - Ensure that you are able to grant admin consent to that Service Principal (Enterprise Application).
     Restarting the process of setting up SharePoint Embedded manually will resolve this. You can do this by navigating to the **API Permissions Tab** and click on ```Grant Admin Consent for {{Tenant Name}}```. Navigate to the app's Enterprise Application entity and click on the ```Grant Admin Consent for {{Tenant Name}}``` as well. Wait for a few minutes and refresh the permissions **API Permissions Tab** and the **Enterprise Application Tab**. If the statuses of the permissions have not been changed, then wait a few more minutes and repeat the above process again times.
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/sharepoint-tab-request-approval" />
     
     
