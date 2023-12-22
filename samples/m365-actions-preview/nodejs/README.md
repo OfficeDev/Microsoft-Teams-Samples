@@ -34,21 +34,21 @@ To debug the app
 1. Open Debug View (`Ctrl+Shift+D`) and select "Debug in the Microsoft 365 app (Edge) without backend" in dropdown list.
 1. Press "F5" to debug the app in the Microsoft 365 app in a browser window.
 
-![Debug](images/21.Debug.png)
+![Debug](images/23.Debug.png)
 
 ## Running the sample
 
 **Select app:**
-![App](images/0.SelectApp.png)
+![App](images/1.SelectApp.png)
 
 **Welcome to todo list app!:**
-![Login](images/1.Login.png)
+![Login](images/2.Login.png)
 
 **Accept permissions:**
-![Permissons](images/2.Permissons.png)
+![Permissons](images/3.Permissons.png)
 
 **No task added:**
-![NoTask](images/3.NoTask.png)
+![NoTask](images/4.NoTask.png)
 
 **Click more options:**
 ![SelectMoreOptions](images/4.SelectMoreOptions.png)
@@ -57,48 +57,54 @@ To debug the app
 ![AddDoTaskComple](images/5.AddDoTaskComple.png)
 
 **Add your notes here:**
-![AddNotes](images/6.AddNotes.png)
+![AddNotesDes](images/6.AddNotesDes.png)
 
-**Notes docx:**
-![AddNodesData](images/7.AddNodesData.png)
+**Add to do list grid:**
+![TaskGrid](images/7.TaskGrid.png)
 
-**Notes pdf:**
-![PDFNodes](images/8.PDFNodes.png)
+**Add todo task and Mark complete UI:**
+![AddDoTaskComplePDF](images/8.AddDoTaskComplePDF.png)
 
-**To do list:**
-![MainTaskGrid](images/9.MainTaskGrid.png)
+**Add your notes here:**
+![AddNotesDesPDF](images/9.AddNotesDesPDF.png)
 
-**Click Edit:**
-![Edit](images/10.Edit.png)
+**Add to do list grid:**
+![TaskGrid](images/10.TaskGrid.png)
 
-**Edit value:**
-![EditValueUI](images/11.EditValueUI.png)
+**Click related tasks:**
+![RelatedTasks](images/11.RelatedTasks.png)
 
-**Delete:**
-![Delete](images/12.Delete.png)
+**All tasks list:**
+![TaskRelatedTasksGrid](images/12.TaskRelatedTasksGrid.png)
 
-**Mark task complete:**
-![MarkComplete](images/13.MarkComplete.png)
+**Select related tasks completed:**
+![CompleteRelatedTasks](images/13.CompleteRelatedTasks.png)
 
-**Mark complete UI:**
-![CheckMarkComplete](images/14.CheckMarkComplete.png)
+**Add task:**
+![NewTaskTab](images/14.NewTaskTab.png)
 
-**Select task:**
-![SelectCheckBoxMarkCom](images/15.SelectCheckBoxMarkCom.png)
+**Edit task:**
+![Edit](images/15.Edit.png)
 
-**Status mark:**
-![SelectedUI](images/16.SelectedUI.png)
+**Edit task value:**
+![EditValue](images/16.EditValue.png)
 
-**Mark task complete:**
-![PDFMarkComple](images/17.PDFMarkComple.png)
+**Save edit task value:**
+![SaveEditValue](images/17.SaveEditValue.png)
 
-**Mark complete UI:**
-![MarkUI](images/18.MarkUI.png)
+**Delete task:**
+![Delete](images/18.Delete.png)
 
-**Status mark:**
-![SelectCheck](images/19.SelectCheck.png)
+**Delete a particular task:**
+![DeletedRow](images/19.DeletedRow.png)
 
-**To do list:**
-![MainGrid](images/20.MainGrid.png)
+**Add task and Enter the task notes:**
+![AddTaskNewTab](images/20.AddTaskNewTab.png)
+
+**New task added:**
+![NewTask](images/21.NewTask.png)
+
+**Uninstall app:**
+![Uninstall](images/22.Uninstall.png)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/m365-actions-preview-nodejs" />
