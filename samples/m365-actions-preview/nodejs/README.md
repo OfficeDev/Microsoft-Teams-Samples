@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-m365-actions-preview-nodejs
 ---
 
-# Actions across Microsoft 365 (private preview)
+# Actions across Microsoft 365
 
 Developers have the power to enhance users' productivity by building Actions that streamline task completion, minimizing context switching across various applications. 
 This feature not only benefits users by enabling them to accomplish tasks more efficiently, but it also enhances the visibility and user engagement of your app by 
