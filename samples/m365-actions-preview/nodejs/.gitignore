@@ -354,7 +354,7 @@ env/.env.*.user
 env/.env.local
 .DS_Store
 build
-appPackage/build
+appManifest/build
 .env
 .deployment
 lib/
