@@ -15,6 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-m365-actions-preview-nodejs
 
 # Actions across Microsoft 365 (private preview)
 
+Developers have the power to enhance users' productivity by building Actions that streamline task completion, minimizing context switching across various applications. 
+This feature not only benefits users by enabling them to accomplish tasks more efficiently, but it also enhances the visibility and user engagement of your app by 
+seamlessly integrating it into their workflow.
+During this private preview phase, we are introducing Actions on content in the Microsoft 365 app. This empowers users to take immediate action on content files through your app, expanding the range of interactions users can have with their content.
+
 ## Interaction with app
 
 ![m365-actions-preview](images/m365-actions-preview.gif)
