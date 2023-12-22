@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "12/04/2023 01:38:27 PM"
+ createdDate: "12/22/2023 01:38:27 PM"
 urlFragment: officedev-microsoft-teams-samples-m365-actions-preview-nodejs
 ---
 
