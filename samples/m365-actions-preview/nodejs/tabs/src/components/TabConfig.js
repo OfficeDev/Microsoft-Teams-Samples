@@ -1,9 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import React from "react";
 import "./App.css";
+
 import { app, pages } from "@microsoft/teams-js";
+
+import React from "react";
 
 /**
  * The 'Config' component is used to display your group tabs
@@ -25,7 +27,7 @@ class TabConfig extends React.Component {
         pages.config
           .setConfig({
             suggestedDisplayName: "Todo List",
-            entityId: "Test",
+            entityId: "index",
             contentUrl: baseUrl + "/index.html#/tab",
             websiteUrl: baseUrl + "/index.html#/tab",
           })

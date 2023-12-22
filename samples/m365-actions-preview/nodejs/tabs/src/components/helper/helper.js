@@ -50,6 +50,7 @@ export async function loginBtnClick(credential, scope) {
     try {
         // Popup login page to get user's access token
         await credential.login(scope);
+        return true;
     } catch (err) {
         console.log(err);
         if (err instanceof Error && err.message?.includes("CancelledByUser")) {
@@ -61,6 +62,7 @@ export async function loginBtnClick(credential, scope) {
         }
 
         alert("Login failed: " + err);
+        return false;
     }
 }
 /**

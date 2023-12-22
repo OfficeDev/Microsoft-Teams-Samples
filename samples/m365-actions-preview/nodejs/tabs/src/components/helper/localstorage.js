@@ -50,12 +50,10 @@ export function isDataExist(item, retrievedData) {
 /**
  * Returns data info from localStorage
 */
-export function getItemsFromLocalStorage(itemId) {
+export function getItemsFromLocalStorage() {
     const storeData = []
     const retrievedData = localStorage.getItem(storageKey);
-    if (itemId && retrievedData) {
-        return JSON.parse(retrievedData).storeData.filter(x => x.itemId === itemId);
-    }
+    
     if (retrievedData) {
         return JSON.parse(retrievedData).storeData;
     }

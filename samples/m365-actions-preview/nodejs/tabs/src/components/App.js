@@ -7,7 +7,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 
 import { Route, HashRouter as Router, Routes } from "react-router-dom";
 
-import DialogPage from "./DialogPage";
+import NewTaskPage from "./NewTaskPage";
 import Privacy from "./about/Privacy";
 import React from "react";
 import Tab from "./Tab";
@@ -28,7 +28,7 @@ function App() {
           <Route path="/termsofuse" element={<TermsOfUse />} />
           <Route path="/tab" element={<Tab />} />
           <Route path="/config" element={<TabConfig />} />
-          <Route path="/dialogPage" element={<DialogPage />} />
+          <Route path="/newTaskPage" element={<NewTaskPage />} />
         </Routes>
       </Router>
     );

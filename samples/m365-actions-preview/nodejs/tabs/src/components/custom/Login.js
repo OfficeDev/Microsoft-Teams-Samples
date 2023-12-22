@@ -7,7 +7,7 @@ export const Login = (props) => {
             <Profile userInfo={props.userInfo} />
             <h2>Welcome to To Do List App!</h2>
             <Button appearance="primary" onClick={() => props.loginBtnClick()}>
-                Start
+                Login
             </Button>
         </div>
     )

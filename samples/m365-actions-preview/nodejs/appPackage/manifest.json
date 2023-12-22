@@ -27,7 +27,10 @@
     {
       "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/config",
       "canUpdateConfiguration": true,
-      "scopes": ["team", "groupChat"],
+      "scopes": [
+        "team",
+        "groupChat"
+      ],
       "context": [
         "channelTab",
         "meetingChatTab",
@@ -43,23 +46,69 @@
       "name": "Tasks",
       "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
       "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
-      "scopes": ["personal"]
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "newTaskPage",
+      "name": "New Task",
+      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/newTaskPage",
+      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/newTaskPage",
+      "scopes": [
+        "personal"
+      ]
     }
   ],
   "actions": [
     {
-      "id": "completeLinkedTask",
-      "displayName": "Mark complete",
-      "intent": "custom",
-      "description": "Test action with open intent and openPage handler",
+      "id": "addTodoTask",
+      "displayName": "Add ToDo task",
+      "intent": "addTo",
+      "description": "Add this file with a short note to my to do list",
       "handlers": [
         {
           "type": "openPage",
           "supportedObjects": {
             "file": {
-              "extensions": ["xlsx", "doc", "docx", "pdf", "pptx", "ppt"]
-            },
-            "folder": null
+              "extensions": [
+                "xlsx",
+                "doc",
+                "dot",
+                "docx",
+                "pdf",
+                "pptx",
+                "ppt"
+              ]
+            }
+          },
+          "pageInfo": {
+            "pageId": "newTaskPage",
+            "subPageId": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "completeLinkedTask",
+      "displayName": "Related Tasks",
+      "intent": "custom",
+      "description": "Show tasks that are related to the content.",
+      "handlers": [
+        {
+          "type": "openPage",
+          "supportedObjects": {
+            "file": {
+              "extensions": [
+                "xlsx",
+                "doc",
+                "dot",
+                "docx",
+                "pdf",
+                "pptx",
+                "ppt"
+              ]
+            }
           },
           "pageInfo": {
             "pageId": "index",
@@ -67,32 +116,12 @@
           }
         }
       ]
-    },
-    {
-      "id": "addTodoTask",
-      "displayName": "Add todo task",
-      "intent": "addTo",
-      "description": "Add this file with a short note to my to do list",
-      "handlers": [
-        {
-          "type": "openDialog",
-          "supportedObjects": {
-            "file": {
-              "extensions": ["xlsx", "doc", "dot", "docx", "pdf", "pptx", "ppt"]
-            },
-            "folder": null
-          },
-          "dialogInfo": {
-            "dialogType": "url",
-            "url": "${{TAB_ENDPOINT}}/index.html#/dialogPage",
-            "width": "small",
-            "height": "large"
-          }
-        }
-      ]
     }
   ],
-  "permissions": ["identity", "messageTeamMembers"],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
     "${{TAB_DOMAIN}}",
     "*tab.azurewebsites.net",

@@ -12,7 +12,7 @@ const config = require("../config");
 const oboAuthConfig = {
     authorityHost: config.authorityHost,
     clientId: config.clientId,
-    tenantId: config.tenantId,
+    tenantId: "common",
     clientSecret: config.clientSecret,
 };
 
@@ -42,16 +42,13 @@ module.exports = async function (context, req, config) {
         const accessToken = config.AccessToken;
         const oboCredential = new OnBehalfOfUserCredential(accessToken, oboAuthConfig);
         // Get the user info from access token
-        const currentUser = await oboCredential.getUserInfo();
+        const currentUser = oboCredential.getUserInfo();
         const objectId = currentUser.objectId;
         var query;
 
         switch (method) {
             case "get":
-                if (req.query.itemId && req.query.objectId) {
-                    query = `select id, description, isCompleted, objectId, itemId from dbo.Todo where itemId = '${req.query.itemId}' and 
-                    objectId='${req.query.objectId}' order by isCompleted desc`;
-                } else if (req.query.objectId) {
+                if (req.query.objectId) {
                     query = `select * from dbo.Todo where objectId='${req.query.objectId}' order by isCompleted desc`;
                 }
                 break;

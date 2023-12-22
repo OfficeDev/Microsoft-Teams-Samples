@@ -185,7 +185,8 @@ span {
 }
 
 .auth {
-  margin-top: 30vh;
+  padding: 30vh;
+  height: 100%;
 }
 
 .auth .profile {

@@ -63,7 +63,7 @@ export const DataGrid = (props) => {
                         <TableCell>
                             <TableCellLayout style={{ width: "100%" }}>
                                 {props.editId !== item.id &&
-                                    <Label as="label" size="small" className={"text" + (item.isCompleted ? " is-completed" : "")}>{item.description}</Label>
+                                    <Label as="label" size="small" onDoubleClick={() => { props.onEdit(item.id) }} className={"text" + (item.isCompleted ? " is-completed" : "")}>{item.description}</Label>
                                 }
                                 {props.editId && props.editId === item.id &&
                                     <Input
@@ -102,6 +102,7 @@ export const DataGrid = (props) => {
                                         userId={item.objectId}
                                     />
                                 }
+                                {!item.itemId && <div>No attachment found</div>}
                             </TableCellLayout>
                         </TableCell>
                         <TableCell>
@@ -116,11 +117,9 @@ export const DataGrid = (props) => {
                                 </MenuTrigger>
                                 <MenuPopover>
                                     <MenuList>
-                                        {item.isCompleted === 0 &&
-                                            <MenuItem icon={<Edit20Regular />} onClick={() => { props.onEdit(item.id) }}>
-                                                Edit
-                                            </MenuItem>
-                                        }
+                                        <MenuItem icon={<Edit20Regular />} onClick={() => { props.onEdit(item.id) }}>
+                                            Edit
+                                        </MenuItem>
                                         <MenuItem icon={<Delete20Regular />} onClick={() => props.onDeleteItem(item.id)}>
                                             Delete
                                         </MenuItem>

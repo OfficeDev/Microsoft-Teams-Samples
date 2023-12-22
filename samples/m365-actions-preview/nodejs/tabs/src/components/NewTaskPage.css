@@ -1,0 +1,29 @@
+.task-container {
+    /* margin: auto; */
+    height: auto;
+    flex-direction: column;
+    width: 500px;
+    padding: 15px;
+    /* border: 1px solid #70707030; */
+}
+
+.task-header>.task-title {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.task-button {
+    display: flex;
+    /* justify-content: flex-end; */
+    margin-top: 15px;
+}
+
+.task-main {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.task-list-button {
+    padding: 15px;
+}

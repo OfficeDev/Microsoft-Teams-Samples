@@ -9,16 +9,14 @@ import {
   TeamsUserCredential,
   createApiClient,
 } from "@microsoft/teamsfx";
-import { Checkbox, Input, Spinner } from "@fluentui/react-components";
+import { Button, Checkbox, Input, Spinner } from "@fluentui/react-components";
+import { app, pages } from "@microsoft/teams-js";
 import { callFunctionWithErrorHandling, loginBtnClick } from "./helper/helper";
 import { getItemsFromLocalStorage, onDeleteItem, setValuesToLocalStorage, updateItem } from "./helper/localstorage";
 
 import { DataGrid } from "./custom/DataGrid";
-import FilteteredResult from './custom/FilteredResult';
 import { Login } from "./custom/Login";
 import React from "react";
-import { TodoDialog } from "./custom/Dialog";
-import { app } from "@microsoft/teams-js";
 import config from "./lib/config";
 import noItemimage from "../images/no-item.png";
 import { v4 as uuidv4 } from 'uuid';
@@ -49,58 +47,75 @@ class Tab extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.loginBtn = this.loginBtn.bind(this);
-    this.clearFilter = this.clearFilter.bind(this);
   }
 
   async componentDidMount() {
     await this.initTeamsFx();
-    await this.initData();
+    if (!await this.checkIsConsentNeeded()) {
+      await this.setUser();
+      await this.setItemId();
+      await this.initData();
+    }
   }
 
-  async initTeamsFx() {
-    const authConfig = {
-      clientId: config.clientId,
-      initiateLoginEndpoint: config.initiateLoginEndpoint,
-    };
-
-    const credential = new TeamsUserCredential(authConfig);
-    const userInfo = await credential.getUserInfo();
-
+  async setUser() {
+    const userInfo = await this.credential.getUserInfo();
     this.setState({
       userInfo: userInfo,
     });
+  }
 
-    this.scope = config.scopes;
-    this.credential = credential;
-
-    const apiBaseUrl = config.apiEndpoint + "/api/";
-    // createApiClient(...) creates an Axios instance which uses BearerTokenAuthProvider to inject token to request header
-    const apiClient = createApiClient(
-      apiBaseUrl,
-      new BearerTokenAuthProvider(async () => (await credential.getToken("")).token)
-    );
-    this.apiClient = apiClient;
-
+  async setItemId() {
     const context = await app.getContext();
     const itemId = context.actionInfo && context.actionInfo.actionObjects[0].itemId;
     this.setState({
-      actionObjectsType: context.actionInfo && context.actionInfo.actionObjects[0].type,
       itemId: itemId
     });
   }
 
-  async initData() {
-    if (!(await this.checkIsConsentNeeded())) {
-      this.setState({ loader: true });
-      await this.getItems(this.state.itemId);
-      this.setState({ loader: false });
+  async initTeamsFx() {
+    try {
+      const authConfig = {
+        clientId: config.clientId,
+        initiateLoginEndpoint: config.initiateLoginEndpoint,
+      };
+
+      const credential = new TeamsUserCredential(authConfig);
+      this.credential = credential;
+      this.scope = config.scopes;
+
+      const apiBaseUrl = config.apiEndpoint + "/api/";
+      // createApiClient(...) creates an Axios instance which uses BearerTokenAuthProvider to inject token to request header
+      const apiClient = createApiClient(
+        apiBaseUrl,
+        new BearerTokenAuthProvider(async () => (await credential.getToken("")).token)
+      );
+      this.apiClient = apiClient;
+
+    } catch (error) {
+      console.log("initTeamsFx", error);
     }
+  }
+
+  async initData() {
+    this.setState({ loader: true });
+    await this.getItems(this.state.itemId);
+    this.setState({ loader: false });
   }
 
   async checkIsConsentNeeded() {
     try {
-      await this.credential.getToken(this.scope);
+      const token = localStorage.getItem("tokenWithExpireTime")
+      if (!token) {
+        const accessToken = await this.credential.getToken(this.scope);
+        localStorage.setItem("tokenWithExpireTime", JSON.stringify(accessToken));
+      } else {
+        localStorage.removeItem("tokenWithExpireTime");
+        document.location.reload();
+      }
+
     } catch (error) {
+      await this.setUser();
       this.setState({
         showLoginPage: true,
       });
@@ -116,8 +131,8 @@ class Tab extends React.Component {
     let result = undefined;
 
     // For using localstorage
-    if (config.localStorage.toUpperCase() === "TRUE") {
-      result = getItemsFromLocalStorage(itemId);
+    if (config.localStorage && config.localStorage.toUpperCase() === "TRUE") {
+      result = getItemsFromLocalStorage();
     } else {
       // Use client TeamsFx SDK to call "todo" Azure Function in "get" method to get all todo list which belong to user oid
       result = await callFunctionWithErrorHandling(this.apiClient, "todo", "get", undefined,
@@ -137,7 +152,7 @@ class Tab extends React.Component {
   async onAddItem() {
 
     // For using localstorage
-    if (config.localStorage.toUpperCase() === "TRUE") {
+    if (config.localStorage && config.localStorage.toUpperCase() === "TRUE") {
       setValuesToLocalStorage({
         id: uuidv4(),
         objectId: this.state.userInfo.objectId,
@@ -163,7 +178,7 @@ class Tab extends React.Component {
 
   async onUpdateItem(id, description) {
     // For using localstorage
-    if (config.localStorage.toUpperCase() === "TRUE") {
+    if (config.localStorage && config.localStorage.toUpperCase() === "TRUE") {
       updateItem(id, description, undefined);
     } else {
       // Use client TeamsFx SDK to call "todo" Azure Function in "put" method to update a todo item
@@ -179,7 +194,7 @@ class Tab extends React.Component {
     this.setState({ loader: true });
 
     // For using localstorage
-    if (config.localStorage.toUpperCase() === "TRUE") {
+    if (config.localStorage && config.localStorage.toUpperCase() === "TRUE") {
       onDeleteItem(id);
     } else {
       // Use client TeamsFx SDK to call "todo" Azure Function in "delete" method to delete a todo item
@@ -194,7 +209,7 @@ class Tab extends React.Component {
     this.handleInputChange(index, "isCompleted", isCompleted);
 
     // For using localstorage
-    if (config.localStorage.toUpperCase() === "TRUE") {
+    if (config.localStorage && config.localStorage.toUpperCase() === "TRUE") {
       updateItem(id, undefined, isCompleted);
 
     } else {
@@ -231,20 +246,13 @@ class Tab extends React.Component {
     this.setState({ newItemDescription: description });
   }
 
-  loginBtn() {
-    loginBtnClick(this.credential, this.scope);
-  }
-
-  async clearFilter() {
-    this.setState({
-      itemId: undefined,
-      loader: true
-    });
-    await this.getItems(undefined);
-    this.setState({
-      showFilter: false,
-      loader: false
-    });
+  async loginBtn() {
+    const isLoginSuccessfull = await loginBtnClick(this.credential, this.scope);
+    if (isLoginSuccessfull) {
+      this.setState({ showLoginPage: false, loader: true });
+      await this.refresh();
+      this.setState({ loader: false });
+    }
   }
 
   render() {
@@ -252,17 +260,6 @@ class Tab extends React.Component {
       <div>
         {this.state.showLoginPage === false && (
           <div className="flex-container">
-            {this.state.showFilter &&
-              <FilteteredResult
-                teamsUserCredential={this.credential}
-                scope={this.scope}
-                actionObjectsType={this.state.actionObjectsType}
-                clearFilter={this.clearFilter}
-                count={this.state.dbItems.length}
-                itemId={this.state.itemId}
-                objectId={this.state.userInfo.objectId}
-              />
-            }
             <div className="todo-col">
               <div className="todo">
                 <div className="header">
@@ -270,16 +267,12 @@ class Tab extends React.Component {
                     <h2>To Do List</h2>
                   </div>
                   <div className="add-button">
-                    {this.credential && this.state.itemId && this.state.userInfo && (
-                      <TodoDialog
-                        handleFormSubmit={this.handleFormSubmit}
-                        handleDialogInputChange={this.handleDialogInputChange}
-                        description={this.state.newItemDescription}
-                        teamsUserCredential={this.credential}
-                        scope={this.scope}
-                        userInfo={this.state.userInfo}
-                        itemId={this.state.itemId}
-                      />)}
+                    <Button appearance="primary" onClick={async () => {
+                      await pages.currentApp.navigateTo({
+                        pageId: "newTaskPage"
+                      })
+                    }} >+ Add task
+                    </Button>
                   </div>
                 </div>
 
