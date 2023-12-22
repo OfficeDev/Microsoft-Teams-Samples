@@ -107,4 +107,56 @@ To debug the app
 **Uninstall app:**
 ![Uninstall](images/22.Uninstall.png)
 
+### (Optional) Deploy the app to Azure
+
+>Here are the instructions to run the sample in **Visual Studio Code**. You can also try to run the app using TeamsFx CLI tool, refer to [Try the Sample with TeamsFx CLI](cli.md)
+
+1. Clone the repo to your local workspace or directly download the source code.
+1. Download [Visual Studio Code](https://code.visualstudio.com) and install [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit).
+1. Open the project in Visual Studio Code.
+1. Create an **env/.env.dev.user** file, and set value for `SECRET_SQL_USER_NAME` and `SECRET_SQL_PASSWORD`
+1. Open the command palette and select `Teams: Provision in the cloud`. You will be asked to input admin name and password of SQL. The toolkit will help you to provision Azure SQL.
+1. Once provision is completed, open the command palette and select `Teams: Deploy to the cloud`.
+1. Open **env/.env.dev** file, you could get the database name in `PROVISIONOUTPUT__AZURESQLOUTPUT__DATABASENAME` output. [Set IP address of your computer into server-level IP firewall rule from the database overview page](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-configure#from-the-database-overview-page).
+1. In Azure portal, find the database by `databaseName` and use [query editor](https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-portal) with below query to create a table:
+    ```sql
+    CREATE TABLE Todo
+    (
+        id INT IDENTITY PRIMARY KEY,
+        description NVARCHAR(128) NOT NULL,
+        objectId NVARCHAR(36),
+        itemId NVARCHAR(128),
+        channelOrChatId NVARCHAR(128),
+        isCompleted TinyInt NOT NULL default 0,
+    )
+    ```
+
+### Preview the app in Teams
+1. Once deployment is completed, you can preview the app running in Azure. In Visual Studio Code, open `Run and Debug` and select `Launch Remote in the Microsoft 365 app (Edge)` or `Launch Remote in the Microsoft 365 app (Chrome)` in the dropdown list and Press `F5` or the green arrow button to open a browser.
+
+## Feedback
+We really appreciate your feedback! If you encounter any issue or error, please report issues to us following the [Supporting Guide](https://github.com/OfficeDev/TeamsFx-Samples/blob/dev/SUPPORT.md). Meanwhile you can make [recording](https://aka.ms/teamsfx-record) of your journey with our product, they really make the product better. Thank you!
+
+## Contributing
+
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow 
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/m365-actions-preview-nodejs" />
