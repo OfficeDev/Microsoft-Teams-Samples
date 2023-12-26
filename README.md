@@ -187,7 +187,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 ## [Actions Preview](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 |    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
 |:--:|:---------------|:---------------------------------------------------------------------------------|:------|:----------------|:-------|
-|1|Actions across Microsoft 365 | This sample contains private preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com).| |[View][m365-actions-preview#js] ![toolkit-icon](assets/toolkit-icon.png) 
+|1|Actions across Microsoft 365 | This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com).| |[View][m365-actions-preview#js] ![toolkit-icon](assets/toolkit-icon.png) 
 
 ## Scenario specific samples
 

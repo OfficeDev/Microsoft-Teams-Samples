@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-m365-actions-preview-nodejs",
     "source": "officeDev",
-    "title": "Actions across Microsoft 365 (private preview)",
-    "shortDescription": "This sample contains private preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com),",
+    "title": "Actions across Microsoft 365",
+    "shortDescription": "This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com),",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/m365-actions-preview/nodejs",
     "longDescription": [
-      "This sample contains private preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com)."
+      "This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com)."
     ],
     "creationDateTime": "2023-12-22",
     "updateDateTime": "2023-12-22",
