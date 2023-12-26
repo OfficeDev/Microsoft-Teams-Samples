@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates Microsoft Entra and Silent Authentication inside teams configurable tab.
+description: This sample demonstrates Microsoft Entra ID and Silent Authentication inside teams configurable tab.
 products:
 - office-teams
 - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-aut
 
 ## Summary
 
-There are many services that you may wish to consume inside your Teams app, and most of those services require authentication and authorization to get access to the service. Services include Facebook, Twitter, and of course Teams. Users of Teams have user profile information stored in Microsoft Entra ID (Azure AD) using Microsoft Graph and this article will focus on authentication using Azure AD to get access to this information.
+There are many services that you may wish to consume inside your Teams app, and most of those services require authentication and authorization to get access to the service. Services include Facebook, Twitter, and of course Teams. Users of Teams have user profile information stored in Microsoft Entra ID using Microsoft Graph and this article will focus on authentication using Azure AD to get access to this information.
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
