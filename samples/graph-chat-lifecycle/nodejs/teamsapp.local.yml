@@ -104,6 +104,6 @@ deploy:
       appsettings: # Required. The appsettings to be generated
         tab:
           appId: ${{AAD_APP_CLIENT_ID}}
-          clientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+          appPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
           applicationIdUri: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
         
