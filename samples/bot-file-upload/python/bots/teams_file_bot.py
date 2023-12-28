@@ -48,7 +48,7 @@ class TeamsFileUploadBot(TeamsActivityHandler):
             # Attempt to upload a file to Teams.  This will display a confirmation to
             # the user (Accept/Decline card).  If they accept, on_teams_file_consent_accept
             # will be called, otherwise on_teams_file_consent_decline.
-            filename = "teams-logo.png"
+            filename = "teams.png"
             file_path = "files/" + filename
             file_size = os.path.getsize(file_path)
             await self._send_file_card(turn_context, filename, file_size)
@@ -97,7 +97,7 @@ class TeamsFileUploadBot(TeamsActivityHandler):
             file_consent_card_response.upload_info.upload_url, open(file_path, "rb"), headers=headers
         )
 
-        if response.status_code != 201:
+        if response.status_code != 201 and response.status_code != 200:
             print(f"Failed to upload, status {response.status_code}, file_path={file_path}")
             await self._file_upload_failed(turn_context, "Unable to upload file.")
         else:
