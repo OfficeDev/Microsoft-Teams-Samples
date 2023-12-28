@@ -79,7 +79,7 @@ async def messages(req: Request) -> Response:
         return json_response(
             data=invoke_response.body, status=invoke_response.status
         )
-    ##return Response(status=HTTPStatus.OK)
+    
     status = HTTPStatus.OK if not invoke_response else invoke_response.status
 
     return Response(status=status)
