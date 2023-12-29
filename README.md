@@ -17,6 +17,8 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Webhooks and Connectors samples](#Webhooks-and-Connectors-samples)
 1. [Graph APIs](#Graph-APIs)
 1. [Calls and online meetings bots](#Calls-and-online-meetings-bots)
+1. [Meetings samples](#Meetings-samples)
+1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
@@ -182,6 +184,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |15|meetings-audio-state|This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.||[View][meetings-audio-state#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |16|meetings-context-app|This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.|[View][meetings-context-app#csharp]|[View][meetings-context-app#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
+## [Actions Preview](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
+|    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
+|:--:|:---------------|:---------------------------------------------------------------------------------|:------|:----------------|:-------|
+|1|Actions across Microsoft 365 | This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com).| |[View][m365-actions-preview#js] ![toolkit-icon](assets/toolkit-icon.png) 
+
 ## Scenario specific samples
 
 |    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
@@ -316,6 +323,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
+[m365-actions-preview#js]:samples/m365-actions-preview/nodejs
 [region-selection-app#cs]: samples/app-region-selection/csharp  
 [meetings-notification#cs]:samples/meetings-notification/csharp
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp

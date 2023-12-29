@@ -1,0 +1,137 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.5",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "M365 platform teams",
+    "websiteUrl": "${{TAB_ENDPOINT}}",
+    "privacyUrl": "${{TAB_ENDPOINT}}/index.html#/privacy",
+    "termsOfUseUrl": "${{TAB_ENDPOINT}}/index.html#/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "To Do",
+    "full": "To Do action app"
+  },
+  "description": {
+    "short": "To Do action app",
+    "full": "To Do action app"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "${{TAB_ENDPOINT}}/index.html#/config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupChat"
+      ],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Tasks",
+      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "newTaskPage",
+      "name": "New Task",
+      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/newTaskPage",
+      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/newTaskPage",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "addTodoTask",
+      "displayName": "Add ToDo task",
+      "intent": "addTo",
+      "description": "Add this file with a short note to my to do list",
+      "handlers": [
+        {
+          "type": "openPage",
+          "supportedObjects": {
+            "file": {
+              "extensions": [
+                "xlsx",
+                "doc",
+                "dot",
+                "docx",
+                "pdf",
+                "pptx",
+                "ppt"
+              ]
+            }
+          },
+          "pageInfo": {
+            "pageId": "newTaskPage",
+            "subPageId": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "completeLinkedTask",
+      "displayName": "Related Tasks",
+      "intent": "custom",
+      "description": "Show tasks that are related to the content.",
+      "handlers": [
+        {
+          "type": "openPage",
+          "supportedObjects": {
+            "file": {
+              "extensions": [
+                "xlsx",
+                "doc",
+                "dot",
+                "docx",
+                "pdf",
+                "pptx",
+                "ppt"
+              ]
+            }
+          },
+          "pageInfo": {
+            "pageId": "index",
+            "subPageId": ""
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}",
+    "*tab.azurewebsites.net",
+    "statics.teams.cdn.office.net",
+    "local.teams.office.com",
+    "local.teams.office.com:9000",
+    "jaguarshark.azurewebsites.net"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}
