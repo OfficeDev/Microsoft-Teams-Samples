@@ -141,7 +141,7 @@ Click on Add Permissions to commit your changes.
 
     - Enter a name for your new Connection setting. This will be the name that gets referenced inside the settings of your bot service code in step 5
 
-    - In the Service Provider dropdown, select Microsoft Entra ID
+    - In the Service Provider dropdown, select Azure Active Directory V2
 
     - Enter in the client id and client secret obtained in step 1.1 and 1.2
 
