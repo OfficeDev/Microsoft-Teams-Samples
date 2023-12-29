@@ -13,6 +13,9 @@ const TextEncoder = require('util').TextEncoder;
 const ACData = require('adaptivecards-templating');
 const AdaptiveCardTemplate = require('../resources/UserMentionCardTemplate.json');
 const ImmersiveReaderCardTemplate = require('../resources/ImmersiveReaderCard.json');
+let counter = 0;
+let users = [];
+let teamMemberDetails = [];
 
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
@@ -38,6 +41,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.getSingleMember(context);
             } else if (text.includes('immersivereader')) {
                 await this.getImmersivereaderCard(context);
+            } else if (text.includes('check')) {
+                await this.checkReadUserCount(context);
+            } else if (text.includes('reset')) {
+                await this.resetReadUserCount(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -73,6 +80,16 @@ class TeamsConversationBot extends TeamsActivityHandler {
             }));
         });
 
+        // Invoked when user read the message sent by bot in personal scope.
+        this.onTeamsReadReceiptEvent(async (readReceiptInfo, turnContext, next) => {
+            let memberDetails = teamMemberDetails.find(member => member.aadObjectId === turnContext._activity.from.aadObjectId);
+            if (memberDetails && readReceiptInfo.isMessageRead(memberDetails.messageId)) {
+                users.push(memberDetails.name);
+                counter++;
+                teamMemberDetails = teamMemberDetails.filter(member => member.aadObjectId !== turnContext._activity.from.aadObjectId);
+              }
+        });
+
         // This method registers the lambda function, which will be invoked when message sent by user is updated in chat.
         this.onTeamsMessageEditEvent(async (context, next) => {
             let editedMessage = context.activity.text;
@@ -92,6 +109,23 @@ class TeamsConversationBot extends TeamsActivityHandler {
             await context.sendActivity("Message is soft deleted");
             next();
         });
+    }
+
+    // Checks the count of members who have read the message sent by MessageAllMembers command.
+    async checkReadUserCount(turnContext) {
+        if (users.length !== 0 && users.length !== undefined) {
+            const userList = Array.from(users).join(", ");
+            await turnContext.sendActivity(`Number of members read the message: ${counter}\n\nMembers: ${userList}`);
+        } else {
+            await turnContext.sendActivity("Read count is zero. Please make sure to send a message to all members firstly to check the count of members who have read your message.");
+        }
+    }
+
+    // Resets the check count of members who have read the message sent by MessageAllMembers command.
+    async resetReadUserCount(turnContext) {
+        teamMemberDetails = [];
+        counter = 0;
+        users = [];
     }
 
     async onInstallationUpdateActivity(context) {
@@ -139,6 +173,18 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 title: 'Send Immersive Reader Card',
                 value: null,
                 text: 'ImmersiveReader'
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Check read count",
+                value: null,
+                Text: "check"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Reset read count",
+                value: null,
+                Text: "reset"
             }
         ];
 
@@ -265,6 +311,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
 
     async messageAllMembersAsync(context, isAadId) {
         const members = await this.getPagedMembers(context);
+        await this.resetReadUserCount(context);
 
         await Promise.all(members.map(async (member) => {
             const message = MessageFactory.text(
@@ -291,7 +338,9 @@ class TeamsConversationBot extends TeamsActivityHandler {
                         process.env.MicrosoftAppId,
                         ref,
                         async (context) => {
-                            await context.sendActivity(message);
+                           var messageId = await context.sendActivity(message);
+                           member.messageId = messageId.id;
+                           teamMemberDetails.push(member);
                         });
                 });
         }));

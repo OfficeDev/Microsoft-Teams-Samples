@@ -26,6 +26,9 @@ This sample shows app stage view, Mute/Unmute Teams meeting audio call in meetin
 **Interaction with bot**
 ![mute-unmute](Images/MeetingTabsGif.gif)
 
+**Interaction with Teams Themes**
+![TeamsTheme](Images/TeamsThemes.gif)
+
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
@@ -159,11 +162,21 @@ Toggle button to mute state its looks like below.
 Toggle button to Unmute state it will unmute client audio.
 ![audioCallTrue](Images/audioCallTrue.png)
 
+13. **App theme when dark**
+![Dark](Images/dark-with-timer.PNG)
+
+14. **App theme when light**
+![Light](Images/light-with-timer.PNG)
+
+15. **App theme when contrast**
+![Contrast](Images/contrast-with-timer.PNG)
+
 ## Further reading
 
 - [Toggle incoming audio](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#toggle-incoming-audio)
 - [Get incoming audio speaker](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#get-incoming-audio-speaker)
 - [Generate meeting side panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 
 

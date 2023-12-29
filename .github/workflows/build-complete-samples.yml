@@ -1006,9 +1006,16 @@ jobs:
             - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
               name: 'tab-meeting-transcript-recording-api-server'
               version: '18.x'
-
+              
             - project_path: 'samples/bot-tag-mention/nodejs'
               name: 'bot-tag-mention-nodejs'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/tabs'
+              name: 'm365-actions-preview'
+              version: '18.x'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/api'
+              name: 'm365-actions-preview-api'
               version: '18.x'
 
       fail-fast: false

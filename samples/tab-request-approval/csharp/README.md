@@ -103,11 +103,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-	Again
-	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
+    * Select **Single page application**.
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token
     ✔ Access Token
@@ -135,14 +132,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 19. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
-   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
-   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
+   - `{MicrosoftAppId}` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `{TenantId}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `{MicrosoftAppPassword}` - Generated from Step 14, also referred to as Client secret
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
    - Press `F5` to run the project
 	 
 20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
+   - `{MicrosoftAppId}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
@@ -160,26 +157,53 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Running the sample
 
-User Persona:
+- Install App User-1
 
-- Send request to the manger for task approval.
+![InstallAppUser1](TabRequestApproval/Images/1.InstallAppUser.png)
 
-![Request from user](TabRequestApproval/Images/TaskRequest.png)
+- Create Task
 
-- Request status
+![CreateTask](TabRequestApproval/Images/3.CreateTask.png)
 
-![Request status](TabRequestApproval/Images/RequestStatus.png)
+- Task Details
 
-Manager Persona:
+![TaskDetails](TabRequestApproval/Images/4.RequestTo.png)
 
-- Activity feed notification of approval request.
+- All Person
 
-![Notification](TabRequestApproval/Images/RequestNotification.png)
+![TaskDetails](TabRequestApproval/Images/5.SelectPerson.png)
 
-- Pending task approval request.
+- Select a Person
 
-![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+![TaskDetails](TabRequestApproval/Images/6.SelectOnePerson.png)
 
+- Create task Details
+
+![CreateTaskDetails](TabRequestApproval/Images/7.CreateTaskDetails.png)
+
+- Install App User-2
+
+![InstallAppUser2](TabRequestApproval/Images/2.InstallAppUser.png)
+
+- Send Request
+
+![SendRequest](TabRequestApproval/Images/12.SendReq.png)
+
+- On click of notification a task module will open, redirecting the user to the request.
+
+![SendRequest](TabRequestApproval/Images/8.Activity.png)
+
+- User-1 My Request 
+
+![SendRequest](TabRequestApproval/Images/9.User1MyRequestDetails.png)
+
+- User-2 My Pending Approvals 
+
+![SendRequest](TabRequestApproval/Images/10.User2PendingRequestDetails.png)
+
+- User-1 Approved Status
+
+![SendRequest](TabRequestApproval/Images/11.ApprovedReq.png)
 
 ## Further reading
 

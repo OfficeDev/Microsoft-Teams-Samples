@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-03-2023 10:00:01"
+ createdDate: "11-22-2023 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-nodejs
 
 ---
@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 This sample shows meeting transcripts and recordings.
 
 **Interaction with app**
-![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecordingGif.gif)
+![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecording.gif)
 
 ## Prerequisites
 
@@ -31,24 +31,6 @@ This sample shows meeting transcripts and recordings.
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
-
-## Run the app (Using Teams Toolkit for Visual Studio Code)
-
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-1. Navigate to **Azure App Registration -> API Permissions Tab**, and make sure to add the below permission:
-    -  Select Add a permission
-    -  Select Microsoft Graph -\> Delegated permissions.
-
-     Calendars.ReadBasic
-
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup Register you app with Azure AD.
 
@@ -146,7 +128,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
-  
+   
 > Note : Global Administrator can grant consent using following link: https://login.microsoftonline.com/common/adminconsent?client_id=<%appId%>
    
 **This step is specific to Teams:**
@@ -181,9 +163,21 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![Login-In ](Images/PermissionsRequested.png)
 
+**Sign-In Loading:**
+
+![Login-In ](Images/LoginInLoading.png)
+
 **Meeting Detail Page:**
 
 ![Home](Images/Home.png)
+
+**Get Notification:**
+
+![Notification](MeetingTranscriptRecording/Images/GetNotification.png)
+
+**Loading Meetings, Fetching Transcript and Recordings:**
+
+![RecordingTranscriptForm](Images/RecordingTranscriptFormLoading.png)
 
 **Recording and Transcript Form:**
 

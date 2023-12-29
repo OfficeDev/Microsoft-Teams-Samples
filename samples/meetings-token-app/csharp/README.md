@@ -28,12 +28,18 @@ This application also shows the implementation of Live Share SDK to update the d
 * Meeting SidePanel
 * Live Share SDK
 * RSC Permissions
+* Theme Handler
 
 **NOTE: This capability is currently available in developer preview only.**
 
 ## Interaction with app
  
 ![Preview](Images/Preview.gif)
+
+## Interaction with app theme
+
+![Preview Image](Images/app-theme-tokenapp.gif)
+
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -173,6 +179,13 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
  ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
  ![side_panel_tab](Images/side_panel_tab.png)
+
+ ### Interactions with app theme
+ ![Preview Image](Images/light.PNG)
+
+ ![Preview Image](Images/dark.PNG)
+
+ ![Preview Image](Images/contrast.PNG)
   
 ### User interactions
 - **Token** - Requests a token for the user
@@ -193,6 +206,7 @@ In your own projects, please use a durable storage mechanism to store the servic
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 # Contributing
 

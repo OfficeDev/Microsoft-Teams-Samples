@@ -4,13 +4,37 @@
 // </copyright>
 
 import React, { Component } from 'react'
+import * as microsoftTeams from "@microsoft/teams-js";
+
 class ShareView extends Component {
     constructor(props) {
         super(props);
-        this.state = { seconds: 0 };
+        this.state = {
+            seconds: 0,
+            appTheme: ""
+        };
     }
 
     componentDidMount() {
+        let app = microsoftTeams.app;
+        app.initialize().then(app.getContext).then((context) => {
+            // Applying default theme from app context property
+            switch (context.app.theme) {
+                case 'dark':
+                    this.setState({ appTheme: "timerCount-dark" })
+                    break;
+                case 'contrast':
+                    this.setState({ appTheme: "timerCount-contrast" })
+                    break;
+                case 'default':
+                    this.setState({ appTheme: "timerCount-light" })
+                    break;
+                default:
+                    return this.setState({ appTheme: "timerCount-dark" })
+            }
+        });
+
+        // counts time
         this.timer();
     }
 
@@ -22,13 +46,14 @@ class ShareView extends Component {
     timer = () => {
         this.f = setInterval(this.onStart, 1000);
     }
-    
+
     render() {
         return (
-            <div className="timerCount">
+            <div className={this.state.appTheme}>
                 <h1>{this.state.seconds}</h1>
             </div>
         )
     }
 }
+
 export default ShareView
