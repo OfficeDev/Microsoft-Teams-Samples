@@ -1,0 +1,67 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.12",
+    "version": "1.0.1",
+    "id": "$ClientId",
+    "packageName": "com.microsoft.teams.tabrequestapproval",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.teams.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "SharePoint-Tab-Request-Approval",
+        "full": "App using SharePoint Embedded for storage of task approvals being sent to the manager."
+    },
+    "description": {
+        "short": "App helps user to raise a request and notify manager for approve or reject it.",
+        "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection. Data is stored using SharePoint Embedded."
+    },
+    "accentColor": "#235EA5",
+    "configurableTabs": [
+        {
+            "configurationUrl": "$BaseUrl/config",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupchat"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "request",
+            "name": "Request",
+            "contentUrl": "$BaseUrl/request",
+            "websiteUrl": "$BaseUrl/request",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "$DomainName"
+    ],
+    "activities": {
+        "activityTypes": [
+            {
+                "type": "approvalRequired",
+                "description": "Required approval",
+                "templateText": "A task created with title {approvalTaskId}"
+            }
+        ]
+    },
+    "webApplicationInfo": {
+        "id": "$ClientId",
+        "resource": "api://$DomainName/$ClientId"
+    }
+}
