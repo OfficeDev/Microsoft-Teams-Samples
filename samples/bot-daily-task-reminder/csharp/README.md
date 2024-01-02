@@ -49,7 +49,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.9 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Visual Studio 2022 **Version 17.9 Preview 2 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
 1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
