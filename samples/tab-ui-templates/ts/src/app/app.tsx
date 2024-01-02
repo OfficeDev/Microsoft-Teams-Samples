@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
 
-//import { Provider } from "@fluentui/react-teams";
 import { themeNames } from "@fluentui/react-teams";
 import { About } from "./about";
 import { Privacy } from "./privacy";
