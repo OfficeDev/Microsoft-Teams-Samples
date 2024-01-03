@@ -47,10 +47,14 @@ export const getFlexColumnStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     minHeight: "0px",
-  },
+    },
+  bgColor: {
+    backgroundColor: "#242424",
+    color: "white"
+    },
   fill: {
     width: "100%",
-    height: "100%",
+    height: "100vh",
   },
   smallGap: {
     "> :not(:last-child)": {
@@ -74,6 +78,7 @@ export const getFlexColumnStyles = makeStyles({
   },
   vAlignCenter: {
     justifyContent: "center",
+    alignItems: "center"
   },
   vAlignEnd: {
     justifyContent: "end",

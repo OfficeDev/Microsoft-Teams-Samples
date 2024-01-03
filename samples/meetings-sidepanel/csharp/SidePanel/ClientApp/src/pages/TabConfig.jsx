@@ -31,7 +31,8 @@ const TabConfig = () => {
         flexColumnStyles.hAlignCenter,
         flexColumnStyles.vAlignCenter,
         flexColumnStyles.fill,
-        flexColumnStyles.smallGap
+        flexColumnStyles.smallGap,
+        flexColumnStyles.bgColor
       )}
     >
       <Title2 block align="center">
