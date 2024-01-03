@@ -17,7 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/app-region-selection/csharp/published'    # set this to the path to your web app project, defaults to the repository root
     PROJECT_PATH: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
-    AZURE_WEBAPP_NAME: 'app-region-selection'  # set this to your application's name
+    AZURE_WEBAPP_NAME: 'RegionSelectionAppTestHarikrishnanSai'  # set this to your application's name
     DOTNET_VERSION: '6.0.x'           # set this to the dot net version to use
 jobs:
   build:
@@ -66,5 +66,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}  # Replace with your app name
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_App_Region_Selection }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_RegionSelectionAppTestHarikrishnanSai }}
           package: .
