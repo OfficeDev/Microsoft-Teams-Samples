@@ -7,7 +7,9 @@ namespace Microsoft.BotBuilderSamples.Models
 {
     public class WelcomeUserState
     {
-        // Gets or sets whether the user has been welcomed in the conversation.
+        /// <summary>
+        /// Gets or sets whether the user has been welcomed in the conversation.
+        /// </summary>
         public bool DidUserSelectedDomain { get; set; } = false;
         public string SelectedDomain { get; set; } = string.Empty;
         public string SelectedRegion { get; set; } = string.Empty;

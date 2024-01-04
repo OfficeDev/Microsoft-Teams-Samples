@@ -57,7 +57,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             foreach (var member in membersAdded)
             {
-                if (member.Id != turnContext.Activity.Recipient.Id)
+                if (member != null && member.Id != turnContext.Activity.Recipient.Id)
                 {
                     var welcomeUserStateAccessor = _userState.CreateProperty<WelcomeUserState>(nameof(WelcomeUserState));
                     var didBotWelcomeUser = await welcomeUserStateAccessor.GetAsync(turnContext, () => new WelcomeUserState(), cancellationToken);
