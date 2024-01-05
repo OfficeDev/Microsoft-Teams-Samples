@@ -115,11 +115,32 @@ const App: React.FC = () => {
   const [items, setDiscounts] = useState<Offer[]>([]);
 
   const getData = () => { 
-    fetch('http://localhost:3001/offers', {cache: "no-store"}) //api for the get request
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      setDiscounts(data);})
+    //If you want to run mock APIs with dynamic data, uncomment lines 120 to 124 and comment lines 126 to 142.
+    
+    //fetch('http://localhost:3001/offers', {cache: "no-store"}) //api for the get request
+    //.then(response => response.json())
+    //.then(data => {
+    // console.log(data);
+    //setDiscounts(data);})
+
+    const webData = [
+      {
+        "id": "fe8cae38-278b-4b56-a8b8-e5a58e565436",
+        "customer" : "bob@contoso.com",
+        "salesperson": "sally@blueyonderairlines.com",
+        "discountPercentage": "15",
+        "offerText": "We are pleased to offer you a discount of "
+      },
+      {
+        "id": "d6d0fc50-4715-4fdf-82f2-4bf90d6320c4",
+        "customer" : "kim@fabrikam.com",
+        "salesperson": "joe@blueyonderairlines.com",
+        "discountPercentage": "20",
+        "offerText": "As a preferred customer, your discount is"
+      }
+   ]
+   setDiscounts(webData);
+
   };
 
   useEffect(() => {
