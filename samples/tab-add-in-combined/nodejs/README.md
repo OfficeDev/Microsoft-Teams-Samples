@@ -97,8 +97,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
        - `samples/tab-add-in-combined/nodejs/add-in/src/taskpane/components/App.tsx`
        - `samples/tab-add-in-combined/nodejs/tab/src/components/App.tsx`
-   - If you want to run mock APIs with dynamic data, uncomment lines 120 to 124 and comment lines 126 to 142.
-       - `samples/tab-add-in-combined/nodejs/tab/src/components/App.tsx`
 
 ### Build for production
 
