@@ -43,8 +43,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1) Register your app with Microsoft identity platform via the Azure AD portal (Microsoft Entra ID app registration)
-    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
+1) Register your app with Microsoft identity platform via the Microsoft Entra ID portal (Microsoft Entra ID app registration)
+    - Your app must be registered in the Microsoft Entra ID portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
 **Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level 
 
 2) Clone the repository
@@ -72,7 +72,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    ```
 
 5)  Update appsettings.json
-    - Update configuration for `<<Client Id>>`, `<<Client Secret>>` and ``<<Tenant Id>>`` with the ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```TenantId``` which was generated while doing Microsoft Entra ID pp registration in your Azure Portal.
+    - Update configuration for `<<Client Id>>`, `<<Client Secret>>` and ``<<Tenant Id>>`` with the ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```TenantId``` which was generated while doing Microsoft Entra ID app registration in your Azure Portal.
 
 6) Run the bot from Visual Studio: 
     - Press `F5` to run the project

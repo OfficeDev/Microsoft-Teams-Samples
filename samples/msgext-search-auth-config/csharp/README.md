@@ -85,7 +85,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-    - Set "ConnectionName" in the `appsettings.json`. The Microsoft Entra ConnectionName from the OAuth Connection Settings on Azure Bot registration
+    - Set "ConnectionName" in the `appsettings.json`. The Microsoft Entra ID ConnectionName from the OAuth Connection Settings on Azure Bot registration
     - Set "SiteUrl" in the `appsettings.json`. The ngrok forwarding url (ie `https://xxxx.ngrok-free.app`) from starting ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.

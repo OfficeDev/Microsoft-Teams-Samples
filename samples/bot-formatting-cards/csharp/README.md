@@ -132,7 +132,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```
    
    **Note: In adaptive card, what we are defining (User details) should be exist in the same tenant where you are testing the app (teams' login) etc...**
-  - Update the user Microsoft Entra object ID in your adaptive card JSON from your tenant's Microsoft Entra users available in the Azure portal.
+  - Update the user Microsoft Entra object ID in your adaptive card JSON from your tenant's Microsoft Entra ID users available in the Azure portal.
     - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\adaptivePeoplePersonaCardIcon.json
       1) On line 16, replace {{User-Object-ID}}  
       2) On line 17, replace {{User-Display-Name}}

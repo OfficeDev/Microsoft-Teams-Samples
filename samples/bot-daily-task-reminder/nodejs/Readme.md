@@ -62,7 +62,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > the Teams service needs to call into the bot.
 
 1) Setup for Bot
-- In Azure portal, create Microsoft Entra app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
+- In Azure portal, create Microsoft Entra ID app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -100,7 +100,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm install
     ```
 
-- Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created while doing Microsoft Entra app registration in Azure portal, the MicrosoftAppPassword is referred to as the "client secret" generated while creating Secret in Microsoft Entra ID app registration.
+- Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created while doing Microsoft Entra ID app registration in Azure portal, the MicrosoftAppPassword is referred to as the "client secret" generated while creating Secret in Microsoft Entra ID app registration.
  `BaseUrl` with application base url. For e.g., your ngrok url https://xxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 - Run your app
