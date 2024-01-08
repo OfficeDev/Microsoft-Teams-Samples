@@ -103,7 +103,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - Select Configuration section.
    - Under configuration -> Add OAuth connection string.
    - Provide connection Name : for eg `ssoconnection`
-   - Select service provider ad `Microsoft Entra ID V2`
+   - Select service provider ad `Azure Active Directory V2`
    - Complete the form as follows:
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file.

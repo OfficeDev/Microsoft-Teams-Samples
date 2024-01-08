@@ -81,7 +81,7 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
    - Select Configuration section.
    - Under configuration -> Add OAuth connection string.
    - Provide connection Name : for eg `ssoconnection`
-   - Select service provider ad `Microsoft Entra ID V2`
+   - Select service provider ad `Azure Active Directory V2`
    - Complete the form as follows:
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file.

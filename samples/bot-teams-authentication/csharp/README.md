@@ -30,7 +30,7 @@ This sample utilizes an app setting `UseSingleSignOn` to add `TeamsSSOTokenExcha
 
 > IMPORTANT: Teams SSO only works in 1-1 chats, and not group contexts.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a bot authentication, as well as how to sign in from a bot. In this sample we are assuming the OAuth 2 provider is Microsoft Entra ID and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an Microsoft Entra ID application setup for use in Azure Bot Service. The scopes used in this sample are the following:
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a bot authentication, as well as how to sign in from a bot. In this sample we are assuming the OAuth 2 provider is Azure Active Directory v2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
 
 - `openid`
 - `User.Read`

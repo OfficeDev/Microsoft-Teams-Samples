@@ -71,7 +71,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-    b. **Service Provider:** Select Microsoft Entra ID v2. Once you select this, the Azure AD-specific fields will be displayed.
+    b. **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
 
     c. **Client id:** Enter the Application (client) ID .
 
