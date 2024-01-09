@@ -220,7 +220,7 @@ This Javascript file is served from the `/ssoDemo` page and handles most of the 
 This function asks Teams for an authentication token from Microsoft Entra ID. The token is displayed so you can try it in Postman.
 
 2. getServerSideToken() -
-This function sends the token to the backend to exchange for elevated permissions using Microsoft Entra's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
+This function sends the token to the backend to exchange for elevated permissions using Microsoft Entra ID's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
 
 3. useServerSideToken() -
 This function uses the token to call the Microsoft Graph and display the resulting JSON.
