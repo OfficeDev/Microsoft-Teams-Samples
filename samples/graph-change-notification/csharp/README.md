@@ -55,7 +55,7 @@ This sample app demonstrates sending change notifications to user presence in Te
    ```
 
 3) Setup App Registration
-This step will create an AAD app, it will be reused wherever it needs AAD throughout this sample to simpler the steps.
+This step will create an Microsoft Entra ID app, it will be reused wherever it needs Microsoft Entra ID throughout this sample to simpler the steps.
 
     - Navigate to [Azure _App Registration_ Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
 
@@ -66,7 +66,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
         ![App Registration Organization](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppRegistration.png)
 
-    - Navigate to the AAD app you just created, _copy and paste the Application ID(will referred as **AppId** in this document) somewhere safe_. You'll need it in a future step:
+    - Navigate to the Microsoft Entra ID app you just created, _copy and paste the Application ID(will referred as **AppId** in this document) somewhere safe_. You'll need it in a future step:
         ![Save Application ID](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppId.png)
 
 - Create Client Secret
@@ -145,7 +145,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
         a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-        b. Service Provider: select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+        b. Service Provider: select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
 
         c. Client id: enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 
@@ -171,13 +171,13 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
    
 6) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
-    - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing AAD app registration.
+    - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing Microsoft Entra ID app registration.
     - Provide ConnectionName in appsetting that is created in Azure wile creating connect for your Azure bot.
     - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
     - Press `F5` to run the project
 
 7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your Microsoft Entra ID app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

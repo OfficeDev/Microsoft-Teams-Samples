@@ -41,7 +41,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 **NOTE: The feature is only available only be used from the desktop app*
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     
   -  Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 

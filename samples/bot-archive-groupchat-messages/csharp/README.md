@@ -59,7 +59,7 @@ This feature shown in this sample is currently available in Public Developer Pre
    - Complete the form as follows:
 
     - **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-    - **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
+    - **Service Provider:** Select Azure Active Directory V2. Once you select this, the Azure AD-specific fields will be displayed.
     - **Client id:** Enter the Application (client) ID .
     - **Client secret:** Enter the Application (client) secret.
     -  Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
