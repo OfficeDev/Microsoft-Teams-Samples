@@ -39,7 +39,7 @@ Verify you have the right account for building Teams apps and install some recom
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     > NOTE: When you create your app registration, you will create an App ID and App password (Secret) - make sure you keep these for later.
 
 2. Setup for Bot
@@ -69,7 +69,7 @@ Verify you have the right account for building Teams apps and install some recom
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
   - Modify the `/appsettings.json` and fill in the following details:
-  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret
 
 - Run the bot from a terminal or from Visual Studio:
