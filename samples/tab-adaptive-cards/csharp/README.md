@@ -45,7 +45,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/download) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   -  Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
     * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
   - Navigate to **Authentication**
@@ -98,7 +98,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{ Bot Id }}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{ Bot Id }}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ Bot Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ApplicationBaseUrl}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   - `{{ Connection Name  }}` - For the connection name step 2 and also refer In the Azure Portal, navigate back to the Azure Bot resource created (https://learn.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)

@@ -45,7 +45,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -110,7 +110,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
   - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   - `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI. * ex: `api://<your_tunnel_domain>/00000000-0000-0000-0000-000000000000`..

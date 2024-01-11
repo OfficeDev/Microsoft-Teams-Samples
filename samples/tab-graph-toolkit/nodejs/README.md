@@ -47,7 +47,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    - Register an App in Azure. Navigate to App registeration click on New registeration.
    - Update your App Name `mgtteamstab`
    - Click on Add a Platform in redirect URI section.
