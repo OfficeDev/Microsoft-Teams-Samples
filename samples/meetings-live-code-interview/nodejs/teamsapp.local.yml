@@ -92,6 +92,16 @@ provision:
       appId: M365_APP_ID
 
 deploy:
+# Install development tool(s)
+  - uses: devTool/install
+    with:
+      devCert:
+        trust: true
+    # Write the information of installed development tool(s) into environment
+    # file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      sslCertFile: SSL_CRT_FILE
+      sslKeyFile: SSL_KEY_FILE
   # Run npm command
   - uses: cli/runNpmCommand
     with:
@@ -102,3 +112,12 @@ deploy:
     with:
       workingDirectory: api
       args: install --no-audit
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.localConfigs 
+      envs:
+        PORT: 3978
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}      
