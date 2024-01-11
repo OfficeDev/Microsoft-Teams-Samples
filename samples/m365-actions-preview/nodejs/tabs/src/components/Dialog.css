@@ -1,0 +1,16 @@
+.dialog-container {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+}
+
+.dialog-header>.dialog-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.dialog-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

@@ -51,7 +51,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
-1) Register your app with Microsoft identity platform via the Azure AD portal (AAD app registration in Azure portal)
+1) Register your app with Microsoft identity platform via the Azure AD portal (Microsoft Entra ID app registration in Azure portal)
     - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2).
     
 **Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level permission for the app.
@@ -82,7 +82,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-6) Update the `.env` file configuration (ClientId, ClientSecret) for the bot to use the Microsoft App Id and App Password from the AAD app registration in your Azure Portal or from Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+6) Update the `.env` file configuration (ClientId, ClientSecret) for the bot to use the Microsoft App Id and App Password from the Microsoft Entra ID app registration in your Azure Portal or from Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 7) Run your bot at the command line:
 

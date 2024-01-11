@@ -51,7 +51,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  
     - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
     - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
@@ -71,7 +71,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
        a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-       b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+       b. Service Provider. Select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
 
        c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 

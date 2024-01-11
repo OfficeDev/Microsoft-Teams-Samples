@@ -39,7 +39,7 @@ When meeting ends, attendance report card is sent by the bot.
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
       -  Click on "New registration", and create an Azure AD application.
 
     -  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".

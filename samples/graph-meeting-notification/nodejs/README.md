@@ -49,7 +49,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission

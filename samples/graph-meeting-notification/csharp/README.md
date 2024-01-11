@@ -43,7 +43,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
    - Navigate to **API Permissions**, and make sure to add the follow permissions:
    - Select Add a permission
@@ -92,9 +92,9 @@ This is a sample application which demonstrates use of online meeting subscripti
     ```
     
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ MicrosoftAppTenantId }}`- Generated from Step 1 while doing AAd app registration in Azure portal Directory (tenant) ID.
+  - `{{ MicrosoftAppTenantId }}`- Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Directory (tenant) ID.
   - `{{BaseUrl}}` -  Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
   - `{{ Base64EncodedCertificate}}` - value from *Create and install Self-Signed certificate* step 2
   - `{{ CertificateThumbprint }}` - value from *Create and install Self-Signed certificate* step 2

@@ -2,10 +2,9 @@ import {
   Grid,
   Box,
   Flex,
-  Text,
-  Image,
   SiteVariablesPrepared,
 } from "@fluentui/react-northstar";
+import { Subtitle1, makeStyles, shorthands, Text, Image  } from "@fluentui/react-components";
 import platformUiImage from "../../assets/images/platform-ui.jpg";
 import teamsTemplatesImage from "../../assets/images/teams-templates.jpg";
 import teamsAppsImage from "../../assets/images/teams-apps.jpg";
@@ -18,26 +17,20 @@ export function WelcomeTab() {
         margin: "1.6rem 1.25rem",
       }}
     >
-      <Text size="large" weight="bold" as="h1">
+      <Text size={500} weight="bold" as="h1">
         Welcome to our Teams Sample App
       </Text>
+      <div>
       <Text
-        as="p"
-        variables={({ colorScheme }: SiteVariablesPrepared) => {
-          console.log(colorScheme.default.foreground2);
-          return {
-            border: "1px solid red",
-            backgroundColor: "red",
-          };
-        }}
-        styles={{ marginBottom: "3rem", opacity: ".65", maxWidth: "50rem" }}
+        style={{ marginBottom: "3rem", opacity: ".65", maxWidth: "50rem" }}
       >
         The Teams Sample App can help you better understand how your app should
         look and behave in Teams depending on the scenario. Select a UI template
         above (for example, Forms) to get started. To learn more, see the
         following resources.
       </Text>
-      <Text size="medium" weight="bold" as="h2">
+      </div>
+      <Text size={500} weight="bold" as="h2">
         Resources
       </Text>
       <Grid
@@ -77,44 +70,31 @@ interface IResourceCard {
 }
 const ResourceCard = ({ imageUrl, title, desc, links }: IResourceCard) => {
   return (
-    <Flex column>
+    <div>
       <Image
         src={imageUrl}
         alt={title}
-        styles={{
+        style={{
           borderRadius: "4px",
           boxShadow:
             "0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 5px rgba(0, 0, 0, 0.06)",
         }}
-        fluid
       />
       <Text
-        size="medium"
+        size={500}
         weight="semibold"
         as="h3"
-        styles={{ margin: "2rem 0 .5rem" }}
+        style={{ margin: "2rem 0 .5rem" }}
       >
         {title}
       </Text>
       <Text
         as="p"
-        styles={{ margin: ".5rem 0 2rem", flexGrow: 1, opacity: ".65" }}
+        style={{ margin: ".5rem 0 2rem", flexGrow: 1, opacity: ".65" }}
       >
         {desc}
       </Text>
-      {links.map((link: IResourceCardLink, key: number) => (
-        <Text
-          key={key}
-          as="a"
-          href={link.href}
-          target="_blank"
-          content={link.label}
-          size="small"
-          color="brand"
-          styles={{ textDecoration: "none", marginBottom: ".5rem" }}
-        />
-      ))}
-    </Flex>
+    </div>
   );
 };
 

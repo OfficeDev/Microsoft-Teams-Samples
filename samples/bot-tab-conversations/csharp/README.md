@@ -144,20 +144,20 @@ There is also a personal tab that will list inquires from all the support depart
 
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok-free.app` if you are using Ngrok and if you are using dev tunnels then your URL will be like: `https://<randomsubdomain>.devtunnels.ms`).
 
-* Create an AAD app registration in Azure Portal and also create Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
+* Create an Microsoft Entra ID app registration in Azure Portal and also create Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
     * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain>/api/messages` like your ngrok URL `https://xxxxx.ngrok-free.app` or dev tunnels URL like : `https://XXXXXX.devtunnels.ms`.
     * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL aginn in your Azure Bot for local running*
     * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-* [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
-    * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
+* [Update the Microsoft Entra ID App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
+    * When creating the Bot above, an Microsoft Entra ID app should either have been created for you, or you should have chosen an Microsoft Entra ID app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
-    * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
+    * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an Microsoft Entra ID API, creating an Application ID URI, scopes, etc.
 
     * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok-free.app/auth-end' 
 
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
-    * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
+    * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your Microsoft Entra ID App*
 
 **Setup for code**
 - Clone the repository
@@ -185,9 +185,9 @@ There is also a personal tab that will list inquires from all the support depart
 
 * In `appSettings.json` and `.env` file replace:
     * `<<tunnel-url>>` with your tunnel URL minus the https://.
-    * `<<aad-id>>` with your AAD Application (Client) Id.
+    * `<<aad-id>>` with your Microsoft Entra ID Application (Client) Id.
     * `<<aad-client-secret>>` with the client secret you created above.
-    * `<<tenant-id>>` with the directory id received via creating AAD app registration in your Azure Portal.
+    * `<<tenant-id>>` with the directory id received via creating Microsoft Entra ID app registration in your Azure Portal.
     * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
 
 * Setup Manifest for Teams

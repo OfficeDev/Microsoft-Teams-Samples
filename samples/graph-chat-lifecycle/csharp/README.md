@@ -39,7 +39,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 1.Register your Teams Auth SSO with Azure AD
 
- -  Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ -  Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  -  Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -116,7 +116,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     ```
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{ YOUR-APP-PASSWORD}}` -  Generated from Step 1, also referred to as Client secret.
-  - `{{ YOUR-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal
+  - `{{ YOUR-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal
   - `{{ YOUR-TENANT-ID}}` - Generated from Step 1, also referred to as Directory (tenant) ID
   - `{{ ApplicationIdURI}}` - Generated from Step 1 , eg.(api://<<BASE-URL-DOMAIN>>/<<YOUR-APP-ID>>)
 
