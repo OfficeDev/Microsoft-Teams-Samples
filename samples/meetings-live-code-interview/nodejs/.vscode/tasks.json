@@ -81,7 +81,8 @@
             "label": "Start application",
             "dependsOn": [
                 "Start frontend",
-                "Start backend"
+                "Start backend",
+                "Start Live Share SDK"
             ]
         },
         {
@@ -125,6 +126,28 @@
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
                     "endsPattern": "Server listening on http://localhost:"
+                }
+            }
+        },
+        {
+            "label": "Start Live Share SDK",
+            "type": "shell",
+            "command": "npx @fluidframework/azure-local-service@latest",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$",
+                    "file": 0,
+                    "location": 1,
+                    "message": 2
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Listening on port 7070"
                 }
             }
         }
