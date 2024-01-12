@@ -33,7 +33,7 @@ provision:
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./appManifest/manifest.json
       outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
@@ -80,4 +80,13 @@ deploy:
   # Run npm command for server
   - uses: cli/runNpmCommand
     with:
-      args: install --no-audit        
+      args: install --no-audit  
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./ClientApp/.localConfigs 
+      envs:
+        PORT: 3978
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}      

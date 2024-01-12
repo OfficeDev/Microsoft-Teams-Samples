@@ -1,24 +1,29 @@
+const path = require('path');
 const express = require('express');
 const bodyparser = require('body-parser');
 var cors = require('cors');
-const path = require('path');
-const app = express();
 
-const server = require('http').createServer(app);
+// Read botFilePath and botFileSecret from .env file.
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
+
+// Create HTTP server.
+const server = express();
+const port = process.env.port || process.env.PORT || 3000;
+server.listen(port, () => 
+    console.log(`App listening at https://localhost:${port}`)
+);
+
+// parse application/json
+server.use(cors());
+server.use(express.json());
+
 const todoData = {};
 const doneData = {};
 const doingData = {};
 
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-
-// parse application/json
-app.use(cors());
-app.use(express.json());
-
-
 // Gets the meeting data based on status.
-app.get('/getMeetingData', function (req, res) {
+server.get('/getMeetingData', function (req, res) {
   if (req.query.status === "todo") {
     res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId] : undefined });;
   }
@@ -31,7 +36,7 @@ app.get('/getMeetingData', function (req, res) {
 });
 
 // Saves the meeting data based on status.
-app.post('/saveMeetingData', function (req, res) {
+server.post('/saveMeetingData', function (req, res) {
   let meetingDetails = req.body;
 
   if (meetingDetails.status === "todo") {
@@ -56,8 +61,4 @@ app.post('/saveMeetingData', function (req, res) {
   }
 
   res.status(200).send();
-});
-
-server.listen(3000, function () {
-  console.log('app listening on port 3000!');
 });
