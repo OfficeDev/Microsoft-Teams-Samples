@@ -50,7 +50,6 @@ app.post('/sendFeedNotification', function (req, res) {
 
 async function sendNotificationFlow(tenantId, recipientId) {
   var token = await auth.getAccessToken(tenantId);
-  // TODO: broken due to insufficient permissions
   var appId = await getAppId(token, recipientId);
   await sendActivityFeedNotification(token, recipientId, appId);
 }
