@@ -42,8 +42,9 @@ app.post('/sendFeedNotification', function (req, res) {
   var tenantId = req.body.tenantId;
   sendNotificationFlow(tenantId, recipientId).then(function(){
     console.log('Notification send success');
+    res.status(200).send('ok')
   }).catch(function(err){
-    console.error('Notification send error', err);
+    res.status(500).send('error: ' + err.message)
   });
 });
 
@@ -55,12 +56,10 @@ async function sendNotificationFlow(tenantId, recipientId) {
 }
 
 // Get installed app id.
-function getAppId(appList) {
-  var list = appList;
-  var i;
-  for (i = 0; i < list.length; i++) {
-    if (list[i].teamsAppDefinition['displayName'] == "RSC-GraphAPI NodeJs") {
-      return list[i].id;
+function findAppIdInList(appList) {
+  for (var i = 0; i < appList.length; i++) {
+    if (appList[i].teamsAppDefinition['displayName'] == "RSC-GraphAPI NodeJs") {
+      return appList[i].id;
     }
   }
 }
@@ -75,7 +74,7 @@ async function getAppId(accessToken, reciepientUserId) {
   };
 
   var res = await axios.get("https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition", config)
-  var appId = getAppId(res.value);
+  var appId = findAppIdInList(res.data.value);
   return appId;
 }
 
