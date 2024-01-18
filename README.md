@@ -8,7 +8,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 
 # Sample lists
 
-1. [Ready to try sample app manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
+1. [Copilot for Microsoft 365 plugins samples](#Copilot-for-Microsoft-365-plugins-samples)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)
@@ -20,6 +20,14 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Meetings samples](#Meetings-samples)
 1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
+
+## [Copilot for Microsoft 365 plugins samples](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples)
+| Name    | Description |  .NET    | TypeScript   | JavaScript |
+| -------- | :------- | ------- | ------- | ------- |
+| Northwind Inventory  | Plugin that allows users to query the Northwind Database | | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
+| Document Search | Plugin that enables Hybrid Search (Vector + Semantic) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-csharp)  | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-js) | |
+| Product support | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-product-support-sso-csharp) | |
+| [Multi Parameters]  |Plugin that demonstrates how to implement complex utterances and support deep retrieval | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-csharp)  |[View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-ts) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-js)|
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
