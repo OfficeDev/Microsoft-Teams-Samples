@@ -24,13 +24,13 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 ## [Copilot for Microsoft 365 plugins samples](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples)
 | Name    | Description | Language 
 | -------- | :-------: | ------- |
-| [Northwind Inventory](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-northwind-inventory-ts)  | Plugin that allows users to query the Northwind Database | TypeScript |
-| [Document Search](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-doc-search-js) | Plugin that enables Hybrid Search (Vector + Semantic) | JavaScript |
-| [Document Search](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-doc-search-csharp) | Plugin that enables Hybrid Search (Vector + Semantic) | .NET |
-| [Product support](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-product-support-sso-csharp) | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | .NET |
-| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-multiparam-csharp)  |Plugin that demonstrates how to implement complex utterances and support deep retrieval | .NET  |
-| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-multiparam-ts)  | Plugin that demonstrates how to implement complex utterances and support deep retrieval  | TypeScript|
-| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/samples/msgext-multiparam-js)  | Plugin that demonstrates how to implement complex utterances and support deep retrieval  | JavaScript|
+| [Northwind Inventory](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts)  | Plugin that allows users to query the Northwind Database | TypeScript |
+| [Document Search](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-js) | Plugin that enables Hybrid Search (Vector + Semantic) | JavaScript |
+| [Document Search](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-csharp) | Plugin that enables Hybrid Search (Vector + Semantic) | .NET |
+| [Product support](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-product-support-sso-csharp) | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | .NET |
+| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-csharp)  |Plugin that demonstrates how to implement complex utterances and support deep retrieval | .NET  |
+| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-ts)  | Plugin that demonstrates how to implement complex utterances and support deep retrieval  | TypeScript|
+| [Multi Parameters](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-js)  | Plugin that demonstrates how to implement complex utterances and support deep retrieval  | JavaScript|
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
