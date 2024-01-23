@@ -164,7 +164,13 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ![](images/app-complete-sample8.png)
 
-![](images/app-complete-sample-tab.png)
+![](images/app-complete-sample9.png)
+
+![](images/app-complete-sample10.png)
+
+![](images/app-complete-sample11.png)
+
+
 
 ## Outlook on the web
 
