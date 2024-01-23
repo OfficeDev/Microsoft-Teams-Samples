@@ -170,10 +170,6 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ![](images/app-complete-sample10.png)
 
-
-
-
-
 ## Outlook on the web
 
 - To view your app in Outlook on the web.
