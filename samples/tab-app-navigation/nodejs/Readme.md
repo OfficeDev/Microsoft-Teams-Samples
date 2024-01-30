@@ -27,6 +27,8 @@ This sample shows the tab navigation feature such as navigation between tabs wit
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
+- **Note**  This feature `(Tab App Navigation)` is only supported in new Teams `T2.1`.
+
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
@@ -34,6 +36,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+**Update Placeholder For External App ID**
+
+    - Get the external app id from teams admin portal.
+    - Navigate to 'src/components/tabAppNavigation.tsx file at line number `13` replace placeholder `<<External-App-Id>>` with your actual external app id which you can get from teams admin portal.
+
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -73,6 +80,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     npm install
     ```
+    **Update Placeholder For External App ID**
+    - Get the external app id from teams admin portal (https://admin.teams.microsoft.com/policies/manage-apps)
+    - Navigate to 'src/components/tabAppNavigation.tsx file at line number `13` replace placeholder `<<External-App-Id>>` with your     actual external app id which you can get from teams admin portal.
+
+    ![External App Id](Images/ExternalAppId.PNG)
+  
 
 3) Run your app (Either from any local terminal or from Visual Studio Code terminal)
 
@@ -88,8 +101,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Sideload the app in `Teams Scope` (Supported scopes: Teams)
-
-**Note** Teams T1 (Classic Teams) will not get support for this feature, `(Tab App Navigation)` is only supported in the new Teams `T2.1`.
      
 ## Running the sample
 
