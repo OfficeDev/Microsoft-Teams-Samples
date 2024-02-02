@@ -86,3 +86,9 @@ deploy:
         PORT: 3978
         SSL_CRT_FILE: ${{SSL_CRT_FILE}}
         SSL_KEY_FILE: ${{SSL_KEY_FILE}}
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs: 
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}
