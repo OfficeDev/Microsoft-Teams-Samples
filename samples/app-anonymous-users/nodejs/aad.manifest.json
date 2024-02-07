@@ -92,16 +92,16 @@
         }
     ],
     "identifierUris": [
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
+        "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
     ],
     "replyUrlsWithType": [
         {
-            "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-            "type": "Web"
+            "url": "https://${{BOT_DOMAIN}}/auth-end",
+            "type": "Spa"
         },
         {
-            "url": "https://token.botframework.com/.auth/web/redirect",
-            "type": "Web"
+            "url": "https://${{BOT_DOMAIN}}/auth-start",
+            "type": "Spa"
         }
     ]
 }
