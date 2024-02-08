@@ -119,16 +119,29 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-![Dashboard](Images/Dashboard.png)
+![Install](Images/1.Install.png)
+
+![SelectTeams](Images/2.SelectTeams.png)
+
+![SelectTab](Images/3.SelectTab.png)
+
+![HomePage](Images/4.HomePage.png)
+
+![JoinMeeting](Images/11.JoinMeeting.png)
 
 **Note: Download the meeting template, update your meeting details, and then upload it.** [Meeting Template](template/MeetingTemplate.xlsx)
 
-![Create Meeting](Images/CreateMeeting.png)
+![UploadMeeting](Images/5.UploadMeeting.png)
 
-![Meeting upolad](Images/MeetingDetailUpload.png)
+![MeetingDetails](Images/6.MeetingDetails.png)
 
-![Meeting detail](Images/MeetingDetail.png)
+![CreateMeeting1](Images/7.CreateMeeting1.png)
 
+![CreateMeeting2](Images/8.CreateMeeting2.png)
+
+![CreateMeeting3](Images/9.CreateMeeting3.png)
+
+![meetingDetails](Images/10.meetingDetails.png)
 
 ## Further reading
 - [Create Event](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=javascript)
