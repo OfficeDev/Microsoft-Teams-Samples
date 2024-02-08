@@ -121,6 +121,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Dashboard](Images/Dashboard.png)
 
+**Note: Download the meeting template, update your meeting details, and then upload it.** [Meeting Template](template/MeetingTemplate.xlsx)
+
 ![Create Meeting](Images/CreateMeeting.png)
 
 ![Meeting upolad](Images/MeetingDetailUpload.png)
