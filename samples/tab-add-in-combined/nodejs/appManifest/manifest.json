@@ -11,13 +11,13 @@
         "termsOfUseUrl": "${{TAB_ENDPOINT}}/about.html"
     },
     "icons": {
-        "outline": "BlueYonderDiscountIcon64.png",
-        "color": "BlueYonderDiscountIcon128.png"
+        "outline": "outline.png",
+        "color": "color.png"
     },
-    "name": {
-        "short": "Discounts",
-        "full": "Blue Yonder Airlines Discounts"
-    },
+  "name": {
+    "short": "Discounts",
+    "full": "Blue Yonder Airlines Discounts"
+  },
     "description": {
         "short": "Insert discount offers in Outlook email and view data about the offers in Teams.",
         "full": "Insert discount offers in Outlook email and view data about the offers in Teams."
