@@ -1,0 +1,259 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Configure</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" integrity="sha384-EKT9Wswdn78EAHAqcOh50wnaPfH3aPa7YZ1R89/TCN98AhkqZJ2g47u4k2I5eCk8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script type="text/javascript" src="/StaticViews/js/jwt-decode.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css" />
+
+    <style type="text/css">
+        body {
+            width: 95%;
+            font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+        }
+
+        .row {
+            padding: 8px 0;
+        }
+
+        .discuss-row {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgba(22, 35, 58, 0.74);
+        }
+
+        .tabname-label {
+            font-size: 12px;
+            line-height: 1.33;
+            color: rgba(37, 36, 36, 0.75);
+        }
+
+
+        .tabname {
+            border-radius: 3px;
+            box-shadow: 0 0 10px 0 rgba(37, 36, 36, 0.15);
+        }
+
+        .tabname-row {
+            padding-bottom: 20px;
+        }
+
+        .row input {
+            border: 1px solid #f3f2f1;
+            border-bottom: 1px solid #6264a7;
+            background-color: transparent;
+            margin: 0 5px;
+            padding: 3px 5px;
+            background-color: #f3f2f1;
+            height: 32px;
+            width: 100%;
+            margin: 0;
+        }
+
+            .row input:focus {
+                outline: none;
+            }
+
+        #posting {
+            background-color: #f3f2f1;
+            border-bottom: 1px solid #6264a7;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 8px;
+            display: block;
+            font-size: 14px;
+            line-height: 1.43;
+            color: #252424;
+            margin: 0;
+            cursor: pointer;
+        }
+
+            #posting:focus {
+                outline: none;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .dropdownContent {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border-bottom: 1px solid #6264a7;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-size: 14px;
+            line-height: 1.43;
+            color: #252424;
+            overflow: auto;
+            z-index: 1;
+            box-shadow: 0 0 10px 0 rgba(37, 36, 36, 0.15);
+        }
+
+            .dropdownContent span {
+                padding: 6px 16px;
+                text-decoration: none;
+                color: rgba(37, 36, 36, 0.75);
+                display: block;
+            }
+
+                .dropdownContent span:hover {
+                    background-color: #8b8cc7;
+                    color: white;
+                    cursor: pointer;
+                }
+
+        .icon {
+            padding-right: 10px;
+            vertical-align: bottom;
+            float: right;
+        }
+    </style>
+</head>
+<body dir="ltr">
+    <div class="main-dialog">
+        <div class="row ms-Grid-row wideRow">
+            <div class="ms-Grid-col ms-sm12">
+                <span class="discuss-row">
+                    Discuss potential candidates right within your team by setting up a tab.
+                </span>
+            </div>
+        </div>
+        <div class="row ms-Grid-row">
+            <div class="ms-Grid-col ms-sm12">
+                <span class="tabname-label">Tab name</span>
+            </div>
+        </div>
+        <div class="row ms-Grid-row tabname-row">
+            <div class="ms-Grid-col ms-sm12">
+                <input type="text" placeholder="e.g., PM EK6784UI" name="tabname" id="tabname" value="" class="input-field" autofocus />
+            </div>
+        </div>
+        <div class="row ms-Grid-row">
+            <div class="ms-Grid-col ms-sm12">
+                <span class="tabname-label">Select job posting</span>
+            </div>
+        </div>
+        <div class="row ms-Grid-row">
+            <div class="ms-Grid-col ms-sm12">
+                <div id="posting" class="position-dropdown dropdown dropdownButton">
+                    <span id="currentPosition">Loading...</span>
+                    <i class="ms-Icon ms-Icon--ChevronDown icon dropdownButton" title="Open" aria-hidden="true"></i>
+                </div>
+                <div id="positionsDropdownContent" class="dropdownContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        async function loadPage()
+        {
+            var nameSelector = $('#tabname');
+            var currentSelectedPositionId = 0;
+            var positionData;
+
+            function closeAllDropdowns() { $("#positionsDropdownContent").hide(); }
+
+            function checkValidityState() {
+                microsoftTeams.settings.setValidityState(nameSelector.val().length !== 0 && currentSelectedPositionId > 0);
+            }
+            nameSelector.on('input', function () { checkValidityState(); });
+            $(window).click(function (e) {
+                if (!$(e.target).hasClass('.change-position-btn')) {
+                    closeAllDropdowns();
+                }
+            });
+
+            $(".dropdownButton").click(function (e) {
+                $("#positionsDropdownContent").toggle();
+                e.stopPropagation();
+                e.cancelBubble = true;
+            });
+
+            function rebuildDropdown() {
+                var html = "";
+                positionData.forEach(function (d) {
+                    if (d.positionId !== currentSelectedPositionId) {
+                        var positionName = 'ID ' + d.positionExternalId + ' - ' + d.title;
+                        html += '<span class="change-position-btn" data-position-id="' + d.positionId + '" data-position-name="' + positionName + '">' + positionName + '</span>';
+                    }
+                });
+                $("#positionsDropdownContent").html(html);
+                $(".change-position-btn").click(function (e) {
+                    $("#positionsDropdownContent").toggle();
+                    updateSelectedPosition($(e.target).data("position-id"), $(e.target).data("position-name"));
+                    rebuildDropdown();
+                });
+            }
+
+            function updateSelectedPosition(positionId, positionName) {
+                currentSelectedPositionId = positionId;
+                $("#currentPosition").text(positionName);
+                $("#positionsDropdownContent").width($("#posting").outerWidth());
+                checkValidityState();
+            }
+
+            //fetch stuff
+
+            let accessToken = window.localStorage.getItem("userToken");
+            let authorization = "Bearer " + accessToken;
+            let data = await fetch(window.location.origin + '/api/positions/', {
+                headers: {
+                    Authorization: authorization,
+                }
+            });
+
+            if (data.ok) {
+                let json = await data.json();
+                    updateSelectedPosition(json[0].positionId, 'ID ' + json[0].positionExternalId + ' - ' + json[0].title);
+                    positionData = json;
+                    rebuildDropdown();
+            } else {
+                console.error("HTTP-Error: " + data.status);
+            }
+
+            //Save handler when user clicked on Save button
+            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+
+                microsoftTeams.getContext(function () {
+                    var name = nameSelector.val();
+                    var url = window.location.origin + '/StaticViews/TeamTab.html?positionId=' + currentSelectedPositionId;
+                    var websiteUrl = url + '&web=1';
+
+                    console.log(nameSelector.val);
+                    console.log(url);
+                    console.log(websiteUrl);
+
+
+                    microsoftTeams.settings.setSettings({
+                        entityId: currentSelectedPositionId,
+                        contentUrl: url,
+                        suggestedDisplayName: name,
+                        websiteUrl: websiteUrl
+                    });
+
+                    saveEvent.notifySuccess();
+                });
+            });
+
+        }
+
+        $(async () => {
+            await this.handlePageLoad();
+            this.loadPage();
+        })
+
+    </script>
+</body>
+</html>

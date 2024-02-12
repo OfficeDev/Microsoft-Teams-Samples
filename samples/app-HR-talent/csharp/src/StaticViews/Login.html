@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="/config.js"></script>
+    <title>Contoso - Login</title>
+    <script type="text/javascript">
+
+        //context: this page is loaded when Teams SSO cannot be performed - i.e. when user is accessed website outside of Teams, or if consent is required when loading the page inside Teams.
+
+        //declare the required parameters/options for the MSAL library to use - it will redirect back to /auth-end.html once the Azure AD sign-in process is completed
+        const msalConfig = {
+            auth: {
+                clientId: window.global.microsoftAppId,
+                redirectUri: window.location.origin + "/StaticViews/LoginResult.html"
+            }
+        };
+
+        //declare scopes that you want to request in the returned access_token. If consent is required, MSAL will handle this
+        alert(window.global.applicationIdUri);
+        var requestObj = {
+            scopes: [window.global.applicationIdUri + "/access_as_user"],
+            prompt: "select_account"
+        };
+
+        //initalize the MSAL browser clientapp with the MSAL configuration
+        const clientApp = new msal.PublicClientApplication(msalConfig);
+
+        //begins the sign-in process, by redirecting to Azure AD with the required parameters/options in this page.
+        //This SSO flow is using Code Grant with PKCE(following current best-practices)
+
+        redirectAuth = async () => {
+
+            await clientApp.handleRedirectPromise();
+
+            const accounts = clientApp.getAllAccounts();
+            clientApp.loginRedirect(requestObj);
+        }
+
+        $(this.redirectAuth);
+
+
+    </script>
+</head>
+<body>
+</body>
+</html>
