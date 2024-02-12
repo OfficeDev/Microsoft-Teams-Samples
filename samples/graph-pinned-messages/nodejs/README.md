@@ -112,6 +112,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1) Update the `.env` configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with values generated in step 1 while doing App Registration.
 
+**Note: Navigate to samples\graph-pinned-messages\nodejs\ClientApp\src\components\dashboard.jsx**
+       - On line 88, replace {{ChatId}}  
 
 ### 3.1. Install node modules and run server 
 
