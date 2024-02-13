@@ -44,7 +44,7 @@
                 "ports": [
                     {
                         "portNumber": 3978,
-                        "protocol": "https",
+                        "protocol": "http",
                         "access": "public",
                         "writeToEnvironmentFile": {
                             "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT

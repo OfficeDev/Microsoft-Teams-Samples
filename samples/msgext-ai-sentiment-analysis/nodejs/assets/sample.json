@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-nodejs",
+    "name": "officedev-microsoft-teams-samples-msgext-action-nodejs",
     "source": "officeDev",
-    "title": "Sentiment analysis of Teams chat message using messaging extension and Azure Open AI",
-    "shortDescription": "Sentiment analysis of Teams chat message using messaging extension and Azure Open AI",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-sentiment-analysis/nodejs",
+    "title": "Messaging Extension Action",
+    "shortDescription": "This is an sample application which showcases action based messaging extension.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action/nodejs",
     "longDescription": [
-      "This sample shows a feature where user can get sentiment analysis for posted messages in Teams chat using messaging extension and Azure Open AI."
+      "This is an sample application which showcases action based messaging extension."
     ],
-    "creationDateTime": "2023-08-07",
-    "updateDateTime": "2023-08-07",
+    "creationDateTime": "2022-10-04",
+    "updateDateTime": "2022-10-04",
     "products": [
       "Teams"
     ],
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "ME, Azure Open AI, toolkit"
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
-        "type": "image",
+        "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-ai-sentiment-analysis/nodejs/Images/Sentiment_Analysis.gif",
-        "alt": "Solution UX showing sentiment analysis for Team's chat messages using messaging extension and Azure Open AI"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action/nodejs/Images/MsgExtAction.gif",
+        "alt": "Solution UX showing action based messaging extension"
       }
     ],
     "authors": [
