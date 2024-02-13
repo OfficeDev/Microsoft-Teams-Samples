@@ -50,6 +50,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
+**Note:** Please create and install self-signed certificate before running this sample using toolkit or manually.
+
 ### Register your application with Azure AD
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.

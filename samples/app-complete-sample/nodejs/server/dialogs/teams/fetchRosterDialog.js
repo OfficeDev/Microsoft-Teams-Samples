@@ -25,7 +25,7 @@ class FetchRosterDialog extends ComponentDialog {
         }
         
         reply.text = JSON.stringify(members)
-        await stepContext.context.sendActivity(reply);
+        await stepContext.context.sendActivity(reply.text);
         return await stepContext.endDialog();
     }
 }
