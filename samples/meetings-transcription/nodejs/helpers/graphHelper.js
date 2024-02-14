@@ -49,6 +49,7 @@ class GraphHelper {
         try
         {
             var access_Token = await this._token;
+            console.log(access_Token);
             var getAllTranscriptsEndpoint = `${process.env.GraphApiEndpoint}/users/${process.env.UserId}/onlineMeetings/${meetingId}/transcripts`;
             const getAllTranscriptsConfig = {
                 method: 'get',

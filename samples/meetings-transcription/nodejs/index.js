@@ -69,7 +69,7 @@ server.set('views', __dirname);
 
 
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`Server.name listening to ${server.url}`);
+    console.log(`Server listening on http://localhost:${process.env.PORT}`);
 });
 
 // Returns view to be open in task module.
