@@ -460,6 +460,10 @@ jobs:
               name: 'sharepoint-embedded-tab-request-approval'
               version: '6.0.x'
 
+            - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
+              name: 'app-HR-talent'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:

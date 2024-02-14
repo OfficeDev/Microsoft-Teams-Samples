@@ -223,7 +223,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |20|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.||[View][bot-ai-enterprise-search#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |21|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip)|
 |22|Sharepoint tab request approval | This sample app demonstrates the usage of SharePoint Embedded for storage in teams. |[View][sharepoint-tab-request-approval#csharp]||
-
+|22|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||
 
 ## Application templates
 
@@ -351,6 +351,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [memessagereminder#csharp]:samples/msgext-message-reminder/csharp
 [tab-request-approval#csharp]:samples/tab-request-approval/csharp
 [sharepoint-tab-request-approval#csharp]:samples/sharepoint-tab-request-approval/csharp
+[app-HR-talent#csharp]:samples/app-HR-talent/csharp
 [bot-request-approval#csharp]:samples/bot-request-approval/csharp
 [typeaheadsearchonadaptivecard#js]:samples/bot-type-ahead-search-adaptive-cards/nodejs
 [meetings-live-code-interview#csharp]:samples/meetings-live-code-interview/csharp

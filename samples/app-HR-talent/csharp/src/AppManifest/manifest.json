@@ -36,7 +36,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<DOMAIN-NAME>>/channelconfig.html",
+      "configurationUrl": "https://<<DOMAIN-NAME>>/TeamTabConfig.html",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
