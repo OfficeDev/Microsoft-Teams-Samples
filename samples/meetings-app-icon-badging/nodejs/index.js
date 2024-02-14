@@ -6,26 +6,24 @@
 // Import required pckages
 const path = require('path');
 
-// Read botFilePath and botFileSecret from .env file.
-const ENV_FILE = path.join(__dirname, '..', '.env');
-//const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-
 const restify = require('restify');
+
+// Read botFilePath and botFileSecret from .env file.
+const ENV_FILE = path.join(__dirname,'.env');
+require('dotenv').config({ path: ENV_FILE });
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+const { BotFrameworkAdapter } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+//const adapter = new CloudAdapter(botFrameworkAuthentication);
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
+});
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -44,27 +42,33 @@ adapter.onTurnError = async (context, error) => {
 
     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create the bot that will handle incoming messages.
 const bot = new TeamsBot();
 
 // Create HTTP server.
-const server = restify.createServer();
-server.use(restify.plugins.bodyParser());
+var server = restify.createServer();
 
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${server.url}`);
-});
+const port = process.env.port || process.env.PORT || 3978;
+
+// Service listening on the port 3978
+server.listen(port, () =>
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);
 
 // Listen for incoming requests.
-server.post('/api/messages', async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => bot.run(context));
+server.post('/api/messages', (req, res, next) => {
+    adapter.processActivity(req, res, async (context) => {
+        await bot.run(context);
+        return next();
+    });
 });
 
 // Serve static pages from the 'pages' folder.
 server.get('/*', restify.plugins.serveStatic({
     directory: './pages'
 }));
+
+
+
