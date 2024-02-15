@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 
 namespace TeamsTabSSO.Helper
 {
@@ -125,37 +126,30 @@ namespace TeamsTabSSO.Helper
         /// <returns>App access token on behalf of user.</returns>
         public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor)
         {
-            var httpContext = httpContextAccessor.HttpContext;
-            httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
-            var idToken = assertion.ToString().Split(" ")[1];
-            var body = $"assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={configuration[ClientIdConfigurationSettingsKey]}@{configuration[TenantIdConfigurationSettingsKey]}&client_secret={configuration[AppsecretConfigurationSettingsKey]}&scope=https://graph.microsoft.com/User.Read";
+            var tenantId = configuration["AzureAd:TenantId"];
+            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
+                                                .WithClientSecret(configuration["AzureAd:AppSecret"])
+                                                .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
+                                                .Build();
+
             try
             {
-                var client = httpClientFactory.CreateClient("WebClient");
-                string responseBody;
-                using (var request = new HttpRequestMessage(HttpMethod.Post, configuration[AzureInstanceConfigurationSettingsKey] + configuration[TenantIdConfigurationSettingsKey] + configuration[AzureAuthUrlConfigurationSettingsKey]))
-                {
-                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    request.Content = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
-                    using (HttpResponseMessage response = await client.SendAsync(request))
+                var httpContext = httpContextAccessor.HttpContext;
+                httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
+                var idToken = assertion.ToString().Split(" ")[1];
+                UserAssertion assert = new UserAssertion(idToken);
+                List<string> scopes = new List<string>
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            responseBody = await response.Content.ReadAsStringAsync();
-                        }
-                        else
-                        {
-                            responseBody = await response.Content.ReadAsStringAsync();
-                            throw new Exception(responseBody);
-                        }
-                    }
-                }
+                        "User.Read"
+                    };
 
-                return JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
+                var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
+
+                return responseToken.AccessToken.ToString();
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "invalid_grant";
             }
         }
 

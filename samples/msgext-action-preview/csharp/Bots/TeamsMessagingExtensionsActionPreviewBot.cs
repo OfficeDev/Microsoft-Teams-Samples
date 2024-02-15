@@ -32,7 +32,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
-        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
             var adaptiveCardEditor = AdaptiveCardHelper.CreateAdaptiveCardEditor();
 
@@ -55,7 +58,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             });
         }
 
-        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
             var exampleData = JsonConvert.DeserializeObject<ExampleData>(action.Data.ToString());
 
@@ -107,7 +113,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             });
         }
 
-        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionBotMessagePreviewEditAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionBotMessagePreviewEditAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
             // The data has been returned to the bot in the action structure.
             var activityPreview = action.BotActivityPreview[0];
@@ -137,7 +146,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             });
         }
 
-        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionBotMessagePreviewSendAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionBotMessagePreviewSendAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
             // The data has been returned to the bot in the action structure.
             var activityPreview = action.BotActivityPreview[0];
@@ -151,7 +163,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             var message = MessageFactory.Attachment(new Attachment { ContentType = AdaptiveCard.ContentType, Content = adaptiveCard });
 
             //User Attribution for Bot messages
-            if (exampleData.UserAttributionSelect=="true")
+            if (exampleData.UserAttributionSelect == "true")
             {
                 message.ChannelData = new
                 {
@@ -174,7 +186,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             return null;
         }
 
-        protected override async Task OnTeamsMessagingExtensionCardButtonClickedAsync(ITurnContext<IInvokeActivity> turnContext, JObject obj, CancellationToken cancellationToken)
+        protected override async Task OnTeamsMessagingExtensionCardButtonClickedAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            JObject obj,
+            CancellationToken cancellationToken)
         {
             // If the adaptive card was added to the compose window (by either the OnTeamsMessagingExtensionSubmitActionAsync or
             // OnTeamsMessagingExtensionBotMessagePreviewSendAsync handler's return values) the submit values will come in here.

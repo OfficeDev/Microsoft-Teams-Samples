@@ -1,7 +1,7 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "bot-conversation-sso-quickstart-aad",
+    "name": "bot-tag-mention-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,

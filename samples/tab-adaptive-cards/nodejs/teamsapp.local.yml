@@ -92,5 +92,5 @@ deploy:
       envs:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-        connectionName: ${{CONNECTION_NAME}}
+        ConnectionName: ${{CONNECTION_NAME}}
         BaseUrl: ${{BOT_ENDPOINT}}
