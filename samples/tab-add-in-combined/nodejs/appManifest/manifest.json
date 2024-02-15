@@ -11,8 +11,8 @@
         "termsOfUseUrl": "${{TAB_ENDPOINT}}/about.html"
     },
     "icons": {
-        "outline": "BlueYonderDiscountIcon64.png",
-        "color": "BlueYonderDiscountIcon128.png"
+        "outline": "outline.png",
+        "color": "color.png"
     },
     "name": {
         "short": "Discounts",

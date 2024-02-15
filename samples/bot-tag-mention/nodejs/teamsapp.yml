@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-conversation-sso-quickstart-js
+  sampleTag: Microsoft-Teams-Samples:bot-tag-mention-js
 
 environmentFolderPath: ./env
