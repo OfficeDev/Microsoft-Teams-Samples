@@ -5,7 +5,7 @@
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,
-	"oauth2AllowImplicitFlow": true,
+    "oauth2AllowImplicitFlow": true,
     "optionalClaims": {
         "idToken": [],
         "accessToken": [
@@ -107,17 +107,17 @@
             ]
         }
     ],
-    "identifierUris":[
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "identifierUris": [
+        "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
     ],
-    "replyUrlsWithType":[
+    "replyUrlsWithType": [
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
+            "url": "https://${{BOT_DOMAIN}}/auth-end",
+            "type": "Web"
         },
         {
-			"url": "https://token.botframework.com/.auth/web/redirect",
-			"type": "Web"
-		}
+            "url": "https://token.botframework.com/.auth/web/redirect",
+            "type": "Web"
+        }
     ]
 }
