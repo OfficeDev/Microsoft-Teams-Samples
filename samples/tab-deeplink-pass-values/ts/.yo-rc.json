@@ -1,0 +1,9 @@
+{
+  "generator-teams": {
+    "promptValues": {
+      "developer": "Microsoft"
+    },
+    "libraryName": "deepLinksValuePassingSample",
+    "generator-version": "4.1.0"
+  }
+}
