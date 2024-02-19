@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://aka.ms/teams-app-test-tool-config/0.1.0/config.schema.json
+# Visit https://aka.ms/teams-app-test-tool-config-guide for details on this file
+
+# The config file is for customization of Teams context information like chats, teams and users.
+# It is mockup data for testing Bot Framework APIs (or botbuilder SDK methods like TeamsInfo.getTeamMembers()).
+# You can customize this file to change API response if your bot code uses these APIs.
+version: "0.1.0"
+tenantId: 00000000-0000-0000-0000-0000000000001
+bot:
+  id: 00000000-0000-0000-0000-00000000000011
+  name: Test Bot
+currentUser:
+  id: user-id-0
+  name: Alex Wilber
+  userPrincipleName: alexw@example.com
+  aadObjectId: 00000000-0000-0000-0000-0000000000020
+  givenName: Alex
+  surname: Wilber
+  email: alexw@example.com
+users:
+  - id: user-id-1
+    name: Megan Bowen
+    userPrincipleName: meganb@example.com
+    aadObjectId: 00000000-0000-0000-0000-0000000000021
+    givenName: Megan
+    surname: Bowen
+    email: meganb@example.com
+  - id: user-id-2
+    name: Adele Vance
+    userPrincipleName: adelev@example.com
+    aadObjectId: 00000000-0000-0000-0000-0000000000022
+    givenName: Adele
+    surname: Vance
+    email: adelev@example.com
+  - id: user-id-3
+    name: Isaiah Langer
+    userPrincipleName: isaiah@example.com
+    aadObjectId: 00000000-0000-0000-0000-0000000000023
+    givenName: Isaiah
+    surname: Langer
+    email: isaiahl@example.com
+  - id: user-id-4
+    name: Patti Fernandez
+    userPrincipleName: pattif@example.com
+    aadObjectId: 00000000-0000-0000-0000-0000000000024
+    givenName: Patti
+    surname: Fernandez
+    email: pattif@example.com
+  - id: user-id-5
+    name: Lynne Robbins
+    userPrincipleName: lynner@example.com
+    aadObjectId: 00000000-0000-0000-0000-0000000000025
+    givenName: Lynne
+    surname: Robbins
+    email: lynner@example.com
+personalChat:
+  id: personal-chat-id
+groupChat:
+  id: group-chat-id
+  name: Group Chat
+team:
+  id: team-id
+  name: My Team
+  aadGroupId: 00000000-0000-0000-0000-000000000031
+  channels:
+    - id: channel-announcements-id
+      name: Announcements
+
