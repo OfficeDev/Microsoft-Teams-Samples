@@ -133,7 +133,7 @@ Using the `yoteams-deploy` plugin, automatically added to the project, deploymen
 
 ### Configuration
 
-Configuration is stored in the `.env` file.
+Configuration will be stored in the `.env` file. Please create one based on the .env_sample file included in the `samples/tab-deeplink-pass-values/ts` folder.
 
 ### Debug and test locally
 
