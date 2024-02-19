@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "b404cc0a-f062-42c5-85c8-d8bb1dd12fc1",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.tabconversations",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-      "configurationUrl": "<<your base url>>/configure",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -37,6 +37,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<DOMAIN-NAME>>"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ]
 }

@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.productinspection",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuser"
   },
   "icons": {
     "color": "color.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "TabProductInspection",
       "name": "Capture image tab",
-      "contentUrl": "https://{{domain-name}}/index",
-      "websiteUrl": "https://{{domain-name}}/index",
+      "contentUrl": "https://${{TAB_DOMAIN}}/index",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/index",
       "scopes": [
         "personal"
       ]
@@ -39,8 +39,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}",
-    "{{domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ],
   "devicePermissions": [
     "media"
