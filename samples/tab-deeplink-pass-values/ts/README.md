@@ -53,7 +53,7 @@ All required source code are located in the `./src` folder:
         ```bash
         git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
         ```
-    - Update the `.env` configuration:
+    - Create a `.env` file and copy/paste the contents of `.env_sample` into it. Then, update the below configurations:
       - `PUBLIC_HOSTNAME` should point to your tunnel url (e.g., 124.ngrok-free.app)
       - `APPLICATION_ID` should be the ID of your Microsoft Teams application
 
@@ -96,6 +96,10 @@ To access the app, you can either open the tab in Microsoft Teams, or you can ac
 
 ### View the standalone web app
 1. To switch to the standalone app from the tab app, right-click the tab and select "Open in browser" or "Open in new window". Or, you can also enter your tunnel's public URL directly in the browser.
+
+### Deep Link Generation Demo
+
+![Gif demonstrating how to generate a deep link](images/deepLinkSampleApp.gif)
 
 ## Further Reading
 - [Using deep links in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-application?tabs=teamsjs-v2)
