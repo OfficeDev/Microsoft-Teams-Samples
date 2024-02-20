@@ -1,281 +1,194 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
-const { TeamsActivityHandler, CardFactory, MessageFactory } = require("botbuilder");
-var chosenFlow = "";
+ 
+const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 class TeamsBot extends TeamsActivityHandler {
-    constructor() {
-        super();
-        this.onMembersAdded(async (context, next) => {
-            const membersAdded = context.activity.membersAdded;
-            for (let member = 0; member < membersAdded.length; member++) {
-
-                if (membersAdded[member].id !== context.activity.recipient.id) {
-                    await context.sendActivity("Hello and welcome! With this sample you can see the functionality of static and dynamic search in adaptive card");
-                }
-            }
-            await next();
-        });
-
-        // Registers an activity event handler for the message event, emitted for every incoming message activity.
-        this.onMessage(async (context, next) => {
-
-            if (context.activity.text != null) {
-                
-                if (context.activity.text.toLowerCase().trim() === "chosen flow" || context.activity.text.toLowerCase().trim() === "<at>typeahead search adaptive card</at> chosen flow") {
-                    const replyActivity = MessageFactory.text(`Bot configured for ${chosenFlow} flow`);
-                    await context.sendActivity(replyActivity);
-                }
-            }
-            else if (context.activity.value != null) {
-                await context.sendActivity("Selected option is: " + context.activity.value.choiceselect);
-            }
-
-            // By calling next() you ensure that the next BotHandler is run.
-            await next();
-        });
-    }
-
-    //Invoked when an invoke activity is received from bot.
-    async onInvokeActivity(context) {
-
-        if (context._activity.name == "config/fetch") {
-            const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForDynamicSearch());
-            try {
-                return {
-                    status: 200,
-                    body: {
-                        config: {
-                            type: 'continue',
-                            value: {
-                                card: adaptiveCard,
-                                height: 400,
-                                title: 'Task module fetch response',
-                                width: 400
-                            }
-                        }
-                    }
-                }
-            } catch (e) {
-                console.log(e);
-            }
+  constructor() {
+    super();
+    this.onMembersAdded(async (context, next) => {
+      const membersAdded = context.activity.membersAdded;
+      for (let member = 0; member < membersAdded.length; member++) {
+        if (membersAdded[member].id !== context.activity.recipient.id) {
+          await context.sendActivity("Hello and welcome! With this sample you can see the functionality of bot configuration");
         }
-
-        if (context._activity.name == "config/submit") {
-
-            const choice = context._activity.value.data.choiceselect.split(" ")[0];
-            chosenFlow = choice;
-
-            if (choice === "static_option_2") {
-                const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForStaticSearch());
-
-                return {
-                    status: 200,
-                    body: {
-                        config: {
-                            type: 'continue',
-                            value: {
-                                card: adaptiveCard,
-                                height: 400,
-                                title: 'Task module submit response',
-                                width: 400
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-
-                try {
-                    return {
-                        status: 200,
-                        body: {
-                            config: {
-                                type: 'message',
-                                value: "Submitted successfully!"
-                            }
-                        }
-                    }
-                }
-                catch (e) {
-                    console.log(e);
-
-                }
-            }
-            return await super.onInvokeActivity(context);
-        }
-    }
-
-    adaptiveCardForStaticSearch = () => ({
-        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-        "version": "1.6",
-        "type": "AdaptiveCard",
-        "body": [
-            {
-                "text": "Please search for the IDE from static list.",
-                "wrap": true,
-                "type": "TextBlock"
-            },
-            {
-                "columns": [
-                    {
-                        "width": "auto",
-                        "items": [
-                            {
-                                "text": "IDE: ",
-                                "wrap": true,
-                                "height": "stretch",
-                                "type": "TextBlock"
-                            }
-                        ],
-                        "type": "Column"
-                    }
-                ],
-                "type": "ColumnSet"
-            },
-            {
-                "columns": [
-                    {
-                        "width": "stretch",
-                        "items": [
-                            {
-                                "choices": [
-                                    {
-                                        "title": "Visual studio",
-                                        "value": "visual_studio"
-                                    },
-                                    {
-                                        "title": "IntelliJ IDEA ",
-                                        "value": "intelliJ_IDEA "
-                                    },
-                                    {
-                                        "title": "Aptana Studio 3",
-                                        "value": "aptana_studio_3"
-                                    },
-                                    {
-                                        "title": "PyCharm",
-                                        "value": "pycharm"
-                                    },
-                                    {
-                                        "title": "PhpStorm",
-                                        "value": "phpstorm"
-                                    },
-                                    {
-                                        "title": "WebStorm",
-                                        "value": "webstorm"
-                                    },
-                                    {
-                                        "title": "NetBeans",
-                                        "value": "netbeans"
-                                    },
-                                    {
-                                        "title": "Eclipse",
-                                        "value": "eclipse"
-                                    },
-                                    {
-                                        "title": "RubyMine ",
-                                        "value": "rubymine "
-                                    },
-                                    {
-                                        "title": "Visual studio code",
-                                        "value": "visual_studio_code"
-                                    }
-                                ],
-                                "style": "filtered",
-                                "placeholder": "Search for a IDE",
-                                "id": "choiceselect",
-                                "type": "Input.ChoiceSet"
-                            }
-                        ],
-                        "type": "Column"
-                    }
-                ],
-                "type": "ColumnSet"
-            }
-        ],
-        "actions": [
-            {
-                "type": "Action.Submit",
-                "id": "submit",
-                "title": "Submit"
-            }
-        ]
+      }
+ 
+      await next();
     });
-
-    adaptiveCardForDynamicSearch = () => ({
-        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-        "version": "1.6",
-        "type": "AdaptiveCard",
-        "body": [
-            {
-                "text": "Please search for npm packages using dynamic search control.",
-                "wrap": true,
-                "type": "TextBlock"
-            },
-            {
-                "columns": [
-                    {
-                        "width": "auto",
-                        "items": [
-                            {
-                                "text": "NPM packages search: ",
-                                "wrap": true,
-                                "height": "stretch",
-                                "type": "TextBlock"
-                            }
-                        ],
-                        "type": "Column"
-                    }
-                ],
-                "type": "ColumnSet"
-            },
-            {
-                "columns": [
-                    {
-                        "width": "stretch",
-                        "items": [
-                            {
-                                "choices": [
-                                    {
-                                        "title": "Static Option 1",
-                                        "value": "static_option_1"
-                                    },
-                                    {
-                                        "title": "Static Option 2",
-                                        "value": "static_option_2"
-                                    },
-                                    {
-                                        "title": "Static Option 3",
-                                        "value": "static_option_3"
-                                    }
-                                ],
-                                "value": "static_option_2",
-                                "isMultiSelect": false,
-                                "style": "filtered",
-                                "choices.data": {
-                                    "type": "Data.Query",
-                                    "dataset": "npmpackages",
-                                    "count": 12
-
-                                },
-                                "id": "choiceselect",
-                                "type": "Input.ChoiceSet"
-                            }
-                        ],
-                        "type": "Column"
-                    }
-                ],
-                "type": "ColumnSet"
-            }
-        ],
-        "actions": [
-            {
-                "type": "Action.Submit",
-                "id": "submitdynamic",
-                "title": "Submit"
-            }
-        ]
+ 
+    this.onMessage(async (context, next) => {
+ 
+      // By calling next() you ensure that the next BotHandler is run.
+      await next();
     });
+  }
+ 
+/* Implementing sdk handler for bot configuration
+configData object currently doesnt suport any data
+*/
+async handleTeamsConfigFetch(_context, _configData) {
+  let response = {};         
+  const cardJson = {
+      type: 'AdaptiveCard',
+      version: '1.4',
+      body: [
+          {
+              type: 'TextBlock',
+              text: 'Bot Config Fetch',
+          },
+      ],
+  };
+  const card = CardFactory.adaptiveCard(cardJson);
+    /*
+    Option 1: You can add a "config/auth" response as below code
+    Note: The URL in value must be linked to a valid auth URL which can be opened in a browser. This code is only representative and not a working example.
+    */
+  response = {
+      config: {
+        type:"auth",
+        suggestedActions:{
+        actions:[
+            {
+                type: "openUrl",
+                value: "https://example.com/auth",
+                 title: "Sign in to this app"
+            }]
+        },
+      },
+  };
+ 
+    /*
+      Option 2: You can add a "config/continue" response as below code
+      */
+    //   const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForContinue());
+    //   response = {
+    //       config: {
+    //           value: {
+    //               card: adaptiveCard,
+    //               height: 200,
+    //               width: 200,
+    //               title: 'test card',
+    //           },
+    //           type: 'continue',
+    //       },
+    //   };
+    return response;  
+  }
+ 
+ 
+async handleTeamsConfigSubmit(context, _configData) {
+  let response = {};
+  const choice = context._activity.value.data.choiceselect;
+       if(choice==="continue"){
+        const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForSubmit());
+        response = {
+            config: {
+              type: 'continue',
+                value: {
+                    card: adaptiveCard,
+                    height: 200,
+                    width: 200,
+                    title: 'Task module submit response',
+                }               
+            },
+        };
+        return response;
+       }
+       else {
+        response = {
+          config: {
+              type: 'message',
+              value: 'You have chosen to finish setting up bot',
+          },
+       }
+       return response;
+  
 }
-
+}
+ 
+  adaptiveCardForContinue = () => ({
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
+    "type": "AdaptiveCard",
+    "body": [
+      {
+        "text": "Please choose bot set up option",
+        "wrap": true,
+        "type": "TextBlock"
+      },
+      {
+        "columns": [
+          {
+            "width": "auto",
+            "items": [
+              {
+                "text": "Option: ",
+                "wrap": true,
+                "height": "stretch",
+                "type": "TextBlock"
+              }
+            ],
+            "type": "Column"
+          }
+        ],
+        "type": "ColumnSet"
+      },
+      {
+        "columns": [
+          {
+            "width": "stretch",
+            "items": [
+              {
+                "choices": [
+                  {
+                    "title": "Continue with more options",
+                    "value": "continue"
+                  },
+                  {
+                    "title": "Finish setting up bot",
+                    "value": "finish"
+                  }
+                ],
+                "style": "filtered",
+                "placeholder": "Search for an option",
+                "id": "choiceselect",
+                "type": "Input.ChoiceSet"
+              }
+            ],
+            "type": "Column"
+          }
+        ],
+        "type": "ColumnSet"
+      }
+    ],
+    "actions": [
+      {
+        "type": "Action.Submit",
+        "id": "submit",
+        "title": "Submit"
+      }
+    ]
+  });
+ 
+  adaptiveCardForSubmit= () => ({
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
+    "type": "AdaptiveCard",
+    "body": [
+      {
+        "text": "Please hit submit to continue setting up bot",
+        "wrap": true,
+        "type": "TextBlock"
+      }
+    ],
+    "actions": [
+      {
+        "type": "Action.Submit",
+        "id": "submitdynamic",
+        "title": "Submit"
+      }
+    ]
+  });
+}
+  
 module.exports.TeamsBot = TeamsBot;
