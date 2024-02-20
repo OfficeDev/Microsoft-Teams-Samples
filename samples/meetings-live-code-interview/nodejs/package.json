@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@fluidframework/test-client-utils": "~0.59.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
@@ -38,10 +39,10 @@
     "start-server-and-test": "^1.11.6"
   },
   "scripts": {
-    "dev:teamsfx": "npm run start",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
     "clean": "npx shx rm -rf build",
-    "start": "start-server-and-test start:server 7070 start:client",
-    "start:client": "set PORT=3978 HTTP=true && react-scripts start",
+    "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
+    "start:client": "set PORT=3978 HTTPS=true && react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",

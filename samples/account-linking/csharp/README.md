@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos linking user's Azure AD ID with Facebook and Google account of user from bot, ME and tab.
+description: This sample demos linking user's Microsoft Entra ID with Facebook and Google account of user from bot, ME and tab.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 
 # External OAuth identity linking in Teams Apps.
 
-This sample demos linking user's AAD id with their GitHub identity. 
+This sample demos linking user's Microsoft Entra ID with their GitHub identity. 
 
 The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API.
 
@@ -73,8 +73,8 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
 
 For this example, we'll use the `590a2d6f8b31.ngrok-free.app` as our domain name.
 
-### 2. Provision an Azure AD application for Tab SSO
-Please follow the instructions on [creating an Azure AD application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
+### 2. Provision an Microsoft Entra ID application for Tab SSO
+Please follow the instructions on [creating an Microsoft Entra ID application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
 
 #### 2.1 Configure the app for v2 tokens
 **IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `AppManifest` blade is set to `2`.
@@ -106,7 +106,7 @@ Please fill in the following values into the `AppManifest/manifest.json` file (c
 | Parameter  | Value |
 |---|---|
 | Bot Id  | The "Application (client) id" from step 3. |
-| Azure Ad Application Id | the "Application (client) id" from step 2| 
+| Microsoft Entra ID Application Id | the "Application (client) id" from step 2| 
 |Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok-free.app`.
 |Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok-free.app`.
 
@@ -121,9 +121,9 @@ Please copy the `Source/appsettings.json` into a new file `appsettings.developme
 
 | Parameter | Value |
 | --------- | ----- |
-| AzureAd:ClientId | The client id from step 2 |
-| AzureAd:ClientSecret | The client secret from step 2 |
-| AzureAd:TenantId | `common` | 
+| Microsoft Entra ID:ClientId | The client id from step 2 |
+| Microsoft Entra ID:ClientSecret | The client secret from step 2 |
+| Microsoft Entra ID:TenantId | `common` | 
 | Bot:MicrosoftAppId | The client id from step 3 | 
 | Bot:MicrosoftAppPassword | The client secret from step 3 | 
 | OAuth:ClientId | The client id from step 4 | 
@@ -142,7 +142,7 @@ Please follow the documentation on [creating a Microsoft Teams app package](http
 
 The "manifest" in question is the `AppManifest` directory filled out in step 5.
 
-### 10. (Optional) Enable the Azure Ad version of the integration
+### 10. (Optional) Enable the Microsoft Entra ID version of the integration
 If you want to try out the implementation using Azure you will need to provision a few resources first
 
 1. [Storage account (with table storage)](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview)

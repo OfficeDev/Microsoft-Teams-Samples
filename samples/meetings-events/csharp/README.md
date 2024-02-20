@@ -77,7 +77,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
 - Navigate to `samples/meetings-events/csharp` 
-    - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing AAD app registration in step 1.
+    - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing Microsoft Entra ID app registration in step 1.
 
 - Run the app from a terminal or from Visual Studio, choose option A or B.
 
@@ -100,7 +100,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 Modify the `manifest.json` in the `/AppManifest` folder and replace the following details
 
-   - `<<App-ID>>` with your AAD app registration id   
+   - `<<App-ID>>` with your Microsoft Entra ID app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
    - - **Upload** the `manifest.zip` to Teams

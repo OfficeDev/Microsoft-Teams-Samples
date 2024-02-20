@@ -19,7 +19,7 @@ namespace Microsoft.BotBuilderSamples
             {
                 Question = userText,
                 MultiSelect = choiceSet.IsMultiSelect ? "true" : "false",
-                UserAttributionSelect=attributionFlag,
+                UserAttributionSelect = attributionFlag,
                 Option1 = choiceSet.Choices[0].Title,
                 Option2 = choiceSet.Choices[1].Title,
                 Option3 = choiceSet.Choices[2].Title,
@@ -30,7 +30,7 @@ namespace Microsoft.BotBuilderSamples
         {
             var cardData = exampleData ?? new ExampleData();
 
-            return new AdaptiveCard
+            return new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -46,8 +46,9 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Type = AdaptiveChoiceSetInput.TypeName,
                         Id = "MultiSelect",
-                        Value = cardData.MultiSelect,
                         IsMultiSelect = false,
+                        Value = cardData.MultiSelect,
+                        Style=AdaptiveChoiceInputStyle.Expanded,
                         Choices = new List<AdaptiveChoice>
                         {
                             new AdaptiveChoice() { Title = "True", Value = "true" },
@@ -63,7 +64,9 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Type = AdaptiveChoiceSetInput.TypeName,
                         Id = "UserAttributionSelect",
+                        IsMultiSelect = false,
                         Value = cardData.UserAttributionSelect,
+                        Style= AdaptiveChoiceInputStyle.Expanded,
                         Choices = new List<AdaptiveChoice>
                         {
                             new AdaptiveChoice() { Title = "True", Value = "true" },
@@ -85,7 +88,7 @@ namespace Microsoft.BotBuilderSamples
 
         public static AdaptiveCard CreateAdaptiveCard(ExampleData data)
         {
-            return new AdaptiveCard
+            return new AdaptiveCard("1.0")
             {
                 Body = new List<AdaptiveElement>
                 {
@@ -97,6 +100,7 @@ namespace Microsoft.BotBuilderSamples
                         Type = AdaptiveChoiceSetInput.TypeName,
                         Id = "Choices",
                         IsMultiSelect = bool.Parse(data.MultiSelect),
+                        Style=AdaptiveChoiceInputStyle.Expanded,
                         Choices = new List<AdaptiveChoice>
                         {
                             new AdaptiveChoice() { Title = data.Option1, Value = data.Option1 },

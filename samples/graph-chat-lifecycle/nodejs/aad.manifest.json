@@ -146,23 +146,7 @@
     ],
   "replyUrlsWithType": [
     {
-      "url": "${{TAB_ENDPOINT}}/auth-end.html",
-      "type": "Web"
-    },
-    {
-      "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
-      "type": "Spa"
-    },
-    {
-      "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
-      "type": "Spa"
-    },
-    {
-      "url": "${{TAB_ENDPOINT}}/auth-end",
-      "type": "Spa"
-    },
-    {
-      "url": "${{TAB_ENDPOINT}}/Home/BrowserRedirect",
+      "url": "${{TAB_ENDPOINT}}/auth/auth-end",
       "type": "Spa"
     }
   ]

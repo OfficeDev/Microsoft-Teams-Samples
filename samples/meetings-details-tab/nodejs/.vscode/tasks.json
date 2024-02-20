@@ -104,7 +104,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to port:"
+                    "endsPattern": "Compiled with warnings."
                 }
             }
         },
@@ -126,7 +126,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "API server is listening on port"
+                    "endsPattern": "Server listening on http://localhost:"
                 }
             }
         }

@@ -151,7 +151,7 @@ Click on Add Permissions to commit your changes.
   - Select `ReleaseManagement.csproj` file
   - Press `F5` to run the project
 
-- Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId` generated in previous steps 1 (Setup for AAD app registration). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+- Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId` generated in previous steps 1 (Setup for Microsoft Entra ID app registration). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 **Setup Manifest for Teams**
 

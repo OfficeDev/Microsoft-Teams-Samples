@@ -39,7 +39,7 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
   - Register your app with Microsoft identity platform via the Azure AD portal

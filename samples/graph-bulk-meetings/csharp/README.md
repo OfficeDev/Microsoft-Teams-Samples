@@ -54,8 +54,8 @@ Note these instructions are for running the sample on your local machine, the tu
 
 ![Ngrok](EventMeeting/Images/NgrokScreenshot.png)
 
-1) Setup for AAD app registration
-    In Azure portal, create a AAD app registration
+1) Setup for Microsoft Entra ID app registration
+    In Azure portal, create a Microsoft Entra ID app registration
         - Navigate to **API Permissions**, and make sure to add the below permissions:
         - Select Add a permission, select Microsoft Graph -> Application permissions.
             - `Calendars.ReadWrite`
@@ -68,7 +68,7 @@ Note these instructions are for running the sample on your local machine, the tu
 1) Setup for Bot
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
    In the new Azure Bot resource in the Portal, 
@@ -86,12 +86,12 @@ Note these instructions are for running the sample on your local machine, the tu
 
 1) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
-    - Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` values received while doing AAD app registration in your Azure portal.
+    - Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` values received while doing Microsoft Entra ID app registration in your Azure portal.
     - Press `F5` to run the project
 
 1) Modify the `manifest.json` in the `/AppManifest` folder 
 Replace the following details:
-    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing AAD app registration in your Azure portal.
+    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing Microsoft Entra ID app registration in your Azure portal.
     - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

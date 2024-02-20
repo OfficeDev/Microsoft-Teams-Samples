@@ -25,7 +25,7 @@ class UpdateTextMsgSetupDialog extends ComponentDialog {
             reply.entities.splice(0, 1);
         }
 
-        var result = await stepContext.context.sendActivity(reply);
+        var result = await stepContext.context.sendActivity(reply.text);
         currentState.activityId = result.id;
         return await stepContext.endDialog();
     }

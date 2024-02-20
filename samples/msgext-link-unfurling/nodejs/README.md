@@ -71,7 +71,7 @@ the Teams service needs to call into the bot.
 ## Setup for bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
    In the new Azure Bot resource in the Portal, 
@@ -113,8 +113,12 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 > Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 
+![InstallApp ](Images/InstallApp.png)
+
 If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
+
+![Link-Unfurling ](Images/Link-Unfurling1.png)
 
 
 ## Deploy the bot to Azure

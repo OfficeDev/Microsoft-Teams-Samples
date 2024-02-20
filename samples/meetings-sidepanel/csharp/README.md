@@ -58,7 +58,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2. Create AAD app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+2. Create Microsoft Entra ID app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
         > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
@@ -81,7 +81,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    - `<<Your_Domain_URL>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 6. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
-   - <<Manifest-id>> with any random GUID or your MicrosoftAppId from AAD app registration.
+   - <<Manifest-id>> with any random GUID or your MicrosoftAppId from Microsoft Entra ID app registration.
    - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
    - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.

@@ -13,7 +13,7 @@ const server = express();
 
 const port = process.env.port || process.env.PORT || 3978;
 server.listen(port, () => 
-    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+    console.log(`Service listening at http://localhost:${port}`)
 );
 
 server.use(express.static(path.join(__dirname, 'static')));
