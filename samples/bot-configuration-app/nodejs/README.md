@@ -126,14 +126,14 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
    **Option 1 : Auth card Interactions:**
-   Comment option 2 code in [teamsBot.js](/samples/bot-configuration-app/nodejs/teamsBot.js) to experience the `config/Auth`
-   Note : The following `Sign-in` page is made with a dummy URL, Please update it with your auth URL
+   - Comment option 2 code in [teamsBot.js](/samples/bot-configuration-app/nodejs/teamsBot.js) to experience the `config/Auth`
+   - Note : The following `Sign-in` page is made with a dummy URL, Please update it with your auth URL
 
   ![Bot-description-card](Images/Bot-description-card.png)
 
    **Option 2 : Bot Descrption Card:**
-   **Show configurable card interaction:**
-   Comment option 1 code in [teamsBot.js](/samples/bot-configuration-app/nodejs/teamsBot.js) to experience the `config/continue`
+   - **Show configurable card interaction:**
+   - Comment option 1 code in [teamsBot.js](/samples/bot-configuration-app/nodejs/teamsBot.js) to experience the `config/continue`
 
   ![configurable-card-Interaction1 ](Images/configurable-card-Interaction1.png)
 
