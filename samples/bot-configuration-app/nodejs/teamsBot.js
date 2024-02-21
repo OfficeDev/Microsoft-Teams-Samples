@@ -60,18 +60,18 @@ async handleTeamsConfigFetch(_context, _configData) {
     /*
       Option 2: You can add a "config/continue" response as below code
       */
-    //   const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForContinue());
-    //   response = {
-    //       config: {
-    //           value: {
-    //               card: adaptiveCard,
-    //               height: 200,
-    //               width: 200,
-    //               title: 'test card',
-    //           },
-    //           type: 'continue',
-    //       },
-    //   };
+       const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForContinue());
+       /*response = {
+           config: {
+               value: {
+                   card: adaptiveCard,
+                   height: 200,
+                   width: 200,
+                   title: 'test card',
+               },
+               type: 'continue',
+           },
+       };*/
     return response;  
   }
  
