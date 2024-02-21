@@ -66,11 +66,12 @@ const Notes = (props: INotesProps) => {
     }
 
     React.useEffect((): any => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
             sethostClientType(context.app.host.clientType);
         });
         loadNotes();
+      });
     }, [props.currentCandidateEmail])
 
     return (

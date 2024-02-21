@@ -44,11 +44,10 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     }
 
     React.useEffect(() => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
             sethostClientType(context.app.host.clientType);
         });
-
         getCandidateDetails()
             .then((res) => {
                 const data = res.data as ICandidateDetails[];
@@ -66,6 +65,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
             .catch((ex) => {
                 console.log(ex)
             });
+        });
     }, [])
 
     return (

@@ -7,9 +7,10 @@ const Timeline = () => {
     const [hostClientType, sethostClientType] = React.useState<any>('');
 
     React.useEffect(() => {
-        microsoftTeams.app.initialize();
-        microsoftTeams.app.getContext().then(async (context) => {
-            sethostClientType(context.app.host.clientType);
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then(async (context) => {
+                sethostClientType(context.app.host.clientType);
+            });
         });
     }, []);
 

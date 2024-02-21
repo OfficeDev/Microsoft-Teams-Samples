@@ -8,7 +8,8 @@ const AddNotes = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
 
     React.useEffect(() => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
     }, [])
 
     const saveNote = () => {

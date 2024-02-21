@@ -33,7 +33,8 @@ const AddQuestions = (props: any): React.ReactElement => {
     ]);
   
     React.useEffect(() => {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
     }, [])
 
     const saveQuestion = () => {

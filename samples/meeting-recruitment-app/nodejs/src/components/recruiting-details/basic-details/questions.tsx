@@ -162,8 +162,9 @@ const Questions = (): React.ReactElement => {
         // Setting ratings to show in the UI.
         setRatingsArray(prevItems);
 
-        microsoftTeams.app.initialize();
-        loadQuestions();
+        microsoftTeams.app.initialize().then(() => {
+            loadQuestions();
+        });
     }, [])
 
     return (
