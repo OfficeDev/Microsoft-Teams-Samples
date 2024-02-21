@@ -914,10 +914,6 @@ jobs:
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
               version: '16.x'
-
-            - project_path: 'samples/tab-deeplink-pass-values/ts'
-              name: 'tab-deeplink-pass-values'
-              version: '16.x'
             
             - project_path: 'samples/tab-channel-context/nodejs'
               name: 'tab-channel-context'  
