@@ -31,16 +31,16 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidMount() {
-    microsoftTeams.initialize();
-    microsoftTeams.getContext((context) => {
-      let theme = context.theme || "";
+    microsoftTeams.app.initialize();
+    microsoftTeams.app.getContext().then(async (context) => {
+      let theme = context.app.theme || "";
       this.updateTheme(theme);
       this.setState({
         theme: theme
       });
     });
 
-    microsoftTeams.registerOnThemeChangeHandler((theme) => {
+    microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
       this.updateTheme(theme);
       this.setState({
         theme: theme,

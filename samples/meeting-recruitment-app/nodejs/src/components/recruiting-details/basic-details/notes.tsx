@@ -16,25 +16,29 @@ const Notes = (props: INotesProps) => {
 
     // Method to start task module to add a note.
     const addNotesTaskModule = () => {
-        let taskInfo = {
+        let urlDialogInfo = {
             title: "Notes",
-            height: 300,
-            width: 400,
             url: `${window.location.origin}/addNote`,
+            fallbackUrl: `${window.location.origin}/addNote`,
+            size: {
+                height: 300,
+                width: 400,
+            }
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, note) => {
-            if (err) {
+        microsoftTeams.dialog.url.open(urlDialogInfo, (submitHandler) => {
+            if (submitHandler.err) {
                 console.log("Some error occurred in the task module")
                 return
             }
-
-            microsoftTeams.getContext((context) => {
+            var details = JSON.parse(JSON.stringify(submitHandler.result));
+            
+            microsoftTeams.app.getContext().then(async (context) => {
                 // The note details to save.
                 const noteDetails: INoteDetails = {
                     CandidateEmail: props.currentCandidateEmail,
-                    Note: note,
-                    AddedBy: context.userPrincipalName!
+                    Note: details.toString(),
+                    AddedBy: context.user?.userPrincipalName!
                 };
 
                 // API call to save the question to storage.
@@ -62,9 +66,9 @@ const Notes = (props: INotesProps) => {
     }
 
     React.useEffect((): any => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            sethostClientType(context.hostClientType);
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext().then(async (context) => {
+            sethostClientType(context.app.host.clientType);
         });
         loadNotes();
     }, [props.currentCandidateEmail])

@@ -8,11 +8,11 @@ const AddNotes = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
     }, [])
 
     const saveNote = () => {
-        microsoftTeams.tasks.submitTask(note);
+        microsoftTeams.dialog.url.submit(note);
         return true;
     }
 

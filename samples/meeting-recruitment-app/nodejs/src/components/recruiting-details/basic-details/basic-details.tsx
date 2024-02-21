@@ -36,17 +36,17 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     }
 
     const startCall = () => {
-        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users="+candidateDetails[selectedIndex]?.Email);
+        microsoftTeams.app.openLink("https://teams.microsoft.com/l/call/0/0?users="+candidateDetails[selectedIndex]?.Email);
     }
 
     const startChat = () => {
-        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/chat/0/0?users="+candidateDetails[selectedIndex]?.Email);
+        microsoftTeams.app.openLink("https://teams.microsoft.com/l/chat/0/0?users="+candidateDetails[selectedIndex]?.Email);
     }
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            sethostClientType(context.hostClientType);
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext().then(async (context) => {
+            sethostClientType(context.app.host.clientType);
         });
 
         getCandidateDetails()

@@ -33,11 +33,11 @@ const AddQuestions = (props: any): React.ReactElement => {
     ]);
   
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
     }, [])
 
     const saveQuestion = () => {
-        microsoftTeams.tasks.submitTask(JSON.stringify(questions));
+        microsoftTeams.dialog.url.submit(JSON.stringify(questions));
         return true;
     }
 

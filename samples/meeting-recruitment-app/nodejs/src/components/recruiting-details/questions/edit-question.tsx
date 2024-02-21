@@ -6,14 +6,14 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const EditQuestion = (props: any): React.ReactElement => {
     const [question, setQuestion] = React.useState<any>('');
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         const search = props.location.search;
         const editText = new URLSearchParams(search).get('editText');
         setQuestion(editText);
     }, [])
 
     const saveQuestion = () => {
-        microsoftTeams.tasks.submitTask(question.trim());
+        microsoftTeams.dialog.url.submit(question.trim());
         return true;
     }
 
