@@ -5,7 +5,7 @@ const express = require('express');
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
 
-const { TeamsMessagingExtensionsActionBot } = require('./bots/teamsMessagingExtensionsActionBot');
+const { TeamsBot } = require('./bots/teamsBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -37,7 +37,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new TeamsMessagingExtensionsActionBot();
+const bot = new TeamsBot();
 
 const server = express();
 server.engine('html', require('ejs').renderFile);

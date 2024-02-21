@@ -1,7 +1,7 @@
 {
     "name": "teams-bot",
     "version": "1.0.0",
-    "description": "Bot Builder v4 Bot Teams sample",
+    "description": "Sentiment analysis of Teams chat messages using message extension and Azure Open AI",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",

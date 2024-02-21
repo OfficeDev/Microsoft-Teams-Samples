@@ -6,7 +6,7 @@ const { Configuration, OpenAIApi } = require("openai");
 var textToAnalyze = "";
 var sentimentResponse = "";
 
-class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
+class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
         this.baseUrl = process.env.BaseUrl;
@@ -82,4 +82,4 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
       }
 }
 
-module.exports.TeamsMessagingExtensionsActionBot = TeamsMessagingExtensionsActionBot;
+module.exports.TeamsBot = TeamsBot;

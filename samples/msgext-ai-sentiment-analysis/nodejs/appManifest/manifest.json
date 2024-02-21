@@ -1,131 +1,51 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
-  "version": "1.0",
+  "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples",
+  "packageName": "com.microsoft.teams.sentimentanalysis",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://dev.botframework.com",
-    "privacyUrl": "https://privacy.microsoft.com",
-    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Action Messaging Extension",
-    "full": "Microsoft Teams Action Based Messaging Extension"
+    "short": "ME-ai-sentiment-analysis",
+    "full": "Sentiment analysis using message extension."
   },
   "description": {
-    "short": "Sample demonstrating an Action Based Messaging Extension",
-    "full": "Sample Action Messaging Extension built with the Bot Builder SDK"
+    "short": "Sentiment analysis Using Azure Open AI through messaging extension.",
+    "full": "This sample shows a feature where user can get sentiment analysis for posted messages in Teams chat using messaging extension and Azure Open AI."
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
-  "accentColor": "#FFFFFF",
-  "bots": [
-    {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
-      "needsChannelSelector": false,
-      "isNotificationOnly": false,
-      "supportsCalling": false,
-      "supportsVideo": false,
-      "supportsFiles": false,
-      "scopes": [
-        "team",
-        "personal",
-        "groupchat"
-      ]
-    }
-  ],
+  "accentColor": "#60A18E",
   "composeExtensions": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": true,
       "commands": [
         {
-          "id": "createCard",
+          "id": "me-sentiment-ai",
+          "description": "send sentiment for any text messages posted in Microsoft Teams chat",
+          "title": "Sentiment analysis",
           "type": "action",
-          "context": [
-            "compose"
-          ],
-          "description": "Command to run action to create a Card from Compose Box",
-          "title": "Create Card",
-          "parameters": [
-            {
-              "name": "title",
-              "title": "Card title",
-              "description": "Title for the card",
-              "inputType": "text"
-            },
-            {
-              "name": "subTitle",
-              "title": "Subtitle",
-              "description": "Subtitle for the card",
-              "inputType": "text"
-            },
-            {
-              "name": "text",
-              "title": "Text",
-              "description": "Text for the card",
-              "inputType": "textarea"
-            }
-          ]
-        },
-        {
-          "id": "shareMessage",
-          "type": "action",
+          "fetchTask": true,
           "context": [
             "message"
-          ],
-          "description": "Test command to run action on message context (message sharing)",
-          "title": "Share Message",
-          "parameters": [
-            {
-              "name": "includeImage",
-              "title": "Include Image",
-              "description": "Include image in Hero Card",
-              "inputType": "toggle"
-            }
-          ]
-        },
-        {
-          "id": "FetchRoster",
-          "description": "Fetch the conversation roster",
-          "title": "FetchRoster",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "compose"
-          ]
-        },
-        {
-          "id": "webView",
-          "description": "Fetch the Web View",
-          "title": "Web View",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "compose"
-          ]
-        },
-        {
-          "id": "Static HTML",
-          "description": "Fetch the Static HTML",
-          "title": "Static HTML",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "compose"
           ]
         }
       ]
     }
   ],
   "permissions": [
-    "identity"
+    "identity",
+    "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}",
     "${{BOT_DOMAIN}}"
   ]
 }
