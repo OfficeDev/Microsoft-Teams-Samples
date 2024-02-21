@@ -81,11 +81,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - `User.Read` (enabled by default)
     - `ChannelMessage.Send`
     - `ChatMessage.Send`
-    - `Chat.ReadWrite`
-    - `TeamsActivity.Send`    
+    - `Chat.ReadWrite`    
     - `TeamsAppInstallation.ReadForUser`.
 
--  You need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions
+-  You need to add `Directory.Read.All` as Application level permissions
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
