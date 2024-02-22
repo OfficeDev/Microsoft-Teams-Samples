@@ -131,7 +131,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
   ![Bot-description-card](Images/Bot-description-card.png)
 
-   **Option 2 : Bot Descrption Card:**
+   **Option 2 : Bot adaptive Card:**
    - **Show configurable card interaction:**
    - Comment out option 1 code in [teamsBot.js](/samples/bot-configuration-app/nodejs/teamsBot.js) to experience the `config/Continue` feature.
 
