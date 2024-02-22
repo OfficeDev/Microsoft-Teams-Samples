@@ -11,6 +11,7 @@
         microsoftTeams.app.initialize().then(() => {
             getLocation();
         })
+        
          // Method to get current user's geo location
          // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
          // If the value of allowChooseLocation is false, then the users cannot change their current location.
@@ -29,8 +30,30 @@
                 });
             }
             else {
-                alert("Location feature not supported");
+               // alert("Location feature not supported");
+                getLocationUsingNavigator();
             }
+        }
+        function getLocationUsingNavigator() {
+            navigator.permissions.query({ name: "geolocation" }).then((result) => {
+                if (result.state === "granted") {
+                    showMap();
+                } else if (result.state === "prompt") {
+                    showButtonToEnableMap();
+                } else if (result.state === "denied") {
+                    alert("Please give permission");
+                }
+            // Don't do anything if the permission was denied.
+            });
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {     
+            let location = {"latitude":position.coords.latitude,"longitude":position.coords.longitude};       
+            microsoftTeams.tasks.submitTask(location);
         }
     </script>
     <style>
@@ -44,7 +67,7 @@
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
-            <div>
+            <div> 
             </div>
         </div>
     </div>
