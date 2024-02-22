@@ -1,14 +1,14 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
-  "id": "<<Guid>>",
+  "id": "${{TEAMS_APP_ID}}",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.microsoft.com/privacy",
-    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuse"
   },
   "name": {
     "short": "Channel Group Tab",
@@ -25,7 +25,7 @@
   "accentColor": "#D85028",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<Base-url>/tab",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/tab",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
@@ -38,6 +38,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ]
 }

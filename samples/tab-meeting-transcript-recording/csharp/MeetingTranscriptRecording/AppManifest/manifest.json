@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{MicrosoftAppId}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.meetingtranscriptrecording",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "meetingtranscriptrecording",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://{{domain-name}}/meetingtranscriptrecording",
-      "websiteUrl": "https://{{domain-name}}/meetingtranscriptrecording",
+      "contentUrl": "https://${{TAB_DOMAIN}}/meetingtranscriptrecording",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/meetingtranscriptrecording",
       "scopes": [
         "personal"
       ]
@@ -39,10 +39,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{MicrosoftAppId}}",
-    "resource": "api://{{domain-name}}/{{MicrosoftAppId}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

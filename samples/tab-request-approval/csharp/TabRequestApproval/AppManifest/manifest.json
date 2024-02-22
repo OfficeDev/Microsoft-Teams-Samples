@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{MicrosoftAppId}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.tabrequestapproval",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "request",
       "name": "Request",
-      "contentUrl": "https://{Base_Url}/request",
-      "websiteUrl": "https://{Base_Url}/request",
+      "contentUrl": "https://${{TAB_DOMAIN}}/request",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/request",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ],
   "activities": {
     "activityTypes": [
@@ -51,7 +52,7 @@
     ]
   },
   "webApplicationInfo": {
-    "id": "{MicrosoftAppId}",
-    "resource": "api://{Base_Url}/{MicrosoftAppId}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

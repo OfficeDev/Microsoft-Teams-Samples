@@ -20,6 +20,7 @@ const SidePanel = (props) => {
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
+                
                 // Applying default theme from app context property
                 switch (context.app.theme) {
                     case 'dark':
@@ -35,13 +36,17 @@ const SidePanel = (props) => {
                         return setAppTheme('theme-light');
                 }
 
-                var userId = context.user.id;
-                var meetingId = context.meeting.id;
-                var tenantId = context.user.tenant.id;
+                var userData = {
+                    meetingId: context.meeting.id,
+                    userId: context.user.id,
+                    tenantId: context.user.tenant.id
+                }
+
                 agendaListPopulate();
 
-                setMeetingContext(userId, meetingId, tenantId).then((result) => {
+                setMeetingContext(userData).then((result) => {
                     if (result.data == true) {
+
                         document.getElementById("agendaButtonDiv").style.display = "block";
                         document.getElementById("publishAgendaButton").style.display = "block";
                     }
@@ -145,13 +150,13 @@ const SidePanel = (props) => {
     // This method is called to publish the agenda in meeting chat.
     function publishAgenda() {
         const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-        postAgenda();
+        postAgenda(agendaValue);
     }
 
     // This method is called whenever the shared state is updated.
     const updateEditorState = () => {
         const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-        agendaListPopulate();
+        agendaListPopulate(agendaValue);
     };
 
     return (
