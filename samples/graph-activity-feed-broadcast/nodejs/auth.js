@@ -16,7 +16,7 @@ auth.getAccessToken = function (tenantId) {
   };
   var url = "https://login.microsoftonline.com/" + tenantId + "/oauth2/v2.0/token";
   request.post({ url: url, form: requestParams }, function (err, response, body) {
-    var parsedBody = JSON.parse(body);
+    var parsedBody = JSON.parse(response.body);
 
     if (err) {
       deferred.reject(err);

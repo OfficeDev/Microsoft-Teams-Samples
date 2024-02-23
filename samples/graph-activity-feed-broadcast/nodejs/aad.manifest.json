@@ -50,7 +50,7 @@
                 },
                 {
                     "id": "Directory.Read.All",
-                    "type": "Role"
+                    "type": "Scope"
                 }
             ]
         }
@@ -130,7 +130,7 @@
             "type": "Spa"
         },
         {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
+            "url": "${{TAB_ENDPOINT}}/auth-end",
             "type": "Spa"
         }
     ]
