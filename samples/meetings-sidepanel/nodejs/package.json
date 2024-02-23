@@ -39,7 +39,6 @@
         "restify": "^10.0.0",
         "socket.io": "^4.0.0",
         "string-format": "^2.0.0",
-        "swiper": "^6.0.2",
         "url": "^0.11.0"
     },
     "devDependencies": {
