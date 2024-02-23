@@ -48,7 +48,7 @@ const Home = props => {
             "userName": userName.value
         };
 
-        microsoftTeams.dialog.submit(taskDetails);
+        microsoftTeams.dialog.url.submit(taskDetails);
         return true;
     }
 
