@@ -39,6 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
+    "token.botframework.com",
     "<<domain-name>>",
     "${{BOT_DOMAIN}}"
   ],
