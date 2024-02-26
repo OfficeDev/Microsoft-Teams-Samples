@@ -61,7 +61,6 @@ adapter.onTurnError = async (context, error) => {
 // Define the state store for your bot.
 // See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
 // A bot requires a state storage system to persist the dialog and user state between messages.
-//const memoryStorage = new MemoryStorage();
 
 // Create conversation and user state with in-memory storage provider.
 const conversationState = new ConversationState(memoryStorage);
