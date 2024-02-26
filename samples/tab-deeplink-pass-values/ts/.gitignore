@@ -1,0 +1,15 @@
+# do not include the node modules in Git
+node_modules
+
+# do not include the package in Git
+package
+
+# do not include the local environment files
+.env
+
+# do not include the Connectors Json Db file
+connectors.json
+
+# do not include dist or temp files
+dist
+temp

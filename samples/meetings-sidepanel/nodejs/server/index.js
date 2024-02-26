@@ -1,23 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 // index.js is used to setup and configure your bot
-
 // Import required pckages
 const path = require('path');
 const restify = require('restify');
-
 var bodyParser = require('body-parser');
 const socketio = require('socket.io')(8080);
 var fs = require('file-system');
 const cacheService = require('./Services/myCache');
-
 Controller = require('./Controllers/HomeController')
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
-
 const { SidePanelBot } = require('./bots/SidePanelBot');
 
 // Read botFilePath and botFileSecret from .env file.
@@ -47,7 +42,6 @@ adapter.onTurnError = async (context, error) => {
 
     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create the bot that will handle incoming messages.
@@ -91,3 +85,6 @@ addNewPoint = (point) => {
     agendaPoints = cacheService.myCache.get("points");
     console.log(agendaPoints);
 }
+
+
+

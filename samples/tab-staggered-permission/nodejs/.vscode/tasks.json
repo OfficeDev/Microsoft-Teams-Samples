@@ -100,7 +100,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": ".*",
-                    "endsPattern": "App started listening on port"
+                    "endsPattern": "Server listening on http://localhost:"
                 }
             }
         }

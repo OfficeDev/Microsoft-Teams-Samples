@@ -104,6 +104,6 @@ deploy:
       envs:
           ClientId: ${{AAD_APP_CLIENT_ID}}
           ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          TenantId: ${{AAD_APP_TENANT_ID}}
           applicationIdUri: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
+          TenantId: ${{AAD_APP_TENANT_ID}}
           port: "3978"

@@ -113,8 +113,12 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 > Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 
+![InstallApp ](Images/InstallApp.png)
+
 If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
+
+![Link-Unfurling ](Images/Link-Unfurling1.png)
 
 
 ## Deploy the bot to Azure
