@@ -4,8 +4,10 @@
 using System;
 using Azure.Identity;
 using CallingBotSample.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph;
+using Microsoft.Graph.Communications.Client.Authentication;
+using Microsoft.Graph.Communications.Common;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CallingBotSample.Services.MicrosoftGraph
 {
@@ -23,11 +25,14 @@ namespace CallingBotSample.Services.MicrosoftGraph
             var options = new AzureAdOptions();
             azureAdOptionsAction(options);
 
-            ClientSecretCredential authenticationProvider = new ClientSecretCredential(options.TenantId, options.ClientId, options.ClientSecret);
+            //var options = new ClientSecretCredentialOptions {     AuthorityHost = AzureAuthorityHosts.AzureGovernment, }; // https://learn.microsoft.com/dotnet/api/azure.identity.clientsecretcredentialvar clientSecretCredential = new ClientSecretCredential(     tenantId, clientId, clientSecret, options);
 
+            ClientSecretCredential authenticationProvider = new ClientSecretCredential(options.TenantId, options.ClientId, options.ClientSecret, new ClientSecretCredentialOptions { AuthorityHost = AzureAuthorityHosts.AzureGovernment });
+
+            var authProvider = new TokenCredentialAuthProvider(authenticationProvider, new[] { "https://graph.microsoft.us/.default" } );
             services.AddScoped<GraphServiceClient, GraphServiceClient>(sp =>
             {
-                return new GraphServiceClient(authenticationProvider);
+                return new GraphServiceClient("https://graph.microsoft.us/v1.0", authProvider, null);
             });
 
             services.AddTransient<ICallService, CallService>();
