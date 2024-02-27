@@ -112,7 +112,7 @@
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
+    "id": "${{BOT_ID}}",
     "resource": "api://botid-${{BOT_ID}}"
   }
 }
