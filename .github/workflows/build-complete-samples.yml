@@ -649,7 +649,7 @@ jobs:
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '18.2.x'
+              version: '16.18.0'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
