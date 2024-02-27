@@ -6,12 +6,7 @@ class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
     this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-      for (let member = 0; member < membersAdded.length; member++) {
-        if (membersAdded[member].id !== context.activity.recipient.id) {
-          await context.sendActivity("Hello and welcome! With this sample you can see the functionality of bot configuration");
-        }
-      }
+      await context.sendActivity("Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card.");
 
       await next();
     });
