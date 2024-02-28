@@ -39,7 +39,6 @@
                 if (result.state === "denied") {
                     alert("Please give permission");
                 }
-            // Don't do anything if the permission was denied.
             });
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
