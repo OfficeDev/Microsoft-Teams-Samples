@@ -36,11 +36,7 @@
         }
         function getLocationUsingNavigator() {
             navigator.permissions.query({ name: "geolocation" }).then((result) => {
-                if (result.state === "granted") {
-                    showMap();
-                } else if (result.state === "prompt") {
-                    showButtonToEnableMap();
-                } else if (result.state === "denied") {
+                if (result.state === "denied") {
                     alert("Please give permission");
                 }
             // Don't do anything if the permission was denied.
