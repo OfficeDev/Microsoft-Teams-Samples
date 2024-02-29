@@ -117,7 +117,7 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 4) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/app-in-meeting.jsx`
 
-5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
+5) On line 74, replace `<<App id>>` with `Id` obtained in step 3.
 
 6) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/share-to-meeting.jsx`
 
