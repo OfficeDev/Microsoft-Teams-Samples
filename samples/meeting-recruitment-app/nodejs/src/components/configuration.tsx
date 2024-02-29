@@ -5,21 +5,23 @@ const Configuration = () => {
     const [tabId, setTabId] = React.useState('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-
-        microsoftTeams.getContext(async (context: microsoftTeams.Context) => {
-            setTabId(context.entityId)
+        microsoftTeams.app.initialize().then(() => {
+            
+        microsoftTeams.app.getContext().then(async (context) => {
+            setTabId(context.page.id)
         });
-
-        microsoftTeams.settings.registerOnSaveHandler(async (saveEvent: microsoftTeams.settings.SaveEvent) => {
-            microsoftTeams.settings.setSettings({
+       
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.pages.config.setConfig({
                 entityId: tabId,
                 contentUrl: `${window.location.origin}/details`,
                 suggestedDisplayName: 'Recruiting',
             });
             saveEvent.notifySuccess();
         });
-        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.pages.config.setValidityState(true);
+    });
+
     }, []);
 
     return (

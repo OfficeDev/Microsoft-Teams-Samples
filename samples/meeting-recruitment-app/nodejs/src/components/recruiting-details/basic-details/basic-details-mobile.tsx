@@ -18,20 +18,27 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const [skills, setSkills] = React.useState<string[]>([]);
 
     const openShareTaskModule = () => {
-        let taskInfo = {
+        
+        let urlDialogInfo = {
             title: "Share policy assets",
-            height: 400,
-            width: 400,
             url: `${window.location.origin}/shareAssets`,
+            fallbackUrl: `${window.location.origin}/shareAssets`,
+            size: {
+                height: 400,
+                width: 400,
+            }
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, note) => {
-            if (err) {
+        microsoftTeams.dialog.url.open(urlDialogInfo, (submitHandler) => {
+            if (submitHandler.err) {
                 console.log("Some error occurred in the task module")
                 return
             }
 
-            var details = JSON.parse(note);
+            const dataString   = JSON.stringify(submitHandler.result);
+            const questionsObject = JSON.parse(dataString);
+            const details = JSON.parse(questionsObject);
+
             let files = new Array();
             details.checkedValues.map((item: any) => {
                 if (item.isChecked == true) {
@@ -39,7 +46,7 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 }
             })
 
-            if (note !== undefined) {
+            if (submitHandler.result !== undefined) {
                 const assetDetail: IAssetDetails = {
                     message: details.note,
                     files: files,

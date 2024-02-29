@@ -139,6 +139,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
         ```bash
         # npm install
+        # npm start
 
         ```
 
