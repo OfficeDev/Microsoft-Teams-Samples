@@ -116,25 +116,38 @@ class MainDialog extends LogoutDialog {
             "name": context._activity.from.name,
             "id": context._activity.from.id
         }];
-
+        
         await Promise.all(members.map(async (member) => {
-            const message = this.sendFileCard(filename, fileSize);
-
-            const ref = TurnContext.getConversationReference(context._activity);
-            ref.user = member;
-
-            await context.adapter.createConversation(ref, async (context) => {
+            
+        const message = await this.sendFileCard(context,filename, fileSize);
+            
+        const convoParams = {
+            members: [member],
+            tenantId: context._activity.channelData.tenant.id
+        };
+        
+        // Creates a conversation on the specified groupchat and send file consent card on that conversation.
+        await context.adapter.createConversationAsync(
+            process.env.MicrosoftAppId,
+            context._activity.channelId,
+            context._activity.serviceUrl,
+            null,
+            convoParams,
+            async (context) => {
                 const ref = TurnContext.getConversationReference(context._activity);
-
-                await context.adapter.continueConversation(ref, async (context) => {
+                await context.adapter.continueConversationAsync(
+                process.env.MicrosoftAppId,
+                ref,
+                async (context) => {
                     await context.sendActivity(message);
                 });
             });
+        
         }));
     }
 
     // Create file consent card.
-    sendFileCard(filename, filesize) {
+    async sendFileCard(context,filename, filesize) {
         const consentContext = { filename: filename };
 
         const fileCard = {

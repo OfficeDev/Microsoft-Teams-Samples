@@ -28,7 +28,8 @@ const ShareAssets = (): React.ReactElement => {
     );
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
     }, [])
 
     const saveNote = () => {
@@ -40,7 +41,7 @@ const ShareAssets = (): React.ReactElement => {
         })
 
         setCheckboxValues({ ...checkboxValues, checkedValues: temp });
-        microsoftTeams.tasks.submitTask(JSON.stringify(checkboxValues));
+        microsoftTeams.dialog.url.submit(JSON.stringify(checkboxValues));
         return true;
     }
 
@@ -78,7 +79,7 @@ const ShareAssets = (): React.ReactElement => {
                         className="shareAssetsText" />
                 </Flex>
                 <Flex gap="gap.smaller" hAlign="end">
-                    <Button content="Cancel" secondary onClick={() => microsoftTeams.tasks.submitTask(undefined)} />
+                    <Button content="Cancel" secondary onClick={() => microsoftTeams.dialog.url.submit(undefined)} />
                     <Button content="Share" primary onClick={saveNote} />
                 </Flex>
             </Flex>

@@ -26,27 +26,34 @@ const Questions = (): React.ReactElement => {
 
     // Method to start task module to add questions.
     const addQuestionsTaskModule = () => {
-        let taskInfo = {
+        let urlDialogInfo = {
             title: "Questions",
-            height: 300,
-            width: 400,
             url: `${window.location.origin}/questions`,
+            fallbackUrl: `${window.location.origin}/questions`,
+            size: {
+                height: 300,
+                width: 400,
+            }
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, questionsJson) => {
-            if (err) {
+        microsoftTeams.dialog.url.open(urlDialogInfo, (submitHandler) => {
+            if (submitHandler.err) {
                 console.log("Some error occurred in the task module")
                 return
             }
-            const questionsObject = JSON.parse(questionsJson);
-            microsoftTeams.getContext((context) => {
+            
+            const dataString   = JSON.stringify(submitHandler.result);
+            const questionsObject1 = JSON.parse(dataString);
+            const questionsObject = JSON.parse(questionsObject1);
+
+            microsoftTeams.app.getContext().then(async (context) => {
                 const questDetails: IQuestionSet[] = questionsObject.map((question: any) => {
                     if (question.checked) {
                         // The question details to save.
                         return {
-                            meetingId: context.meetingId!,
+                            meetingId: context.meeting?.id!,
                             question: question.value,
-                            setBy: context.userPrincipalName!,
+                            setBy: context.user?.userPrincipalName!,
                             isDelete: 0
                         };
                     }
@@ -66,24 +73,30 @@ const Questions = (): React.ReactElement => {
 
     // Method to start task module to edit a question.
     const editQuestionsTaskModule = (editText: string, rowKey: any) => {
-        let taskInfo = {
+       
+        let urlDialogInfo = {
             title: "Questions",
-            height: 300,
-            width: 400,
             url: `${window.location.origin}/edit?editText=` + editText,
+            fallbackUrl: `${window.location.origin}/edit?editText=` + editText,
+            size: {
+                height: 300,
+                width: 400,
+            }
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question: string) => {
-            if (err) {
+        microsoftTeams.dialog.url.open(urlDialogInfo, (submitHandler) => {
+            if (submitHandler.err) {
                 console.log("Some error occurred in the task module")
                 return
             }
+            const dataStringEdit   = JSON.stringify(submitHandler.result);
+            const questionsObjectEdits = JSON.parse(dataStringEdit);
 
-            microsoftTeams.getContext((context) => {
+            microsoftTeams.app.getContext().then(async (context) => {
                 const questDetails: IQuestionSet = {
-                    MeetingId: context.meetingId!,
-                    Question: question,
-                    SetBy: context.userPrincipalName!,
+                    MeetingId: context.meeting?.id!,
+                    Question: questionsObjectEdits,
+                    SetBy: context.user?.userPrincipalName!,
                     IsDelete: 0,
                     QuestionId: rowKey
                 };
@@ -104,8 +117,8 @@ const Questions = (): React.ReactElement => {
 
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        microsoftTeams.getContext((context) => {
-            getQuestions(context.meetingId!)
+        microsoftTeams.app.getContext().then(async (context) => {
+            getQuestions(context.meeting?.id!)
                 .then((res) => {
                     console.log(res)
                     const questions = res.data as any[];
@@ -149,8 +162,9 @@ const Questions = (): React.ReactElement => {
         // Setting ratings to show in the UI.
         setRatingsArray(prevItems);
 
-        microsoftTeams.initialize();
-        loadQuestions();
+        microsoftTeams.app.initialize().then(() => {
+            loadQuestions();
+        });
     }, [])
 
     return (
