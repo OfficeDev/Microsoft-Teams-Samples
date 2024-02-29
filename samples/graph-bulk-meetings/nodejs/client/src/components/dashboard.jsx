@@ -55,7 +55,7 @@ class Dashboard extends Component {
             url: `${window.location.origin}/fileupload`,
             size: {
                 height: 450,
-                width: 700,
+                width: 900,
             }
         }, (dialogResponse) => {
             if (dialogResponse.result) {
