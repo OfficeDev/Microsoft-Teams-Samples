@@ -34,18 +34,21 @@
                 getLocationUsingNavigator();
             }
         }
+
         function getLocationUsingNavigator() {
             navigator.permissions.query({ name: "geolocation" }).then((result) => {
                 if (result.state === "denied") {
                     alert("Please give permission");
                 }
             });
+            
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
+
         function showPosition(position) {     
             let location = {"latitude":position.coords.latitude,"longitude":position.coords.longitude};       
             microsoftTeams.tasks.submitTask(location);
