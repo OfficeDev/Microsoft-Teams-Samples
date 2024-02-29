@@ -47,7 +47,7 @@
                     completionBotId: null,
                 };
 
-                taskInfo.card = data;
+                taskInfo.card = data.content;
                 taskInfo.title = "Create Groupchat";
                 taskInfo.height = "280";
                 taskInfo.width = "500";
@@ -64,7 +64,8 @@
                     microsoftTeams.app.initialize().then(() => {
                         microsoftTeams.app.getContext().then((context) => {
                             var userId = context.user.id;
-                            $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
+                            var resultObject = JSON.parse(result);
+                            $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: resultObject.users, userId: userId, title: resultObject.title }).done(function (data) {
                                 console.log(data);
                                 $("#createGroupChat").hide();
                                 $("#welcomeMsg").hide();
