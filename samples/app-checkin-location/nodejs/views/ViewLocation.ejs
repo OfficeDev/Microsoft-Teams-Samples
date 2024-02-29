@@ -26,19 +26,34 @@
                 "latitude": parseFloat(latitude),
                 "longitude": parseFloat(longitude)
             };
-
-            microsoftTeams.location.showLocation(location, (error, result) => {
-                if (error) {
-                    let errorMessage = "Error";
-                    if (error.message) {
-                        errorMessage = `Error Code: ${error.errorCode}, Message: ${error.message}`;
-                    } else {
-                        errorMessage = `Error Code: ${error.errorCode}`;
+            if (microsoftTeams.location.isSupported()) {
+                microsoftTeams.location.showLocation(location, (error, result) => {
+                    if (error) {
+                        let errorMessage = "Error";
+                        if (error.message) {
+                            errorMessage = `Error Code: ${error.errorCode}, Message: ${error.message}`;
+                        } else {
+                            errorMessage = `Error Code: ${error.errorCode}`;
+                        }
+                        alert(errorMessage);
+                        return;
                     }
-                    alert(errorMessage);
-                    return;
-                }
-            });
+                });
+            }
+            else {
+                showMap(latitude,longitude);
+            }
+        }
+        function showMap(latitude,longitude) {
+            
+            // Get location data
+            var latlong =  latitude+ "," + longitude ;
+
+            // Set Google map source url
+            var mapLink = "http://maps.google.com?q=" + latlong;
+            
+            // Create and insert Google map
+            document.getElementById("map").innerHTML = "latitude : "+ latitude + ", Longitude :  "+ longitude +"  <br /> <a target='_blank'  href='" + mapLink + "'> Click here to view location </a>";
         }
     </script>
     <style>
@@ -51,7 +66,7 @@
 
 <body class="theme-light">
     <div class="surface">
-        <div class="panel">
+        <div class="panel" id="map">
             <div>
             </div>
         </div>
