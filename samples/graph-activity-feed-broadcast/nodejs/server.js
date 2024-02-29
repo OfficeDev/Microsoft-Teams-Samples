@@ -2,11 +2,11 @@ const express = require('express');
 const path = require('path');
 const auth = require('./auth');
 const app = express();
+const bodyparser = require('body-parser');
 const msal = require('@azure/msal-node');
 const axios = require('axios');
 const isomorphicFetch = require('isomorphic-fetch');
-const bodyparser = require('body-parser');
-const { SimpleGraphClient } = require('./simpleGraphClient');
+const { SimpleGraphClient } = require('./SimpleGraphClient');
 
 var delegatedToken = "";
 var applicationToken = "";
