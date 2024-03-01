@@ -223,7 +223,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |20|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.||[View][bot-ai-enterprise-search#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |21|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip)|
 |22|Sharepoint tab request approval | This sample app demonstrates the usage of SharePoint Embedded for storage in teams. |[View][sharepoint-tab-request-approval#csharp]||
-|22|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||
+|22|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||[View](/samples/app-HR-talent/csharp/src/demo-manifest/TeamsTalentMgmt.zip)
 
 ## Application templates
 
