@@ -20,17 +20,11 @@ const FacebookAuthEnd = props => {
             let url = getHashParameters();
             var code = url.searchParams.get("code");
             var state = url.searchParams.get("state");
-            let expectedState = localStorage.getItem("simple.state");
-
-            if (expectedState === state) {
+            if (state === "ValidateState") {
                 // Success -- return token information to the parent page.
                 // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
-                let key = "auth.result";
-                localStorage.setItem(key, JSON.stringify({
-                    idToken: code,
-                }));
-
-                microsoftTeams.authentication.notifySuccess(key);
+                
+                microsoftTeams.authentication.notifySuccess(code);
             } else {
                 // State does not match, report error
                 microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");

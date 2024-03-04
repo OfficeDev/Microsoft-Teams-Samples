@@ -45,24 +45,6 @@
       ]
     }
   ],
-  "staticTabs": [
-    {
-      "entityId": "index",
-      "name": "Token App",
-      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
-      "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
-      "scopes": [
-        "personal",
-        "team"
-      ]
-    },
-    {
-      "entityId": "about",
-      "scopes": [
-        "personal"
-      ]
-    }
-  ],
   "bots": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
