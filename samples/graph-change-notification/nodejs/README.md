@@ -94,10 +94,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       * Enter the **redirect URI** for the app in the following format: `https://token.botframework.com/.auth/web/redirect`.
   14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
-  15. Create a Bot Registration
-    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+ 2. Setup for Bot
+    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+	**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
     
 ### Instruction on setting connection string for bot authentication on the behalf of user
    ![image](Images/BotConnection.png)
@@ -121,12 +122,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
     h. For Resource URL, enter https://graph.microsoft.com/
     i. Provide  Scopes like "Presence.Read, Presence.Read.All"
- 
- 2. Setup for Bot
-	- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-	**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
  - Run ngrok - point to port 3978
