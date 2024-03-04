@@ -47,7 +47,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Before running this sample using toolkit, we need to update the .env file values in your code for 'Base64EncodedCertificate' and 'PRIVATE_KEY_PATH'. Follow this documentation for the steps to get the values  - [Create and install Self-Signed certificate](CertificateDocumentation/README.md)
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
@@ -102,12 +101,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     
 ### Instruction on setting connection string for bot authentication on the behalf of user
    ![image](Images/BotConnection.png)
-
-   - In the Azure portal, select your resource group from the dashboard.
-
-   - Select your bot channel registration link.
-
-   - Open the resource page and select Configuration under Settings.
 
    - Select Add OAuth Connection Settings.
 
