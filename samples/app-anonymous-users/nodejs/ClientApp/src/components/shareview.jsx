@@ -138,9 +138,6 @@ const ShareView = () => {
                 height: 535
             })
             .then((result) => {
-                //let data = localStorage.getItem(result);
-                //let tokenDetails = JSON.parse(data);
-                //localStorage.removeItem(result);
                 resolve(result);
             })
             .catch((reason) => {

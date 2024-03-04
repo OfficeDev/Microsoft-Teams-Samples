@@ -13,10 +13,6 @@ const getGraphAccessToken = async (req, res) => {
     var chatId = req.query.chatId;
     var scopes = ["https://graph.microsoft.com/User.Read"];
 
-    console.log("token_" + token);
-    console.log("chatId_" +chatId);
-    console.log("TenantId_"+ tid);
-
   // Creating MSAL client
   const msalClient = new msal.ConfidentialClientApplication({
     auth: {

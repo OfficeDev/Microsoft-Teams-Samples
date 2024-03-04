@@ -24,11 +24,6 @@ const FacebookAuthEnd = props => {
                 // Success -- return token information to the parent page.
                 // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
                 
-                //let key = "auth.result";
-                //localStorage.setItem(key, JSON.stringify({
-                    //idToken: code,
-                //}));
-
                 microsoftTeams.authentication.notifySuccess(code);
             } else {
                 // State does not match, report error
