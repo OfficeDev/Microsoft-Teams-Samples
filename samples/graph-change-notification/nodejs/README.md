@@ -101,6 +101,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     
 ### Instruction on setting connection string for bot authentication on the behalf of user
+   ![image](Images/BotConnection.png)
+
    - In the Azure portal, select your resource group from the dashboard.
 
    - Select your bot channel registration link.
@@ -109,11 +111,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
    - Select Add OAuth Connection Settings.
 
-    ![image](Images/configuration.png)
-	
    - Complete the form as follows.
 
-    a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+    a. Enter a name for the connection. You'll use this name in your bot in the .env file. For example BotTeamsAuthADv1.
 
     b. Service Provider. Select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
 
