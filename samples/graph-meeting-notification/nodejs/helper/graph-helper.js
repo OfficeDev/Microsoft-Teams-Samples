@@ -14,7 +14,7 @@ class GraphHelper {
     static async deleteSubscription(subscriptionId) {
         var applicationToken = await auth.getAccessToken();
 
-        await axios.delete(`https://graph.microsoft.com/beta/subscriptions/${subscriptionId}`, {
+        await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
             headers: {
                 "accept": "application/json",
                 "contentType": 'application/json',
@@ -33,9 +33,11 @@ class GraphHelper {
         let resource = "";
         try {
         applicationToken = await auth.getAccessToken();
+        console.log("application Token--->",applicationToken);
         resource = `/communications/onlineMeetings/?$filter=JoinWebUrl eq '${meetingJoinUrl}'`;
+        console.log("resource---->",resource);
 
-            var apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
+            var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
                 headers: {
                     "accept": "application/json",
                     "contentType": 'application/json',
@@ -75,7 +77,7 @@ class GraphHelper {
                     encryptionCertificateId: process.env.EncryptionCertificateId
                 };
 
-                var response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`, subscriptionCreationInformation, {
+                var response = await axios.post(`https://graph.microsoft.com/v1.0/subscriptions`, subscriptionCreationInformation, {
                     headers: {
                         "accept": "application/json",
                         "contentType": 'application/json',
