@@ -12,6 +12,7 @@ const HTMLConnectorCard = require('../resources/formatHTMLConnectorCard.json');
 const CardWithEmoji = require('../resources/adaptiveCardWithEmoji.json');
 const PeoplePersonaCardIcon = require('../resources/adaptivePeoplePersonaCardIcon.json');
 const PeoplePersonaCardSetIcon = require('../resources/adaptivePeoplePersonaCardSetIcon.json');
+const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -29,7 +30,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet'];
+            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -69,6 +70,10 @@ class BotFormattingCards extends ActivityHandler {
 
                     case "PersonaSet":
                         await context.sendActivity({ attachments: [this.sendPersonaCardSetIcons()] });
+                        break;
+                    
+                    case "Layout":
+                        await context.sendActivity({ attachments: [this.sendLayoutCard()] });
                         break;
                 }
 
@@ -169,6 +174,12 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
+    */
+    sendLayoutCard() {
+        return CardFactory.adaptiveCard(AdaptiveCardResponsiveLayout);
+    }
+
+    /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
@@ -218,6 +229,11 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'PersonaSet',
                 value: 'PersonaSet'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Layout',
+                value: 'Layout'
             },
             {
                 type: ActionTypes.ImBack,
