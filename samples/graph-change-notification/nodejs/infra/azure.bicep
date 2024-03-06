@@ -49,9 +49,9 @@ resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021
   name: 'oauthbotsetting'
   location: 'global'
   properties: {
-    serviceProviderDisplayName: 'Azure Active Directory v2'
-    serviceProviderId: '30dd229c-58e3-4a48-bdfd-91ec48eb906c'
-    scopes: 'User.Read'
+    serviceProviderDisplayName: 'Azure Active Directory'
+    serviceProviderId: '5232e24f-b6c6-4920-b09d-d93a520c92e9'
+    scopes: 'Presence.Read,Presence.Read.All'
     parameters: [
       {
         key: 'clientId'
@@ -62,12 +62,20 @@ resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021
         value: aadAppClientSecret
       }
       {
+        key: 'grantType'
+        value: 'authorization_code'
+      }
+      {
+        key: 'loginUri'
+        value: 'https://login.microsoftonline.com'
+      }
+      {
         key: 'tenantID'
         value: microsoftAppTenantId
       }
       {
-        key: 'tokenExchangeUrl'
-        value: 'api://botid-${aadAppClientId}'
+        key: 'resourceUri'
+        value: 'https://graph.microsoft.com/'
       }
     ]
   }
