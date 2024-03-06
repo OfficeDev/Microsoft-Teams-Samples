@@ -109,7 +109,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
     a. Enter a name for the connection. You'll use this name in your bot in the .env file. For example BotTeamsAuthADv1.
 
-    b. Service Provider. Select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
+    b. Service Provider. Select **Azure Active Directory**.
 
     c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 
@@ -120,7 +120,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     f. Login URL. Enter https://login.microsoftonline.com.
 
     g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
+
     h. For Resource URL, enter https://graph.microsoft.com/
+    
     i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 
 3. Setup NGROK
