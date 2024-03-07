@@ -31,11 +31,11 @@
         },
         {
             "name": "Python: Run App Locally",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/app.py",
             "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal",
+            "console": "integratedTerminal"
         }
     ],
     "compounds": [
