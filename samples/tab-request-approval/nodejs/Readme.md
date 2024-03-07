@@ -100,11 +100,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`, `https://{Base_Url}/auth-start`. This will be the page where a successful implicit grant flow will redirect the user. Eg for ngrok url `https://1234.ngrok-free.app` the `Base_Url` will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    Again
 	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/tabAuth`
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`,`https://{Base_Url}/auth-start`
 	
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
