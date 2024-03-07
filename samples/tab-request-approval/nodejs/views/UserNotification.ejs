@@ -2,11 +2,10 @@
 <html lang="en">
     <head>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
-            crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+        crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -33,10 +32,8 @@
         <div class="tab-content">
             <div id="createtask" class="tab-pane fade in active">
                 <div class="mb">
+                    <br />
                     <div class="form-group fg">
-                        <mgt-teams-msal2-provider client-id=""
-                            auth-popup-url="/tabAuth" scopes="User.Read,people.read"></mgt-teams-msal2-provider>
-                        <mgt-login></mgt-login>
                         <label for="title" class="title">Task Title</label>
                         <br>
                         <input type="text" id="taskTitle" name="taskTitle">
@@ -47,13 +44,16 @@
                         <input type="text" id="taskDescription" name="taskDescription">
                         </br>
                     </div>
-                    <label for="selection" class="selection">Send to</label>
-                    <mgt-people-picker selection-mode="single"></mgt-people-picker>
+                    <div class="form-group fg">
+                        <label for="request to" class="description">Request to</label><br />
+                        <input type="text" readonly id="defaultSelected" name="defaultSelected">
+                        <input type="hidden" id="objectId" name="objectId">
+                        <button data-id="default" onclick="selectPeople(event,[],false,true)"> Select </button>
+                    </div>
                 </div>
                 <div class="modal-footer mf">
                     </br>
-                    <button type="button" class="btn-send save" onclick="return sendNotificationToUser()">Send
-                        Notification</button>
+                    <button type="button" class="btn-send save" onclick="return sendNotificationToUser()">Send Notification</button>
                 </div>
             </div>
             <div id="mylist" class="tab-pane fade">
@@ -97,15 +97,53 @@
         </div>
     </div>
     <script>
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
+            });
+        });
+   
+        let aadId;
+        microsoftTeams.app.getContext().then(function (context) {
+            aadId = context.user.id
+        })
+   
+        // People picker api call.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+            $("#defaultSelected").empty();
+            var id = $(e.currentTarget).attr('data-id');
+   
+            if (setSelected == "default") {
+                setSelected = [aadId];
+            }
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+                    for (var i = 0; i < people.length; i++) {
+                        if (id == "default") {
+                            $("#defaultSelected").val(people[i].email)
+                            $("#objectId").val(people[i].objectId)
+                            $("#defaultSelected").show();
+                        }
+                    }
+   
+                }
+            });
+        }
+    </script>
+    <script>
         var data =  <%-data%>
         var token = data.token;
         var upn = "";
 
         $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
+            });
+            
             microsoftTeams.getContext(function (context) {
             upn = context.upn;
             console.log("context is"+JSON.stringify(context));
-            if(context.subEntityId != "") {
+
+            if(context.subEntityId != "" && context.subEntityId != undefined ) 
+            {
                 let taskInfo = {
                 title: null,
                 height: null,
@@ -127,18 +165,15 @@
         });
             $('#notask').hide();
             $('#norequest').hide();
-            microsoftTeams.initialize();
         });
        
-        var username = "";
-        var userId = "";
+        var userName = "";
         var createdBy = "";
         var empty = true;
 
-        microsoftTeams.getContext(function (context) {
-            createdBy = context.upn;
-            userName = context.upn;
-            userId = context.userObjectId;
+        microsoftTeams.app.getContext().then((context) => {
+            createdBy = context.user.userPrincipalName;
+            userName = context.user.userPrincipalName;
             taskDetailsForUser(data, createdBy);
             taskDetailsForManager(data, createdBy);
         });
@@ -269,12 +304,8 @@
 
         // Send notification to user.
         function sendNotificationToUser() {
-            var person = document.querySelector('mgt-people-picker').selectedPeople;
-            userId = person[0].id;
-            username = person[0].userPrincipalName;
             var isValid = true;
-
-            $('#taskTitle,#taskDescription').each(function (e) {
+            $('#taskTitle,#taskDescription,#defaultSelected').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
                     $(this).css({
@@ -292,12 +323,15 @@
                 e.preventDefault();
                 return false;
             }
-            var action = "EntityTopic";
+
+            var PersonUerName = $("#defaultSelected").val().trim();
+            var userId = $("#objectId").val().trim();
+
             let taskInfo = {
                 id: data.requestDetails.length + 1,
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
-                assignedTo: username,
+                assignedTo: PersonUerName,
                 createdBy: createdBy
             };
 
@@ -310,6 +344,7 @@
                 success: function (profile) {
                     appId = getAppId(profile);
                     sendNotification(userId, taskInfo, token, appId);
+                    console.log('success');
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -365,6 +400,7 @@
                 },
                 success: function (profile) {
                     saveRequestDetails(taskInfo);
+                    console.log('success');
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
