@@ -16,10 +16,17 @@
 
             // Application base url and this redirects to Index view
             var contentUrl = window.location.origin;
+            
+            var context = {
+                contentUrl: contentUrl,
+                websiteUrl: contentUrl,
+                name: "DemoStageView",
+                openMode: "popOutWithChat"
+            }
 
-            // Passing the values and encoding the url while implementing the deeplink from tab
-            let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context={\"contentUrl\":\"" + contentUrl + "\",\"websiteUrl\":\"" + contentUrl +"\",\"name\":\"DemoStageView\"}";
-            microsoftTeams.app.openLink(url);
+            const encodedContext = encodeURIComponent(JSON.stringify(context));
+            
+            microsoftTeams.app.openLink("https://teams.microsoft.com/l/stage/" + appId + "/0?context="+encodedContext+");
             };
     </script>
 </head>
