@@ -64,12 +64,23 @@ server.get('/UserRequest', function (req, res) {
   res.render('./views/UserRequest', { data: JSON.stringify(requestData) });
 });
 
+server.post('/ApproveRejectRequestActivity', function (req, res) {
+  console.log('Activity server calling');
+  localdata.map((item, index) => {
+    if(item.id == req.body.taskId){
+      item.status = req.body.status;
+    }
+  })
+  res.render('./views/UserRequest', { data: JSON.stringify('successfully') });
+});
+
 server.post('/ApproveRejectRequest', function (req, res) {
-localdata.map((item, index) => {
-  if(item.id == req.body.taskId){
-    item.status = req.body.status;
-  }
-})
+  console.log('Server calling');
+  localdata.map((item, index) => {
+    if(item.id == req.body.taskId){
+      item.status = req.body.status;
+    }
+  })
 });
 
 server.post('/SaveRequest', function (req, res) {

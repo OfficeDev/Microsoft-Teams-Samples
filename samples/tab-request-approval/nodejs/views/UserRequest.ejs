@@ -93,18 +93,18 @@
             };
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
                     microsoftTeams.tasks.submitTask();
+                    
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask();
         };  
 
         function RejectRequest() {
@@ -116,7 +116,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
@@ -126,8 +126,6 @@
                     console.log('error', errorThrown);
                 }
             });
-
-            microsoftTeams.tasks.submitTask();
         };
     </script>
 </body>
