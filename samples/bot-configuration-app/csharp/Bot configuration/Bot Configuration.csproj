@@ -23,16 +23,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Bots\LocalizerBot.fr-CA.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Bots\LocalizerBot.hi-IN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Home\Index.es-MX.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

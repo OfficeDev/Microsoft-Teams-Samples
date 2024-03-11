@@ -6,14 +6,14 @@ products:
 - office
 - office-365
 languages:
-- nodejs
+- csharp
 extensions:
  contentType: samples
- createdDate: "25-09-2023 23:30:17"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
+ createdDate: "11/03/2024 01:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-csharp
 ---
-# Bot Configuration 
 
+# Teams App Localization
 This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.
 
 To get a configurable card with a static typeahead search control, add the bot to a Teams or group chat scope. Upon submission, the card will be updated to include a dynamic typeahead search control.
@@ -22,90 +22,75 @@ To get a configurable card with a static typeahead search control, add the bot t
 * Bots
 * Adaptive Cards
 * bot reconfiguration
-* Type ahead search 
+* Type ahead search
 
-## Interaction with bot
+## Interaction with app
 
 ![Configuration Bot](Images/ConfigurationBot.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Bot Configuration:** [Manifest](/samples/bot-configuration-app/nodejs/demo-manifest/bot-configuration-app.zip)
+**Bot Configuration:** [Manifest](/samples/bot-configuration-app/csharp/demo-manifest/bot-configuration-app.zip)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account
-- [NodeJS](https://nodejs.org/en/)
-- [devtunnel](https://aka.ms/TunnelsCliDownload/win-x64) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+Verify you have the right account for building Teams apps and install some recommended development tools.
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
-
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
-
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+- You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    > NOTE: When you create your app registration, you will create an App ID and App password (Secret) - make sure you keep these for later.
 
-   Run ngrok - point to port 3978
+2. Setup for Bot
+	
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
+3. Setup NGROK
+ - Run ngrok - point to port 3978
 
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnels with anonymous user access command as shown below:
+    ```bash
+    ngrok http 3978 --host-header="localhost:3978"
+    ```
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-## Setup for bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
+4. Setup for code
 
-## Setup for code
-1) Clone the repository
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+  - Modify the `/appsettings.json` and fill in the following details:
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret
 
-1) In a terminal, navigate to `samples/bot-configuration-app/nodejs`
+- Run the bot from a terminal or from Visual Studio:
 
-1) Install modules
+5. If you are using Visual Studio
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `Bot configuration\csharp` folder
+  - Select `Bot Configuration.csproj` file
 
-    ```bash
-    npm install
-    ```
-
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) 
-
-1) Run your bot at the command line:
-
-    ```bash
-    npm start
-    ```
-
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `<<domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+6. This step is related to Microsoft Teams app manifest
+    - **Edit** the `manifest.json` contained in the `AppManifest` or `AppManifest_Hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` 
+   - replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
     - Add the app to team/groupChat scope (Supported scopes)
+
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
 ## Running the sample
 
@@ -125,7 +110,16 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **Added bot UI:**
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
-   **Show configurable card interaction:**
+   **Option 1 : Auth card Interactions:**
+   - Comment out option 2 code in [teamsBot.js](/samples/bot-configuration-app/csharp/Bot configuration/Bots/TeamsBot.cs) to experience the `config/Auth` feature.
+   - Note: The `Sign-in` page displayed is currently using a dummy URL. Please update it with your authentication URL.
+
+  ![Bot-description-card](Images/Bot-description-card.png)
+
+   **Option 2 : Bot adaptive Card:**
+   - **Show configurable card interaction:**
+   - Comment out option 1 code in [teamsBot.js](/samples/bot-configuration-app/csharp/Bot configuration/Bots/TeamsBot.cs) to experience the `config/Continue` feature.
+
   ![configurable-card-Interaction1 ](Images/configurable-card-Interaction1.png)
 
   ![configurable-card-Interaction2 ](Images/configurable-card-Interaction2.png)
@@ -134,20 +128,8 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
     
   ![configurable-card-Interaction4 ](Images/configurable-card-Interaction4.png)
 
-   - **Bot description card Interactions:**
 
-   **Bot Descrption Card:**
-   **Hover over the bot and a adaptive Card appears**
-  ![Bot-description-card](Images/Bot-description-card.png)
 
-   **Click the settings button in the card to invoke configurable card:**
-  ![Bot-description-card-interaction1](Images/Bot-description-card-interaction1.png)
-
-  ![Bot-description-card-interaction2](Images/Bot-description-card-interaction2.png)
-
-  ![Bot-description-card-interaction3](Images/Bot-description-card-interaction3.png)
-
-  ![Bot-description-card-interaction4](Images/Bot-description-card-interaction4.png)
 
 ## Deploy to Azure
 
@@ -168,4 +150,4 @@ Deploy your project to Azure by following these steps:
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-csharp" />

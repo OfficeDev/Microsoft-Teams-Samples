@@ -460,6 +460,9 @@ jobs:
               name: 'sharepoint-embedded-tab-request-approval'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-configuration-app/csharp/Bot configuration/Bot Configuration.csproj'
+              name: 'bot-configuration-app'
+              version: '6.0.x'
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
