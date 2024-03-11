@@ -160,27 +160,53 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
-2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
+- Install App User-1
 
-User Persona:
+![InstallAppUser1](Images/1.InstallAppUser.png)
 
-- Send request to the manger for task approval.
+- Create Task
 
-  ![Request page for user](Images/tab-approval-page.png)
+![CreateTask](Images/3.CreateTask.png)
 
-  ![Request from user](Images/tab-approval-details.png)
+- Task Details
 
-Manager Persona:
+![TaskDetails](Images/4.RequestTo.png)
 
-- Activity feed notification of approval request.
+- All Person
 
-  ![Notification](Images/tab-request-details.png)
+![TaskDetails](Images/5.SelectPerson.png)
+
+- Select a Person
+
+![TaskDetails](Images/6.SelectOnePerson.png)
+
+- Create task Details
+
+![CreateTaskDetails](Images/7.CreateTaskDetails.png)
+
+- Install App User-2
+
+![InstallAppUser2](Images/2.InstallAppUser.png)
+
+- Send Request
+
+![CreateTask](Images/7.CreateTaskDetails.png)
 
 - On click of notification a task module will open, redirecting the user to the request.
 
-  ![RequestTaskNotification](Images/request-notification.png)
+![SendRequest](Images/8.Activity.png)
+
+- User-1 My Request 
+
+![SendRequest](Images/9.User1MyRequestDetails.png)
+
+- User-2 My Pending Approvals 
+
+![SendRequest](Images/10.User2PendingRequestDetails.png)
+
+- User-1 Approved Status
+
+![SendRequest](Images/11.ApprovedReq.png)
 
 ## Further reading
 
