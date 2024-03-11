@@ -39,6 +39,9 @@ const ShareView = () => {
     // Declare new state variables that are required disable the authentication button after login
     const [ssoAuthenticationButtonVisible, setIsSsoAuthenticationButtonVisible] = useState(true);
 
+    // Theme change variables
+    const [appTheme, setAppTheme] = useState("");
+
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
             verifyAnonymousUser();
@@ -48,18 +51,18 @@ const ShareView = () => {
     // Builds the socket connection, mapping it to /io
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
-            setSocket(io());   
-        });  
+            setSocket(io());
+        });
     }, []);
 
-     // subscribe to the socket event
-     useEffect(() => {
+    // subscribe to the socket event
+    useEffect(() => {
         if (!socket) return;
         socket.on('connection', () => {
             socket.connect();
         });
 
-       // receive a message from the server
+        // receive a message from the server
         socket.on("message", data => {
             if (data.Key === "Anonymous") {
                 aShowSetCount(data.Value);
@@ -67,12 +70,49 @@ const ShareView = () => {
                 uShowSetCount(data.Value);
             }
         });
-    
+
     }, [socket]);
-  
+
+    componentDidMount = () => {
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+
+                // Applying default theme from app context property
+                switch (context.app.theme) {
+                    case 'dark':
+                        setAppTheme("theme-dark");
+                        break;
+                    case 'contrast':
+                        setAppTheme("theme-contrast");
+                        break;
+                    case 'default':
+                        setAppTheme("theme-light");
+                        break;
+                }
+            }).bind(this);
+        });
+    }
+
+    componentDidUpdate = () => {
+        // handle theme when Teams theme changes to dark,light and contrast.
+        microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+            switch (theme) {
+                case 'dark':
+                    setAppTheme("theme-dark");
+                    break;
+                case 'contrast':
+                    setAppTheme("theme-contrast");
+                    break;
+                case 'default':
+                    setAppTheme("theme-light");
+                    break;
+            }
+        }.bind(this));
+    }
+
     // Once we call getContext API, we can recognize anonymous users by checking for the licenseType value like: context.user.licenseType === "Anonymous".
     const verifyAnonymousUser = () => {
-          microsoftTeams.app.getContext().then((context) => {
+        microsoftTeams.app.getContext().then((context) => {
             if (context.user.licenseType === "Anonymous") {
                 setIsAnonymousUser(true);
             }
@@ -90,10 +130,10 @@ const ShareView = () => {
                 let addAnonymousVal = aShowCount + 1;
 
                 // Sending the updated count to socket.emit to show the latest data on stage view.
-                var anonymousCountValue={  
-                    Key : "Anonymous",  
-                    Value : addAnonymousVal  
-                    };
+                var anonymousCountValue = {
+                    Key: "Anonymous",
+                    Value: addAnonymousVal
+                };
                 socket.emit("message", anonymousCountValue); // send a message to the server
             }
             else {
@@ -101,11 +141,11 @@ const ShareView = () => {
                 let addUserVal = uShowCount + 1;
 
                 // Sending the updated count to socket.emit to show the latest data on stage view.
-                var UserCountValue={  
-                    Key : "User",  
-                    Value : addUserVal  
-                    };
-                    
+                var UserCountValue = {
+                    Key: "User",
+                    Value: addUserVal
+                };
+
                 socket.emit("message", UserCountValue); // send a message to the server
             }
         }
@@ -130,19 +170,19 @@ const ShareView = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
         let state = "ValidateState";
-       
+
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
                 url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=${state}`,
                 width: 600,
                 height: 535
             })
-            .then((result) => {
-                resolve(result);
-            })
-            .catch((reason) => {
-                reject(reason);
-            })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((reason) => {
+                    reject(reason);
+                })
         });
     }
 
@@ -161,22 +201,22 @@ const ShareView = () => {
                     mode: 'cors',
                     cache: 'default'
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson !== "") {
-                        let jsonResult = JSON.parse(responseJson);
-                        // This variables will load the values to the labels
-                        setUserName("Welcome: " + jsonResult.name);
-                        setIsFacebookButtonEnabled(false);
-                        setEnableVoteDiv(true);
-                    }
-                });
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson !== "") {
+                            let jsonResult = JSON.parse(responseJson);
+                            // This variables will load the values to the labels
+                            setUserName("Welcome: " + jsonResult.name);
+                            setIsFacebookButtonEnabled(false);
+                            setEnableVoteDiv(true);
+                        }
+                    });
             });
         });
     }
@@ -229,26 +269,26 @@ const ShareView = () => {
                     mode: 'cors',
                     cache: 'default'
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson === "") {
-                        setIsConsentButtonVisible(true);
-                        setIsSsoAuthenticationButtonVisible(false);
-                    }
-                    else {
-                        let userDetails = JSON.parse(responseJson);
-                        setUserName("Welcome: " + userDetails.details.displayName);
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson === "") {
+                            setIsConsentButtonVisible(true);
+                            setIsSsoAuthenticationButtonVisible(false);
+                        }
+                        else {
+                            let userDetails = JSON.parse(responseJson);
+                            setUserName("Welcome: " + userDetails.details.displayName);
 
-                        setIsSsoAuthenticationButtonVisible(false);
-                        setEnableVoteDiv(true);
-                    }
-                });
+                            setIsSsoAuthenticationButtonVisible(false);
+                            setEnableVoteDiv(true);
+                        }
+                    });
             });
         });
     }
@@ -282,37 +322,39 @@ const ShareView = () => {
     }
 
     return (
-        <div className="timerCount">
-            {IsAnonymousUser
-                ? 
-                   <div className="btnlogin">
-                    {IsFacebookButtonEnabled &&
+        <div className={appTheme}>
+            <div className="timerCount">
+                {IsAnonymousUser
+                    ?
+                    <div className="btnlogin">
+                        {IsFacebookButtonEnabled &&
                             <Button appearance="primary" onClick={facebookLogin}>Sign-In</Button>
                         }
                         <Text size={500} weight="semibold">{userName}</Text>
-                   </div>
-                 : <div className="btnlogin">
-                    {ssoAuthenticationButtonVisible &&
-                        <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
-                    }
-                    <Text size={500} weight="semibold">{userName}</Text>
-                    {IsConsentButtonVisible &&
-                        <>
-                            <div id="divError">Please click on consent button</div>
-                            <Button appearance="primary" onClick={requestConsent}>Consent</Button>
-                        </>
-                    }
-                 </div>
-            }
-            {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
-                <div>
-                    <Button appearance="primary" onClick={submitVote} disabled={isVoteBtnDisabled} >Submit Vote</Button>
-                    <br />
-                    <Text size={500} weight="semibold">Anonymous users voted : {aShowCount}</Text>
-                    <br />
-                    <Text size={500} weight="semibold">Users voted : {uShowCount}</Text>
-                </div>
-            }
+                    </div>
+                    : <div className="btnlogin">
+                        {ssoAuthenticationButtonVisible &&
+                            <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
+                        }
+                        <Text size={500} weight="semibold">{userName}</Text>
+                        {IsConsentButtonVisible &&
+                            <>
+                                <div id="divError">Please click on consent button</div>
+                                <Button appearance="primary" onClick={requestConsent}>Consent</Button>
+                            </>
+                        }
+                    </div>
+                }
+                {enableVoteDiv &&  // If the login is successful, only the submitted vote button will be visible. 
+                    <div>
+                        <Button appearance="primary" onClick={submitVote} disabled={isVoteBtnDisabled} >Submit Vote</Button>
+                        <br />
+                        <Text size={500} weight="semibold">Anonymous users voted : {aShowCount}</Text>
+                        <br />
+                        <Text size={500} weight="semibold">Users voted : {uShowCount}</Text>
+                    </div>
+                }
+            </div>
         </div>
     );
 };
