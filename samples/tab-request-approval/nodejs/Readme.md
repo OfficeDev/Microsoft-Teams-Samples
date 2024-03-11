@@ -160,27 +160,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-- Install App User-1
+- User-1 Install App
 
 ![InstallAppUser1](Images/1.InstallAppUser.png)
 
-- Create Task
+- User-1 Create Task
 
 ![CreateTask](Images/3.CreateTask.png)
 
-- Task Details
+- User-1 Task Details
 
 ![TaskDetails](Images/4.RequestTo.png)
 
-- All Person
+- User-1 All Person
 
 ![TaskDetails](Images/5.SelectPerson.png)
 
-- Select a Person
+- User-1 Select a Person
 
 ![TaskDetails](Images/6.SelectOnePerson.png)
 
-- Create task Details
+- User-1 Create task Details
 
 ![CreateTaskDetails](Images/7.CreateTaskDetails.png)
 
@@ -188,11 +188,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![InstallAppUser2](Images/2.InstallAppUser.png)
 
-- Send Request
+- User-1 Send Request
 
 ![CreateTask](Images/7.CreateTaskDetails.png)
 
-- On click of notification a task module will open, redirecting the user to the request.
+- User-2 On click of notification a task module will open, redirecting the user to the request.
 
 ![SendRequest](Images/8.Activity.png)
 
