@@ -289,10 +289,7 @@
                     width: 600,
                     height: 535})
                 .then((result) => {
-                    let data = localStorage.getItem(result);
-                    let tokenDetails = JSON.parse(data);
-                    localStorage.removeItem(result);
-                    resolve(tokenDetails);
+                    resolve(result);
                 })
                 .catch((reason) => {
                     reject(reason);
@@ -303,7 +300,7 @@
         function fbAuth() {
             fbAuthentication()
                 .then((result) => {
-                    return getServerSideTokenFb(result.idToken);
+                    return getServerSideTokenFb(result);
                 })
                 .catch((error) => {
                     console.log(error);

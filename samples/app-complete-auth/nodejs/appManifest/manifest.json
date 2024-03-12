@@ -19,7 +19,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "App complete auth"
+    "short": "App complete auth",
+    "full": "App complete auth"
   },
   "description": {
     "short": "Authentication sample for Microsoft Teams",

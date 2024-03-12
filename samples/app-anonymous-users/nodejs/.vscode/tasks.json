@@ -104,7 +104,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "Compiled successfully!"
                 }
             }
         },
@@ -128,7 +128,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "Server listening on http://localhost:"
                 }
             }
         }

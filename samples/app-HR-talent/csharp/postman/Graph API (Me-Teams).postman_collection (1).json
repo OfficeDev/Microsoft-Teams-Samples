@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "333811eb-2917-8122-3a92-4320b978fa7f",
+		"name": "Graph API (Me/Teams)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Me - Teams Chat",
+			"item": [
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/me",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Joined Teams",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/me/joinedTeams",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"me",
+								"joinedTeams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Team Channels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/teams/f3e9518c-c11f-451a-b890-495d2476848b/channels",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"teams",
+								"f3e9518c-c11f-451a-b890-495d2476848b",
+								"channels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Chat Message to Channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": {\r\n    \"content\": \"Hello World\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/teams/12288a3d-8742-4ce1-93e4-03e35e5773fb/channels/19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2/messages",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"teams",
+								"12288a3d-8742-4ce1-93e4-03e35e5773fb",
+								"channels",
+								"19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Chat Messages in Channel",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/teams/12288a3d-8742-4ce1-93e4-03e35e5773fb/channels/19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2/messages",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"teams",
+								"12288a3d-8742-4ce1-93e4-03e35e5773fb",
+								"channels",
+								"19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reply to Chat Message in Channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": {\r\n    \"contentType\": \"html\",\r\n    \"content\": \"Hello World v2\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/teams/12288a3d-8742-4ce1-93e4-03e35e5773fb/channels/19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2/messages/1622105461963/replies",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"teams",
+								"12288a3d-8742-4ce1-93e4-03e35e5773fb",
+								"channels",
+								"19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2",
+								"messages",
+								"1622105461963",
+								"replies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reply to Chat Message Adaptive Card in Channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": null,\r\n    \"body\": {\r\n        \"contentType\": \"html\",\r\n        \"content\": \"<attachment id=\\\"74d20c7f34aa4a7fb74e2b30004247c5\\\"></attachment>\"\r\n    },\r\n    \"attachments\": [\r\n        {\r\n            \"id\": \"74d20c7f34aa4a7fb74e2b30004247c5\",\r\n            \"contentType\": \"application/vnd.microsoft.card.thumbnail\",\r\n            \"contentUrl\": null,\r\n            \"content\": \"{\\r\\n  \\\"title\\\": \\\"This is an example of posting a card\\\",\\r\\n  \\\"subtitle\\\": \\\"<h3>This is the subtitle</h3>\\\",\\r\\n  \\\"text\\\": \\\"Here is some body text. <br>\\\\r\\\\nAnd a <a href=\\\\\\\"http://microsoft.com/\\\\\\\">hyperlink</a>. <br>\\\\r\\\\nAnd below that is some buttons:\\\",\\r\\n  \\\"buttons\\\": [\\r\\n    {\\r\\n      \\\"type\\\": \\\"messageBack\\\",\\r\\n      \\\"title\\\": \\\"Login to FakeBot\\\",\\r\\n      \\\"text\\\": \\\"login\\\",\\r\\n      \\\"displayText\\\": \\\"login\\\",\\r\\n      \\\"value\\\": \\\"login\\\"\\r\\n    }\\r\\n  ]\\r\\n}\",\r\n            \"name\": null,\r\n            \"thumbnailUrl\": null\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/teams/12288a3d-8742-4ce1-93e4-03e35e5773fb/channels/19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2/messages/1622105461963/replies",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"teams",
+								"12288a3d-8742-4ce1-93e4-03e35e5773fb",
+								"channels",
+								"19:39e1a6c6fcce468c8dfdc2bc11d22b95@thread.tacv2",
+								"messages",
+								"1622105461963",
+								"replies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Chat in Teams",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"chatType\": \"oneOnOne\",\r\n  \"members\": [\r\n    {\r\n      \"@odata.type\": \"#microsoft.graph.aadUserConversationMember\",\r\n      \"roles\": [\"owner\"],\r\n      \"user@odata.bind\": \"https://graph.microsoft.com/v1.0/users('5e9e185e-1a9a-4d1e-920b-2e8d51513ac9')\"\r\n    },\r\n    {\r\n      \"@odata.type\": \"#microsoft.graph.aadUserConversationMember\",\r\n      \"roles\": [\"owner\"],\r\n      \"user@odata.bind\": \"https://graph.microsoft.com/v1.0/users('c7a18f5a-1deb-4c82-9c76-a5322f0ceeff')\"\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/chats",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"chats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Chat Message in Chat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{delegatedAccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": {\r\n    \"content\": \"Hello World\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/chats/19:5e9e185e-1a9a-4d1e-920b-2e8d51513ac9_c7a18f5a-1deb-4c82-9c76-a5322f0ceeff@unq.gbl.spaces/messages",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"chats",
+								"19:5e9e185e-1a9a-4d1e-920b-2e8d51513ac9_c7a18f5a-1deb-4c82-9c76-a5322f0ceeff@unq.gbl.spaces",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List All Users",
+			"item": [
+				{
+					"name": "List All Users in Tenant",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{appAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/users",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teams Apps",
+			"item": [
+				{
+					"name": "Get Teams App ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{appAccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps?$filter=externalId eq 'c3c61e3a-e42e-40e8-a0bc-29b57a845db6'",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"appCatalogs",
+								"teamsApps"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": "externalId eq 'c3c61e3a-e42e-40e8-a0bc-29b57a845db6'"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Install Personal App for User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{appAccessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"teamsApp@odata.bind\":\"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/32581186-d246-4a66-83f7-4933c9bc8329\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/users/jonis@M365x13689988.onmicrosoft.com/teamwork/installedApps",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"users",
+								"jonis@M365x13689988.onmicrosoft.com",
+								"teamwork",
+								"installedApps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

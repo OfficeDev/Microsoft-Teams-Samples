@@ -1,0 +1,15 @@
+{
+    "env": {
+        "node": true,
+        "es2020": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "no-process-env": "off"
+    }
+}
