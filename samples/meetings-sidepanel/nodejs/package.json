@@ -41,7 +41,7 @@
         "url": "^0.11.0"
     },
     "devDependencies": {
-        "esbuild": "^0.18.1",
+        "esbuild": "^0.18.20",
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
