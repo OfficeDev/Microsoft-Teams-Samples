@@ -251,10 +251,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Adaptive Card updated to be responsive using targetWidth:**
 
-**Note** - Adaptive card responsive layout is only supported on mobile and desktop clients
-
-**Desktop:**
-
 ![Layout](BotFormattingCards/Images/14.Layout.png)
 
 **Mobile:**
