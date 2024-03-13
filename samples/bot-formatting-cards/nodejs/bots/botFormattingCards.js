@@ -13,6 +13,7 @@ const CardWithEmoji = require('../resources/adaptiveCardWithEmoji.json');
 const PeoplePersonaCardIcon = require('../resources/adaptivePeoplePersonaCardIcon.json');
 const PeoplePersonaCardSetIcon = require('../resources/adaptivePeoplePersonaCardSetIcon.json');
 const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
+const CodeBlocksCard = require('../resources/codeBlocksCard.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -29,8 +30,9 @@ class BotFormattingCards extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const text = context.activity.text;
 
+
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -74,6 +76,10 @@ class BotFormattingCards extends ActivityHandler {
                     
                     case "Layout":
                         await context.sendActivity({ attachments: [this.sendLayoutCard()] });
+
+
+                    case "CodeBlock":
+                        await context.sendActivity({ attachments: [this.sendCodeBlock()] });
                         break;
                 }
 
@@ -113,6 +119,10 @@ class BotFormattingCards extends ActivityHandler {
     */
     sendMentionSupportCard() {
         return CardFactory.adaptiveCard(MentionSupport);
+    }
+
+    sendCodeBlock() {
+        return CardFactory.adaptiveCard(CodeBlocksCard);
     }
 
     /**
@@ -234,6 +244,10 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'Layout',
                 value: 'Layout'
+
+                title: 'CodeBlock',
+                value: 'CodeBlock'
+
             },
             {
                 type: ActionTypes.ImBack,

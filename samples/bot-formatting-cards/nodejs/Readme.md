@@ -233,6 +233,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![PersonaSet](Images/11.PersonaSet.png)
 
+**Code Block in Adaptive Card:**
+
+![PersonaSet](Images/CodeBlocks.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
