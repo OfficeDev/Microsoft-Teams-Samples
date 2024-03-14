@@ -124,6 +124,9 @@ class BotFormattingCards extends ActivityHandler {
         return CardFactory.adaptiveCard(CodeBlocksCard);
     }
 
+    /**
+    * Adaptive Card updated to be responsive using targetWidth.
+    */
     sendLayoutCard() {
         return CardFactory.adaptiveCard(AdaptiveCardResponsiveLayout);
     }
