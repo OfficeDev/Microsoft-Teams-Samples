@@ -45,8 +45,8 @@
                         "protocol": "http",
                         "access": "public",
                         "writeToEnvironmentFile": {
-                            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-                            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
+                            "endpoint": "TAB_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
+                            "domain": "TAB_DOMAIN" // output tunnel domain as BOT_DOMAIN
                         }
                     }
                 ],
