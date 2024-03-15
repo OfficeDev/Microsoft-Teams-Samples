@@ -1,75 +1,58 @@
-import { Providers, ProviderState } from '@microsoft/mgt-element';
-import { Agenda, Login, Todo, PersonCard, PeoplePicker, Tasks, Person, ViewType } from '@microsoft/mgt-react';
-import React, { useState, useEffect } from 'react';
-import { Accordion } from '@fluentui/react-northstar'
-import './App.css';
+// https://fluentsite.z22.web.core.windows.net/quick-start
+import {
+  FluentProvider,
+  teamsLightTheme,
+  teamsDarkTheme,
+  teamsHighContrastTheme,
+  tokens
+} from '@fluentui/react-components';
+import { useEffect } from 'react';
+import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { app } from '@microsoft/teams-js';
+import { useTeamsUserCredential } from '@microsoft/teamsfx-react';
+import Tab from './Tab';
+import { TeamsFxContext } from './Context';
 
-function useIsSignedIn(): [boolean] {
-    const [isSignedIn, setIsSignedIn] = useState(false);
-
-    useEffect(() => {
-        const updateState = () => {
-            const provider = Providers.globalProvider;
-            setIsSignedIn(provider && provider.state === ProviderState.SignedIn);
-        };
-
-        Providers.onProviderUpdated(updateState);
-        updateState();
-
-        return () => {
-            Providers.removeProviderUpdatedListener(updateState);
+/**
+ * The main app which handles the initialization and routing
+ * of the app.
+ */
+export default function App() {
+  const { loading, theme, themeString, teamsUserCredential } = useTeamsUserCredential({
+    clientId: process.env.REACT_APP_CLIENT_ID!,
+    initiateLoginEndpoint: process.env.REACT_APP_START_LOGIN_PAGE_URL!
+  });
+  useEffect(() => {
+    loading &&
+      app.initialize().then(() => {
+        // Hide the loading indicator.
+        app.notifySuccess();
+      });
+  }, [loading]);
+  return (
+    <TeamsFxContext.Provider value={{ theme, themeString, teamsUserCredential }}>
+      <FluentProvider
+        theme={
+          themeString === 'dark'
+            ? teamsDarkTheme
+            : themeString === 'contrast'
+            ? teamsHighContrastTheme
+            : {
+                ...teamsLightTheme,
+                colorNeutralBackground3: '#FFFFFF'
+              }
         }
-    }, []);
-
-    return [isSignedIn];
+        style={{ background: tokens.colorNeutralBackground3 }}
+      >
+        <Router>
+          {!loading && (
+            <Routes>
+              <Route path="/tab" element={<Tab />} />
+              <Route path="*" element={<Navigate to={'/tab'} />}></Route>
+            </Routes>
+          )}
+        </Router>
+      </FluentProvider>
+    </TeamsFxContext.Provider>
+  );
 }
-
-function App() {
-    const [isSignedIn] = useIsSignedIn();
-    const panels = [
-        {
-            key: 'Agenda',
-            title: <div className="title">Agenda</div>,
-            content: <Agenda />,
-        },
-        {
-            key: 'Peoplepicker',
-            title: <div className="title"> People picker </div>,
-            content: <div className="container-div"> <PeoplePicker /></div>,
-        },
-        {
-            key: 'Todo',
-            title: <div className="title"> To do</div>,
-            content: <div className="container-div"> <Todo /> </div>,
-        },
-        {
-            key: 'PersonCard',
-            title: <div className="title"> Person Card</div>,
-            content: <div className="container-div"> <PersonCard personQuery="me" /> </div>,
-        },
-        {
-            key: 'Person',
-            title: <div className="title"> Person</div>,
-            content: <div className="container-div"> <Person personQuery="me" view={ViewType.threelines} /> </div>,
-        },
-        {
-            key: 'Tasks',
-            title: <div className="title"> Tasks</div>,
-            content: <div className="container-div"> <Tasks /></div>,
-        },
-    ]
-
-    return (
-        <div className="App">
-            <header>
-                <Login />
-            </header>
-            <div>
-                {isSignedIn &&
-                    <Accordion defaultActiveIndex={[0]} panels={panels}/>}
-            </div>
-        </div>
-    );
-}
-
-export default App;
