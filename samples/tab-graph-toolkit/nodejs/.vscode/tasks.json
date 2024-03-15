@@ -27,7 +27,7 @@
                     "portOccupancy" // Validate available ports to ensure those debug ones are not occupied.
                 ],
                 "portOccupancy": [
-                    53000 // tab service port
+                    3978 // tab service port
                 ]
             }
         },
