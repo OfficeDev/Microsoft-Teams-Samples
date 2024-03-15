@@ -117,13 +117,31 @@ On the first time running and debugging your app you need allow the localhost ce
 
 ## Running the sample.
 
-![Sign in card](Images/SignInOption.png)
+![InstallApp](Images/1.InstallApp.png)
 
-![Agenda](Images/Agenda.png)
+![Login](Images/2.Login.png)
 
-![People picker](Images/PeoplePicker.png)
+![Consent](Images/3.Consent.png)
 
-![Tasks](Images/Tasks.png)
+![HomePage](Images/4.HomePage.png)
+
+![Agenda](Images/5.Agenda.png)
+
+![PeoplePicker](Images/6.PeoplePicker.png)
+
+![PeoplePickerSelect](Images/66.PeoplePicker.png)
+
+![ToDo](Images/7.ToDo.png)
+
+![PersonCard](Images/8.PersonCard.png)
+
+![Person](Images/9.Person.png)
+
+![PersonSelect](Images/10.Person1.png)
+
+![Tasks](Images/11.Tasks.png)
+
+![TasksSelect](Images/12.TasksSelect.png)
 
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
