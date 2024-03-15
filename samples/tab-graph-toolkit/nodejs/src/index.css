@@ -16,6 +16,9 @@ body {
 .mgtDetails{
   padding: 2rem;
 }
+.loginbtn{
+  padding: 1rem;
+}
 
 @media only screen and (max-width: 768px) {
   body {

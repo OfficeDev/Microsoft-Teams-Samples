@@ -72,9 +72,11 @@ export default function Tab() {
     <div>
       {consentNeeded && (
         <>
+        <div className="loginbtn">
           <Button appearance="primary" disabled={loading} onClick={consent}>
             Login
           </Button>
+        </div>
         </>
       )}
       {!consentNeeded && (
