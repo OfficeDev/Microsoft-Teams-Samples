@@ -83,8 +83,8 @@ namespace StaggeredPermission.helper
         public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor, string idToken)
         {
             var tenantId = configuration["AzureAd:TenantId"];
-            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:MicrosoftAppId"])
-                                                .WithClientSecret(configuration["AzureAd:MicrosoftAppPassword"])
+            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:ClientId"])
+                                                .WithClientSecret(configuration["AzureAd:AppSecret"])
                                                 .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
                                                 .Build();
 
