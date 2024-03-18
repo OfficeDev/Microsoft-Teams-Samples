@@ -20,7 +20,7 @@ namespace StaggeredPermission.helper
         /// <returns>Valid Audiences.</returns>
         public static IEnumerable<string> GetValidAudiences(IConfiguration configuration)
         {
-            var clientId = configuration["AzureAd:MicrosoftAppId"];
+            var clientId = configuration["AzureAd:ClientId"];
             var applicationIdUri = configuration["AzureAd:ApplicationIdURI"];
             var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
             return validAudiences;
