@@ -186,7 +186,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             // var reply = MessageFactory.Text($"<b>File uploaded.</b> Your file <b>{fileConsentCardResponse.UploadInfo.Name}</b> is ready to download");
             // Added defects to check automation flow
 
-            var reply = MessageFactory.Text($"<b>File uploaded Successfully.</b>");
+            var reply = MessageFactory.Text($"<b>File uploaded.</b> Your file <b>{fileConsentCardResponse.UploadInfo.Name}</b> is ready to download");
             reply.TextFormat = "xml";
             reply.Attachments = new List<Attachment> { asAttachment };
 
