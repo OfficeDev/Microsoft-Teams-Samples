@@ -84,42 +84,42 @@ export default function Tab() {
         <div className="mgtDetails">
           <Person personQuery="me" view={ViewType.oneline} />
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Agenda')}>Agenda</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('Agenda')}><i className="arrow right"></i>Agenda</h3> 
             <div style={{ display: activeDiv === 'Agenda' ? 'block' : 'none' }}> 
             <Agenda></Agenda> 
             </div>
           </div>
 
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('PeoplePicker')}>PeoplePicker</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('PeoplePicker')}><i className="arrow right"></i>PeoplePicker</h3> 
             <div style={{ display: activeDiv === 'PeoplePicker' ? 'block' : 'none' }}> 
             <PeoplePicker></PeoplePicker>
           </div>
           </div>
 
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Todo')}>ToDo</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('Todo')}><i className="arrow right"></i>ToDo</h3> 
             <div style={{ display: activeDiv === 'Todo' ? 'block' : 'none' }}>
               <Todo></Todo> 
             </div>
           </div>
             
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Person')}>Person Card</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('Person')}><i className="arrow right"></i>Person Card</h3> 
             <div style={{ display: activeDiv === 'Person' ? 'block' : 'none' }}>
             <Person personQuery="me" view={ViewType.fourlines} /> 
             </div>
           </div>
 
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('People')}>Person</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('People')}><i className="arrow right"></i>Person</h3> 
             <div style={{ display: activeDiv === 'People' ? 'block' : 'none' }}>
             <People></People>
             </div>
           </div>
 
           <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Tasks')}>Tasks</h3> 
+            <h3 className="cursorPointer" onClick={() => toggleVisibility('Tasks')}><i className="arrow right"></i>Tasks</h3> 
             <div style={{ display: activeDiv === 'Tasks' ? 'block' : 'none' }}>
             <Tasks></Tasks>
             </div>

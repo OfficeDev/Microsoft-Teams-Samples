@@ -8,6 +8,7 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
 }
 
 .cursorPointer{
@@ -18,6 +19,19 @@ body {
 }
 .loginbtn{
   padding: 1rem;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 0.5rem;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 
 @media only screen and (max-width: 768px) {
