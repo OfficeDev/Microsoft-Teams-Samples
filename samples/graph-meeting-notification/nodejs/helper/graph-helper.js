@@ -33,9 +33,7 @@ class GraphHelper {
         let resource = "";
         try {
         applicationToken = await auth.getAccessToken();
-        console.log("application Token--->",applicationToken);
         resource = `/communications/onlineMeetings/?$filter=JoinWebUrl eq '${meetingJoinUrl}'`;
-        console.log("resource---->",resource);
 
             var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/subscriptions`, {
                 headers: {
