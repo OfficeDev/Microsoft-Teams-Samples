@@ -13,6 +13,7 @@ const CardWithEmoji = require('../resources/adaptiveCardWithEmoji.json');
 const PeoplePersonaCardIcon = require('../resources/adaptivePeoplePersonaCardIcon.json');
 const PeoplePersonaCardSetIcon = require('../resources/adaptivePeoplePersonaCardSetIcon.json');
 const CodeBlocksCard = require('../resources/codeBlocksCard.json');
+const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -29,9 +30,8 @@ class BotFormattingCards extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const text = context.activity.text;
 
-
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -76,6 +76,10 @@ class BotFormattingCards extends ActivityHandler {
                     case "CodeBlock":
                         await context.sendActivity({ attachments: [this.sendCodeBlock()] });
                         break;
+                    
+                    case "Layout":
+                        await context.sendActivity({ attachments: [this.sendLayoutCard()] });
+                        break;                            
                 }
 
                 await context.sendActivity(`You have Selected <b>${text}</b>`);
@@ -118,6 +122,13 @@ class BotFormattingCards extends ActivityHandler {
 
     sendCodeBlock() {
         return CardFactory.adaptiveCard(CodeBlocksCard);
+    }
+
+    /**
+    * Adaptive Card updated to be responsive using targetWidth.
+    */
+    sendLayoutCard() {
+        return CardFactory.adaptiveCard(AdaptiveCardResponsiveLayout);
     }
 
     /**
@@ -233,6 +244,11 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'CodeBlock',
                 value: 'CodeBlock'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Layout',
+                value: 'Layout'
             },
             {
                 type: ActionTypes.ImBack,

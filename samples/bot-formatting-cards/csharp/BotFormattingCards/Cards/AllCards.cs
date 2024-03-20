@@ -193,6 +193,23 @@ namespace BotAllCards.Cards
 
             return PersonaCardSetIconAdaptiveCardAttachment;
         }
+        /// <summary>
+        /// Adaptive Card updated to be responsive using targetWidth.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment sendResponsiveLayoutCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardResponsiveLayout.json" };
+            var adaptiveCardlayoutJson = File.ReadAllText(Path.Combine(paths));
+
+            var LayoutCardAdaptiveCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardlayoutJson),
+            };
+
+            return LayoutCardAdaptiveCardAttachment;
+        }
 
     }
 }

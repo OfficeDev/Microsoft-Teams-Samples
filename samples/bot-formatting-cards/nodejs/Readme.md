@@ -235,7 +235,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Code Block in Adaptive Card:**
 
-![PersonaSet](Images/CodeBlocks.png)
+![CodeBlock](Images/12.CodeBlocks.png)
+
+**Adaptive Card updated to be responsive using targetWidth:**
+
+![Layout](Images/13.Layout.png)
+
+**Mobile:**
+
+![LayoutMobile](Images/14.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 
