@@ -7,4 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-all-cards-nodejs
 
 environmentFolderPath: ./env
-projectId: 5e3de923-95a7-4199-8034-24a984ae3ddf
+projectId:
