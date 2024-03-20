@@ -80,6 +80,9 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
       * Select **Add a platform**.
       * Select **Single-page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/blank-auth-end.html` and `https://{Base_Url}/auth-end.html?clientId={AppID}`.
+
+      ![Authentication](TabGraphToolkit/Images/Authentication.png)
+
   14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
 2. Setup NGROK
