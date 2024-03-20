@@ -90,6 +90,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     * Select **Add a platform**.
     * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-start`.
 - Set another redirect URI:
     * Select **Add a platform**.
     * Select **web**.
