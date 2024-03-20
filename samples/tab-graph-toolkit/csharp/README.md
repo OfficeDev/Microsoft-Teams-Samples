@@ -153,20 +153,26 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 
 ![HomePage](TabGraphToolkit/Images/4.HomePage.png)
 
+**<Agenda>**
 ![Agenda](TabGraphToolkit/Images/5.Agenda.png)
 
+**<PeoplePicker>**
 ![PeoplePicker](TabGraphToolkit/Images/6.PeoplePicker.png)
 
 ![PeoplePickerSelect](TabGraphToolkit/Images/66.PeoplePicker.png)
 
+**<Todo>**
 ![ToDo](TabGraphToolkit/Images/7.ToDo.png)
 
+**<Person>**
 ![PersonCard](TabGraphToolkit/Images/8.PersonCard.png)
 
 ![Person](TabGraphToolkit/Images/9.Person.png)
 
+**<People>**
 ![PersonSelect](TabGraphToolkit/Images/10.Person1.png)
 
+**<Tasks>**
 ![Tasks](TabGraphToolkit/Images/11.Tasks.png)
 
 ![TasksSelect](TabGraphToolkit/Images/12.Tasks1.png)
