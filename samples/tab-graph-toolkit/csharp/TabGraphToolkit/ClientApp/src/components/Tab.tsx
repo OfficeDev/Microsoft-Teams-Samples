@@ -12,12 +12,12 @@ import {
 } from "@microsoft/teamsfx";
 
 const authConfig: TeamsUserCredentialAuthConfig = {
-    clientId: '5f9e7249-b8e4-46f3-84e8-f8012e278a31',
-    initiateLoginEndpoint: 'https://0e3c-2402-e280-2138-11c-a8ad-3b34-57cc-39f1.ngrok-free.app/auth-start.html',
-    };
+  clientId: process.env.REACT_APP_CLIENT_ID!,
+  initiateLoginEndpoint: process.env.REACT_APP_START_LOGIN_PAGE_URL!,
+};
 
 const scopes = [
-  'Bookmark.Read.All',
+    'Bookmark.Read.All',
     'Calendars.Read',
     'Channel.ReadBasic.All',
     'Group.ReadWrite.All',
@@ -82,48 +82,48 @@ export default function Tab() {
       {!consentNeeded && (
         <>
         <div className="mgtDetails">
-          <Person personQuery="me" view={ViewType.oneline} />
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Agenda')}><i className="arrow right"></i>Agenda</h3> 
-            <div style={{ display: activeDiv === 'Agenda' ? 'block' : 'none' }}> 
-            <Agenda></Agenda> 
+            <Person personQuery="me" view={ViewType.oneline} />
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('Agenda')}><i className="arrow right"></i>Agenda</h3>
+                <div style={{ display: activeDiv === 'Agenda' ? 'block' : 'none' }}>
+                    <Agenda></Agenda>
+                </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('PeoplePicker')}><i className="arrow right"></i>PeoplePicker</h3> 
-            <div style={{ display: activeDiv === 'PeoplePicker' ? 'block' : 'none' }}> 
-            <PeoplePicker></PeoplePicker>
-          </div>
-          </div>
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('PeoplePicker')}><i className="arrow right"></i>PeoplePicker</h3>
+                <div style={{ display: activeDiv === 'PeoplePicker' ? 'block' : 'none' }}>
+                    <PeoplePicker></PeoplePicker>
+                </div>
+            </div>
 
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Todo')}><i className="arrow right"></i>ToDo</h3> 
-            <div style={{ display: activeDiv === 'Todo' ? 'block' : 'none' }}>
-              <Todo></Todo> 
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('Todo')}><i className="arrow right"></i>ToDo</h3>
+                <div style={{ display: activeDiv === 'Todo' ? 'block' : 'none' }}>
+                    <Todo></Todo>
+                </div>
             </div>
-          </div>
-            
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Person')}><i className="arrow right"></i>Person Card</h3> 
-            <div style={{ display: activeDiv === 'Person' ? 'block' : 'none' }}>
-            <Person personQuery="me" view={ViewType.fourlines} /> 
-            </div>
-          </div>
 
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('People')}><i className="arrow right"></i>Person</h3> 
-            <div style={{ display: activeDiv === 'People' ? 'block' : 'none' }}>
-            <People></People>
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('Person')}><i className="arrow right"></i>Person Card</h3>
+                <div style={{ display: activeDiv === 'Person' ? 'block' : 'none' }}>
+                    <Person personQuery="me" view={ViewType.fourlines} />
+                </div>
             </div>
-          </div>
 
-          <div>
-            <h3 className="cursorPointer" onClick={() => toggleVisibility('Tasks')}><i className="arrow right"></i>Tasks</h3> 
-            <div style={{ display: activeDiv === 'Tasks' ? 'block' : 'none' }}>
-            <Tasks></Tasks>
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('People')}><i className="arrow right"></i>Person</h3>
+                <div style={{ display: activeDiv === 'People' ? 'block' : 'none' }}>
+                    <People></People>
+                </div>
             </div>
-          </div>
+
+            <div>
+                <h3 className="cursorPointer" onClick={() => toggleVisibility('Tasks')}><i className="arrow right"></i>Tasks</h3>
+                <div style={{ display: activeDiv === 'Tasks' ? 'block' : 'none' }}>
+                    <Tasks></Tasks>
+                </div>
+            </div>
         </div>
         </>
       )}
