@@ -99,7 +99,6 @@ deploy:
       target: ./ClientApp/.env
       envs:
         REACT_APP_MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
-        REACT_APP_FACEBOOK_APP_ID: ${{REACT_APP_FACEBOOK_APP_ID}}
 
   # Generate runtime environment variables For Server
   - uses: file/createOrUpdateEnvironmentFile
@@ -108,6 +107,6 @@ deploy:
       envs:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-        connectionName: ${{CONNECTION_NAME}}
-        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-        MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
+        ApplicationBaseUrl: ${{BOT_ENDPOINT}}
+        

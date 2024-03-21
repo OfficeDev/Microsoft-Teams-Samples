@@ -1,14 +1,14 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
-  "id": "<<Guid>>",
+  "id": "${{TEAMS_APP_ID}}",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
   "developer": {
     "name": "Contoso",
-    "websiteUrl": "https://<<Base-url>>",
-    "privacyUrl": "https://<<Base-url>>/privacy",
-    "termsOfUseUrl": "https://<<Base-url>>/tou",
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/tou",
     "mpnId": ""
   },
   "name": {
@@ -29,8 +29,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://<<Base-url>>/PersonalTab",
-      "websiteUrl": "https://<<Base-url>>/PersonalTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/PersonalTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/PersonalTab",
       "scopes": [
         "personal"
       ]
@@ -44,6 +44,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ]
 }

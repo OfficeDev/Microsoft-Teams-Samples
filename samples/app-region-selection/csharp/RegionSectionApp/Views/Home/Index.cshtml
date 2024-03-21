@@ -20,15 +20,14 @@
     <p>
         <div>
             <label for="domainChoice">Select the data center Region you would like to set: </label>
-            @* Added defects to check automation flow *@ 
 
-            @* <select id="domainChoice" name="domainChoice">
+            <select id="domainChoice" name="domainChoice">
                 <option value="" selected="selected">(Select a region)</option>
                 @foreach (var item in Model.regionDomains)
                 {
                     <option value="@item.region">@(  item.country + " - " + item.region)</option>
                 }
-            </select> *@
+            </select>
         </div>
     </p>
 

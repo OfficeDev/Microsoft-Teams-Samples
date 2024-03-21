@@ -25,8 +25,8 @@
                     "type": "Scope"
                 },
                 {
-                    "id": "TeamworkTag.ReadWrite.All",
-                    "type": "Role"
+                    "id": "TeamworkTag.ReadWrite",
+                    "type": "Scope"
                 }
             ]
         }
@@ -95,19 +95,5 @@
     ],
     "identifierUris": [
         "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
-    ],
-    "replyUrlsWithType": [
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html",
-            "type": "Web"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
-            "type": "Spa"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
-            "type": "Spa"
-        }
     ]
 }

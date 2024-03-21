@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "c7229567-6c0a-4912-8fe5-d338af585b42",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.tabpeoplepicker",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.teams.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<your_tunnel_domain>/configure",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -37,8 +37,8 @@
     {
       "entityId": "peoplepickertab",
       "name": "Tab",
-      "contentUrl": "https://<your_tunnel_domain>/index",
-      "websiteUrl": "https://<your_tunnel_domain>/index",
+      "contentUrl": "https://${{TAB_DOMAIN}}/index",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/index",
       "scopes": [
         "personal"
       ]
@@ -49,6 +49,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
   ]
 }

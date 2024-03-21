@@ -106,7 +106,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     npm install
     ```
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from Bot Framework registration. 
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Microsoft Entra ID app registration in Azure portal or from Bot Framework registration. 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal app registration service and you can always create a new client secret anytime.
 
 - Run your app

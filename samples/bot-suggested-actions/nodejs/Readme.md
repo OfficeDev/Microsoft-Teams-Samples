@@ -56,7 +56,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
 - Register Azure AD application resource in Azure portal
@@ -85,7 +85,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 - In a terminal, navigate to `samples/bot-suggested-actions/nodejs`
 
 - Install modules

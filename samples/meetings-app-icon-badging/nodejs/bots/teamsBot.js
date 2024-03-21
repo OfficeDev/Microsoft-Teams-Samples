@@ -13,15 +13,16 @@ class TeamsBot extends TeamsActivityHandler {
 
         // This method is invoked whenever there is any message activity in bot's chat.
         this.onMessage(async (context, next) => {
+           
             var members = new Array();
-            let meetingId = context.activity.channelData.meeting.id;
+            let meetingId = context._activity.channelData.meeting.id;
 
             if (context.activity.value == null) {
-                TurnContext.removeRecipientMention(context.activity);
+                TurnContext.removeRecipientMention(context._activity);
 
-                if (context.activity.text.trim() == "SendNotification") {
+                if (context._activity.text.trim() == "SendNotification") {
                     var meetingMembers = await TeamsInfo.getPagedMembers(context);
-                    let tenantId = context.activity.channelData.tenant.id;
+                    let tenantId = context._activity.channelData.tenant.id;
 
                     for (var member in meetingMembers) {
                         let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);

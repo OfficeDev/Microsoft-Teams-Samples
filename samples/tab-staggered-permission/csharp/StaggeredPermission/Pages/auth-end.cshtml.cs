@@ -28,7 +28,7 @@ namespace StaggeredPermission.Pages
 	/// </summary>
         public void OnGet()
         {
-            ClientId = _configuration["MicrosoftAppId"];
+            ClientId = _configuration["AzureAd:ClientId"];
         }
     }
 }

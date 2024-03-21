@@ -57,7 +57,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## To try this sample
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2.  Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -162,9 +162,13 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ![](images/app-complete-sample7.png)
 
+![](images/app-complete-sample11.png)
+
 ![](images/app-complete-sample8.png)
 
-![](images/app-complete-sample-tab.png)
+![](images/app-complete-sample9.png)
+
+![](images/app-complete-sample10.png)
 
 ## Outlook on the web
 
@@ -174,15 +178,15 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](images/InstallOutlook.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![AppOutlook](images/AppOutlook.png)
 
 **Select your app icon from message extension and find ward, it will show all options**
 
-![AppOutlook](Images/AppOutlook_msgext.png)
+![AppOutlook](images/AppOutlook_msgext.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -194,11 +198,11 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](images/InstallOffice.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![AppOffice](images/AppOffice.png) 
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 

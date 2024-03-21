@@ -41,7 +41,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### 1. Register you app with Azure AD
 
-  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -56,7 +56,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
    In the new Azure Bot resource in the Portal, 

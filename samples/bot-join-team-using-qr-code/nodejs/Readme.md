@@ -119,7 +119,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
     ```
 
 **Manually update the manifest.json**
-- Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in previous step while doing AAD app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in previous step while doing Microsoft Entra ID app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - Also, update {{domain-name}} in your manifest `validDomains` section with your app domain like ngrok domain `1234.ngrok-free.app` or dev tunnels domain `12345.devtunnels.ms` excluding http/https.
 

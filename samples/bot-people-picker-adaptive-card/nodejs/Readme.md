@@ -60,7 +60,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > the Teams service needs to call into the bot.
 
 1) Setup for Bot
-- In Azure portal, create AAD app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
+- In Azure portal, create Microsoft Entra ID app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -96,7 +96,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm install
     ```
 
-- Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing AAD app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your AAD app registrationin.
+- Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing Microsoft Entra ID app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your Microsoft Entra ID app registrationin.
 
 - Run your app
 

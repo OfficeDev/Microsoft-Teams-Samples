@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-auth-config-csharp
 
 Bot Framework v4 sample for Teams expands the [msgext-search-auth-config](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp) sample to include a configuration page and Bot Service authentication.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension. In this sample we are assuming the OAuth 2 provider is Azure Active Directory v2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension. In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
 
 - `email`
 - `openid`
@@ -47,7 +47,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Description
 
-- Teams Messaging Extension Auth Configuration [AAD Authentication] for search, action and link unfurling combined in the sample. 
+- Teams Messaging Extension Auth Configuration [Microsoft Entra Authentication] for search, action and link unfurling combined in the sample. 
 - [Add Authentication to your Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#create-the-bot-channels-registration)
 
 
@@ -85,7 +85,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-    - Set "ConnectionName" in the `appsettings.json`. The AAD ConnectionName from the OAuth Connection Settings on Azure Bot registration
+    - Set "ConnectionName" in the `appsettings.json`. The Microsoft Entra ID ConnectionName from the OAuth Connection Settings on Azure Bot registration
     - Set "SiteUrl" in the `appsettings.json`. The ngrok forwarding url (ie `https://xxxx.ngrok-free.app`) from starting ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.

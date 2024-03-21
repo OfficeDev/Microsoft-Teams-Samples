@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>
+
 </Project>

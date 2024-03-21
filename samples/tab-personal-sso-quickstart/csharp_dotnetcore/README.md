@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab.
+description: This is an sample tab application which demonstrates Azure Microsoft Entra authentication using OBO flow in personal teams tab.
 products:
 - office-teams
 - office
@@ -37,12 +37,25 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.8 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
     
 ## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  - Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -108,8 +121,8 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal Directory (tenant) ID.
-  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{YOUR-TENANT-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Directory (tenant) ID.
+  - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ YOUR-CLIENT-SECRET}}` - Generated from Step 1, also referred to as Client secret
   - `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI. E.g. api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000.,
   

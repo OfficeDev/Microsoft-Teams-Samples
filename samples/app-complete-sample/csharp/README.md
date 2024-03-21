@@ -54,10 +54,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 NOTE: Teams does not work nor render things exactly like the Bot Emulator, but it is a quick way to see if your bot is running and functioning correctly.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
-	- Register a AAD aap registration in Azure portal.
+	- Register a Microsoft Entra ID aap registration in Azure portal.
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
@@ -135,7 +135,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
    
 Congratulations!!! You have just created and sideloaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
-NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with AAD nor Visual Studio Team Services.
+NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with Microsoft Entra ID nor Visual Studio Team Services.
 
 ## Overview
 

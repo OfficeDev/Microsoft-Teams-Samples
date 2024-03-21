@@ -69,7 +69,7 @@ For reference please check [Share app content to stage API](https://docs.microso
 **This capability is currently available in developer preview only.**
 
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
     **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 2. Setup NGROK
@@ -117,7 +117,7 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 4) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/app-in-meeting.jsx`
 
-5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
+5) On line 74, replace `<<App id>>` with `Id` obtained in step 3.
 
 6) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/share-to-meeting.jsx`
 

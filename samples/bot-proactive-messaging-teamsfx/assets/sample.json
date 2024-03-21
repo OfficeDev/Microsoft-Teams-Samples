@@ -1,0 +1,65 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx",
+    "source": "officeDev",
+    "title": "Proactive Messaging",
+    "shortDescription": "Demonstrates how to send proactive messages to users.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging-teamsfx",
+    "longDescription": [
+      "This is a sample which shows how to save user's conversation reference information to send proactive reminder message using Bots."
+    ],
+    "creationDateTime": "2022-03-06",
+    "updateDateTime": "2023-11-03",
+    "products": [
+      "Teams",
+      "TeamsToolkit"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main//samples/bot-proactive-messaging-teamsfx/images/thumbnail.png",
+        "alt": "Proactive Messaging"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

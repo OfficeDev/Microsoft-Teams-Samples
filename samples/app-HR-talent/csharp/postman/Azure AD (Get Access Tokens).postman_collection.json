@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "f3891c91-2903-4760-91a8-86e60764daa0",
+		"name": "Azure AD (Get Access Tokens)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client Credentials Grant (App)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "login.microsoftonline.com",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "client_id={{clientID}}\r\n&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default\r\n&client_secret={{clientSecret}}\r\n&grant_type=client_credentials"
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{tenantID}}/oauth2/v2.0/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{tenantID}}",
+						"oauth2",
+						"v2.0",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resource Owner Password Credentials (Delegated)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "login.microsoftonline.com",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "client_id={{clientID}}\r\n&client_secret={{clientSecret}}\r\n&scope={{delegatedScopes}}\r\n&username={{delegatedUsername}}\r\n&password={{delegatedUserPassword}}\r\n&grant_type=password"
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/organizations/oauth2/v2.0/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"organizations",
+						"oauth2",
+						"v2.0",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

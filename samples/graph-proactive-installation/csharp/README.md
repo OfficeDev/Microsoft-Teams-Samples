@@ -38,14 +38,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - Required Microsoft graph Application level permissions to run this sample app
      ![ApiPermission](ProactiveAppInstallation/Images/ApiPermission.png)
   - [Get consent for the Application permissions](https://docs.microsoft.com/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
 
 2. Setup for Bot
-	- Register a AAD aap registration in Azure portal.
+	- Register a Microsoft Entra ID aap registration in Azure portal.
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
@@ -73,7 +73,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
   - Modify the `/appsettings.json` and fill in the following details:
-    - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+    - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
     - `{{ YOUR-MICROSOFT-APP-PASSWORD}}` - Generated from Step 1, also referred to as Client secret
     - `{{ YOUR-APPCATALOG-TEAM-ID }}` - To get `TeamsappcatalogAppId` you first navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Then search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
   

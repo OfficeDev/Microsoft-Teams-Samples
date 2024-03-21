@@ -102,7 +102,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": ".*",
-                    "endsPattern": "App started listening on port"
+                    "endsPattern": "Compiled with warnings."
                 }
             }
         },
@@ -124,7 +124,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "API server is listening on port"
+                    "endsPattern": "app listening on port 3000!"
                 }
             }
         }

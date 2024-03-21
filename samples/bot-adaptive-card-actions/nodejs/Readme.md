@@ -53,7 +53,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
       > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 2. Setup for Bot:
@@ -82,7 +82,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 
   - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. 
-(**Note:** The MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+(**Note:** The MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
   - In a terminal, navigate to `samples/bot-adaptive-card-actions/nodejs`
 

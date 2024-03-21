@@ -41,17 +41,20 @@ This sample app demonstrates sending notifications to users when presence status
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
 
+**Note:** Please create and install self-signed certificate before running this sample using toolkit or manually.
+
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Before running this sample using toolkit, we need to update the .env file values in your code for 'Base64EncodedCertificate' and 'PRIVATE_KEY_PATH'. Follow this documentation for the steps to get the values  - [Create and install Self-Signed certificate](CertificateDocumentation/README.md)
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  
     - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
     - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
@@ -71,7 +74,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
        a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-       b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+       b. Service Provider. Select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
 
        c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 

@@ -41,7 +41,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Setup
 
 1) Setup for Bot
-- Register a AAD aap registration in Azure portal.
+- Register a Microsoft Entra ID aap registration in Azure portal.
 - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
@@ -69,7 +69,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Application-Base-Url }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
 

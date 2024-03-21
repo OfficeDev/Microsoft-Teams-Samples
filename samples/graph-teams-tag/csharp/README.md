@@ -44,7 +44,7 @@ This is a sample application where user can create, update, add or remove member
 ## Setup
 
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
@@ -82,7 +82,7 @@ This is a sample application where user can create, update, add or remove member
  
 
   - Update appsettings.json
-   Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with the values generated while doing AAD app registration in Azure Portal.
+   Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with the values generated while doing Microsoft Entra ID app registration in Azure Portal.
 
  - Run the bot from Visual Studio: 
    - Press `F5` to run the project

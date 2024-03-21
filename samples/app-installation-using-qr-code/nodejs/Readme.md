@@ -101,7 +101,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-- Update the `.env` configuration file for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` from the AAD app registration in Azure portal or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
+- Update the `.env` configuration file for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` from the Microsoft Entra ID app registration in Azure portal or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
     - Also, update `connectionName` as the name of your Azure Bot connection created in previous steps.
     - `connectionName` - The OAuthConnection setting from step 1, from Azure Bot SSO setup.
     - `BaseUrl` with application base url. For e.g., your ngrok url https://xxx.ngrok-free.app, your dev tunnels url https://xxx.devtunnels.ms.

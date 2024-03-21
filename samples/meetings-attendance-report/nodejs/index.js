@@ -64,7 +64,7 @@ server.use(express.urlencoded({
 }));
 
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`Server listening to ${server.url}`);
+    console.log(`Server listening on http://localhost:${process.env.PORT}`);
 });
 
 

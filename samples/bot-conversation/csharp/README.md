@@ -39,6 +39,19 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.9 Preview 2 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -61,7 +74,7 @@ the Teams service needs to call into the bot.
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
    In the new Azure Bot resource in the Portal, 
