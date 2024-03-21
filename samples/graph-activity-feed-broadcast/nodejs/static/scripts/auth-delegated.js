@@ -1,4 +1,4 @@
-(async function() {
+(async function () {
     'use strict';
     await microsoftTeams.app.initialize();
     // Get auth token
@@ -19,16 +19,16 @@
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            tid: context.user.tenant.id,
-                            token: clientSideToken
-                        }),
-                    })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tid: context.user.tenant.id,
+                        token: clientSideToken
+                    }),
+                })
                     .then((response) => {
                         if (response.ok) {
                             return response.json();
@@ -64,26 +64,26 @@
 
     // Method invoked on sso authentication.
     getClientSideToken()
-    .then((clientSideToken) => {
-        return getServerSideToken(clientSideToken);
-    })
-    .catch((error) => {
-        if (error === "invalid_grant") {
-            console.log(`Error: ${error} - user or admin consent required`);
-            // Display in-line button so user can consent
-            requestConsent()
-                .then((result) => {
-                    getClientSideToken()
-                        .then((clientSideToken) => {
-                            return getServerSideToken(clientSideToken);
-                        })
-                })
-                .catch((error) => {
-                    console.log(`ERROR ${error}`);
-                });
-        } else {
-            // Something else went wrong
-            console.log(`Error from web service: ${error}`);
-        }
-    });
+        .then((clientSideToken) => {
+            return getServerSideToken(clientSideToken);
+        })
+        .catch((error) => {
+            if (error === "invalid_grant") {
+                console.log(`Error: ${error} - user or admin consent required`);
+                // Display in-line button so user can consent
+                requestConsent()
+                    .then((result) => {
+                        getClientSideToken()
+                            .then((clientSideToken) => {
+                                return getServerSideToken(clientSideToken);
+                            })
+                    })
+                    .catch((error) => {
+                        console.log(`ERROR ${error}`);
+                    });
+            } else {
+                // Something else went wrong
+                console.log(`Error from web service: ${error}`);
+            }
+        });
 })();
