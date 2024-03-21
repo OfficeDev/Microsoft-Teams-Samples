@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "composeExtensions": [
     {
-      "botId": "${{BOT_ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
