@@ -2,16 +2,38 @@
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
+const fs = require('fs');
 class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
     this.onMembersAdded(async (context, next) => {
-      const membersAdded = context.activity.membersAdded;
-      for (let member = 0; member < membersAdded.length; member++) {
-        if (membersAdded[member].id !== context.activity.recipient.id) {
-          await context.sendActivity("Hello and welcome! With this sample you can see the functionality of bot configuration");
-        }
-      }
+      const imagePath = 'Images/configbutton.png';
+      const imageBase64 = fs.readFileSync(imagePath, 'base64');
+      const card = CardFactory.adaptiveCard({
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.0",
+        "body": [
+          {
+            "type": "TextBlock",
+            "text": "Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card.",
+            "wrap": true,
+            "size": "large",
+            "weight": "bolder"
+          },
+          {
+            "type": "Image",
+            "url": `data:image/jpeg;base64,${imageBase64}`,
+            "size": "auto"
+          }
+        ],
+        "fallbackText": "This card requires Adaptive Card support."
+      });
+
+      await context.sendActivity({
+        text: '',
+        attachments: [card]
+      });
 
       await next();
     });
@@ -62,15 +84,15 @@ class TeamsBot extends TeamsActivityHandler {
       */
     const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForContinue());
     response = {
-        config: {
-            value: {
-                card: adaptiveCard,
-                height: 200,
-                width: 200,
-                title: 'test card',
-            },
-            type: 'continue',
+      config: {
+        value: {
+          card: adaptiveCard,
+          height: 200,
+          width: 200,
+          title: 'test card',
         },
+        type: 'continue',
+      },
     };
     return response;
   }
