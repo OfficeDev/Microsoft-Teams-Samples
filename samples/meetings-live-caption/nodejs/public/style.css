@@ -30,3 +30,19 @@
         transform: rotate(360deg);
     }
 }
+
+/* Theme styles */
+.container .theme-dark {
+    color: white;
+    padding: 0.5rem;
+}
+
+.container .theme-light {
+    color: #242424;
+    padding: 0.5rem;
+}
+
+.container .theme-contrast {
+    color: chartreuse;
+    padding: 0.5rem;
+}
