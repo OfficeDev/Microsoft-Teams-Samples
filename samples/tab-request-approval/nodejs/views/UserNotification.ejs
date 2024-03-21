@@ -256,7 +256,6 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    console.log('success');
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
@@ -278,7 +277,6 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    console.log('success');
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
@@ -345,7 +343,6 @@
                 success: function (profile) {
                     appId = getAppId(profile);
                     sendNotification(userId, taskInfo, token, appId);
-                    console.log('success');
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -401,7 +398,6 @@
                 },
                 success: function (profile) {
                     saveRequestDetails(taskInfo);
-                    console.log('success');
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
