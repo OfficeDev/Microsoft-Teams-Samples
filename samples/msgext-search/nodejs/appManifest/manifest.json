@@ -45,6 +45,20 @@
               "inputType": "text"
             }
           ]
+        },
+        {
+          "id": "wikipediaSearch",
+          "title": "wikipedia",
+          "initialRun": false,
+          "description": "Type to search in wikipedia",
+          "parameters": [
+            {
+              "name": "name",
+              "title": "Name",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
         }
       ]
     }
