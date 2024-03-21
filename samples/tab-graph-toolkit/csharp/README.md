@@ -148,12 +148,17 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
    
 ## Running the sample
+
+**Install App**
 ![InstallApp](TabGraphToolkit/Images/1.InstallApp.png)
 
+**Login**
 ![Login](TabGraphToolkit/Images/2.Login.png)
 
+**Consent Page**
 ![Consent](TabGraphToolkit/Images/3.Consent.png)
 
+**Home Page**
 ![HomePage](TabGraphToolkit/Images/4.HomePage.png)
 
 **Agenda**
