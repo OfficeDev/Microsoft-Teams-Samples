@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+            crossorigin="anonymous">
     </script>
     <script>
         microsoftTeams.app.initialize().then(() => {
@@ -16,8 +15,9 @@
 
             // Application base url and this redirects to Index view
             var contentUrl = window.location.origin;
-            
+
             var context = {
+                appId: appId,
                 contentUrl: contentUrl,
                 websiteUrl: contentUrl,
                 name: "DemoStageView",
@@ -25,9 +25,12 @@
             }
 
             const encodedContext = encodeURIComponent(JSON.stringify(context));
-            
-            microsoftTeams.app.openLink("https://teams.microsoft.com/l/stage/" + appId + "/0?context="+encodedContext+");
-            };
+
+            // Passing the values and encoding the url while implementing the deeplink from tab
+            let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context=" + encodedContext;
+
+            microsoftTeams.app.openLink(url);
+        };
     </script>
 </head>
 
