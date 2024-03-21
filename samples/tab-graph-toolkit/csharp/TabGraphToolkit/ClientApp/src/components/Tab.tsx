@@ -3,7 +3,6 @@ import { TeamsFxContext } from "./Context";
 import React from "react";
 import { Agenda, Person, applyTheme,People,PeoplePicker,Tasks,Todo, PersonCard, ViewType } from "@microsoft/mgt-react";
 import { Button } from "@fluentui/react-components";
-
 import { Providers, ProviderState } from "@microsoft/mgt-react";
 import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
 import {
