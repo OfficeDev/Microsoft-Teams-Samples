@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import {axios} from 'axios';
 
 // API to save meeting context.
 export function setMeetingContext(userData) {

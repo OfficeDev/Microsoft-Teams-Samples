@@ -1,0 +1,62 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "targetWidth": "atLeast:narrow",
+          "items": [
+            {
+              "type": "Image",
+              "style": "Person",
+              "url": "https://aka.ms/AAp9xo4",
+              "size": "Small"
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "spacing": "medium",
+          "verticalContentAlignment": "center",
+          "items": [
+            {
+              "type": "TextBlock",
+              "weight": "Bolder",
+              "text": "David Claux",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "targetWidth": "atMost:narrow",
+              "spacing": "None",
+              "text": "Platform Architect",
+              "isSubtle": true,
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "targetWidth": "atLeast:standard",
+          "spacing": "medium",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Platform Architect",
+              "isSubtle": true,
+              "wrap": true
+            }
+          ],
+          "width": "stretch",
+          "verticalContentAlignment": "center"
+        }
+      ]
+    }
+  ],
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5"
+}

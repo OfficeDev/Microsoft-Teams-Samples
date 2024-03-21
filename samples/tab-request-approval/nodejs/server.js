@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyparser = require('body-parser');
 const path = require('path');
 const auth = require('./auth');
 const fetch = require("node-fetch");
@@ -11,9 +12,12 @@ var localdata = [];
 
 const server = express();
 
+server.use(bodyparser.urlencoded({ extended: false }))
+server.use(bodyparser.json())
+
 const port = process.env.port || process.env.PORT || 3978;
 server.listen(port, () => 
-    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+    console.log(`Service listening at http://localhost:${port}`)
 );
 
 server.use(express.static(path.join(__dirname, 'static')));
@@ -46,9 +50,6 @@ server.get('/auth/auth-end', function (req, res) {
   res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
-server.get('/tabAuth', function (req, res) {
-  res.render('./views/tabAuth');
-});
 
 server.get('/UserRequest', function (req, res) {
   var requestId = req.url.split('=')[1];
@@ -63,12 +64,23 @@ server.get('/UserRequest', function (req, res) {
   res.render('./views/UserRequest', { data: JSON.stringify(requestData) });
 });
 
-server.post('/serverroveRejectRequest', function (req, res) {
-localdata.map((item, index) => {
-  if(item.id == req.body.taskId){
-    item.status = req.body.status;
-  }
-})
+server.post('/ApproveRejectRequestActivity', function (req, res) {
+  console.log('Activity server calling');
+  localdata.map((item, index) => {
+    if(item.id == req.body.taskId){
+      item.status = req.body.status;
+    }
+  })
+  res.render('./views/UserRequest', { data: JSON.stringify('successfully') });
+});
+
+server.post('/ApproveRejectRequest', function (req, res) {
+  console.log('Server calling');
+  localdata.map((item, index) => {
+    if(item.id == req.body.taskId){
+      item.status = req.body.status;
+    }
+  })
 });
 
 server.post('/SaveRequest', function (req, res) {

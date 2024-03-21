@@ -125,7 +125,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "Server listening on http://localhost:"
+                    "endsPattern": "app listening on port"
                 }
             }
         }

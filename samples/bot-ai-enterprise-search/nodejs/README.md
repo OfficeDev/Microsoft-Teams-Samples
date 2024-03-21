@@ -52,7 +52,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. In the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
 
-`SECRET_OPENAI_API_KEY=<OpenAI Service Key>`
 
 `SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
 
@@ -61,8 +60,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 `EMBEDDING_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Embedding Model Name>/embeddings?api-version=2023-03-15-preview`
 
 `COMPLETION_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>`
-
-`CHAT_COMPLETION_MODEL_NAME=gpt-35-turbo`
 
 `AZURE_STORAGE_CONNECTION_STRING='DefaultEndpointsProtocol=https;AccountName=<Storage Account Name>;AccountKey=<Your Account Key>;EndpointSuffix=core.windows.net'`
 
@@ -121,7 +118,6 @@ the Teams service needs to call into the bot.
 
 6. Update the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
 
-`SECRET_OPENAI_API_KEY=<OpenAI Service Key>`
 
 `SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
 
@@ -130,8 +126,6 @@ the Teams service needs to call into the bot.
 `EMBEDDING_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Embedding Model Name>/embeddings?api-version=2023-03-15-preview`
 
 `COMPLETION_MODEL_URL=https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>`
-
-`CHAT_COMPLETION_MODEL_NAME=gpt-35-turbo`
 
 `AZURE_STORAGE_CONNECTION_STRING='DefaultEndpointsProtocol=https;AccountName=<Storage Account Name>;AccountKey=<Your Account Key>;EndpointSuffix=core.windows.net'`
 
@@ -208,8 +202,6 @@ Also, make sure that below key/values are properly added to the configuration se
 `"name": "BOT_ID", "value": "<BOT_ID>"`
 
 `"name": "BOT_PASSWORD", "value": "<BOT_PASSWORD>"`
-
-`"name": "CHAT_COMPLETION_MODEL_NAME", "value": "gpt-35-turbo"`
 
 `"name": "COMPLETION_MODEL_URL", "value": "https://<Azure OpenAI Service Name>.openai.azure.com/openai/deployments/<Your Deployed Completion Model Name>"`
 

@@ -21,60 +21,60 @@
             "resourceAppId": "Microsoft Graph",
             "resourceAccess": [
                 {
-                    "id": "User.Read",
-                    "type": "Scope"
+                  "id": "User.Read",
+                  "type": "Scope"
                 },
                 {
-                    "id": "Directory.Read.All",
-                    "type": "Scope"
+                  "id": "Directory.Read.All",
+                  "type": "Scope"
                 },
                 {
-                    "id": "Directory.ReadWrite.All",
-                    "type": "Scope"
+                  "id": "Directory.ReadWrite.All",
+                  "type": "Scope"
                 },
                 {
-                    "id": "ChatMessage.Send",
-                    "type": "Scope"
+                  "id": "ChatMessage.Send",
+                  "type": "Scope"
                 },
                 {
-                    "id": "Chat.ReadWrite",
-                    "type": "Scope"
+                  "id": "Chat.ReadWrite",
+                  "type": "Scope"
                 },
                 {
-                    "id": "TeamsActivity.Send",
-                    "type": "Scope"
+                  "id": "TeamsActivity.Send",
+                  "type": "Scope"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadWriteForUser",
-                    "type": "Scope"
+                  "id": "TeamsAppInstallation.ReadWriteForUser",
+                  "type": "Scope"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadWriteSelfForUser",
-                    "type": "Scope"
+                  "id": "TeamsAppInstallation.ReadWriteSelfForUser",
+                  "type": "Scope"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadForUser",
-                    "type": "Scope"
+                  "id": "TeamsAppInstallation.ReadForUser",
+                  "type": "Scope"
                 },
                 {
-                    "id": "TeamsActivity.Send",
-                    "type": "Role"
+                  "id": "TeamsActivity.Send",
+                  "type": "Role"
                 },
                 {
-                    "id": "Directory.Read.All",
-                    "type": "Role"
+                  "id": "Directory.Read.All",
+                  "type": "Role"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadWriteForUser.All",
-                    "type": "Role"
+                  "id": "TeamsAppInstallation.ReadWriteForUser.All",
+                  "type": "Role"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadWriteSelfForUser.All",
-                    "type": "Role"
+                  "id": "TeamsAppInstallation.ReadWriteSelfForUser.All",
+                  "type": "Role"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadForUser.All",
-                    "type": "Role"
+                  "id": "TeamsAppInstallation.ReadForUser.All",
+                  "type": "Role"
                 }
             ]
         }
@@ -146,15 +146,11 @@
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html",
-            "type": "Web"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
+            "url": "${{TAB_ENDPOINT}}/auth-end",
             "type": "Spa"
         },
         {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
+            "url": "${{TAB_ENDPOINT}}/auth-start",
             "type": "Spa"
         }
     ]

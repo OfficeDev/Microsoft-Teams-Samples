@@ -109,9 +109,6 @@ deploy:
     with:
       target: ./ClientApp/.env
       envs:
-        BROWSER: none
-        HTTPS: true
-        PORT: 3978
         REACT_APP_MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
 
  # Generate runtime environment variables for backend
@@ -119,6 +116,6 @@ deploy:
     with:
       target: ./.env # Required. The relative path of settings file
       envs:
-          appId: ${{AAD_APP_CLIENT_ID}}
-          clientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          applicationIdUri: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
+          MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+          MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+          MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

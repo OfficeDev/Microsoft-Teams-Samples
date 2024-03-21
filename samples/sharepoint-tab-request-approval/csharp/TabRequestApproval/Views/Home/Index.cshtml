@@ -1,0 +1,358 @@
+﻿@using TabRequestApproval.Model
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+				integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+				crossorigin="anonymous">
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <style>
+             #mainDiv {
+                 padding-left: 2%;
+                 padding-top: 2%;
+                 padding-right: 2%;
+             }
+      </style>
+
+      <script>
+         $(document).ready(function () {
+             getRequestList();
+             $('#task-submitted').hide();
+         });
+
+         microsoftTeams.initialize();
+         var token = localStorage.getItem("accessToken");
+         var username = "";
+         var userId = "";
+         
+         microsoftTeams.getContext(function (context) {
+			 username = context.userPrincipalName;
+             userId = context.userObjectId;
+
+             if(context.subEntityId!="" && context.subEntityId!= undefined)
+             {
+				 var subEntityId = context.subEntityId;
+                 let taskInfo = {
+                        title: "Request details",
+                        height: 400,
+                        width: 400,
+					url: window.location.origin + "/RequestDetails?subEntityId=" + subEntityId,
+                        card: null,
+                        fallbackUrl:null,
+                        completionBotId: null,
+                     };
+
+                  microsoftTeams.tasks.startTask(taskInfo);
+             };
+         });
+         
+         // Get request list.
+         function getRequestList() {
+			 microsoftTeams.initialize();
+			 microsoftTeams.getContext(function (context) {
+				$.ajax({
+					url: "/GetRequestList?channelId=" + context.channelId + "&groupId=" + context.groupId + "&chatId=" + context.chatId + "&tenantId=" + context.tid + "&userId=" + context.userObjectId,
+					type: "GET",
+					dataType: "json",
+					success: function (response) {
+						taskDetailsForUser(response);
+						taskDetailsForManager(response);
+					},
+					error: function (xhr, textStatus, errorThrown) {
+						console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+					},
+				});
+			 });
+         }
+         
+         // Set details for user
+         function taskDetailsForUser(data) {
+             var list = data;
+             var userList = [];
+
+             if (list != undefined && list.length > 0) {
+                 list.map(item => {
+                     if (item.userName == username) {
+                         userList.push(item);
+                     }
+                 })
+             }
+
+             if (list == undefined || userList.length == 0) {
+                 $('#notask').show();
+                 $('#mytask').hide();
+             }
+             else {
+                 $('#notask').hide();
+                 var i;
+                 for (i = 0; i < userList.length; i++) {
+                     $('#task-list-table-user').append(`<tr style="padding:1px" >
+                        <td style="margin-left:1px"> ${i+1} </td>
+                        <td style="margin-left:1px"> ${userList[i].title} </td>
+                        <td style="margin-left:1px"> ${userList[i].description} </td>
+                        <td style="margin-left:1px"> ${userList[i].personaName} </td>
+                        <td style="margin-left:1px"> ${userList[i].status} </td>
+                        </tr>`
+                      );
+                 };
+             }
+         }
+         
+         // Set details for manager.
+         function taskDetailsForManager(data) {
+             var list = data;
+             var managerList = [];
+         
+             if (list != undefined && list.length > 0) {
+                 list.map(item => {
+                    if (item.status == "Pending" && item.personaName == username) {
+                         managerList.push(item);
+                     }
+                 })
+             }
+
+             if (list == undefined || managerList.length == 0) {
+                 $('#norequest').show();
+                 $('#approverequest').hide();
+             }
+             else {
+                 $('#norequest').hide();
+                 var i;
+                 for (i = 0; i < managerList.length; i++) {
+                     $('#task-list-table-manager').append(`<tr style="padding:1px">
+                         <td>${i+1}</td>
+                         <td>${managerList[i].title}</td>
+                         <td>${managerList[i].description}</td>
+                         <td>${managerList[i].userName}</td>
+                         <td style="padding:5px">  
+                         <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} data-app-itemscopeid = ${managerList[i].teamsAppInstallationScopeId} onclick = "ApproveRequest(event)"> Approve </button>
+                         </td> 
+                         <td style="padding:5px">
+								 <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} data-app-itemscopeid = ${managerList[i].teamsAppInstallationScopeId} onclick = "RejectRequest(event)"> Reject </button>
+                         </td>
+                         </tr>`
+                    );
+                 };
+             }
+         }
+
+         // Method to approve request.
+         function ApproveRequest(e) {
+             var taskId = $(e.currentTarget).attr('data-app-itemid');
+			 var teamsAppInstallationScopeId = $(e.currentTarget).attr('data-app-itemscopeid');
+
+             let taskInfo = {
+                 taskId: taskId,
+                 status: "Approved",
+                 access_token: token,
+				 teamsAppInstallationScopeId: teamsAppInstallationScopeId,
+             };
+
+			 microsoftTeams.initialize();
+			 microsoftTeams.getContext(function (context) {
+				$.ajax({
+					type: 'POST',
+					url: "/RespondRequest",
+					dataType: 'json',
+					data: taskInfo
+				});
+			 });
+         };
+         
+         // Method to reject request.
+         function RejectRequest(e) {
+             var taskId = $(e.currentTarget).attr('data-app-itemid');
+			 var teamsAppInstallationScopeId = $(e.currentTarget).attr('data-app-itemscopeid');
+
+             let taskInfo = {
+                 taskId: taskId,
+                 status: "Rejected",
+                 access_token: token,
+				teamsAppInstallationScopeId: teamsAppInstallationScopeId,
+             };
+
+			microsoftTeams.initialize();
+			microsoftTeams.getContext(function (context) {
+				$.ajax({
+					type: 'POST',
+					url: "/RespondRequest",
+					dataType: 'json',
+					data: taskInfo
+				});
+			});
+         };
+         
+         // Send notification to manager about request.
+         function SendNotificationToManager() {
+             var isValid = true;
+             $('#title,#description').each(function () {
+                 if ($.trim($(this).val()) == '') {
+                     isValid = false;
+                     $(this).css({
+                         "border": "1px solid red"
+                     });
+                 }
+                 else {
+                     $(this).css({
+                         "border": "",
+                         "background": ""
+                     });
+                 }
+             });
+
+             if (isValid == false) {
+                 e.preventDefault();
+
+                 return false;
+             }
+
+			microsoftTeams.initialize();
+			 microsoftTeams.getContext(function (context) {
+				var person = $("#defaultSelected").val().trim();
+
+				let taskInfo = {
+					taskId: context.subEntityId,
+					title: $('#title').val(),
+					description: $('#description').val(),
+					userName: username,
+					personaName: person,
+					access_token: token,
+				};
+
+				$.ajax({
+					type: 'POST',
+					url: "/SendNotificationToManager?channelId=" + context.channelId + "&groupId=" + context.groupId + "&chatId=" + context.chatId + "&tenantId=" + context.tid + "&userId=" + context.userObjectId,
+					dataType: 'json',
+					data: taskInfo,
+				});
+			 });
+
+               $('#task-submitted').show();
+
+             return true;
+         };
+      </script>
+		<script>
+			$(document).ready(function () {
+				microsoftTeams.app.initialize().then(() => {
+				});
+			});
+
+			let aadId;
+			microsoftTeams.app.getContext().then(function (context) {
+				aadId = context.user.id
+			})
+
+			// People picker api call.
+			function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+				$("#defaultSelected").empty();
+				var id = $(e.currentTarget).attr('data-id');
+
+				if (setSelected == "default") {
+					setSelected = [aadId];
+				}
+				microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+					if (people) {
+						for (var i = 0; i < people.length; i++) {
+							if (id == "default") {
+								$("#defaultSelected").val(people[i].email)
+								$("#defaultSelected").show();
+							}
+						}
+
+					}
+				});
+			}
+		</script>
+   </head>
+	<body id="mainDiv">
+		<div>
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#createtask">Create Task</a></li>
+				<li><a data-toggle="tab" href="#mylist">My Requests</a></li>
+				<li><a data-toggle="tab" href="#managerList">My Pending Approvals</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="createtask" class="tab-pane fade in active">
+					<div class="mb">
+						<br />
+						<div class="form-group fg">
+							@{
+								var clientId = ViewBag.clientId;
+							}
+							<label for="title" class="title">Request title</label>
+							<br>
+							<input type="text" id="title" name="taskTitle">
+						</div>
+						<div class="form-group fg">
+							<label for="title-desc" class="description">Request description</label><br />
+							<input type="text" id="description" name="taskDescription">
+							<br />
+						</div>
+						<div class="form-group fg">
+							<label for="request to" class="description">Request to</label><br />
+							<input type="text" readonly id="defaultSelected" name="defaultSelected">
+							<button data-id="default" onclick="selectPeople(event,[],false,true)"> Select </button>
+						</div>
+					</div>
+					<div class="modal-footer mf">
+						<br />
+						<button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
+					</div>
+					<div id="task-submitted">
+						Request submitted successfully.
+					</div>
+				</div>
+				<div id="mylist" class="tab-pane fade">
+					<div id="notask">
+						<span>No records found</span>
+					</div>
+					<div id="mytask">
+						<h5>List of tasks:</h5>
+						<table border="1" id="task-list-table-user" class="table table-hover">
+							<thead>
+								<tr>
+									<td>Sr No.</td>
+									<td>Request title</td>
+									<td>Request description</td>
+									<td>Pending with</td>
+									<td>Status</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				<div id="managerList" class="tab-pane fade">
+					<div id="norequest">
+						<span>No records found</span>
+					</div>
+					<div id="approverequest">
+						<h5>List of tasks:</h5>
+						<table border="1" id="task-list-table-manager" class="table table-hover">
+							<thead>
+								<tr>
+									<td>Sr No.</td>
+									<td>Request title</td>
+									<td>Request description</td>
+									<td>Request by</td>
+									<td>Approve</td>
+									<td>Reject</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div id="divError" style="display: none"></div>
+				<button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+			</div>
+		</div>
+	</body>
+</html>

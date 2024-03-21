@@ -6,8 +6,9 @@
 import React, { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import $ from "jquery";
-import { TeamsFluidClient } from "@microsoft/live-share";
 import { SharedMap } from "fluid-framework";
+import { LiveShareClient } from "@microsoft/live-share";
+import { LiveShareHost } from "@microsoft/teams-js";
 
 let containerValue;
 
@@ -48,7 +49,8 @@ const Doing = props => {
             await microsoftTeams.app.initialize();
             window.localStorage.debug = "fluid:*";
             // Define Fluid document schema and create container
-            const client = new TeamsFluidClient();
+            const host = LiveShareHost.create();
+            const client = new LiveShareClient(host);
 
             const containerSchema = {
                 initialObjects: { editorMap: SharedMap }
@@ -121,7 +123,7 @@ const Doing = props => {
 
         microsoftTeams.app.getContext().then((context) => {
             // Invoking task module to collect status details from participants.
-            microsoftTeams.dialog.open(taskInfo, (taskDetails) => {
+            microsoftTeams.dialog.url.open(taskInfo, (taskDetails) => {
                 if (taskDetails.result?.taskDescription) {
                     let meeting = {
                         meetingId: context.meeting.id,

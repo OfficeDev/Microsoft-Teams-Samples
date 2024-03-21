@@ -56,13 +56,21 @@ namespace TeamsAuthSSO.Controllers
         [HttpGet("GetUserAccessToken")]
         public async Task<ActionResult<string>> GetUserAccessToken()
         {
-            try
             {
-                return await SSOAuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
-            }
-            catch (Exception)
-            {
-                return null;
+                try
+                {
+                    var token = await SSOAuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+                    if (token != null)
+                    {
+                        return token;
+                    }
+
+                    else return null;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
 

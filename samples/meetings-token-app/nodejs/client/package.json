@@ -32,10 +32,10 @@
     "dev:teamsfx": "npm run dev",
     "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
     "clean": "npx shx rm -rf build",
-    "start": "react-scripts --openssl-legacy-provider start",
-    "start:client": "set PORT=3978 HTTP=true &&  react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
+    "start:client": "set PORT=3978 HTTP=true &&  react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "react-scripts  build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

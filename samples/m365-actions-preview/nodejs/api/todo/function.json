@@ -1,0 +1,27 @@
+{
+    "bindings": [
+        {
+            "authLevel": "anonymous",
+            "type": "httpTrigger",
+            "direction": "in",
+            "name": "req",
+            "methods": [
+                "get",
+                "put",
+                "post",
+                "delete"
+            ],
+            "route": "todo"
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "$return"
+        },
+        {
+            "direction": "in",
+            "name": "teamsfxContext",
+            "type": "TeamsFx"
+        }
+    ]
+}

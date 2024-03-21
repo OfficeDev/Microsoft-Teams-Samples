@@ -162,9 +162,13 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ![](images/app-complete-sample7.png)
 
+![](images/app-complete-sample11.png)
+
 ![](images/app-complete-sample8.png)
 
-![](images/app-complete-sample-tab.png)
+![](images/app-complete-sample9.png)
+
+![](images/app-complete-sample10.png)
 
 ## Outlook on the web
 
@@ -174,15 +178,15 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](images/InstallOutlook.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![AppOutlook](images/AppOutlook.png)
 
 **Select your app icon from message extension and find ward, it will show all options**
 
-![AppOutlook](Images/AppOutlook_msgext.png)
+![AppOutlook](images/AppOutlook_msgext.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -194,11 +198,11 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](images/InstallOffice.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![AppOffice](images/AppOffice.png) 
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 

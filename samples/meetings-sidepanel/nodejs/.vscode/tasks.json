@@ -29,7 +29,7 @@
                 ],
                 "portOccupancy": [
                     3978, // app service port
-                    9239 // app inspector port for Node.js debugger
+                    3000 // app inspector port for Node.js debugger
                 ]
             }
         },
@@ -81,9 +81,11 @@
             "label": "Start application",
             "dependsOn": [
                 "Start frontend",
-                "Start backend"
+                "Start backend",
+                "Start Live Share SDK"
             ]
         },
+        
         {
             "label": "Start frontend",
             "type": "shell",
@@ -102,7 +104,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": ".*",
-                    "endsPattern": "Compiled|Failed|compiled|failed"
+                    "endsPattern": "Compiled with warnings."
                 }
             }
         },
@@ -126,7 +128,31 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "restify listening to 3000"
+                }
+            }
+        },
+        {
+            "label": "Start Live Share SDK",
+            "type": "shell",
+            "command": "npx @fluidframework/azure-local-service@latest",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}/ClientApp"
+            },
+            "problemMatcher": {
+                "pattern": [
+                    {
+                        "regexp": "^.*$",
+                        "file": 0,
+                        "location": 1,
+                        "message": 2
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "[nodemon] starting",
+                    "endsPattern": "Listening on port 7070"
                 }
             }
         }

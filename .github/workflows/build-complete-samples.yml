@@ -456,6 +456,14 @@ jobs:
               name: 'tab-meeting-transcript-recording'
               version: '6.0.x'
 
+            - project_path: 'samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
+              name: 'sharepoint-embedded-tab-request-approval'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
+              name: 'app-HR-talent'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -645,7 +653,7 @@ jobs:
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '18.2.x'
+              version: '16.18.0'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
@@ -769,7 +777,7 @@ jobs:
 
             - project_path: 'samples/tab-graph-toolkit/nodejs'
               name: 'tab-graph-toolkit'
-              version: '14.x'
+              version: '16.x'
             
             - project_path: 'samples/graph-meeting-notification/nodejs'
               name: 'graph-meeting-notification'
@@ -1005,6 +1013,17 @@ jobs:
 
             - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
               name: 'tab-meeting-transcript-recording-api-server'
+              version: '18.x'
+              
+            - project_path: 'samples/bot-tag-mention/nodejs'
+              name: 'bot-tag-mention-nodejs'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/tabs'
+              name: 'm365-actions-preview'
+              version: '18.x'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/api'
+              name: 'm365-actions-preview-api'
               version: '18.x'
 
       fail-fast: false

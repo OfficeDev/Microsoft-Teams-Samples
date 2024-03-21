@@ -298,11 +298,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
     async getImmersivereaderCard(context) {
-        const adaptiveCard = new ACData.Template(AdaptiveCardTemplate);
-
-        await context.sendActivity({
-            attachments: [CardFactory.adaptiveCard(adaptiveCard)]
-        });
+        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(ImmersiveReaderCardTemplate)]});
     }
 
     async deleteCardActivityAsync(context) {

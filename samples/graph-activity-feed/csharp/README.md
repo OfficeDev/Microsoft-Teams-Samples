@@ -42,11 +42,11 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    
    ### Register your Teams Auth SSO with Azure AD
 
-  - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  - Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
      Select **New Registration** and on the *register an application page*, set following values:
      * Set **name** to your app name.
      * Choose the **supported account types** (any account type will work)
@@ -98,7 +98,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
    - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup for Bot
-   - Register a AAD aap registration in Azure portal.
+   - Register a Microsoft Entra ID aap registration in Azure portal.
    - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)   
 
@@ -126,8 +126,8 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     ```
 
   - Modify the `/appsettings.json` and fill in the following details:
-  -  `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
-  -  `{{TenantId}}` - Generated from Step 1 while doing AAd app registration in Azure portal Directory (tenant) ID.
+  -  `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  -  `{{TenantId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal Directory (tenant) ID.
   -  `{{ MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
   -  `{{ ApplicationIdURI }}` - Your application's ApplicationIdURI ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`..
 

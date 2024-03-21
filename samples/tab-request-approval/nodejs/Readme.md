@@ -52,7 +52,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ### Register your Teams Auth SSO with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -100,11 +100,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`, `https://{Base_Url}/auth-start`. This will be the page where a successful implicit grant flow will redirect the user. Eg for ngrok url `https://1234.ngrok-free.app` the `Base_Url` will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
-    Again
 	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/tabAuth`
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`,`https://{Base_Url}/auth-start`
 	
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -151,9 +148,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ### 4. Setup Manifest for Teams
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `staticTab` inside `contenrUrl` . Replace `<<BASE-URL-DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your base url domain will be `1234.ngrok-free.app`. Replace the same value for `<<BASE-URL-DOMAIN>>` inside `validDomains` section.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -163,27 +160,53 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
-2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
+- User-1 Install App
 
-User Persona:
+![InstallAppUser1](Images/1.InstallAppUser.png)
 
-- Send request to the manger for task approval.
+- User-1 Create Task
 
-  ![Request page for user](Images/tab-approval-page.png)
+![CreateTask](Images/3.CreateTask.png)
 
-  ![Request from user](Images/tab-approval-details.png)
+- User-1 Task Details
 
-Manager Persona:
+![TaskDetails](Images/4.RequestTo.png)
 
-- Activity feed notification of approval request.
+- User-1 All Person
 
-  ![Notification](Images/tab-request-details.png)
+![TaskDetails](Images/5.SelectPerson.png)
 
-- On click of notification a task module will open, redirecting the user to the request.
+- User-1 Select a Person
 
-  ![RequestTaskNotification](Images/request-notification.png)
+![TaskDetails](Images/6.SelectOnePerson.png)
+
+- User-1 Create task Details
+
+![CreateTaskDetails](Images/7.CreateTaskDetails.png)
+
+- Install App User-2
+
+![InstallAppUser2](Images/2.InstallAppUser.png)
+
+- User-1 Send Request
+
+![CreateTask](Images/7.CreateTaskDetails.png)
+
+- User-2 On click of notification a task module will open, redirecting the user to the request.
+
+![SendRequest](Images/8.Activity.png)
+
+- User-1 My Request 
+
+![SendRequest](Images/9.User1MyRequestDetails.png)
+
+- User-2 My Pending Approvals 
+
+![SendRequest](Images/10.User2PendingRequestDetails.png)
+
+- User-1 Approved Status
+
+![SendRequest](Images/11.ApprovedReq.png)
 
 ## Further reading
 

@@ -3,6 +3,7 @@
     "appId": "${{AAD_APP_CLIENT_ID}}",
     "name": "graph-appcatalog-lifecycle-aad",
     "accessTokenAcceptedVersion": 2,
+    "allowPublicClient": null,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,
 	"oauth2AllowImplicitFlow": true,
@@ -27,11 +28,35 @@
                     "type": "Scope" 
                 },
                 {
-                    "id": "AppCatalog.ReadWrite.All",
+                    "id": "profile",
+                    "type": "Scope"
+                },
+                {
+                    "id": "openid",
+                    "type": "Scope"
+                },
+                {
+                    "id": "email",
+                    "type": "Scope" 
+                },
+                {
+                    "id": "Directory.ReadWrite.All",
+                    "type": "Scope"
+                },
+                {
+                    "id": "Directory.Read.All",
                     "type": "Scope"
                 },
                 {
                     "id": "AppCatalog.Submit",
+                    "type": "Scope"
+                },
+                {
+                    "id": "AppCatalog.ReadWrite.All",
+                    "type": "Scope"
+                },
+                {
+                    "id": "AppCatalog.Read.All",
                     "type": "Scope"
                 }
             ]
@@ -103,13 +128,13 @@
         "api://botid-${{AAD_APP_CLIENT_ID}}"
     ],
     "replyUrlsWithType":[
-        {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
-        },
-        {
-			"url": "https://token.botframework.com/.auth/web/redirect",
-			"type": "Web"
-		}
+          {
+            "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+            "type": "Web"
+          },
+          {
+              "url": "https://token.botframework.com/.auth/web/redirect",
+              "type": "Web"
+          }
     ]
 }
