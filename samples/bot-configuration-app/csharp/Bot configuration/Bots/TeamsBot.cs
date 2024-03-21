@@ -101,6 +101,9 @@ namespace Botconfiguration.Bots
                 }
             };*/
 
+            /*
+            Option 2: You can add a "config/continue" response as below code
+            */
             ConfigResponseBase response = adaptiveCardForContinue();
 
             return Task.FromResult(response);
@@ -161,8 +164,6 @@ namespace Botconfiguration.Bots
                     }
                 }
             };
-
-
 
             ConfigResponseBase response = new ConfigResponse<TaskModuleResponseBase>
             {
