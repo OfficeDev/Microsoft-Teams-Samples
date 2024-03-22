@@ -9,8 +9,10 @@ const createMeetingAsync = async (req, res) => {
     var excelData = req.body;
 
     try {
-        await GraphHelper.createMeetingAsync(userid, excelData);
-        res.status(201).send();
+            for (var i = 0; i < excelData.length; i++) {
+            await GraphHelper.createMeetingAsync(userid, excelData[i]);
+            res.status(201).send();
+        }
     }
     catch (ex) {
         console.error(ex);

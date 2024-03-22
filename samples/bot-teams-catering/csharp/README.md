@@ -43,7 +43,7 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
     - Go to App registrations and create a new app registration in a different tab.
 

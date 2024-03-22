@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "fluid-framework": "~0.59.0",
     "has-cors": "^1.1.0",
+    "http-proxy-middleware": "^2.0.6",
     "lodash": "^4.17.21",
     "msteams-ui-components-react": "^0.8.4",
     "react": "^16.14.0",
@@ -63,5 +64,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000/"
 }

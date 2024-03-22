@@ -57,7 +57,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Setup
 
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+ 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
   
          Go to App registrations and create a new app registration in a different tab.
       Register an application.
@@ -135,7 +135,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   - Select Add in the pop-up dialog box. **Your app is uploaded to Teams**.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meeting-recruitment-app/nodejs/api/server/index.js#L55) line and put your debugger for local debug.
 

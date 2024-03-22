@@ -1,0 +1,279 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Open Positions</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" integrity="sha384-EKT9Wswdn78EAHAqcOh50wnaPfH3aPa7YZ1R89/TCN98AhkqZJ2g47u4k2I5eCk8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script type="text/javascript" src="/StaticViews/js/jwt-decode.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css" />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css" />
+    <style type="text/css">
+        .row {
+            padding: 5px 20px;
+        }
+
+        .wideRow {
+            padding: 20px;
+        }
+
+        .teams {
+            color: #585757;
+            font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+        }
+
+        .loggedInAs {
+            display: none;
+            width: 100%;
+            text-align: right;
+            padding-bottom: 20px;
+        }
+
+        .main-block {
+            min-height: 150px;
+            background-color: white;
+        }
+
+        .counters {
+            color: #6264a7;
+        }
+
+        .active, .active .counters {
+            color: white;
+            background-color: #6264a7;
+        }
+
+        .large-font-size {
+            font-size: 18px;
+        }
+
+        .medium-font-size {
+            font-size: 14px;
+        }
+
+        .small-font-size {
+            font-size: 12px;
+        }
+
+        .count-labels {
+            font-size: 54px;
+            text-align: center;
+        }
+
+        .more-info {
+            cursor: pointer;
+            display: none;
+        }
+
+        .show {
+            display: inline-block;
+        }
+
+        .loading {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .sign-in-btn {
+            background-color: #6264A7;
+            border: 0.125rem solid;
+            border-radius: 0.125rem;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            height: 2rem;
+            cursor: pointer;
+            min-width: 6rem;
+            padding: 0.25rem;
+            white-space: nowrap;
+        }
+
+            .sign-in-btn:hover {
+                background-color: #464775;
+            }
+
+        .button-holder {
+            display: none;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        async function loadPage() {
+            var accessToken = window.localStorage.getItem("userToken");
+            getInfoFromToken(accessToken);
+            var positionId = getQueryStringValue('positionId');
+            getData(window.localStorage.getItem("username"), positionId);
+        }
+
+        async function getData(recruiterId, positionId) {
+            $(".button-holder").hide();
+            $(".loading").show();
+            var apiPath = "/api/positions/open";
+            if (recruiterId && recruiterId.lastIndexOf("@") !== -1) {
+                apiPath = "/api/recruiters/" + encodeURIComponent(recruiterId.substring(0, recruiterId.lastIndexOf("@"))) + "/positions";
+            }
+
+            let accessToken = window.localStorage.getItem("userToken");
+            let authorization = "Bearer " + accessToken;
+            let data = await fetch(window.location.origin + apiPath, {
+                headers: {
+                    Authorization: authorization,
+                }
+            });
+
+            if (data.ok) {
+                let json = await data.json();
+                buildPage(json, recruiterId, positionId);
+            } else {
+                console.error("HTTP-Error: " + data.status);
+            }
+        }
+
+        function buildPage(data, recruiterId, positionId) {
+            var activeIndex = 0;
+            var isMsteamsContext = false;
+            var maxActiveIndex;
+                    var positionHtml = "";
+                    $(".loading").hide();
+                    if (recruiterId) {
+                        var loggedInAs = $(".loggedInAs");
+                        loggedInAs.text("You are logged in as " + recruiterId);
+                        loggedInAs.show();
+                    }
+                    maxActiveIndex = data.length - 1;
+                    data.forEach(function (positionInfo, index) {
+                        if (positionId && positionInfo.positionId != positionId) {
+                            return;
+                        }
+
+                        var appliedCount = 0;
+                        var screeningCount = 0;
+                        var interviewingCount = 0;
+                        var offeredCount = 0;
+                        if (positionInfo.candidates) {
+                            positionInfo.candidates.forEach(function (candidate) {
+                                if (candidate.stage === "Applied") { appliedCount++; }
+                                else if (candidate.stage === "Interviewing") { interviewingCount++; }
+                                else if (candidate.stage === "Screening") { screeningCount++; }
+                                else if (candidate.stage === "Offered") { offeredCount++; }
+                            });
+                        }
+
+                        var activeClass = index === activeIndex ? 'active' : '';
+                        positionHtml += '<div id="main-block-' + index + '" data-index="' + index + '" class="ms-Grid-row row main-block ' + activeClass + '">'
+                            + '<div class="ms-sm12 ms-Grid-col">'
+                            + '<div class="ms-Grid-row">'
+                            + '<div class="ms-sm6 ms-Grid-col">'
+                            + '<div class="ms-Grid-row row">'
+                            + '<div class="ms-sm6 ms-Grid-col large-font-size"><strong>' + positionInfo.title + '</strong></div>'
+                            + '<div class="ms-sm6 ms-Grid-col medium-font-size">Location: <strong>' + positionInfo.location.city + ', ' + positionInfo.location.state + '</strong></div>'
+                            + '</div>'
+                            + '<div class="ms-Grid-row row medium-font-size">'
+                            + '<div class="ms-sm6 ms-Grid-col"><strong>Job Details</strong></div>'
+                            + '<div class="ms-sm6 ms-Grid-col">Days Open: <strong>' + positionInfo.daysOpen + '</strong></div>'
+                            + '</div>'
+                            + '<div class="ms-Grid-row row wideRow">'
+                            + '<div id="description-' + index + '" class="ms-sm11 ms-Grid-col small-font-size" title="' + positionInfo.fullDescription + '">' + positionInfo.description + '</div>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="ms-sm6 ms-Grid-col counters">'
+                            + ' <div class="row ms-Grid-row count-labels">'
+                            + '<div id="applied-count" class="ms-Grid-col ms-sm3">' + appliedCount + '</div>'
+                            + '<div id="screening-count" class="ms-Grid-col ms-sm3">' + screeningCount + '</div>'
+                            + '<div id="interviewing-count" class="ms-Grid-col ms-sm3">' + interviewingCount + '</div>'
+                            + '<div id="offered-count" class="ms-Grid-col ms-sm3">' + offeredCount + '</div>'
+                            + '</div>'
+                            + '<div class="row ms-Grid-row">'
+                            + '<div class="ms-Grid-col ms-sm3 medium-font-size ms-textAlignCenter">applied</div>'
+                            + '<div class="ms-Grid-col ms-sm3 medium-font-size ms-textAlignCenter">screening</div>'
+                            + '<div class="ms-Grid-col ms-sm3 medium-font-size ms-textAlignCenter">interviewing</div>'
+                            + '<div class="ms-Grid-col ms-sm3 medium-font-size ms-textAlignCenter">offered</div>'
+                            + '</div>'
+                            + '</div>'
+                            + '</div>'
+                            + '<div class="ms-Grid-row row ms-textAlignCenter">'
+                            + '<div class="ms-sm12 ms-Grid-col">'
+                            + '<i data-show-description="' + positionInfo.fullDescription + '" data-index="' + index + '" class="ms-Icon ms-Icon--ChevronDown more-info more-info-' + index + '" title="More details" aria-hidden="true" style="display: inline-block;"></i>'
+                            + '<i data-show-description="' + positionInfo.description + '" data-index="' + index + '" class="ms-Icon ms-Icon--ChevronUp more-info more-info-' + index + '" title="Less details" aria-hidden="true"></i>'
+                            + '</div>'
+                            + '</div>'
+                            + '</div>'
+                            + '</div>';
+                    });
+                    if (data.length === 0) {
+                        positionHtml = '<div class="ms-Grid-row row ms-textAlignCenter"><div class="ms-sm12 ms-Grid-col">No opened positions yet.</div></div>';
+                    }
+                    $("#position-list").html(positionHtml);
+
+                    $(".main-block").click(function () {
+                        clickOnMainBlock($(this));
+                    });
+
+                    $(".more-info").click(function (e) {
+                        var currentObject = $(this);
+                        var index = currentObject.data("index");
+                        var closeAction = currentObject.hasClass("ms-Icon--ChevronUp");
+                        $('.more-info-' + index).toggle();
+                        var newDescription = currentObject.data("show-description");
+                        $('#description-' + index).text(newDescription);
+                        if (index === activeIndex || closeAction) {
+                            e.stopPropagation();
+                            e.cancelBubble = true;
+                        }
+                    });
+
+                    $(document).keydown(function (e) {
+                        var newIndex = activeIndex;
+                        switch (e.which) {
+                            case 38:
+                                if (activeIndex !== 0) { newIndex -= 1; }
+                                break;
+
+                            case 40:
+                                if (activeIndex !== maxActiveIndex) { newIndex += 1; }
+                                break;
+
+                            default: return;
+                        }
+                        clickOnMainBlock($('#main-block-' + newIndex));
+                    });
+                }
+
+                function clickOnMainBlock(currentObject) {
+                    var index = currentObject.data("index");
+                    if (index !== activeIndex) {
+                        $(".active").removeClass("active");
+                        currentObject.addClass("active");
+                    }
+                    activeIndex = index;
+                }
+ 
+
+            function getQueryStringValue(key) {
+                return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+            }
+
+        $(async () => {
+            await this.handlePageLoad();
+            this.loadPage();
+        })
+
+
+
+    </script>
+</head>
+<body dir="ltr">
+    <div class="teams">
+        <div class="loading">Loading...</div>
+        <div class="button-holder"><input type="button" class="sign-in-btn" value="Sign In" onclick="authenticate(); return false;" /></div>
+        <div class="loggedInAs"></div>
+        <div id="position-list"></div>
+    </div>
+</body>
+</html>

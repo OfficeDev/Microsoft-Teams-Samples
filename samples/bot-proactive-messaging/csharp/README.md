@@ -63,16 +63,16 @@ Two samples to highlight solutions to two challenges with building proactive mes
    devtunnel host -p 5000 --allow-anonymous
    ```
 
-2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+2. Create a Microsoft Entra ID app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok-free.app/api/messages`
 
-3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok-free.app` or dev tunnels domain: `12345.devtunnels.ms` excluding http/https.
+3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing Microsoft Entra ID app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok-free.app` or dev tunnels domain: `12345.devtunnels.ms` excluding http/https.
 
 4. Zip the contents of `AppManifest` into a `manifest.zip`.
 
-5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing AAD app registration in previous steps.
+5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing Microsoft Entra ID app registration in previous steps.
 
 
 **Coordinate Logger**

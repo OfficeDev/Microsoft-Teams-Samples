@@ -47,7 +47,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1.Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1.Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    Fill out name and select third option for supported account type and click "Register".
 
    ![AppRegistration](MeetingApp/Images/AppRegistration.png)
@@ -99,7 +99,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-    - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+    - `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
     - `{{ MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
     - `{{ StorageConnectionString }}` - Generated from Step 3,Create a Azure Storage accoun
 

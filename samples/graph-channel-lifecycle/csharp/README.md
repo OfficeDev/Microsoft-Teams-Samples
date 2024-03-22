@@ -38,7 +38,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
@@ -64,7 +64,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     ```
 
 - Modify the `/appsettings.json` and fill in the following details:
-  - `{{ ClientId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{ ClientId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
   - `{{ ClientSecret}}` - Generated from Step 1, also referred to as Client secret
   - `{{ BaseUri }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 

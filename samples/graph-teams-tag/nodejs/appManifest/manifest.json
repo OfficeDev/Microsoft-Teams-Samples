@@ -28,8 +28,7 @@
       "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "team",
-        "groupchat"
+        "team"
       ]
     }
   ],

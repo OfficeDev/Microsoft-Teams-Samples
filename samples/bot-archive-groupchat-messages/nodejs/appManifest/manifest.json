@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Fetch Groupchat Messages",
+    "short": "Fetch",
     "full": "Fetch groupchat messages with graph api"
   },
   "description": {
@@ -45,6 +45,6 @@
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
   }
 }
