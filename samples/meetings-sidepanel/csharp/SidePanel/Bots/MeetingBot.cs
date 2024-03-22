@@ -15,6 +15,8 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
+            HomeController.serviceUrl = turnContext.Activity.ServiceUrl;
+            HomeController.conversationId = turnContext.Activity.Conversation.Id;
             var replyText = "Hello and welcome **" + turnContext.Activity.From.Name + "** to the Meeting Extensibility SidePanel app.";
             await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
         }
