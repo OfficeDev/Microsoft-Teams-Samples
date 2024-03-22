@@ -20,10 +20,15 @@
     <script>
 
         var appId;
+        var tenantId;
 
         // Initialize teams js sdk
         $(document).ready(function () {
-            microsoftTeams.app.initialize();
+            microsoftTeams.app.initialize().then(function(){
+                microsoftTeams.app.getContext().then((context) => {
+                    tenantId = context.user.tenant.id;
+                });
+            })
         });
 
         // People picker api call for selecting reciepient.
@@ -37,13 +42,14 @@
             });
         }
 
-        function sendNotification(reciepientUserId) {
+        function sendNotification(recipientUserId) {
             $.ajax({
             type: 'POST',
             url: '/sendFeedNotification',
             dataType: 'json',
             data: {
-                'reciepientUserId': reciepientUserId,
+                'recipientUserId': recipientUserId,
+                'tenantId': tenantId,
             },
             success: function (responseJson) {
                 console.log("Message send successfully");
