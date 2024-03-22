@@ -12,7 +12,7 @@
         "value": "${{BOT_DOMAIN}}"
       },
       "botDisplayName": {
-        "value": "bot-conversation"
+        "value": "TeamsConversationBot"
       }
     }
   }
