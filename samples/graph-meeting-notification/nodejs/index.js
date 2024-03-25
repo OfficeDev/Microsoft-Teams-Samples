@@ -16,19 +16,19 @@ const { DecryptionHelper } = require("./helper/decryption-helper");
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { CloudAdapter, 
-    ConversationState, 
-    MemoryStorage, 
-    ConfigurationServiceClientCredentialFactory, 
+const { CloudAdapter,
+    ConversationState,
+    MemoryStorage,
+    ConfigurationServiceClientCredentialFactory,
     createBotFrameworkAuthenticationFromConfiguration } = require('botbuilder');
 
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
     MicrosoftAppId: process.env.MicrosoftAppId,
     MicrosoftAppPassword: process.env.MicrosoftAppPassword,
     MicrosoftAppTenantId: process.env.TenantId
-  });
-  
-  const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfiguration(null, credentialsFactory);
+});
+
+const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfiguration(null, credentialsFactory);
 
 
 // Create adapter.
@@ -52,7 +52,7 @@ adapter.onTurnError = async (context, error) => {
 
     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-    
+
     // Clear out state
     await conversationState.delete(context);
 };
@@ -100,34 +100,36 @@ const notification = async (req, res, next) => {
         res.send(req.query.validationToken);
     } else {
         clientStatesValid = false;
-        var responsePayload = await DecryptionHelper.getDecryptedContent(req.body.value);
 
-        if(responsePayload.eventType == "Microsoft.Communication.CallRosterUpdate") {
-            if(responsePayload['activeParticipants@delta'].length > 0 || responsePayload['activeParticipants@remove'].length > 0) {
+        var notification = req.body.value;
+        var responsePayload = await DecryptionHelper.processEncryptedNotification(notification);
+
+        if (responsePayload.eventType == "Microsoft.Communication.CallRosterUpdate") {
+            if (responsePayload['activeParticipants@joined'] || responsePayload['activeParticipants@remove']) {
                 for (const conversationReference of Object.values(conversationReferences)) {
                     await adapter.continueConversationAsync(process.env.MicrosoftAppId, conversationReference, async turnContext => {
 
-                        if(responsePayload['activeParticipants@delta'].length > 0) {
+                        if (responsePayload['activeParticipants@joined']) {
                             var membersJoined = new Array();
-                            responsePayload['activeParticipants@delta'].map((member) => {
+                            responsePayload['activeParticipants@joined'].map((member) => {
                                 var member = {
                                     title: "Member name",
                                     value: member.Identity.User.DisplayName
-                                 }
-                               membersJoined.push(member);
+                                }
+                                membersJoined.push(member);
                             })
 
-                            await MeetingNotficationBot.DisplayMeetingUpdate(turnContext, "Members joined",membersJoined);
+                            await MeetingNotficationBot.DisplayMeetingUpdate(turnContext, "Members joined", membersJoined);
                         }
 
-                        if(responsePayload['activeParticipants@remove'].length > 0) {
+                        if (responsePayload['activeParticipants@remove']) {
                             var membersLeft = new Array();
                             responsePayload['activeParticipants@remove'].map((member) => {
-                               var member = {
-                               title: "Member name",
-                               value: member.Identity.User.DisplayName
-                            }
-                               membersLeft.push(member);
+                                var member = {
+                                    title: "Member name",
+                                    value: member.Identity.User.DisplayName
+                                }
+                                membersLeft.push(member);
                             })
 
                             await MeetingNotficationBot.DisplayMeetingUpdate(turnContext, "Members left", membersLeft);
@@ -141,6 +143,7 @@ const notification = async (req, res, next) => {
             for (const conversationReference of Object.values(conversationReferences)) {
                 await adapter.continueConversationAsync(process.env.MicrosoftAppId, conversationReference, async turnContext => {
                     let carddata = await MeetingNotficationBot.MeetingStartEndCard(turnContext, meetingIndicator);
+                    return carddata;
                 });
             }
         }

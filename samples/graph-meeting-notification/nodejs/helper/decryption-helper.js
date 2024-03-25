@@ -8,7 +8,6 @@ class DecryptionHelper {
     static async getDecryptedContent(notification) {
 
         if (notification) {
-            
             var payLoad = this.processEncryptedNotification(notification);
             return payLoad;
         }

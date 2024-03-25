@@ -11,6 +11,7 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
+
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
