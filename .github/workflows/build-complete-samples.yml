@@ -460,6 +460,10 @@ jobs:
               name: 'sharepoint-embedded-tab-request-approval'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-configuration-app/csharp/Bot configuration/Bot Configuration.csproj'
+              name: 'bot-configuration-app'
+              version: '6.0.x'
+
             - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
               name: 'app-HR-talent'
               version: '6.0.x'
