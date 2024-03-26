@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.sample.messageReaction",
   "developer": {
     "name": "MessageReactionBot",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "groupchat",
         "team",
@@ -41,5 +41,7 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": []
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
 }
