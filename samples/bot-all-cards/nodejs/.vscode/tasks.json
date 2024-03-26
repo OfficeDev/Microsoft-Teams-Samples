@@ -5,6 +5,105 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Start Teams App (Test Tool)",
+            "dependsOn": [
+                "Validate prerequisites (Test Tool)",
+                "Deploy (Test Tool)",
+                "Start application (Test Tool)",
+                "Start Test Tool",
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            // Check all required prerequisites.
+            // See https://aka.ms/teamsfx-tasks/check-prerequisites to know the details and how to customize the args.
+            "label": "Validate prerequisites (Test Tool)",
+            "type": "teamsfx",
+            "command": "debug-check-prerequisites",
+            "args": {
+                "prerequisites": [
+                    "nodejs", // Validate if Node.js is installed.
+                    "portOccupancy" // Validate available ports to ensure those debug ones are not occupied.
+                ],
+                "portOccupancy": [
+                    3978, // app service port
+                    9239, // app inspector port for Node.js debugger
+                    56150, // test tool port
+                ]
+            }
+        },
+        {
+            // Build project.
+            // See https://aka.ms/teamsfx-tasks/deploy to know the details and how to customize the args.
+            "label": "Deploy (Test Tool)",
+            "type": "teamsfx",
+            "command": "deploy",
+            "args": {
+                "env": "testtool",
+            }
+        },
+        {
+            "label": "Start application (Test Tool)",
+            "type": "shell",
+            "command": "npm run dev:teamsfx:testtool",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "problemMatcher": {
+                "pattern": [
+                    {
+                        "regexp": "^.*$",
+                        "file": 0,
+                        "location": 1,
+                        "message": 2
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "[nodemon] starting",
+                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                }
+            }
+        },
+        {
+            "label": "Start Test Tool",
+            "type": "shell",
+            "command": "npm run dev:teamsfx:launch-testtool",
+            "isBackground": true,
+            "options": {
+                "env": {
+                  "PATH": "${workspaceFolder}/devTools/teamsapptester/node_modules/.bin:${env:PATH}"
+                }
+            },
+            "windows": {
+                "options": {
+                    "env": {
+                        "PATH": "${workspaceFolder}/devTools/teamsapptester/node_modules/.bin;${env:PATH}"
+                    }
+                }
+            },
+            "problemMatcher": {
+                "pattern": [
+                    {
+                        "regexp": "^.*$",
+                        "file": 0,
+                        "location": 1,
+                        "message": 2
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".*",
+                    "endsPattern": "Listening on"
+                }
+            },
+            "presentation": {
+                "panel": "dedicated",
+                "reveal": "silent"
+            }
+        },
+        {
             "label": "Start Teams App Locally",
             "dependsOn": [
                 "Validate prerequisites",
