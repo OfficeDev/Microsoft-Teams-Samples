@@ -161,6 +161,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties assets_4sample_1json__JsonSchema="https://datahubproject.io/schemas/datahub_ingestion_schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
