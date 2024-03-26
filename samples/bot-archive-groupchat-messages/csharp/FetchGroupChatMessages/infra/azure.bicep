@@ -67,7 +67,7 @@ resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021
       }
       {
         key: 'tokenExchangeUrl'
-        value: 'api://${botAppDomain}/botid-${aadAppClientId}'
+        value: 'api://botid-${aadAppClientId}'
       }
     ]
   }

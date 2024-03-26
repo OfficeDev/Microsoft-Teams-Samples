@@ -45,6 +45,6 @@
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
   }
 }
