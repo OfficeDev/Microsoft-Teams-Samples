@@ -102,17 +102,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Running the sample
 
-  ![tab](LinkUnfurlingInShareToTeams/Images/tabpage.png)
+  ![tab](LinkUnfurlingInShareToTeams/Images/1.Install.png)
   
-  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/linkunfurlscreen.png)
+  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/2.Tab.png)
 
-  ![Link unfurling success](LinkUnfurlingInShareToTeams/Images/successcard.png)
+  ![Share To Teams](LinkUnfurlingInShareToTeams/Images/3.ShareToTeams.png)
   
-  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/channelcard.png)
+  ![Shared](LinkUnfurlingInShareToTeams/Images/4.SharedSuccess.png)
 
-  ![tab-web](LinkUnfurlingInShareToTeams/Images/tabpageweb.png)
+  ![In Teams](LinkUnfurlingInShareToTeams/Images/5.InTeams.png)
 
-  ![Link unfurling STT web](LinkUnfurlingInShareToTeams/Images/linkunfurlingweb.png)
+  ![View Via Card](LinkUnfurlingInShareToTeams/Images/6.ViewViaCard.png)
 
 ## Deploy the bot to Azure
 
