@@ -148,27 +148,31 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ## Running the sample
 
-![](images/app-complete-sample1.png)
+![](images/1.Install.png)
 
-![](images/app-complete-sample2.png)
+![](images/2.Welcome.png)
 
-![](images/app-complete-sample3.png)
+![](images/3.Commands.png)
 
-![](images/app-complete-sample4.png)
+![](images/4.Hello.png)
 
-![](images/app-complete-sample5.png)
+![](images/5.MultiDialog.png)
 
-![](images/app-complete-sample6.png)
+![](images/6.Roaster.png)
 
-![](images/app-complete-sample7.png)
+![](images/7.Names.png)
 
-![](images/app-complete-sample11.png)
+![](images/8.LastDialog.png)
 
-![](images/app-complete-sample8.png)
+![](images/9.OneToOne.png)
 
-![](images/app-complete-sample9.png)
+![](images/10.SetupTextMessage.png)
 
-![](images/app-complete-sample10.png)
+![](images/12.BotInfo.png)
+
+![](images/13.ConfigTabTeams.png)
+
+![](images/14.TeamsTab.png)
 
 ## Outlook on the web
 
