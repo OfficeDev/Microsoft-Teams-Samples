@@ -37,4 +37,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>
+
 </Project>
