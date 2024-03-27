@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
@@ -15,8 +15,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Mgt-teams-tab",
-    "full": "Microsoft graph toolkit teams tab."
+    "short": "Mgt teams tab",
+    "full": "Tab graph toolkit"
   },
   "description": {
     "short": "Microsoft graph toolkit teams tab",
@@ -25,10 +25,10 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "entityId": "index",
+      "entityId": "index0",
       "name": "Personal Tab",
-      "contentUrl": "https://{{domain-name}}/tab",
-      "websiteUrl": "https://{{domain-name}}/tab",
+      "contentUrl": "https://{{domain-name}}/index.html#/tab",
+      "websiteUrl": "https://{{domain-name}}/index.html#/tab",
       "scopes": [
         "personal"
       ]
@@ -39,6 +39,12 @@
     "messageTeamMembers"
   ],
   "validDomains": [
+    "*.ngrok-free.app",
     "{{domain-name}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+  },
+  "showLoadingIndicator": false
 }
