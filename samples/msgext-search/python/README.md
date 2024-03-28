@@ -102,7 +102,7 @@ the Teams service needs to call into the bot.
 
 > Note this `manifest.json` specified that the feature will be available from both the `compose` and `commandBox` areas of Teams. Please refer to Teams documentation for more details.
 
-In Teams, the command bar is located at the top of the window. When you at mention the bot what you type is forwarded (as you type) to the bot for processing. By way of illustration, this sample uses the text it receives to query the NuGet package store.
+In Teams, you can click `Actions and apps` option button at right bottom of the message typing box to choose the search extension bot. And then you can search information by typing query to the bot for processing. By way of illustration, this sample uses the text it receives to query the [PyPI](https://pypi.org/). 
 
 There is a secondary, drill down, event illustrated in this sample: clicking on the results from the initial query will result in the bot receiving another event.
 
