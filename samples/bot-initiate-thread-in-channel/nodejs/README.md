@@ -121,14 +121,14 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
 
 **Adding the bot to a team's channel :**
-![add-App ](Images/add-App.png)
+![Add-App ](Images/1.Install.png)
 
-![add-App-To-Teams-Channel ](Images/add-App-To-Teams-Channel.png)
+![Add-App-To-Teams-Channel ](Images/2.SelectTeams.png)
 
-![added-App ](Images/added-App.png)
+![Mention Bot In Teams ](Images/3.MentionInTeams.png)
 
 **Mention the bot in a team's channel using "@" with any message like: '@yourbotname Hello' :**
-![mentionedBot-NewThread ](Images/mentionedBot-NewThread.png)
+![First Response To New Thread ](Images/4.FirstResponseInThread.png)
 
 
 ## Deploy the bot to Azure
