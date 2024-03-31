@@ -117,31 +117,30 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/1.AddApp.png)
+![InstallApp](Images/1.Install.png)
 
 **Welcome UI:**
 
-![Initial message](Images/2.Welcome.png)
+![Initial message](Images/2.WelcomeMessage.png)
 
-![Running Sample](Images/3.AdaptiveCard_Actions.png)
+![Running Sample](Images/9.SuggestedActions.png)
 
-![Running Sample](Images/4.ActionSubmit.png)
+![Running Sample](Images/3.Red.png)
 
-![Running Sample](Images/5.ActionShowCard.png)
+![Running Sample](Images/4.Yellow.png)
 
-![Running Sample](Images/5.ActionSubmitted.png)
+![Running Sample](Images/5.Blue.png)
 
-![Running Sample](Images/6.Togglevisible.png)
+![Running Sample](Images/6.CardActions.png)
 
-![Running Sample](Images/7.ToggleVisibleOnClick.png)
+![Running Sample](Images/7.ActionSubmit.png)
 
-![Running Sample](Images/8.SuggestedActions.png)
+![Running Sample](Images/8.ActionShowCard.png)
 
-![Running Sample](Images/9.RedColor.png)
+![Running Sample](Images/10.ToggleVisibiliyCard.png)
 
-![Running Sample](Images/10.BlueColor.png)
+![Running Sample](Images/11.VisibleOnClick.png)
 
-![Running Sample](Images/11.YellowColor.png)
 
 ## Deploy the bot to Azure
 
