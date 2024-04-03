@@ -110,13 +110,6 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **Added bot UI:**
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
-   **Option 1 : Auth card Interactions:**
-   - Comment out option 2 code in [teamsBot.js](/samples/bot-configuration-app/csharp/Bot configuration/Bots/TeamsBot.cs) to experience the `config/Auth` feature.
-   - Note: The `Sign-in` page displayed is currently using a dummy URL. Please update it with your authentication URL.
-
-  ![Bot-description-card](Images/Bot-description-card.png)
-
-   **Option 2 : Bot adaptive Card:**
    - **Show configurable card interaction:**
    - Comment out option 1 code in [teamsBot.js](/samples/bot-configuration-app/csharp/Bot configuration/Bots/TeamsBot.cs) to experience the `config/Continue` feature.
 
