@@ -20,8 +20,8 @@
             // Client id
             var appId = '@(ViewBag.AppId)';
 
-            // Get thread id like "19:be817b823c204cde8aa174ae146251dd@thread.v2";
-            var threadId = @Model.ThreadId;
+            // Get thread id by this format "19:***********@thread.v2";
+            var threadId = "@TabInStageView.Bots.ActivityBot._threadId";
 
             // Application base url and this redirects to Index view
             var contentUrl = window.location.origin;
