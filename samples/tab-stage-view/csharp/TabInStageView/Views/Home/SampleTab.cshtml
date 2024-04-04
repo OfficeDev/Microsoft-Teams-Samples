@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@page
+@model TabInStageView.Models.TabInfoAction
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,11 +10,18 @@
             crossorigin="anonymous">
     </script>
     <script>
+        
         microsoftTeams.app.initialize().then(() => {
+           
         });
+
         function createLink() {
+
             // Client id
             var appId = '@(ViewBag.AppId)';
+
+            // Get thread id like "19:be817b823c204cde8aa174ae146251dd@thread.v2";
+            var threadId = @Model.ThreadId;
 
             // Application base url and this redirects to Index view
             var contentUrl = window.location.origin;
@@ -21,13 +31,16 @@
                 contentUrl: contentUrl,
                 websiteUrl: contentUrl,
                 name: "DemoStageView",
-                openMode: "popOutWithChat"
+                openMode: "popoutWithChat",
+                threadId:threadId
             }
 
             const encodedContext = encodeURIComponent(JSON.stringify(context));
 
             // Passing the values and encoding the url while implementing the deeplink from tab
             let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context=" + encodedContext;
+
+            console.log("eoncoded URL",url);
 
             microsoftTeams.app.openLink(url);
         };
