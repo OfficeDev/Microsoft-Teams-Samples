@@ -1007,6 +1007,10 @@ jobs:
               name: 'bot-configuration-app'
               version: '18.x'
 
+            - project_path: 'samples/bot-configuration-app-auth/nodejs'
+              name: 'bot-configuration-app-auth'
+              version: '18.x'
+
             - project_path: 'samples/tab-add-in-combined/nodejs'
               name: 'tab-add-in-combined'
               version: '18.x'
