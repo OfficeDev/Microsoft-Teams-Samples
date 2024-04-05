@@ -111,7 +111,6 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
    - **Show configurable card interaction:**
-   - Comment out option 1 code in [teamsBot.js](/samples/bot-configuration-app/csharp/Bot configuration/Bots/TeamsBot.cs) to experience the `config/Continue` feature.
 
   ![configurable-card-Interaction1 ](Images/configurable-card-Interaction1.png)
 
