@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/vdevPrevieW/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.botconfigurationauth",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Bot Configuration auth Sample App",
+    "full": "Bot Configuration auth Sample App"
+  },
+  "description": {
+    "short": "Bot Configuration auth Sample App",
+    "full": "This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "needsChannelSelector": false,
+      "scopes": [
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "configuration": {
+        "groupChat": {
+          "fetchTask": true
+        },
+        "team": {
+          "fetchTask": true
+        }
+      },
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}
