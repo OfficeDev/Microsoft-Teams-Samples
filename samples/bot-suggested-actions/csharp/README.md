@@ -108,11 +108,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Running the sample
 
-![Welcome Message](SuggestedActions/Images/WelcomeMessage.PNG)
+![Install](SuggestedActions/Images/1.Install.png)
 
-![Red](SuggestedActions/Images/Red.png)
+![Welcome ](SuggestedActions/Images/2.Welcome.png)
 
-![Yellow](SuggestedActions/Images/Yellow.png)
+![Red](SuggestedActions/Images/3.Red.png)
+
+![Yellow](SuggestedActions/Images/4.Yellow.png)
+
+![Blue](SuggestedActions/Images/5.Blue.png)
 
 ## Deploy the bot to Azure
 

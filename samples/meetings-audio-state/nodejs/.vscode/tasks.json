@@ -28,8 +28,7 @@
                     "portOccupancy" // Validate available ports to ensure those debug ones are not occupied.
                 ],
                 "portOccupancy": [
-                    3978, // app service port
-                    9239 // app inspector port for Node.js debugger
+                    3978 // app service port
                 ]
             }
         },
@@ -97,7 +96,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    "endsPattern": "Compiled with warnings"
                 }
             }
         }

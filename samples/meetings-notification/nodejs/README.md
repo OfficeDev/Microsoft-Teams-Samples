@@ -131,30 +131,32 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
+![Install](Images/1.Install.png)
+
 Type `SendContentBubble` in bot chat to send In-Meeting notifications.
 
 **Hello command interaction:**
 
-![Meetings AgendaCard](Images/AgendaCard.png)
+![Meetings AgendaCard](Images/5.ContentBubble.png)
 
 **Provide your feedback:**
 
-![Meetings Feedback Submit](Images/FeedbackSubmit.png)
+![Meetings Feedback Submit](Images/6.ProvideFeedback.png)
 
 **Provide your feedback Yes:**
 
-![Meetings Feedback CardYes](Images/FeedbackCardYes.png)
-
-**Provide your feedback No:**
-
-![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
+![Meetings Feedback CardYes](Images/7.SubmittedYes.png)
 
 ## Send targeted meeting notification
 
 Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
-![Meeting card](Images/MeetingCard.png)
+![Meeting card](Images/2.CardInMeeting.png)
 
-![Target notification](Images/TargetNotification.png)
+![Target notification](Images/3.TargetedNotification.png)
+
+![Target notification](Images/4.SubmitFeedback.png)
+
+![Target notification](Images/4.TargetNotificationSubmittedYes.png)
 
 **Interacting with the app in Teams Meeting**
 
