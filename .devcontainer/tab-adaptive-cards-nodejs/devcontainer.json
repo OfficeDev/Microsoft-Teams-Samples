@@ -1,0 +1,7 @@
+{
+	"name": "tab-adaptive-cards-nodejs",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "nodejs",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/tab-adaptive-cards/nodejs"
+}
