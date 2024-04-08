@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "25-09-2023 23:30:17"
-urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-auth-nodejs
 ---
 # Bot Configuration 
 
@@ -31,7 +31,7 @@ To get a configurable card with a static typeahead search control, add the bot t
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Bot Configuration:** [Manifest](/samples/bot-configuration-app/nodejs/demo-manifest/bot-configuration-app.zip)
+**Bot Configuration:** [Manifest](/samples/bot-configuration-app-auth/nodejs/demo-manifest/bot-configuration-app.zip)
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-configuration-app/nodejs`
+1) In a terminal, navigate to `samples/bot-configuration-app-auth/nodejs`
 
 1) Install modules
 
@@ -125,18 +125,10 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **Added bot UI:**
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
-   - **Show configurable card interaction:**
+   **Option 1 : Auth card Interactions:**
+   - Note: The `Sign-in` page displayed is currently using a dummy URL. Please update it with your authentication URL.
 
-  ![configurable-card-Interaction1 ](Images/configurable-card-Interaction1.png)
-
-  ![configurable-card-Interaction2 ](Images/configurable-card-Interaction2.png)
-
-  ![configurable-card-Interaction3 ](Images/configurable-card-Interaction3.png)
-    
-  ![configurable-card-Interaction4 ](Images/configurable-card-Interaction4.png)
-
-
-
+  ![Bot-description-card](Images/Bot-description-card.png)
 
 ## Deploy to Azure
 
@@ -157,4 +149,4 @@ Deploy your project to Azure by following these steps:
 - [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-configuration-app-auth-nodejs" />
