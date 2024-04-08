@@ -169,12 +169,6 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ## Running the sample
 
-**Upload App:**
-
-![Upload](Images/Upload.png)
-
-![UploadSucess](Images/UploadSucess.png)
-
 **Install App:**
 
 ![InstallApp](Images/InstallApp.png)
@@ -187,7 +181,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ![SignButton](Images/SignButton.png)
 
-**Login Successfully:**
+**Welcome Universal Card:**
 
 ![InstallApp](Images/loginsuccess.png)
 
