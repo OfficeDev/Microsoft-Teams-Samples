@@ -25,7 +25,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 ## Interaction with app
 
-![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
+![MeetingsTranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
 ## Prerequisites
 
