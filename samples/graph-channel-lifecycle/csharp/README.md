@@ -100,11 +100,11 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
   ![](ChannelLifecycle/Images/Image0.png)
 
-  ![](ChannelLifecycle/Images/Image1.png)
+  ![](ChannelLifecycle/Images/Image1.PNG)
 
-  ![](ChannelLifecycle/Images/Image2.png)
+  ![](ChannelLifecycle/Images/Image2.PNG)
 
-  ![](ChannelLifecycle/Images/Image3.png)
+  ![](ChannelLifecycle/Images/Image3.PNG)
 
   ![](ChannelLifecycle/Images/Image4.png)
 
