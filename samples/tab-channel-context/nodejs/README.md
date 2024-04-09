@@ -42,7 +42,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif)
+![PreviewImage](Images/Preview.gif)
 
 ## Setup
 
@@ -95,13 +95,25 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
 
 # Running the sample
-1) Configure in Private channel
+1) Configure in Regular channel
 
-![tab context in private channel](Images/privateChannel.png)
+![image1](Images/image1.png)
 
-2) Configure in Public channel
+![image2](Images/image2.png)
 
-![tab context in private channel](Images/regularChannel.png)
+![image3](Images/image3.png)
+
+![image4](Images/image4.png)
+
+2) Configure in Private channel
+
+![image5](Images/image5.png)
+
+![image6](Images/image6.png)
+
+![image7](Images/image7.png)
+
+![image8](Images/image8.png)
 
 **Features of the sample**
 
