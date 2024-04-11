@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev:teamsfx": "npm run start",
-    "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
+    "start": "set PORT=3978 HTTPS=true && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

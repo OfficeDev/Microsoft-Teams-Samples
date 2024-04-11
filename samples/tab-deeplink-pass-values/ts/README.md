@@ -1,9 +1,25 @@
+---
+page_type: sample
+description: Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- ts
+extensions:
+ contentType: samples
+ createdDate: "02-21-2024 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-tab-deeplink-pass-values-ts
+---
+
 # Passing Values with Deep Links for Tab Apps and Standalone Web Apps
 
 Deep links load applications with additional information that can be used to carry out app logic (e.g., querying a DB, displaying certain data, navigating the user to deeper pages, etc.). This Microsoft Teams tab app sample shows how you can create and use deep links to pass values to tab apps, and how the link's formatting and consumption methods may vary based on the user's access environment (i.e., if they are using Microsoft Teams vs. the app's public URL).
 
-## Included Features
+ ## Included Features
 * Tabs
+* Deep Links
 
 ## Interaction with app
 ### Initial state of tab app
@@ -182,3 +198,12 @@ SET DEBUG=msteams
 ```
 
 If you are using Microsoft Azure to host your Microsoft Teams app, then you can add `DEBUG` as an Application Setting with the value of `msteams`.
+
+## Further reading
+
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+- [Deep links in teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-pass-values-ts" />

@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "${{BOT_ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -96,7 +96,7 @@
             "domains": [
               "*.botframework.com"
             ],
-            "supportsAnonymizedPayloads": true
+	   "supportsAnonymizedPayloads": true
           }
         }
       ]
@@ -107,12 +107,12 @@
   ],
   "validDomains": [
     "*.githubusercontent.com",
-    "{{domain-name}}",
+    "*.ngrok-free.app",
     "*.botframework.com",
     "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{BOT_ID}}"
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
   }
 }

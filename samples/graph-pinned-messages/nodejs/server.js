@@ -2,10 +2,14 @@
 // Licensed under the MIT License.
 
 const express = require('express');
+const bodyparser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
 const server = express();
+
+server.use(bodyparser.urlencoded({ extended: false }))
+server.use(bodyparser.json())
 
 server.use(cors());
 server.use(express.json());

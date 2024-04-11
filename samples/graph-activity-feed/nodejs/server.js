@@ -10,6 +10,8 @@ const axios = require('axios');
 var delegatedToken = "";
 var applicationToken = "";
 
+app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json())
 app.use(express.static(path.join(__dirname, 'static')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');

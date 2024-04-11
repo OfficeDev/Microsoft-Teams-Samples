@@ -103,6 +103,7 @@ We recommend that you copy these values into a text file, using an application l
     -  TeamsAppInstallation.ReadWriteForChat.All
     -  AppCatalog.Read.All
     -  User.Read.All
+    -  Teamwork.Migrate.All
 
 Click on Add Permissions to commit your changes.
 

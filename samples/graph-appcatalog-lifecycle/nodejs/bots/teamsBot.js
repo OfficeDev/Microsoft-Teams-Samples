@@ -26,16 +26,22 @@ class TeamsBot extends DialogBot {
 
         this.onTokenResponseEvent(async (context, next) => {
             console.log('Running dialog with Token Response Event Activity.');
-
+    
             // Run the Dialog with the new Token Response Event Activity.
             await this.dialog.run(context, this.dialogState);
-
+    
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
     }
 
-    async handleTeamsSigninVerifyState(context, state) {
+    async handleTeamsSigninVerifyState(context, query) {
+        console.log('Running dialog with signin/verifystate from an Invoke Activity.');
+        await this.dialog.run(context, this.dialogState);
+    }
+
+    async handleTeamsSigninTokenExchange(context, query) {
+        console.log('Running dialog with signin/tokenExchange from an Invoke Activity.');
         await this.dialog.run(context, this.dialogState);
     }
 }

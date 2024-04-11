@@ -27,12 +27,12 @@
                     "type": "Scope"
                 },
                 {
-                    "id": "Group.ReadWrite.All",
-                    "type": "Role"
+                    "id": "Presence.Read",
+                    "type": "Scope"
                 },
                 {
-                    "id": "TeamsAppInstallation.ReadWriteForUser.All",
-                    "type": "Role"
+                    "id": "Presence.Read.All",
+                    "type": "Scope"
                 }
             ]
         }
@@ -103,10 +103,6 @@
         "api://botid-${{AAD_APP_CLIENT_ID}}"
     ],
     "replyUrlsWithType":[
-        {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
-        },
         {
 			"url": "https://token.botframework.com/.auth/web/redirect",
 			"type": "Web"

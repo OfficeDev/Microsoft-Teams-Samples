@@ -1,0 +1,379 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>View candidate</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" integrity="sha384-EKT9Wswdn78EAHAqcOh50wnaPfH3aPa7YZ1R89/TCN98AhkqZJ2g47u4k2I5eCk8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
+    <script type="text/javascript" src="/StaticViews/js/jwt-decode.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css" />
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css" />
+
+    <style type="text/css">
+        .row {
+            padding: 5px 20px;
+        }
+
+        .wideRow {
+            padding: 20px;
+        }
+
+        .teams {
+            width: 95%;
+            font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+        }
+
+            .teams .jobTitleHeader {
+                background-color: #6264a7;
+            }
+
+        #job-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .jobTitleHeader {
+            width: 100%;
+            color: white;
+            min-height: 170px;
+        }
+
+        .applicantsColumn {
+            text-align: center;
+        }
+
+        .jobDetails {
+            width: 100%;
+            min-height: 100px;
+            background-color: white;
+        }
+
+            .jobDetails .last-row {
+                padding: 5px 20px 20px;
+            }
+
+            .jobDetails .icon {
+                padding-right: 10px;
+            }
+
+        .applicantsTitle {
+            color: rgba(37, 36, 36, 0.75);
+        }
+
+            .applicantsTitle .applicantsHeader {
+                padding-right: 10px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+        #candidates-count-label {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(37, 36, 36, 0.75);
+        }
+
+        .itemImage {
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            margin-right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+            .itemImage img {
+                display: block;
+                opacity: 1;
+                width: 100%;
+                height: auto;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+        .stageColumn {
+            cursor: pointer;
+        }
+
+        .gridList .headerRow {
+            color: rgba(37, 36, 36, 0.65);
+            font-size: 12px;
+            padding: 10px 0;
+        }
+
+        .gridList .itemRow {
+            padding: 10px 0;
+            background-color: white;
+        }
+
+            .gridList .itemRow .text-row {
+                padding-top: 8px;
+            }
+
+            .gridList .itemRow:hover {
+                background-color: #eee;
+                cursor: pointer;
+            }
+
+        .gridList .icon {
+            padding-left: 10px;
+            cursor: pointer;
+            vertical-align: bottom;
+        }
+
+        .show-candidates-section, .show-hr-section {
+            display: block;
+        }
+
+        .medium-font-size {
+            font-size: 14px;
+        }
+
+        .small-font-size {
+            font-size: 12px;
+        }
+
+        .text-overflow {
+            overflow: hidden;
+        }
+
+        .count-labels {
+            font-size: 54px;
+            padding-top: 25px;
+        }
+
+        .hrImage {
+            padding-top: 10px;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .text-overflow {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function loadPage() {
+
+            let isTeams = window.localStorage.getItem("isTeams");
+            window.localStorage.removeItem("isTeams");
+            if (!isTeams) {
+                var urlParams = new URLSearchParams(location.search);
+                var positionId = urlParams.get('positionId');
+                buildPage(positionId);
+            }
+            else {
+                microsoftTeams.getContext(function (context) {
+                    var positionId = context.entityId;
+                    buildPage(positionId);
+                });
+            }
+        }
+
+        async function buildPage(positionId) {
+
+            let accessToken = window.localStorage.getItem("userToken");
+            let authorization = "Bearer " + accessToken;
+            let data = await fetch(window.location.origin + '/api/positions/' + positionId, {
+                headers: {
+                    Authorization: authorization,
+                }
+            });
+
+            if (data.ok) {
+                let json = await data.json();
+                getData(json);
+            } else {
+                console.error("HTTP-Error: " + data.status);
+            }
+        }
+
+        function getData(data) {
+
+            $("#job-title").text(data.title);
+            $("#job-id").text(data.positionExternalId);
+            $("#hiring-manager").text(data.hiringManager.name);
+            $("#job-description").text(data.description);
+            $("#job-description").prop("title", data.fullDescription);
+            $("#job-location").text(data.location.city + ', ' + data.location.state);
+            $("#hrManagerImagesTemplate").html(buildIconTemplate(data.hiringManager, true, false));
+            var hirringTeam = [];
+            var maxCountOfHiringTeam = 4;
+
+            if (data.candidates) {
+                var candidatesRows = '';
+                var appliedCount = 0;
+                var screeningCount = 0;
+                var interviewingCount = 0;
+                var offeredCount = 0;
+                data.candidates.forEach(function (candidate, index) {
+                    if (candidate.interviews) {
+                        candidate.interviews.forEach(function (i) {
+                            var shouldAdd = true;
+                            hirringTeam.forEach(function (ht) {
+                                if (ht.recruiterId === i.recruiterId) {
+                                    shouldAdd = false;
+                                }
+                            });
+                            if (i.recruiter && shouldAdd && hirringTeam.length < maxCountOfHiringTeam) {
+                                hirringTeam.push(i.recruiter);
+                            }
+                        });
+                    }
+
+                    if (candidate.stage === "Applied") { appliedCount++; }
+                    else if (candidate.stage === "Interviewing") { interviewingCount++; }
+                    else if (candidate.stage === "Screening") { screeningCount++; }
+                    else if (candidate.stage === "Offered") { offeredCount++; }
+                    var personImage = buildIconTemplate(candidate, false, true);
+                    candidatesRows += '<div class="ms-Grid-row itemRow small-font-size" onclick="openDetails(' + candidate.candidateId + ',\'' + candidate.name + '\')">'
+                        + '<div class="ms-sm1 ms-Grid-col">' + personImage + '</div>'
+                        + '<div class="ms-sm4 ms-Grid-col text-row">' + candidate.name + '</div>'
+                        + '<div class="ms-sm2 ms-Grid-col text-row">Yesterday</div>'
+                        + '<div class="ms-sm3 ms-Grid-col text-row">' + candidate.location.city + ', ' + candidate.location.state + '</div>'
+                        + '<div class="ms-sm2 ms-Grid-col text-row stage-btn" data-index="' + index + '" data-positionId="' + candidate.positionId + '">'
+                        + '<span class="stageColumn label-' + candidate.id + '" data-index="' + index + '" data-positionId="' + candidate.positionId + '">' + candidate.stage + '</span>'
+                        + '</div>'
+                        + '</div>';
+                });
+                $("#applied-count").text(appliedCount);
+                $("#screening-count").text(screeningCount);
+                $("#interviewing-count").text(interviewingCount);
+                $("#offered-count").text(offeredCount);
+                $("#candidate-rows").html(candidatesRows);
+                var extraLabel = data.candidates.length === 1 ? "candidate" : "candidates";
+                $("#candidates-count-label").text(data.candidates.length + " " + extraLabel);
+            }
+            else {
+                $(".show-candidates-section").hide();
+            }
+
+            if (hirringTeam.length > 0) {
+                var template = '';
+                hirringTeam.forEach(function (hrPerson) {
+                    template += buildIconTemplate(hrPerson, true, false);
+                });
+                $("#hrStuffImagesTemplate").html(template);
+            }
+            else {
+                $(".show-hr-section").hide();
+            }
+        }
+
+        function buildIconTemplate(person, addName, centerImage) {
+            var nameAddition = "";
+            var extraClass = "";
+            if (addName) {
+                extraClass = 'ms-sm3 ms-Grid-col';
+                var firstName = person.name.substr(0, person.name.indexOf(' '));
+                nameAddition = '<div class="hrImage">'
+                    + '<span class="small-font-size" title="' + person.name + '">' + firstName + '</span>'
+                    + '</div>';
+            }
+
+            var centerImage = centerImage ? 'text-align: center;' : '';
+            return '<div class="' + extraClass + '">'
+                + '<div style="' + centerImage + '">'
+                + '<div class="ms-Image itemImage">'
+                + '<img alt="' + person.name + '" class="ms-Image-image is-loaded ms-Image-image--cover ms-Image-image--portrait is-fadeIn" src="' + person.profilePicture + '" />'
+                + '</div>'
+                + nameAddition
+                + '</div>'
+                + '</div>';
+        }
+
+        function openDetails(candidateId, candidateName) {
+            microsoftTeams.tasks.startTask({
+                url: window.location.origin + '/StaticViews/CandidateFeedback.html?candidateId=' + encodeURIComponent(candidateId),
+                title: "Feedback for " + candidateName,
+                width: "large",
+                height: "large"
+            });
+        }
+
+        $(async () => {
+            await this.handlePageLoad();
+            this.loadPage();
+        })
+
+    </script>
+</head>
+<body dir="ltr">
+    <div class="teams">
+        <div class="ms-Grid-row jobTitleHeader">
+            <div class="ms-Grid-col ms-sm5">
+                <div class="row ms-Grid-row wideRow"><strong id="job-title"></strong></div>
+                <div class="row ms-Grid-row medium-font-size"><span>Hiring Manager: <strong id="hiring-manager"></strong></span></div>
+                <div class="row ms-Grid-row medium-font-size"><span>ID: <strong id="job-id"></strong></span></div>
+                <div class="row ms-Grid-row medium-font-size"><span>Location: <strong id="job-location"></strong></span></div>
+            </div>
+            <div class="ms-Grid-col ms-sm7 applicantsColumn">
+                <div class="row ms-Grid-row count-labels">
+                    <div id="applied-count" class="ms-Grid-col ms-sm2">0</div>
+                    <div class="ms-Grid-col ms-sm1">|</div>
+                    <div id="screening-count" class="ms-Grid-col ms-sm2">0</div>
+                    <div class="ms-Grid-col ms-sm1">|</div>
+                    <div id="interviewing-count" class="ms-Grid-col ms-sm2">0</div>
+                    <div class="ms-Grid-col ms-sm1">|</div>
+                    <div id="offered-count" class="ms-Grid-col ms-sm2">0</div>
+                </div>
+                <div class="row ms-Grid-row">
+                    <div class="ms-Grid-col ms-sm2 medium-font-size text-overflow">applied</div>
+                    <div class="ms-Grid-col ms-sm2 ms-smPush1 medium-font-size text-overflow">screening</div>
+                    <div class="ms-Grid-col ms-sm2 ms-smPush2 medium-font-size text-overflow">interviewing</div>
+                    <div class="ms-Grid-col ms-sm2 ms-smPush3 medium-font-size text-overflow">offered</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-Grid-row jobDetails">
+            <div class="ms-Grid-col ms-sm12">
+                <div class="row ms-Grid-row wideRow">
+                    <div class="ms-sm6 ms-Grid-col"><strong class="small-font-size">Job details</strong></div>
+                    <div class="ms-sm2 ms-Grid-col small-font-size"><strong>Hiring Manager</strong></div>
+                    <div class="ms-sm4 ms-Grid-col small-font-size show-hr-section"><strong>Hiring Team</strong></div>
+                </div>
+            </div>
+            <div class="ms-Grid-col ms-sm12">
+                <div class="row ms-Grid-row last-row">
+                    <div id="job-description" class="ms-sm6 ms-Grid-col small-font-size"></div>
+                    <div id="hrManagerImagesTemplate" class="ms-sm2 ms-Grid-col"></div>
+                    <div id="hrStuffImagesTemplate" class="ms-sm4 ms-Grid-col show-hr-section"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ms-Grid-row show-candidates-section">
+            <div class="ms-sm12 wideRow ms-Grid-col applicantsTitle">
+                <div class="ms-Grid-col ms-sm12">
+                    <span class="applicantsHeader">Applicants</span>
+                    <span id="candidates-count-label"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-Grid gridList show-candidates-section">
+            <div class="ms-Grid-row headerRow">
+                <div class="ms-sm1 ms-Grid-col"></div>
+                <div class="ms-sm4 ms-Grid-col">Name</div>
+                <div class="ms-sm2 ms-Grid-col">Modified</div>
+                <div class="ms-sm3 ms-Grid-col">Location</div>
+                <div class="ms-sm2 ms-Grid-col">Current Stage</div>
+            </div>
+            <div id="candidate-rows"></div>
+        </div>
+    </div>
+</body>
+</html>

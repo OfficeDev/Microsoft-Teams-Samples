@@ -249,6 +249,14 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![PersonaCardSetIcon](BotFormattingCards/Images/13.PersonaCardSetIcon.png)
 
+**Adaptive Card updated to be responsive using targetWidth:**
+
+![Layout](BotFormattingCards/Images/14.Layout.png)
+
+**Mobile:**
+
+![Layout](BotFormattingCards/Images/15.LayoutMobile.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.

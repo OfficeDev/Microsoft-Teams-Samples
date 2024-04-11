@@ -13,12 +13,13 @@ class GraphHelper {
      */
     static async createMeetingAsync(userId, excelData) {
         var applicationToken = await auth.getAccessToken();
+        console.log(applicationToken);
 
-        await axios.post(`https://graph.microsoft.com/beta/users/${userId}/events`, excelData, {
+        await axios.post(`https://graph.microsoft.com/beta/users/${userId}/events`, excelData, 
+        {
             headers: {
                 "authorization": "Bearer " + applicationToken,
-                "contentType": 'application/json',
-                "Prefer": "outlook.timezone=\"Asia/Kolkata\""
+                "contentType": 'application/json'
             }
         });
     }

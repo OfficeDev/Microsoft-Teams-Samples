@@ -28,120 +28,114 @@ class DialogBot extends TeamsActivityHandler {
             let arr = [];
             var data;
             switch (context.activity.text) {
-                case "login":
-                case "logout":
-                    // Run the Dialog with the new message Activity.
+            case 'login':
+                await this.dialog.run(context, this.dialogState);
+                break;
+            case 'logout':
+                // Run the Dialog with the new message Activity.
+                await this.dialog.run(context, this.dialogState);
+                await this.cardActivityAsync(context);
+                break;
+            case 'listapp':
+                // Run the Dialog with the new message Activity.
+                data = await AppCatalogHelper.GetAllapp(context);
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.ListCardData(context);
+                } else {
+                    arr = await this.GetData(data);
+                    await this.DislplayCardData(context, arr, 'Listapp');
+                    await this.ListCardData(context);
+                }
+                // this.FormatData(data);
+                break;
+            case 'app':
+                // Run the Dialog with the new message Activity.
+                data = await AppCatalogHelper.GetappById(context);
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.ListCardData(context);
+                } else {
+                    arr = await this.GetData(data);
+                    await this.DislplayCardData(context, arr, 'app');
+                    await this.ListCardData(context);
+                }
+                break;
+            case 'findapp':
+                // Run the Dialog with the new message Activity.
+                data = await AppCatalogHelper.FindApplicationByTeamsId(context);
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.ListCardData(context);
+                } else {
+                    arr = await this.GetData(data);
+                    await this.DislplayCardData(context, arr, 'findapp');
+                    await this.ListCardData(context);
+                }
+                break;
+            case 'status':
+                // Run the Dialog with the new message Activity.
+                data = await AppCatalogHelper.AppStatus(context);
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.ListCardData(context);
+                } else {
+                    arr = await this.GetData(data);
+                    await this.DislplayCardData(context, arr, 'status');
+                    await this.ListCardData(context);
+                }
+                break;
+            case 'bot':
+                // Run the Dialog with the new message Activity.
+                data = await AppCatalogHelper.ListAppHavingBot(context);
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.ListCardData(context);
+                } else {
+                    arr = await this.GetData(data);
+                    await this.DislplayCardData(context, arr, 'bot');
+                    await this.ListCardData(context);
+                }
+                break;
+            case 'home':
+                await this.cardActivityAsync(context);
+                break;
+            case 'list':
+                await this.ListCardData(context);
+                break;
+            case 'publish':
+                data = await AppCatalogHelper.PublishApp();
+                if (data === null) {
                     await this.dialog.run(context, this.dialogState);
                     await this.cardActivityAsync(context);
-                    break;
-                case "listapp":
-                    //Run the Dialog with the new message Activity.
-                    data = await AppCatalogHelper.GetAllapp(context);
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.ListCardData(context);
-                    }
-                    else {
-                        arr = await this.GetData(data);
-                        await this.DislplayCardData(context, arr, "Listapp");
-                        await this.ListCardData(context);
-                    }
-                    // this.FormatData(data);
-                    break;
-                case "app":
-                    //Run the Dialog with the new message Activity.
-                    data = await AppCatalogHelper.GetappById(context);
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.ListCardData(context);
-                    }
-                    else {
-                        arr = await this.GetData(data);
-                        await this.DislplayCardData(context, arr, "app");
-                        await this.ListCardData(context);
-                    }
-                    break;
-                case "findapp":
-                    //Run the Dialog with the new message Activity.
-                    data = await AppCatalogHelper.FindApplicationByTeamsId(context);
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.ListCardData(context);
-                    }
-                    else {
-                        arr = await this.GetData(data);
-                        await this.DislplayCardData(context, arr, "findapp");
-                        await this.ListCardData(context);
-                    }
-                    break;
-                case "status":
-                    //Run the Dialog with the new message Activity.
-                    data = await AppCatalogHelper.AppStatus(context);
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.ListCardData(context);
-                    }
-                    else {
-                        arr = await this.GetData(data);
-                        await this.DislplayCardData(context, arr, "status");
-                        await this.ListCardData(context);
-                    }
-                    break;
-                case "bot":
-                    //Run the Dialog with the new message Activity.
-                    data = await AppCatalogHelper.ListAppHavingBot(context);
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.ListCardData(context);
-                    }
-                    else {
-                        arr = await this.GetData(data);
-                        await this.DislplayCardData(context, arr, "bot");
-                        await this.ListCardData(context);
-                    }
-                    break;
-                case "home":
+                } else {
+                    await this.DislplayData(context, 'publish', data);
                     await this.cardActivityAsync(context);
-                    break;
-                case "list":
-                    await this.ListCardData(context);
-                    break;
-                case "publish":
-                    data = await AppCatalogHelper.PublishApp();
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.cardActivityAsync(context);
-                    }
-                    else {
-                        await this.DislplayData(context, "publish", data);
-                        await this.cardActivityAsync(context);
-                    }
-                    break;
-                case "update":
-                    data = await AppCatalogHelper.UpdateApp();
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.cardActivityAsync(context);
-                    }
-                    else {
-                        await this.DislplayData(context, "update", data);
-                        await this.cardActivityAsync(context);
-                    }
-                    break;
-                case "delete":
-                    data = await AppCatalogHelper.DeleteApp();
-                    if (data === null) {
-                        await this.dialog.run(context, this.dialogState);
-                        await this.cardActivityAsync(context);
-                    }
-                    else {
-                        await this.DislplayData(context, "Delete","App deleted successfully");
-                        await this.cardActivityAsync(context);
-                    }
-                    break;
-                default:
-                    await context.sendActivity(MessageFactory.text(context.activity.text, context.activity.text));
-                    break;
+                }
+                break;
+            case 'update':
+                data = await AppCatalogHelper.UpdateApp();
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.cardActivityAsync(context);
+                } else {
+                    await this.DislplayData(context, 'update', data);
+                    await this.cardActivityAsync(context);
+                }
+                break;
+            case 'delete':
+                data = await AppCatalogHelper.DeleteApp();
+                if (data === null) {
+                    await this.dialog.run(context, this.dialogState);
+                    await this.cardActivityAsync(context);
+                } else {
+                    await this.DislplayData(context, 'Delete', 'App deleted successfully');
+                    await this.cardActivityAsync(context);
+                }
+                break;
+            default:
+                await context.sendActivity(MessageFactory.text(context.activity.text, context.activity.text));
+                break;
             }
 
             // Run the Dialog with the new message Activity.
@@ -159,6 +153,7 @@ class DialogBot extends TeamsActivityHandler {
         await this.conversationState.saveChanges(context, false);
         await this.userState.saveChanges(context, false);
     }
+
     async GetData(data) {
         var arr = [];
         data.value.slice(0, 10).map(element => {
@@ -168,43 +163,44 @@ class DialogBot extends TeamsActivityHandler {
 
             });
         });
-        console.log("!", arr);
+        console.log('!', arr);
         return arr;
     }
+
     async cardActivityAsync(context) {
         const cardActions = [
             {
                 type: ActionTypes.MessageBack,
                 title: 'Home',
                 value: 1,
-                text: 'home',
+                text: 'home'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'List',
                 value: 2,
-                text: 'list',
+                text: 'list'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'Delete App',
                 value: 3,
-                text: 'delete',
+                text: 'delete'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'Publish App',
                 value: 4,
-                text: 'publish',
+                text: 'publish'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'Update app',
                 value: 5,
-                text: 'update',
+                text: 'update'
             }
         ];
-            await this.sendWelcomeCard(context, cardActions);
+        await this.sendWelcomeCard(context, cardActions);
     }
 
     async ListCardData(context) {
@@ -213,37 +209,37 @@ class DialogBot extends TeamsActivityHandler {
                 type: ActionTypes.MessageBack,
                 title: 'Home',
                 value: 1,
-                text: 'home',
+                text: 'home'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'List Apps',
                 value: 3,
-                text: 'listapp',
+                text: 'listapp'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'ListApp by ID',
                 value: 4,
-                text: 'app',
+                text: 'app'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'App based on manifest Id',
                 value: 5,
-                text: 'findapp',
+                text: 'findapp'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'App Status',
                 value: 6,
-                text: 'status',
+                text: 'status'
             },
             {
                 type: ActionTypes.MessageBack,
                 title: 'List of bot',
                 value: 7,
-                text: 'bot',
+                text: 'bot'
             }
         ];
         const card = CardFactory.heroCard(
@@ -266,57 +262,56 @@ class DialogBot extends TeamsActivityHandler {
     }
 
     async DislplayData(context, header, response) {
-        let card = {
-            "type": "AdaptiveCard",
-            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-            "version": "1.3",
-            "body": [
+        const card = {
+            type: 'AdaptiveCard',
+            $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+            version: '1.3',
+            body: [
                 {
-                    "type": "TextBlock",
-                    "size": "Medium",
-                    "weight": "Bolder",
-                    "text": header
+                    type: 'TextBlock',
+                    size: 'Medium',
+                    weight: 'Bolder',
+                    text: header
                 },
                 {
-                    "type": "TextBlock",
-                    "wrap": true,
-                    "text": response
+                    type: 'TextBlock',
+                    wrap: true,
+                    text: response
                 }]
-        }
+        };
         var tdata = CardFactory.adaptiveCard(card);
         await context.sendActivity({ attachments: [tdata] });
     }
 
     async DislplayCardData(context, cardData, header) {
-
-        console.log("cardData", cardData);
-        let body = [{
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "text": header
-        },]
+        console.log('cardData', cardData);
+        const body = [{
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Bolder',
+            text: header
+        }];
         cardData.forEach(data => {
             body.push(
                 {
-                    "type": "TextBlock",
-                    "wrap": true,
-                    "text": data.displayName
+                    type: 'TextBlock',
+                    wrap: true,
+                    text: data.displayName
                 },
                 {
-                    "type": "TextBlock",
-                    "wrap": true,
-                    "text": data.id
+                    type: 'TextBlock',
+                    wrap: true,
+                    text: data.id
                 }
-            )
-        })
+            );
+        });
 
-        let card = {
-            "type": "AdaptiveCard",
-            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-            "version": "1.3",
-            "body": body
-        }
+        const card = {
+            type: 'AdaptiveCard',
+            $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+            version: '1.3',
+            body: body
+        };
         var tdata = CardFactory.adaptiveCard(card);
         await context.sendActivity({ attachments: [tdata] });
     }

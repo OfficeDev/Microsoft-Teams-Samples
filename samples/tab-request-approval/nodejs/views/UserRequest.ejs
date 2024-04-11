@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
             integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
@@ -94,18 +93,18 @@
             };
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
                     microsoftTeams.tasks.submitTask();
+                    
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask();
         };  
 
         function RejectRequest() {
@@ -117,7 +116,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
@@ -127,8 +126,6 @@
                     console.log('error', errorThrown);
                 }
             });
-
-            microsoftTeams.tasks.submitTask();
         };
     </script>
 </body>

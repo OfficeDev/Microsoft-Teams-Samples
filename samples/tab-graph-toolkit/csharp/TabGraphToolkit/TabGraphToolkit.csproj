@@ -4,14 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\build\**" />
+    <Content Remove="ClientApp\build\**" />
+    <EmbeddedResource Remove="ClientApp\build\**" />
+    <None Remove="ClientApp\build\**" />
+  </ItemGroup>
  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.31" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\build" />
   </ItemGroup>
 
 </Project>

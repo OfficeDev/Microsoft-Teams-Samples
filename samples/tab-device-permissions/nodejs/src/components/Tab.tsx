@@ -102,10 +102,10 @@ const Tab = () => {
               /* Component to capture audio in browser */
               children={<CaptureAudioWeb />} writeKey={''}
             />
-            <Segment
-              /* Component to Get notification in browser */
-              children={<GetNotificationWeb />} writeKey={''}
-            />
+            {/* <Segment */}
+               {/* Component to Get notification in browser  */}
+              {/* children={<GetNotificationWeb />} writeKey={''} */}
+            {/* /> */}
           </div>
           <div className='Grid'>
             <Segment
