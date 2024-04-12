@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "name": {
-    "short": "search-extension-settings",
+    "short": "Search Messaging Extension",
     "full": "Microsoft Teams V4 Search Messaging Extension Bot and settings"
   },
   "description": {
@@ -37,7 +37,6 @@
           "description": "Test command to run query",
           "title": "Search",
           "type": "query",
-          "initialRun": true,
           "parameters": [
             {
               "name": "searchQuery",
@@ -46,11 +45,22 @@
               "inputType": "text"
             }
           ]
+        },
+        {
+          "id": "wikipediaSearch",
+          "title": "wikipedia",
+          "initialRun": false,
+          "description": "Type to search in wikipedia",
+          "parameters": [
+            {
+              "name": "name",
+              "title": "Name",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
         }
       ]
     }
-  ],
-  "validDomains": [
-    "<<YOUR-BASE-URL-DOMAIN>>"
   ]
 }
