@@ -164,6 +164,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In Teams, Install App
 
  ![](Images/Install.png)
+ 
+ ![](Images/SelectTeams.png)
 
  ![](Images/InstallSaveTab.png)
 
