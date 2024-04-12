@@ -117,7 +117,7 @@ If you copy and paste a link from https://www.BotFramework.com into the compose 
 
 **Select your app icon to launch your app in Office on the web**
 
-![Search in Extension](Images/SearchInExtension.PNG)
+![Search in Extension](Images/SearchInExtension.png)
 
 ## Deploy the bot to Azure
 
