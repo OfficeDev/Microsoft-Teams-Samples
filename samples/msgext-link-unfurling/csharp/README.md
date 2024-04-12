@@ -96,9 +96,9 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 
-> Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
-
 ![Add-App](Images/Add-App.png)
+
+> Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 
 If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
