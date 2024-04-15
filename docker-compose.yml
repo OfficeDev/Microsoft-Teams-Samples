@@ -16,4 +16,14 @@ services:
       # Mount the root folder that contains .git
       - .:/workspace:cached
     command: sleep infinity
+    links:
+      - csharp
+    # ...
+
+  csharp:
+    image: mcr.microsoft.com/devcontainers/dotnet:0-6.0
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: sleep infinity
     # ...

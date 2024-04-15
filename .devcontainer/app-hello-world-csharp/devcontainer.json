@@ -1,0 +1,7 @@
+{
+	"name": "app-hello-world-csharp",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "csharp",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web"
+}
