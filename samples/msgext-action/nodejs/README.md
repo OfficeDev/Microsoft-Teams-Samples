@@ -120,22 +120,26 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 1) Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code.
 
-![ME-Card ](Images/CreateAdaptiveCard.png)
+![Install](Images/1.Install.png)
 
-![ME-Card-in-chat ](Images/CardInComposeBox.png)
+![ME-Card ](Images/2.SelectActionMessageExtension.png)
 
-![ME-Posted-Card ](Images/CardPreview.png)
+![ME-Card ](Images/2.CreateCard.png)
+
+![ME-Posted-Card ](Images/3.SendCard.png)
 
 
 2) Selecting the **Fetch Roster** command from the Compose Box command list. You will presented with prompt for Just In Time installation if app is not already added to current team/chat.
 
-![Roster-Fetch ](Images/FetchRoster.png)
+![Roster-Fetch ](Images/4.FetchRoaster.png)
 
 3) You can try with other supported commands as well like: **Adaptive Card**, **Web View**, **HTML**, **Razor View**
 
-![Static-Tab ](Images/StaticPage.png)
+![Static-Tab ](Images/7.StaticHtml.png)
 
-![Web-View ](Images/WebView.png)
+![Web-View ](Images/5.EnterDetailsCard_WebView.png)
+
+![Web-View ](Images/6.SendEmpDetails.png)
 
 ## Deploy the bot to Azure
 

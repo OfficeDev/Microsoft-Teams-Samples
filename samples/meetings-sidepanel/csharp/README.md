@@ -108,25 +108,32 @@ User interactions(Meeting Organizer)
 - **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
 - **Publish Agenda** - Sends the agenda list to the meeting chat.
 
+## Installation and setup meetings sidepanel.
+![Install](Images/1.Install.png)
+
+![Install](Images/2.AddToMeeting.png)
+
+![Install](Images/3.ConfigureTab.png)
+
 1. Welcome image to added side panel.
-![Customform](SidePanel/Images/welcome.png)
+![Customform](SidePanel/Images/4.Sidepanel.png)
 
 2. Screen ready to added the agenda.
-![AddNewAgenda](SidePanel/Images/addnewagenda.png)
+![AddNewAgenda](SidePanel/Images/5.PushedAgenda.png)
 
 3. On click of "Add" button, agenda point will be added to the agenda list.
-![AgendaSubmit](SidePanel/Images/addagendabutton.png)
+![AgendaSubmit](SidePanel/Images/6.PublishAgenda.png)
 
 4. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
-![AgendaCard](SidePanel/Images/agendacard.png)
+![AgendaCard](SidePanel/Images/7.PublishAgendaChat.png)
 
 ## Interaction with app theme when Teams theme changes.
 
-![Preview Image](Images/light.PNG)
+![Preview Image](SidePanel/Images/8.DarkTheme.png)
 
-![Preview Image](Images/dark.PNG)
+![Preview Image](SidePanel/Images/4.Sidepanel.png)
 
-![Preview Image](Images/contrast.PNG)
+![Preview Image](SidePanel/Images/9.ContrastTheme.png)
 
 ## Deploy the bot to Azure
 
