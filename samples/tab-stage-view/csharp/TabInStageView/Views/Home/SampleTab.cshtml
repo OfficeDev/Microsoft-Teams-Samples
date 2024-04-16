@@ -1,26 +1,47 @@
-﻿<!DOCTYPE html>
+﻿@page
+@model TabInStageView.Models.TabInfoAction
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+            crossorigin="anonymous">
     </script>
     <script>
-        microsoftTeams.app.initialize().then(() => {
-        });
+        // App Initilize
+        microsoftTeams.app.initialize();
+
         function createLink() {
+
             // Client id
             var appId = '@(ViewBag.AppId)';
+
+            // Get thread id by this format "19:***********thread.v2";
+            var threadId = "@TabInStageView.Bots.ActivityBot._threadId";
 
             // Application base url and this redirects to Index view
             var contentUrl = window.location.origin;
 
+            var context = {
+                appId: appId,
+                contentUrl: contentUrl,
+                websiteUrl: contentUrl,
+                name: "DemoStageView",
+                openMode: "popoutWithChat",
+                threadId:threadId
+            }
+
+            const encodedContext = encodeURIComponent(JSON.stringify(context));
+
             // Passing the values and encoding the url while implementing the deeplink from tab
-            let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context={\"contentUrl\":\"" + contentUrl + "\",\"websiteUrl\":\"" + contentUrl +"\",\"name\":\"DemoStageView\"}";
+            let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context=" + encodedContext;
+
+            console.log("eoncoded URL",url);
+
             microsoftTeams.app.openLink(url);
-            };
+        };
     </script>
 </head>
 
