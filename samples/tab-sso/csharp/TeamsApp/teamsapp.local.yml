@@ -53,7 +53,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ./appsettings.json
+      target: ../TeamsTabSSO/appsettings.json
       content:
         AzureAd:
           TenantId: ${{AAD_APP_TENANT_ID}}
@@ -95,19 +95,3 @@ provision:
     with:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
-
-  # Create or update debug profile in lauchsettings file
-  - uses: file/createOrUpdateJsonFile
-    with:
-      target: ./Properties/launchSettings.json
-      content:
-        profiles:
-          Microsoft Teams (browser):
-            commandName: "Project"
-            dotnetRunMessages: true
-            launchBrowser: true
-            launchUrl: "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&appTenantId=${{TEAMS_APP_TENANT_ID}}&login_hint=${{TEAMSFX_M365_USER_NAME}}"
-            applicationUrl: "https://localhost:44302;http://localhost:2544"
-            environmentVariables:
-              ASPNETCORE_ENVIRONMENT: "Development"
-            hotReloadProfile: "aspnetcore"
