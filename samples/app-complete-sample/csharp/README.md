@@ -29,7 +29,7 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 ## Interaction with app
 
-![ Module ](template-bot-master-csharp/Images/Sample.gif)
+![ Module ](AppCompleteSample/Images/Sample.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -104,7 +104,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
    
 6. Run the bot from a terminal or from Visual Studio:
 
-    A) From a terminal, navigate to `samples/app-checkin-location/csharp`
+    A) From a terminal, navigate to `samples/app-complete-sample/csharp`
 
 	  ```bash
 	  # run the bot
@@ -114,7 +114,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 	     - Launch Visual Studio
 	     - File -> Open -> Project/Solution
 	     - Navigate to `app-complete-sample` folder
-	     - Select `template-bot-master-csharp.sln` file
+	     - Select `AppCompleteSample.sln` file
 	     - Press `F5` to run the project
 
 7. Setup Manifest for Teams
@@ -132,7 +132,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AppCompleteSAmple/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
    
 Congratulations!!! You have just created and sideloaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
 NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with Microsoft Entra ID nor Visual Studio Team Services.
@@ -181,15 +181,17 @@ This directory holds utility functions for the project.
 
 ## Running the sample.
 
-![ Hello ](Images/Hello.png)
+![ Add Sample ](AppCompleteSample/Images/1.Install.png)
 
-![ Dilaog ](Images/dialog.png)
+![ Hello ](AppCompleteSample/Images/HelloDialog.png)
 
-![ Quiz1 ](Images/Quiz1.png)
+![ Dilaog ](AppCompleteSample/Images/Dialog.png)
 
-![ Quiz2 ](Images/Quiz2.png)
+![ Quiz ](AppCompleteSample/Images/Quiz.png)
 
-![ Tab ](Images/static-tab.png)
+![ MultiDialog2 ](AppCompleteSample/Images/MultiDialog2.png)
+
+![ Tab ](AppCompleteSample/Images/3.BotTab.png)
 
 ## Outlook on the web
 
@@ -199,15 +201,15 @@ This directory holds utility functions for the project.
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](AppCompleteSample/Images/InstallOutlook.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![AppOutlook](AppCompleteSample/Images/AppOutlook.png)
 
 **Select your app icon from message extension and find ward, it will show all options**
 
-![AppOutlook](Images/AppOutlook_msgext.png)
+![AppOutlook](AppCompleteSample/Images/AppOutlook_msgext.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -219,11 +221,11 @@ This directory holds utility functions for the project.
 
 **Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](AppCompleteSample/Images/InstallOffice.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![AppOffice](AppCompleteSample/Images/AppOffice.png) 
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
