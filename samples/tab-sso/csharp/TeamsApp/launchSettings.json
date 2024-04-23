@@ -1,8 +1,17 @@
 {
 	"profiles": {
+		// Debug project within Teams
 		"Microsoft Teams (browser)": {
 			"commandName": "Project",
-			"launchUrl": "https://teams.microsoft.com/l/app/%TEAMSAPPID%?installAppPackage=true&webjoin=true&appTenantId=%TENANTID%&login_hint=%USERNAME%"
+			"launchUrl": "https://teams.microsoft.com/1/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&appTenantId=${{TEAMS_APP_TENANT_ID}}&login_hint=${{TEAMSFX_M365_USER_NAME}}"
+		},
+		"Microsoft 365 app (browser)": {
+			"commandName": "Project",
+			"launchUrl": "https://www.office.com/m365apps/${{M365_APP_ID}}?auth=2&login_hint=${{TEAMSFX_M365_USER_NAME}}"
+		},
+		"Outlook (browser)": {
+			"commandName": "Project",
+			"launchUrl": "https://outlook.office.com/host/${{M365_APP_ID}}?login_hint=${{TEAMSFX_M365_USER_NAME}}"
 		}
 	}
 }
