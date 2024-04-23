@@ -126,7 +126,7 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 ### 4. Setup Manifest for Teams
 
 1. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
-   - `3a0f426b-7465-4b81-ab2f-d3e4b1d999d0` with Application id generated from Step 3
+   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 3
    - `<<domain-name>>` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `AppManifest_Hub` folder into a `AppManifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
