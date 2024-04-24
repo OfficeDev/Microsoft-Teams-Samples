@@ -20,6 +20,11 @@ This is a sample meeting side panel application which demonstrates how to enable
 Once the meeting is scheduled, follow this doc to enable [Provide Cart Catptions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
 
+## Enable CART Captions From Settings
+![Enable CART-1](Images/8.SettingToEnableCart-1.png)
+
+![Enable CART-2](Images/7.SettingsToEnableCart-2.png)
+
 ## Included Features
 * Meeting Chat 
 * Meeting Details
@@ -87,17 +92,26 @@ Copy the CART link it will used while configuring tab for meeting.
 
 ## Running the sample
 
+![Install App](Images/1.Install.png)
+
+![Add TO Meeting](Images/2.AddToMeeting.png)
+
+![Configurable Tab ](Images/3.ConfigWithoutCartURL.png)
+
+![Configurable Tab](Images/4.ConfigWithCartURL.png)
+
 1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
-![Add Tab](MeetingLiveCaption/Images/AddMeetingCaption.png)
+![Add Tab](Images/9.ScheduleMeeting.png)
 
 2. Once meeting started, turn on live caption.
-![Start live caption](MeetingLiveCaption/Images/TurnOnLiveCaption.png)
+![Enable Live Caption](Images/5.SettingsToEnableLiveCaption.png)
 
 3. Once the live caption has started, you can use the app to send live caption.
-![Send live caption](MeetingLiveCaption/Images/MeetingCaptionSidePanel.png)
+![Send live caption](Images/6.LiveCaption.png)
 
 4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](MeetingLiveCaption/Images/LiveCaption.png)
+![Caption in meeting](Images/LiveCaption.png)
+
 
 ## Further reading
 
