@@ -80,7 +80,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  - Navigate to ```samples\tab-personal\mvc-csharp``` folder
  - Select ```PersonalTabMVC.sln``` file and open the solution
 
-4. Modify the `manifest.json` in the `/AppManifest` or `/Manifest_Hub` folder and replace the following details:
+4. Modify the `manifest.json` in the `/appPackage` or `/Manifest_Hub` folder and replace the following details:
    - <<Guid>> with any random GUID.
    - `<<Base-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -88,7 +88,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 5. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest or ./Manifest_Hub folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage or ./Manifest_Hub folder, select the zip folder, and choose Open.
 
   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
 
