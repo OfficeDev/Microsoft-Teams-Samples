@@ -142,19 +142,23 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 ## Running the sample
 
-1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
+1. Install App.
+
+![InstallApp](ChatLifecycle/Images/InstallApp.png)
+
+2. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
 
 ![welcome card](ChatLifecycle/Images/welcome.png)
 
-2. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+3. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
 
   ![group chat created](ChatLifecycle/Images/groupchatbuttonclick.png) 
 
-3. created group chat Details.
-![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
-
 4. Successfully Group chat created.
 ![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
+
+5. created group chat Details.
+![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
 
 ## Outlook on the web
 
