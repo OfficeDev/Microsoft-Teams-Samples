@@ -149,17 +149,25 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
 
-![Dashboard](Images/Dashboard.png)
+## Installation and setup meetings sidepanel.
+
+![Install](Images/1.Install.png)
+
+![Install](Images/2.AddToMeeting.png)
+
+![Install](Images/3.ConfigureTab.png)
 
 2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
 
-![AddNewAgendaItem](Images/AddNewAgendaItem.png)
+![AddNewAgendaItem](Images/4.Sidepanel.png)
 
-![AddedNew](Images/AddedNew.png)
+![AddedNew](Images/5.PushedAgenda.png)
 
 3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
 
-![Notification](Images/Notification.png)
+![Notification](Images/6.PublishAgenda.png)
+
+![Notification](Images/7.PublishAgendaChat.png)
 
 **User interactions(Meeting Organizer)**
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
@@ -169,11 +177,11 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ## Interaction with app theme when Teams theme changes.
 
-![Preview Image](Images/light.PNG)
+![Preview Image](Images/4.Sidepanel.png)
 
-![Preview Image](Images/dark.PNG)
+![Preview Image](Images/8.DarkTheme.png)
 
-![Preview Image](Images/contrast.PNG)
+![Preview Image](Images/9.ContrastTheme.png)
 
 ## Deploy the bot to Azure
 
