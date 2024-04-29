@@ -27,7 +27,7 @@ This sample app demonstrates sending notifications to users when presence status
 
 ## Interaction with app
 
-![PreviewImage](Images/Preview.gif)
+![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -86,6 +86,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       - `Presence.Read`
       - `Presence.Read.All`
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+  ![ApiPermission](Images/ApiPermission.png)
   13. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:
@@ -174,19 +175,26 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ## Running with sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 
-![image](Images/Login.png)
+![image0](Images/image0.png)
 
-![image](Images/BeRightBack_validate.png)
+![image1](Images/image1.png)
+
+![image2](Images/image2.png)
 
 - After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
 
-![image](Images/Busy.png)
+![image3](Images/image3.png)
 
-- Change user status from busy to busy offline
+![image4](Images/image4.png)
 
-![image](Images/Offline.png)
+![image5](Images/image5.png)
 
+![image6](Images/image6.png)
+
+![image7](Images/image7.png)
+
+![image8](Images/image8.png)
 
 ## Further reading
 - [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)

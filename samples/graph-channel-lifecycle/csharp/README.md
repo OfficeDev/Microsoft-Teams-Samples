@@ -24,7 +24,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 ## Interaction with app
 
- ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)
+ ![ChannelLifeCycleModule](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)
 
 ## Prerequisites
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -98,11 +98,19 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 ## Running the sample.
 
+  ![](ChannelLifecycle/Images/Image0.png)
+
   ![](ChannelLifecycle/Images/Image1.PNG)
 
   ![](ChannelLifecycle/Images/Image2.PNG)
 
   ![](ChannelLifecycle/Images/Image3.PNG)
+
+  ![](ChannelLifecycle/Images/Image4.png)
+
+  ![](ChannelLifecycle/Images/Image5.png)
+
+  ![](ChannelLifecycle/Images/Image6.png)
   
   [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
   

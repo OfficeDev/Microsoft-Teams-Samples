@@ -25,7 +25,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 ## Interaction with app
 
-![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
+![MeetingsTranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
 ## Prerequisites
 
@@ -141,6 +141,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
+![Policy](MeetingTranscription/Images/Policy.png)
 
 
 6. Setup Manifest for Teams
@@ -157,39 +158,26 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
-## Running the sample
+## Running the sample.
 
-**Upload an app to your org's app catalog:**
+1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
+![Add Bot](MeetingTranscription/Images/1.AddMeetingTranscriptBot.PNG)
 
-![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.png)
+![AddMeetingGroup](MeetingTranscription/Images/2.AddMeetingGroup.png)
 
-**Schedule the meeting and add Meeting Transcript Bot from Apps section in that particular scheduled meeting:**
+![JoinMeeting](MeetingTranscription/Images/3.JoinMeeting.png)
 
-![Add BotApp](MeetingTranscription/Images/AddMeetingTranscriptBot.PNG)
+2. Once meeting started, start the Transcript for the meeting.
+![Start Transcript](MeetingTranscription/Images/4.StartTranscript.png)
 
-**Created and approved by your organization:**
+3. Once the transcription has started, you can see the live transcription it the meeting UI.
+![Leave Meeting](MeetingTranscription/Images/5.LeaveMeeting.png)
 
-![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.png)
+4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
+![Meeting Transcript Card](MeetingTranscription/Images/6.MeetingTranscriptCard.png)
 
-**Welcome echo UI:**
-
-![Add Bot](MeetingTranscription/Images/WelcomeEcho.png)
-
-**Once meeting started, start the Transcript for the meeting:**
-
-![Start Transcript](MeetingTranscription/Images/StartTranscript.PNG)
-
-**Once the transcription has started, you can see the live transcription it the meeting UI:**
-
-![Add Bot](MeetingTranscription/Images/LeaveMeeting.PNG)
-
-**Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module:**
-
-![Add Bot](MeetingTranscription/Images/MeetingTranscriptCard.PNG)
-
-**After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module:**
-
-![Add Bot](MeetingTranscription/Images/TranscriptTaskModule.PNG)
+5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
+![Transcript Task Module](MeetingTranscription/Images/7.TranscriptTaskModule.png)
 
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.
