@@ -492,7 +492,7 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp.sln'
+            - project_path: 'samples/app-complete-sample/csharp/AppCompleteSample.sln'
               name: 'app-complete-sample'
 
       fail-fast: false
