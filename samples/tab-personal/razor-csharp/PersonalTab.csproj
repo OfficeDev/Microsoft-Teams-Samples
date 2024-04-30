@@ -10,13 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AppManifest\manifest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Compile Remove="appPackage\**" />
+    <Compile Remove="TeamsApp\**" />
+    <Content Remove="appPackage\**" />
+    <Content Remove="TeamsApp\**" />
+    <EmbeddedResource Remove="appPackage\**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
+    <None Remove="appPackage\**" />
+    <None Remove="TeamsApp\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
-
+	
 </Project>
