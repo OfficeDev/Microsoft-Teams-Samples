@@ -148,43 +148,43 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/1.AddApp.png)
+![InstallApp](Images/1.Install.png)
 
 **Welcome Message:**
 
-![Initial message](Images/1.Welcome.png)
+![Initial message](Images/2.Welcome.png)
 
 **Adaptive Card:**
 
-![Adaptive Card](Images/2.AdaptiveCard.png)
+![Adaptive Card](Images/3.AdaptiveCard.png)
 
 **Hero Card:**
 
-![Hero Card](Images/3.HeroCard.png)
+![Hero Card](Images/4.HeroCard.png)
 
 **List Card:**
 
-![List Card](Images/4.ListCard.png)
+![List Card](Images/5.ListCard.png)
 
 **Office365 Card:**
 
-![Office365 Connector Card](Images/5.Office365ConnectorCard.png)
+![Office365 Connector Card](Images/6.Office365Card.png)
 
 **SignIn Card:**
 
-![SignIn Card](Images/6.SignIncard.png)
+![SignIn Card](Images/8.SignInCard.png)
 
 **Thumbnail Card:**
 
-![Thumbnail Card](Images/7.ThumbnailCard.png)
+![Thumbnail Card](Images/9.ThumbnailCard.png)
 
 **Collection Card:**
 
-![Collection Card](Images/8.CollectionCard.png)
+![Collection Card](Images/7.CollectionCard.png)
 
 **Oauth Card:**
 
-![Oauth Card](Images/9.OathCard.png)
+![Oauth Card](Images/8.SignInCard.png)
 
 ## Deploy the bot to Azure
 

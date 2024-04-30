@@ -144,19 +144,19 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![Installapp](BotAllCards/Images/Installapp.png)
+![Installapp](BotAllCards/Images/1.Install.png)
 
 **Welcome Cards:**
 
-![WelcomeCards](BotAllCards/Images/WelcomeCards.png)
+![WelcomeCards](BotAllCards/Images/2.Welcome.png)
 
 **All Cards:**
 
-![AllCards](BotAllCards/Images/AllCards.png)
+![AllCards](BotAllCards/Images/3.SelectCards.png)
 
 **Adaptive Card:**
 
-![AdaptiveCard](BotAllCards/Images/AdaptiveCard.png)
+![AdaptiveCard](BotAllCards/Images/4.AdaptiveCard.png)
 
 Add media url from sharepoint or onedrive to the text input to get media loaded to the adaptive card. For more information refer [media elements in card.](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop) 
 
@@ -166,31 +166,31 @@ Add media url from sharepoint or onedrive to the text input to get media loaded 
 
 **Hero Card:**
 
-![HeroCard](BotAllCards/Images/HeroCard.png)
+![HeroCard](BotAllCards/Images/5.HeroCard.png)
 
 **OAuth Card:**
 
-![OAuthCard](BotAllCards/Images/OAuthCard.png)
+![OAuthCard](BotAllCards/Images/6.OathCard.png)
 
 **Signin Card:**
 
-![SigninCard](BotAllCards/Images/SigninCard.png)
+![SigninCard](BotAllCards/Images/7.SignInCard.png)
 
 **Thumbnail Card:**
 
-![ThumbnailCard](BotAllCards/Images/ThumbnailCard.png)
+![ThumbnailCard](BotAllCards/Images/8.ThumbnailCard.png)
 
 **List Card:**
 
-![ListCards](BotAllCards/Images/ListCards.png)
+![ListCards](BotAllCards/Images/9.ListCard.png)
 
 **Collections Card:**
 
-![CollectionsCards](BotAllCards/Images/CollectionsCards.png)
+![CollectionsCards](BotAllCards/Images/10.CollectionCard.png)
 
 **Connector Card:**
 
-![ConnectorCards](BotAllCards/Images/ConnectorCards.png)
+![ConnectorCards](BotAllCards/Images/11.ConnectorCard.png)
 
 ## Deploy the bot to Azure
 
