@@ -11,8 +11,12 @@
 
   <ItemGroup>
     <Compile Remove="appPackage\**" />
+    <Compile Remove="TeamsApp\**" />
     <Content Remove="appPackage\**" />
+    <Content Remove="TeamsApp\**" />
     <EmbeddedResource Remove="appPackage\**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
     <None Remove="appPackage\**" />
+    <None Remove="TeamsApp\**" />
   </ItemGroup>
 </Project>
