@@ -96,21 +96,21 @@ Message the bot and it will respond with an 'Echo: [your message]'.  Add a messa
 
 - **Personal Scope Interactions:**
 
-![personalScope-AddApp ](Images/personalScope-AddApp.png)
+![personalScope-AddApp ](Images/1.Install.png)
 
-![personalScope-Interaction ](Images/personalScope-Interaction.png)
+![personalScope-Interaction ](Images/2.PersonalChat.png)
 
 - **Group Chat Scope Interactions:**
 
-![groupChat-AddApp ](Images/groupChat-AddApp.png)
+![groupChat-AddApp ](Images/5.AddToGC.png)
 
-![groupChat-Interaction ](Images/groupChat-Interaction.png)
+![groupChat-Interaction ](Images/6.GroupChat.png)
 
 - **Team Scope Interactions:**
 
-![teamScope-AddApp ](Images/teamScope-AddApp.png)
+![teamScope-AddApp ](Images/3.AddToTeams.png)
 
-![teamScope-Interaction ](Images/teamScope-Interaction.png)
+![teamScope-Interaction ](Images/4.TeamsChat.png)
 
 
 ## Deploy the bot to Azure

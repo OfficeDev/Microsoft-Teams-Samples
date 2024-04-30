@@ -100,25 +100,31 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 Use the bot command `staticsearch` to get the card with static typeahead search control and use bot command `dynamicsearch` to get the card with dynamic typeahead search control.
 
-![Welcome in typedsearch](TypeaheadSearch/Images/welcome.png)
+![Install App](TypeaheadSearch/Images/1.Install.png)
+
+![Welcome](TypeaheadSearch/Images/2.Welcome.png)
 
 `Static search:`
  Static typeahead search allows users to search from values specified within `input.choiceset` in the Adaptive Card payload.
 
-![static search card](TypeaheadSearch/Images/staticSearchCard.png)
+![static search card](TypeaheadSearch/Images/3.StaticSearch.png)
+
+![static search card](TypeaheadSearch/Images/4.StaticSearch2.png)
 
 Static tpyedhead detail after submission
 
-![static search card](TypeaheadSearch/Images/StaticSearchSubmitDetail.png)
+![static search card](TypeaheadSearch/Images/5.SelectedOption.png)
 
 `Dynamic search:`
  Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
 
-![dynamic search card](TypeaheadSearch/Images/dynamicSearch.png)
+![dynamic search card](TypeaheadSearch/Images/6.DynamicSearch.png)
+
+![dynamic search card](TypeaheadSearch/Images/7.DynamicSearch2.png)
 
 `On `Submit` button click, the bot will return the choice that we have selected:`
 
-![dynamic search results](TypeaheadSearch/Images/dynamicSearchsubmitdetail.png)
+![dynamic search results](TypeaheadSearch/Images/8.SelectedDynamicSearch.png)
 
 ## Further reading
 

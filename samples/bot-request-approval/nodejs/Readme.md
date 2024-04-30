@@ -120,19 +120,23 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  
  ## Running the sample.
  
+  ![Initial Card](Images/1.Install.png)
+
+  ![Add TO Chat](Images/2.AddToChat.png)
+
 - Initiated request using bot command `request` in group chat.
 
-  ![Initial Card](Images/InitialCard.png)
+  ![Mention Bot](Images/2.MentionBot.png)
 
 - Card will refresh for requester to fill details.
 
-  ![Request Card](Images/CreateTask.png)
+  ![Task Management](Images/3.TaskManagement.png)
   
 - After submitting the request, requester can edit or cancel the request.
 
     **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
 
-  ![Edit/Cancel Card](Images/UserCard.png)
+  ![Edit/Cancel Card](Images/4.ResponseSent.png)
 
 **Manager:**
 
@@ -140,11 +144,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
     **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
 
-  ![Approve/Reject Card](Images/ManagerCard.png)
+  ![Approve/Reject Card](Images/5.RecievedApproveRequest.png)
 
 - If manager approves or rejects the request, card will be refreshed for all the members in group chat.
 
-  ![Status Card](Images/ApprovedRequest.png)
+  ![Status Card](Images/6.Approved.png)
   
 
 ## Further reading

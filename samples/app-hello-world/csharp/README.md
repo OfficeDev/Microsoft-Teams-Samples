@@ -121,9 +121,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![InstallApp](Microsoft.Teams.Samples.HelloWorld.Web/Images/Install.png)
 
+**Welcome Bot:**
+
+![Hello Bot](Microsoft.Teams.Samples.HelloWorld.Web/Images/Bot.png)
+
 **Welcome UI:**
 
-![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
+![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/Tab.png)
 
 ## Outlook on the web
 

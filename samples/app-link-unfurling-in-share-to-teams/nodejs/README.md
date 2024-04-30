@@ -105,17 +105,19 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-  ![tab](Images/tabpage.png)
+  ![tab](Images/1.Install.png)
   
-  ![Link unfurling STT](Images/linkunfurlscreen.png)
+  ![Continue Devtunnel](Images/2.Continue.png)
 
-  ![Link unfurling success](Images/successcard.png)
+  ![Tab](Images/3.Tab.png)
   
-  ![Link unfurling card](Images/channelcard.png)
+  ![Share To Teams](Images/4.ShareToTeams.png)
 
-  ![tab-web](Images/tabpageweb.png)
+  ![Link Shared](Images/5.Shared.png)
 
-  ![Link unfurling STT web](Images/linkunfurlingweb.png)
+  ![Link unfurling STT Teams](Images/6.InTeams.png)
+
+  ![View Via Card](Images/7.ViewViaCard.png)
 
 ## Deploy the bot to Azure
 
