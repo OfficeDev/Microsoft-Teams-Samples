@@ -53,7 +53,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../PersonalTabSSO/appsettings.json
+      target: ../appsettings.json
       content:
         AzureAd:
           ClientId: ${{AAD_APP_CLIENT_ID}}
