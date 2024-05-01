@@ -53,7 +53,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ./appsettings.json
+      target: ../PersonalTabSSO/appsettings.json
       content:
         AzureAd:
           ClientId: ${{AAD_APP_CLIENT_ID}}
@@ -73,39 +73,33 @@ provision:
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./AppManifest/manifest.json
+      manifestPath: ./appPackage/manifest.json
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./AppManifest/manifest.json
-      outputZipPath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./AppManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
   # Apply the Teams app manifest to an existing Teams app in
   # Teams Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
-
-  # Create or update debug profile in lauchsettings file
-  - uses: file/createOrUpdateJsonFile
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+  # Extend your Teams app to Outlook and the Microsoft 365 app
+  - uses: teamsApp/extendToM365
     with:
-      target: ./Properties/launchSettings.json
-      content:
-        profiles:
-          Microsoft Teams (browser):
-            commandName: "Project"
-            dotnetRunMessages: true
-            launchBrowser: true
-            launchUrl: "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&appTenantId=${{TEAMS_APP_TENANT_ID}}&login_hint=${{TEAMSFX_M365_USER_NAME}}"
-            applicationUrl: "https://localhost:44302;http://localhost:2544"
-            environmentVariables:
-              ASPNETCORE_ENVIRONMENT: "Development"
-            hotReloadProfile: "aspnetcore"
+      # Relative path to the build app package.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+    # Write the information of created resources into environment file for
+    # the specified environment variable(s).
+    writeToEnvironmentFile:
+      titleId: M365_TITLE_ID
+      appId: M365_APP_ID
