@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph API Explorer</title>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js referrerpolicy="no-referrer"></script>
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <script>
+        var tenantId;
+
+        // Initialize teams js sdk
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(function () {
+                microsoftTeams.app.getContext().then((context) => {
+                    tenantId = context.user.tenant.id;
+                });
+            })
+        });
+
+        function sendNotification(recipientUserId) {
+            console.log("entered sendNotification" + tenantId)
+            $.ajax({
+                type: 'POST',
+                url: '/sendFeedNotification',
+                dataType: 'json',
+                data: {
+                    'recipientUserId': "830d1f62-704f-453e-8114-964551d13547",
+                    'tenantId': tenantId,
+                },
+                success: function (responseJson) {
+                    console.log("Message send successfully");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+
+        function handleItemClick(URL, parameters, permissions) {
+            var URLElement = document.getElementById('URLInput');
+            populateList(parameters, 'parametersList');
+            populateList(permissions, 'permissionsList');
+            URLElement.value = URL;
+        }
+
+        function populateList(Items, listId) {
+            const List = document.getElementById(listId);
+            const itemsArray = Items.split(',');
+            List.innerHTML = '';
+            itemsArray.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.trim();
+                List.appendChild(li);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="col p-0">
+                    <div>
+                        <h4>Graph resource list</h4>
+                    </div>
+                    <div>
+                        <div class="accordion" id="accordionExample">
+                            <% items.forEach((api, index) => { %>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading<%= index + 1 %>">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse<%= index + 1 %>" aria-expanded="true" aria-controls="collapse<%= index + 1 %>">
+                                            <%= api.methodType %>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse<%= index + 1 %>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<%= index + 1 %>" data-bs-parent="#accordionExample">
+                                        <ul class="list-group">
+                                            <% api.methods.forEach(item => { %>
+                                                <li class="list-group-item clickable"
+                                                    onclick="handleItemClick('<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>')">
+                                                    <%= item.key %>
+                                                </li>
+                                            <% }); %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <% }); %>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <h4>Graph API</h4>
+                <div class="col p-0">
+                    <div class="card p-3">
+                        <div class="card-body row p-0">
+                            <h6 for="input1" class="col-form-label">URL</h6>
+                            <div class="col">
+                                <input type="text" id="URLInput" class="form-control">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="sendNotification('')">Submit</button>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <h6>Parameters</h6>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card" style="max-height: 75px;">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <ul class="list-unstyled" id="parametersList">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <h6>RSC permissions Required</h6>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card" style="max-height: 75px;">
+                                            <div class="card-body" style="overflow-y: auto;">
+                                                <ul class="list-unstyled" id="permissionsList">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0 mt-3">
+                            <h6 class="p-0">Request Body</h6>
+                            <textarea class="form-control" rows="7"></textarea>
+                        </div>
+                    </div>
+                    <div class="row-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Response</h6>
+                                <div class="form-control" style="min-height: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

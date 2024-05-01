@@ -1,0 +1,92 @@
+[
+    {
+        "methodType": "Channel",
+        "methods": [
+            {
+                "key": "Send Activity Notification",
+                "value": {
+                    "URL": "https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification",
+                    "Parameters": ["recipientUserId"],
+                    "Permissions": ["TeamsActivity.Send.User"]
+                }
+            },
+            {
+                "key": "Item 2",
+                "value": {
+                    "URL": "url 2",
+                    "Parameters": ["Parameter 3", "Parameter 4"],
+                    "Permissions": ["Permission 3", "Permission 4"]
+                }
+            },
+            {
+                "key": "Item 3",
+                "value": {
+                    "URL": "url 3",
+                    "Parameters": ["Parameter 5", "Parameter 6"],
+                    "Permissions": ["Permission 5", "Permission 6"]
+                }
+            },
+            {
+                "key": "Item 4",
+                "value": {
+                    "URL": "url 4",
+                    "Parameters": ["Parameter 7", "Parameter 8"],
+                    "Permissions": ["Permission 7", "Permission 8"]
+                }
+            },
+            {
+                "key": "Item 5",
+                "value": {
+                    "URL": "url 5",
+                    "Parameters": ["Parameter 9", "Parameter 10"],
+                    "Permissions": ["Permission 9", "Permission 10"]
+                }
+            }
+        ]
+    },
+    {
+        "methodType": "Channel message",
+        "methods": [
+            {
+                "key": "Send Activity Notification",
+                "value": {
+                    "URL": "https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification",
+                    "Parameters": ["recipientUserId"],
+                    "Permissions": ["TeamsActivity.Send.User"]
+                }
+            },
+            {
+                "key": "Item 2",
+                "value": {
+                    "URL": "url 2",
+                    "Parameters": ["Parameter 3", "Parameter 4"],
+                    "Permissions": ["Permission 3", "Permission 4"]
+                }
+            },
+            {
+                "key": "Item 3",
+                "value": {
+                    "URL": "url 3",
+                    "Parameters": ["Parameter 5", "Parameter 6"],
+                    "Permissions": ["Permission 5", "Permission 6"]
+                }
+            },
+            {
+                "key": "Item 4",
+                "value": {
+                    "URL": "url 4",
+                    "Parameters": ["Parameter 7", "Parameter 8"],
+                    "Permissions": ["Permission 7", "Permission 8"]
+                }
+            },
+            {
+                "key": "Item 5",
+                "value": {
+                    "URL": "url 5",
+                    "Parameters": ["Parameter 9", "Parameter 10"],
+                    "Permissions": ["Permission 9", "Permission 10"]
+                }
+            }
+        ]
+    }
+]

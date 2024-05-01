@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSC Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+
+<style>
+    #mainDeiv{
+        padding-left: 10%;
+        padding-top:2%;
+    }
+</style>
+</head>
+<body>   
+<div id="mainDeiv">
+    
+    <h4>List of PermissionGrants current application has:</h4>
+    <p id="rsclist"></p>
+
+    <br/>
+    <h4>List of channels in this team:</h4>
+    <p id="channels"></p>
+</div>
+
+<script>
+    
+      var token=  <%-token%>;
+
+    $(document).ready(function (){           
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
+                    console.log("TenantId "+ tenantId);
+                    console.log("TeamId "+ teamId);        
+
+                getChannelsList(token,teamId);
+                getPermissionsList(token,teamId);
+            });
+        });
+    });
+
+    function getChannelsList(accessToken,teamId) {            
+        $.ajax({
+            url: "https://graph.microsoft.com/v1.0/teams/"+teamId+"/channels",
+            type: "GET",
+             beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + accessToken);
+            },
+            success: function (profile) {               
+                console.log(profile);
+                ListChannels(profile);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+            },
+        });
+    }
+
+    function getPermissionsList(accessToken,groupId){
+        $.ajax({
+            url: "https://graph.microsoft.com/v1.0/Groups/"+groupId+"/PermissionGrants",
+            type: "GET",
+             beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + accessToken);
+            },
+            success: function (profile) {               
+                console.log(profile);
+                ListPermissions(profile)
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+            },
+        });
+    }
+
+    function ListChannels(profile){
+        var list=profile.value;
+
+        var text="";
+        var i;
+        for(i=0;i<list.length;i++)
+        {
+            text+= list[i].displayName+ "<br>";
+        }
+        document.getElementById("channels").innerHTML = text;
+    }
+
+    function ListPermissions(profile){
+        var list=profile.value;
+        var text="";
+        var i;
+        for(i=0;i<list.length;i++)
+        {
+            text+= list[i].permission+ "<br>";
+        }
+        document.getElementById("rsclist").innerHTML = text;
+    }
+</script>
+</body>
+</html>
