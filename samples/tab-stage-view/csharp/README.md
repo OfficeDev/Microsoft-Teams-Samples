@@ -21,6 +21,9 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ## Included Features
 * Bots
 * Stage View (tabs)
+* Collaborative Stageview
+* Stageview Multi-window (PopOut)
+* Stageview Modal
 
 ## Interaction with app
 
@@ -129,23 +132,23 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![InstallApp](TabInStageView/Images/Install.png)
+![InstallApp](TabInStageView/Images/1.Install.png)
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
-![Welcome Message](TabInStageView/Images/welcomeAction.png)
+![Welcome Message](TabInStageView/Images/2.WelcomeCard.png)
 
 **Open the URL in tab stage view:**
 
-![InstallApp](TabInStageView/Images/ClickButton.png)
+![InstallApp](TabInStageView/Images/3.Bot-ViewViaCardAction.png)
 
 **Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
-![Stage View in tab](TabInStageView/Images/CollaborativeStageView.png)
+![Stage View in tab](TabInStageView/Images/7.Tab-PopOutWithChat.png)
 
 **Opening stage view from Adaptive card via deep link:**
 
-![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
+![Stage View Deep Link](TabInStageView/Images/4.Bot-OpenViaDeeplinkLinkButton.png)
 
 ![LinkUnfurlingStageView](TabInStageView/Images/LinkUnfurlingStageView.png)
 
@@ -155,7 +158,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Tab with execute deep link action to open stage view:**
 
-![Tab View](TabInStageView/Images/viaTabDeeplink.png)  
+![OpenMode Model](TabInStageView/Images/5.Tab-Model.png) 
+
+![OpenMode PopOut](TabInStageView/Images/6.Tab-PopOut.png)
+ 
 
 
 ## Outlook on the web
