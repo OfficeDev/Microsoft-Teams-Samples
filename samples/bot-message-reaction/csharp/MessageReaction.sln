@@ -5,6 +5,13 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageReaction", "MessageReaction.csproj", "{974209C8-26DD-407B-9EF2-910B12FF236E}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{12D71071-264C-48D4-9833-12C2FB6F524D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C9FACF6-AC49-4DF1-8CA7-1A18E6507CBB}"
+	ProjectSection(SolutionItems) = preProject
+		MessageReaction.slnLaunch.user = MessageReaction.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{974209C8-26DD-407B-9EF2-910B12FF236E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{974209C8-26DD-407B-9EF2-910B12FF236E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{974209C8-26DD-407B-9EF2-910B12FF236E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D71071-264C-48D4-9833-12C2FB6F524D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D71071-264C-48D4-9833-12C2FB6F524D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D71071-264C-48D4-9833-12C2FB6F524D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D71071-264C-48D4-9833-12C2FB6F524D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
