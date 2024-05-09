@@ -12,8 +12,18 @@
     <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js
         integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
         crossorigin="anonymous"></script>
+    <style>
+        .orange-bg {
+            background-color: orange;
+        }
+        
+        .violet-bg {
+            background-color: violet;
+        }
+    </style>
     <script>
         var tenantId;
+        var methodName;
 
         // Initialize teams js sdk
         $(document).ready(function () {
@@ -24,30 +34,83 @@
             })
         });
 
-        function sendNotification(recipientUserId) {
-            console.log("entered sendNotification" + tenantId)
+        function handleRequest() {
+            switch(methodName){
+                case "Send Activity Notification":
+                {
+                    sendNotification();
+                }
+            }
+        }
+
+        function sendNotification() {
+            var url = document.getElementById('URLInput').value;
+            var requestBody = document.getElementById('requestBody').value;
+
             $.ajax({
                 type: 'POST',
                 url: '/sendFeedNotification',
                 dataType: 'json',
                 data: {
-                    'recipientUserId': "830d1f62-704f-453e-8114-964551d13547",
+                    'url': url,
+                    'requestBody': requestBody,
                     'tenantId': tenantId,
                 },
                 success: function (responseJson) {
-                    console.log("Message send successfully");
+                    var responseBody = document.getElementById('responseBody');
+                    responseBody.textContent = "Status : " + responseJson;
+                    console.log("message sent successfully" + responseJson);
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    var responseBody = document.getElementById('responseBody');
+                    responseBody.textContent = errorThrown;
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 }
             });
         }
 
-        function handleItemClick(URL, parameters, permissions) {
+        function handleItemClick(apiMethod, URL, parameters, permissions, body,type) {
+            methodName = apiMethod
             var URLElement = document.getElementById('URLInput');
+            var requestBody = document.getElementById('requestBody');
+            var methodType = document.getElementById('methodType');
+            methodType.className="";
+            switch(type){
+                case "DELETE":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="bg-danger badge";
+                    break;
+                }
+                case "PATCH":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="orange-bg badge";
+                    break;
+                }
+                case "POST":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="bg-success badge";
+                    break;
+                }
+                case "PUT":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="violet-bg badge";
+                    break;
+                }
+                default: {
+                    methodType.textContent = type;
+                    methodType.className ="bg-primary badge";
+                    break;
+                }
+            }
             populateList(parameters, 'parametersList');
             populateList(permissions, 'permissionsList');
             URLElement.value = URL;
+            var temp = JSON.parse(body);
+            requestBody.value = JSON.stringify(temp,null,2);
         }
 
         function populateList(Items, listId) {
@@ -85,8 +148,15 @@
                                         aria-labelledby="heading<%= index + 1 %>" data-bs-parent="#accordionExample">
                                         <ul class="list-group">
                                             <% api.methods.forEach(item => { %>
-                                                <li class="list-group-item clickable"
-                                                    onclick="handleItemClick('<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>')">
+                                                <li class="list-group-item clickable align-items-center"
+                                                    onclick="handleItemClick('<%= item.key %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>')">
+                                                    <% if (item.type == 'GET' || item.type == 'POST') { %>
+                                                        <span class="badge <%= item.type === 'GET' ? 'bg-primary' : 'bg-success' %> m-2"><%= item.type %></span>
+                                                    <% } else if (item.type == 'PUT' || item.type == 'PATCH'){ %>
+                                                        <span class="badge <%= item.type === 'PUT' ? 'violet-bg' : 'orange-bg' %> m-2"><%= item.type %></span>
+                                                    <% } else if (item.type == 'DELETE'){ %>
+                                                        <span class="badge bg-danger m-2"><%= item.type %></span>
+                                                    <% } %>
                                                     <%= item.key %>
                                                 </li>
                                             <% }); %>
@@ -104,12 +174,13 @@
                     <div class="card p-3">
                         <div class="card-body row p-0">
                             <h6 for="input1" class="col-form-label">URL</h6>
-                            <div class="col">
-                                <input type="text" id="URLInput" class="form-control">
+                            <div class="col" style="display: -webkit-box">
+                                <span class="badge bg-primary" id="methodType" style="margin-right: 8px; padding:13px;">GET</span>
+                                <input type="text" id="URLInput" class="form-control" style="width: calc(100% - 60px);">
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary"
-                                    onclick="sendNotification('')">Submit</button>
+                                    onclick="handleRequest()">Submit</button>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -146,14 +217,14 @@
                         </div>
                         <div class="row m-0 mt-3">
                             <h6 class="p-0">Request Body</h6>
-                            <textarea class="form-control" rows="7"></textarea>
+                            <textarea id="requestBody" class="form-control" rows="7"></textarea>
                         </div>
                     </div>
                     <div class="row-1">
                         <div class="card">
                             <div class="card-body">
                                 <h6>Response</h6>
-                                <div class="form-control" style="min-height: 200px;">
+                                <div class="form-control" id="responseBody" style="min-height: 200px;">
                                 </div>
                             </div>
                         </div>

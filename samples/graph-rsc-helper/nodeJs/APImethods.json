@@ -5,9 +5,26 @@
             {
                 "key": "Send Activity Notification",
                 "value": {
-                    "URL": "https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification",
+                    "URL": "https://graph.microsoft.com/beta/users/830d1f62-704f-453e-8114-964551d13547/teamwork/sendActivityNotification",
                     "Parameters": ["recipientUserId"],
                     "Permissions": ["TeamsActivity.Send.User"]
+                },
+                "type": "GET",
+                "Body": {
+                    "topic": {
+                        "source": "entityUrl",
+                        "value": "https://graph.microsoft.com/beta/users/830d1f62-704f-453e-8114-964551d13547/teamwork/installedApps"
+                    },
+                    "activityType": "taskCreated",
+                    "previewText": {
+                        "content": "New Task Created"
+                    },
+                    "templateParameters": [
+                        {
+                            "name": "taskName",
+                            "value": "test"
+                        }
+                    ]
                 }
             },
             {
@@ -16,7 +33,9 @@
                     "URL": "url 2",
                     "Parameters": ["Parameter 3", "Parameter 4"],
                     "Permissions": ["Permission 3", "Permission 4"]
-                }
+                },
+                "type": "POST",
+                "Body":{}
             },
             {
                 "key": "Item 3",
@@ -24,7 +43,9 @@
                     "URL": "url 3",
                     "Parameters": ["Parameter 5", "Parameter 6"],
                     "Permissions": ["Permission 5", "Permission 6"]
-                }
+                },
+                "type": "PUT",
+                "Body":{}
             },
             {
                 "key": "Item 4",
@@ -32,7 +53,9 @@
                     "URL": "url 4",
                     "Parameters": ["Parameter 7", "Parameter 8"],
                     "Permissions": ["Permission 7", "Permission 8"]
-                }
+                },
+                "type": "PATCH",
+                "Body":{}
             },
             {
                 "key": "Item 5",
@@ -40,7 +63,9 @@
                     "URL": "url 5",
                     "Parameters": ["Parameter 9", "Parameter 10"],
                     "Permissions": ["Permission 9", "Permission 10"]
-                }
+                },
+                "type": "DELETE",
+                "Body":{}
             }
         ]
     },
@@ -53,7 +78,9 @@
                     "URL": "https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification",
                     "Parameters": ["recipientUserId"],
                     "Permissions": ["TeamsActivity.Send.User"]
-                }
+                },
+                "type": "GET",
+                "Body":{}
             },
             {
                 "key": "Item 2",
@@ -61,7 +88,9 @@
                     "URL": "url 2",
                     "Parameters": ["Parameter 3", "Parameter 4"],
                     "Permissions": ["Permission 3", "Permission 4"]
-                }
+                },
+                "type": "POST",
+                "Body":{}
             },
             {
                 "key": "Item 3",
@@ -69,7 +98,9 @@
                     "URL": "url 3",
                     "Parameters": ["Parameter 5", "Parameter 6"],
                     "Permissions": ["Permission 5", "Permission 6"]
-                }
+                },
+                "type": "GET",
+                "Body":{}
             },
             {
                 "key": "Item 4",
@@ -77,7 +108,9 @@
                     "URL": "url 4",
                     "Parameters": ["Parameter 7", "Parameter 8"],
                     "Permissions": ["Permission 7", "Permission 8"]
-                }
+                },
+                "type": "DELETE",
+                "Body":{}
             },
             {
                 "key": "Item 5",
@@ -85,7 +118,9 @@
                     "URL": "url 5",
                     "Parameters": ["Parameter 9", "Parameter 10"],
                     "Permissions": ["Permission 9", "Permission 10"]
-                }
+                },
+                "type": "GET",
+                "Body":{}
             }
         ]
     }

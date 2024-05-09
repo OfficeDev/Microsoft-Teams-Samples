@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const auth = require('./auth');
 const indexRouter = require('./routes/index');
+const { v4: uuidv4 } = require('uuid');
 require('isomorphic-fetch');
 const axios = require('axios');
 
@@ -47,7 +48,6 @@ app.get('/RSCGraphAPI', function (req, res) {
     try {
         // Parse JSON data
         const items = JSON.parse(data);
-        console.log(items);
         res.render('./views/RSCGraphAPI',{items});
     } catch (error) {
         console.error('Error parsing JSON:', error);
@@ -55,74 +55,39 @@ app.get('/RSCGraphAPI', function (req, res) {
 });
 });
 
-app.post('/sendFeedNotification', function (req, res) {
-  var recipientId = req.body.recipientUserId;
-  var tenantId = req.body.tenantId;
-  sendNotificationFlow(tenantId, recipientId).then(function(){
+app.post('/sendFeedNotification', async function (req, res) {
+  try {
+    const tenantId = req.body.tenantId;
+    console.log(req.body.url);
+    console.log(req.body.requestBody);
+    const responseData = await sendActivityFeedNotificationtest(tenantId, req.body.url, req.body.requestBody);
     console.log('Notification send success');
-    res.status(200).send('ok')
-  }).catch(function(err){
-    res.status(500).send('error: ' + err.message)
-  });
+    res.json(responseData.status); 
+  } catch (err) {
+    console.error('Error sending feed notification:', err.message);
+    res.status(500).send('Error: ' + err.message);
+  }
 });
 
-async function sendNotificationFlow(tenantId, recipientId) {
+async function sendActivityFeedNotificationtest(tenantId, url, requestBody) {
   var token = await auth.getAccessToken(tenantId);
-  var appId = await getAppId(token, recipientId);
-  await sendActivityFeedNotification(token, recipientId, appId);
-}
-
-// Get installed app id.
-function findAppIdInList(appList) {
-  for (var i = 0; i < appList.length; i++) {
-    if (appList[i].teamsAppDefinition['displayName'] == "RSC-GraphAPI NodeJs") {
-      return appList[i].id;
-    }
-  }
-}
-
-// Fetch the list of installed apps for user
-async function getAppId(accessToken, reciepientUserId) {
+  var postData = JSON.parse(requestBody);
+  const startIndex = url.indexOf('/users/') + '/users/'.length;
+  const endIndex = url.indexOf('/', startIndex);
+  const recipientUserId = url.substring(startIndex, endIndex);
+  const randomUUID = uuidv4();
+  const encodedString = Buffer.from(recipientUserId+"##"+process.env.teamsAppId).toString('base64');
+  postData.topic.value = postData.topic.value +"/"+encodedString;
 
   const config = {
     headers: {
-      Authorization: "Bearer " + accessToken
-    }
-  };
-
-  var res = await axios.get("https://graph.microsoft.com/v1.0/users/" + reciepientUserId + "/teamwork/installedApps/?$expand=teamsAppDefinition", config)
-  var appId = findAppIdInList(res.data.value);
-  return appId;
-}
-
-// Send activity feed notification to user
-async function sendActivityFeedNotification(accessToken, recipientUserId, appId) {
-
-  var postData = {
-    topic: {
-      source: "entityUrl",
-      value: `https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/installedApps/${appId}`
-    },
-    activityType: "taskCreated",
-    previewText: {
-      content: "New Task Created"
-    },
-    templateParameters: [
-      {
-        name: "taskName",
-        value: "test"
-      }
-    ]
-  };
-
-  const config = {
-    headers: {
-      Authorization: "Bearer " + accessToken
+      Authorization: "Bearer " + token
     }
   };
   
-  await axios.post(`https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification`, postData, config)
-  console.log('Notification sent');
+  var response = await axios.post(url, postData, config)
+  console.log('Notification sent', response);
+  return response;
 }
 
 app.listen(3978 || 3978, function () {
