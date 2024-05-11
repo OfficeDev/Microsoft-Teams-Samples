@@ -24,6 +24,7 @@ namespace TabInStageView.Bots
     {
         private readonly string _appId;
         private readonly string _applicationBaseURL;
+        public static string _threadId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivityBot"/> class.
@@ -45,6 +46,10 @@ namespace TabInStageView.Bots
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var welcomeText = "Hello and welcome!, Please type any bot command to see the stage view feature";
+
+            // Set thread Id
+            _threadId = turnContext.Activity.Conversation.Id;
+
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)

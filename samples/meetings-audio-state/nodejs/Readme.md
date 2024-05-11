@@ -26,11 +26,7 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
 ## Interaction with Tab
 ![mute-unmute](Images/mute-unmute-audiostate.gif)
 
-## Handling Themes (Light/Dark/Contrast)
-![mute-unmute](Images/ThemesHandler.gif)
-
 ## Prerequisites
-
 - [nodejs](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
@@ -117,28 +113,32 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 You can interact with Teams Tab meeting sidepanel.
 
 1. **Select your app**
+![Install](Images/1.Install.png)
+
 Add your application to the `meetings` as its display as below.
-![Stage 1](Images/joinTheCall.png)
+![AddToMeeting](Images/2.AddToMeeting.png)
+
+![Configure](Images/3.ConfigureTab.png)
 
 2. **Toggle To Mute**
 Toggle button to mute state its looks like below.
-![Stage 2](Images/ToggleMute.png)
+![Stage 2](Images/4.AudioStateTrue.png)
 
 3. **Toggle To Unmute**
 Toggle button to Unmute state it will unmute client audio.
-![Stage 3](Images/ToggleUnMute.png)
+![Stage 3](Images/5.AudioStateFalse.png)
 
 4. **Dark Theme**
 App theme changes to dark when Teams theme switch to dark .
-![Dark](Images/dark.PNG)
+![Dark](Images/6.DarkTheme.png)
 
 5. **Light Theme**
 App theme changes to light when Teams theme switch to light .
-![Light](Images/light.PNG)
+![Light](Images/4.AudioStateTrue.png)
 
 6. **Contrast Theme**
 App theme changes to contrast when Teams theme switch to contrast .
-![Contrast](Images/contrast.PNG)
+![Contrast](Images/7.Contrast.png)
 
 ## Further reading
 

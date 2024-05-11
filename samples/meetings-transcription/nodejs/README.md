@@ -142,6 +142,7 @@ Click on Add Permissions to commit your changes.
 5. Allow applications to access online meetings on behalf of a user
    - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
   - **Note**: Copy the User Id you used to granting the policy. You need while configuring the .env file.
+  ![Policy](Images/Policy.png)
 
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -162,15 +163,23 @@ Click on Add Permissions to commit your changes.
 ## Running the sample.
 
 1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
-![Add Bot](Images/AddMeetingTranscriptBot.PNG)
+![Add Bot](Images/1.AddMeetingTranscriptBot.PNG)
+
+![AddMeetingGroup](Images/2.AddMeetingGroup.png)
+
+![JoinMeeting](Images/3.JoinMeeting.png)
+
 2. Once meeting started, start the Transcript for the meeting.
-![Start Transcript](Images/StartTranscript.PNG)
+![Start Transcript](Images/4.StartTranscript.png)
+
 3. Once the transcription has started, you can see the live transcription it the meeting UI.
-![Leave Meeting](Images/LeaveMeeting.PNG)
+![Leave Meeting](Images/5.LeaveMeeting.png)
+
 4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
-![Meeting Transcript Card](Images/MeetingTranscriptCard.PNG)
+![Meeting Transcript Card](Images/6.MeetingTranscriptCard.png)
+
 5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
-![Transcript Task Module](Images/TranscriptTaskModule.PNG)
+![Transcript Task Module](Images/7.TranscriptTaskModule.png)
 
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.

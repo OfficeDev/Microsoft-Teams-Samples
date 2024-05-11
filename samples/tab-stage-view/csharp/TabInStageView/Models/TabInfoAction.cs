@@ -5,6 +5,7 @@
 namespace TabInStageView.Models
 {
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
     /// Tab info action model class.
@@ -22,5 +23,16 @@ namespace TabInStageView.Models
         /// </summary>
         [JsonProperty("tabInfo")]
         public TabInfo TabInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets tab info.
+        /// </summary>
+        [JsonProperty("threadId")]
+        public string? ThreadId { get; set; } = string.Empty;
+
+        public TabInfoAction()
+        {
+            ThreadId = "";
+        }
     }
 }

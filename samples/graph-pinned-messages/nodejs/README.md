@@ -164,6 +164,9 @@ npm install --legacy-peer-deps
 
 ## Running the sample
 
+1) Install App
+![InstallApp](Images/InstallApp.png)
+
 1) Add the app in group scope.
 ![pinned-messages-install ](Images/pin-message-installation.png)
 

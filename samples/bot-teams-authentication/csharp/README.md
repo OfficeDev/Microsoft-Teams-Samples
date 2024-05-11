@@ -111,17 +111,15 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to Microsoft Entra ID, then making a call to the Graph API on your behalf and returning the results.
 
-![add-App ](Images/add-App.png)
+![add-App ](Images/1.Install.png)
 
-![added-App ](Images/added-App.png)
+![added-App ](Images/2.Welcome.png)
 
-![auth-login ](Images/auth-login.png)
+![auth-Success ](Images/3.AuthSuccess.png)
 
-![auth-Success ](Images/auth-Success.png)
+![auth-Token ](Images/4.AuthToken.png)
 
-![auth-Token ](Images/auth-Token.png)
-
-![logout ](Images/logout.png)
+![logout ](Images/5.Logout.png)
 
 ## Deploy the bot to Azure
 

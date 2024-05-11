@@ -101,19 +101,19 @@ the Teams service needs to call into the bot.
 ## Running the sample
 
 Install Sample to Teams
-![Add Sample ](Images/1.Add_Sample.PNG)
+![Add Sample ](Images/1.Install.png)
 
 Welcome Message then click on 3 dots navigate to ME sentiment analysis
-![Welcome](Images/2.Welcome_SentimentAnalysis.PNG)
+![Welcome](Images/2.SelectSentimentAnalysis.png)
 
 Its shows Sentiment like(positive/negative/neutral) for messages posted in Teams chat.
-![Sentiment Analysis Reuslt](Images/4.Result.PNG)
+![Sentiment Analysis Reuslt](Images/3.Netural.png)
+
+Showing Sentiment Analysis `Positive` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/4.Positive.png)
 
 Showing Sentiment Analysis `Negative` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/5.Negative.PNG)
-
-Showing Sentiment Analysis `Neutral` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/6.Neutral.PNG)
+![Sentiment Analysis Reuslt](Images/5.Negative.png)
 
 ## Further reading
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)

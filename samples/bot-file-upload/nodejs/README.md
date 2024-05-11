@@ -118,20 +118,18 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 > Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
 
 1. Adding the bot:
-![add-App ](Images/add-App.png)
+![add-App ](Images/1.Install.png)
 
 1. Sending a message to the bot will cause it to respond with a card that will prompt you to upload a file. The file that's being uploaded is the `teams-logo.png` in the `Files` directory in this sample. The `Accept` and `Decline` events illustrated in this sample are specific to Teams. You can message the bot again to receive another prompt.
-![file-Card ](Images/file-Card.png)
-![file-Card-Uploaded ](Images/file-Card-Uploaded.png)
+![file-Card ](Images/2.FileUploadCard.png)
+![file-Card-Uploaded And Attach File ](Images/3.AttachFile.png)
 
 1. You can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
-![attachment-File-Upload ](Images/attachment-File-Upload.png)
-![attachment-File-Uploaded ](Images/attachment-File-Uploaded.png)
+![attachment-File-Upload ](Images/4.FileReceived.png)
 
 1. You can also send an inline image in the message compose section. This will be present in the attachments of the Activity and requires the Bot's access token to fetch the image.
-![inline-Image ](Images/inline-Image.png)
-![inline-Image-Send ](Images/inline-Image-Send.png)
-![inline-Image-Uploaded ](Images/inline-Image-Uploaded.png)
+![inline-Image ](Images/5.InLineImageOption.png)
+![inline-Image-Send ](Images/6.InLineImageUploaded.png)
 
 
 ## Deploy the bot to Azure

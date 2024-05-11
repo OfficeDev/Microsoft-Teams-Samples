@@ -3,8 +3,8 @@
 @{
 }
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.17.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-+DItxkmrHBjTqyGZe60m2HxjR/eDhdYpaTux8gT9/YqHSMxASoTe+Y66GvNEMT8k"
+    <script src="https://res.cdn.office.net/teams-js/2.22.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-WSG/sWulIv7rel5TnFlH8JTpxl2OxzZh9Lux2mIzBFiTRLFvMBeFv9VURu/3vQdx"
             crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -20,6 +20,7 @@
         var actualMessage = "";
 
         microsoftTeams.app.initialize().then(() => {
+   
             var urlParams = new URLSearchParams(window.location.search);
             actualMessage = urlParams.get("title");
             result = urlParams.get("result");

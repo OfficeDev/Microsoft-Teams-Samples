@@ -155,11 +155,11 @@ You can use this app by following the below steps:
 
 - App in stage view.
 
-![Stage View Screen](Images/stage_view.png)
+![Stage View Screen](Images/10.StageView2.png)
 
 - Sharing specific part of your app to the meeting stage.
 
-![Share Specific part screen](Images/share_specific_part.png)
+![Share Specific part screen](Images/9.ShareSpecificPart.png)
 
 **NOTE: Currently Live Share SDK is not supported in mobiles.**
 
@@ -179,39 +179,37 @@ You can use this app by following the below steps:
 
     - Search for your app `App in meeting` and add it.
 
-![Select App](Images/select_app.png)
+![Select App](Images/1.Install.png)
 
     - Join the meeting and click on the app icon at the top
     - This will open a sidepanel with `Share` icon at top to share the app for collaboration in stage view.
 
-![App icon](Images/app_icon.png)
-
-![Share Icon](Images/share_icon.png)
+![Stage View](Images/2.StageView.png)
 
     - You can now interact with the app.
 
 
 - Add Details for collaboration.
 
-![Add Button](Images/add_button.png)
+![Add Doing](Images/3.AddDoing.png)
 
-![Add Details](Images/add_details.png)
+![Add Todo](Images/4.AddToDo.png)
 
 - App in sidepanel.
 
-![App in sidepanel](Images/side_panel.png)
+![App in sidepanel](Images/1.AppInMeetings.png)
 
 - Sharing specific parts of app.
 
-![Share specific part](Images/share_specific_part_sidepanel.png)
+![Share specific part](Images/9.ShareSpecificPart.png)
 
 ## Interaction with App theme when Teams Theme changes.
 
-![light](Images/light.PNG)
+![light](Images/10.StageView2.png)
 
-![dark](Images/dark.PNG)
+![dark](Images/7.DarkTheme.png)
 
-![contrast](Images/contrast.PNG)
+![contrast](Images/8.ContrastTheme.png)
 
 ## Further reading
 

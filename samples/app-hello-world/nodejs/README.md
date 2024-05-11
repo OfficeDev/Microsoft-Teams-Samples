@@ -122,11 +122,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/Install.png)
+![InstallApp](Images/Install.png.png)
 
-**Welcome UI:**
+**Hello World Bot:**
 
-![HelloWorld](Images/HelloWorld.png)
+![HelloWorld](Images/Bot.png)
+
+**Hello Wrold Tab:**
+
+![HelloWorld](Images/Tab.png)
 
 ## Outlook on the web
 

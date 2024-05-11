@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
+    <script src="https://res.cdn.office.net/teams-js/2.22.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-WSG/sWulIv7rel5TnFlH8JTpxl2OxzZh9Lux2mIzBFiTRLFvMBeFv9VURu/3vQdx"
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
-     
+
     <title>Meeting Live Caption</title>
     <link rel="stylesheet" href="../style.css">
     <style>
@@ -16,7 +19,6 @@
         }
 
         .container {
-            color: white;
             padding: 0.5rem;
         }
 
@@ -34,14 +36,7 @@
             background-color: #7A80EB;
         }
     </style>
-          <script src="../jquery.min.js"></script>
-          <script
-          src="..//MicrosoftTeams.min.js"
-          integrity="sha384-h+MoYshcGDPMLlXjHLt2dSgsgYyWQ+yHd4Ob13htDsu8trGPea8Vooa8+tLtRzU7"
-          crossorigin="anonymous"
-        ></script>
-    <script type="text/javascript"> 
-        $(document).ready(function () {
+    <script>
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
                 var infoDiv = document.getElementById("show-info");
@@ -56,7 +51,7 @@
                 }
             });
         });
-    });
+
         function onSubmitCaption() {
             var captionInput = document.getElementById("caption");
             document.getElementById("loader").hidden = false;
@@ -109,6 +104,7 @@
             </div>
         </form>
     </div>
+
 </body>
 
 </html>

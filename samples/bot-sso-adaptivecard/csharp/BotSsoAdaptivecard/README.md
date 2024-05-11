@@ -157,12 +157,6 @@ Register your application with Azure AD
 
 ## Running the sample
 
-**Upload App:**
-
-![Upload](Images/Upload.png)
-
-![UploadSucess](Images/UploadSucess.png)
-
 **Install App:**
 
 ![InstallApp](Images/InstallApp.png)

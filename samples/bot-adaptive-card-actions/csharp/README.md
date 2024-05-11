@@ -109,27 +109,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-![App Setup](AdaptiveCardActions/Images/1.AddApp.png)
+![App Setup](AdaptiveCardActions/Images/1.Install.png)
 
-![Welcome](AdaptiveCardActions/Images/2.Welcome.png)
+![Welcome](AdaptiveCardActions/Images/2.WelcomeMessage.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/3.AdaptiveCard_Actions.png)
+![Runnning Sample](AdaptiveCardActions/Images/9.SuggestedActions.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/4.ActionSubmit.png)
+![Runnning Sample](AdaptiveCardActions/Images/3.Red.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/5.ActionShowCard.png)
+![Runnning Sample](AdaptiveCardActions/Images/4.Yellow.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/6.Togglevisible.png)
+![Runnning Sample](AdaptiveCardActions/Images/5.Blue.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/7.ToggleVisibleOnClick.png)
+![Runnning Sample](AdaptiveCardActions/Images/6.CardActions.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/8.SuggestedActions.png)
+![Runnning Sample](AdaptiveCardActions/Images/7.ActionSubmit.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/9.RedColor.png)
+![Runnning Sample](AdaptiveCardActions/Images/8.ActionShowCard.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/10.BlueColor.png)
+![Runnning Sample](AdaptiveCardActions/Images/10.ToggleVisibiliyCard.png)
 
-![Runnning Sample](AdaptiveCardActions/Images/11.YellowColor.png)
+![Runnning Sample](AdaptiveCardActions/Images/11.VisibleOnClick.png)
 
 ## Deploy the bot to Azure
 
@@ -139,8 +139,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Actions](https://learn.microsoft.com/adaptive-cards/rendering-cards/actions)
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
-
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptive-card-actions-csharp" />

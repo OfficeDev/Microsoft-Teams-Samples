@@ -76,5 +76,5 @@ class SearchBasedMessagingExtension(TeamsActivityHandler):
             name = result["name"]
             description = result["description"]
             url = result["html_url"]
-            search_results.append({"name": name, "summary": description, "url": url})
+            search_results.append({"name": name, "summary": description if description else "", "url": url})
         return search_results[:10] if len(search_results) > 10 else search_results
