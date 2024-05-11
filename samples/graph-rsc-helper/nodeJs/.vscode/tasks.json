@@ -5,6 +5,22 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Start Teams App Locally for team",
+            "dependsOn": [
+                "Setup team scope for manifest.json",
+                "Start Teams App Locally"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "Start Teams App Locally for chat",
+            "dependsOn": [
+                "Setup chat scope for manifest.json",
+                "Start Teams App Locally"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
             "label": "Start Teams App Locally",
             "dependsOn": [
                 "Validate prerequisites",
@@ -14,6 +30,22 @@
                 "Start application"
             ],
             "dependsOrder": "sequence"
+        },
+        {
+            "label": "Setup team scope for manifest.json",
+            "type": "shell",
+            "command": "node setupTeam.js",
+            "options": {
+              "cwd": "${workspaceFolder}/setupManifest"
+            },
+        },
+        {
+            "label": "Setup chat scope for manifest.json",
+            "type": "shell",
+            "command": "node setupChat.js",
+            "options": {
+              "cwd": "${workspaceFolder}/setupManifest"
+            },
         },
         {
             // Check all required prerequisites.
@@ -64,7 +96,7 @@
             "command": "provision",
             "args": {
                 "env": "local"
-            }
+            },
         },
         {
             // Build project.

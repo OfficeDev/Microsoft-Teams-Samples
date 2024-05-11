@@ -100,12 +100,12 @@
     ],
     "compounds": [
         {
-            "name": "Debug in Teams (Edge)",
+            "name": "Debug in Teams for team RSC permissions (Edge)",
             "configurations": [
                 "Attach to Frontend in Teams (Edge)",
                 "Attach to Local Service"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Start Teams App Locally for team",
             "presentation": {
                 "group": "group 1: Teams",
                 "order": 1
@@ -113,69 +113,17 @@
             "stopAll": true
         },
         {
-            "name": "Debug in Teams (Chrome)",
+            "name": "Debug in Teams for chat RSC permissions (Edge)",
             "configurations": [
-                "Attach to Frontend in Teams (Chrome)",
+                "Attach to Frontend in Teams (Edge)",
                 "Attach to Local Service"
             ],
-            "preLaunchTask": "Start Teams App Locally",
+            "preLaunchTask": "Start Teams App Locally for chat",
             "presentation": {
                 "group": "group 1: Teams",
                 "order": 2
             },
             "stopAll": true
         },
-        {
-            "name": "Debug in Outlook (Edge)",
-            "configurations": [
-                "Attach to Frontend in Outlook (Edge)",
-                "Attach to Local Service"
-            ],
-            "preLaunchTask": "Start Teams App Locally",
-            "presentation": {
-                "group": "group 2: Outlook",
-                "order": 1
-            },
-            "stopAll": true
-        },
-        {
-            "name": "Debug in Outlook (Chrome)",
-            "configurations": [
-                "Attach to Frontend in Outlook (Chrome)",
-                "Attach to Local Service"
-            ],
-            "preLaunchTask": "Start Teams App Locally",
-            "presentation": {
-                "group": "group 2: Outlook",
-                "order": 2
-            },
-            "stopAll": true
-        },
-        {
-            "name": "Debug in the Microsoft 365 app (Edge)",
-            "configurations": [
-                "Attach to Frontend in the Microsoft 365 app (Edge)",
-                "Attach to Local Service"
-            ],
-            "preLaunchTask": "Start Teams App Locally",
-            "presentation": {
-                "group": "group 3: the Microsoft 365 app",
-                "order": 1
-            },
-            "stopAll": true
-        },
-        {
-            "name": "Debug in the Microsoft 365 app (Chrome)",
-            "configurations": [
-                "Attach to Frontend in the Microsoft 365 app (Chrome)",
-                "Attach to Local Service"
-            ],
-            "preLaunchTask": "Start Teams App Locally",
-            "presentation": {
-                "group": "group 3: the Microsoft 365 app",
-                "order": 2
-            },
-            "stopAll": true
-        }
     ]
 }

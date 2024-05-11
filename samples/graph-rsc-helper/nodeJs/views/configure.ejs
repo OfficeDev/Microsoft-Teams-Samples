@@ -25,10 +25,10 @@
                 microsoftTeams.app.notifySuccess();
                 microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                     microsoftTeams.pages.config.setConfig({
-                        entityID: "Rsc demo",
-                        contentUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
-                        suggestedTabName: "Rsc demo",
-                        websiteUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
+                        entityID: "RSCGraphAPI",
+                        contentUrl: `${window.location.origin}/RSCGraphAPI?tenantId={tid}`,
+                        suggestedTabName: "RSCGraphAPI",
+                        websiteUrl: `${window.location.origin}/RSCGraphAPI?tenantId={tid}`,
                     });
                     saveEvent.notifySuccess();               
                 });

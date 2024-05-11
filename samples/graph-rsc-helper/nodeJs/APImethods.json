@@ -3,6 +3,7 @@
         "methodType": "Channel",
         "methods": [
             {
+                "scope": "team",
                 "key": "Send Activity Notification",
                 "value": {
                     "URL": "https://graph.microsoft.com/beta/users/830d1f62-704f-453e-8114-964551d13547/teamwork/sendActivityNotification",
@@ -28,6 +29,7 @@
                 }
             },
             {
+                "scope": "team",
                 "key": "Item 2",
                 "value": {
                     "URL": "url 2",
@@ -38,6 +40,7 @@
                 "Body":{}
             },
             {
+                "scope": "chat",
                 "key": "Item 3",
                 "value": {
                     "URL": "url 3",
@@ -48,6 +51,7 @@
                 "Body":{}
             },
             {
+                "scope": "chat",
                 "key": "Item 4",
                 "value": {
                     "URL": "url 4",
@@ -58,6 +62,7 @@
                 "Body":{}
             },
             {
+                "scope": "chat",
                 "key": "Item 5",
                 "value": {
                     "URL": "url 5",
@@ -73,6 +78,7 @@
         "methodType": "Channel message",
         "methods": [
             {
+                "scope": "chat",
                 "key": "Send Activity Notification",
                 "value": {
                     "URL": "https://graph.microsoft.com/beta/users/${recipientUserId}/teamwork/sendActivityNotification",
@@ -83,6 +89,7 @@
                 "Body":{}
             },
             {
+                "scope": "chat",
                 "key": "Item 2",
                 "value": {
                     "URL": "url 2",
@@ -93,6 +100,7 @@
                 "Body":{}
             },
             {
+                "scope": "team",
                 "key": "Item 3",
                 "value": {
                     "URL": "url 3",
@@ -103,6 +111,7 @@
                 "Body":{}
             },
             {
+                "scope": "team",
                 "key": "Item 4",
                 "value": {
                     "URL": "url 4",
@@ -113,6 +122,7 @@
                 "Body":{}
             },
             {
+                "scope": "team",
                 "key": "Item 5",
                 "value": {
                     "URL": "url 5",

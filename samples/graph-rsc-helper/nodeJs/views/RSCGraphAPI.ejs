@@ -24,12 +24,28 @@
     <script>
         var tenantId;
         var methodName;
+        var appScope;
+        var teamId;
+        var channelId;
+        var chatId;
+        var userId;
 
         // Initialize teams js sdk
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(function () {
                 microsoftTeams.app.getContext().then((context) => {
                     tenantId = context.user.tenant.id;
+                    userId = context.user.id;
+                    chatId = context.chat?.id;
+                    channelId = context.channel?.id;
+                    teamId = context.team?.groupId;
+                    if (chatId) {
+                        appScope = "chat";
+                    }  else if (teamId) {
+                        appScope = "team";
+                    } else {
+                        appScope = "personal"
+                    }
                 });
             })
         });
@@ -39,6 +55,10 @@
                 case "Send Activity Notification":
                 {
                     sendNotification();
+                }
+                default:
+                {
+                    getTeamChannels();
                 }
             }
         }
@@ -55,6 +75,11 @@
                     'url': url,
                     'requestBody': requestBody,
                     'tenantId': tenantId,
+                    'scope': appScope,
+                    'userId': userId,
+                    'teamId': teamId,
+                    'channelId': channelId,
+                    'chatId': chatId,
                 },
                 success: function (responseJson) {
                     var responseBody = document.getElementById('responseBody');
@@ -69,7 +94,40 @@
             });
         }
 
-        function handleItemClick(apiMethod, URL, parameters, permissions, body,type) {
+        function getTeamChannels() {
+            var url = document.getElementById('URLInput').value;
+            var requestBody = document.getElementById('requestBody').value;
+
+            $.ajax({
+                type: 'POST',
+                url: '/graphCall',
+                dataType: 'json',
+                data: {
+                    'url': url,
+                    'requestBody': requestBody,
+                    'tenantId': tenantId,
+                    'scope': appScope,
+                    'userId': userId,
+                    'teamId': teamId,
+                    'channelId': channelId,
+                    'chatId': chatId,
+                },
+                success: function (responseJson) {
+                    var responseBody = document.getElementById('responseBody');
+                    var per = document.createElement('pre');
+                    per.innerHTML  = responseJson;
+                    responseBody.appendChild(per);
+                    console.log("message sent successfully" + responseJson);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    var responseBody = document.getElementById('responseBody');
+                    responseBody.textContent = errorThrown;
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+
+        function handleItemClick(apiMethod, URL, parameters, permissions, body,type, scope) {
             methodName = apiMethod
             var URLElement = document.getElementById('URLInput');
             var requestBody = document.getElementById('requestBody');
@@ -108,6 +166,8 @@
             }
             populateList(parameters, 'parametersList');
             populateList(permissions, 'permissionsList');
+            // Uncomment the below line to enable the submit button
+            // setSubmitButton(scope);
             URLElement.value = URL;
             var temp = JSON.parse(body);
             requestBody.value = JSON.stringify(temp,null,2);
@@ -122,6 +182,19 @@
                 li.textContent = item.trim();
                 List.appendChild(li);
             });
+        }
+
+        function setSubmitButton(scope) {
+            const button = document.getElementById("submitButton");
+            if (scope === appScope) {
+                button.disabled = false;
+                button.innerText = "Submit";
+            } else {
+                button.disabled = true;
+                button.innerText = `Try it in ${scope === 'chat' ? 'Chat app' : 'Team app'}`;
+                button.style.backgroundColor = 'gray'
+            }
+            List.innerHTML = '';
         }
     </script>
 </head>
@@ -149,7 +222,7 @@
                                         <ul class="list-group">
                                             <% api.methods.forEach(item => { %>
                                                 <li class="list-group-item clickable align-items-center"
-                                                    onclick="handleItemClick('<%= item.key %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>')">
+                                                    onclick="handleItemClick('<%= item.key %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>', '<%= item.scope%>')">
                                                     <% if (item.type == 'GET' || item.type == 'POST') { %>
                                                         <span class="badge <%= item.type === 'GET' ? 'bg-primary' : 'bg-success' %> m-2"><%= item.type %></span>
                                                     <% } else if (item.type == 'PUT' || item.type == 'PATCH'){ %>
@@ -179,7 +252,7 @@
                                 <input type="text" id="URLInput" class="form-control" style="width: calc(100% - 60px);">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary"
+                                <button type="submit" id="submitButton" class="btn btn-primary"
                                     onclick="handleRequest()">Submit</button>
                             </div>
                         </div>

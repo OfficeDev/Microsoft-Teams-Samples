@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@azure/identity": "^1.3.0",
     "@microsoft/microsoft-graph-client": "^3.0.4",
     "@microsoft/teams-js": "^2.5.0",
     "axios": "^1.1.3",
