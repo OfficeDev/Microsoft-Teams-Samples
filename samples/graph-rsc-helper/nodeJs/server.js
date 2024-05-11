@@ -21,17 +21,13 @@ app.set('views', __dirname);
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
+const credential = require('./graph/credential');
+const buidGraphClient = require('./graph/graphClient');
+const graphClient = buidGraphClient(credential);
 app.use('/', indexRouter);
 
 app.get('/configure', function (req, res) {
   res.render('./views/configure');
-});
-
-app.get('/rscdemo', function (req, res) {
-  var tenantId = req.url.split('=')[1];
-  auth.getAccessToken(tenantId).then(async function (token) {
-    res.render('./views/rscdemo', { token: JSON.stringify(token) });
-  });
 });
 
 app.get('/sendNotification', function (req, res) {
@@ -65,6 +61,17 @@ app.post('/sendFeedNotification', async function (req, res) {
     res.json(responseData.status); 
   } catch (err) {
     console.error('Error sending feed notification:', err.message);
+    res.status(500).send('Error: ' + err.message);
+  }
+});
+
+app.post('/graphCall', async function (req, res) {
+  try {
+    const teamId = req.body.teamId;
+    const result = await graphClient.api(`teams/${teamId}/channels`).get();
+    res.json(JSON.stringify(result, null, 2)); 
+  } catch (err) {
+    console.error('Error graphCall:', err.message);
     res.status(500).send('Error: ' + err.message);
   }
 });

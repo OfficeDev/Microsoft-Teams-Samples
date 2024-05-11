@@ -66,22 +66,6 @@
     "permissions": {
       "resourceSpecific": [
         {
-          "name": "TeamSettings.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMessage.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "TeamSettings.Edit.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelSettings.ReadWrite.Group",
-          "type": "Application"
-        },
-        {
           "name": "Channel.Create.Group",
           "type": "Application"
         },
@@ -90,35 +74,51 @@
           "type": "Application"
         },
         {
-          "name": "TeamsApp.Read.Group",
+          "name": "ChannelMeeting.ReadBasic.Group",
           "type": "Application"
         },
         {
-          "name": "TeamsTab.Read.Group",
+          "name": "ChannelMeetingParticipant.Read.Group",
           "type": "Application"
         },
         {
-          "name": "TeamsTab.Create.Group",
+          "name": "ChannelMeetingRecording.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMeetingTranscript.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMeetingNotification.Send.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMessage.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelSettings.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsActivity.Send.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsAppInstallation.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamMember.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamSettings.ReadWrite.Group",
           "type": "Application"
         },
         {
           "name": "TeamsTab.ReadWrite.Group",
-          "type": "Application"
-        },
-        {
-          "name": "TeamsTab.Delete.Group",
-          "type": "Application"
-        },
-        {
-          "name": "Member.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "Owner.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "TeamsActivity.Send.User",
           "type": "Application"
         }
       ]

@@ -103,6 +103,7 @@ deploy:
     with:
       target: ./.env
       envs:
+        TenantId: ${{AAD_APP_TENANT_ID}}
         ClientId: ${{AAD_APP_CLIENT_ID}}
         ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         teamsAppId: ${{TEAMS_APP_ID}}
