@@ -28,6 +28,18 @@ const permissions = [
       "type": "Application"
   },
   {
+      "name": "Chat.Manage.Chat",
+      "type": "Application"
+  },
+  {
+    "name": "TeamsTab.Create.Chat",
+    "type": "Application"
+  },
+  {
+    "name": "TeamsTab.Read.Chat",
+    "type": "Application"
+  },
+  {
       "name": "TeamsTab.ReadWrite.Chat",
       "type": "Application"
   },
@@ -37,26 +49,6 @@ const permissions = [
   },
   {
       "name": "TeamsActivity.Send.Chat",
-      "type": "Application"
-  },
-  {
-      "name": "OnlineMeetingTranscript.Read.Chat",
-      "type": "Application"
-  },
-  {
-      "name": "OnlineMeeting.ReadBasic.Chat",
-      "type": "Application"
-  },
-  {
-      "name": "OnlineMeetingRecording.Read.Chat",
-      "type": "Application"
-  },
-  {
-      "name": "OnlineMeetingNotification.Send.Chat",
-      "type": "Application"
-  },
-  {
-      "name": "OnlineMeetingParticipant.Read.Chat",
       "type": "Application"
   }
 ];

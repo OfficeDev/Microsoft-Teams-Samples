@@ -12,26 +12,6 @@ const permissions = [
     type: "Application",
   },
   {
-    name: "ChannelMeeting.ReadBasic.Group",
-    type: "Application",
-  },
-  {
-    name: "ChannelMeetingParticipant.Read.Group",
-    type: "Application",
-  },
-  {
-    name: "ChannelMeetingRecording.Read.Group",
-    type: "Application",
-  },
-  {
-    name: "ChannelMeetingTranscript.Read.Group",
-    type: "Application",
-  },
-  {
-    name: "ChannelMeetingNotification.Send.Group",
-    type: "Application",
-  },
-  {
     name: "ChannelMessage.Read.Group",
     type: "Application",
   },
@@ -53,6 +33,14 @@ const permissions = [
   },
   {
     name: "TeamSettings.ReadWrite.Group",
+    type: "Application",
+  },
+  {
+    name: "TeamsTab.Create.Group",
+    type: "Application",
+  },
+  {
+    name: "TeamsTab.Delete.Group",
     type: "Application",
   },
   {
