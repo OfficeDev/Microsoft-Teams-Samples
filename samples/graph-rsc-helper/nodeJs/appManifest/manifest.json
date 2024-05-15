@@ -23,16 +23,6 @@
     "full": "Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization"
   },
   "accentColor": "#5558AF",
-  "staticTabs": [
-    {
-      "entityId": "Send Notification",
-      "name": "RSC",
-      "contentUrl": "https://${{TAB_DOMAIN}}/RSCGraphAPI",
-      "scopes": [
-        "personal"
-      ]
-    }
-  ],
   "configurableTabs": [
     {
       "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
@@ -52,15 +42,15 @@
   "activities": {
     "activityTypes": [
       {
-        "type": "taskCreated",
-        "description": "Task created activity",
-        "templateText": "New created task {taskName} for you"
+        "type": "demoNotification",
+        "description": "Test notification",
+        "templateText": "created a test notification for you"
       }
     ]
   },
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "https://RscBasedStoreApp"
+    "resource": "https://RscBasedStoreApp123"
   },
   "authorization": {
     "permissions": {
@@ -71,26 +61,6 @@
         },
         {
           "name": "Channel.Delete.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMeeting.ReadBasic.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMeetingParticipant.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMeetingRecording.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMeetingTranscript.Read.Group",
-          "type": "Application"
-        },
-        {
-          "name": "ChannelMeetingNotification.Send.Group",
           "type": "Application"
         },
         {
@@ -115,6 +85,14 @@
         },
         {
           "name": "TeamSettings.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Create.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Delete.Group",
           "type": "Application"
         },
         {

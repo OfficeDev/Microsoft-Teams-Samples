@@ -23,12 +23,14 @@
     </style>
     <script>
         var tenantId;
-        var methodName;
+        var apiId;
+        var apiName;
         var appScope;
         var teamId;
         var channelId;
         var chatId;
         var userId;
+        var requestType;
 
         // Initialize teams js sdk
         $(document).ready(function () {
@@ -51,29 +53,20 @@
         });
 
         function handleRequest() {
-            switch(methodName){
-                case "Send Activity Notification":
-                {
-                    sendNotification();
-                }
-                default:
-                {
-                    getTeamChannels();
-                }
-            }
-        }
-
-        function sendNotification() {
+            console.log("api name is " + apiName);
             var url = document.getElementById('URLInput').value;
             var requestBody = document.getElementById('requestBody').value;
 
             $.ajax({
                 type: 'POST',
-                url: '/sendFeedNotification',
+                url: '/handleRequest',
                 dataType: 'json',
                 data: {
+                    'apiId': apiId,
+                    'apiName': apiName,
                     'url': url,
                     'requestBody': requestBody,
+                    'requestType': requestType,
                     'tenantId': tenantId,
                     'scope': appScope,
                     'userId': userId,
@@ -83,37 +76,7 @@
                 },
                 success: function (responseJson) {
                     var responseBody = document.getElementById('responseBody');
-                    responseBody.textContent = "Status : " + responseJson;
-                    console.log("message sent successfully" + responseJson);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    var responseBody = document.getElementById('responseBody');
-                    responseBody.textContent = errorThrown;
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                }
-            });
-        }
-
-        function getTeamChannels() {
-            var url = document.getElementById('URLInput').value;
-            var requestBody = document.getElementById('requestBody').value;
-
-            $.ajax({
-                type: 'POST',
-                url: '/graphCall',
-                dataType: 'json',
-                data: {
-                    'url': url,
-                    'requestBody': requestBody,
-                    'tenantId': tenantId,
-                    'scope': appScope,
-                    'userId': userId,
-                    'teamId': teamId,
-                    'channelId': channelId,
-                    'chatId': chatId,
-                },
-                success: function (responseJson) {
-                    var responseBody = document.getElementById('responseBody');
+                    responseBody.innerHTML = "";
                     var per = document.createElement('pre');
                     per.innerHTML  = responseJson;
                     responseBody.appendChild(per);
@@ -126,9 +89,11 @@
                 }
             });
         }
-
-        function handleItemClick(apiMethod, URL, parameters, permissions, body,type, scope) {
-            methodName = apiMethod
+  
+        function handleItemClick(id, name, URL, parameters, permissions, body,type, scope) {
+            apiName = name
+            apiId = id;
+            requestType = type;
             var URLElement = document.getElementById('URLInput');
             var requestBody = document.getElementById('requestBody');
             var methodType = document.getElementById('methodType');
@@ -166,11 +131,16 @@
             }
             populateList(parameters, 'parametersList');
             populateList(permissions, 'permissionsList');
-            // Uncomment the below line to enable the submit button
-            // setSubmitButton(scope);
+            setSubmitButton(scope);
+            console.log("URL is " + URL);
             URLElement.value = URL;
-            var temp = JSON.parse(body);
-            requestBody.value = JSON.stringify(temp,null,2);
+            console.log("body is " + body);
+            if (type === "GET" || type === "DELETE") {
+                requestBody.value = '';
+            } else {
+                requestBody.value = JSON.stringify(JSON.parse(body),null,2);
+            }
+            
         }
 
         function populateList(Items, listId) {
@@ -189,12 +159,12 @@
             if (scope === appScope) {
                 button.disabled = false;
                 button.innerText = "Submit";
+                button.className = 'btn btn-primary'
             } else {
                 button.disabled = true;
                 button.innerText = `Try it in ${scope === 'chat' ? 'Chat app' : 'Team app'}`;
-                button.style.backgroundColor = 'gray'
+                button.className = 'btn btn-secondary'
             }
-            List.innerHTML = '';
         }
     </script>
 </head>
@@ -214,7 +184,7 @@
                                     <h2 class="accordion-header" id="heading<%= index + 1 %>">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapse<%= index + 1 %>" aria-expanded="true" aria-controls="collapse<%= index + 1 %>">
-                                            <%= api.methodType %>
+                                            <%= api.category %>
                                         </button>
                                     </h2>
                                     <div id="collapse<%= index + 1 %>" class="accordion-collapse collapse"
@@ -222,7 +192,7 @@
                                         <ul class="list-group">
                                             <% api.methods.forEach(item => { %>
                                                 <li class="list-group-item clickable align-items-center"
-                                                    onclick="handleItemClick('<%= item.key %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>', '<%= item.scope%>')">
+                                                    onclick="handleItemClick('<%= item.id %>', '<%= item.name %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>', '<%= item.scope%>')">
                                                     <% if (item.type == 'GET' || item.type == 'POST') { %>
                                                         <span class="badge <%= item.type === 'GET' ? 'bg-primary' : 'bg-success' %> m-2"><%= item.type %></span>
                                                     <% } else if (item.type == 'PUT' || item.type == 'PATCH'){ %>
@@ -230,7 +200,7 @@
                                                     <% } else if (item.type == 'DELETE'){ %>
                                                         <span class="badge bg-danger m-2"><%= item.type %></span>
                                                     <% } %>
-                                                    <%= item.key %>
+                                                    <%= item.name %>
                                                 </li>
                                             <% }); %>
                                         </ul>
