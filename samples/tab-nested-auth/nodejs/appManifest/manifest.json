@@ -33,15 +33,6 @@
       ]
     }
   ],
-  "configurableTabs": [
-    {
-      "configurationUrl": "${{TAB_ENDPOINT}}/configure/?inTeams=true",
-      "canUpdateConfiguration": true,
-      "scopes": [
-        "team"
-      ]
-    }
-  ],
   "permissions": [
     "identity",
     "messageTeamMembers"
