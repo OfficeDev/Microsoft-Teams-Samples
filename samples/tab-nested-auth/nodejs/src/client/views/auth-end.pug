@@ -1,0 +1,40 @@
+doctype html
+
+html
+  head
+    title Auth End Page
+
+  body
+    script(src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js", crossorigin="anonymous")
+    script(type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js")
+
+    script.
+         microsoftTeams.app.initialize().then(() => {
+         microsoftTeams.app.getContext().then(async (context) => {
+          const msalConfig = {
+            auth: {
+              clientId: "#{clientId}",
+              authority: `https://login.microsoftonline.com/${context.tid}`,
+              navigateToLoginRequestUrl: false
+            },
+            cache: {
+              cacheLocation: "sessionStorage",
+            },
+          }
+
+          const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+          msalInstance.handleRedirectPromise()
+            .then((tokenResponse) => {
+              if (tokenResponse !== null) {
+                microsoftTeams.authentication.notifySuccess(JSON.stringify({
+                  sessionStorage: sessionStorage
+                }));
+              } else {
+                microsoftTeams.authentication.notifyFailure("Get empty response.");
+              }
+            })
+            .catch((error) => {
+              microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+            });
+        });
+      });

@@ -1,0 +1,38 @@
+extends layout.pug
+
+block content
+
+  script(src="/scripts/ssoDemo.js")
+  script(
+  src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-0lOzlvRkoNWAcLkbUTuao6TaDa7zI7v+q2PUAm3lrMxUp43PFwf2kaQu7FYT9fjS"
+  crossorigin="anonymous")
+  script(type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js")
+  script(src="/scripts/msal-auth.js")
+  script(src="/scripts/msalDemo.js")
+
+  script.
+   $(document).ready(function () {
+   const url = new URL(window.location);
+        const params = new URLSearchParams(url.search);
+
+        if (params.get("inTeams")) {
+           // Teams SSO Oauth Flow
+            ssoAuth();
+          } else {
+            // MSAL Browser Auth excuted on browser outside teams
+           const authService = new MsalAuthService("#{clientId}", "#{applicationIdUri}");
+            msalAuth(authService);
+          }
+          });
+
+  div(class="font-semibold font-title") Azure AD SSO Tab Demo
+    button(class="taskmodule-button" onclick="openTaskModule()") TaskModule  
+  div(id="browser-signin-text") Try signing in from browser - 
+    a(href="/ssodemo" target="_blank") Click here
+  div(id="logs" style="overflow-x: hidden; overflow-y: scroll;")
+  div(id="browser-signin-container" hidden="true")
+    div(id="browser-login")
+      h2() Please click on Login button to see your profile details!
+      button(class="browser-button" onclick="loginUser()") Login
+    div(id="divGraphProfile" style="display:none;")
