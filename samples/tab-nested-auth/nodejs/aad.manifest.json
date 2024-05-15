@@ -96,10 +96,6 @@
         {
             "url": "${{TAB_ENDPOINT}}/auth-end",
             "type": "Spa"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/Home/BrowserRedirect",
-            "type": "Spa"
         }
     ]
 }
