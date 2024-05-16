@@ -7,7 +7,8 @@ const {
     MessageFactory,
     TeamsActivityHandler,
     TeamsInfo,
-    TurnContext
+    TurnContext,
+    ActivityTypes
 } = require('botbuilder');
 const TextEncoder = require('util').TextEncoder;
 const ACData = require('adaptivecards-templating');
@@ -45,6 +46,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.checkReadUserCount(context);
             } else if (text.includes('reset')) {
                 await this.resetReadUserCount(context);
+            } else if (text.includes('label')) {
+                await this.addAILabel(context);
+            } else if (text.includes('sensitivity')) {
+                await this.addSensitivityLabel(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -87,7 +92,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 users.push(memberDetails.name);
                 counter++;
                 teamMemberDetails = teamMemberDetails.filter(member => member.aadObjectId !== turnContext._activity.from.aadObjectId);
-              }
+            }
         });
 
         // This method registers the lambda function, which will be invoked when message sent by user is updated in chat.
@@ -108,6 +113,40 @@ class TeamsConversationBot extends TeamsActivityHandler {
         this.onTeamsMessageSoftDeleteEvent(async (context, next) => {
             await context.sendActivity("Message is soft deleted");
             next();
+        });
+    }
+
+    async addAILabel(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI`,
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org",
+                    additionalType: ["AIGeneratedContent"], // AI Generated label
+                }
+            ]
+        });
+    }
+
+    async addSensitivityLabel(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI`,
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org", // AI Generated label
+                    usageInfo: {
+                        "@type": "CreativeWork",
+                        description: "Please be mindful of sharing outside of your team", // Sensitivity description
+                        name: "Confidential \\ Contoso FTE", // Sensitivity title
+                    }
+                }
+            ]
         });
     }
 
@@ -185,6 +224,18 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 Title: "Reset read count",
                 value: null,
                 Text: "reset"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "AI label",
+                value: null,
+                Text: "label"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Sensitivity label",
+                value: null,
+                Text: "sensitivity"
             }
         ];
 
@@ -298,7 +349,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
     async getImmersivereaderCard(context) {
-        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(ImmersiveReaderCardTemplate)]});
+        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(ImmersiveReaderCardTemplate)] });
     }
 
     async deleteCardActivityAsync(context) {
@@ -334,9 +385,9 @@ class TeamsConversationBot extends TeamsActivityHandler {
                         process.env.MicrosoftAppId,
                         ref,
                         async (context) => {
-                           var messageId = await context.sendActivity(message);
-                           member.messageId = messageId.id;
-                           teamMemberDetails.push(member);
+                            var messageId = await context.sendActivity(message);
+                            member.messageId = messageId.id;
+                            teamMemberDetails.push(member);
                         });
                 });
         }));
