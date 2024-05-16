@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.0",
-  "id": "07d429f7-91f9-45ff-ba7e-ac5b26939b45",
-  "packageName": "com.teams.meetingtranscriptrecording",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.teams.tabnestedauth",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app",
-    "privacyUrl": "https://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app/privacy",
-    "termsOfUseUrl": "https://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,10 +25,9 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "entityId": "index",
-      "name": "Nested App Authentication",
-      "contentUrl": "https://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app/tab",
-      "websiteUrl": "https://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app/tab",
+      "entityId": "com.teams.tabnestedauth",
+      "name": "Nested App Auth",
+      "contentUrl": "https://{{domain-name}}/tab",
       "scopes": [
         "personal"
       ]
@@ -39,10 +38,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app"
-  ],
-  "webApplicationInfo": {
-    "id": "07d429f7-91f9-45ff-ba7e-ac5b26939b45",
-    "resource": "api://c3a5-2402-e280-2138-11c-3d5d-2e7-f8c8-775e.ngrok-free.app/07d429f7-91f9-45ff-ba7e-ac5b26939b45"
-  }
+    "{{domain-name}}"
+  ]
 }

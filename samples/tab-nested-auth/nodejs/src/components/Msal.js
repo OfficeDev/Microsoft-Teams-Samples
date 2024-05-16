@@ -8,16 +8,20 @@ import { Button} from '@fluentui/react-components';
 import * as msal from "@azure/msal-browser";
 
 const Msal = () => {
+
     const [meData, setMeData] = useState("");
     const [token, setToken] = useState("");
+
     let pca = undefined;
+
     const msalConfig = {
         auth: {
-            clientId: "07d429f7-91f9-45ff-ba7e-ac5b26939b45",
+            clientId: "<<YOUR-MICROSOFT-APP-ID>>",
             authority: "https://login.microsoftonline.com/common",
             supportsNestedAppAuth: true // Enable native bridging.
         }
     };
+
     useEffect(() => {
         async function fetchMyAPI() {
             pca = await msal.PublicClientNext.createPublicClientApplication(msalConfig);
@@ -25,9 +29,9 @@ const Msal = () => {
         fetchMyAPI()
       }, [])
 
+
     // Tab sso authentication.
     const msallogin = () => {
-        
        const account = pca.getActiveAccount();
 
         const accessTokenRequest = {
