@@ -100,11 +100,11 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Install app:**
 
-![InstallApp ](Images/1.InstallApp.PNG)
+![InstallApp ](Images/1.InstallApp.png)
 
-![2.LoginPage ](Images/2.LoginPage.PNG)
+![2.LoginPage ](Images/2.LoginPage.png)
 
-![InstallApp ](Images/3.UserInformation.PNG)
+![InstallApp ](Images/3.UserInformation.png)
 
 
 ## Further reading
