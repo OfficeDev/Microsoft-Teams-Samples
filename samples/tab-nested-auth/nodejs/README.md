@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs.
+description: This sample shows meeting transcripts and recordings.
 products:
 - office-teams
 - office
@@ -9,246 +9,185 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "12/03/2021 12:53:17 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-sso-nodejs
+ createdDate: "11-22-2023 10:00:01"
+urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-nodejs
+
 ---
 
-# Tabs Azure AD SSO Sample using NodeJS
+## Meeting Transcripts Recordings
 
-This sample shows how to implement Azure AD single sign-on support for tabs. It will:
+This sample shows meeting transcripts and recordings.
 
-1. Obtain an access token for the logged-in user using SSO
-
-2. Call a web service - also part of this project - to exchange this access token for one with User.Read permission
-
-3. Call Graph and retrieve the user's profile
-
-## Included Features
-* Teams SSO (tabs)
-* MSAL.js 2.0 support
-* Graph API
-
-- **Interaction with app**
-![tab-sso-sample ](./doc/images/tab-sso.gif)
+**Interaction with app**
+![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecording.gif)
 
 ## Prerequisites
 
-You will need:
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
-1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine.
+### Setup Register you app with Azure AD.
 
-3. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
-   If you using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `.env` files.
+  4. Under **Manage**, select **Expose an API**. 
+  5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
+      * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
+  6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+  7. Set **Who can consent?** to `Admins and users`
+  8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+      * **Admin consent title:** Teams can access the user’s profile.
+      * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+      * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+      * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+  9. Ensure that **State** is set to **Enabled**
+  10. Select **Add scope**
+      * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+          * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
+  11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+      * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+      * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+      * `4765445b-32c6-49b0-83e6-1d93765276ca` (Microsoft 365 web application)
+      * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Microsoft 365 desktop application)
+      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop application)
+      * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web application)
+      * `27922004-5251-4030-b22d-91ecd9a37ea4` (Outlook mobile application)
+  12. Navigate to **API Permissions**, and make sure to add the follow permissions:
+  -   Select Add a permission
+  -   Select Microsoft Graph -\> Delegated permissions.
 
-4. [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+      ![Login-In ](Images/Permissions.png)
 
-> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+  -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+  13. Navigate to **Authentication**
+      If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+  - Set a redirect URI:
+      * Select **Add a platform**.
+      * Select **Single-page application**.
+      * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
+  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Setup 
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+> Note these instructions are for running the sample on your local machine.
 
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
+1. Run ngrok - point to port 3978
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
-## Run the app (Manually Uploading to Teams)
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-## Step 1: Register an Azure AD Application
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
-Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams permission to obtain access tokens on its behalf.
+2. Clone the repository
 
-1. Create an [Microsoft Entra ID application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+    
+3. We have two different solutions to run, so follow below steps:
+ 
+- In a terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs/api-server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
 
-    * Set your application URI to the same URI you've created in tunnelling application. 
-        * Ex: `api://<your_tunnel_domain>/{appId}`
-        using the application ID that was assigned to your app
-    * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
-        * Visit `Manage > Authentication`. 
-        * Add a platform
-        * Select `Single-page application`
-        * Create a redirect URI in the format of: `https://<your_tunnel_domain>/auth-end`.
-        * Within same `Single-page-application` add another url in the format of: `https://<your_tunnel_domain>/Home/BrowserRedirect`.
-    * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
-        * Visit `Manage > Certificates & secrets`
-        * Create a new client secret.
-    * Setup your API permissions. This is what your application is allowed to request permission to access.
-        * Visit `Manage > API Permissions`
-        * Make sure you have the following Graph permissions enabled: `email`, `offline_access`, `openid`, `profile`, and `User.Read`.
-        * Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the `profile` permission (for example, if we want access to the user's profile photo).
+    ```bash
+    npm install
+    ```
 
-    * Expose an API that will give the Teams desktop, web and mobile clients access to the permissions above
-        * Visit `Manage > Expose an API`
-        * Add a scope and give it a scope name of `access_as_user`. Your API url should look like this: `api://contoso.ngrok-free.app/{appID}/access_as_user`. In the "who can consent" step, enable it for "Admins and users". Make sure the state is set to "enabled".
-        * Next, add two client applications. This is for the Teams desktop/mobile clients and the web client.
-            * 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
-            * 1fec8e78-bce4-4aaf-ab1b-5451cc387264
-    **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
-      * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
-      * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
-      * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
-      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
+    ```bash
+    npm start
+    ```
+- The server will start running on 5000 port
 
-## Update the app manifest and config.js file
+- In a different terminal, navigate to `samples/tab-meeting-transcript-recording/nodejs` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
-1. Update the `manifest.json` file as follows:
+    ```bash
+    npm install
+    ```
 
-    * Generate a new unique ID for the application and replace the id field with this GUID. On Windows, you can generate a new GUID in PowerShell with this command:
-    ~~~ powershell
-     [guid]::NewGuid()
-    ~~~
-    * Ensure the package name is unique within the tenant where you will run the app
-    * Edit the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    * Replace `{your_tunnel_domain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
-    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{your_tunnel_domain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\appManifest_Hub` folder with the required values.
-    **Zip** up the contents of the `appManifest` folder to create a `Manifest.zip` or `appManifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    ```bash
+    npm start
+    ```
+- The client will start running on 3978 port
 
-2. Update your `config/default.json` file
-    * Replace the `tab.appId` property with you Azure AD application ID
-    * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
-    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://<your_tunnel_domain>/{appID}`
-    * If you want to use a port other than 3978, fill that in here (and in your tunnel command)
-    * Note : Do not push the `clientId` and `clientSecret` values inside your repo. Instead we recommend to store them at some secure location like Azure key vault.
+4. Open .env file from this path folders `samples/tab-meeting-transcript-recording/nodejs` and `samples/tab-meeting-transcript-recording/nodejs/api-server` update:
+   - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
+   - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
+   - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+   
+> Note : Global Administrator can grant consent using following link: https://login.microsoftonline.com/common/adminconsent?client_id=<%appId%>
+   
+**This step is specific to Teams:**
 
-## Running the app locally
+- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `{{Microsoft-App-id}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{Microsoft-App-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
-1. If you are using Ngrok, run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
-    * Win: `./ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
-    * Mac: `/ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
+- **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-Leave this running while you're running the application locally, and open another command prompt for the steps which follow.
+- **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-2. Install the neccessary NPM packages and start the app
-    * `npm install`
-    * `npm start`
+- **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-Thhe app should start running on port 3978 or the port you configured
-
-## Packaging and installing your app to Teams
-
-1. Package your manifest 
-    * `gulp generate-manifest`
-    * This will create a zip file in the manifest folder
-2. Install in Teams
-    * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > Manage your apps > Publish App > Upload Custom App`.
-    * Upload the manifest zip file created in step #1
+- Add the app to personal static tabs.
 
 ## Running the sample
 
-1. Once you've installed the app, it should automatically open for you. Visit the `Auth Tab` to begin testing out the authentication flow.
-2. Follow the onscreen prompts. The authentication flow will print the output to your screen.
+You can interact with Teams Tab meeting sidepanel.
 
-Tab auth in personal scope
-![tab-sso-page ](./doc/images/tab-sso-details.png)
+**Install app:**
 
-Tab auth in group scope
-![tab-sso-teams ](./doc/images/tab-sso-teams.png)
+![InstallApp ](Images/Install.png)
 
-Tab auth in browser
-![tab-sso-browser ](./doc/images/tab-sso-browser.png)
+**Click Sign-In:**
 
-Tab auth in browser with user details
-![tab-sso-teams ](./doc/images/tab-sso-browser-auth.png)
+![Login-In ](Images/LoginIn.png)
 
-## Outlook on the web
+**Click Consent:**
 
-- To view your app in Outlook on the web.
+![Login-In ](Images/LoginConsent.png)
 
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+**Permissions Requested:**
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+![Login-In ](Images/PermissionsRequested.png)
 
-![InstallOutlook](./doc/images/InstallOutlook.png)
+**Sign-In Loading:**
 
-**Select your app icon to launch and preview your app running in Outlook on the web**
+![Login-In ](Images/LoginInLoading.png)
 
-![AppOutlook](./doc/images/AppOutlook.png)
+**Meeting Detail Page:**
 
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+![Home](Images/Home.png)
 
-## Office on the web
+**Get Notification:**
 
-- To preview your app running in Office on the web.
+![Notification](MeetingTranscriptRecording/Images/GetNotification.png)
 
-- Log into office.com with test tenant credentials
+**Loading Meetings, Fetching Transcript and Recordings:**
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+![RecordingTranscriptForm](Images/RecordingTranscriptFormLoading.png)
 
-![InstallOffice](./doc/images/InstallOffice.png)
+**Recording and Transcript Form:**
 
-**Select your app icon to launch your app in Office on the web**
+![RecordingTranscriptForm](Images/RecordingTranscriptForm.png)
 
-![AppOffice](./doc/images/AppOffice.png) 
+## Further reading
 
-**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+- [Azure AD application using Microsoft Graph](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
+- [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
+- [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)
 
-# App structure
 
-## Routes
-
-Compared to the Hello World sample, this app has four additional routes:
-1. `/ssoDemo` renders the tab UI. 
-    * This is the tab called `Auth Tab` in personal app inside Teams. The purpose of this page is primarily to execute the `ssoDemo.js` file that handles and initiates the authentication flow.
-    * This tab can also be added to Teams channels
-2. `/getProfileOnBehalfOf` does not render anything but instead is the server-side route for initiating the [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). 
-    * It takes the token it receives from the `/ssoDemo` page and attemps to exchange it for a new token that has elevated permissions to access the `profile` Graph API (which is usually used to retrieve the users profile photo).
-    * If it fails (because the user hasn't granted permission to access the `profile` API), it returns an error to the `/ssoDemo` page. This error is used to display the "Consent" button which uses the Teams SDK to open the `/auth/start` page in a pop-up window.
-3. `/auth/start` and `/auth/end` routes are used if the user needs to grant further permissions. This experience happens in a seperate window. 
-    * The `/auth/start` page merely creates a valid Microsoft Entra ID authorization endpoint and redirects to that Microsoft Entra ID consent page.
-    * Once the user has consented to the permissions, Microsoft Entra ID redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/ssoDemo` page by calling the `notifySuccess` API.
-    * This workflow is only neccessary if you want authorization to use additional Graph APIs. Most apps will find this flow unnesseccary if all they want to do is authenticate the user.
-    * This workflow is the same as our standard [web-based authentication flow](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#navigate-to-the-authorization-page-from-your-popup-page) that we've always had in Teams before we had single sign-on support. It just so happens that it's a great way to request additional permissions from the user, so it's left in this sample as an illustration of what that flow looks like.
-
-## msal-auth.js
-
-This Javascript file is served from the `/msal-auth.js` page and handles the browser-side authentication workflow.
-
-## ssoDemo.js
-
-This Javascript file is served from the `/ssoDemo` page and handles most of the client-side authentication workflow. This file is broken into three main functions:
-
-1. getClientSideToken() -
-This function asks Teams for an authentication token from Microsoft Entra ID. The token is displayed so you can try it in Postman.
-
-2. getServerSideToken() -
-This function sends the token to the backend to exchange for elevated permissions using Microsoft Entra ID's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
-
-3. useServerSideToken() -
-This function uses the token to call the Microsoft Graph and display the resulting JSON.
-
-4. requestConsent() - 
-This function launches the consent pop-up
-
-Inline code runs these in sequence, running requestConsent only if an `invalid_grant` error is received from the server.
-
-# Additional reading
-
- For how to get started with Microsoft Teams development see [Get started on the Microsoft Teams platform with Node.js and App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio).
-
-For further information on Single Sign-On and how it works, visit our [Single Sign-On documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
-
-# Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Further Reading.
-[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-meeting-transcript-recording-nodejs" />

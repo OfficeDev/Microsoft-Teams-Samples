@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-sso-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-meeting-transcript-recording-nodejs",
     "source": "officeDev",
-    "title": "Teams Tab SSO Authentication (NodeJS)",
-    "shortDescription": "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-sso/nodejs",
+    "title": "This sample shows meeting transcripts and recordings.",
+    "shortDescription": "This sample shows meeting transcripts and recordings.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-meeting-transcript-recording/nodejs",
     "longDescription": [
-      "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs."
+      "This sample shows meeting transcripts and recordings."
     ],
-    "creationDateTime": "2021-12-03",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2023-11-22",
+    "updateDateTime": "2023-11-22",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/nodejs/./doc/images/tab-sso.gif",
-        "alt": "Solution UX showing teams tab sso authentication (nodejs)"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-meeting-transcript-recording/nodejs/Images/MeetingTranscriptRecordingGif.gif",
+        "alt": "Solution UX showing gif meeting transcripts and recordings."
       }
     ],
     "authors": [

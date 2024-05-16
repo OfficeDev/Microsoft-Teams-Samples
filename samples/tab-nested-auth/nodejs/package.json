@@ -1,35 +1,43 @@
 {
-  "name": "msteams-nodejs-tab-sso",
-  "version": "1.0.0",
-  "description": "This sample shows how to implement Azure AD single sign-on support for tabs.",
-  "scripts": {
-    "dev:teamsfx": "npm run start",
-    "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js"
+  "name": "microsoft-teams-ext",
+  "version": "0.1.0",
+  "msteams": {
+    "teamsAppId": null
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
-  },
-  "author": "Microsoft Corp.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/issues"
-  },
-  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "private": true,
   "dependencies": {
-    "@azure/msal-node": "^1.14.3",
-    "config": "^3.3.8",
-    "express": "^4.16.2",
-    "faker": "^6.6.6",
-    "node-fetch": "^2.1.2",
-    "pug": "^2.0.0-rc.4"
+    "@azure/msal-browser": "^3.11.0",
+    "@fluentui/react-components": "^9.0.0-rc.10",
+    "@microsoft/teams-js": "^2.23.0",
+    "crypto": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "5.0.1",
+    "reactstrap": "^9.2.0"
   },
+  "browser": {
+    "crypto": false
+  },
+  "scripts": {
+    "start": "set PORT=3978 HTTP=true && react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^4.0.2",
-    "gulp-zip": "^4.0.0",
-    "esbuild": "^0.18.1"
+    "web-vitals": "^3.1.0"
   }
 }
