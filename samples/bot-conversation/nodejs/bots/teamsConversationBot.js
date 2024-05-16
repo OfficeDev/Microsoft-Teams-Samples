@@ -134,7 +134,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     async addSensitivityLabel(turnContext) {
         await turnContext.sendActivity({
             type: ActivityTypes.Message,
-            text: `Hey I'm a friendly AI bot. This message is generated via AI`,
+            text: `This is an example for sensitivity label that help users identify the confidentiality of a message`,
             entities: [
                 {
                     type: "https://schema.org/Message",
