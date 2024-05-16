@@ -9,14 +9,15 @@ import * as msal from "@azure/msal-browser";
 
 const Msal = () => {
 
-    const [meData, setMeData] = useState("");
-    const [token, setToken] = useState("");
+    const [meData, setMeData] = useState(null);
+    const [token, setToken] = useState();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     let pca = undefined;
 
     const msalConfig = {
         auth: {
-            clientId: "<<YOUR-MICROSOFT-APP-ID>>",
+            clientId: "08fe371d-249e-4fc6-871b-9ee6f809af6b",
             authority: "https://login.microsoftonline.com/common",
             supportsNestedAppAuth: true // Enable native bridging.
         }
@@ -80,9 +81,10 @@ const Msal = () => {
         
         if (response.ok) {
             // Write file names to the console.
-            const data = await response.json();
-            const results = JSON.stringify(data,null,2);
-            setMeData(results);
+            const jsonValue = await response.json();
+            const alignedJSON = JSON.stringify(jsonValue, null, 2);
+            setMeData(alignedJSON);
+            setIsLoggedIn(true);
         } else {
             const errorText = await response.text();
             console.error("Microsoft Graph call failed - error text: " + errorText);
@@ -92,14 +94,12 @@ const Msal = () => {
     return (
         <div>
             <div className="">
-                <Button appearance="primary" onClick={msallogin}>Login</Button>
+            {!isLoggedIn && <Button appearance="primary" onClick={msallogin}>Login</Button>}
             </div>
-            <br></br>
-            <p>{token}</p>
-            <br></br>
-            <p>
-                {meData}
-            </p>
+            {isLoggedIn && <h1 style={{ color: 'black' }}>Welcome! You are login information.</h1>}
+            <div>
+              <pre style={{ whiteSpace: 'pre-wrap', color: 'black'}}>{meData}</pre>
+            </div>
         </div>
     );
 };
