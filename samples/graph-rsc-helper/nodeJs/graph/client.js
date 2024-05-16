@@ -90,23 +90,23 @@ async function resolveChatPlaceHolders(
   userId,
   chatId
 ) {
-  url = originalUrl.replace("${chatId}", chatId);
-  url = url.replace("${userId}", userId);
-  requestBody = originalRequestBody.replace("${chatId}", chatId);
-  requestBody = requestBody.replace("${userId}", userId);
+  url = originalUrl.replace("{chatId}", chatId);
+  url = url.replace("{userId}", userId);
+  requestBody = originalRequestBody.replace("{chatId}", chatId);
+  requestBody = requestBody.replace("{userId}", userId);
 
   if (
-    url.includes("${tabId}") ||
-    requestBody.includes("${tabId}") ||
-    url.includes("${installedAppId}") ||
-    requestBody.includes("${installedAppId}")
+    url.includes("{tabId}") ||
+    requestBody.includes("{tabId}") ||
+    url.includes("{installedAppId}") ||
+    requestBody.includes("{installedAppId}")
   ) {
     const { tabId, installedAppId } =
       await getDefaultTabIdAndInstalledAppIdInChat(chatId);
-    url = url.replace("${tabId}", tabId);
-    url = url.replace("${installedAppId}", installedAppId);
-    requestBody = requestBody.replace("${tabId}", tabId);
-    requestBody = requestBody.replace("${installedAppId}", installedAppId);
+    url = url.replace("{tabId}", tabId);
+    url = url.replace("{installedAppId}", installedAppId);
+    requestBody = requestBody.replace("{tabId}", tabId);
+    requestBody = requestBody.replace("{installedAppId}", installedAppId);
   }
   return { url, requestBody };
 }
@@ -118,25 +118,25 @@ async function resolveTeamPlaceHolders(
   teamId,
   channelId
 ) {
-  url = originalUrl.replace("${teamId}", teamId);
-  url = url.replace("${channelId}", channelId);
-  url = url.replace("${userId}", userId);
-  requestBody = originalRequestBody.replace("${teamId}", teamId);
-  requestBody = requestBody.replace("${channelId}", channelId);
-  requestBody = requestBody.replace("${userId}", userId);
+  url = originalUrl.replace("{teamId}", teamId);
+  url = url.replace("{channelId}", channelId);
+  url = url.replace("{userId}", userId);
+  requestBody = originalRequestBody.replace("{teamId}", teamId);
+  requestBody = requestBody.replace("{channelId}", channelId);
+  requestBody = requestBody.replace("{userId}", userId);
 
   if (
-    url.includes("${tabId}") ||
-    requestBody.includes("${tabId}") ||
-    url.includes("${installedAppId}") ||
-    requestBody.includes("${installedAppId}")
+    url.includes("{tabId}") ||
+    requestBody.includes("{tabId}") ||
+    url.includes("{installedAppId}") ||
+    requestBody.includes("{installedAppId}")
   ) {
     const { tabId, installedAppId } =
       await getDefaultTabIdAndInstalledAppIdInTeam(teamId, channelId);
-    url = url.replace("${tabId}", tabId);
-    url = url.replace("${installedAppId}", installedAppId);
-    requestBody = requestBody.replace("${tabId}", tabId);
-    requestBody = requestBody.replace("${installedAppId}", installedAppId);
+    url = url.replace("{tabId}", tabId);
+    url = url.replace("{installedAppId}", installedAppId);
+    requestBody = requestBody.replace("{tabId}", tabId);
+    requestBody = requestBody.replace("{installedAppId}", installedAppId);
   }
   return { url, requestBody };
 }

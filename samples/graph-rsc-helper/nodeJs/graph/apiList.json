@@ -7,7 +7,7 @@
                 "id": "ListInstalledApps",
                 "name": "List Installed Apps",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps?$expand=teamsApp",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/installedApps?$expand=teamsApp",
                     "Parameters": [
                         "{teamId}"
                     ],
@@ -23,7 +23,7 @@
                 "id": "SendActivityNotification",
                 "name": "Send Activity Notification",
                 "value": {
-                    "URL": "https://graph.microsoft.com/1.0/teams/${teamId}/sendActivityNotification",
+                    "URL": "https://graph.microsoft.com/1.0/teams/{teamId}/sendActivityNotification",
                     "Parameters": [
                         "{teamId}", "{userId}"
                     ],
@@ -35,7 +35,7 @@
                 "Body": {
                     "topic": {
                         "source": "entityUrl",
-                        "value": "https://graph.microsoft.com/v1.0/teams/${teamId}"
+                        "value": "https://graph.microsoft.com/v1.0/teams/{teamId}"
                     },
                     "activityType": "demoNotification",
                     "previewText": {
@@ -43,7 +43,7 @@
                     },
                     "recipient": {
                         "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": "${userId}"
+                        "userId": "{userId}"
                     },
                     "templateParameters": [
                     ]
@@ -59,7 +59,7 @@
                 "id": "ListMessages",
                 "name": "List Message",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/messages?top=5",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/messages?top=5",
                     "Parameters": ["{teamId}", "{channelId}"],
                     "Permissions": [
                         "ChannelMessage.Read.Group"
@@ -72,7 +72,7 @@
                 "id": "ListMessagesReplies",
                 "name": "List Message Replies",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/messages/[messageId]/replies",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/messages/[messageId]/replies",
                     "Parameters": ["{teamId}", "{channelId}", "[messageId]"],
                     "Permissions": [
                         "ChannelMessage.Read.Group"
@@ -90,7 +90,7 @@
                 "id": "ListChannels",
                 "name": "List Channels",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels",
                     "Parameters": ["{teamId}"],
                     "Permissions": [
                         "ChannelSettings.Read.Group",
@@ -104,7 +104,7 @@
                 "id": "GetChannel",
                 "name": "Get Channel",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}",
                     "Parameters": ["{teamId}", "{channelId}"],
                     "Permissions": [
                         "ChannelSettings.Read.Group",
@@ -118,7 +118,7 @@
                 "id": "CreateChannel",
                 "name": "Create Channel",
                 "value": {
-                    "URL": "https://graph.microsoft.com/beta/teams/${teamId}/channels",
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels",
                     "Parameters": ["{teamId}"],
                     "Permissions": [
                         "Channel.Create.Group"
@@ -136,7 +136,7 @@
                 "id": "UpdateChannel",
                 "name": "Update Channel",
                 "value": {
-                    "URL": "https://graph.microsoft.com/beta/teams/${teamId}/channels/[editableChannelId]",
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels/[editableChannelId]",
                     "Parameters": ["{teamId}", "[editableChannelId]"],
                     "Permissions": [
                         "ChannelSettings.ReadWrite.Group"
@@ -152,7 +152,7 @@
                 "id": "DeleteChannel",
                 "name": "Delete Channel",
                 "value": {
-                    "URL": "https://graph.microsoft.com/beta/teams/${teamId}/channels/[editableChannelId]",
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels/[editableChannelId]",
                     "Parameters": ["{teamId}", "[editableChannelId]"],
                     "Permissions": [
                         "Channel.Delete.Group"
@@ -165,7 +165,7 @@
                 "id": "Primary Channel",
                 "name": "Primary Channel",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/primaryChannel",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/primaryChannel",
                     "Parameters": ["{teamId}"],
                     "Permissions": [
                         "ChannelSettings.Read.Group",
@@ -184,7 +184,7 @@
                 "id": "ListTabs",
                 "name": "List Tabs",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs?$expand=teamsApp",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs?$expand=teamsApp",
                     "Parameters": ["{teamId}", "{channelId}"],
                     "Permissions": [
                         "TeamsTab.Read.Group",
@@ -198,7 +198,7 @@
                 "id": "Get Tab",
                 "name": "Get Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs/${tabId}",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/{tabId}",
                     "Parameters": ["{teamId}", "{channelId}", "{tabId}"],
                     "Permissions": [
                         "TeamsTab.Read.Group",
@@ -212,7 +212,7 @@
                 "id": "AddTab",
                 "name": "Add Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs",
                     "Parameters": [
                         "{teamId}", 
                         "{channelId}",
@@ -225,7 +225,7 @@
                 "type": "POST",
                 "Body": {
                     "displayName": "Test adding tab",
-                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/${installedAppId}",
+                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{installedAppId}",
                     "configuration": {
                         "entityId": "2DCA2E6C7A10415CAF6B8AB6661B3154",
                         "contentUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView",
@@ -238,7 +238,7 @@
                 "id": "UpdateTab",
                 "name": "Update Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs/${tabId}",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/{tabId}",
                     "Parameters": [
                         "{teamId}", 
                         "{channelId}",
@@ -258,7 +258,7 @@
                 "id": "DeleteTab",
                 "name": "Deleta Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs/[tabId]",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/[tabId]",
                     "Parameters": [
                         "{teamId}", 
                         "{channelId}",
@@ -280,7 +280,7 @@
                 "id": "ListMembers",
                 "name": "List Members",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/members",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/members",
                     "Parameters": ["{teamId}"],
                     "Permissions": [
                         "TeamMember.Read.Group"
@@ -293,7 +293,7 @@
                 "id": "GetMember",
                 "name": "Get Member",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/teams/${teamId}/members/[membershipId]",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/members/[membershipId]",
                     "Parameters": [
                         "{teamId}",
                         "[membershipId]"
@@ -315,7 +315,7 @@
                 "id": "SendActivityNotification",
                 "name": "Send Activity Notification",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/sendActivityNotification",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/sendActivityNotification",
                     "Parameters": [
                         "{chatId}",
                         "{userId}"
@@ -328,7 +328,7 @@
                 "Body": {
                     "topic": {
                         "source": "entityUrl",
-                        "value": "https://graph.microsoft.com/v1.0/chats/${chatId}"
+                        "value": "https://graph.microsoft.com/v1.0/chats/{chatId}"
                     },
                     "activityType": "testNotification",
                     "previewText": {
@@ -336,7 +336,7 @@
                     },
                     "recipient": {
                         "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": "${userId}"
+                        "userId": "{userId}"
                     }
                 }
             },
@@ -345,7 +345,7 @@
                 "id": "ListMessages",
                 "name": "List Messages",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/messages?$top=5",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/messages?$top=5",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -361,7 +361,7 @@
                 "id": "GetChat",
                 "name": "Get Chat",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -379,7 +379,7 @@
                 "id": "UpdateChat",
                 "name": "Update Chat",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -397,7 +397,7 @@
                 "id": "ListInstalledApps",
                 "name": "List Installed Apps",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/installedApps?$expand=teamsApp",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/installedApps?$expand=teamsApp",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -419,7 +419,7 @@
                 "id": "ListMembers",
                 "name": "List Members",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/members",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -436,7 +436,7 @@
                 "id": "GetMember",
                 "name": "Get Member",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/members/[membershipId]",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members/[membershipId]",
                     "Parameters": [
                         "{chatId}",
                         "[membershipId]"
@@ -454,7 +454,7 @@
                 "id": "RemoveMember",
                 "name": "Remove Member",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/members/[membershipId]",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members/[membershipId]",
                     "Parameters": [
                         "{chatId}",
                         "membershipId"
@@ -476,7 +476,7 @@
                 "id": "ListTabs",
                 "name": "List Tabs",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/tabs",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs",
                     "Parameters": [
                         "{chatId}"
                     ],
@@ -492,7 +492,7 @@
                 "id": "GetTab",
                 "name": "Get Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/tabs/${tabId}",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/{tabId}",
                     "Parameters": [
                         "{chatId}",
                         "{tabId}"
@@ -510,7 +510,6 @@
                 "id": "AddTab",
                 "name": "Add Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/tabs",
                     "Parameters": [
                         "{chatId}",
                         "{installedAppId}"
@@ -523,7 +522,7 @@
                 "type": "POST",
                 "Body": {
                     "displayName": "Test adding tab",
-                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/${installedAppId}",
+                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{installedAppId}",
                     "configuration": {
                         "entityId": "2DCA2E6C7A10415CAF6B8AB6661B3154",
                         "contentUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView",
@@ -536,7 +535,7 @@
                 "id": "UpdateTab",
                 "name": "Update Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/tabs/${tabId}",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/{tabId}",
                     "Parameters": [
                         "{chatId}",
                         "{tabId}"
@@ -555,7 +554,7 @@
                 "id": "DeleteTab",
                 "name": "Deleta Tab",
                 "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/${chatId}/tabs/[tabId]",
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/[tabId]",
                     "Parameters": [
                         "{chatId}",
                         "[tabId]"

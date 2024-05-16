@@ -1,9 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
-const env = require("dotenv");
 const path = require("path");
 const fs = require("fs");
-const auth = require("./auth");
 const indexRouter = require("./routes/index");
 const { v4: uuidv4 } = require("uuid");
 require("isomorphic-fetch");
@@ -30,7 +28,7 @@ app.get("/configure", function (req, res) {
 });
 
 app.get("/RSCGraphAPI", function (req, res) {
-  fs.readFile("APImethods.json", "utf8", (err, data) => {
+  fs.readFile("graph/apiList.json", "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file:", err);
       return;
@@ -41,7 +39,7 @@ app.get("/RSCGraphAPI", function (req, res) {
       const items = JSON.parse(data);
       res.render("./views/RSCGraphAPI", { items });
     } catch (error) {
-      console.error("Error parsing JSON:", error);
+      console.error("Error parsing API list JSON:", error);
     }
   });
 });

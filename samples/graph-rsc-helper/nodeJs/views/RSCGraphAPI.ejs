@@ -129,7 +129,8 @@
                     break;
                 }
             }
-            populateList(parameters, 'parametersList');
+            var parametersWithDescription = addDescriptionForparameters(parameters);
+            populateList(parametersWithDescription, 'parametersList');
             populateList(permissions, 'permissionsList');
             setSubmitButton(scope);
             console.log("URL is " + URL);
@@ -143,12 +144,43 @@
             
         }
 
+        function addDescriptionForparameters(parameters) {
+            const parametersArray = parameters.split(',');
+            const parametersWithDescription = parametersArray.map((parameter)=>{
+                switch (parameter) {
+                    case "{teamId}":
+                        return `${parameter}: Will be replaced with the id of the team the App is installed.`;
+                    case "{channelId}":
+                        return `${parameter}: Will be replaced with the id of the channel the App is installed.`;
+                    case "{chatId}":
+                        return `${parameter}: Will be replaced with the id of the chat the App is installed.`;
+                    case "{userId}":
+                        return `${parameter}: Will be replaced with the id of the current user.`;
+                    case "{tabId}":
+                        return `${parameter}: Will be replaced with the id of the tab defined by the App.`;
+                    case "{installedAppId}":
+                        return `${parameter}: Will be replaced with the installed id of the App.`;
+                    case "[messageId]":
+                        return `${parameter}: Require the id of a actual message. Can be found in response of List Messages API.`;
+                    case "[editableChannelId]":
+                        return `${parameter}: Require the id of an actual editable channel.`;
+                    case "[tabId]":
+                        return `${parameter}: Require the id of a actual tab. Can be found in response of List Tabs API.`;
+                    case "[membershipId]":
+                        return `${parameter}: Require the id of a actualmembership. Can be found in response of List Members API.`;
+                    default:
+                        return parameter;
+                }
+            })
+            return parametersWithDescription.join(',');
+        }
         function populateList(Items, listId) {
             const List = document.getElementById(listId);
             const itemsArray = Items.split(',');
             List.innerHTML = '';
             itemsArray.forEach(item => {
                 const li = document.createElement('li');
+                li.className = 'list-group-item';
                 li.textContent = item.trim();
                 List.appendChild(li);
             });
@@ -227,32 +259,28 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
+                            <div class="col-md-8">
+                                <div class="row align-items-start">
+                                    <div class="col-2">
                                         <h6>Parameters</h6>
                                     </div>
-                                    <div class="col-8">
-                                        <div class="card" style="max-height: 75px;">
-                                            <div class="card-body" style="overflow-y: auto;">
-                                                <ul class="list-unstyled" id="parametersList">
-                                                </ul>
-                                            </div>
+                                    <div class="col-10">
+                                        <div class="card" style="max-height: 120px;">
+                                            <ul class="list-group list-group-flush" id="parametersList" style="overflow-y: auto;">
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <div class="row align-items-start">
                                     <div class="col-4">
-                                        <h6>RSC permissions Required</h6>
+                                        <h6>RSC permissions</h6>
                                     </div>
                                     <div class="col-8">
-                                        <div class="card" style="max-height: 75px;">
-                                            <div class="card-body" style="overflow-y: auto;">
-                                                <ul class="list-unstyled" id="permissionsList">
-                                                </ul>
-                                            </div>
+                                        <div class="card" style="max-height: 120px;">
+                                            <ul class="list-group list-group-flush" id="permissionsList" style="overflow-y: auto;">
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
