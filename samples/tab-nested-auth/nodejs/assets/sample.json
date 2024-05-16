@@ -31,7 +31,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-nested-auth/nodejs/Images/MeetingTranscriptRecordingGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-nested-auth/nodejs/Images/tab-nested-auth.gif",
         "alt": "Solution UX showing gif nested app authentication."
       }
     ],
