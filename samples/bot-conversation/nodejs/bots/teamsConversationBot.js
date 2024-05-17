@@ -50,6 +50,10 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.addAILabel(context);
             } else if (text.includes('sensitivity')) {
                 await this.addSensitivityLabel(context);
+            } else if (text.includes('feedback')) {
+                await this.addFeedbackButtons(context);
+            } else if (text.includes('citation')) {
+                await this.addCitations(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -150,6 +154,49 @@ class TeamsConversationBot extends TeamsActivityHandler {
         });
     }
 
+    async addFeedbackButtons(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `This is an example for Feedback buttons that helps to provide feedback for a bot message`,
+            channelData: {
+                feedbackLoopEnabled: true // Enable feedback buttons
+            },
+        });
+    }
+
+    async addCitations(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI - $(txt) [1]`, // cite with [1]
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org",
+                    "@id": "",
+                    citation: [
+                        {
+                            "@type": "Claim",
+                            position: 1, // Required. Should match the [1] in the text above
+                            appearance: {
+                                "@type": "DigitalDocument",
+                                name: "Some secret citation", // Title
+                                url: "https://example.com/claim-1", // Hyperlink on the title
+                                abstract: "Excerpt", // Excerpt (abstract)
+                                keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // Keywords
+                                usageInfo: {
+                                    "@type": "CreativeWork",
+                                    name: "Confidential \\ Contoso FTE", // Sensitivity title
+                                    description: "Only accessible to Contoso FTE", // Sensitivity description
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
+        });
+    }
+
     // Checks the count of members who have read the message sent by MessageAllMembers command.
     async checkReadUserCount(turnContext) {
         if (users.length !== 0 && users.length !== undefined) {
@@ -157,6 +204,26 @@ class TeamsConversationBot extends TeamsActivityHandler {
             await turnContext.sendActivity(`Number of members read the message: ${counter}\n\nMembers: ${userList}`);
         } else {
             await turnContext.sendActivity("Read count is zero. Please make sure to send a message to all members firstly to check the count of members who have read your message.");
+        }
+    }
+
+    async onInvokeActivity(context) {
+        try {
+            switch (context.activity.name) {
+                case "message/submitAction":
+                    return await context.sendActivity("Provided reaction : " + context.activity.value.actionValue.reaction + "<br> Feedback : " + JSON.parse(context.activity.value.actionValue.feedback).feedbackText);
+                default:
+                    return {
+                        status: 200,
+                        body: `Unknown invoke activity handled as default- ${context.activity.name}`,
+                    };
+            }
+        } catch (err) {
+            console.log(`Error in onInvokeActivity: ${err}`);
+            return {
+                status: 500,
+                body: `Invoke activity received- ${context.activity.name}`,
+            };
         }
     }
 
@@ -236,6 +303,18 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 Title: "Sensitivity label",
                 value: null,
                 Text: "sensitivity"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Feedback buttons",
+                value: null,
+                Text: "feedback"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Citations",
+                value: null,
+                Text: "citation"
             }
         ];
 

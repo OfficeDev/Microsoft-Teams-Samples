@@ -66,6 +66,14 @@
             {
               "title": "sensitivity",
               "description": "Sensitivity label added to your bot message specifies the confidentiality of a message"
+            },
+            {
+              "title": "Feedback buttons",
+              "description": "Feedback buttons that helps to provide feedback for a bot message"
+            },
+            {
+              "title": "citation",
+              "description": "Used to cite the sources of the bot message"
             }
           ]
         }
