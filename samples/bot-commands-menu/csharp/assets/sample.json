@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-localization-csharp",
+    "name": "officedev-microsoft-teams-samples-bot-commands-menu-csharp",
     "source": "officeDev",
-    "title": "Teams App Localization",
+    "title": "Create a commands menu",
     "shortDescription": "Microsoft Teams app localization using Bot and Tab",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-commands-menu/csharp",
     "longDescription": [
-      "Microsoft Teams app localization using Bot and Tab"
+      "This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command."
     ],
-    "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "creationDateTime": "2024-17-05",
+    "updateDateTime": "2024-17-05",
     "products": [
       "Teams"
     ],
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab,bot"
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/csharp/Images/Preview.gif",
-        "alt": "Solution UX showing teams app localization"
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-commands-menu/csharp/Images/Botcommandsmenu.gif",
+        "alt": "Solution UX showing teams commands menu"
       }
     ],
     "authors": [
