@@ -247,7 +247,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - Consists features such as citations, feedback buttons, and sensitivity label that enables better user engagement
 
 - `AI label` - enables user to identify that the message was generated using AI.
-![AI-label](Images/softDeleteMessage.png)
+![AI-label](Images/AI-label.png)
 
 - `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
 ![Citations](Images/softDeleteMessage.png)
