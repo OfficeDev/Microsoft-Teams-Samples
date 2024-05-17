@@ -84,8 +84,10 @@ Verify you have the right account for building Teams apps and install some recom
 
 # Running the sample
 
+**Install App Personal**
 ![image](Images/1.InstallApp.png)
 
+**Prompt starters**
 ![2.PromptStarters](Images/2.PromptStarters.png)
 
 ![3.SearchFlights](Images/3.SearchFlights.png)
