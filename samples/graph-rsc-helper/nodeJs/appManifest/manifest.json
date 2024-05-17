@@ -15,11 +15,11 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "RSC-GraphAPI NodeJs",
-    "full": "RSC with Graph API"
+    "short": "Graph API Explorer for RSC",
+    "full": "Graph API Explorer for RSC"
   },
   "description": {
-    "short": "RSC GraphAPI-Node Js",
+    "short": "Graph API Explorer for RSC",
     "full": "Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization"
   },
   "accentColor": "#5558AF",

@@ -141,7 +141,8 @@
             } else {
                 requestBody.value = JSON.stringify(JSON.parse(body),null,2);
             }
-            
+            var responseBody = document.getElementById('responseBody');
+            responseBody.innerHTML = "";
         }
 
         function addDescriptionForparameters(parameters) {
@@ -207,7 +208,7 @@
             <div class="col-3">
                 <div class="col p-0">
                     <div>
-                        <h4>Graph resource list</h4>
+                        <h4>Graph API Category</h4>
                     </div>
                     <div>
                         <div class="accordion" id="accordionExample">
