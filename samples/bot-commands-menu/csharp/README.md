@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app localization using Bot and Tab
+description: Microsoft Teams Create Commands Menu
 products:
 - office-teams
 - office
@@ -9,26 +9,19 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
+ createdDate: "05/17/2024 01:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-commands-menu-csharp
 ---
 
-# Teams App Localization
-This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
+# Create a commands menu
+This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command.
 
 ## Included Features
 * Bots
-* Tabs
-* Localization
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
-
-**App Localization:** [Manifest](/samples/app-localization/csharp/demo-manifest/app-localization.zip)
+![Preview Image](Images/Botcommandsmenu.gif)
 
 ## Prerequisites
 
@@ -70,80 +63,40 @@ Verify you have the right account for building Teams apps and install some recom
     ```
   - Modify the `/appsettings.json` and fill in the following details:
   - `{{MicrosoftAppId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
-  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret
+  - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
 
 - Run the bot from a terminal or from Visual Studio:
 
 5. If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `app-localization\csharp` folder
-  - Select `Localization.csproj` file
+  - Navigate to `bot-commands-menu\csharp` folder
+  - Select `CommandsMenu.csproj` file
 
 6. This step is related to Microsoft Teams app manifest
-    - **Edit** the `manifest.json` contained in the `AppManifest` or `AppManifest_Hub` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<Tunnel Url>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage`  folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{MicrosoftAppId}}` and <<Azure Bot ID>> and for the contentUrl "<<Tunnel Url>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
    - **Provide turnnelling Url** in `manifest.json` for contentUrl in case of tabs and for messaging endpoint in case of bots if enabled
    - replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `Manifest` or `Manifest_hub` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/csharp/Localization/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
-
 # Running the sample
 
-In Teams, Once the app is successfully installed, you can interact with tab and bot in your preferred language.
+![image](Images/1.InstallApp.png)
 
-#### To change language in Teams
-To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
-1. **Installation**: You should see your app installation screen content in selected language.
-![image](Images/Upload.png)
+![2.PromptStarters](Images/2.PromptStarters.png)
 
-1. **Bot**: send any message to see localized
-![image](Images/Reply.png)
-1. **Tab**: click on tab to see localized info.
-![image](Images/Hindi.png)
+![3.SearchFlights](Images/3.SearchFlights.png)
 
-## Outlook on the web
+![4.SearchHotels](Images/4.SearchHotels.png)
 
-- To view your app in Outlook on the web.
+![3.SearchFlightsDetails](Images/3.SearchFlightsDetails.png)
 
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
-
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
-
-![InstallOutlook](Images/InstallOutlook.png)
-
-**Select your app icon to launch and preview your app running in Outlook on the web**
-
-![AppOutlook](Images/AppOutlook.png)
-
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
-
-## Office on the web
-
-- To preview your app running in Office on the web.
-
-- Log into office.com with test tenant credentials
-
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
-
-![InstallOffice](Images/InstallOffice.png)
-
-**Select your app icon to launch your app in Office on the web**
-
-![AppOffice](Images/AppOffice.png) 
-
-**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
-
-#### To Add more languages for localization in Teams through Code.
- 
- Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/aspnet/core/fundamentals/localization?view=aspnetcore-5.0). 
+![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
 
 ## Further reading
 
-- [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
+- [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
+- [Create prompt suggestions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/prompt-suggestions?branch=pr-en-us-10866&tabs=manually-in-the-app-manifest%2Cjavascript)
 
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-localization-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-commands-menu-csharp" />

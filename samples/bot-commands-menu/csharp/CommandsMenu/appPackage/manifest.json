@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "[Microsoft App ID for your bot]",
+      "botId": "{{MicrosoftAppId}}",
       "scopes": [
         "personal",
         "team"
