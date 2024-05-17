@@ -35,30 +35,15 @@ namespace CommandsMenu.Bots
                     await SearchFlightsReaderCardAsync(turnContext, cancellationToken);
                 else if (text.Contains("search hotels"))
                     await SearchHotelsReaderCardAsync(turnContext, cancellationToken);
+                else if (text.Contains("help"))
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Displays this help message."));
+                else if (text.Contains("best time to fly"))
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip this summer."));
             }
             else if (turnContext.Activity.Value != null)
             {
                 // Respond with hotel search details if the activity has a value (e.g., from an adaptive card)
                 await turnContext.SendActivityAsync(MessageFactory.Text("Hotel search details are: " + turnContext.Activity.Value), cancellationToken);
-            }
-        }
-
-        /// <summary>
-        /// Invoked when the bot or a user is added to the conversation.
-        /// </summary>
-        /// <param name="membersAdded">A list of all the members added to the conversation.</param>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            foreach (var member in turnContext.Activity.MembersAdded)
-            {
-                // Send a welcome message to new members added to the conversation
-                if (member.Id != turnContext.Activity.Recipient.Id)
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can see the functionality of create a commands menu."), cancellationToken);
-                }
             }
         }
 
