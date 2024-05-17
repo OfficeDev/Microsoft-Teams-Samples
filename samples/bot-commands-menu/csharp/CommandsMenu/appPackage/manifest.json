@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.1",
+  "id": "{{MicrosoftAppId}}",
+  "packageName": "com.contoso.localization",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Commands Menu",
+    "full": "Commands Menu"
+  },
+  "description": {
+    "short": "Create a commands menu",
+    "full": "This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "{{MicrosoftAppId}}",
+      "scopes": [
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "Search Flights",
+              "description": "Search flights from Seattle to Phoenix May 2-5 departing after 3pm"
+            },
+            {
+              "title": "Search Hotels",
+              "description": "Search hotels in Portland tonight"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "Search Flights",
+              "description": "Search flights from Seattle to Phoenix May 2-5 departing after 3pm"
+            },
+            {
+              "title": "Search Hotels",
+              "description": "Search hotels in Portland tonight"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "groupChat"
+          ],
+          "commands": [
+            {
+              "title": "Search Flights",
+              "description": "Search flights from Seattle to Phoenix May 2-5 departing after 3pm"
+            },
+            {
+              "title": "Search Hotels",
+              "description": "Search hotels in Portland tonight"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}
