@@ -42,16 +42,16 @@ Verify you have the right account for building Teams apps and install some recom
 	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK
- - Run ngrok - point to port 3978
+ - Run ngrok - point to port 54765
 
     ```bash
-    ngrok http 3978 --host-header="localhost:3978"
+    ngrok http 54765 --host-header="localhost:54765"
     ```
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 54765 --allow-anonymous
    ```
 
 4. Setup for code
