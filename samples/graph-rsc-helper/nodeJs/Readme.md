@@ -3,14 +3,12 @@ page_type: sample
 description: Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.
 products:
 - office-teams
-- office
-- office-365
 languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs
+ createdDate: "29/04/2024 01:38:26 PM"
+urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs-helper
 ---
 
 # Resource specific consent with Graph API

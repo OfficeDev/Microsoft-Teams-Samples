@@ -23,7 +23,7 @@
                 "id": "SendActivityNotification",
                 "name": "Send Activity Notification",
                 "value": {
-                    "URL": "https://graph.microsoft.com/1.0/teams/{teamId}/sendActivityNotification",
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/sendActivityNotification",
                     "Parameters": [
                         "{teamId}", "{userId}"
                     ],
@@ -44,9 +44,7 @@
                     "recipient": {
                         "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
                         "userId": "{userId}"
-                    },
-                    "templateParameters": [
-                    ]
+                    }
                 }
             }
         ]
@@ -312,36 +310,6 @@
         "methods": [
             {
                 "scope": "chat",
-                "id": "SendActivityNotification",
-                "name": "Send Activity Notification",
-                "value": {
-                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/sendActivityNotification",
-                    "Parameters": [
-                        "{chatId}",
-                        "{userId}"
-                    ],
-                    "Permissions": [
-                        "TeamsActivity.Send.Chat"
-                    ]
-                },
-                "type": "POST",
-                "Body": {
-                    "topic": {
-                        "source": "entityUrl",
-                        "value": "https://graph.microsoft.com/v1.0/chats/{chatId}"
-                    },
-                    "activityType": "testNotification",
-                    "previewText": {
-                        "content": "New Test Notification Created"
-                    },
-                    "recipient": {
-                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": "{userId}"
-                    }
-                }
-            },
-            {
-                "scope": "chat",
                 "id": "ListMessages",
                 "name": "List Messages",
                 "value": {
@@ -408,6 +376,36 @@
                 },
                 "type": "GET",
                 "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "SendActivityNotification",
+                "name": "Send Activity Notification",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/sendActivityNotification",
+                    "Parameters": [
+                        "{chatId}",
+                        "{userId}"
+                    ],
+                    "Permissions": [
+                        "TeamsActivity.Send.Chat"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "topic": {
+                        "source": "entityUrl",
+                        "value": "https://graph.microsoft.com/v1.0/chats/{chatId}"
+                    },
+                    "activityType": "demoNotification",
+                    "previewText": {
+                        "content": "New Test Notification Created"
+                    },
+                    "recipient": {
+                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
+                        "userId": "{userId}"
+                    }
+                }
             }
         ]
     },
