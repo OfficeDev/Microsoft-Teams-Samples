@@ -241,6 +241,27 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - Message is restored
 ![message-undelete](Images/messageUndelete.png)
 
+7. **Format AI bot messages**
+- Consists features such as citations, feedback buttons, and sensitivity label that enables better user engagement
+
+- `AI label` - enables user to identify that the message was generated using AI.
+![AI-label](Images/AI-label.png)
+
+- `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
+![Citations](Images/softDeleteMessage.png)
+
+- `Feedback buttons` - enables user to provide positive or negative feedback based on their experience.
+![Feedback-buttons](Images/Feedback-buttons.png)
+
+![Feedback-buttons1](Images/Feedback-buttons1.png)
+
+![Feedback-buttons2](Images/Feedback-buttons2.png)
+
+![Feedback-buttons3](Images/Feedback-buttons3.png)
+
+- `Sensitivity label` - enables user to understand the confidentiality of the bot's message.
+![Sensitivity-label](Images/Sensitivity-label.png)
+
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
 ## Deploy the bot to Azure
