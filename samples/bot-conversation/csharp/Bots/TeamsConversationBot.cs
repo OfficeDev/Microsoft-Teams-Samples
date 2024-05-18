@@ -20,6 +20,8 @@ using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using System.Collections.Concurrent;
 using System.Collections;
+using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -67,6 +69,10 @@ namespace Microsoft.BotBuilderSamples.Bots
                 await CheckReadUserCount(turnContext, cancellationToken);
             else if (text.Contains("reset"))
                 await ResetReadUserCount(turnContext, cancellationToken);
+            else if (text.Contains("label"))
+                await addAILabel(turnContext, cancellationToken);
+            else if (text.Contains("feedback"))
+                await addFeedbackButtons(turnContext, cancellationToken);
             else
                 await CardActivityAsync(turnContext, false, cancellationToken);
         }
@@ -80,6 +86,42 @@ namespace Microsoft.BotBuilderSamples.Bots
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
                 }
             }
+        }
+
+        private async Task addAILabel(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+            new Activity
+            {
+                Type = ActivityTypes.Message,
+                Text = "Hey I'm a friendly AI bot. This message is generated via AI",
+                Entities = new List<Entity>
+               {
+                   new Entity
+                   {
+                       Type = "https://schema.org/Message",
+                       Properties = JObject.FromObject(new Dictionary<string, object>
+                       {
+                           { "@type", "Message" },
+                           { "@context", "https://schema.org" },
+                           { "additionalType", new List<string> { "AIGeneratedContent" } }
+                       })
+                   }
+               }
+            }
+        );
+        }
+
+        private async Task addFeedbackButtons(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+                new Activity
+                {
+                    Type = ActivityTypes.Message,
+                    Text = "This is an example for sensitivity label that help users identify the confidentiality of a message",
+                    ChannelData = new { feedbackLoopEnabled = true },
+                }
+            );
         }
 
         /// <summary>
@@ -199,6 +241,18 @@ namespace Microsoft.BotBuilderSamples.Bots
                                 Type = ActionTypes.MessageBack,
                                 Title = "Reset read count",
                                 Text = "reset"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "AI label",
+                                Text = "label"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Feedback buttons",
+                                Text = "feedback"
                             }
                         }
             };
