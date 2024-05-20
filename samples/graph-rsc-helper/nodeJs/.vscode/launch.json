@@ -100,7 +100,7 @@
     ],
     "compounds": [
         {
-            "name": "Debug in Teams for team RSC permissions (Edge)",
+            "name": "Debug in team channel for RSC permissions (Edge)",
             "configurations": [
                 "Attach to Frontend in Teams (Edge)",
                 "Attach to Local Service"
@@ -113,7 +113,7 @@
             "stopAll": true
         },
         {
-            "name": "Debug in Teams for chat RSC permissions (Edge)",
+            "name": "Debug in group chat for RSC permissions (Edge)",
             "configurations": [
                 "Attach to Frontend in Teams (Edge)",
                 "Attach to Local Service"

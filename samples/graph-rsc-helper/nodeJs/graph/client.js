@@ -26,7 +26,7 @@ async function callChatAPI(
   } catch (error) {
     console.log("Error callChatAPI:", error.message);
     return {
-      error: error.message,
+      error: error?.response?.data ? error.response.data : error.message
     };
   }
 }
@@ -56,9 +56,9 @@ async function callTeamAPI(
       requestBody ? JSON.parse(requestBody) : null
     );
   } catch (error) {
-    console.log("Error callChatAPI:", error.message);
+    console.log("Error callTeamAPI:", error.message);
     return {
-      error: error.message,
+      error: error?.response?.data ? error.response.data : error.message
     };
   }
 }
