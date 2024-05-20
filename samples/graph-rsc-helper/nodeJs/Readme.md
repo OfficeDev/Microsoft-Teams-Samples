@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.
+description: Shows how to config RSC permissions in manifest, use them to call Microsoft Graph, and watch the real response with the scope installed.
 products:
 - office-teams
 languages:
@@ -13,27 +13,21 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs-helper
 
 # Resource specific consent with Graph API
 
-This sample illustrates you can use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API.
+This sample illustrates you can use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API in team channel and group chat. And watch the real response with the scope installed.
 
 ## Included Features
 * Tabs
 * RSC Permissions
-
-## Interaction with app.
-
-![Broadcast from user](./Images/RSCDemo.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**RSC with Graph API:** [Manifest](/samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)
+* Tab App in team channel
+* Tab App in group chat
+* Graph API request with application permission
 
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/) version v16.14.2 or Higher Version
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -43,78 +37,55 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+### Debug in team channel
+1. Select **Debug > Debug in team channel for RSC permissions** or **F5** to run the app in a Teams web client
+1. In the browser that launches, select the **Add to a team** button to install the app to a team channel
+1. Click **continue** when popuping devtunnel dialog
+1. Click **Save** to finish the App configureation
+   
+### Debug in group chat
+1. Select **Debug > Debug in group chat for RSC permissions** to run the app in a Teams web client
+1. In the browser that launches, select the **Add to a chat** button to install the app to a group chat
+1. Click **continue** when popuping devtunnel dialog
+1. Click **Save** to finish the App configureation
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Setup
-1) Register your app with Microsoft identity platform via the Azure AD portal (Microsoft Entra ID app registration in Azure portal)
-    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2).
-    
-**Note** -  Make sure you have added `TeamsAppInstallation.ReadForUser.All` as Application level permission for the app.
+## Note
+- Due to the length limit of the RSC permission in manifest, separate permission lists are used for team channel and group chat under the `setupManifest` folder.  Every time, debug launch will load the permissions in corresponding team/chat file and write them into the the section of `authorization.permissions.resourceSpecific` in `appManifest/manifest.json`
 
-2) Clone the repository
+- The sample provide several parameters in request url and request body. Parameters in format `{...}` will be replaced with default value automatically when the request sent. Parameters in format `[...]` should be replaced by users.
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+- The sample collects the tenantId, userId, teamId, channelId and chatId information in `views/RSCGraphAPI.ejs` using team-js SDK.
 
-3) In a terminal, navigate to `samples/graph-rsc/nodejs`
+- The sample creates an Aad App using `aad.manifest.json` with basic `User.Read` permission only. The token used to call Graph API is generated as following. The scope for the token is `https://graph.microsoft.com/.default`
+``` js
+// graph/credential.js
+const tenantId = process.env.TenantId;
+const clientId = process.env.ClientId;
+const clientSecret = process.env.ClientSecret;
+const credential = new identity.ClientSecretCredential(tenantId, clientId, clientSecret);
 
-4) Install modules
-
-    ```bash
-    npm install
-    ```
-
-5) Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3978 --allow-anonymous
-   ```
-
-6) Update the `.env` file configuration (ClientId, ClientSecret) for the bot to use the Microsoft App Id and App Password from the Microsoft Entra ID app registration in your Azure Portal or from Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-
-7) Run your bot at the command line:
-
-    ```bash
-    npm start
-    ```
-
-8) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-
-##  Running the sample
+// graph/client.js
+const token = await credential.getToken(
+    "https://graph.microsoft.com/.default"
+);
+axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`; 
+```
 
 **App review:**
 ![Overview](./Images/Overview.png)
 
-**App permission:**
-![Permission](./Images/Permission.png)
+**Team installation:**
+![Overview](./Images/teamInstallation.png)
 
-**Permission list:**
-![Permissionlist](./Images/PermissionList.png)
+**Chat installation::**
+![Overview](./Images/chatInstallation.png)
 
-## Send activity feed notification
+**Graph API response:**
+![Response](./Images/response.png)
 
-**Tab Page**
-![tab-page](./Images/notify-tab.png)
-
-**Select Reciepient**
-![select-people](./Images/select-people.png)
-
-**Sent Notification**
-![notification](./Images/notification.png)
 
 ## Further Reading.
 
@@ -122,4 +93,4 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - [Upload app manifest file](https://docs.microsoft.com//microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-rsc-nodeJs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-rsc-nodeJs-helper" />

@@ -508,6 +508,7 @@
                 "id": "AddTab",
                 "name": "Add Tab",
                 "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs",
                     "Parameters": [
                         "{chatId}",
                         "{installedAppId}"
