@@ -54,6 +54,8 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.addFeedbackButtons(context);
             } else if (text.includes('citation')) {
                 await this.addCitations(context);
+            } else if (text.includes('aitext')) {
+                await this.sendAIMessage(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -117,6 +119,48 @@ class TeamsConversationBot extends TeamsActivityHandler {
         this.onTeamsMessageSoftDeleteEvent(async (context, next) => {
             await context.sendActivity("Message is soft deleted");
             next();
+        });
+    }
+
+    async sendAIMessage(context) {
+        await context.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI [1]`,
+            channelData: {
+                feedbackLoopEnabled: true,
+            },
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org",
+                    usageInfo: {
+                        "@type": "CreativeWork",
+                        "@id": "sensitivity1"
+                    },
+                    additionalType: ["AIGeneratedContent"],
+                    citation: [
+                        {
+                            "@type": "Claim",
+                            position: 1,
+                            appearance: {
+                                "@type": "DigitalDocument",
+                                name: "Some secret citation",
+                                url: "https://example.com/claim-1",
+                                abstract: "Excerpt",
+                                encodingFormat: "docx",
+                                keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // These appear below the citation title
+                                usageInfo: {
+                                    "@type": "CreativeWork",
+                                    "@id": "sensitivity1",
+                                    name: "Sensitivity title",
+                                    description: "Sensitivity description",
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
         });
     }
 
@@ -315,6 +359,12 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 Title: "Citations",
                 value: null,
                 Text: "citation"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Send AI message",
+                value: null,
+                Text: "aitextmessage"
             }
         ];
 
