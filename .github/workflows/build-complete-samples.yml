@@ -1038,6 +1038,10 @@ jobs:
               name: 'm365-actions-preview-api'
               version: '18.x'
 
+            - project_path: 'samples/bot-commands-menu/nodejs'
+              name: 'bot-commands-menu'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
