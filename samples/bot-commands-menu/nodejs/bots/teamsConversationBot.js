@@ -11,7 +11,7 @@ const FlightsDetailsCardTemplate  = require('../resources/flightsDetails.json');
 
 const SearchHotelsCardTemplate  = require('../resources/searchHotels.json');
 
-class TeamsConversationBot extends TeamsActivityHandler {
+class TeamsCommandsMenuBot extends TeamsActivityHandler {
     constructor() {
         super();
 
@@ -60,4 +60,4 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 }
 
-module.exports.TeamsConversationBot = TeamsConversationBot;
+module.exports.TeamsCommandsMenuBot = TeamsCommandsMenuBot;
