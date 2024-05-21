@@ -36,7 +36,7 @@ class TeamsCommandsMenuBot extends TeamsActivityHandler {
                 {
                     await context.sendActivity('Displays this help message.');
                 } 
-                else if (text.includes('best time to fly.')) 
+                else if (text.includes('best time to fly')) 
                 {
                     await context.sendActivity('Best time to fly to London for a 5 day trip this summer.');
                 } 
