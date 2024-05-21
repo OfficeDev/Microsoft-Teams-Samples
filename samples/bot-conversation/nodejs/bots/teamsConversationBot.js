@@ -227,6 +227,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                                 name: "Some secret citation", // Title
                                 url: "https://example.com/claim-1", // Hyperlink on the title
                                 abstract: "Excerpt", // Excerpt (abstract)
+                                encodingFormat: "docx",
                                 keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // Keywords
                                 usageInfo: {
                                     "@type": "CreativeWork",
