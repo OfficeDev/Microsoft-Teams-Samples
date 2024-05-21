@@ -250,7 +250,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 ![AI-label](Images/AI-label.png)
 
 - `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
-![Citations](Images/softDeleteMessage.png)
+![Citations](Images/citations.png)
 
 - `Feedback buttons` - enables user to provide positive or negative feedback based on their experience.
 ![Feedback-buttons](Images/Feedback-buttons.png)
@@ -263,6 +263,9 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 - `Sensitivity label` - enables user to understand the confidentiality of the bot's message.
 ![Sensitivity-label](Images/Sensitivity-label.png)
+
+- `Send AI message` - Replies back with a bot message containing all formats: AI label, Citations, Feedback buttons, and Sensitivity label.
+![sendtext](Images/sendtext.png)
 
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 

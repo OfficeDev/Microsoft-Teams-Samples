@@ -76,8 +76,8 @@
               "description": "Used to cite the sources of the bot message"
             },
             {
-              "title": "SendAITextMessage",
-              "description": "Sends an format AI text message using bot"
+              "title": "SendAIText",
+              "description": "Sends an AI generated message in text format using bot"
             }
           ]
         }

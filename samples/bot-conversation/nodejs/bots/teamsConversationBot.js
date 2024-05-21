@@ -211,7 +211,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     async addCitations(turnContext) {
         await turnContext.sendActivity({
             type: ActivityTypes.Message,
-            text: `Hey I'm a friendly AI bot. This message is generated via AI - $(txt) [1]`, // cite with [1]
+            text: `Hey I'm a friendly AI bot. This message is an example for Citaion - [1]`, // cite with [1]
             entities: [
                 {
                     type: "https://schema.org/Message",
@@ -364,7 +364,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 Type: ActionTypes.MessageBack,
                 Title: "Send AI message",
                 value: null,
-                Text: "aitextmessage"
+                Text: "sendAItext"
             }
         ];
 
