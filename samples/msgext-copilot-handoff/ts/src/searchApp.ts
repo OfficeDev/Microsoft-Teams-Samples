@@ -12,8 +12,16 @@ import actionHandler from "./adaptiveCards/cardHandler";
 import { CreateActionErrorResponse } from "./adaptiveCards/utils";
 
 export class SearchApp extends TeamsActivityHandler {
-  constructor() {
+
+  notifyContinuationActivity: any;
+  continuationParameters: any;
+  constructor(
+    notifyContinuationActivity: any,
+    continuationParameters: any = {} /*conversations: any = {}*/
+  ) {
     super();
+    this.notifyContinuationActivity = notifyContinuationActivity;
+    this.continuationParameters = continuationParameters;
   }
 
   // Handle search message extension
@@ -47,13 +55,18 @@ export class SearchApp extends TeamsActivityHandler {
           case 'cancel': {
             return actionHandler.handleTeamsCardActionCancelRestock(context);
           }
+          case "handoff": {
+            return actionHandler.handleTeamsCardActionHandOff(context);
+          }
+          case "refresh": {
+            return actionHandler.handleTeamsCardActionRefreshCard(context);
+          }
           default:
-            // TODO: Handle Refresh correctly and set this line back to
-            // returning an error
-            // return CreateActionErrorResponse(400, 0, `ActionVerbNotSupported: ${context.activity.value.action.verb} is not a supported action verb.`);
-
-            // Workaround to stop choking on refresh activities
-            return CreateActionErrorResponse(200, 0, `ActionVerbNotSupported: ${context.activity.value.action.verb} is not a supported action verb.`);
+            return CreateActionErrorResponse(
+              400,
+              0,
+              `ActionVerbNotSupported: ${context.activity.value.action.verb} is not a supported action verb.`
+            );
          
         }
      
@@ -72,7 +85,8 @@ export class SearchApp extends TeamsActivityHandler {
 
         case "handoff/action": {
 
-          // TODO: Save continuation token and use it to process final response to user later 
+          this.addOrUpdateContinuationParameters(context);
+          setTimeout(async () => await this.notifyContinuationActivity(), 10);
 
           return { status: 200 }; // return just the http status 
 
@@ -120,6 +134,24 @@ export class SearchApp extends TeamsActivityHandler {
 
     }
 
+  }
+
+  private addOrUpdateContinuationParameters(context): void {
+    console.log(
+      `Adding continuation parameters for context: ${JSON.stringify(context)}`
+    );
+    this.continuationParameters[context.activity.from.id] = {
+      claimsIdentity: context.turnState.get(context.adapter.BotIdentityKey),
+      conversationReference: TurnContext.getConversationReference(
+        context.activity
+      ),
+      oAuthScope: context.turnState.get(context.adapter.OAuthScopeKey),
+      continuationToken: context.activity.value.continuation,
+      cardAttachment:
+        actionHandler.handleTeamsCardActionHandOffWithContinuation(
+          context.activity.value.continuation
+        ),
+    };
   }
 }
 

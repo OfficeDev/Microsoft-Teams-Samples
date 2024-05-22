@@ -6,11 +6,12 @@ import { updateProduct, getProductEx } from "../northwindDB/products";
 import { ProductEx } from '../northwindDB/model';
 import editCard from './editCard.json';
 import successCard from './successCard.json';
+import successCardHandoff from "./successCardHandoff.json";
 import * as ACData from "adaptivecards-templating";
 
 import { CreateActionErrorResponse, CreateAdaptiveCardInvokeResponse, getInventoryStatus } from './utils';
 
-function getEditCard(product: ProductEx): any {
+function getEditCard(product: ProductEx, context: TurnContext): any {
 
     var template = new ACData.Template(editCard);
     var card = template.expand({
@@ -31,11 +32,54 @@ function getEditCard(product: ProductEx): any {
             unitSales: product.UnitSales,
             inventoryValue: product.InventoryValue,
             revenue: product.Revenue,
-            averageDiscount: product.AverageDiscount
+            averageDiscount: product.AverageDiscount,
+            botId: getBotMri(context),
+            continuationToken: product.ProductName + "-continuation",
         }
     });
     return CardFactory.adaptiveCard(card);
 }
+
+async function handleTeamsCardActionRefreshCard(context: TurnContext) {
+    const request = context.activity.value;
+    const data = request.action.data;
+    console.log(`🎬 Handling refresh action, productId=${data.productId}`);
+  
+    if (data.productId) {
+      const product = await getProductEx(data.productId);
+  
+      var template = new ACData.Template(successCard);
+      var card = template.expand({
+        $root: {
+          productName: product.ProductName,
+          unitsInStock: product.UnitsInStock,
+          productId: product.ProductID,
+          categoryId: product.CategoryID,
+          imageUrl: product.ImageUrl,
+          supplierName: product.SupplierName,
+          supplierCity: product.SupplierCity,
+          categoryName: product.CategoryName,
+          inventoryStatus: getInventoryStatus(product),
+          unitPrice: product.UnitPrice,
+          quantityPerUnit: product.QuantityPerUnit,
+          unitsOnOrder: product.UnitsOnOrder,
+          reorderLevel: product.ReorderLevel,
+          unitSales: product.UnitSales,
+          inventoryValue: product.UnitsInStock * product.UnitPrice,
+          revenue: product.Revenue,
+          averageDiscount: product.AverageDiscount,
+          botId: getBotMri(context),
+          continuationToken: product.ProductName + "-continuation",
+          // Card message
+          message: `Card refreshed successfully!`,
+        },
+      });
+  
+      return CreateAdaptiveCardInvokeResponse(200, card);
+    } else {
+      return CreateActionErrorResponse(400, 0, "Invalid request");
+    }
+  }
 
 async function handleTeamsCardActionUpdateStock(context: TurnContext) {
 
@@ -179,4 +223,42 @@ function getBotMri(context: TurnContext): string {
       : context.activity.recipient.id;
   }
 
-export default { getEditCard, handleTeamsCardActionUpdateStock, handleTeamsCardActionRestock, handleTeamsCardActionCancelRestock }
+  async function handleTeamsCardActionHandOff(context: TurnContext) {
+    const request = context.activity.value;
+    const data = request.action.data;
+    console.log(
+      `🎬 Handling copilot handoff case, continuationToken=${data.continuationToken}`
+    );
+  
+    if (data.continuationToken) {
+      var template = new ACData.Template(successCardHandoff);
+      var card = template.expand({
+        $root: {
+          continuationToken: data.continuationToken,
+        },
+      });
+  
+      return CreateAdaptiveCardInvokeResponse(200, card);
+    } else {
+      return CreateActionErrorResponse(400, 0, "Invalid request");
+    }
+  }
+
+  function handleTeamsCardActionHandOffWithContinuation(
+    continuationToken: string
+  ) {
+    console.log(
+      `🎬 Handling copilot handoff case, continuationToken=${continuationToken}`
+    );
+  
+    var template = new ACData.Template(successCardHandoff);
+    var card = template.expand({
+      $root: {
+        continuationToken,
+      },
+    });
+  
+    return CardFactory.adaptiveCard(card);
+  }
+
+export default { getEditCard, handleTeamsCardActionRefreshCard, handleTeamsCardActionUpdateStock, handleTeamsCardActionRestock, handleTeamsCardActionCancelRestock, handleTeamsCardActionHandOff, handleTeamsCardActionHandOffWithContinuation }

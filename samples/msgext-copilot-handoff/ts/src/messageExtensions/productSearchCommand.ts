@@ -40,7 +40,7 @@ async function handleTeamsMessagingExtensionQuery(
             `Supplied by ${product.SupplierName} of ${product.SupplierCity}<br />${product.UnitsInStock} in stock`,
             [product.ImageUrl]);
         
-        const resultCard = cardHandler.getEditCard(product);
+        const resultCard = cardHandler.getEditCard(product, context);
         const attachment = { ...resultCard, preview };
         attachments.push(attachment);
     });

@@ -29,7 +29,7 @@ async function handleTeamsMessagingExtensionQuery(
             `Avg discount ${product.AverageDiscount}%<br />Supplied by ${product.SupplierName} of ${product.SupplierCity}`,
             [product.ImageUrl]);
 
-        const resultCard = cardHandler.getEditCard(product);
+        const resultCard = cardHandler.getEditCard(product, context);
         const attachment = { ...resultCard, preview };
         attachments.push(attachment);
     });

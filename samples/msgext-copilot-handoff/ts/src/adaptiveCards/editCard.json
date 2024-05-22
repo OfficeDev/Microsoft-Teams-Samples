@@ -223,6 +223,11 @@
                                         "data": {
                                             "productId": "${productId}"
                                         }
+                                    },
+                                    {
+                                        "type": "Action.OpenUrl",
+                                        "title": "Handoff to bot",
+                                        "url": "https://teams.microsoft.com/l/chat/0/0?users=${botId}&continuation=${continuationToken}"
                                     }
                                 ]
                             }

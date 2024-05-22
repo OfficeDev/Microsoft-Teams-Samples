@@ -8,6 +8,7 @@ import {
   ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
   TurnContext,
+  ActivityTypes,
 } from "botbuilder";
 
 // This bot's main dialog.
@@ -53,7 +54,57 @@ const onTurnErrorHandler = async (context: TurnContext, error: Error) => {
 adapter.onTurnError = onTurnErrorHandler;
 
 // Create the bot that will handle incoming messages.
-const searchApp = new SearchApp();
+// const conversationReferences = {};
+const continuationParameters: {} = {};
+const searchApp = new SearchApp(async () => {
+  console.log(
+    `Handling continuation - ${JSON.stringify(continuationParameters)}`
+  );
+  for (const continuationParameter of Object.values(continuationParameters)) {
+    const conversationReference = (continuationParameter as any)
+      .conversationReference;
+
+      await adapter.continueConversationAsync(
+        (continuationParameter as any).claimsIdentity,
+        conversationReference,
+        (continuationParameter as any).oAuthScope,
+        async (context) => {
+          // MicrosoftAppCredentials.trustServiceUrl(
+          //   conversationReference.serviceUrl
+          // );
+          const continuationToken = (continuationParameter as any)
+            .continuationToken;
+          await context.sendActivities([
+            {
+              type: ActivityTypes.Message,
+              text: "Continuing conversation from copilot...",
+            },
+            { type: ActivityTypes.Typing },
+            { type: "delay", value: 1000 },
+            {
+              type: ActivityTypes.Message,
+              text: `Fetching more details using the continuation token passed: ${continuationToken}`,
+            },
+            { type: ActivityTypes.Typing },
+            { type: "delay", value: 4000 },
+            {
+              type: ActivityTypes.Message,
+              text: `Handoff successful!`,
+              attachments: [(continuationParameter as any).cardAttachment],
+            },
+            { type: ActivityTypes.Typing },
+            { type: "delay", value: 2000 },
+            {
+              type: ActivityTypes.Message,
+              text: `Do you need revenue or discounts details about ${(
+                continuationToken as string
+              ).replace("-continuation", "")}?`,
+            },
+          ]);
+        }
+      );
+  }
+}, continuationParameters /* conversationReferences */);
 
 // Create HTTP server.
 const server = restify.createServer();
