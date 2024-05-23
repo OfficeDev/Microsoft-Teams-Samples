@@ -1,0 +1,18 @@
+{
+    "debug.onTaskErrors": "abort",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/aad.*.json"
+            ],
+            "schema": {}
+        }
+    ],
+    "cSpell.words": [
+        "botbuilder",
+        "msgext",
+        "Northwind",
+        "Sideloading",
+        "TEAMSFX"
+    ]
+}
