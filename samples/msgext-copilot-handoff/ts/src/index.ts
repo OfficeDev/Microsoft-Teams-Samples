@@ -89,8 +89,6 @@ const searchApp = new SearchApp(async () => {
               text: `Handoff successful!`,
               attachments: [(continuationParameter as any).cardAttachment],
             },
-            { type: ActivityTypes.Typing },
-            { type: "delay", value: 2000 },
           ]);
         }
       );
