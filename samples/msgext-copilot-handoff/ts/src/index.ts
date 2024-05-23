@@ -69,9 +69,6 @@ const searchApp = new SearchApp(async () => {
         conversationReference,
         (continuationParameter as any).oAuthScope,
         async (context) => {
-          // MicrosoftAppCredentials.trustServiceUrl(
-          //   conversationReference.serviceUrl
-          // );
           const continuationToken = (continuationParameter as any)
             .continuationToken;
           await context.sendActivities([
@@ -94,12 +91,6 @@ const searchApp = new SearchApp(async () => {
             },
             { type: ActivityTypes.Typing },
             { type: "delay", value: 2000 },
-            {
-              type: ActivityTypes.Message,
-              text: `Do you need revenue or discounts details about ${(
-                continuationToken as string
-              ).replace("-continuation", "")}?`,
-            },
           ]);
         }
       );
