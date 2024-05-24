@@ -50,7 +50,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "teamstestdomain.com/teams/csharp"
             ]
           }
         }
