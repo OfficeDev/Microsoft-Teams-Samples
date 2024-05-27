@@ -19,8 +19,8 @@
     "full": "Nested App Authentication"
   },
   "description": {
-    "short": "Sample Teams Meeting Transcripts and Recordings.",
-    "full": "Sample Teams Meeting Transcripts and Recordings."
+    "short": "Sample Teams Nested App Authentication.",
+    "full": "Sample Teams Nested App Authentication."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
