@@ -17,7 +17,7 @@ const Msal = () => {
 
     const msalConfig = {
         auth: {
-            clientId: "08fe371d-249e-4fc6-871b-9ee6f809af6b",
+            clientId: "<clientId>",
             authority: "https://login.microsoftonline.com/common",
             supportsNestedAppAuth: true // Enable native bridging.
         }
