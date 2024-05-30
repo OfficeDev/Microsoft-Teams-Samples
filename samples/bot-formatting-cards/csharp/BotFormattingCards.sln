@@ -5,6 +5,13 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotFormattingCards", "BotFormattingCards\BotFormattingCards.csproj", "{783D6E6F-7339-4D74-89D4-B240496CC7A3}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{3F6A1C23-8A4D-4464-A110-A5D92B178476}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C7554D92-2D8D-4EAC-8E7A-6125A7D80D17}"
+	ProjectSection(SolutionItems) = preProject
+		BotFormattingCards.slnLaunch.user = BotFormattingCards.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F6A1C23-8A4D-4464-A110-A5D92B178476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6A1C23-8A4D-4464-A110-A5D92B178476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6A1C23-8A4D-4464-A110-A5D92B178476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F6A1C23-8A4D-4464-A110-A5D92B178476}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

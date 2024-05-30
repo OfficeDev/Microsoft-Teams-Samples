@@ -4,12 +4,12 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-formatting-cards-csharp
+  sampleTag: Microsoft-Teams-Samples:bot-daily-task-reminder-csharp
 
 provision:
   - uses: aadApp/create # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
     with:
-      name: bot-formatting-cards-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
+      name: bot-daily-task-reminder-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
       signInAudience: "AzureADMultipleOrgs" # Multitenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: bot-formatting-cards-${{TEAMSFX_ENV}}
+      name: bot-daily-task-reminder-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -40,10 +40,11 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ./appsettings.json
+      target: ../BotDailyTaskReminder/appsettings.json
       content:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        ApplicationBaseUrl: ${{BOT_ENDPOINT}}
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -59,20 +60,20 @@ provision:
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./AppManifest/manifest.json
+      manifestPath: ./appPackage/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./AppManifest/manifest.json
-      outputZipPath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./AppManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
   # Teams Developer Portal.
@@ -80,20 +81,4 @@ provision:
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./AppManifest/build/AppManifest.${{TEAMSFX_ENV}}.zip
-
-  # Create or update debug profile in lauchsettings file
-  - uses: file/createOrUpdateJsonFile
-    with:
-      target: ./Properties/launchSettings.json
-      content:
-        profiles:
-          Microsoft Teams (browser):
-            commandName: "Project"
-            dotnetRunMessages: true
-            launchBrowser: true
-            launchUrl: "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&appTenantId=${{TEAMS_APP_TENANT_ID}}&login_hint=${{TEAMSFX_M365_USER_NAME}}"
-            applicationUrl: "http://localhost:5130"
-            environmentVariables:
-              ASPNETCORE_ENVIRONMENT: "Development"
-            hotReloadProfile: "aspnetcore"
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
