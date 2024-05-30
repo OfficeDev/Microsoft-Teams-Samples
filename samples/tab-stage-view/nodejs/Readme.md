@@ -171,7 +171,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![LinkUnfurlingStageView](Images/LinkUnfurlingStageView.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area, the link will unfurl.**
+**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area, the link will unfurl.**
 
 ![LinkUnfurlingText](Images/LinkUnfurlingText.png)
 
@@ -221,7 +221,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![OpenAppIcon](Images/OpenAppIcon.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
 
 ![Outlook Unfurling](Images/OutlookUnfurling.png)
 
