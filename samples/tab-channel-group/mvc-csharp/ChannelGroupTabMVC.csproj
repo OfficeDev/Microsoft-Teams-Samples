@@ -5,10 +5,6 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PostBuildEvent>powershell.exe Compress-Archive -Path \"$(ProjectDir)AppManifest\*\" -DestinationPath \"$(TargetDir)Tab.zip\" -Force</PostBuildEvent>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="appPackage\**" />
     <Compile Remove="TeamsApp\**" />
