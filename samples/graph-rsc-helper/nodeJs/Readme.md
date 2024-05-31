@@ -41,7 +41,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ### Debug in team channel
 1. Select **Debug > Debug in team channel for RSC permissions** or **F5** to run the app in a Teams web client
 1. In the browser that launches, select the **Add to a team** button to install the app to a team channel
-1. Click **continue** when popuping devtunnel dialog
 1. Click **Save** to finish the App configureation
    
 ### Debug in group chat

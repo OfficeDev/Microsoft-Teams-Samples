@@ -1,11 +1,11 @@
 const express = require("express");
+const https = require('https');
 const bodyparser = require("body-parser");
 const path = require("path");
 const fs = require("fs");
 const indexRouter = require("./routes/index");
-const { v4: uuidv4 } = require("uuid");
 require("isomorphic-fetch");
-const axios = require("axios");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 
@@ -15,9 +15,6 @@ app.use(express.static(__dirname + "/Styles"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 app.set("views", __dirname);
-
-const ENV_FILE = path.join(__dirname, ".env");
-require("dotenv").config({ path: ENV_FILE });
 
 const apiClient = require("./graph/client");
 
@@ -63,6 +60,11 @@ app.post("/handleRequest", async function (req, res) {
   }
 });
 
-app.listen(3978 || 3978, function () {
+const privateKey = fs.readFileSync(process.env.SSL_KEY_FILE);
+const certificate = fs.readFileSync(process.env.SSL_CRT_FILE);
+const credentials = {key: privateKey, cert: certificate};
+const server = https.createServer(credentials, app);
+
+server.listen(3978, function () {
   console.log("app listening on port 3978!");
 });

@@ -24,7 +24,6 @@
             "label": "Start Teams App Locally",
             "dependsOn": [
                 "Validate prerequisites",
-                "Start local tunnel",
                 "Provision",
                 "Deploy",
                 "Start application"
@@ -63,30 +62,6 @@
                     3978 // tab service port
                 ]
             }
-        },
-        {
-            // Start the local tunnel service to forward public URL to local port and inspect traffic.
-            // See https://aka.ms/teamsfx-tasks/local-tunnel for the detailed args definitions.
-            "label": "Start local tunnel",
-            "type": "teamsfx",
-            "command": "debug-start-local-tunnel",
-            "args": {
-                "type": "dev-tunnel",
-                "ports": [
-                    {
-                        "portNumber": 3978,
-                        "protocol": "http",
-                        "access": "public",
-                        "writeToEnvironmentFile": {
-                            "endpoint": "TAB_ENDPOINT", // output tunnel endpoint as TAB_ENDPOINT
-                            "domain": "TAB_DOMAIN" // output tunnel domain as TAB_DOMAIN
-                        }
-                    }
-                ],
-                "env": "local"
-            },
-            "isBackground": true,
-            "problemMatcher": "$teamsfx-local-tunnel-watch"
         },
         {
             // Create the debug resources.

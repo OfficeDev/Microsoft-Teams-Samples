@@ -43,6 +43,11 @@ provision:
     writeToEnvironmentFile: 
       teamsAppId: TEAMS_APP_ID
 
+  - uses: script # Set required variables for local launch
+    with:
+      run:
+        echo "::set-teamsfx-env TAB_DOMAIN=localhost:3978";
+        echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:3978";
 
   # Apply the AAD manifest to an existing AAD app. Will use the object id in
   # manifest file to determine which AAD app to update.
@@ -81,13 +86,24 @@ provision:
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
 deploy:
+  # Install development tool(s)
+  - uses: devTool/install
+    with:
+      devCert:
+        trust: true
+    # Write the information of installed development tool(s) into environment
+    # file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      sslCertFile: SSL_CRT_FILE
+      sslKeyFile: SSL_KEY_FILE
+
   # Run npm command
   - uses: cli/runNpmCommand
     with:
       workingDirectory: .
       args: install --no-audit
 
-# Generate runtime environment variables
+  # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
     with:
       target: ./.env
@@ -96,3 +112,5 @@ deploy:
         ClientId: ${{AAD_APP_CLIENT_ID}}
         ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         teamsAppId: ${{TEAMS_APP_ID}}
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}
