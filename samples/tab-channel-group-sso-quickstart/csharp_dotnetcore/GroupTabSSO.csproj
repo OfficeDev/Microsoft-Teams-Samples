@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="Manifest\**" />
+    <Compile Remove="TeamsApp\**" />
     <Content Remove="Manifest\**" />
+    <Content Remove="TeamsApp\**" />
     <EmbeddedResource Remove="Manifest\**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
     <None Remove="Manifest\**" />
+    <None Remove="TeamsApp\**" />
   </ItemGroup>
 
   <ItemGroup>
