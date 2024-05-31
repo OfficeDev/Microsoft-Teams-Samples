@@ -75,7 +75,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com",
+              "tabstageview.com/card",
               "${{BOT_DOMAIN}}"
             ]
           }

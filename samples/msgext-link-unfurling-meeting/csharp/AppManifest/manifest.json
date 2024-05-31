@@ -62,8 +62,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "{{domain-name}}",
-              "ngrok-free.app"
+              "{{domain-name}}"
             ]
           }
         }

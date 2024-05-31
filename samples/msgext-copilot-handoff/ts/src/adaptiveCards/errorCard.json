@@ -1,0 +1,21 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Oops! Something went wrong:",
+        "wrap": true
+      },      
+      {
+        "type": "Graph",
+        "someProperty": "foo",
+        "fallback": {
+          "type": "TextBlock",
+          "text": "Could not update stock at this time",
+          "wrap": true
+        }
+      }
+    ]
+  }

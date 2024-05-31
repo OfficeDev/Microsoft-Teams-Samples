@@ -51,7 +51,7 @@
           "value": {
             "domains": [
               "${{BOT_DOMAIN}}",
-              "*.botframework.com",
+              "teamstestdomain.com/teams/test",
               "{{domain-name}}"
             ]
           }

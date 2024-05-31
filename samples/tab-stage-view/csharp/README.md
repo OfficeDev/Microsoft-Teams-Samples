@@ -149,7 +149,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![LinkUnfurlingStageView](TabInStageView/Images/LinkUnfurlingStageView.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
 
 ![LinkUnfurlingText](TabInStageView/Images/LinkUnfurlingText.png)
 
@@ -180,7 +180,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![OpenAppIcon](TabInStageView/Images/OpenAppIcon.png)
 
-**Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening the stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
 
 ![Outlook Unfurling](TabInStageView/Images/OutlookUnfurling.png)
 
