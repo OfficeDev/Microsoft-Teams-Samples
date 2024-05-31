@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "${{BOT_ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "needsChannelSelector": false,
       "scopes": [
         "personal",
