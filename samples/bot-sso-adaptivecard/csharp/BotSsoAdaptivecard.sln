@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotSsoAdaptivecard", "BotSsoAdaptivecard\BotSsoAdaptivecard.csproj", "{BFDF6B3D-BB62-42DD-88EF-528FFE9FCBAD}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{E23D9341-4966-407A-8150-FD8EC80AD26B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6FCF5D35-4CE6-49A0-B9C8-CB92F6930B7F}"
+	ProjectSection(SolutionItems) = preProject
+		BotSsoAdaptivecard.slnLaunch.user = BotSsoAdaptivecard.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{BFDF6B3D-BB62-42DD-88EF-528FFE9FCBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFDF6B3D-BB62-42DD-88EF-528FFE9FCBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFDF6B3D-BB62-42DD-88EF-528FFE9FCBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23D9341-4966-407A-8150-FD8EC80AD26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23D9341-4966-407A-8150-FD8EC80AD26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23D9341-4966-407A-8150-FD8EC80AD26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23D9341-4966-407A-8150-FD8EC80AD26B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
