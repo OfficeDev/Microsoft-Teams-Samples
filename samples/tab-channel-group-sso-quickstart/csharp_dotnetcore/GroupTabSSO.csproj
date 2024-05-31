@@ -6,9 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="Manifest\**" />
+    <Compile Remove="TeamsApp\**" />
     <Content Remove="Manifest\**" />
+    <Content Remove="TeamsApp\**" />
     <EmbeddedResource Remove="Manifest\**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
     <None Remove="Manifest\**" />
+    <None Remove="TeamsApp\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +21,10 @@
     <PackageReference Include="Microsoft.Identity.Client" Version="4.57.0" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
   </ItemGroup>
   <PropertyGroup>
     <LibraryRestore>false</LibraryRestore>

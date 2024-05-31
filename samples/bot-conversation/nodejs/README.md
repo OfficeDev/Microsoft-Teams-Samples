@@ -243,6 +243,30 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - Message is restored
 ![message-undelete](Images/messageUndelete.png)
 
+ 7. **Format AI bot messages**
+- Consists features such as citations, feedback buttons, and sensitivity label that enables better user engagement
+
+- `AI label` - enables user to identify that the message was generated using AI.
+![AI-label](Images/AI-label.png)
+
+- `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
+![Citations](Images/citations.png)
+
+- `Feedback buttons` - enables user to provide positive or negative feedback based on their experience.
+![Feedback-buttons](Images/Feedback-buttons.png)
+
+![Feedback-buttons1](Images/Feedback-buttons1.png)
+
+![Feedback-buttons2](Images/Feedback-buttons2.png)
+
+![Feedback-buttons3](Images/Feedback-buttons3.png)
+
+- `Sensitivity label` - enables user to understand the confidentiality of the bot's message.
+![Sensitivity-label](Images/Sensitivity-label.png)
+
+- `Send AI message` - Replies back with a bot message containing all formats: AI label, Citations, Feedback buttons, and Sensitivity label.
+![sendtext](Images/sendtext.png)
+
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
 ## Deploy the bot to Azure
@@ -257,6 +281,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Receive a read receipt](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?branch=pr-en-us-9184&tabs=dotnet1%2Capp-manifest-v112-or-later%2Cdotnet2%2Cdotnet3%2Cdotnet4%2Cdotnet5%2Cdotnet#receive-a-read-receipt)
+- [Format AI bot messages](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/format-ai-bot-messages?branch=pr-en-us-10798&tabs=js)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-nodejs" />

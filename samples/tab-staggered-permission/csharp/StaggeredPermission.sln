@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaggeredPermission", "StaggeredPermission\StaggeredPermission.csproj", "{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{BEB78E4A-BEA1-4C26-953C-A3F8AC413232}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{472FC046-929F-4413-B64A-BA177C23C0A8}"
+	ProjectSection(SolutionItems) = preProject
+		StaggeredPermission.slnLaunch.user = StaggeredPermission.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB78E4A-BEA1-4C26-953C-A3F8AC413232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB78E4A-BEA1-4C26-953C-A3F8AC413232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB78E4A-BEA1-4C26-953C-A3F8AC413232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB78E4A-BEA1-4C26-953C-A3F8AC413232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
