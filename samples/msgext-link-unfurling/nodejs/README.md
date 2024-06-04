@@ -15,7 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling
 
 # Teams Link Unfurl Bot Node.js
 
-If you copy and paste a link from `https://www.botframework.com` or your tunnel base url, it wil unfurl inside compose area.
+If you copy and paste the link `https://teamstestdomain.com/teams/test` or your tunnel base url, it wil unfurl inside compose area.
+
+- Note : To enable link unfurling for your domain, add your domain to the manifest.json file under message handlers.
 
 ## Included Features
 * Bots
@@ -115,7 +117,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 ![InstallApp ](Images/InstallApp.png)
 
-If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
+If you copy and paste a link from https://teamstestdomain.com/teams/test into the compose message area the link will unfurl.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
 
 ![Link-Unfurling ](Images/Link-Unfurling1.png)

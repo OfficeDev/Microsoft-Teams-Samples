@@ -12,9 +12,4 @@
     <PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
-
 </Project>

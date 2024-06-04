@@ -207,7 +207,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 ![SignIn](Docs/SignIn.png)
 
-**Create link - https://<your_tunnel_domain>/api/messages/dashboard1:**
+**Create link - https://<your_tunnel_domain>/dashboard1:**
 
 ![MsgextLinkMeeting](Docs/MsgextLinkMeeting.png)
 
