@@ -15,7 +15,7 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "linkunfurling-reddit-${{TEAMSFX_ENV}}",
+        "short": "linkunfurling-reddit${{APP_NAME_SUFFIX}}",
         "full": "full name for linkunfurling-reddit"
     },
     "description": {
