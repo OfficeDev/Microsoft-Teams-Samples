@@ -21,7 +21,7 @@ In your working directory, open the [manifest.json](https://github.com/OfficeDev
 
 ~~~json
 "icons": {
-    "color": "Northwind-Logo3-192-${{TEAMSFX_ENV}}.png",
+    "color": "Northwind-Logo3-192${{APP_NAME_SUFFIX}}.png",
     "outline": "Northwind-Logo3-32.png"
 },
 ~~~

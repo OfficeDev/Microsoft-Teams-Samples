@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: bot-people-picker-adaptive-card-${{TEAMSFX_ENV}}
+      name: bot-people-picker-adaptive-card${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 

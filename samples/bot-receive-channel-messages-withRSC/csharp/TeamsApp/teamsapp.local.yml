@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: bot-receive-channel-messages-withRSC-${{TEAMSFX_ENV}}
+      name: bot-receive-channel-messages-withRSC${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
