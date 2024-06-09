@@ -1,0 +1,23 @@
+{
+  "name": "translation-poc-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "@azure/openai": "^1.0.0-beta.6",
+    "@azure/storage-blob": "^12.23.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.17.1",
+    "langchain": "^0.2.5",
+    "officeparser": "^4.1.1",
+    "openai": "3.3.0",
+    "uuid": "^9.0.1"
+  }
+}
