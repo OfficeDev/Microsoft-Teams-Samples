@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel",
+    "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel-group-chats",
     "source": "officeDev",
-    "title": "Graph Change Notification Team/Channel",
-    "shortDescription": "Graph change notification for team and channel",
+    "title": "User Scope Graph Change Notification Team/Channel",
+    "shortDescription": "User Scope Graph change notification for team, channel and group",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/nodejs",
     "longDescription": [
-      "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel through teams tab."
+      "This sample demonstrates the use of Team/Channel and User Scope Graph subscription that will post notifications when user Create/Edit/Delete the team/channel through teams tab."
     ],
     "creationDateTime": "2022-10-03",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-06-10",
     "products": [
       "Teams"
     ],

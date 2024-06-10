@@ -8,6 +8,7 @@
     "@fluentui/react-northstar": "^0.63.1",
     "@microsoft/teams-js": "^2.1.0",
     "axios": "^0.21.1",
+    "bootstrap": "^5.3.3",
     "moment": "^2.29.4",
     "react": "17.0.0",
     "react-dom": "17.0.0",
@@ -17,7 +18,7 @@
   },
   "scripts": {
     "dev:teamsfx": "npm run start",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
