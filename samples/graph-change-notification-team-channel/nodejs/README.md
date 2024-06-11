@@ -161,26 +161,36 @@ You can interact with Teams Tab by subscribing the teams/channel for notificatio
 ## User Scope Graph API Notifications
 
 1. **Installation To Group Chat**
-![Channel-Welcome](Images/2.SelectGroupChat.png)
+![Sample](Images/2.SelectGroupChat.png)
 
 1. **Select Subscription Tab**
-![Channel-Welcome](Images/3.SelectSubscriptionsTab.png)
+![Sample](Images/3.SelectSubscriptionsTab.png)
 
 1. **Subscription Tab**
-![Channel-Welcome](Images/4.SubscriptionTab.png)
+![Sample](Images/4.SubscriptionTab.png)
 
 1. **Notification Of Specific Group Updates**
-![Channel-Welcome](Images/5.SpecificGroupUpdated.png)
+![Sample](Images/5.SpecificGroupUpdated.png)
 
 1. **Notification of Any-Grpup Updates**
-![Channel-Welcome](Images/6.AnyGroupUpdates.png)
+![Sample](Images/6.AnyGroupUpdates.png)
 
 1. **Graph Notification**
-![Channel-Welcome](Images/7.GraphNotifications.png)
+![Sample](Images/7.GraphNotifications.png)
+
+## Left Rail Experience
+
+1. **Once the meeting chat is created it will be in hidden stage and after sending message to that chat, hidden property will becomes `false` and by this left rail of teams will be updated and it appears in `recent`**
+
+![Sample](Images/8.Hidden-True.png)
+
+![Sample](Images/9.SendingMsgToChat.png)
+
+![Sample](Images/10.HiddenFalse.png)
 
 1. **Show Welcome - Channel**
 Welcome Message when Channel selected for subscription.
-![Channel-Welcome](Images/Channel-Welcome.png)
+![Sample](Images/Channel-Welcome.png)
 
 2. **Channel Notifications**
 Channel Created Update Delete Message
