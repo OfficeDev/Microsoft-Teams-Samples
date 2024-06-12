@@ -6,8 +6,8 @@
   },
   "private": true,
   "dependencies": {
-    "@azure/msal-browser": "^3.11.0",
-    "@fluentui/react-components": "^9.0.0-rc.10",
+    "@azure/msal-browser": "^3.15.0",
+    "@fluentui/react-components": "^9.18.0",
     "@microsoft/teams-js": "^2.23.0",
     "crypto": "^1.0.1",
     "react": "^18.2.0",
