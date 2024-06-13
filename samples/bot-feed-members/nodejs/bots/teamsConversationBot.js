@@ -63,7 +63,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 type: 'Container',
                 items: members.members.map(item => ({
                     type: 'TextBlock',
-                    text: `- ${item.name}s`,
+                    text: `- ${item.name}`,
                     wrap: true
                 }))
             }
