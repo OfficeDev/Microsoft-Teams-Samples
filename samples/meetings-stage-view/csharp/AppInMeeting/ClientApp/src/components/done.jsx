@@ -153,7 +153,7 @@ const Done = props => {
                 <img className="add-icon" src="/add_icon.svg" title="Click to continue existing conversation" />
             </button>
             <br />
-            <button onClick={() => { props.shareSpecificPart('done') }} className="share-specific-part-button">
+            <button onClick={() => { props.shareCollaborativeStageView('done') }} className="share-specific-part-button">
                 Share Done
             </button>
             <div id="done">

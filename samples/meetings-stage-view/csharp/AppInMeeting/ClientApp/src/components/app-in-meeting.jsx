@@ -103,6 +103,31 @@ const AppInMeeting = props => {
         });
     };
 
+    // Share the content to in collaborative mode.
+    const shareCollaborativeStageView = (partName) => {
+        var appContentUrl = "";
+        microsoftTeams.app.getContext().then((context) => {
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    console.log(result);
+                }
+
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl,
+                // Optional shareOptions with sharingProtocol set to ScreenShare
+                {
+                    sharingProtocol: microsoftTeams.meeting.SharingProtocol.ScreenShare
+                });
+        });
+    };
+
+
+
     return (
         <div id="chatSection" className={appTheme}>
             <div className="label">
@@ -117,6 +142,9 @@ const AppInMeeting = props => {
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
                     <Done shareSpecificPart={shareSpecificPart} />
+                </div>
+                <div className={defaultStyle + ' ' + appTheme}>
+                    <Done shareCollaborativeStageView={shareCollaborativeStageView} />
                 </div>
                 <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>
