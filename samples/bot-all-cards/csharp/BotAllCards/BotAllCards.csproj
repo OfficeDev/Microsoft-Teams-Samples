@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.19.0" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.19.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
 </Project>
