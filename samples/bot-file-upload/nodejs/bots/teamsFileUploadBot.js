@@ -131,6 +131,11 @@ class TeamsFileUploadBot extends TeamsActivityHandler {
             contentUrl: `data:image/png;base64,${ base64Image }`
         };
     }
+
+    async handleTeamsFileConsent(context,response){
+        console.log("handleTeamsFileConsent() method executed");
+        console.log(context,response);
+    }
 }
 
 module.exports.TeamsFileUploadBot = TeamsFileUploadBot;
