@@ -129,11 +129,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - **This step is specific to Teams.**
 
-1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1) Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
 
-2) Zip the contents of `AppManifest` folder into a `manifest.zip`.
+2) Zip the contents of `appPackage` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -151,7 +151,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
