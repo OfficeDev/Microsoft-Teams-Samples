@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatLifecycle", "ChatLifecycle\ChatLifecycle.csproj", "{DD8A1EAC-6947-423D-A135-8D6B22E7E857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatLifecycle", "ChatLifecycle\ChatLifecycle.csproj", "{DD8A1EAC-6947-423D-A135-8D6B22E7E857}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{6E781779-964A-40E5-AD02-44DF3BBD6901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DD8A1EAC-6947-423D-A135-8D6B22E7E857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD8A1EAC-6947-423D-A135-8D6B22E7E857}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD8A1EAC-6947-423D-A135-8D6B22E7E857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E781779-964A-40E5-AD02-44DF3BBD6901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E781779-964A-40E5-AD02-44DF3BBD6901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E781779-964A-40E5-AD02-44DF3BBD6901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E781779-964A-40E5-AD02-44DF3BBD6901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
