@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/vdevPrevieW/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.botconfigurationauth",
   "developer": {
     "name": "Microsoft",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Bot Configuration auth Sample App",
+    "short": "Bot Configuration auth",
     "full": "Bot Configuration auth Sample App"
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "needsChannelSelector": false,
       "scopes": [
         "personal",
@@ -48,6 +48,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{BOT_DOMAIN}}"
   ]
 }
