@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DetailsTab", "DetailsTab\De
 EndProject
 Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{97168E17-6C4F-4974-817B-61076C787459}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7DB8EFC-8D39-47B6-A1C5-D2289730F60B}"
+	ProjectSection(SolutionItems) = preProject
+		DetailsTab.slnLaunch.user = DetailsTab.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
