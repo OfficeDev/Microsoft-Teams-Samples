@@ -85,7 +85,7 @@ const AppInMeeting = props => {
     }
 
     // Share the content to meeting stage view.
-    const shareSpecificPart = (partName) => {
+    const shareSpecificAppContent = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
             appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
@@ -103,8 +103,8 @@ const AppInMeeting = props => {
         });
     };
 
-    // Share the content to in collaborative mode.
-    const shareCollaborativeStageView = (partName) => {
+    // Share the content to in view-only screen sharing mode.
+    const shareSpecificAppContentScreenShare = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
             appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
@@ -135,16 +135,16 @@ const AppInMeeting = props => {
             </div>
             <div id="boardDiv" className="chat-window">
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Todo shareSpecificPart={shareSpecificPart} />
+                    <Todo shareSpecificAppContent={shareSpecificAppContent} />
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Doing shareSpecificPart={shareSpecificPart} />
+                    <Doing shareSpecificAppContent={shareSpecificAppContent} />
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Done shareSpecificPart={shareSpecificPart} />
+                    <Done shareSpecificAppContent={shareSpecificAppContent} />
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Done shareCollaborativeStageView={shareCollaborativeStageView} />
+                    <Done shareSpecificAppContentScreenShare={shareSpecificAppContentScreenShare} />
                 </div>
                 <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>
