@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TabGraphToolkit", "TabGraph
 EndProject
 Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{9B37CFF1-E97C-4B8F-80B3-4705A686F5EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D633122D-ADA8-4D8A-9C8D-C1DC0A5B684E}"
+	ProjectSection(SolutionItems) = preProject
+		TabGraphToolkit.slnLaunch.user = TabGraphToolkit.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
