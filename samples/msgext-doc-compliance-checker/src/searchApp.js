@@ -6,9 +6,7 @@ const path = require('path');
 const { BlobServiceClient } = require('@azure/storage-blob');
 const mammoth = require('mammoth');
 const pdf = require('pdf-parse');
-const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=sampleappsstorage;AccountKey=AVyJ2e1AY0kzc3Jy+Eb6TdYSt7yHZ3KSj8fQ2y1Kt9II06XIkoDMhUXvw9aqWgSrlVUBvZhcGYeRRtgB4nO3Xw==;EndpointSuffix=core.windows.net';
-const containerName = 'msgext-doc-compliance-checker';
-
+const config = require("./config");
 
 class SearchApp extends TeamsActivityHandler {
   constructor() {
@@ -16,8 +14,8 @@ class SearchApp extends TeamsActivityHandler {
   }
 
   async blobGetAllDocumentsName(msFileName) {
-    const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
-    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
+    const containerClient = blobServiceClient.getContainerClient(config.containerName);
     let blobs = containerClient.listBlobsFlat();
     for await (const blob of blobs) {
       const filename = blob.name;
@@ -83,8 +81,8 @@ class SearchApp extends TeamsActivityHandler {
  
   async blobGetAllCheckListNames() {
     try {
-      const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
-      const containerClient = blobServiceClient.getContainerClient(containerName);
+      const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
+      const containerClient = blobServiceClient.getContainerClient(config.containerName);
       const blockBlobClient = containerClient.getBlockBlobClient("checklist.txt");
       const downloadBlockBlobResponse = await blockBlobClient.download(0);
       const checkListText = await this.streamToString(downloadBlockBlobResponse.readableStreamBody);
