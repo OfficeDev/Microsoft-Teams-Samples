@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.1",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
@@ -33,14 +33,14 @@
         "channelTab"
       ],
       "name": "Stage View",
-      "contentUrl": "https://{{domain-name}}/sampleTab",
-      "websiteUrl": "https://{{domain-name}}/sampleTab",
-      "searchUrl": "https://{{domain-name}}/sampleTab"
+      "contentUrl": "https://${{BOT_DOMAIN}}/sampleTab",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/sampleTab",
+      "searchUrl": "https://${{BOT_DOMAIN}}/sampleTab"
     }
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "team",
         "personal",
@@ -52,7 +52,7 @@
   "accentColor": "#60A18E",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "commands": [
         {
           "id": "searchQuery",
@@ -76,7 +76,7 @@
           "value": {
             "domains": [
               "tabstageview.com/card",
-              "{{domain-name}}"
+              "${{BOT_DOMAIN}}"
             ]
           }
         }
@@ -85,7 +85,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{{domain-name}}",
+    "${{BOT_DOMAIN}}",
     "token.botframework.com"
   ]
 }
