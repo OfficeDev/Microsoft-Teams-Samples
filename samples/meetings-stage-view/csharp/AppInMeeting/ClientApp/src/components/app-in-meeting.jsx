@@ -103,7 +103,7 @@ const AppInMeeting = props => {
         });
     };
 
-    // Share the content to in view-only screen sharing mode.
+    // Share the content in view-only screen sharing mode.
     const shareSpecificAppContentScreenShare = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
