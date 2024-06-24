@@ -27,10 +27,10 @@
     "adaptivecards-templating": "^2.3.1",
     "langchain": "^0.0.118",
     "botbuilder": "^4.20.0",
-    "mammoth": "^1.7.2",
     "pdf-parse": "^1.1.1",
     "restify": "^10.0.0",
-    "textract": "^2.5.0"
+    "textract": "^2.5.0",
+    "word-extractor": "^1.0.4"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

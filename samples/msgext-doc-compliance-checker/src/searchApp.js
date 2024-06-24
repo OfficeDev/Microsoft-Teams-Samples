@@ -1,12 +1,10 @@
 const axios = require("axios");
 const { TeamsActivityHandler, MessageFactory, CardFactory } = require("botbuilder");
 const { checkCompliance } = require('./aiClient');
-const fs = require('fs');
-const path = require('path');
 const { BlobServiceClient } = require('@azure/storage-blob');
-const mammoth = require('mammoth');
 const pdf = require('pdf-parse');
 const config = require("./config");
+const WordExtractor = require("word-extractor");
 
 class SearchApp extends TeamsActivityHandler {
   constructor() {
@@ -25,13 +23,14 @@ class SearchApp extends TeamsActivityHandler {
           const downloadBlockBlobResponse = await blockBlobClient.download(0);
           let fileContent;
           if (filename.endsWith('.docx')) {
-            const downloadedWordContent = await this.streamToBufferDoc(downloadBlockBlobResponse.readableStreamBody);
-            const docContent = await mammoth.extractRawText({ buffer: downloadedWordContent });
-            fileContent = docContent.value;
+            const downloadedWordContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
+            const extractor = new WordExtractor();
+            const extracted = await extractor.extract(downloadedWordContent);
+            fileContent = extracted.getBody();
           } else if (filename.endsWith('.txt')) {
             fileContent = await this.streamToString(downloadBlockBlobResponse.readableStreamBody);
           } else if (filename.endsWith('.pdf')) {
-            const pdfContent = await this.streamToBufferPDF(downloadBlockBlobResponse.readableStreamBody);
+            const pdfContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
             const pdfData = await pdf(pdfContent);
             fileContent = pdfData.text;
           }
@@ -40,7 +39,7 @@ class SearchApp extends TeamsActivityHandler {
       }
     }
   }
-  async streamToBufferPDF(readableStream) {
+  async streamToBuffer(readableStream) {
     return new Promise((resolve, reject) => {
       const chunks = [];
       readableStream.on('data', (data) => {
@@ -66,19 +65,7 @@ class SearchApp extends TeamsActivityHandler {
     });
   }
 
-  async streamToBufferDoc(readableStream) {
-    return new Promise((resolve, reject) => {
-      const chunks = [];
-      readableStream.on('data', (data) => {
-        chunks.push(data);
-      });
-      readableStream.on('end', () => {
-        resolve(Buffer.concat(chunks));
-      });
-      readableStream.on('error', reject);
-    });
-  }
- 
+
   async blobGetAllCheckListNames() {
     try {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
@@ -98,13 +85,35 @@ class SearchApp extends TeamsActivityHandler {
     }
   }
 
+  async generateAdaptiveCardData(complianceResult) {
+    let status = '';
+    let verifyContent = '';
+    const lines = complianceResult.trim().split('\n').map(line => line.trim());
+    const items = lines.map(line => {
+      const [txtDescription, statusPart] = line.split(':').map(part => part.trim());
+      if (statusPart.includes(',')) {
+        [status, verifyContent] = statusPart.split(',').map(part => part.trim());
+      } else {
+        status = statusPart.trim();
+      }
+      return {
+        txtDescription,
+        status,
+        verifyContent,
+        contentStatus: status === 'Yes' ? '🟢' : '🔴',
+      };
+    });
+    return {
+      descriptionStatus: items
+    };
+  }
+
+
   async handleTeamsMessagingExtensionQuery(context, query) {
 
     const msFileName = query.parameters[0].value;
 
     const downloadedContent = await this.blobGetAllDocumentsName(msFileName);
-    const characterCount = downloadedContent.length;
-    console.log(`Character count: ${characterCount}`);
     console.log('Downloaded Content:', downloadedContent);
     const predefinedDocument = downloadedContent;
 
@@ -113,35 +122,158 @@ class SearchApp extends TeamsActivityHandler {
 
     const complianceResult = await checkCompliance(checkListItems, predefinedDocument);
 
+    const resultAdaptiveCardData = await this.generateAdaptiveCardData(complianceResult);
+
     const card = CardFactory.adaptiveCard({
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
       "type": "AdaptiveCard",
-      "version": "1.6",
       "body": [
         {
           "type": "Container",
-          "style": "emphasis", // Adding a background color
+          "style": "emphasis",
           "items": [
             {
-              "type": "TextBlock",
-              "text": complianceResult,
-              "weight": "bolder",
-              "wrap": true,
-              "size": "medium",
-              "color": "accent", // Adding color
-              "horizontalAlignment": "center", // Center alignment
-              "spacing": "medium"
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "size": "large",
+                      "weight": "bolder",
+                      "text": "COMPLIANCE CHECKER",
+                      "wrap": true
+                    }
+                  ],
+                  "width": "stretch"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "size": "large",
+                      "weight": "bolder",
+                      "text": `PASSED: ${resultAdaptiveCardData.descriptionStatus.filter(item => item.status === "Yes").length}`,
+                      "wrap": true
+                    }
+                  ],
+                  "width": "auto"
+                }
+              ]
             }
           ],
-          "padding": {
-            "top": "small",
-            "bottom": "small",
-            "left": "medium",
-            "right": "medium"
-          }
-        }
-      ]
+          "bleed": true
+        },
+        {
+          "type": "Container",
+          "spacing": "Large",
+          "style": "emphasis",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "text": "CHECKLIST ITEMS",
+                      "wrap": true
+                    }
+                  ],
+                  "width": "stretch"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "text": "STATUS",
+                      "wrap": true
+                    }
+                  ],
+                  "width": "auto"
+                }
+              ]
+            }
+          ],
+          "bleed": true
+        },
+        ...resultAdaptiveCardData.descriptionStatus.map((item, index) => ({
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "spacing": "Medium",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": item.txtDescription,
+                      "wrap": true
+                    }
+                  ],
+                  "width": "stretch"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": item.status + item.contentStatus,
+                      "wrap": true
+                    }
+                  ],
+                  "width": "auto"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "ActionSet",
+                      "actions": [
+                        {
+                          "type": "Action.ToggleVisibility",
+                          "targetElements": [
+                            {
+                              "elementId": `textToShowHide_${index}`
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                  ],
+                  "width": "auto"
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "id": `textToShowHide_${index}`,
+              "isVisible": false,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": item.verifyContent || "No additional details available.",
+                  "isSubtle": true,
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        })),
+      ],
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.5"
     });
+
+
+
 
     const preview = CardFactory.heroCard(
       "Compliance Check Result",
