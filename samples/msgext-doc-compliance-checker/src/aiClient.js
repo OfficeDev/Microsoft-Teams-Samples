@@ -4,7 +4,10 @@ const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const config = require("./config");
 
 async function checkCompliance(checkListItems, predefinedDocument) {
-    const systemPrompt = `You are an assistant that helps in verifying documents against a given checklist item. For each checklist item, indicate if it is present or missing in the document. If the item is present, provide the relevant content and "Yes". If the item is missing, return "No".`;
+    const systemPrompt = `You are an assistant that helps verify documents against a given checklist. For each item on the checklist:
+- If the item is present in the document, provide the relevant content followed by "Yes".
+- If the item is missing in the document, respond with "No" and indicate that no additional details are available.`;
+
     let fileChunks = [];
 
     let counter = 0;

@@ -86,16 +86,10 @@ class SearchApp extends TeamsActivityHandler {
   }
 
   async generateAdaptiveCardData(complianceResult) {
-    let status = '';
-    let verifyContent = '';
-    const lines = complianceResult.trim().split('\n').map(line => line.trim());
+    const lines = complianceResult.trim().split('\n').map(line => line.trim().replace(/^- /, ''));
     const items = lines.map(line => {
       const [txtDescription, statusPart] = line.split(':').map(part => part.trim());
-      if (statusPart.includes(',')) {
-        [status, verifyContent] = statusPart.split(',').map(part => part.trim());
-      } else {
-        status = statusPart.trim();
-      }
+      const [status, verifyContent] = statusPart.split(',').map(part => part.trim());
       return {
         txtDescription,
         status,
@@ -112,7 +106,6 @@ class SearchApp extends TeamsActivityHandler {
   async handleTeamsMessagingExtensionQuery(context, query) {
 
     const msFileName = query.parameters[0].value;
-
     const downloadedContent = await this.blobGetAllDocumentsName(msFileName);
     console.log('Downloaded Content:', downloadedContent);
     const predefinedDocument = downloadedContent;
@@ -239,11 +232,12 @@ class SearchApp extends TeamsActivityHandler {
                       "actions": [
                         {
                           "type": "Action.ToggleVisibility",
+                          "title": "▲",
                           "targetElements": [
                             {
                               "elementId": `textToShowHide_${index}`
                             }
-                          ]
+                          ] 
                         }
                       ]
                     },
@@ -272,9 +266,6 @@ class SearchApp extends TeamsActivityHandler {
       "version": "1.5"
     });
 
-
-
-
     const preview = CardFactory.heroCard(
       "Compliance Check Result",
       complianceResult,
@@ -293,10 +284,7 @@ class SearchApp extends TeamsActivityHandler {
         attachments: [{ ...card, preview }]
       }
     };
-
-
   }
-
 }
 
 module.exports.SearchApp = SearchApp;
