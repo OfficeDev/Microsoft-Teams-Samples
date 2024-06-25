@@ -29,6 +29,9 @@ This sample illustrates you can use [Resource Specific Consent](https://learn.mi
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 
+## Interaction with app
+![graph RSC helper](Images/graphrschelper.gif)
+
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
@@ -92,4 +95,4 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
 - [Upload app manifest file](https://docs.microsoft.com//microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-rsc-nodeJs-helper" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-rsc-helper-nodejs" />
