@@ -253,7 +253,7 @@ class SearchApp extends TeamsActivityHandler {
               "items": [
                 {
                   "type": "TextBlock",
-                  "text": item.verifyContent || "No additional details available.",
+                  "text": item.verifyContent,
                   "isSubtle": true,
                   "wrap": true
                 }
