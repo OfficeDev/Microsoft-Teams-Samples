@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph API Explorer</title>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js referrerpolicy="no-referrer"></script>
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js
+        integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+        crossorigin="anonymous"></script>
+    <style>
+        .orange-bg {
+            background-color: orange;
+        }
+        
+        .violet-bg {
+            background-color: violet;
+        }
+    </style>
+    <script>
+        var tenantId;
+        var apiId;
+        var apiName;
+        var appScope;
+        var teamId;
+        var channelId;
+        var chatId;
+        var userId;
+        var requestType;
+
+        // Initialize teams js sdk
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(function () {
+                microsoftTeams.app.getContext().then((context) => {
+                    tenantId = context.user.tenant.id;
+                    userId = context.user.id;
+                    chatId = context.chat?.id;
+                    channelId = context.channel?.id;
+                    teamId = context.team?.groupId;
+                    if (chatId) {
+                        appScope = "chat";
+                    }  else if (teamId) {
+                        appScope = "team";
+                    } else {
+                        appScope = "personal"
+                    }
+                });
+            })
+        });
+
+        function handleRequest() {
+            console.log("api name is " + apiName);
+            var url = document.getElementById('URLInput').value;
+            var requestBody = document.getElementById('requestBody').value;
+
+            $.ajax({
+                type: 'POST',
+                url: '/handleRequest',
+                dataType: 'json',
+                data: {
+                    'apiId': apiId,
+                    'apiName': apiName,
+                    'url': url,
+                    'requestBody': requestBody,
+                    'requestType': requestType,
+                    'tenantId': tenantId,
+                    'scope': appScope,
+                    'userId': userId,
+                    'teamId': teamId,
+                    'channelId': channelId,
+                    'chatId': chatId,
+                },
+                success: function (responseJson) {
+                    var responseBody = document.getElementById('responseBody');
+                    responseBody.innerHTML = "";
+                    var per = document.createElement('pre');
+                    per.innerHTML  = responseJson;
+                    responseBody.appendChild(per);
+                    console.log("message sent successfully" + responseJson);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    var responseBody = document.getElementById('responseBody');
+                    responseBody.textContent = errorThrown;
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+  
+        function handleItemClick(id, name, URL, parameters, permissions, body,type, scope) {
+            apiName = name
+            apiId = id;
+            requestType = type;
+            var URLElement = document.getElementById('URLInput');
+            var requestBody = document.getElementById('requestBody');
+            var methodType = document.getElementById('methodType');
+            methodType.className="";
+            switch(type){
+                case "DELETE":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="bg-danger badge";
+                    break;
+                }
+                case "PATCH":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="orange-bg badge";
+                    break;
+                }
+                case "POST":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="bg-success badge";
+                    break;
+                }
+                case "PUT":
+                {
+                    methodType.textContent = type;
+                    methodType.className ="violet-bg badge";
+                    break;
+                }
+                default: {
+                    methodType.textContent = type;
+                    methodType.className ="bg-primary badge";
+                    break;
+                }
+            }
+            var parametersWithDescription = addDescriptionForparameters(parameters);
+            populateList(parametersWithDescription, 'parametersList');
+            populateList(permissions, 'permissionsList');
+            setSubmitButton(scope);
+            console.log("URL is " + URL);
+            URLElement.value = URL;
+            console.log("body is " + body);
+            if (type === "GET" || type === "DELETE") {
+                requestBody.value = '';
+            } else {
+                requestBody.value = JSON.stringify(JSON.parse(body),null,2);
+            }
+            var responseBody = document.getElementById('responseBody');
+            responseBody.innerHTML = "";
+        }
+
+        function addDescriptionForparameters(parameters) {
+            const parametersArray = parameters.split(',');
+            const parametersWithDescription = parametersArray.map((parameter)=>{
+                switch (parameter) {
+                    case "{teamId}":
+                        return `${parameter}: Will be replaced with the id of the team the App is installed.`;
+                    case "{channelId}":
+                        return `${parameter}: Will be replaced with the id of the channel the App is installed.`;
+                    case "{chatId}":
+                        return `${parameter}: Will be replaced with the id of the chat the App is installed.`;
+                    case "{userId}":
+                        return `${parameter}: Will be replaced with the id of the current user.`;
+                    case "{tabId}":
+                        return `${parameter}: Will be replaced with the id of the tab defined by the App.`;
+                    case "{installedAppId}":
+                        return `${parameter}: Will be replaced with the installed id of the App.`;
+                    case "[messageId]":
+                        return `${parameter}: Require the id of a actual message. Can be found in response of List Messages API.`;
+                    case "[editableChannelId]":
+                        return `${parameter}: Require the id of an actual editable channel.`;
+                    case "[tabId]":
+                        return `${parameter}: Require the id of a actual tab. Can be found in response of List Tabs API.`;
+                    case "[membershipId]":
+                        return `${parameter}: Require the id of a actualmembership. Can be found in response of List Members API.`;
+                    default:
+                        return parameter;
+                }
+            })
+            return parametersWithDescription.join(',');
+        }
+        function populateList(Items, listId) {
+            const List = document.getElementById(listId);
+            const itemsArray = Items.split(',');
+            List.innerHTML = '';
+            itemsArray.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.textContent = item.trim();
+                List.appendChild(li);
+            });
+        }
+
+        function setSubmitButton(scope) {
+            const button = document.getElementById("submitButton");
+            if (scope === appScope) {
+                button.disabled = false;
+                button.innerText = "Submit";
+                button.className = 'btn btn-primary'
+            } else {
+                button.disabled = true;
+                button.innerText = `Try it in ${scope === 'chat' ? 'Chat app' : 'Team app'}`;
+                button.className = 'btn btn-secondary'
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="col p-0">
+                    <div>
+                        <h4>Graph API Category with RSC Permissions</h4>
+                    </div>
+                    <div>
+                        <div class="accordion" id="accordionExample">
+                            <% items.forEach((api, index) => { %>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading<%= index + 1 %>">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse<%= index + 1 %>" aria-expanded="true" aria-controls="collapse<%= index + 1 %>">
+                                            <%= api.category %>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse<%= index + 1 %>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<%= index + 1 %>" data-bs-parent="#accordionExample">
+                                        <ul class="list-group">
+                                            <% api.methods.forEach(item => { %>
+                                                <li class="list-group-item clickable align-items-center"
+                                                    onclick="handleItemClick('<%= item.id %>', '<%= item.name %>','<%= item.value.URL %>','<%= item.value.Parameters %>','<%= item.value.Permissions %>','<%= JSON.stringify(item.Body)%>', '<%= item.type%>', '<%= item.scope%>')">
+                                                    <% if (item.type == 'GET' || item.type == 'POST') { %>
+                                                        <span class="badge <%= item.type === 'GET' ? 'bg-primary' : 'bg-success' %> m-2"><%= item.type %></span>
+                                                    <% } else if (item.type == 'PUT' || item.type == 'PATCH'){ %>
+                                                        <span class="badge <%= item.type === 'PUT' ? 'violet-bg' : 'orange-bg' %> m-2"><%= item.type %></span>
+                                                    <% } else if (item.type == 'DELETE'){ %>
+                                                        <span class="badge bg-danger m-2"><%= item.type %></span>
+                                                    <% } %>
+                                                    <%= item.name %>
+                                                </li>
+                                            <% }); %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <% }); %>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <h4>Graph API</h4>
+                <div class="col p-0">
+                    <div class="card p-3">
+                        <div class="card-body row p-0">
+                            <h6 for="input1" class="col-form-label">URL</h6>
+                            <div class="col" style="display: -webkit-box">
+                                <span class="badge bg-primary" id="methodType" style="margin-right: 8px; padding:13px;">GET</span>
+                                <input type="text" id="URLInput" class="form-control" style="width: calc(100% - 60px);">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" id="submitButton" class="btn btn-primary"
+                                    onclick="handleRequest()">Submit</button>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-8">
+                                <div class="row align-items-start">
+                                    <div class="col-2">
+                                        <h6>Parameters</h6>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="card" style="max-height: 120px;">
+                                            <ul class="list-group list-group-flush" id="parametersList" style="overflow-y: auto;">
+                                                <li></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row align-items-start">
+                                    <div class="col-4">
+                                        <h6>RSC permissions</h6>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="card" style="max-height: 120px;">
+                                            <ul class="list-group list-group-flush" id="permissionsList" style="overflow-y: auto;">
+                                                <li></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0 mt-3">
+                            <h6 class="p-0">Request Body</h6>
+                            <textarea id="requestBody" class="form-control" rows="7"></textarea>
+                        </div>
+                    </div>
+                    <div class="row-1">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Response</h6>
+                                <div class="form-control" id="responseBody" style="min-height: 200px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

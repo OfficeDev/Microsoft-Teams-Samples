@@ -1,0 +1,570 @@
+[
+    {
+        "category": "Team",
+        "methods": [
+            {
+                "scope": "team",
+                "id": "ListInstalledApps",
+                "name": "List Installed Apps",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/installedApps?$expand=teamsApp",
+                    "Parameters": [
+                        "{teamId}"
+                    ],
+                    "Permissions": [
+                        "TeamsAppInstallation.Read.Group"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "team",
+                "id": "SendActivityNotification",
+                "name": "Send Activity Notification",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/sendActivityNotification",
+                    "Parameters": [
+                        "{teamId}", "{userId}"
+                    ],
+                    "Permissions": [
+                        "TeamsActivity.Send.Group"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "topic": {
+                        "source": "entityUrl",
+                        "value": "https://graph.microsoft.com/v1.0/teams/{teamId}"
+                    },
+                    "activityType": "demoNotification",
+                    "previewText": {
+                        "content": "New Test Notification Created"
+                    },
+                    "recipient": {
+                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
+                        "userId": "{userId}"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "category": "Team Channel Message",
+        "methods": [
+            {
+                "scope": "team",
+                "id": "ListMessages",
+                "name": "List Message",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/messages?top=5",
+                    "Parameters": ["{teamId}", "{channelId}"],
+                    "Permissions": [
+                        "ChannelMessage.Read.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "ListMessagesReplies",
+                "name": "List Message Replies",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/messages/[messageId]/replies",
+                    "Parameters": ["{teamId}", "{channelId}", "[messageId]"],
+                    "Permissions": [
+                        "ChannelMessage.Read.Group"
+                    ]
+                },
+                "type": "GET"
+            }
+        ]
+    },
+    {
+        "category": "Team Channel",
+        "methods": [
+            {
+                "scope": "team",
+                "id": "ListChannels",
+                "name": "List Channels",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels",
+                    "Parameters": ["{teamId}"],
+                    "Permissions": [
+                        "ChannelSettings.Read.Group",
+                        "ChannelSettings.ReadWrite.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "GetChannel",
+                "name": "Get Channel",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}",
+                    "Parameters": ["{teamId}", "{channelId}"],
+                    "Permissions": [
+                        "ChannelSettings.Read.Group",
+                        "ChannelSettings.ReadWrite.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "CreateChannel",
+                "name": "Create Channel",
+                "value": {
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels",
+                    "Parameters": ["{teamId}"],
+                    "Permissions": [
+                        "Channel.Create.Group"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "displayName": "Test Architecture Discussion",
+                    "description": "This test channel is where we debate all future architecture plans",
+                    "membershipType": "standard"
+                }
+            },
+            {
+                "scope": "team",
+                "id": "UpdateChannel",
+                "name": "Update Channel",
+                "value": {
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels/[editableChannelId]",
+                    "Parameters": ["{teamId}", "[editableChannelId]"],
+                    "Permissions": [
+                        "ChannelSettings.ReadWrite.Group"
+                    ]
+                },
+                "type": "PATCH",
+                "Body": {
+                    "displayName": "Test Update Channel Name"
+                }
+            },
+            {
+                "scope": "team",
+                "id": "DeleteChannel",
+                "name": "Delete Channel",
+                "value": {
+                    "URL": "https://graph.microsoft.com/beta/teams/{teamId}/channels/[editableChannelId]",
+                    "Parameters": ["{teamId}", "[editableChannelId]"],
+                    "Permissions": [
+                        "Channel.Delete.Group"
+                    ]
+                },
+                "type": "DELETE"
+            },
+            {
+                "scope": "team",
+                "id": "Primary Channel",
+                "name": "Primary Channel",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/primaryChannel",
+                    "Parameters": ["{teamId}"],
+                    "Permissions": [
+                        "ChannelSettings.Read.Group",
+                        "ChannelSettings.ReadWrite.Group"
+                    ]
+                },
+                "type": "GET"
+            }
+        ]
+    },
+    {
+        "category": "Team Tab",
+        "methods": [
+            {
+                "scope": "team",
+                "id": "ListTabs",
+                "name": "List Tabs",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs?$expand=teamsApp",
+                    "Parameters": ["{teamId}", "{channelId}"],
+                    "Permissions": [
+                        "TeamsTab.Read.Group",
+                        "TeamsTab.ReadWrite.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "Get Tab",
+                "name": "Get Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/{tabId}",
+                    "Parameters": ["{teamId}", "{channelId}", "{tabId}"],
+                    "Permissions": [
+                        "TeamsTab.Read.Group",
+                        "TeamsTab.ReadWrite.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "AddTab",
+                "name": "Add Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs",
+                    "Parameters": [
+                        "{teamId}", 
+                        "{channelId}",
+                        "{installedAppId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Create.Group"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "displayName": "Test adding tab",
+                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{installedAppId}",
+                    "configuration": {
+                        "entityId": "2DCA2E6C7A10415CAF6B8AB6661B3154",
+                        "contentUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView",
+                        "websiteUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154"
+                    }
+                }
+            },
+            {
+                "scope": "team",
+                "id": "UpdateTab",
+                "name": "Update Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/{tabId}",
+                    "Parameters": [
+                        "{teamId}", 
+                        "{channelId}",
+                        "{tabId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.ReadWrite.Group"
+                    ]
+                },
+                "type": "PATCH",
+                "Body": {
+                    "displayName": "Test update tab name"
+                }
+            },
+            {
+                "scope": "team",
+                "id": "DeleteTab",
+                "name": "Deleta Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/tabs/[tabId]",
+                    "Parameters": [
+                        "{teamId}", 
+                        "{channelId}",
+                        "[tabId]"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Delete.Group"
+                    ]
+                },
+                "type": "DELETE"
+            }
+        ]
+    },
+    {
+        "category": "Team Member",
+        "methods": [
+             {
+                "scope": "team",
+                "id": "ListMembers",
+                "name": "List Members",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/members",
+                    "Parameters": ["{teamId}"],
+                    "Permissions": [
+                        "TeamMember.Read.Group"
+                    ]
+                },
+                "type": "GET"
+            },
+            {
+                "scope": "team",
+                "id": "GetMember",
+                "name": "Get Member",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/teams/{teamId}/members/[membershipId]",
+                    "Parameters": [
+                        "{teamId}",
+                        "[membershipId]"
+                    ],
+                    "Permissions": [
+                        "TeamMember.Read.Group"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            }
+        ]
+    },
+    {
+        "category": "Chat",
+        "methods": [
+            {
+                "scope": "chat",
+                "id": "ListMessages",
+                "name": "List Messages",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/messages?$top=5",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "ChatMessage.Read.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "GetChat",
+                "name": "Get Chat",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "Chat.Manage.Chat",
+                        "ChatSettings.Read.Chat",
+                        "ChatSettings.ReadWrite.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "UpdateChat",
+                "name": "Update Chat",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "ChatSettings.ReadWrite.Chat"
+                    ]
+                },
+                "type": "PATCH",
+                "Body": {
+                    "topic": "Group chat title update"
+                }
+            },
+            {
+                "scope": "chat",
+                "id": "ListInstalledApps",
+                "name": "List Installed Apps",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/installedApps?$expand=teamsApp",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "TeamsAppInstallation.Read.Chat",
+                        "Chat.Manage.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "SendActivityNotification",
+                "name": "Send Activity Notification",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/sendActivityNotification",
+                    "Parameters": [
+                        "{chatId}",
+                        "{userId}"
+                    ],
+                    "Permissions": [
+                        "TeamsActivity.Send.Chat"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "topic": {
+                        "source": "entityUrl",
+                        "value": "https://graph.microsoft.com/v1.0/chats/{chatId}"
+                    },
+                    "activityType": "demoNotification",
+                    "previewText": {
+                        "content": "New Test Notification Created"
+                    },
+                    "recipient": {
+                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
+                        "userId": "{userId}"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "category": "Chat Member",
+        "methods": [
+            {
+                "scope": "chat",
+                "id": "ListMembers",
+                "name": "List Members",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "Chat.Manage.Chat",
+                        "ChatMember.Read.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "GetMember",
+                "name": "Get Member",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members/[membershipId]",
+                    "Parameters": [
+                        "{chatId}",
+                        "[membershipId]"
+                    ],
+                    "Permissions": [
+                        "Chat.Manage.Chat",
+                        "ChatMember.Read.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "RemoveMember",
+                "name": "Remove Member",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/members/[membershipId]",
+                    "Parameters": [
+                        "{chatId}",
+                        "membershipId"
+                    ],
+                    "Permissions": [
+                        "Chat.Manage.Chat"
+                    ]
+                },
+                "type": "DELETE",
+                "Body": {}
+            }
+        ]
+    },
+    {
+        "category": "Chat Tab",
+        "methods": [
+            {
+                "scope": "chat",
+                "id": "ListTabs",
+                "name": "List Tabs",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs",
+                    "Parameters": [
+                        "{chatId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Read.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "GetTab",
+                "name": "Get Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/{tabId}",
+                    "Parameters": [
+                        "{chatId}",
+                        "{tabId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Read.Chat",
+                        "TeamsTab.ReadWrite.Chat"
+                    ]
+                },
+                "type": "GET",
+                "Body": {}
+            },
+            {
+                "scope": "chat",
+                "id": "AddTab",
+                "name": "Add Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs",
+                    "Parameters": [
+                        "{chatId}",
+                        "{installedAppId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Create.Chat",
+                        "TeamsTab.ReadWrite.Chat"
+                    ]
+                },
+                "type": "POST",
+                "Body": {
+                    "displayName": "Test adding tab",
+                    "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{installedAppId}",
+                    "configuration": {
+                        "entityId": "2DCA2E6C7A10415CAF6B8AB6661B3154",
+                        "contentUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView",
+                        "websiteUrl": "https://www.example.com/2DCA2E6C7A10415CAF6B8AB6661B3154"
+                    }
+                }
+            },
+            {
+                "scope": "chat",
+                "id": "UpdateTab",
+                "name": "Update Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/{tabId}",
+                    "Parameters": [
+                        "{chatId}",
+                        "{tabId}"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.ReadWrite.Chat"
+                    ]
+                },
+                "type": "PATCH",
+                "Body": {
+                    "displayName": "Test update tab name"
+                }
+            },
+            {
+                "scope": "chat",
+                "id": "DeleteTab",
+                "name": "Deleta Tab",
+                "value": {
+                    "URL": "https://graph.microsoft.com/v1.0/chats/{chatId}/tabs/[tabId]",
+                    "Parameters": [
+                        "{chatId}",
+                        "[tabId]"
+                    ],
+                    "Permissions": [
+                        "TeamsTab.Delete.Chat",
+                        "TeamsTab.ReadWrite.Chat"
+                    ]
+                },
+                "type": "DELETE"
+            }
+        ]
+    }
+]

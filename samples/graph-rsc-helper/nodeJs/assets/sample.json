@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-rsc-nodeJs",
+    "source": "officeDev",
+    "title": "Resource Specific Consent with Graph API Javascript",
+    "shortDescription": "Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-rsc/nodeJs",
+    "longDescription": [
+      "Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab."
+    ],
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2021-11-29",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-rsc/nodeJs/./Images/RSCDemo.gif",
+        "alt": "Solution UX showing resource specific consent with graph api javascript"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
