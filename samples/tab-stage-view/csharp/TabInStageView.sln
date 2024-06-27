@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabInStageView", "TabInStageView\TabInStageView.csproj", "{9595A32B-E860-4EC2-8DA4-FDBDD7FADD80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TabInStageView", "TabInStageView\TabInStageView.csproj", "{9595A32B-E860-4EC2-8DA4-FDBDD7FADD80}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{0D2B7F18-ECC2-4E73-844A-A4B28D4446C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CACA9F3C-6049-492B-B408-F3539F373299}"
+	ProjectSection(SolutionItems) = preProject
+		TabInStageView.slnLaunch.user = TabInStageView.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{9595A32B-E860-4EC2-8DA4-FDBDD7FADD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9595A32B-E860-4EC2-8DA4-FDBDD7FADD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9595A32B-E860-4EC2-8DA4-FDBDD7FADD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D2B7F18-ECC2-4E73-844A-A4B28D4446C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D2B7F18-ECC2-4E73-844A-A4B28D4446C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D2B7F18-ECC2-4E73-844A-A4B28D4446C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D2B7F18-ECC2-4E73-844A-A4B28D4446C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

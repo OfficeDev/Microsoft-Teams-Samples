@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.mgtteamstab",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "index0",
       "name": "Personal Tab",
-      "contentUrl": "https://{{domain-name}}/index.html#/tab",
-      "websiteUrl": "https://{{domain-name}}/index.html#/tab",
+      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
       "scopes": [
         "personal"
       ]
@@ -40,11 +40,11 @@
   ],
   "validDomains": [
     "*.ngrok-free.app",
-    "{{domain-name}}"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   },
   "showLoadingIndicator": false
 }
