@@ -35,7 +35,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/app.py",
             "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal",
+            "console": "integratedTerminal"
         }
     ],
     "compounds": [
