@@ -1,59 +1,58 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.16",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/privacy",
-        "termsOfUseUrl": "https://www.example.com/termofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "msgext-doc-compliance-checker",
-        "full": "full name for msgext-doc-compliance-checker"
-    },
-    "description": {
-        "short": "short description of msgext-doc-compliance-checker",
-        "full": "full description of msgext-doc-compliance-checker"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [],
-    "composeExtensions": [
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "msgext-doc-compliance-checker",
+    "full": "full name for msgext-doc-compliance-checker"
+  },
+  "description": {
+    "short": "short description of msgext-doc-compliance-checker",
+    "full": "full description of msgext-doc-compliance-checker"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [
+    {
+      "botId": "${{BOT_ID}}",
+      "commands": [
         {
-            "botId": "${{BOT_ID}}",
-            "commands": [
-                {
-                    "id": "searchQuery",
-                    "context": [
-                        "compose",
-                        "commandBox"
-                    ],
-                    "description": "Test command to run query",
-                    "title": "Search",
-                    "type": "query",
-                    "parameters": [
-                        {
-                            "name": "searchQuery",
-                            "title": "Search Query",
-                            "description": "Your search query",
-                            "inputType": "text"
-                        }
-                    ]
-                }
-            ]
+          "id": "Search",
+          "type": "query",
+          "title": "General",
+          "description": "Compare a contract proposal against a guidance policy checklist to see if the proposal complies with the guidance or not.",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": ["commandBox", "compose", "message"],
+          "parameters": [
+            {
+              "name": "ComplianceCheckerDoc",
+              "title": "Compliance Checker Documents",
+              "description": "Compare the proposal document against the guidance policy.",
+              "inputType": "text"
+            }
+          ]
         }
-    ],
-    "configurableTabs": [],
-    "staticTabs": [],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": []
+      ]
+    }
+  ],
+  "configurableTabs": [],
+  "staticTabs": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
 }

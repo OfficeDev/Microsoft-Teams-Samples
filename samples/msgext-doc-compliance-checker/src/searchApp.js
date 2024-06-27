@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { TeamsActivityHandler, MessageFactory, CardFactory } = require("botbuilder");
-const { checkCompliance } = require('./aiClient');
+const { checkCompliance, prepareChecklistItems } = require('./aiClient');
 const { BlobServiceClient } = require('@azure/storage-blob');
 const pdf = require('pdf-parse');
 const config = require("./config");
@@ -23,10 +23,16 @@ class SearchApp extends TeamsActivityHandler {
           const downloadBlockBlobResponse = await blockBlobClient.download(0);
           let fileContent;
           if (filename.endsWith('.docx')) {
-            const downloadedWordContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
-            const extractor = new WordExtractor();
-            const extracted = await extractor.extract(downloadedWordContent);
-            fileContent = extracted.getBody();
+            try {
+              const downloadedWordContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
+              const extractor = new WordExtractor();
+              const extracted = await extractor.extract(downloadedWordContent);
+              fileContent = extracted.getBody();
+            }
+            catch (error) {
+              console.error('Error fetching checklist:', error);
+              throw error;
+            }
           } else if (filename.endsWith('.txt')) {
             fileContent = await this.streamToString(downloadBlockBlobResponse.readableStreamBody);
           } else if (filename.endsWith('.pdf')) {
@@ -39,6 +45,8 @@ class SearchApp extends TeamsActivityHandler {
       }
     }
   }
+
+  // Helper function to convert readable stream to buffer.
   async streamToBuffer(readableStream) {
     return new Promise((resolve, reject) => {
       const chunks = [];
@@ -65,16 +73,17 @@ class SearchApp extends TeamsActivityHandler {
     });
   }
 
-
   async blobGetAllCheckListNames() {
     try {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
       const containerClient = blobServiceClient.getContainerClient(config.containerName);
-      const blockBlobClient = containerClient.getBlockBlobClient("checklist.txt");
+      const blockBlobClient = containerClient.getBlockBlobClient("NorthwindPolicyGuidelinesPDF.pdf");
       const downloadBlockBlobResponse = await blockBlobClient.download(0);
-      const checkListText = await this.streamToString(downloadBlockBlobResponse.readableStreamBody);
+      const guidelinesContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
+      const guidelinesText = await pdf(guidelinesContent);
+      const checkListResult = await prepareChecklistItems(guidelinesText.text);
       const checkListContents = [];
-      const lines = checkListText.split('\r\n');
+      const lines = checkListResult.split('\n');
       lines.forEach((line, index) => {
         checkListContents.push({ name: line, lineNumber: index + 1, content: line });
       });
@@ -89,7 +98,8 @@ class SearchApp extends TeamsActivityHandler {
     const lines = complianceResult.trim().split('\n').map(line => line.trim().replace(/^- /, ''));
     const items = lines.map(line => {
       const [txtDescription, statusPart] = line.split(':').map(part => part.trim());
-      const [status, verifyContent] = statusPart.split(',').map(part => part.trim());
+      const status = statusPart.includes('Yes') ? 'Yes' : 'No';
+      const verifyContent = statusPart;
       return {
         txtDescription,
         status,
@@ -102,10 +112,16 @@ class SearchApp extends TeamsActivityHandler {
     };
   }
 
+  async getParameterByName(parameters, name) 
+  {
+    const param = parameters.find(p => p.name === name);
+    return param ? param.value : '';
+  }
+
 
   async handleTeamsMessagingExtensionQuery(context, query) {
-
-    const msFileName = query.parameters[0].value;
+    const { parameters } = query;
+    const msFileName = await this.getParameterByName(parameters, "ComplianceCheckerDoc");
     const downloadedContent = await this.blobGetAllDocumentsName(msFileName);
     console.log('Downloaded Content:', downloadedContent);
     const predefinedDocument = downloadedContent;
@@ -232,12 +248,12 @@ class SearchApp extends TeamsActivityHandler {
                       "actions": [
                         {
                           "type": "Action.ToggleVisibility",
-                          "title": "▲",
+                          "title": "▲▼",
                           "targetElements": [
                             {
                               "elementId": `textToShowHide_${index}`
                             }
-                          ] 
+                          ]
                         }
                       ]
                     },
