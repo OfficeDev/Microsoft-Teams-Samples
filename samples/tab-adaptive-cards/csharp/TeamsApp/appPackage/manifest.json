@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.tabadaptivecard",
   "developer": {
     "name": "Microsoft",
@@ -27,19 +27,19 @@
     {
       "entityId": "homeTab",
       "name": "Home",
-      "contentBotId": "{{BOT-ID}}",
+      "contentBotId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "youtubeTab",
       "name": "YouTube",
-      "contentBotId": "{{BOT-ID}}",
+      "contentBotId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [ "personal" ]
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{{domain-name}}",
+    "${{BOT_DOMAIN}}",
     "*.youtube.com",
     "token.botframework.com"
   ]
