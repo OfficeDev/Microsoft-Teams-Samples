@@ -11,17 +11,24 @@ class SearchApp extends TeamsActivityHandler {
     super();
   }
 
+  // Method to fetch document content from Azure Blob Storage
   async blobGetAllDocumentsName(msFileName) {
     const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
     const containerClient = blobServiceClient.getContainerClient(config.containerName);
     let blobs = containerClient.listBlobsFlat();
+    
+    // Iterate through blobs to find the document
     for await (const blob of blobs) {
       const filename = blob.name;
+      
+      // Check if the file is of type PDF, DOCX, or TXT
       if (filename.endsWith('.pdf') || filename.endsWith('.docx') || filename.endsWith('.txt')) {
         if (filename.split('.')[0] === msFileName) {
           const blockBlobClient = containerClient.getBlockBlobClient(filename);
           const downloadBlockBlobResponse = await blockBlobClient.download(0);
           let fileContent;
+
+          // Process DOCX file
           if (filename.endsWith('.docx')) {
             try {
               const downloadedWordContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
@@ -33,9 +40,13 @@ class SearchApp extends TeamsActivityHandler {
               console.error('Error fetching checklist:', error);
               throw error;
             }
-          } else if (filename.endsWith('.txt')) {
+          } 
+          // Process TXT file
+          else if (filename.endsWith('.txt')) {
             fileContent = await this.streamToString(downloadBlockBlobResponse.readableStreamBody);
-          } else if (filename.endsWith('.pdf')) {
+          } 
+          // Process PDF file
+          else if (filename.endsWith('.pdf')) {
             const pdfContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
             const pdfData = await pdf(pdfContent);
             fileContent = pdfData.text;
@@ -60,6 +71,7 @@ class SearchApp extends TeamsActivityHandler {
     });
   }
 
+  // Helper function to convert readable stream to string.
   async streamToString(readableStream) {
     return new Promise((resolve, reject) => {
       const chunks = [];
@@ -73,20 +85,26 @@ class SearchApp extends TeamsActivityHandler {
     });
   }
 
+  // Method to fetch checklist names from Azure Blob Storage
   async blobGetAllCheckListNames(checkListFileName) {
     try {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
       const containerClient = blobServiceClient.getContainerClient(config.containerName);
       let blockBlobClient;
+
+      // Determine which checklist file to use
       if (checkListFileName != "") {
         blockBlobClient = containerClient.getBlockBlobClient(config.CheckListFileName);
       } else {
         blockBlobClient = containerClient.getBlockBlobClient(config.CheckListFileName);
       }
+
       const downloadBlockBlobResponse = await blockBlobClient.download(0);
       const guidelinesContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
       const guidelinesText = await pdf(guidelinesContent);
       const checkListResult = await prepareChecklistItems(guidelinesText.text);
+      
+      // Process checklist items
       const checkListContents = [];
       const lines = checkListResult.split('\n');
       lines.forEach((line, index) => {
@@ -99,6 +117,7 @@ class SearchApp extends TeamsActivityHandler {
     }
   }
 
+  // Method to generate adaptive card data based on compliance results
   async generateAdaptiveCardData(complianceResult) {
     const lines = complianceResult.trim().split('\n').map(line => line.trim().replace(/^- /, ''));
     const items = lines.map(line => {
@@ -117,13 +136,13 @@ class SearchApp extends TeamsActivityHandler {
     };
   }
 
-    async getParameterByName(parameters, name)
-    {
+  // Method to get a parameter value by its name
+  async getParameterByName(parameters, name) {
     const param = parameters.find(p => p.name === name);
     return param ? param.value : '';
   }
 
-
+  // Method to handle messaging extension queries in Teams
   async handleTeamsMessagingExtensionQuery(context, query) {
     const { parameters } = query;
     const msFileName = await this.getParameterByName(parameters, "ComplianceCheckerDoc");
@@ -135,7 +154,6 @@ class SearchApp extends TeamsActivityHandler {
     console.log('Check list names:', checkListItems);
 
     const complianceResult = await checkCompliance(checkListItems, predefinedDocument);
-
     const resultAdaptiveCardData = await this.generateAdaptiveCardData(complianceResult);
 
     const card = CardFactory.adaptiveCard({
