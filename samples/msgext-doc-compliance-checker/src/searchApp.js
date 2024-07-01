@@ -73,11 +73,16 @@ class SearchApp extends TeamsActivityHandler {
     });
   }
 
-  async blobGetAllCheckListNames() {
+  async blobGetAllCheckListNames(checkListFileName) {
     try {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
       const containerClient = blobServiceClient.getContainerClient(config.containerName);
-      const blockBlobClient = containerClient.getBlockBlobClient("NorthwindPolicyGuidelinesPDF.pdf");
+      let blockBlobClient;
+      if (checkListFileName != "") {
+        blockBlobClient = containerClient.getBlockBlobClient(config.CheckListFileName);
+      } else {
+        blockBlobClient = containerClient.getBlockBlobClient(config.CheckListFileName);
+      }
       const downloadBlockBlobResponse = await blockBlobClient.download(0);
       const guidelinesContent = await this.streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
       const guidelinesText = await pdf(guidelinesContent);
@@ -112,8 +117,8 @@ class SearchApp extends TeamsActivityHandler {
     };
   }
 
-  async getParameterByName(parameters, name) 
-  {
+    async getParameterByName(parameters, name)
+    {
     const param = parameters.find(p => p.name === name);
     return param ? param.value : '';
   }
@@ -122,11 +127,11 @@ class SearchApp extends TeamsActivityHandler {
   async handleTeamsMessagingExtensionQuery(context, query) {
     const { parameters } = query;
     const msFileName = await this.getParameterByName(parameters, "ComplianceCheckerDoc");
+    const checkListFileName = await this.getParameterByName(parameters, "CheckListFileName");
     const downloadedContent = await this.blobGetAllDocumentsName(msFileName);
     console.log('Downloaded Content:', downloadedContent);
     const predefinedDocument = downloadedContent;
-
-    const checkListItems = await this.blobGetAllCheckListNames(msFileName);
+    const checkListItems = await this.blobGetAllCheckListNames(checkListFileName);
     console.log('Check list names:', checkListItems);
 
     const complianceResult = await checkCompliance(checkListItems, predefinedDocument);

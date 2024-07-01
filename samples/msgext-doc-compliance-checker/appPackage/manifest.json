@@ -42,6 +42,12 @@
               "title": "Compliance Checker Documents",
               "description": "Compare the proposal document against the guidance policy.",
               "inputType": "text"
+            },
+            {
+              "name": "CheckListFileName",
+              "title": "Compliance Checker Documents",
+              "description": "Compare the proposal document against the guidance policy.",
+              "inputType": "text"
             }
           ]
         }
