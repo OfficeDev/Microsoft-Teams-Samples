@@ -1,64 +1,56 @@
-# Overview of Custom Search Results template
+---
+page_type: sample
+description: This sample demonstrates how to integrate Azure AI Search in a Teams message extension to compare a contract proposal against a guidance policy checklist to see if the proposal complies with the guidance. It uses Teams Toolkit for Visual Studio Code and JavaScript, and the message extension can be used as a plugin in Microsoft Copilot for Microsoft 365.
+products:
+- office-teams
+- copilot-m365
+languages:
+- javascript
+---
 
-This app template is a search-based [message extension](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions?tabs=nodejs) that allows users to search an external system and share results through the compose message area of the Microsoft Teams client. You can now build and run your search-based message extensions in Teams, Outlook for Windows desktop and web experiences.
+# Compliance Checker with Azure AI Search sample
 
-## Get started with the template
 
-> **Prerequisites**
->
-> To run the template in your local dev machine, you will need:
->
-> - [Node.js](https://nodejs.org/), supported versions: 16, 18
-> - [Teams Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version 5.0.0 and higher or [Teams Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
+## Prerequisites
 
-> For local debugging using Teams Toolkit CLI, you need to do some extra steps described in [Set up your Teams Toolkit CLI for local debugging](https://aka.ms/teamsfx-cli-debugging).
+- [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Azure subscription](https://portal.azure.com)
+- You will need to create [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal), [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) and [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) resources on Azure portal.
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-1. First, select the Teams Toolkit icon on the left in the VS Code toolbar.
-2. Press F5 to start debugging which launches your app in Teams App Test Tool using a web browser. Select `Debug in Test Tool`.
-3. To trigger the Message Extension, you can click the `+` in compose message area and select `Search Command`
+## Run the app (Using Teams Toolkit for Visual Studio Code)
 
-**Congratulations**! You are running an application that can now search npm registries in Teams App Test Tool.
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
 
-![Search app demo](https://github.com/OfficeDev/TeamsFx/assets/9698542/5275e5bc-492f-4365-b602-5803938a9780)
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-## What's included in the template
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-| Folder        | Contents                                     |
-| ------------- | -------------------------------------------- |
-| `.vscode/`    | VSCode files for debugging                   |
-| `appPackage/` | Templates for the Teams application manifest |
-| `env/`        | Environment files                            |
-| `infra/`      | Templates for provisioning Azure resources   |
-| `src/`        | The source code for the search application   |
+## Setup and use the sample
+1) Clone the repository
 
-The following files can be customized and demonstrate an example implementation to get you started.
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+1) Navigate to the `samples/msgext-doc-compliance-checker` folder and open with Visual Studio Code.
 
-| File               | Contents                                                                                       |
-| ------------------ | ---------------------------------------------------------------------------------------------- |
-| `src/searchApp.js` | Handles the business logic for this app template to query npm registry and return result list. |
-| `src/index.js`     | `index.js` is used to setup and configure the Message Extension.                               |
+1) Navigate to the `samples/msgext-doc-compliance-checker/.localConfigs` directory and update the values below.
 
-The following are Teams Toolkit specific project files. You can [visit a complete guide on Github](https://github.com/OfficeDev/TeamsFx/wiki/Teams-Toolkit-Visual-Studio-Code-v5-Guide#overview) to understand how Teams Toolkit works.
+   ```txt
+      AZURE_OPENAI_SERVICE_NAME= the name of the Azure OpenAI resource 
+      AZURE_OPENAI_DEPLOYMENT_NAME= the deployment name of the `text-embedding-ada-002` model
+      AZURE_OPENAI_API_KEY= the key available under Keys and endpoints on Azure OpenAI resource
+      AZURE_SEARCH_ENDPOINT= the endpoint url of Azure AI Search
+      AZURE_SEARCH_ADMIN_KEY= the admin key available under Keys on Azure AI Search resource
+      AZURE_SEARCH_INDEX_NAME= the index name created when uploading documents
+   ```
 
-| File                 | Contents                                                                                                                                  |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `teamsapp.yml`       | This is the main Teams Toolkit project file. The project file defines two primary things: Properties and configuration Stage definitions. |
-| `teamsapp.local.yml` | This overrides `teamsapp.yml` with actions that enable local execution and debugging.                                                     |
-| `teamsapp.testtool.yml`| This overrides `teamsapp.yml` with actions that enable local execution and debugging in Teams App Test Tool.                            |
 
-## Extend the template
-
-Following documentation will help you to extend the template.
-
-- [Add or manage the environment](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-multi-env)
-- [Create multi-capability app](https://learn.microsoft.com/microsoftteams/platform/toolkit/add-capability)
-- [Add single sign on to your app](https://learn.microsoft.com/microsoftteams/platform/toolkit/add-single-sign-on)
-- [Access data in Microsoft Graph](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-sdk#microsoft-graph-scenarios)
-- [Use an existing Microsoft Entra application](https://learn.microsoft.com/microsoftteams/platform/toolkit/use-existing-aad-app)
-- [Customize the Teams app manifest](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-preview-and-customize-app-manifest)
-- Host your app in Azure by [provision cloud resources](https://learn.microsoft.com/microsoftteams/platform/toolkit/provision) and [deploy the code to cloud](https://learn.microsoft.com/microsoftteams/platform/toolkit/deploy)
-- [Collaborate on app development](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-collaboration)
-- [Set up the CI/CD pipeline](https://learn.microsoft.com/microsoftteams/platform/toolkit/use-cicd-template)
-- [Publish the app to your organization or the Microsoft Teams app store](https://learn.microsoft.com/microsoftteams/platform/toolkit/publish)
-- [Develop with Teams Toolkit CLI](https://aka.ms/teams-toolkit-cli/debug)
-- [Preview the app on mobile clients](https://github.com/OfficeDev/TeamsFx/wiki/Run-and-debug-your-Teams-application-on-iOS-or-Android-client)
+### Step 3 - Test the app in Copilot for Microsoft 365
+Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the EcoGroceries Call Center plugin.
