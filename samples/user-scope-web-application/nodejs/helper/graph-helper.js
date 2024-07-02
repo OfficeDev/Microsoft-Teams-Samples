@@ -82,54 +82,48 @@ class GraphHelper {
     * @param {pageId}. Team and channel subscription.
     */
     static async createSubscription(id, token, subsId) {
-        console.log(new Date(Date.now() + 3600000).toISOString())
         let existing_Subscriptions = null;
         applicationToken = token;
         let resource = "";
         let changeType = "";
 
         switch (subsId) {
-            case '1':
+            case 'channel':
                 resource = `/teams/${id}/channels`; // id = teamsId
                 changeType = "created,deleted,updated";
                 break;
-            case '2':
+            case 'team':
                 resource = `/teams/${id}`; // id = teamsId
                 changeType = "deleted,updated"
                 break;
-            case '3':
+            case 'specificChat':
                 resource = `/chats/${id}`; // id = group-chat id
                 changeType = "updated";
                 break;
-            case '4':
+            case 'anyChat':
                 resource = `/chats`;
                 changeType = "created,updated";
                 break;
-            case '5':
+            case 'userSpecificWithChatID':
                 resource = `/chats/${id}?notifyOnUserSpecificProperties=${true}`; // id = group-chat id
                 changeType = "created,updated";
                 break;
-            case '6':
+            case 'userLevel':
                 let userId = id;
                 resource = `/users/${userId}/chats`; //id = userId
                 changeType = "created,updated";
                 break;
-            case '7':
+            case 'mePath':
                 resource = `/me/chats`;
                 changeType = "created,updated";
                 break;
-            case '8':
+            case 'userLeveOnUserSpecificProperty':
                 resource = `/users/${id}/chats?notifyOnUserSpecificProperties=true`; // id = userId
                 changeType = "created,updated";
                 break;
-            case '9':
+            case 'whereTeamsAppInstalled':
                 let teamsAppId = id;
                 resource = `/appCatalogs/teamsApps/${teamsAppId}/installedToChats`; // id = teams-app-id
-                changeType = "created,updated";
-                break;
-            case '10':
-                // Get All Messages For Particular User
-                resource = `/users/${id}/chats`; // id = teams-app-id
                 changeType = "created,updated";
                 break;
         }

@@ -28,7 +28,7 @@ const checkExistingSubsription = async (req, res) => {
 /** Creates Subscription for Channel */
 const createChannelAsync = async (req, res) => {
     var teamId = req.query.teamId;
-    var subsId = "1";
+    var subsId = "channel";
 
     try {
         await GraphHelper.createSubscription(teamId, subsId);
@@ -43,7 +43,7 @@ const createChannelAsync = async (req, res) => {
 /** Creates Subscription for Team */
 const createTeamAsync = async (req, res) => {
     var teamId = req.query.teamId;
-    var subsId = "2";
+    var subsId = "team";
 
     try {
         var result = await GraphHelper.createSubscription(teamId, subsId);
@@ -58,7 +58,7 @@ const createTeamAsync = async (req, res) => {
 /** Creates Subscription for UserSCope Chats */
 const subscribeToSpecificChat = async (req, res) => {
     var chatId = req.query.chatId;
-    var subsId = "3";
+    var subsId = "specificChat";
 
     try {
         var result = await GraphHelper.createSubscription(chatId, subsId);
@@ -73,7 +73,7 @@ const subscribeToSpecificChat = async (req, res) => {
 /** Creates Subscription for UserSCope Chats */
 const subscribeToAnyChat = async (req, res) => {
     var chatId = req.query.chatId;
-    var subsId = "4";
+    var subsId = "anyChat";
 
     try {
         var result = await GraphHelper.createSubscription(chatId, subsId);
@@ -88,7 +88,7 @@ const subscribeToAnyChat = async (req, res) => {
 /** Creates Subscription for UserSpecificProperties */
 const notifyOnUserSpecificProperties = async (req, res) => {
     var chatId = req.query.chatId;
-    var subsId = "5";
+    var subsId = "userSpecificWithChatID";
 
     try {
         var result = await GraphHelper.createSubscription(chatId, subsId);
@@ -103,7 +103,7 @@ const notifyOnUserSpecificProperties = async (req, res) => {
 /** Creates Subscription for userLevelChats */
 const userLevelChats = async (req, res) => {
     var userId = req.query.userId;
-    var subsId = "6";
+    var subsId = "userLevel";
 
     try {
         var result = await GraphHelper.createSubscription(userId, subsId);
@@ -118,7 +118,7 @@ const userLevelChats = async (req, res) => {
 /** Creates Subscription for userLevelUsingMePath */
 const userLevelUsingMePath = async (req, res) => {
     var userId = req.query.userId;
-    var subsId = "7";
+    var subsId = "mePath";
 
     try {
         var result = await GraphHelper.createSubscription(userId, subsId);
@@ -134,7 +134,7 @@ const userLevelUsingMePath = async (req, res) => {
 const userLevelChatsUsingNotifyOnUserSpecificProperties = async (req, res) => {
     var userId = req.query.userId;
     var token = req.query.token;
-    var subId = "8";
+    var subId = "userLeveOnUserSpecificProperty";
 
     try {
         var result = await GraphHelper.createSubscription(userId, token, subId);
@@ -149,7 +149,7 @@ const userLevelChatsUsingNotifyOnUserSpecificProperties = async (req, res) => {
 /** Creates Subscription for anyChatWhereTeamsAppIsInstalled */
 const anyChatWhereTeamsAppIsInstalled = async (req, res) => {
     var userId = req.query.userId;
-    var subsId = "9";
+    var subsId = "whereTeamsAppInstalled";
 
     try {
         var result = await GraphHelper.createSubscription(userId, subsId);
@@ -161,10 +161,9 @@ const anyChatWhereTeamsAppIsInstalled = async (req, res) => {
     }
 }
 
-/** Creates Subscription for anyChatWhereTeamsAppIsInstalled */
+/** Get all chats */
 const getAllChats = async (req, res) => {
     var userId = req.query.userId;
-    var subsId = "10";
 
     try {
         var result = await GraphHelper.getAllChatsFromGraphpAPI(userId);
@@ -176,13 +175,12 @@ const getAllChats = async (req, res) => {
     }
 }
 
-/** Creates Subscription for anyChatWhereTeamsAppIsInstalled */
+/** Get all messages base on chat-id */
 const getAllMessageByChatId = async (req, res) => {
     var chatId = req.query.chatId;
 
     try {
         var result = await GraphHelper.getAllMessagesByChatId(chatId);
-        //console.log("All Messages----->", result);
         res.status(202).send(result);
     }
     catch (ex) {
