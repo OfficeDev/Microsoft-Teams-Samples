@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <h3>
+    <p>
+      Please use this API endpoint
+      (<code><'Your Application Base URL'>/search?query=<'Your search query or search text'></code>) to perform semantic search on
+      your query.
+    </p>
+    <p>
+      For example: <a
+        href="http://localhost:3978/search?query=What is Teams Copilot?">http://localhost:3978/search?query=What is
+        Teams Copilot?</a>
+    </p>
+    <p>
+      If you want to delete all the embedding vectors stored in your Cosmos DB, please use this API endpoint
+      (<code><'Your Application Base URL'>/delete'></code>).
+    </p>
+    <p>
+      For example: <a
+        href="http://localhost:3978/delete">http://localhost:3978/delete</a>
+    </p>
+    <p>
+      NOTE: If you call this API endpoint once, it will start deleting the embeddings from CosmosDB storage and we do not have any way to stop it ,so be careful before hitting this API endpoint.
+    </p>
+  </h3>
+</body>
+
+</html>

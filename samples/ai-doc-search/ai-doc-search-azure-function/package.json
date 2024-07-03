@@ -1,0 +1,23 @@
+{
+  "name": "ai-doc-search-azure-function",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "@azure/functions": "^4.0.0",
+    "@azure/openai": "^1.0.0-beta.6",
+    "@azure/storage-blob": "^12.23.0",
+    "@opentelemetry/api": "^1.9.0",
+    "applicationinsights": "^3.1.0",
+    "dotenv": "^16.4.5",
+    "langchain": "^0.2.5",
+    "pdf-parse": "^1.1.1",
+    "uuid": "^9.0.1",
+    "word-extractor": "^1.0.4"
+  },
+  "main": "src/functions/*.js"
+}
