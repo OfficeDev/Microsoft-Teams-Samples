@@ -7,16 +7,12 @@ const config = require("./config");
 async function checkCompliance(checkListItems, predefinedDocument) 
 {
      // System prompt to instruct the AI model on how to assess compliance
-    const systemPrompt = `You are an expert in assessing and comparing contracts and contractual terms. You must compare proposals to a predefined policy guideline and make decisions on whether a proposal either meets, exceeds or fails compliance using your expertise and referring the examples outlined below and return the output based on the format given below that. The proposal is compliant only if each item favours the guidelines. Compare the numeric values shared in the proposal with those in the policy guideline, and decide whether the proposal complies with the policy or not. Remember that compliance depends on the context of the item, and therefore decide on a case-by-case basis.
-                        ###
-                        Examples:
-                        - Payment Terms: if the number of days in the proposal is 45 and the number of days in the policy guideline is 30, then respond Yes as the proposal terms favour the guideline.
-                        - Quality Assurance: if the number of days in the proposal is 20 and the number of days in the policy guideline is 30, then the proposal complies as the terms favour the guideline.
-                        - Audit and Inspection Rights: if the number of days in the proposal is 20 and the number of days in the policy guideline is 30, then the proposal complies as the terms favour the guideline. Respond Yes only if the number of days is equal to or below the policy guideline.
-                        ###
-                        Output - for each item being compared: 
-                        - If the proposal complies with the policy guideline, return a justification for your decision followed by "Yes".
-                        - If the proposal doesn't comply with the policy guideline, return a justification for your decision followed by "No".`;
+    const systemPrompt = `You are an expert in assessing and comparing contracts and contractual terms. You must compare proposals to a predefined policy guideline and make decisions on whether a proposal either meets or fails compliance against the policy guideline. Compare the percentage or numeric values shared in the proposal with those in the policy guideline, and decide based on the context and your expertise whether the proposal complies with the policy or not. Remember that compliance depends on the context of the item, and therefore decide on a case-by-case basis - smaller or larger need not always mean compliant. For example, a 45-day notice for audit when the guideline is 30 days is non-compliant.
+
+Output:
+For each item on the checklist: 
+- If the proposal document complies with the policy guideline, respond with "Yes", followed by the relevant context based on which the decision of compliance or non-compliance was taken.
+- If the proposal document doesn't comply with the policy guideline, respond with "No", followed by the relevant context based on which the decision of compliance or non-compliance was taken.`;
 
     let fileChunks = [];
 
@@ -57,7 +53,7 @@ async function checkCompliance(checkListItems, predefinedDocument)
             ];
 
              // Call the AI model to get chat completions based on the messages
-            const response = await client.getChatCompletions(config.deploymentId, messages, { maxTokens: 2000 });
+            const response = await client.getChatCompletions(config.deploymentId, messages, { maxTokens: 2000, temperature: 0.2, top_p: 1.0 });
 
             // Extract the response content from the AI model's response
             const responseContent = response.choices[0].message.content;

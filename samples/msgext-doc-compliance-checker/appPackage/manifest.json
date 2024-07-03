@@ -35,18 +35,22 @@
           "description": "Compare a contract proposal against a guidance policy checklist to see if the proposal complies with the guidance or not.",
           "initialRun": false,
           "fetchTask": false,
-          "context": ["commandBox", "compose", "message"],
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
           "parameters": [
             {
-              "name": "ComplianceCheckerDoc",
-              "title": "Compliance Checker Documents",
-              "description": "Compare the proposal document against the guidance policy.",
+              "name": "ProposalDocument",
+              "title": "Proposal Document",
+              "description": "This is the proposal document which needs to be evaluated and checked for compliance against the policy guidelines.",
               "inputType": "text"
             },
             {
-              "name": "CheckListFileName",
-              "title": "Compliance Checker Documents",
-              "description": "Compare the proposal document against the guidance policy.",
+              "name": "PolicyGuidelineDocument",
+              "title": "Policy Guideline Document",
+              "description": "This is the guidance policy document that any submitted proposal needs to be evaluated against.",
               "inputType": "text"
             }
           ]
