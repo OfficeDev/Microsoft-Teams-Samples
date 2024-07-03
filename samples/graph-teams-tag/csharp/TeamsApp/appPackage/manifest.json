@@ -1,9 +1,9 @@
-{
+﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "<<Your Microsoft App Id>>",
-  "packageName": "com.teams.RSC",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.teams.graphteamstag",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,20 +15,21 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "App Installation",
-    "full": "App Installation sample"
+    "short": "Manage Team Tags",
+    "full": "Manage Team Tags"
   },
   "description": {
-    "short": "App Installation",
-    "full": "This example show the App Installation, which includes app creation , update and delete"
+    "short": "This example is used to manage Teams team tags.",
+    "full": "This example is used to manage Teams team tags. You can create, update, add or remove members. All of Graph CRUD operations related to tags can be performed within this sample."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<your_tunnel_domain>/ConfigureTab",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "team"
+        "team",
+        "groupchat"
       ]
     }
   ],
@@ -37,6 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<domain-name>>"
-  ]
+    "${{TAB_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
 }
