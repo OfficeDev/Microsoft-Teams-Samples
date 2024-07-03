@@ -70,6 +70,9 @@ If you use Ngrok, make sure you've downloaded and installed Ngrok on your local 
 - Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
+Make sure your Application ID Url under Expose and API section is in below format. The above sso document uses only bot-sso. This sample uses both tab + bot sso so replace the url format.
+ `api://<your_tunnel_domain>/botid-<<YOUR-MICROSOFT-APP-ID>>`
+
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
