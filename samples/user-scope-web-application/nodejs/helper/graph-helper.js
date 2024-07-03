@@ -10,24 +10,26 @@ class GraphHelper {
     /**
      * Get All Group Chats
      */
-    static async getAllChatsFromGraphpAPI(userId) {
-        let applicationToken = await auth.getAccessToken();
+    static async getAllChatsFromGraphpAPI(userId, token) {
         let groupChatList = [];
 
         try {
-            var apiResponse = await axios.get(`https://graph.microsoft.com/v1.0/users/${userId}/chats?notifyOnUserSpecificProperties= ${true}`, {
+            var apiResponse = await axios.get(`https://graph.microsoft.com/beta/users/${userId}/chats?notifyOnUserSpecificProperties=${true}`, {
                 headers: {
                     "accept": "application/json",
                     "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
+                    "authorization": "bearer " + token
                 }
             });
 
             groupChatList = [];
-            groupChatList = apiResponse.data.value;
-            if (groupChatList.length > 0) {
-                return groupChatList;
-            }
+            (apiResponse.data.value).forEach(element => {
+                if (element.viewpoint.isHidden === false && element.topic !== null) {
+                    groupChatList.push(element);
+                }
+            });
+
+            return groupChatList;
         }
         catch (ex) {
             return null;
@@ -37,8 +39,7 @@ class GraphHelper {
     /**
      * Get All Messages by chatId
      */
-    static async getAllMessagesByChatId(chatId) {
-        let applicationToken = await auth.getAccessToken();
+    static async getAllMessagesByChatId(chatId, token) {
         let messagesList = [];
 
         try {
@@ -46,7 +47,7 @@ class GraphHelper {
                 headers: {
                     "accept": "application/json",
                     "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
+                    "authorization": "bearer " + token
                 }
             });
 
@@ -150,8 +151,8 @@ class GraphHelper {
                     console.log("Previous Subscription Deleted Successfully");
                 }
                 else {
-                    console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
-                    return existingSubscription
+                    console.log(`ExistingSubscriptionFound: ${resource}`);
+                    return "Using Existing Subscription"
                 }
             }
         }
@@ -181,11 +182,11 @@ class GraphHelper {
                 });
 
                 existingSubscription = response.data;
-                return existingSubscription;
+                return "Subscription Created";
             }
         }
         catch (e) {
-            console.log("Error--" + e.response.data.error);
+            console.log("Error--" + e);
         }
     }
 }

@@ -22,6 +22,7 @@ const UserScopeTestApp = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [subsStatus, setSubsStatus] = useState("Please wait subscribing...");
   const [showLastReadDivider, setshowLastReadDivider] = useState("");
+  const [currentDateTime, setCurrentDateTime] = useState(new Date());
   let msalInstance = undefined;
   const [groupList, setGroupList] = useState([]);
   const [notificationList, setNotificationList] = useState([]);
@@ -58,7 +59,7 @@ const UserScopeTestApp = () => {
         const objFromJson = JSON.parse(results);
 
         //  Get Chats from graph api by passing CurrentUser
-        var resp = await axios.get(`/api/changeNotification/getAllChats?userId=${objFromJson.id}`);
+        var resp = await axios.get(`/api/changeNotification/getAllChats?userId=${objFromJson.id}&token=${token}`);
         if (resp.data.length > 0) {
           setGroupList(resp.data);
         }
@@ -81,31 +82,26 @@ const UserScopeTestApp = () => {
     fetchUserDetails();
   }, [])
 
-  // Change Notifications 
+  // Get Change notification when state changes
   useEffect(() => {
-    const changeNotifications = async () => {
-      try {
-        const response = await axios.post('/api/notifications');
-        if (response.data.length > 0) {
-          setNotificationList(response.data);
-          (response.data).forEach(element => {
-            setshowLastReadDivider(element.viewpointLastMessageReadDT);
-          });
-        }
-      }
-      catch (e) {
-        console.error('Error fetching data:', e);
-      }
+    const getNotificationsUrl = () => {
+      return axios.post('/api/notifications');
+    };
+
+    const getNotificationsData = async () => {
+      const response = await (getNotificationsUrl());
+      setNotificationList([]);
+      setNotificationList(response.data);
     }
 
-    changeNotifications();
-  }, []);
+    getNotificationsData();
+  }, [notificationList]);
 
-  // Bind left rail of teams chat
+  // Bind left rail items
   const renderList = () => {
     groupList.forEach(async (item, index) => {
 
-      // Check if item.id exists in list6
+      // Check if item.id exists in notificationList
       const isInNotificationList = notificationList.some((listItem) => listItem.id === item.id);
 
       if (item.topic != null) {
@@ -125,7 +121,7 @@ const UserScopeTestApp = () => {
 
   // Get the last message of chat using chat Id
   const getLastMessageOfChat = async (chatId) => {
-    var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}`);
+    var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}&token=${token}`);
     let msgList = [];
     msgList.push(response.data);
   }
@@ -135,7 +131,7 @@ const UserScopeTestApp = () => {
     var subsResp = await axios.post(`/api/changeNotification/UserLevelChatsUsingNotifyOnUser?userId=${userId}&token=${token}`);
     try {
       if (subsResp.data) {
-        setSubsStatus("Subscription Created");
+        setSubsStatus(subsResp.data);
       }
     }
     catch (error) {
@@ -159,6 +155,7 @@ const UserScopeTestApp = () => {
       <div>
         {renderList()}
       </div>
+
       <Flex
         gap="gap.small"
         padding="padding.medium"
@@ -204,12 +201,12 @@ const UserScopeTestApp = () => {
                 let messageList = [];
                 let elements = [];
                 let chatId = newProps.items[newProps.selectedIndex].key;
-                var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}`);
-                // Emplty old items
+                var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}&token=${token}`);
                 messageList = [];
                 messageList.push(response.data);
                 messageList[0].forEach((item, index) => {
-                  if (showLastReadDivider && showLastReadDivider < item.lastModifiedDateTime) {
+                  const isInNotificationList = notificationList.some((listItem) => listItem.viewpointLastMessageReadDT < currentDateTime);
+                  if (isInNotificationList) {
                     elements.push({
                       children: <Divider content="Last read" color="brand" important />,
                       key: item.id, // Unique key for the last read divider
@@ -222,12 +219,12 @@ const UserScopeTestApp = () => {
                       contentPosition: 'start',
                       message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()} />,
                       key: item.id
-                    }, {
-                      children: <Divider content={moment(item.lastModifiedDateTime).format('dddd')} />,
-                      key: item.id, // Unique key for the last read divider
-                    })
+                    },
+                      {
+                        children: <Divider content={moment(item.lastModifiedDateTime).format('dddd')} />,
+                        key: item.id, // Unique key for the last read divider
+                      })
                   }
-
                   if (item.messageType === "message" && item.from.user.displayName != currentUser) {
                     elements.push({
                       contentPosition: 'end',

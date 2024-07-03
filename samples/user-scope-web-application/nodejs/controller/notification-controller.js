@@ -164,9 +164,10 @@ const anyChatWhereTeamsAppIsInstalled = async (req, res) => {
 /** Get all chats */
 const getAllChats = async (req, res) => {
     var userId = req.query.userId;
+    var token = req.query.token;
 
     try {
-        var result = await GraphHelper.getAllChatsFromGraphpAPI(userId);
+        var result = await GraphHelper.getAllChatsFromGraphpAPI(userId,token);
         res.status(202).send(result);
     }
     catch (ex) {
@@ -178,9 +179,10 @@ const getAllChats = async (req, res) => {
 /** Get all messages base on chat-id */
 const getAllMessageByChatId = async (req, res) => {
     var chatId = req.query.chatId;
+    var token = req.query.token;
 
     try {
-        var result = await GraphHelper.getAllMessagesByChatId(chatId);
+        var result = await GraphHelper.getAllMessagesByChatId(chatId,token);
         res.status(202).send(result);
     }
     catch (ex) {
