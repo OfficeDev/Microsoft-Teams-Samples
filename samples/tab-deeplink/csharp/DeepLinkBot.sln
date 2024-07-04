@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeepLinkBot", "DeepLinkBot\
 EndProject
 Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{BD528DA9-F03F-4914-9EAC-97C61793CC67}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A362977-2104-4668-A5BA-0E4670FEE7B1}"
+	ProjectSection(SolutionItems) = preProject
+		DeepLinkBot.slnLaunch.user = DeepLinkBot.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
