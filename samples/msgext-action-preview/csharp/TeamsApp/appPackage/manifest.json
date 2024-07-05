@@ -1,0 +1,69 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.samples",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Preview Messaging Extension",
+    "full": "Microsoft Teams Action Based Messaging Extension with Preview"
+  },
+  "description": {
+    "short": "Sample demonstrating an Action Based Messaging Extension with Preview",
+    "full": "Sample Action Messaging Extension built with the Bot Builder SDK demonstrating Preview"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "createWithPreview",
+          "type": "action",
+          "title": "Create Card",
+          "description": "Example of creating a Card",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
+          "parameters": [
+            {
+              "name": "param",
+              "title": "param",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

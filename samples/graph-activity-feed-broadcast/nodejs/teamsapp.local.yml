@@ -37,7 +37,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: graph-activity-feed-broadcast-${{TEAMSFX_ENV}}
+      name: graph-activity-feed-broadcast${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 

@@ -24,7 +24,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 ## Interaction with app
    
-  ![](Images/GraphChannelLifeCycleModule.gif)
+  ![GraphChannelLifeCycleModule](Images/GraphChannelLifeCycleModule.gif)
 
 ## Prerequisites
 
@@ -100,6 +100,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    ![](Images/image2.png)
 
    ![](Images/image3.png)
+
+   ![](Images/image4.png)
+
+   ![](Images/image5.png)
+
+   ![](Images/image6.png)
+
+   ![](Images/image7.png)
+   
 
 
   [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)

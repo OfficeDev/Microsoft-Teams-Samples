@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: msgext-action-${{TEAMSFX_ENV}}
+      name: msgext-action${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -89,3 +89,4 @@ deploy:
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        BaseUrl: ${{BOT_ENDPOINT}}

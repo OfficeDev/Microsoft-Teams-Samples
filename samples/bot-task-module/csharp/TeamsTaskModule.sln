@@ -5,6 +5,13 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamsTaskModule", "TeamsTaskModule.csproj", "{2EA07D5E-C587-4B54-B9CF-150C07F14294}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{1B4C2D04-402A-4438-9B5E-696CEA3655C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86747CD8-F714-4CC9-AE50-C6E0A4E475CC}"
+	ProjectSection(SolutionItems) = preProject
+		TeamsTaskModule.slnLaunch.user = TeamsTaskModule.slnLaunch.user
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{2EA07D5E-C587-4B54-B9CF-150C07F14294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EA07D5E-C587-4B54-B9CF-150C07F14294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EA07D5E-C587-4B54-B9CF-150C07F14294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4C2D04-402A-4438-9B5E-696CEA3655C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4C2D04-402A-4438-9B5E-696CEA3655C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4C2D04-402A-4438-9B5E-696CEA3655C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4C2D04-402A-4438-9B5E-696CEA3655C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

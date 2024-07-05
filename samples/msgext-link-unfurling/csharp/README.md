@@ -96,9 +96,13 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 
+![Add-App](Images/Add-App.png)
+
 > Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 
-If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.
+If you copy and paste the link `https://teamstestdomain.com/teams/csharp`, it wil unfurl inside compose area.
+
+- Note : To enable link unfurling for your domain, add your domain to the manifest.json file under message handlers.
 ![Link-Unfurling ](Images/Link-Unfurling.png)
 
 ## Outlook on the web
@@ -117,7 +121,7 @@ If you copy and paste a link from https://www.BotFramework.com into the compose 
 
 **Select your app icon to launch your app in Office on the web**
 
-![Search in Extension](Images/SearchInExtension.PNG)
+![Search in Extension](Images/SearchInExtension.png)
 
 ## Deploy the bot to Azure
 

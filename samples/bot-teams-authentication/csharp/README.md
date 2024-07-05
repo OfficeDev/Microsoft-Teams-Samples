@@ -58,6 +58,19 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
@@ -97,9 +110,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
@@ -111,17 +124,15 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to Microsoft Entra ID, then making a call to the Graph API on your behalf and returning the results.
 
-![add-App ](Images/add-App.png)
+![add-App ](Images/1.Install.png)
 
-![added-App ](Images/added-App.png)
+![added-App ](Images/2.Welcome.png)
 
-![auth-login ](Images/auth-login.png)
+![auth-Success ](Images/3.AuthSuccess.png)
 
-![auth-Success ](Images/auth-Success.png)
+![auth-Token ](Images/4.AuthToken.png)
 
-![auth-Token ](Images/auth-Token.png)
-
-![logout ](Images/logout.png)
+![logout ](Images/5.Logout.png)
 
 ## Deploy the bot to Azure
 

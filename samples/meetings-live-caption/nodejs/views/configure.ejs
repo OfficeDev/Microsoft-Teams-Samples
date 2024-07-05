@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <script src="https://res.cdn.office.net/teams-js/2.22.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-WSG/sWulIv7rel5TnFlH8JTpxl2OxzZh9Lux2mIzBFiTRLFvMBeFv9VURu/3vQdx"
+        crossorigin="anonymous"></script>
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
@@ -15,14 +19,8 @@
             padding: 0.5rem;
         }
     </style>
-        <script src="../jquery.min.js"></script>
-    <script
-    src="..//MicrosoftTeams.min.js"
-    integrity="sha384-h+MoYshcGDPMLlXjHLt2dSgsgYyWQ+yHd4Ob13htDsu8trGPea8Vooa8+tLtRzU7"
-    crossorigin="anonymous"
-  ></script>
-    <script type="text/javascript"> 
-    $(document).ready(function () {
+
+    <script>
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
                 var myHeaders = new Headers();
@@ -53,7 +51,7 @@
                     .catch(error => saveEvent.notifyFailure(error));
             });
         });
-    });
+
         function onCARTInputChange(url) {
             var errorSpan = document.getElementById("error_messsage");
 

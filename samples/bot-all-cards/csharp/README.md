@@ -48,6 +48,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -115,11 +129,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - **This step is specific to Teams.**
 
-1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1) Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
 
-2) Zip the contents of `AppManifest` folder into a `manifest.zip`.
+2) Zip the contents of `appPackage` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -137,26 +151,26 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
 **Install App:**
 
-![Installapp](BotAllCards/Images/Installapp.png)
+![Installapp](BotAllCards/Images/1.Install.png)
 
 **Welcome Cards:**
 
-![WelcomeCards](BotAllCards/Images/WelcomeCards.png)
+![WelcomeCards](BotAllCards/Images/2.Welcome.png)
 
 **All Cards:**
 
-![AllCards](BotAllCards/Images/AllCards.png)
+![AllCards](BotAllCards/Images/3.SelectCards.png)
 
 **Adaptive Card:**
 
-![AdaptiveCard](BotAllCards/Images/AdaptiveCard.png)
+![AdaptiveCard](BotAllCards/Images/4.AdaptiveCard.png)
 
 Add media url from sharepoint or onedrive to the text input to get media loaded to the adaptive card. For more information refer [media elements in card.](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop) 
 
@@ -166,31 +180,31 @@ Add media url from sharepoint or onedrive to the text input to get media loaded 
 
 **Hero Card:**
 
-![HeroCard](BotAllCards/Images/HeroCard.png)
+![HeroCard](BotAllCards/Images/5.HeroCard.png)
 
 **OAuth Card:**
 
-![OAuthCard](BotAllCards/Images/OAuthCard.png)
+![OAuthCard](BotAllCards/Images/6.OathCard.png)
 
 **Signin Card:**
 
-![SigninCard](BotAllCards/Images/SigninCard.png)
+![SigninCard](BotAllCards/Images/7.SignInCard.png)
 
 **Thumbnail Card:**
 
-![ThumbnailCard](BotAllCards/Images/ThumbnailCard.png)
+![ThumbnailCard](BotAllCards/Images/8.ThumbnailCard.png)
 
 **List Card:**
 
-![ListCards](BotAllCards/Images/ListCards.png)
+![ListCards](BotAllCards/Images/9.ListCard.png)
 
 **Collections Card:**
 
-![CollectionsCards](BotAllCards/Images/CollectionsCards.png)
+![CollectionsCards](BotAllCards/Images/10.CollectionCard.png)
 
 **Connector Card:**
 
-![ConnectorCards](BotAllCards/Images/ConnectorCards.png)
+![ConnectorCards](BotAllCards/Images/11.ConnectorCard.png)
 
 ## Deploy the bot to Azure
 

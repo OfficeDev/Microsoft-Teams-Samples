@@ -9,7 +9,7 @@
       "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4. This sample also features facebook authentication using bot."
     ],
     "creationDateTime": "2017-09-22",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-04-21",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/csharp/Images/SampleCsharpModule.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/csharp/AppCompleteSample/Images/Sample.gif",
         "alt": "Solution UX showing bot, tabs, and messaging extension"
       }
     ],

@@ -42,10 +42,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.9 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
-1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
 1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -99,9 +100,9 @@ the Teams service needs to call into the bot.
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported app scope)
 
@@ -112,20 +113,19 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
 
 1. Adding the bot:
-![add-App ](Images/add-App.png)
+![add-App ](Images/1.Install.png)
 
 1. Sending a message to the bot will cause it to respond with a card that will prompt you to upload a file. The file that's being uploaded is the `teams-logo.png` in the `Files` directory in this sample. The `Accept` and `Decline` events illustrated in this sample are specific to Teams. You can message the bot again to receive another prompt.
-![file-Card ](Images/file-Card.png)
-![file-Card-Uploaded ](Images/file-Card-Uploaded.png)
+![file-Card ](Images/2.FileUploadCard.png)
+![file-Card-Uploaded and attach file](Images/3.AttachFile.png)
 
 1. You can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
-![attachment-File-Upload ](Images/attachment-File-Upload.png)
-![attachment-File-Uploaded ](Images/attachment-File-Uploaded.png)
+![attachment-File-Upload ](Images/3.AttachFile.png)
+![attachment-File-Uploaded ](Images/4.FileReceived.png)
 
 1. You can also send an inline image in the message compose section. This will be present in the attachments of the Activity and requires the Bot's access token to fetch the image.
-![inline-Image ](Images/inline-Image.png)
-![inline-Image-Send ](Images/inline-Image-Send.png)
-![inline-Image-Uploaded ](Images/inline-Image-Uploaded.png)
+![inline-Image ](Images/5.InLineImageOption.png)
+![inline-Image-Uploaded ](Images/6.InLineImageUploaded.png)
 
 ## Deploy the bot to Azure
 

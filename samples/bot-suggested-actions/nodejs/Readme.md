@@ -118,11 +118,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/InstallApp.png)
+![InstallApp](Images/1.Install.png)
 
 **Welcome UI:**
 
-![Initial message](Images/WelcomeMessage.PNG)
+![Initial message](Images/2.Welcome.png)
+
+![Red](Images/3.Red.png)
+
+![Yellow](Images/4.Yellow.png)
+
+![Blue](Images/5.Blue.png)
 
 ## Deploy the bot to Azure
 

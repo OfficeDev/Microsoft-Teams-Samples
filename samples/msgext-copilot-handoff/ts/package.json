@@ -1,0 +1,43 @@
+{
+    "name": "northwindproducts",
+    "version": "1.0.0",
+    "description": "Microsoft Teams Toolkit message extension search sample",
+    "engines": {
+        "node": "16 || 18"
+    },
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "./lib/src/index.js",
+    "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+        "dev": "nodemon --exec node --inspect=9239 --ignore _storage_emulator/ --signal SIGINT -r ts-node/register ./src/index.ts",
+        "build": "tsc --build",
+        "start": "node ./lib/src/index.js",
+        "storage": "azurite --silent --location ./_storage_emulator --debug ./_storage_emulator/debug.log",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "nodemon --exec \"npm run start\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com"
+    },
+    "dependencies": {
+        "@azure/data-tables": "^13.2.2",
+        "@microsoft/adaptivecards-tools": "^1.3.2",
+        "adaptive-expressions": "4.21.0",
+        "adaptivecards": "2.11.1",
+        "adaptivecards-templating": "2.3.1",
+        "botbuilder": "^4.20.0",
+        "restify": "^10.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.0.0",
+        "@types/restify": "^8.5.5",
+        "azurite": "^3.26.0",
+        "env-cmd": "^10.1.0",
+        "nodemon": "^2.0.7",
+        "shx": "^0.3.3",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.4.4"
+    }
+}

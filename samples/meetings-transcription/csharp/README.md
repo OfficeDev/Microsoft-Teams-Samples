@@ -25,7 +25,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 ## Interaction with app
 
-![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
+![MeetingsTranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
 ## Prerequisites
 
@@ -36,6 +36,20 @@ This is a sample application which demonstrates how to get Transcript using Grap
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+
+-  [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.9 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -141,55 +155,43 @@ This is a sample application which demonstrates how to get Transcript using Grap
 - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
+![Policy](MeetingTranscription/Images/Policy.png)
 
 
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
-## Running the sample
+## Running the sample.
 
-**Upload an app to your org's app catalog:**
+1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
+![Add Bot](MeetingTranscription/Images/1.AddMeetingTranscriptBot.PNG)
 
-![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.png)
+![AddMeetingGroup](MeetingTranscription/Images/2.AddMeetingGroup.png)
 
-**Schedule the meeting and add Meeting Transcript Bot from Apps section in that particular scheduled meeting:**
+![JoinMeeting](MeetingTranscription/Images/3.JoinMeeting.png)
 
-![Add BotApp](MeetingTranscription/Images/AddMeetingTranscriptBot.PNG)
+2. Once meeting started, start the Transcript for the meeting.
+![Start Transcript](MeetingTranscription/Images/4.StartTranscript.png)
 
-**Created and approved by your organization:**
+3. Once the transcription has started, you can see the live transcription it the meeting UI.
+![Leave Meeting](MeetingTranscription/Images/5.LeaveMeeting.png)
 
-![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.png)
+4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
+![Meeting Transcript Card](MeetingTranscription/Images/6.MeetingTranscriptCard.png)
 
-**Welcome echo UI:**
-
-![Add Bot](MeetingTranscription/Images/WelcomeEcho.png)
-
-**Once meeting started, start the Transcript for the meeting:**
-
-![Start Transcript](MeetingTranscription/Images/StartTranscript.PNG)
-
-**Once the transcription has started, you can see the live transcription it the meeting UI:**
-
-![Add Bot](MeetingTranscription/Images/LeaveMeeting.PNG)
-
-**Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module:**
-
-![Add Bot](MeetingTranscription/Images/MeetingTranscriptCard.PNG)
-
-**After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module:**
-
-![Add Bot](MeetingTranscription/Images/TranscriptTaskModule.PNG)
+5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
+![Transcript Task Module](MeetingTranscription/Images/7.TranscriptTaskModule.png)
 
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.

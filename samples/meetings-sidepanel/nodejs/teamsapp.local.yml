@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: meetings-sidepanel-${{TEAMSFX_ENV}}
+      name: meetings-sidepanel${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -94,4 +94,4 @@ deploy:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-        BaseURL: ${{BOT_ENDPOINT}}
+        BaseUrl: ${{BOT_ENDPOINT}}

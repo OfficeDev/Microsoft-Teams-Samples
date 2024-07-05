@@ -130,6 +130,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
 |9|Messaging extension - Adaptive Card based loop components | Demonstrates how to create Messaging extension with adaptive card-based loop components. | [View][msgext-unfurling-ac-loop-components#cs]    | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |   |    |[View](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
 |10|Messaging Extensions AI - Sentiment Analysis | Messaging Extension with AI capability that performs sentiment analysis (positive/negative/neutral) for messages posted in Microsoft Teams chat |[View][msgext-ai-sentiment-analysis#cs] | [View][msgext-ai-sentiment-analysis#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
+|11|Copilot Handoff | This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension showcases copilot handoff along with allowings users to query the Northwind Database || [View][msgext-copilot-handoff#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
 
 #### Additional samples
 
@@ -316,6 +317,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-unfurling-ac-loop-components#nodejs]:samples/msgext-unfurling-ac-loop-components/nodejs
 [msgext-unfurling-ac-loop-components#cs]:samples/msgext-unfurling-ac-loop-components/csharp
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
+[msgext-copilot-handoff#js]:samples/[msgext-copilot-handoff/ts
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
