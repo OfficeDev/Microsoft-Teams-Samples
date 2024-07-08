@@ -12,7 +12,7 @@ languages:
 
 ## Interaction with app
 
- ![expert-finder-gif](Images/expert-finder.gif)
+ ![expert-finder-gif](images/expert-finder.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -73,16 +73,16 @@ Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left o
 ## Running the sample
 
 **SSO auth**
-![sso-auth](Images/copilot-auth.png)
+![sso-auth](images/copilot-auth.png)
 
 **Search based on skills**
-![skills](Images/skill-param.png)
+![skills](images/skill-param.png)
 
 **Search based on skills and country**
-![skills-country](Images/skill-location.png)
+![skills-country](images/skill-location.png)
 
 **Search based on multiple parameters**
-![multi-param](Images/multi-param.png)
+![multi-param](images/multi-param.png)
 
 ## Further reading
 
