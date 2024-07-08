@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCompleteSample", "AppCompleteSample\AppCompleteSample.csproj", "{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
