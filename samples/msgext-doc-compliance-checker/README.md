@@ -15,9 +15,8 @@ languages:
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Azure subscription](https://portal.azure.com)
-- You will need to create [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-create-service-portal), [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) and [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) resources on Azure portal.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -43,14 +42,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) Navigate to the `samples/msgext-doc-compliance-checker/.localConfigs` directory and update the values below.
 
    ```txt
-      AZURE_OPENAI_SERVICE_NAME= the name of the Azure OpenAI resource 
-      AZURE_OPENAI_DEPLOYMENT_NAME= the deployment name of the `text-embedding-ada-002` model
-      AZURE_OPENAI_API_KEY= the key available under Keys and endpoints on Azure OpenAI resource
-      AZURE_SEARCH_ENDPOINT= the endpoint url of Azure AI Search
-      AZURE_SEARCH_ADMIN_KEY= the admin key available under Keys on Azure AI Search resource
-      AZURE_SEARCH_INDEX_NAME= the index name created when uploading documents
+      END_POINT="https://<your-service>.azurewebsites.net"
+      API_KEY="your-api-key"
+      DEPLOYMENT_ID="your-deployment-id"
+      AZURE_STORAGE_CONNECTION_STRING="The connection string for your Azure Storage account."
+      CONTAINER_NAME="your-container"
+      CHECKLIST_NAME="your-checklist-name"
    ```
-
-
-### Step 3 - Test the app in Copilot for Microsoft 365
-Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the EcoGroceries Call Center plugin.
