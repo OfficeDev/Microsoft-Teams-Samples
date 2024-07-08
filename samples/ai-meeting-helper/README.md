@@ -72,25 +72,25 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) Navigate to the `samples/ai-meeting-helper/.localConfigs` directory and update the values below.
 
    ```txt
-      BOT_ID="BOT_ID"
-BOT_PASSWORD="SECRET_BOT_PASSWORD"
-AZURE_OPENAI_API_KEY="SECRET_AZURE_OPENAI_API_KEY"
-AZURE_OPENAI_ENDPOINT="AZURE_OPENAI_ENDPOINT"
-AZURE_OPENAI_DEPLOYMENT_NAME="AZURE_OPENAI_DEPLOYMENT_NAME"
-Token="Token"
-BOT_ENDPOINT="BOT_ENDPOINT"
-Base64EncodedCertificate="Base_64_Encoded_Certificate"
-EncryptionCertificateId="Encryption_Certificate_Id"
-PRIVATE_KEY_PATH="Pem_File_Path"
-Account_Name="Azure_Storage_Account"
-Account_Key="Azure_Storage_Account_Key"
-Table_Name="Azure_Storage_Table"
-partitionKey="Azure_Storage_Table_PartitionKey"
-AI_Model="Azure_Open_AI_Model"
-SubscriptionURL="https://graph.microsoft.com/v1.0/subscriptions"
-SystemPrompt="Generate a filtered list of action items from meeting transcriptions by user in bullet point user wise categorized with proper format like:  <b> Attendee:</b> 
- Action Items in bullet points"
-   ``` 
+        BOT_ID="BOT_ID"
+        BOT_PASSWORD="SECRET_BOT_PASSWORD"
+        AZURE_OPENAI_API_KEY="SECRET_AZURE_OPENAI_API_KEY"
+        AZURE_OPENAI_ENDPOINT="AZURE_OPENAI_ENDPOINT"
+        AZURE_OPENAI_DEPLOYMENT_NAME="AZURE_OPENAI_DEPLOYMENT_NAME"
+        Token="Token"
+        BOT_ENDPOINT="BOT_ENDPOINT"
+        Base64EncodedCertificate="Base_64_Encoded_Certificate"
+        EncryptionCertificateId="Encryption_Certificate_Id"
+        PRIVATE_KEY_PATH="Pem_File_Path"
+        Account_Name="Azure_Storage_Account"
+        Account_Key="Azure_Storage_Account_Key"
+        Table_Name="Azure_Storage_Table"
+        partitionKey="Azure_Storage_Table_PartitionKey"
+        AI_Model="Azure_Open_AI_Model"
+        SubscriptionURL="https://graph.microsoft.com/v1.0/subscriptions"
+        SystemPrompt="Generate a filtered list of action items from meeting transcriptions by user in bullet point user wise categorized with proper format like:  <b> Attendee:</b> 
+        Action Items in bullet points"
+    ``` 
 
 ## Running the sample
 
