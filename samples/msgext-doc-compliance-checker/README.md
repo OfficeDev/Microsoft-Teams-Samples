@@ -88,7 +88,7 @@ Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left o
 
 ## Further reading
 
-### AI, Redis And Blob Storage
+### AI, Message Extensions And Blob Storage
 
 - [Message extensions for Microsoft Copilot for Microsoft 365](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-message-extension-bot)
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
