@@ -19,7 +19,7 @@ languages:
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -83,8 +83,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Compliance Checker No Results**
 ![8.ComplianceCheckerNoResults](Images/8.ComplianceCheckerNoResults.png)
 
-### Step 3 - Test the app in Copilot for Microsoft 365
-Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the EcoGroceries Call Center plugin.
+### Test the app in Copilot for Microsoft 365
+Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the msgext-doc-compliance-checker plugin.
 
 ## Further reading
 
