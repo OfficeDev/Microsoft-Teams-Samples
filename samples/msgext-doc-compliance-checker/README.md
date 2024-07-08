@@ -12,7 +12,7 @@ languages:
 
 ## Interaction with app
 
- ![](Images/MsgextSSO.gif)
+ ![msgext-doc-compliance-checkerGif](Images/msgext-doc-compliance-checkerGif.gif)
 
 ## Prerequisites
 
