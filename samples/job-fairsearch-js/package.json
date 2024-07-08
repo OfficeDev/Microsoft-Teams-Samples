@@ -19,8 +19,10 @@
   },
   "dependencies": {
     "@microsoft/adaptivecards-tools": "^1.3.3",
+    "adaptivecards": "^3.0.4",
     "azure-storage": "^2.10.7",
     "botbuilder": "^4.22.2",
+    "esbuild": "^0.21.5",
     "restify": "^10.0.0"
   },
   "devDependencies": {

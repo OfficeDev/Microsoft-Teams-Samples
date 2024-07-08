@@ -6,27 +6,18 @@ const restify = require("restify");
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const {
-  CloudAdapter,
-  ConfigurationServiceClientCredentialFactory,
-  ConfigurationBotFrameworkAuthentication,
+  BotFrameworkAdapter,
 } = require("botbuilder");
 const { SearchApp } = require("./searchApp");
 const config = require("./config");
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
-  MicrosoftAppId: config.botId,
-  MicrosoftAppPassword: config.botPassword,
-  MicrosoftAppType: "MultiTenant",
+
+const adapter = new BotFrameworkAdapter({
+  appId: config.botId,
+  appPassword: config.botPassword
 });
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
-  {},
-  credentialsFactory
-);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
   // This check writes out errors to console log .vs. app insights.
