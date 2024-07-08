@@ -10,6 +10,9 @@ languages:
 
 # Compliance Checker with Azure AI Search sample
 
+## Interaction with app
+
+ ![](Images/MsgextSSO.gif)
 
 ## Prerequisites
 
@@ -49,3 +52,39 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       CONTAINER_NAME="your-container"
       CHECKLIST_NAME="your-checklist-name"
    ```
+
+## Running the sample
+
+**Select Upload an app**
+![UploadCustomeApp](Images/0.UploadCustomeApp.png)
+
+**Select Add**
+![ComplianceCheckerInstallApp](Images/1.ComplianceCheckerInstallApp.png)
+
+**Search for your app in Messaging Extensions**
+![ComplianceCheckerSearchApp](Images/2.ComplianceCheckerSearchApp.png)
+
+**Select App**
+![ComplianceCheckerSelectApp](Images/3.ComplianceCheckerSelectApp.png)
+
+**Search File Name**
+![ComplianceCheckerSearchFileName](Images/4.ComplianceCheckerSearchFileName.png)
+
+**File Name Results**
+![ComplianceCheckerSelectResults](Images/5.ComplianceCheckerSelectResults.png)
+
+**Compliance Checker Results**
+![6.ComplianceCheckerResults](Images/6.ComplianceCheckerResults.png)
+
+**Compliance Checker Yes Results**
+![7.ComplianceCheckerYesResults](Images/7.ComplianceCheckerYesResults.png)
+
+**Compliance Checker No Results**
+![8.ComplianceCheckerNoResults](Images/8.ComplianceCheckerNoResults.png)
+
+## Further reading
+
+- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-doc-compliance-checker" />
