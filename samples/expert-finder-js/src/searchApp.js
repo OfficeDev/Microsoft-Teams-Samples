@@ -1,4 +1,5 @@
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
+const config = require("./config");
 const azure = require("azure-storage");
 
 class SearchApp extends TeamsActivityHandler {
@@ -43,7 +44,7 @@ class SearchApp extends TeamsActivityHandler {
    const searchObject = constructSearchObject(skills, country, availability);
 
     // Define your Azure Table Storage connection string or credentials
-    const connectionString = "";
+    const connectionString = config.connectionString;
 
     // Create a table service object using the connection string
     const tableService = azure.createTableService(connectionString);
@@ -51,11 +52,7 @@ class SearchApp extends TeamsActivityHandler {
     var candiDateData = [];
 
     // Define the name of the table you want to store data in
-    const tableName = "";
-
-    // Define the partition key and row key of the entity to be retrieved
-    const partitionKey = ""; // Replace with the actual partition key
-    const rowKey = ""; // Replace with the actual row key
+    const tableName = config.tableName;
 
     // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
     const magicCode =
