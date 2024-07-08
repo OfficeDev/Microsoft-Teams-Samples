@@ -14,6 +14,11 @@ languages:
 
  ![msgext-doc-compliance-checkerGif](Images/msgext-doc-compliance-checkerGif.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/msgext-doc-compliance-checker/demo-manifest/msgext-doc-compliance-checker.zip)
+
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
