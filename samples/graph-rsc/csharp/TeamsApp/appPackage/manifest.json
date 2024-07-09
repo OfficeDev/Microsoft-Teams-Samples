@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
   "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<Your Microsoft APP Id>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.RSC",
   "developer": {
     "name": "Microsoft",
@@ -27,7 +27,7 @@
     {
       "entityId": "Send Notification",
       "name": "RSC",
-      "contentUrl": "https://[Your tunnel Domain]/SendNotification",
+      "contentUrl": "https://${{TAB_DOMAIN}}/SendNotification",
       "scopes": [
         "personal"
       ]
@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://[Your tunnel Domain]/ConfigureTab",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/ConfigureTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -47,7 +47,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<domain-name>>"
+    "${{TAB_DOMAIN}}"
   ],
   "activities": {
     "activityTypes": [
@@ -59,7 +59,7 @@
     ]
   },
   "webApplicationInfo": {
-    "id": "<<Your Microsoft APP Id>>",
+    "id": "${{AAD_APP_CLIENT_ID}}",
     "resource": "https://RscBasedStoreApp"
   },
   "authorization": {
