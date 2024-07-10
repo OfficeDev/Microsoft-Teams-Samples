@@ -194,7 +194,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |14|meetings-attendance-report|This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.|[View][meetings-attendance-report#csharp]|[View][meetings-attendance-report#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |15|meetings-audio-state|This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.||[View][meetings-audio-state#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |16|meetings-context-app|This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.|[View][meetings-context-app#csharp]|[View][meetings-context-app#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
-|17|ai-meetings-helper|This sample shows how OpenAI extracts action items from meeting transcriptions for all meeting participants, and then sends those action items to the users.||[View][ai-meeting-helpe#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
+|17|ai-meetings-helper|This sample shows how OpenAI extracts action items from meeting transcriptions for all meeting participants, and then sends those action items to the users.||[View][ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Actions Preview](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 |    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
