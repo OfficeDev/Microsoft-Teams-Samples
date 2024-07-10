@@ -72,7 +72,7 @@ app.post('/api/notifications', async (req, res) => {
             });
 
             /** Send Respond to view **/
-            res.send(notificationList.reverse());
+            res.send(notificationList);
         }
     }
 });

@@ -20,6 +20,7 @@ const UserScopeTestApp = () => {
   const bindLeftRailItems = [];
   const [allMessages, setAllMessages] = useState([]);
   const [currentUser, setCurrentUser] = useState("");
+  let UserId = "";
   const [subsStatus, setSubsStatus] = useState("Please wait subscribing...");
   const [showLastReadDivider, setshowLastReadDivider] = useState("");
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -58,15 +59,13 @@ const UserScopeTestApp = () => {
         const results = JSON.stringify(data, null, 2);
         const objFromJson = JSON.parse(results);
 
-        //  Get Chats from graph api by passing CurrentUser
-        var resp = await axios.get(`/api/changeNotification/getAllChats?userId=${objFromJson.id}&token=${token}`);
-        if (resp.data.length > 0) {
-          setGroupList(resp.data);
-        }
+        // fetch group chat list (left rail items)
+        fetchTeamsLeftRail(objFromJson.id, token);
 
         // subscribe to change notifications
         subscribeToUserLevelChatsWithNotifiySpecificProperty(objFromJson.id);
         setCurrentUser(objFromJson.displayName);
+        UserId = objFromJson.id;
 
       } else {
         const errorText = await response.text();
@@ -82,12 +81,31 @@ const UserScopeTestApp = () => {
     fetchUserDetails();
   }, [])
 
-  // Get Change notification when state changes
+  // Fetch teams group chat list
+  const fetchTeamsLeftRail = async (userID, token) => {
+    var resp = await axios.get(`/api/changeNotification/getAllChats?userId=${userID}&token=${token}`);
+    if (resp.data.length > 0) {
+      setGroupList(resp.data);
+    }
+  }
+
+  // Get Change notification and reflect to UI
   useEffect(() => {
+    const interval = setInterval(() => {
+      getNotificationsData();
+      fetchTeamsLeftRail(UserId, token);
+    }, 5000)
+
+    return () => clearInterval(interval); // Clean up the interval 
+
+  }, []);
+
+  // Return notifications URL
     const getNotificationsUrl = () => {
       return axios.post('/api/notifications');
     };
 
+  //  Fetch notification data
     const getNotificationsData = async () => {
       const response = await (getNotificationsUrl());
       setNotificationList([]);
