@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to extract Action Items and Meeting summary from the meeting transcription using Azure open AI Search in a Teams. It uses Teams Toolkit for Visual Studio Code.
+description: This sample showcases how to utilize Azure Open AI Search within Teams Toolkit for Visual Studio Code to extract Action Items and Meeting summaries from meeting transcriptions.
 products:
 - office-teams
 - copilot-m365
@@ -100,22 +100,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Select Add**
 ![MeetingHelperInstallApp](Images/1.MeetingHelperInstallApp.png)
 
-**Find all upcomoing meetings**
+**Find all upcoming meetings.**
 ![MeetingHelperSearchApp](Images/2.MeetingHelperFindUpcomingMeeting.png)
 
-**Click on the specific meeting for subscription**
+**Click on the particular meeting to subscribe.**
 ![MeetingHelperSelectApp](Images/3.MeetingHelperSubscription.png)
 
-**Joing the meeting that you have subscribe**
+**Join the meeting that you have subscribed to.**
 ![MeetingHelperSearchFileName](Images/4.MeetingHelperJoinMeeting.png)
 
 **Start transcription**
 ![MeetingHelperSelectResults](Images/5.MeetingHelperStartTranscription.png)
 
-**End the Meeting**
+**End the meeting**
 ![6.MeetingHelperResults](Images/6.MeetingHelperEndMeeting.png)
 
-**Meeting Helper Results**
+**Meeting helper results**
 ![7.MeetingHelperYesResults](Images/7.MeetingHelperResults.png)
 
 ## Further reading
