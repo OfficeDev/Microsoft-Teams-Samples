@@ -112,9 +112,6 @@ const UserScopeTestApp = () => {
       setNotificationList(response.data);
     }
 
-    getNotificationsData();
-  }, [notificationList]);
-
   // Bind left rail items
   const renderList = () => {
     groupList.forEach(async (item, index) => {
