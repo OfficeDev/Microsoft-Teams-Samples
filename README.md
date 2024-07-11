@@ -42,7 +42,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
 
-|    | Sample Name        | Description                                                                                                                | C#    | TypeScript | App Manifest  
+|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|ai-meetings-helper|This sample shows how OpenAI extracts action items from meeting transcriptions for all meeting participants, and then sends those action items to the users.||[View][ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
 
