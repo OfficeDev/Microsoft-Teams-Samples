@@ -281,7 +281,7 @@ async function createSubscription(meetingJoinUrl, userId, conversationId, tenant
 async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meetingDetails) {
   const apiKey = config.azureOpenAIKey;
   const endpoint =  config.azureOpenAIEndpoint;
-  const deployment_Id = config.AI_Model; 
+  const deployment_Id = config.azureOpenAIDeploymentName; 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
   let fileChunks = [];
   try {
@@ -355,7 +355,7 @@ async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meeti
         ];
       
 
-        const response = await client.getChatCompletions(deployment_Id, messages_MeetingSummary, { maxTokens: 5000 });
+        const response = await client.getChatCompletions(deployment_Id, messages_MeetingSummary, { maxTokens: 4095 });
           
         const MeetingSummary = `\n <b> Meeting Name: </b> ${meetingDetails.subject}
                                 \n <b> Date:</b>  ${ConvertTimeToLocal(meetingDetails.startDateTime)}

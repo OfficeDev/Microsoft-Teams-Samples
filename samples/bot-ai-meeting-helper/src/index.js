@@ -80,7 +80,7 @@ server.post("/EventHandler", async (req, res) => {
            
             if (alreadyProcessed(requestId)) {
               console.log(`Request ${requestId} already processed`);
-              // return res.status(200).end();
+               return res.status(200).end();
             }
             
             // Process the webhook payload
