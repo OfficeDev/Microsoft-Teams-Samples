@@ -10,11 +10,12 @@ import { app, nestedAppAuth } from "@microsoft/teams-js";
 
 const Msal = () => {
 
-    const [meData, setMeData] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [meData, setMeData] = useState(null); // State to store user data
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
-    let pca = undefined;
+    let pca = undefined; // Public client application instance
 
+    // MSAL configuration
     const msalConfig = {
         auth: {
             clientId: "{{clientId}}",
@@ -22,6 +23,7 @@ const Msal = () => {
         }
     };
 
+    // Function to initialize the public client application
     function initializePublicClient() {
         console.log("Starting initializePublicClient");
         return createNestablePublicClientApplication(msalConfig).then(
@@ -33,11 +35,12 @@ const Msal = () => {
         );
     }
 
+    // Function to get the active account
     const getActiveAccount = async () => {
         console.log("Starting getActiveAccount");
         let activeAccount = null;
         try {
-            console.log("getting active account");
+            console.log("Getting active account");
             activeAccount = pca.getActiveAccount();
         } catch (error) {
             console.log(error);
@@ -63,6 +66,7 @@ const Msal = () => {
         return activeAccount;
     }
 
+    // Function to get the token for the user
     const getToken = async () => {
         let activeAccount = await getActiveAccount();
         const tokenRequest = {
@@ -76,7 +80,7 @@ const Msal = () => {
             })
             .catch((error) => {
                 console.log(error);
-                // try to get token via popup
+                // Try to get token via popup if silent acquisition fails
                 return pca.acquireTokenPopup(tokenRequest)
                     .then(async (result) => {
                         console.log(result);
@@ -89,6 +93,7 @@ const Msal = () => {
             });
     }
 
+    // Function to initiate login and token retrieval
     const msallogin = async () => {
         let isNAAResults = await nestedAppAuth.isNAAChannelRecommended();
         if (isNAAResults == true) {
@@ -98,13 +103,13 @@ const Msal = () => {
                     callApi(token);
                 });
             });
-        }else{
+        } else {
             console.log("Not Starting getNAAToken");
         }
     }
 
+    // Function to call the Microsoft Graph API with the access token
     async function callApi(accessToken) {
-        // Call the Microsoft Graph API with the access token.
         const response = await fetch(
             `https://graph.microsoft.com/v1.0/me`,
             {
@@ -112,7 +117,7 @@ const Msal = () => {
             }
         );
         if (response.ok) {
-            // Write file names to the console.
+            // Parse and set the user data
             const jsonValue = await response.json();
             const alignedJSON = JSON.stringify(jsonValue, null, 2);
             setMeData(alignedJSON);
