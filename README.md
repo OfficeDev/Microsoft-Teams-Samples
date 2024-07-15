@@ -44,7 +44,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|Compliance Checker|Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not.||[View][msgext-ai-doc-compliance-checker#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AI Compliance Checker.zip)
+|1|Compliance Checker|Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not.||[View][msgext-ai-doc-compliance-checker#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
