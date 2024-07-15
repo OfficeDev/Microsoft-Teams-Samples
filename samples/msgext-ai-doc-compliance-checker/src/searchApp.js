@@ -1,4 +1,18 @@
-const axios = require("axios");
+/**
+ * SearchApp Class
+ * 
+ * This class extends the TeamsActivityHandler to handle Microsoft Teams activities.
+ * It includes functionalities to check compliance, prepare checklist items, and handle
+ * interactions with Azure Blob Storage and document parsing (PDF and Word).
+ * 
+ * Dependencies:
+ * - botbuilder: For handling bot activities
+ * - aiClient: Custom module for compliance and checklist preparation
+ * - @azure/storage-blob: For Azure Blob Storage interactions
+ * - pdf-parse: For parsing PDF documents
+ * - config: Configuration file
+ * - word-extractor: For extracting content from Word documents
+ */
 const { TeamsActivityHandler, MessageFactory, CardFactory } = require("botbuilder");
 const { checkCompliance, prepareChecklistItems } = require('./aiClient');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -87,7 +101,8 @@ class SearchApp extends TeamsActivityHandler {
 
   // Method to fetch checklist names from Azure Blob Storage
   async blobGetAllCheckListNames(checkListFileName) {
-    try {
+    try 
+    {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
       const containerClient = blobServiceClient.getContainerClient(config.containerName);
       let blockBlobClient;
@@ -109,7 +124,9 @@ class SearchApp extends TeamsActivityHandler {
         checkListContents.push({ name: line, lineNumber: index + 1, content: line });
       });
       return checkListContents;
-    } catch (error) {
+    }
+    catch (error) 
+    {
       console.error('Error fetching checklist:', error);
       throw error;
     }
@@ -128,6 +145,7 @@ class SearchApp extends TeamsActivityHandler {
         verifyContent,
         contentStatus: status === 'Yes' ? '🟢' : '🔴',
       };
+
     });
     return {
       descriptionStatus: items

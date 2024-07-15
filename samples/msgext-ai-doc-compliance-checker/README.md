@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to integrate Azure AI Search in a Teams message extension to compare a contract proposal against a guidance policy checklist to see if the proposal complies with the guidance. It uses Teams Toolkit for Visual Studio Code and JavaScript, and the message extension can be used as a plugin in Microsoft Copilot for Microsoft 365.
+description: This sample demonstrates integrating Azure Open AI into a Teams message extension to check a contract proposal's compliance with a policy checklist. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Microsoft Copilot for Microsoft 365.
 products:
 - office-teams
 - copilot-m365
@@ -8,13 +8,13 @@ languages:
 - javascript
 ---
 
-# Compliance Checker with Azure AI Search sample
+# Doc Compliance Checker using Azure Open AI service
 
 ## Interaction with app
 
  ![msgext-doc-compliance-checkerGif](Images/msgext-doc-compliance-checkerGif.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
+## Try It Yourself - Experience the app in your Microsoft Teams and Copilot client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/msgext-ai-doc-compliance-checker/demo-manifest/msgext-ai-doc-compliance-checker.zip)
@@ -25,7 +25,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
 - [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
+- [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -93,7 +93,7 @@ Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left o
 
 ## Further reading
 
-### AI, Message Extensions And Blob Storage
+### Azure Open AI Service, Message Extensions And Azure Blob Storage.
 
 - [Message extensions for Microsoft Copilot for Microsoft 365](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-message-extension-bot)
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)

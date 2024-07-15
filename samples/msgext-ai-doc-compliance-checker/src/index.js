@@ -1,5 +1,18 @@
-// index.js is used to setup and configure your bot
-
+/**
+ * index.js
+ * 
+ * This file is used to set up and configure the bot for deployment.
+ * It imports the necessary packages, sets up the server, and initializes the bot.
+ * 
+ * Packages:
+ * - restify: Used for creating the server and handling HTTP requests.
+ * - botbuilder: Provides core bot services including the CloudAdapter, 
+ *   ConfigurationServiceClientCredentialFactory, and ConfigurationBotFrameworkAuthentication.
+ * - searchApp: Custom bot application class that handles Teams activities.
+ * - config: Configuration file containing settings and credentials.
+ * 
+ * For more information on bot services, see https://aka.ms/bot-services.
+ */
 // Import required packages
 const restify = require("restify");
 
