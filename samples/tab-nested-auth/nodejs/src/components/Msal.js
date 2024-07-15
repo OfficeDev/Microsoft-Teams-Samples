@@ -6,34 +6,29 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@fluentui/react-components';
 import { createNestablePublicClientApplication } from "@azure/msal-browser";
-import { app } from "@microsoft/teams-js";
+import { app, nestedAppAuth } from "@microsoft/teams-js";
 
 const Msal = () => {
 
     const [meData, setMeData] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    let publicClientApplication = undefined;
-    
-    
+    let pca = undefined;
+
     const msalConfig = {
         auth: {
-            clientId: "c1dfdce5-d852-4cd9-8651-5cdb628d8f9a",
+            clientId: "{{clientId}}",
             authority: "https://login.microsoftonline.com/common"
         }
     };
-    
-    useEffect(() => {
-        initializePublicClient();
-    }, [])
 
-    async function initializePublicClient() {
+    function initializePublicClient() {
         console.log("Starting initializePublicClient");
-        publicClientApplication = await createNestablePublicClientApplication(msalConfig).then(
+        return createNestablePublicClientApplication(msalConfig).then(
             (result) => {
                 console.log("Client app created");
-                publicClientApplication = result;
-                return publicClientApplication;
+                pca = result;
+                return pca;
             }
         );
     }
@@ -43,7 +38,7 @@ const Msal = () => {
         let activeAccount = null;
         try {
             console.log("getting active account");
-            activeAccount = publicClientApplication.getActiveAccount();
+            activeAccount = pca.getActiveAccount();
         } catch (error) {
             console.log(error);
         }
@@ -56,10 +51,10 @@ const Msal = () => {
                     homeAccountId: context.user?.id,
                     loginHint: (await app.getContext()).user?.loginHint
                 };
-                const accountWithFilter = publicClientApplication.getAccount(accountFilter);
+                const accountWithFilter = pca.getAccount(accountFilter);
                 if (accountWithFilter) {
                     activeAccount = accountWithFilter;
-                    publicClientApplication.setActiveAccount(activeAccount);
+                    pca.setActiveAccount(activeAccount);
                 }
             } catch (error) {
                 console.log(error);
@@ -74,7 +69,7 @@ const Msal = () => {
             scopes: ["User.Read"],
             account: activeAccount || undefined,
         };
-        return publicClientApplication.acquireTokenSilent(tokenRequest)
+        return pca.acquireTokenSilent(tokenRequest)
             .then((result) => {
                 console.log(result);
                 return result.accessToken;
@@ -82,7 +77,7 @@ const Msal = () => {
             .catch((error) => {
                 console.log(error);
                 // try to get token via popup
-                return publicClientApplication.acquireTokenPopup(tokenRequest)
+                return pca.acquireTokenPopup(tokenRequest)
                     .then(async (result) => {
                         console.log(result);
                         return result.accessToken;
@@ -95,17 +90,16 @@ const Msal = () => {
     }
 
     const msallogin = async () => {
-        console.log("Starting getNAAToken");
-        if (!publicClientApplication) {
+        let isNAAResults = await nestedAppAuth.isNAAChannelRecommended();
+        if (isNAAResults == true) {
+            console.log("Starting getNAAToken");
             return initializePublicClient().then((_client) => {
                 return getToken().then((token) => {
                     callApi(token);
                 });
             });
-        } else {
-            return getToken().then((token) => {
-                callApi(token);
-            });
+        }else{
+            console.log("Not Starting getNAAToken");
         }
     }
 
