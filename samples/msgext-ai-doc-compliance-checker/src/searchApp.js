@@ -28,7 +28,7 @@ class SearchApp extends TeamsActivityHandler {
   // Method to fetch document content from Azure Blob Storage
   async blobGetAllDocumentsName(msFileName) {
     const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
-    const containerClient = blobServiceClient.getContainerClient(config.containerName);
+    const containerClient = blobServiceClient.getContainerClient(config.azure_containerName);
     let blobs = containerClient.listBlobsFlat();
 
     // Iterate through blobs to find the document
@@ -104,7 +104,7 @@ class SearchApp extends TeamsActivityHandler {
     try 
     {
       const blobServiceClient = BlobServiceClient.fromConnectionString(config.azure_Storage_Connection_String);
-      const containerClient = blobServiceClient.getContainerClient(config.containerName);
+      const containerClient = blobServiceClient.getContainerClient(config.azure_containerName);
       let blockBlobClient;
       // Determine which checklist file to use
       if (checkListFileName != "") {

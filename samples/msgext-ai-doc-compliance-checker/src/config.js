@@ -5,7 +5,7 @@ const config = {
   apiKey: process.env.API_KEY,
   deploymentId: process.env.DEPLOYMENT_ID,
   azure_Storage_Connection_String: process.env.AZURE_STORAGE_CONNECTION_STRING,
-  containerName: process.env.CONTAINER_NAME,
+  azure_containerName: process.env.AZURE_CONTAINER_NAME,
   CheckListFileName: process.env.CHECKLIST_NAME
 };
 

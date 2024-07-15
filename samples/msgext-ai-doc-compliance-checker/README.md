@@ -55,7 +55,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       API_KEY="your-api-key"
       DEPLOYMENT_ID="your-deployment-id"
       AZURE_STORAGE_CONNECTION_STRING="The connection string for your Azure Storage account."
-      CONTAINER_NAME="your-container"
+      AZURE_CONTAINER_NAME="your-container"
       CHECKLIST_NAME="your-checklist-name"
    ```
 
