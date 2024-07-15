@@ -1,0 +1,68 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "msgext-ai-doc-compliance-checker",
+    "full": "full name for msgext-ai-doc-compliance-checker"
+  },
+  "description": {
+    "short": "short description of msgext-ai-doc-compliance-checker",
+    "full": "full description of msgext-ai-doc-compliance-checker"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [
+    {
+      "botId": "${{BOT_ID}}",
+      "commands": [
+        {
+          "id": "Search",
+          "type": "query",
+          "title": "General",
+          "description": "Compare a contract proposal against a guidance policy checklist to see if the proposal complies with the guidance or not.",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
+          "parameters": [
+            {
+              "name": "ProposalDocument",
+              "title": "Proposal Document",
+              "description": "This is the proposal document which needs to be evaluated and checked for compliance against the policy guidelines.",
+              "inputType": "text"
+            },
+            {
+              "name": "PolicyGuidelineDocument",
+              "title": "Policy Guideline Document",
+              "description": "This is the guidance policy document that any submitted proposal needs to be evaluated against.",
+              "inputType": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "configurableTabs": [],
+  "staticTabs": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}
