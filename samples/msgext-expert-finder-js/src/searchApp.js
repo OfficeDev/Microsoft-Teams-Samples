@@ -7,41 +7,41 @@ class SearchApp extends TeamsActivityHandler {
   async handleTeamsMessagingExtensionQuery(context, query) {
     const { parameters } = query;
 
-      const skills = getParameterByName(parameters, "Skill");
-      const country = getParameterByName(parameters, "Location");
-      const availabilityParam = getParameterByName(parameters, "Availability");
+    const skills = getParameterByName(parameters, "Skill");
+    const country = getParameterByName(parameters, "Location");
+    const availabilityParam = getParameterByName(parameters, "Availability");
 
-      var availability;
+    var availability;
 
-      if(availabilityParam == "true") {
-        availability = true;
-      }
-      else if(availabilityParam == "false") {
-        availability = false;
-      }
-      else {
-        availability = undefined;
-      }
+    if (availabilityParam == "true") {
+      availability = true;
+    }
+    else if (availabilityParam == "false") {
+      availability = false;
+    }
+    else {
+      availability = undefined;
+    }
 
     function constructSearchObject(skills, country, availability) {
       const filterObject = {};
-  
+
       if (country) {
-          filterObject.country = country;
+        filterObject.country = country;
       }
 
       if (skills) {
         filterObject.skills = skills;
-    }
-  
-      if (availability != undefined) {
-          filterObject.availability = availability;
       }
-  
-      return filterObject;
-  }
 
-   const searchObject = constructSearchObject(skills, country, availability);
+      if (availability != undefined) {
+        filterObject.availability = availability;
+      }
+
+      return filterObject;
+    }
+
+    const searchObject = constructSearchObject(skills, country, availability);
 
     // Define your Azure Table Storage connection string or credentials
     const connectionString = config.connectionString;
@@ -56,39 +56,39 @@ class SearchApp extends TeamsActivityHandler {
 
     // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
     const magicCode =
-        query.state && Number.isInteger(Number(query.state))
-            ? query.state
-            : '';
+      query.state && Number.isInteger(Number(query.state))
+        ? query.state
+        : '';
 
     const tokenResponse = await context.adapter.getUserToken(
-        context,
-        "authbot",
-        magicCode
+      context,
+      "authbot",
+      magicCode
     );
 
     if (!tokenResponse || !tokenResponse.token) {
-    //     // There is no token, so the user has not signed in yet.
+      //     // There is no token, so the user has not signed in yet.
 
-    //     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-        const signInLink = await context.adapter.getSignInLink(
-            context,
-            "authbot"
-        );
+      //     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+      const signInLink = await context.adapter.getSignInLink(
+        context,
+        "authbot"
+      );
 
-        return {
-            composeExtension: {
-                type: 'auth',
-                suggestedActions: {
-                    actions: [
-                        {
-                            type: 'openUrl',
-                            value: signInLink,
-                            title: 'Bot Service OAuth'
-                        },
-                    ],
-                },
-            },
-        };
+      return {
+        composeExtension: {
+          type: 'auth',
+          suggestedActions: {
+            actions: [
+              {
+                type: 'openUrl',
+                value: signInLink,
+                title: 'Bot Service OAuth'
+              },
+            ],
+          },
+        },
+      };
     }
 
     // Define a function to fetch candidates based on parameters
@@ -99,36 +99,36 @@ class SearchApp extends TeamsActivityHandler {
         let whereClause = "";
         let skillsAdded = false;
 
-               // Construct the where clause dynamically based on provided parameters
-               Object.keys(queryParameters).forEach((key, index) => {
-                if (key === "skills" || key === "availability") {
-                    return; // Skip skills and availability for now, handle separately below
-                }
-    
-                const condition = `${key} eq '${queryParameters[key]}'`;
-                if (whereClause !== "") {
-                    whereClause += " and ";
-                }
-                whereClause += `(${condition})`;
-            });
-    
-            
-            // Add availability filter if provided
-            if (queryParameters.availability !== undefined && queryParameters.availability !== null) {
-                const availabilityCondition = `availability eq ${queryParameters.availability}`;
-                if (whereClause !== "") {
-                    whereClause += " and ";
-                }
-                whereClause += `(${availabilityCondition})`;
-            }
-
-            // If no parameters provided, select all
-            if (whereClause === "") {
-              whereClause = "PartitionKey ne ''"; // Dummy condition to select all in case parameters are null or empty
+        // Construct the where clause dynamically based on provided parameters
+        Object.keys(queryParameters).forEach((key, index) => {
+          if (key === "skills" || key === "availability") {
+            return; // Skip skills and availability for now, handle separately below
           }
-    
-            query.where(whereClause);
-    
+
+          const condition = `${key} eq '${queryParameters[key]}'`;
+          if (whereClause !== "") {
+            whereClause += " and ";
+          }
+          whereClause += `(${condition})`;
+        });
+
+
+        // Add availability filter if provided
+        if (queryParameters.availability !== undefined && queryParameters.availability !== null) {
+          const availabilityCondition = `availability eq ${queryParameters.availability}`;
+          if (whereClause !== "") {
+            whereClause += " and ";
+          }
+          whereClause += `(${availabilityCondition})`;
+        }
+
+        // If no parameters provided, select all
+        if (whereClause === "") {
+          whereClause = "PartitionKey ne ''"; // Dummy condition to select all in case parameters are null or empty
+        }
+
+        query.where(whereClause);
+
 
         tableService.queryEntities(
           tableName,
@@ -161,8 +161,8 @@ class SearchApp extends TeamsActivityHandler {
       });
     }
 
+    // Fetch candidates based on applied filters.
     var candidates = await fetchCandidates(searchObject);
-
 
     var attachments = [];
     candiDateData = candidates;
