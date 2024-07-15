@@ -8,7 +8,7 @@ languages:
 - javascript
 ---
 
-# Compliance Checker with Azure AI Search sample
+# Meeting Helper with Azure Open IA
 
 ## Interaction with app
 
@@ -49,14 +49,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) Navigate to the `samples/bot-ai-meeting-helper` folder and open with Visual Studio Code.
   
 1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
-  -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+ 14. Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following
+ 
+     ![PolicySetup](Images/Policy.png)
+     
+      PowerShell script
 
-  ```powershell
+    ```powershell
     # Import-Module MicrosoftTeams
     # Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
     Connect-MicrosoftTeams
     New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>" or "-Global"
+    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
     ```
 
     e.g.:
@@ -66,9 +70,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       Connect-MicrosoftTeams
 
       New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
-      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c" or "-Global"
+      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
     ```
-
 1) In Azure App Registration Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
 
     - `Calendars.Read`
