@@ -8,23 +8,7 @@ var auth = {};
  
 const config = require('./config');
 
-auth.getAccessToken1 = async function (tenantId) {
-  try {
-    const response = await axios.post(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
-    
-    grant_type: 'client_credentials',  
-    client_id: process.env.BOT_ID,
-      scope: 'https://graph.microsoft.com/.default',
-      client_secret: process.env.BOT_PASSWORD
-      // ,
-      // grant_type: 'client_credentials'
-    });
-    return response.data.access_token;
-  } catch (error) {
-    throw new Error('Failed to obtain access token: ' + error.message);
-  }
-};
-
+// Function to obtain an access token using the tenant ID.
 auth.getAccessToken = function (tenantId) {
     var deferred = Q.defer();
     var requestParams = {

@@ -44,7 +44,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|ai-meetings-helper|This sample shows how OpenAI extracts action items from meeting transcriptions for all meeting participants, and then sends those action items to the users.||[View][ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
+|1|bot-ai-meeting-helper|This sample demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.||[View][bot-ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/bot-ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
@@ -412,7 +412,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-audio-state#nodejs]:samples/meetings-audio-state/nodejs
 [meetings-context-app#csharp]:samples/meetings-context-app/csharp
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
-[ai-meeting-helper#nodejs]:samples/ai-meeting-helper
+[bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs

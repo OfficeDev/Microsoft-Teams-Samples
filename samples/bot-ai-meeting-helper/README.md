@@ -12,12 +12,12 @@ languages:
 
 ## Interaction with app
 
- ![ai-meeting-helperGif](Images/ai-meeting-helperGif.gif)
+ ![bot-ai-meeting-helperGif](Images/bot-ai-meeting-helperGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/ai-meeting-helper/demo-manifest/ai-meeting-helper.zip)
+**Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
 ## Prerequisites
 
@@ -46,12 +46,28 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-1) Navigate to the `samples/ai-meeting-helper` folder and open with Visual Studio Code.
+1) Navigate to the `samples/bot-ai-meeting-helper` folder and open with Visual Studio Code.
   
 1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
   -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
-      ![Policy ](Images/Policy.png)
+  ```powershell
+    # Import-Module MicrosoftTeams
+    # Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
+    Connect-MicrosoftTeams
+    New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>" or "-Global"
+    ```
+
+    e.g.:
+
+    ```powershell
+      # Import-Module MicrosoftTeams
+      Connect-MicrosoftTeams
+
+      New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
+      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c" or "-Global"
+    ```
 
 1) In Azure App Registration Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
 
@@ -69,7 +85,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - `User.ReadBasic.All`
     - `User.ReadWrite.All`
 
-1) Navigate to the `samples/ai-meeting-helper/.localConfigs` directory and update the values below.
+1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs` directory and update the values below.
 
    ```txt
         BOT_ID="BOT_ID"
@@ -124,4 +140,4 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/ai-meeting-helper" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-meeting-helper" />

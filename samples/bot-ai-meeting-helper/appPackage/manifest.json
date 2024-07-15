@@ -15,12 +15,12 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "ai-meeting-helper${{APP_NAME_SUFFIX}}",
-        "full": "full name for ai-meeting-helper"
+        "short": "bot-ai-meeting-helper${{APP_NAME_SUFFIX}}",
+        "full": "full name for bot-ai-meeting-helper"
     },
     "description": {
-        "short": "short description for ai-meeting-helper",
-        "full": "full description for ai-meeting-helper"
+        "short": "short description for bot-ai-meeting-helper",
+        "full": "full description for bot-ai-meeting-helper"
     },
     "accentColor": "#FFFFFF",
     "bots": [

@@ -14,7 +14,7 @@ const config = require('./config');
 const clientId = process.env.BOT_ID;
 const clientSecret = process.env.BOT_PASSWORD;
 const baseUrl = config.BOT_ENDPOINT;
-const tenantId = config.Tenant;
+// const tenantId = config.Tenant;
 const graphScopes = ['https://graph.microsoft.com/User.Read'];
 let eventDetails = [];
 let token = null;
@@ -32,12 +32,13 @@ const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const fs = require('fs');
  const sampleTranscription = require('./sampleTranscription');
 
+//Function to retrieve all meeting events from the calendar.
 async function getTodaysMeetingAgenda(req, context) {
   
   const currentDate = new Date().toISOString().split('T')[0];
   const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendar/events?$filter=start/dateTime ge '${currentDate}'&$orderby=start/dateTime`;
     
-  const accessToken = await auth.getAccessToken(tenantId);
+  const accessToken = await auth.getAccessToken(context.activity.conversation.tenantId);
   try {
     console.log(accessToken);     
     const response = await axios.get(Graphurl, {
@@ -52,11 +53,11 @@ async function getTodaysMeetingAgenda(req, context) {
   }
 }
 
-// Function to fetch Transcription text
-async function getMeetingTranscription(joinWebUrl, userId) {
+// Function to fetch the meeting transcription text for a specific meeting using the join URL.
+async function getMeetingTranscription(joinWebUrl, userId, tenantId) {
   try { 
 
-      const onlineMeetingDetail = await getMeetingDetailsUsingSubscription(joinWebUrl, userId);
+      const onlineMeetingDetail = await getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId);
 
       const accessToken = await auth.getAccessToken(tenantId); 
       
@@ -84,8 +85,8 @@ async function getMeetingTranscription(joinWebUrl, userId) {
   }
 }
 
-// Function to fetch online meetings filtered by join web URL
-async function getMeetingDetailsUsingSubscription(joinWebUrl, userId) {
+// Function to fetch online meeting details filtered by the join web URL.
+async function getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId) {
   try {
     // Encode the join web URL
     const encodedJoinWebUrl = decodeURIComponent(joinWebUrl);
@@ -117,7 +118,7 @@ function extractMeetingId(joinUrl) {
   return meetingId;
 }
 
-
+// Function to generate event cards and send them to the user. 
 function BindCard(calendarEvents)
 {
 
@@ -140,6 +141,7 @@ function BindCard(calendarEvents)
 };
 }
 
+// Function to convert UTC time to local time.
 function ConvertTimeToLocal(utcDateString)
 { 
   if(utcDateString.dateTime != undefined)
@@ -176,10 +178,10 @@ function ConvertTimeToLocal(utcDateString)
     
 }
 
+// Function to change the date and time format.
 function ChangeDateTimeFormat(date)
 {
   // Parse the original date string into components
-  //const date = new Date(originalDateString);
   const year = date.getFullYear();
   const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero indexed, so we add 1
   const day = ('0' + date.getDate()).slice(-2);
@@ -193,7 +195,8 @@ function ChangeDateTimeFormat(date)
   return formattedDateString;
 }
 
-async function createSubscription(meetingJoinUrl, userId, conversationId) {
+// Function to create a subscription based on the meeting join URL.
+async function createSubscription(meetingJoinUrl, userId, conversationId, tenantId) {
   let existingSubscriptions = null;
   let applicationToken = "";
   let resource = "";
@@ -237,7 +240,7 @@ async function createSubscription(meetingJoinUrl, userId, conversationId) {
   // Once old subscriptions are deleted, creating new subscription.
   try {
       if (existingSubscription == null) {
-        await getMeetingDetailsUsingSubscription(resource, userId)
+        await getMeetingDetailsUsingSubscription(resource, userId, tenantId)
         .then(async meetingDetails => {
             const subscriptionEndPoint = new Date(meetingDetails.endDateTime);
             subscriptionEndPoint.setHours(subscriptionEndPoint.getHours() + 1);
@@ -248,7 +251,7 @@ async function createSubscription(meetingJoinUrl, userId, conversationId) {
                 expirationDateTime: isoString,
                 includeResourceData: true,
                 changeType: "updated", 
-                clientState: userId,
+                clientState: userId + "|" +  tenantId,
                 encryptionCertificate: config.Base64EncodedCertificate,
                 encryptionCertificateId: config.EncryptionCertificateId
             };
@@ -274,7 +277,7 @@ async function createSubscription(meetingJoinUrl, userId, conversationId) {
  
 }
 
-// Function to transcribe meeting notes and extract action items
+// Function to retrieve meeting transcription, use Azure OpenAI to summarize the meeting, and extract all action items for all attendees.
 async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meetingDetails) {
   const apiKey = process.env.AZURE_OPENAI_API_KEY;
   const endpoint =  process.env.AZURE_OPENAI_ENDPOINT;
@@ -375,7 +378,7 @@ function escapeSpecialChars(str) {
             .replace(/'/g, "\\'");   // escape single quotes
 }
 
-// Function to combine action items and meeting summaries by user
+// Function to combine action items and meeting summaries for each user.
 function combineMeetingData(data) {
   const combinedData = {};
   
@@ -404,7 +407,7 @@ function combineMeetingData(data) {
   return formattedOutput;
 }
 
-// function for send action Items to individual 
+// Function to send action items to individual users.
 async function SendUserActivity(conversationId, AIPrompt)
 {
     try{
@@ -424,8 +427,7 @@ async function SendUserActivity(conversationId, AIPrompt)
     }
 }
 
-// Function to extract user-wise action items from generated text
-// and send consolidated action items to all users.
+// Function to extract user-specific action items from generated text and send consolidated action items to all users.
 function FormatActionItems(generatedText, withlist) {
   let actionItems = "";
 
@@ -475,8 +477,8 @@ async function extractUserActionItems(MeetingSummary, generatedText, users) {
   });  
 }
 
-// get User information using userid
-async function getUserInformation(userId) {
+// Function to retrieve user information using the user ID with the Graph API.
+async function getUserInformation(userId, tenantId) {
   try {
     const accessToken = await auth.getAccessToken(tenantId); 
     

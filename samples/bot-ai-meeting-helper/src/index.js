@@ -64,6 +64,7 @@ function markAsProcessed(requestId) {
   processedRequests.add(requestId);
 }
 
+// This function is designed for a webhook that triggers when a meeting begins or ends within a particular subscription.
 server.post("/EventHandler", async (req, res) => {
   if(req.url === "/EventHandler")
   {
@@ -72,21 +73,21 @@ server.post("/EventHandler", async (req, res) => {
     var requestId  = "";
     if(responsePayload.eventType === "Microsoft.Communication.CallEnded")
       {
-        await serverAPI.getMeetingTranscription(req.body.value[0].resource, req.body.value[0].clientState)
+        await serverAPI.getMeetingTranscription(req.body.value[0].resource, req.body.value[0].clientState.split('|')[0], req.body.value[0].clientState.split('|')[1])
         .then(async meetingDetails => {
            
             requestId = req.rawHeaders[3];
            
             if (alreadyProcessed(requestId)) {
               console.log(`Request ${requestId} already processed`);
-               return res.status(200).end();
+              // return res.status(200).end();
             }
             
             // Process the webhook payload
             console.log('Processing webhook payload:', req.body);
           
             // Call graph API        
-            serverAPI.getMeetingDetailsUsingSubscription(req.body.value[0].resource, req.body.value[0].clientState)
+            serverAPI.getMeetingDetailsUsingSubscription(req.body.value[0].resource, req.body.value[0].clientState.split('|')[0], req.body.value[0].clientState.split('|')[1])
             .then(async onlineMeetingDetail => {
                  // get User and meeting details
               const UserInfo =  GetUserInformationAndSendActionItems(req.body.value[0].resource,  meetingDetails, onlineMeetingDetail, req.body.value[0].subscriptionId);
@@ -111,12 +112,10 @@ server.post("/EventHandler", async (req, res) => {
   }
 });
 
+// This is for listening to all messages from the bot.
 server.post("/api/messages", async (req, res) => { 
 
-  // const c = await serverAPI.transcribeAndExtractUserActionItems("","", "");
-  // return "";
-
-    // Route received a request to adapter for processing
+  // Route received a request to adapter for processing
     await adapter.process(req, res, async (context) => {
       if (context.activity.type === 'message') { 
         if(context.activity.text.indexOf('upcoming')>-1)
@@ -141,7 +140,7 @@ server.post("/api/messages", async (req, res) => {
               }
             });   
 
-            subscription = await serverAPI.createSubscription(context.activity.value.id, context.activity.from.aadObjectId , context.activity.conversation.id);
+            subscription = await serverAPI.createSubscription(context.activity.value.id, context.activity.from.aadObjectId , context.activity.conversation.id, context.activity.conversation.tenantId);
           }
           catch(ex)
           {
@@ -159,7 +158,7 @@ server.post("/api/messages", async (req, res) => {
               }
             }); 
 
-          const saving = await SaveUserAndMeetingDetailsForSubscription(context.activity.value.id, context.activity.from.aadObjectId, context.activity.conversation.id, subscription.split('|')[0]);
+          const saving = await SaveUserAndMeetingDetailsForSubscription(context.activity.value.id, context.activity.from.aadObjectId, context.activity.conversation.id, subscription.split('|')[0], context.activity.conversation.tenantId);
             
             await context.sendActivity({
               type: 'invokeResponse',
@@ -173,7 +172,7 @@ server.post("/api/messages", async (req, res) => {
           }
           catch(ex)
           {
-            // await context.sendActivity("saving1111: "+ ex.message);
+            console.log(ex.message);
           }
          
           if(subscription.split('|').length>1)
@@ -199,8 +198,8 @@ server.post("/api/messages", async (req, res) => {
     });
 });
 
-// function for store all subscription related meeting and user informations
-async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conversationId, subscriptionId)
+// Function to store all meeting and user information related to subscriptions.
+async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conversationId, subscriptionId, tenantId)
 {  
   try
   {
@@ -210,7 +209,7 @@ async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conv
         try
         {
           // get meeting Id using Join Web URL 
-          OnlineMeetingId = await serverAPI.getMeetingDetailsUsingSubscription(`/communications/onlineMeetings/?$filter=JoinWebUrl eq '${joinWebUrl}'`, userId);    
+          OnlineMeetingId = await serverAPI.getMeetingDetailsUsingSubscription(`/communications/onlineMeetings/?$filter=JoinWebUrl eq '${joinWebUrl}'`, userId, tenantId);    
         }
         catch(ex)
         {
@@ -218,7 +217,7 @@ async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conv
         }
 
         // Get User Information for saving
-        UserInformation = await serverAPI.getUserInformation(userId);
+        UserInformation = await serverAPI.getUserInformation(userId, tenantId);
       
         // call function to save.
         let data = { onlineMeetingId: OnlineMeetingId.id, 
@@ -242,6 +241,7 @@ async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conv
   }  
 }
 
+// Function to retrieve user information from the database for sending action items.
 async function GetUserInformationAndSendActionItems(onlineMeetingId, AIPrompt, onlineMeetingDetail, subscriptionId)
 {
   try
