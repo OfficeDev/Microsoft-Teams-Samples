@@ -25,7 +25,32 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
 - [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 - [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
+
+## Setup and use the sample
+
+1) Create azure Blob Storage
+   Refer the document [Create Blob Storage]("https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal") and create a blob storage in azure.
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+1) Navigate to the `samples/msgext-ai-doc-compliance-checker` folder and open with Visual Studio Code.
+
+1) Navigate to the `samples/msgext-ai-doc-compliance-checker/.localConfigs` directory and update the values below.
+
+   ```txt
+      END_POINT={{Azure_End_Point}}
+      API_KEY={{Azure_Api_Key}}
+      DEPLOYMENT_ID={{Azure_Deployment_Id}}
+      AZURE_STORAGE_CONNECTION_STRINGH={{Azure_Storage_Connection_Stringh}}
+      AZURE_CONTAINER_NAME={{Azure_Container_Name}}
+      CHECKLIST_NAME={{CheckList_Name}}
+      SYSTEM_PROMPT={{System_Prompt}}
+   ```
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -39,25 +64,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
-
-## Setup and use the sample
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-1) Navigate to the `samples/msgext-ai-doc-compliance-checker` folder and open with Visual Studio Code.
-
-1) Navigate to the `samples/msgext-ai-doc-compliance-checker/.localConfigs` directory and update the values below.
-
-   ```txt
-      END_POINT="https://<your-service>.azurewebsites.net"
-      API_KEY="your-api-key"
-      DEPLOYMENT_ID="your-deployment-id"
-      AZURE_STORAGE_CONNECTION_STRING="The connection string for your Azure Storage account."
-      AZURE_CONTAINER_NAME="your-container"
-      CHECKLIST_NAME="your-checklist-name"
-   ```
 
 ## Running the sample
 

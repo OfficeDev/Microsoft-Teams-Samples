@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "msgext-ai-doc-compliance-checker",
-    "full": "full name for msgext-ai-doc-compliance-checker"
+    "short": "Compliance Checker",
+    "full": "AI Compliance Checker"
   },
   "description": {
-    "short": "short description of msgext-ai-doc-compliance-checker",
-    "full": "full description of msgext-ai-doc-compliance-checker"
+    "short": "Use AI to compare a documents for compliance against a guideline.",
+    "full": "Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

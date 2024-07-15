@@ -91,4 +91,11 @@ deploy:
       envs:
         BOT_ID: ${{BOT_ID}}
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        END_POINT: "{{End_Point}}"
+        API_KEY: "{{Api_Key}}"
+        DEPLOYMENT_ID: "{{Deployment_Id}}"
+        AZURE_STORAGE_CONNECTION_STRINGH: "{{Azure_Storage_Connection_Stringh}}"
+        AZURE_CONTAINER_NAME: "{{Azure_Container_Name}}"
+        CHECKLIST_NAME: "{{CheckList_Name}}"
+        SYSTEM_PROMPT: "{{System_Prompt}}"
        

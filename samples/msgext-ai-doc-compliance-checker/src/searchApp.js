@@ -1,18 +1,10 @@
 /**
  * SearchApp Class
- * 
  * This class extends the TeamsActivityHandler to handle Microsoft Teams activities.
  * It includes functionalities to check compliance, prepare checklist items, and handle
  * interactions with Azure Blob Storage and document parsing (PDF and Word).
- * 
- * Dependencies:
- * - botbuilder: For handling bot activities
- * - aiClient: Custom module for compliance and checklist preparation
- * - @azure/storage-blob: For Azure Blob Storage interactions
- * - pdf-parse: For parsing PDF documents
- * - config: Configuration file
- * - word-extractor: For extracting content from Word documents
  */
+
 const { TeamsActivityHandler, MessageFactory, CardFactory } = require("botbuilder");
 const { checkCompliance, prepareChecklistItems } = require('./aiClient');
 const { BlobServiceClient } = require('@azure/storage-blob');
