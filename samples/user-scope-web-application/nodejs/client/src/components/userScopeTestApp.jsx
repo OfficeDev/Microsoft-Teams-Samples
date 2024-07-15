@@ -108,9 +108,30 @@ const UserScopeTestApp = () => {
   //  Fetch notification data
     const getNotificationsData = async () => {
       const response = await (getNotificationsUrl());
-      setNotificationList([]);
-      setNotificationList(response.data);
+    addOrRemoveItem(response.data[0]);
+  }
+
+  // Function to add or remove an item based on id existence
+  const addOrRemoveItem = (newItem) => {
+    // Check if newItem's id already exists in notificationList
+    const itemIndex = notificationList.findIndex(item => item.id === newItem.id);
+
+    if (itemIndex === -1) {
+      // If id does not exist, add newItem to notificationList
+      setNotificationList(prevList => [...prevList, newItem]);
+    } else {
+      // If id exists, remove item from notificationList
+      const updatedList = [...notificationList];
+      updatedList.splice(itemIndex, 1);
+      setNotificationList(updatedList);
     }
+  };
+
+  // Function to set group chat As-Read
+  const setAsReadById = (itemId) => {
+    const updatedList = notificationList.filter(item => item.id !== itemId);
+    setNotificationList(updatedList);
+  };
 
   // Bind left rail items
   const renderList = () => {
@@ -216,6 +237,8 @@ const UserScopeTestApp = () => {
                 let messageList = [];
                 let elements = [];
                 let chatId = newProps.items[newProps.selectedIndex].key;
+                // set group chat As-Read
+                setAsReadById(chatId);
                 var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}&token=${token}`);
                 messageList = [];
                 messageList.push(response.data);
@@ -228,6 +251,7 @@ const UserScopeTestApp = () => {
                     });
                   }
 
+                  if (item.from) {
                   if (item.messageType === "message" && item.from.user.displayName == currentUser) {
                     elements.push({
                       gutter: <Avatar icon={<PersonIcon />} />,
@@ -246,6 +270,7 @@ const UserScopeTestApp = () => {
                       message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()} />,
                       key: item.id,
                     })
+                  }
                   }
                 });
 
