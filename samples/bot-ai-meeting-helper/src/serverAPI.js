@@ -279,8 +279,8 @@ async function createSubscription(meetingJoinUrl, userId, conversationId, tenant
 
 // Function to retrieve meeting transcription, use Azure OpenAI to summarize the meeting, and extract all action items for all attendees.
 async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meetingDetails) {
-  const apiKey = process.env.AZURE_OPENAI_API_KEY;
-  const endpoint =  process.env.AZURE_OPENAI_ENDPOINT;
+  const apiKey = config.azureOpenAIKey;
+  const endpoint =  config.azureOpenAIEndpoint;
   const deployment_Id = config.AI_Model; 
   const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
   let fileChunks = [];
