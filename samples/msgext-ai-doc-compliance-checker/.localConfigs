@@ -1,0 +1,9 @@
+BOT_ID={{Azure_Bot_Id}}
+BOT_PASSWORD={{Azure_Bot_Password}}
+END_POINT={{Azure_End_Point}}
+API_KEY={{Azure_Api_Key}}
+DEPLOYMENT_ID={{Azure_Deployment_Id}}
+AZURE_STORAGE_CONNECTION_STRINGH={{Azure_Storage_Connection_Stringh}}
+AZURE_CONTAINER_NAME={{Azure_Container_Name}}
+CHECKLIST_NAME={{CheckList_Name}}
+SYSTEM_PROMPT={{System_Prompt}}
