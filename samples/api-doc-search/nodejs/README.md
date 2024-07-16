@@ -5,6 +5,7 @@ products:
 - azure-cosmos-db
 - azure-openai
 - azure-functions
+- azure-blob-storage
 languages:
 - nodejs
 extensions:
