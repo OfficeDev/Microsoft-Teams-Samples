@@ -40,6 +40,12 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
+## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
+
+|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
+
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------|:--------|
@@ -406,6 +412,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-audio-state#nodejs]:samples/meetings-audio-state/nodejs
 [meetings-context-app#csharp]:samples/meetings-context-app/csharp
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
+[bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
+[api-doc-search#nodejs]:samples/api-doc-search
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
