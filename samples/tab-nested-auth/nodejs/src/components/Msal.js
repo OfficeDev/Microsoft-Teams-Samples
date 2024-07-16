@@ -97,14 +97,14 @@ const Msal = () => {
     const msallogin = async () => {
         let isNAAResults = await nestedAppAuth.isNAAChannelRecommended();
         if (isNAAResults == true) {
-            console.log("Starting getNAAToken");
+            console.log("Nested app auth capabilities supported");
             return initializePublicClient().then((_client) => {
                 return getToken().then((token) => {
                     callApi(token);
                 });
             });
         } else {
-            console.log("Not Starting getNAAToken");
+            console.log("Nested app auth capabilities not supported");
         }
     }
 

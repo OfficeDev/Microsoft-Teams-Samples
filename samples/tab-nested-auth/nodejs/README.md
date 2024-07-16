@@ -56,7 +56,16 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       * Select **Add a platform**.
       * Select **Single-page application**.
       * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/tab` and `brk-<broker_application_id>://<your_domain>`.
-  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
+
+      ![Authentication](Images/Authentication.png)
+      
+  5. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    -   Select Add a permission
+    -   Select Microsoft Graph -\> Delegated permissions.
+        * User.Read (enabled by default)
+    -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+  6.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
 ## Setup 
 
