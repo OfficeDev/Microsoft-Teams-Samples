@@ -13,6 +13,13 @@ using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.SignalR.Client;
+using Azure.Core;
+using Microsoft.AspNetCore.SignalR;
+using OnlineMeeting = Microsoft.Graph.OnlineMeeting;
+using static Microsoft.Graph.Constants;
+using Newtonsoft.Json.Serialization;
+using System.Text;
+using System.Xml.Linq;
 
 namespace MeetingTranscriptRecording.Controllers
 {
@@ -103,10 +110,12 @@ namespace MeetingTranscriptRecording.Controllers
                             // Deserialize the response into JoinUrlData
                             var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
 
-                            if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
+                            if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].Id != null)
                             {
                                 // Update the CardData object with the online meeting ID
-                                Obj.onlineMeetingId = responseJoinUrlData.Value[0].id;
+                                Obj.onlineMeetingId = responseJoinUrlData.Value[0].Id;
+                                // await this.SendChatMessageAsync(responseJoinUrlData.Value[0], accessToken);
+
                             }
                             else
                             {
@@ -130,6 +139,71 @@ namespace MeetingTranscriptRecording.Controllers
             }
         }
 
+        private async Task SendChatMessageAsync(OnlineMeeting onlineMeeting, string accessToken)
+        {
+            var delegatedAccessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+
+            var graphClient = GraphClient.GetGraphClient(accessToken);
+            try
+            {
+                ChatMessage message = await graphClient.Chats[onlineMeeting.ChatInfo.ThreadId].Messages.Request().AddAsync(new ChatMessage
+                {
+                    Body = new ItemBody
+                    {
+                        Content = "Hello, I am your virtual assistant.Setting up AI for this meeting."
+                    }
+                });
+
+                Console.WriteLine("Chat message sent." +  message.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+            }            
+            
+        }
+        private async Task SetAutoRecordingAsync(OnlineMeeting onlineMeeting, string accessToken)
+        {
+            string graphApiUrl = $"https://graph.microsoft.com/v1.0/users/{onlineMeeting.Participants.Organizer.Identity.User.Id}/onlineMeetings/{onlineMeeting.Id}";
+            try
+            {
+                var results = string.Empty;
+                // Create an HttpClient instance
+                using (HttpClient client = new HttpClient())
+                {
+                    // Set the base address for the Graph API
+                    client.BaseAddress = new Uri(graphApiUrl);
+
+                    // Set the authorization header with the access token
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    
+                    var content = new System.Net.Http.StringContent("{\"recordAutomatically\": true}", Encoding.UTF8, "application/json");
+
+                    // Make a GET request to retrieve user data
+                    HttpResponseMessage response = await client.PatchAsync(graphApiUrl, content);
+
+                    // Check the status code
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        // Check if the request was successful
+                        if (response.IsSuccessStatusCode)
+                        {
+                            results =  await response.Content.ReadAsStringAsync();
+                        }
+                        else
+                        {
+                            throw new HttpRequestException($"HTTP request failed with status code: {response.StatusCode}");
+                        }
+                    }
+                    Console.WriteLine("Updated OnlineMeeting =" +results);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new HttpRequestException($"Error making PATCH request: {ex.Message}");
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -146,7 +220,7 @@ namespace MeetingTranscriptRecording.Controllers
 
                 // Retrieve the base URL from configuration
                 var BaseURL = _configuration["AzureAd:BaseURL"];
-
+                
                 if (MeetingId.meetingId != null)
                 {
                     // Construct the Graph API endpoint to retrieve online transcripts
@@ -350,7 +424,7 @@ namespace MeetingTranscriptRecording.Controllers
                     var sub = new Subscription
                     {
                         Resource = "me/events",
-                        ChangeType = "created,updated",
+                        ChangeType = "created",
                         NotificationUrl = notificationUrl,
                         ClientState = "ClientState",
                         ExpirationDateTime = newTime
@@ -792,13 +866,17 @@ namespace MeetingTranscriptRecording.Controllers
                             // Make an authenticated API request to get online meeting details
                             var responseJoinUrlData = JsonConvert.DeserializeObject<JoinUrlData>(responseBodyJoinUrl);
 
-                            if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].id != null)
+                            if (responseJoinUrlData != null && responseJoinUrlData.Value.Count > 0 && responseJoinUrlData.Value[0].Id != null)
                             {
                                 // Get the online meeting ID
-                                string onlineMeetingId = responseJoinUrlData.Value[0].id;
+                                string onlineMeetingId = responseJoinUrlData.Value[0].Id;
+                                OnlineMeeting onlineMeeting = responseJoinUrlData.Value[0];
+                                
+                                // await this.SendChatMessageAsync(responseJoinUrlData.Value[0], accessToken);
+                                await this.SetAutoRecordingAsync(responseJoinUrlData.Value[0], accessToken);
 
                                 // Retrieve event details from a dictionary
-                                TranscriptRecordingEventDetails.TryGetValue(onlineMeetingId, out CardData EventDetails);
+                                TranscriptRecordingEventDetails.TryGetValue(onlineMeeting.Id, out CardData EventDetails);
 
                                 if (EventDetails != null)
                                 {
@@ -827,6 +905,27 @@ namespace MeetingTranscriptRecording.Controllers
                                         TranscriptRecordingEventDetails.TryUpdate(onlineMeetingId, EventDetails, OldEventDetails);
                                     }
 
+                                    var hubConnection = new HubConnectionBuilder().WithUrl(_configuration["AzureAd:BaseUrlNgrok"] + "/chatHub").Build();
+                                    await hubConnection.StartAsync();
+                                    await hubConnection.InvokeAsync("SendMessage", "TranscriptRecording", TranscriptRecordingEventDetails);
+                                    await hubConnection.StopAsync();
+                                }
+                                else
+                                {
+                                    // Create a CardData object to store event details
+                                    var Obj = new CardData();
+                                    Obj.subject = onlineMeeting.Subject;
+                                    Obj.start = onlineMeeting.StartDateTime.Value.DateTime.ToString("MMM dd h:mm tt");
+                                    Obj.end = onlineMeeting.EndDateTime.Value.DateTime.ToString("MMM dd h:mm tt");
+                                    string email = onlineMeeting.Participants.Organizer.Upn;
+                                    Obj.organizer = email.Substring(0, email.IndexOf('@')+1);
+                                    Obj.condition = false;
+                                    Obj.transcriptsId = null;
+                                    Obj.recordingId = null;
+                                    Obj.signalRCondition = false;
+                                    Obj.onlineMeetingId = onlineMeeting.Id;
+                                    // Get the join URL for the online meeting
+                                    TranscriptRecordingEventDetails.TryAdd(Obj.onlineMeetingId, Obj);
                                     var hubConnection = new HubConnectionBuilder().WithUrl(_configuration["AzureAd:BaseUrlNgrok"] + "/chatHub").Build();
                                     await hubConnection.StartAsync();
                                     await hubConnection.InvokeAsync("SendMessage", "TranscriptRecording", TranscriptRecordingEventDetails);

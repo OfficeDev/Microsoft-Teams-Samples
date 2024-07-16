@@ -21,6 +21,10 @@
       "resourceAppId": "Microsoft Graph",
       "resourceAccess": [
         {
+          "id": "ChatMessage.Send",
+          "type": "Scope"
+        },
+        {
           "id": "User.Read",
           "type": "Scope"
         },

@@ -2,6 +2,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
 
+using Microsoft.Graph;
+
 namespace MeetingTranscriptRecording.Models
 {
     /// <summary>
@@ -17,7 +19,7 @@ namespace MeetingTranscriptRecording.Models
     /// </summary>
     public class JoinUrlData
     {
-        public List<JoinWebUrl> Value { get; set; }
+        public List<OnlineMeeting> Value { get; set; }
     }
 
     /// <summary>
@@ -53,14 +55,6 @@ namespace MeetingTranscriptRecording.Models
     }
 
     /// <summary>
-    ///  Represents an object with a single property, id.
-    /// </summary>
-    public class JoinWebUrl
-    {
-        public string id { get; set; }
-    }
-
-    /// <summary>
     /// Represents data related to an event, potentially an online meeting.
     /// </summary>
     public class EventData
@@ -75,7 +69,7 @@ namespace MeetingTranscriptRecording.Models
 
         public Organizer organizer { get; set; }
 
-        public OnlineMeeting onlineMeeting { get; set; }
+        public EventOnlineMeeting onlineMeeting { get; set; }
 
     }
 
@@ -119,7 +113,7 @@ namespace MeetingTranscriptRecording.Models
     /// <summary>
     /// 
     /// </summary>
-    public class OnlineMeeting
+    public class EventOnlineMeeting
     {
         public string joinUrl { get; set; }
     }
