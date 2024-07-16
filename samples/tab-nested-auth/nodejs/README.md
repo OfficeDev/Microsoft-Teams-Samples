@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows nested app authentication.
+description: This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications.
 products:
 - office-teams
 - office
@@ -9,28 +9,37 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "05-16-2024 10:00:01"
+ createdDate: "07-16-2024 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-nested-auth-nodejs
 
 ---
 
 ## Nested app authentication
 
-Nested app authentication (NAA) is a new authentication protocol for single page applications that are embedded in host environments like Teams.
+Nested app authentication (NAA) is a new authentication protocol for single page applications embedded in host environments like Teams, Outlook, and Microsoft 365, simplifying the authentication process to facilitate single sign-on (SSO) across nested applications and offering several advantages over the On-Behalf-Of (OBO) flow.
 
 **Interaction with app**
 ![tab-nested-auth](Images/tab-nested-auth.gif)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [NodeJS](https://nodejs.org/en/)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [VS Code](https://code.visualstudio.com/)
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
-- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup Register you app with Azure AD.
 
@@ -40,7 +49,7 @@ Nested app authentication (NAA) is a new authentication protocol for single page
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `.env` files.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `Msal.js` files.
   4. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:
@@ -99,16 +108,37 @@ Nested app authentication (NAA) is a new authentication protocol for single page
 You can interact with Teams Tab meeting sidepanel.
 
 **Install app:**
-
 ![InstallApp ](Images/1.InstallApp.png)
 
+**Click Login:**
 ![2.LoginPage ](Images/2.LoginPage.png)
 
-![InstallApp ](Images/3.UserInformation.png)
+![Permissions ](Images/Permissions.png)
 
+![PermissionsAccepts ](Images/PermissionsAccepts.png)
+
+![UserInformation ](Images/3.UserInformation.png)
+
+## Outlook on the web
+To debug the app
+1. Open the folder in Visual Studio Code with Teams Toolkit extension installed.
+1. Open Debug View (`Ctrl+Shift+D`) and select "Debug in Outlook (Edge)" in dropdown list.
+1. Press "F5" to debug the app in the Outlook app in a browser window.
+
+![SelectOutlook ](Images/1.SelectOutlook.png)
+
+## Running the sample
+
+**Click Login:**
+![OutlookLogin ](Images/2.OutlookLogin.png)
+
+**Login Details:**
+![OutlookLoginDetails ](Images/3.OutlookLoginDetails.png)
 
 ## Further reading
 
 - [Nested app authentication](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/nested-authentication?branch=pr-en-us-10768)
+
+- [SPA Redirect URL](https://learn.microsoft.com/en-us/office/dev/add-ins/develop/enable-nested-app-authentication-in-your-add-in#add-a-trusted-broker-through-spa-redirect)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-nested-auth-nodejs" />
