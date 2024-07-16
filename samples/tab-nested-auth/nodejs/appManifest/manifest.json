@@ -19,8 +19,8 @@
     "full": "Nested App Authentication"
   },
   "description": {
-    "short": "Sample Teams Nested App Authentication.",
-    "full": "Sample Teams Nested App Authentication."
+    "short": "This sample shows nested app authentication.",
+    "full": "This sample shows nested app authenticationis a new protocol that simplifies single sign-on (SSO) for single page applications."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

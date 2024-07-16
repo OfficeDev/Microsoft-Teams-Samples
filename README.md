@@ -70,7 +70,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |25| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
 |26| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |27| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
-|28| Nested app authentication |This sample shows nested app authentication. ||[View][tab-nested-auth#nodejs]|
+|28| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. ||[View][tab-nested-auth#nodejs]|
 
 
 

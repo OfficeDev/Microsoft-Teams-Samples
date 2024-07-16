@@ -6,7 +6,7 @@
     "shortDescription": "This sample shows nested app authentication.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-nested-auth/nodejs",
     "longDescription": [
-      "This sample shows nested app authentication."
+      "This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications."
     ],
     "creationDateTime": "2023-11-22",
     "updateDateTime": "2023-11-22",
