@@ -113,17 +113,20 @@ const UserScopeTestApp = () => {
 
   // Function to add or remove an item based on id existence
   const addOrRemoveItem = (newItem) => {
+    if (newItem) {
     // Check if newItem's id already exists in notificationList
     const itemIndex = notificationList.findIndex(item => item.id === newItem.id);
 
     if (itemIndex === -1) {
       // If id does not exist, add newItem to notificationList
       setNotificationList(prevList => [...prevList, newItem]);
+
     } else {
       // If id exists, remove item from notificationList
       const updatedList = [...notificationList];
       updatedList.splice(itemIndex, 1);
       setNotificationList(updatedList);
+    }
     }
   };
 
@@ -243,26 +246,24 @@ const UserScopeTestApp = () => {
                 messageList = [];
                 messageList.push(response.data);
                 messageList[0].forEach((item, index) => {
-                  const isInNotificationList = notificationList.some((listItem) => listItem.viewpointLastMessageReadDT < currentDateTime);
-                  if (isInNotificationList) {
-                    elements.push({
-                      children: <Divider content="Last read" color="brand" important />,
-                      key: item.id, // Unique key for the last read divider
-                    });
-                  }
-
+                  const isInNotificationList = notificationList.some((listItem) => listItem.lastModifiedDateTime === item.lastModifiedDateTime);
                   if (item.from) {
                   if (item.messageType === "message" && item.from.user.displayName == currentUser) {
                     elements.push({
                       gutter: <Avatar icon={<PersonIcon />} />,
                       contentPosition: 'start',
                       message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()} />,
-                      key: item.id
+                        key: item.id,
+                        children: isInNotificationList ? <Divider content="Last read" color="brand" important /> : null,
+                        key: item.id, // Unique key for the last read divider
+
                     },
                       {
                         children: <Divider content={moment(item.lastModifiedDateTime).format('dddd')} />,
                         key: item.id, // Unique key for the last read divider
-                      })
+                        },
+
+                      )
                   }
                   if (item.messageType === "message" && item.from.user.displayName != currentUser) {
                     elements.push({
