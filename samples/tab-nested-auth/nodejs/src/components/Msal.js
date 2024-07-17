@@ -55,7 +55,6 @@ const Msal = () => {
                     homeAccountId: context.user?.id,
                     loginHint: context.user?.loginHint
                 };
-                alert(accountFilter.loginHint);
                 const accountWithFilter = pca.getAccount(accountFilter);
                 if (accountWithFilter) {
                     activeAccount = accountWithFilter;
@@ -140,7 +139,7 @@ const Msal = () => {
         <div>
             <div className="">
                 {!isLoggedIn && <Button appearance="primary" onClick={msallogin}>Login</Button>}
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             </div>
             {isLoggedIn && <h1 style={{ color: 'black' }}>Welcome! Your login information:</h1>}
             <div>
