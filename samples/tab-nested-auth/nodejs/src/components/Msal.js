@@ -12,6 +12,7 @@ const Msal = () => {
 
     const [meData, setMeData] = useState(null); // State to store user data
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+    const [errorMessage, setErrorMessage] = useState('');
 
     let pca = undefined; // Public client application instance
 
@@ -52,8 +53,9 @@ const Msal = () => {
                 const accountFilter = {
                     tenantId: context.user?.tenant?.id,
                     homeAccountId: context.user?.id,
-                    loginHint: (await app.getContext()).user?.loginHint
+                    loginHint: context.user?.loginHint
                 };
+                alert(accountFilter.loginHint);
                 const accountWithFilter = pca.getAccount(accountFilter);
                 if (accountWithFilter) {
                     activeAccount = accountWithFilter;
@@ -87,8 +89,8 @@ const Msal = () => {
                         return result.accessToken;
                     })
                     .catch((error) => {
-                        console.log(error);
-                        return JSON.stringify(error);
+                        console.error(error); // Log the error for debugging purposes
+                        return undefined; // Return undefined to indicate an error occurred
                     });
             });
     }
@@ -110,21 +112,27 @@ const Msal = () => {
 
     // Function to call the Microsoft Graph API with the access token
     async function callApi(accessToken) {
-        const response = await fetch(
-            `https://graph.microsoft.com/v1.0/me`,
-            {
-                headers: { Authorization: accessToken },
+        try {
+            const response = await fetch(
+                `https://graph.microsoft.com/v1.0/me`,
+                {
+                    headers: { Authorization: accessToken },
+                }
+            );
+            if (response.ok) {
+                // Parse and set the user data
+                const jsonValue = await response.json();
+                const alignedJSON = JSON.stringify(jsonValue, null, 2);
+                setMeData(alignedJSON);
+                setIsLoggedIn(true);
+            } else {
+                const errorText = await response.text();
+                console.error("Microsoft Graph call failed - error text: " + errorText);
+                setErrorMessage("An error occurred while trying to log in. Please try again.");
             }
-        );
-        if (response.ok) {
-            // Parse and set the user data
-            const jsonValue = await response.json();
-            const alignedJSON = JSON.stringify(jsonValue, null, 2);
-            setMeData(alignedJSON);
-            setIsLoggedIn(true);
-        } else {
-            const errorText = await response.text();
-            console.error("Microsoft Graph call failed - error text: " + errorText);
+        } catch (error) {
+            console.error("Network error: ", error);
+            setErrorMessage("A network error occurred. Please check your connection and try again.");
         }
     }
 
@@ -132,8 +140,9 @@ const Msal = () => {
         <div>
             <div className="">
                 {!isLoggedIn && <Button appearance="primary" onClick={msallogin}>Login</Button>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
             </div>
-            {isLoggedIn && <h1 style={{ color: 'black' }}>Welcome! You are login information.</h1>}
+            {isLoggedIn && <h1 style={{ color: 'black' }}>Welcome! Your login information:</h1>}
             <div>
                 <pre style={{ whiteSpace: 'pre-wrap', color: 'black' }}>{meData}</pre>
             </div>
