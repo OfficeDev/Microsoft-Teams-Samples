@@ -36,10 +36,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup and use the sample
 
-1) Create Azure Blob Storage:
+1) **Create Azure Blob Storage:**
 Refer to the Create Blob Storage documentation [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) to create a blob storage in Azure.
 
-1) Add the files to be checked for compliance:
+1) **Add the files to be checked for compliance:**
 Upload the policy guideline document (keep the file-name handy for adding into the .localConfigs file) and also the proposal documents to compare against the guideline.
 
 1) Clone the repository
@@ -99,7 +99,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ![8.ComplianceCheckerNoResults](Images/8.ComplianceCheckerNoResults.png)
 
 ### Test the app in Copilot for Microsoft 365
-Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the msgext-ai-doc-compliance-checker plugin.
 
 1) **Open Microsoft Teams, navigate to the Copilot section from the left-hand menu, look for the "Plug-ins" section on the right side of the screen, and use the search bar within the Plug-ins menu to search for "Compliance Checker":**
 ![10.Copilot](Images/10.Copilot.png)
