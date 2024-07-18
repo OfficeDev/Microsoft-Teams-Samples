@@ -82,7 +82,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
 **Team installation:**
 ![Overview](./Images/teamInstallation.png)
 
-**Chat installation::**
+**Chat installation:**
 ![Overview](./Images/chatInstallation.png)
 
 **Graph API response:**
