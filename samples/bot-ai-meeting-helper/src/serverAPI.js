@@ -36,7 +36,7 @@ const fs = require('fs');
 async function getTodaysMeetingAgenda(req, context) {
   
   const currentDate = new Date().toISOString().split('T')[0];
-  const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendar/events?$filter=start/dateTime ge '${currentDate}'&$orderby=start/dateTime`;
+  const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendar/events?$filter=start/dateTime ge '${currentDate}'&$orderby=start/dateTime&$expand=instances`;
     
   const accessToken = await auth.getAccessToken(context.activity.conversation.tenantId);
   try {
@@ -121,24 +121,43 @@ function extractMeetingId(joinUrl) {
 // Function to generate event cards and send them to the user. 
 function BindCard(calendarEvents)
 {
-
-  return {
-    contentType: "application/vnd.microsoft.teams.card.list",
-    content: {
-        title: "Meeting Events",
-        items: calendarEvents.map(calendar => {
+  try
+  {
+    if(calendarEvents.length)
+      {
           return {
-                  type: "resultItem",
-                  title: calendar.subject,
-                  subtitle: ConvertTimeToLocal(calendar.start),
-                  tap: {
-                    type: "invoke",
-                    value: {id: calendar.onlineMeeting.joinUrl}
-                  }
-            };
-        })
-    }
-};
+            contentType: "application/vnd.microsoft.teams.card.list",
+            content: {
+                title: "Meeting Events",
+                items: calendarEvents.map(calendar => {
+                  return {
+                          type: "resultItem",
+                          title: calendar.subject,
+                          subtitle: ConvertTimeToLocal(calendar.start),
+                          tap: {
+                            type: "invoke",
+                            value: {id: calendar.onlineMeeting.joinUrl}
+                          }
+                    };
+                })
+            }
+        };
+      }
+      else
+      {
+         return {
+            contentType: "application/vnd.microsoft.teams.card.list",
+            content: {
+                title: "Meeting events not found.",
+                type: "section"
+            }
+        };
+      }
+  }
+ catch(e)
+ {
+  console.log(e);
+ }
 }
 
 // Function to convert UTC time to local time.

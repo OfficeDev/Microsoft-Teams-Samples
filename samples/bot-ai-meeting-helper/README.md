@@ -8,7 +8,7 @@ languages:
 - javascript
 ---
 
-# Meeting Helper with Azure Open IA
+# Meeting Helper with Azure Open AI
 
 ## Interaction with app
 
@@ -17,15 +17,16 @@ languages:
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
+**Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+- [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
 - [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-- [Open AI](https://platform.openai.com/docs/quickstart/build-your-application) or [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
+- [Azure OpenAI]([https://azure.microsoft.com/free/](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio))
+- [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) if on macOS (`brew install --cask powershell`)
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -33,7 +34,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
 1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Select **File > Open Folder** in VS Code and choose this sample's directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -49,7 +50,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) Navigate to the `samples/bot-ai-meeting-helper` folder and open with Visual Studio Code.
   
 1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
- 14. Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following
+1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following (Images for reference only)
  
      ![PolicySetup](Images/Policy.png)
      
@@ -60,7 +61,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     # Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
     Connect-MicrosoftTeams
     New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
+    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-the-policy-needs-to-be-granted>>"
     ```
 
     e.g.:
@@ -88,6 +89,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - `User.ReadBasic.All`
     - `User.ReadWrite.All`
 
+        ![Application Permission](Images/ApplicationPermission.png)
+
 1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs` directory and update the values below.
 
    ```txt
@@ -113,34 +116,35 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-**Select Upload an app**
+1) **Select Upload an app**
 ![UploadCustomeApp](Images/0.UploadCustomeApp.png)
 
-**Select Add**
+1) **Select Add**
 ![MeetingHelperInstallApp](Images/1.MeetingHelperInstallApp.png)
 
-**Find all upcoming meetings.**
+1) **Find all upcoming meetings.**
 ![MeetingHelperSearchApp](Images/2.MeetingHelperFindUpcomingMeeting.png)
 
-**Click on the particular meeting to subscribe.**
+1) **Click on the particular meeting to subscribe.**
 ![MeetingHelperSelectApp](Images/3.MeetingHelperSubscription.png)
 
-**Join the meeting that you have subscribed to.**
+1) **Join the meeting that you have subscribed to.**
 ![MeetingHelperSearchFileName](Images/4.MeetingHelperJoinMeeting.png)
 
-**Start transcription**
+1) **Start transcription**
 ![MeetingHelperSelectResults](Images/5.MeetingHelperStartTranscription.png)
 
-**End the meeting**
+1) **End the meeting**
 ![6.MeetingHelperResults](Images/6.MeetingHelperEndMeeting.png)
 
-**Meeting helper results**
+1) **Meeting helper results**
 ![7.MeetingHelperYesResults](Images/7.MeetingHelperResults.png)
 
 ## Further reading
 
-### AI, Message Extensions And Blob Storage
+### AI, Message Extensions And Table Storage
 
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
+- [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-meeting-helper" />
