@@ -75,31 +75,49 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-**Add Compliance Checker App**
+1) **Add Compliance Checker App:**
 ![ComplianceCheckerInstallApp](Images/1.ComplianceCheckerInstallApp.png)
 
-**Search for the Compliance Checker app from the Messaging Extensions**
+1) **Search for the Compliance Checker app from the Messaging Extensions:**
 ![ComplianceCheckerSearchApp](Images/2.ComplianceCheckerSearchApp.png)
 
-**Select and add the Compliance Checker App**
+1) **Select and add the Compliance Checker App:**
 ![ComplianceCheckerSelectApp](Images/3.ComplianceCheckerSelectApp.png)
 
-**Search for the file name of the proposal document to compare against the policy document**
+1) **Search for the file name of the proposal document to compare against the policy document:**
 ![ComplianceCheckerSearchFileName](Images/4.ComplianceCheckerSearchFileName.png)
 
-**Compliance Assessment Result. The proposal document is checked against the guideline document and the results are shown in an adaptive card**
+1) **Compliance Assessment Result. The proposal document is checked against the guideline document and the results are shown in an adaptive card:**
 ![ComplianceCheckerSelectResults](Images/5.ComplianceCheckerSelectResults.png)
 
-**Compliance Checker Results**
+1) **Compliance Checker Results:**
 ![6.ComplianceCheckerResults](Images/6.ComplianceCheckerResults.png)
 
-**Click on the arrow to expand the card and get contextual reasoning for the complaince status being Yes or No.**
+1) **Click on the arrow to expand the card and get contextual reasoning for the complaince status being Yes or No:**
 ![7.ComplianceCheckerYesResults](Images/7.ComplianceCheckerYesResults.png)
 
 ![8.ComplianceCheckerNoResults](Images/8.ComplianceCheckerNoResults.png)
 
 ### Test the app in Copilot for Microsoft 365
 Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the msgext-ai-doc-compliance-checker plugin.
+
+1) **Open Microsoft Teams, navigate to the Copilot section from the left-hand menu, look for the "Plug-ins" section on the right side of the screen, and use the search bar within the Plug-ins menu to search for "Compliance Checker":**
+![10.Copilot](Images/10.Copilot.png)
+
+1) **Enable Compliance Checker app:**
+![11.CopilotEnable](Images/11.CopilotEnable.png)
+
+1) **Type Prompt: "Using Compliance Checker, evaluate Acme Suppliers Proposal for compliance" and click the send icon:**
+![12.CopilotPrompt](Images/12.CopilotPrompt.png)
+
+1) **Compliance checker results are being generating:**
+![13.CopilotResultsLoading](Images/13.CopilotResultsLoading.png)
+
+1) **The Compliance Checker has evaluated the Acme Suppliers Proposal and here are the results:**
+![14.CopilotResults](Images/14.CopilotResults.png)
+
+1) **Click on the arrow to expand the card and get contextual reasoning for the complaince status being Yes or No:**
+![15.CopilotCardResults](Images/15.CopilotCardResults.png)
 
 ## Further reading
 
