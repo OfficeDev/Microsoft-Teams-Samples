@@ -99,6 +99,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm start
     ```
 - The client will start running on 3978 port
+
+4. Open Msal.js file from this path folder `samples/tab-nested-auth/nodejs/src/components` and update:
+   - `{{clientId}}` - Generated from Step 1 (Application (client) ID)is the application app id
    
 **This step is specific to Teams:**
 
