@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates integrating Azure Open AI into a Teams message extension to check a contract proposal's compliance with a policy checklist. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Microsoft Copilot for Microsoft 365.
+description: This sample demonstrates integrating Azure Open AI into a Teams message extension to check a contract proposal's compliance with a policy checklist. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Copilot for Microsoft 365.
 products:
 - office-teams
 - copilot-m365
@@ -8,7 +8,13 @@ languages:
 - javascript
 ---
 
-# Doc Compliance Checker using Azure Open AI service
+# Compliance Checker using Azure Open AI
+
+This sample uses Azure Open AI to compare proposal documents uploaded to an Azure Blob storage with a policy guideline that is also uploaded in the blob.
+ 
+The solutions makes calls to Azure Open AI to assess compliance against each of the line items mentioned in the policy guideline, and returns a result that is formatted and displayed as an adaptive card. 
+ 
+The sample can also be used as a Copilot Plug-in.
 
 ## Interaction with app
 
@@ -17,7 +23,7 @@ languages:
 ## Try It Yourself - Experience the app in your Microsoft Teams and Copilot client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Msgext Doc Compliance Checker sample app:** [Manifest](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
+**Compliance Checker sample app:** [Manifest](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
 
 ## Prerequisites
 
@@ -30,8 +36,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup and use the sample
 
-1) Create azure Blob Storage
-   Refer the document [Create Blob Storage]("https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal") and create a blob storage in azure.
+1) Create Azure Blob Storage:
+Refer to the Create Blob Storage documentation [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal) to create a blob storage in Azure.
+
+1) Add the files to be checked for compliance:
+Upload the policy guideline document (keep the file-name handy for adding into the .localConfigs file) and also the proposal documents to compare against the guideline.
 
 1) Clone the repository
 
@@ -46,10 +55,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
       END_POINT={{Azure_End_Point}}
       API_KEY={{Azure_Api_Key}}
       DEPLOYMENT_ID={{Azure_Deployment_Id}}
-      AZURE_STORAGE_CONNECTION_STRINGH={{Azure_Storage_Connection_Stringh}}
+      AZURE_STORAGE_CONNECTION_STRING={{Azure_Storage_Connection_String}}
       AZURE_CONTAINER_NAME={{Azure_Container_Name}}
-      CHECKLIST_NAME={{CheckList_Name}}
-      SYSTEM_PROMPT={{System_Prompt}}
+      CHECKLIST_NAME={{Name of the Policy Guideline document uploaded in Azure Blob}}
    ```
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -67,31 +75,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-**Select Upload an app**
-![UploadCustomeApp](Images/0.UploadCustomeApp.png)
-
-**Select Add**
+**Add Compliance Checker App**
 ![ComplianceCheckerInstallApp](Images/1.ComplianceCheckerInstallApp.png)
 
-**Search for your app in Messaging Extensions**
+**Search for the Compliance Checker app from the Messaging Extensions**
 ![ComplianceCheckerSearchApp](Images/2.ComplianceCheckerSearchApp.png)
 
-**Select App**
+**Select and add the Compliance Checker App**
 ![ComplianceCheckerSelectApp](Images/3.ComplianceCheckerSelectApp.png)
 
-**Search File Name**
+**Search for the file name of the proposal document to compare against the policy document**
 ![ComplianceCheckerSearchFileName](Images/4.ComplianceCheckerSearchFileName.png)
 
-**File Name Results**
+**Compliance Assessment Result. The proposal document is checked against the guideline document and the results are shown in an adaptive card**
 ![ComplianceCheckerSelectResults](Images/5.ComplianceCheckerSelectResults.png)
 
 **Compliance Checker Results**
 ![6.ComplianceCheckerResults](Images/6.ComplianceCheckerResults.png)
 
-**Compliance Checker Yes Results**
+**Click on the arrow to expand the card and get contextual reasoning for the complaince status being Yes or No.**
 ![7.ComplianceCheckerYesResults](Images/7.ComplianceCheckerYesResults.png)
 
-**Compliance Checker No Results**
 ![8.ComplianceCheckerNoResults](Images/8.ComplianceCheckerNoResults.png)
 
 ### Test the app in Copilot for Microsoft 365
