@@ -1,38 +1,38 @@
 
-# Setup Azure Function to store Embedding Vectors in CosmosDB
+# Setup Azure Function for Storing Embedding Vectors in CosmosDB
 
-## Create Azure Open AI service
+## Create an Azure Open AI service
 **> Note: You can skip this step if you have already created the Azure Open AI service.**
 - In Azure portal, create an [Azure Open AI servie](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
-- Create and collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName` and save these values in Notepad to update in `.local.settings.json` file later.
+- Create and collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName` and save these values to update in `.local.settings.json` file later.
 
-- **Azure Open AI deployed model:** Deploy the model in Azure Open AI service for the application to use embedding vectors.
+- **Deploy Azure Open AI model:** Deploy the `text-embedding-ada-002` model in your created Azure Open AI service for the application to create embedding vectors.
 ![Azure Opne AI deployed model](Images/5.azure-open-ai-deployed-model.png)
 
-## Create and Configure Azure Cosmos DB for NoSQL
-**> Note: You can skip this step if you have already created the Azure Cosmos DB account.**
+## Create and Configure Azure CosmosDB for NoSQL
+**> Note: You can skip this step if you have already created the Azure CosmosDB account.**
 
- - **[Create Azure Cosmos DB Account](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-portal#create-account)** in Azure portal and [Enroll in the Vector Search Preview Feature](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search#enroll-in-the-vector-search-preview-feature)
+ - **[Create Azure CosmosDB Account](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-portal#create-account)** in Azure portal and [Enroll in the Vector Search Preview Feature](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search#enroll-in-the-vector-search-preview-feature)
   
- - Create and collect `CosmosDBEndpoint`, `CosmosDBKey`, `CosmosDBDatabaseId`, `CosmosDBContainerId`, `PartitionKey` and save these values in Notepad to update in `.local.settings.json` file later.
+ - Create and collect `CosmosDBEndpoint`, `CosmosDBKey`, `CosmosDBDatabaseId`, `CosmosDBContainerId`, `PartitionKey` and save these values to update in `.local.settings.json` file later.
 
-## Create Azure Blob storage:
+## Create Azure Blob storage
 **> Note: You can skip this step if you have already created the Azure Blob storage.**
 
 - In Azure portal, create a [Azure Blob storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction).
-- Create and collect `AzureStorageDBConnString`, `AzureBlobContainerName` and save these values in Notepad to update in `.local.settings.json` file later.
+- Create and collect `AzureStorageDBConnString`, `AzureBlobContainerName` and save these values to update in `.local.settings.json` file later.
 
 ## Create Azure Function
 
-- [Create the function app](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#create-the-function-app).
+- [Create the function app](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#create-the-function-app)
 
 ## Create Azure App Insights
 - [Azure App Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs)
-- Create and collect `APPINSIGHTS_INSTRUMENTATIONKEY`, `APPINSIGHTS_CONNECTIONSTRING` and save these values in Notepad to update in `.local.settings.json` file later.
+- Create and collect `APPINSIGHTS_INSTRUMENTATIONKEY`, `APPINSIGHTS_CONNECTIONSTRING` and save these valuesto update in `.local.settings.json` file later.
 
 
 ## Create the Event Subscription
-**> Note: Please follow below documentation carefully to make your Azure function successfully up and running.**
+**> Note: Please follow the documentation below carefully to successfully set up and run your Azure Function.**
 
 - [Create the event subscription](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#create-the-event-subscription).
 
@@ -50,7 +50,7 @@
   
   - In a terminal, navigate to `samples/api-doc-search/azure-function-nodejs`
 
- - Install node modules and run application via pressing F5 in Visual Studio Code
+ - Install node modules and run application by pressing F5 in Visual Studio Code
  
    ```bash
     npm install
@@ -58,22 +58,23 @@
 
 ## Running the sample
 
-[Prepare local storage emulation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#prepare-local-storage-emulation)
+**To run the sample locally:**
 
-[Run the function locally](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#run-the-function-locally)
+[Prepare local storage emulation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#prepare-local-storage-emulation) and [Run the azure function locally](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#run-the-function-locally)
+
+**To run the sample on Azure (online):**
 
 [Upload a file to the blob container and it will trigger Azure function automatically and Azure function with start creating and storing embedding vectors in CosmosDB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#upload-a-file-to-the-container)
 
-- **Blob Container:** Upload the file to blob container and it will trigger Azure function automatically.
-![Blob Container](Images/1.blob-container.png)
+- **Upload file to Azure Blob container:** Upload the file(s) for which you want to create vector embeddings into the Blob Storage container.
+  ![Blob Container](Images/1.blob-container.png)
 
-- **Azure Function Invocation:** Azure function will invoke and start creating and storing embedding vectors in CosmosDB.
-![Azure Function Invocation](Images/3.azure-function-invocation.png)
-  
-- **Cosmos DB Embeddings:** You can see the embedding vectors stored in CosmosDB.
-![Cosmos DB Embeddings](Images/4.cosmos-db-embeddings.png)
+- **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function which will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+  ![Azure Function Invocation](Images/3.azure-function-invocation.png)
 
-## Deploy the sample in Azure environment
+  ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
+
+## Deploy the sample in Azure environment (Optional)
 
 [Deploy your function code to azure function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#deploy-your-function-code)
 
