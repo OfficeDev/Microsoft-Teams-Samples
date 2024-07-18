@@ -84,33 +84,33 @@ In this step, we will run the sample by uploading files on which a prompt query 
 
 - **Upload file to Azure Blob container:** Upload the file(s) for which you want to create vector embeddings into the Blob Storage container.
 
-- ![Blob Container](../azure-function-nodejs/Images/1.blob-container.png)
+  ![Blob Container](../azure-function-nodejs/Images/1.blob-container.png)
 
 
 - **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function which will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
 
-- ![Azure Function Invocation](../azure-function-nodejs/Images/3.azure-function-invocation.png)
+  ![Azure Function Invocation](../azure-function-nodejs/Images/3.azure-function-invocation.png)
 
-- ![Cosmos DB Embeddings](../azure-function-nodejs/Images/4.cosmos-db-embeddings.png)
+  ![Cosmos DB Embeddings](../azure-function-nodejs/Images/4.cosmos-db-embeddings.png)
 
 - **You can call the API Endpoint to run the required prompts on the documents in two ways:**
 **1) Directly from a web browser Once you run the sample locally and press F5, it will open the Application Homepage:**
 
-- ![API Home page](Images/1.app-home-page.png)
+  ![API Home page](Images/1.app-home-page.png)
 
 - `http://localhost:3000/search?query=what is Teams AI Library?`
-- ![Search query and result - 4](Images/5.search-result-web.png)
+  ![Search query and result - 4](Images/5.search-result-web.png)
 
 
 2) **Using an API testing tool, like Postman:**
 - `http://localhost:3000/search?query=what is Teams AI Library`
-- ![Search query and result - 1](Images/2.search-result-postman-1.png)
+  ![Search query and result - 1](Images/2.search-result-postman-1.png)
 
 
 - **Open the Postman and search the query to get results:**
 
 - `http://localhost:3000/search?query=what is Prompt Tuning?`
-- ![Search query and result - 2](Images/3.search-result-postman-2.png)
+  ![Search query and result - 2](Images/3.search-result-postman-2.png)
 
 
 ## Deploy the sample in Azure environment (Optional)
