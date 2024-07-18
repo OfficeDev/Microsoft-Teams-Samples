@@ -19,11 +19,11 @@ urlFragment: officedev-microsoft-teams-samples-api-doc-search-nodejs
 
 This sample demonstrate the concept of Retrieval Augmented Generation (RAG). 
  
-To do this, we upload documents into an Azure blob storage. The contents of these documents are converted into vector embeddings that are stored in an Azure NoSQL Cosmos DB. Using an API endpoint, we can run prompt queries on the contents of the documents. 
+- To do this, we upload documents into an Azure blob storage. The contents of these documents are converted into vector embeddings that are stored in an Azure NoSQL Cosmos DB. Using an API endpoint, we can run prompt queries on the contents of the documents. 
  
-Relevant results are returned by performing RAG on the document contents vector embeddings and shown along with a calculated similarity score.
+- Relevant results are returned by performing RAG on the document contents vector embeddings and shown along with a calculated similarity score.
  
-The API endpoint can be called in two ways - using the browser directly, or a GET call using any API testing tool. 
+- The API endpoint can be called in two ways - using the browser directly, or a GET call using any API testing tool. 
 
 ## Included Features
 * **Blob-based Event Subscription:** Enables event-driven actions based on changes or updates to Azure Blob Storage.
@@ -94,20 +94,19 @@ In this step, we will run the sample by uploading files on which a prompt query 
   ![Cosmos DB Embeddings](../azure-function-nodejs/Images/4.cosmos-db-embeddings.png)
 
 - **You can call the API Endpoint to run the required prompts on the documents in two ways:**
-**1) Directly from a web browser Once you run the sample locally and press F5, it will open the Application Homepage:**
+
+**1) Directly from a web browser Once you run the sample locally by presssing F5 in Visual Studio Code, it will open the Application Homepage:**
 
   ![API Home page](Images/1.app-home-page.png)
 
-- `http://localhost:3000/search?query=what is Teams AI Library?`
+- Type your query like: `http://localhost:3000/search?query=what is Teams AI Library?`
   ![Search query and result - 4](Images/5.search-result-web.png)
 
 
-2) **Using an API testing tool, like Postman:**
-- `http://localhost:3000/search?query=what is Teams AI Library`
+**2) Using an API testing tool, like Postman:**
+- Type your query and select `GET` and press `Send` button:`http://localhost:3000/search?query=what is Teams AI Library`
   ![Search query and result - 1](Images/2.search-result-postman-1.png)
 
-
-- **Open the Postman and search the query to get results:**
 
 - `http://localhost:3000/search?query=what is Prompt Tuning?`
   ![Search query and result - 2](Images/3.search-result-postman-2.png)
