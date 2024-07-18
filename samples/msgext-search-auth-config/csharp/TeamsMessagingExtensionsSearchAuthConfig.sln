@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamsMessagingExtensionsSearchAuthConfig", "TeamsMessagingExtensionsSearchAuthConfig.csproj", "{7947D33C-51D6-4431-BAC1-C0681DE93A2D}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{8A10B048-7614-49C0-9B7E-83974C19E080}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7947D33C-51D6-4431-BAC1-C0681DE93A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7947D33C-51D6-4431-BAC1-C0681DE93A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7947D33C-51D6-4431-BAC1-C0681DE93A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A10B048-7614-49C0-9B7E-83974C19E080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A10B048-7614-49C0-9B7E-83974C19E080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A10B048-7614-49C0-9B7E-83974C19E080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A10B048-7614-49C0-9B7E-83974C19E080}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
