@@ -8,7 +8,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: msgext-multiparam-js-${{TEAMSFX_ENV}}
+      name: expert-finder-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -18,7 +18,7 @@ provision:
   - uses: botAadApp/create
     with:
       # The Azure Active Directory application's display name
-      name: msgext-multiparam-js-${{TEAMSFX_ENV}}
+      name: expert-finder-${{TEAMSFX_ENV}}
     writeToEnvironmentFile:
       # The Azure Active Directory application's client id created for bot.
       botId: BOT_ID
@@ -29,7 +29,7 @@ provision:
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: msgext-multiparam-js
+      name: expert-finder
       messagingEndpoint: ${{BOT_ENDPOINT}}/api/messages
       description: ""
       channels:
