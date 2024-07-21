@@ -1,7 +1,6 @@
 ---
 page_type: sample
-description:  This sample implements a Teams message extension that can be used to query a database of candidates based on their skills, location and availability. 
-The sample, when used with Copilot for M365, demonstrates SSO, and Copilot's ability to perform multi-parameter search.
+description:  This sample implements a Teams message extension that can be used to query a database of candidates based on their skills, location and availability. The sample, when used with Copilot for M365, demonstrates SSO, and Copilot's ability to perform multi-parameter search.
 products:
 - office-teams
 - copilot-m365
@@ -44,16 +43,16 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 2) Follow the steps mentioned to [Create azure table storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal) inside the storage account.
 
 3) Follow the schema as given in the below image while creating the azure table.
-   ![Schema](Images/table-storage-schema.png)
+  - ![Schema](images/table-storage-schema.png)
 
-4) Clone the repository
+5) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-5) Navigate to the `samples/msgext-expert-finder-js` folder and open with Visual Studio Code.
+6) Navigate to the `samples/msgext-expert-finder-js` folder and open with Visual Studio Code.
 
-6) Navigate to the `samples/msgext-expert-finder-js/.localConfigs` directory and update the values below.
+7) Navigate to the `samples/msgext-expert-finder-js/.localConfigs` directory and update the values below.
 
    ```txt
       CONNECTION_STRING=<azure storage account connection string> (Created in step 1)
@@ -74,13 +73,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Setup SSO for Expert finder.
 1) Go to app registrations in azure portal and search the app created by toolkit. You will get the resource suffix inside `samples/msgext-expert-finder-js/env/.env.local` with key as `APP_NAME_SUFFIX`. This resource suffix should be used to search the created azure resources. For eg you can search the app registration with name like `expert-finder-local` 
- ![redirect](Images/app-reg-page.png)
+ ![redirect](images/app-reg-page.png)
 2) Go to redirect url section. Select Add a platform -> Web -> Add below url
  - `https://token.botframework.com/.auth/web/redirect`
  - Under implicit grant flow make sure Access token and Id token both options are selected. 
  - Select Configure.
- ![redirect](Images/app-redirect-url.png)
- ![grant](Images/implicit-grant.png)  
+ ![redirect](images/app-redirect-url.png)
+ ![grant](images/implicit-grant.png)  
 3) Expose API endpoint
 - Click "_Expose an API_" in the left rail
 
@@ -149,13 +148,13 @@ Add the following Ids as authorized clients for your application
 1) Go to app store in teams -> Upload an app -> Upload custom/store app
 2) Navigate to `samples/msgext-expert-finder-js/appPackage/build` and select `appPackage.local.zip` for uploading.
 3) Add the app and test the app as a messaging extension.
-![Plugin](Images/upload-app.png)
-![Plugin](Images/msgext-page.png) 
+![Plugin](images/upload-app.png)
+![Plugin](images/msgext-page.png) 
 
 ### Test the app in Copilot for Microsoft 365
 Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the Expert-finder plugin.
 
-![Plugin](Images/plugin.png)
+![Plugin](images/plugin.png)
 
 - Here are some sample prompts you can try : 
 1) `Find candidates with skill in Azure.`
