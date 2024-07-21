@@ -133,6 +133,8 @@ Add the following Ids as authorized clients for your application
     - In the Service Provider dropdown, select Azure Active Directory V2
 
     - Enter in the client id and client secret obtained in step 1.
+    - For client secret navigate to `samples/msgext-expert-finder-js/env/.env.local.user` and select the `Decrypt secret` option to get the decrypted client secret.
+     ![grant](images/bot-secret.png)  
 
     - For the Token Exchange URL use the Application ID URL obtained in step 3. (Url in format `api://botid-<app-id>)`
 
