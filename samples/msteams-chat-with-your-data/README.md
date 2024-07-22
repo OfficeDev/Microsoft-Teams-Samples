@@ -1,6 +1,6 @@
 # Chat With Your Data
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=mbindra-ChatWithYourData&repo=Microsoft-Teams-Samples/samples/msteams-chat-with-your-data&devcontainer_path=.devcontainer%2Fdevcontainer.json&resume=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=mbindra-ChatWithYourData&repo=322043759&devcontainer_path=.devcontainer%2Fmsteams-chat-with-your-data%2Fdevcontainer.json&resume=1)
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
