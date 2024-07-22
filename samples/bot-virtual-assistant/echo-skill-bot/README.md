@@ -42,7 +42,7 @@ This simple echo bot repeats the exact message sent by the user, showcasing basi
 4. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `.env` file configuration in code.
 
 ## Setup NGROK
-1) Run ngrok - point to port 39783
+   Run ngrok - point to port 39783
 
     ```bash
    ngrok http 39783 --host-header="localhost:39783"
@@ -55,21 +55,21 @@ This simple echo bot repeats the exact message sent by the user, showcasing basi
    ```
 
 ## Setup the Azure bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name and fill in the required fields.
     - Select **supported account types** as "MultiTenant" and select "Use existing app registration" and provide app registration app id (Application (client) ID) created in previous step.
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
-   In the new Azure Bot resource in the Portal, 
+- In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application (NGROK/Devtunnel URL). Append with the path `/api/messages`
     for example: `https://12345.ngrok-free.app/api/messages` or `https://12345.devtunnels.ms/api/messages`
 
 ## Setup the Appplication Insights
-In Azure portal, create a [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource).
+In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource).
 
-Note> While creating the Application Insights, please select the NodeJS as the application type.
-    - Collect and save Instrumentation Key and Connecting String which will be required later to update in the `.en` configuration file in code.
+**Note>** While creating the Application Insights, please select the NodeJS as the application type.
+    - Collect and save Instrumentation Key and Connecting String which will be required later to update in the `.env` configuration file in code.
 
 ## Setup the code
 1) Clone the repository
@@ -123,11 +123,17 @@ Note> While creating the Application Insights, please select the NodeJS as the a
 
 You can interact with this echo bot in Teams by sending it a message. The bot will echo back the same message.
 
-**User Prompt:** `Repeat this for me - Why did Microsoft Copilot refuse to play hide and seek? Because good assistance is always easy to find!`
+**User Prompt:** 
+
+`Repeat this for me - Why did Microsoft Copilot refuse to play hide and seek? Because good assistance is always easy to find!`
+
 ![user-prompt ](images/5.user-prompt.png)
 
-**Bot Response:** `Echo bot: Repeat this for me - Why did Microsoft Copilot refuse to play hide and seek? Because good assistance is always easy to find!`
-![user-prompt ](images/6.bot-response)
+**Bot Response:** 
+
+`Echo bot: Repeat this for me - Why did Microsoft Copilot refuse to play hide and seek? Because good assistance is always easy to find!`
+
+![user-prompt ](images/6.bot-response.png)
 
 ## Deploy the app to Azure
 
