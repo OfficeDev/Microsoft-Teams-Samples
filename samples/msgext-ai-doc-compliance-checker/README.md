@@ -4,6 +4,7 @@ description: This sample demonstrates integrating Azure Open AI into a Teams mes
 products:
 - office-teams
 - copilot-m365
+- azure open-ai
 languages:
 - javascript
 ---
@@ -12,7 +13,7 @@ languages:
 
 This sample uses Azure Open AI to compare proposal documents uploaded to an Azure Blob storage with a policy guideline that is also uploaded in the blob.
  
-The solutions makes calls to Azure Open AI to assess compliance against each of the line items mentioned in the policy guideline, and returns a result that is formatted and displayed as an adaptive card. 
+The solution makes calls to Azure Open AI to assess compliance against each of the line items mentioned in the policy guideline, and returns a result that is formatted and displayed as an adaptive card. 
  
 The sample can also be used as a Copilot Plug-in.
 
