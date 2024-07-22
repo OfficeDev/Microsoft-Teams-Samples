@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample echo bot showcases the implementation of basic message mirroring and interaction within both personal and Teams scopes.
+description: This sample echo skill bot showcases the implementation of basic message mirroring and interaction within both personal and Teams scopes.
 products:
 - office-teams
 - office
@@ -13,9 +13,10 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
 ---
 
-# Echo Bot
+# Echo Skill Bot
 
-This simple echo bot repeats the exact message sent by the user, showcasing basic message handling in both personal and Teams scopes.
+This simple echo skill bot repeats the exact message sent by the user, showcasing basic message handling in both personal and Teams scopes.
+**Note: This skill bot is going to be called from the main Virtual Assistant bot (Root Bot) and it will echo back the same message sent by the user.**
 
 ## Included Features
 * Bots
@@ -88,12 +89,12 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     npm install
     ```
 
-4)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
+4) Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
    - `{{MicrosoftAppType}}` - The value for app type will be `MultiTenant` only as we have configured the app registration for MultiTenant and this app (Including virtual assistant bot) supports multiple tenant only.
    - `{{MicrosoftAppId}}` - Generated while registering your application. (Application (client) ID) is the application app id.
    - `{{MicrosoftAppPassword}}` - Generated while registering your application. Also referred to as Client secret.
    - `{{MicrosoftAppTenantId}}` - Put it as blank as we are using MultiTenant app.
-   - `{{AllowedCallers}}` - ID of the application that are allowed to call this skill bot (Echo bot). In this case, please provide the app registration id of your main virtual assistant bot (Root Bot).
+   - `{{AllowedCallers}}` - ID of the application that are allowed to call this skill bot (Echo skill bot). In this case, please provide the app registration id of your main virtual assistant bot (Root Bot).
    - `{{APPINSIGHTS_INSTRUMENTATIONKEY}}` - Provide the application insights `Instrumentation Key` created in previous steps. (Required to log the telemetry data)
    - `{{APPINSIGHTS_CONNECTIONSTRING}}` - Provide the application insights `Connection String` created in previous steps. (Required to log the telemetry data)
 
@@ -121,7 +122,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
 ## Running the sample
 
-You can interact with this echo bot in Teams by sending it a message. The bot will echo back the same message.
+You can interact with this echo skill bot in Teams by sending it a message. The bot will echo back the same message.
 
 **User Prompt:** 
 
