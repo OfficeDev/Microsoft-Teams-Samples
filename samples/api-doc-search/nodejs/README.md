@@ -25,6 +25,8 @@ This sample demonstrate the concept of Retrieval Augmented Generation (RAG).
  
 - The API endpoint can be called in two ways - using the browser directly, or a GET call using any API testing tool. 
 
+> **Note:** As this is a Custom API application, you can consume/call this API from any other applications.
+
 ## Included Features
 * **Blob-based Event Subscription:** Enables event-driven actions based on changes or updates to Azure Blob Storage.
 * **Azure Open AI Embeddings:** Utilizes OpenAI embeddings for enhanced understanding and representation of textual content.
@@ -50,15 +52,19 @@ This sample demonstrate the concept of Retrieval Augmented Generation (RAG).
 ## Setup the application locally
 
 ### Setup Azure Function
+Follow below guide to setup Azure Function and other resources before proceeding:
 - [Setup Azure Function and other resources](../azure-function-nodejs/README.md)
 
 ### Create and configure Azure Cosmos DB for NoSQL
 
+**> Note: You can skip this step if you have already created the Azure CosmosDB account while creating Azure function.**
  - **[Create Azure Cosmos DB Account](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-portal#create-account)** in Azure portal and [Enroll in the Vector Search Preview Feature](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search#enroll-in-the-vector-search-preview-feature)
+ - Deploy the `text-embedding-ada-002` model in your created Azure Open AI service for the application to create embedding vectors for user prompts or queries.
  - Create and collect `CosmosDBEndpoint`, `CosmosDBKey`, `CosmosDBDatabaseId`, `CosmosDBContainerId` and save those values to update in `.env` file later.
 
 ### Create an Azure Open AI service
-- In Azure portal, create a [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+**> Note: You can skip this step if you have already created the Azure Open AI service while creating the Azure function.**
+- In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 - Create and collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName`, and save those value  to update in `.env` file later.
    
 ### Setup for code
@@ -112,8 +118,8 @@ In this step, we will run the sample by uploading files on which a prompt query 
   ![Search query and result - 2](Images/3.search-result-postman-2.png)
 
 
-## Deploy the sample in Azure environment (Optional)
-
+## Deploy the Azure function to Azure
+To test the application in Azure environment, you can deploy the Azure function to Azure. Follow the below guide to deploy the Azure function to Azure:
 [Deploy the code](https://learn.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=windows&pivots=development-environment-vscode#configure-the-app-service-app-and-deploy-code)
 
 ## Further reading
