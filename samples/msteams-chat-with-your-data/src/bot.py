@@ -137,7 +137,7 @@ async def conversation_update(context: TurnContext, state: AppTurnState):
 
 @app.message("/clear")
 async def message(context: TurnContext, state: AppTurnState):
-    state.deleteConversationState()
+    del state.conversation
     await context.send_activity(
         "New chat session started: Previous messages won't be used as context for new queries."
     )
