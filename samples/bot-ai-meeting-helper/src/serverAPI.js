@@ -31,12 +31,39 @@ const credentials = new MicrosoftAppCredentials(config.botId,config.botPassword)
 const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const fs = require('fs');
  const sampleTranscription = require('./sampleTranscription');
+const { date } = require('azure-storage');
+
+
+const appInsights = require('applicationinsights');
+
+// Configure Application Insights with your instrumentation key or connection string
+const instrumentationKey = config.APPINSIGHTS_INSTRUMENTATIONKEY;
+
+// Or use connection string
+const connectionString = config.APPINSIGHTS_CONNECTIONSTRING;
+
+appInsights.setup(connectionString || instrumentationKey)
+    .setAutoCollectRequests(true)
+    .setAutoCollectPerformance(true, true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectConsole(true, true)
+    .setUseDiskRetryCaching(true)
+    .start();
+    
+const client = appInsights.defaultClient;
 
 //Function to retrieve all meeting events from the calendar.
 async function getTodaysMeetingAgenda(req, context) {
   
-  const currentDate = new Date().toISOString().split('T')[0];
-  const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendar/events?$filter=start/dateTime ge '${currentDate}'&$orderby=start/dateTime&$expand=instances`;
+  const currentDate = new Date();
+  const startDate = currentDate.toISOString();
+
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + 10);
+ 
+  // const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendar/events?$filter=start/dateTime ge '${currentDate}'&$orderby=start/dateTime&$expand=instances`;
+  const Graphurl =  `https://graph.microsoft.com/v1.0/users/` + context.activity.from.aadObjectId + `/calendarView?startDateTime=${startDate}&endDateTime=${endDate.toISOString()}`;
     
   const accessToken = await auth.getAccessToken(context.activity.conversation.tenantId);
   try {
@@ -54,20 +81,24 @@ async function getTodaysMeetingAgenda(req, context) {
 }
 
 // Function to fetch the meeting transcription text for a specific meeting using the join URL.
-async function getMeetingTranscription(joinWebUrl, userId, tenantId) {
+async function getMeetingTranscription(joinWebUrl, userId, tenantId, meetingId) {
   try { 
 
-      const onlineMeetingDetail = await getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId);
+     // const onlineMeetingDetail = await getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId);
 
       const accessToken = await auth.getAccessToken(tenantId); 
       
+      client.trackEvent({ name: "response getMeetingTranscription", properties: { onlineMeetingDetail: meetingId } });
+            
       // Make GET request to Microsoft Graph API
-      const responseTranscriptionURL = await axios.get(`https://graph.microsoft.com/v1.0/users/${userId}/onlineMeetings/${onlineMeetingDetail.id}/transcripts`, {
+      const responseTranscriptionURL = await axios.get(`https://graph.microsoft.com/v1.0/users/${userId}/onlineMeetings/${meetingId}/transcripts`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
 
+      client.trackEvent({ name: "responseTranscriptionURL", properties: { responseTranscriptionURL:"line # 100", onlineMeetingDetail: responseTranscriptionURL.data.value } });
+            
       // get Latest URL 
       const response = await axios.get(`${responseTranscriptionURL.data.value[responseTranscriptionURL.data.value.length-1].transcriptContentUrl + '?$format=text/vtt'}`, {
         headers: {
@@ -76,10 +107,13 @@ async function getMeetingTranscription(joinWebUrl, userId, tenantId) {
       });
 
     console.log(response.data)
-
+    client.trackEvent({ name: "response By Transcription URL", properties: { responseTranscriptionURL:"line # 110",onlineMeetingDetail: response.data } });
+          
       // Extract and return the meetings from the response data
       return response.data;
   } catch (error) {
+      client.trackException({ exception: error, properties: { getMeetingTranscription: "Error fetching meetings" } });
+
       console.error("Error fetching meetings:", error);
       throw error;
   }
@@ -92,6 +126,9 @@ async function getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId) 
     const encodedJoinWebUrl = decodeURIComponent(joinWebUrl);
     const accessToken = await auth.getAccessToken(tenantId); 
     
+    client.trackEvent({ name: "call getMeetingDetailsUsingSubscription", properties: { tenantId: tenantId } });
+            
+    
     // Construct the URL with filter query
     const url = `https://graph.microsoft.com/v1.0/users/${userId}${joinWebUrl.replace('communications','')}`;
 
@@ -103,9 +140,13 @@ async function getMeetingDetailsUsingSubscription(joinWebUrl, userId, tenantId) 
       }
     });
 
+    client.trackEvent({ name: "response getMeetingDetailsUsingSubscription", properties: { response: response } });
+            
     return response.data.value[0];
 
   } catch (error) {
+    client.trackException({ exception: error, properties: { getOnlineMeeting: "Error fetching meetings" } });
+
     console.error("Error fetching meetings:", error);
     throw error;
   }
@@ -136,7 +177,7 @@ function BindCard(calendarEvents)
                           subtitle: ConvertTimeToLocal(calendar.start),
                           tap: {
                             type: "invoke",
-                            value: {id: calendar.onlineMeeting.joinUrl}
+                            value: {meetingId:calendar.id, joinUrl: calendar.onlineMeeting.joinUrl, endTime: calendar.end.dateTime}
                           }
                     };
                 })
@@ -162,39 +203,32 @@ function BindCard(calendarEvents)
 
 // Function to convert UTC time to local time.
 function ConvertTimeToLocal(utcDateString)
-{ 
-  if(utcDateString.dateTime != undefined)
-    {
-      return utcDateString.dateTime.toLocaleString(undefined, {
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-    }
-    else
-    {
-        // Create a new Date object from the UTC timestamp
-        const utcDate = new Date(utcDateString);
-
-        // Format options for desired output
-        const options = {
-            month: '2-digit',  // mm
-            day: '2-digit',    // dd
-            year: 'numeric',   // yyyy
-            hour: '2-digit',   // hh
-            minute: '2-digit', // MM
-            hour12: true       // AM/PM format
-        };
-
-        // Convert UTC date to local date string with specified format
-        const localDateString = utcDate.toLocaleString('en-US', options);
-        
-        return localDateString;
-    }
+{   
+  let UTCDate = new Date();
+  try
+  {
+    if(utcDateString.dateTime != undefined)
+      {
+        UTCDate = new Date(utcDateString.dateTime+ 'Z');
+      }
+      else
+      {
+        UTCDate = new Date();
+      }
     
+      let istTime = UTCDate.toLocaleString('en-US', {
+        timeZone: config.LocalTimeZone
+      }); 
+      return istTime;     
+  }
+  catch(e)
+  { 
+    client.trackException({ exception: e, properties: { ConvertTimeToLocal: "ConvertTimeToLocal" } });
+
+    return new Date();
+  
+  }
+  
 }
 
 // Function to change the date and time format.
@@ -215,7 +249,7 @@ function ChangeDateTimeFormat(date)
 }
 
 // Function to create a subscription based on the meeting join URL.
-async function createSubscription(meetingJoinUrl, userId, conversationId, tenantId) {
+async function createSubscription(meetingJoinUrl, userId, conversationId, tenantId, endTime, meetingId) {
   let existingSubscriptions = null;
   let applicationToken = "";
   let resource = "";
@@ -261,30 +295,31 @@ async function createSubscription(meetingJoinUrl, userId, conversationId, tenant
       if (existingSubscription == null) {
         await getMeetingDetailsUsingSubscription(resource, userId, tenantId)
         .then(async meetingDetails => {
-            const subscriptionEndPoint = new Date(meetingDetails.endDateTime);
-            subscriptionEndPoint.setHours(subscriptionEndPoint.getHours() + 1);
-            let isoString = ChangeDateTimeFormat(subscriptionEndPoint);
-            let subscriptionCreationInformation = {
-                resource: resource,
-                notificationUrl: notificationUrl,
-                expirationDateTime: isoString,
-                includeResourceData: true,
-                changeType: "updated", 
-                clientState: userId + "|" +  tenantId,
-                encryptionCertificate: config.Base64EncodedCertificate,
-                encryptionCertificateId: config.EncryptionCertificateId
-            };
+              const subscriptionEndPoint = new Date(endTime);
+              subscriptionEndPoint.setHours(subscriptionEndPoint.getHours() + 1);
+              let isoString = ChangeDateTimeFormat(subscriptionEndPoint);
+              let subscriptionCreationInformation = {
+                  resource: resource,
+                  notificationUrl: notificationUrl ,
+                  expirationDateTime: isoString,
+                  includeResourceData: true,
+                  changeType: "updated", 
+                  clientState: userId + "|" +  tenantId,
+                  encryptionCertificate: config.Base64EncodedCertificate,
+                  encryptionCertificateId: config.EncryptionCertificateId,
+                  encryptionCertificateId:meetingDetails.id
+              };
 
-            var response = await axios.post(config.SubscriptionURL, subscriptionCreationInformation, {
-                headers: {
-                    "accept": "application/json",
-                    "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
-                }
-            });
+              var response = await axios.post(config.SubscriptionURL, subscriptionCreationInformation, {
+                  headers: {
+                      "accept": "application/json",
+                      "contentType": 'application/json',
+                      "authorization": "bearer " + applicationToken
+                  }
+              });
 
-            existingSubscription = response.data;
-            return existingSubscription.id + "|Subscription created.";
+              existingSubscription = response.data;
+              return existingSubscription.id + "|Subscription created.";         
         }); 
          return existingSubscription.id + "|Subscription created.";
       }
@@ -301,9 +336,13 @@ async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meeti
   const apiKey = config.azureOpenAIKey;
   const endpoint =  config.azureOpenAIEndpoint;
   const deployment_Id = config.azureOpenAIDeploymentName; 
-  const client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
+  const ai_client = new OpenAIClient(endpoint, new AzureKeyCredential(apiKey));
   let fileChunks = [];
   try {
+    
+       client.trackEvent({ name: "subscription", properties: { transcribeAndExtractUserActionItems: meetingNotes } });
+              
+
         const splitter = new RecursiveCharacterTextSplitter({
             chunkSize: 3000,
             chunkOverlap: 2,
@@ -325,7 +364,7 @@ async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meeti
               { role: "user", content: chunkContent }
           ];
           
-          const response = await client.getChatCompletions(deployment_Id, messages, { maxTokens: 2000 });
+          const response = await ai_client.getChatCompletions(deployment_Id, messages, { maxTokens: 2000 });
           generatedText = response.choices[0].message.content.trim(); 
           try
           { 
@@ -374,10 +413,10 @@ async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meeti
         ];
       
 
-        const response = await client.getChatCompletions(deployment_Id, messages_MeetingSummary, { maxTokens: 4095 });
+        const response = await ai_client.getChatCompletions(deployment_Id, messages_MeetingSummary, { maxTokens: 4095 });
           
         const MeetingSummary = `\n <b> Meeting Name: </b> ${meetingDetails.subject}
-                                \n <b> Date:</b>  ${ConvertTimeToLocal(meetingDetails.startDateTime)}
+                                \n <b> Date:</b>  ${ConvertTimeToLocal(new Date())}
                                 \n <b> Meeting Summary:</b> <br /> ${FormatActionItems(response.choices[0].message.content.trim())} <br />
                                  \n <b> Action Items:<b> <br /> \n \n \n ${concatinateActionItemsForUsers}`;
 
@@ -388,6 +427,11 @@ async function transcribeAndExtractUserActionItems(meetingNotes, userinfo, meeti
         //meetingDetails
         // extractUserActionItems(MeetingSummary, responsesResults.join('\n'), userinfo);
   } catch (error) {
+    // userinfo.forEach( user => {
+    //   SendUserActivity(user.conversationId, error);
+    // });
+      client.trackException({ exception: error, properties: { transcribeAndExtractUserActionItems: "transcribeAndExtractUserActionItems" } });
+
       console.error('Error fetching data from Azure OpenAI API:', error.message);
   }
 }
