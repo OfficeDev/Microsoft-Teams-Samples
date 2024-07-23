@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample echo skill bot showcases the implementation of basic message mirroring and interaction within both personal and Teams scopes.
+description: This sample echo skill bot demonstrates the implementation of basic message mirroring and interaction within both personal and Teams contexts.
 products:
 - office-teams
 - office
@@ -15,13 +15,14 @@ urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
 
 # Echo Skill Bot
 
-This simple echo skill bot repeats the exact message sent by the user, showcasing basic message handling in both personal and Teams scopes.
-**Note: This skill bot is going to be called from the main Virtual Assistant bot (Root Bot) and it will echo back the same message sent by the user.**
+This simple echo bot repeats the user's message and sends it back to them, demonstrating basic message handling in personal chats and Teams.
+
+**Note: This skill bot will be called by the main Virtual Assistant bot (Root Bot) and will echo back the user's message.**
 
 ## Included Features
 * Bots
 
-## Interaction with the bot
+## Interaction with the Bot
 
 ![Conversation Bot](images/echo-skill-bot.gif)
 
@@ -69,8 +70,8 @@ This simple echo skill bot repeats the exact message sent by the user, showcasin
 ## Setup the Appplication Insights
 In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource).
 
-**Note>** While creating the Application Insights, please select the NodeJS as the application type.
-    - Collect and save Instrumentation Key and Connecting String which will be required later to update in the `.env` configuration file in code.
+**Note>** When setting up Application Insights, choose NodeJS as the application type.
+    - Make sure to collect and save the Instrumentation Key and Connection String, as you'll need these to update the `.env` configuration file in your code later.
 
 ## Setup the code
 1) Clone the repository
