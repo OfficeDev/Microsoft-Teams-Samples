@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample echo skill bot demonstrates the implementation of basic message mirroring and interaction within both personal and Teams contexts.
+description: This sample bot demonstrates the implementation of basic message mirroring and interaction within both personal and Teams channel scopes.
 products:
 - office-teams
 - office
@@ -15,9 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
 
 # Echo Skill Bot
 
-This simple echo bot repeats the user's message and sends it back to them, demonstrating basic message handling in personal chats and Teams.
+This simple echo skill bot repeats the user's message and sends it back to them, demonstrating basic message handling in personal chats and Teams channel scopes.
 
 **Note: This skill bot will be called by the main Virtual Assistant bot (Root Bot) and will echo back the user's message.**
+
+You can create a new skill bot by following the steps mentioned in the [Create a skill](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs) documentation.
 
 ## Included Features
 * Bots
@@ -28,20 +30,28 @@ This simple echo bot repeats the user's message and sends it back to them, demon
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account
+- Microsoft Teams is installed and you have an valid M365 account
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- Visual Studio Code or any other code editor
+- An Azure subscription with permissions to create resources
 
 ## Setup for App Registration
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
-    * Choose the **supported account types** as "MultiTenant" only
+    * Choose the **supported account types** as "MultiTenant" only (If you created your Virtual Assistant (root bot) then you should selet multi-tenant here as well). For more information, see [Supported account types](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs).
+    ![tenant-wise-support](images/tenant-wise-support.png)
+    
     * Leave **Redirect URI** empty.
     * Choose **Register**.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your `Teams application manifest` and in the `.env` file configuration in code.
-4. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `.env` file configuration in code.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your `Teams application manifest` and `.env` file configuration in your code.
+4. Navigate to **Certificates & secrets**. In the Client secrets section:
+    * Click on "+ New client secret".
+    * Add a description(Name of the secret) for the secret and select “Never” for Expires.
+    * Click "Add".
+    * Once the client secret is created, copy its value, it need to be placed in the `.env` file configuration in code.
 
 ## Setup NGROK
    Run ngrok - point to port 39783
@@ -62,7 +72,7 @@ This simple echo bot repeats the user's message and sends it back to them, demon
     - Select **supported account types** as "MultiTenant" and select "Use existing app registration" and provide app registration app id (Application (client) ID) created in previous step.
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
-- In the new Azure Bot resource in the Portal, 
+- In the new Azure Bot resource in the Portal,
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application (NGROK/Devtunnel URL). Append with the path `/api/messages`
     for example: `https://12345.ngrok-free.app/api/messages` or `https://12345.devtunnels.ms/api/messages`
@@ -70,7 +80,7 @@ This simple echo bot repeats the user's message and sends it back to them, demon
 ## Setup the Appplication Insights
 In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource).
 
-**Note>** When setting up Application Insights, choose NodeJS as the application type.
+**Note>** When setting up Application Insights, choose `NodeJS` as the application type.
     - Make sure to collect and save the Instrumentation Key and Connection String, as you'll need these to update the `.env` configuration file in your code later.
 
 ## Setup the code
@@ -84,7 +94,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
 3) Install node modules
 
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+   Inside `echo-skill-bot` folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
@@ -94,10 +104,10 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
    - `{{MicrosoftAppType}}` - The value for app type will be `MultiTenant` only as we have configured the app registration for MultiTenant and this app (Including virtual assistant bot) supports multiple tenant only.
    - `{{MicrosoftAppId}}` - Generated while registering your application. (Application (client) ID) is the application app id.
    - `{{MicrosoftAppPassword}}` - Generated while registering your application. Also referred to as Client secret.
-   - `{{MicrosoftAppTenantId}}` - Put it as blank as we are using MultiTenant app.
+   - `MicrosoftAppTenantId` - Put it as blank as we are using MultiTenant app.
    - `{{AllowedCallers}}` - ID of the application that are allowed to call this skill bot (Echo skill bot). In this case, please provide the app registration id of your main virtual assistant bot (Root Bot).
    - `{{APPINSIGHTS_INSTRUMENTATIONKEY}}` - Provide the application insights `Instrumentation Key` created in previous steps. (Required to log the telemetry data)
-   - `{{APPINSIGHTS_CONNECTIONSTRING}}` - Provide the application insights `Connection String` created in previous steps. (Required to log the telemetry data)
+   - `{{APPINSIGHTS_CONNECTIONSTRING}}` - Provide the application insights `Connection String` created in previous steps in single quote. (Required to log the telemetry data)
 
 5) Run your application locally
 
@@ -111,7 +121,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 1. Modify the `manifest.json` available in the `/appPackage` folder in your opened project in `Visual Studio Code` and replace the following details:
    - `{{MicrosoftAppId}}` It can be any GUID or you can add your app registration id as well which was generated while registering or creating the app registration in Azure portal.
    - `{{BotId}}` Replace with your app registration id which was generated while registering or creating the app registration in Azure portal.
-   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be `12345.ngrok-free.app` when you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be `12345.ngrok-free.app` when you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`. If you have deployed the application in Azure app service, please use like `xyz.azurewebsites.net`.
 
 2. Zip the contents of the `appPackage` folder to create a `manifest.zip` file.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
@@ -139,7 +149,7 @@ You can interact with this echo skill bot in Teams by sending it a message. The 
 
 ## Deploy the app to Azure
 
-To learn more about deploying a nodejs app to Azure, see [Configure the App Service app and deploy the code](https://learn.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=windows&pivots=development-environment-vscode#configure-the-app-service-app-and-deploy-code) for a complete list of deployment instructions.
+To learn more about deploying a `NodeJS` app to Azure, see [Configure the App Service app and deploy the code](https://learn.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=windows&pivots=development-environment-vscode#configure-the-app-service-app-and-deploy-code) for a complete list of deployment instructions.
 
 ## Further reading
 
