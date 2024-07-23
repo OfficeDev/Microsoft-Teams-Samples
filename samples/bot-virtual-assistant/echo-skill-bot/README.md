@@ -93,7 +93,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
 3) Install node modules
 
-   Inside `echo-skill-bot` folder, open your local terminal and run the below command to install `node modules``. You can do the same in `Visual Studio Code` terminal by opening the project in Visual Studio Code.
+   Inside `echo-skill-bot` folder, open your local terminal and run the below command to install `node modules`. You can do the same in `Visual Studio Code` terminal by opening the project in Visual Studio Code.
 
     ```bash
     npm install
