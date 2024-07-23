@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07/15/2024 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-echo-skill-bot-nodejs
 ---
 
 # Echo Skill Bot
@@ -90,7 +90,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-virtual-assistant/bot-ai-virtual-assistant`
+2) In a terminal, navigate to `samples/bot-virtual-assistant/echo-skill-bot`
 
 3) Install node modules
 
@@ -125,9 +125,9 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
 2. Zip the contents of the `appPackage` folder to create a `manifest.zip` file.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
-3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+3. Upload the manifest.zip file to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
-   - Choose Upload a custom App
+   - Choose [Upload a custom App](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#upload-your-app) (If it is not enabled, please contact your Teams admin to enable this feature or you can also refer [Allow users to upload custom apps](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps))
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
@@ -148,15 +148,17 @@ You can interact with this echo skill bot in Teams by sending it a message. The 
 ![user-prompt ](images/6.bot-response.png)
 
 ## Deploy the app to Azure
+If you want to deploy the app to Azure, you can follow the below steps:
+- Create an app service in Azure that support NodeJS.
+- Deploy the code to the app service.
 
 To learn more about deploying a `NodeJS` app to Azure, see [Configure the App Service app and deploy the code](https://learn.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=windows&pivots=development-environment-vscode#configure-the-app-service-app-and-deploy-code) for a complete list of deployment instructions.
 
 ## Further reading
 
 - [Implement a skill](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs)
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-virtual-assistant" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-virtual-assistant/echo-skill-bot" />
