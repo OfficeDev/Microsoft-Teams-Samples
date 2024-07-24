@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-ai-skill-bo
 
 # AI Skill Bot
 
-This AI Translator Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in both personal chats and within Teams channels, showcasing its functionality across different communication contexts.
+This AI Skill Translator Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in both personal chats and within Teams channels, showcasing its functionality across different communication contexts.
 
 **Note: This skill bot will be called by the main Virtual Assistant bot (Root Bot) to perform translations and return the translated response to the user.**
 
