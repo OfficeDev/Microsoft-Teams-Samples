@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "ai-bot",
-    "full": "ai skill bot"
+    "short": "AI Translator Bot",
+    "full": "AI Skill Bot for Translation"
   },
   "description": {
-    "short": "AI skill bot to perform translation",
-    "full": "AI skill bot that perform translation for user provided inputs and give response back to users."
+    "short": "AI bot that translates text",
+    "full": "An AI skill bot designed to translate user-provided text inputs and return the translated responses."
   },
   "accentColor": "#FFFFFF",
   "bots": [
