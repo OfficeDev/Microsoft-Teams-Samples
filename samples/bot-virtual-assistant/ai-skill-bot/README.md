@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This AI Translator Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in both personal and Teams channel scopes.
+description: This AI Translator Skill Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in both personal and Teams channel scopes.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-ai-skill-bo
 
 # AI Skill Bot
 
-This AI Skill Translator Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in both personal chats and within Teams channels, showcasing its functionality across different communication contexts.
+This AI Translator Skill Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in both personal chats and within Teams channels, showcasing its functionality across different communication contexts.
 
 **Note: This skill bot will be called by the main Virtual Assistant bot (Root Bot) to perform translations and return the translated response to the user.**
 
@@ -35,6 +35,7 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Visual Studio Code](https://code.visualstudio.com/Download) or any other code editor
 - An [Azure subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide) with permissions to create resources
+- [Azure Open AI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
 
 ## Setup for App Registration
 
@@ -45,12 +46,12 @@ You can create a new skill bot by following the steps mentioned in the [Create a
     ![tenant-wise-support](images/tenant-wise-support.png)
     
     * Leave **Redirect URI** as empty.
-    * Click on **Register** but to create app registration.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those values later when updating your `Teams application manifest` and `.env` file configuration in sample code.
+    * Click on **Register** button to create app registration.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
 4. Navigate to **Certificates & secrets**. In the Client secrets section:
     * Click on **"+ New client secret"**.
     * Add a description (Name of the secret) for the secret and select “Never” for Expires.
-    * Click "Add".
+    * Click "Add" button.
     * Once the client secret is created, copy its value and save. It will be required later to add in the `.env` file configuration in sample code.
 
 ## Setup NGROK
@@ -67,9 +68,9 @@ You can create a new skill bot by following the steps mentioned in the [Create a
    ```
 
 ## Setup the Azure bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+- In Azure portal, create an [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - Fill all the required information including the bot name.
-    - Select **supported account types** as `MultiTenant` and select `Use existing app registration` and provide app registration id (Application (client) ID) created in previous steps.
+    - Select **supported account types** as `MultiTenant` and select `Use existing app registration` and provide app registration id (Application (client) ID) created while creating app registration in previous steps.
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
 - Open newly created Azure Bot resource in the Azure Portal and update the following settings:
@@ -80,9 +81,8 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 ## Create an Azure Open AI service
 
 - In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
-- Create and collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName` and save these values to update in `.env` file later.
-
 - **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
+- Collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName` values and save these values to update in `.env` file later.
 
 ## Setup the code
 1) Clone the repository
@@ -130,12 +130,12 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 3. Upload the `manifest.zip` file to Teams (in the Apps view click **"Upload a custom app"**)
    - Go to **Microsoft Teams** and then go to side panel, select Apps
    - Choose [Upload a custom App](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#upload-your-app) (If it is not enabled, please contact your Teams admin to enable this feature or you can also refer [Allow users to upload custom apps](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps))
-   - Go to your project directory, the `./appPackage` folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   - Go to your project directory and `./appPackage` folder, select the zip folder, and choose Open.
+   - Select Add in the opened pop-up dialog box. Your app will be uploaded to Teams.
 
 ## Running the sample
 
-You can interact with this AI skill translator bot in Teams by sending it a message. The bot will translate the message into the desired language and return the translated response.
+You can interact with this AI translator skill bot in Teams by sending it a message. The bot will translate the message into the desired language and return the translated response.
 
 **User Prompt:** 
 

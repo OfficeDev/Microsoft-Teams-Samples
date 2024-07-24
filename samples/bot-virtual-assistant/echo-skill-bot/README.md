@@ -45,12 +45,12 @@ You can create a new skill bot by following the steps mentioned in the [Create a
     ![tenant-wise-support](images/tenant-wise-support.png)
     
     * Leave **Redirect URI** as empty.
-    * Click on **Register** but to create app registration.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those values later when updating your `Teams application manifest` and `.env` file configuration in sample code.
+    * Click on **Register** button to create app registration.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
 4. Navigate to **Certificates & secrets**. In the Client secrets section:
     * Click on **"+ New client secret"**.
     * Add a description (Name of the secret) for the secret and select “Never” for Expires.
-    * Click "Add".
+    * Click "Add" button.
     * Once the client secret is created, copy its value and save. It will be required later to add in the `.env` file configuration in sample code.
 
 ## Setup NGROK
@@ -67,9 +67,9 @@ You can create a new skill bot by following the steps mentioned in the [Create a
    ```
 
 ## Setup the Azure bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+- In Azure portal, create an [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - Fill all the required information including the bot name.
-    - Select **supported account types** as `MultiTenant` and select `Use existing app registration` and provide app registration id (Application (client) ID) created in previous steps.
+    - Select **supported account types** as `MultiTenant` and select `Use existing app registration` and provide app registration id (Application (client) ID) created while creating app registration in previous steps.
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
 - Open newly created Azure Bot resource in the Azure Portal and update the following settings:
@@ -127,8 +127,8 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 3. Upload the `manifest.zip` file to Teams (in the Apps view click **"Upload a custom app"**)
    - Go to **Microsoft Teams** and then go to side panel, select Apps
    - Choose [Upload a custom App](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#upload-your-app) (If it is not enabled, please contact your Teams admin to enable this feature or you can also refer [Allow users to upload custom apps](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps))
-   - Go to your project directory, the `./appPackage` folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   - Go to your project directory and `./appPackage` folder, select the zip folder, and choose Open.
+   - Select Add in the opened pop-up dialog box. Your app will be uploaded to Teams.
 
 ## Running the sample
 
