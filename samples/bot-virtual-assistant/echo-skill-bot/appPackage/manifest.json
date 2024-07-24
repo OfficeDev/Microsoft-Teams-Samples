@@ -16,11 +16,11 @@
   },
   "name": {
     "short": "echo-bot",
-    "full": "echo-skill-bot"
+    "full": "Echo Skill Bot"
   },
   "description": {
     "short": "Echo bot",
-    "full": "Echo bot that echo back the user provided messages as inputs."
+    "full": "A bot that echoes back the messages provided by the user, allowing for simple interaction and message verification."
   },
   "accentColor": "#FFFFFF",
   "bots": [
