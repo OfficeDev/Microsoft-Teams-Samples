@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.5",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.skype.teams.samples.sampleapp",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#3F487F",
   "staticTabs": [
     {
-      "contentUrl": "https://{{domain-name}}/BotInfo",
+      "contentUrl": "${{BOT_ENDPOINT}}/BotInfo",
       "entityId": "statictab",
       "name": "Bot Info",
       "scopes": [
@@ -36,7 +36,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{domain-name}}/Page/index.html",
+      "configurationUrl": "${{BOT_ENDPOINT}}/Page/index.html",
       "canUpdateConfiguration": false,
       "scopes": [
         "team",
@@ -46,7 +46,7 @@
   ],
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "isNotificationOnly": false,
       "scopes": [
         "team",
@@ -153,7 +153,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -177,6 +177,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{BOT_DOMAIN}}"
   ]
 }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.appcompleteauth",
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{Base_URL_Domain}/botid-{{Microsoft-App-Id}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
   },
   "developer": {
     "name": "Microsoft",
@@ -29,7 +29,7 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "contentUrl": "https://{Base_URL_Domain}/tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
@@ -39,7 +39,7 @@
   ],
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -68,7 +68,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -132,7 +132,7 @@
           "value": {
             "domains": [
               "*.botframework.com",
-              "{Base_URL_Domain}"
+              "${{BOT_DOMAIN}}"
             ]
           }
         }
@@ -145,6 +145,6 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "{Base_URL_Domain}"
+    "${{BOT_DOMAIN}}"
   ]
 }
