@@ -22,6 +22,7 @@ This sample demonstrates generating action items and a meeting summary based on 
 * **Graph API:** Utilize graph APIs to retrieve meeting transcriptions and other meeting or user-related details.
 * **Azure Open AI:** Leverages Azure OpenAI for extracting action items and meeting summaries.
 * **Azure Table Storage:** Utilizes Azure Table Storage to store subscribed user information, including conversation IDs for sending meeting details.
+* **Self-Signed Certificate:** Uses Azure self-signed certificates for encryption and decryption to establish the meeting subscription.
 
 ## Interaction with app
 
@@ -35,6 +36,7 @@ This sample demonstrates generating action items and a meeting summary based on 
 - [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 - [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) if on macOS (`brew install --cask powershell`)
+- [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal)
 
 ### Create an Azure Open AI service
 - In Azure portal, create a [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
@@ -43,6 +45,10 @@ This sample demonstrates generating action items and a meeting summary based on 
 ### Create an Azure Table Storage
 - In Azure portal, create a [Azure Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal).
 - Create and collect `Account_Name`, `Account_Key`, `Table_Name`, and save those value  to update in `.env` file later.
+
+## Create an Azure Self-Signed Certificate
+- In Azure portal, create a [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal).
+- Create and collect `EncryptionCertificateId`, `Base64EncodedCertificate`, `PRIVATE_KEY_PATH`, and save those value  to update in `.env` file later.
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
