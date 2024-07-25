@@ -34,6 +34,9 @@
       },
       "azureSearchIndex": {
           "value": "${{AZURE_SEARCH_INDEX}}"
+      },
+      "azureOpenAIModel": {
+        "value": "${{AZURE_OPENAI_MODEL}}"
       }
   }
 }

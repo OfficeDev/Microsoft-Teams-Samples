@@ -40,7 +40,7 @@ if config.AZURE_OPENAI_KEY:
     model = OpenAIModel(
         AzureOpenAIModelOptions(
             api_key=config.AZURE_OPENAI_KEY,
-            default_model='gpt-4o',
+            default_model=config.AZURE_OPENAI_MODEL,
             api_version="2024-02-15-preview",
             endpoint=config.AZURE_OPENAI_ENDPOINT,
             logger=logger
@@ -50,7 +50,7 @@ else:
     model = OpenAIModel(
         AzureOpenAIModelOptions(
             azure_ad_token_provider=get_bearer_token_provider(DefaultAzureCredential(), 'https://cognitiveservices.azure.com/.default'),
-            default_model='gpt-4o',
+            default_model=config.AZURE_OPENAI_MODEL,
             api_version="2024-02-15-preview",
             endpoint=config.AZURE_OPENAI_ENDPOINT,
             logger=logger
@@ -65,7 +65,7 @@ prompts = PromptManager(
 async def get_default_prompt(context: TurnContext, state: TurnState, planner: ActionPlanner) -> PromptTemplate:
     prompt = await prompts.get_prompt("chat")
 
-    prompt.config.completion.model = 'gpt-4o'
+    prompt.config.completion.model = config.AZURE_OPENAI_MODEL
 
     if config.AZURE_SEARCH_ENDPOINT:
         if config.AZURE_SEARCH_KEY:
