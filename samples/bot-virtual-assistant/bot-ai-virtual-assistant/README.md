@@ -67,15 +67,14 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
    - `AZURE_OPENAI_DEPLOYMENT_NAME` - Generated while creating Azure Open AI service (`AzureOpenAIDeploymentName` value).
    - `MicrosoftAppType` - The value for app type will be `MultiTenant` because we have configured the application to support `MultiTenant` Including Echo skill and AI Translator skill bots which we are going to call from this Virtual Assistant bot.
    - `MicrosoftAppTenantId` - Put it as blank as we are using MultiTenant app.
-   - `SkillHostEndpoint` - It will be in format: `{ApplicationBaseURL}/api/skills/`.
-     Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
+   - `SkillHostEndpoint` - It will be in format: `{ApplicationBaseURL}/api/skills/`. Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
+   
    - `SkillId` - It will be comma separated list of unique id's that will be representing your skill bots like: `EchoSkillBot,OpenAiSkillBot`
    - `SkillAppId` - It will be comma separated list of your app registration id's of your skill bots like: `SkillAppId=xxxxxx-4573-xxxx-2e74bf1edbd0,xxxxx-1b8a-4029-xxxx-aa07dc2d3ee6`
 
    **Note: Make sure that your `SkillId` values and `SkillAppId` values are in proper order means if you have added skillId as `EchoSkillBot` first, you should add that app registration id as in first place in `SkillAppId` section followed by `OpenAiSkillBot` related app registraiton id value.**
-   - `SkillEndpoint` - It will be comma separated list of your bot's Messaging Endpoing like: `{EchoBot-ApplicationBaseURL}/api/messages,{AIBot-ApplicationBaseURL}/api/messages`.
-   
-   Example: `http://localhost:39783/api/messages,http://localhost:39784/api/messages`
+   - `SkillEndpoint` - It will be comma separated list of your bot's Messaging Endpoing like: `{EchoBot-ApplicationBaseURL}/api/messages,{AIBot-ApplicationBaseURL}/api/messages`. Example: `http://localhost:39783/api/messages,http://localhost:39784/api/messages`
+
    - `APPINSIGHTS_INSTRUMENTATIONKEY` - Provide the application insights `Instrumentation Key` created in previous steps (Required to log the telemetry data).
    - `APPINSIGHTS_CONNECTIONSTRING` - Provide the application insights `Connection String` created in previous steps in single quote (Required to log the telemetry data).
 
