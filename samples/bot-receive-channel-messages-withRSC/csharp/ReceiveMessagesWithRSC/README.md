@@ -7,7 +7,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Showing messages based on option selected
 
-![Channel messages](Images/botWithRSCFlow.png)
+![Bot Receive Channel MessagesWithRSCGif](images/Bot_Channel_Messenging-RSC-nodejs-gif.gif)
 
 ## Prerequisites
 
@@ -60,9 +60,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `AppManifest`, and then select **Add** to add the bot to your selected team.
     
-![App Installation](Images/installApp.png)
-
-![Permissions](Images/permissions1.png)
+![App Installation](Images/1.Install.png)
 
 ## To try this sample
 
@@ -90,12 +88,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
   - Select `ReceiveMessagesWithRSC.csproj` file
   - Press `F5` to run the project
 
-## Interacting with the bot in Teams
+## Running the sample
 
-Select a channel and enter a message in the channel for your bot.
+**Adding bot UI:**
 
-The bot receives the message without being @mentioned.
+![App installation](images/1.Install.png)
 
+**Hey command interaction:**
+
+![Permissions](images/3.Interaction.png)
+
+**1 or 2 command interaction:**
+
+![Permissions](images/4.1_and_2_Command_Interaction.png) 
+
+**Adding App to group chat:**
+
+![Adding To Groupchat](images/5.Install_to_GC.png) 
+
+**Group chat interaction with bot without being @mentioned:**
+
+![Group Chat](images/7.1_and_2_Command_Interaction.png) 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
