@@ -16,11 +16,11 @@
     },
     "name": {
         "short": "virtual-assistant${{APP_NAME_SUFFIX}}",
-        "full": "Teams AI based Virtual Assistant Root Bot"
+        "full": "Teams AI-based Virtual Assistant Root Bot"
     },
     "description": {
-        "short": "A virtual assistant bot that dynamically calls Echo and AI skill bots.",
-        "full": "This virtual assistant bot acts as a root bot in Microsoft Teams, using the Teams AI library to direct inputs to an Echo or AI skill bot. It enhances productivity by providing automated responses and information retrieval, improving team communication."
+        "short": "A root bot that routes inputs to skill bots for tailored responses.",
+        "full": "The Teams AI-based Virtual Assistant Root Bot routes user inputs to specialized skill bots, such as Echo and AI Translator, using the Teams AI library. It enhances productivity by automating responses and providing tailored information."
     },
     "accentColor": "#FFFFFF",
     "bots": [
