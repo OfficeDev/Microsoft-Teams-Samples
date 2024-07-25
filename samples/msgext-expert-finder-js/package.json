@@ -1,10 +1,10 @@
 {
-  "name": "msgextmultiparamjs",
+  "name": "expert-finder-js",
   "version": "1.0.0",
   "msteams": {
     "teamsAppId": null
   },
-  "description": "Microsoft Teams Toolkit message extension search sample",
+  "description": "Microsoft Teams message extension that can be used as a plugin to Search for candidates and share profiles matching a criteria.",
   "engines": {
     "node": "16 || 18"
   },

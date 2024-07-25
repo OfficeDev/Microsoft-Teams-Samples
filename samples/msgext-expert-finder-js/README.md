@@ -6,6 +6,10 @@ products:
 - copilot-m365
 languages:
 - javascript
+extensions:
+ contentType: samples
+ createdDate: "07/26/2024 23:30:17 PM"
+urlFragment: officedev-microsoft-teams-samples-msgext-expert-finder-js
 ---
 
 # Expert Finder message extension sample with SSO
@@ -13,7 +17,7 @@ languages:
 ## Interaction with app
 
 In this sample, we demonstrate two capabilities of Copilot for M365:
-1) to search across a database of candidates to find a relevant "expert" based on multiple parameters such as their skill, location and availability.
+1) To search across a database of candidates to find a relevant "expert" based on multiple parameters such as their skill, location and availability.
 2) Single Sign On (SSO) when using plug-ins within Copilot for M365.
 
 On first use, a window requesting for Sign In pops-up and once SSO is completed, the user flow continues as usual. 
@@ -25,13 +29,13 @@ The database of candidates is hosted in an Azure Table storage, and the app itse
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Expert Finder sample app:** [Manifest](/samples/msgext-epert-finder-js/demo-manifest/expert-finder.zip)
+**Microsoft Teams Expert Finder sample app:** [Manifest](/samples/msgext-expert-finder-js/demo-manifest/expert-finder.zip)
 
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+- [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
 - [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 
@@ -55,8 +59,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 7) Navigate to the `samples/msgext-expert-finder-js/.localConfigs` directory and update the values below.
 
    ```txt
-      CONNECTION_STRING=<azure storage account connection string> (Created in step 1)
-      TABLE_NAME=<azure table name> (Created in step 2)
+      AZURE_TABLE_STORAGE_CONNECTION_STRING=<azure storage account connection string> (Created in step 1)
+      AZURE_TABLE_TABLE_NAME=<azure table name> (Created in step 2)
    ```
 
 ## Setup resources (Using Teams Toolkit for Visual Studio Code)
@@ -146,7 +150,7 @@ Add the following Ids as authorized clients for your application
 
     ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotConnectionString.png)
 
-## Upload the app manifest to teams.
+## Upload the app package to teams.
 1) Go to app store in teams -> Upload an app -> Upload custom/store app
 2) Navigate to `samples/msgext-expert-finder-js/appPackage/build` and select `appPackage.local.zip` for uploading.
 3) Add the app and test the app as a messaging extension.
@@ -165,7 +169,7 @@ Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left o
 
 ## Running the sample
 
-**SSO auth**
+**SSO auth with consent popup when sign in button is clicked**
 ![sso-auth](images/copilot-auth.png)
 
 **Search based on skills**

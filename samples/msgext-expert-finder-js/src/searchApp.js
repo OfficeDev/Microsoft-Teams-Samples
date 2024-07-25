@@ -1,3 +1,7 @@
+/// <summary>
+/// This class is responsible for handling the messaging extension code and SSO auth inside copilot.
+/// </summary>
+
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const config = require("./config");
 const azure = require("azure-storage");
@@ -44,12 +48,12 @@ class SearchApp extends TeamsActivityHandler {
     const searchObject = constructSearchObject(skills, country, availability);
 
     // Define your Azure Table Storage connection string or credentials
-    const connectionString = config.connectionString;
+    const storageConnectionString = config.storageConnectionString;
 
     // Create a table service object using the connection string
-    const tableService = azure.createTableService(connectionString);
+    const tableService = azure.createTableService(storageConnectionString);
 
-    var candiDateData = [];
+    var candidateData = [];
 
     // Define the name of the table you want to store data in
     const tableName = config.tableName;
@@ -68,7 +72,6 @@ class SearchApp extends TeamsActivityHandler {
 
     if (!tokenResponse || !tokenResponse.token) {
       //     // There is no token, so the user has not signed in yet.
-
       //     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
       const signInLink = await context.adapter.getSignInLink(
         context,
@@ -112,7 +115,6 @@ class SearchApp extends TeamsActivityHandler {
           whereClause += `(${condition})`;
         });
 
-
         // Add availability filter if provided
         if (queryParameters.availability !== undefined && queryParameters.availability !== null) {
           const availabilityCondition = `availability eq ${queryParameters.availability}`;
@@ -128,7 +130,6 @@ class SearchApp extends TeamsActivityHandler {
         }
 
         query.where(whereClause);
-
 
         tableService.queryEntities(
           tableName,
@@ -165,13 +166,12 @@ class SearchApp extends TeamsActivityHandler {
     var candidates = await fetchCandidates(searchObject);
 
     var attachments = [];
-    candiDateData = candidates;
-    console.log("Candidates:", candiDateData);
-
+    candidateData = candidates;
+    console.log("Candidates:", candidateData);
 
     // Create Adaptive Card object
 
-    candiDateData.map((result) => {
+    candidateData.map((result) => {
       var availability = result.availability._ ? "Yes" : "No"
       const resultCard = CardFactory.adaptiveCard({
         "type": "AdaptiveCard",

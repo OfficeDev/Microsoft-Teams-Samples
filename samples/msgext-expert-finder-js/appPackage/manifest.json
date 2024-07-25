@@ -7,10 +7,10 @@
     "defaultLanguageTag": "en-us"
   },
   "developer": {
-    "name": "Teams App, Inc.",
-    "websiteUrl": "https://www.example.com",
-    "privacyUrl": "https://www.example.com/termofuse",
-    "termsOfUseUrl": "https://www.example.com/privacy"
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -69,8 +69,12 @@
       ]
     }
   ],
-  "configurableTabs": [],
-  "staticTabs": [],
   "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": []
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+  "webApplicationInfo": {
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
+  }
 }

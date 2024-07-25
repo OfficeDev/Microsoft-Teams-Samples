@@ -40,6 +40,12 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
+## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
+
+|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|msgext-expert-finder-js|This sample implements a Teams message extension that can be used to query a database of candidates based on their skills, location and availability. The sample, when used with Copilot for M365, demonstrates SSO, and Copilot's ability to perform multi-parameter search.||[View][msgext-expert-finder#nodejs]|-
+
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------|:--------|
@@ -317,7 +323,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-unfurling-ac-loop-components#nodejs]:samples/msgext-unfurling-ac-loop-components/nodejs
 [msgext-unfurling-ac-loop-components#cs]:samples/msgext-unfurling-ac-loop-components/csharp
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
-[msgext-copilot-handoff#js]:samples/[msgext-copilot-handoff/ts
+[msgext-copilot-handoff#js]:samples/msgext-copilot-handoff/ts
+[msgext-expert-finder#nodejs]:samples/msgext-expert-finder/js
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp

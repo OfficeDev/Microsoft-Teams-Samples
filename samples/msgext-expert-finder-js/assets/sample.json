@@ -3,8 +3,8 @@
     "name": "officedev-microsoft-teams-samples-msgext-expert-finder-js",
     "source": "officeDev",
     "title": "Microsoft Teams msgext-expert-finder javascript sample",
-    "shortDescription": "Microsoft Teams bot-ai-meeting-helper sample app in Node.js how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-ai-meeting-helper",
+    "shortDescription": "Microsoft Teams message extension that can be used as a plugin to Search for candidates and share profiles matching a criteria.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-expert-finder",
     "longDescription": [
       "This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension allows users to query the candidates based on their skills, location and availability."
     ],
