@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Teams AI-based Virtual Assistant Root Bot dynamically routes user inputs to Echo and AI skill bots, returning tailored responses. It operates seamlessly within Microsoft Teams to enhance productivity by automating responses and facilitating efficient interactions.
+description: A Teams AI-based Virtual Assistant Root Bot that routes user inputs to skill bots for tailored responses, enhancing productivity within Microsoft Teams.
 products:
 - office-teams
 - office
@@ -62,15 +62,21 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
    - `BOT_ID` - It will be automatically generated while running the sample using Toolkit.
    - `BOT_PASSWORD` - It will be automatically generated while running the sample using Toolkit.
    - `SECRET_AZURE_OPENAI_API_KEY` - Generated while creating Azure Open AI service (`AzureOpenAIApiKey` value).
-   - `AZURE_OPENAI_ENDPOINT` - Generated while creating Azure Open AI service (`AzureOpenAIEndpoint` value). Example: https://abc.openai.azure.com/
+   - `AZURE_OPENAI_ENDPOINT` - Generated while creating Azure Open AI service (`AzureOpenAIEndpoint` value). 
+   Example: https://abc.openai.azure.com/
    - `AZURE_OPENAI_DEPLOYMENT_NAME` - Generated while creating Azure Open AI service (`AzureOpenAIDeploymentName` value).
    - `MicrosoftAppType` - The value for app type will be `MultiTenant` because we have configured the application to support `MultiTenant` Including Echo skill and AI Translator skill bots which we are going to call from this Virtual Assistant bot.
    - `MicrosoftAppTenantId` - Put it as blank as we are using MultiTenant app.
-   - `SkillHostEndpoint` - It will be in format: `{ApplicationBaseURL}/api/skills/` Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
+   - `SkillHostEndpoint` - It will be in format: `{ApplicationBaseURL}/api/skills/`.
+
+   Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
    - `SkillId` - It will be comma separated list of unique id's that will be representing your skill bots like: `EchoSkillBot,OpenAiSkillBot`
    - `SkillAppId` - It will be comma separated list of your app registration id's of your skill bots like: `SkillAppId=xxxxxx-4573-xxxx-2e74bf1edbd0,xxxxx-1b8a-4029-xxxx-aa07dc2d3ee6`
+
    **Note: Make sure that your `SkillId` values and `SkillAppId` values are in proper order means if you have added skillId as `EchoSkillBot` first, you should add that app registration id as in first place in `SkillAppId` section followed by `OpenAiSkillBot` related app registraiton id value.**
-   - `SkillEndpoint` - It will be comma separated list of your bot's Messaging Endpoing like: `{EchoBot-ApplicationBaseURL}/api/messages,{AIBot-ApplicationBaseURL}/api/messages` Example: `http://localhost:39783/api/messages,http://localhost:39784/api/messages`
+   - `SkillEndpoint` - It will be comma separated list of your bot's Messaging Endpoing like: `{EchoBot-ApplicationBaseURL}/api/messages,{AIBot-ApplicationBaseURL}/api/messages`.
+   
+   Example: `http://localhost:39783/api/messages,http://localhost:39784/api/messages`
    - `APPINSIGHTS_INSTRUMENTATIONKEY` - Provide the application insights `Instrumentation Key` created in previous steps (Required to log the telemetry data).
    - `APPINSIGHTS_CONNECTIONSTRING` - Provide the application insights `Connection String` created in previous steps in single quote (Required to log the telemetry data).
 
@@ -87,10 +93,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-> If you are facing any issue while adding the application from launched browser popup, you can upload the generated app package manually by following below steps: 
-1. Navigate to the application folder `samples/bot-virtual-assistant/bot-ai-virtual-assistant/appPackage/build` and check for `appPackage.local.zip` auto generated file.
+**If you are facing any issue while adding the application from launched browser popup, you can upload the generated app package manually by following below steps:**
 
-Upload the `appPackage.local.zip` file to Teams (in the Apps view click **"Upload a custom app"**)
+- Navigate to the application folder `samples/bot-virtual-assistant/bot-ai-virtual-assistant/appPackage/build` and check for `appPackage.local.zip` auto generated file.
+
+- Upload the `appPackage.local.zip` file to Teams (in the Apps view click **"Upload a custom app"**)
    - Go to **Microsoft Teams** and then go to side panel, select Apps
    - Choose [Upload a custom App](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#upload-your-app) (If it is not enabled, please contact your Teams admin to enable this feature or you can also refer [Allow users to upload custom apps](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps))
    - Go to your project directory and `./appPackage/build` folder, select the zip folder, and choose Open.
@@ -137,5 +144,7 @@ If you want to deploy the app to Azure, you can follow the below steps:
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Azure Open AI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
+- [Azure Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-virtual-assistant/ai-skill-bot" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-virtual-assistant/bot-ai-virtual-assistant" />
