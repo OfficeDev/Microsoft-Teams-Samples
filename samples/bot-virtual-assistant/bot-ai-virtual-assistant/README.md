@@ -63,13 +63,12 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
    - `BOT_PASSWORD` - It will be automatically generated while running the sample using Toolkit.
    - `SECRET_AZURE_OPENAI_API_KEY` - Generated while creating Azure Open AI service (`AzureOpenAIApiKey` value).
    - `AZURE_OPENAI_ENDPOINT` - Generated while creating Azure Open AI service (`AzureOpenAIEndpoint` value). 
-   Example: https://abc.openai.azure.com/
+     Example: https://abc.openai.azure.com/
    - `AZURE_OPENAI_DEPLOYMENT_NAME` - Generated while creating Azure Open AI service (`AzureOpenAIDeploymentName` value).
    - `MicrosoftAppType` - The value for app type will be `MultiTenant` because we have configured the application to support `MultiTenant` Including Echo skill and AI Translator skill bots which we are going to call from this Virtual Assistant bot.
    - `MicrosoftAppTenantId` - Put it as blank as we are using MultiTenant app.
    - `SkillHostEndpoint` - It will be in format: `{ApplicationBaseURL}/api/skills/`.
-
-   Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
+     Example: `http://localhost:3978/api/skills/` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
    - `SkillId` - It will be comma separated list of unique id's that will be representing your skill bots like: `EchoSkillBot,OpenAiSkillBot`
    - `SkillAppId` - It will be comma separated list of your app registration id's of your skill bots like: `SkillAppId=xxxxxx-4573-xxxx-2e74bf1edbd0,xxxxx-1b8a-4029-xxxx-aa07dc2d3ee6`
 
@@ -106,6 +105,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ## Running the sample
 
 You can interact with this AI Virtual Assistant bot in Teams by sending it a message. The bot will dynamically route user inputs to Echo and AI skill bots, that returning tailored responses.
+
+**Note: We will ask queries to Virtual Assistant Bot and it will call Echo and AI Translator skill bots to get the responses.**
 
 ### ECHO Bot
 **User Prompt:** 
