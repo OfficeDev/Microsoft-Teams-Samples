@@ -3,8 +3,6 @@ page_type: sample
 description: A Teams AI-based Virtual Assistant Root Bot that routes user inputs to skill bots for tailored responses, enhancing productivity within Microsoft Teams.
 products:
 - office-teams
-- office
-- office-365
 languages:
 - nodejs
 extensions:
@@ -24,7 +22,7 @@ You can implement a skill consumer bot by following the steps mentioned in the [
 ## Included Features
 * Bots
 
-## Interaction with the Bot
+## Interaction with the Bot 
 
 ![Conversation Bot](images/bot-ai-virtual-assistant.gif)
 
@@ -44,7 +42,7 @@ You can implement a skill consumer bot by following the steps mentioned in the [
 - **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
 - Collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName` values and save these values to update in `.localConfigs` file later.
 
-## Setup the Appplication Insights
+## Setup the Application Insights
 In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource) and save `Instrumentation Key` and `Connection String` values and which will be required later while updating `.localConfigs` file configuration in sample code.
 
 **Note>** While creating or setting up Application Insights, choose `NodeJS` as the application type.
@@ -105,9 +103,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 You can interact with this AI Virtual Assistant bot in Teams by sending it a message. The bot will dynamically route user inputs to Echo and AI skill bots, that returning tailored responses.
 
-**Note: We will ask queries to Virtual Assistant Bot and it will call Echo and AI Translator skill bots to get the responses.**
+**Note: We will ask queries to Virtual Assistant Bot and it will call Echo or AI Translator skill bot to get the responses.**
 
 ### ECHO Bot
+- [Click here to setup Echo Skill Bot](../echo-skill-bot/README.md)
+
 **User Prompt:** 
 
 `Repeat this for me - Why did Microsoft Copilot refuse to play hide and seek? Because good assistance is always easy to find!`
@@ -121,6 +121,8 @@ You can interact with this AI Virtual Assistant bot in Teams by sending it a mes
 ![user-prompt ](images/6.echo-bot-response.png)
 
 ### AI Translator Bot
+- [Click here to setup AI Translator Bot](../ai-skill-bot/README.md)
+
 **User Prompt:** 
 
 `Can you convert the sentence 'I will attend the meeting tomorrow' into French?`

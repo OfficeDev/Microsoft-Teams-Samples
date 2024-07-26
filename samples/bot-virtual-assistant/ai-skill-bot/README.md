@@ -3,8 +3,6 @@ page_type: sample
 description: This AI Translator Skill Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in both personal and Teams channel scopes.
 products:
 - office-teams
-- office
-- office-365
 languages:
 - nodejs
 extensions:

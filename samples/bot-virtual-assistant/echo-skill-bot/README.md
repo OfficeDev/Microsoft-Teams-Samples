@@ -3,8 +3,6 @@ page_type: sample
 description: This sample bot demonstrates the implementation of basic message mirroring and interaction within both personal and Teams channel scopes.
 products:
 - office-teams
-- office
-- office-365
 languages:
 - nodejs
 extensions:
@@ -77,7 +75,7 @@ You can create a new skill bot by following the steps mentioned in the [Create a
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application (NGROK/Devtunnel URL). Append with the path `/api/messages`
     for example: `https://12345.ngrok-free.app/api/messages` or `https://12345.devtunnels.ms/api/messages` or  `https://abc.azurewebsites.net`
 
-## Setup the Appplication Insights
+## Setup the Application Insights
 In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource) and save `Instrumentation Key` and `Connection String` values and which will be required later while updating `.env` file configuration in sample code.
 
 **Note>** While creating or setting up Application Insights, choose `NodeJS` as the application type.
