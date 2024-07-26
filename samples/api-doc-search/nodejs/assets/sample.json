@@ -11,7 +11,7 @@
     "creationDateTime": "2024-07-15",
     "updateDateTime": "2024-07-15",
     "products": [
-      "Azure Open AI", "CosmosDB", "Azure Functions", "Blob Storage"
+      "Azure Open AI", "Azure CosmosDB", "Azure Functions", "Azure Blob Storage"
     ],
     "metadata": [
       {
@@ -28,7 +28,7 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "Azure Open AI, CosmosDB, Azure Functions, Blob Storage"
+        "value": "Azure Open AI, Azure CosmosDB, Azure Functions, Azure Blob Storage"
       }
     ],
     "thumbnails": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/api-doc-search/nodejs/Images/rag-based-cosmos-db.gif",
-        "alt": "Solution UX showing RAG Based CosmosDB semantic search node js"
+        "alt": "Solution UX showing RAG Based CosmosDB semantic search NodeJS"
       }
     ],
     "authors": [
@@ -48,20 +48,20 @@
     ],
     "references": [
       {
-        "name": "Azure CosmosDB",
-        "url": "https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/vector-search"
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
       },
       {
-        "name": "Azure Open AI Service",
-        "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/overview"
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
       },
       {
-        "name": "Azure Function",
-        "url": "https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript"
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
       },
       {
-        "name": "Azure Blob Storage",
-        "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction"
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }
