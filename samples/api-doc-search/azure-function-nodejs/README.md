@@ -70,7 +70,7 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 
   ![Run the function](Images/execute-function-now-locally.png)
 
-  - After running Azure function, it will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required vector embeddings for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
 

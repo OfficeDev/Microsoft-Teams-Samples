@@ -32,9 +32,13 @@ This sample demonstrate the concept of Retrieval Augmented Generation (RAG).
 * **Azure Open AI Embeddings:** Utilizes OpenAI embeddings for enhanced understanding and representation of textual content.
 * **Vector Search with NoSQL Cosmos DB:** Performs efficient vector searches using the `VectorDistance()` function within Azure Cosmos DB, a scalable NoSQL database.
 
-## Interaction with the application
+## Interaction with the application locally
 
 ![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db.gif)
+
+## Interaction with the application with deployed resources
+
+![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db-local.gif)
 
 ## Prerequisites
 
@@ -110,9 +114,28 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 
   ![Run the function](Images/execute-function-now-locally.png)
 
-  - After running Azure function, it will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required vector embeddings for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
+
+**You can call the API Endpoint to run the required prompts on the documents in two ways:**
+
+**1) Directly from a web browser Once you run the sample locally by presssing F5 in Visual Studio Code, it will open the Application Homepage:**
+
+  ![API Home page](Images/1.app-home-page.png)
+
+- **Type your query like: `http://localhost:3000/search?query=what is Teams AI Library?`**
+
+  ![Search query and result - 4](Images/5.search-result-web.png)
+
+
+**2) Using an API testing tool, like Postman:**
+- **Type your query and select `GET` and press `Send` button: `http://localhost:3000/search?query=what is Teams AI Library`**
+  ![Search query and result - 1](Images/2.search-result-postman-1.png)
+
+
+- **`http://localhost:3000/search?query=what is Prompt Tuning?`**
+  ![Search query and result - 2](Images/3.search-result-postman-2.png)
 
 ### Running the sample by uploading the files to Azure Blob Storage
 
@@ -128,6 +151,7 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
   ![Cosmos DB Embeddings](../azure-function-nodejs/Images/4.cosmos-db-embeddings.png)
 
 **You can call the API Endpoint to run the required prompts on the documents in two ways:**
+**Note:** You can use your deployed application URL instead of `http://localhost:3000` in the below steps.
 
 **1) Directly from a web browser Once you run the sample locally by presssing F5 in Visual Studio Code, it will open the Application Homepage:**
 
@@ -171,6 +195,5 @@ To test the application in Azure environment, you can deploy the Azure function 
 - [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
 
 - [Azure App Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs)
-
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/api-doc-search" />
