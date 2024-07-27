@@ -23,6 +23,8 @@
 ## Create Azure Function
 
 - [Create the function app](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#create-the-function-app)
+- [Update application settings](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#update-application-settings)
+- [Build the endpoint URL](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#build-the-endpoint-url)
 
 ## Create Azure App Insights
 - [Azure App Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs)
@@ -54,13 +56,25 @@
     npm install
    ```
 
-## Running the sample locally
+## Running the sample locally by uploading file in local emulated storage
 
 Step: 1 [Prepare local storage emulation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#prepare-local-storage-emulation) and [Run the azure function locally](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#run-the-function-locally)
 
+  ![Create Blob Container](Images/create-blob-container-locally.png)
+
 Step 2: [Upload the file in local emulated storage and it will trigger Azure function locally and Azure function with start creating and storing embedding vectors in CosmosDB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#upload-a-file-to-the-container)
 
-## Running the sample in Azure (online)
+  ![Upload file to Blob Container](Images/upload-file-blob-container-locally.png)
+
+Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#prepare-local-storage-emulation)
+
+  ![Run the function](Images/execute-function-now-locally.png)
+
+  - After running Azure function, it will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+
+  ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
+
+## Running the deployed Azure function by uploading file in Azure Blob storage
 [Upload a file to the blob container and it will trigger Azure function automatically and Azure function with start creating and storing embedding vectors in CosmosDB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#upload-a-file-to-the-container)
 
 - **Upload file to Azure Blob container:** Upload the file(s) for which you want to create vector embeddings into the Blob Storage container.
@@ -71,7 +85,7 @@ Step 2: [Upload the file in local emulated storage and it will trigger Azure fun
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
 
-## Deploy the sample in Azure environment (Optional)
+## Deploy the Azure Function (Optional)
 
 [Deploy your function code to azure function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#deploy-your-function-code)
 
