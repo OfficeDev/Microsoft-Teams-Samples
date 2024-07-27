@@ -34,11 +34,11 @@ This sample demonstrate the concept of Retrieval Augmented Generation (RAG).
 
 ## Interaction with the application locally
 
-![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db.gif)
+![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db-local.gif)
 
 ## Interaction with the application with deployed resources
 
-![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db-local.gif)
+![RAG Based CosmosDB Semantic Search Gif](Images/rag-based-cosmos-db.gif)
 
 ## Prerequisites
 
