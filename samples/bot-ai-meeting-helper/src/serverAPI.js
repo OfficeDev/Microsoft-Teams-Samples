@@ -1,3 +1,7 @@
+// <copyright file="serverAPI.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const express = require('express');
 const jwt_decode = require('jwt-decode');
 const msal = require('@azure/msal-node');

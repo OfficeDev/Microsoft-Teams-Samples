@@ -1,3 +1,7 @@
+// <copyright file="database.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
 const { ConsoleTranscriptLogger } = require("botbuilder");
 

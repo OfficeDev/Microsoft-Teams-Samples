@@ -1,4 +1,4 @@
-// <copyright file="certificate-helper-bot.js" company="Microsoft">
+// <copyright file="certificate-helper.js" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
@@ -8,6 +8,7 @@ const os = require('os');
 const crypto = require('crypto');
 const pem = require('pem');
 const config = require('../config');
+
 /**
  * Configures path to openssl.exe if needed
  */
@@ -19,7 +20,9 @@ function ensureOpenSsl() {
     pem.config({ pathOpenSSL: pathOpenSSL });
   }
 }
+
 /**
+ * To get private key from path
  * @param  {string} keyPath - The relative path to the file containing the private key
  * @returns {string} Contents of the private key file
  */

@@ -1,3 +1,8 @@
+// <copyright file="index.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+
 // Import required packages
 const restify = require("restify");
 

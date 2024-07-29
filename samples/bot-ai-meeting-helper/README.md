@@ -5,9 +5,13 @@ products:
 - office-teams
 - copilot-m365
 languages:
-- javascript
----
+- nodejs
+extensions:
+ contentType: samples
+ createdDate: "07/29/2024 01:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-ai-meeting-helper-nodejs
 
+---
 # Meeting Helper with Azure Open AI
 
 This sample demonstrates generating action items and a meeting summary based on the attendees and transcription, then sending them to all participants.
@@ -71,29 +75,29 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > When the application is running for the first time, the Teams toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
 
 ## Setup and use the sample locally 
-1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs1` and rename to ".localConfigs" and update the values below.
+1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs` and update the values below.
 
    ```txt
-        BOT_ID="BOT_ID"
-        BOT_PASSWORD="SECRET_BOT_PASSWORD"
-        AZURE_OPENAI_API_KEY="SECRET_AZURE_OPENAI_API_KEY"
-        AZURE_OPENAI_ENDPOINT="AZURE_OPENAI_ENDPOINT"
-        AZURE_OPENAI_DEPLOYMENT_NAME="AZURE_OPENAI_DEPLOYMENT_NAME" 
-        BOT_ENDPOINT="BOT_ENDPOINT"
-        Base64EncodedCertificate="Base_64_Encoded_Certificate"
-        EncryptionCertificateId="Encryption_Certificate_Id"
-        PRIVATE_KEY_PATH="Pem_File_Path"
-        Account_Name="Azure_Storage_Account"
-        Account_Key="Azure_Storage_Account_Key"
-        Table_Name="Azure_Storage_Table"
-        partitionKey="Azure_Storage_Table_PartitionKey"
-        AI_Model="Azure_Open_AI_Model"
-        SubscriptionURL="https://graph.microsoft.com/v1.0/subscriptions"
+        BOT_ID - It will be automatically generated while running the sample using Toolkit.
+        BOT_PASSWORD - It will be automatically generated while running the sample using Toolkit.
+        AZURE_OPENAI_API_KEY - Generated while creating Azure Open AI service (`AZURE_OPENAI_API_KEY` value).
+        AZURE_OPENAI_ENDPOINT - Generated while creating Azure Open AI service (`AZURE_OPENAI_ENDPOINT` value).
+        AZURE_OPENAI_DEPLOYMENT_NAME  - Generated while creating Azure Open AI service (`AZURE_OPENAI_DEPLOYMENT_NAME` value).
+        BOT_ENDPOINT - It will be automatically generated while running the sample using Toolkit. Example: `https://xxxxx2kx-3978.inc1.devtunnels.ms` and if your app is deployed to Azure Web app, you should provide your deployed application base URL.
+        Base64EncodedCertificate - Generated while creating Azure Self-Signed Certificate service (`Base64EncodedCertificate` value)
+        EncryptionCertificateId - Generated while creating Azure Self-Signed Certificate service (`EncryptionCertificateId` value).
+        PRIVATE_KEY_PATH  - Generated while creating Azure Self-Signed Certificate service download the PEM file and move to "src/helper" (`"./private.pem"`)
+        Account_Name - Generated while creating Azure Table Storage service (`Account_Name` value).
+        Account_Key  - Generated while creating Azure Table Storage service (`Account_Key` value).
+        Table_Name   - Generated while creating Azure Table Storage service (`Table_Name` value).
+        partitionKey - "Azure_Storage_Table_PartitionKey"
+        AI_Model  - Generated while creating Azure Open AI service 
+        SubscriptionURL - "https://graph.microsoft.com/v1.0/subscriptions"
         SystemPrompt="Generate a filtered list of action items from meeting transcriptions by user in bullet point user wise categorized with proper format like:  <b> Attendee:</b> 
         Action Items in bullet points"
         LocalTimeZone=Asia/Kolkata
-        APPINSIGHTS_INSTRUMENTATIONKEY=""
-        APPINSIGHTS_CONNECTIONSTRING=""
+        APPINSIGHTS_INSTRUMENTATIONKEY- Provide the application insights `Instrumentation Key` created in previous steps (Required to log the telemetry data).
+        APPINSIGHTS_CONNECTIONSTRING  - Provide the application insights `Connection String` created in previous steps in single quote (Required to log the telemetry data).
     ``` 
 1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script (Images for reference only)
  

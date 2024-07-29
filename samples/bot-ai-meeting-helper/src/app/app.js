@@ -1,3 +1,7 @@
+// <copyright file="app.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const { MemoryStorage } = require("botbuilder");
 const path = require("path");
 const config = require("../config");
@@ -14,9 +18,11 @@ const model = new OpenAIModel({
   useSystemMessages: true,
   logRequests: true,
 });
+
 const prompts = new PromptManager({
   promptsFolder: path.join(__dirname, "../prompts"),
 });
+
 const planner = new ActionPlanner({
   model,
   prompts,

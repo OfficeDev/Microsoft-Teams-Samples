@@ -1,5 +1,7 @@
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+// <copyright file="adapter.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const {
   CloudAdapter,
   ConfigurationServiceClientCredentialFactory,

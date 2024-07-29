@@ -1,3 +1,7 @@
+// <copyright file="config.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const config = {
         BOT_ID: process.env.BOT_ID,
         BOT_PASSWORD: process.env.BOT_PASSWORD, 

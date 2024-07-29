@@ -1,3 +1,7 @@
+// <copyright file="auth.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 var request = require('request');
 var graph = require('@microsoft/microsoft-graph-client');
 var Q = require('q');
