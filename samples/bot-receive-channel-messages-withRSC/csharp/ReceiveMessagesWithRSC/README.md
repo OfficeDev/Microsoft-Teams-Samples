@@ -7,7 +7,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Showing messages based on option selected
 
-![Channel messages](Images/botWithRSCFlow.png)
+![Bot Receive Channel MessagesWithRSCGif](images/Bot_Channel_Messenging-RSC-nodejs-gif.gif)
 
 ## Prerequisites
 
@@ -18,6 +18,19 @@ This feature shown in this sample is currently available in Public Developer Pre
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.9 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -47,9 +60,7 @@ This feature shown in this sample is currently available in Public Developer Pre
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `AppManifest`, and then select **Add** to add the bot to your selected team.
     
-![App Installation](Images/installApp.png)
-
-![Permissions](Images/permissions1.png)
+![App Installation](Images/1.Install.png)
 
 ## To try this sample
 
@@ -77,12 +88,27 @@ This feature shown in this sample is currently available in Public Developer Pre
   - Select `ReceiveMessagesWithRSC.csproj` file
   - Press `F5` to run the project
 
-## Interacting with the bot in Teams
+## Running the sample
 
-Select a channel and enter a message in the channel for your bot.
+**Adding bot UI:**
 
-The bot receives the message without being @mentioned.
+![App installation](images/1.Install.png)
 
+**Hey command interaction:**
+
+![Permissions](images/3.Interaction.png)
+
+**1 or 2 command interaction:**
+
+![Permissions](images/4.1_and_2_Command_Interaction.png) 
+
+**Adding App to group chat:**
+
+![Adding To Groupchat](images/5.Install_to_GC.png) 
+
+**Group chat interaction with bot without being @mentioned:**
+
+![Group Chat](images/7.1_and_2_Command_Interaction.png) 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.

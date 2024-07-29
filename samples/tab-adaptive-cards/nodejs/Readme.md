@@ -146,31 +146,35 @@ You can use this tab by following the below steps:
 
 **Sign in card:**
 
-![Sign in Card](Images/sign-in.png)
+![Sign in Card](Images/2.SignIn.png)
+
+![TabAdaptiveCards](Images/3.SelectUserToSignIn.png)
+
+![TabAdaptiveCards](Images/4.AcceptPermissions.png)
 
 **Home Page:**
 
-![Home Page](Images/home-page.png)
+![Home Page](Images/5.HomeTab.png)
 
 **Task module:**
 
-![Task Module](Images/task-module.png)
+![Task Module](Images/6.TaskModule.png)
 
 **Task module close:**
 
-![Task Module Close](Images/task-moduleclose.png)
-
-**Show Task module:**
-
-![Task Module](Images/task-moduleyoutube.png)
+![Task Module Close](Images/6.TaskModule.png)
 
 **YouTube Tab:**
 
-![Task Module](Images/youtube-tab.png)
+![Tab Youtube](Images/7.TabYoutube.png)
+
+**Show Task module:**
+
+![Task Module](Images/8.TaskModuleYoutube.png)
 
 **Sign out card:**
 
-![Sign out Card](Images/sign-out.png)
+![Sign out Card](Images/9.SignOutSuccessful.png)
 
 ## Deploy the bot to Azure
 

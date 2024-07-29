@@ -15,7 +15,7 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "AI-EnterpriseSearch-${{TEAMSFX_ENV}}",
+        "short": "AI-EnterpriseSearch${{APP_NAME_SUFFIX}}",
         "full": "full name for AI-EnterpriseSearch"
     },
     "description": {

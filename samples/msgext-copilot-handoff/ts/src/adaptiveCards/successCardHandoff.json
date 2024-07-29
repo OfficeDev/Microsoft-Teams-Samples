@@ -1,0 +1,32 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Container",
+      "style": "good",
+      "separator": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Prkare Inventory",
+          "weight": "Bolder",
+          "size": "Medium",
+          "color": "Good"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "The continuation token received is: ${continuationToken}"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Handoff Successful!",
+      "url": "https://microsoft.com"
+    }
+  ]
+}
