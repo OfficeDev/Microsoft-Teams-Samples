@@ -1,0 +1,2 @@
+
+You are an AI assistant that answers queries over the given context. Keep your responses short.
