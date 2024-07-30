@@ -2,42 +2,28 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-const express = require('express');
-const jwt_decode = require('jwt-decode');
+const express = require('express'); 
 const msal = require('@azure/msal-node');
 const app = express();
 const path = require('path');
 const axios = require('axios');
 const { DateTime } = require('luxon');
 const ENV_FILE = path.join(__dirname, '.env');
-const { Readable } = require('stream');
 require('dotenv').config({ path: ENV_FILE });
 const url = require('url');
 const config = require('./config');
-
-const clientId = process.env.BOT_ID;
-const clientSecret = process.env.BOT_PASSWORD;
-const baseUrl = config.BOT_ENDPOINT;
-// const tenantId = config.Tenant;
-const graphScopes = ['https://graph.microsoft.com/User.Read'];
-let eventDetails = [];
-let token = null;
-let eventUpdated = false;
-const server = require('http').createServer(app);
-const io = require('socket.io')(server, { cors: { origin: "*" } });
-const auth = require('./auth');
-const { connected } = require('process');
-const jwt = require('jsonwebtoken');
+  
+const baseUrl = config.BOT_ENDPOINT; 
+let eventDetails = []; 
+const server = require('http').createServer(app); 
+const auth = require('./auth'); 
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector');
 
 const credentials = new MicrosoftAppCredentials(config.botId,config.botPassword);
-const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
-const fs = require('fs');
- const sampleTranscription = require('./sampleTranscription');
+const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter"); 
+const sampleTranscription = require('./sampleTranscription');
 const { date } = require('azure-storage');
-
-
 const appInsights = require('applicationinsights');
 
 // Configure Application Insights with your instrumentation key or connection string

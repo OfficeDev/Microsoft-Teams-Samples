@@ -16,11 +16,11 @@
     },
     "name": {
         "short": "bot-ai-meeting-helper${{APP_NAME_SUFFIX}}",
-        "full": "full name for bot-ai-meeting-helper"
+        "full": "Bot AI Meeting Helper"
     },
     "description": {
-        "short": "short description for bot-ai-meeting-helper",
-        "full": "full description for bot-ai-meeting-helper"
+        "short": "Bot AI Meeting Helper",
+        "full": "An AI meeting helper that extracts meeting summaries and action items from transcriptions and provides the responses."
     },
     "accentColor": "#FFFFFF",
     "bots": [

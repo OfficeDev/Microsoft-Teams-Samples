@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases how to utilize Azure Open AI Search within Teams Toolkit for Visual Studio Code to extract Action Items and Meeting summaries from meeting transcriptions.
+description: This example demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.
 products:
 - office-teams
 - copilot-m365
@@ -32,6 +32,9 @@ This sample demonstrates generating action items and a meeting summary based on 
 
  ![bot-ai-meeting-helperGif](Images/bot-ai-meeting-helperGif.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
 ## Prerequisites
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
@@ -44,6 +47,7 @@ This sample demonstrates generating action items and a meeting summary based on 
 
 ### Create an Azure Open AI service
 - In Azure portal, create a [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+- **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
 - Create and collect `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT_NAME`, and save those value  to update in `.env` file later.
 
 ### Create an Azure Table Storage
@@ -54,6 +58,10 @@ This sample demonstrates generating action items and a meeting summary based on 
 - In Azure portal, create a [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal).
 - Create and collect `EncryptionCertificateId`, `Base64EncodedCertificate`, `PRIVATE_KEY_PATH`, and save those value  to update in `.env` file later.
 
+## Setup the Application Insights
+In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource) and save `Instrumentation Key` and `Connection String` values and which will be required later while updating `.env` file configuration in sample code.
+
+**Note>** While creating or setting up Application Insights, choose `NodeJS` as the application type.
 
 ## Setup and use the sample locally 
 1) Navigate to the `samples/bot-ai-meeting-helper/.localConfigs` and update the values below.
@@ -101,9 +109,9 @@ This sample demonstrates generating action items and a meeting summary based on 
       # Import-Module MicrosoftTeams
       Connect-MicrosoftTeams
 
-      New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
+      New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "xxxxxx0f-xxe2-4exx-9exx-2exxxx76bxxc" -Description "Online meeting policy - contoso town"
       
-      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
+      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "7xxxx076x-xxxx-4xfx-x6x3-xa1xxx28xxxc"
       OR
       # For global access
       # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
@@ -151,9 +159,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 > When the application is running for the first time, the Teams toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
 **Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
 - To run the demo, you must set up and grant the necessary policy. Please follow the second step mentioned above for instructions on how to do this. 
@@ -181,11 +186,17 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 1) **All subscribed users will automatically receive the meeting summary and action items.**
 ![7.MeetingHelperYesResults](Images/7.MeetingHelperResults.png)
 
+## Deploy/Host your app on Azure
+If you want to deploy the app to Azure, you can follow the below steps:
+- [Provision cloud resources](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/provision)
+- [Deploy Microsoft Teams app to the cloud using Microsoft Visual Studio Code](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/deploy)
+
 ## Further reading
 
 ### AI, Personal Chat And Table Storage
 
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
-- [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
+- [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal) 
+- [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/about-certificates)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-ai-meeting-helper" />

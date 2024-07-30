@@ -28,7 +28,7 @@
         },
         {
           "key": "TEAMS-FEATURES",
-          "value": "tab,bot,msgext"
+          "value": "bot"
         }
       ],
       "thumbnails": [

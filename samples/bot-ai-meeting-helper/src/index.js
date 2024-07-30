@@ -7,24 +7,17 @@
 const restify = require("restify");
 
 // This bot's adapter
-const adapter = require("./adapter");
-
-// This bot's main dialog.
-const app = require("./app/app");
+const adapter = require("./adapter"); 
 
 // serever.js
  const serverAPI = require("./serverAPI");
 
- // database.js
-  const database = require("./database");
+ // tableStorageService.js
+  const tableStorageService = require("./tableStorageService");
 
  const { DecryptionHelper } = require("./helper/decryption-helper");
 
- const { BotFrameworkAdapter, MemoryStorage, TurnContext, ConsoleTranscriptLogger } = require('botbuilder');
-
-
- const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector');
-const { AzurePowerShellCredential } = require("@azure/identity");
+ const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector'); 
  
 const config = require("./config");
 
@@ -56,16 +49,7 @@ appInsights.setup(connectionString || instrumentationKey)
     .start();
     
 const client = appInsights.defaultClient;
-
-const model = new OpenAIModel({
-  azureApiKey: config.azureOpenAIKey,
-  azureDefaultDeployment: config.azureOpenAIDeploymentName,
-  azureEndpoint: config.azureOpenAIEndpoint,
-
-  useSystemMessages: true,
-  logRequests: true,
-});
-
+ 
 // Create HTTP server.
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
@@ -279,7 +263,7 @@ async function SaveUserAndMeetingDetailsForSubscription(joinWebUrl, userId, conv
           userPrincipalName: UserInformation.userPrincipalName
         };
 
-        await database.storeData(config.partitionKey, uuidv4(), data);
+        await tableStorageService.storeData(config.partitionKey, uuidv4(), data);
 
         client.trackEvent({ name: "Database_Storing", properties: { getMeetingDetailsUsingSubscription: UserInformation } });
               
@@ -298,7 +282,7 @@ async function GetUserInformationAndSendActionItems(onlineMeetingId, AIPrompt, o
   try
   {
     // Example usage:
-    database.getData("","",subscriptionId)
+    tableStorageService.getData("","",subscriptionId)
     .then(async UserAndMeeting => {
         
         client.trackEvent({ name: "Database_sendActivity", properties: { users: UserAndMeeting } });
