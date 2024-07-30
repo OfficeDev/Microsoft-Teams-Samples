@@ -1,7 +1,7 @@
 // <copyright file="search.js" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
-// server.js is used to setup and configure your API server.
+// search.js is used to perform vector search on the documents stored in Cosmos DB.
 // </copyright>
 
 var express = require('express');
