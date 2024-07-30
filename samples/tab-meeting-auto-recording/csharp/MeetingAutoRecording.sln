@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingAutoRecording", "Mee
 EndProject
 Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{1A7810A0-962D-4870-B8A8-1A1D56DAE905}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F04852E6-2C15-4FB2-976E-F78EFAE3D990}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64670BA3-6E78-477F-89FC-63F432C0424B}"
 	ProjectSection(SolutionItems) = preProject
 		MeetingAutoRecording.slnLaunch.user = MeetingAutoRecording.slnLaunch.user
 	EndProjectSection
