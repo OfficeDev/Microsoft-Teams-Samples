@@ -48,55 +48,62 @@
   - Navigate to `samples/api-doc-search/azure-function-nodejs` folder and open the project in Visual Studio Code.
   - Open `.local.settings1.json` file and rename it as `.local.settings.json` and update the configuration for the application for below values:
 
-  `"AzureWebJobsStorage"`: Use `"UseDevelopmentStorage=true"` to connect to the local Azure Storage Emulator; replace with actual Azure Storage connection string for deployment. e.g., `"DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/"`.
-  `"FUNCTIONS_WORKER_RUNTIME": "node"`: Set to `"node"` for Node.js runtime (same for local and deployment).
+      - `"AzureWebJobsStorage"`: Use `"UseDevelopmentStorage=true"` to connect to the local Azure Storage Emulator; replace with actual Azure Storage connection string for deployment. e.g., `"DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/"`.
+      
+      - `"FUNCTIONS_WORKER_RUNTIME": "node"`: Set to `"node"` for Node.js runtime (same for local and deployment).
   `"AzureWebJobsFeatureFlags"`: Use `"EnableWorkerIndexing"` for local testing if indexing features are needed; omit or adjust based on production needs.
-  `"c0008c_STORAGE""`: Use `"UseDevelopmentStorage=true"` for local testing with Azure Blob Storage Emulator; replace with actual Azure Blob Storage connection string for deployment.
-  `"AzureOpenAIEndpoint": ""`: Enter the endpoint URL for Azure OpenAI service e.g., `"https://your-openai-resource.openai.azure.com/"`.
-  `"AzureOpenAIApiKey": ""`: Enter the API key for accessing Azure OpenAI service.
-  `"AzureOpenAIDeploymentName": "text-embedding-ada-002"`: Specifies the deployment name for Azure OpenAI's text embedding model.
-  `"CosmosDBEndpoint": ""`: Enter the endpoint URL for Azure Cosmos DB e.g., `"https://your-cosmosdb-account.documents.azure.com:443/"`.
-  `"CosmosDBKey": ""`: Enter the key for Azure Cosmos DB access.
-  `"CosmosDBDatabaseId": ""`: Enter the ID of the Cosmos DB database.
-  `"CosmosDBContainerId": ""`: Enter the ID of the Cosmos DB container.
-  `"PartitionKey":""`: Enter the partition key used in Cosmos DB for partitioning data.
-  `"AzureStorageDBConnString": ""`: Enter the actual Azure Storage database connection string for deployment.
-  `"AzureBlobContainerName": ""`: Enter the name of the Azure Blob storage container.
-  `"APPINSIGHTS_INSTRUMENTATIONKEY": ""`: Enter the Instrumentation Key for Azure Application Insights.
-  `"APPINSIGHTS_CONNECTIONSTRING": ""`: Enter the connection string for Azure Application Insights.
+      - `"c0008c_STORAGE""`: Use `"UseDevelopmentStorage=true"` for local testing with Azure Blob Storage Emulator; replace with actual Azure Blob Storage connection string for deployment.
+      - `"AzureOpenAIEndpoint": ""`: Enter the endpoint URL for Azure OpenAI service e.g., `"https://your-openai-resource.openai.azure.com/"`.
+      - `"AzureOpenAIApiKey": ""`: Enter the API key for accessing Azure OpenAI service.
+      - `"AzureOpenAIDeploymentName": "text-embedding-ada-002"`: Specifies the deployment name for Azure OpenAI's text embedding model.
+      - `"CosmosDBEndpoint": ""`: Enter the endpoint URL for Azure Cosmos DB e.g., `"https://your-cosmosdb-account.documents.azure.com:443/"`.
+      - `"CosmosDBKey": ""`: Enter the key for Azure Cosmos DB access.
+      - `"CosmosDBDatabaseId": ""`: Enter the ID of the Cosmos DB database.
+      - `"CosmosDBContainerId": ""`: Enter the ID of the Cosmos DB container.
+      - `"PartitionKey":""`: Enter the partition key used in Cosmos DB for partitioning data.
+      - `"AzureStorageDBConnString": ""`: Enter the actual Azure Storage database connection string for deployment.
+      - `"AzureBlobContainerName": ""`: Enter the name of the Azure Blob storage container.
+      - `"APPINSIGHTS_INSTRUMENTATIONKEY": ""`: Enter the Instrumentation Key for Azure Application Insights.
+      - `"APPINSIGHTS_CONNECTIONSTRING": ""`: Enter the connection string for Azure Application Insights.
 
   - Go to `src` folder, open `src/BlobTriggerEventGrid.js` file, and update below details:
-    `path`:
-    **Description:** The `path` property specifies the path pattern for the blob storage container and the blob name that triggers the Azure Function. It includes placeholders to dynamically capture the actual blob name.
+      - `path`: 
+      **Description:** The `path` property specifies the path pattern for the blob storage container and the blob name that triggers the Azure Function. It includes placeholders to dynamically capture the actual blob name.
     **Format:** `'samples-workitems/{name}'` (
     `samples-workitems`: The name of the Azure Blob storage container. Your function will listen for events (such as blob creation or modification) specifically in this container.)
+      
     `{name}`: A placeholder that gets replaced with the actual name of the blob that triggered the event. This allows your function to process the specific blob involved in the event.
     **Example:** If a blob named `example-file.txt` is added to the `samples-workitems` container, your function will be triggered with the `blobName` as `example-file.txt.`
-
-    `source`: 
+  
+      - `source`: 
     **Description:** The `source` property specifies the origin of the events that trigger the Azure Function.
     **Value:** `'EventGrid'` (Indicates that the events are coming from Azure Event Grid. Azure Event Grid is a service that enables you to easily build event-based architectures by reacting to changes or events in Azure services, such as Blob storage.)
+      
     **Usage:** This value is typically set to `'EventGrid'` when your function is designed to respond to events delivered by Azure Event Grid.
-
-    `connection`
+      - `connection`
+      
     **Description:** The `connection` property specifies the name of the application setting that contains the connection string for your Azure Storage account. This connection string is used by the function to connect to Azure Storage.
+  
     **Value:** `'c0008c_STORAGE'` (This is the name of the application setting where the connection string for Azure Storage is stored. It should match the name you use in your Azure Function App’s configuration.)
     
   - **Setting Up Connection Strings: For Local Development:** 
+  
     In your `local.settings.json` file, add
-    ```bash {
+```bash
+{
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "c0008c_STORAGE": "UseDevelopmentStorage=true"
-  } ```
+  } 
 }
+```
 
 **Setting Up Connection Strings: For Azure Deployment:** 
     In your `local.settings.json` file, add
     ```bash 
     DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/;
-```
+    ```
 
  - In a terminal, navigate to `samples/api-doc-search/azure-function-nodejs`
 
