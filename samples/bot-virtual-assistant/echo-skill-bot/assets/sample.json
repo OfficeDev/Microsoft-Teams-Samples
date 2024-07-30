@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-bot-virtual-assistant-echo-skill-bot-nodejs",
     "source": "officeDev",
     "title": "Echo Skill Bot Sample",
-    "shortDescription": "This sample bot demonstrates the implementation of basic message mirroring and interaction within both personal and Teams channel scopes.",
+    "shortDescription": "This sample bot demonstrates the implementation of basic message mirroring and interaction within personal scope in Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-virtual-assistant/echo-skill-bot",
     "longDescription": [
       "This sample demonstrates a basic echo bot that repeats the exact message sent by the user, highlighting simple message handling with the Bot Framework v4 in both personal and Teams environments."

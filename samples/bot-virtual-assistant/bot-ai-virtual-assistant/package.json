@@ -4,7 +4,7 @@
     "msteams": {
         "teamsAppId": null
     },
-    "description": "Microsoft Teams Toolkit AI Chat Bot Sample with Teams AI Library",
+    "description": "Teams AI-based Virtual Assistant Root Bot (Node.js)",
     "engines": {
         "node": "16 || 18"
     },
@@ -31,7 +31,6 @@
         "botbuilder": "^4.20.0",
         "botframework-connector": "~4.22.1",
         "dotenv": "~8.2.0",
-        "natural": "^7.0.6",
         "restify": "^10.0.0"
     },
     "devDependencies": {

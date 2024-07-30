@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This AI Translator Skill Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in both personal and Teams channel scopes.
+description: This AI Translator Skill Bot demonstrates translating user inputs and returning the translated responses, operating seamlessly in personal scope in Teams.
 products:
 - office-teams
 languages:
@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-virtual-assistant-ai-skill-bo
 
 # AI Skill Bot
 
-This AI Translator Skill Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in both personal chats and within Teams channels, showcasing its functionality across different communication contexts.
+This AI Translator Skill Bot takes user-provided text, translates it into the desired language, and then returns the translated response to the user. It operates smoothly in personal chats within Teams, showcasing its functionality across different communication contexts.
 
 **Note: This skill bot will be called by the main Virtual Assistant bot (Root Bot) to perform translations and return the translated response to the user.**
 
@@ -37,7 +37,7 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 
 ## Setup for App Registration
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID ï¿½ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **+ New Registration** and on the *Register an application page*, set following values:
     * Set **Name** to your app name.
     * Choose the **Supported account types** as `Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)` (MultiTenant) only (If you created your Virtual Assistant (root bot) as MultiTenant then you should select same here). For more information, see [Supported account types](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs):
@@ -45,10 +45,10 @@ You can create a new skill bot by following the steps mentioned in the [Create a
     
     * Leave **Redirect URI** as empty.
     * Click on **Register** button to create app registration.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youï¿½ll need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
 4. Navigate to **Certificates & secrets**. In the Client secrets section:
     * Click on **"+ New client secret"**.
-    * Add a description (Name of the secret) for the secret and select “Never” for Expires.
+    * Add a description (Name of the secret) for the secret and select ï¿½Neverï¿½ for Expires.
     * Click "Add" button.
     * Once the client secret is created, copy its value and save. It will be required later to add in the `.env` file configuration in sample code.
 
@@ -143,7 +143,7 @@ You can interact with this AI translator skill bot in Teams by sending it a mess
 
 **Bot Response:** 
 
-`AI Translator bot: "Je vais assister à la réunion demain."`
+`AI Translator bot: "Je vais assister ï¿½ la rï¿½union demain."`
 
 ![user-prompt ](images/6.bot-response.png)
 
@@ -157,6 +157,7 @@ To learn more about deploying a `NodeJS` app to Azure, see [Configure the App Se
 ## Further reading
 
 - [Implement a skill](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs)
+- [Azure Open AI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

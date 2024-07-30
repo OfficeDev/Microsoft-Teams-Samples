@@ -1,7 +1,7 @@
 {
     "name": "ai-skill-bot",
     "version": "1.0.0",
-    "description": "Bot Builder v4 echo skill bot sample",
+    "description": "AI Translator Bot Sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
