@@ -48,10 +48,10 @@
   - Navigate to `samples/api-doc-search/azure-function-nodejs` folder and open the project in Visual Studio Code.
   - Open `.local.settings1.json` file and rename it as `.local.settings.json` and update the configuration for the application for below values:
 
-      - `"AzureWebJobsStorage"`: Use `"UseDevelopmentStorage=true"` to connect to the local Azure Storage Emulator; replace with actual Azure Storage connection string for deployment. e.g., `"DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/"`.
+      - `"AzureWebJobsStorage": ""`: Use `"UseDevelopmentStorage=true"` to connect to the local Azure Storage Emulator; replace with actual Azure Storage connection string for deployment. e.g., `"DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/"`.
       
       - `"FUNCTIONS_WORKER_RUNTIME": "node"`: Set to `"node"` for Node.js runtime (same for local and deployment).
-  `"AzureWebJobsFeatureFlags"`: Use `"EnableWorkerIndexing"` for local testing if indexing features are needed; omit or adjust based on production needs.
+      - `"AzureWebJobsFeatureFlags"`: Use `"EnableWorkerIndexing"` for local testing if indexing features are needed; omit or adjust based on production needs.
       - `"c0008c_STORAGE""`: Use `"UseDevelopmentStorage=true"` for local testing with Azure Blob Storage Emulator; replace with actual Azure Blob Storage connection string for deployment.
       - `"AzureOpenAIEndpoint": ""`: Enter the endpoint URL for Azure OpenAI service e.g., `"https://your-openai-resource.openai.azure.com/"`.
       - `"AzureOpenAIApiKey": ""`: Enter the API key for accessing Azure OpenAI service.
@@ -67,43 +67,15 @@
       - `"APPINSIGHTS_CONNECTIONSTRING": ""`: Enter the connection string for Azure Application Insights.
 
   - Go to `src` folder, open `src/BlobTriggerEventGrid.js` file, and update below details:
-      - `path`: 
-      **Description:** The `path` property specifies the path pattern for the blob storage container and the blob name that triggers the Azure Function. It includes placeholders to dynamically capture the actual blob name.
-    **Format:** `'samples-workitems/{name}'` (
-    `samples-workitems`: The name of the Azure Blob storage container. Your function will listen for events (such as blob creation or modification) specifically in this container.)
+      - `path`: The `path` property specifies the path pattern for the blob storage container and the blob name that  triggers the Azure Function. It includes placeholders to dynamically capture the actual blob name. **Format:** `'samples-workitems/{name}'` (`samples-workitems`: The name of the Azure Blob storage container. Your function will listen for events (such as blob creation or modification) specifically in this container.)
       
-    `{name}`: A placeholder that gets replaced with the actual name of the blob that triggered the event. This allows your function to process the specific blob involved in the event.
-    **Example:** If a blob named `example-file.txt` is added to the `samples-workitems` container, your function will be triggered with the `blobName` as `example-file.txt.`
-  
-      - `source`: 
-    **Description:** The `source` property specifies the origin of the events that trigger the Azure Function.
-    **Value:** `'EventGrid'` (Indicates that the events are coming from Azure Event Grid. Azure Event Grid is a service that enables you to easily build event-based architectures by reacting to changes or events in Azure services, such as Blob storage.)
+        `{name}`: A placeholder that gets replaced with the actual name of the blob that triggered the event. This allows your function to process the specific blob involved in the event. 
+        **Example:** If a blob named `example-file.txt` is added to the `samples-workitems` container, your function     will be triggered with the `blobName` as `example-file.txt.`
+      - `source`: The `source` property specifies the origin of the events that trigger the Azure Function. **Value:** `'EventGrid'` (Indicates that the events are coming from Azure Event Grid. Azure Event Grid is a service that enables you to easily build event-based architectures by reacting to changes or events in Azure services, such as Blob storage.)
+        **Usage:** This value is typically set to `'EventGrid'` when your function is designed to respond to events delivered by Azure Event Grid.
       
-    **Usage:** This value is typically set to `'EventGrid'` when your function is designed to respond to events delivered by Azure Event Grid.
-      - `connection`
-      
-    **Description:** The `connection` property specifies the name of the application setting that contains the connection string for your Azure Storage account. This connection string is used by the function to connect to Azure Storage.
-  
-    **Value:** `'c0008c_STORAGE'` (This is the name of the application setting where the connection string for Azure Storage is stored. It should match the name you use in your Azure Function App’s configuration.)
-    
-  - **Setting Up Connection Strings: For Local Development:** 
-  
-    In your `local.settings.json` file, add
-```bash
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "c0008c_STORAGE": "UseDevelopmentStorage=true"
-  } 
-}
-```
-
-**Setting Up Connection Strings: For Azure Deployment:** 
-    In your `local.settings.json` file, add
-    ```bash 
-    DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;BlobEndpoint=https://your_account_name.blob.core.windows.net/;
-    ```
+      - `connection` : The `connection` property specifies the name of the application setting that contains the connection string for your Azure Storage account. This connection string is used by the function to connect to Azure Storage. 
+        **Value:** `'c0008c_STORAGE'` (This is the name of the application setting where the connection string for Azure Storage is stored. It should match the name you use in your Azure Function App’s configuration.)
 
  - In a terminal, navigate to `samples/api-doc-search/azure-function-nodejs`
 
@@ -148,6 +120,8 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 ## Deploy the Azure Function (Optional)
 
 [Deploy your function code to azure function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#deploy-your-function-code)
+
+Note> After code deployment to web app service in Azure, make sure to update all the configuration settings (`Environment variables`) in Azure portal.
 
 ## Further reading
 
