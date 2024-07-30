@@ -62,46 +62,48 @@ const container = cosmosClient.database(databaseId).container(containerId);
  * @throws Will throw an error if text splitting fails.
  */
 async function splitText(fileContentsAsString) {
-  // Create an instance of the RecursiveCharacterTextSplitter with specified options
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 800,
-    chunkOverlap: 10,
-    separators: ['\n\n', '\n', ' ', '']
-  });
+    // Create an instance of the RecursiveCharacterTextSplitter with specified options
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 800,
+      chunkOverlap: 10,
+      separators: ['\n\n', '\n', ' ', '']
+    });
 
-  // Split the file content into smaller chunks and return the result
-  return await splitter.createDocuments([fileContentsAsString]);
-}
+    // Split the file content into smaller chunks and return the result
+    return await splitter.createDocuments([fileContentsAsString]);
+  }
 
 /**
- * Function to list all blobs in a container and retrieve their URLs.
- *
- * @returns {Array} - An array containing URLs of all blobs in the container.
- * @throws Will throw an error if listing blobs fails.
+ * Function to process a blob based on its file type and create embeddings.
+ * 
+ * @param {string} blobUrl - URL of the blob to process.
+ * @param {object} context - Azure function context for logging and tracking.
+ * @throws Will throw an error if processing the blob fails.
  */
 async function InitiateEmbeddings(blobUrl, context) {
   try {
-    const blobName = path.basename(blobUrl);
+      const blobName = path.basename(blobUrl);
 
     const extension = path.extname(blobName).toLowerCase();
+
     if (extension === '.txt') {
       const fileContents = await readBlobContents(blobUrl);
-      const fileChunks = await createFileChunks(fileContents, context);
+        const fileChunks = await createFileChunks(fileContents, context);
 
       context.log(`FileName ${blobName}, Chunks ${fileChunks.length}`);
       console.log(`FileName ${blobName}, Chunks ${fileChunks.length}`);
-      console.log(`=================================================`);
+        console.log(`=================================================`);
 
       await createEmbeddings(fileChunks, blobUrl, blobName, context);
-    }
+    } 
     else if (extension === '.pdf') {
       const blobServiceClient = BlobServiceClient.fromConnectionString(azureStorageConnString);
-      const containerClient = blobServiceClient.getContainerClient(azureBlobContainerName);
+        const containerClient = blobServiceClient.getContainerClient(azureBlobContainerName);
 
       const blobName = getBlobNameFromUrl(blobUrl);
-      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
-      // Download blob content as a buffer
+        // Download blob content as a buffer
       const downloadBlockBlobResponse = await blockBlobClient.download();
       const blobContentBuffer = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
 
@@ -109,23 +111,23 @@ async function InitiateEmbeddings(blobUrl, context) {
       await parseOfficeFile(blobUrl, blobName, context, fileContent);
     } else if (extension === '.docx') {
       const blobServiceClient = BlobServiceClient.fromConnectionString(azureStorageConnString);
-      const containerClient = blobServiceClient.getContainerClient(azureBlobContainerName);
+        const containerClient = blobServiceClient.getContainerClient(azureBlobContainerName);
 
       const blobName = getBlobNameFromUrl(blobUrl);
-      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
-      // Download blob content as a buffer
+        // Download blob content as a buffer
       const downloadBlockBlobResponse = await blockBlobClient.download();
       const blobContentBuffer = await streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
 
-      const extractor = new WordExtractor();
-      const extracted = extractor.extract(blobContentBuffer);
+        const extractor = new WordExtractor();
+        const extracted = extractor.extract(blobContentBuffer);
 
-      extracted.then(async function (doc) {
-        console.log(doc.getBody());
-        await parseOfficeFile(blobUrl, blobName, context, doc.getBody());
-      });
-    }
+        extracted.then(async function (doc) {
+            console.log(doc.getBody());
+            await parseOfficeFile(blobUrl, blobName, context, doc.getBody());
+        });
+    } 
     else {
       context.log(`${blobName} is not one of the allowed file types.`);
       console.log(`${blobName} is not one of the allowed file types.`);
@@ -143,6 +145,8 @@ async function InitiateEmbeddings(blobUrl, context) {
  *
  * @param {string} blobUrl - The URL of the blob storage where the file is stored.
  * @param {string} fileName - The name of the file.
+ * @param {object} context - Azure function context for logging and tracking.
+ * @param {string} data - The text data to be processed.
  * @returns {Array} - An array of records containing similarity score, file name, URL, and contents.
  * @throws Will throw an error if parsing or embedding retrieval fails.
  */
@@ -203,6 +207,7 @@ async function parseOfficeFile(blobUrl, fileName, context, data) {
  * It calls an API to generate the embedding for the provided content.
  *
  * @param {string} content - The content for which to generate an embedding.
+ * @returns {Array} - The embedding vector for the given content.
  * @throws Will throw an error if the API call fails.
  */
 async function getEmbeddingAsync(content) {
@@ -223,7 +228,14 @@ async function getEmbeddingAsync(content) {
   }
 }
 
-// Create small chunks of contents.
+/**
+ * Function to create small chunks of file contents.
+ * 
+ * @param {string} fileContentsAsString - The file contents as a string.
+ * @param {object} context - Azure function context for logging and tracking.
+ * @returns {Array} - An array of file chunks.
+ * @throws Will throw an error if chunking fails.
+ */
 async function createFileChunks(fileContentsAsString, context) {
   try {
     const splitter = new RecursiveCharacterTextSplitter({
@@ -244,7 +256,17 @@ async function createFileChunks(fileContentsAsString, context) {
   }
 }
 
-// Create vector embeddings for each chunk of the file.
+
+/**
+ * Function to create vector embeddings for each chunk of the file.
+ * 
+ * @param {Array} fileChunks - The chunks of the file content.
+ * @param {string} blobUrl - The URL of the blob storage where the file is stored.
+ * @param {string} fileName - The name of the file.
+ * @param {object} context - Azure function context for logging and tracking.
+ * @returns {Array} - An array of records containing the file name, URL, and contents of each chunk.
+ * @throws Will throw an error if embedding creation fails.
+ */
 async function createEmbeddings(fileChunks, blobUrl, fileName, context) {
   try {
     const records = [];
@@ -254,13 +276,13 @@ async function createEmbeddings(fileChunks, blobUrl, fileName, context) {
       console.log(chunk);
       console.log("====================================");
 
-      // Get embedding for the current item
+      // Get embedding for the current chunk
       try {
         const embedding = await getEmbeddingAsync(chunk.pageContent);
 
         // Create the DocumentEmbeddingDetail object
         const documentEmbedding = {
-          id: uuidv4(), // Ensure the item has a unique 'id'
+          id: uuidv4(), // Ensure the chunk has a unique 'id'
           partitionKey: process.env.PartitionKey, // Adjust based on your partition key strategy
           contents: chunk.pageContent,
           fileName: fileName,
@@ -269,7 +291,6 @@ async function createEmbeddings(fileChunks, blobUrl, fileName, context) {
         };
 
         records.push({
-          // SimilarityScore: 0.0,
           FileName: fileName,
           Url: blobUrl,
           Contents: chunk.pageContent
@@ -285,12 +306,19 @@ async function createEmbeddings(fileChunks, blobUrl, fileName, context) {
 
     return records;
   } catch (err) {
-    context.log("Error parsing office file:", err);
-    console.error("Error parsing office file:", err);
+    context.log("Error creating embeddings:", err);
+    console.error("Error creating embeddings:", err);
+    throw err;
   }
 }
 
-// Helper function to read blob contents.
+/**
+ * Helper function to read blob contents from Azure Blob Storage.
+ * 
+ * @param {string} blobUrl - The URL of the blob to read.
+ * @returns {string} - The contents of the blob as a string.
+ * @throws Will throw an error if reading the blob fails.
+ */
 async function readBlobContents(blobUrl) {
   try {
     const blobServiceClient = BlobServiceClient.fromConnectionString(azureStorageConnString);
@@ -313,7 +341,14 @@ async function readBlobContents(blobUrl) {
   }
 }
 
-// Helper function to convert readable stream to buffer.
+
+/**
+ * Helper function to convert a readable stream to a buffer.
+ * 
+ * @param {ReadableStream} readableStream - The readable stream to convert.
+ * @returns {Promise<Buffer>} - A promise that resolves to the buffer containing the stream's data.
+ * @throws Will throw an error if the stream fails.
+ */
 async function streamToBuffer(readableStream) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -327,12 +362,24 @@ async function streamToBuffer(readableStream) {
   });
 }
 
-// Helper function to get blob name from URL.
+
+/**
+ * Helper function to extract the blob name from a URL.
+ * 
+ * @param {string} blobUrl - The URL of the blob.
+ * @returns {string} - The name of the blob.
+ */
 function getBlobNameFromUrl(blobUrl) {
   return path.basename(blobUrl);
 }
 
-// Helper function to read PDF content.
+/**
+ * Helper function to read content from a PDF file.
+ * 
+ * @param {Buffer} buffer - The buffer containing the PDF file data.
+ * @returns {Promise<string>} - A promise that resolves to the text content of the PDF.
+ * @throws Will throw an error if reading the PDF content fails.
+ */
 async function readPdfContent(buffer) {
   try {
     const data = await pdfParse(buffer);
