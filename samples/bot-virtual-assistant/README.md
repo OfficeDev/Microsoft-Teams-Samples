@@ -1,6 +1,6 @@
 
 ## This sample is having three solutions
-**Application Setup Order:**
+Please follow **Applications Setup Order:** to setup your applications successfully.
 
 1. echo-skill-bot
 1. ai-skill-bot
