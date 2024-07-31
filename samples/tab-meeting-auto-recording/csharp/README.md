@@ -11,7 +11,6 @@ extensions:
  contentType: samples
  createdDate: "30-07-2024 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
-
 ---
 
 ## Tab Meeting Recording and transcript with auto recording
@@ -36,8 +35,6 @@ This integration enhances accessibility, improves content retrieval, and ensures
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 - [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-
-
 
 ## Setup and use the sample 
 
@@ -107,55 +104,43 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-### Setup Register you app with Azure AD.
-  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-  2. Select **New Registration** and on the *register an application page*, set following values:
-      * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
-      * Leave **Redirect URI** empty.
-      * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-  4. Under **Manage**, select **Expose an API**. 
-  5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
-      * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
-  6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
-  7. Set **Who can consent?** to `Admins and users`
-  8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
-      * **Admin consent title:** Teams can access the user’s profile.
-      * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
-      * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
-      * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
-  9. Ensure that **State** is set to **Enabled**
-  10. Select **Add scope**
-      * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-          * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
-  11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
-      * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
-      * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
-      * `4765445b-32c6-49b0-83e6-1d93765276ca` (Microsoft 365 web application)
-      * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Microsoft 365 desktop application)
-      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop application)
-      * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web application)
-      * `27922004-5251-4030-b22d-91ecd9a37ea4` (Outlook mobile application)
-  12. Navigate to **API Permissions**, and make sure to add the follow permissions:
-  -   Select Add a permission
-  -   Select Microsoft Graph -\> Delegated permissions.
-  -   Select Microsoft Graph -\> Application permissions.
+### Setup and use the sample locally
+
+1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
+  -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+ 
+      PowerShell script
+
+    ```powershell
+    # Import-Module MicrosoftTeams
+    # Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
+    Connect-MicrosoftTeams
+    New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-the-policy-needs-to-be-granted>>"
+    
+    OR
+    # For global access
+    # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
+    ```
+    Example:
+
+    ```powershell
+      # Import-Module MicrosoftTeams
+      Connect-MicrosoftTeams
+
+      New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "xxxxxx0f-xxe2-4exx-9exx-2exxxx76bxxc" -Description "Online meeting policy - contoso town"
+      
+      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "7xxxx076x-xxxx-4xfx-x6x3-xa1xxx28xxxc"
+      OR
+      # For global access
+      # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
+    ```
+    
+      ![Policy ](MeetingAutoRecording/Images/Policy.png)
+     
+1) In Azure [App Registration](https://ms.portal.azure.com/) Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
 
       ![Login-In ](MeetingAutoRecording/Images/Permissions.png)
-
-  -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-  13. Navigate to **Authentication**
-      If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-  - Set a redirect URI:
-      * Select **Add a platform**.
-      * Select **Single-page application**.
-      * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end` and `https://{Base_Url}/auth-start`.
-  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-  15.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
-  -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
-
-      ![Policy ](MeetingAutoRecording/Images/Policy.png)
 
 ## Running the sample
 
