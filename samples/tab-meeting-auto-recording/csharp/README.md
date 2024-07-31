@@ -16,7 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ## Tab Meeting Recording and transcript with auto recording
 
-This feature ensures that meetings initiated from a specific Teams tab are automatically recorded and transcribed by leveraging event subscriptions and integrating with the Microsoft Graph API. It manages the recording process by subscribing to relevant Teams events to detect when a meeting starts and then uses the API to control recording settings. Additionally, it enables real-time transcription of the meeting content, providing both audio/video recordings and searchable text, which enhances accessibility and offers valuable content for future reference.
+This feature ensures that meetings initiated from a specific Teams tab are automatically recorded and transcribed by leveraging Microsoft Graph API and event subscriptions. 
+
+It detects when a meeting starts from the tab and uses the API to control recording settings, providing seamless management of the recording process. Additionally, it enables real-time transcription of the meeting content, offering both audio/video recordings and searchable text. 
+
+This integration enhances accessibility, improves content retrieval, and ensures valuable documentation for future reference.
 
 **Interaction with app**
 ![MeetingAutoRecording](MeetingAutoRecording/Images/MeetingTranscriptRecording.gif)
