@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ---
 
-## Meeting Transcripts Recordings
+## Meeting Auto Recording
 
 This sample shows meeting auto recording.
 
@@ -150,7 +150,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
   15.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
   -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
-    ![Policy ](MeetingAutoRecording/Images/Policy.png)
+      ![Policy ](MeetingAutoRecording/Images/Policy.png)
 
 ## Running the sample
 
