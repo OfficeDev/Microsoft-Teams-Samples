@@ -44,13 +44,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
-
-## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
-
-|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
-|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|bot-ai-meeting-helper|This sample demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.||[View][bot-ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/bot-ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
+|1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]| 
+|2|bot-ai-meeting-helper|This sample demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.||[View][bot-ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/bot-ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 

@@ -3,7 +3,6 @@ page_type: sample
 description: This example demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.
 products:
 - office-teams
-- copilot-m365
 languages:
 - nodejs
 extensions:
@@ -37,7 +36,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
-- To run the demo, you must set up and grant the necessary policy. Please follow the second step mentioned above for instructions on how to do this. 
+- To run the demo, you must set up and grant the necessary policy. Please follow the second step mentioned below for instructions (in "Setup and use the sample locally" section) on how to do this. 
 
 ## Prerequisites
 
@@ -52,7 +51,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ### Create an Azure Open AI service
 - In Azure portal, create a [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 - **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
-- Create and collect `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT_NAME`, and save those value  to update in `.env` file later.
+- Create and collect `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT_NAME`, and save those value  to update in `.localConfigs` file later.
 
 ### Create an Azure Table Storage
 - In Azure portal, create a [Azure Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal).
@@ -60,10 +59,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Create an Azure Self-Signed Certificate
 - In Azure portal, create a [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal).
-- Create and collect `EncryptionCertificateId`, `Base64EncodedCertificate`, `PRIVATE_KEY_PATH`, and save those value  to update in `.env` file later.
+- Create and collect `EncryptionCertificateId`, `Base64EncodedCertificate`, `PRIVATE_KEY_PATH`, and save those value  to update in `.localConfigs` file later.
 
 ## Setup the Application Insights
-In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource) and save `Instrumentation Key` and `Connection String` values and which will be required later while updating `.env` file configuration in sample code.
+In Azure portal, create an [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/nodejs#resource) and save `Instrumentation Key` and `Connection String` values and which will be required later while updating `.localConfigs` file configuration in sample code.
 
 **Note>** While creating or setting up Application Insights, choose `NodeJS` as the application type.
 
@@ -141,8 +140,6 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
         ![Application Permission](Images/ApplicationPermission.png)
 
-1) Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
@@ -192,8 +189,6 @@ If you want to deploy the app to Azure, you can follow the below steps:
 - [Deploy Microsoft Teams app to the cloud using Microsoft Visual Studio Code](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/deploy)
 
 ## Further reading
-
-### AI, Personal Chat And Table Storage
 
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal) 

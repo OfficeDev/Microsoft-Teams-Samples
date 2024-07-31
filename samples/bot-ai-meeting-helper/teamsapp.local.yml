@@ -93,12 +93,10 @@ deploy:
         AZURE_OPENAI_API_KEY: ${{SECRET_AZURE_OPENAI_API_KEY}}
         AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
         AZURE_OPENAI_DEPLOYMENT_NAME: ${{AZURE_OPENAI_DEPLOYMENT_NAME}}
-        BOT_ENDPOINT: ${{BOT_ENDPOINT}}
-        Token: ${{Token}}
+        BOT_ENDPOINT: ${{BOT_ENDPOINT}} 
         Base64EncodedCertificate: ${{Base_64_Encoded_Certificate}}
         EncryptionCertificateId: ${{Encryption_Certificate_Id}}
         PRIVATE_KEY_PATH : ${{Pem_File_Path}}
-        OPENSSL_CONFIG: "C:/Program Files/OpenSSL-Win64/bin/openssl.exe"
         Account_Name: "${{Azure_Storage_Account}}"
         Account_Key: "${{Azure_Storage_Account_Key}}"
         Table_Name: "${{Azure_Storage_Table}}"

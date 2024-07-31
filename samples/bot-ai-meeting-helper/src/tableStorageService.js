@@ -1,4 +1,4 @@
-// <copyright file="database.js" company="Microsoft">
+// <copyright file="tableStorageService.js" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 

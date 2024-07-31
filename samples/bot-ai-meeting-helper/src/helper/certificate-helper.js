@@ -10,18 +10,6 @@ const pem = require('pem');
 const config = require('../config');
 
 /**
- * Configures path to openssl.exe if needed
- */
-function ensureOpenSsl() {
-  if (os.platform() === 'win32') {
-    const pathOpenSSL = process.env.OPENSSL_CONF
-      ? process.env.OPENSSL_CONF.replace('.cfg', '.exe')
-      : config.OPENSSL_CONFIG;
-    pem.config({ pathOpenSSL: pathOpenSSL });
-  }
-}
-
-/**
  * To get private key from path
  * @param  {string} keyPath - The relative path to the file containing the private key
  * @returns {string} Contents of the private key file
@@ -46,7 +34,6 @@ module.exports = {
     const certFullPath = path.join(__dirname, certPath);
     return new Promise((resolve, reject) => {
       if (!fs.existsSync(certFullPath)) {
-            ensureOpenSsl();
             pem.createCertificate(
               {
                 selfSigned: true,
