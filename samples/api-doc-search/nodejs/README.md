@@ -86,7 +86,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 **Note: All of these above values are created and collected in the previous steps.
 Also, responses depend on `Cosine Similarity` where `Cosine similarity` compares two items by looking at the angle between them, giving a score from 0 to 1, where `1` means they are exactly the same, and `0` means they are completely different.**
 
-  - In a terminal, navigate to `samples/api-doc-search/nodejs`
+  - In a terminal, navigate to `samples/api-doc-search/nodejs` or open folder in Visual Studio Code.
   - Install node modules and run application by pressing F5 in Visual Studio Code
  
    ```bash
