@@ -17,11 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-api-doc-search-nodejs
 
 # RAG-based Semantic Search API with Azure CosmosDB NoSQL
 
-This sample demonstrate the concept of Retrieval Augmented Generation (RAG). 
+This sample demonstrates the concept of Retrieval Augmented Generation (RAG). 
  
-- To do this, we upload documents into an Azure blob storage. The contents of these documents are converted into vector embeddings that are stored in an Azure NoSQL Cosmos DB. Using an API endpoint, we can run prompt queries on the contents of the documents. 
+- To do this, we upload documents into an Azure blob storage. The contents of these documents are converted into embedding vectors that are stored in an Azure NoSQL Cosmos DB. Using an API endpoint, we can run prompt queries on the contents of the documents. 
  
-- Relevant results are returned by performing RAG on the document contents vector embeddings and shown along with a calculated similarity score.
+- Relevant results are returned by performing RAG on the document contents embedding vectors and shown along with a calculated similarity score.
  
 - The API endpoint can be called in two ways - using the browser directly, or a GET call using any API testing tool. 
 
@@ -84,12 +84,10 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
   - Open `.env` file and update the `.env` configuration for the application to use the `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentName`, `CosmosDBEndpoint`, `CosmosDBKey`, `CosmosDBDatabaseId`, `CosmosDBContainerId`, `SimilarityScore`, `APPINSIGHTS_INSTRUMENTATIONKEY`, `APPINSIGHTS_CONNECTIONSTRING` values.
   
 **Note: All of these above values are created and collected in the previous steps.
-Also, responses are depend on `Cosine Similarity` where `Cosine similarity` compares two items by looking at the angle between them, giving a score from 0 to 1, where `1` means they are exactly the same, and `0` means they are completely different.**
+Also, responses depend on `Cosine Similarity` where `Cosine similarity` compares two items by looking at the angle between them, giving a score from 0 to 1, where `1` means they are exactly the same, and `0` means they are completely different.**
 
-  ```bash
   - In a terminal, navigate to `samples/api-doc-search/nodejs`
-
- - Install node modules and run application by pressing F5 in Visual Studio Code
+  - Install node modules and run application by pressing F5 in Visual Studio Code
  
    ```bash
     npm install
@@ -99,7 +97,7 @@ Also, responses are depend on `Cosine Similarity` where `Cosine similarity` comp
 
 **Note:** To run this sample, you need to have the Azure function running locally or deployed. Follow the steps mentioned in the [Azure Function](../azure-function-nodejs/README.md) section to configure and run the Azure function locally.
 
-In this step, we will run the sample by uploading files on which a prompt query needs to be executed. Once the file is uploaded, vector embeddings for it are created, and using an API endpoint, a prompt query can be fired which returns relevant responses using RAG, along with a similarity score.
+In this step, we will run the sample by uploading files on which a prompt query needs to be executed. Once the file is uploaded, embedding vectors  for it are created, and using an API endpoint, a prompt query can be fired which returns relevant responses using RAG, along with a similarity score.
 
 ### Running the sample locally by uploading file in local emulated storage
 Step: 1 [Prepare local storage emulation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#prepare-local-storage-emulation) and [Run the azure function locally](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#run-the-function-locally)
@@ -114,7 +112,7 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 
   ![Run the function](Images/execute-function-now-locally.png)
 
-  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required vector embeddings for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
+  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required embedding vectors for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
 
@@ -139,15 +137,15 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 
 ### Running the sample by uploading the files to Azure Blob Storage
 
-- **Upload file to Azure Blob container:** Upload the file(s) for which you want to create vector embeddings into the Blob Storage container in Azure.
+- **Upload file to Azure Blob container:** Upload the file(s) for which you want to create embedding vectors into the Blob Storage container in Azure.
 
   ![Blob Container](../azure-function-nodejs/Images/1.blob-container.png)
 
-- **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function (Deployed Azure Function) which will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+- **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function (Deployed Azure Function) which will start creating the required embedding vectors  and store in the Azure NoSQL Cosmos DB.
 
   ![Azure Function Invocation](../azure-function-nodejs/Images/3.azure-function-invocation.png)
 
-- **Cosmos DB Embeddings:** Once the Azure function is executed, the vector embeddings for the uploaded files are stored in the Azure Cosmos DB.
+- **Cosmos DB Embeddings:** Once the Azure function is executed, the embedding vectors for the uploaded files are stored in the Azure Cosmos DB.
   ![Cosmos DB Embeddings](../azure-function-nodejs/Images/4.cosmos-db-embeddings.png)
 
 **You can call the API Endpoint to run the required prompts on the documents in two ways:**
