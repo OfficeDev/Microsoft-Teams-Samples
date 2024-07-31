@@ -108,35 +108,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
   -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
- 
-      PowerShell script
-
-    ```powershell
-    # Import-Module MicrosoftTeams
-    # Call Connect-MicrosoftTeams using no parameters to open a window allowing for MFA accounts to authenticate
-    Connect-MicrosoftTeams
-    New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-    Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-the-policy-needs-to-be-granted>>"
     
-    OR
-    # For global access
-    # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
-    ```
-    Example:
-
-    ```powershell
-      # Import-Module MicrosoftTeams
-      Connect-MicrosoftTeams
-
-      New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "xxxxxx0f-xxe2-4exx-9exx-2exxxx76bxxc" -Description "Online meeting policy - contoso town"
-      
-      Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "7xxxx076x-xxxx-4xfx-x6x3-xa1xxx28xxxc"
-      OR
-      # For global access
-      # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
-    ```
-    
-      ![Policy ](MeetingAutoRecording/Images/Policy.png)
+  ![Policy ](MeetingAutoRecording/Images/Policy.png)
      
 1) In Azure [App Registration](https://ms.portal.azure.com/) Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
 
