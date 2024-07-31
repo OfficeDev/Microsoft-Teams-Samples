@@ -40,6 +40,12 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
+## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
+
+|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
+
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------|:--------|
@@ -71,7 +77,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |26| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |27| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
 |28| Tab Meeting Auto Recording |This sample shows meeting auto recording. |[View][tab-meeting-auto-recording#csharp]||
-
+|29| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. ||[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -166,6 +172,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |11|Graph Meeting Notification  | This is a sample application which demonstrates the use of online meeting subscription and sends you the notifications in chat using bot. | [View][graph-meeting-notification#cs]|[View][graph-meeting-notification#js] ![toolkit-icon](assets/toolkit-icon.png)|
 |12|Change Notifications Team/Channel  | This sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel using Graph api. | [View][change-notifications-team/channel#cs]|[View][change-notifications-team/channel#js] ![toolkit-icon](assets/toolkit-icon.png)|
 |13|graph-teams-tag  | This is a sample application which demonstrates how to use CRUD Graph operations within tab related to team tags. | [View][graph-teams-tag#cs]|[View][graph-teams-tag#js] ![toolkit-icon](assets/toolkit-icon.png)|
+|14|Graph API Explorer for RSC | Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization | |[View][graph-rsc-helper#js] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
 
@@ -282,6 +289,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-meeting-transcript-recording#csharp]:samples/tab-meeting-transcript-recording/csharp
 [tab-meeting-auto-recording#csharp]:samples/tab-meeting-auto-recording/csharp
 [tab-deeplink-pass-values#ts]:samples/tab-deeplink-pass-values/ts
+[tab-nested-auth#nodejs]:samples/tab-nested-auth/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
@@ -407,6 +415,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-audio-state#nodejs]:samples/meetings-audio-state/nodejs
 [meetings-context-app#csharp]:samples/meetings-context-app/csharp
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
+[bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
+[api-doc-search#nodejs]:samples/api-doc-search
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
@@ -438,6 +448,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel/nodejs
 [graph-teams-tag#cs]:samples/graph-teams-tag/csharp
 [graph-teams-tag#js]:samples/graph-teams-tag/nodejs
+[graph-rsc-helper#js]:samples/graph-rsc-helper/nodejs
 [link-unfurling-stt#nodejs]:samples/app-link-unfurling-in-share-to-teams/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
