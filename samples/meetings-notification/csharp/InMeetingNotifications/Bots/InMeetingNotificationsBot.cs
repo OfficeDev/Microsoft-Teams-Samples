@@ -186,7 +186,7 @@ namespace InMeetingNotificationsBot
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var welcomeText = "Hello and welcome to Content Bubble Sample Bot! Send my hello to see today's agenda. - Testing YMAL";
+            var welcomeText = "Hello and welcome to Content Bubble Sample Bot! Send my hello to see today's agenda.";
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
