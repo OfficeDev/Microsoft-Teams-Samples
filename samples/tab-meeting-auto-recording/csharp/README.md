@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ---
 
-## Meeting Auto Recording
+## Teams Tab - Meeting Auto-Recording
 
-This sample shows meeting auto recording.
+This feature ensures that meetings initiated from a specific Teams tab are automatically recorded, leveraging event subscriptions to manage and trigger the recording process. The implementation involves subscribing to relevant Teams events and integrating with the Microsoft Graph API to control recording settings.
 
 **Interaction with app**
 ![MeetingAutoRecording](MeetingAutoRecording/Images/MeetingTranscriptRecording.gif)
