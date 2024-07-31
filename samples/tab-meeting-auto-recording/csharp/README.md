@@ -33,6 +33,63 @@ This sample shows meeting auto recording.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 - [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
+
+
+## Setup and use the sample 
+
+> Note these instructions are for running the sample on your local machine.
+
+1. Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http https://localhost:44302
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 44302 --allow-anonymous
+   ```
+
+2. Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+    
+3. Run the app from a terminal or from Visual Studio, choose option A or B.
+
+    A) From a terminal, navigate to `samples/tab-meeting-auto-recording/csharp`
+
+    ```bash
+    # run the app
+    dotnet run
+    ```
+    B) Or from Visual Studio
+
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/tab-meeting-auto-recording/csharp` folder
+    - Select `MeetingAutoRecording.sln` file
+    - Press `F5` to run the project
+
+4. In a terminal, navigate to `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp`
+
+    - Inside ClientApp folder execute the below command.
+
+        ```bash
+        # npm install
+        # npm start
+
+        ```
+
+5. Open .env file from this path folder `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp` and update:
+   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   
+
+6. Modify the `/appsettings.json` and fill in the following details:
+   - `{{BaseUrlNgrok}}` - With base Url domain. E.g. if you are using ngrok it would be 1234.ngrok-free.app and if you are using dev tunnels then your domain will be 12345.devtunnels.ms.
+  
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
@@ -46,7 +103,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup Register you app with Azure AD.
-
   1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
@@ -94,76 +150,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
   15.  Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
   -  Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
-      ![Policy ](MeetingAutoRecording/Images/Policy.png)
-
-## Setup 
-
-> Note these instructions are for running the sample on your local machine.
-
-1. Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3978 --allow-anonymous
-   ```
-
-2. Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-    
-3. Run the app from a terminal or from Visual Studio, choose option A or B.
-
-    A) From a terminal, navigate to `samples/tab-meeting-auto-recording/csharp`
-
-    ```bash
-    # run the app
-    dotnet run
-    ```
-    B) Or from Visual Studio
-
-    - Launch Visual Studio
-    - File -> Open -> Project/Solution
-    - Navigate to `samples/tab-meeting-auto-recording/csharp` folder
-    - Select `MeetingAutoRecording.sln` file
-    - Press `F5` to run the project
-
-4. In a terminal, navigate to `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp`
-
-    - Inside ClientApp folder execute the below command.
-
-        ```bash
-        # npm install
-        # npm start
-
-        ```
-
-5. Open .env file from this path folder `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp` and update:
-   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id\
-   
-
-6. Modify the `/appsettings.json` and fill in the following details:
-   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
-   - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
-  
-**This step is specific to Teams:**
-
-- **Edit** the `manifest.json` contained in the  `AppPackage` folder to replace your Microsoft App Id `{{MicrosoftAppId}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{MicrosoftAppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-
-- **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-
-- **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-
-- **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-
-- Add the app to personal static tabs.
+    ![Policy ](MeetingAutoRecording/Images/Policy.png)
 
 ## Running the sample
 
