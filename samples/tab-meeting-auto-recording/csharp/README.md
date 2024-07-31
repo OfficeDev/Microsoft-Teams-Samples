@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ---
 
-## Teams Tab - Meeting Auto-Recording
+## Tab Meeting Recording and transcript with auto recording
 
-This feature ensures that meetings initiated from a specific Teams tab are automatically recorded, leveraging event subscriptions to manage and trigger the recording process. The implementation involves subscribing to relevant Teams events and integrating with the Microsoft Graph API to control recording settings.
+This feature ensures that meetings initiated from a specific Teams tab are automatically recorded and transcribed by leveraging event subscriptions and integrating with the Microsoft Graph API. It manages the recording process by subscribing to relevant Teams events to detect when a meeting starts and then uses the API to control recording settings. Additionally, it enables real-time transcription of the meeting content, providing both audio/video recordings and searchable text, which enhances accessibility and offers valuable content for future reference.
 
 **Interaction with app**
 ![MeetingAutoRecording](MeetingAutoRecording/Images/MeetingTranscriptRecording.gif)
@@ -89,6 +89,7 @@ This feature ensures that meetings initiated from a specific Teams tab are autom
 
 6. Modify the `/appsettings.json` and fill in the following details:
    - `{{BaseUrlNgrok}}` - With base Url domain. E.g. if you are using ngrok it would be 1234.ngrok-free.app and if you are using dev tunnels then your domain will be 12345.devtunnels.ms.
+   > Make sure to manually update `{{BaseUrlNgrok}}` with the ngrok or dev-tunnel URL. Otherwise, notifications will not function correctly.
   
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
