@@ -105,11 +105,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to Microsoft Entra ID, then making a call to the Graph API on your behalf and returning the results.
 
-![add-App ](Images/1.Add_App.png)
+![Add-App ](Images/1.Install.png)
 
-![add-to-teams ](Images/2.Add_Teams.png)
+![Add-to-teams ](Images/2.Bot_Response.png)
 
-![auth-login ](Images/3.Welcome_Signout.png)
+![Auth-login ](Images/3.Logged_In.png)
+
+![Token ](Images/4.User_Token.png)
+
+![Auth-logout ](Images/5.Logged_Out.png)
 
 ## Deploy the bot to Azure
 

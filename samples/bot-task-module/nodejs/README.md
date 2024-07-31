@@ -124,31 +124,31 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 - **Personal Scope Interactions:**
 
-![ps-AddApp ](Images/ps-AddApp.png)
+![ps-AddApp ](Images/1.Install.png)
 
-![ps-Cards ](Images/ps-Cards.png)
+![ps-Cards ](Images/2.Interaction_with_Bot.png)
 
-![ps-AC-TaskModule ](Images/ps-AC-TaskModule.png)
+![ps-AC-TaskModule ](Images/3.Adaptive_card_in_chat.png)
 
-![ps-AC-TaskModule-Submit ](Images/ps-AC-TaskModule-Submit.png)
+![ps-AC-TaskModule-Submit ](Images/4.Adaptive_card_submitted.png)
 
 - **Group Chat Scope Interactions:**
 
-![gc-Interaction ](Images/gc-Interaction.png)
+![gc-Interaction ](Images/5.Update_in_chat.png)
 
 - **Team Scope Interactions:**
 
-![ts-Interaction ](Images/ts-Interaction.png)
+![ts-Interaction ](Images/6.Interaction_with_bot_in_GC.png)
 
 - **Task Module Tab:**
 
-![TaskModuleTasks](Images/3.Tasks.png)
+![TaskModuleTasks](Images/8.Tasks_Tab_in_chat.png)
 
-![Youtube](Images/4.Youtube.png)
+![Youtube](Images/9.Youtuube_in_chat.png)
 
-![PowerApp](Images/5.PowerApp.png)
+![PowerApp](Images/10.Powerapp_in_Tab.png)
 
-![CustomForm](Images/6.CustomForm.png)
+![CustomForm](Images/11.Custom_form_in_Tab.png)
 
 ![AdaptiveCard](Images/7.AdaptiveCard.png)
 
