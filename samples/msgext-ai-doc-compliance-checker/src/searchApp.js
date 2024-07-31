@@ -32,6 +32,7 @@ class SearchApp extends TeamsActivityHandler {
         if (filename.split('.')[0] === msFileName) {
           const blockBlobClient = containerClient.getBlockBlobClient(filename);
           const downloadBlockBlobResponse = await blockBlobClient.download(0);
+          
           let fileContent;
 
           // Process DOCX file
@@ -131,6 +132,7 @@ class SearchApp extends TeamsActivityHandler {
       const [txtDescription, statusPart] = line.split(':').map(part => part.trim());
       const status = statusPart.includes('Yes') ? 'Yes' : 'No';
       const verifyContent = statusPart;
+      
       return {
         txtDescription,
         status,

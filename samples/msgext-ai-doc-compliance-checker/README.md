@@ -7,6 +7,10 @@ products:
 - azure open-ai
 languages:
 - javascript
+extensions:
+ contentType: samples
+ createdDate: "07/15/2024 01:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-msgext-ai-doc-compliance-checker-js
 ---
 
 # Compliance Checker using Azure Open AI
@@ -35,6 +39,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 - [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 
+## Create an Azure Open AI service
+
+- In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+- **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
+- Collect `AzureOpenAIEndpoint`, `AzureOpenAIApiKey`, `AzureOpenAIDeploymentId` values and save these values to update in `.env` file later.
+
 ## Setup and use the sample
 
 1) **Create Azure Blob Storage:**
@@ -52,13 +62,16 @@ Upload the policy guideline document (keep the file-name handy for adding into t
 
 1) Navigate to the `samples/msgext-ai-doc-compliance-checker/.localConfigs` directory and update the values below.
 
-   ```txt
-      END_POINT={{Azure_End_Point}}
-      API_KEY={{Azure_Api_Key}}
-      DEPLOYMENT_ID={{Azure_Deployment_Id}}
+   When running the sample using the toolkit, the BOT_ID and BOT_PASSWORD are automatically generated for you. You do not need to manually configure these credentials
+    ```bash
+      BOT_ID={{Azure_Bot_Id}} 
+      BOT_PASSWORD={{Azure_Bot_Password}}
+      END_POINT={{AzureOpenAIEndpoint}}
+      API_KEY={{AzureOpenAIApiKey}}
+      DEPLOYMENT_ID={{AzureOpenAIDeploymentId}}
       AZURE_STORAGE_CONNECTION_STRING={{Azure_Storage_Connection_String}}
       AZURE_CONTAINER_NAME={{Azure_Container_Name}}
-      CHECKLIST_NAME={{Name of the Policy Guideline document uploaded in Azure Blob}}
+      CHECKLIST_NAME={{The name of the Policy Guideline document uploaded in Azure Blob should include the file extension. Supported file formats are: .pdf , .docx, .txt}}
    ```
 
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
@@ -107,7 +120,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) **Enable Compliance Checker app:**
 ![11.CopilotEnable](Images/11.CopilotEnable.png)
 
-1) **Type Prompt: "Using Compliance Checker, evaluate Acme Suppliers Proposal for compliance" and click the send icon:**
+1) **Using Compliance Checker, evaluate Acme Suppliers Proposal for compliance**
 ![12.CopilotPrompt](Images/12.CopilotPrompt.png)
 
 1) **Compliance checker results are being generating:**
@@ -118,6 +131,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1) **Click on the arrow to expand the card and get contextual reasoning for the complaince status being Yes or No:**
 ![15.CopilotCardResults](Images/15.CopilotCardResults.png)
+
+## Deploy/Host your app on Azure
+If you want to deploy the app to Azure, you can follow the below steps:
+- [Provision cloud resources](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/provision)
+- [Deploy Microsoft Teams app to the cloud using Microsoft Visual Studio Code](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/deploy)
 
 ## Further reading
 

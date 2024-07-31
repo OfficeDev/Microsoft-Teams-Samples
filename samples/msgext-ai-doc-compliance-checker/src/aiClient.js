@@ -62,6 +62,7 @@ For each item on the checklist:
             if (fileChunks.length == 1) {
                 responsesResults.push(responseContent);  // If there is only one chunk, add the response content directly
             }
+            
             if (fileChunks.length >= 2) {
                  // If there are multiple chunks, process each line of the response
                 const responselines = responseContent.split('\n').filter(line => line.trim() !== '');
@@ -72,6 +73,7 @@ For each item on the checklist:
                         let cleanedText = content.replace(/- /g, '');
                         let cleanedTextResult = cleanedText.split(':')[0];
                         const foundItemIndex = checkListItems.findIndex(item => item.content === cleanedTextResult);
+                        
                         if (foundItemIndex !== -1) {
                             checkListItems.splice(foundItemIndex, 1);
                             responsesResults.push(content);
