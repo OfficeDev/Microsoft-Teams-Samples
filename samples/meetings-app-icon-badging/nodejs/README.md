@@ -25,7 +25,7 @@ This sample illustrates how to send app icon badging notification on tab icon in
 
 ## Interaction with app
 
-![App Icon Badging](Images/app_icon_badging.gif)
+![App Icon Badging](Images/AppIconBadgingNodejs.gif)
 
 ## Prerequisites
 
@@ -128,19 +128,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Setup Configurable Tab:**
 
-![Setup Tab](Images/1.set_up_config_tab.png)
+![Setup Tab](Images/1.Install.png)
 
 **Interacting with the app in Teams Meeting**
 
+![App Icon Badging](Images/2.AddToMeeting.png)
+
+![App Icon Badging](Images/4.Sidepanel.png)
+
 Type `SendNotification` in bot chat to send In-Meeting notifications.
 
+![App Icon Badging](Images/5.SendCommand.png)
+
 **Notification On Tab Icon as 'Icon Badging':**
+![App Icon Badging](Images/6.SelectOptionAppIconBadging.png)
 
-![App Icon Badging](Images/2.app_icon_badging.png)
-
-**Stage View and App Icon Badging Notification:**
-
-![Stage View and AppIconBadging](Images/3.StageView_and_AppIconBadging.png)
+![App Icon Badging](Images/7.AppIconBadgingNotification.png)
 
 
 ## Further reading
