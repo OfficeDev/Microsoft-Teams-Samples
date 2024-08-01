@@ -1,0 +1,21 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "c0008c_STORAGE": "UseDevelopmentStorage=true",
+    "AzureOpenAIEndpoint": "",
+    "AzureOpenAIApiKey": "",
+    "AzureOpenAIDeploymentName": "text-embedding-ada-002",
+    "CosmosDBEndpoint": "",
+    "CosmosDBKey": "",
+    "CosmosDBDatabaseId": "",
+    "CosmosDBContainerId": "",
+    "PartitionKey":"",
+    "AzureStorageDBConnString": "",
+    "AzureBlobContainerName": "",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "",
+    "APPINSIGHTS_CONNECTIONSTRING": ""
+  }
+}

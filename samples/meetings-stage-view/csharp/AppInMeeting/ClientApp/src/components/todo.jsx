@@ -154,7 +154,7 @@ const Todo = props => {
                 <img className="add-icon" src="/add_icon.svg" title="Click to continue existing conversation" />
             </button>
             <br />
-            <button onClick={() => { props.shareSpecificPart('todo') }} className="share-specific-part-button">
+            <button onClick={() => { props.shareSpecificAppContent('todo') }} className="share-specific-part-button">
                 Share To Do
             </button>
             <div id="todo">

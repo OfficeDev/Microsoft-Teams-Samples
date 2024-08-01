@@ -1,0 +1,133 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${title}",
+      "$when": "${not(empty(title))}",
+      "wrap": true,
+      "weight": "Bolder",
+      "style": "heading"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${text}",
+      "$when": "${not(empty(text))}",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "$data": "${sections}",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "${title}",
+          "$when": "${not(empty(title))}",
+          "wrap": true,
+          "weight": "Bolder",
+          "style": "heading"
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "$when": "${not(empty(activityImage))}",
+              "items": [
+                {
+                  "type": "Image",
+                  "style": "Person",
+                  "url": "${activityImage}",
+                  "$when": "${not(empty(activityImage))}",
+                  "altText": "${activityTitle}",
+                  "size": "Small"
+                }
+              ],
+              "width": "auto"
+            },
+            {
+              "type": "Column",
+              "$when": "${not(empty(activityTitle)) or not(empty(activitySubtitle)) or not(empty(activityText))}",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "weight": "Bolder",
+                  "text": "${activityTitle}",
+                  "$when": "${not(empty(activityTitle))}",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${activitySubtitle}",
+                  "$when": "${not(empty(activitySubtitle))}",
+                  "spacing": "None",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${activityText}",
+                  "$when": "${not(empty(activityText))}",
+                  "spacing": "None",
+                  "wrap": true
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        },
+        {
+          "type": "Image",
+          "url": "${heroImage.image}",
+          "$when": "${not(empty(heroImage))}",
+          "altText": "${heroImage.title}",
+          "size": "stretch"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${text}",
+          "$when": "${not(empty(text))}",
+          "spacing": "None",
+          "wrap": true
+        },
+        {
+          "type": "FactSet",
+          "$when": "${not(empty(facts))}",
+          "facts": [
+            {
+              "$data": "${facts}",
+              "$when": "${not(empty(name))}",
+              "title": "${name}",
+              "value": "${value}"
+            }
+          ]
+        },
+        {
+          "type": "Image",
+          "url": "${image}",
+          "$data": "${images}",
+          "$when": "${not(empty(images))}",
+          "altText": "${title}",
+          "size": "auto"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "$data": "${sections.potentialAction}",
+      "$when": "${@type == 'OpenUri'}",
+      "title": "${name}",
+      "url": "${targets[0].uri}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "$data": "${potentialAction}",
+      "$when": "${@type == 'OpenUri'}",
+      "title": "${name}",
+      "url": "${targets[0].uri}"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5"
+}
