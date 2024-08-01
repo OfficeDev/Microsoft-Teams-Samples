@@ -45,6 +45,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
+|2|Teams Azure OpenAI|This sample showcases a Teams app template that enables data interaction using retrieval-augmented generation (RAG) with Azure OpenAI and Azure AI Search.||[View][msteams-chat-with-your-data] ![toolkit-icon](assets/toolkit-icon.png)|-
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
@@ -417,6 +418,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
 [bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
 [api-doc-search#nodejs]:samples/api-doc-search
+[msteams-chat-with-your-data]:samples/msteams-chat-with-your-data
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
