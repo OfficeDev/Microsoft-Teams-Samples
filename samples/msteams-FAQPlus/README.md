@@ -27,32 +27,19 @@ This sample implements a chatbot that answers queries based on a custom database
 * **Proactive Messaging:** Proactive messaging is used to send a message to the Teams channel by initiating a conversation.
 * **Adaptive Cards:** Adaptive cards are used to send the conversation history to the Teams channel and allow for actions such as "chat with user" or "close ticket".
 
-## Interaction with the bot
+## Interaction with the app
  ![bot-in-action](images/app.gif)
 
-## How the knowledge base works
-![FAQBot Setup](images/architecture.png)
-1. **User Query**:
-    - The user asks the bot a question.
-2. **Prompt Generation**:
-    - The bot generates a prompt based on the user's question.
-3. **Azure AI Search**:
-    - The prompt is sent as a query to Azure AI Search to find relevant information.
-    - The top ranked search results are sent to the LLM.
-4. **Azure OpenAI**:
-   - The promt is also sent to Azure OpenAI model to set the context and intent.
-   - The model provides a generative response which is sent back to the user.
-
-## Set up and run the app in Github Codespaces
+## Set up and run the sample app in Github Codespaces
 1. Click **Open in GitHub Codespaces** badge above to create a codespace for the sample app. Wait for the codespace to be setup, it may take a couple of minutes.
 2. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
 3. [Set up your knowledge base using Azure AI resources](#set-up-your-knowledge-base).
 4. [Populate the environment files](#populate-the-environment-files).
 5. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Select ```Debug``` and press ```F5``` or click on the play button.
 6. Download the zip file ```appPackage/build/appPackage.local.zip``` and [sideload the app to Teams personal chat](#sideload-the-app-to-teams-personal-chat) and  [sideload the app to Teams Channel](#sideload-the-app-to-teams-channel)
-7. You can now [interact with the app](#interact-with-the-app).
+7. You can now [run the sample app](#run-the-sample-app).
    
-## Set up and run the app locally
+## Set up and run the sample app locally
 ### Prerequisites
 - [Python 3.11](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/)
@@ -67,12 +54,14 @@ This sample implements a chatbot that answers queries based on a custom database
    ```git clone https://github.com/t-mbindra/chat-with-your-data.git```
 2. Open the project folder(Microsoft-Teams-Samples/samples/msteams-chat-with-your-data) in VS Code.
 3.  Run
-   ```poetry install && poetry build```
-4. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
-5. [Set up your knowledge base using Azure AI resources](#set-up-your-knowledge-base).
-6. [Populate the environment files](#populate-the-environment-files).
-7. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Press ```F5``` or click on the play button. Also, [sideload the app to Teams Channel](#sideload-the-app-to-teams-channel)
-8. You can now [interact with the app](#interact-with-the-app).
+   ```poetry install```
+4. Run
+   ```poetry build```
+5. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
+6. [Set up your knowledge base using Azure AI resources](#set-up-your-knowledge-base).
+7. [Populate the environment files](#populate-the-environment-files).
+8. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Press ```F5``` or click on the play button. Also, [sideload the app to Teams Channel](#sideload-the-app-to-teams-channel)
+9. You can now [run the sample app](#run-the-sample-app).
 
 >[!Note]
 > Check the status of all your local(Debug/F5 flow) bots on [Microsoft Bot Framework](https://dev.botframework.com/bots).
@@ -105,7 +94,7 @@ This sample implements a chatbot that answers queries based on a custom database
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Interact with the app
+## Run the sample app
 1. The bot sends a welcome message.
  ![welcome-message](images/welcome.png)
 2. User chats with the bot.
@@ -123,6 +112,19 @@ This sample implements a chatbot that answers queries based on a custom database
 8. User clears the chat history.
  ![clear-conversation-history](images/clear.png)
 
+## How the knowledge base works
+![FAQBot Setup](images/architecture.png)
+1. **User Query**:
+    - The user asks the bot a question.
+2. **Prompt Generation**:
+    - The bot generates a prompt based on the user's question.
+3. **Azure AI Search**:
+    - The prompt is sent as a query to Azure AI Search to find relevant information.
+    - The top ranked search results are sent to the LLM.
+4. **Azure OpenAI**:
+   - The promt is also sent to Azure OpenAI model to set the context and intent.
+   - The model provides a generative response which is sent back to the user.
+
 ## Deploy/Host the app on Azure
 Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 1. [Populate the environment files](#populate-the-environment-files).
@@ -133,3 +135,7 @@ Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 > Check the status of your dev(hosted on Azure) bots on [Azure Portal](https://portal.azure.com/#home) by navigating to the relevant resource group.
 > Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
 > Teams toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
+
+## Further Reading
+- [Azure OpenAI On Your Data](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data?tabs=ai-search%2Ccopilot)
+- [Azure AI search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
