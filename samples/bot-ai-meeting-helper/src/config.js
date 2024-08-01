@@ -22,7 +22,6 @@ const config = {
         LocalTimeZone: process.env.LocalTimeZone,
         APPINSIGHTS_INSTRUMENTATIONKEY: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
         APPINSIGHTS_CONNECTIONSTRING: process.env.APPINSIGHTS_CONNECTIONSTRING,
-
   };
 
 module.exports = config;

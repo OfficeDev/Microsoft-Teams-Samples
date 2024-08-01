@@ -3,16 +3,12 @@
 // </copyright>
 
 const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
-const { ConsoleTranscriptLogger } = require("botbuilder");
 
 const path = require('path');
-
 const ENV_FILE = path.join(__dirname, '.env');
 
 require('dotenv').config({ path: ENV_FILE });
-
 const config = require('./config');
-
 
 // Replace with your actual storage account name and account key
 const accountName = config.Account_Name;
@@ -35,6 +31,7 @@ async function storeData(partitionKey, rowKey, data) {
             rowKey: rowKey,
             ...data
         };
+        
         await tableClient.createEntity(entity);
         console.log(`Entity with PartitionKey: ${partitionKey}, RowKey: ${rowKey} has been created.`);
     }

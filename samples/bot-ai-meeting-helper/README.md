@@ -9,8 +9,8 @@ extensions:
  contentType: samples
  createdDate: "07/29/2024 01:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-ai-meeting-helper-nodejs
-
 ---
+
 # Meeting Helper with Azure Open AI
 
 This sample demonstrates generating action items and a meeting summary based on the attendees and transcription, then sending them to all participants.
@@ -55,7 +55,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### Create an Azure Table Storage
 - In Azure portal, create a [Azure Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal).
-- Create and collect `Account_Name`, `Account_Key`, `Table_Name`, and save those value  to update in `.env` file later.
+- Create and collect `Account_Name`, `Account_Key`, `Table_Name`, and save those value  to update in `.localConfigs` file later.
 
 ## Create an Azure Self-Signed Certificate
 - In Azure portal, create a [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal).
