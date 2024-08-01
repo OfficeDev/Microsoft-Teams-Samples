@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-msteams-chat-with-your-data
 ---
 
 # Chat With Your Data
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=mbindra-ChatWithYourData&repo=322043759&devcontainer_path=.devcontainer%2Fmsteams-chat-with-your-data%2Fdevcontainer.json&resume=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=322043759&devcontainer_path=.devcontainer%2Fmsteams-chat-with-your-data%2Fdevcontainer.json&resume=1)
 
 This sample showcases a Teams app template to chat with your data via RAG (retrieval augmentation generation) through Azure OpenAI On Your Data and Azure AI Search.
 - The user can set up a datasource such as Azure AI Search, Azure Blob Storage, URL/web address, Azure Cosmos DB for MongoDB vCore, uploaded files, or Elasticsearch.
@@ -27,16 +27,16 @@ This sample showcases a Teams app template to chat with your data via RAG (retri
 ## Interaction with the app
  ![bot-in-action](images/app.gif)
   
-## Set up and run the app in Github Codespaces
+## Set up and run the sample app in Github Codespaces
 1. Click Open in GitHub Codespaces badge above to create a codespace for the sample app. Wait for the codespace to be setup, it may take a couple of minutes.
 2. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
 3. [Set up your data source using Azure AI resources](#set-up-your-data-source).
 4. [Populate the environment files](#populate-the-environment-files).
 5. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Select ```Debug``` and press ```F5``` or click on the play button.
 6. Download the zip file ```appPackage/build/appPackage.local.zip``` and [sideload the app to Teams](#sideload-the-app-to-teams).
-7. You can now [interact with the app](#interact-with-the-app).
+7. You can now [run the sample app](#run-the-sample-app).
 
-## Set up and run the app locally
+## Set up and run the sample app locally
 ### Prerequisites
 - [Python 3.11](https://www.python.org/downloads/)
 - [Node.js](https://nodejs.org/)
@@ -51,12 +51,14 @@ This sample showcases a Teams app template to chat with your data via RAG (retri
    ```git clone https://github.com/t-mbindra/chat-with-your-data.git```
 2. Open the project folder(Microsoft-Teams-Samples/samples/msteams-chat-with-your-data) in VS Code.
 3.  Run
-   ```poetry install && poetry build``` in the terminal.
-4. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
-5. [Set up your data source using Azure AI resources](#set-up-your-data-source).
-6. [Populate the environment files](#populate-the-environment-files).
-7. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Press ```F5``` or click on the play button.
-8. You can now [interact with the app](#interact-with-the-app).
+   ```poetry install```
+4. Run 
+   ```poetry build```
+5. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
+6. [Set up your data source using Azure AI resources](#set-up-your-data-source).
+7. [Populate the environment files](#populate-the-environment-files).
+8. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Press ```F5``` or click on the play button.
+9. You can now [run the sample](#run-the-sample).
 
 >[!Note]
 > Check the status of all your local(Debug/F5 flow) bots on [Microsoft Bot Framework](https://dev.botframework.com/bots).
@@ -87,7 +89,7 @@ This sample showcases a Teams app template to chat with your data via RAG (retri
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Interact with the app
+## Run the sample app
 1. The bot sends a welcome message.
  ![welcome-message](images/welcome.png)
 2. Chat with the bot.
@@ -105,3 +107,7 @@ Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 > Check the status of your dev(hosted on Azure) bots on [Azure Portal](https://portal.azure.com/#home) by navigating to the relevant resource group.
 > Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
 > Teams toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
+
+## Further Reading
+- [Azure OpenAI On Your Data](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data?tabs=ai-search%2Ccopilot)
+- [Azure AI search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
