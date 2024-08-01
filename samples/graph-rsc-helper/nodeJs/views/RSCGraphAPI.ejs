@@ -129,7 +129,6 @@
                     break;
                 }
             }
-
             var parametersWithDescription = addDescriptionForparameters(parameters);
             populateList(parametersWithDescription, 'parametersList');
             populateList(permissions, 'permissionsList');
@@ -137,13 +136,11 @@
             console.log("URL is " + URL);
             URLElement.value = URL;
             console.log("body is " + body);
-
             if (type === "GET" || type === "DELETE") {
                 requestBody.value = '';
             } else {
                 requestBody.value = JSON.stringify(JSON.parse(body),null,2);
             }
-
             var responseBody = document.getElementById('responseBody');
             responseBody.innerHTML = "";
         }
@@ -176,15 +173,12 @@
                         return parameter;
                 }
             })
-
             return parametersWithDescription.join(',');
         }
-
         function populateList(Items, listId) {
             const List = document.getElementById(listId);
             const itemsArray = Items.split(',');
             List.innerHTML = '';
-            
             itemsArray.forEach(item => {
                 const li = document.createElement('li');
                 li.className = 'list-group-item';

@@ -1,7 +1,6 @@
 const axios = require("axios");
 const credential = require("./credential");
 const teamsAppId = process.env.teamsAppId;
-
 async function callChatAPI(
   originalUrl,
   requestType,
@@ -15,11 +14,9 @@ async function callChatAPI(
     userId,
     chatId
   );
-
   console.log(
     `url: ${url}, requestBody: ${requestBody}, requestType: ${requestType}`
   );
-
   try {
     return await callAPI(
       url,
@@ -41,7 +38,7 @@ async function callTeamAPI(
   userId,
   teamId,
   channelId
-)  {
+) {
   const { url, requestBody } = await resolveTeamPlaceHolders(
     originalUrl,
     originalRequestBody,
@@ -49,11 +46,9 @@ async function callTeamAPI(
     teamId,
     channelId
   );
-
   console.log(
     `url: ${url}, requestBody: ${requestBody}, requestType: ${requestType}`
   );
-
   try {
     return await callAPI(
       url,
@@ -108,13 +103,11 @@ async function resolveChatPlaceHolders(
   ) {
     const { tabId, installedAppId } =
       await getDefaultTabIdAndInstalledAppIdInChat(chatId);
-      
     url = url.replace("{tabId}", tabId);
     url = url.replace("{installedAppId}", installedAppId);
     requestBody = requestBody.replace("{tabId}", tabId);
     requestBody = requestBody.replace("{installedAppId}", installedAppId);
   }
-
   return { url, requestBody };
 }
 
@@ -140,13 +133,11 @@ async function resolveTeamPlaceHolders(
   ) {
     const { tabId, installedAppId } =
       await getDefaultTabIdAndInstalledAppIdInTeam(teamId, channelId);
-
     url = url.replace("{tabId}", tabId);
     url = url.replace("{installedAppId}", installedAppId);
     requestBody = requestBody.replace("{tabId}", tabId);
     requestBody = requestBody.replace("{installedAppId}", installedAppId);
   }
-
   return { url, requestBody };
 }
 
@@ -154,22 +145,18 @@ async function getDefaultTabIdAndInstalledAppIdInChat(chatId) {
   const token = await credential.getToken(
     "https://graph.microsoft.com/.default"
   );
-
   axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
   const result = await axios.get(
     `https://graph.microsoft.com/v1.0/chats/${chatId}/tabs?$expand=teamsApp`
   );
-
   let tabId;
   let installedAppId;
   for (let i = 0; i < result.data.value.length; i++) {
-
     if (result.data.value[i].teamsApp.externalId === teamsAppId) {
       tabId = result.data.value[i].id;
       installedAppId = result.data.value[i].teamsApp.id;
     }
   }
-
   console.log(`tabId: ${tabId}, installedAppId: ${installedAppId}`);
   return { tabId, installedAppId };
 }
@@ -178,12 +165,10 @@ async function getDefaultTabIdAndInstalledAppIdInTeam(teamId, channelId) {
   const token = await credential.getToken(
     "https://graph.microsoft.com/.default"
   );
-
   axios.defaults.headers.common["Authorization"] = `Bearer ${token.token}`;
   const result = await axios.get(
     `https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/tabs?$expand=teamsApp`
   );
-
   let tabId;
   let installedAppId;
   for (let i = 0; i < result.data.value.length; i++) {
@@ -192,7 +177,6 @@ async function getDefaultTabIdAndInstalledAppIdInTeam(teamId, channelId) {
       installedAppId = result.data.value[i].teamsApp.id;
     }
   }
-
   console.log(`tabId: ${tabId}, installedAppId: ${installedAppId}`);
   return { tabId, installedAppId };
 }

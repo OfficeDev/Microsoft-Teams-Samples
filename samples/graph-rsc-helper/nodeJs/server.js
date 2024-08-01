@@ -45,7 +45,6 @@ app.post("/handleRequest", async function (req, res) {
   const apiId = req.body.apiId;
   const tenantId = req.body.tenantId;
   const scope = req.body.scope;
-  
   try {
     console.log("apiId: ", apiId);
     if (scope === "team") {
