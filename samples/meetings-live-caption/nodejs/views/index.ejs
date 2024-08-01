@@ -19,6 +19,8 @@
         }
 
         .container {
+            color: cornflowerblue;
+            font-weight: bold;
             padding: 0.5rem;
         }
 
@@ -36,7 +38,13 @@
             background-color: #7A80EB;
         }
     </style>
-    <script>
+    
+    <script src="../jquery.min.js"></script>
+    <script src="..//MicrosoftTeams.min.js"
+        integrity="sha384-h+MoYshcGDPMLlXjHLt2dSgsgYyWQ+yHd4Ob13htDsu8trGPea8Vooa8+tLtRzU7"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
                 var infoDiv = document.getElementById("show-info");
