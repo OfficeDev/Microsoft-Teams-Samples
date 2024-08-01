@@ -28,7 +28,7 @@
       "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "team"
+        "groupchat"
       ]
     }
   ],
@@ -56,47 +56,51 @@
     "permissions": {
       "resourceSpecific": [
         {
-          "name": "Channel.Create.Group",
+          "name": "Calls.AccessMedia.Chat",
           "type": "Application"
         },
         {
-          "name": "Channel.Delete.Group",
+          "name": "Calls.JoinGroupCalls.Chat",
           "type": "Application"
         },
         {
-          "name": "ChannelMessage.Read.Group",
+          "name": "ChatSettings.ReadWrite.Chat",
           "type": "Application"
         },
         {
-          "name": "ChannelSettings.ReadWrite.Group",
+          "name": "ChatMessage.Read.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamsActivity.Send.Group",
+          "name": "ChatMessageReadReceipt.Read.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamsAppInstallation.Read.Group",
+          "name": "ChatMember.Read.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamMember.Read.Group",
+          "name": "Chat.Manage.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamSettings.ReadWrite.Group",
+          "name": "TeamsTab.Create.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamsTab.Create.Group",
+          "name": "TeamsTab.Read.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamsTab.Delete.Group",
+          "name": "TeamsTab.ReadWrite.Chat",
           "type": "Application"
         },
         {
-          "name": "TeamsTab.ReadWrite.Group",
+          "name": "TeamsAppInstallation.Read.Chat",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsActivity.Send.Chat",
           "type": "Application"
         }
       ]

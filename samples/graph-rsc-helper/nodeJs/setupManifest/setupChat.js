@@ -52,7 +52,9 @@ const permissions = [
       "type": "Application"
   }
 ];
+
 manifest.authorization.permissions.resourceSpecific = permissions;
+
 fs.writeFileSync(
   "../appManifest/manifest.json",
   JSON.stringify(manifest, null, 2)

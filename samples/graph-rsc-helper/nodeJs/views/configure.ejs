@@ -30,8 +30,10 @@
                         suggestedTabName: "RSCGraphAPI",
                         websiteUrl: `${window.location.origin}/RSCGraphAPI?tenantId={tid}`,
                     });
+                    
                     saveEvent.notifySuccess();               
                 });
+
                 microsoftTeams.pages.config.setValidityState(true);
             });
         </script>
