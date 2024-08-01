@@ -101,7 +101,7 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 
   ![Run the function](Images/execute-function-now-locally.png)
 
-  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required vector embeddings for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
+  - After running Azure function, provide file name like: `abc.pdf` it will start creating the required embedding vectors for uploaded file and store the vectors in the Azure NoSQL Cosmos DB.
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
 
@@ -109,12 +109,12 @@ Step 3: [Run the function locally](https://learn.microsoft.com/en-us/azure/azure
 **Note: Before running the Azure function, make sure you have deployed the Azure function and updated the configuration settings in Azure portal.**
 **Also, follow [Trigger Azure Functions on blob containers using an event subscription](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#create-the-event-subscription) to create event that will trigger Azure function once file is uploaded to Azure blob storage.**
 
-[Upload a file to the blob container and it will trigger Azure function automatically and Azure function with start creating and storing embedding vectors in CosmosDB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#upload-a-file-to-the-container)
+[Upload a file to the blob container and it will trigger Azure function automatically and Azure function will start creating and storing embedding vectors in CosmosDB](https://learn.microsoft.com/en-us/azure/azure-functions/functions-event-grid-blob-trigger?pivots=programming-language-javascript#upload-a-file-to-the-container)
 
-- **Upload file to Azure Blob container:** Upload the file(s) for which you want to create vector embeddings into the Blob Storage container.
+- **Upload file to Azure Blob container:** Upload the file(s) for which you want to create embedding vectors into the Blob Storage container.
   ![Blob Container](Images/1.blob-container.png)
 
-- **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function which will start creating the required vector embeddings and store in the Azure NoSQL Cosmos DB.
+- **Azure Function Invocation:** Uploading the files to blob will automatically trigger the Azure function which will start creating the required embedding vectors and store in the Azure NoSQL Cosmos DB.
   ![Azure Function Invocation](Images/3.azure-function-invocation.png)
 
   ![CosmosDB Embeddings](Images/4.cosmos-db-embeddings.png)
