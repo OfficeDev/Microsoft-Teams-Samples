@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description:  This sample implements a Teams message extension that can be used within Copilot to query a database of candidates based on their skills, location and availability. The sample further demonstrates SSO and Copilot's ability to perform multi-parameter search.
+description: This sample implements a Teams message extension that can be used within Copilot to query a database of candidates based on their skills, location and availability. The sample further demonstrates SSO and Copilot's ability to perform multi-parameter search.
 products:
 - office-teams
 - copilot-m365
@@ -156,13 +156,13 @@ Note> Azure bot will be created automatically in the selected subscription and r
 1) Go to app store in teams -> Upload an app -> Upload custom/store app
 2) Navigate to `samples/msgext-expert-finder-js/appPackage/build` and select `appPackage.local.zip` for uploading.
 3) Add the app and test the app as a messaging extension.
-![Plugin](images/upload-app.png)
-![Plugin](images/msgext-page.png) 
+![Plugin](images/2-upload-a-custom-app.png)
+![Plugin](images/15.me-page.png) 
 
 ### Test the app in Copilot for Microsoft 365
 Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left of the chat user interface, below the compose box. You should see a plugin icon. Click this and enable the Expert-finder plugin.
 
-![Plugin](images/plugin.png)
+![Plugin](images/6.copilot-enable-plugin.png)
 
 - Here are some sample prompts you can try : 
 1) `Find candidates with skill in Azure.`
@@ -172,16 +172,12 @@ Navigate to the Microsoft Copilot for Microsoft 365 chat. Check the lower left o
 ## Running the sample
 
 **SSO auth with consent popup when sign in button is clicked**
-![sso-auth](images/copilot-auth.png)
-
-**Search based on skills**
-![skills](images/skill-param.png)
+![sso-auth](images/12.copilot-auth.png)
 
 **Search based on skills and country**
-![skills-country](images/skill-location.png)
+![skills-country](images/13.multi-param.png)
 
-**Search based on multiple parameters**
-![multi-param](images/multi-param.png)
+**Note: You can search candidates based on multiple parameters like skills, location, availability etc.**
 
 ## Further reading
 
