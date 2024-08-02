@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description:  This sample implements a Teams message extension that can be used to query a database of candidates based on their skills, location and availability. The sample, when used with Copilot for M365, demonstrates SSO, and Copilot's ability to perform multi-parameter search.
+description:  This sample implements a Teams message extension that can be used within Copilot to query a database of candidates based on their skills, location and availability. The sample further demonstrates SSO and Copilot's ability to perform multi-parameter search.
 products:
 - office-teams
 - copilot-m365
@@ -16,9 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-expert-finder-js
 
 ## Interaction with app
 
-In this sample, we demonstrate two capabilities of Copilot for M365:
+Using this messaging extension sample, we demonstrate two capabilities of Copilot for M365:
 1) To search across a database of candidates to find a relevant "expert" based on multiple parameters such as their skill, location and availability.
-2) Single Sign On (SSO) when using plug-ins within Copilot for M365.
+2) Single Sign On (SSO)
 
 On first use, a window requesting for Sign In pops-up and once SSO is completed, the user flow continues as usual. 
 
@@ -76,9 +76,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 
 ## Setup SSO for Expert finder.
-1) Go to app registrations in azure portal and search the app created by toolkit. You will get the resource suffix inside `samples/msgext-expert-finder-js/env/.env.local` with key as `APP_NAME_SUFFIX`. This resource suffix should be used to search the created azure resources. For eg you can search the app registration with name like `expert-finder-local` 
+1) Go to app registrations in azure portal and search for the app registration created by toolkit automatically. You will get the resource suffix inside `samples/msgext-expert-finder-js/env/.env.local` with key as `APP_NAME_SUFFIX`. This resource suffix should be used to search the created azure resources. For eg you can search the app registration with name like `expert-finder-local` 
  ![redirect](images/app-reg-page.png)
-2) Go to redirect url section. Select Add a platform -> Web -> Add below url
+2) Under Manage > Authentication > Platform Configurations > Add a Platform > Web > Redirect URIs > Add the below URI
  - `https://token.botframework.com/.auth/web/redirect`
  - Under implicit grant flow make sure Access token and Id token both options are selected. 
  - Select Configure.
@@ -87,7 +87,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 3) Expose API endpoint
 - Click "_Expose an API_" in the left rail
 
-    - Set your Application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and `.env.local` file, which is the same you create and saved in step 2
+    - Set your Application ID URI to include your bot id in the following format - `api://botid-<AppId>`, where `<AppId>` is the id of the bot that will be making the SSO request and can be found in `.env.local` file in your sample solution.
     ![Application ID URI](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppIdUri.png)
 
    - Click "_Add a scope_"
@@ -122,11 +122,12 @@ Add the following Ids as authorized clients for your application
 
     ![Add Client Application](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddClient.png)
 
-5) Setup Bot Service Connection (TokenStore)
+5) Setup Azure Bot Service Connection (TokenStore)
+Note> Azure bot will be created automatically in the selected subscription and resource group while running the sample using Toolkit.
 
-- In the Azure Portal, navigate back to the Azure Bot resource created in Step 2
+- In the Azure Portal, go to the resource group selected while running the sample using toolkit and navigate to the Azure Bot resource
    
-- Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
+- Switch to the "Settings" and Configuration section and click on `Add OAuth Connection Settings`
 
     ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotConfigurationPage.png)
 
@@ -134,13 +135,14 @@ Add the following Ids as authorized clients for your application
 
     - Enter a name for your new Connection setting. Keep the name as `authbot`.
 
-    - In the Service Provider dropdown, select Azure Active Directory V2
+    - In the Service Provider dropdown, select `Azure Active Directory V2`
 
-    - Enter in the client id and client secret obtained in step 1.
+    - Enter the client id and client secret generated automatically while running the sample using Toolkit.
     - For client secret navigate to `samples/msgext-expert-finder-js/env/.env.local.user` and select the `Decrypt secret` option to get the decrypted client secret.
-     ![grant](images/bot-secret.png)  
+     ![grant](images/bot-secret.png)
+    - For client id, navigate to `samples/msgext-expert-finder-js/env/.env.local` and select the `APP_ID` option to get the client id.
 
-    - For the Token Exchange URL use the Application ID URL obtained in step 3. (Url in format `api://botid-<app-id>)`
+    - For the Token Exchange URL use the Application ID URI obtained in step 3. (Uri in format `api://botid-<app-id>)`
 
     - Specify "common" as the Tenant ID. If you are using Single Tenant app registration then set your tenant Id where the bot is registered.
 
