@@ -140,7 +140,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
 
         ![Application Permission](Images/ApplicationPermission.png)
     
-Note: provide admin consent for the permissions once added by clicking on the "Grant admin consent for <<tenant-name>>" button.
+Note: provide admin consent for the permissions once added by clicking on the "Grant admin consent for `<<tenant-name>>"` button.
     
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
@@ -181,7 +181,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 1) **Once the meeting has ended, the transcription will be generated in the background. The application will call the Graph API to obtain the transcription and process it. Using Azure OpenAI, all meeting action items are extracted and a summary is generated. 
 Note that you will have to resubscribe for every occurrence of a meeting to get the meeting summary and action items.**
-
 ![6.MeetingHelperResults](Images/6.MeetingHelperEndMeeting.png)
 
 1) **All subscribed users will automatically receive the meeting summary and action items.**
