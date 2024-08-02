@@ -28,7 +28,7 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an valid [M365 account](https://www.microsoft.com/en-us/microsoft-365/what-is-microsoft-365?msockid=00bf51c23fe96f65186b42723e726e7f)
+- Microsoft Teams is installed and you have a valid [M365 account](https://www.microsoft.com/en-us/microsoft-365/what-is-microsoft-365?msockid=00bf51c23fe96f65186b42723e726e7f)
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Visual Studio Code](https://code.visualstudio.com/Download) or any other code editor
@@ -146,6 +146,8 @@ You can interact with this AI translator skill bot in Teams by sending it a mess
 `AI Translator bot: "Je vais assister � la r�union demain."`
 
 ![user-prompt ](images/6.bot-response.png)
+
+**Note that the root bot uses OpenAI to detect the intent and decided to call the appropriate bot without needing to be told explicitly and displays the result from the respective bot.**
 
 ## Deploy the app to Azure
 If you want to deploy the app to Azure, you can follow the below steps:
