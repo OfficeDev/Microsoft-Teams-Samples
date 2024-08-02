@@ -330,7 +330,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-unfurling-ac-loop-components#cs]:samples/msgext-unfurling-ac-loop-components/csharp
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
 [msgext-copilot-handoff#js]:samples/msgext-copilot-handoff/ts
-[msgext-expert-finder#nodejs]:samples/msgext-expert-finder/js
+[msgext-expert-finder#nodejs]:samples/msgext-expert-finder-js
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
