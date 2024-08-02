@@ -36,7 +36,7 @@ You can create a new skill bot by following the steps mentioned in the [Create a
 
 ## Setup for App Registration
 
-1. Register a new application in the [Microsoft Entra ID � App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft EntraID App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **+ New Registration** and on the *Register an application page*, set following values:
     * Set **Name** to your app name.
     * Choose the **Supported account types** as `Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)` (MultiTenant) only (If you created your Virtual Assistant (root bot) as MultiTenant then you should select same here). For more information, see [Supported account types](https://learn.microsoft.com/en-us/azure/bot-service/skill-implement-skill?view=azure-bot-service-4.0&tabs=cs):
@@ -44,10 +44,10 @@ You can create a new skill bot by following the steps mentioned in the [Create a
     
     * Leave **Redirect URI** as empty.
     * Click on **Register** button to create app registration.
-3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You�ll need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You will need those values later when updating your `appPackage (manifest.json file)` and `.env` file configuration in sample code.
 4. Navigate to **Certificates & secrets**. In the Client secrets section:
     * Click on **"+ New client secret"**.
-    * Add a description (Name of the secret) for the secret and select �Never� for Expires.
+    * Add a description (Name of the secret) for the secret and select `Never` for Expires.
     * Click "Add" button.
     * Once the client secret is created, copy its value and save. It will be required later to add in the `.env` file configuration in sample code.
 

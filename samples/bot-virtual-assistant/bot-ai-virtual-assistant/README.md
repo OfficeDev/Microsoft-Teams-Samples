@@ -131,7 +131,7 @@ You can interact with this AI Virtual Assistant bot in Teams by sending it a mes
 
 **Bot Response:** 
 
-`AI Translator bot: "Je vais assister � la r�union demain."`
+`AI Translator bot: "Je vais assister a la reunion demain."`
 
 ![user-prompt ](images/8.ai-bot-response.png)
 
