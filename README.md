@@ -47,6 +47,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
 |2|Compliance Checker|Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not.||[View][msgext-ai-doc-compliance-checker#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
 |3|bot-ai-meeting-helper|This sample demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.||[View][bot-ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/bot-ai-meeting-helper/demo-manifest/Meeting-Helper.zip)
+|4|bot-virtual-assistant|This is a sample application that demonstrates a root bot that routes inputs to skill bots for tailored responses.||[View][bot-virtual-assistant#nodejs]|-
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
@@ -292,7 +293,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-meeting-transcript-recording#csharp]:samples/tab-meeting-transcript-recording/csharp
 [tab-deeplink-pass-values#ts]:samples/tab-deeplink-pass-values/ts
 [tab-nested-auth#nodejs]:samples/tab-nested-auth/nodejs
-
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 [group-channel-tab#ts#spfx]:samples/tab-channel-group/spfx
@@ -420,6 +420,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
 [bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
 [api-doc-search#nodejs]:samples/api-doc-search
+[bot-virtual-assistant#nodejs]:samples/bot-virtual-assistant
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
