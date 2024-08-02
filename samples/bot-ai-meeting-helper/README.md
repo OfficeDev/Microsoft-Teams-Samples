@@ -91,7 +91,7 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
         APPINSIGHTS_INSTRUMENTATIONKEY- Provide the application insights `Instrumentation Key` created in previous steps (Required to log the telemetry data).
         APPINSIGHTS_CONNECTIONSTRING  - Provide the application insights `Connection String` created in previous steps in single quote (Required to log the telemetry data).
     ``` 
-1) Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script (Images for reference only)
+1) Use the PowerShell script below to create a policy for the users who will need to subscribe to meetings and use the bot (Note: Images for reference only)
  
       PowerShell script
 
@@ -101,9 +101,9 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     Connect-MicrosoftTeams
     New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
     Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-the-policy-needs-to-be-granted>>"
-    
+     ```
     OR
-    # For global access
+     ```# For global access
     # Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Global
     ```
     Example:
@@ -139,7 +139,9 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     - `User.ReadWrite.All`
 
         ![Application Permission](Images/ApplicationPermission.png)
-
+    
+Note: provide admin consent for the permissions once added by clicking on the "Grant admin consent for <<tenant-name>>" button.
+    
 ## Run the app (Using Teams Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
@@ -162,22 +164,24 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-1) **Select Upload an app and choose the app package if you are running demo-manifest then choose downloaded demo-manifest zip file. If the sample is running locally then root folder, appPackage >> build >> appPackage.local.zip**
+1) **Select Upload an app and choose the app package. If you are running demo-manifest then choose the downloaded demo-manifest zip file. If the sample is running locally then go to the root folder `appPackage >> build >> appPackage.local.zip`**
 ![UploadCustomeApp](Images/0.UploadCustomeApp.png)
 
-1) **To fetch all upcoming meetings when a user requests "What is my upcoming meetings," the application will display all future scheduled one-time meetings and recurring meetings, showing individual instances of each recurring meeting.**
+1) **In the bots chat interface, fetch all upcoming meetings by typing "What are my upcoming meetings" and the bot will display all future scheduled one-time meetings and recurring meetings (shown as individual instances).**
 ![MeetingHelperSearchApp](Images/2.MeetingHelperFindUpcomingMeeting.png)
 
-1) **When the user clicks on a specific meeting, the application will call the Graph API to create a subscription for that particular instance, store the subscription details in the database, and then send an acknowledgment.**
+1) **On clicking on a specific meeting, the bot will call a Graph API to create a subscription for that particular instance and store the subscription details in the Azure Table database, and then send an acknowledgment**
 ![MeetingHelperSelectApp](Images/3.MeetingHelperSubscription.png)
 
 1) **Once the meeting has started, the user needs to join the meeting.**
 ![MeetingHelperSearchFileName](Images/4.MeetingHelperJoinMeeting.png)
 
-1) **After joining the meeting, the user must navigate to the "More options" menu at the top and select "Record and transcribe," then choose "Start transcription" to begin recording the transcription.**
+1) **IMPORTANT: Don't forget to turn on transcription after joining the meeting. To do this, navigate to the "More options" menu at the top and select "Record and transcribe," then choose "Start transcription" to begin the transcription.**
 ![MeetingHelperSelectResults](Images/5.MeetingHelperStartTranscription.png)
 
-1) **Once the meeting is concluded, the transcription will be generated in the background. Additionally, the application will internally call the Graph API to obtain the transcription. Using Azure OpenAI, it will extract all meeting action items and generate a meeting summary.**
+1) **Once the meeting has ended, the transcription will be generated in the background. The application will call the Graph API to obtain the transcription and process it. Using Azure OpenAI, all meeting action items are extracted and a summary is generated. 
+Note that you will have to resubscribe for every occurrence of a meeting to get the meeting summary and action items.**
+
 ![6.MeetingHelperResults](Images/6.MeetingHelperEndMeeting.png)
 
 1) **All subscribed users will automatically receive the meeting summary and action items.**
