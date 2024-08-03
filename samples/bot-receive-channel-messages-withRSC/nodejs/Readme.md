@@ -27,7 +27,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Interaction with app
 
-![Bot Receive Channel MessagesWithRSCGif](images/BotWithRSCModule.gif)
+![Bot Receive Channel MessagesWithRSCGif](images/Bot_Channel_Messenging-RSC-nodejs-gif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -147,23 +147,23 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Adding bot UI:**
 
-![App installation](images/1.RSC_Install_Scopes.png)
+![App installation](images/1.Install.png)
 
 **Hey command interaction:**
 
-![Permissions](images/2.botWithRSCFlow.png)
+![Permissions](images/3.Interaction.png)
 
 **1 or 2 command interaction:**
 
-![Permissions](images/3.Notification.png) 
+![Permissions](images/4.1_and_2_Command_Interaction.png) 
 
 **Adding App to group chat:**
 
-![Adding To Groupchat](images/4.RSC_Groupchat.png) 
+![Adding To Groupchat](images/5.Install_to_GC.png) 
 
 **Group chat interaction with bot without being @mentioned:**
 
-![Group Chat](images/5.RSC_GroupConversation.png) 
+![Group Chat](images/7.1_and_2_Command_Interaction.png) 
 
 **Interacting with the bot in Teams**
 
