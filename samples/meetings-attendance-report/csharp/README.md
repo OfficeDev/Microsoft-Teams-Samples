@@ -143,19 +143,19 @@ When meeting ends, attendance report card is sent by the bot.
 
 **Schedule the meeting and add Meeting Attendance Bot from Apps section in that particular scheduled meeting:**
 
-![Install](MeetingAttendance/Images/InstallApp.png)
+![Install](MeetingAttendance/Images/1.Install.png)
 
 **Add Meeting UI:**
 
-![Add Meeting](MeetingAttendance/Images/AddMeetingAttendanceBot.png)
+![Add Meeting](MeetingAttendance/Images/2.Add_to_Meeting.png)
 
 **On installation you will get a welcome card**
 
-![Welcome Card](MeetingAttendance/Images/WelcomeCard.png)
+![Welcome Card](MeetingAttendance/Images/3.Installed.png)
 
 **Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report:** 
 
-![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png)
+![Attendance Report](MeetingAttendance/Images/4.Attendance_Report.png)
 
 ## Deploy the bot to Azure
 

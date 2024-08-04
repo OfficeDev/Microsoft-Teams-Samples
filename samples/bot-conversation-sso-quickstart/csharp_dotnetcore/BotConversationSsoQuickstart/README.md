@@ -108,11 +108,13 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ## Running the sample
 
-![bot signin card](Images/BotSignInCard.png)
+![Install](Images/1.Install.png)
 
-![user details card](Images/UserDetailsCard.png)
+![bot signin card](Images/2.Installed.png)
 
-![token](Images/Token.png)
+![user details card](Images/3.Logged_In.png)
+
+![token](Images/4.Your_Token.png)
 
 ## Further reading
 

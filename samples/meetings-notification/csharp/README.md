@@ -120,22 +120,24 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 Type `SendInMeetingNotification` in bot chat to send In-Meeting notifications.
 
-![Welcome](InMeetingNotifications/Images/Welcome.png)
+![Install](InMeetingNotifications/Images/1.Install.png)
 
-![Agenda card](InMeetingNotifications/Images/AgendaCard.png)
+![Welcome](InMeetingNotifications/Images/2.Home_Page.png)
 
-![Feedback submit](InMeetingNotifications/Images/FeedbackSubmit.png)
+![Agenda card](InMeetingNotifications/Images/3.Send_Meeting_Notification.png)
 
-![Feedback card](InMeetingNotifications/Images/FeedbackCard.png)
+![Feedback submit](InMeetingNotifications/Images/4.Option_Card.png)
+
+![Feedback card](InMeetingNotifications/Images/5.Output_in_Chat.png)
 
 
 ## Send targeted meeting notification
 
 Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
 
-![Meeting card](InMeetingNotifications/Images/MeetingCard.png)
+![Meeting card](InMeetingNotifications/Images/6.Card_in_Meeting_Chat.png)
 
-![Target notification](InMeetingNotifications/Images/TargetNotification.png)
+![Target notification](InMeetingNotifications/Images/7.Popup_Window.png)
 
 
 ## Further Reading

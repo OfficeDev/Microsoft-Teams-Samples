@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-python
 [Task Modules](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules) allow you to create modal popup experiences in your Teams bot or application. This sample shows how to fetch a Task Module from a Hero Card button and receive input from an Adaptive Card in the Task Module.
 
 - **Interaction with bot**
-![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
+![bot-task-module ](Images/TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -83,20 +83,51 @@ the Teams service needs to call into the bot.
 
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card with a button which will display a Task Module when clicked.  The Task Module demonstrates retrieving input from a user through a Text Block and a Submit button.
 
-Sends Adaptive Cards 
-![Adaptive Cards](Images/1.PNG)
+**Task Module running the sample**
 
-Adaptive Card Input
-![Card Input](Images/2.PNG)
+![Task Module](Images/1.Install.png)
 
-Response from the card
-![Card Form](Images/3.PNG)
+![Task Module](Images/2.Bot_Response_Cards.png)
 
-Adaptive card from input
-![Card Youtube](Images/4.PNG)
+![Task Module](Images/3.Adaptive_Card.png)
 
-Adaptive card youtube
-![Card Youtube](Images/5.PNG)
+![Task Module](Images/4.Text_Input.png)
+
+![Task Module](Images/5.Submitted.png)
+
+![Task Module](Images/6.Bot_Response_Chat.png)
+
+![Task Module](Images/7.Custom_Form_Chat.png)
+
+![Task Module](Images/8.Youtube_In_Chat.png)
+
+![Task Module](Images/9.Installing_To_GC.png)
+
+![Task Module](Images/10.Select_GC.png)
+
+![Task Module](Images/11.Bot_Response_Cards_GC.png)
+
+![Task Module](Images/12.Adaptive_Card_In_GC.png)
+
+![Task Module](Images/13.Bot_Response_GC.png)
+
+![Task Module](Images/14.Custom_Form_GC.png)
+
+![Task Module](Images/15.Youtube_GC.png)
+
+![Task Module](Images/16.Install_Team.png)
+
+![Task Module](Images/17.Select_Team.png)
+
+![Task Module](Images/18.Bot_Response_Cards_Team.png)
+
+![Task Module](Images/19.Adaptive_Card_Team.png)
+
+![Task Module](Images/20.Response_In_Team.png)
+
+![Task Module](Images/21.Custom_Form_Team.png)
+
+![Task Module](Images/22.Youtube_Team.png)
 
 ## Deploy the bot to Azure
 
