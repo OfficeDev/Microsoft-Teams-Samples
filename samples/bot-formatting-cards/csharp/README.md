@@ -23,7 +23,7 @@ This sample feature shows how to use different formatting on cards using bot.
 
 ## Interaction with app
 
-![Types Of Cards](BotFormattingCards/Images/DifferentFormattingCards.gif)
+![Types Of Cards](BotFormattingCards/Images/Bot_Formatting_Cards_nodejs_gif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -204,59 +204,59 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](BotFormattingCards/Images/1.InstallApp.png)
+![InstallApp](BotFormattingCards/Images/1.Install.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](BotFormattingCards/Images/2.WelcomeMessage.png)
-
-**Type Of Cards:**
-
-![TypeOfCards](BotFormattingCards/Images/3.TypeOfCards.png)
+![WelcomeMessage](BotFormattingCards/Images/2.Welcome_Message.png)
 
 **Mention Card:**
 
-![MentionCard](BotFormattingCards/Images/4.MentionCard.png)
+![MentionCard](BotFormattingCards/Images/3.Mention_support_card.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](BotFormattingCards/Images/5.InformationMaskCard.png)
+![InformationMaskCard](BotFormattingCards/Images/4.Info_Mask_card.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](BotFormattingCards/Images/6.FullWidthCard.png)
+![FullWidthCard](BotFormattingCards/Images/5.Full_Width_Card.png)
 
 **Stage View Card:**
 
-![StageViewCard](BotFormattingCards/Images/7.StageViewCard.png)
+![StageViewCard](BotFormattingCards/Images/6.Stage_View_Card.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](BotFormattingCards/Images/8.OverflowMenuCard.png)
+![OverflowMenuCard](BotFormattingCards/Images/7.Over_Flow_Menu_Card.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](BotFormattingCards/Images/9.HTMLFormatCard.png)
+![HTMLFormatCard](BotFormattingCards/Images/8.HTTP_Connector_Card.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](BotFormattingCards/Images/10.CardWithEmoji.png)
+![CardWithEmoji](BotFormattingCards/Images/9.Adaptive_card_with_Emoji.png)
 
 **Persona Card Icon:**
 
-![PersonaCardIcon](BotFormattingCards/Images/12.PersonaCardIcon.png)
+![Persona](BotFormattingCards/Images/10.Persona_Card_Icon.png)
 
 **Persona Set Icon:**
 
-![PersonaCardSetIcon](BotFormattingCards/Images/13.PersonaCardSetIcon.png)
+![PersonaSet](BotFormattingCards/Images/11.Persona_Set_Icon.png)
+
+**Code Block in Adaptive Card:**
+
+![CodeBlock](BotFormattingCards/Images/12.Code_Block_Adaptive_Card.png)
 
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](BotFormattingCards/Images/14.Layout.png)
+![Layout](BotFormattingCards/Images/13.Layout.png)
 
 **Mobile:**
 
-![Layout](BotFormattingCards/Images/15.LayoutMobile.png)
+![LayoutMobile](BotFormattingCards/Images/14.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 
