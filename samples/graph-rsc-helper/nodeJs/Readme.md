@@ -13,14 +13,15 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs-helper
 
 # Resource specific consent with Graph API
 
-This sample illustrates you can use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API in team channel and group chat. And watch the real response with the scope installed.
+This sample demonstrates how to use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API in Microsoft teams channel and group chat. You can observe the real API response with the scope installed.
 
 ## Included Features
-* Tabs
+* Tab
 * RSC Permissions
+* Graph
 * Tab App in team channel
 * Tab App in group chat
-* Graph API request with application permission
+
 
 ## Prerequisites
 
