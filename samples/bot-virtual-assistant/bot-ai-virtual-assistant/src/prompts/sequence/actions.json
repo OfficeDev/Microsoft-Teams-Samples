@@ -1,0 +1,10 @@
+[
+    {
+        "name": "EchoBot",
+        "description": "Echo bot is called whenever user message needs to be repeated or echoed back to the user."
+    },
+    {
+        "name": "TranslationBot",
+        "description": "Translation bot is used to perform translation on user given text or content."
+    }
+]

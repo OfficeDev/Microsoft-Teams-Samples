@@ -92,6 +92,16 @@ If you copy and paste a link from https://www.BotFramework.com into the compose 
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
+## Running the sample
+
+![msgext-search ](Images/1.Install.png)
+
+![msgext-search ](Images/2.Installed.png)
+
+![msgext-search ](Images/3.Link_Unfurling_In_Compose_Box.png)
+
+![msgext-search ](Images/4.Link_Unfurling_Chat.png)
+
 ## Further reading
 
 - [Link unfurling](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages)

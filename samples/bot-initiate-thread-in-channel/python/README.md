@@ -87,10 +87,11 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message. It will respond by creating a new thread within the channel and replying to the new thread it just started.
 
 **Adding the bot to a team's channel :**
-![AddInTeam](Images/AddInTeam.PNG)
+![AddInTeam](Images/1.install.png)
 
-![NewThread](Images/NewThread.PNG)
+![AddInTeam](Images/2.selectteam.png)
 
+![Thread](Images/3.convo.png)
 
 ## Deploy the bot to Azure
 
