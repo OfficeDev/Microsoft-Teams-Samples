@@ -58,7 +58,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Setup and use the sample locally.
+## Manually Setup and use the sample locally.
 
 1) Run ngrok - point to port 5130
 
@@ -87,6 +87,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - File -> Open -> Project/Solution
 - Navigate to ```samples\meetings-sidepanel\csharp``` folder
 - Select ```SidePanel.sln``` file and open the solution
+
+**Note** : In the debug dropdown menu of Visual Studio, select default startup project > **SidePanel**
 
 5. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
