@@ -58,18 +58,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Setup.
+## Setup and use the sample locally.
 
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 2. Create Microsoft Entra ID app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
