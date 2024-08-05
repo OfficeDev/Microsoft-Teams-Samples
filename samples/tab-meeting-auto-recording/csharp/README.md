@@ -134,6 +134,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - Navigate to `samples/tab-meeting-auto-recording/csharp` folder
     - Select `MeetingAutoRecording.sln` file
     - Press `F5` to run the project
+    
 **Note:** In the debug dropdown menu of Visual Studio, select default startup project > **MeetingAutoRecording**
 
 4. In a terminal, navigate to `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp`
