@@ -526,7 +526,7 @@ jobs:
 
             - project_path: 'samples/app-sso/nodejs/client'
               name: 'app-sso-client'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
@@ -1013,6 +1013,10 @@ jobs:
 
             - project_path: 'samples/m365-actions-preview/nodejs/api'
               name: 'm365-actions-preview-api'
+              version: '18.x'
+
+            - project_path: 'samples/graph-rsc-helper/nodejs'
+              name: 'graph-rsc-helper'
               version: '18.x'
 
             - project_path: 'samples/tab-nested-auth/nodejs'

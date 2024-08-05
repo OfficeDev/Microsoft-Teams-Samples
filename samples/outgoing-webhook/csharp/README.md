@@ -24,7 +24,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 ## Interaction with app
 
-![Basic response](WebhookSampleBot/Images/OutgoingWebhook.gif)
+![Basic response](Images/OutgoingWebhook.gif)
 
 ## Pre-requisites
 
@@ -91,11 +91,15 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 Example screenshot to reply to any message:
  
-![Basic response](Images/response.png)
+![Configuration](Images/1.scenario1.png)
+
+![Configuration](Images/2.scenario2.png)
 
 Example screenshot to show Hero card (using type of card in message):
  
-![Hero card](Images/hero_card.png)
+![Basic response](Images/3.reply.png)
+
+![Hero card](Images/4.herocard.png)
 
 ## Further Reading
 

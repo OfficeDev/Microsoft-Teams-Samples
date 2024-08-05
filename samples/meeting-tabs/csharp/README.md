@@ -137,51 +137,48 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 You can interact with Teams Tab meeting sidepanel.
 
 1. **Install app**
-![InstallApp](Images/InstallApp.png)
+![InstallApp](Images/1.Install.png)
 
 2. **Type a meeting name**
-![AddMeetingTabs](Images/AddMeetingTabs.png)
+![AddMeetingTabs](Images/2.Select_meeting.png)
 
 3. **Select meeting name**
-![selectMeetingName](Images/selectMeetingName.png)
+![selectMeetingName](Images/3.Configure_Page.png)
 
 4. **Add meeting tab**
-![AddMeeting](Images/AddMeeting.png)
+![AddMeeting](Images/4.App_Added.png)
 
-5. **Join meeting**
-![JoinMeeting](Images/JoinMeeting.png)
+5. **App In Meeting**
+![JoinMeeting](Images/5.Selecting_App_In_Metting.png)
 
 6. **Select your app**
-![appAddMeeting](Images/appAddMeeting.png)
+![appAddMeeting](Images/6.Configure_Tab_In_Meeting.png)
 
 7. **Add meeting tab**
-![appAddMeetingTabs](Images/appAddMeetingTabs.png)
+![appAddMeetingTabs](Images/7.Tab_Added.png)
 
-8. **Home page**
-![HomePage](Images/HomePage.png)
+8. **Click share To stage view**
+![HomePage](Images/8.Click_Share_To_Stage_View.png)
 
 9. **Click share To stage view**
-![clickShareStageView](Images/clickShareStageView.png)
+![clickShareStageView](Images/9.Share_To_Stage_View.png)
 
-10. **Share To stage view**
-![NextTenant](Images/NextTenant.png)
+10. **Toggle To Mute**
+![NextTenant](Images/10.Toggle_To_Mute.png)
 
-11. **Toggle To Mute**
+11. **Toggle To UnMute**
 Toggle button to mute state its looks like below.
-![audioCall](Images/audioCall.png)
+![audioCall](Images/11.Toggle_To_Unmute.png)
 
-12. **Toggle To Unmute**
+12. **App theme when Dark**
 Toggle button to Unmute state it will unmute client audio.
-![audioCallTrue](Images/audioCallTrue.png)
+![audioCallTrue](Images/12.App_Theme_Dark.png)
 
-13. **App theme when dark**
-![Dark](Images/dark-with-timer.PNG)
+13. **App theme when Light**
+![Light](Images/13.App_Theme_Light.png)
 
-14. **App theme when light**
-![Light](Images/light-with-timer.PNG)
-
-15. **App theme when contrast**
-![Contrast](Images/contrast-with-timer.PNG)
+14. **App theme when Contrast**
+![Contrast](Images/14.App_Theme_High_Contrast.png)
 
 ## Further reading
 

@@ -84,14 +84,14 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 ## Running the sample
 
 - Example screenshot to show Hero card:
-![Hero card](Images/heroCard.png)
+![Hero card](Images/1.hero-card.png)
 
 * Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
 
 * If you type anything else apart from above mentioned type, it will echo back what you typed.
 
 - Example screenshot to show Echo message:
-![Echo message](Images/echoMessage.png)
+![Echo message](Images/2.hello-bot.png)
 
 
 ## Contributing
