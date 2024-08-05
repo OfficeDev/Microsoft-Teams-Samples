@@ -172,51 +172,47 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Install App User-1
 
-![InstallAppUser1](TabRequestApproval/Images/1.InstallAppUser.png)
+![InstallAppUser1](TabRequestApproval/Images/1.Install_User1.png)
 
 - Create Task
 
-![CreateTask](TabRequestApproval/Images/3.CreateTask.png)
+![CreateTask](TabRequestApproval/Images/2.Create_Task.png)
 
 - Task Details
 
-![TaskDetails](TabRequestApproval/Images/4.RequestTo.png)
+![TaskDetails](TabRequestApproval/Images/3.Task_Details.png)
 
 - All Person
 
-![TaskDetails](TabRequestApproval/Images/5.SelectPerson.png)
+![TaskDetails](TabRequestApproval/Images/5.Select_a_Person.png)
 
 - Select a Person
 
-![TaskDetails](TabRequestApproval/Images/6.SelectOnePerson.png)
+![TaskDetails](TabRequestApproval/Images/6.Install_User2.png)
 
 - Create task Details
 
-![CreateTaskDetails](TabRequestApproval/Images/7.CreateTaskDetails.png)
+![CreateTaskDetails](TabRequestApproval/Images/7.Create_Task_User2.png)
 
 - Install App User-2
 
-![InstallAppUser2](TabRequestApproval/Images/2.InstallAppUser.png)
+![InstallAppUser2](TabRequestApproval/Images/8.Send_Request.png)
 
 - Send Request
 
-![SendRequest](TabRequestApproval/Images/12.SendReq.png)
+![SendRequest](TabRequestApproval/Images/9.Request_Popup_User2.png)
 
 - On click of notification a task module will open, redirecting the user to the request.
 
-![SendRequest](TabRequestApproval/Images/8.Activity.png)
+![SendRequest](TabRequestApproval/Images/10.Requests_User1.png)
 
 - User-1 My Request 
 
-![SendRequest](TabRequestApproval/Images/9.User1MyRequestDetails.png)
+![SendRequest](TabRequestApproval/Images/11.Pending_Approvals_User2.png)
 
 - User-2 My Pending Approvals 
 
-![SendRequest](TabRequestApproval/Images/10.User2PendingRequestDetails.png)
-
-- User-1 Approved Status
-
-![SendRequest](TabRequestApproval/Images/11.ApprovedReq.png)
+![SendRequest](TabRequestApproval/Images/12.Approved_Status_User1.png)
 
 ## Further reading
 

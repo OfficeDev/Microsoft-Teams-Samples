@@ -101,7 +101,9 @@ the Teams service needs to call into the bot.
 ## Running the sample
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
-![msgext-reaction ](Images/ReactionWithEcho.PNG)
+![msgext-reaction ](Images/1.reply.png)
+
+![msgext-reaction ](Images/2.echo.png)
 
 ## Deploy the bot to Azure
 
