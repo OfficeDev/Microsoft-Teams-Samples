@@ -97,13 +97,15 @@ You can also send a file to the bot as an attachment in the message compose sect
 > Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
 
 The bot initialization welcome message
-![WelcomeCard](Images/WelcomeCard.PNG)
+![WelcomeCard](Images/1.Install.png)
 
 The bot will respond to the message when you upload a file
-![FileUploadInMessageSection](Images/FileUploadInMessageSection.PNG)
+![FileUploadInMessageSection](Images/2.Bot_Response.png)
 
 The bot sends message to download file.
-![ReadyToDownload](Images/ReadyToDownload.PNG)
+![Download Option](Images/3.File_Download_Option.png)
+
+![ReadyToDownload](Images/4.File_Uploaded.png)
 
 ## Deploy the bot to Azure
 

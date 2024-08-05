@@ -118,16 +118,16 @@ You can select an option from the command list by typing ```@TeamsConversationBo
 ## Running the sample
 
 The bot initialization message
-![Message](Images/1.BotInstallationMessage.PNG)
+![Message](Images/1.prompts.png)
 
 The bot will send the welcome card for you to interact with
-![WelcomeCard](Images/2.WelcomeCard.PNG)
+![WelcomeCard](Images/2.welcome.png)
 
 The bot will respond to the message and mention the user
-![MentionMe](Images/3.MentionMe.PNG)
+![MentionMe](Images/3.mention.png)
 
 The bot initialization message
-![MessageAllMembers](Images/4.MessageAllMembers.PNG)
+![MessageAllMembers](Images/4.message-to-all.png)
 
 ## Deploy the bot to Azure
 

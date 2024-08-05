@@ -471,6 +471,10 @@ jobs:
             - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
               name: 'app-HR-talent'
               version: '6.0.x'
+            
+            - project_path: 'samples/app-complete-sample/csharp/AppCompleteSample/AppCompleteSample.csproj'
+              name: 'app-complete-sample'
+              version: '6.0.x'
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
@@ -485,33 +489,6 @@ jobs:
 
       - name: Build app
         run: dotnet build "${{ matrix.project_path }}" --configuration Release
-
-  build-dotnet-samples:
-    runs-on: windows-latest
-    #Add project path, name as below for any new additions
-    strategy:
-      matrix:
-        include:
-            - project_path: 'samples/app-complete-sample/csharp/AppCompleteSample.sln'
-              name: 'app-complete-sample'
-
-      fail-fast: false
-    name: Build "${{ matrix.name }}" csharp
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
-
-      - name: Restore NuGet packages
-        run: nuget restore ${{ matrix.project_path }}
-      
-      - name: Build
-        run: msbuild ${{ matrix.project_path }} /p:Configuration=Release
-
 
   build-nodejs-samples:
     runs-on: windows-latest
@@ -549,7 +526,7 @@ jobs:
 
             - project_path: 'samples/app-sso/nodejs/client'
               name: 'app-sso-client'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
@@ -1036,6 +1013,10 @@ jobs:
 
             - project_path: 'samples/m365-actions-preview/nodejs/api'
               name: 'm365-actions-preview-api'
+              version: '18.x'
+
+            - project_path: 'samples/graph-rsc-helper/nodejs'
+              name: 'graph-rsc-helper'
               version: '18.x'
 
             - project_path: 'samples/tab-nested-auth/nodejs'
