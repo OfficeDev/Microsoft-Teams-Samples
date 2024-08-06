@@ -35,7 +35,7 @@ export const AppRoute = () => {
                     <Route path="/home" element= { <Home /> }/>
                     <Route path="/doneView" element= { <Done shareSpecificAppContent={(meetingStatus) => {}} /> }/>
                     <Route path="/doingView" element= { <Doing shareSpecificAppContent={(meetingStatus) => {}} /> }/>
-                    <Route path="/todoView" element= { <Todo shareSpecificAppContent={(meetingStatus) => {}} /> 
+                    <Route path="/todoView" element= { <Todo shareSpecificAppContent={(meetingStatus) => {}} />  }/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>
