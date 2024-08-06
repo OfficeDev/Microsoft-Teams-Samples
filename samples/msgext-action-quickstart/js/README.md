@@ -106,13 +106,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-![action command compose](Images/ActionCommandParameter.PNG)
+![Installation](Images/1-AppInstallation.png)
 
-![compose extension result](Images/ComposeExtensionResultCard.PNG)
+![action command compose](Images/2-InputCard.png)
 
-![action command from message](Images/ActionCommandFromMessage.PNG)
+![compose extension result](Images/3-PreviewInComposeBox.png)
 
-![compose result from message action](Images/HeroCardResult.PNG)
+![action command from message](Images/4-IncludeImageCard.png)
+
+![compose result from message action](Images/5-ImageSent.png)
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.

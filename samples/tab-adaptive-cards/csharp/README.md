@@ -166,17 +166,23 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Tab showing Adaptive card with action controls.
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignIn.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/1-AppInstallation.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignInPrompt.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/2-Sign-inPage.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/TabAdaptiveCardFlow.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/3-AccountSelection.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleFetch.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/4-HomePage.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleSubmit.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/5-ShowTaskModulePage.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignOutMessage.png)
+![Adaptive Card](TabWithAdpativeCardFlow/Images/6-AfterClickingClose.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/7-SignOutPage.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/8-Youtube_Tab.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/9-Youtube_Adaptive_Card.png)
 
 ## Deploy the bot to Azure
 

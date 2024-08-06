@@ -1,0 +1,67 @@
+{
+    "@context": "http://schema.org/extensions",
+    "@type": "MessageCard",
+    "originator": "4c4cf981-1009-49bd-99f8-c206944a1513",
+    "correlationId": "129f6d7e-29a5-496f-bdca-23315c1c78d9",
+    "themeColor": "",
+    "hideOriginalBody": true,
+    "enableBodyToggling": true,
+    "sections": [
+      {
+        "markdown": true,
+        "heroImage": {
+          "image": "https://fastly.picsum.photos/id/882/600/300.jpg?hmac=Dgr3dvW6mvOwKDZWSSvqCSFOZE0l3e1EG_yW7Zr33Ok"
+        },
+        "startGroup": false
+      },
+      {
+        "markdown": true,
+        "activityTitle": "### Action Required",
+        "activityText": "You have a pending access request.",
+        "startGroup": false
+      },
+      {
+        "markdown": true,
+        "activityTitle": "Requested by: [Mayank Varsney](mailto:mavarshn@contoso\\.com) (mavarshn@contoso\\.com)",
+        "activityText": "Requesting **Edit** permission for [Contoso's Private Team for Testing](https://contoso.com)",
+        "activityImage": "https://fastly.picsum.photos/id/360/200/200.jpg?hmac=uO4zEvFVrZ6_pBuLc0DuGdgwe5g3FiJCd7bGsr2lhCo",
+        "startGroup": true
+      },
+      {
+        "markdown": true,
+        "activityText": "I'd like access, please.",
+        "startGroup": true
+      }
+    ],
+    "potentialAction": [
+      {
+        "hideCardOnInvoke": false,
+        "target": "https://microsoft.sharepoint-df.com/teams/SunghwasPrivateTeamforTesting",
+        "bodyContentType": "application/json",
+        "body": "{\"refreshStatus\":{\"uniqueId\":\"4b097b19-901f-4a61-8336-93ae282d3137\",\"status\":1,\"signature\":\"cDQ1NXhWL0dsdml2OUFYbFJIOE1RMDdWSWdLeUJlUzd3eGt2SGt6STlYYz0\"}}",
+        "@type": "HttpPOST",
+        "@id": "3ec91f3d-29be-4e36-976b-20dff314d4dd",
+        "name": "Approve",
+        "isPrimaryAction": false
+      },
+      {
+        "hideCardOnInvoke": false,
+        "target": "https://microsoft.sharepoint-df.com/teams/SunghwasPrivateTeamforTesting",
+        "bodyContentType": "application/json",
+        "body": "{\"refreshStatus\":{\"uniqueId\":\"4b097b19-901f-4a61-8336-93ae282d3137\",\"status\":3,\"signature\":\"cDQ1NXhWL0dsdml2OUFYbFJIOE1RMDdWSWdLeUJlUzd3eGt2SGt6STlYYz0\"}}",
+        "@type": "HttpPOST",
+        "@id": "5bbb0bf7-78f5-4643-b768-1cc73d3296d9",
+        "name": "Decline",
+        "isPrimaryAction": false
+      }
+    ],
+    "messageCardContext": {
+      "correlationId": "129f6d7e-29a5-496f-bdca-23315c1c78d9",
+      "messageCardSource": "ExplicitMessageCard",
+      "oamAppName": "SharePointAccessRequest",
+      "messageCardStampingSource": "TEE",
+      "isRefreshCard": false
+    },
+    "@source": "Schema.org Parser",
+    "@entityExtractionTrustLevel": "Scenario"
+  }

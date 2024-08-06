@@ -113,15 +113,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Use command `create-reminder` to get card with action `Schedule task`.
 
-  ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
+  ![Schedule task ](BotDailyTaskReminder/Images/1.create-remainder.png)
 
 - Task module to add task details.
 
-  ![Task Details ](BotDailyTaskReminder/Images/ScheduleTask.png)
+  ![Task Details ](BotDailyTaskReminder/Images/2.addtask-modules.png)
 
 - User will get a task reminder card at scheduled time.
 
-  ![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
+  ![Created](BotDailyTaskReminder/Images/3.successfully-created.png)
+
+  ![Reminder Card](BotDailyTaskReminder/Images/4.reminder-card.png)
 
 
 ## Deploy the bot to Azure
