@@ -12,6 +12,9 @@ extensions:
   createdDate: "12/05/2017 06:03:13 PM"
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 # Outgoing Webhook Sample Node.js
 
