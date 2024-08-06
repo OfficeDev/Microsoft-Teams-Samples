@@ -111,21 +111,21 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
   
 ## Running the sample
 
-   ![](Images/Install.png)
+   ![GraphAppInstallation](Images/1.add_app.png)
 
-   ![](Images/AddAppListTab.png)
+   ![GraphAppInstallation](Images/2.select_team.png)
 
-   ![](Images/ListApp.png)
+   ![GraphAppInstallation](Images/3.add_to_team.png)
 
-   ![](Images/AppAddSuccess.png)
+   ![GraphAppInstallation](Images/4.app_installation.png)
 
-   ![](Images/AppDescription.png)
-   
-   ![](Images/AppUpdateSuccess.png)
+   ![GraphAppInstallation](Images/5.app_installed_demo.png)
 
-    ![](Images/DeleteApp.png)
+   ![GraphAppInstallation](Images/6.app_added_success.png)
 
-    ![](Images/AppDeleteSuccess.png)
+   ![GraphAppInstallation](Images/7.clicking_get_info.png)
+
+   ![GraphAppInstallation](Images/8.clicking_update.png)
  
 ## Further reading
 

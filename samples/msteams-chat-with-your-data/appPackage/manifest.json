@@ -1,0 +1,50 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "version": "1.0.0",
+    "manifestVersion": "1.16",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.package.name",
+    "name": {
+        "short": "TeamsAzureOpenAI-${{TEAMSFX_ENV}}",
+        "full": "Teams Azure OpenAI"
+    },
+    "developer": {
+        "name": "Microsoft",
+        "mpnId": "",
+        "websiteUrl": "https://teams.microsoft.com",
+        "privacyUrl": "https://privacy.microsoft.com/privacystatement",
+        "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
+    },
+    "description": {
+        "short": "Custom copilot to chat with your data via RAG through Azure OpenAI On Your Data",
+        "full": "Custom copilot to chat with your data via RAG (retrieval augmentation generation) through Azure OpenAI On Your Data supported data sources:  Azure AI Search, Azure Blob Storage, URL/web address, Azure Cosmos DB for MongoDB vCore, uploaded files, and Elasticsearch."
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "conversations",
+            "scopes": ["personal"]
+        },
+        {
+            "entityId": "about",
+            "scopes": ["personal"]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": ["personal", "team", "groupChat"],
+            "isNotificationOnly": false,
+            "supportsCalling": false,
+            "supportsVideo": false,
+            "supportsFiles": false
+        }
+    ],
+    "validDomains": [
+        "${{BOT_DOMAIN}}"
+    ]
+}

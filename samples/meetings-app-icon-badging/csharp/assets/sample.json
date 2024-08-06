@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-app-icon-badging/csharp/AppIconBadgingInMeetings/Images/App_Icon_Badging.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-app-icon-badging/csharp/AppIconBadgingInMeetings/Images/AppIconBadgingCsharp.gif",
         "alt": "Solution UX showing app icon badging in Microsoft Teams meeting - csharp"
       }
     ],

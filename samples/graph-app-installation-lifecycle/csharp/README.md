@@ -121,17 +121,19 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-![](AppInstallation/Images/Install.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/1.app_install.png)
 
-![](AppInstallation/Images/AddAppListTab.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/2.select_team.png)
 
-![](AppInstallation/Images/ListApp.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/3.add_app_list.png)
 
-![](AppInstallation/Images/GetUserApp.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/4.app_installation.png)
 
-![](AppInstallation/Images/AppDescription.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/5.on_clicking_addpoly.png)
 
-![](AppInstallation/Images/DeleteApp.png)
+![GraphAppInstallationLifeCycle](AppInstallation/Images/6.on_clicking_get_info.png)
+
+![GraphAppInstallationLifeCycle](AppInstallation/Images/7.delete_click.png)
 
 ## Further Reading
 
