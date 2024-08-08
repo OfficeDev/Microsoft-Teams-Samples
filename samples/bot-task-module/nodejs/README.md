@@ -25,7 +25,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 * Dialogs (referred as task modules in TeamsJS v1.x)
 
 ## Interaction with botss
-![Dialog App](Images/TaskModule.gif)
+![Dialog App](Images/TeamsDialog.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -124,33 +124,41 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 - **Personal Scope Interactions:**
 
-![ps-AddApp ](Images/1.Install.png)
+![1.Install ](Images/1.Install.png)
 
-![ps-Cards ](Images/2.Interaction_with_Bot.png)
+![2.Interaction_with_Bot ](Images/2.Interaction_with_Bot.png)
 
-![ps-AC-TaskModule ](Images/3.Adaptive_card_in_chat.png)
+![3.Adaptive_card_in_chat ](Images/3.Adaptive_card_in_chat.png)
 
-![ps-AC-TaskModule-Submit ](Images/4.Adaptive_card_submitted.png)
+![4.Adaptive_card_submitted ](Images/4.Adaptive_card_submitted.png)
 
-- **Group Chat Scope Interactions:**
+![5.Update_in_chat ](Images/5.Update_in_chat.png)
 
-![gc-Interaction ](Images/5.Update_in_chat.png)
+![6.CustomForm ](Images/6.CustomForm.png)
 
-- **Team Scope Interactions:**
-
-![ts-Interaction ](Images/6.Interaction_with_bot_in_GC.png)
+![7.CustomFormResults ](Images/7.CustomFormResults.png)
 
 - **Dialog (referred as task modules in TeamsJS v1.x) Tab:**
 
-![TaskModuleTasks](Images/8.Tasks_Tab_in_chat.png)
+![8.Tasks_Tab_in_chat](Images/8.Tasks_Tab_in_chat.png)
 
-![Youtube](Images/9.Youtuube_in_chat.png)
+![9.Youtuube_in_chat](Images/9.Youtuube_in_chat.png)
 
-![PowerApp](Images/10.Powerapp_in_Tab.png)
+![10.Powerapp_in_Tab](Images/10.Powerapp_in_Tab.png)
 
-![CustomForm](Images/11.Custom_form_in_Tab.png)
+![11.Custom_form_in_Tab](Images/11.Custom_form_in_Tab.png)
 
-![AdaptiveCard](Images/7.AdaptiveCard.png)
+![12.GroupChat](Images/12.GroupChat.png)
+
+![13.ConfigTab](Images/13.ConfigTab.png)
+
+![14.ConfigTabResults](Images/14.ConfigTabResults.png)
+
+- **Group Chat Scope Interactions:**
+
+![15.GroupChatCard ](Images/15.GroupChatCard.png)
+
+![15.GroupChatCardResults ](Images/15.GroupChatCardResults.png)
 
 ## Deploy the bot to Azure
 
