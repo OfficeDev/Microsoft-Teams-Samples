@@ -77,7 +77,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private static Attachment GetTaskModuleHeroCardOptions()
         {
-            // Create a Hero Card with TaskModuleActions for each Task Module
+            // Create a Hero Card with TaskModuleActions for each Dialogs (referred as task modules in TeamsJS v1.x)
             return new HeroCard()
             {
                 Title = "Task Module Invocation from Hero Card",
@@ -89,7 +89,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private static Attachment GetTaskModuleAdaptiveCardOptions()
         {
-            // Create an Adaptive Card with an AdaptiveSubmitAction for each Task Module
+            // Create an Adaptive Card with an AdaptiveSubmitAction for each Dialogs (referred as task modules in TeamsJS v1.x)
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 2))
             {
                 Body = new List<AdaptiveElement>()

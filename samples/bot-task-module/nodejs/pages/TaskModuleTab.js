@@ -237,7 +237,7 @@
                             );
                         };
 
-                        //Task modules invoked from a tab
+                        //Dialogs (referred as task modules in TeamsJS v1.x) invoked from a tab
                         microsoftTeams.dialog.open(taskInfo_1, submitHandler);
                         break;
 
