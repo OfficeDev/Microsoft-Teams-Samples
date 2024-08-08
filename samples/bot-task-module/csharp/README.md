@@ -150,9 +150,9 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 ![10.GroupChat ](Images/10.GroupChat.png)
 
-![11.GroupCustomForm ](Images/11.GroupCustomForm.png)
+![11.GroupCustomForm ](Images/12.GroupCustomForm.png)
 
-![12.GroupResults ](Images/12.GroupResults.png)
+![12.GroupResults ](Images/13.GroupResults.png)
 
 ## Deploy the bot to Azure
 
