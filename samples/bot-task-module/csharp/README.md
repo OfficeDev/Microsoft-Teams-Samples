@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
 
 Bot Framework Teams Dialog sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialogs from Hero Card or Adaptive Card buttons and receive input from the Dialogs in the bot.
+This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialog from Hero Card or Adaptive Card buttons and receive input from the Dialog in the bot.
 
 ## Included Features
 * Bots
