@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Task Module",
-    "full": "Simple Task Module"
+    "short": "Teams Dialogs",
+    "full": "Simple Dialogs (referred as task modules in TeamsJS v1.x)"
   },
   "description": {
-    "short": "Test Task Module Scenario",
-    "full": "Simple Task Module Scenario Test"
+    "short": "Test Dialogs (referred as task modules in TeamsJS v1.x)",
+    "full": "Simple Dialogs (referred as task modules in TeamsJS v1.x) Scenario Test"
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

@@ -13,9 +13,9 @@
     DeeplinkHelper deepLinkHelper = new DeeplinkHelper(@Json.Serialize(Configuration["MicrosoftAppId"]).ToString(), @Json.Serialize(Configuration["BaseUrl"]).ToString());
 }
 
-<div class="font-semibold font-title">Microsoft Teams Task Modules Demo</div>
+<div class="font-semibold font-title">Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Demo</div>
 <p>
-    A task module allows Teams app developers to create one or more custom, modal experiences with custom code for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous,
+    A dialog (referred as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous,
     intermediate task completion information.
 </p>
 <p>
@@ -60,7 +60,7 @@
                 width: 400,
             };
 
-            taskInfo.title = "Task Module Demo";
+        taskInfo.title = "Teams Dialogs Demo";
 
             if (type.includes('youtube')) {
             taskInfo.url = @Json.Serialize(Configuration["BaseUrl"]) + "/youtube";
