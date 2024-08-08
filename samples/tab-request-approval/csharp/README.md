@@ -202,7 +202,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![SendRequest](TabRequestApproval/Images/9.Request_Popup_User2.png)
 
-- On click of notification a task module will open, redirecting the user to the request.
+- On click of notification a dialog will open, redirecting the user to the request.
 
 ![SendRequest](TabRequestApproval/Images/10.Requests_User1.png)
 

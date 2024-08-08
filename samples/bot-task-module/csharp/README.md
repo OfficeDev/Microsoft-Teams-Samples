@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use Task Module using Bot Framework v4
+description: This sample app demonstrate how to use Dialog using Bot Framework v4
 products:
 - office-teams
 - office
@@ -13,16 +13,16 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
 
 ---
-# Teams Task Module
+# Teams Dialog
 
-Bot Framework Teams Task Module sample.
+Bot Framework Teams Dialog sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from Hero Card or Adaptive Card buttons and receive input from the Task Module in the bot.
+This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialogs from Hero Card or Adaptive Card buttons and receive input from the Dialogs in the bot.
 
 ## Included Features
 * Bots
 * Tabs
-* Task Modules
+* Dialogs
 
 ## Interaction with bot
 ![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
@@ -30,7 +30,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Task Module:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
+**Teams Dialog:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 
 ## Prerequisites
 
@@ -124,7 +124,7 @@ the Teams service needs to call into the bot.
 
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
-You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Task Module when clicked. The Task Modules demonstrate retrieving input from a user, or displaying custom web page content.
+You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Dialog when clicked. The Dialogs demonstrate retrieving input from a user, or displaying custom web page content.
 
 - **Personal Scope Interactions:**
 
@@ -164,6 +164,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
+- [Dialogs](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-csharp" />

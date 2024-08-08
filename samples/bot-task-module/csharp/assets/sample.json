@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-task-module-csharp",
     "source": "officeDev",
-    "title": "Task Module using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate how to use Task Module using Bot Framework v4",
+    "title": "Dialog using Bot Framework v4",
+    "shortDescription": "This sample app demonstrate how to use Dialog using Bot Framework v4",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-task-module/csharp",
     "longDescription": [
-      "This sample app demonstrate how to use Task Module using Bot Framework v4"
+      "This sample app demonstrate how to use Dialog using Bot Framework v4"
     ],
     "creationDateTime": "2019-10-17",
     "updateDateTime": "2022-12-06",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-task-module/csharp/Images/Bot_Tab_TaskModule.gif",
-        "alt": "Solution UX showing Task Module using Bot Framework v4"
+        "alt": "Solution UX showing Dialog using Bot Framework v4"
       }
     ],
     "authors": [

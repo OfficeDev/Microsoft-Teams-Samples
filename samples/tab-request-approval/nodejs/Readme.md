@@ -192,7 +192,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![CreateTask](Images/7.CreateTaskDetails.png)
 
-- User-2 On click of notification a task module will open, redirecting the user to the request.
+- User-2 On click of notification a dialog will open, redirecting the user to the request.
 
 ![SendRequest](Images/8.Activity.png)
 
