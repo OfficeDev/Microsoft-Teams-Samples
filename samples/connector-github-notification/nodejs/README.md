@@ -20,9 +20,10 @@ This is an example to show how to write a connector for Microsoft Teams using Gi
  
 #### Prerequisites
 1. Register a new OAuth application at GitHub. Note the GitHub client id and secret.
-2. Download ngrok from https://ngrok.com/. Run the following command to setup a tunnel to localhost:3000
+2. If you want to run this code locally, use a tunnelling service like [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version.
+3. If you are using Ngrok as a tunnelling service then download ngrok from https://ngrok.com/. Run the following command to setup a tunnel to localhost:3000
  `ngrok http 3000`
- Note the ngrok address, which looks something like `https://013e0d3f.ngrok.io`.
+ Note the ngrok address, which looks something like `https://013e0d3f.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 3. Put the callback Url in the Oauth app as 'your-ngrok/auth/github/callback'.
 4. Replace the clientId,clientSecret,callbackUrl and serviceUrl in Default.json.
 
@@ -47,3 +48,6 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-github-notification-nodejs" />

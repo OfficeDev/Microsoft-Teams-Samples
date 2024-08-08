@@ -1,0 +1,47 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "metadata": {
+    "webUrl": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main"
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Adaptive Card-based Loop component",
+      "size": "Large",
+      "weight": "Bolder"
+    },
+
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "These samples are designed to help understand Microsoft Teams platform capabilities and scenarios(Bots,Tabs,Message extensions,Meeting extensions,Personal apps,Webhooks and connectors)",
+          "weight": "bolder",
+          "size": "medium"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "title": "Execute!",
+      "verb": "userExecute"
+    },
+
+    {
+      "type": "Action.OpenUrl",
+      "title": "Universal Actions for Adaptive Cards",
+      "url": "https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/work-with-universal-actions-for-adaptive-cards"
+    },
+
+    {
+      "type": "Action.OpenUrl",
+      "title": "Adaptive Card-based Loop components",
+      "url": "https://learn.microsoft.com/microsoftteams/platform/m365-apps/cards-loop-component?branch=pr-9230"
+    }
+  ]
+}

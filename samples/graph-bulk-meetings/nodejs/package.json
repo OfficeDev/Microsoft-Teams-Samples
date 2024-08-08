@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./server.js",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +28,7 @@
     "parallel-each": "^1.1.7",
     "q": "^1.5.1",
     "request": "^2.88.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "esbuild": "^0.18.1"
   }
 }

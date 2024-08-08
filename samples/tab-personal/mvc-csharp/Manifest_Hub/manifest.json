@@ -44,6 +44,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "{{domain-name}}"
   ]
 }

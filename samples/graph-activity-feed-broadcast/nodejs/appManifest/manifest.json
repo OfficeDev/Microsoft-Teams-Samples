@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.activityfeedbroadcast",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Activity feed broadcast",
+    "full": "Activity feed notification to notify any message to all members of the organisation"
+  },
+  "description": {
+    "short": "Activity feed notification to notify any message to the organisation",
+    "full": "Activity feed notification to notify any message to all members of the organisation"
+  },
+  "accentColor": "#235EA5",
+  "staticTabs": [
+    {
+      "entityId": "broadcast",
+      "name": "BroadcastTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/broadcast",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/broadcast",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "approvalRequired",
+        "description": "Required approval",
+        "templateText": "A task created with title {approvalTaskId}"
+      }
+    ]
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.User"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Group"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Chat"
+        }
+      ]
+    }
+  },
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

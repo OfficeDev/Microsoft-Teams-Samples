@@ -9,8 +9,9 @@
         let showSSOToggle = false;
         let showFbToggle = false;
         let showUserToggle = false;
-        let clientId =  <%-clientId%>
         let redirectUri = window.location.origin + "/fb-auth";
+        let clientId =  <%-clientId%>
+        
 
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
@@ -23,8 +24,7 @@
             });
         });
 
-        microsoftTeams.app.initialize();
-        function ssoAuthentication() {
+         ssoAuthentication = () => {
             getClientSideToken()
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);
@@ -289,10 +289,7 @@
                     width: 600,
                     height: 535})
                 .then((result) => {
-                    let data = localStorage.getItem(result);
-                    let tokenDetails = JSON.parse(data);
-                    localStorage.removeItem(result);
-                    resolve(tokenDetails);
+                    resolve(result);
                 })
                 .catch((reason) => {
                     reject(reason);
@@ -303,7 +300,7 @@
         function fbAuth() {
             fbAuthentication()
                 .then((result) => {
-                    return getServerSideTokenFb(result.idToken);
+                    return getServerSideTokenFb(result);
                 })
                 .catch((error) => {
                     console.log(error);

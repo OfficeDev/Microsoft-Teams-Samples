@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-app-anonymous-users-csharp",
     "source": "officeDev",
     "title": "Anonymous User Support",
-    "shortDescription": "This sample app shows anonymous users support in teams meeting apps.",
+    "shortDescription": "This sample app shows anonymous users support in Teams meeting apps.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-anonymous-users/csharp",
     "longDescription": [
-      "This sample app shows anonymous users support in teams meeting apps."
+      "This sample app shows anonymous users support in Teams meeting apps. It also supports Azure AD and Facebook authentications."
     ],
     "creationDateTime": "2023-02-06",
     "updateDateTime": "2023-02-08",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-anonymous-users/csharp/Images/anonymoususersupport.gif",
-        "alt": "Solution UX showing anonymous user support in teams meeting apps"
+        "alt": "Solution UX showing anonymous user support in Teams meeting apps."
       }
     ],
     "authors": [
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }

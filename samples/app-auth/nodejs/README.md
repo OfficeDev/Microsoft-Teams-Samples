@@ -20,17 +20,28 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 This sample demonstrates authentication in Microsoft Teams using bot and tab.
 
+## Included Features
+* Teams SSO (Using bots and tabs)
+* Bots
+* MSAL.js 2.0 support
+
 ## Interaction with App
 ![app-auth-sample](Images/app-auth.gif)
 
 ## Getting started
 
-1. Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
+1. Install some sort of tunnelling service. Eg. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 2. Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint for the bot registration):<br>
 
     ```bash
     ngrok http 3978 --host-header=localhost
     ```
+    Alternatively, you can also use the `dev tunnels`. Please follow this documentation: [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) link  and host the tunnel with anonymous user access as shown below:
+	
+	  ```bash
+	  devtunnel host -p 3978 --allow-anonymous
+	  ```
+
 ### Setup for code
 
  - Clone the repository
@@ -49,17 +60,17 @@ This sample demonstrates authentication in Microsoft Teams using bot and tab.
     
 3. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 > **IMPORTANT**: Do not use the legacy Bot Framework portal, nor App Studio, to create the bot. Your bot MUST be registered with
 > Azure Bot Service to use the authentication functionality provided by Azure Bot Service.
 
-4. Create an app manifest. Navigate to the file, manifest/manifest.json - Change:
+4. Create an app manifest. Navigate to the file, appManifest/manifest.json - Change:
     1. <<REGISTERED_BOT_ID>> (there are 3) change to your registered bot's app ID
     2. <<BASE_URI_DOMAIN>> (there are 5) change to your https endpoint from ngrok excluding the "https://" part
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-auth\nodejs\Manifest_Hub` folder with the required values.
-    3. Zip up the contents of the `manifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-auth\nodejs\appManifestHub` folder with the required values.
+    3. Zip up the contents of the `appManifest` folder to create a `manifest.zip` or `appManifestHub` folder into a `appManifestHub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 ## Setup
 
@@ -67,10 +78,7 @@ To be able to use an identity provider, first you have to register your applicat
 
 ### Changing app settings
 
-This project uses the [config](https://www.npmjs.com/package/config) package. The default configuration is in `config\default.json`.
-
--   Environment variable overrides are defined in `config\custom-environment-variables.json`. You can set these environment variables when running node. If you are using Visual Studio Code, you can set these in your `launch.json` file.
--   Alternatively, you can specify local modifications in `config\local.json`.
+-   Environment variable overrides are defined in `app-auth\nodejs\.env`. You can set these environment variables when running node.
 
 The instructions below assume that you're using environment variables to configure the app, and will specify the name of the variable to set.
 
@@ -81,14 +89,12 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 1. Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the same account that you used to register your bot.
 2. Find your application in the list and click on the name to edit.
 3. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
-
-    - `https://<your_ngrok_url>/tab/simple-end`
     - `https://token.botframework.com/.auth/web/redirect`
-    - Add this URL as *Single-page application* `https://<your_ngrok_url>/tab/silent-end`
+    - Add this URL as *Single-page application* `https://<your_tunnel_domain>/silent-end`
 
 4. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
-5. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_url>/{AppID}
+5. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_tunnel_domain>/{AppID}
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set Who can consent? to Admins and users
 
@@ -101,7 +107,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 
 10. Select **Add scope**
     - Note: The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end; for example:
-        - `api://<your_ngrok_url>/<aad_application_id>/access_as_user`
+        - `api://<your_tunnel_domain>/<aad_application_id>/access_as_user`
     - If you are facing any issue in your app, please uncomment [this] line( https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-auth/nodejs/src/AuthBot.ts#L119) and put your debugger for local debug.
    
 11. In the **Authorized client applications** section, you identify the applications that you want to authorize to your app’s web application. Each of the following IDs needs to be entered:
@@ -123,13 +129,21 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 
 14. The bot uses `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD`, so these should already be set.
 
+### Setup Facebook authentication
+15. To test facebook auth flow [create a facebookapp](FacebookDocumentation/README.md) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
+   - Select service provider ad `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16.
+   - For scopes, add `email public_profile`
+
 ### Update your Microsoft Teams application manifest
 
-15. Add new properties to your Microsoft Teams manifest:
+15. Add new properties to your Microsoft Teams app manifest:
 
     - **WebApplicationInfo** - The parent of the following elements.
     - **Id** - The client ID of the application. This is an application ID that you obtain as part of registering the application with Azure AD 1.0 endpoint.
-    - **Resource** - The domain and subdomain of your application. This is the same URI (including the `api://` protocol) that you used when registering the app in AAD. The domain part of this URI should match the domain, including any subdomains, used in the URLs in the section of your Teams application manifest.
+    - **Resource** - The domain and subdomain of your application. This is the same URI (including the `api://` protocol) that you used when registering the app in Microsoft Entra ID. The domain part of this URI should match the domain, including any subdomains, used in the URLs in the section of your Teams application manifest.
 
     ```json
     "webApplicationInfo": {
@@ -138,7 +152,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
     }
     ```
 
-16. Add permissions and update validDomains to allow token endpoint used by bot framework. Teams will only show the sign-in popup if its from a whitelisted domain.
+17. Add permissions and update validDomains to allow token endpoint used by bot framework. Teams will only show the sign-in popup if its from a whitelisted domain.
 
     ```json
     "permissions": [
@@ -151,7 +165,7 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
     ```
 
 Notes:
--   The resource for an AAD app will usually just be the root of its site URL and the appID (e.g. api://subdomain.example.com/6789/c6c1f32b-5e55-4997-881a-753cc1d563b7). We also use this value to ensure your request is coming from the same domain. Therefore make sure that your contentURL for your tab uses the same domains as your resource property.
+-   The resource for an Microsoft Entra ID app will usually just be the root of its site URL and the appID (e.g. api://subdomain.example.com/6789/c6c1f32b-5e55-4997-881a-753cc1d563b7). We also use this value to ensure your request is coming from the same domain. Therefore make sure that your contentURL for your tab uses the same domains as your resource property.
 -   You need to be using manifest version 1.5 or higher for these fields to be used.
 -   Scopes aren’t supported in the manifest and instead should be specified in the API Permissions section in the Azure portal
 -   If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-auth/nodejs/src/AuthBot.ts#L119) line and put your debugger for local debug.
@@ -172,44 +186,6 @@ Notes:
 
 5. Click **Save**.
 6. Set the environment variable `AZUREAD_CONNECTIONNAME` to the name that you chose for this OAuth connection.
-
-### [Optional] Using LinkedIn
-
-1. Follow the instructions [here](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/context#step-1-configure-your-application) to create and configure a LinkedIn application for OAuth 2.
-2. In "Authorized Redirect URLs", add `https://token.botframework.com/.auth/web/redirect`.
-3. Note your app's "Client ID" and "Client Secret".
-4. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
-5. Click **Settings**.
-6. Under **OAuth Connection Settings** near the bottom of the page, click **Add Setting**.
-7. Fill in the form as follows:
-
-    1. For **Name**, enter a name for your connection (e.g., "LinkedIn")
-    2. For **Service Provider**, select **LinkedIn**.
-    3. For **Client id**, enter the client ID for your LinkedIn app.
-    4. For **Client secret**, enter the client secret for your LinkedIn app.
-    5. For **Scopes**, enter `r_liteprofile r_emailaddress`.
-
-8. Click **Save**.
-9. Set the environment variable `LINKEDIN_CONNECTIONNAME` to the name that you chose for this OAuth connection.
-
-### [Optional] Using Google
-
-1. Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com). Enable access to the [Google People API](https://developers.google.com/people/).
-2. In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect`.
-3. Note your app's "Client ID" and "Client Secret".
-4. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
-5. Click **Settings**.
-6. Under **OAuth Connection Settings** near the bottom of the page, click **Add Setting**.
-7. Fill in the form as follows:
-
-    1. For **Name**, enter a name for your connection (e.g., "Google")
-    2. For **Service Provider**, select **Google**.
-    3. For **Client id**, enter the client ID for your Google app.
-    4. For **Client secret**, enter the client secret for your Google app.
-    5. For **Scopes**, enter `openid profile email`.
-
-8. Click **Save**.
-9. Set the environment variable `GOOGLE_CONNECTIONNAME` to the name that you chose for this OAuth connection.
 
 ### Testing the OAuth connections
 
@@ -241,9 +217,9 @@ Tab authentication
 
 Bot authentication
 
-![Bot SSO](Images/appbot.png)
+![Bot SSO](Images/login-card.png)
 
-![Bot AAD login](Images/appbot2.png)
+![Bot Microsoft Entra ID login](Images/sso-bot.png)
 
 ## Outlook on the web
 
@@ -308,3 +284,6 @@ As of April 2019, Microsoft Teams mobile clients support the `signin` action pro
 ## Further reading
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-auth-nodejs" />

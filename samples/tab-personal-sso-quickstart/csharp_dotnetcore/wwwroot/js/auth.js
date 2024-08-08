@@ -1,23 +1,24 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-    getClientSideToken()
-       .then((clientsidetoken) => {
-           console.log("clientsidetoken: " + clientsidetoken);
-           return getServerSideToken(clientsidetoken);
-       })
-       .catch((error) => {
-           console.log(error);
-           if (error === "invalid_grant") {
-               // display in-line button so user can consent
-               $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
-               $("#diverror").show();
-               $("#consent").show();
-           } else {
-               console.log("authentication failed. something went wrong");
-           }
-       });
+    microsoftTeams.app.initialize().then(() => {
+        getClientSideToken()
+        .then((clientsidetoken) => {
+            console.log("clientsidetoken: " + clientsidetoken);
+            return getServerSideToken(clientsidetoken);
+        })
+        .catch((error) => {
+            console.log(error);
+            if (error === "invalid_grant") {
+                // display in-line button so user can consent
+                $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+                $("#diverror").show();
+                $("#consent").show();
+            } else {
+                console.log("authentication failed. something went wrong");
+            }
+        });
+    });
 });
 
 function requestConsent() {
@@ -87,10 +88,17 @@ function getServerSideToken(clientSideToken) {
                             if (JSON.parse(responseJson).error)
                                 reject(JSON.parse(responseJson).error);
                         } else if (responseJson) {
-                            accessToken = responseJson;
-                            console.log("Exchanged token: " + accessToken);
-                            getUserInfo(context.user.userPrincipalName);
-                            getPhotoAsync(accessToken);
+                            if (responseJson == "invalid_grant") {
+                                console.log("error" + responseJson);
+                                $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+                                $("#diverror").show();
+                                $("#consent").show();
+                            }
+                            else {
+                                accessToken = responseJson;
+                                getUserInfo(context.user.userPrincipalName);
+                                getPhotoAsync(accessToken);
+                            }
                         }
                     });
             }

@@ -7,12 +7,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
                 getAuthToken();
+            });
         });
 
         // Get face book client side token.
         function getAuthToken() {
-            microsoftTeams.app.initialize();
             localStorage.removeItem("auth.error");
             let code = getHashParameters();
             let key = "auth.result";

@@ -3,10 +3,11 @@
  * Licensed under the MIT License.
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
-import { TeamsFluidClient } from "@microsoft/live-share";
+import { LiveShareHost } from "@microsoft/teams-js";
+import { LiveShareClient } from "@microsoft/live-share";
 import { setMeetingContext, addAgendaTask, postAgenda } from "./services/agendaAPIHelper"
 
 let containerValue;
@@ -14,10 +15,26 @@ let containerValue;
 const SidePanel = (props) => {
 
     const agendaValueKey = "editor-value-key";
+    const [appTheme, setAppTheme] = useState("");
 
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
+                // Applying default theme from app context property
+                switch (context.app.theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
+                }
+
                 var userId = context.user.id;
                 var meetingId = context.meeting.id;
                 var tenantId = context.user.tenant.id;
@@ -33,20 +50,38 @@ const SidePanel = (props) => {
                         document.getElementById("publishAgendaButton").style.display = "none";
                     }
                 })
-            })
+            });
+
+            // Handle app theme when 'Teams' theme changes
+            microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                switch (theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
+                }
+            });
         });
     }, []);
 
     // Initial setup for using fluid container.
     useEffect(() => {
-        microsoftTeams.app.initialize();
         (async function () {
 
             let connection;
             window.localStorage.debug = "fluid:*";
+            await microsoftTeams.app.initialize();
+            const host = LiveShareHost.create();
 
             // Define Fluid document schema and create container
-            const client = new TeamsFluidClient();
+            const client = new LiveShareClient(host);
             const containerSchema = {
                 initialObjects: { editorMap: SharedMap }
             };
@@ -62,6 +97,8 @@ const SidePanel = (props) => {
             containerValue = container;
             containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
         })();
+
+
     }, []);
 
 
@@ -119,21 +156,23 @@ const SidePanel = (props) => {
 
     return (
         <>
-            <div className="agendaTitle">
-                Agenda
+            <div className={appTheme}>
+                <div className="agendaTitle">
+                    Agenda
+                </div>
+                <div id="agendaButtonDiv">
+                    <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
+                </div>
+                <div id="agendaInputDiv" style={{ display: 'none' }}>
+                    <input type="text" id="agendaInput" /><br />
+                    <button id="addAgendaButton" onClick={addAgenda}>Add</button>
+                </div>
+                <div id="list">
+                    <ol type="1" id="agendaList">
+                    </ol>
+                </div>
+                <button id="publishAgendaButton" onClick={publishAgenda}>Publish Agenda</button>
             </div>
-            <div id="agendaButtonDiv">
-                <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
-            </div>
-            <div id="agendaInputDiv" style={{ display: 'none' }}>
-                <input type="text" id="agendaInput" /><br />
-                <button id="addAgendaButton" onClick={addAgenda}>Add</button>
-            </div>
-            <div id="list">
-                <ol type="1" id="agendaList">
-                </ol>
-            </div>
-            <button id="publishAgendaButton" onClick={publishAgenda}>Publish Agenda</button>
         </>
     );
 };

@@ -1,0 +1,49 @@
+<!--This file is used during the Teams authentication flow to assist with retrieval of the access token.-->
+<!--If you're not familiar with this, do not alter or remove this file from your project.-->
+<html>
+  <head>
+    <title>Login Start Page</title>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+  <script src="https://res.cdn.office.net/teams-js/2.7.1/js/MicrosoftTeams.min.js" integrity="sha384-4Gy2G+qxzDVdrdemcVqKVQvaSK1Ghg3x6xcsaMLPc/pw7KPtiogHGM97LTWF2PWg" crossorigin="anonymous"></script>
+    <script
+      type="text/javascript"
+      src="https://alcdn.msauth.net/browser/2.21.0/js/msal-browser.min.js"
+      integrity="sha384-s/NxjjAgw1QgpDhOlVjTceLl4axrp5nqpUbCPOEQy1PqbFit9On6uw2XmEF1eq0s"
+      crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+      microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then(async (context) => {
+          // Generate random state string and store it, so we can verify it in the callback
+          var currentURL = new URL(window.location);
+          var clientId = currentURL.searchParams.get("clientId");
+          var scope = currentURL.searchParams.get("scope");
+          var loginHint = currentURL.searchParams.get("loginHint");
+
+          const msalConfig = {
+            auth: {
+              clientId: clientId,
+              authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
+              navigateToLoginRequestUrl: false
+            },
+            cache: {
+              cacheLocation: "sessionStorage",
+            },
+          }
+
+          const msalInstance = new msal.PublicClientApplication(msalConfig);
+          const scopesArray = scope.split(" ");
+          const scopesRequest = {
+            scopes: scopesArray,
+            redirectUri: window.location.origin + `/auth-end.html?clientId=${clientId}`,
+            loginHint: loginHint
+          };
+          await msalInstance.loginRedirect(scopesRequest);
+        });
+      });
+      </script>
+  </body>
+</html>

@@ -10,6 +10,10 @@ const StageViewImagesCard = require('../resources/stageViewForImages.json');
 const OverFlowMenuCard = require('../resources/overflowMenu.json');
 const HTMLConnectorCard = require('../resources/formatHTMLConnectorCard.json');
 const CardWithEmoji = require('../resources/adaptiveCardWithEmoji.json');
+const PeoplePersonaCardIcon = require('../resources/adaptivePeoplePersonaCardIcon.json');
+const PeoplePersonaCardSetIcon = require('../resources/adaptivePeoplePersonaCardSetIcon.json');
+const CodeBlocksCard = require('../resources/codeBlocksCard.json');
+const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -27,7 +31,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -60,6 +64,22 @@ class BotFormattingCards extends ActivityHandler {
                     case "CardWithEmoji":
                         await context.sendActivity({ attachments: [this.sendCardWithEmoji()] });
                         break;
+
+                    case "Persona":
+                        await context.sendActivity({ attachments: [this.sendPersonaCardIcons()] });
+                        break;
+
+                    case "PersonaSet":
+                        await context.sendActivity({ attachments: [this.sendPersonaCardSetIcons()] });
+                        break;
+
+                    case "CodeBlock":
+                        await context.sendActivity({ attachments: [this.sendCodeBlock()] });
+                        break;
+                    
+                    case "Layout":
+                        await context.sendActivity({ attachments: [this.sendLayoutCard()] });
+                        break;                            
                 }
 
                 await context.sendActivity(`You have Selected <b>${text}</b>`);
@@ -98,6 +118,17 @@ class BotFormattingCards extends ActivityHandler {
     */
     sendMentionSupportCard() {
         return CardFactory.adaptiveCard(MentionSupport);
+    }
+
+    sendCodeBlock() {
+        return CardFactory.adaptiveCard(CodeBlocksCard);
+    }
+
+    /**
+    * Adaptive Card updated to be responsive using targetWidth.
+    */
+    sendLayoutCard() {
+        return CardFactory.adaptiveCard(AdaptiveCardResponsiveLayout);
     }
 
     /**
@@ -142,6 +173,22 @@ class BotFormattingCards extends ActivityHandler {
         return CardFactory.adaptiveCard(CardWithEmoji);
     }
 
+     /**
+    * Persona card Icon in an Adaptive Card
+    * If you want to show a single user in an Adaptive Card, the Adaptive Card displays the people icon and the name of the user.
+    */
+     sendPersonaCardIcons() {
+        return CardFactory.adaptiveCard(PeoplePersonaCardIcon);
+    }
+
+     /**
+    * Persona Card Set Icon in an Adaptive Card
+    * If you want to show multiple users in an Adaptive Card, the Adaptive Card displays only the people icon of the users.
+    */
+     sendPersonaCardSetIcons() {
+        return CardFactory.adaptiveCard(PeoplePersonaCardSetIcon);
+    }
+
     /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
@@ -182,6 +229,26 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'CardWithEmoji',
                 value: 'CardWithEmoji'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Persona',
+                value: 'Persona'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'PersonaSet',
+                value: 'PersonaSet'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'CodeBlock',
+                value: 'CodeBlock'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Layout',
+                value: 'Layout'
             },
             {
                 type: ActionTypes.ImBack,

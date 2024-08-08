@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msgext-search-sso-config",
+    "name": "officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension SSO Config Bot",
     "shortDescription": "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.",
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }

@@ -24,8 +24,7 @@ const commonQueryParams = () => {
  * It gathers the required information before calling AAD
  */
 export function AuthStartAad() {
-  microsoftTeams.app.initialize();
-
+  microsoftTeams.app.initialize().then(() => {
   // Get the tab context, and use the information to navigate to Azure AD login page
   microsoftTeams.app.getContext().then(async (context) => {
     let tenantId = context.user.tenant.id; // Tenant ID of the logged in user
@@ -40,6 +39,7 @@ export function AuthStartAad() {
     let authorizeEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize?${queryParams.toString()}`;
     window.location.assign(authorizeEndpoint);
   });
+});
 
   return (
     <p>
@@ -60,10 +60,10 @@ const msalAuth = new MsalAuth();
  */
 export function AuthStartMsa() {
   (function () {
-    microsoftTeams.app.initialize();
-
-    msalAuth.loadAuthModule();
-    msalAuth.attemptLogIn();
+    microsoftTeams.app.initialize().then(() => {
+      msalAuth.loadAuthModule();
+      msalAuth.attemptLogIn();
+    });
   })();
 
   return (

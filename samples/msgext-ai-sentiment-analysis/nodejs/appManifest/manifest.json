@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.sentimentanalysis",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "ME-ai-sentiment-analysis",
+    "full": "Sentiment analysis using message extension."
+  },
+  "description": {
+    "short": "Sentiment analysis Using Azure Open AI through messaging extension.",
+    "full": "This sample shows a feature where user can get sentiment analysis for posted messages in Teams chat using messaging extension and Azure Open AI."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "composeExtensions": [
+    {
+      "botId": "${{BOT_ID}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "me-sentiment-ai",
+          "description": "send sentiment for any text messages posted in Microsoft Teams chat",
+          "title": "Sentiment analysis",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "message"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

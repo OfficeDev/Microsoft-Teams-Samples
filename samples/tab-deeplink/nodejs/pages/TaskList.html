@@ -6,7 +6,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
-                microsoftTeams.app.initialize();
+                microsoftTeams.app.initialize().then(() => {
                 var s=DeepLinkModel;
                 var html ='';
                 s.forEach(x=> {
@@ -22,6 +22,7 @@
                     listContent.appendChild(lineBreakTag);
                 });
             });
+        });
         </script>
     </head>
     <body>

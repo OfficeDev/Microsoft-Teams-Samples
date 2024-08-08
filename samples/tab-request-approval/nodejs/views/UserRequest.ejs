@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,7 +90,7 @@
             };
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
@@ -102,7 +101,6 @@
                 }
             });
 
-            microsoftTeams.dialog.submit();
         };  
 
         function RejectRequest() {
@@ -114,7 +112,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/ApproveRejectRequest',
+                url: '/ApproveRejectRequestActivity',
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
@@ -124,8 +122,6 @@
                     console.log('error', errorThrown);
                 }
             });
-
-            microsoftTeams.dialog.submit();
         };
     </script>
 </body>

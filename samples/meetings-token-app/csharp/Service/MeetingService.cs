@@ -9,6 +9,7 @@ namespace TokenApp.Service
     using System.Net.Http.Headers;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Integration.AspNet.Core;
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Bot.Schema;
@@ -23,7 +24,7 @@ namespace TokenApp.Service
     {
         private readonly HttpClient httpClient;
         private readonly AppCredentials botCredentials;
-        private readonly BotFrameworkHttpAdapter botAdapter;
+        private readonly IBotFrameworkHttpAdapter botFrameworkHttpAdapter;
         private readonly ITenantInfoRepository tenantInfoRepository;
         private readonly string teamsAppId;
         private readonly string contentBubbleUrl;
@@ -44,7 +45,7 @@ namespace TokenApp.Service
             IOptions<MeetingServiceOptions> meetingServiceOptions)
         {
             this.botCredentials = botCredentials;
-            this.botAdapter = (BotFrameworkHttpAdapter)botAdapter;
+            this.botFrameworkHttpAdapter = botAdapter;
             this.httpClient = httpClientFactory.CreateClient();
             this.tenantInfoRepository = tenantInfoRepository;
             this.teamsAppId = meetingServiceOptions.Value.TeamsAppId;
@@ -54,10 +55,16 @@ namespace TokenApp.Service
         /// <inheritdoc/>
         public async Task<UserMeetingRoleServiceResponse> GetMeetingRoleAsync(string meetingId, string userId, string tenantId)
         {
-            var serviceUri = this.tenantInfoRepository.GetServiceUrl(tenantId);
-            if (serviceUri == null)
+            string serviceUri;
+            var getServiceURL = this.tenantInfoRepository.GetServiceUrl(tenantId);
+
+            if (getServiceURL != null)
             {
-                throw new InvalidOperationException("Service URL is not avaiable for tenant ID " + tenantId);
+                serviceUri = getServiceURL;
+            }
+            else
+            {
+                serviceUri = "https://smba.trafficmanager.net/amer/";
             }
 
             using var getRoleRequest = new HttpRequestMessage(HttpMethod.Get, new Uri(new Uri(serviceUri), string.Format("v1/meetings/{0}/participants/{1}?tenantId={2}", meetingId, userId, tenantId)));
@@ -71,6 +78,7 @@ namespace TokenApp.Service
             {
                 UserRole = JsonConvert.DeserializeObject<Models.UserRole>(userRole),
             };
+            
             return response;
         }
 
@@ -87,6 +95,7 @@ namespace TokenApp.Service
             {
                 Query = Uri.EscapeDataString($"Token={currentToken}&User={currentUserName}"),
             };
+            
             var activity = new Activity
             {
                 Type = ActivityTypes.Message,
@@ -114,7 +123,7 @@ namespace TokenApp.Service
             };
 
             // Continue the conversation to get a turn context for the conversation then post the activity
-            await this.botAdapter.ContinueConversationAsync(
+            await ((BotAdapter)this.botFrameworkHttpAdapter).ContinueConversationAsync(
                 this.botCredentials.MicrosoftAppId,
                 conversationReference,
                 async (turnContext, cancellationToken) =>

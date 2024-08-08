@@ -19,7 +19,14 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 
 Sample that shows how to use dialog bot with bot sdk v4, messaging extension, facebook auth flow in Nodejs.
 
-- **Interaction with app**
+## Included Features
+* Bots
+* Tabs
+* Messaging Extensions
+* Adaptive Cards
+* Facebook Authentication (bots)
+
+## Interaction with app
 ![app-complete-sample ](images/app-complete-sample.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -30,14 +37,31 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+1. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `FBConnectionName`
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## To try this sample
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2.  Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
  
  3. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service- 4.0) and get client id and secret for facebook app.
 Now go to your bot channel registartion -> configuration -> Add OAuth connection string
@@ -48,12 +72,18 @@ Now go to your bot channel registartion -> configuration -> Add OAuth connection
 Open the ".env" file in the project and add connection name which we have provided in bot channel registration
 E.g. ConnectionName = facebookconnection
 
-4. Setup NGROK
-      - Run ngrok - point to port 3978
+4. Run ngrok - point to port 3978
 
-	```bash
-	# ngrok http -host-header=rewrite 3978
-	```     
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 5. Clone the repository
 
     ```bash
@@ -66,7 +96,7 @@ E.g. ConnectionName = facebookconnection
     ```
     MicrosoftAppId=
     MicrosoftAppPassword=
-    BaseUri=https://#####abc.ngrok.io
+    BaseUri=https://#####abc.ngrok-free.app
     ```
  - Install modules
 
@@ -81,16 +111,16 @@ E.g. ConnectionName = facebookconnection
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppPackage or ./Manifest_hub folder folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `AppPackage` or `Manifest_hub` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appManifest or ./appManifest_Hub folder folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` or `appManifest_Hub` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     		
-  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/appManifest_Hub` folder with the required values.
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/nodejs/server/index.js#L53) line and put your debugger for local debug.
@@ -118,23 +148,31 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ## Running the sample
 
-![](images/app-complete-sample1.png)
+![](images/1.Install.png)
 
-![](images/app-complete-sample2.png)
+![](images/2.Welcome.png)
 
-![](images/app-complete-sample3.png)
+![](images/3.Commands.png)
 
-![](images/app-complete-sample4.png)
+![](images/4.Hello.png)
 
-![](images/app-complete-sample5.png)
+![](images/5.MultiDialog.png)
 
-![](images/app-complete-sample6.png)
+![](images/6.Roaster.png)
 
-![](images/app-complete-sample7.png)
+![](images/7.Names.png)
 
-![](images/app-complete-sample8.png)
+![](images/8.LastDialog.png)
 
-![](images/app-complete-sample-tab.png)
+![](images/9.OneToOne.png)
+
+![](images/10.SetupTextMessage.png)
+
+![](images/12.BotInfo.png)
+
+![](images/13.ConfigTabTeams.png)
+
+![](images/14.TeamsTab.png)
 
 ## Outlook on the web
 
@@ -144,15 +182,15 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](images/InstallOutlook.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![AppOutlook](images/AppOutlook.png)
 
 **Select your app icon from message extension and find ward, it will show all options**
 
-![AppOutlook](Images/AppOutlook_msgext.png)
+![AppOutlook](images/AppOutlook_msgext.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -164,11 +202,11 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 **Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](images/InstallOffice.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![AppOffice](images/AppOffice.png) 
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
@@ -183,3 +221,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-sample-nodejs" />

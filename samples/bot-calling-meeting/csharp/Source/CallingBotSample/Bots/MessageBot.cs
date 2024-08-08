@@ -256,11 +256,11 @@ namespace CallingBotSample.Bots
         {
             var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
 
-            foreach(TeamsChannelAccount user in users.Members)
+            foreach (TeamsChannelAccount user in users.Members)
             {
                 TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
 
-                if (participant.Meeting.Role == "Organiser")
+                if (participant.Meeting.Role == "Organizer")
                 {
                     return new Identity
                     {

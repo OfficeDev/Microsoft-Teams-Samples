@@ -23,6 +23,11 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 
 3. Call Graph and retrieve the user's profile
 
+## Included Features
+* Teams SSO (tabs)
+* MSAL.js 2.0 support
+* Graph API
+
 - **Interaction with app**
 ![tab-sso-sample ](./doc/images/tab-sso.gif)
 
@@ -34,26 +39,44 @@ You will need:
 
 2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine.
 
-3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+3. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+   If you using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
+4. [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Run the app (Manually Uploading to Teams)
 
 ## Step 1: Register an Azure AD Application
 
 Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams permission to obtain access tokens on its behalf.
 
-1. Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
+1. Create an [Microsoft Entra ID application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
-    * Set your application URI to the same URI you've created in Ngrok. 
-        * Ex: `api://contoso.ngrok.io/{appId}`
+    * Set your application URI to the same URI you've created in tunnelling application. 
+        * Ex: `api://<your_tunnel_domain>/{appId}`
         using the application ID that was assigned to your app
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
         * Add a platform
         * Select `Single-page application`
-        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
-        * Within same `Single-page-application` add another url in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
+        * Create a redirect URI in the format of: `https://<your_tunnel_domain>/auth-end`.
+        * Within same `Single-page-application` add another url in the format of: `https://<your_tunnel_domain>/Home/BrowserRedirect`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
         * Create a new client secret.
@@ -64,7 +87,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 
     * Expose an API that will give the Teams desktop, web and mobile clients access to the permissions above
         * Visit `Manage > Expose an API`
-        * Add a scope and give it a scope name of `access_as_user`. Your API url should look like this: `api://contoso.ngrok.io/{appID}/access_as_user`. In the "who can consent" step, enable it for "Admins and users". Make sure the state is set to "enabled".
+        * Add a scope and give it a scope name of `access_as_user`. Your API url should look like this: `api://contoso.ngrok-free.app/{appID}/access_as_user`. In the "who can consent" step, enable it for "Admins and users". Make sure the state is set to "enabled".
         * Next, add two client applications. This is for the Teams desktop/mobile clients and the web client.
             * 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
             * 1fec8e78-bce4-4aaf-ab1b-5451cc387264
@@ -83,22 +106,22 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
      [guid]::NewGuid()
     ~~~
     * Ensure the package name is unique within the tenant where you will run the app
-    * Edit the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    * Replace `{ngrokSubdomain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
-    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok.io/{{AppId}}`.
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\Manifest_Hub` folder with the required values.
-    **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    * Edit the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    * Replace `{your_tunnel_domain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
+    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{your_tunnel_domain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok-free.app/{{AppId}}`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\appManifest_Hub` folder with the required values.
+    **Zip** up the contents of the `appManifest` folder to create a `Manifest.zip` or `appManifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 2. Update your `config/default.json` file
     * Replace the `tab.appId` property with you Azure AD application ID
     * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
-    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok.io/{appID}`
-    * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
+    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://<your_tunnel_domain>/{appID}`
+    * If you want to use a port other than 3978, fill that in here (and in your tunnel command)
     * Note : Do not push the `clientId` and `clientSecret` values inside your repo. Instead we recommend to store them at some secure location like Azure key vault.
 
 ## Running the app locally
 
-1. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
+1. If you are using Ngrok, run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
     * Win: `./ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
     * Mac: `/ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
 
@@ -180,8 +203,8 @@ Compared to the Hello World sample, this app has four additional routes:
     * It takes the token it receives from the `/ssoDemo` page and attemps to exchange it for a new token that has elevated permissions to access the `profile` Graph API (which is usually used to retrieve the users profile photo).
     * If it fails (because the user hasn't granted permission to access the `profile` API), it returns an error to the `/ssoDemo` page. This error is used to display the "Consent" button which uses the Teams SDK to open the `/auth/start` page in a pop-up window.
 3. `/auth/start` and `/auth/end` routes are used if the user needs to grant further permissions. This experience happens in a seperate window. 
-    * The `/auth/start` page merely creates a valid AAD authorization endpoint and redirects to that AAD consent page.
-    * Once the user has consented to the permissions, AAD redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/ssoDemo` page by calling the `notifySuccess` API.
+    * The `/auth/start` page merely creates a valid Microsoft Entra ID authorization endpoint and redirects to that Microsoft Entra ID consent page.
+    * Once the user has consented to the permissions, Microsoft Entra ID redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/ssoDemo` page by calling the `notifySuccess` API.
     * This workflow is only neccessary if you want authorization to use additional Graph APIs. Most apps will find this flow unnesseccary if all they want to do is authenticate the user.
     * This workflow is the same as our standard [web-based authentication flow](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#navigate-to-the-authorization-page-from-your-popup-page) that we've always had in Teams before we had single sign-on support. It just so happens that it's a great way to request additional permissions from the user, so it's left in this sample as an illustration of what that flow looks like.
 
@@ -194,10 +217,10 @@ This Javascript file is served from the `/msal-auth.js` page and handles the bro
 This Javascript file is served from the `/ssoDemo` page and handles most of the client-side authentication workflow. This file is broken into three main functions:
 
 1. getClientSideToken() -
-This function asks Teams for an authentication token from AAD. The token is displayed so you can try it in Postman.
+This function asks Teams for an authentication token from Microsoft Entra ID. The token is displayed so you can try it in Postman.
 
 2. getServerSideToken() -
-This function sends the token to the backend to exchange for elevated permissions using AAD's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
+This function sends the token to the backend to exchange for elevated permissions using Microsoft Entra ID's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
 
 3. useServerSideToken() -
 This function uses the token to call the Microsoft Graph and display the resulting JSON.

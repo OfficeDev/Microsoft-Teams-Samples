@@ -2,6 +2,10 @@
   "name": "connectersample",
   "version": "1.0.0",
   "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
   "dependencies": {
     "async": "^3.2.4",
     "body-parser": "^1.17.1",
@@ -13,7 +17,8 @@
     "jade": "^1.11.0",
     "jquery": "^3.5.0",
     "method-override": "^3.0.0",
-    "passport": "^0.6.0"
+    "passport": "^0.6.0",
+    "esbuild": "^0.18.1"
   },
   "author": "",
   "license": "ISC",

@@ -17,11 +17,13 @@
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
     "restler": "^3.4.0",
-    "xmlhttprequest": "^1.8.0"
+    "xmlhttprequest": "^1.8.0",
+    "esbuild": "^0.18.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",

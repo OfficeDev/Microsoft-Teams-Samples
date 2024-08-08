@@ -33,8 +33,9 @@
         
     <script type="text/javascript">
         
-        microsoftTeams.app.initialize();
-
+        microsoftTeams.app.initialize().then(() => {
+        });
+        
         function onSubmit() {
             var newSettings = [];
 
@@ -48,7 +49,6 @@
 
             microsoftTeams.authentication.notifySuccess(JSON.stringify(newSettings));
         }
-
     </script>
 </body>
 </html>

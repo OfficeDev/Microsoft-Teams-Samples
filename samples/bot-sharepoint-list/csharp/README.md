@@ -98,7 +98,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ### This steps is specific to Microsoft Teams
 
-- Navigate to `teamsAppManifest` folder
+- Navigate to `AppManifest` folder
 - Select the `Manifest.json` and update it with your `Your Bot Id`
 - Now zip the manifest.json along with icons
 - Go to teams and do `Upload a Custom App` 
@@ -135,3 +135,6 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - [Sharepoint API basic operations](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints)
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sharepoint-list-csharp" />

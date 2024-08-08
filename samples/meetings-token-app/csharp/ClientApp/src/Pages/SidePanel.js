@@ -15,6 +15,8 @@ import * as microsoftTeams from "@microsoft/teams-js";
 let containerValue;
 const SidePanel = props => {
     const editorValueKey = "meeting-meta-data";
+    const [appTheme, setAppTheme] = useState("");
+    const [customStyle] = useState("app-container");
 
     const [currentToken, setCurrentToken] = useState(0);
     const [userToken, setUserToken] = useState({
@@ -42,7 +44,41 @@ const SidePanel = props => {
 
     useEffect(() => {
         onInitializeContianer();
-    })
+
+        // Applying default theme from app context property
+        microsoftTeams.app.getContext().then((context) => {
+            switch (context.app.theme) {
+                case 'dark':
+                    setAppTheme('theme-dark');
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+                case 'contrast':
+                    setAppTheme('theme-contrast');
+                    break;
+                default:
+                    return setAppTheme('theme-light');
+            }
+        });
+
+        // Handle app theme when 'Teams' theme changes
+        microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+            switch (theme) {
+                case 'dark':
+                    setAppTheme('theme-dark');
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+                case 'contrast':
+                    setAppTheme('theme-contrast');
+                    break;
+                default:
+                    return setAppTheme('theme-light');
+            }
+        });
+    });
 
     const onInitializeContianer = () => {
         (async function () {
@@ -146,7 +182,7 @@ const SidePanel = props => {
                 number: currentUser.TokenNumber,
                 status: currentUser.Status || Constants.MeetingTokenStatus.NotUsed
             });
-            
+
             setCustomError(clearErrorFactory());
 
             if (shouldUpdateState) {
@@ -157,7 +193,7 @@ const SidePanel = props => {
 
     return (
         <Fragment>
-            <div className="app-container">
+            <div className={customStyle + ' ' + appTheme}>
                 <ErrorMessageBar msg={customError.msg} show={customError.status} />
                 <TokenIndicator show={true} value={participants.length && currentToken} title={"Current Token"} />
                 <TokenActionButtons isOrganizer={user.isOrganizer}
@@ -175,7 +211,9 @@ const SidePanel = props => {
                     title={`Your Token: ${userToken.status}`}
                 />
             </div>
-            <UserList items={participants} />
+            <div className={appTheme}>
+                <UserList items={participants} />
+            </div>
         </Fragment>
     );
 }

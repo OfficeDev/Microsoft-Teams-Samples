@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@@microsoft/mgt@2/dist/bundle/mgt-loader.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+            crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -25,31 +26,31 @@
             $('#task-submitted').hide();
         });
 
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+        });
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
 
+        microsoftTeams.app.getContext().then((context) => {
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
+        });
+
         microsoftTeams.getContext(function (context) {
-            username = context.upn;
-            userId = context.userObjectId;
-
-            if (context.subEntityId != "" && context.subEntityId != undefined) {
-                let taskModuleSize = {
-                    height: 400,
-                    width: 400,
-                };
-
+            if(context.subEntityId!="" && context.subEntityId!= undefined)
+            {
                 let taskInfo = {
                     title: "Request details",
-                    size: taskModuleSize,
+                    height: 400,
+                    width: 400,
                     url: window.location.origin + "/RequestDetails?taskId=" + context.subEntityId,
                     card: null,
-                    fallbackUrl: null,
+                    fallbackUrl:null,
                     completionBotId: null,
                 };
 
-                microsoftTeams.dialog.open(taskInfo);
+                microsoftTeams.tasks.startTask(taskInfo);
             };
         });
 
@@ -91,12 +92,12 @@
                 var i;
                 for (i = 0; i < userList.length; i++) {
                     $('#task-list-table-user').append(`<tr style="padding:1px" >
-                                <td style="margin-left:1px"> ${i + 1} </td>
-                                <td style="margin-left:1px"> ${userList[i].title} </td>
-                                <td style="margin-left:1px"> ${userList[i].description} </td>
-                                <td style="margin-left:1px"> ${userList[i].managerName} </td>
-                                <td style="margin-left:1px"> ${userList[i].status} </td>
-                                </tr>`
+                        <td style="margin-left:1px"> ${i+1} </td>
+                        <td style="margin-left:1px"> ${userList[i].title} </td>
+                        <td style="margin-left:1px"> ${userList[i].description} </td>
+                        <td style="margin-left:1px"> ${userList[i].personaName} </td>
+                        <td style="margin-left:1px"> ${userList[i].status} </td>
+                        </tr>`
                     );
                 };
             }
@@ -109,7 +110,7 @@
 
             if (list != undefined && list.length > 0) {
                 list.map(item => {
-                    if (item.status == "Pending" && item.managerName == username) {
+                    if (item.status == "Pending" && item.personaName == username) {
                         managerList.push(item);
                     }
                 })
@@ -124,17 +125,17 @@
                 var i;
                 for (i = 0; i < managerList.length; i++) {
                     $('#task-list-table-manager').append(`<tr style="padding:1px">
-                                 <td>${i + 1}</td>
-                                 <td>${managerList[i].title}</td>
-                                 <td>${managerList[i].description}</td>
-                                 <td>${managerList[i].userName}</td>
-                                 <td style="padding:5px">
-                                 <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "ApproveRequest(event)"> Approve </button>
-                                 </td>
-                                 <td style="padding:5px">
-                                 <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "RejectRequest(event)"> Reject </button>
-                                 </td>
-                                 </tr>`
+                        <td>${i+1}</td>
+                        <td>${managerList[i].title}</td>
+                        <td>${managerList[i].description}</td>
+                        <td>${managerList[i].userName}</td>
+                        <td style="padding:5px">
+                        <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "ApproveRequest(event)"> Approve </button>
+                        </td>
+                        <td style="padding:5px">
+                        <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "RejectRequest(event)"> Reject </button>
+                        </td>
+                        </tr>`
                     );
                 };
             }
@@ -177,7 +178,7 @@
         // Send notification to manager about request.
         function SendNotificationToManager() {
             var isValid = true;
-            $('#title,#description').each(function () {
+            $('#title,#description,#defaultSelected').each(function () {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
                     $(this).css({
@@ -197,13 +198,13 @@
 
                 return false;
             }
-
-            var person = document.querySelector('mgt-people-picker').selectedPeople;
+           
+            var person = $("#defaultSelected").val().trim();
             let taskInfo = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
-                managerName: person[0].userPrincipalName,
+                personaName: person,
                 access_token: token,
             };
 
@@ -219,6 +220,42 @@
             return true;
         };
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
+            });
+        });
+
+        let aadId;
+        microsoftTeams.app.getContext().then(function (context) {
+            aadId = context.user.id
+        })
+
+        // People picker api call.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+            $("#defaultSelected").empty();
+            var id = $(e.currentTarget).attr('data-id');
+
+            if (setSelected == "default") {
+                setSelected = [aadId];
+            }
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+                    for (var i = 0; i < people.length; i++) {
+                        if (id == "default") {
+                            $("#defaultSelected").val(people[i].email)
+                            $("#defaultSelected").show();
+                        }
+                    }
+
+                }
+            });
+        }
+    </script>
+
+
 </head>
 <body id="mainDiv">
     <div>
@@ -230,26 +267,25 @@
         <div class="tab-content">
             <div id="createtask" class="tab-pane fade in active">
                 <div class="mb">
+                    <br />
                     <div class="form-group fg">
                         @{
                             var clientId = ViewBag.clientId;
                         }
-                        <mgt-teams-msal2-provider client-id=@clientId
-                                                  auth-popup-url="/TabAuth"
-                                                  scopes="User.Read,people.read"></mgt-teams-msal2-provider>
-                        <mgt-login></mgt-login>
                         <label for="title" class="title">Request title</label>
                         <br>
                         <input type="text" id="title" name="taskTitle">
                     </div>
-                    <br />
                     <div class="form-group fg">
                         <label for="title-desc" class="description">Request description</label><br />
                         <input type="text" id="description" name="taskDescription">
                         <br />
                     </div>
-                    <label for="request to" class="description">Request to</label><br />
-                    <mgt-people-picker selection-mode="single"></mgt-people-picker>
+                    <div class="form-group fg">
+                        <label for="request to" class="description">Request to</label><br />
+                        <input type="text" readonly id="defaultSelected" name="defaultSelected">
+                        <button data-id="default" onclick="selectPeople(event,[],false,true)"> Select </button>
+                    </div>
                 </div>
                 <div class="modal-footer mf">
                     <br />
@@ -299,6 +335,10 @@
                 </div>
             </div>
         </div>
+        <div>
+        <div id="divError" style="display: none"></div>
+        <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+    </div>
     </div>
 </body>
 </html>

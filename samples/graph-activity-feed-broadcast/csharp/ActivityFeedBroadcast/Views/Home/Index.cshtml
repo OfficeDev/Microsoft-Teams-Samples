@@ -21,10 +21,11 @@
 
       <script>
          $(document).ready(function () {
-             $('#task-submitted').hide();
+            microsoftTeams.app.initialize().then(() => {
+                $('#task-submitted').hide();
+            });
          }); 
 
-          microsoftTeams.app.initialize();
             var token = localStorage.getItem("accessToken");
             var userId = "";
             var userName = "";
@@ -111,10 +112,15 @@
             </div>
             <div class="modal-footer mf">
                 <br />
-                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+                <button type="button" class="btn-send save" id="send-notification" onclick="return SendNotificationToOrganisation()">Send message</button>
+                <br />
+                <button type="button" class="btn-send" onclick="return grantConsent()" id="consent" style="display:none;">Grant consent</button>
             </div>
-            <div id="task-submitted">
+            <div id="task-submitted" style="display:none;">
                 Message broadcasted successfully.
+            </div>
+            <div id="grant-consent" style="display:none;">
+                Error occured, Please click on grant consent button to grant consent.
             </div>
         </div>
         </div>

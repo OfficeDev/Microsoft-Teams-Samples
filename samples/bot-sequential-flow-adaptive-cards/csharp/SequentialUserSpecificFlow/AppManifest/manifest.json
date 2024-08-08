@@ -1,0 +1,62 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.sequentialflowbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Sequential flow Adaptive Card",
+    "full": "Sequential WorkFlow and User specific view Adaptive Cards Bot"
+  },
+  "description": {
+    "short": "Sequential flow, User specific view and upto date adaptive cards sample bot",
+    "full": "This sample demos the sequential flow, User specific view and upto date adaptive cards in a bot."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "Incident",
+          "type": "action",
+          "title": "Get incidents",
+          "description": "Get list of incidents",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

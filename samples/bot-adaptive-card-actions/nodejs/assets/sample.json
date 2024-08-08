@@ -9,7 +9,7 @@
       "Sample which demonstrates different Adaptive Card action types using bot."
     ],
     "creationDateTime": "2022-12-27",
-    "updateDateTime": "2022-12-27",
+    "updateDateTime": "2023-06-28",
     "products": [
       "Teams"
     ],
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }

@@ -1,0 +1,62 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.appcheckinlocation",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "App check in location",
+    "full": "Get check in location of user"
+  },
+  "description": {
+    "short": "App check in location",
+    "full": "This sample shows feature where user can checkin with current location and view all previous checkins."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "checkin",
+              "description": "To check in current location"
+            },
+            {
+              "title": "viewcheckin",
+              "description": "To get all last checkin locations"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "devicePermissions": [
+    "geolocation"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

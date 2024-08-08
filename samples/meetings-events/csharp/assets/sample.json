@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-meetings-events-csharp",
     "source": "officeDev",
-    "title": "Realtime meeting events",
-    "shortDescription": "This sample demonstrates use of various meeting events which arfe available in bot framework v4",
+    "title": "Realtime meeting events and meeting participant events",
+    "shortDescription": "This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-events/csharp",
     "longDescription": [
-      "This sample demonstrates use of various meeting events which arfe available in bot framework v4"
+      "This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4"
     ],
     "creationDateTime": "2021-11-10",
-    "updateDateTime": "2022-10-21",
+    "updateDateTime": "2023-08-02",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-events/csharp/MeetingEvents/Images/MeetingsEvents.gif",
-        "alt": "Solution UX showing realtime meeting events"
+        "alt": "Solution UX showing realtime meeting events and meeting participant events"
       }
     ],
     "authors": [
@@ -61,7 +61,7 @@
       },
       {
         "name": "Teams development videos from the community",
-        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+        "url": "https://aka.ms/community/videos/m365powerplatform"
       }
     ]
   }

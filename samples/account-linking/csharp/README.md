@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos linking user's Azure AD ID with Facebook and Google account of user from bot, ME and tab.
+description: This sample demos linking user's Microsoft Entra ID with Facebook and Google account of user from bot, ME and tab.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 
 # External OAuth identity linking in Teams Apps.
 
-This sample demos linking user's AAD id with their GitHub identity. 
+This sample demos linking user's Microsoft Entra ID with their GitHub identity. 
 
 The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API.
 
@@ -37,11 +37,18 @@ There are example in-memory and Azure implementations of the token persistance.
   ```bash
   dotnet --version
   ```
-- [ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used).
   
   run ngrok locally
   ```bash
-  ngrok http https://localhost:5001
+  ngrok http 5001 --host-header="localhost:5001"
+  ```
+
+  Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+  
+  ```bash
+  devtunnel host -p 5001 --allow-anonymous
   ```
 
 ## Setup
@@ -49,7 +56,7 @@ There are example in-memory and Azure implementations of the token persistance.
 If you are running this app locally, you will probably be using some form of tunnel to your local machine. For this sample we use [ngrok](https://ngrok.com)
 
 ```bash
-ngrok http https://localhost:5001
+ngrok http 5001 --host-header="localhost:5001"
 ```
 
 ```bash
@@ -58,19 +65,19 @@ Account                       {{REDACTED}}
 Version                       2.3.40
 Region                        United States (us)
 Web Interface                 http://127.0.0.1:4040
-Forwarding                    http://590a2d6f8b31.ngrok.io -> https://localhost:5001
-Forwarding                    https://590a2d6f8b31.ngrok.io -> https://localhost:5001
+Forwarding                    http://590a2d6f8b31.ngrok-free.app -> https://localhost:5001
+Forwarding                    https://590a2d6f8b31.ngrok-free.app -> https://localhost:5001
 Connections                   ttl     opn     rt1     rt5     p50     p90
                               0       0       0.00    0.00    0.00    0.00                
 ```
 
-For this example, we'll use the `590a2d6f8b31.ngrok.io` as our domain name.
+For this example, we'll use the `590a2d6f8b31.ngrok-free.app` as our domain name.
 
-### 2. Provision an Azure AD application for Tab SSO
-Please follow the instructions on [creating an Azure AD application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
+### 2. Provision an Microsoft Entra ID application for Tab SSO
+Please follow the instructions on [creating an Microsoft Entra ID application with Tab SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#1-create-your-azure-ad-application). The fully qualified domain name will be the ngrok url from before.
 
 #### 2.1 Configure the app for v2 tokens
-**IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `Manifest` blade is set to `2`.
+**IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `AppManifest` blade is set to `2`.
 
 
 Please save for a future step
@@ -87,21 +94,21 @@ Please save
 ### 4. Provision a GitHub app
 Please follow the instructions on [creating a GitHub App](https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app).
 
-The "callback url" will be `https://{{your-domain}}/oauth/end`, e.g. `https://590a2d6f8b31.ngrok.io/oauth/end`.
+The "callback url" will be `https://{{your-domain}}/oauth/end`, e.g. `https://590a2d6f8b31.ngrok-free.app/oauth/end`.
 
 Please save
 1. The `Client ID`
 2. A `client secret` 
 
 ### 5. Filling in the Manifest file
-Please fill in the following values into the `Manifest/Manifest.json` file (called out using the `{{ }}` fences)
+Please fill in the following values into the `AppManifest/manifest.json` file (called out using the `{{ }}` fences)
 
 | Parameter  | Value |
 |---|---|
 | Bot Id  | The "Application (client) id" from step 3. |
-| Azure Ad Application Id | the "Application (client) id" from step 2| 
-|Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok.io`.
-|Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok.io`.
+| Microsoft Entra ID Application Id | the "Application (client) id" from step 2| 
+|Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok-free.app`.
+|Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok-free.app`.
 
 ### 6. Clone the repository
 
@@ -114,9 +121,9 @@ Please copy the `Source/appsettings.json` into a new file `appsettings.developme
 
 | Parameter | Value |
 | --------- | ----- |
-| AzureAd:ClientId | The client id from step 2 |
-| AzureAd:ClientSecret | The client secret from step 2 |
-| AzureAd:TenantId | `common` | 
+| Microsoft Entra ID:ClientId | The client id from step 2 |
+| Microsoft Entra ID:ClientSecret | The client secret from step 2 |
+| Microsoft Entra ID:TenantId | `common` | 
 | Bot:MicrosoftAppId | The client id from step 3 | 
 | Bot:MicrosoftAppPassword | The client secret from step 3 | 
 | OAuth:ClientId | The client id from step 4 | 
@@ -133,9 +140,9 @@ dotnet run
 ### 9. Installing the app
 Please follow the documentation on [creating a Microsoft Teams app package](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package) and [sideloading your app in Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package). 
 
-The "manifest" in question is the `Manifest` directory filled out in step 5.
+The "manifest" in question is the `AppManifest` directory filled out in step 5.
 
-### 10. (Optional) Enable the Azure Ad version of the integration
+### 10. (Optional) Enable the Microsoft Entra ID version of the integration
 If you want to try out the implementation using Azure you will need to provision a few resources first
 
 1. [Storage account (with table storage)](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview)
@@ -182,3 +189,6 @@ Add the parameters to the
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/account-linking-csharp" />

@@ -30,7 +30,8 @@
 
 <script>
   
-    microsoftTeams.app.initialize();
+    microsoftTeams.app.initialize().then(() => {
+    });
 
     //retrieve accessToken from localstorage saved in auth.js file
     var token = localStorage.getItem("accessToken");
@@ -68,8 +69,8 @@
             microsoftTeams.app.getContext().then((context) => {
 
                 var userID = context.user.id;
-                var Json = JSON.stringify(result);
-                var parsedJson = JSON.parse(Json);
+                //var Json = JSON.stringify(result);
+                var parsedJson = JSON.parse(result);
                 var resultJson = parsedJson.users;
                 var title = parsedJson.title;
 

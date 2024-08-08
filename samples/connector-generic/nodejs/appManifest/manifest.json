@@ -1,0 +1,35 @@
+{
+	"$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+	"manifestVersion": "1.8",
+	"id": "3ea203f0-07f0-46d2-8da3-4639b616cf37",
+	"version": "1.0",
+	"packageName": "com.NotifyMe",
+	"developer": {
+		"name": "Developer",
+		"websiteUrl": "https://www.microsoft.com",
+		"privacyUrl": "https://www.microsoft.com",
+		"termsOfUseUrl": "https://www.microsoft.com"
+	},
+	"name": {
+		"full": "NotifyMe",
+		"short": "NotifyMe"
+	},
+	"accentColor": "#FFFFFF",
+	"description": {
+		"full": "Sample to show how to configure a connector and  send notifications inside teams",
+		"short": "Sample to show how connector works inside teams"
+	},
+	"icons": {
+		"outline": "outline.png",
+		"color": "color.png"
+	},
+	"connectors": [
+		{
+			"connectorId": "<<CONNECTOR_ID>>",
+			"configurationUrl": "https://<<AppDomain>>/connectorconfig",
+			"scopes": [
+				"team"
+			]
+		}
+	]	
+}

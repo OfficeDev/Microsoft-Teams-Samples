@@ -1,6 +1,6 @@
-(function() {
+(async function () {
     'use strict';
-    microsoftTeams.app.initialize();
+    await microsoftTeams.app.initialize();
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
@@ -19,16 +19,16 @@
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            tid: context.user.tenant.id,
-                            token: clientSideToken
-                        }),
-                    })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tid: context.user.tenant.id,
+                        token: clientSideToken
+                    }),
+                })
                     .then((response) => {
                         if (response.ok) {
                             return response.json();

@@ -40,14 +40,16 @@ const ShareView = () => {
     const [ssoAuthenticationButtonVisible, setIsSsoAuthenticationButtonVisible] = useState(true);
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        verifyAnonymousUser();
+        microsoftTeams.app.initialize().then(() => {
+            verifyAnonymousUser();
+        });
     }, [])
 
     // Builds the socket connection, mapping it to /io
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        setSocket(io());     
+        microsoftTeams.app.initialize().then(() => {
+            setSocket(io());   
+        });  
     }, []);
 
      // subscribe to the socket event
@@ -116,7 +118,7 @@ const ShareView = () => {
     const facebookLogin = () => {
         fbAuthentication() // This method get a client-side token for Facebook
             .then((result) => {
-                return getFacebookProfileName(result.idToken); // This method get a face book user profile details.
+                return getFacebookProfileName(result); // This method get a face book user profile details.
             })
             .catch((error) => {
                 console.log(error);
@@ -127,9 +129,8 @@ const ShareView = () => {
     const fbAuthentication = () => {
         var facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
         let redirectUri = window.location.origin + "/facebook-auth-end";
-        let state = Math.random().toString(36).substring(2, 7);
-        localStorage.setItem("simple.state", state);
-
+        let state = "ValidateState";
+       
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
                 url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=${state}`,
@@ -137,10 +138,7 @@ const ShareView = () => {
                 height: 535
             })
             .then((result) => {
-                let data = localStorage.getItem(result);
-                let tokenDetails = JSON.parse(data);
-                localStorage.removeItem(result);
-                resolve(tokenDetails);
+                resolve(result);
             })
             .catch((reason) => {
                 reject(reason);

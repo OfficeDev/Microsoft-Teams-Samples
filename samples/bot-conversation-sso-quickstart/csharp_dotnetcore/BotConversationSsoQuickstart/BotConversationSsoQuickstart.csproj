@@ -18,4 +18,8 @@
 	  <PackageReference Include="Microsoft.Identity.Web" Version="1.25.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>
+
 </Project>

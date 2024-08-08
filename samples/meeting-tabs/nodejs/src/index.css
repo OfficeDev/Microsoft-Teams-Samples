@@ -1,20 +1,17 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.header{
-  background-color: #fff;
-  height: 10rem;
+.header {
+    background-color: #fff;
+    height: 10rem;
 }
 
 .tag-container {
@@ -24,11 +21,62 @@ code {
     padding: 0.9rem;
 }
 
-.timerCount {
+.timerCount-dark {
     padding: 10rem;
     text-align: center;
+    background-color: #242424;
+    color: white;
+}
+
+.timerCount-light {
+    padding: 10rem;
+    text-align: center;
+    background-color: white;
+    color: #242424;
+}
+
+.timerCount-contrast {
+    padding: 10rem;
+    text-align: center;
+    background-color: black;
+    color: yellow;
+}
+
+.fui-FluentProvider {
+    display: contents;
 }
 
 .ap {
     margin-left: inherit !important;
+}
+
+/* Theme styles */
+.theme-dark {
+    margin: 0.5rem;
+    margin-right: 0px;
+    margin-right: 0px;
+    border-radius: 2px;
+    padding: 0.3rem;
+    background-color: #242424;
+    color: white;
+}
+
+.theme-light {
+    margin: 0.5rem;
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 0.9rem;
+    background-color: white;
+    color: #242424;
+    display: contents;
+}
+
+.theme-contrast {
+    margin: 0.5rem;
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 0.9rem;
+    background-color: black;
+    color: yellow;
+    display: contents;
 }

@@ -22,11 +22,14 @@ how to incorporate basic conversational flow into a Teams application. It also i
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
-- **Interaction with bot**
-![BotConversation](Images/BotConversation.gif)
+## Included Features
+* Bots
+* Adaptive Cards
+* Teams Conversation Events
+* Immersive Reading Support for Cards
 
-- **Interaction with bot**
-![bot-conversations ](Images/bot-conversations.gif)
+## Interaction with bot
+![BotConversation](Images/BotConversation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -40,7 +43,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Setup for Java and Maven [Setup](Setup.md)
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 
@@ -49,20 +52,26 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
 
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 1) Clone the repository
 
@@ -79,7 +88,7 @@ the Teams service needs to call into the bot.
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
@@ -89,17 +98,18 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message, or selecting a command from the command list. The bot will respond to the following strings. 
 
 1. **Show Welcome**
-    ![WelcomeCard](Images/2.WelcomeCard.PNG)
+    ![Prompts](Images/1.prompts.png)
+    ![Welcome](Images/2.welcome.png)
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
 
 2. **MentionMe**
-    ![MentionMe](Images/3.MentionMe.PNG)
+    ![MentionMe](Images/3.mention.png)
   - **Result:** The bot will respond to the message and mention the user
   - **Valid Scopes:** personal, group chat, team chat
 
 3. **MessageAllMembers**
-    ![MessageAllMembers](Images/4.MessageAllMembers.PNG)
+    ![MessageAllMembers](Images/4.sent.png)
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
   - **Valid Scopes:** personal, group chat, team chat
 
@@ -124,3 +134,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Maven Plugin for Azure App Service](https://github.com/microsoft/azure-maven-plugins/tree/develop/azure-webapp-maven-plugin)
 - [How Microsoft Teams bots work](https://docs.microsoft.com/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
 - [Azure for Java cloud developers](https://docs.microsoft.com/azure/java/?view=azure-java-stable)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-java" />

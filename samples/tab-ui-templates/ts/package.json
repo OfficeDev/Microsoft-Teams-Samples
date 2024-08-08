@@ -29,8 +29,11 @@
     "teams toolkit"
   ],
   "dependencies": {
+    "@fluentui/react": "^8.112.9",
+    "@fluentui/react-components": "^9.42.0",
     "@fluentui/react-northstar": "^0.51.3",
-    "@fluentui/react-teams": "0.1.0-alpha.10",
+    "@fluentui/react-search-preview": "^0.1.34",
+    "@fluentui/react-teams": "^0.1.0-alpha.10",
     "@microsoft/teams-js": "^2.0.0",
     "@uifabric/example-data": "^7.1.5",
     "faker": "^5.1.0",
@@ -46,10 +49,11 @@
     "@types/faker": "^5.1.5",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.13",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^17.0.71",
+    "@types/react-dom": "^17.0.25",
     "@types/react-router-dom": "^5.1.6",
     "axios": "^0.21.0",
+    "env-cmd": "^10.1.0",
     "gulp": "^4.0.2",
     "gulp-token-replace": "^1.1.5",
     "gulp-zip": "^5.0.2",
@@ -61,7 +65,8 @@
     "z-schema": "^5.0.0"
   },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts --openssl-legacy-provider start",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+    "start": "set PORT=53000 && react-scripts start",
     "serve": "react-scripts start & gulp start-ngrok",
     "build": "react-scripts build",
     "package": "gulp manifest"

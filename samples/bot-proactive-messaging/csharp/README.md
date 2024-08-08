@@ -38,6 +38,9 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `README.md`          | This README file.                                                           |
 | `LICENSE`            | The license for the sample. 
 
+## Included Features
+* Bots
+
 ## Interaction with app
 
  ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)
@@ -45,24 +48,31 @@ Two samples to highlight solutions to two challenges with building proactive mes
 ## Prerequisites
 - Microsoft Teams account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
 1. Configure public url to point to http port 5000
-```bash
-# ngrok http -host-header=rewrite 5000
-```
 
-2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+   ```bash
+   ngrok http 5000 --host-header="localhost:5000"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 5000 --allow-anonymous
+   ```
+
+2. Create a Microsoft Entra ID app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok.io/api/messages`
+- configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok-free.app/api/messages`
 
-3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok.io` excluding http/https.
+3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing Microsoft Entra ID app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok-free.app` or dev tunnels domain: `12345.devtunnels.ms` excluding http/https.
 
-4. Zip the contents of `teamsAppManifest` into a `manifest.zip`.
+4. Zip the contents of `AppManifest` into a `manifest.zip`.
 
-5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing AAD app registration in previous steps.
+5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing Microsoft Entra ID app registration in previous steps.
 
 
 **Coordinate Logger**
@@ -158,3 +168,6 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-csharp" />

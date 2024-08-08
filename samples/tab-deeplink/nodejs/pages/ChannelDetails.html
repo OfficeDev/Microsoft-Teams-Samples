@@ -16,8 +16,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         var queryStringId = params.get('id');
-        microsoftTeams.app.initialize();
-
+        microsoftTeams.app.initialize().then(() => {
         window.onload = function () {
             if (queryStringId == 2) {
                 document.getElementById("taskDiv").innerHTML = "Messaging Extension :<br/>";
@@ -32,6 +31,7 @@
                 document.getElementById("taskContent").innerHTML = "A bot also referred to as a chatbot or conversational bot is an app that runs simple and repetitive automated tasks performed by the users, such as customer service or support staff. Examples of bots in everyday use include, bots that provide information about the weather, make dinner reservations, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation that provides access to services. For more details.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards' target='_blank'>Click here</a>";
             }
         }
+    });
     </script>
     <div style="margin-top:1rem;">
         <span class="container" style="font-size:20px;font-weight:700;">

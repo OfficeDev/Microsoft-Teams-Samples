@@ -1,9 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# TeamsFx files
+env/.env.*.user
+env/.env.local
+.DS_Store
+.localConfigs
+build
+appManifest/build
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 
 # testing
 /coverage
@@ -13,12 +17,5 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.eslintcache
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.env
+.deployment

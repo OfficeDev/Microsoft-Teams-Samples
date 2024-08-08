@@ -12,8 +12,8 @@
     <button onclick="selectThumbnailCards()">Thumbnail Cards</button>
     <button onclick="selectHeroCards()">Hero Cards</button>
     <script>        
-        $(document).ready(function () {
-            microsoftTeams.app.initialize();
+        $(document).ready(async function () {
+            await microsoftTeams.app.initialize();
         });
 
         function selectThumbnailCards() {

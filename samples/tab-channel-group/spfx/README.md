@@ -17,7 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 
 Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services.
 
-**Interaction with Sharepoint Teams Tab Application**
+## Included Features
+* Tabs
+
+## Interaction with Sharepoint Teams Tab Application
 ![Teams-Tab-SPFX](images/teams-tab-spfx.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -168,3 +171,5 @@ For more information about getting started with Teams-sharepoint, please review 
 - [Use Microsoft Graph in your solution](https://docs.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
 - [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-spfx" />

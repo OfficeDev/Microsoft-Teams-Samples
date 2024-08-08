@@ -9,8 +9,7 @@ const path = require('path');
 
 // console.log(TaskmoduleIds);
 // Read botFilePath and botFileSecret from .env file.
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
+
 
 const restify = require('restify');
 
@@ -18,6 +17,9 @@ const restify = require('restify');
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
 const { MeetingNotificationBot } = require('./bots/meetingNotificationBot');
+
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -52,11 +54,10 @@ const bot = new MeetingNotificationBot();
 // Create HTTP server.
 var server = restify.createServer();
 server= require("express")();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${ server.name } listening to ${ server.url }`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
-});
+const port = process.env.port || process.env.PORT || 3978;
+server.listen(port, () => 
+    console.log(`App service listening at http://localhost:${port}`)
+);
 
  // Listen for incoming requests.
 server.post('/api/messages', (req, res) =>{

@@ -16,36 +16,67 @@ class TeamsMessagingExtensionsSearchBot extends TeamsActivityHandler {
     async handleTeamsMessagingExtensionQuery(context, query) {
         const searchQuery = query.parameters[0].value;
         const attachments = [];
+        if (query.commandId == 'wikipediaSearch') {
+            const wikipediaUrl = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${searchQuery}&utf8=1`;
 
-        switch (searchQuery) {
-        case 'adaptive card':
-            return this.GetAdaptiveCard();
+            try {
+                const response = await axios.get(wikipediaUrl);
+                const attachments = [];
 
-        case 'connector card':
-            return this.GetConnectorCard();
+                response.data.query.search.slice(0, 8).forEach(result => {
+                    const heroCard = CardFactory.heroCard(
+                        result.title,
+                        result.snippet, // Use snippet as card's subtitle or content
+                        null, // No images for now
+                        [{ type: 'openUrl', title: 'Read More', value: `https://en.wikipedia.org/wiki/${result.title}` }]
+                    );
 
-        case 'result grid':
-            return this.GetResultGrid();
+                    attachments.push(heroCard);
+                });
 
-        default: {
+                return {
+                    composeExtension: {
+                        type: 'result',
+                        attachmentLayout: 'list',
+                        attachments: attachments
+                    }
+                };
+            } catch (error) {
+                console.error('Error fetching Wikipedia data:', error);
+                return null;
+            }
+        }
+        else if (query.commandId == 'searchQuery') {
+            switch (searchQuery) {
+                case 'adaptive card':
+                    return this.GetAdaptiveCard();
+
+                case 'connector card':
+                    return this.GetConnectorCard();
+
+                case 'result grid':
+                    return this.GetResultGrid();
+
+                default: {
             const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${ querystring.stringify({ text: searchQuery, size: 8 }) }`);
 
-            response.data.objects.forEach(obj => {
-                const heroCard = CardFactory.heroCard(obj.package.name);
-                const preview = CardFactory.heroCard(obj.package.name);
-                preview.content.tap = { type: 'invoke', value: { description: obj.package.description } };
-                const attachment = { ...heroCard, preview };
-                attachments.push(attachment);
-            });
+                    response.data.objects.forEach(obj => {
+                        const heroCard = CardFactory.heroCard(obj.package.name);
+                        const preview = CardFactory.heroCard(obj.package.name);
+                        preview.content.tap = { type: 'invoke', value: { description: obj.package.description } };
+                        const attachment = { ...heroCard, preview };
+                        attachments.push(attachment);
+                    });
 
-            return {
-                composeExtension: {
-                    type: 'result',
-                    attachmentLayout: 'list',
-                    attachments: attachments
+                    return {
+                        composeExtension: {
+                            type: 'result',
+                            attachmentLayout: 'list',
+                            attachments: attachments
+                        }
+                    };
                 }
-            };
-        }
+            }
         }
     }
 

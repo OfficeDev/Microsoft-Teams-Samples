@@ -21,113 +21,114 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
-            $('input[type="radio"]').click(function () {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".desc").not(targetBox).hide();
-                $(targetBox).show();
+            microsoftTeams.app.initialize().then(() => {
+                $('input[type="radio"]').click(function () {
+                    var inputValue = $(this).attr("value");
+                    var targetBox = $("." + inputValue);
+                    $(".desc").not(targetBox).hide();
+                    $(targetBox).show();
+                });
+           });
+        });
+
+            var token = localStorage.getItem("accessToken");
+            var username = "";
+            var userId = "";
+
+            microsoftTeams.app.getContext().then((context) => {
+                username = context.user.userPrincipalName;
+                userId = context.user.id;
+
             });
-        });
 
-        microsoftTeams.app.initialize();
-        var token = localStorage.getItem("accessToken");
-        var username = "";
-        var userId = "";
-
-        microsoftTeams.app.getContext().then((context) => {
-            username = context.user.userPrincipalName;
-            userId = context.user.id;
-
-        });
-
-        var empty = true;
-        $('input[type="text"]').each(function () {
-            if ($(this).val() != "") {
-                empty = false;
-                return false;
-            }
-        });
-
-        function SendNotificationToUser() {
-            var isValid = true;
-            $('#title,#description').each(function () {
-                if ($.trim($(this).val()) == '') {
-                    isValid = false;
-                    $(this).css({
-                        "border": "1px solid red"
-                    });
-                }
-                else {
-                    $(this).css({
-                        "border": "",
-                        "background": ""
-                    });
+            var empty = true;
+            $('input[type="text"]').each(function () {
+                if ($(this).val() != "") {
+                    empty = false;
+                    return false;
                 }
             });
 
-            if (isValid == false) {
-                e.preventDefault();
-                return false;
-            }
+            function SendNotificationToUser() {
+                var isValid = true;
+                $('#title,#description').each(function () {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red"
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                });
 
-            var action = "EntityTopic";
-            let taskDetails = {
-                title: $('#title').val(),
-                description: $('#description').val(),
-                userName: username,
-                access_token: token,
-                taskInfoAction: action,
+                if (isValid == false) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                var action = "EntityTopic";
+                let taskDetails = {
+                    title: $('#title').val(),
+                    description: $('#description').val(),
+                    userName: username,
+                    access_token: token,
+                    taskInfoAction: action,
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/SendNotificationToUser',
+                    dataType: 'json',
+                    data: taskDetails
+                });
+
+                return true;
             };
+            function customTopicNotification() {
+                var isValid = true;
 
-            $.ajax({
-                type: 'POST',
-                url: '/SendNotificationToUser',
-                dataType: 'json',
-                data: taskDetails
-            });
-
-            return true;
-        };
-        function customTopicNotification() {
-            var isValid = true;
-
-            $('#DeployementTitle,#DeploymentDescription').each(function () {
-                if ($.trim($(this).val()) == '') {
-                    isValid = false;
-                    $(this).css({
-                        "border": "1px solid red"
-                    });
+                $('#DeployementTitle,#DeploymentDescription').each(function () {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red"
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                });
+                if (isValid == false) {
+                    e.preventDefault();
+                    return false;
                 }
-                else {
-                    $(this).css({
-                        "border": "",
-                        "background": ""
-                    });
-                }
-            });
-            if (isValid == false) {
-                e.preventDefault();
-                return false;
-            }
-            var action = "customTopic";
+                var action = "customTopic";
 
-            let taskDetails = {
-                DeployementTitle: $('#DeployementTitle').val(),
-                DeploymentDescription: $('#DeploymentDescription').val(),
-                taskInfoAction: action,
-                access_token: token,
-                userName: username,
+                let taskDetails = {
+                    DeployementTitle: $('#DeployementTitle').val(),
+                    DeploymentDescription: $('#DeploymentDescription').val(),
+                    taskInfoAction: action,
+                    access_token: token,
+                    userName: username,
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/SendNotificationToUser',
+                    dataType: 'json',
+                    data: taskDetails
+                });
+
+                return true;
             };
-
-            $.ajax({
-                type: 'POST',
-                url: '/SendNotificationToUser',
-                dataType: 'json',
-                data: taskDetails
-            });
-
-            return true;
-        };
 
     </script>
 </head>
@@ -189,7 +190,7 @@
         </div>
     </div>
 
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 </body>
 
 </html>

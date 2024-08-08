@@ -1,0 +1,60 @@
+h3 {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+button {
+    margin-left: 36rem;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 30rem;
+    height: 12rem;
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+.container {
+    padding: 2px 2px;
+    display: flex;
+}
+
+img {
+    border-radius: 50%;
+}
+
+.profile {
+    margin-top: 1rem;
+    margin-left: 2rem;
+    max-width: 30rem;
+    align-content: flex-start;
+}
+
+.btn-outline-info {
+    margin-left: 19rem;
+    max-width: 10rem;
+}
+
+.signin-header {
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.card-container-div {
+    margin-left: 30%;
+    padding-bottom: 2rem;
+}
+
+.card-container-div-mobile {
+    margin-left: 1%;
+    padding-bottom: 2rem;
+}
+
+#divError {
+    margin-left: 1rem
+}

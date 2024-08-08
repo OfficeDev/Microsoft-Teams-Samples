@@ -19,9 +19,12 @@ urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-csharp
 
 Webhooks are a great way for Teams to integrate with external apps. A webhook is essentially a POST request sent to a callback URL. In Teams, outgoing webhooks provide a simple way to allow users to send messages to your web service without having to go through the full process of creating bots via the [Microsoft Bot Framework](https://dev.botframework.com/). Outgoing webhooks post data from Teams to any chosen service capable of accepting a JSON payload. Once an outgoing webhook is added to a team, it acts like bot, listening in channels for messages using @mention, sending notifications to external web services, and responding with rich messages that can include cards and images.
 
+## Included Features
+* Outgoing Webhooks
+
 ## Interaction with app
 
-![Basic response](WebhookSampleBot/Images/OutgoingWebhook.gif)
+![Basic response](Images/OutgoingWebhook.gif)
 
 ## Pre-requisites
 
@@ -32,7 +35,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
   # determine dotnet version
   dotnet --version
   ```
-- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 - Visual Studio
 
@@ -49,9 +52,9 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     - In the resulting popup window complete the required fields:
     - Name - The webhook title and @mention tap.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
-    - **Test Scenarios 1** Callback URL should be like: <ngrokurl>/api/Sample or yourappsiteurl/api/Sample
+    - **Test Scenarios 1** Callback URL should be like: <your_tunnel_URL>/api/Sample or yourappsiteurl/api/Sample
       ![Api Sample](Images/ApiSample.png)
-    - **Test Scenarios 2** Callback URL should be like: <ngrokurl>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
+    - **Test Scenarios 2** Callback URL should be like: <your_tunnel_URL>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
       ![Api Auth](Images/ApiAuthenticated.png)   
     - Description - A detailed string that will appear in the profile card and the team-level App dashboard.
     - Profile Picture (optional) an app icon for your webhook.
@@ -62,9 +65,16 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 2. Setup NGROK
  - Run ngrok - point to port 3978
 
- ```bash
-  ngrok http -host-header=rewrite 3978
- ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 3. Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
@@ -81,12 +91,19 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 Example screenshot to reply to any message:
  
-![Basic response](Images/response.png)
+![Configuration](Images/1.scenario1.png)
+
+![Configuration](Images/2.scenario2.png)
 
 Example screenshot to show Hero card (using type of card in message):
  
-![Hero card](Images/hero_card.png)
+![Basic response](Images/3.reply.png)
+
+![Hero card](Images/4.herocard.png)
 
 ## Further Reading
 
 [Outgoing webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-outgoing-webhook?tabs=urljsonpayload%2Cdotnet)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/outgoing-webhook-csharp" />

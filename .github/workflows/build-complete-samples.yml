@@ -172,6 +172,10 @@ jobs:
               name: 'tab-adaptive-cards'
               version: '6.0.x'
 
+            - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
+              name: 'tab-external-auth'
+              version: '6.0.x'
+
             - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
               name: 'tab-conversations'
               version: '6.0.x'
@@ -190,6 +194,10 @@ jobs:
 
             - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
               name: 'msgext-message-reminder'
+              version: '6.0.x'
+              
+            - project_path: 'samples/msgext-search-sso-config/csharp/TeamsMessagingExtensionsSearchSSO.csproj'
+              name: 'msgext-search-sso-config'
               version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
@@ -370,11 +378,7 @@ jobs:
 
             - project_path: 'samples/msgext-search/csharp/TeamsMessagingExtensionsSearch.csproj'
               name: 'msgext-search'
-              version: '6.0.x'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
-              name: 'bot-tab-conversations'
-              version: '6.0.x'      
+              version: '6.0.x'   
                     
             - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
               name: 'msteams-application-resourcehub'
@@ -436,6 +440,42 @@ jobs:
               name: 'bot-sso-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/meetings-app-icon-badging/csharp/AppIconBadgingInMeetings/AppIconBadgingInMeetings.csproj'
+              name: 'meetings-app-icon-badging'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-tag-mention/csharp/TagMentionBot.csproj'
+              name: 'bot-tag-mention'
+              version: '6.0.x'
+
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/csharp/MsgextUnfurlingAcLoop.csproj'
+              name: 'msgext-unfurling-ac-loop-components'
+              version: '6.0.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/csharp/MeetingTranscriptRecording/MeetingTranscriptRecording.csproj'
+              name: 'tab-meeting-transcript-recording'
+              version: '6.0.x'
+
+            - project_path: 'samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
+              name: 'sharepoint-embedded-tab-request-approval'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-configuration-app/csharp/Bot configuration/Bot Configuration.csproj'
+              name: 'bot-configuration-app'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-configuration-app-auth/csharp/Bot configuration/Bot Configuration.csproj'
+              name: 'bot-configuration-app-auth'
+              version: '6.0.x'
+
+            - project_path: 'samples/app-HR-talent/csharp/src/TeamsTalentMgmtAppV6.csproj'
+              name: 'app-HR-talent'
+              version: '6.0.x'
+            
+            - project_path: 'samples/app-complete-sample/csharp/AppCompleteSample/AppCompleteSample.csproj'
+              name: 'app-complete-sample'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -449,33 +489,6 @@ jobs:
 
       - name: Build app
         run: dotnet build "${{ matrix.project_path }}" --configuration Release
-
-  build-dotnet-samples:
-    runs-on: windows-latest
-    #Add project path, name as below for any new additions
-    strategy:
-      matrix:
-        include:
-            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp.sln'
-              name: 'app-complete-sample'
-
-      fail-fast: false
-    name: Build "${{ matrix.name }}" csharp
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
-
-      - name: Restore NuGet packages
-        run: nuget restore ${{ matrix.project_path }}
-      
-      - name: Build
-        run: msbuild ${{ matrix.project_path }} /p:Configuration=Release
-
 
   build-nodejs-samples:
     runs-on: windows-latest
@@ -510,6 +523,10 @@ jobs:
             - project_path: 'samples/app-sso/nodejs'
               name: 'app-sso'
               version: '14.x'
+
+            - project_path: 'samples/app-sso/nodejs/client'
+              name: 'app-sso-client'
+              version: '18.x'
 
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
@@ -603,21 +620,33 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs/server'
+            - project_path: 'samples/meetings-sidepanel/nodejs'
               name: 'meetings-sidepanel'
-              version: '14.x'
+              version: '18.x'
+
+            - project_path: 'samples/meetings-sidepanel/nodejs/ClientApp'
+              name: 'meetings-sidepanel-clientapp'
+              version: '18.x'
 
             - project_path: 'samples/meetings-stage-view/nodejs'
               name: 'meetings-stage-view'
               version: '14.x'
+            
+            - project_path: 'samples/meetings-stage-view/nodejs/ClientApp'
+              name: 'meetings-stage-view-clientapp'
+              version: '14.x'
 
             - project_path: 'samples/meetings-token-app/nodejs'
               name: 'meetings-token-app'
-              version: '14.x'
+              version: '16.18.0'
 
             - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
-              version: '14.x'
+              version: '16.8.x'
+
+            - project_path: 'samples/meeting-recruitment-app/nodejs'
+              name: 'meeting-recruitment-app-clientapp'
+              version: '16.8.x'
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
               name: 'msgext-message-reminder'
@@ -695,7 +724,15 @@ jobs:
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
+            - project_path: 'samples/tab-channel-group-sso-quickstart/js/api-server'
+              name: 'tab-channel-group-sso-quickstart-api-server'
+              version: '14.x'
+
             - project_path: 'samples/tab-channel-group-sso-quickstart/ts'
+              name: 'tab-channel-group-sso-quickstart'
+              version: '14.x'
+
+            - project_path: 'samples/tab-channel-group-sso-quickstart/ts/api-server'
               name: 'tab-channel-group-sso-quickstart'
               version: '14.x'
 
@@ -711,13 +748,21 @@ jobs:
               name: 'tab-personal-sso-quickstart'
               version: '18.x'
 
+            - project_path: 'samples/tab-personal-sso-quickstart/js/api-server'
+              name: 'tab-personal-sso-quickstart-api-server'
+              version: '18.x'
+
             - project_path: 'samples/tab-personal-sso-quickstart/ts'
               name: 'tab-personal-sso-quickstart'
               version: '18.x'
 
+            - project_path: 'samples/tab-personal-sso-quickstart/ts/api-server'
+              name: 'tab-personal-sso-quickstart-api-server'
+              version: '18.x'
+
             - project_path: 'samples/tab-graph-toolkit/nodejs'
               name: 'tab-graph-toolkit'
-              version: '14.x'
+              version: '16.x'
             
             - project_path: 'samples/graph-meeting-notification/nodejs'
               name: 'graph-meeting-notification'
@@ -775,16 +820,32 @@ jobs:
               name: 'graph-bulk-meetings'
               version: '16.x' 
 
+            - project_path: 'samples/graph-bulk-meetings/nodejs/client'
+              name: 'graph-bulk-meetings-client'
+              version: '16.x' 
+
             - project_path: 'samples/graph-change-notification-team-channel/nodejs'
               name: 'graph-change-notification-team-channel'
+              version: '16.x' 
+
+            - project_path: 'samples/graph-change-notification-team-channel/nodejs/client'
+              name: 'graph-change-notification-team-channel-client'
               version: '16.x' 
 
             - project_path: 'samples/graph-pinned-messages/nodejs'
               name: 'graph-pinned-messages'
               version: '16.x'
 
+            - project_path: 'samples/graph-pinned-messages/nodejs/ClientApp'
+              name: 'graph-pinned-messages-clientapp'
+              version: '16.x'
+
             - project_path: 'samples/graph-teams-tag/nodejs'
               name: 'graph-teams-tag'
+              version: '16.x'
+
+            - project_path: 'samples/graph-teams-tag/nodejs/client'
+              name: 'graph-teams-tag-client'
               version: '16.x'
 
             - project_path: 'samples/incoming-webhook/nodejs/ClientApp'
@@ -837,13 +898,13 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
-              version: '18.x'
+              version: '16.x'
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
               version: '16.x'
             
-            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
+            - project_path: 'samples/tab-channel-context/nodejs'
               name: 'tab-channel-context'  
               version: '16.x'
             
@@ -884,12 +945,82 @@ jobs:
               version: '18.x'
 
             - project_path: 'samples/app-anonymous-users/nodejs/ClientApp'
-              name: 'app-anonymous-users'
+              name: 'app-anonymous-users-clientapp'
               version: '18.x'
-                                 
+
+            - project_path: 'samples/app-anonymous-users/nodejs'
+              name: 'app-anonymous-users-api'
+              version: '18.x'
 
             - project_path: 'samples/bot-sso-adaptivecard/nodejs'
               name: 'bot-sso-adaptivecard'
+              version: '18.x'
+            
+            - project_path: 'samples/bot-teams-authentication/nodejs'
+              name: 'bot-teams-authentication'
+              version: '18.x'
+
+            - project_path: 'samples/meetings-app-icon-badging/nodejs'
+              name: 'meetings-app-icon-badging'
+              version: '18.x'
+
+            - project_path: 'samples/tab-multi-hub/ts/api-server'
+              name: 'tab-multi-hub-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/tab-multi-hub/ts'
+              name: 'tab-multi-hub'
+              version: '18.x'
+            
+            - project_path: 'samples/msgext-unfurling-ac-loop-components/nodejs'
+              name: 'msgext-unfurling-ac-loop-components'
+              version: '18.x'
+
+            - project_path: 'samples/bot-ai-enterprise-search/nodejs'
+              name: 'bot-ai-enterprise-search'
+              version: '18.x'
+
+            - project_path: 'samples/msgext-ai-sentiment-analysis/nodejs'
+              name: 'msgext-ai-sentiment-analysis'
+              version: '18.x'
+            
+            - project_path: 'samples/bot-configuration-app/nodejs'
+              name: 'bot-configuration-app'
+              version: '18.x'
+
+            - project_path: 'samples/bot-configuration-app-auth/nodejs'
+              name: 'bot-configuration-app-auth'
+              version: '18.x'
+
+            - project_path: 'samples/tab-add-in-combined/nodejs'
+              name: 'tab-add-in-combined'
+              version: '18.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs'
+              name: 'tab-meeting-transcript-recording'
+              version: '18.x'
+
+            - project_path: 'samples/tab-meeting-transcript-recording/nodejs/api-server'
+              name: 'tab-meeting-transcript-recording-api-server'
+              version: '18.x'
+              
+            - project_path: 'samples/bot-tag-mention/nodejs'
+              name: 'bot-tag-mention-nodejs'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/tabs'
+              name: 'm365-actions-preview'
+              version: '18.x'
+
+            - project_path: 'samples/m365-actions-preview/nodejs/api'
+              name: 'm365-actions-preview-api'
+              version: '18.x'
+
+            - project_path: 'samples/graph-rsc-helper/nodejs'
+              name: 'graph-rsc-helper'
+              version: '18.x'
+
+            - project_path: 'samples/tab-nested-auth/nodejs'
+              name: 'tab-nested-auth'
               version: '18.x'
 
       fail-fast: false
@@ -908,7 +1039,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
+          npm run build
 
   build-java-samples:
     runs-on: windows-latest

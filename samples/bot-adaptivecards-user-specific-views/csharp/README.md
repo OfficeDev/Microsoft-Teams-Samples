@@ -15,6 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-v
 
 # Teams Adaptive Card Views
 
+- **Interaction with bot**
+  ![UserSpecificView](docs/UserSpecificView_all.gif)
+
 This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
 
 Specifically, it uses the Universal Action `Action.Execute` with `refresh` property, which enables developers to build different views for users in a common chat thread. 
@@ -72,6 +75,10 @@ Bot Framework v4 Conversation Bot sample for Teams.
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
+## Included Features
+* Bots
+* Universal Adaptive Cards
+
 ## Interaction with bot
 
 #### Me Action
@@ -80,11 +87,16 @@ how to incorporate basic conversational flow into a Teams application. It also i
 #### AllUser Action
 ![bot-conversations ](docs/UserSpecificView_all.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams bot adaptivecards user specific views sample app:** [Manifest](/samples/bot-adaptivecards-user-specific-views/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
 ## Setup
 
@@ -93,20 +105,26 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http --host-header=rewrite 3978
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 1) Clone the repository
 
@@ -125,9 +143,9 @@ the Teams service needs to call into the bot.
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `AppPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     
-    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/chat/Meeting scope (Supported scopes)
 
@@ -158,112 +176,112 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   
   **Search Application:**
   
-  ![Serach-App ](docs/01_SearchApp.png)
+  ![Serach-App ](docs/1.searchapp.png)
 
   **Add Application:**
   
-  ![personal-AddBot ](docs/02_AddAppaspersonal.png)
+  ![personal-AddBot ](docs/2.add-application.png)
 
   **Me Flow**
 
  **Show Welcome command interaction:**
  
-  ![personal-WelcomeCard-Interaction ](docs/03_defaultcard.png)
+  ![personal-WelcomeCard-Interaction ](docs/3.me-welcome-card.png)
   
  **Show Action command interaction with Me:**
  
- ![personal-WelcomeCard-Me](docs/04_clickonMe.png)
+ ![personal-WelcomeCard-Me](docs/4.me-action-card.png)
  
  **Show Response Card :**
  
- ![personal-WelcomeCard-Response](docs/05_meclickresponsecard.png)
+ ![personal-WelcomeCard-Response](docs/5.response-card.png)
  
   **On Manual Refresh Click:**
   
- ![personal-WelcomeCard-ManualRefresh](docs/05_meclickresponsecard.png)
+ ![personal-WelcomeCard-ManualRefresh](docs/6.manual-refresh.png)
  
  **On Update Base Card Click:**
  
- ![personal-WelcomeCard-UpdatebaseCardClick](docs/11_updateBasecard.png)
+ ![personal-WelcomeCard-UpdatebaseCardClick](docs/7.response-update.png)
  
  **Response Update Base Card Click:**
  
- ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/12_responseBasecard.png)
+ ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/8.update-base-card-click.png)
  
 **Flow with all Users**
 
  **Show Action command interaction with All Users:**
  
- ![personal-WelcomeCard-alluser](docs/all_02_onclickallUsers.png)
+ ![personal-WelcomeCard-alluser](docs/9.alluser-action.png)
  
  **Show Response Card :**
  
- ![personal-WelcomeCard-allResponse](docs/all_03_responseclickallUsers.png)
+ ![personal-WelcomeCard-allResponse](docs/10.alluser-response-card.png)
  
   **On Manual Refresh Click:**
   
- ![personal-WelcomeCard-allManualRefresh](docs/all_04_onmanualclick.png)
+ ![personal-WelcomeCard-allManualRefresh](docs/11.all-user-manual.png)
  
  **On Update Base Card Click:**
  
- ![personal-WelcomeCard-allUpdatebaseCardClick](docs/all_08_UpdateBaseCard.png)
+ ![personal-WelcomeCard-allUpdatebaseCardClick](docs/12.all-user-update.png)
  
  
   - **Team Scope Interactions:**
   
   **About UI**
   
-  ![Team-scope-app](docs/01_TeamScope.png)
+  ![Team-scope-app](docs/13.add-to-team.png)
  
   **Team Selection**
 	
-  ![Team-scope-app](docs/02_TeamScope_teamselection.png)
+  ![Team-scope-app](docs/14.team-selection.png)
   
   **Selected Team**
   
-  ![Team-scope-app](docs/03_TeamScope_teamselect.png)
+  ![Team-scope-app](docs/15.selected-team.png)
   
   **Welcome intraction card**
   
-  ![Team-scope-app](docs/04_TeamScope_command.png)
+  ![Team-scope-app](docs/16.prompt.png)
   
   
   - **Chat Scope Interactions:**
   
   **About UI**
   
-  ![Chat-scope-app](docs/chatscope_01.png)
+  ![Chat-scope-app](docs/17.welcome-interaction.png)
   
   **Chat Selection**
 	
-  ![Chat-scope-app](docs/chatscope_02.png)
+  ![Chat-scope-app](docs/18.add-to-chat.png)
   
   **Selected Chat**
   
-  ![Chat-scope-app](docs/chatscope_03.png)
+  ![Chat-scope-app](docs/19.select-chat.png)
   
   **Welcome intraction card**
   
-  ![Chat-scope-app](docs/04_TeamScope_command.png)
+  ![Chat-scope-app](docs/20.welcome-card-at-chat.png)
   
   
   - **Meeting Scope Interactions:**
   
   **About UI**
 
-  ![Meeting-scope-app](docs/Meetingscop_01.png)
+  ![Meeting-scope-app](docs/21.add-to-meeting.png)
   
   **Meeting Selection**
 	
-  ![Meeting-scope-app](docs/Meetingscop_02.png)
+  ![Meeting-scope-app](docs/22.select-meeting.png)
   
   **Selected Meeting**
   
-  ![Meeting-scope-app](docs/Meetingscop_03.png)
+  ![Meeting-scope-app](docs/23.call-to-card.png)
   
   **Welcome intraction card**
   
-  ![Meeting-scope-app](docs/Meetingscop_04.png)
+  ![Meeting-scope-app](docs/24.welcome-card.png)
   
 ## FAQ
 
@@ -295,3 +313,6 @@ If User A opens the chat again on either of these clients, it will show the cach
 
 ## Further reading
 [User Specific Views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-adaptivecards-user-specific-views-csharp" />

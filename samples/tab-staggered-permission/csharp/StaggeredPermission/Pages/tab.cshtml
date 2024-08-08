@@ -76,11 +76,11 @@
     <script>
         let idToken;
         $(document).ready(function () {
+         microsoftTeams.app.initialize().then(() => {
             $("#mails").hide();
             getClientSideToken();
+         });
         });
-
-        microsoftTeams.app.initialize();
 
         // Get the id token.
         function getClientSideToken() {

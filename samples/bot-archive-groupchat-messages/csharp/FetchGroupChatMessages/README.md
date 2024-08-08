@@ -33,7 +33,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 3 Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+# ngrok http 3978 --host-header="localhost:3978"
 ```
 
 4. Create a Bot Registration
@@ -52,7 +52,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your tab is uploaded to Teams
 
 ## To try this sample

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +25,8 @@
     "express": "^4.17.1",
     "parallel-each": "^1.1.7",
     "pem": "^1.14.6",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "q": "^1.5.1",
+    "esbuild": "^0.18.1"
   }
 }

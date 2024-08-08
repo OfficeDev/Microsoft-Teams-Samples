@@ -6,8 +6,10 @@
     "license": "MIT",
     "main": "index.js",
     "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
+        "build": "node build.js",
         "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -29,6 +31,8 @@
         "restify": "^8.6.1"
     },
     "devDependencies": {
+        "env-cmd": "^10.1.0",
+        "esbuild": "^0.18.1",
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",

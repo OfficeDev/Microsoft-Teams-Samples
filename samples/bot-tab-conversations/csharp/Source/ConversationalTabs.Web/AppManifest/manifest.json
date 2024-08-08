@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<app-id>>",
+  "packageName": "com.microsoft.teams.conversationaltabs",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Conversational Tabs",
+    "full": "Programmatic Conversational Tabs"
+  },
+  "description": {
+    "short": "Programmatic creation of Conversational Tabs",
+    "full": "Programmatic creation of Conversational Tabs"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "support-department-personal",
+      "name": "Customer Support",
+      "contentUrl": "https://<<ngrok-url>>/personal",
+      "websiteUrl": "https://<<ngrok-url>>",
+      "scopes": ["personal"]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<ngrok-url>>/configure",
+      "canUpdateConfiguration": false,
+      "scopes": [ "team" ],
+      "context": [ "channelTab" ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<aad-id>>",
+      "scopes": ["team"],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [],
+  "permissions": [],
+  "validDomains": ["*.ngrok-free.app", "<<ngrok-url>>"],
+  "webApplicationInfo": {
+    "id": "<<aad-id>>",
+    "resource": "api://<<ngrok-url>>/<<aad-id>>"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "packageName": "com.teams.meetingtranscriptrecording",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://{{domain-name}}",
+    "privacyUrl": "https://{{domain-name}}/privacy",
+    "termsOfUseUrl": "https://{{domain-name}}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Transcripts Recordings",
+    "full": "Meeting Transcripts Recordings"
+  },
+  "description": {
+    "short": "Sample Teams Meeting Transcripts and Recordings.",
+    "full": "Sample Teams Meeting Transcripts and Recordings."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Meeting T&R Graph API Demo",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
+  }
+}

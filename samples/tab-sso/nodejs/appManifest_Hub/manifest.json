@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{AppId}}",
+  "packageName": "com.contoso.teamsauthsso",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab Auth SSO",
+    "full": "Tab Auth SSO"
+  },
+  "description": {
+    "short": "Tab Auth SSO app",
+    "full": "This sample shows sso authentication for tab."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://<your_tunnel_domain>/ssoDemo",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<your_tunnel_domain>"
+  ],
+  "webApplicationInfo": {
+    "id": "{{AppId}}",
+    "resource": "api://<your_tunnel_domain>/{{AppId}}"
+  }
+}

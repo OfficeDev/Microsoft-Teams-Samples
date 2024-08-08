@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "packageName": "com.teams.sample.appAnonymousUsers",
+  "developer": {
+    "name": "appAnonymousUsers",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "name": {
+    "short": "Anonymous User Support",
+    "full": "Anonymous User Support"
+  },
+  "description": {
+    "short": "This sample shows anonymous users support in Teams meeting apps.",
+    "full": "This sample shows anonymous users support in Teams meeting apps."
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{domain-name}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupChat"
+      ],
+      "context": [
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-id}}",
+      "scopes": [
+        "groupChat",
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "groupChat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "Vote",
+              "description": "Sends vote card message via @mention vote"
+            },
+            {
+              "title": "CreateConversation",
+              "description": "Create 1:1 conversation with bot for all the meeting participants via @mention CreateConversation"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "meetingExtensionDefinition": {
+    "supportsAnonymousGuestUsers": true
+  },
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-id}}",
+    "resource": "api://{{domain-name}}/botid-{{Microsoft-App-id}}"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}

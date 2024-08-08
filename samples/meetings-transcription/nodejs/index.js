@@ -67,10 +67,9 @@ server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
 
+
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${server.url}`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
+    console.log(`Server listening on http://localhost:${process.env.PORT}`);
 });
 
 // Returns view to be open in task module.
@@ -98,6 +97,7 @@ server.get('/home', async (req, res) => {
 
     res.render('./views/', { transcript: transcript });
 });
+
 
 // Listen for incoming activities and route them to your bot main dialog.
 server.post('/api/messages', (req, res) => {

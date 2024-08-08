@@ -1,4 +1,4 @@
-﻿@model TabActivityFeed.Model.TaskDetails
+@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,12 +20,14 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
+          microsoftTeams.app.initialize().then(() => {
             $('input[type="radio"]').click(function () {
                 var inputValue = $(this).attr("value");
                 var targetBox = $("." + inputValue);
                 $(".desc").not(targetBox).hide();
                 $(targetBox).show();
             });
+          });
         });
 
         microsoftTeams.app.initialize();
@@ -81,7 +83,7 @@
                 userName: username,
                 taskInfoAction: action,
                 access_token: token,
-                chatId:groupchatId,
+                chatId: groupchatId,
             };
 
             $.ajax({
@@ -142,8 +144,8 @@
 
 <body>
     <div id="login">
-    <h4>Click on login button to continue</h4>
-    <button onclick="login()">Login</button>
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
     </div>
     <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
@@ -194,7 +196,7 @@
         </div>
     </div>
 
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 
 </body>
 

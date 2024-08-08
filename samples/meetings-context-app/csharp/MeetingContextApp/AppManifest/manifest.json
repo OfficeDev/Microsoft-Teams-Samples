@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "{{Manifest-id}}",
   "packageName": "com.teams.meetingtabcontext",
@@ -53,7 +53,7 @@
               "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
             }
           ],
-          "scopes": ["groupchat"]
+          "scopes": [ "groupchat" ]
         }
       ]
 
@@ -64,14 +64,14 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<domain-name>>",
     "{{Domain Name}}"
   ],
-    "webApplicationInfo": {
+  "webApplicationInfo": {
     "id": "{{Microsoft-App-Id}}",
     "resource": "https://RscBasedStoreApp"
-    },
-	"authorization": {
+  },
+  "authorization": {
     "permissions": {
       "resourceSpecific": [
         {

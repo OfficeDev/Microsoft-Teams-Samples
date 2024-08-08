@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 This is an sample application which shows how to create teams meetings in bulk using file upload method.
 
+## Included Features
+* Tabs
+* Graph API
+
 ## Interaction with app
 
 ![Bulk Meeting Gif](Images/BulkMeeting.gif)
@@ -25,13 +29,26 @@ This is an sample application which shows how to create teams meetings in bulk u
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
   - Navigate to **API Permissions**, and make sure to add the follow permissions:
   - Select Add a permission
@@ -52,11 +69,18 @@ This is an sample application which shows how to create teams meetings in bulk u
   **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
-   - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup for code
 
   - Clone the repository
@@ -83,26 +107,44 @@ This is an sample application which shows how to create teams meetings in bulk u
     
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
-![Dashboard](Images/Dashboard.png)
+![Install](Images/1.Install.png)
 
-![Create Meeting](Images/CreateMeeting.png)
+![SelectTeams](Images/2.SelectTeams.png)
 
-![Meeting upolad](Images/MeetingDetailUpload.png)
+![SelectTab](Images/3.SelectTab.png)
 
-![Meeting detail](Images/MeetingDetail.png)
+![HomePage](Images/4.HomePage.png)
 
+![JoinMeeting](Images/11.JoinMeeting.png)
+
+**Note: Download the meeting template, update your meeting details, and then upload it.** [Meeting Template](template/MeetingTemplate.xlsx)
+
+![UploadMeeting](Images/5.UploadMeeting.png)
+
+![MeetingDetails](Images/6.MeetingDetails.png)
+
+![CreateMeeting1](Images/7.CreateMeeting1.png)
+
+![CreateMeeting2](Images/8.CreateMeeting2.png)
+
+![CreateMeeting3](Images/9.CreateMeeting3.png)
+
+![meetingDetails](Images/10.meetingDetails.png)
 
 ## Further reading
 - [Create Event](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=javascript)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-bulk-meetings-nodejs" />

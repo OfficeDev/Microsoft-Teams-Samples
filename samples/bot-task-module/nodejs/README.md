@@ -19,7 +19,12 @@ Bot Framework Teams Task Module sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from a Hero Card button and receive input from an Adaptive Card in the Task Module.
 
-- **Interaction with bot**
+## Included Features
+* Bots
+* Tabs
+* Task Modules
+
+## Interaction with botss
 ![Task Module App](Images/TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -31,7 +36,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -40,19 +59,25 @@ the Teams service needs to call into the bot.
 
 1) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http --host-header=rewrite 3978
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ## Setup for bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 ## Setup for code
 1) Clone the repository
@@ -72,7 +97,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 1) Update the `.env` configuration for the bot to use the `<<MicrosoftAppId>>`, `<<MicrosoftAppPassword>>` from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `<<MicrosoftAppTenantId>>` will be the id for the tenant where application is registered.
 - Set "MicrosoftAppType" in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
-- Replace `<<BaseUrl>>` in the `.env` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok.
+- Replace `<<BaseUrl>>` in the `.env` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok-free.app`) after starting ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 - Replace `<<MicrosoftAppId>>` and <<BaseUrl>> with your MicrosoftAppId and BaseUrl in the `.TaskModuleTab.js` file.
 
@@ -83,9 +108,9 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `<<Valid-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `<<Valid-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
 
@@ -99,31 +124,31 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 - **Personal Scope Interactions:**
 
-![ps-AddApp ](Images/ps-AddApp.png)
+![ps-AddApp ](Images/1.Install.png)
 
-![ps-Cards ](Images/ps-Cards.png)
+![ps-Cards ](Images/2.Interaction_with_Bot.png)
 
-![ps-AC-TaskModule ](Images/ps-AC-TaskModule.png)
+![ps-AC-TaskModule ](Images/3.Adaptive_card_in_chat.png)
 
-![ps-AC-TaskModule-Submit ](Images/ps-AC-TaskModule-Submit.png)
+![ps-AC-TaskModule-Submit ](Images/4.Adaptive_card_submitted.png)
 
 - **Group Chat Scope Interactions:**
 
-![gc-Interaction ](Images/gc-Interaction.png)
+![gc-Interaction ](Images/5.Update_in_chat.png)
 
 - **Team Scope Interactions:**
 
-![ts-Interaction ](Images/ts-Interaction.png)
+![ts-Interaction ](Images/6.Interaction_with_bot_in_GC.png)
 
 - **Task Module Tab:**
 
-![TaskModuleTasks](Images/3.Tasks.png)
+![TaskModuleTasks](Images/8.Tasks_Tab_in_chat.png)
 
-![Youtube](Images/4.Youtube.png)
+![Youtube](Images/9.Youtuube_in_chat.png)
 
-![PowerApp](Images/5.PowerApp.png)
+![PowerApp](Images/10.Powerapp_in_Tab.png)
 
-![CustomForm](Images/6.CustomForm.png)
+![CustomForm](Images/11.Custom_form_in_Tab.png)
 
 ![AdaptiveCard](Images/7.AdaptiveCard.png)
 
@@ -138,3 +163,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-nodejs" />

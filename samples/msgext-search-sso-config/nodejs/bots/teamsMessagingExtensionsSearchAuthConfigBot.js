@@ -15,7 +15,6 @@ const {
 const axios = require('axios');
 const querystring = require('querystring');
 const { SimpleGraphClient } = require('..\\simpleGraphClient.js');
-const { polyfills } = require('isomorphic-fetch');
 
 // User Configuration property name
 const USER_CONFIGURATION = 'userConfigurationProperty';
@@ -32,7 +31,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         this.userConfigurationProperty = userState.createProperty(
             USER_CONFIGURATION
         );
-        this.connectionName = process.env.ConnectionName;
+        this.connectionName = process.env.connectionName;
         this.userState = userState;
     }
 
@@ -48,28 +47,30 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
     // Overloaded function. Receives invoke activities with Activity name of 'composeExtension/queryLink'
     async handleTeamsAppBasedLinkQuery(context, query) {
-        const magicCode =
-            query.state && Number.isInteger(Number(query.state))
-                ? query.state
-                : '';
-        const tokenResponse = await context.adapter.getUserToken(
-            context,
-            this.connectionName,
-            magicCode
-        );
+        const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.connectionName,
+                context.activity.channelId,
+                magicCode
+            );
 
         if (!tokenResponse || !tokenResponse.token) {
             // There is no token, so the user has not signed in yet.
-
             // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-            const signInLink = await context.adapter.getSignInLink(
-                context,
-                this.connectionName
+            const { signInLink } = await userTokenClient.getSignInResource(
+                this.connectionName,
+                context.activity
             );
 
             return {
                 composeExtension: {
-                    type: 'auth',
+                    type: 'silentAuth',
                     suggestedActions: {
                         actions: [
                             {
@@ -145,23 +146,25 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
         if (!userSettings || userSettings.includes('profile')) {
             // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =
-                query.state && Number.isInteger(Number(query.state))
-                    ? query.state
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
                     : '';
-            const tokenResponse = await context.adapter.getUserToken(
-                context,
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
                 this.connectionName,
+                context.activity.channelId,
                 magicCode
             );
 
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
-
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                const signInLink = await context.adapter.getSignInLink(
-                    context,
-                    this.connectionName
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
                 );
 
                 return {
@@ -229,23 +232,25 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     // Overloaded function. Receives invoke activities with the name 'composeExtension/fetchTask'
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         if (action.commandId === 'SHOWPROFILE') {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =
-                action.state && Number.isInteger(Number(action.state))
-                    ? action.state
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
                     : '';
-            const tokenResponse = await context.adapter.getUserToken(
-                context,
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
                 this.connectionName,
+                context.activity.channelId,
                 magicCode
             );
 
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-
-                const signInLink = await context.adapter.getSignInLink(
-                    context,
-                    this.connectionName
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
                 );
 
                 return {
@@ -345,15 +350,17 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             const authObj = valueObj.authentication;
             if (authObj.token) {
                 // If the token is NOT exchangeable, then do NOT deduplicate requests.
-                if (await this.tokenIsExchangeable(context)) {
-                    return await super.onInvokeActivity(context);
-                }
-                else {
-                    const response = {
+                 if (await this.tokenIsExchangeable(context)) 
+                 {
+                     return await super.onInvokeActivity(context);
+                 }
+                 else {
+                        const response = 
+                        {
                         status: 412
-                    };
+                        };
                     return response;
-                }
+                 }
             }
         }
 
@@ -381,7 +388,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return ActivityHandler.createInvokeResponse({
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         attachmentLayout: 'list',
                         attachments: [
                             attachment
@@ -397,25 +404,33 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     async tokenIsExchangeable(context) {
         let tokenExchangeResponse = null;
         try {
+            const userId = context.activity.from.id;
             const valueObj = context.activity.value;
             const tokenExchangeRequest = valueObj.authentication;
             console.log("tokenExchangeRequest.token: " + tokenExchangeRequest.token);
 
-            tokenExchangeResponse = await context.adapter.exchangeToken(context,
-                process.env.connectionName,
-                context.activity.from.id,
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+
+            tokenExchangeResponse = await userTokenClient.exchangeToken(
+                userId,
+                this.connectionName,
+                context.activity.channelId,
                 { token: tokenExchangeRequest.token });
+
             console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
-        } catch (err) {
+        } 
+        catch (err) 
+        {
             console.log('tokenExchange error: ' + err);
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }
-        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
+        if (!tokenExchangeResponse || !tokenExchangeResponse.token) 
+        {
             return false;
         }
 
-        console.log('Exchanged token: ' + tokenExchangeResponse.token);
+        console.log('Exchanged token: ' + JSON.stringify(tokenExchangeResponse));
         return true;
     }
 }

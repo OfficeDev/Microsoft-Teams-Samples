@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "<<Manifest-Id>>",
+  "packageName": "com.microsoft.teams.samples.todoconnectorapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "TODO Connector App",
+    "full": "TODO Connector App"
+  },
+  "description": {
+    "short": "This is a small sample app we made for you, in nodejs",
+    "full": "This is a small sample app which shows connector authentication and sends notification on task creation."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#3F487F",
+  "connectors": [
+    {
+      "connectorId": "<<connector-Id>>",
+      "configurationUrl": "https://<<App-Domain>>/SetupAuth",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<App-Domain>>"
+  ]
+}

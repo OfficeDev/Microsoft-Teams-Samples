@@ -9,7 +9,7 @@
     <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="theme-light">
-    <div class="surface">
+    <div class="surface" style="height:max-content;">
         <div class="panel">
 
 <html>
@@ -27,17 +27,18 @@
     <script>
         microsoftTeams.app.initialize();
         function validateForm() {
+            fetch(`${window.location.origin}/getAppConfig`).then(response => response.json()).then(data => {
             var customerInfo = {
                 name: document.forms["customerForm"]["name"].value,
                 email: document.forms["customerForm"]["email"].value,
                 favoriteBook: document.forms["customerForm"]["favoriteBook"].value
             }
-            
-            microsoftTeams.dialog.submit(customerInfo, "<<YOUR-MICROSOFT-APP-ID>>");
+            microsoftTeams.tasks.submitTask(customerInfo, data.MicrosoftAppId);
+        });
             return true;
         }
     </script>
-    <div class="surface theme-light">
+    <div class="surface theme-light" style="height:max-content;">
         <div class="panel">
             <div class="font-semibold font-title">Enter new customer information:</div>
             <form method="GET" id="customerForm" action="Noop.html" onSubmit="return validateForm()">

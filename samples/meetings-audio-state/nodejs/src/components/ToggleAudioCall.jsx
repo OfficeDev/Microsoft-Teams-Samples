@@ -4,16 +4,51 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import "../style/style.css";
 
 class ToggleAudioCall extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
             errorCode: "",
-            result: ""
+            result: "",
+            appTheme: ""
         }
     }
 
     componentDidMount() {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+
+                // Applying default theme from app context property
+                switch (context.app.theme) {
+                    case 'dark':
+                        this.setState({ appTheme: "theme-dark" });
+                        break;
+                    case 'contrast':
+                        this.setState({ appTheme: "theme-contrast" });
+                        break;
+                    case 'default':
+                        this.setState({ appTheme: "theme-light" });
+                        break;
+                }
+            }).bind(this);
+        });
+    }
+
+    componentDidUpdate() {
+        // handle theme when Teams theme changes to dark,light and contrast.
+        microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+            switch (theme) {
+                case 'dark':
+                    this.setState({ appTheme: "theme-dark" });
+                    break;
+                case 'contrast':
+                    this.setState({ appTheme: "theme-contrast" });
+                    break;
+                case 'default':
+                    this.setState({ appTheme: "theme-light" });
+                    break;
+            }
+        }.bind(this));
     }
 
     callback = (errcode, bln) => {
@@ -24,6 +59,7 @@ class ToggleAudioCall extends Component {
             this.setState({ result: JSON.stringify(bln) })
         }
     }
+
     /// <summary>
     /// This method getIncomingClientAudioState returns the current state of client audio.
     /// The incoming audio is muted if the result is true and unmuted if the result is false.
@@ -44,7 +80,7 @@ class ToggleAudioCall extends Component {
         return (
             <Flex>
                 <FlexItem push>
-                    <div className="tag-container">
+                    <div className={this.state.appTheme}>
                         <h3>Mute/Unmute Audio Call </h3>
                         <Button primary content="Mute/Un-Mute" onClick={this.toggleState} />
                         <li className="break"> Mute State : <b>{this.state.result}</b></li>

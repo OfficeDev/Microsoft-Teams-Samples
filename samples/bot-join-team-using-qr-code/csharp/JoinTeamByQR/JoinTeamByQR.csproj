@@ -24,4 +24,8 @@
       <Folder Include="Images\" />
     </ItemGroup>
 
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
+  </ItemGroup>
+
 </Project>

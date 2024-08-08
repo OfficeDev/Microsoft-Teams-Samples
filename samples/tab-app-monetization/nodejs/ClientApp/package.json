@@ -10,19 +10,20 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.2.0",
     "msteams-ui-components-react": "^0.8.4",
+    "react": "^16.14.0",
     "react-bootstrap": "^2.4.0",
+    "react-dom": "^16.14.0",
     "react-json-view": "^1.21.3",
     "react-meta-tags": "^1.0.1",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.3",
     "typestyle": "^2.1.0",
-    "web-vitals": "^1.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3",
-    "react-scripts": "^5.0.1"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "set PORT=3978 && react-scripts --openssl-legacy-provider start",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+    "start": "set PORT=3978 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
-     "@types/react-router-dom": "^5.3.0"
+    "@types/react-router-dom": "^5.3.0",
+    "env-cmd": "^10.1.0"
   }
 }

@@ -45,8 +45,8 @@ const Todo = props => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-         microsoftTeams.app.initialize();
-        (async function () {            
+        (async function () {  
+            await microsoftTeams.app.initialize();          
             window.localStorage.debug = "fluid:*";
             // Define Fluid document schema and create container
             const client = new TeamsFluidClient();
@@ -154,7 +154,7 @@ const Todo = props => {
                 <img className="add-icon" src="/add_icon.svg" title="Click to continue existing conversation" />
             </button>
             <br />
-            <button onClick={() => { props.shareSpecificPart('todo') }} className="share-specific-part-button">
+            <button onClick={() => { props.shareSpecificAppContent('todo') }} className="share-specific-part-button">
                 Share To Do
             </button>
             <div id="todo">

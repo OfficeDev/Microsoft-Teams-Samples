@@ -17,13 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodej
 
 This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 
-**Interaction with bot**
+## Included Features
+* Connectors
+
+## Interaction with bot
 ![Connector_Todo](Images/Connector_Todo_Nodejs.gif) 
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
@@ -33,8 +36,15 @@ This is a sample connector application which demonstarates how to add authentica
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 2. Clone the repository
 
     ```bash
@@ -57,7 +67,7 @@ This is a sample connector application which demonstarates how to add authentica
    1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
-   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
+   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok-free.app.
    1. Click on Save. After the save completes, you will see your connector id.
 
 5. [Using Azure AD](#using-azure-ad)
@@ -65,7 +75,7 @@ This is a sample connector application which demonstarates how to add authentica
    - Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
    - Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<Your_Ngrok_Domain>/SimpleEnd`
+    - `https://<your_tunnel_domain>/SimpleEnd`
 
    - Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
@@ -82,7 +92,7 @@ This is a sample connector application which demonstarates how to add authentica
 6. Setting up .env configuration 
    - Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
-   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
+   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` if you are using ngrok it would be `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 7. Run your app for server and client
 
@@ -91,8 +101,8 @@ This is a sample connector application which demonstarates how to add authentica
     ```
 
 8. __*This step is specific to Teams.*__
- - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+ - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your `ConnectorId` field in `~/appManifest/manifest.json` file with      your ConnectorId in `connectors` section.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
  
         Example :
 
@@ -105,7 +115,7 @@ This is a sample connector application which demonstarates how to add authentica
         ]
         ```
     
-    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -150,3 +160,6 @@ This is a sample connector application which demonstarates how to add authentica
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />

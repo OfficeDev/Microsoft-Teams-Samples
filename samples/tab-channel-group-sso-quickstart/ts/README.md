@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample application which showcases AAD authentication in channel tab.
+description: This is an sample application which showcases Microsoft Entra authentication in channel tab.
 products:
 - office-teams
 - office
@@ -25,14 +25,28 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
-- [ngrok](https://ngrok.com/) or equivalent tunneling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
   
 ## Setup
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env file at both client and server.
   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
   - Navigate to **Authentication**
@@ -42,7 +56,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for your app. This will be the page where a successful implicit grant flow will redirect the user. 
-    Set it as `https://Base_Url/auth-end`, ex:`https://f631****.ngrok.io/auth-end` 
+    Set it as `https://Base_Url/auth-end`, ex:`https://f631****.ngrok-free.app/auth-end` 
 
     Next, enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -53,7 +67,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
         * ex: `api://subdomain.example.com/00000000-0000-0000-0000-000000000000`.
         
         The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
-        - ex: api://f631****.ngrok.io/00000000-0000-0000-0000-000000000000
+        - ex: api://f631****.ngrok-free.app/00000000-0000-0000-0000-000000000000
     
     -Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
     -Set **Who can consent?** to `Admins and users`
@@ -70,7 +84,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
   ## Set up the client .env with the following keys:
     - `"REACT_APP_AZURE_APP_REGISTRATION_ID"` : Application ID of the Azure AD application
-    - `"REACT_APP_BASE_URL"` : Ngrok URL you get after running the ngrok command.
+    - `"REACT_APP_BASE_URL"` : tunnel URL you get after running the tunnel commands.
 
   ## Set up the `api-server` .env with the following keys:
    Go to the folder `api-server` and update following values in .env files
@@ -81,7 +95,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
    In the new Azure Bot resource in the Portal, 
@@ -89,11 +103,18 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
     
 3. Setup NGROK
-  - Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 4. Setup for code
  - Clone the repository
 
@@ -103,7 +124,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
   - In a terminal, navigate to `samples/tab-channel-group-sso-quickstart/ts`
   
-  -Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` `, `REACT_APP_BASE_URL` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot).
+  -Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` `, `REACT_APP_BASE_URL` with application base url. For e.g., your ngrok or dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot).
   
   - Build and Run
 You can build and run the project from the command line or an IDE:
@@ -126,15 +147,15 @@ You can build and run the project from the command line or an IDE:
     
  5 . Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>"` with MicrosoftAppId. E.g. `"api://1234.ngrok.io/000000000000-00000000-00"`.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>"` with MicrosoftAppId. E.g. `"api://1234.ngrok-free.app/000000000000-00000000-00"`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ### Build for production
@@ -160,3 +181,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 [Tab-channel-group-SSO-QuickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-sso-quickstart-ts" />

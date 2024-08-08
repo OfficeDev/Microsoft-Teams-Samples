@@ -29,19 +29,18 @@ function shareAppContentToStage() {
         }, `${window.location.origin}/DeepLinkChannel`);
     });
 }
-    microsoftTeams.app.initialize();
-     microsoftTeams.app.getContext().then((context) => {
-        
-         if (context.page.frameContext === "sidePanel") {
+microsoftTeams.app.initialize().then(() => {
+    microsoftTeams.app.getContext().then((context) => {
+        if (context.page.frameContext === "sidePanel") {
             document.getElementById("side-panel-content").style.display = "block";
 
-             document.getElementById('tableList').style.display = "none";
+            document.getElementById('tableList').style.display = "none";
             document.getElementById('taskList').style.display = "none";
             document.getElementById("extended-deeplink").style.display = "none";
             document.getElementById("side-panel-deeplink").style.display = "none";
-         }
-         else if (context.page.frameContext === "meetingStage") {
-             deepLinkString = `https://teams.microsoft.com/l/entity/@ViewBag.AppId/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
+        }
+        else if (context.page.frameContext === "meetingStage") {
+            deepLinkString = `https://teams.microsoft.com/l/entity/@ViewBag.AppId/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
 
             document.getElementById("side-panel-deeplink").style.display = "block";
 
@@ -76,7 +75,7 @@ function shareAppContentToStage() {
             element.style.display = "none";
         }
     })
-
+});
 </script>
 
 <div id="taskDiv" style="margin-top:10px;width:180px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;"></div>

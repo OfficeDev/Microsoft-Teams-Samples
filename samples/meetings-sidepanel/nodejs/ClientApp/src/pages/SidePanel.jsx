@@ -3,139 +3,183 @@
  * Licensed under the MIT License.
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
+import { LiveShareHost } from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
-import { TeamsFluidClient } from "@microsoft/live-share";
-import { setMeetingContext, postAgenda } from "./services/agendaAPIHelper"
+import { LiveShareClient } from "@microsoft/live-share";
+import { setMeetingContext, addAgendaTask, postAgenda } from "./services/agendaAPIHelper"
 
 let containerValue;
 
 const SidePanel = (props) => {
 
-  const agendaValueKey = "editor-value-key";
+    const agendaValueKey = "editor-value-key";
+    const [appTheme, setAppTheme] = useState("");
 
-  useEffect(() => {
-    microsoftTeams.app.initialize().then(() => {
-      microsoftTeams.app.getContext().then((context) => {
-        var userId = context.user.id;
-        var meetingId = context.meeting.id;
-        var tenantId = context.user.tenant.id;
-        var userData = {meetingId : meetingId,userId:userId,tenantId:tenantId}
-        agendaListPopulate();
-        setMeetingContext(userData).then((result) => {
-          if(result.data==true)
-                {
-                    document.getElementById("agendaButtonDiv").style.display="block";
-                    document.getElementById("publishAgendaButton").style.display="block";
+    useEffect(() => {
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                
+                // Applying default theme from app context property
+                switch (context.app.theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
                 }
-                else
-                {
-                    document.getElementById("agendaButtonDiv").style.display="none";
-                    document.getElementById("publishAgendaButton").style.display="none";
-                }         
-        })
-      })
-    });
-  }, []);
 
-  // Initial setup for using fluid container.
-  useEffect(() => {
-    microsoftTeams.app.initialize();
-    (async function () {
+                var userData = {
+                    meetingId: context.meeting.id,
+                    userId: context.user.id,
+                    tenantId: context.user.tenant.id
+                }
 
-      let connection;
-      window.localStorage.debug = "fluid:*";
+                agendaListPopulate();
 
-      // Define Fluid document schema and create container
-      const client = new TeamsFluidClient();
-      const containerSchema = {
-        initialObjects: { editorMap: SharedMap }
-      };
+                setMeetingContext(userData).then((result) => {
+                    if (result.data == true) {
 
-      function onContainerFirstCreated(container) {
-        // Set initial state of the editorMap.
-        var initalArray = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
-        container.initialObjects.editorMap.set(agendaValueKey, initalArray);
-      }
+                        document.getElementById("agendaButtonDiv").style.display = "block";
+                        document.getElementById("publishAgendaButton").style.display = "block";
+                    }
+                    else {
+                        document.getElementById("agendaButtonDiv").style.display = "none";
+                        document.getElementById("publishAgendaButton").style.display = "none";
+                    }
+                })
+            });
 
-      // Joining the container with default schema defined.
-      const { container } = await client.joinContainer(containerSchema, onContainerFirstCreated);
-      containerValue = container;
-      containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
-    })();
-  }, []);
+            // Handle app theme when 'Teams' theme changes
+            microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                switch (theme) {
+                    case 'dark':
+                        setAppTheme('theme-dark');
+                        break;
+                    case 'default':
+                        setAppTheme('theme-light');
+                        break;
+                    case 'contrast':
+                        setAppTheme('theme-contrast');
+                        break;
+                    default:
+                        return setAppTheme('theme-light');
+                }
+            });
+        });
+    }, []);
+
+    // Initial setup for using fluid container.
+    useEffect(() => {
+        microsoftTeams.app.initialize();
+        (async function () {
+
+            let connection;
+            window.localStorage.debug = "fluid:*";
+            await microsoftTeams.app.initialize();
+            const host = LiveShareHost.create();
+
+            // Define Fluid document schema and create container
+            const client = new LiveShareClient(host);
+            const containerSchema = {
+                initialObjects: { editorMap: SharedMap }
+            };
+
+            function onContainerFirstCreated(container) {
+                // Set initial state of the editorMap.
+                var initalArray = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
+                container.initialObjects.editorMap.set(agendaValueKey, initalArray);
+            }
+
+            // Joining the container with default schema defined.
+            const { container } = await client.joinContainer(containerSchema, onContainerFirstCreated);
+            containerValue = container;
+            containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
+        })();
+
+    }, []);
 
 
-  function agendaListPopulate() {
-    var agendaValue;
-    if(containerValue == null || containerValue == "") {
-      agendaValue = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
+    function agendaListPopulate() {
+        var agendaValue;
+        if (containerValue == null || containerValue == "") {
+            agendaValue = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
+        }
+        else {
+            agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+        }
+
+        var divStart = "<ol type=\"1\">";
+        agendaValue.forEach(x => {
+            divStart += "<li>" + x + "</li>";
+        });
+        divStart += "</ol>";
+        document.getElementById("agendaList").innerHTML = divStart;
     }
 
-    else {
-      agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+    function showAgendaInput() {
+        document.getElementById("agendaInputDiv").style.display = "block";
+        document.getElementById("agendaButtonDiv").style.display = "none";
+        document.getElementById("agendaInput").focus();
     }
 
-    var divStart = "<ol type=\"1\">";
-    alert("editor value in populate"+agendaValue);
-    agendaValue.forEach(x => {
-      divStart += "<li>" + x + "</li>";
-    });
-    divStart += "</ol>";
-    document.getElementById("agendaList").innerHTML = divStart;
-  }
+    function addAgenda() {
+        document.getElementById("agendaInputDiv").style.display = "none";
+        document.getElementById("agendaButtonDiv").style.display = "block";
+        var newAgendaItem = document.getElementById('agendaInput').value;
+        let taskInfo = {
+            title: newAgendaItem
+        };
 
-  function showAgendaInput() {
-    document.getElementById("agendaInputDiv").style.display = "block";
-    document.getElementById("agendaButtonDiv").style.display = "none";
-    document.getElementById("agendaInput").focus();
-}
+        // API call to save agenda.
+        addAgendaTask(taskInfo);
 
-function addAgenda() {
-  document.getElementById("agendaInputDiv").style.display = "none";
-  document.getElementById("agendaButtonDiv").style.display = "block";
-  var newAgendaItem = document.getElementById('agendaInput').value;
+        var editorMap = containerValue.initialObjects.editorMap;
+        var agendas = editorMap.get(agendaValueKey);
+        agendas.push(newAgendaItem);
+        editorMap.set(agendaValueKey, agendas);
+    }
 
-  var editorMap = containerValue.initialObjects.editorMap;
-  var agendas = editorMap.get(agendaValueKey);
-  agendas.push(newAgendaItem);
-  editorMap.set(agendaValueKey, agendas);
-     
-  }
+    // This method is called to publish the agenda in meeting chat.
+    function publishAgenda() {
+        const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+        postAgenda(agendaValue);
+    }
 
-// This method is called to publish the agenda.
- function publishAgenda() {
-  const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-  var publishData = {context: agendaValue};
-  postAgenda(publishData);
- }
+    // This method is called whenever the shared state is updated.
+    const updateEditorState = () => {
+        const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
+        agendaListPopulate(agendaValue);
+    };
 
-  // This method is called whenever the shared state is updated.
-  const updateEditorState = () => {
-    const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-    agendaListPopulate();
-  };
-
-  return (
-    <>
-      <div className="agendaTitle">
-        Agenda
-      </div>
-      <div id="agendaButtonDiv">
-        <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
-      </div>
-      <div id="agendaInputDiv" style={{display:'none'}}>
-        <input type="text" id="agendaInput" /><br />
-        <button id="addAgendaButton" onClick={addAgenda}>Add</button>
-      </div>
-      <div id="list">
-        <ol type="1" id="agendaList">
-        </ol>
-      </div>
-      <button id="publishAgendaButton" onClick={publishAgenda}>Publish Agenda</button>
-    </>
-  );
+    return (
+        <>
+            <div className={appTheme}>
+                <div className="agendaTitle">
+                    Agenda
+                </div>
+                <div id="agendaButtonDiv">
+                    <button id="agendaButton" onClick={showAgendaInput}>Add New Agenda Item</button>
+                </div>
+                <div id="agendaInputDiv" style={{ display: 'none' }}>
+                    <input type="text" id="agendaInput" /><br />
+                    <button id="addAgendaButton" onClick={addAgenda}>Add</button>
+                </div>
+                <div id="list">
+                    <ol type="1" id="agendaList">
+                    </ol>
+                </div>
+                <button id="publishAgendaButton" onClick={publishAgenda}>Publish Agenda</button>
+            </div>
+        </>
+    );
 };
 
 export default SidePanel;

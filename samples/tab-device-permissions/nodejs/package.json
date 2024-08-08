@@ -2,6 +2,7 @@
   "name": "test-tab",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@fluentui/react-card": "^9.0.0-beta.34",
     "@fluentui/react-components": "^9.0.0-rc.10",
@@ -20,14 +21,15 @@
     "react-grid": "^4.0.4",
     "react-scripts": "^5.0.1",
     "react-segment-analytics": "^2.0.0",
-    "reactstrap": "^9.1.5",
+    "reactstrap": "9.1.6",
     "rsuite": "^5.23.2",
     "swiper": "^8.4.5",
     "typescript": "^4.9.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts start",
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+    "start": "set PORT=3978 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/w3c-image-capture": "^1.0.5"
+    "@types/w3c-image-capture": "^1.0.5",
+    "env-cmd": "^10.1.0"
   }
 }

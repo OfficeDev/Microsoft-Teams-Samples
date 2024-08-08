@@ -1,0 +1,19 @@
+{
+    "productName": "Chai",
+    "unitsInStock": "130",
+    "productId": 1,
+    "categoryId": 1,
+    "imageUrl": "https://picsum.photos/id/431/200/300",
+    "supplierName": "Contoso Beverage Company",
+    "supplierCity": "London",
+    "categoryName": "Beverages",
+    "inventoryStatus": "In stock",
+    "unitPrice": "18",
+    "quantityPerUnit": "10 boxes x 20 bags",
+    "unitsOnOrder": "25",
+    "reorderLevel": "25",
+    "unitSales": "828",
+    "inventoryValue": "2,340",
+    "revenue": "12,788",
+    "averageDiscount": "8.6%"
+}

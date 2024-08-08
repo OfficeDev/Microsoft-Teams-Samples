@@ -29,6 +29,11 @@
       "type": "Action.OpenUrl",
       "title": "${ExtendedDeepLinkTitle}",
       "url": "${ExtendedDeepLink}"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "${sidePanelLinkTitle}",
+      "url": "${sidePanelLink}"
     }
   ]
 }

@@ -17,7 +17,15 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-csharp
 
 Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
-- **Interaction with app**
+## Included Features
+* Teams SSO (tabs, bots, messaging extensions, link unfurling)
+* Facebook Authentication (tabs, bots, messaging extensions, link unfurling)
+* Adaptive Cards
+* Task Modules
+* Graph API
+* MSAL.js 2.0 support
+
+### **Interaction with app**
 ![app-complete-auth-sample ](AppCompleteAuth/Images/app-complete-auth.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
@@ -34,15 +42,30 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 ### Register you app with Azure AD.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -51,7 +74,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 4. Under **Manage**, select **Expose an API**. 
 5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -62,7 +85,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 9. Ensure that **State** is set to **Enabled**
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/botid-00000000-0000-0000-0000-000000000000/access_as_user.
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -82,6 +105,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     * Select **Add a platform**.
     * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-start`.
 - Set another redirect URI:
     * Select **Add a platform**.
     * Select **web**.
@@ -91,7 +115,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 15. Create a Bot Registration
    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
    - Select Configuration section.
    - Under configuration -> Add OAuth connection string.
    - Provide connection Name : for eg `ssoconnection`
@@ -102,7 +126,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
     c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
     d. **Tenant ID**  Enter value as `common`.
-    e. **Token Exchange Url** Enter the url in format `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`(Refer step 1.5)
+    e. **Token Exchange Url** Enter the url in format `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`(Refer step 1.5)
     f. Provide **Scopes** like "User.Read openid"
   
 
@@ -116,9 +140,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ### 2. Setup NGROK
 1) Run ngrok - point to port 3978
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 ### 3. Setup for code
   
@@ -134,27 +164,27 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 3. Setup and run the bot from Visual Studio: 
     Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+   - `{{TenantId}}` - Enter value as `common`.
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
-   - `{{base-url}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{base-url}}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be https://12345.devtunnels.ms.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ Facebook Connection Name}}`- Generated from step 16.
    - Press `F5` to run the project
 
 ### 4. Setup Manifest for Teams
 
-1. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok.io the base url domain will be 12345.ngrok.io if you are using ngrok.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\csharp\AppCompleteAuth\Manifest_Hub` folder with the required values.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\csharp\AppCompleteAuth\AppManifest_Hub` folder with the required values.
 
-2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+2. Zip up the contents of the `appPackage` folder to create a `manifest.zip` or `AppManifest_Hub` folder into a `AppManifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
  **Note**: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
@@ -173,7 +203,7 @@ Type `login`.  A login card will be sent to user.
 
 - **SSO**
   
-Select AAD SSO login option. A consent popup will be sent. Click continue.
+Select Microsoft Entra SSO login option. A consent popup will be sent. Click continue.
 ![SSO login](AppCompleteAuth/Images/bot-consent.png)
 
 After the consent is granted, card will be sent containing user's profile details.
@@ -291,3 +321,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-complete-auth-csharp" />

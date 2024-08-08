@@ -22,6 +22,14 @@ This application also shows the implementation of Live Share SDK to update the d
 - [Live-share-sdk-overview](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 - [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 
+## Included Features
+* Meeting Chat
+* Meeting Details
+* Meeting SidePanel
+* Live Share SDK
+* RSC Permissions
+* Theme Handler
+
 **NOTE: This capability is currently available in developer preview only.**
 
 ### Key features
@@ -40,6 +48,10 @@ This application also shows the implementation of Live Share SDK to update the d
 
  ![side_panel_tab](Images/side_panel_tab.png)
 
+## Interaction with app theme
+
+ ![Preview Image](Images/app-theme-tokenapp.gif)
+
  ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
@@ -50,36 +62,36 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ### Tools
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
-
 - [Nodejs](https://nodejs.org/en/download/) version 10.21.0+ (use the LTS version)
   ```bash
   # determine dotnet version
   node --version
   ```
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
-- [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http -host-header=rewrite 3978
-  ```
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Technologies
 
 We assume working knowledge of the following technologies to gain full understanding of the app
-- [C#](https://docs.microsoft.com/dotnet/csharp/tutorials/)
-- [ECMAScript6](http://es6-features.org/)
-- [Asp.NET core](https://docs.microsoft.com/aspnet/core/?view=aspnetcore-3.1) version 3.1
 - [React.JS](https://reactjs.org/tutorial/tutorial.html) version 16+ 
 
 The app uses the Teams extensibility features described on the following pages:
 - [Apps in Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
 - [Create apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
-- [Tab single sign-on](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/nodejs/server/api/botController.js#L25) line and put your debugger for local debug.
 
@@ -89,7 +101,7 @@ The app uses the Teams extensibility features described on the following pages:
 1. Start an ngrok session as indicated above. Note the ngrok domain, as you will use this in the registration steps below, where it will be the value of `WebAppDomain`.
 2. Register your bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-3. Update the AAD app registration for tab SSO, following the  instructions [here](Wiki/auth-aad-sso.md). The "fully qualified domain name" in the instructions will be your ngrok domain.
+3. Update the Microsoft Entra ID app registration for tab SSO, following the  instructions [here](Wiki/auth-aad-sso.md). The "fully qualified domain name" in the instructions will be your ngrok domain.
 4. Set up the .env with the following keys:
     - `"BotId"` : Application (Bot) ID of the bot's Azure AD application
     - `"BotPassword"` : client secret of the bot's Azure AD application
@@ -108,10 +120,20 @@ The app uses the Teams extensibility features described on the following pages:
     }
     ```
 
-### Step 3: Run Ngrok
+### Step 3: Run Ngrok or Dev Tunnel
 1. The application (client) will run on port 3978
-2. ngrok http -host-header=rewrite 3978
-  
+2. Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 ### Step 4: Run Client & the Server
 You can build and run the project from the command line or an IDE:
 
@@ -127,7 +149,7 @@ You can build and run the project from the command line or an IDE:
     - Open new terminal
     - npm run server
     - The server will start running on 3000 port
-5. Update the manifest .zip file under appPackage folder
+5. Update the manifest .zip file under appManifest folder
     - npm run manifest
 6. Now your application is running and ready to upload
 
@@ -139,7 +161,7 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
 ### Step 6: Sideload the app in a Teams desktop client
-1. Create a .zip using the below files, which are in the `appPackage` folder.
+1. Create a .zip using the below files, which are in the `appManifest` folder.
   - manifest.json
   - icon-outline.png
   - icon-color.png
@@ -162,11 +184,28 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 ![](https://user-images.githubusercontent.com/50989436/118591024-1f803880-b7c1-11eb-9663-90e6959482dd.png)
 ![](https://user-images.githubusercontent.com/50989436/118591053-2909a080-b7c1-11eb-8724-194e2aff2a42.png)
 
+### Interactions with app theme
+ ![Preview Image](Images/light.PNG)
+
+ ![Preview Image](Images/dark.PNG)
+
+ ![Preview Image](Images/contrast.PNG)
+
 
 ## Troubleshooting
 The sample app uses an in-memory store to maintain token information and the service URL for the tenant. If you restart the project, you must run the following command to recapture the service URL: `@[BotName] reset`
 
 In your own projects, please use a durable storage mechanism to store the service URL for the tenant.
+
+## Deploy to Azure
+
+Deploy your project to Azure by following these steps:
+
+| From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From TeamsFx CLI                                                                                                                                                                                                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Open Teams Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Teams Toolkit and click `Provision` from DEPLOYMENT section or open the command palette and select: `Teams: Provision`.</li><li>Open the Teams Toolkit and click `Deploy` or open the command palette and select: `Teams: Deploy`.</li></ul> | <ul> <li>Run command `teamsfx account login azure`.</li> <li>Run command `teamsfx provision --env dev`.</li> <li>Run command: `teamsfx deploy --env dev`. </li></ul> |
+
+> Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
 ## Further reading
 
@@ -177,6 +216,7 @@ In your own projects, please use a durable storage mechanism to store the servic
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 
 # Contributing
 
@@ -191,3 +231,5 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-token-app-nodejs" />

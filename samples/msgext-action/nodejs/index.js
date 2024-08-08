@@ -1,19 +1,5 @@
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-const PORT = process.env.PORT || 3978;
-const server = express();
-
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -27,6 +13,9 @@ const adapter = new BotFrameworkAdapter({
     appId: process.env.MicrosoftAppId,
     appPassword: process.env.MicrosoftAppPassword
 });
+
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -45,14 +34,19 @@ adapter.onTurnError = async (context, error) => {
 
     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create the bot that will handle incoming messages.
 const bot = new TeamsMessagingExtensionsActionBot();
 
-server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+const server = express();
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+
+const port = process.env.PORT || 3978;
+server.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
 });
 
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));

@@ -18,14 +18,28 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-csharp
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
-## Interaction with app- Mobile
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* Live Share SDK
+* RSC Permissions
+
+## Interaction with app - Web
 
 ![Preview Image](Images/preview_web.gif)
 
-## Interaction with app- Web
+## Interaction with app - Mobile
 
 ![Preview Image](Images/preview_mobile.gif)
 
+## Interaction with app theme
+
+![Preview Image](Images/app-theme.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Realtime meeting stage view:** [Manifest](/samples/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 
 ## Prerequisites
 
@@ -35,7 +49,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -45,16 +59,22 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 **This capability is currently available in developer preview only**
 
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 
 2. Setup NGROK
-- Run ngrok - point to port 3978
+ - Run ngrok - point to port 3978
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 3. Setup for code
 
@@ -109,7 +129,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 6) Navigate to `samples/meetings-stage-view/csharp/AppInMeeting/ClientApp/src/components/share-to-meeting.jsx`
 
-7) On line 24, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok.io`.
+7) On line 24, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
 8) On line 25, replace `<<Application-ID>>` with `Id` obtained in step 3.
 
@@ -117,14 +137,14 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
@@ -143,11 +163,11 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 - App in stage view.
 
-![Stage View Screen](Images/stage_view.png)
+![Stage View Screen](Images/10.StageView2.png)
 
 - Sharing specific part of your app to the meeting stage.
 
-![Share Specific part screen](Images/share_specific_part.png)
+![Share Specific part screen](Images/9.ShareSpecificPart.png)
 
 **NOTE: Currently Live Share SDK is not supported in mobiles.**
 
@@ -167,31 +187,38 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
     - Search for your app `App in meeting` and add it.
 
-![Select App](Images/select_app.png)
+![Select App](Images/1.Install.png)
 
     - Join the meeting and click on the app icon at the top
     - This will open a sidepanel with `Share` icon at top to share the app for collaboration in stage view.
 
-![App icon](Images/app_icon.png)
-
-![Share Icon](Images/share_icon.png)
+![Share Icon](Images/2.StageView.png)
 
     - You can now interact with the app.
 
-
 - Add Details for collaboration.
 
-![Add Button](Images/add_button.png)
+![Add Doing](Images/3.AddDoing.png)
 
-![Add Details](Images/add_details.png)
+![Add ToDo](Images/4.AddToDo.png)
+
+![Add Done](Images/5.AddDone.png)
 
 - App in sidepanel.
 
-![App in sidepanel](Images/side_panel.png)
+![App in sidepanel](Images/1.AppInMeetings.png)
 
 - Sharing specific parts of app.
 
-![Share specific part](Images/share_specific_part_sidepanel.png)
+![Share specific part](Images/9.ShareSpecificPart.png)
+
+## Interaction with App theme when Teams Theme changes.
+
+![light](Images/2.StageView.png)
+
+![dark](Images/7.DarkTheme.png)
+
+![contrast](Images/8.ContrastTheme.png)
 
 ## Further reading
 
@@ -200,3 +227,6 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 - [Meeting stage view](https://learn.microsoft.com/microsoftteams/platform/sbs-meetings-stage-view)
 - [Enable Share to Meeting](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-in-meeting?tabs=method-1#enable-share-in-meeting)
 - [Deeplink to meeting share to stage](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-in-meeting?tabs=method-1#generate-a-deep-link-to-share-content-to-stage-in-meetings)
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-stage-view-csharp" />

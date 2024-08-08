@@ -17,9 +17,15 @@ urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
 
 This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
+## Included Features
+* Bots
+* Adaptive Cards
+* Task Modules
+* RSC Permissions
+
 ## Interaction with app
 
-![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
+![MeetingsTranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
 ## Prerequisites
 
@@ -29,13 +35,27 @@ This is a sample application which demonstrates how to get Transcript using Grap
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+
+-  [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.9 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 **NOTE: The feature is only available only be used from the desktop app*
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     
   -  Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
@@ -79,17 +99,24 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
 
-- Run ngrok - point to port 3978
+1) Run ngrok - point to port 3978
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
-- Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+- If you are using Ngrok, once started you should see URL  `https://41ed-abcd-e125.ngrok-free.app`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 4. Setup for code
 - Clone the repository
@@ -98,7 +125,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
--  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running ngrok, UserId of the user used while granting the policy in step 5). 
+-  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running the tunnel, UserId of the user used while granting the policy in step 5). 
 
 - Run the bot from a terminal or from Visual Studio:
   A) From a terminal, navigate to `MeetingTranscription`
@@ -128,55 +155,43 @@ This is a sample application which demonstrates how to get Transcript using Grap
 - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
+![Policy](MeetingTranscription/Images/Policy.png)
 
 
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-transcription/csharp/MeetingTranscription/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
 
-## Running the sample
+## Running the sample.
 
-**Upload an app to your org's app catalog:**
+1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
+![Add Bot](MeetingTranscription/Images/1.AddMeetingTranscriptBot.PNG)
 
-![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.png)
+![AddMeetingGroup](MeetingTranscription/Images/2.AddMeetingGroup.png)
 
-**Schedule the meeting and add Meeting Transcript Bot from Apps section in that particular scheduled meeting:**
+![JoinMeeting](MeetingTranscription/Images/3.JoinMeeting.png)
 
-![Add BotApp](MeetingTranscription/Images/AddMeetingTranscriptBot.PNG)
+2. Once meeting started, start the Transcript for the meeting.
+![Start Transcript](MeetingTranscription/Images/4.StartTranscript.png)
 
-**Created and approved by your organization:**
+3. Once the transcription has started, you can see the live transcription it the meeting UI.
+![Leave Meeting](MeetingTranscription/Images/5.LeaveMeeting.png)
 
-![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.png)
+4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
+![Meeting Transcript Card](MeetingTranscription/Images/6.MeetingTranscriptCard.png)
 
-**Welcome echo UI:**
-
-![Add Bot](MeetingTranscription/Images/WelcomeEcho.png)
-
-**Once meeting started, start the Transcript for the meeting:**
-
-![Start Transcript](MeetingTranscription/Images/StartTranscript.PNG)
-
-**Once the transcription has started, you can see the live transcription it the meeting UI:**
-
-![Add Bot](MeetingTranscription/Images/LeaveMeeting.PNG)
-
-**Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module:**
-
-![Add Bot](MeetingTranscription/Images/MeetingTranscriptCard.PNG)
-
-**After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module:**
-
-![Add Bot](MeetingTranscription/Images/TranscriptTaskModule.PNG)
+5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
+![Transcript Task Module](MeetingTranscription/Images/7.TranscriptTaskModule.png)
 
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.
@@ -204,3 +219,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-transcription-csharp" />

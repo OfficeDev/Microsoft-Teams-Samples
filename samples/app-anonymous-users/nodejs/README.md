@@ -29,8 +29,20 @@ This sample shows anonymous users support in Teams meeting apps.
     # determine node version
     node --version
     ```
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -39,14 +51,20 @@ This sample shows anonymous users support in Teams meeting apps.
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http --host-header=rewrite 3978
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
 2. Setup
 
  ### Register you app with Azure AD.
 
-  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   2. Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -55,7 +73,7 @@ This sample shows anonymous users support in Teams meeting apps.
   3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
   4. Under **Manage**, select **Expose an API**. 
   5. Select the **Set** link to generate the Application ID URI in the form of `api://{base-url}/botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/botid-{AppID}`
-      * ex: `api://%ngrokDomain%.ngrok.io/botid-00000000-0000-0000-0000-000000000000`.
+      * ex: `api://%ngrokDomain%.ngrok-free.app/botid-00000000-0000-0000-0000-000000000000`.
   6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
   7. Set **Who can consent?** to `Admins and users`
   8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -66,7 +84,7 @@ This sample shows anonymous users support in Teams meeting apps.
   9. Ensure that **State** is set to **Enabled**
   10. Select **Add scope**
       * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-          * `api://[ngrokDomain].ngrok.io/botid-00000000-0000-0000-0000-000000000000/access_as_user.
+          * `api://[ngrokDomain].ngrok-free.app/botid-00000000-0000-0000-0000-000000000000/access_as_user.
   11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
       * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
       * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -86,7 +104,7 @@ This sample shows anonymous users support in Teams meeting apps.
   15. Create a Bot Registration
     - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
@@ -107,7 +125,7 @@ This sample shows anonymous users support in Teams meeting apps.
    - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
    - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{FacebookAppId}} and {{FacebookAppPassword}}`- Generated from step 16.
-   - `{{domain-name}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{domain-name}}` - Your domain name. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 5. Open .env file from this path folder `samples/app-anonymous-users/nodejs/ClientApp` and update 
    - `{{Microsoft-App-id}}` - Generated from Step 1 (Application (client) ID)is the application app id
@@ -142,11 +160,11 @@ This sample shows anonymous users support in Teams meeting apps.
 
 7. __*This step is specific to Teams.*__
 
-- **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
-- **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+- **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-- **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+- **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
@@ -293,3 +311,6 @@ You can interact with Teams Tab meeting sidepanel.
 - [Build apps for anonymous users](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-anonymous-user?branch=pr-en-us-7318&tabs=javascript)
 - [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
 - [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-anonymous-users-nodejs" />

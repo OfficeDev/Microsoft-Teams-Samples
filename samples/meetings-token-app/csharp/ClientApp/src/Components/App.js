@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -13,7 +13,12 @@ import ContentBubble from "./ContentBubble";
 function App() {
 
   // Initialize the Microsoft Teams SDK
-  microsoftTeams.app.initialize();
+   
+  useEffect(() => {
+    (async function () {
+        await microsoftTeams.app.initialize();
+        })();
+    }, []);
   
   // Display the app home page hosted in Teams
   return (

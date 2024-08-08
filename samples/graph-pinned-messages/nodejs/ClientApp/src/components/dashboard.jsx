@@ -57,10 +57,11 @@ class Dashboard extends Component {
     // Callback function for successfull authorization
     consentSuccess = async (result) => {
         this.setState({ ssoError: false });
-        microsoftTeams.app.initialize();
-        microsoftTeams.authentication.getAuthToken().then((result) => {
-            this.ssoLoginSuccess(result);
-        })
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                this.ssoLoginSuccess(result);
+            })
+        });
     }
 
     // Callback function for failure authorization
@@ -84,10 +85,10 @@ class Dashboard extends Component {
 
     // Exchange client token with server token and fetch the pinned message details.
     exchangeClientTokenForServerToken = async (token) => {
-        var id = "12345";
+        var id = "ChatId";  //Replace {{ChatId ex - 19:75e4d14a2c2c4644a7adaf4e3976d17b@thread.v2}}  
         axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${id}`).then((response) => {
             var responseMessageData = response.data;
-            console.log(responseMessageData);
+            console.log("-----Response--->",responseMessageData);
             this.setState({
                 pinnedMessageId: responseMessageData.id,
                 pinnedMessage: responseMessageData.message,
@@ -113,6 +114,7 @@ class Dashboard extends Component {
         var pinnedMessageId = this.state.pinnedMessageId;
         var response = await axios.get(`/api/chat/unpinMessage?ssoToken=${accessToken}&chatId=${this.state.context.chat.id}&pinnedMessageId=${pinnedMessageId}`)
         this.setState({ isError: true });
+        console.log("Response---->",response);
     }
 
     // Api call to pin message into chat.
@@ -120,6 +122,7 @@ class Dashboard extends Component {
         this.setState({ isError: false });
         var messageId = this.state.newMessageId;
         var response = await axios.get(`/api/chat/pinMessage?ssoToken=${accessToken}&chatId=${this.state.context.chat.id}&messageId=${messageId}`);
+        console.log("Response---->",response);
         window.location.reload();
     }
 

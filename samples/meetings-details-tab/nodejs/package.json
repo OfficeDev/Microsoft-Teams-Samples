@@ -4,13 +4,14 @@
   "description": "Microsoft Teams conversation bot quickstart",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:teamsfx": "npm run start",
     "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon server/index.js",
-    "build": "npm install && cd client && npm install && npm run build",
+    "build": "npm install && node build.js && cd client && npm install && npm run build",
     "server": "npm install && cd client && npm install && npm run build && cd ../ && nodemon server/index.js",
     "client": "cd client && npm install && npm run start",
-    "manifest": "del \"appPackage\\appPackage.zip\" 2> nul && powershell Compress-Archive appPackage/* appPackage/appPackage.zip"
+    "manifest": "del \"appManifest\\appManifest.zip\" 2> nul && powershell Compress-Archive appManifest/* appManifest/appManifest.zip"
   },
   "keywords": [],
   "author": "Microsoft",
@@ -24,6 +25,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "html-entities": "^1.3.1",
-    "memorystorage": "^0.12.0"
+    "memorystorage": "^0.12.0",
+    "esbuild": "^0.18.1"
   }
 }

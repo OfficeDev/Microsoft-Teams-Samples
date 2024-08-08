@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import $ from "jquery";
 
@@ -11,8 +11,10 @@ import $ from "jquery";
 const Home = props => {
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
-    }, []);
+        (async function () {
+            await microsoftTeams.app.initialize();
+            })();
+        }, []);
 
     // Method to check validate form and add the entered details.
     const sendTaskDetails = (event) => {
@@ -46,7 +48,7 @@ const Home = props => {
             "userName": userName.value
         };
 
-        microsoftTeams.dialog.submit(taskDetails);
+        microsoftTeams.dialog.url.submit(taskDetails);
         return true;
     }
 

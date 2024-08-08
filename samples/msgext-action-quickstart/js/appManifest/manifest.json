@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Messaging Extension Action",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Messaging Extension Action.",
+    "full": "Full description of Messaging Extension Action."
+  },
+  "accentColor": "#FFFFFF",
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "createCard",
+          "type": "action",
+          "title": "Create Card",
+          "description": "Command to run action to create a Card from Compose Box",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "title",
+              "title": "Card title",
+              "description": "Title for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "subTitle",
+              "title": "Subtitle",
+              "description": "Subtitle for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "text",
+              "title": "Text",
+              "description": "Text for the card",
+              "inputType": "textarea"
+            }
+          ]
+        },
+        {
+          "id": "shareMessage",
+          "type": "action",
+          "title": "Share Message",
+          "description": "Test command to run action on message context (message sharing)",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+            "message"
+          ],
+          "parameters": [
+            {
+              "name": "includeImage",
+              "title": "Include Image",
+              "description": "Include image in Hero Card",
+              "inputType": "toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "token.botframework.com",
+    "{{domain-name}}",
+    "*.ngrok.io",
+    "${{BOT_DOMAIN}}"
+  ]
+}

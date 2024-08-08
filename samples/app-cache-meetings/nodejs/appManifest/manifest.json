@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.13",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.appcache",
+  "name": {
+    "short": "App Caching In Meeting",
+    "full": "App Caching In Meeting"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "description": {
+    "short": "App Caching In Meeting",
+    "full": "This sample shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting)."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "${{TAB_ENDPOINT}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [ "groupchat", "team" ],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "privateChatTab"
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{TAB_ENDPOINT}}" 
+  ],
+  "showLoadingIndicator": true
+}

@@ -18,7 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-cshar
 
 This application simulates a real task management system and allows users to create and view tasks. The content is randomly generated to simulate how notification can be sent into Microsoft Teams channel using connector.
 
-**Interaction with bot**
+## Included Features
+* Connectors
+
+## Interaction with bot
 ![Connector_Todo](Images/connector_todo_notification_csharp.gif) 
 
 ## Prerequisites
@@ -31,7 +34,7 @@ The minimum prerequisites to run this sample are:
   ```bash
   dotnet --version
   ```
-* [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+* [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 * [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account 
 
@@ -43,8 +46,15 @@ The minimum prerequisites to run this sample are:
 1. Run ngrok - point to port 3978
 
    ```bash
-     ngrok http -host-header=rewrite 3978
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
 2. Clone the repository
 
     ```bash
@@ -68,7 +78,7 @@ The minimum prerequisites to run this sample are:
    1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
-   1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
+   1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok-free.app.
    1. Enable the action on connector card by selecting the Yes radio button and enter the update endpoint: `https://[BASE_URI]/Task/Update`
    1. Click on Save. After the save completes, you will see your connector id.
    1. In the Web.config file, set the `configuration.appSettings.Base_Uri` variable to the ngrok https forwarding url from the above.
@@ -81,7 +91,7 @@ The minimum prerequisites to run this sample are:
    
 5. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
-    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
  
         Example :
 
@@ -94,7 +104,7 @@ The minimum prerequisites to run this sample are:
         ]
         ```
     
-    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -142,3 +152,6 @@ The minimum prerequisites to run this sample are:
 - Review [Getting Started with Bot Framework](https://docs.microsoft.com/en-us/bot-framework/bot-builder-overview-getstarted)
 - Review [Testing your bot with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/botsadd)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-csharp" />

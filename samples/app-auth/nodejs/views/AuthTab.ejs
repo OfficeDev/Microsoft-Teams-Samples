@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <title>SSO Authentication Sample</title>
+</head>
+
+<body>
+    <p>
+        This sample shows the basics of an single sign-on authentication flow in a Microsoft Teams tab.
+    </p>
+    <p>
+        The "Grant access to Microsoft Graph" button will appear only if additional consent is required.
+    </p>
+
+    <!-- Login button -->
+    <button id="btnSSO" style="display: none" onclick="showUserInformationUsingSSO()">Single Sign-On</button>
+    <p id="divError" style="display: none" class="auth-data"></p>
+
+    <!-- Result -->
+
+    <h2>Claims from SSO access_token</h2>
+    <div id="divAccessTokenError" style="display: none" class="auth-data"></div>
+    <div id="divIdTokenClaims" style="display: none" class="auth-data"></div>
+    <p id="divRawAccessToken" style="display: none" class="auth-data"></p>
+
+    <h2>Profile from Microsoft Graph (via On-Behalf-Of flow)</h2>
+    <div id="divGraphProfileError" style="display: none" class="auth-data"></div>
+    <div id="divGraphProfile" style="display: none" class="auth-data"></div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
+        crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"
+        integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        microsoftTeams.app.initialize().then(() => {
+        });
+
+        // Trying to silently login using SSO
+        showUserInformationUsingSSO();
+
+        function showUserInformationUsingSSO() {
+            microsoftTeams.authentication.getAuthToken().then((token) => {
+                $('#btnSSO').hide();
+                $("#btnGraphAccess").hide();
+                showUserInformationInToken(token);
+                showUserProfileFromGraph(token);
+            })
+                .catch((error) => {
+                    console.log('SSO failureCallback error: ', error);
+                    $('#btnSSO').show();
+                    showAuthError(error, "divError");
+                });
+        }
+
+        // Show the token and the user information that it has in its claims
+        function showUserInformationInToken(idToken) {
+            $("#divRawAccessToken").text(idToken).show();
+
+            microsoftTeams.app.getContext().then((context) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/decodedToken',
+                    dataType: 'json',
+                    data: {
+                        'idToken': idToken,
+                    },
+                    success: function (token) {
+                        let claimsDiv = $("#divIdTokenClaims");
+                        claimsDiv.empty();
+
+                        for (let claimId in token) {
+                            $("<div>")
+                                .append($("<b>").text(claimId + ": "))
+                                .append($("<span>").text(token[claimId]))
+                                .appendTo(claimsDiv);
+                        }
+
+                        // The id token for a guest (external) user will not have a "upn" claim.
+                        // Instead it has a "unique_name" claim, which is the username in the home organization/identity provider.
+
+                        $("#divIdTokenClaims").show();
+                        $("#divIdTokenError").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
+                });
+            });
+        }
+
+        // Get the user's profile information
+        function showUserProfileFromGraph(idToken) {
+            // The current implementation for SSO only grants consent for OpenID Connect scopes (email, profile, openid)
+            // and offline_access, but not for other APIs. If your app needs further scopes, there are some workarounds to enable this.
+            // This code prompts for user consent to additional scopes.
+
+            // Through the Azure AD On-Behalf-Of flow, the app can exchange it for an access token for
+            // other APIs that the user has consented to. In this example, the app gets a Graph token and
+            // returns the user's full Azure AD profile.
+
+
+            microsoftTeams.app.getContext().then((context) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/getProfileOnBehalfOf',
+                    dataType: 'json',
+                    data: {
+                        'idToken': idToken,
+                    },
+                    success: function (responseJson) {
+                        let profileDiv = $("#divGraphProfile");
+                        profileDiv.empty();
+
+                        for (let key in responseJson) {
+                            if ((key[0] !== "@") && responseJson[key]) {
+                                $("<div>")
+                                    .append($("<b>").text(key + ": "))
+                                    .append($("<span>").text(JSON.stringify(responseJson[key])))
+                                    .appendTo(profileDiv);
+                            }
+                        }
+
+                        $("#divGraphProfile").show();
+                        $("#divGraphProfileError").hide();
+
+                        console.log(JSON.stringify(responseJson));
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
+                });
+            });
+        }
+
+        // Show error information
+        function showAuthError(reason, errorDivId) {
+            $("#" + errorDivId).text(reason).show();
+            $("#divProfile").hide();
+        }
+    </script>
+</body>
+</html>
