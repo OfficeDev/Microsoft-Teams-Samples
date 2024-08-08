@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-task-module-nodejs",
     "source": "officeDev",
-    "title": "Bot Dialog",
-    "shortDescription": "This is an sample application which showcases how to invoke dialog from adaptive and hero cards.",
+    "title": "Bot Dialogs (referred as task modules in TeamsJS v1.x)",
+    "shortDescription": "This is an sample application which showcases how to invoke dialog (referred as task modules in TeamsJS v1.x) from adaptive and hero cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-task-module/nodejs",
     "longDescription": [
-      "This is an sample application which showcases how to invoke dialog from adaptive and hero cards."
+      "This is an sample application which showcases how to invoke dialog (referred as task modules in TeamsJS v1.x) from adaptive and hero cards."
     ],
     "creationDateTime": "2022-10-04",
     "updateDateTime": "2023-01-01",

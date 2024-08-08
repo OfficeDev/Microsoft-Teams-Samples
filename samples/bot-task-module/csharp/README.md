@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use Dialog using Bot Framework v4
+description: This sample app demonstrate how to use Dialogs (referred as task modules in TeamsJS v1.x) using Bot Framework v4
 products:
 - office-teams
 - office
@@ -15,14 +15,14 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
 ---
 # Teams Dialog (referred as task modules in TeamsJS v1.x)
 
-Bot Framework Teams Dialog sample.
+Bot Framework Teams Dialogs (referred as task modules in TeamsJS v1.x) sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialog from Hero Card or Adaptive Card buttons and receive input from the Dialog in the bot.
+This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialog (referred as task modules in TeamsJS v1.x) from Hero Card or Adaptive Card buttons and receive input from the Dialog (referred as task modules in TeamsJS v1.x) in the bot.
 
 ## Included Features
 * Bots
 * Tabs
-* Dialogs
+* Dialogs (referred as task modules in TeamsJS v1.x)
 
 ## Interaction with bot
 ![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
@@ -30,7 +30,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). I
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Dialog:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
+**Teams Dialogs (referred as task modules in TeamsJS v1.x):** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 
 ## Prerequisites
 
@@ -124,7 +124,7 @@ the Teams service needs to call into the bot.
 
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
-You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Dialog when clicked. The Dialogs demonstrate retrieving input from a user, or displaying custom web page content.
+You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Dialog (referred as task modules in TeamsJS v1.x) when clicked. The Dialogs (referred as task modules in TeamsJS v1.x) demonstrate retrieving input from a user, or displaying custom web page content.
 
 - **Personal Scope Interactions:**
 
