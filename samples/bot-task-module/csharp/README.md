@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
 
 ---
-# Teams Dialog
+# Teams Dialog (referred as task modules in TeamsJS v1.x)
 
 Bot Framework Teams Dialog sample.
 
