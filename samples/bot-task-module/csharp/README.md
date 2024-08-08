@@ -128,31 +128,31 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 - **Personal Scope Interactions:**
 
-![ps-AddApp ](Images/ps-AddApp.png)
+![1.InstallApp ](Images/1.InstallApp.png)
 
-![ps-Cards ](Images/ps-Cards.png)
+![2.Dialogs ](Images/2.Dialogs.png)
 
-![ps-AC-TaskModule ](Images/ps-AC-TaskModule.png)
+![2.GroupDialogs ](Images/2.GroupDialogs.png)
 
-![ps-AC-TaskModule-Submit ](Images/ps-AC-TaskModule-Submit.png)
+![3.AdaptiveCard ](Images/3.AdaptiveCard.png)
 
-- **Group Chat Scope Interactions:**
+![4.ThanksAdaptiveCard ](Images/4.ThanksAdaptiveCard.png)
 
-![gc-Interaction ](Images/gc-Interaction.png)
+![5.CustomForm ](Images/5.CustomForm.png)
 
-- **Team Scope Interactions:**
+![6.Results ](Images/6.Results.png)
 
-![ts-Interaction ](Images/ts-Interaction.png)
+![7.YouTube ](Images/7.YouTube.png)
 
-![tasks](Images/tasks.png)
+![8.Task ](Images/8.Task.png)
 
-![youtube](Images/youtube.png)
+![9.PowerApp ](Images/9.PowerApp.png)
 
-![Customform](Images/Customform.png)
+![10.GroupChat ](Images/10.GroupChat.png)
 
-![customformregister](Images/customformregister.png)
+![11.GroupCustomForm ](Images/11.GroupCustomForm.png)
 
-![TabAdaptiveCard](Images/Tab_AdaptiveCard.png)
+![12.GroupResults ](Images/12.GroupResults.png)
 
 ## Deploy the bot to Azure
 

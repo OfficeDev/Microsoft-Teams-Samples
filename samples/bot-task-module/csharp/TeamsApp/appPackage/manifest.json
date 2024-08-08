@@ -16,11 +16,11 @@
   },
   "name": {
     "short": "Teams Dialogs",
-    "full": "Simple Dialogs (referred as task modules in TeamsJS v1.x)"
+    "full": "Teams Dialog (referred as task modules in TeamsJS v1.x)"
   },
   "description": {
-    "short": "Test Dialogs (referred as task modules in TeamsJS v1.x)",
-    "full": "Simple Dialogs (referred as task modules in TeamsJS v1.x) Scenario Test"
+    "short": "Teams Dialog (referred as task modules in TeamsJS v1.x)",
+    "full": "This is an sample application which showcases how to invoke dialog (referred as task modules in TeamsJS v1.x) from adaptive and hero cards."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
