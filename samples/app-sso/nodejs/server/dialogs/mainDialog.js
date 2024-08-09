@@ -6,7 +6,7 @@ const { CardFactory } = require('botbuilder');
 
 const { LogoutDialog } = require('./logoutDialog');
 const { SimpleGraphClient } = require('../models/simpleGraphClient');
-const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
+const { SsoOAuthPrompt } = require('./ssoOauthPrompt');
 
 const CONFIRM_PROMPT = 'ConfirmPrompt';
 const MAIN_DIALOG = 'MainDialog';
