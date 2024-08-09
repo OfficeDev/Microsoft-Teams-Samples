@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
   "version": "1.0.0",
-  "id": "<<GUID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.meetingattendancereport",
   "developer": {
     "name": "Microsoft",
@@ -25,21 +25,29 @@
   "accentColor": "#235EA5",
   "bots": [
     {
-      "botId": "<<Microsoft-App-Id>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [ "groupchat" ],
       "isNotificationOnly": true
     }
   ],
   "validDomains": [
-    "<<domain-name>>",
-    "<<App-Domain>>"
+    "${{BOT_DOMAIN}}"
   ],
-  "permissions": [ "messageTeamMembers" ],
+  "permissions": [
+    "messageTeamMembers"
+  ],
   "webApplicationInfo": {
-    "id": "<<Microsoft-App-Id>>",
-    "resource": "https://RscPermission",
-    "applicationPermissions": [
-      "OnlineMeeting.ReadBasic.Chat"
-    ]
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscPermission"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }

@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.samples.AppSSO",
   "developer": {
     "name": "Microsoft",
@@ -11,8 +11,8 @@
     "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "App SSO in csharp",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -104,14 +104,14 @@
     {
       "entityId": "auth",
       "name": "SSO Tab",
-      "contentUrl": "https://<<DOMAIN-NAME>>/Home/Index",
-      "websiteUrl": "https://<<DOMAIN-NAME>>/Index",
+      "contentUrl": "https://${{BOT_DOMAIN}}/Home/Index",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/Index",
       "scopes": [ "personal" ]
     }
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -120,8 +120,8 @@
     }
   ],
   "webApplicationInfo": {
-    "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<DOMAIN-NAME>>/botid-<<YOUR-MICROSOFT-APP-ID>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
   },
 
   "permissions": [
@@ -130,7 +130,7 @@
   ],
   "validDomains": [
     "*.githubusercontent.com",
-    "<<DOMAIN-NAME>>",
+    "${{BOT_DOMAIN}}",
     "*.botframework.com"
   ]
 }
