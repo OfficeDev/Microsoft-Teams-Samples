@@ -20,10 +20,16 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 * Tabs
 * Bots
 * Messaging Extensions
+* Element RelationShip Property
+    * OneWay Dependency
+    * Mutual Dependency
 
 ## Interaction with app
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
+
+![ElementRelationShipProperty](Images/ElementRelationShip/OneWay_MutualDependency.gif)
+
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -163,6 +169,26 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ![AppOffice](Images/AppOffice.png)
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
+**Element RealtionShip Property**
+**Oneway Dependency - Bot and Message Extension both should work**
+![BotResponse](Images/ElementRelationShip/3.ResponseFromBot_OnewayDepency.png)
+
+![MessageExtension](Images/ElementRelationShip/4.MsgExt_OneWayDependency.png)
+
+**Mutual Dependency - Bot,Tab and Configurable Tab all three should work**
+**Group Scope**
+![ConfigurableTab](Images/ElementRelationShip/6.ConfigureTab.png)
+
+![GroupChatTab](Images/ElementRelationShip/7.GC_Tab_MutualDependency.png)
+
+![GroupChatBot](Images/ElementRelationShip/8.GC_Bot_MutualDependency.png)
+
+![GroupChatMessageExt](Images/ElementRelationShip/9.GC_MsgExtension.png)
+
+**Outlook - Oneway Dependency**
+**Outlook doesn't support bots, and since Message Extensions depend on a bot, the Message Extension doesn't work in Outlook**
+![OutLookMessageExtension](Images/ElementRelationShip/11.Outlook_MsgExt.png)
 
 ## Deploy the bot to Azure
 
