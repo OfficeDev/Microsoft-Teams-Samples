@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "MeetingEvents\\MeetingEvents.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  }
+]

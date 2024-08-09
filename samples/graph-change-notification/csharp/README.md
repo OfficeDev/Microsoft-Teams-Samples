@@ -34,8 +34,22 @@ This sample app demonstrates sending change notifications to user presence in Te
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
-## Setup
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Manually Setup and use the sample locally.
 ### Register you app with Azure AD.
 
   1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -117,16 +131,16 @@ This sample app demonstrates sending change notifications to user presence in Te
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) Run ngrok - point to port 3978
+2) Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 3)  Open the code in Visual Studio
@@ -135,6 +149,8 @@ This sample app demonstrates sending change notifications to user presence in Te
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification/csharp` folder
   - Select `ChangeNotification.sln` and open it in Visual Studio
+  
+  **Note:** In the debug dropdown menu of Visual Studio, select default startup project > **ChangeNotification**
    
 4) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
@@ -144,9 +160,9 @@ Modify the `appsettings.json` file with the following details:
     - Press `F5` to run the project
 
 5) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your Microsoft Entra ID app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json`file contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your Microsoft Entra ID app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
