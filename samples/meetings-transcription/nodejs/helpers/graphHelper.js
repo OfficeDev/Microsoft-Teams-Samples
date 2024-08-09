@@ -42,7 +42,7 @@ class GraphHelper {
     /**
      * Gets the meeting transcript for the passed meeting Id.
      * @param {string} meetingId Id of the meeting
-     * @returns Transcript of meeting if any therwise return empty string.
+     * @returns Transcript of meeting if any otherwise return empty string.
      */
     async GetMeetingTranscriptionsAsync(meetingId)
     {
