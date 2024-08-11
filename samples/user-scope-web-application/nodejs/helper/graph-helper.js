@@ -52,7 +52,11 @@ class GraphHelper {
             });
 
             messagesList = [];
-            messagesList = apiResponse.data.value;
+            (apiResponse.data.value).forEach(element => {
+                if (element.messageType === "message" && element.attachments.length === 0) {
+                    messagesList.push(element);
+                }
+            });
 
             if (messagesList.length > 0) {
                 return messagesList;
