@@ -1,0 +1,14 @@
+html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+    margin: 5em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+div.panel {
+    padding: 15px;
+}
