@@ -2,45 +2,50 @@
 <html lang="en">
 
 <head>
-  <title>
-    Microsoft Teams Hello World Sample App
-  </title>
-  <link rel="stylesheet" type="text/css" href="../styles/custom.css">
-  <script src="https://res.cdn.office.net/teams-js/2.26.0/js/MicrosoftTeams.min.js"></script>
+    <title>
+        Microsoft Teams Hello World Sample App
+    </title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <script src="https://res.cdn.office.net/teams-js/2.26.0/js/MicrosoftTeams.min.js"></script>
 
-  <script type="text/javascript">
-    microsoftTeams.app.initialize();
+    <script type="text/javascript">
+        microsoftTeams.app.initialize();
 
-    function openTaskModule() {
-      var taskModuleInfo = {
-        title: "Task Module From Static Tab",
-        size: {
-          height: 250,
-          width: 250
-        },
-        url: window.location.origin + "/taskModulePage"
-      };
+        function openTaskModule() {
+            var taskModuleInfo = {
+                title: "Task Module From Static Tab",
+                size: {
+                    height: 250,
+                    width: 400
+                },
+                url: window.location.origin + "/taskModulePage"
+            };
 
-      // Open task module
-      microsoftTeams.dialog.url.open(taskModuleInfo);
-    }
+            // Open task module
+            microsoftTeams.dialog.url.open(taskModuleInfo);
+        }
 
-  </script>
+    </script>
 </head>
 
 <body class="theme-light">
-  <div class="surface">
-    <div class="panel">
-      <div class="font-semibold font-title">This is our Static Tab
-        <h3> Please Click Below Button To Open Task Module</h3>
-        <br>
-        <button onclick=openTaskModule()>Open Task Module</button>
+    <div class="surface">
+        <div class="panel">
+            <div class="font-semibold font-title">
+                This is our Static Tab
+                <h3> Please Click Below Button To Open Task Module</h3>
+                <br>
+                <button onclick=openTaskModule()>Open Task Module</button>
 
-      </div>
+            </div>
 
+        </div>
     </div>
-  </div>
-  </div>
+    </div>
 </body>
 
 </html>

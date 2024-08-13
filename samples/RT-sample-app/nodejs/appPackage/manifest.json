@@ -1,130 +1,149 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
-    "manifestVersion": "devPreview",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/privacy",
-        "termsOfUseUrl": "https://www.example.com/termofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "RT-Sample-App",
-        "full": "full name for RT-sample-app"
-    },
-    "description": {
-        "short": "Specify runtime requirements for specific app capabilities",
-        "full": "Specify runtime requirements for specific app capabilities"
-    },
-    "accentColor": "#FFFFFF",
-    "elementRelationshipSet": {
-        "oneWayDependencies": [
-            {
-                "element": {
-                    "name": "composeExtensions",
-                    "id": "composeExt_ID",
-                    "commandIds": [
-                        "createCard"
-                    ]
-                },
-                "dependsOn": [
-                    {
-                        "name": "bots",
-                        "id": "${{BOT_ID}}"
-                    }
-                ]
-            }
-        ],
-        "mutualDependencies": [
-            [
-                {
-                    "name": "staticTabs",
-                    "id": "staticTab_ID"
-                },
-                {
-                    "name": "composeExtensions",
-                    "id": "composeExt_ID"
-                },
-                {
-                    "name": "bots",
-                    "id": "${{BOT_ID}}"
-                }
-            ]
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "RT-Sample-App",
+    "full": "full name for RT-sample-app"
+  },
+  "description": {
+    "short": "Specify runtime requirements for specific app capabilities",
+    "full": "Specify runtime requirements for specific app capabilities"
+  },
+  "accentColor": "#FFFFFF",
+  "elementRelationshipSet": {
+    "oneWayDependencies": [
+      {
+        "element": {
+          "name": "composeExtensions",
+          "id": "composeExt_ID",
+          "commandIds": [
+            "createCard"
+          ]
+        },
+        "dependsOn": [
+          {
+            "name": "bots",
+            "id": "${{BOT_ID}}"
+          }
         ]
-    },
-    "bots": [
+      }
+    ],
+    "mutualDependencies": [
+      [
         {
-            "botId": "${{BOT_ID}}",
-            "needsChannelSelector": false,
-            "isNotificationOnly": false,
-            "scopes": [
-                "personal",
-                "groupchat",
-                "team"
-            ]
-        }
-    ],
-    "composeExtensions": [
+          "name": "staticTabs",
+          "id": "staticTab_ID"
+        },
         {
-            "id": "composeExt_ID",
-            "botId": "${{BOT_ID}}",
-            "commands": [
-                {
-                    "id": "createCard",
-                    "context": [
-                        "compose",
-                        "message",
-                        "commandBox"
-                    ],
-                    "description": "Command to run action to create a Card from Compose Box",
-                    "title": "Create Card",
-                    "type": "action",
-                    "parameters": [
-                        {
-                            "name": "title",
-                            "title": "Card title",
-                            "description": "Title for the card",
-                            "inputType": "text"
-                        },
-                        {
-                            "name": "subTitle",
-                            "title": "Subtitle",
-                            "description": "Subtitle for the card",
-                            "inputType": "text"
-                        },
-                        {
-                            "name": "text",
-                            "title": "Text",
-                            "description": "Text for the card",
-                            "inputType": "textarea"
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "staticTabs": [
+          "name": "composeExtensions",
+          "id": "composeExt_ID"
+        },
         {
-            "entityId": "staticTab_Id",
-            "name": "Personal Tab",
-            "contentUrl": "${{BOT_ENDPOINT}}/tab",
-            "websiteUrl": "${{BOT_ENDPOINT}}/tab",
-            "scopes": [
-                "personal"
-            ]
+          "name": "bots",
+          "id": "${{BOT_ID}}"
         }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "${{BOT_DOMAIN}}"
+      ]
     ]
+  },
+  "elementRelationshipSet": {
+    "oneWayDependencies": [
+      {
+        "element": {
+          "name": "staticTabs",
+          "id": "staticTab_Id"
+        },
+        "dependsOn": [
+          {
+            "name": "composeExtensions",
+            "id": "composeExt_ID",
+            "commandIds": [
+              "createCard"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal",
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "id": "composeExt_ID",
+      "botId": "${{BOT_ID}}",
+      "commands": [
+        {
+          "id": "createCard",
+          "context": [
+            "compose",
+            "message",
+            "commandBox"
+          ],
+          "description": "Command to run action to create a Card from Compose Box",
+          "title": "Create Card",
+          "type": "action",
+          "parameters": [
+            {
+              "name": "title",
+              "title": "Card title",
+              "description": "Title for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "subTitle",
+              "title": "Subtitle",
+              "description": "Subtitle for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "text",
+              "title": "Text",
+              "description": "Text for the card",
+              "inputType": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "staticTab_Id",
+      "name": "Personal Tab",
+      "contentUrl": "${{BOT_ENDPOINT}}/tab",
+      "websiteUrl": "${{BOT_ENDPOINT}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
 }
