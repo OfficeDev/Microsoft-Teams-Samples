@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
-const BEGINdIALOG = 'BeginDialog';
+const BEGINDIALOG = 'BeginDialog';
 const HELLO = 'Hello';
 const { HelloDialog } = require('../basic/helloDialog');
 
@@ -11,7 +11,7 @@ class BeginDialogExampleDailog extends ComponentDialog {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
-        this.addDialog(new WaterfallDialog(BEGINdIALOG, [
+        this.addDialog(new WaterfallDialog(BEGINDIALOG, [
             this.beginBeginDialogExampleDailog.bind(this),
             this.continueBeginDialogExampleDailog.bind(this),
         ]));
