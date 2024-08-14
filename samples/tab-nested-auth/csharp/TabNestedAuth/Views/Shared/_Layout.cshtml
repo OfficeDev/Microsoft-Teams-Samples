@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TeamsAuthSSO</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
+            crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="~/js/auth.js"></script>
+    <script src="~/js/msal-auth.js"></script>
+    <style>
+         body {
+             font-family:"Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
+         }
+    </style>
+    @RenderSection("Scripts", required: false)
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+</html>

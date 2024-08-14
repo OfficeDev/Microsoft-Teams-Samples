@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<head>
+    <style>
+        .loginBtn {
+            background-color: rgb(91, 95, 199);
+            border: 1px solid rgb(91, 95, 199);
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-family: Graphik, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.15;
+            padding: 12px 16px;
+            width: 5rem;
+        }
+    </style>
+    <script>
+        async function login() {
+            try {
+                const response = await fetch('@Url.Action("Login", "Home")', {
+                    method: 'GET'
+                });
+
+                if (response.ok) {
+                    const data = await response.text();
+                    document.getElementById('graphData').innerText = data;
+                } else {
+                    alert('Failed to retrieve data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</head>
+
+<div>
+    <button class="loginBtn" onclick="login()">Login</button>
+</div>
+
+<div class="text-center">
+    <pre id="graphData" style="white-space:pre-wrap"></pre>
+</div>
