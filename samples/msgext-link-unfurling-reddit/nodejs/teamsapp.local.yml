@@ -74,5 +74,6 @@ deploy:
       envs:
         BOT_ID: ${{BOT_ID}}
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        BOT_TYPE: 'MultiTenant'
         REDDIT_ID: ${{REDDIT_ID}}
         REDDIT_PASSWORD: ${{SECRET_REDDIT_PASSWORD}}
