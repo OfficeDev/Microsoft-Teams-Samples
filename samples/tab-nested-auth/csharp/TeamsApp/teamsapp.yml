@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-sso-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-nested-auth-csharp
 
 environmentFolderPath: ./env

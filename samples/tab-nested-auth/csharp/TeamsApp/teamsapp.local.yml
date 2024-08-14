@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-sso-csharp
+  sampleTag: Microsoft-Teams-Samples:tab-nested-auth-csharp
 
 provision:
   # Creates a new Azure Active Directory (AAD) app to authenticate users if
@@ -44,7 +44,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: tab-sso${{APP_NAME_SUFFIX}}
+      name: tab-nested-auth${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -53,7 +53,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../TeamsTabSSO/appsettings.json
+      target: ../TabNestedAuth/appsettings.json
       content:
         AzureAd:
           TenantId: ${{AAD_APP_TENANT_ID}}
