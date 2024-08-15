@@ -117,19 +117,19 @@ app.post('/config', function (req, res) {
 app.post('/comment', (req, res) => {
   //setHeader with CARD-ACTION-STATUS will post the message to the same conversation
   //The comments entered is posted back in the conversation here
-  res.setHeader("CARD-ACTION-STATUS", "Your comments " + "**-- " + req.body.comment + " --**" + " are posted succesfully");
+  res.setHeader("CARD-ACTION-STATUS", "Your comments " + "**-- " + req.body.comment + " --**" + " are posted successfully");
   res.sendStatus(200);
 });
 
 app.post('/mergerequest', (req, res) => {
   //setHeader with CARD-ACTION-STATUS will post the message to the same conversation
-  res.setHeader("CARD-ACTION-STATUS", "Your pull request is merged succesfully");
+  res.setHeader("CARD-ACTION-STATUS", "Your pull request is merged successfully");
   res.sendStatus(200);
 });
 
 app.post('/closerequest', (req, res) => {
   //setHeader with CARD-ACTION-STATUS will post the message to the same conversation
-  res.setHeader("CARD-ACTION-STATUS", "Your pull request is closed succesfully");
+  res.setHeader("CARD-ACTION-STATUS", "Your pull request is closed successfully");
   res.sendStatus(200);
 });
 
