@@ -127,11 +127,11 @@ Use the bot command `peoplepickercard` to get the card with people picker contro
 
  Adaptive card.
 
-![people picker card ](PeoplePicker/Images/adaptiveCard.png)
+![people picker card ](PeoplePicker/Images/people-picker-card.png)
 
  Adaptive card with details( On `Assign` button click, the bot will return the member id that we have selected.)  
 
-![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
+![people picker card ](PeoplePicker/Images/people-picker-id.png)
 
 
 ## Further reading

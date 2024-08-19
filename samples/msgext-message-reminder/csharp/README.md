@@ -120,29 +120,31 @@ Personal scope scenario
 
 - Select `...` over message to get action `create-reminder` for scheduling task.
 
-![Select message](MessagingExtensionReminder/Images/MessageAction.png)
+![Select message](MessagingExtensionReminder/Images/1.personalscope.png)
 
 - Task module to add task details.
 
-![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
+![Task Details](MessagingExtensionReminder/Images/2.task-module-in-personal-scope.png)
 
 - Reminder card of task at scheduled date and time.
 
-![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
+![Task reminder](MessagingExtensionReminder/Images/3.Reminder-card-of-task-at-scheduled-date-and-time.png)
 
 Team scope scenario
 
 - Select `...` over message to get action `create-reminder` for scheduling task.
 
-![Team message action ](MessagingExtensionReminder/Images/MessageActionTeam.png)
+![Team message action ](MessagingExtensionReminder/Images/4.teamscope.png)
 
 - Task module to add task details.
 
-![Team Task Details ](MessagingExtensionReminder/Images/ScheduleTaskTeam.png)
+![Team Task Details ](MessagingExtensionReminder/Images/5.Task-module-to-add-task-details.png)
 
 - Reminder card of task at scheduled date and time.
 
-![ TeamTask reminder](MessagingExtensionReminder/Images/TaskReminderTeam.png)
+![ TeamTask reminder](MessagingExtensionReminder/Images/6.task-created-success-new.png)
+
+![ TeamTask reminder](MessagingExtensionReminder/Images/7.Reminder-card-of-task-at-scheduled-date-and-time.png)
 
 
 ## Deploy the bot to Azure

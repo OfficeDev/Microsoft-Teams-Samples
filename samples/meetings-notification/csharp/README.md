@@ -38,6 +38,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -106,22 +120,24 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 Type `SendInMeetingNotification` in bot chat to send In-Meeting notifications.
 
-![Welcome](InMeetingNotifications/Images/Welcome.png)
+![Install](InMeetingNotifications/Images/1.Install.png)
 
-![Agenda card](InMeetingNotifications/Images/AgendaCard.png)
+![Welcome](InMeetingNotifications/Images/2.Home_Page.png)
 
-![Feedback submit](InMeetingNotifications/Images/FeedbackSubmit.png)
+![Agenda card](InMeetingNotifications/Images/3.Send_Meeting_Notification.png)
 
-![Feedback card](InMeetingNotifications/Images/FeedbackCard.png)
+![Feedback submit](InMeetingNotifications/Images/4.Option_Card.png)
+
+![Feedback card](InMeetingNotifications/Images/5.Output_in_Chat.png)
 
 
 ## Send targeted meeting notification
 
 Type `SendTargetedNotification` in bot chat to send Targeted Meeting notifications.
 
-![Meeting card](InMeetingNotifications/Images/MeetingCard.png)
+![Meeting card](InMeetingNotifications/Images/6.Card_in_Meeting_Chat.png)
 
-![Target notification](InMeetingNotifications/Images/TargetNotification.png)
+![Target notification](InMeetingNotifications/Images/7.Popup_Window.png)
 
 
 ## Further Reading
