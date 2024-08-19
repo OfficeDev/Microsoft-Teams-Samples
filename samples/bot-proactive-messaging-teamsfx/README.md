@@ -14,13 +14,24 @@ This is a sample which shows how to save user's conversation reference informati
 
 - From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code. 
 - Alternatively use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button.
-- From Teams Toolkit CLI: Start debugging the project by executing the command `teamsapp preview --local` in your project directory.
+- From Teams Toolkit CLI:
+  - Install [dev tunnel cli](https://aka.ms/teamsfx-install-dev-tunnel).
+  - Login with your M365 Account using the command `devtunnel user login`.
+  - Start your local tunnel service by running the command `devtunnel host -p 3978 --protocol http --allow-anonymous`.
+  - In the `env/.env.local` file, fill in the values for `PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN` and `PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT` with your dev tunnel URL.
+    ```
+    PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN=sample-id-3978.devtunnels.ms
+    PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT=https://sample-id-3978.devtunnels.ms
+    ```
+  - Executing the command `teamsapp provision --env local` in your project directory.
+  - Executing the command `teamsapp deploy --env local` in your project directory.
+  - Executing the command `teamsapp preview --env local --run-command "cd bot; npm run dev:teamsapp"` in your project directory.
 
 **Note**: If deploying or provisioning the sample, please replace line 9 of file `bot/teamsBot.js` with .env.dev. (By default its set to `.env.local`)
 
 ## Edit the manifest
 
-You can find the Teams app manifest in `templates/appManifest` folder. The folder contains a manifest template file:
+You can find the Teams app manifest in `templates/appPackage` folder. The folder contains a manifest template file:
 * `manifest.template.json`
 
 Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
@@ -51,7 +62,7 @@ Once the provisioning and deployment steps are finished, you can preview your ap
   1. Select `Launch Remote (Edge)` or `Launch Remote (Chrome)` from the launch configuration drop-down.
   1. Press the Play (green arrow) button to launch your app - now running remotely from Azure.
 
-- From Teams Toolkit CLI: execute `teamsapp preview --remote` in your project directory to launch your application.
+- From Teams Toolkit CLI: execute `teamsapp preview --env dev` in your project directory to launch your application.
 
 ## Validate manifest file
 

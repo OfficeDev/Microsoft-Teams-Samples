@@ -1,14 +1,21 @@
 const esbuild = require('esbuild');
+
 esbuild.build({
     entryPoints: ['server.js'],
     bundle: true,
     platform: 'node',
-    outfile: 'dist/index.js'
+    outfile: 'dist/index.js',
+    loader: {
+        '.node': 'file'
+    },
+    external: [
+        'keytar' 
+    ]
 })
-    .then((r) => {
+    .then(() => {
         console.log(`Build succeeded.`);
     })
     .catch((e) => {
-        console.log("Error building:", e.message);
+        console.error("Error building:", e.message);
         process.exit(1);
     });

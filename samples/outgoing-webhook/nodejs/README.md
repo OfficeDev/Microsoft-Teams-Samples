@@ -12,6 +12,9 @@ extensions:
   createdDate: "12/05/2017 06:03:13 PM"
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 # Outgoing Webhook Sample Node.js
 
@@ -84,14 +87,14 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 ## Running the sample
 
 - Example screenshot to show Hero card:
-![Hero card](Images/heroCard.png)
+![Hero card](Images/1.hero-card.png)
 
 * Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
 
 * If you type anything else apart from above mentioned type, it will echo back what you typed.
 
 - Example screenshot to show Echo message:
-![Echo message](Images/echoMessage.png)
+![Echo message](Images/2.hello-bot.png)
 
 
 ## Contributing
