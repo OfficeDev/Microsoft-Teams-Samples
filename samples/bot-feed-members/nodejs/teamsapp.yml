@@ -4,7 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-conversation-nodejs
+  sampleTag: Microsoft-Teams-Samples:bot-feed-members-nodejs
 
 environmentFolderPath: ./env
-projectId: f959a91d-c748-4bf5-96d4-b7d0d21dbfb7

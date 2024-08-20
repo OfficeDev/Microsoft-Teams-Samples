@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
+description: This sample showcases how apps function within federated group chats.
 products:
 - office-teams
 - office
@@ -28,7 +28,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 
 ## Interaction with bot
 
-![Conversation Bot](Images/bot-conversation.gif)
+![Conversation Bot](Images/bot-feed-members.gif)
 
 ## Prerequisites
 
@@ -108,7 +108,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
    
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation/nodejs/index.js#L46) line and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-feed-members/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
 
