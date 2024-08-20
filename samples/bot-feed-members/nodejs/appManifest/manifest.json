@@ -26,7 +26,7 @@
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
-        "groupchat",
+        "groupChat",
         "team"
       ],
       "isNotificationOnly": false,
@@ -36,7 +36,7 @@
       "commandLists": [
         {
           "scopes": [
-            "groupchat"
+            "groupChat"
           ],
           "commands": [
             {
