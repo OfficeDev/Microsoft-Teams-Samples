@@ -15,7 +15,6 @@ class TeamsConversationBot extends TeamsActivityHandler {
         super();
 
         this.onMessage(async (context, next) => {
-            // Code to get details of all members in group chat
             const members = await TeamsInfo.getPagedMembers(context);
             TurnContext.removeRecipientMention(context.activity);
 
@@ -25,65 +24,93 @@ class TeamsConversationBot extends TeamsActivityHandler {
             } else {
                 await this.cardActivityAsync(context, false);
             }
-
             await next();
         });
 
         this.onMembersAdded(async (context, next) => {
-                const members = await TeamsInfo.getPagedMembers(context);
-                var memberId = context.activity.membersAdded[0].aadObjectId;
-                var member = await TeamsInfo.getMember(context, memberId);
-                await context.sendActivity(`Welcome to the team :${member.name}`);
-                await this.listMembersAsync(context, members);
-                
+            const memberId = context.activity.membersAdded[0].aadObjectId;
+            const member = await TeamsInfo.getMember(context, memberId);
+        
+            // Create the Adaptive Card with member details
+            const memberCard = {
+                type: "AdaptiveCard",
+                body: [
+                    {
+                        type: "TextBlock",
+                        text: `Welcome to the team, ${member.name}!`,
+                        weight: "Bolder",
+                        size: "ExtraLarge"  // Increased size
+                    },
+                    {
+                        type: "TextBlock",
+                        text: "Here are your details:",
+                        weight: "Bolder",
+                        size: "Large",  // Increased size
+                        spacing: "Large"  // Added spacing
+                    },
+                    {
+                        type: "FactSet",
+                        facts: [
+                            { title: "Name:", value: member.name },
+                            { title: "Email:", value: member.email },
+                            { title: "Given Name:", value: member.givenName },
+                            { title: "Surname:", value: member.surname },
+                            { title: "User Principal Name:", value: member.userPrincipalName }
+                        ],
+                        spacing: "ExtraLarge"  // Added spacing for more visual space
+                    }
+                ],
+                actions: [],
+                $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+                version: "1.4"
+            };
+        
+            // Send the Adaptive Card
+            await context.sendActivity({
+                attachments: [CardFactory.adaptiveCard(memberCard)]
+            });
+        
             await next();
         });
-    }
-
-    async onInstallationUpdateActivity(context) {
-        if (context.activity.conversation.conversationType === 'channel') {
-            await context.sendActivity(MessageFactory.text(`Welcome to Microsoft Teams type list by @ mention the bot to get list of all members.`));
-        } else {
-            await context.sendActivity(MessageFactory.text('Welcome to Microsoft Teams type list by @ mention the bot to get list of all members.'));
-        }
+        
     }
 
     async listMembersAsync(context, members) {
        // Construct Adaptive Card JSON
-       const adaptiveCardJson = {
-        type: 'AdaptiveCard',
-        body: [
-            {
-                type: 'TextBlock',
-                text: 'List Example',
-                weight: 'Bolder',
-                size: 'Medium'
-            },
-            {
-                type: 'Container',
-                items: members.members.map(item => ({
+        const adaptiveCardJson = {
+            type: 'AdaptiveCard',
+            body: [
+                {
                     type: 'TextBlock',
-                    text: `- ${item.name}`,
-                    wrap: true
-                }))
-            }
-        ],
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        version: '1.4'
-    };
+                    text: 'List of Members',
+                    weight: 'Bolder',
+                    size: 'Medium'
+                },
+                {
+                    type: 'Container',
+                    items: members.members.map(item => ({
+                        type: 'TextBlock',
+                        text: `- ${item.name}`,
+                        wrap: true
+                    }))
+                }
+            ],
+            $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+            version: '1.4'
+        };
 
-    // Create an Activity object with the Adaptive Card attachment
-    const reply = {
-        type: 'message',
-        text: 'Here is the list of members in group:',
-        attachments: [CardFactory.adaptiveCard(adaptiveCardJson)]
-    };
+        // Create an Activity object with the Adaptive Card attachment
+        const reply = {
+            type: 'message',
+            text: 'Here is the list of members in group :',
+            attachments: [CardFactory.adaptiveCard(adaptiveCardJson)]
+        };
 
-    // Send the Activity
-    await context.sendActivity(reply);
+        // Send the Activity
+        await context.sendActivity(reply);
     }
 
-    async cardActivityAsync(context, isUpdate) {
+    async cardActivityAsync(context) {
         const cardActions = [
             {
                 type: ActionTypes.MessageBack,
@@ -92,45 +119,6 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 text: 'List'
             }
         ];
-
-        if (isUpdate) {
-            await this.sendUpdateCard(context, cardActions);
-        } else {
-            await this.sendWelcomeCard(context, cardActions);
-        }
-    }
-
-    async sendUpdateCard(context, cardActions) {
-        const data = context.activity.value;
-        data.count += 1;
-        cardActions.push({
-            type: ActionTypes.MessageBack,
-            title: 'Update Card',
-            value: data,
-            text: 'UpdateCardAction'
-        });
-        const card = CardFactory.heroCard(
-            'Updated card',
-            `Update count: ${data.count}`,
-            null,
-            cardActions
-        );
-        card.id = context.activity.replyToId;
-        const message = MessageFactory.attachment(card);
-        message.id = context.activity.replyToId;
-        await context.updateActivity(message);
-    }
-
-    async sendWelcomeCard(context, cardActions) {
-        const initialValue = {
-            count: 0
-        };
-        cardActions.push({
-            type: ActionTypes.MessageBack,
-            title: 'Update Card',
-            value: initialValue,
-            text: 'UpdateCardAction'
-        });
         const card = CardFactory.heroCard(
             'Welcome card',
             '',
@@ -140,5 +128,4 @@ class TeamsConversationBot extends TeamsActivityHandler {
         await context.sendActivity(MessageFactory.attachment(card));
     }
 }
-
 module.exports.TeamsConversationBot = TeamsConversationBot;
