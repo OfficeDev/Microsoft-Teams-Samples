@@ -131,10 +131,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Outlook**
 
-**Outlook doesn't support bots, and because ComposeExtension depend on a bot, the ComposeExtension doesn't work in Outlook**
+**actionME dependsOn bots, actionME won't show up in Outlook**
 ![OutLookMessageExtension](Images/8.Outlook_SampleNotFoundForMsgExt.png)
 
-**Static Tab Depends On ComposeExtension, the Static tab doesn't work in outlook**
+**Static Tab Depends On actionME, the Static tab doesn't work in outlook**
 ![OutLookMessageExtension](Images/8.Outlook_SampleNotFoundForTab.png)
 
 ## Deploy the bot to Azure

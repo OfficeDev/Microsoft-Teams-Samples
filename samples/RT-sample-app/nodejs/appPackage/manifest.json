@@ -136,7 +136,17 @@
       "websiteUrl": "${{BOT_ENDPOINT}}/tab",
       "scopes": [
         "personal"
-      ]
+      ],
+      "requirementSet": {
+        "hostMustSupportFunctionalities": [
+          {
+            "name": "dialogUrl"
+          },
+          {
+            "name": "dialogUrlBot"
+          }
+        ]
+      }
     }
   ],
   "permissions": [
