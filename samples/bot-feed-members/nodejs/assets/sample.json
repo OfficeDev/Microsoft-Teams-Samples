@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-feed-members-nodejs",
     "source": "officeDev",
-    "title": "Bot Conversation",
+    "title": "Apps in Federated",
     "shortDescription": "This sample showcases how apps function within federated group chats.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-feed-members/nodejs",
     "longDescription": [
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-feed-members/nodejs/Images/ConversationBot.gif",
-        "alt": "Solution UX showing conversation events for teams bot"
+        "alt": "Solution UX showing apps in federated group chats"
       }
     ],
     "authors": [

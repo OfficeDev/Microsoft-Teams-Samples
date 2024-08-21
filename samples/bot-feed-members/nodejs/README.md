@@ -9,26 +9,21 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "10-04-2022 20:15:25"
+ createdDate: "08-21-2024 20:15:25"
 urlFragment: officedev-microsoft-teams-samples-bot-feed-members-nodejs
 ---
 
-# Teams Conversation Bot
+# Apps in federated
 
-Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
-
-This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
-how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
+Apps in federated group chats.
 
 ## Included Features
 * Bots
 * Adaptive Cards
-* Teams Conversation Events
-* Immersive Reading Support for Cards
 
 ## Interaction with bot
 
-![Conversation Bot](Images/bot-feed-members.gif)
+![bot-feed-members](Images/bot-feed-members.gif)
 
 ## Prerequisites
 
@@ -102,7 +97,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
@@ -111,6 +106,31 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-feed-members/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
+
+![1.InstallApp](Images/1.InstallApp.png)
+
+![2.SelectGroupChat](Images/2.SelectGroupChat.png)
+
+![3.Listallmembers](Images/3.Listallmembers.png)
+
+![4.listmembersingroup](Images/4.listmembersingroup.png)
+
+![5.AppPeople](Images/5.AppPeople.png)
+
+![6.AddingMember](Images/6.AddingMember.png)
+
+![7.AddingMemberDetails](Images/7.AddingMemberDetails.png)
+
+![8.AddMeeting](Images/8.AddMeeting.png)
+
+![9.SelectMeeting](Images/9.SelectMeeting.png)
+
+![10.MeetingHello](Images/10.MeetingHello.png)
+
+![11.ListMember](Images/11.ListMember.png)
+
+![12.AddingMemeberDetails](Images/12.AddingMemeberDetails.png)
+
 
 ## Deploy the bot to Azure
 
