@@ -10,28 +10,41 @@ const {
     TurnContext
 } = require('botbuilder');
 
+// The TeamsConversationBot class extends TeamsActivityHandler to handle Teams-specific activities.
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
         super();
 
+        // Handle messages sent to the bot.
         this.onMessage(async (context, next) => {
+            // Get a paginated list of members in the current Teams conversation.
             const members = await TeamsInfo.getPagedMembers(context);
+            
+            // Remove the bot's mention from the message text to clean up the user's input.
             TurnContext.removeRecipientMention(context.activity);
 
+            // Normalize the message text for case-insensitive comparison.
             const text = context.activity.text.trim().toLocaleLowerCase();
+            
+            // If the message contains 'list', list the members. Otherwise, send a welcome card.
             if (text.includes('list')) {
                 await this.listMembersAsync(context, members);
             } else {
                 await this.cardActivityAsync(context, false);
             }
+            // Call the next middleware in the pipeline.
             await next();
         });
 
+        // Handle new members added to the conversation.
         this.onMembersAdded(async (context, next) => {
+            // Get the ID of the first member added.
             const memberId = context.activity.membersAdded[0].aadObjectId;
+            
+            // Fetch detailed information about the new member.
             const member = await TeamsInfo.getMember(context, memberId);
         
-            // Create the Adaptive Card with member details
+            // Create an Adaptive Card to welcome the new member and display their details.
             const memberCard = {
                 type: "AdaptiveCard",
                 body: [
@@ -65,18 +78,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 version: "1.4"
             };
         
-            // Send the Adaptive Card
+            // Send the Adaptive Card as an activity to the user.
             await context.sendActivity({
                 attachments: [CardFactory.adaptiveCard(memberCard)]
             });
         
+            // Call the next middleware in the pipeline.
             await next();
         });
-        
     }
 
+    // Lists all members in the current Teams conversation.
     async listMembersAsync(context, members) {
-       // Construct Adaptive Card JSON
+        // Construct the Adaptive Card JSON structure with the list of members.
         const adaptiveCardJson = {
             type: 'AdaptiveCard',
             body: [
@@ -99,18 +113,20 @@ class TeamsConversationBot extends TeamsActivityHandler {
             version: '1.4'
         };
 
-        // Create an Activity object with the Adaptive Card attachment
+        // Create an Activity object containing the Adaptive Card as an attachment.
         const reply = {
             type: 'message',
-            text: 'Here is the list of members in group :',
+            text: 'Here is the list of members in group:',
             attachments: [CardFactory.adaptiveCard(adaptiveCardJson)]
         };
 
-        // Send the Activity
+        // Send the Activity with the list of members to the user.
         await context.sendActivity(reply);
     }
 
+    // Sends a welcome card with an option to list all members.
     async cardActivityAsync(context) {
+        // Define the action button to list all members.
         const cardActions = [
             {
                 type: ActionTypes.MessageBack,
@@ -119,13 +135,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 text: 'List'
             }
         ];
+        
+        // Create a Hero Card with the defined action button.
         const card = CardFactory.heroCard(
             'Welcome card',
             '',
             null,
             cardActions
         );
+
+        // Send the Hero Card as an activity to the user.
         await context.sendActivity(MessageFactory.attachment(card));
     }
 }
+
+// Export the TeamsConversationBot class for use in other files.
 module.exports.TeamsConversationBot = TeamsConversationBot;
