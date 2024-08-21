@@ -104,31 +104,16 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## RT Sample App Feature
 **This sample app feature is to show oneway dependency**
----
-Manifest: 1. OneWay Dependent
-Capabilities:
-Bot and Action-ME
-Scenario:
-Action-ME Depends on Bot
----
----
-Manifest: 2. OneWay Dependent
-Capabilities:
-Static-Tab and Bot
-Dependency:
-Static-Tab Depends on Bot
----
----
-Manifest: 3. Host Support Functionality
-Capabilities:
-Static-Tab with dialog URL
-Dependency:
--
----
 
-1) Static tab that contains a dialog - 
-2) Static tab + ME => the static tab dependsOn ME
-3) actionME depends on Bot => for the bot-base-actionME scenario  
+| Manifests | Capabilities | Dependency |
+|----------|----------|----------|
+| 1.OneWay ME-DependsOn-Bot | Bot and Action-ME | Action-ME Depends on Bot |
+| 2.OneWay Tab-DependsOn-Bot | Static-Tab and Bot | Static-Tab Depends on Bot |
+| 3.StaticTab-With-DialogURL |Static-Tab with dialog URL | Host Support Functionalities |
+
+1) actionME depends on Bot => for the bot-base-actionME scenario 
+2) Static tab + Bot => the static tab dependsOn Bot
+1) Static tab that contains a dialog, 
 
 
 
