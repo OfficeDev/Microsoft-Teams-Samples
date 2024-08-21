@@ -98,17 +98,18 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message, or selecting a command from the command list. The bot will respond to the following strings. 
 
 1. **Show Welcome**
-    ![WelcomeCard](Images/2.WelcomeCard.PNG)
+    ![Prompts](Images/1.prompts.png)
+    ![Welcome](Images/2.welcome.png)
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
 
 2. **MentionMe**
-    ![MentionMe](Images/3.MentionMe.PNG)
+    ![MentionMe](Images/3.mention.png)
   - **Result:** The bot will respond to the message and mention the user
   - **Valid Scopes:** personal, group chat, team chat
 
 3. **MessageAllMembers**
-    ![MessageAllMembers](Images/4.MessageAllMembers.PNG)
+    ![MessageAllMembers](Images/4.sent.png)
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
   - **Valid Scopes:** personal, group chat, team chat
 

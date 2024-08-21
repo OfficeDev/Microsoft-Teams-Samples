@@ -89,7 +89,7 @@ All required source code are located in the `./src` folder:
     - Start the app
 
         ```
-        gulp serve
+        npm start
         ```
 
 3. Upload tab app to Teams
@@ -123,47 +123,6 @@ To access the app, you can either open the tab in Microsoft Teams, or you can ac
 - [Tab Context - Microsoft Teams JavaScript library](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#getting-context-by-using-the-microsoft-teams-javascript-library)
 - [React Hook - useEffect](https://react.dev/reference/react/useEffect)
 - [JS String match](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
-
-## Useful Guidance from Yo Teams
-
-### Building the app
-
-The application is built using the `build` Gulp task.
-
-``` bash
-npm i -g gulp-cli
-gulp build
-```
-
-### Building the manifest
-
-To create the Microsoft Teams Apps manifest, run the `manifest` Gulp task. This will generate and validate the package and finally create the package (a zip file) in the `package` folder. The manifest will be validated against the schema and dynamically populated with values from the `.env` file.
-
-``` bash
-gulp manifest
-```
-
-### Deploying the manifest
-
-Using the `yoteams-deploy` plugin, automatically added to the project, deployment of the manifest to the Teams App store can be done manually using `gulp tenant:deploy` or by passing the `--publish` flag to any of the `serve` tasks.
-
-### Configuration
-
-Configuration will be stored in the `.env` file. Please create one based on the .env_sample file included in the `samples/tab-deeplink-pass-values/ts` folder.
-
-### Debug and test locally
-
-To debug and test the solution locally you use the `serve` Gulp task. This will first build the app and then start a local web server on port 3007, where you can test your Tabs, Bots or other extensions. Also this command will rebuild the App if you change any file in the `/src` directory.
-
-``` bash
-gulp serve
-```
-
-To debug the code you can append the argument `debug` to the `serve` command as follows. This allows you to step through your code using your preferred code editor.
-
-``` bash
-gulp serve --debug
-```
 
 ### Useful links
 

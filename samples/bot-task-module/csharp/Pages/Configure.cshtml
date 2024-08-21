@@ -12,7 +12,7 @@
     <p>
         <label for="tabChoice">Select the tab you would like to see: </label>
         <div>
-            <input type="radio" name="tabType" value="tasks" onclick="onClick()">Task Module<br>
+            <input type="radio" name="tabType" value="tasks" onclick="onClick()">Teams Dialogs<br>
             <input type="radio" name="tabType" value="helloworld" onclick="onClick()"> Hello World
         </div>
     </p>
@@ -27,7 +27,7 @@
             microsoftTeams.settings.setSettings({
                 entityId: "tasks",
                 contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks",
-                suggestedDisplayName: "Task Module CSharp",
+                suggestedDisplayName: "Teams Dialogs CSharp",
                 websiteUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks"
             });
         } else {

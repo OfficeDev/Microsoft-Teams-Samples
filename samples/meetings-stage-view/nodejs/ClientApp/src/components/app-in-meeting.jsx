@@ -83,7 +83,7 @@ const AppInMeeting = props => {
     }
 
     // Share the content to meeting stage view.
-    const shareSpecificPart = (partName) => {
+    const shareSpecificAppContent = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
             appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
@@ -101,6 +101,29 @@ const AppInMeeting = props => {
         });
     };
 
+      // Share the content in view-only screen sharing mode.
+      const shareSpecificAppContentScreenShare = (partName) => {
+        var appContentUrl = "";
+        microsoftTeams.app.getContext().then((context) => {
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    console.log(result);
+                }
+
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl,
+                // Optional shareOptions with sharingProtocol set to ScreenShare
+                {
+                    sharingProtocol: microsoftTeams.meeting.SharingProtocol.ScreenShare
+                });
+        });
+    };
+
     return (
         <div id="chatSection" className={appTheme}>
             <div className="label">
@@ -108,13 +131,16 @@ const AppInMeeting = props => {
             </div>
             <div id="boardDiv" className="chat-window">
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Todo shareSpecificPart={shareSpecificPart} />
+                    <Todo shareSpecificAppContent={shareSpecificAppContent} />
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Doing shareSpecificPart={shareSpecificPart} />
+                    <Doing shareSpecificAppContent={shareSpecificAppContent} />
                 </div>
                 <div className={defaultStyle + ' ' + appTheme}>
-                    <Done shareSpecificPart={shareSpecificPart} />
+                    <Done shareSpecificAppContent={shareSpecificAppContent} />
+                </div>
+                <div className={defaultStyle + ' ' + appTheme}>
+                    <Done shareSpecificAppContentScreenShare={shareSpecificAppContentScreenShare} />
                 </div>
                 <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>

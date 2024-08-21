@@ -98,8 +98,8 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
-![AddInTeam](Images/AddInTeam.PNG)
-![NewThread](Images/NewThread.PNG)
+![AddInTeam](Images/1.addtoteam.png)
+![NewThread](Images/2.thread.png)
 
 ## Deploy the bot to Azure
 

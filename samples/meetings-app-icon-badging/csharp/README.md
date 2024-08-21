@@ -103,15 +103,23 @@ Message the Bot by @ mentioning to interact with meetings notifications.
 
 **Setup Configurable Tab:**
 
-![Setup Tab](AppIconBadgingInMeetings/Images/2.Meeting_Config_Tab.png)
+![Setup Tab](AppIconBadgingInMeetings/Images/1.AddToMeeting.png)
+
+![Setup Tab](AppIconBadgingInMeetings/Images/2.ConfigTab.png)
 
 **Interacting with the app in Teams Meeting**
 
+![SidePanel](AppIconBadgingInMeetings/Images/3.Sidepanel.png)
+
 Type `SendNotification` in bot chat to send In-Meeting notifications.
+
+![SendNotification](AppIconBadgingInMeetings/Images/4.SendNotificationCammand.png)
+
+![SendNotification](AppIconBadgingInMeetings/Images/5.SelectOptionAppIconBadging.png)
 
 **Notification On Tab Icon as 'Icon Badging':**
 
-![App Icon Badging](AppIconBadgingInMeetings/Images/3.AppIconBadging.png)
+![AppIconBadgingInMeetings](AppIconBadgingInMeetings/Images/6.AppIconBadgingNotification.png)
 
 
 ## Further reading

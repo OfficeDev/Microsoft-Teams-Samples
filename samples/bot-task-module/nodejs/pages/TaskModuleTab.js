@@ -14,8 +14,7 @@
 
         var taskInfo_1 = {
             title: "",
-            height: "",
-            width: "",
+            size: "",
             url: "",
             card: "",
             fallbackUrl: "",
@@ -238,8 +237,8 @@
                             );
                         };
 
-                        //Task modules invoked from a tab
-                        microsoftTeams.tasks.startTask(taskInfo_1, submitHandler);
+                        //Dialogs (referred as dialogs (referred as task modules in TeamsJS v1.x) in TeamsJS v1.x) invoked from a tab
+                        microsoftTeams.dialog.open(taskInfo_1, submitHandler);
                         break;
 
                     default:
