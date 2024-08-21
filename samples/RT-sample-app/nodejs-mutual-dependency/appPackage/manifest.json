@@ -16,31 +16,14 @@
   },
   "name": {
     "short": "RT-Sample-App",
-    "full": "full name for RT-sample-app"
+    "full": "Mutual Dependeny RT Sample App"
   },
   "description": {
     "short": "Specify runtime requirements for specific app capabilities",
-    "full": "Specify runtime requirements for specific app capabilities"
+    "full": "This sample feature is to cover Mutual Dependency like Bot, Tab, ME depends on each other"
   },
   "accentColor": "#FFFFFF",
   "elementRelationshipSet": {
-    "oneWayDependencies": [
-      {
-        "element": {
-          "name": "composeExtensions",
-          "id": "composeExt_ID",
-          "commandIds": [
-            "createCard"
-          ]
-        },
-        "dependsOn": [
-          {
-            "name": "bots",
-            "id": "${{BOT_ID}}"
-          }
-        ]
-      }
-    ],
     "mutualDependencies": [
       [
         {
@@ -56,25 +39,6 @@
           "id": "${{BOT_ID}}"
         }
       ]
-    ]
-  },
-  "elementRelationshipSet": {
-    "oneWayDependencies": [
-      {
-        "element": {
-          "name": "staticTabs",
-          "id": "staticTab_Id"
-        },
-        "dependsOn": [
-          {
-            "name": "composeExtensions",
-            "id": "composeExt_ID",
-            "commandIds": [
-              "createCard"
-            ]
-          }
-        ]
-      }
     ]
   },
   "bots": [
@@ -136,17 +100,7 @@
       "websiteUrl": "${{BOT_ENDPOINT}}/tab",
       "scopes": [
         "personal"
-      ],
-      "requirementSet": {
-        "hostMustSupportFunctionalities": [
-          {
-            "name": "dialogUrl"
-          },
-          {
-            "name": "dialogUrlBot"
-          }
-        ]
-      }
+      ]
     }
   ],
   "permissions": [

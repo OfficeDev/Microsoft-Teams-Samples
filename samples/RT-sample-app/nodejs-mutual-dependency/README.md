@@ -8,8 +8,8 @@ title: Specify relationships between app capabilities
 description: Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet)
 extensions:
   contentType: samples
-  createdDate: 10/19/2024 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-RT-sample-app-nodejs
+  createdDate: 08/20/2024 10:02:21 PM
+urlFragment: officedev-microsoft-teams-samples-RT-sample-app-nodejs-mutual-dependency
 ---
 
 # Microsoft Teams RT Sample App Feature.
@@ -21,7 +21,6 @@ urlFragment: officedev-microsoft-teams-samples-RT-sample-app-nodejs
 * Bots
 * Compose Extensions
 * Element RelationShip Property
-    * OneWay Dependency
     * Mutual Dependency
 
 ## Interaction with app
@@ -84,7 +83,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) In a terminal, navigate to `samples/RT-sample-app/nodejs`
+2) In a terminal, navigate to `samples/RT-sample-app/nodejs-mutual-dependency`
 
 3) Install modules
 
@@ -103,11 +102,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
 
 ## RT Sample App Feature
-**This feature is to cover all 4 hero scenarios with one sample**
-1) Static tab that contains a dialog - 
-2) Static tab + ME => the static tab dependsOn ME
-3) Static tab + ME + BOT => the three mutually depends on each other
-4) actionME depends on Bot => for the bot-base-actionME scenario   
+**This sample feature is to cover Mutual Dependency like Bot, Tab, ME depends on each other**
+1) Static Tab + ME + BOT => the three mutually depends on each other
 
 ## Running the sample
 
@@ -115,27 +111,27 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![InstallApp](Images/1.Install_App.png)
 
-**Oneway Dependency and Mutual Dependency In Teams**
+**Mutual Dependency In Teams**
 
-![Teams](Images/2.PersonalBot.png)
+![TeamsBot](Images/2.PersonalBot.png)
 
-![Teams](Images/3.PersonalSelectMsgExtAction.png)
+![TeamsMsgExt](Images/3.PersonalSelectMsgExtAction.png)
 
-![Teams](Images/4.PersonalMsgExtAction.png)
+![TeamsMsgExt](Images/4.PersonalMsgExtAction.png)
 
-![Teams](Images/5.PersonaMsgExtActionSubmit.png)
+![TeamsActionSubmit](Images/5.PersonaMsgExtActionSubmit.png)
 
-![Teams](Images/6.StaticTab.png)
+![TeamsTab](Images/6.StaticTab.png)
 
-![Teams](Images/7.TaskModule.png)
+![TeamsTaskmodule](Images/7.TaskModule.png)
 
 **Outlook**
 
 **actionME dependsOn bots, actionME won't show up in Outlook**
-![OutLookMessageExtension](Images/8.Outlook_SampleNotFoundForMsgExt.png)
+![OutLookMessageExtension](Images/8.Outlook_AppNotFoundForMsgExt.png)
 
 **Static Tab Depends On actionME, the Static tab doesn't work in outlook**
-![OutLookMessageExtension](Images/8.Outlook_SampleNotFoundForTab.png)
+![OutLookStaticTab](Images/8.Outlook_AppNotFoundForTab.png)
 
 ## Deploy the bot to Azure
 
@@ -146,4 +142,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Specify Microsoft 365 host runtime requirements in app manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/specify-runtime-requirements?branch=pr-en-us-11018)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/RT-sample-app-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/RT-sample-app-nodejs-mutual-dependency" />
