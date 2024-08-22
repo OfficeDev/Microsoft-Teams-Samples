@@ -9,7 +9,7 @@ description: Microsoft Teams RT sample app in Node.js which specify relationship
 extensions:
   contentType: samples
   createdDate: 08/20/2024 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-RT-sample-app-nodejs-mutual-dependency
+urlFragment: officedev-microsoft-teams-samples-requirement-targeting-mutual-dependency-nodejs
 ---
 
 # Microsoft Teams RT Sample App Feature.
@@ -83,7 +83,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) In a terminal, navigate to `samples/RT-sample-app/nodejs-mutual-dependency`
+2) In a terminal, navigate to `samples/requirement-targeting-mutual-dependency`
 
 3) Install modules
 
@@ -167,4 +167,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Specify Microsoft 365 host runtime requirements in app manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/specify-runtime-requirements?branch=pr-en-us-11018)
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/RT-sample-app-nodejs-mutual-dependency" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/requirement-targeting-mutual-dependency-nodejs" />
