@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet)
+description: Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet) and hostMustSuppot scenarios.
 extensions:
   contentType: samples
   createdDate: 08/21/2024 10:02:21 PM
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-RT-sample-app-nodejs-oneway-depen
 
 # Microsoft Teams RT Sample App Feature.
 
-- Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet)
+- Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet) and hostMustSuppot scenarios.
 
 ## Included Features
 * Tabs
@@ -112,10 +112,80 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 | 3.StaticTab-With-DialogURL |Static-Tab with dialog URL | Host Support Functionalities |
 
 1) actionME depends on Bot => for the bot-base-actionME scenario 
+
+**JSON for ME-DependsOn-Bot**
+
+```json
+"elementRelationshipSet": {
+        "oneWayDependencies": [
+            {
+                "element": {
+                    "name": "composeExtensions",
+                    "id": "composeExt_ID",
+                    "commandIds": [
+                        "createCard"
+                    ]
+                },
+                "dependsOn": [
+                    {
+                        "name": "bots",
+                        "id": "${{BOT_ID}}"
+                    }
+                ]
+            }
+        ]
+    },
+``` 
+
 2) Static tab + Bot => the static tab dependsOn Bot
-1) Static tab that contains a dialog, 
 
+**JSON for Tab-DependsOn-Bot**
 
+```json
+"elementRelationshipSet": {
+        "oneWayDependencies": [
+            {
+                "element": {
+                    "name": "staticTabs",
+                    "id": "staticTab_Id"
+                },
+                "dependsOn": [
+                    {
+                        "name": "bots",
+                        "id": "${{BOT_ID}}"
+                    }
+                ]
+            }
+        ]
+    },
+
+```
+3) Static tab that contains a dialog, 
+
+**JSON for Static-Tab with dialog URL**
+```json
+ "staticTabs": [
+        {
+            "entityId": "staticTab_Id",
+            "name": "Personal Tab",
+            "contentUrl": "https://${{BOT_DOMAIN}}/tab",
+            "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
+            "scopes": [
+                "personal"
+            ],
+            "requirementSet": {
+                "hostMustSupportFunctionalities": [
+                    {
+                        "name": "dialogUrl"
+                    },
+                    {
+                        "name": "dialogUrlBot"
+                    }
+                ]
+            }
+        }
+    ],
+```
 
 ## Running the sample
 

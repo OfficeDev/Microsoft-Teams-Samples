@@ -105,6 +105,31 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **This sample feature is to cover Mutual Dependency like Bot, Tab, ME depends on each other**
 1) Static Tab + ME + BOT => the three mutually depends on each other
 
+**JSON for Bot,Tab and ME**
+
+```json
+
+ "elementRelationshipSet": {
+   "mutualDependencies": [
+     [
+       {
+         "name": "staticTabs",
+         "id": "staticTab_ID"
+       },
+       {
+         "name": "composeExtensions",
+         "id": "composeExt_ID"
+       },
+       {
+         "name": "bots",
+         "id": "${{BOT_ID}}"
+       }
+     ]
+   ]
+ },
+
+``` 
+
 ## Running the sample
 
 **Install App:**
@@ -127,10 +152,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Outlook**
 
-**actionME dependsOn bots, actionME won't show up in Outlook**
+**action command dependsOn bots, wehre as Message Extension Action won't showup in Outlook**
 ![OutLookMessageExtension](Images/8.Outlook_AppNotFoundForMsgExt.png)
 
-**Static Tab Depends On actionME, the Static tab doesn't work in outlook**
+**Static Tab Depends On Message Extension Action, the Static tab won't showup in outlook**
 ![OutLookStaticTab](Images/8.Outlook_AppNotFoundForTab.png)
 
 ## Deploy the bot to Azure
