@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.3.0",
+  "id": "ea05d40a-27d4-4a58-9860-de83ef1d42ef",
+  "packageName": "com.gauravkeshre.sample.supporttickets",
+  "developer": {
+    "name": "Gaurav Keshre",
+    "websiteUrl": "https://supportticketsapp.azurewebsites.net/",
+    "privacyUrl": "https://supportticketsapp.azurewebsites.net/privacy.html",
+    "termsOfUseUrl": "https://supportticketsapp.azurewebsites.net/termsofuse.html"
+  },
+  "icons": {
+      "color": "icon192.png",
+      "outline": "icon32.png"
+  },
+  "name": {
+    "short": "Support Tickets",
+    "full": "Support Tickets"
+  },
+  "description": {
+    "short": "This app allows user to login using SSO and log attendence.",
+    "full": "A simple react application for Microsoft Teams. This app allows user to login using SSO and log attendence."
+  },
+  "accentColor": "#5296d5",
+  "staticTabs": [
+    {
+      "entityId": "Index",
+      "name": "Index",
+      "contentUrl": "https://supportticketsapp.azurewebsites.net",
+      "websiteUrl": "https://supportticketsapp.azurewebsites.net",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "showLoadingIndicator": false,
+  "permissions": [
+      "identity",
+      "messageTeamMembers"
+  ],
+  "validDomains": [
+      "supportticketsapp.azurewebsites.net"
+  ],
+  "webApplicationInfo": {
+      "id": "3206947a-348e-4146-9acc-2aea7cc321f3",
+      "resource": "api://supportticketsapp.azurewebsites.net/3206947a-348e-4146-9acc-2aea7cc321f3"
+  },
+  "devicePermissions": [
+    "media"
+  ]
+}
