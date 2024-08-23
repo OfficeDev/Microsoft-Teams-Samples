@@ -231,6 +231,8 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
+- [Share to teams web apps](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
+
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-deeplink-nodejs" />
