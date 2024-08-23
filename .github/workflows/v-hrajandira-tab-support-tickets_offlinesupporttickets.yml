@@ -7,7 +7,9 @@ on:
   push:
     branches:
       - v-hrajandira/tab-support-tickets
-  workflow_dispatch:
+    paths:
+      - 'samples/tab-support-tickets/**'  
+  workflow_dispatch: 
 
 jobs:
   build:
