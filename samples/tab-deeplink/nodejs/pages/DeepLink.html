@@ -6,6 +6,7 @@
         integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
         crossorigin="anonymous"></script>
     <script src="DeepLinkModel.js"></script>
+    <script async defer src="https://teams.microsoft.com/share/launcher.js"></script>
     <script type="text/javascript">
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
@@ -47,6 +48,15 @@
     <div id="taskContent"
         style="margin-top:-23px;margin-left:80px;color:Highlight;font-family:'Segoe UI';font-size:15px"></div>
     <div id="list-content" style="margin-top:3rem"></div>
+    <div class="surface">
+        <div class="panel">
+            <p>Share to Teams using a Web Page</p>
+            <span class="teams-share-button"
+                data-href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Zjk2ZjQ1NTItNzNjMy00MGM1LWIxYWEtODRmZmFhYThmMGEz%40thread.v2/0?context=%7b%22Tid%22%3a%2272f988bf-86f1-41af-91ab-2d7cd011db47%22%2c%22Oid%22%3a%22943a82b8-fdb9-4dbf-aa6c-31e37bb9aed6%22%7d"
+                data-msg-text="Test Message" data-icon-px-size="64" data-allow-share-in-meeting="true"
+                data-app-id="c8fdd482-d94b-46fa-a3b7-06fcefbbee55" data-preview="true"></span>
+        </div>
+    </div>
     <div style="margin-top:1rem;">
         <span class="container" style="font-size:20px;font-weight:700;">
             Extended Deep link features

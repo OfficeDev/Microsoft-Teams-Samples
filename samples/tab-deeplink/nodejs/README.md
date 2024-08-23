@@ -150,42 +150,50 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 `@mention` bot in meeting chat to get an adaptive card.
 
-![Bot-Adaptive-Card](DeepLinkBot/images/BotAdaptiveCard.png)
+![Bot-Adaptive-Card](Images/BotAdaptiveCard.png)
 
 Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 **Note:** When the deeplink is opened outside meeting, it will redirect to meeting details tab.
-![Meeting-Sidepanel](DeepLinkBot/images/Sidepanel.PNG)
+![Meeting-Sidepanel](Images/Sidepanel.PNG)
 
 
 **Tab interaction:**
    
 **Deeplink to Audio Call:**
 
-![Audio-Deeplink](images/AudioCall.png)
+![Audio-Deeplink](Images/AudioCall.png)
 
 **Deeplink to Video Call:**
    
-![Video-Deeplink](images/VideoCall.png)
+![Video-Deeplink](Images/VideoCall.png)
 
 **Deeplink to Meeting schedule:**
    
-![Meeting-Schedule](images/MeetingSchedule.png)
+![Meeting-Schedule](Images/MeetingSchedule.png)
 
 **Deeplink to Polly app install dialog:**
    
-![App-Install-Dialog](images/AppInstall.png)
+![App-Install-Dialog](Images/AppInstall.png)
 
 **Deeplink to start new chat:**
    
-![Start-New-Chat](images/StartChatDeeplink.png)
+![Start-New-Chat](Images/StartChatDeeplink.png)
 
-![New-Chat](images/StartNewChat.png)
+![New-Chat](Images/StartNewChat.png)
 
 **Deeplink to channel conversation:**
    
-![Show-Channel-Conversation ](images/GroupChatDeeplink.png)
+![Show-Channel-Conversation ](Images/GroupChatDeeplink.png)
    
-![channel-Conversation](images/GroupChat.png)
+![channel-Conversation](Images/GroupChat.png)
+
+**Share To Teams Web Apps:**
+
+![Present Now Feature ](Images/PresentNow_Button.png)
+   
+![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
+
+![SharedFromWebApp](Images/ShareToTeams_LinkSharedFromWebApp.png)
 
 ## Outlook on the web
 
