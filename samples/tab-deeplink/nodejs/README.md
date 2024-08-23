@@ -78,6 +78,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
   - Update the `.env` configuration for the bot to use the `YOUR-MICROSOFT-APP-ID`, `YOUR-MICROSOFT-APP-PASSWORD` and `BASE-URL` is tunnel url eg. 124.ngrok-free.app. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
+  - navigate to `Deeplink.html` page at line number `58` Update the `data-app-id` attribute with your application id.
+    
+    ```bash
+    data-app-id="{{Your-App-Id}}"
+    ```
+
     - In a terminal, navigate to `samples/tab-deeplink/nodejs`
 
         ```bash
