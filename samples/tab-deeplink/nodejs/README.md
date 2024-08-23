@@ -189,7 +189,9 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 **Share To Teams Web Apps:**
 
-![Present Now Feature ](Images/PresentNow_Button.png)
+![Teams Button](Images/ShareToTeamWebApps.png)
+
+![Present Now Feature](Images/PresentNow_Button.png)
    
 ![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
 
@@ -231,7 +233,7 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
-- [Share to teams web apps](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
+- [Share to teams web apps](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
 
 
 
