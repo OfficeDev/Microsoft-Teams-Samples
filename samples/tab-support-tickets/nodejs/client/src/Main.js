@@ -59,7 +59,7 @@ function Main() {
         <div>
             {
                 isLoading ? <h1>Loading...</h1> :
-                teamsContext ? <TeamsAppWrapper context={teamsContext} token={teamsAuthToken} /> : WebPage()
+                <TeamsAppWrapper context={teamsContext} token={teamsAuthToken} />
             }
         </div>
     );
