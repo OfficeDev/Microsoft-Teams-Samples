@@ -68,7 +68,8 @@ class TeamsConversationBot extends TeamsActivityHandler {
                             { title: "Email:", value: member.email },
                             { title: "Given Name:", value: member.givenName },
                             { title: "Surname:", value: member.surname },
-                            { title: "User Principal Name:", value: member.userPrincipalName }
+                            { title: "User Principal Name:", value: member.userPrincipalName },
+                            { title: "Tenant Id:", value: member.tenantId }
                         ],
                         spacing: "ExtraLarge"  // Added spacing for more visual space
                     }
