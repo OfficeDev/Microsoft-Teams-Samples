@@ -13,45 +13,17 @@ namespace TeamsAuthSSO.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly MsalClient _msalClient;
 
         public HomeController(
             IConfiguration configuration)
         {
             _configuration = configuration;
-            _msalClient = new MsalClient(_configuration["AzureAd:ClientId"].ToString(), _configuration["AzureAd:TenantId"].ToString());
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            ViewBag.GraphData = "";
+            ViewBag.clientId = _configuration["AzureAd:ClientId"].ToString();
             return View();
         }
-
-        public async Task<IActionResult> Login()
-        {
-            try
-            {
-                // Acquire the access token
-                var accessToken = await _msalClient.AcquireTokenAsync();
-
-                if (string.IsNullOrEmpty(accessToken))
-                {
-                    return Content("Failed to acquire access token.");
-                }
-
-                // Call the Graph API with the acquired token
-                var graphData = await GraphApiClient.CallGraphApiAsync(accessToken);
-
-                return Content(graphData);
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception as needed
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                return Content("An error occurred while processing your request.");
-            }
-        }
-
     }
 }
