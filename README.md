@@ -81,7 +81,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |26| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |27| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
 |28| Tab Meeting Recording and transcript with auto recording |This sample shows meeting recording and transcript with auto recording. |[View][tab-meeting-auto-recording#csharp]||
-|29| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. ||[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
+|29| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. |[View][tab-nested-auth#cs]|[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -298,6 +298,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-meeting-auto-recording#csharp]:samples/tab-meeting-auto-recording/csharp
 [tab-deeplink-pass-values#ts]:samples/tab-deeplink-pass-values/ts
 [tab-nested-auth#nodejs]:samples/tab-nested-auth/nodejs
+[tab-nested-auth#cs]:samples/tab-nested-auth/csharp
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 [group-channel-tab#ts#spfx]:samples/tab-channel-group/spfx
