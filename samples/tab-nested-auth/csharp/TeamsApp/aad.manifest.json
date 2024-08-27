@@ -91,8 +91,8 @@
   ],
   "replyUrlsWithType": [
     {
-      "url": "http://localhost",
-      "type": "Web"
+      "url": "brk-multihub://${{TAB_DOMAIN}}",
+      "type": "Spa"
     }
   ]
 }
