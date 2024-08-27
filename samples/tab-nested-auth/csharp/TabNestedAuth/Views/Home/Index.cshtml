@@ -42,7 +42,7 @@
 
     // Function to initialize the public client application
     function initializePublicClient() {
-        await microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize();
 
         console.log("Starting initializePublicClient");
         return msal.createNestablePublicClientApplication(msalConfig).then(
@@ -117,9 +117,10 @@
     }
 
     const login = async () => {
+        console.log("Login Successfully");
         await microsoftTeams.app.initialize();
         let isNAAResults = await microsoftTeams.nestedAppAuth.isNAAChannelRecommended();
-         console.log(isNAAResults);
+        console.log("isNAAChannelRecommended" + isNAAResults);
         if (isNAAResults) {
             console.log("Nested app auth capabilities supported");
             return initializePublicClient().then((_client) => {
