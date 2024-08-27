@@ -1,10 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    Layout = "_Layout";
+    ViewData["Title"] = "Home Page"; // Sets the title of the page to "Home Page"
+    Layout = "_Layout"; // Specifies the layout to be used for this page
 }
 
 <head>
     <style>
+        /* Styles for the login button */
         .loginBtn {
             background-color: rgb(91, 95, 199);
             border: 1px solid rgb(91, 95, 199);
@@ -18,6 +19,7 @@
             width: 5rem;
         }
 
+        /* Styles for displaying user data */
         .userData {
             font-family: Segoe UI;
             white-space: pre-wrap;
@@ -42,13 +44,13 @@
 
     // Function to initialize the public client application
     function initializePublicClient() {
-        microsoftTeams.app.initialize();
+        microsoftTeams.app.initialize(); // Initialize the Teams app context
 
         console.log("Starting initializePublicClient");
         return msal.createNestablePublicClientApplication(msalConfig).then(
             (result) => {
                 console.log("Client app created");
-                pca = result;
+                pca = result; // Set the global pca variable to the created client application
                 return pca;
             }
         ).catch((error) => {
@@ -58,7 +60,7 @@
 
     // Function to get the active account
     const getActiveAccount = async () => {
-        console.log("Starting getActiveAccount");
+        console.log("Starting getActiveAccount"); // Attempt to get the active account from MSAL
         let activeAccount = null;
         try {
             console.log("Getting active account");
@@ -70,6 +72,7 @@
         if (!activeAccount) {
             console.log("No active account, trying login popup");
             try {
+                // Get Teams context to filter the accounts
                 const context = await microsoftTeams.app.getContext();
                 const accountFilter = {
                     tenantId: context.user?.tenant?.id,
@@ -78,7 +81,7 @@
                 };
                 const accountWithFilter = pca.getAccountByHomeId(accountFilter.homeAccountId);
                 if (accountWithFilter) {
-                    activeAccount = accountWithFilter;
+                    activeAccount = accountWithFilter; // Set the filtered account as the active account
                     pca.setActiveAccount(activeAccount);
                 }
             } catch (error) {
@@ -92,10 +95,10 @@
     // Function to get the token for the user
     const getToken = async () => {
         console.log("getToken");
-        let activeAccount = await getActiveAccount();
+        let activeAccount = await getActiveAccount(); // Get the active account first
         const tokenRequest = {
-            scopes: ["User.Read"],
-            account: activeAccount || undefined,
+            scopes: ["User.Read"], // Specify the scopes needed for the token
+            account: activeAccount || undefined, // Use the active account if available, else undefined
         };
         return pca.acquireTokenSilent(tokenRequest)
             .then((result) => {
@@ -104,10 +107,10 @@
             })
             .catch((error) => {
                 console.warn("Silent token acquisition failed, attempting popup:", error);
-                return pca.acquireTokenPopup(tokenRequest)
+                return pca.acquireTokenPopup(tokenRequest) // Attempt to acquire the token silently
                     .then((result) => {
                         console.log("Token acquired via popup:", result);
-                        return result.accessToken;
+                        return result.accessToken; // Return the acquired token
                     })
                     .catch((error) => {
                         console.error("Failed to acquire token via popup:", error);
@@ -118,7 +121,8 @@
 
     const login = async () => {
         console.log("Login Successfully");
-        await microsoftTeams.app.initialize();
+        await microsoftTeams.app.initialize(); // Initialize the Teams app context
+        // Check if nested app auth is supported
         let isNAAResults = await microsoftTeams.nestedAppAuth.isNAAChannelRecommended();
         console.log("isNAAChannelRecommended" + isNAAResults);
         if (isNAAResults) {
@@ -127,7 +131,7 @@
                 return getToken().then((token) => {
                     if (token) {
                         console.log("Token acquired successfully:", token);
-                        callApi(token);
+                        callApi(token); // Call the API if the token is acquired successfully
                     } else {
                         console.error("Failed to acquire token");
                     }
@@ -142,38 +146,38 @@
     async function callApi(accessToken) {
         try {
             const response = await fetch(
-                `https://graph.microsoft.com/v1.0/me`,
+                `https://graph.microsoft.com/v1.0/me`, // Endpoint to get user profile data
                 {
-                    headers: { Authorization: `Bearer ${accessToken}` },
+                    headers: { Authorization: `Bearer ${accessToken}` }, // Include the access token in the request headers
                 }
             );
             if (response.ok) {
                 // Parse and set the user data
                 const jsonValue = await response.json();
-                const alignedJSON = JSON.stringify(jsonValue, null, 2);
+                const alignedJSON = JSON.stringify(jsonValue, null, 2); // Pretty-print the JSON response
                 console.log("User data:", alignedJSON);
 
                 const userDataElement = document.getElementById("userData");
                 if (userDataElement) {
-                    userDataElement.textContent = alignedJSON;
-                    document.getElementById("loginBtn").style.display = "none";
-                    document.getElementById("welcomeData").style.display = "block";
+                    userDataElement.textContent = alignedJSON; // Display the user data on the page
+                    document.getElementById("loginBtn").style.display = "none"; // Hide the login button
+                    document.getElementById("welcomeData").style.display = "block"; // Show the welcome message
                 }
             } else {
                 const errorText = await response.text();
                 console.error("Microsoft Graph call failed - error text: " + errorText);
-                setErrorMessage("An error occurred while trying to log in. Please try again.");
             }
         } catch (error) {
             console.error("Network error: ", error);
-            setErrorMessage("A network error occurred. Please check your connection and try again.");
         }
     }
 </script>
 
 <div>
+    <!-- Login button triggers the login function -->
     <button id="loginBtn" class="loginBtn" onclick="login()">Login</button>
 </div>
+<!-- Welcome message -->
     <h1 id="welcomeData" style="display: none;" class="welcomeData">Welcome! Your login information:</h1>
     <div id="userData" class="userData">
-</div>
+</div>  <!-- Container for displaying user data -->
