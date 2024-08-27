@@ -39,7 +39,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID**. You’ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
   4. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:

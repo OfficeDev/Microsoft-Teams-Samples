@@ -56,7 +56,9 @@ provision:
       target: ../TabNestedAuth/appsettings.json
       content:
         AzureAd:
-          ClientId: ${{AAD_APP_CLIENT_ID}}
+           TenantId: ${{AAD_APP_TENANT_ID}}
+           ClientId: ${{AAD_APP_CLIENT_ID}}
+           ApplicationIdURI: ${{TAB_ENDPOINT}}
 
   # Apply the AAD manifest to an existing AAD app. Will use the object id in
   # manifest file to determine which AAD app to update.
