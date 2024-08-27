@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 
-namespace TeamsAuthSSO
+namespace TabNestedAuth
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 
-namespace TeamsAuthSSO
+namespace TabNestedAuth
 {
     using System;
     using Microsoft.AspNetCore.Authentication.AzureAD.UI;
