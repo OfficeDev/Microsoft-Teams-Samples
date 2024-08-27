@@ -93,7 +93,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - Press `F5` to run the project
     
 5. Modify the `/appsettings.json` and fill in the following details:
-  - `{{AzureAD Client Id}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  - `{{ AzureAD Client Id }}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  - `{{ AzureAD Tenant Id }}` - Generated from Step 1, also referred to as Directory Tenant Id
+  - `{{ Application ID URI }}` - Your Application ID URI.  ex: `https://1234.ngrok-free.app`
 
 6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
