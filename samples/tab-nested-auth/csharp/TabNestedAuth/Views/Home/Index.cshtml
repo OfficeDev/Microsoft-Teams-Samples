@@ -120,6 +120,7 @@
     }
 
     const login = async () => {
+        document.getElementById("loadingData").style.display = "block";
         console.log("Login Successfully");
         await microsoftTeams.app.initialize(); // Initialize the Teams app context
         // Check if nested app auth is supported
@@ -159,6 +160,7 @@
 
                 const userDataElement = document.getElementById("userData");
                 if (userDataElement) {
+                    document.getElementById("loadingData").style.display = "none";
                     userDataElement.textContent = alignedJSON; // Display the user data on the page
                     document.getElementById("loginBtn").style.display = "none"; // Hide the login button
                     document.getElementById("welcomeData").style.display = "block"; // Show the welcome message
@@ -178,6 +180,7 @@
     <button id="loginBtn" class="loginBtn" onclick="login()">Login</button>
 </div>
 <!-- Welcome message -->
+    <h2 id="loadingData" style="display: none;" class="loadingData">Loading...</h2>
     <h1 id="welcomeData" style="display: none;" class="welcomeData">Welcome! Your login information:</h1>
     <div id="userData" class="userData">
 </div>  <!-- Container for displaying user data -->
