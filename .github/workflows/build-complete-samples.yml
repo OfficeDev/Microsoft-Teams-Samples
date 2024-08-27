@@ -479,6 +479,10 @@ jobs:
             - project_path: 'samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/MeetingAutoRecording.csproj'
               name: 'tab-meeting-auto-recording'
               version: '6.0.x'
+            
+            - project_path: 'samples/tab-nested-auth/csharp/TabNestedAuth/TabNestedAuth.csproj'
+              name: 'tab-nested-auth'
+              version: '6.0.x'
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
