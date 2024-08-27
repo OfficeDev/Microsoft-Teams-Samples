@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 Nested app authentication (NAA) is a new authentication protocol for single page applications embedded in host environments like Teams, Outlook, and Microsoft 365, simplifying the authentication process to facilitate single sign-on (SSO) across nested applications and offering several advantages over the On-Behalf-Of (OBO) flow.
 
 **Interaction with app**
-![tab-nested-auth](Images/tab-nested-auth.gif)### Setup Register you app with Azure AD.
+![tab-nested-auth](Images/tab-nested-auth.gif)
 
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
@@ -39,7 +39,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
+  3. On the overview page, copy and save the **Application (client) ID**. You’ll need those later when updating your Teams application manifest and in the `appsettings.json` files.
   4. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:
@@ -70,25 +70,32 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3. Setup for code
-
-- Clone the repository
+3. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+    
+4. Run the app from a terminal or from Visual Studio, choose option A or B.
 
-- Modify the `/appsettings.json` and fill in the following details:
+    A) From a terminal, navigate to `/samples/tab-nested-auth/csharp`
+
+    ```bash
+    # run the app
+    dotnet run
+    ```
+    B) Or from Visual Studio
+
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `/samples/tab-nested-auth/csharp` folder
+    - Select `TabNestedAuth.sln` file
+    - Press `F5` to run the project
+    
+5. Modify the `/appsettings.json` and fill in the following details:
   - `{{AzureAD Client Id}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
 
- - If you are using Visual Studio
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `/samples/tab-nested-auth/csharp/TabNestedAuth` folder
-  - Select `TabNestedAuth.csproj` file
-
-
-4. Setup Manifest for Teams
+6. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
