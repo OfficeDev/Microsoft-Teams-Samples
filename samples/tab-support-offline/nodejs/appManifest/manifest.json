@@ -3,9 +3,9 @@
   "manifestVersion": "1.12",
   "version": "1.3.0",
   "id": "{{YOUR-MICROSOFT-APP-ID}}",
-  "packageName": "com.gauravkeshre.sample.supporttickets",
+  "packageName": "com.teams.sample.supporttickets",
   "developer": {
-    "name": "Gaurav Keshre",
+    "name": "appOfflineSupportTickets",
     "websiteUrl": "https://www.microsoft.com",
     "privacyUrl": "https://www.microsoft.com/privacy.html",
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse.html"

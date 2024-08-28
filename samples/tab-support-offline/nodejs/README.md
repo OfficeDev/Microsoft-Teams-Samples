@@ -102,8 +102,9 @@ A classic CRUD app working in offline mode inside Microsoft Teams.
     ```
 - The client will start running on 3000 port
 
-4. Open Msal.js file from this path folder `samples/tab-support-offline/nodejs/src/components` and update:
-   - `{{clientId}}` - Generated from Step 1 (Application (client) ID)is the application app id
+4. Open blobStoreOperations.js file from this path folder `samples\tab-support-offline\nodejs\server\` and update:
+   - `{{ account-Name }}` - Replace these values with your Azure Storage account details
+   - `{{ container-Name }}`
    
 **This step is specific to Teams:**
 
