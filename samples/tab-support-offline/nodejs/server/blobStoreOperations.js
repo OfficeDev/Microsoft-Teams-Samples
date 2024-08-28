@@ -1,13 +1,12 @@
 require('dotenv').config();
-const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
+const { DefaultAzureCredential } = require("@azure/identity");
+const { BlobServiceClient } = require("@azure/storage-blob");
 
 // Replace these values with your Azure Storage account details
-const accountName = 'teamsmobileplatformb411';
-const accountKey = process.env.AZURE_STORAGE_KEY;
+const accountName = 'supportricketblob';
 const containerName = 'aircraft-issue-list';
 
-const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
-const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, sharedKeyCredential);
+const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, new DefaultAzureCredential());
 
 async function getIssues(pageNumber = 1, pageSize = 20) {
     const containerClient = blobServiceClient.getContainerClient(containerName);
