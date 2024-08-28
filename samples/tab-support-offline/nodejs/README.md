@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 A classic CRUD app working in offline mode inside Microsoft Teams.
 
 **Interaction with app**
-![tab-support-offline](Images/tab-nested-auth.gif)
+![tab-support-offline](Images/tab-support-offline.gif)
 
 ## Prerequisites
 
@@ -124,6 +124,36 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Install app:**
 ![InstallApp ](Images/1.InstallApp.png)
+
+**Install app:**
+![InstallApp ](Images/2.HomePage.png)
+
+**Install app:**
+![InstallApp ](Images/3.AddPermission.png)
+
+**Install app:**
+![InstallApp ](Images/4.CreateIssues.png)
+
+**Install app:**
+![InstallApp ](Images/4.CreateIssuesDetails.png)
+
+**Install app:**
+![InstallApp ](Images/5.IssuesGridDetails.png)
+
+**Install app:**
+![InstallApp ](Images/6.CreateNewIsses1.png)
+
+**Install app:**
+![InstallApp ](Images/7.AllIssuesGridDetails.png)
+
+**Install app:**
+![InstallApp ](Images/8.ClickSync.png)
+
+**Install app:**
+![InstallApp ](Images/9.LiveIssues.png)
+
+**Install app:**
+![InstallApp ](Images/10.FlightChange.png)
 
 ## Further reading
 
