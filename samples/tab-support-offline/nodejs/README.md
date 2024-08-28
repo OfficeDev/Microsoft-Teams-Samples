@@ -19,7 +19,13 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 A classic CRUD app working in offline mode inside Microsoft Teams.
 
 **Interaction with app**
+
 ![tab-support-offline](Images/tab-support-offline.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams hello world sample app:** [Manifest](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
 
 ## Prerequisites
 
@@ -125,38 +131,41 @@ You can interact with Teams Tab meeting sidepanel.
 **Install app:**
 ![InstallApp ](Images/1.InstallApp.png)
 
-**Install app:**
-![InstallApp ](Images/2.HomePage.png)
+**Home Page:**
+![HomePage ](Images/2.HomePage.png)
 
-**Install app:**
-![InstallApp ](Images/3.AddPermission.png)
+**Media Permission:**
+![AddPermission ](Images/3.AddPermission.png)
 
-**Install app:**
-![InstallApp ](Images/4.CreateIssues.png)
+**Create New Issues:**
+![CreateIssues ](Images/4.CreateIssues.png)
 
-**Install app:**
-![InstallApp ](Images/4.CreateIssuesDetails.png)
+**Create New Issues Details:**
+![CreateIssuesDetails ](Images/4.CreateIssuesDetails.png)
 
-**Install app:**
-![InstallApp ](Images/5.IssuesGridDetails.png)
+**Issues Details Grid:**
+![IssuesGridDetails ](Images/5.IssuesGridDetails.png)
 
-**Install app:**
-![InstallApp ](Images/6.CreateNewIsses1.png)
+**Create New Issues:**
+![CreateNewIsses1 ](Images/6.CreateNewIsses1.png)
 
-**Install app:**
-![InstallApp ](Images/7.AllIssuesGridDetails.png)
+**Issues Details Grid:**
+![AllIssuesGridDetails ](Images/7.AllIssuesGridDetails.png)
 
-**Install app:**
-![InstallApp ](Images/8.ClickSync.png)
+**Sync:**
+![ClickSync ](Images/8.ClickSync.png)
 
-**Install app:**
-![InstallApp ](Images/9.LiveIssues.png)
+**Live Issues:**
+![LiveIssues ](Images/9.LiveIssues.png)
 
-**Install app:**
-![InstallApp ](Images/10.FlightChange.png)
+**Flight Change:**
+![FlightChange ](Images/10.FlightChange.png)
+
+**Blob Container:**
+![11.BlobContainer ](Images/11.BlobContainer.png)
 
 ## Further reading
 
-- [Nested app authentication](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/nested-authentication?branch=pr-en-us-10768)
+- [Tab](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs?tabs=personal)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-support-offline-nodejs" />
