@@ -15,8 +15,8 @@
       "outline": "icon32.png"
   },
   "name": {
-    "short": "Support Tickets",
-    "full": "Support Tickets"
+    "short": "Offline Support Tickets",
+    "full": "Offline Support Tickets"
   },
   "description": {
     "short": "This app allows user to login using SSO and log attendence.",
