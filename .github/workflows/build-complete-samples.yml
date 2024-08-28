@@ -1027,6 +1027,10 @@ jobs:
               name: 'tab-nested-auth'
               version: '18.x'
 
+            - project_path: 'samples/tab-support-offline/nodejs/client'
+              name: 'tab-support-offline'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
