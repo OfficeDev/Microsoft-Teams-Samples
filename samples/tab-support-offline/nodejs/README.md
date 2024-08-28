@@ -25,7 +25,7 @@ A classic CRUD app working in offline mode inside Microsoft Teams.
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams hello world sample app:** [Manifest](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
+**Microsoft Teams offline support tickets sample app:** [Manifest](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
 
 ## Prerequisites
 
@@ -163,6 +163,12 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Blob Container:**
 ![11.BlobContainer ](Images/11.BlobContainer.png)
+
+## Deploying
+
+1. Build client `npm run build` 
+2. Build command aboves moves `client/build`  folder to server directory
+3. Deploy to Azure App Service
 
 ## Further reading
 
