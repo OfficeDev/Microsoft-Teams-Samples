@@ -11,7 +11,7 @@ app.use(cors());
 const PORT = process.env.PORT || 8080;
 
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '100mb' }));
 app.listen(PORT, () => console.log("Server started at port: " + PORT));
 
 app.get("/api/flights/:flightId/issues", async (req, res) => {
