@@ -19,8 +19,8 @@
     "full": "Offline Support Tickets"
   },
   "description": {
-    "short": "This app allows user to login using SSO and log attendence.",
-    "full": "A simple react application for Microsoft Teams. This app allows user to login using SSO and log attendence."
+    "short": "A classic CRUD app working in offline mode inside Microsoft Teams.",
+    "full": "This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage."
   },
   "accentColor": "#5296d5",
   "staticTabs": [

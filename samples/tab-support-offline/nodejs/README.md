@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: A simple react application for Microsoft Teams. This app allows user to login using SSO and log attendence.
+description: This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 
 ## Offline Support Tickets
 
-A classic CRUD app working in offline mode inside Microsoft Teams.
+This sample app illustrates a classic CRUD application that operates offline within Microsoft Teams. Users can perform create, read, update, and delete operations without an internet connection. When the Android device reconnects to the internet, the app automatically syncs the locally stored data with blob storage. This ensures that all offline changes are updated and integrated into the central storage, maintaining data consistency across devices. The app effectively demonstrates handling data persistence and synchronization in environments with intermittent connectivity.
 
 **Interaction with app**
 
@@ -32,6 +32,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [VS Code](https://code.visualstudio.com/)
+- [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
 
 ### Setup Register you app with Azure AD.
 
@@ -114,7 +115,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    
 **This step is specific to Teams:**
 
-- **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id `{{YOUR-MICROSOFT-APP-ID}}` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{YOUR-MICROSOFT-APP-ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the manifest.json contained in the appManifest folder to replace every instance of the placeholder string `{{YOUR-MICROSOFT-APP-ID}}` with your Microsoft App Id (created during bot registration).
 
 - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
@@ -173,5 +174,6 @@ You can interact with Teams Tab meeting sidepanel.
 ## Further reading
 
 - [Tab](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs?tabs=personal)
+- [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-support-offline-nodejs" />
