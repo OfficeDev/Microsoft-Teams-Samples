@@ -203,10 +203,6 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 ![InstallApp](Docs/InstallApp.png)
 
-**SignIn UI :**
-
-![SignIn](Docs/SignIn.png)
-
 **Create link - https://<your_tunnel_domain>/dashboard1:**
 
 ![MsgextLinkMeeting](Docs/MsgextLinkMeeting.png)
