@@ -140,6 +140,8 @@ Once the meeting where the bot is added starts or ends, real-time updates are po
 
 To utilize this feature, please enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot, following the guidance outlined in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events) documentation
 
+![extra-setup](MeetingEvents/Images/extra-setup.png)
+
 ![Meeting participant added event](MeetingEvents/Images/meeting-participant-added.png)
 
 **End meeting events details:**   
