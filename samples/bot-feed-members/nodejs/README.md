@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-feed-members-nodejs
 
 # Apps in federated
 
-Apps in federated group chats.
+This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed.
 
 ## Included Features
 * Bots
