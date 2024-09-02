@@ -27,6 +27,7 @@
     "workbox-streams": "^6.6.0"
   },
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build && rmdir /s /q ..\\server\\build && xcopy build ..\\server\\build /E /H /C /I",
     "test": "react-scripts test",

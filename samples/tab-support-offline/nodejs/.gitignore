@@ -140,3 +140,24 @@ dist
 
 #macos
 .DS_Store
+
+#############
+
+# TeamsFx files
+env/.env.*.user
+env/.env.local
+.localConfigs
+appManifest/build
+/build
+
+# dependencies
+node_modules/
+
+# misc
+.env
+.deployment
+.DS_Store
+
+# build
+lib/
+
