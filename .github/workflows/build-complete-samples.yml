@@ -1023,6 +1023,10 @@ jobs:
               name: 'm365-actions-preview-api'
               version: '18.x'
 
+            - project_path: 'samples/bot-feed-members/nodejs'
+              name: 'bot-feed-members'
+              version: '18.x'
+
             - project_path: 'samples/graph-rsc-helper/nodejs'
               name: 'graph-rsc-helper'
               version: '18.x'

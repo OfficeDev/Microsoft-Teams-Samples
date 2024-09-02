@@ -115,6 +115,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |23| Bot configuration app with type ahead search control.|This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.|[View][BotConfigurationApp#csharp]|[View][BotConfigurationApp#nodejs
 |23| Bot configuration app with auth |This sample demonstrates the features of bot configuration auth and reconfiguration for both teams and group chats.|[View][BotConfigurationAppAuth#csharp]|[View][BotConfigurationAppAuth#nodejs]
 |24| Tag mention bot  | This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework. |[View][Tagmention#csharp]|[View][Tagmention#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
+|25| Apps in Federated | This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed. ||[View][bot-feed-members#js] ![toolkit-icon](assets/toolkit-icon.png) 
 
 
 #### Additional samples
@@ -346,6 +347,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx
+[bot-feed-members#js]:samples/bot-feed-members/nodejs
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
