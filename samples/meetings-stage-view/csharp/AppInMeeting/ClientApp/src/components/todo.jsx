@@ -6,7 +6,8 @@
 import React, { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import $ from "jquery";
-import { TeamsFluidClient } from "@microsoft/live-share";
+import { LiveShareClient } from "@microsoft/live-share";
+import { LiveShareHost } from "@microsoft/teams-js";
 import { SharedMap } from "fluid-framework";
 
 let containerValue;
@@ -24,8 +25,8 @@ const Todo = props => {
                     url: "api/meeting/getMeetingData?meetingId=" + context.meeting.id + "&status=todo",
                     type: "GET",
                     success: function (response) {
-                        if (response) {
-                            setMeetingDataArray(response);
+                        if (response.data) {
+                            setMeetingDataArray(response.data);
                         }
                     },
                     error: function (xhr, textStatus, errorThrown) {
@@ -45,11 +46,12 @@ const Todo = props => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-        (async function () {  
-            await microsoftTeams.app.initialize();          
+        (async function () {
+            await microsoftTeams.app.initialize();
             window.localStorage.debug = "fluid:*";
             // Define Fluid document schema and create container
-            const client = new TeamsFluidClient();
+            const host = LiveShareHost.create();
+            const client = new LiveShareClient(host);
 
             const containerSchema = {
                 initialObjects: { editorMap: SharedMap }
@@ -122,7 +124,7 @@ const Todo = props => {
 
         microsoftTeams.app.getContext().then((context) => {
             // Invoking task module to collect status details from participants.
-            microsoftTeams.dialog.open(taskInfo, (taskDetails) => {
+            microsoftTeams.dialog.url.open(taskInfo, (taskDetails) => {
                 if (taskDetails.result?.taskDescription) {
                     updateState(taskDetails.result, context.meeting.id);
                 }
