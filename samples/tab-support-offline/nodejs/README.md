@@ -18,9 +18,13 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 
 This sample app illustrates a classic CRUD application that operates offline within Microsoft Teams. Users can perform create, read, update, and delete operations without an internet connection. When the Android device reconnects to the internet, the app automatically syncs the locally stored data with blob storage. This ensures that all offline changes are updated and integrated into the central storage, maintaining data consistency across devices. The app effectively demonstrates handling data persistence and synchronization in environments with intermittent connectivity.
 
-**Interaction with app**
+**Interaction with app - Desktop**
 
 ![tab-support-offline](Images/tab-support-offline.gif)
+
+**Interaction with app - Mobile**
+
+![tab-support-offline-Mobile](Images/Mobile/tab-support-offline-mobile.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
