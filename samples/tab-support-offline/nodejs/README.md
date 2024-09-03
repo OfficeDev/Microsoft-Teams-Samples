@@ -184,64 +184,64 @@ You can interact with Teams Tab meeting sidepanel.
 **Install app:**
 ![ InstallApp](Images/Mobile/1.InstallApp.jpg)
 
-**Install app:**
+**Off Wifi and Internet Connection:**
 ![2.OffWiFi](Images/Mobile/2.OffWiFi.jpg)
 
 **Home Page:**
 ![3.HomePage](Images/Mobile/3.HomePage.jpg)
 
-**Home Page:**
+**Flight Change:**
 ![4.FlightChange](Images/Mobile/4.FlightChange.jpg)
 
-**Home Page:**
+**Live Issues Page:**
 ![5.LiveIssues](Images/Mobile/5.LiveIssues.jpg)
 
-**Home Page:**
+**Create New Issues:**
 ![6.CreateNewIssues](Images/Mobile/6.CreateNewIssues.jpg)
 
-**Home Page:**
+**Priorty Change:**
 ![7.Priority](Images/Mobile/7.Priority.jpg)
 
-**Home Page:**
+**Status Change:**
 ![8.StatusIssues](Images/Mobile/8.StatusIssues.jpg)
 
-**Home Page:**
+**Create New Issues Details:**
 ![9.CreateIssuesDetails](Images/Mobile/9.CreateIssuesDetails.jpg)
 
-**Home Page:**
+**Select Camera:**
 ![10.SelectCamera](Images/Mobile/10.SelectCamera.jpg)
 
-**Home Page:**
+**Permissiom:**
 ![11.PicPermission](Images/Mobile/11.PicPermission.jpg)
 
-**Home Page:**
+**Camera Permission:**
 ![12.AccessYourCamera](Images/Mobile/12.AccessYourCamera.jpg)
 
-**Home Page:**
+**Create New Issues:**
 ![13.CreateIssuesDetailsImage](Images/Mobile/13.CreateIssuesDetailsImage.jpg)
 
-**Home Page:**
+**Issues Added Details:**
 ![14.AddDetails](Images/Mobile/14.AddDetails.jpg)
 
-**Home Page:**
+**Edit Issues:**
 ![15.EditDetails](Images/Mobile/15.EditDetails.jpg)
 
-**Home Page:**
+**Added-Updated Details:**
 ![16.EditUpdatedDetails](Images/Mobile/16.EditUpdatedDetails.jpg)
 
-**Home Page:**
+**On Wifi and Internet Connection: :**
 ![17.OnWiFi](Images/Mobile/17.OnWiFi.jpg)
 
-**Home Page:**
+**Click Sync:**
 ![18.Sync](Images/Mobile/18.Sync.jpg)
 
-**Home Page:**
+**Live Issues Details:**
 ![19.LiveIssuesSync](Images/Mobile/19.LiveIssuesSync.jpg)
 
-**Home Page:**
+**Flight Change:**
 ![20.FlightChange](Images/Mobile/20.FlightChange.jpg)
 
-**Home Page:**
+**Live Issues Details:**
 ![21.DataFlightChange](Images/Mobile/21.DataFlightChange.jpg)
 
 
