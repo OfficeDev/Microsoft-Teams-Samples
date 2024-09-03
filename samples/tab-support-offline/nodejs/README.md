@@ -139,7 +139,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Add the app to personal static tabs.
 
-## Running the sample
+## Desktop Running the sample
 
 You can interact with Teams Tab meeting sidepanel.
 
@@ -178,6 +178,9 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Blob Container:**
 ![11.BlobContainer ](Images/11.BlobContainer.png)
+
+## Mobile Running the sample:**
+![ InstallApp](Images/Mobile/1.InstallApp.jpg)
 
 ## Deploying
 
