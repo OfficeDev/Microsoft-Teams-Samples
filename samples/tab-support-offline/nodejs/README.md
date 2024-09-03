@@ -182,66 +182,87 @@ You can interact with Teams Tab meeting sidepanel.
 ## Mobile Running the sample:
 
 **Install app:**
+
 ![ InstallApp](Images/Mobile/1.InstallApp.jpg)
 
 **Off Wifi and Internet Connection:**
+
 ![2.OffWiFi](Images/Mobile/2.OffWiFi.jpg)
 
 **Home Page:**
+
 ![3.HomePage](Images/Mobile/3.HomePage.jpg)
 
 **Flight Change:**
+
 ![4.FlightChange](Images/Mobile/4.FlightChange.jpg)
 
 **Live Issues Page:**
+
 ![5.LiveIssues](Images/Mobile/5.LiveIssues.jpg)
 
 **Create New Issues:**
+
 ![6.CreateNewIssues](Images/Mobile/6.CreateNewIssues.jpg)
 
 **Priorty Change:**
+
 ![7.Priority](Images/Mobile/7.Priority.jpg)
 
 **Status Change:**
+
 ![8.StatusIssues](Images/Mobile/8.StatusIssues.jpg)
 
 **Create New Issues Details:**
+
 ![9.CreateIssuesDetails](Images/Mobile/9.CreateIssuesDetails.jpg)
 
 **Select Camera:**
+
 ![10.SelectCamera](Images/Mobile/10.SelectCamera.jpg)
 
 **Permissiom:**
+
 ![11.PicPermission](Images/Mobile/11.PicPermission.jpg)
 
 **Camera Permission:**
+
 ![12.AccessYourCamera](Images/Mobile/12.AccessYourCamera.jpg)
 
 **Create New Issues:**
+
 ![13.CreateIssuesDetailsImage](Images/Mobile/13.CreateIssuesDetailsImage.jpg)
 
 **Issues Added Details:**
+
 ![14.AddDetails](Images/Mobile/14.AddDetails.jpg)
 
 **Edit Issues:**
+
 ![15.EditDetails](Images/Mobile/15.EditDetails.jpg)
 
 **Added-Updated Details:**
+
 ![16.EditUpdatedDetails](Images/Mobile/16.EditUpdatedDetails.jpg)
 
-**On Wifi and Internet Connection: :**
+**On Wifi and Internet Connection:**
+
 ![17.OnWiFi](Images/Mobile/17.OnWiFi.jpg)
 
 **Click Sync:**
+
 ![18.Sync](Images/Mobile/18.Sync.jpg)
 
 **Live Issues Details:**
+
 ![19.LiveIssuesSync](Images/Mobile/19.LiveIssuesSync.jpg)
 
 **Flight Change:**
+
 ![20.FlightChange](Images/Mobile/20.FlightChange.jpg)
 
 **Live Issues Details:**
+
 ![21.DataFlightChange](Images/Mobile/21.DataFlightChange.jpg)
 
 
