@@ -179,8 +179,71 @@ You can interact with Teams Tab meeting sidepanel.
 **Blob Container:**
 ![11.BlobContainer ](Images/11.BlobContainer.png)
 
-## Mobile Running the sample:**
+## Mobile Running the sample:
+
+**Install app:**
 ![ InstallApp](Images/Mobile/1.InstallApp.jpg)
+
+**Install app:**
+![2.OffWiFi](Images/Mobile/2.OffWiFi.jpg)
+
+**Home Page:**
+![3.HomePage](Images/Mobile/3.HomePage.jpg)
+
+**Home Page:**
+![4.FlightChange](Images/Mobile/4.FlightChange.jpg)
+
+**Home Page:**
+![5.LiveIssues](Images/Mobile/5.LiveIssues.jpg)
+
+**Home Page:**
+![6.CreateNewIssues](Images/Mobile/6.CreateNewIssues.jpg)
+
+**Home Page:**
+![7.Priority](Images/Mobile/7.Priority.jpg)
+
+**Home Page:**
+![8.StatusIssues](Images/Mobile/8.StatusIssues.jpg)
+
+**Home Page:**
+![9.CreateIssuesDetails](Images/Mobile/9.CreateIssuesDetails.jpg)
+
+**Home Page:**
+![10.SelectCamera](Images/Mobile/10.SelectCamera.jpg)
+
+**Home Page:**
+![11.PicPermission](Images/Mobile/11.PicPermission.jpg)
+
+**Home Page:**
+![12.AccessYourCamera](Images/Mobile/12.AccessYourCamera.jpg)
+
+**Home Page:**
+![13.CreateIssuesDetailsImage](Images/Mobile/13.CreateIssuesDetailsImage.jpg)
+
+**Home Page:**
+![14.AddDetails](Images/Mobile/14.AddDetails.jpg)
+
+**Home Page:**
+![15.EditDetails](Images/Mobile/15.EditDetails.jpg)
+
+**Home Page:**
+![16.EditUpdatedDetails](Images/Mobile/16.EditUpdatedDetails.jpg)
+
+**Home Page:**
+![17.OnWiFi](Images/Mobile/17.OnWiFi.jpg)
+
+**Home Page:**
+![18.Sync](Images/Mobile/18.Sync.jpg)
+
+**Home Page:**
+![19.LiveIssuesSync](Images/Mobile/19.LiveIssuesSync.jpg)
+
+**Home Page:**
+![20.FlightChange](Images/Mobile/20.FlightChange.jpg)
+
+**Home Page:**
+![21.DataFlightChange](Images/Mobile/21.DataFlightChange.jpg)
+
 
 ## Deploying
 
