@@ -185,11 +185,11 @@ You can interact with Teams Tab meeting sidepanel.
 
 ## Mobile Running the sample:
 
-**Install app:**
+**Install the app:**
 
 ![ InstallApp](Images/Mobile/1.InstallApp.jpg)
 
-**Off Wifi and Internet Connection:**
+**Turn off Wi-Fi and internet connection:**
 
 ![2.OffWiFi](Images/Mobile/2.OffWiFi.jpg)
 
@@ -245,11 +245,11 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![15.EditDetails](Images/Mobile/15.EditDetails.jpg)
 
-**Added-Updated Details:**
+**Added/Updated Details:**
 
 ![16.EditUpdatedDetails](Images/Mobile/16.EditUpdatedDetails.jpg)
 
-**On Wifi and Internet Connection:**
+**Turn on Wi-Fi and internet connection:**
 
 ![17.OnWiFi](Images/Mobile/17.OnWiFi.jpg)
 
@@ -257,7 +257,7 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![18.Sync](Images/Mobile/18.Sync.jpg)
 
-**Live Issues Details:**
+**Details of Live Issues:**
 
 ![19.LiveIssuesSync](Images/Mobile/19.LiveIssuesSync.jpg)
 
@@ -265,7 +265,7 @@ You can interact with Teams Tab meeting sidepanel.
 
 ![20.FlightChange](Images/Mobile/20.FlightChange.jpg)
 
-**Live Issues Details:**
+**Details of Live Issues:**
 
 ![21.DataFlightChange](Images/Mobile/21.DataFlightChange.jpg)
 
