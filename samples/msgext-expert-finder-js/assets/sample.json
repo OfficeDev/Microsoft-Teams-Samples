@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-msgext-expert-finder-js",
     "source": "officeDev",
-    "title": "Microsoft Teams msgext-expert-finder javascript sample",
+    "title": "Expert Finder with SSO in Copilot using multi parameter search",
     "shortDescription": "Microsoft Teams message extension that can be used as a plugin to Search for candidates and share profiles matching a criteria.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-expert-finder",
     "longDescription": [
@@ -11,7 +11,8 @@
     "creationDateTime": "2024-07-15",
     "updateDateTime": "2024-07-15",
     "products": [
-      "Teams"
+      "Microsoft Teams",
+      "Microsoft 365 Copilot"
     ],
     "metadata": [
       {
@@ -35,7 +36,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-expert-finder-js/Images/expert-finder.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-expert-finder-js/images/expert-finder.gif",
         "alt": "Solution UX showing microsoft teams nodejs msgext-expert-finder-js sample"
       }
     ],
@@ -62,6 +63,11 @@
       {
         "name": "Teams development videos from the community",
         "url": "https://aka.ms/community/videos/m365powerplatform"
+      },
+      {
+        "name": "Extend Microsoft Copilot for Microsoft 365",
+        "description": "Learn more about how to extend Microsoft Copilot for Microsoft 365",
+        "url": "https://aka.ms/extendcopilotm365"
       }
     ]
   }

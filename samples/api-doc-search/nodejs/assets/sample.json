@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/api-doc-search/nodejs/Images/rag-based-cosmos-db.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/api-doc-search/nodejs/Images/rag-based-cosmos-db.gif",
         "alt": "Solution UX showing RAG Based CosmosDB semantic search NodeJS"
       }
     ],
