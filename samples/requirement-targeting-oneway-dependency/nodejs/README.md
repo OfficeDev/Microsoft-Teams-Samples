@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet) and hostMustSuppot scenarios.
+description: Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
 extensions:
   contentType: samples
   createdDate: 08/21/2024 10:02:21 PM
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 # Microsoft Teams RT Sample App Feature.
 
-- Microsoft Teams RT sample app in Node.js which specify relationships between app capabilities using (elementRelationshipSet) and hostMustSuppot scenarios.
+- Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
 
 ## Included Features
 * Tabs
@@ -30,7 +30,7 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 ## Prerequisites
 
--  Microsoft Teams is installed and you have an account (not a guest account)
+-  Microsoft M365/Teams is installed and you have an account (not a guest account)
 
 -  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 
@@ -102,7 +102,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm start
     ```
 
-## RT Sample App Feature
+## M365 RT Sample App Feature
 **This sample app feature is to show oneway dependency**
 
 | Manifests | Capabilities | Dependency |
@@ -111,7 +111,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 | 2.OneWay Tab-DependsOn-Bot | Static-Tab and Bot | Static-Tab Depends on Bot |
 | 3.StaticTab-With-DialogURL |Static-Tab with dialog URL | Host Support Functionalities |
 
-1) actionME depends on Bot => for the bot-base-actionME scenario 
+
+1) This is to specify One-Way Dependency between actionME contains a bot-sent-card scenario and has to depend-on bot to work properly.
 
 **JSON for ME-DependsOn-Bot**
 
@@ -137,7 +138,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     },
 ``` 
 
-2) Static tab + Bot => the static tab dependsOn Bot
+2) This is to specify One-Way Dependency between static tab and bot where the static tab dependsOn Bot
 
 **JSON for Tab-DependsOn-Bot**
 
@@ -160,7 +161,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     },
 
 ```
-3) Static tab that contains a dialog, 
+3) This is to specify Static tab that contains a dialog using "hostMustSupportFunctionalities" 
 
 **JSON for Static-Tab with dialog URL**
 ```json

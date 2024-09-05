@@ -114,6 +114,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |23| Bot configuration app with type ahead search control.|This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.|[View][BotConfigurationApp#csharp]|[View][BotConfigurationApp#nodejs
 |23| Bot configuration app with auth |This sample demonstrates the features of bot configuration auth and reconfiguration for both teams and group chats.|[View][BotConfigurationAppAuth#csharp]|[View][BotConfigurationAppAuth#nodejs]
 |24| Tag mention bot  | This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework. |[View][Tagmention#csharp]|[View][Tagmention#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
+|26| Requirement Targeting OneWay Dependency | Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using elementRelationshipSet) and functionality using hostMustSupportFunctionalities. ||[View][RequirementTargetingOneWayDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png)
+|25| Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specify mutual-dependency relationships between app capabilities using elementRelationshipSet. ||[View][RequirementTargetingMutualDependency#nodejs]![toolkit-icon](assets/toolkit-icon.png)
 
 
 #### Additional samples
@@ -241,7 +243,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |20|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.||[View][bot-ai-enterprise-search#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |21|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip)|
 |22|Sharepoint tab request approval | This sample app demonstrates the usage of SharePoint Embedded for storage in teams. |[View][sharepoint-tab-request-approval#csharp]||
-|22|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||[View](/samples/app-HR-talent/csharp/src/demo-manifest/TeamsTalentMgmt.zip)
+|23|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||[View](/samples/app-HR-talent/csharp/src/demo-manifest/TeamsTalentMgmt.zip)
 
 ## Application templates
 
@@ -383,6 +385,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [botadaptivecardsuserspecificviews#csharp]:samples/bot-adaptivecards-user-specific-views/csharp
 [Tagmention#csharp]:samples/bot-tag-mention/csharp
 [Tagmention#nodejs]:samples/bot-tag-mention/nodejs
+[RequirementTargetingOneWayDependency#nodejs]:samples/requirement-targeting-oneway-dependency/nodejs
+[RequirementTargetingMutualDependency#nodejs]:samples/requirement-targeting-mutual-dependency/nodejs
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
 [BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
