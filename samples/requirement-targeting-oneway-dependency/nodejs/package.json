@@ -1,7 +1,7 @@
 {
     "name": "rtsampleapp",
     "version": "1.0.0",
-    "description": "Microsoft Teams Toolkit message extension action sample",
+    "description": "Microsoft M365 RT Sample App Feature",
     "engines": {
         "node": "16 || 18"
     },

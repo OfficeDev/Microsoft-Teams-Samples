@@ -12,7 +12,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-dependency
 ---
 
-# Microsoft Teams RT Sample App Feature.
+# Microsoft M365 RT Sample App Feature.
 
 - Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
 
@@ -189,6 +189,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ```
 
 ## Running the sample
+
+> Note: **Steps for manually uploading multiple app manifests:**
+1) The toolkit will automatically generate a `build` folder for each manifest inside the `appPackage` directory.
+2) Go to the build folder, locate the package (e.g., `appPackage.local.zip`), and upload it to Teams. 
 
 **Install App:**
 

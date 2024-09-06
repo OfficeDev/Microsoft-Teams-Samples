@@ -45,18 +45,48 @@ provision:
       # Path to manifest template
       manifestPath: ./appPackage/manifest.json
 
-  # Build Teams app package with latest env value
+  # Build Teams app package for "Action ME Depends On Bot"
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
-      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
-  # Validate app package using validation rules
+      manifestPath: ./appPackage/OneWay_ME_DependsOn_Bot/manifest.json
+      outputZipPath: ./appPackage/OneWay_ME_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/OneWay_ME_DependsOn_Bot/build/manifest.${{TEAMSFX_ENV}}.json
+
+  # Build Teams app package For "Static Tab DependsOn Bot"
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appPackage/OneWay_Tab_DependsOn_Bot/manifest.json
+      outputZipPath: ./appPackage/OneWay_Tab_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/OneWay_Tab_DependsOn_Bot/build/manifest.${{TEAMSFX_ENV}}.json
+
+# Build Teams app package For "Static Tab With Dialog-URL"
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appPackage/StaticTab_With_DialogURL/manifest.json
+      outputZipPath: ./appPackage/StaticTab_With_DialogURL/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/StaticTab_With_DialogURL/build/manifest.${{TEAMSFX_ENV}}.json
+
+
+  # Validate app package using validation rules for "Action ME Depends On Bot"
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/OneWay_ME_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+      
+   # Validate app package using validation rules For "Static Tab DependsOn Bot"
+  - uses: teamsApp/validateAppPackage
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/OneWay_Tab_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Validate app package using validation rules "Static Tab With Dialog-URL"
+  - uses: teamsApp/validateAppPackage
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/StaticTab_With_DialogURL/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
   # Teams Developer Portal.
@@ -64,7 +94,23 @@ provision:
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/OneWay_ME_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Apply the Teams app manifest to an existing Teams app in
+  # Teams Developer Portal.
+  # Will use the app id in manifest file to determine which Teams app to update.
+  - uses: teamsApp/update
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/OneWay_Tab_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
+
+  # Apply the Teams app manifest to an existing Teams app in
+  # Teams Developer Portal.
+  # Will use the app id in manifest file to determine which Teams app to update.
+  - uses: teamsApp/update
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/StaticTab_With_DialogURL/build/appPackage.${{TEAMSFX_ENV}}.zip        
 
 deploy:
   # Run npm command
