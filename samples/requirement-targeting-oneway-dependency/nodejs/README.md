@@ -190,7 +190,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-> Note: **Steps for manually uploading multiple app manifests:**
+>Note: **Steps for manually uploading app manifests**:
 1) The toolkit will automatically generate a `build` folder for each manifest inside the `appPackage` directory.
 2) Go to the build folder, locate the package (e.g., `appPackage.local.zip`), and upload it to Teams. 
 
