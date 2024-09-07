@@ -5,16 +5,16 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+description: Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
 extensions:
   contentType: samples
   createdDate: 08/21/2024 10:02:21 PM
 urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-dependency
 ---
 
-# Microsoft M365 RT Sample App Feature.
+# Microsoft 365 RT Sample App Feature.
 
-- Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+- Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
 
 ## Included Features
 * Tabs
@@ -30,7 +30,7 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 ## Prerequisites
 
--  Microsoft M365/Teams is installed and you have an account (not a guest account)
+-  Microsoft 365, Teams is installed and you have an account (not a guest account)
 
 -  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 
@@ -102,7 +102,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     npm start
     ```
 
-## M365 RT Sample App Feature
+## Microsoft 365 RT Sample App Feature
 **This sample app feature is to show oneway dependency**
 
 | Manifests | Capabilities | Dependency |
@@ -188,11 +188,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ],
 ```
 
-## Running the sample
-
 >Note: **Steps for manually uploading app manifests**:
 1) The toolkit will automatically generate a `build` folder for each manifest inside the `appPackage` directory.
 2) Go to the build folder, locate the package (e.g., `appPackage.local.zip`), and upload it to Teams. 
+
+## Running the sample
 
 **Install App:**
 
