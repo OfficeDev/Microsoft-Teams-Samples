@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.example.contoso",
+  "developer": {
+    "name": "contoso",
+    "websiteUrl": "https://www.contoso.com",
+    "privacyUrl": "https://www.contoso.com/privacy",
+    "termsOfUseUrl": "https://www.contoso.com/legal"
+  },
+  "name": {
+    "short": "Proactive Installation Demo",
+    "full": "Teams Proactive Sampler Application"
+  },
+  "description": {
+    "short": "Samples of Proactive Messaging in Teams",
+    "full": "Samples for getting conversation coordinates and sending proactive messages in Microsoft Teams."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team",
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "Check and Install",
+              "description": "Display the Welcome Message"
+            },
+            {
+              "title": "Send message",
+              "description": "Sends message to all the users"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

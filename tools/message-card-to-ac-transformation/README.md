@@ -16,7 +16,7 @@ Please exercise due diligence and consider the limitations mentioned above when 
  - Copy the output and preview in AC designer https://adaptivecards.io/designer/ or using Adaptive Card Previewer extension in VS Code.
 
 ## Sample Run
-![image](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/tools/message-card-to-ac-transformation/assets/run-command.png)
+![image](assets/run-command.png)
 
-![image](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/tools/message-card-to-ac-transformation/assets/adaptive-card.png)
+![image](assets/adaptive-card.png)
 

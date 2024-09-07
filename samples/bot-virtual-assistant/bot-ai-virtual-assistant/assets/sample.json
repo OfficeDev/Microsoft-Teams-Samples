@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-ai-virtual-assistant-nodejs",
     "source": "officeDev",
-    "title": "Teams AI-based Virtual Assistant Root Bot (Node.js)",
+    "title": "Build an AI superbot that calls sub/child bots using Azure Open AI",
     "shortDescription": "This sample bot demonstrates the skill consumer bot (Virtual Assistant) that routes user inputs to Echo and AI skill bots for tailored responses.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-virtual-assistant/bot-ai-virtual-assistant",
     "longDescription": [

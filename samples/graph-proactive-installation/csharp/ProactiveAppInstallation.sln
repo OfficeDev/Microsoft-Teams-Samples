@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProactiveAppInstallation", "ProactiveAppInstallation\ProactiveAppInstallation.csproj", "{887C82B6-0C97-4B4C-AE7E-F9CDD98A3BD1}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{9A567511-E29B-4DC3-A29A-29795D10CDCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59A6CA01-F6BE-4E0D-A466-37FF20606B4C}"
+	ProjectSection(SolutionItems) = preProject
+		ProactiveAppInstallation.slnLaunch.user = ProactiveAppInstallation.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{887C82B6-0C97-4B4C-AE7E-F9CDD98A3BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{887C82B6-0C97-4B4C-AE7E-F9CDD98A3BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{887C82B6-0C97-4B4C-AE7E-F9CDD98A3BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A567511-E29B-4DC3-A29A-29795D10CDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A567511-E29B-4DC3-A29A-29795D10CDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A567511-E29B-4DC3-A29A-29795D10CDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A567511-E29B-4DC3-A29A-29795D10CDCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

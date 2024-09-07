@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.3.0",
+  "id": "{{YOUR-MICROSOFT-APP-ID}}",
+  "packageName": "com.teams.sample.supporttickets",
+  "developer": {
+    "name": "appOfflineSupportTickets",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy.html",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse.html"
+  },
+  "icons": {
+      "color": "color.png",
+      "outline": "outline.png"
+  },
+  "name": {
+    "short": "Offline Support Tickets",
+    "full": "Offline Support Tickets"
+  },
+  "description": {
+    "short": "A classic CRUD app working in offline mode inside Microsoft Teams.",
+    "full": "This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage."
+  },
+  "accentColor": "#5296d5",
+  "staticTabs": [
+    {
+      "entityId": "Index",
+      "name": "Index",
+      "contentUrl": "https://{{domain-name}}",
+      "websiteUrl": "https://{{domain-name}}",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "showLoadingIndicator": false,
+  "permissions": [
+      "identity",
+      "messageTeamMembers"
+  ],
+  "validDomains": [
+      "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+      "id": "{{YOUR-MICROSOFT-APP-ID}}",
+      "resource": "api://{{domain-name}}/{{YOUR-MICROSOFT-APP-ID}}"
+  },
+  "devicePermissions": [
+    "media"
+  ]
+}
