@@ -18,9 +18,13 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 
 This sample app illustrates a classic CRUD application that operates offline within Microsoft Teams. Users can perform create, read, update, and delete operations without an internet connection. When the Android device reconnects to the internet, the app automatically syncs the locally stored data with blob storage. This ensures that all offline changes are updated and integrated into the central storage, maintaining data consistency across devices. The app effectively demonstrates handling data persistence and synchronization in environments with intermittent connectivity.
 
-**Interaction with app**
+**Interaction with app - Desktop**
 
 ![tab-support-offline](Images/tab-support-offline.gif)
+
+**Interaction with app - Mobile**
+
+![tab-support-offline-Mobile](Images/Mobile/tab-support-offline-mobile.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -33,6 +37,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [VS Code](https://code.visualstudio.com/)
 - [Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Teams Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup Register you app with Azure AD.
 
@@ -125,7 +143,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Add the app to personal static tabs.
 
-## Running the sample
+## Desktop Running the sample
 
 You can interact with Teams Tab meeting sidepanel.
 
@@ -164,6 +182,93 @@ You can interact with Teams Tab meeting sidepanel.
 
 **Blob Container:**
 ![11.BlobContainer ](Images/11.BlobContainer.png)
+
+## Mobile Running the sample:
+
+**Install the app:**
+
+![ InstallApp](Images/Mobile/1.InstallApp.jpg)
+
+**Turn off Wi-Fi and internet connection:**
+
+![2.OffWiFi](Images/Mobile/2.OffWiFi.jpg)
+
+**Home Page:**
+
+![3.HomePage](Images/Mobile/3.HomePage.jpg)
+
+**Flight Change:**
+
+![4.FlightChange](Images/Mobile/4.FlightChange.jpg)
+
+**Live Issues Page:**
+
+![5.LiveIssues](Images/Mobile/5.LiveIssues.jpg)
+
+**Create New Issues:**
+
+![6.CreateNewIssues](Images/Mobile/6.CreateNewIssues.jpg)
+
+**Priorty Change:**
+
+![7.Priority](Images/Mobile/7.Priority.jpg)
+
+**Status Change:**
+
+![8.StatusIssues](Images/Mobile/8.StatusIssues.jpg)
+
+**Create New Issues Details:**
+
+![9.CreateIssuesDetails](Images/Mobile/9.CreateIssuesDetails.jpg)
+
+**Select Camera:**
+
+![10.SelectCamera](Images/Mobile/10.SelectCamera.jpg)
+
+**Permissiom:**
+
+![11.PicPermission](Images/Mobile/11.PicPermission.jpg)
+
+**Camera Permission:**
+
+![12.AccessYourCamera](Images/Mobile/12.AccessYourCamera.jpg)
+
+**Create New Issues:**
+
+![13.CreateIssuesDetailsImage](Images/Mobile/13.CreateIssuesDetailsImage.jpg)
+
+**Issues Added Details:**
+
+![14.AddDetails](Images/Mobile/14.AddDetails.jpg)
+
+**Edit Issues:**
+
+![15.EditDetails](Images/Mobile/15.EditDetails.jpg)
+
+**Added/Updated Details:**
+
+![16.EditUpdatedDetails](Images/Mobile/16.EditUpdatedDetails.jpg)
+
+**Turn on Wi-Fi and internet connection:**
+
+![17.OnWiFi](Images/Mobile/17.OnWiFi.jpg)
+
+**Click Sync:**
+
+![18.Sync](Images/Mobile/18.Sync.jpg)
+
+**Details of Live Issues:**
+
+![19.LiveIssuesSync](Images/Mobile/19.LiveIssuesSync.jpg)
+
+**Flight Change:**
+
+![20.FlightChange](Images/Mobile/20.FlightChange.jpg)
+
+**Details of Live Issues:**
+
+![21.DataFlightChange](Images/Mobile/21.DataFlightChange.jpg)
+
 
 ## Deploying
 
