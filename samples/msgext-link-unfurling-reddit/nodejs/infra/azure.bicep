@@ -60,7 +60,7 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
           value: identity.properties.clientId
         }
         {
-          name: 'BOT_PASSWORD'
+          name: 'BOT_TENANT_ID'
           value: identity.properties.tenantId
         }
         {
