@@ -8,7 +8,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 
 # Sample lists
 
-1. [Copilot for Microsoft 365 agent samples](#Copilot-for-Microsoft-365-plugins-samples)
+1. [Copilot for Microsoft 365 agent samples](#Copilot-for-Microsoft-365-agent-samples)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)
