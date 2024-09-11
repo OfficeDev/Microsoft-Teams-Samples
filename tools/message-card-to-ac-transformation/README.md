@@ -20,3 +20,5 @@ Please exercise due diligence and consider the limitations mentioned above when 
 
 ![image](assets/adaptive-card.png)
 
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/tools/message-card-to-ac-transformation" />
