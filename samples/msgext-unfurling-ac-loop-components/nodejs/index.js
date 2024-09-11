@@ -18,7 +18,8 @@ const config = require("./config");
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
   MicrosoftAppId: config.botId,
   MicrosoftAppPassword: config.botPassword,
-  MicrosoftAppType: "MultiTenant",
+  MicrosoftAppType: config.botType,
+  MicrosoftAppTenantId: config.botTenantId
 });
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
