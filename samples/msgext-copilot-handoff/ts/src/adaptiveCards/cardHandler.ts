@@ -34,7 +34,7 @@ function getEditCard(product: ProductEx, context: TurnContext): any {
             revenue: product.Revenue,
             averageDiscount: product.AverageDiscount,
             botId: getBotMri(context),
-            continuationToken: product.ProductName + "-continuation",
+            continuationToken: product.ProductName,
         }
     });
     return CardFactory.adaptiveCard(card);
@@ -69,7 +69,7 @@ async function handleTeamsCardActionRefreshCard(context: TurnContext) {
           revenue: product.Revenue,
           averageDiscount: product.AverageDiscount,
           botId: getBotMri(context),
-          continuationToken: product.ProductName + "-continuation",
+          continuationToken: product.ProductName,
           // Card message
           message: `Card refreshed successfully!`,
         },
@@ -114,7 +114,7 @@ async function handleTeamsCardActionUpdateStock(context: TurnContext) {
                 revenue: product.Revenue,
                 averageDiscount: product.AverageDiscount,
                 botId: getBotMri(context),
-                continuationToken: product.ProductName + "-continuation",
+                continuationToken: product.ProductName,
                 // Card message
                 message: `Stock updated for ${product.ProductName} to ${product.UnitsInStock}!`
             }
@@ -161,7 +161,7 @@ async function handleTeamsCardActionCancelRestock(context: TurnContext) {
                 revenue: product.Revenue,
                 averageDiscount: product.AverageDiscount,
                 botId: getBotMri(context),
-                continuationToken: product.ProductName + "-continuation",
+                continuationToken: product.ProductName,
                 // Card message                
                 message: `Restock cancelled for ${product.ProductName}.`
             }
@@ -203,7 +203,7 @@ async function handleTeamsCardActionRestock(context: TurnContext) {
                 revenue: product.Revenue,
                 averageDiscount: product.AverageDiscount,
                 botId: getBotMri(context),
-                continuationToken: product.ProductName + "-continuation",
+                continuationToken: product.ProductName,
                 // Card message
                 message: `Restocking ${product.ProductName} placed order for ${data.txtStock ?? 0} units.`
             }

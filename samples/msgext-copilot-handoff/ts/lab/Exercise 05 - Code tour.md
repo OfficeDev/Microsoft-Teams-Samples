@@ -365,6 +365,201 @@ async function handleTeamsCardActionUpdateStock(context: TurnContext) {
 
 As you can see, the code obtains these two values, updates the database, and then sends a new card that contains a message and the updated data.
 
+## Step 5 - Examine the copilot handoff code
+
+When running the Northwind inventory message extension in Copilot for Microsoft 365, users are able to transfer from the Northwind experience in Copilot for Microsoft 365 to a Northwind Products bot in Teams via a copilot handoff.
+
+### The copilot handoff 
+Users of the Northwind inventory message extension can transfer from their chat with the copilot plugin in Microsoft for Copilot 365 to a chat with the Northwind Inventory bot in Teams via a copilot handoff.
+
+The copilot handoff is accomplished in two primary steps by: 
+1) Creating a deep link URL
+
+2) Handling the `onInvokeActivity` handler in the bot code.
+
+### Creating a deep link URL
+
+The deep link contains the BotID of the Teamsbot the user is transferred to and a continuationtoken to pass the context from the chat with Copilot for Microsoft 365 to the new chat in Teams. Users can access this deeplink via the `Action.OpenURL` added into the adaptive card in the message extension as seen in the **editCard.json** adaptive card. 
+
+~~~typescript
+  {
+      "type": "Action.OpenUrl",
+      "title": "Handoff to bot",
+      "url": "https://teams.microsoft.com/l/chat/0/0?users=${botId}&continuation=${continuationToken}"
+  }
+~~~
+
+This creates the clickable “handoff to bot button” seen in the adaptive card
+
+![Handoff action button](./images/action-btn.png)
+
+In this example, the botID is automatically populated via `=${botId}`. You can choose to specify a different bot by following the botID format `28:<botId>`. For example if the botId is `68935e91-ff09-4a33-a675-0fe09f015706`, then url above would be: 
+
+`https://teams.microsoft.com/l/chat/0/0?users28:68935e91-ff09-4a33-a675-0fe09f015706&continuation=${continuationToken}`
+
+The `Action.OpenUrl` property allows the user to hand off the conversation to the NorthwindProducts bot. When a user selects the action button, the deep link is activated and opens a new chat window with the bot in Teams. The bot receives an invoke call with a payload, which contains the continuation token from the URL and uses the token to maintain the context of the conversation as shown below.
+
+![Handoff action button](./images/handoff.png)
+
+When the bot receives the handoff/action invoke activity, it uses the continuation token to look up any necessary information to continue the conversation seamlessly. This involves retrieving conversation history, user preferences, or any other context needed to provide a consistent experience.
+
+### Handling the invoke Type in the bot code
+
+For the bot to handle the invoke call, override onInvokeActivity method as seen in the **searchApp.ts** file.
+
+~~~typescript
+// Handle invoke activities
+  
+  public async onInvokeActivity(context: TurnContext): Promise<InvokeResponse> {
+    try {
+      switch (context.activity.name) {
+        case "handoff/action": {
+          this.addOrUpdateContinuationParameters(context);
+          setTimeout(async () => await this.notifyContinuationActivity(), 10);
+          return { status: 200 }; // return just the http status 
+        }
+        case "composeExtension/query":
+          return {
+            status: 200,
+            body: await this.handleTeamsMessagingExtensionQuery(
+              context,
+              context.activity.value
+            ),
+          };
+
+        default:
+          return {
+            status: 200,
+            body: `Unknown invoke activity handled as default- ${context.activity.name}`,
+          };
+      }
+    } catch (err) {
+      console.log(`Error in onInvokeActivity: ${err}`);
+      return {
+        status: 500,
+        body: `Invoke activity received- ${context.activity.name}`,
+      };
+    }
+  }
+~~~
+
+The response to this invoke call can only be a http status code 200 for success or anything in the range of 400-500 for error. Any text or card response intended to be delivered to the user based on processing the continuation token received in the invoke call must be asynchronously notified to the user.
+
+Now, when bot receives the invoke call, `context.activity.value.continuation` will contain the continuationToken that was set in the deeplink url.
+
+### Notifying Users in the New Chat (Recommended)
+
+To help manage expectations if there is some delay in returning a continuation response from bot due to network latency and processing time, NorthwindProducts sends a series of activities to keep the user informed as seen in the **index.ts** file. 
+
+~~~typescript
+          await context.sendActivities([
+            {
+              type: ActivityTypes.Message,
+              text: "Continuing conversation from copilot...",
+            },
+            { type: ActivityTypes.Typing },
+            { type: "delay", value: 1000 },
+            {
+              type: ActivityTypes.Message,
+              text: `Fetching more details using the continuation token passed: ${continuationToken}`,
+            },
+            { type: ActivityTypes.Typing },
+            { type: "delay", value: 4000 },
+            {
+              type: ActivityTypes.Message,
+              text: `Handoff successful!`,
+              attachments: [(continuationParameter as any).cardAttachment],
+            },
+          ]);
+~~~
+
+The user sees these messages upon entering in the new Teams chat letting them know this chat is being continued from copilot and the user can continue the chat with context when the continuation token is received moments later. 
+
+![Handoff action button](./images/handoff.png)
+
+The final message shown in the sequence of messages sent utilizes an adaptive card defined in the **src\adaptiveCards\successCardHandoff.json** file, which can be customized including establishing the context by including the continuationToken in the welcome textblock and further guiding the conversation with the user by utilizing the continuationToken in the action buttons at the bottom of the adaptive card, allowing users to select the best option to address their needs.
+
+### Managing Adapter Cards with the ContinuationToken
+
+As this sample utilizes many adaptive cards, the **cardHandler.ts** file is used to manage the several different cards being utilized including the **successCardHandoff.json** adaptive card. 
+
+For each adaptive card in the sample the continuationToken is defined to include the `product.ProductName` as the chosen context to share to the bot during a handoff. You can adjust this to include different data to be shared with the user following the handoff.  
+
+~~~typescript
+function getEditCard(product: ProductEx, context: TurnContext): any {
+
+    var template = new ACData.Template(editCard);
+    var card = template.expand({
+        $root: {
+            productName: product.ProductName,
+            unitsInStock: product.UnitsInStock,
+            productId: product.ProductID,
+            categoryId: product.CategoryID,
+            imageUrl: product.ImageUrl,
+            supplierName: product.SupplierName,
+            supplierCity: product.SupplierCity,
+            categoryName: product.CategoryName,
+            inventoryStatus: product.InventoryStatus,
+            unitPrice: product.UnitPrice,
+            quantityPerUnit: product.QuantityPerUnit,
+            unitsOnOrder: product.UnitsOnOrder,
+            reorderLevel: product.ReorderLevel,
+            unitSales: product.UnitSales,
+            inventoryValue: product.InventoryValue,
+            revenue: product.Revenue,
+            averageDiscount: product.AverageDiscount,
+            botId: getBotMri(context),
+            continuationToken: product.ProductName,
+        }
+    });
+    return CardFactory.adaptiveCard(card);
+}
+~~~
+
+At the bottom of the **cardHandler.ts** file, the code specifies the successCardHandoff as the adaptive card template to be used when the continuationToken is present, and it populates the adaptive card with the corresponding data from the continuationToken.
+
+~~~typescript
+  async function handleTeamsCardActionHandOff(context: TurnContext) {
+    const request = context.activity.value;
+    const data = request.action.data;
+    console.log(
+      `🎬 Handling copilot handoff case, continuationToken=${data.continuationToken}`
+    );
+  
+    if (data.continuationToken) {
+      var template = new ACData.Template(successCardHandoff);
+      var card = template.expand({
+        $root: {
+          continuationToken: data.continuationToken,
+        },
+      });
+  
+      return CreateAdaptiveCardInvokeResponse(200, card);
+    } else {
+      return CreateActionErrorResponse(400, 0, "Invalid request");
+    }
+  }
+
+  function handleTeamsCardActionHandOffWithContinuation(
+    continuationToken: string
+  ) {
+    console.log(
+      `🎬 Handling copilot handoff case, continuationToken=${continuationToken}`
+    );
+  
+    var template = new ACData.Template(successCardHandoff);
+    var card = template.expand({
+      $root: {
+        continuationToken,
+      },
+    });
+  
+    return CardFactory.adaptiveCard(card);
+  }
+~~~
+
+Now, the full handoff experience has been set up. Next, you can create your own copilot handoff tailored for your users.
+
 ## Congratulations
 
 You have completed Exercise 5 and the Copilot for Microsoft 365 Message Extensions plugin lab. Thanks very much for doing these labs!

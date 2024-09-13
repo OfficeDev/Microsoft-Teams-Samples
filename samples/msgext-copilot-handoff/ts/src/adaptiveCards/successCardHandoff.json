@@ -3,30 +3,52 @@
   "type": "AdaptiveCard",
   "version": "1.5",
   "body": [
-    {
-      "type": "Container",
-      "style": "good",
-      "separator": true,
-      "items": [
-        {
+      {
           "type": "TextBlock",
-          "text": "Prkare Inventory",
-          "weight": "Bolder",
+          "text": "Hello, I am the Northwind Products bot. Copilot shared the history of your conversation. I see that you are working on:",
+          "wrap": true
+      },
+      {
+          "type": "TextBlock",
+          "text": "${continuationToken}",
+          "wrap": true,
+          "fontType": "Default",
           "size": "Medium",
-          "color": "Good"
-        }
-      ]
-    },
-    {
-      "type": "TextBlock",
-      "text": "The continuation token received is: ${continuationToken}"
-    }
+          "weight": "Bolder",
+          "color": "Accent",
+          "isSubtle": true
+      },
+      {
+          "type": "TextBlock",
+          "text": "I have some resources that may be able to help you. What would you like to do next?",
+          "wrap": true
+      }
   ],
   "actions": [
     {
-      "type": "Action.OpenUrl",
-      "title": "Handoff Successful!",
-      "url": "https://microsoft.com"
+        "type": "Action.Submit",
+        "title": "Tell me more about ${continuationToken}",
+        "data": {
+            "msteams": {
+                "type": "imBack",
+                "value": "Tell me more about: ${continuationToken} -(Great job on completing the demo! Next, you can create your own fully conversational custom engine copilot tailored to your specific user needs and scenarios. To learn more, click 'Build a Custom Engine Copilot' above.)"
+            }
+    }
+    },
+    {
+        "type": "Action.Submit",
+        "title": "Speak to a Live Agent",
+        "data": {
+            "msteams": {
+                "type": "imBack",
+                "value": "Connecting you to an agent. -(Great job on completing the demo! Next, you can create your own fully conversational custom engine copilot tailored to your specific user needs and scenarios. To learn more, click 'Build a Custom Engine Copilot' above.)"
+            }
+    }
+    },
+    {
+        "type": "Action.OpenUrl",
+        "title": "Build a Custom Engine Copilot",
+        "url": "https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-copilot"
     }
   ]
 }
