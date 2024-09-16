@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Expert Finder with SSO in Copilot using multi parameter search",
     "shortDescription": "Microsoft Teams message extension that can be used as a plugin to Search for candidates and share profiles matching a criteria.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-expert-finder",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-expert-finder-js",
     "longDescription": [
       "This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension allows users to query the candidates based on their skills, location and availability."
     ],
