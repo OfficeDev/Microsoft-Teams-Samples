@@ -365,14 +365,14 @@ async function handleTeamsCardActionUpdateStock(context: TurnContext) {
 
 As you can see, the code obtains these two values, updates the database, and then sends a new card that contains a message and the updated data.
 
-## Step 5 - Examine the copilot handoff code
+## Step 5 - Examine the copilot agent handoff code
 
-When running the Northwind inventory message extension in Copilot for Microsoft 365, users are able to transfer from the Northwind experience in Copilot for Microsoft 365 to a Northwind Products bot in Teams via a copilot handoff.
+When running the Northwind inventory message extension in Copilot for Microsoft 365, users are able to transfer from the Northwind experience in Copilot for Microsoft 365 to a Northwind Products bot in Teams via a copilot agent handoff.
 
-### The copilot handoff 
-Users of the Northwind inventory message extension can transfer from their chat with the copilot plugin in Microsoft for Copilot 365 to a chat with the Northwind Inventory bot in Teams via a copilot handoff.
+### The copilot agent handoff 
+Users of the Northwind inventory message extension can transfer from their chat with the copilot plugin in Microsoft for Copilot 365 to a chat with the Northwind Inventory bot in Teams via a copilot agent handoff.
 
-The copilot handoff is accomplished in two primary steps by: 
+The copilot agent handoff is accomplished in two primary steps by: 
 1) Creating a deep link URL
 
 2) Handling the `onInvokeActivity` handler in the bot code.
@@ -558,7 +558,7 @@ At the bottom of the **cardHandler.ts** file, the code specifies the successCard
   }
 ~~~
 
-Now, the full handoff experience has been set up. Next, you can create your own copilot handoff tailored for your users.
+Now, the full handoff experience has been set up. Next, you can create your own copilot agent handoff tailored for your users.
 
 ## Congratulations
 
