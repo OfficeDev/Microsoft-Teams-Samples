@@ -77,7 +77,7 @@ Here are some ideas for prompts to try. If you don't get the result you expect, 
 
 ### Copilot handoff to bot
 
-This sample has a copilot handoff to enable users to transition from Copilot for Microsoft 365 to a Teams bot when needed. To try a copilot handoff when running the sample, follow the instructions below. Also, see the copilot handoff section at the end of [lab Exercise 05](./lab/Exercise%2005%20-%20Code%20tour.md) - Code tour to explore the copilot handoff code in depth. 
+This sample has a copilot agent handoff to enable users to transition from Copilot for Microsoft 365 to a custom engine agent or other Teams bot when needed. To try a copilot agent handoff when running the sample, follow the instructions below. Also, see the copilot agent handoff section at the end of [lab Exercise 05](./lab/Exercise%2005%20-%20Code%20tour.md) - Code tour to explore the copilot handoff code in depth. 
 
 - Copilot welcome screen
 ![Welcome screen for copilot](./lab/images/startScreen.png)
