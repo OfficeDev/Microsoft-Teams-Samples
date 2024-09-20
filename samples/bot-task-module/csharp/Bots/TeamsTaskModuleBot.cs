@@ -77,10 +77,10 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private static Attachment GetTaskModuleHeroCardOptions()
         {
-            // Create a Hero Card with TaskModuleActions for each Task Module
+            // Create a Hero Card with TaskModuleActions for each Dialogs (referred as task modules in TeamsJS v1.x)
             return new HeroCard()
             {
-                Title = "Task Module Invocation from Hero Card",
+                Title = "Dialogs (referred as task modules in TeamsJS v1.x) Invocation from Hero Card",
                 Buttons = new[] { TaskModuleUIConstants.AdaptiveCard, TaskModuleUIConstants.CustomForm, TaskModuleUIConstants.YouTube }
                             .Select(cardType => new TaskModuleAction(cardType.ButtonTitle, new CardTaskFetchValue<string>() { Data = cardType.Id }))
                             .ToList<CardAction>(),
@@ -89,12 +89,12 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private static Attachment GetTaskModuleAdaptiveCardOptions()
         {
-            // Create an Adaptive Card with an AdaptiveSubmitAction for each Task Module
+            // Create an Adaptive Card with an AdaptiveSubmitAction for each Dialogs (referred as task modules in TeamsJS v1.x)
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 2))
             {
                 Body = new List<AdaptiveElement>()
                     {
-                        new AdaptiveTextBlock(){ Text="Task Module Invocation from Adaptive Card", Weight=AdaptiveTextWeight.Bolder, Size=AdaptiveTextSize.Large}
+                        new AdaptiveTextBlock(){ Text="Dialogs (referred as task modules in TeamsJS v1.x) Invocation from Adaptive Card", Weight=AdaptiveTextWeight.Bolder, Size=AdaptiveTextSize.Large}
                     },
                 Actions = new[] { TaskModuleUIConstants.AdaptiveCard, TaskModuleUIConstants.CustomForm, TaskModuleUIConstants.YouTube }
                             .Select(cardType => new AdaptiveSubmitAction() { Title = cardType.ButtonTitle, Data = new AdaptiveCardTaskFetchValue<string>() { Data = cardType.Id } })

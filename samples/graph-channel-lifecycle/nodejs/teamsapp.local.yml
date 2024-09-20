@@ -37,7 +37,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: graph-channel-lifecycle-${{TEAMSFX_ENV}}
+      name: graph-channel-lifecycle${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 

@@ -15,7 +15,7 @@ const THUMBNAILCARD = 'ThumbnailCard';
 const ADAPTIVECARD = "AdaptiveCardDialog";
 const O365CONNECTORECARD = 'O365ConnectorCard';
 const POPUPSIGNINCARD = 'PopupSignInCard';
-const BEGINdIALOG = 'BeginDialog';
+const BEGINDIALOG = 'BeginDialog';
 const QUIZFULLDIALOG = 'QuizFullDialog';
 const PROMPTDIALOG = 'PromptDialog';
 const LISTNAMES = 'ListNames';
@@ -85,7 +85,7 @@ class RootDialog extends ComponentDialog {
         this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD, this.conversationDataAccessor));
         this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD, this.conversationDataAccessor));
         this.addDialog(new PopupSigninCardDialog(POPUPSIGNINCARD, this.conversationDataAccessor));
-        this.addDialog(new BeginDialogExampleDailog(BEGINdIALOG, this.conversationDataAccessor));
+        this.addDialog(new BeginDialogExampleDailog(BEGINDIALOG, this.conversationDataAccessor));
         this.addDialog(new QuizFullDialog(QUIZFULLDIALOG, this.conversationDataAccessor));
         this.addDialog(new PromptDialog(PROMPTDIALOG, this.conversationDataAccessor));
         this.addDialog(new ListNamesDialog(LISTNAMES, this.conversationDataAccessor));
@@ -116,7 +116,7 @@ class RootDialog extends ComponentDialog {
     async run(context, accessor) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
-
+        
         const dialogContext = await dialogSet.createContext(context);
         const results = await dialogContext.continueDialog();
         console.log(results);
@@ -129,102 +129,103 @@ class RootDialog extends ComponentDialog {
     async promptStep(stepContext) {
         var activity = this.removeMentionText(stepContext.context._activity);
         if(activity.text){
-            var command = activity.text;
-            if (command.trim() == "hello" || command.trim() == "hi") {
+            // Clean up the command.
+            var command = activity.text.replace(/\s+/g, ' ').trim().toLowerCase();
+            if (command === "hello" || command === "hi") {
                 return await stepContext.beginDialog(HELLO);
             }
-            else if (command.trim() == "help") {
+            else if (command === "help") {
                 return await stepContext.beginDialog(HELP);
             }
-            else if (command.trim() == "herocard") {
+            else if (command === "herocard") {
                 return await stepContext.beginDialog(HEROCARD);
             }
-            else if (command.trim() == "msgback") {
+            else if (command === "msgback") {
                 return await stepContext.beginDialog(MESSAGEBACK);
             }
-            else if (command.trim() == "multi dialog 1") {
+            else if (command === "multi dialog 1") {
                 return await stepContext.beginDialog(MULTIDIALOG1);
             }
-            else if (command.trim() == "multi dialog 2") {
+            else if (command === "multi dialog 2") {
                 return await stepContext.beginDialog(MULTIDIALOG2);
             }
-            else if (command.trim() == "thumbnailcard") {
+            else if (command === "thumbnailcard") {
                 return await stepContext.beginDialog(THUMBNAILCARD);
             }
-            else if (command.trim() == "adaptivecard") {
+            else if (command === "adaptivecard") {
                 return await stepContext.beginDialog(ADAPTIVECARD);
             }
-            else if (command.trim() == "timezone") {
+            else if (command === "timezone") {
                 await stepContext.context.sendActivity("Here is UTC time -" + stepContext.context._activity.timestamp);
                 await stepContext.context.sendActivity('Here is Local Time - ' + stepContext.context._activity.localTimestamp);
                 return await stepContext.endDialog();
             }
-            else if (command.trim() == "connector card 1" || command.trim() == "connector card 2" || command.trim() == "connector card 3") {
+            else if (command === "connector card 1" || command === "connector card 2" || command === "connector card 3") {
                 return await stepContext.beginDialog(O365CONNECTORECARD);
             }
-            else if (command.trim() == "Connector Card Actions 2" || command.trim() == "Connector Card Actions") {
+            else if (command === "Connector Card Actions 2" || command === "Connector Card Actions") {
                 return await stepContext.beginDialog(O365CONNECTORCARDACTION);
             }
-            else if (command.trim() == "signin") {
+            else if (command === "signin") {
                 return await stepContext.beginDialog(POPUPSIGNINCARD);
             }
-            else if (command.trim() == "dialog flow") {
+            else if (command === "dialog flow") {
                 await stepContext.context.sendActivity("This is step1 in Root Dialog");
                 await stepContext.context.sendActivity("This is step2 in Root Dialog");
-                await stepContext.beginDialog(BEGINdIALOG);
+                await stepContext.beginDialog(BEGINDIALOG);
                 await stepContext.context.sendActivity("This is step3 in Root Dialog After triggering the Hello Dialog");
                 return await stepContext.endDialog();
             }
-            else if (command.trim() == "quiz") {
+            else if (command === "quiz") {
                 await stepContext.context.sendActivity("Hi, Welcome to the fun quiz. Let's get started..");
                 return await stepContext.beginDialog(QUIZFULLDIALOG);
             }
-            else if (command.trim() == "prompt") {
+            else if (command === "prompt") {
                 return await stepContext.beginDialog(PROMPTDIALOG);
             }
-            else if (command.trim() == "names") {
+            else if (command === "names") {
                 return await stepContext.beginDialog(LISTNAMES);
             }
-            else if (command.trim() == "roster") {
+            else if (command === "roster") {
                 return await stepContext.beginDialog(FETCHROSTER);
             }
-            else if (command.trim() == "display cards") {
+            else if (command === "display cards") {
                 return await stepContext.beginDialog(DISPLAYCARDS);
             }
-            else if (command.trim() == "team info") {
+            else if (command === "team info") {
                 return await stepContext.beginDialog(FETCHTEAMINFO);
             }
-            else if (command.trim() == "deep link") {
+            else if (command === "deep link") {
                 return await stepContext.beginDialog(DEEPLINKTAB);
             }
-            else if (command.trim() == "at mention") {
+            else if (command === "at mention") {
                 return await stepContext.beginDialog(ATMENTION);
             }
-            else if (command.trim() == "last dialog") {
+            else if (command === "last dialog") {
                 return await stepContext.beginDialog(GETLASTDIALOG);
             }
-            else if (command.trim() == "setup text message") {
+            else if (command === "setup text message") {
                 return await stepContext.beginDialog(SETUPTEXTMESSAGE);
             }
-            else if (command.trim() == "update text message") {
+            else if (command === "update text message") {
                 return await stepContext.beginDialog(UPDATETEXTMESSAGE);
             }
-            else if (command.trim() == "auth") {
+            else if (command === "auth") {
                 return await stepContext.beginDialog(AUTHCARD);
             }
-            else if (command.trim() == "fblogin") {
+            else if (command === "fblogin") {
                 return await stepContext.beginDialog(FACEBOOKAUTH);
             }
-            else if (command.trim() == "setup card message") {
+            else if (command === "setup card message") {
                 return await stepContext.beginDialog(UPDATECARDSETUP);
             }
-            else if (command.trim() == "update card message") {
+            else if (command === "update card message") {
                 return await stepContext.beginDialog(UPDATECARDMESSAGE);
             }
-            else if (command.trim() == "send message to 1:1") {
+            else if (command === "send message to 1:1") {
                 return await stepContext.beginDialog(PROACTIVEMESSAGE);
             }
-            else if (command.trim() == "logout") {
+            else if (command === "logout") {
                 return await stepContext.beginDialog(LOGOUT);
             }          
         }

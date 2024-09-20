@@ -136,39 +136,36 @@ You can interact with Teams Tab meeting sidepanel.
 4. **Add meeting tab**
 ![AddMeeting](Images/AddMeeting.png)
 
-5. **Join meeting**
-![JoinMeeting](Images/JoinMeeting.png)
-
-6. **Select your app**
+5. **Select your app**
 ![appAddMeeting](Images/appAddMeeting.png)
 
-7. **Add meeting tab**
+6. **Add meeting tab**
 ![appAddMeetingTabs](Images/appAddMeetingTabs.png)
 
-8. **Home page**
+7. **Home page**
 ![HomePage](Images/HomePage.png)
 
-9. **Click share To stage view**
+8. **Click share To stage view**
 ![clickShareStageView](Images/clickShareStageView.png)
 
-10. **Share To stage view**
+9. **Share To stage view**
 ![NextTenant](Images/NextTenant.png)
 
-11. **Toggle To Mute**
+10. **Toggle To Mute**
 Toggle button to mute state its looks like below.
 ![audioCall](Images/audioCall.png)
 
-12. **Toggle To Unmute**
+11. **Toggle To Unmute**
 Toggle button to Unmute state it will unmute client audio.
 ![audioCallTrue](Images/audioCallTrue.png)
 
-13. **App theme when dark**
+12. **App theme when dark**
 ![Dark](Images/dark-with-timer.PNG)
 
-14. **App theme when light**
+13. **App theme when light**
 ![Light](Images/light-with-timer.PNG)
 
-15. **App theme when contrast**
+14. **App theme when contrast**
 ![Contrast](Images/contrast-with-timer.PNG)
 
 ## Further reading

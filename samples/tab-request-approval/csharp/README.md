@@ -51,9 +51,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Run the app (Using Teams Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.8 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Visual Studio 2022 **Version 17.10 Preview 4  or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-1. In Visual Studio, right-click your project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
 1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
@@ -171,51 +172,47 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Install App User-1
 
-![InstallAppUser1](TabRequestApproval/Images/1.InstallAppUser.png)
+![InstallAppUser1](TabRequestApproval/Images/1.Install_User1.png)
 
 - Create Task
 
-![CreateTask](TabRequestApproval/Images/3.CreateTask.png)
+![CreateTask](TabRequestApproval/Images/2.Create_Task.png)
 
 - Task Details
 
-![TaskDetails](TabRequestApproval/Images/4.RequestTo.png)
+![TaskDetails](TabRequestApproval/Images/3.Task_Details.png)
 
 - All Person
 
-![TaskDetails](TabRequestApproval/Images/5.SelectPerson.png)
+![TaskDetails](TabRequestApproval/Images/5.Select_a_Person.png)
 
 - Select a Person
 
-![TaskDetails](TabRequestApproval/Images/6.SelectOnePerson.png)
+![TaskDetails](TabRequestApproval/Images/6.Install_User2.png)
 
 - Create task Details
 
-![CreateTaskDetails](TabRequestApproval/Images/7.CreateTaskDetails.png)
+![CreateTaskDetails](TabRequestApproval/Images/7.Create_Task_User2.png)
 
 - Install App User-2
 
-![InstallAppUser2](TabRequestApproval/Images/2.InstallAppUser.png)
+![InstallAppUser2](TabRequestApproval/Images/8.Send_Request.png)
 
 - Send Request
 
-![SendRequest](TabRequestApproval/Images/12.SendReq.png)
+![SendRequest](TabRequestApproval/Images/9.Request_Popup_User2.png)
 
-- On click of notification a task module will open, redirecting the user to the request.
+- On click of notification a dialog (referred as task modules in TeamsJS v1.x) will open, redirecting the user to the request.
 
-![SendRequest](TabRequestApproval/Images/8.Activity.png)
+![SendRequest](TabRequestApproval/Images/10.Requests_User1.png)
 
 - User-1 My Request 
 
-![SendRequest](TabRequestApproval/Images/9.User1MyRequestDetails.png)
+![SendRequest](TabRequestApproval/Images/11.Pending_Approvals_User2.png)
 
 - User-2 My Pending Approvals 
 
-![SendRequest](TabRequestApproval/Images/10.User2PendingRequestDetails.png)
-
-- User-1 Approved Status
-
-![SendRequest](TabRequestApproval/Images/11.ApprovedReq.png)
+![SendRequest](TabRequestApproval/Images/12.Approved_Status_User1.png)
 
 ## Further reading
 

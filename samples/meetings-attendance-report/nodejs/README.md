@@ -159,19 +159,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 **Schedule the meeting and add Meeting Attendance Bot from Apps section in that particular scheduled meeting:**
 
-![Install](Images/InstallApp.png)
+![Install](Images/1.Install.png)
 
 **Add Meeting UI:**
 
-![Add Bot](Images/AddMeetingAttendanceBot.png)
+![Add Bot](Images/2.Add_to_meeting.png)
 
 **On installation you will get a welcome card:**
 
-![Welcome Card](Images/WelcomeCard.png)
+![Welcome Card](Images/3.Installed.png)
 
 **Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report:**
 
-![Attendance Report](Images/MeetingAttendanceReportCard.png)
+![Attendance Report](Images/4.Attendance_report.png)
 
 ## Further reading
 - [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)

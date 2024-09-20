@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "App SSO Sample\\App SSO Sample.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft 365 app (browser)",
+    "Projects": [
+      {
+        "Path": "App SSO Sample\\App SSO Sample.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft 365 app (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (browser)",
+    "Projects": [
+      {
+        "Path": "App SSO Sample\\App SSO Sample.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  }
+]

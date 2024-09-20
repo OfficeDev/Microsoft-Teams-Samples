@@ -4,6 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="TeamsApp\**" />
+    <Content Remove="TeamsApp\**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
+    <None Remove="TeamsApp\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
@@ -40,6 +47,10 @@
     <None Update="Images\logout.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="TeamsFx" />
   </ItemGroup>
 
 </Project>

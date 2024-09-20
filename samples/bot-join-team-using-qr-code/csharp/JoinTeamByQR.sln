@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoinTeamByQR", "JoinTeamByQR\JoinTeamByQR.csproj", "{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{F1CD3DEF-6506-4F5C-8B08-660EC9EF739F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E13AC70-54EF-4634-9DA6-7A4F95B8972C}"
+	ProjectSection(SolutionItems) = preProject
+		JoinTeamByQR.slnLaunch.user = JoinTeamByQR.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CD3DEF-6506-4F5C-8B08-660EC9EF739F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CD3DEF-6506-4F5C-8B08-660EC9EF739F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CD3DEF-6506-4F5C-8B08-660EC9EF739F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CD3DEF-6506-4F5C-8B08-660EC9EF739F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

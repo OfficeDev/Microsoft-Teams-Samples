@@ -19,6 +19,11 @@ Bot Framework v4 SPListBot sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and save it into sharepoint's List.
 
+## Interaction with app
+
+![SPListBot](SPListBot/Images/Preview.gif)
+
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -116,15 +121,15 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 ### Screenshots
 **Upload the custom app in Teams**
 
-![image](https://user-images.githubusercontent.com/50989436/109759882-c36f3480-7c13-11eb-9a38-e69d2c7139e7.png)
+![image](SPListBot/Images/1.Install.png)
 
 **Interaction with the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109759972-eb5e9800-7c13-11eb-9246-e8fa02fbef64.png)
+![image](SPListBot/Images/2.Installed.png)
 
 **Ping the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png)
+![image](SPListBot/Images/3.Interaction_with_bot.png)
 
 
 ## Further reading

@@ -33,9 +33,9 @@ export const AppRoute = () => {
                     <Route path="/appInMeeting" element= { <AppInMeeting /> }/>
                     <Route path="/configure" element= { <Configure /> }/>
                     <Route path="/home" element= { <Home /> }/>
-                    <Route path="/doneView" element= { <Done shareSpecificPart={(meetingStatus) => {}} /> }/>
-                    <Route path="/doingView" element= { <Doing shareSpecificPart={(meetingStatus) => {}} /> }/>
-                    <Route path="/todoView" element= { <Todo shareSpecificPart={(meetingStatus) => {}} /> }/>
+                    <Route path="/doneView" element= { <Done shareSpecificAppContent={(meetingStatus) => {}} /> }/>
+                    <Route path="/doingView" element= { <Doing shareSpecificAppContent={(meetingStatus) => {}} /> }/>
+                    <Route path="/todoView" element= { <Todo shareSpecificAppContent={(meetingStatus) => {}} />  }/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>

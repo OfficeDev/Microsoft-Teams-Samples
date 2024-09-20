@@ -4,9 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inspection demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -33,7 +32,7 @@
 
     <script>
         $(document).ready(function () {
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
             $("#desktop").attr("src", `${window.location.origin}/Desktop.PNG`);
             $("#laptop").attr("src", `${window.location.origin}/Laptop.PNG`);
             $("#mobile").attr("src", `${window.location.origin}/Mobile.PNG`);
@@ -62,7 +61,7 @@
                 console.log(`Submit handler - err: ${err}`);
             };
 
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.dialog.open(taskInfo, submitHandler);
         }
 
         // Method to open taskmodule that wil redirect user to get product details based on scanned barcode.
@@ -86,7 +85,7 @@
                 console.log(`Submit handler - err: ${err}`);
             };
 
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.dialog.open(taskInfo, submitHandler);
         }
 
     </script>

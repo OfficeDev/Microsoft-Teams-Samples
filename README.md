@@ -8,7 +8,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 
 # Sample lists
 
-1. [Copilot for Microsoft 365 plugins samples](#Copilot-for-Microsoft-365-plugins-samples)
+1. [Copilot for Microsoft 365 plugin samples](#Copilot-for-Microsoft-365-agent-samples)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)
@@ -21,10 +21,10 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
 
-## [Copilot for Microsoft 365 plugins samples](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples)
+## [Copilot for Microsoft 365 plugin samples](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples)
 | Name    | Description |  .NET    | TypeScript   | JavaScript |
 | -------- | :------- | ------- | ------- | ------- |
-| Northwind Inventory  | Plugin that allows users to query the Northwind Database | | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
+| Northwind Inventory  | Plugin that allows users to query the Northwind Database | [View](https://github.com/OfficeDev/Copilot-for-M365-Samples/tree/main/samples/msgext-northwind-inventory-csharp)| [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
 | Document Search | Plugin that enables Hybrid Search (Vector + Semantic) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-csharp)  | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-js) | |
 | Product support | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-product-support-sso-csharp) | |
 | Multi Parameters  |Plugin that demonstrates how to implement complex utterances and support deep retrieval | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-csharp)  |[View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-ts) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-js)|
@@ -39,6 +39,16 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript | App Manifest  
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
+
+## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
+
+|    | Sample Name        | Description                                                                                                                | C#    | JavaScript | App Manifest  
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|api-doc-search|This is a sample API application that demonstrates how to perform RAG-based semantic search using NoSQL CosmosDB.||[View][api-doc-search#nodejs]|-
+|2|Compliance Checker|Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not.||[View][msgext-ai-doc-compliance-checker#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/msgext-ai-doc-compliance-checker/demo-manifest/AIComplianceChecker.zip)
+|3|bot-ai-meeting-helper|This sample demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.||[View][bot-ai-meeting-helper#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
+|4|bot-virtual-assistant|This is a sample application that demonstrates a root bot that routes inputs to skill bots for tailored responses.||[View][bot-virtual-assistant#nodejs]|-
+|5|msgext-expert-finder-js|This sample implements a Teams message extension that can be used to query a database of candidates based on their skills, location and availability. The sample, when used with Copilot for M365, demonstrates SSO, and Copilot's ability to perform multi-parameter search.||[View][msgext-expert-finder#nodejs]|-
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript | App Manifest| 
@@ -70,8 +80,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |25| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
 |26| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |27| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
-
-
+|28| Tab Meeting Recording and transcript with auto recording |This sample shows meeting recording and transcript with auto recording. |[View][tab-meeting-auto-recording#csharp]||
+|29| Offline Support Tickets |This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage. ||[View][tab-support-offline#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
+|30| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. |[View][tab-nested-auth#cs]|[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -104,8 +115,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |23| Bot configuration app with type ahead search control.|This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.|[View][BotConfigurationApp#csharp]|[View][BotConfigurationApp#nodejs
 |23| Bot configuration app with auth |This sample demonstrates the features of bot configuration auth and reconfiguration for both teams and group chats.|[View][BotConfigurationAppAuth#csharp]|[View][BotConfigurationAppAuth#nodejs]
 |24| Tag mention bot  | This sample app demonstrates the use of tag mention funtionality in teams scope using Bot Framework. |[View][Tagmention#csharp]|[View][Tagmention#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
-|24| Commands menu and prompt starters bot  | This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command. |[View][CommandsMenu#csharp]|[View][CommandsMenu#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
-
+|25| Commands menu and prompt starters bot  | This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command. |[View][CommandsMenu#csharp]|[View][CommandsMenu#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
+|26| Bot All Cards | Sample which demonstrates sending different types cards supported in teams using bot. |[View][TypesCards#csharp]|[View][TypesCards#nodejs] ![toolkit-icon](assets/toolkit-icon.png)  | | |[View](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip)
+|27| Apps in Federated | This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed. ||[View][bot-feed-members#js] ![toolkit-icon](assets/toolkit-icon.png)
+|28| Requirement Targeting OneWay Dependency | Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using elementRelationshipSet) and functionality using hostMustSupportFunctionalities. ||[View][RequirementTargetingOneWayDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png)
+|29| Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specify mutual-dependency relationships between app capabilities using elementRelationshipSet. ||[View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png)
 
 #### Additional samples
 
@@ -131,6 +145,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
 |9|Messaging extension - Adaptive Card based loop components | Demonstrates how to create Messaging extension with adaptive card-based loop components. | [View][msgext-unfurling-ac-loop-components#cs]    | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |   |    |[View](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
 |10|Messaging Extensions AI - Sentiment Analysis | Messaging Extension with AI capability that performs sentiment analysis (positive/negative/neutral) for messages posted in Microsoft Teams chat |[View][msgext-ai-sentiment-analysis#cs] | [View][msgext-ai-sentiment-analysis#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
+|11|Copilot Handoff | This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension showcases copilot handoff along with allowings users to query the Northwind Database || [View][msgext-copilot-handoff#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
 
 #### Additional samples
 
@@ -140,6 +155,10 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2|Link unfurling - setup a meeting     | This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.                              |[View][msgext-link-unfurl-meeting#cs]        |
 
 ## [Webhooks and Connectors samples](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
+
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 |    | Sample Name        | Description                                                                      | C#    | JavaScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
@@ -166,6 +185,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |11|Graph Meeting Notification  | This is a sample application which demonstrates the use of online meeting subscription and sends you the notifications in chat using bot. | [View][graph-meeting-notification#cs]|[View][graph-meeting-notification#js] ![toolkit-icon](assets/toolkit-icon.png)|
 |12|Change Notifications Team/Channel  | This sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel using Graph api. | [View][change-notifications-team/channel#cs]|[View][change-notifications-team/channel#js] ![toolkit-icon](assets/toolkit-icon.png)|
 |13|graph-teams-tag  | This is a sample application which demonstrates how to use CRUD Graph operations within tab related to team tags. | [View][graph-teams-tag#cs]|[View][graph-teams-tag#js] ![toolkit-icon](assets/toolkit-icon.png)|
+|14|Graph API Explorer for RSC | Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization | |[View][graph-rsc-helper#js] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
 
@@ -204,7 +224,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
 |:--:|:---------------|:---------------------------------------------------------------------------------|:------|:----------------|:-------|
-|1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][bot-task-module#cs]     |[View][bot-task-module#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
+|1|Teams Dialogs (referred as task modules in TeamsJS v1.x)         | Sample app showing off the Teams Dialogs(referred as task modules in TeamsJS v1.x), a way to invoke custom code from a bot, a tab, or both! |[View][bot-task-module#cs]     |[View][bot-task-module#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts] ![toolkit-icon](assets/toolkit-icon.png) 
 |4|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     ||[View](/samples/app-region-selection/csharp/demo-manifest/app-region-selection.zip)
@@ -226,7 +246,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |20|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.||[View][bot-ai-enterprise-search#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |21|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip)|
 |22|Sharepoint tab request approval | This sample app demonstrates the usage of SharePoint Embedded for storage in teams. |[View][sharepoint-tab-request-approval#csharp]||
-|22|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||[View](/samples/app-HR-talent/csharp/src/demo-manifest/TeamsTalentMgmt.zip)
+|23|App HR talent | This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. |[View][app-HR-talent#csharp]||[View](/samples/app-HR-talent/csharp/src/demo-manifest/TeamsTalentMgmt.zip)
 
 ## Application templates
 
@@ -280,8 +300,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-external-auth#csharp]:samples/tab-external-auth/csharp
 [tab-meeting-transcript-recording#nodejs]:samples/tab-meeting-transcript-recording/nodejs
 [tab-meeting-transcript-recording#csharp]:samples/tab-meeting-transcript-recording/csharp
+[tab-meeting-auto-recording#csharp]:samples/tab-meeting-auto-recording/csharp
 [tab-deeplink-pass-values#ts]:samples/tab-deeplink-pass-values/ts
-
+[tab-nested-auth#nodejs]:samples/tab-nested-auth/nodejs
+[tab-support-offline#nodejs]:samples/tab-support-offline/nodejs
+[tab-nested-auth#cs]:samples/tab-nested-auth/csharp
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 [group-channel-tab#ts#spfx]:samples/tab-channel-group/spfx
@@ -317,6 +340,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-unfurling-ac-loop-components#nodejs]:samples/msgext-unfurling-ac-loop-components/nodejs
 [msgext-unfurling-ac-loop-components#cs]:samples/msgext-unfurling-ac-loop-components/csharp
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
+[msgext-copilot-handoff#js]:samples/msgext-copilot-handoff/ts
+[msgext-expert-finder#nodejs]:samples/msgext-expert-finder-js
 
 [tab-sso#ts]:samples/tab-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
@@ -325,6 +350,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx
+[bot-feed-members#js]:samples/bot-feed-members/nodejs
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
@@ -367,6 +393,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [Tagmention#nodejs]:samples/bot-tag-mention/nodejs
 [CommandsMenu#csharp]:samples/bot-commands-menu/csharp
 [CommandsMenu#nodejs]:samples/bot-commands-menu/nodejs
+[RequirementTargetingOneWayDependency#nodejs]:samples/requirement-targeting-oneway-dependency/nodejs
+[RequirementTargetingMutualDependency#nodejs]:samples/requirement-targeting-mutual-dependency/nodejs
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
 [BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
@@ -406,7 +434,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-attendance-report#nodejs]:samples/meetings-attendance-report/nodejs
 [meetings-audio-state#nodejs]:samples/meetings-audio-state/nodejs
 [meetings-context-app#csharp]:samples/meetings-context-app/csharp
+[msgext-ai-doc-compliance-checker#nodejs]:samples/msgext-ai-doc-compliance-checker
 [meetings-context-app#nodejs]:samples/meetings-context-app/nodejs
+[bot-ai-meeting-helper#nodejs]:samples/bot-ai-meeting-helper
+[api-doc-search#nodejs]:samples/api-doc-search
+[bot-virtual-assistant#nodejs]:samples/bot-virtual-assistant
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
@@ -438,6 +470,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel/nodejs
 [graph-teams-tag#cs]:samples/graph-teams-tag/csharp
 [graph-teams-tag#js]:samples/graph-teams-tag/nodejs
+[graph-rsc-helper#js]:samples/graph-rsc-helper/nodejs
 [link-unfurling-stt#nodejs]:samples/app-link-unfurling-in-share-to-teams/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
