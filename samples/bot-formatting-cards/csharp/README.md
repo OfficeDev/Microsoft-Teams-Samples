@@ -246,25 +246,21 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![PersonaSet](BotFormattingCards/Images/11.Persona_Set_Icon.png)
 
-**Code Block in Adaptive Card:**
-
-![CodeBlock](BotFormattingCards/Images/12.Code_Block_Adaptive_Card.png)
-
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](BotFormattingCards/Images/13.Layout.png)
+![Layout](BotFormattingCards/Images/12.Layout_Card.png)
 
 **Border Adaptive Card:**
 
-![Border](BotFormattingCards/Images/14.Border.png)
+![Border](BotFormattingCards/Images/13.Border.png)
 
 **Rounded Corners Adaptive Card:**
 
-![Rounded Corners](BotFormattingCards/Images/15.RoundedCorners.png)
+![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
 
 **Mobile:**
 
-![LayoutMobile](BotFormattingCards/Images/14.LayoutMobile.png)
+![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 
