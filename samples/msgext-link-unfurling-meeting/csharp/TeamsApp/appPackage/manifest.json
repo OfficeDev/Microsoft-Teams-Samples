@@ -2,13 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0",
-  "id": "845d8001-f01d-4887-b909-2dd673af7bb8",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.meetings.package",
   "developer": {
     "name": "{DeveloperName}",
-    "websiteUrl": "{WebsiteUrl}",
-    "privacyUrl": "{BaseUrl}/privacy",
-    "termsOfUseUrl": "{BaseUrl}/termsofuse"
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "showLoadingIndicator": true,
   "bots": [
     {
-      "botId": "{Bot App Id}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team",
@@ -38,7 +38,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "{BaseUrl}/Config",
+      "configurationUrl": "${{BOT_ENDPOINT}}/Config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -55,14 +55,14 @@
   ],
   "composeExtensions": [
     {
-      "botId": "{Bot App Id}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "messageHandlers": [
         {
           "type": "link",
           "value": {
             "domains": [
-              "{{domain-name}}"
+              "${{BOT_DOMAIN}}"
             ]
           }
         }
@@ -92,12 +92,12 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}",
+    "${{BOT_DOMAIN}}",
     "*.botframework.com",
     "*.microsoft.com"
   ],
   "webApplicationInfo": {
-    "id": "{Bot App Id}",
-    "resource": "api://{domain}/{Bot App Id}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }
