@@ -152,9 +152,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - Press `F5` to run the project
 	 
 20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{MicrosoftAppId}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - `${{AAD_APP_CLIENT_ID}}` with Application id generated from Step 3
+   - `${{TAB_DOMAIN}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
 21. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
