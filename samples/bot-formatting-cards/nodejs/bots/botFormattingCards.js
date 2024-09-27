@@ -283,18 +283,23 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'RoundedCorners',
                 value: 'RoundedCorners'
-            },
-            {
-                type: ActionTypes.ImBack,
-                title: '',
-                value: ''
             }
         ];
 
-        var reply = MessageFactory.text("Please select a card from given options. ");
-        reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
+        await this.sendWelcomeCard(turnContext, cardActions);
+    }
 
-        await turnContext.sendActivity(reply);
+    async sendWelcomeCard(context, cardActions) {
+        const initialValue = {
+            count: 0
+        };
+        const card = CardFactory.heroCard(
+            'Please select a card from given options. ',
+            '',
+            null,
+            cardActions
+        );
+        await context.sendActivity(MessageFactory.attachment(card));
     }
 }
 
