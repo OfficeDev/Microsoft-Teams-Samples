@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.2",
-  "id": "<<teams-app-id>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.meetingsigning",
   "developer": {
     "name": "Contoso",
@@ -26,10 +26,10 @@
   "staticTabs": [],
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<deployment-url>>/configure",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "meetingChatTab",
@@ -43,9 +43,8 @@
   "composeExtensions": [],
   "permissions": [],
   "validDomains": [
-      "localhost:44326",
-      "<<domain-name>>",
-      "<<deployment-url>>"
+    "localhost:44326",
+    "${{BOT_DOMAIN}}"
   ],
   "meetingExtensionDefinition": {
     "supportsAnonymousGuestUsers": true
@@ -73,7 +72,7 @@
     }
   },
   "webApplicationInfo": {
-    "id": "<<aad-id>>",
-    "resource": "api://<<deployment-url>>/<<aad-id>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

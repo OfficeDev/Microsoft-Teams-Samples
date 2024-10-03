@@ -1,0 +1,9 @@
+﻿{
+  "profiles": {
+    // Debug project within Teams
+    "Microsoft Teams (browser)": {
+      "commandName": "Project",
+      "launchUrl": "https://teams.microsoft.com/l/app/%TEAMSAPPID%?installAppPackage=true&webjoin=true&appTenantId=%TENANTID%&login_hint=%USERNAME%"
+    }
+  }
+}
