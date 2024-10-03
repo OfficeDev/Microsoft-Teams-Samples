@@ -117,6 +117,12 @@ namespace Microsoft.BotBuilderSamples
                     // Adaptive Card responsive layout
                     reply.Attachments.Add(AllCards.sendResponsiveLayoutCard());
                     break;
+                case "Border":
+                    reply.Attachments.Add(AllCards.SendBorderCard());
+                    break;
+                case "RoundedCorners":
+                    reply.Attachments.Add(AllCards.SendRoundedCornerCard());
+                    break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     reply.Attachments.Add(AllCards.sendFullWidthCardAdaptiveCard());
@@ -127,6 +133,8 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendPersonaCardIcons());
                     reply.Attachments.Add(AllCards.sendPersonaCardSetIcons());
                     reply.Attachments.Add(AllCards.sendResponsiveLayoutCard());
+                    reply.Attachments.Add(AllCards.SendBorderCard());
+                    reply.Attachments.Add(AllCards.SendRoundedCornerCard());
                     break;
             }
 
@@ -161,6 +169,8 @@ namespace Microsoft.BotBuilderSamples
                     new Choice() { Value = "Persona", Synonyms = new List<string>() { "Persona" } },
                     new Choice() { Value = "PersonaSet", Synonyms = new List<string>() { "PersonaSet" } },
                     new Choice() { Value = "Layout", Synonyms = new List<string>() { "Layout" } },
+                    new Choice() { Value = "Border", Synonyms = new List<string>() { "Border" } },
+                    new Choice() { Value = "RoundedCorners", Synonyms = new List<string>() { "RoundedCorners" } },
                 };
 
                 return returncardOptions;
