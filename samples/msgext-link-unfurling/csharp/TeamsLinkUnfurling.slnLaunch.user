@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Microsoft Teams (Browser)",
+    "Projects": [
+      {
+        "Path": "TeamsLinkUnfurling.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (Browser)",
+    "Projects": [
+      {
+        "Path": "TeamsLinkUnfurling.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  }
+]

@@ -31,6 +31,26 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - Create tags within the team channel prior to utilizing the bot.
+- [Teams](https://teams.microsoft.com/v2/?clientexperience=t2) Microsoft Teams is installed and you have an account
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+
+##Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+
+1.Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
+2.Install Teams Toolkit for Visual Studio Teams Toolkit extension
+3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
+5.In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
+6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
+8.In the browser that launches, select the Add button to install the app to Teams.
+
+If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+
 
 ## Setup
 
@@ -125,16 +145,16 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 
 ### 4. Setup Manifest for Teams
 
-1. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 3
    - `<<domain-name>>` - Your application's base url domain. E.g. for https://12345.ngrok-free.app the base url domain will be 12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `AppManifest_Hub` folder into a `AppManifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+2. Zip up the contents of the `appPackage` folder to create a `manifest.zip` or `appPackage_Hub` folder into a `appPackage_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 
