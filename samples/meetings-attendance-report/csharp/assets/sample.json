@@ -8,8 +8,8 @@
     "longDescription": [
       "This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot."
     ],
-    "creationDateTime": "2022-20-08",
-    "updateDateTime": "2022-20-08",
+    "creationDateTime": "2022-08-20",
+    "updateDateTime": "2022-08-20",
     "products": [
       "Teams"
     ],
