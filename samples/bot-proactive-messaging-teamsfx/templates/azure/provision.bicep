@@ -20,6 +20,9 @@ module botProvision './provision/bot.bicep' = {
   params: {
     provisionParameters: provisionParameters
     userAssignedIdentityId: userAssignedIdentityProvision.outputs.identityResourceId
+    identityClientId: userAssignedIdentityProvision.outputs.identityClientId
+    identityResourceId: userAssignedIdentityProvision.outputs.identityResourceId
+    identityTenantId: userAssignedIdentityProvision.outputs.identityPrincipalId
   }
 }
 
