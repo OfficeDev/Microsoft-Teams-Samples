@@ -127,7 +127,7 @@ namespace TabRequestApproval.Controllers
                                        });
 
                     // Filter installed apps to find the one with DisplayName "Tab Request Approval"
-                    var installationId = installedApps.Value.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.Id);
+                    var installationId = installedApps.Value.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.TeamsAppId);
 
                     // Check if there is at least one matching installationId
                     if (installationId.Any())
