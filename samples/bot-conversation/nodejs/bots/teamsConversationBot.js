@@ -279,13 +279,15 @@ class TeamsConversationBot extends TeamsActivityHandler {
         users = [];
     }
 
+    // We already have prompt starters so we don't need to do anything here.
+    /*
     async onInstallationUpdateActivity(context) {
-        if (context.activity.conversation.conversationType === 'channel') {
-            await context.sendActivity(MessageFactory.text(`Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in ${context.activity.conversation.name}`));
-        } else {
-            await context.sendActivity(MessageFactory.text('Welcome to Microsoft Teams conversationUpdate events demo bot.'));
-        }
-    }
+        // if (context.activity.conversation.conversationType === 'channel') {
+        //     await context.sendActivity(MessageFactory.text(`Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configureddddddddddd in ${context.activity.conversation.name}`));
+        // } else {
+        //     await context.sendActivity(MessageFactory.text('Welcome to Microsoft Teams conversationUpdate events demo botssssss.'));
+        // }
+    }*/
 
     async cardActivityAsync(context, isUpdate) {
         const cardActions = [
