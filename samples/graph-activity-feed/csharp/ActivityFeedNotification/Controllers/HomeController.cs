@@ -307,7 +307,7 @@ namespace TabActivityFeed.Controllers
 
                 var tabs = await graphClient.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Tabs
                 .Request()
-                .Expand("teamsApp")
+                .Expand("teamsAppDefinition")
                 .GetAsync();
                 var tabId = tabs.Where(a => a.DisplayName == "NotifyFeedApp").Select(x => x.Id).ToArray()[0];
                 var topic = new TeamworkActivityTopic
@@ -407,7 +407,7 @@ namespace TabActivityFeed.Controllers
             {
                 var tabs = await graphClient.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Tabs
                 .Request()
-                .Expand("teamsApp")
+                .Expand("teamsAppDefinition")
                 .GetAsync();
 
                 var tabId = tabs.Where(a => a.DisplayName == "NotifyFeedApp").Select(x => x.Id).ToArray()[0];

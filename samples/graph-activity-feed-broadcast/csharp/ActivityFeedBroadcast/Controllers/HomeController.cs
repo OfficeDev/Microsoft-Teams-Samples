@@ -123,7 +123,7 @@ namespace ActivityFeedBroadcast.Controllers
                     {
                         var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
                                              .Request()
-                                             .Expand("teamsApp")
+                                             .Expand("teamsAppDefinition")
                                              .GetAsync();
 
                         var response = new HttpResponseMessage();
