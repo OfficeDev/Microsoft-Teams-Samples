@@ -2,11 +2,10 @@
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -118,53 +117,45 @@ namespace TabRequestApproval.Controllers
                     var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
 
                     // Retrieve user information from Microsoft Graph API
-                    var user = await graphClient.Users[taskInfo.personaName]
-                              .Request()
-                              .GetAsync();
+                    var user = await graphClient.Users[taskInfo.personaName].GetAsync();
 
                     // Retrieve installed apps for the user from Microsoft Graph API
-                    var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
-                                       .Request()
-                                       .Expand("teamsApp")
-                                       .GetAsync();
+                    var installedApps = await graphClient.Users[user.UserPrincipalName].Teamwork.InstalledApps
+                                       .GetAsync((requestConfiguration) =>
+                                       {
+                                           requestConfiguration.QueryParameters.Expand = new string[] { "teamsAppDefinition" };
+                                       });
 
                     // Filter installed apps to find the one with DisplayName "Tab Request Approval"
-                    var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Request Approval").Select(x => x.TeamsApp.Id);
+                    var installationId = installedApps.Value.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.TeamsAppId);
 
                     // Check if there is at least one matching installationId
                     if (installationId.Any())
                     {
-                        // Construct URL for the Teams entity
-                        var url = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
-
-                        // Create a TeamworkActivityTopic for the notification
-                        var topic = new TeamworkActivityTopic
+                        var requestBody = new Microsoft.Graph.Users.Item.Teamwork.SendActivityNotification.SendActivityNotificationPostRequestBody
                         {
-                            Source = TeamworkActivityTopicSource.Text,
-                            Value = $"{taskInfo.title}",
-                            WebUrl = url
-                        };
-
-                        // Create preview text for the notification
-                        var previewText = new ItemBody
-                        {
-                            Content = $"Request By: {taskInfo.userName}"
-                        };
-
-                        // Create template parameters for the notification
-                        var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-                        {
-                            new Microsoft.Graph.KeyValuePair
+                            Topic = new TeamworkActivityTopic
                             {
-                                Name = "approvalTaskId",
-                                Value = taskInfo.title
-                            }
+                                Source = TeamworkActivityTopicSource.Text,
+                                Value = $"{taskInfo.title}",
+                                WebUrl = "https://teams.microsoft.com/l/entity/" + _configuration["AzureAd:MicrosoftAppId"] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}"
+                            },
+                            ActivityType = "approvalRequired",
+                            PreviewText = new ItemBody
+                            {
+                                Content = $"Request By: {taskInfo.userName}"
+                            },
+                            TemplateParameters = new List<Microsoft.Graph.Models.KeyValuePair>
+                            {
+                                new Microsoft.Graph.Models.KeyValuePair
+                                {
+                                    Name = "approvalTaskId",
+                                    Value = taskInfo.title
+                                },
+                            },
                         };
-                        // Send the activity notification using Microsoft Graph API
-                        await graphClient.Users[user.Id].Teamwork
-                            .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
-                            .Request()
-                            .PostAsync();
+
+                        await graphClient.Users[user.Id].Teamwork.SendActivityNotification.PostAsync(requestBody);
                     }
                 }
             }
