@@ -22,10 +22,10 @@
 ## Install certificate.
 Once the download is completed open the downloaded certificate in notepad. The downloaded certificate must be in .pem format.
 
-The certificate will contain bot the base64 string and private key
+The certificate will contain both the base64 string and private key
 
 1. Copy the content between `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`. This will be the value of `Base64EncodedCertificate` in appsettings.json file.
 
 2. Copy the content from `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`. (Including the `BEGIN` and `END` strings). Inside helper folder of this project create a new .pem file and paste the copied key. The key must contain `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----` strings.
 
-3. The name of the file which stores the priavate key is the value of `PRIVATE_KEY_PATH`. The file must be present inside helper folder of this project.
+3. The name of the file which stores the private key is the value of `PRIVATE_KEY_PATH`. The file must be present inside helper folder of this project.
