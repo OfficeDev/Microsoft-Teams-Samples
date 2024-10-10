@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos the feature of link unfurling for share to teams.
+description: This sample demonstrates how to implement link unfurling in Share to Teams for seamless sharing of site content directly to individual contacts or groups on Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-te
 
 ## Link unfruling Share to teams sample
 
-This sample demos the feature of link unfurling for share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
+This sample demonstrates the Share to Teams feature, which allows users to seamlessly share site content directly to contacts or groups in Microsoft Teams, leveraging link unfurling to provide rich previews and context for shared links. It includes comprehensive setup instructions, bot registration, and local deployment steps, making it easy to integrate and test within your Teams environment.
 
 ## Interaction with app
 

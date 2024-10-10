@@ -19,8 +19,8 @@
     "full": "Link unfurling STT"
   },
   "description": {
-    "short": "Sample to test link unfurling in STT",
-    "full": "This sample demos the feature of link unfurling in share to teams"
+    "short": "Demonstrates link unfurling in Share to Teams feature for easy content sharing.",
+    "full": "This sample demonstrates how to implement link unfurling in Share to Teams for seamless sharing of site content directly to individual contacts or groups on Teams."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
