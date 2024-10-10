@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Microsoft Teams (Browser)",
+    "Projects": [
+      {
+        "Path": "AppIconBadgingInMeetings\\AppIconBadgingInMeetings.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  }
+]
