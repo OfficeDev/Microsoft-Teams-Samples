@@ -6,6 +6,17 @@ const express = require('express');
 const router = express.Router();
 
 // Routes for the API calls.
-router.post('/', changeNotification.createChannelAsync);
-router.get('/team', changeNotification.createTeamAsync);
+
+router.post('/channel/', changeNotification.createChannelAsync);
+router.post('/team/', changeNotification.createTeamAsync);
+router.post('/chat/',changeNotification.subscribeToSpecificChat);
+router.post('/anychat/',changeNotification.subscribeToAnyChat);
+router.post('/notifyOnUser/',changeNotification.notifyOnUserSpecificProperties);
+router.post('/userLevelChats/',changeNotification.userLevelChats);
+router.post('/userLevelMePath/',changeNotification.userLevelUsingMePath);
+router.post('/UserLevelChatsUsingNotifyOnUser/',changeNotification.userLevelChatsUsingNotifyOnUserSpecificProperties);
+router.post('/TeamsAppIsInstalled/',changeNotification.anyChatWhereTeamsAppIsInstalled);
+router.get('/checkExistingSubsription/',changeNotification.checkExistingSubsription);
+
+
 module.exports = router;
