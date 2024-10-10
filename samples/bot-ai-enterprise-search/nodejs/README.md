@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings and completion APIs for user queries using Redis DB, and it is based on files uploaded by an admin using a bot.
+description: This Azure Open AI sample app integrates user search with Azure Open AI embeddings, Redis DB, and Teams bot for queries based on uploaded files.
 products:
 - office-teams
 - office
@@ -14,7 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-open-ai-search-file-upload-nodejs
 ---
 # Teams Azure Open AI Embeddings And Redis Search On Uploaded File Using Bot
 
-This bot has been created using [Bot Builder](https://www.npmjs.com/package/botbuilder) and [Teams Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-v4?view=msteams-client-js-latest&pivots=visual-studio-code), this Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings, Redis DB search and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.
+This sample app demonstrates user search functionality powered by Azure Open AI embeddings and Redis DB, facilitating queries based on files uploaded by an admin using a Teams bot. It supports features like Adaptive Cards, Azure Blob Storage, and Redis integration within Teams.
+
+This bot has been created using [Bot Builder](https://www.npmjs.com/package/botbuilder) and [Teams Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-v4?view=msteams-client-js-latest&pivots=visual-studio-code). 
 
 ## Included Features
 * Bots

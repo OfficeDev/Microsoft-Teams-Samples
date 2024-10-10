@@ -1,8 +1,6 @@
 # How to use this Proactive message bots app
 
-A bot, chatbot, or conversational bot is an app that responds to simple commands sent in chat and replies in meaningful ways. Examples of bots in everyday use include: bots that notify about build failures, bots that provide information about the weather or bus schedules, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation. Being a cloud application, a bot can provide valuable and secure access to cloud services and corporate resources.
-
-This is a sample which shows how to save user's conversation reference information to send proactive reminder message using Bots.
+This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Teams Toolkit for streamlined setup and testing.
 
 ## Prerequisites
 

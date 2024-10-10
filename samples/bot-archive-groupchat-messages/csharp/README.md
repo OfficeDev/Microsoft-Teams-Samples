@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample which demonstrates how to archive groupchat messages and send it to user as a file using bot.
+description: This sample bot archives Teams group chat messages and sends them as files to users.
 products:
 - office-teams
 - office
@@ -15,9 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-cs
 
 # Archive groupchat messages
 
-Using this C# sample, a bot can archive chat messages of groupchat and send it to user.
-
-This feature shown in this sample is currently available in Public Developer Preview only.
+This sample demonstrates a bot that archives group chat messages in Microsoft Teams and sends them to users as downloadable files. It supports Teams SSO, Adaptive Cards, and Graph API integration for enhanced functionality.
 
 ## Included Features
 * Teams SSO (bots)

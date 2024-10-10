@@ -18,10 +18,10 @@
         "short": "bot-ai-meeting-helper${{APP_NAME_SUFFIX}}",
         "full": "Bot AI Meeting Helper"
     },
-    "description": {
-        "short": "Bot AI Meeting Helper",
-        "full": "An AI meeting helper that extracts meeting summaries and action items from transcriptions and provides the responses."
-    },
+  "description": {
+    "short": "Generates and sends AI-based meeting summaries and tasks to Teams users.",
+    "full": "This sample uses Azure OpenAI to extract meeting action items and summaries, sending them directly to subscribed participants in Microsoft Teams."
+  },
     "accentColor": "#FFFFFF",
     "bots": [
         {

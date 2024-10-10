@@ -15,8 +15,8 @@
     "full": "Adaptive Card Actions"
   },
   "description": {
-    "short": "Adaptive Card Actions",
-    "full": "This sample shows the feature where user can send different adaptive card actions using bot."
+    "short": "Demonstrates various Adaptive Card actions in a bot for Microsoft Teams.",
+    "full": "This sample shows how to send Adaptive Cards with multiple action types using a Teams bot."
   },
   "icons": {
     "outline": "outline.png",

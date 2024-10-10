@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-tab-conversations-csharp",
     "source": "officeDev",
     "title": "Proactive Tab Conversations",
-    "shortDescription": "Proactive Tab Conversation",
+    "shortDescription": "This sample shows how a bot can proactively start and manage tab-based conversations in Microsoft Teams for support inquiries.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-tab-conversations/csharp",
     "longDescription": [
-      "Proactive Tab Conversation"
+      "Demonstrates a proactive tab conversation feature in Microsoft Teams using a bot, enabling support inquiries to be initiated and displayed within a tab. The solution supports authorization based on team membership and provides adaptive card interactions."
     ],
     "creationDateTime": "2022-05-13",
-    "updateDateTime": "2022-08-08",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

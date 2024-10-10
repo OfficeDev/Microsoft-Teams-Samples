@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-all-cards-csharp",
     "source": "officeDev",
     "title": "Bot All Cards",
-    "shortDescription": "Sample which demonstrates sending different types cards supported in teams using bot.",
+    "shortDescription": "This sample showcases how to send various types of cards using a bot in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-all-cards/csharp",
     "longDescription": [
-      "Sample which demonstrates sending different types cards supported in teams using bot."
+      "This sample demonstrates using a bot to send multiple card types in Microsoft Teams, including Adaptive, Hero, Thumbnail, and OAuth cards. It covers setup, deployment, and app installation instructions."
     ],
     "creationDateTime": "2022-11-01",
-    "updateDateTime": "2022-11-01",
+    "updateDateTime": "2022-10-10",
     "products": [
       "Teams"
     ],

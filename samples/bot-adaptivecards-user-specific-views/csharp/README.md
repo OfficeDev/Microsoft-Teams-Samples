@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot.
+description: This sample app shows how to create user-specific adaptive card views for Teams, enabling personalized content and auto-updating across various chat contexts.
 products:
 - office-teams
 - office
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-v
 - **Interaction with bot**
   ![UserSpecificView](docs/UserSpecificView_all.gif)
 
-This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
+This sample demonstrates how to create user-specific views in Adaptive Cards within Microsoft Teams, using features like Action.Execute and auto-refresh for dynamic updates. The app enables personalized content, allowing seamless interaction across personal, group, and team contexts.
 
 Specifically, it uses the Universal Action `Action.Execute` with `refresh` property, which enables developers to build different views for users in a common chat thread. 
 

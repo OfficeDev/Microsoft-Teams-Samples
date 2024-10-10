@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-teams-catering-csharp",
     "source": "officeDev",
     "title": "Teams Catering Bot",
-    "shortDescription": "Teams catering bot demonstrating how to use Universal adaptive cards in Teams",
+    "shortDescription": "A bot for Microsoft Teams that enables food ordering using Universal Adaptive Cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-teams-catering/csharp",
     "longDescription": [
-      "Teams catering bot demonstrating how to use Universal adaptive cards in Teams"
+      "This Teams Catering Bot allows users to place food and drink orders seamlessly within Microsoft Teams. It leverages Universal Adaptive Cards for dynamic interactions and supports features like recent orders and order confirmation."
     ],
     "creationDateTime": "2021-05-25",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2022-10-10",
     "products": [
       "Teams"
     ],
