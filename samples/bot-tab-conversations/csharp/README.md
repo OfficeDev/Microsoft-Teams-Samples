@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Proactive Tab Conversation
+description: This sample shows how a bot can proactively start and manage tab-based conversations in Microsoft Teams for support inquiries.
 products:
 - office-teams
 - office
@@ -14,8 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-tab-conversations-csharp
 ---
 
 # Proactive Tab Conversations
-The proof of concept demonstrates how to use a bot to proactively create a new conversation each time a support inquiry is filed. The inquiry will be viewable in a tab, and the conversation can continue using conversational tabs.
-This concept can be extended to additional scenarios including proactively creating conversations on a patient, opportunity, incident, etc.
+This sample explores proactive conversations using a Teams bot, where inquiries are created and displayed within a support tab, allowing users to interact via adaptive cards. It supports tab-based interactions, API call authorization based on team membership, and offers both channel and personal tab experiences.
 
 Please see the [Code Tours](#code-tours) section for in-depth explanation of the sample. 
 

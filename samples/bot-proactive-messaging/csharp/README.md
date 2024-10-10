@@ -6,7 +6,7 @@ products:
 - office-teams
 - office
 - office-365
-description: "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
+description: This sample provides solutions for proactive messaging in Teams, including user and channel coordinate logging and message throttling.
 extensions:
  contentType: samples
  createdDate: "05/17/2022 01:48:56 AM"
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-csharp
 ---
 
 # Teams Proactive Messaging Samples
+
+This sample showcases two approaches for building proactive messaging apps in Microsoft Teams using C#. The Coordinate Logger solution captures user and channel conversation coordinates, while the Proactive CMD solution demonstrates how to send messages with policies that handle throttling, ensuring reliable delivery.
 
 <!-- 
 Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
