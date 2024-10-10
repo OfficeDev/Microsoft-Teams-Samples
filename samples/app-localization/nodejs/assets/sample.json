@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-localization-nodejs",
     "source": "officeDev",
     "title": "Teams App Localization",
-    "shortDescription": "Microsoft Teams app localization using Bot and Tab",
+    "shortDescription": "This sample demonstrates how to implement localization for a Microsoft Teams app using Bot and Tab functionalities.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/nodejs",
     "longDescription": [
-      "Microsoft Teams app localization using Bot and Tab"
+      "This Microsoft Teams sample app illustrates how to implement localization using Bot and Tab features. It supports multi-language configurations, allowing seamless app interactions in multiple languages."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-19",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],
