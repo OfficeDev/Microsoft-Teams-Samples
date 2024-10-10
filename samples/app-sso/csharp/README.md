@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl
+description: This sample app demonstrates Teams SSO integration for Tab, Bot, and Messaging Extension, using C# and Azure AD for secure authentication.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 ---
 
 # App SSO C#
+
+This C# sample demonstrates single sign-on (SSO) integration in a Microsoft Teams app, covering authentication scenarios for Teams Tab, Bot, and Messaging Extensions like search, action, and link unfurl. It utilizes Azure AD to obtain tokens and securely access user profiles via Microsoft Graph, while also supporting OAuth flows for seamless authentication.
 
 This app talks about the Teams Tab, Bot, Messaging Extension (ME) - search, action, linkunfurl SSO with C#
 
