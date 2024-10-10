@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 
 # Microsoft Teams hello world sample app.
 
-- Microsoft Teams hello world sample app.
+- This Hello World sample app showcases the fundamental features of Microsoft Teams, including tabs, bots, and messaging extensions, all built with Node.js.
 
 ## Included Features
 * Tabs

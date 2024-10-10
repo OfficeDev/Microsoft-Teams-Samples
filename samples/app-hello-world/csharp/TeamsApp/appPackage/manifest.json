@@ -15,8 +15,8 @@
     "full": "Hello World App"
   },
   "description": {
-    "short": "Hello World App for Microsoft Teams",
-    "full": "This sample app provides a very simple app. You can extend this to add more content and capabilities."
+    "short": "Sample Teams app showcasing tabs, bots, and messaging extensions in C#.",
+    "full": "This Microsoft Teams sample app in C# demonstrates tabs, bots, and messaging extensions."
   },
   "icons": {
     "outline": "outline.png",
