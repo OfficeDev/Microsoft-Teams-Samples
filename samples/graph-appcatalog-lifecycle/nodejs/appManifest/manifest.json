@@ -15,8 +15,8 @@
     "full": "AppCatalog App"
   },
   "description": {
-    "short": "AppCatalog sample  App for Microsoft Teams",
-    "full": "This sample app provides a deatails about AppCatalog. You can extend this to add more content and capabilities."
+    "short": "Sample app demonstrating Teams app installation lifecycle using Graph APIs.",
+    "full": "This sample app showcases the Teams app installation lifecycle through Microsoft Graph APIs."
   },
   "icons": {
     "color": "color.png",

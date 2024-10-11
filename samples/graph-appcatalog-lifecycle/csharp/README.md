@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs through bot.
+description: This sample demonstrates managing the installation lifecycle of Teams apps using Microsoft Graph APIs through a Teams tab.
 products:
 - office-teams
 - office
@@ -14,9 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-csharp
 ---
 # AppCatalog sample
 
-Bot Framework v4 AppCatalog sample for Teams
-
-This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalog followed by commands given to Bot.
+This sample app illustrates the complete lifecycle management of Microsoft Teams apps, including installation, updating, and deletion, utilizing Microsoft Graph APIs within a Teams tab. It enables developers to experience and implement app installations directly in the Microsoft Teams client, showcasing key functionalities like tab integration and interactive user interfaces.
 
 ## Included Features
 * Teams SSO (bots)
