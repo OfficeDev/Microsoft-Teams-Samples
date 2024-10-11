@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-csharp",
     "source": "officeDev",
     "title": "AppCatalog sample",
-    "shortDescription": "This sample demonstrates managing the installation lifecycle of Teams apps using Microsoft Graph APIs through a Teams tab.",
+    "shortDescription": "This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-appcatalog-lifecycle/csharp",
     "longDescription": [
-      "This sample showcases the complete installation lifecycle of Microsoft Teams apps, including creation, updating, and deletion, leveraging the Microsoft Graph API. It features integration with tabs and provides a hands-on experience for users in the Microsoft Teams client."
+      "This sample showcases how to manage the lifecycle of Teams apps in the app catalog by utilizing Microsoft Graph APIs through a bot. Key features include Teams SSO, adaptive cards, and seamless interaction with the Graph API."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2024-10-10",

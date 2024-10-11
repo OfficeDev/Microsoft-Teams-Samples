@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app showcases the Teams app installation lifecycle through Microsoft Graph APIs.
+description: This sample demonstrates programmatic management of Teams app lifecycles in the catalog through Microsoft Graph APIs via a bot.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-nodejs
 ---
 # AppCatalog sample
 
-This sample demonstrates the installation lifecycle for Microsoft Teams apps, showcasing capabilities like app creation, updates, and deletions via Microsoft Graph APIs. It features an interactive tab interface and includes setup instructions for deploying the app in your Teams environment.
+This sample illustrates how to manage the lifecycle of Teams apps in the app catalog programmatically using Microsoft Graph APIs through a bot. It includes features like Teams SSO, Adaptive Cards, and bot commands for publishing, updating, deleting, and listing applications, enhancing your Teams app management experience.
 
 ## Included Features
 * Teams SSO (bots)

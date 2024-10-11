@@ -19,8 +19,8 @@
     "full": "Team App Catalog lifecycle Bot"
   },
   "description": {
-    "short": "Sample showcasing Teams app installation lifecycle with Microsoft Graph APIs.",
-    "full": "This sample demonstrates managing the installation lifecycle of Teams apps using Microsoft Graph APIs through a Teams tab."
+    "short": "Manage Teams app lifecycle in the catalog using Graph APIs through a bot.",
+    "full": "This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot."
   },
   "accentColor": "#FFFFFF",
   "bots": [

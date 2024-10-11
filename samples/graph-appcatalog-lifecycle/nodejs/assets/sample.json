@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-nodejs",
     "source": "officeDev",
     "title": "AppCatalog sample",
-    "shortDescription": "This sample app showcases the Teams app installation lifecycle through Microsoft Graph APIs.",
+    "shortDescription": "This sample demonstrates programmatic management of Teams app lifecycles in the catalog through Microsoft Graph APIs via a bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-appcatalog-lifecycle/nodejs",
     "longDescription": [
-      "This sample app illustrates the Teams app installation lifecycle, including creating, updating, and deleting apps using Microsoft Graph APIs. It features a tab interface and provides a hands-on experience by allowing users to install the app in their Teams client."
+      "This sample showcases a bot that manages the lifecycle of Teams apps in the catalog using Microsoft Graph APIs. It features Teams SSO, Adaptive Cards, and allows users to publish, update, delete, and list apps directly through bot interactions."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2024-10-10",
