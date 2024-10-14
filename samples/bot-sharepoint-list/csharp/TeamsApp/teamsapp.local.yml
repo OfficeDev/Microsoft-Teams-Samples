@@ -4,12 +4,12 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:meetings-context-app-csharp
+  sampleTag: Microsoft-Teams-Samples:bot-sharepoint-list-csharp
 
 provision:
   - uses: aadApp/create # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
     with:
-      name: meetings-context-app-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
+      name: bot-sharepoint-list-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
       signInAudience: "AzureADMultipleOrgs" # Multitenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: meetings-context-app-${{TEAMSFX_ENV}}
+      name: bot-sharepoint-list-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -40,11 +40,12 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../MeetingContextApp/appsettings.json
+      target: ../SPListBot/appsettings.json
       content:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-        MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        TenantID: ${{MICROSOFT_APP_TENANT_ID}}
+        BaseUrl: ${{BOT_ENDPOINT}}
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -82,9 +83,3 @@ provision:
     with:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-
-  # Run npm command for client
-  - uses: cli/runNpmCommand
-    with:
-      workingDirectory: ../MeetingContextApp/ClientApp
-      args: install --no-audit
