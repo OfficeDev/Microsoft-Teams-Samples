@@ -1,0 +1,111 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Below is a **ColumnSet** with rounded corners:",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "roundedCorners": true,
+      "style": "emphasis",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "roundedCorners": true,
+          "showBorder":  true,
+          "style": "accent",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a **Column** with rounded corners",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "showBorder": true,
+          "style": "good",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is another **Column** without rounded corners",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "attention",
+      "roundedCorners": true,
+      "showBorder": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This is a **Container** with rounded corners",
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "style": "accent",
+      "showGridLines": true,
+      "roundedCorners": true,
+      "columns": [
+        {
+          "width": 1
+        },
+        {
+          "width": 1
+        }
+      ],
+      "rows": [
+        {
+          "type": "TableRow",
+          "cells": [
+            {
+              "type": "TableCell",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "This **Table**...",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "TableCell",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "...has rounded corners",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "The below **Image** has rounded corners:",
+      "wrap": true
+    },
+    {
+      "type": "Image",
+      "url": "https://image.shutterstock.com/image-photo/many-birds-flying-on-dramatic-250nw-2479534023.jpg",
+      "width": "100px",
+      "style": "RoundedCorners"
+    }
+  ]
+}

@@ -14,6 +14,8 @@ const PeoplePersonaCardIcon = require('../resources/adaptivePeoplePersonaCardIco
 const PeoplePersonaCardSetIcon = require('../resources/adaptivePeoplePersonaCardSetIcon.json');
 const CodeBlocksCard = require('../resources/codeBlocksCard.json');
 const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
+const AdaptiveCardBorders = require('../resources/adaptiveCardBorders.json');
+const AdaptiveCardRoundedCorners = require('../resources/adaptiveCardRoundedCorners.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -31,7 +33,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -79,7 +81,15 @@ class BotFormattingCards extends ActivityHandler {
                     
                     case "Layout":
                         await context.sendActivity({ attachments: [this.sendLayoutCard()] });
-                        break;                            
+                        break;
+
+                    case "Borders":
+                        await context.sendActivity({ attachments: [this.sendBordersCard()] });
+                        break;
+
+                    case "RoundedCorners":
+                        await context.sendActivity({ attachments: [this.sendRoundedCornersCard()] });
+                        break;
                 }
 
                 await context.sendActivity(`You have Selected <b>${text}</b>`);
@@ -189,6 +199,20 @@ class BotFormattingCards extends ActivityHandler {
         return CardFactory.adaptiveCard(PeoplePersonaCardSetIcon);
     }
 
+     /**
+    * Sends Card showing the use of Borders on columns, columnsets, containers, etc.,
+    */
+    sendBordersCard() {
+        return CardFactory.adaptiveCard(AdaptiveCardBorders);
+    }
+
+     /**
+    Sends Card showing the use of Rounded Corners on columns, columnsets, containers, tables, etc.,
+    */
+    sendRoundedCornersCard() {
+        return CardFactory.adaptiveCard(AdaptiveCardRoundedCorners);
+    }
+
     /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
@@ -252,15 +276,30 @@ class BotFormattingCards extends ActivityHandler {
             },
             {
                 type: ActionTypes.ImBack,
-                title: '',
-                value: ''
+                title: 'Borders',
+                value: 'Borders'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'RoundedCorners',
+                value: 'RoundedCorners'
             }
         ];
 
-        var reply = MessageFactory.text("Please select a card from given options. ");
-        reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
+        await this.sendWelcomeCard(turnContext, cardActions);
+    }
 
-        await turnContext.sendActivity(reply);
+    async sendWelcomeCard(context, cardActions) {
+        const initialValue = {
+            count: 0
+        };
+        const card = CardFactory.heroCard(
+            'Please select a card from given options. ',
+            '',
+            null,
+            cardActions
+        );
+        await context.sendActivity(MessageFactory.attachment(card));
     }
 }
 

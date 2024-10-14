@@ -1,0 +1,94 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Below is a **ColumnSet** with borders:",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "showBorder": true,
+      "style": "emphasis",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "showBorder": true,
+          "style": "accent",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a **Column** with borders",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "style": "good",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "This is a **Column** without borders",
+              "wrap": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "style": "attention",
+      "showBorder": true,
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "This is a **Container** with borders",
+          "wrap": true
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "columns": [
+        {
+          "width": 1
+        },
+        {
+          "width": 1
+        }
+      ],
+      "rows": [
+        {
+          "type": "TableRow",
+          "cells": [
+            {
+              "type": "TableCell",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "This **Table**...",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "TableCell",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "...has borders",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
