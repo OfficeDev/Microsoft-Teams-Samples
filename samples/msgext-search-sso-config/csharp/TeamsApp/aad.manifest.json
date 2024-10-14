@@ -22,10 +22,34 @@
         {
             "resourceAppId": "Microsoft Graph",
             "resourceAccess": [
-                {
-                    "id": "User.Read",
-                    "type": "Scope"
-                }
+              {
+                "id": "User.Read",
+                "type": "Scope"
+              },
+              {
+                "id": "AccessReview.ReadWrite.All",
+                "type": "Scope"
+              },
+              {
+                "id": "Mail.Read",
+                "type": "Scope"
+              },
+              {
+                "id": "Mail.Send",
+                "type": "Scope"
+              },
+              {
+                "id": "openid",
+                "type": "Scope"
+              },
+              {
+                "id": "profile",
+                "type": "Scope"
+              },
+              {
+                "id": "User.ReadBasic.All",
+                "type": "Scope"
+              }
             ]
         }
     ],
@@ -95,13 +119,13 @@
         "api://botid-${{AAD_APP_CLIENT_ID}}"
     ],
     "replyUrlsWithType":[
-        {
+      {
           "url": "https://${{BOT_DOMAIN}}/auth-end.html",
           "type": "Web"
         },
         {
-			"url": "https://token.botframework.com/.auth/web/redirect",
-			"type": "Web"
-		}
+			  "url": "https://token.botframework.com/.auth/web/redirect",
+			  "type": "Web"
+		  }
     ]
 }

@@ -24,7 +24,7 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   name: botServiceName
   properties: {
     displayName: botDisplayName
-    endpoint: 'https://${{botAppDomain}}/api/messages'
+    endpoint: 'https://${botAppDomain}/api/messages'
     msaAppId: botAadAppClientId
     msaAppType: microsoftAppType
     msaAppTenantId: microsoftAppType == 'SingleTenant' ? microsoftAppTenantId : ''

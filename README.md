@@ -8,7 +8,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 
 # Sample lists
 
-1. [Copilot for Microsoft 365 plugin samples](#Copilot-for-Microsoft-365-agent-samples)
+1. [Copilot for Microsoft 365 samples](#Copilot-for-Microsoft-365-samples)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)
@@ -21,7 +21,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
 
-## [Copilot for Microsoft 365 plugin samples](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples)
+## [Copilot for Microsoft 365 samples](https://github.com/OfficeDev/Copilot-for-M365-Samples)
 | Name    | Description |  .NET    | TypeScript   | JavaScript |
 | -------- | :------- | ------- | ------- | ------- |
 | Northwind Inventory  | Plugin that allows users to query the Northwind Database | [View](https://github.com/OfficeDev/Copilot-for-M365-Samples/tree/main/samples/msgext-northwind-inventory-csharp)| [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
@@ -65,24 +65,23 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |[View][tab-graph-toolkit#csharp]|[View][tab-graph-toolkit#js] ![toolkit-icon](assets/toolkit-icon.png)|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js] ![toolkit-icon](assets/toolkit-icon.png) ||[View](/samples/tab-device-permissions/nodejs/demo-manifest/tab-device-permissions.zip)|
-|13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]|| [View][tab-adaptive-cards#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-adaptive-cards/csharp/demo-manifest/tab-adaptive-card.zip)|
-|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)|
-|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-conversations/csharp/demo-manifest/tab-conversations.zip)
-|16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]| |[View][productinspection#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-product-inspection/csharp/demo-manifest/Tab-Product-Inspection.zip)
-|17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]||[View][tab-staggered-permission#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
-|18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]||[View][tab-people-picker#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-people-picker/csharp/demo-manifest/Tab-People-Picker.zip)
-|19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
-|20| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
-|21| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts] ![toolkit-icon](assets/toolkit-icon.png) |
-|22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
-|23| Tab Multi Hub | Interact with the user's calendar, mail, profile, geolocation from personal tabs app. ||[View][tab-multi-hub#ts] ![toolkit-icon](assets/toolkit-icon.png) |
-|24| tab-ui-templates | This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms). ||[View][tab-ui-templates#ts] ![toolkit-icon](assets/toolkit-icon.png) |
-|25| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
-|26| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
-|27| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
-|28| Tab Meeting Recording and transcript with auto recording |This sample shows meeting recording and transcript with auto recording. |[View][tab-meeting-auto-recording#csharp]||
-|29| Offline Support Tickets |This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage. ||[View][tab-support-offline#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
-|30| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. |[View][tab-nested-auth#cs]|[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
+|13|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)|
+|14|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-conversations/csharp/demo-manifest/tab-conversations.zip)
+|15| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]| |[View][productinspection#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-product-inspection/csharp/demo-manifest/Tab-Product-Inspection.zip)
+|16| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]||[View][tab-staggered-permission#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
+|17| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]||[View][tab-people-picker#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/tab-people-picker/csharp/demo-manifest/Tab-People-Picker.zip)
+|18| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
+|19| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
+|20| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts] ![toolkit-icon](assets/toolkit-icon.png) |
+|21| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
+|22| Tab Multi Hub | Interact with the user's calendar, mail, profile, geolocation from personal tabs app. ||[View][tab-multi-hub#ts] ![toolkit-icon](assets/toolkit-icon.png) |
+|23| tab-ui-templates | This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms). ||[View][tab-ui-templates#ts] ![toolkit-icon](assets/toolkit-icon.png) |
+|24| Tab External Auth | This sample illustrates how to implement Google auth using external auth providers. |[View][tab-external-auth#csharp]||
+|25| Tab Meeting Tanscript Recording |This sample shows meeting transcripts and recordings. |[View][tab-meeting-transcript-recording#csharp]|[View][tab-meeting-transcript-recording#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
+|26| Tab DeepLink Pass Values |Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context. ||[View][tab-deeplink-pass-values#ts]|
+|27| Tab Meeting Recording and transcript with auto recording |This sample shows meeting recording and transcript with auto recording. |[View][tab-meeting-auto-recording#csharp]||
+|28| Offline Support Tickets |This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage. ||[View][tab-support-offline#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-support-offline/nodejs/demo-manifest/tab-support-offline.zip)
+|29| Nested App Authentication |This sample shows nested app authentication (NAA) is a new protocol that simplifies single sign-on (SSO) for single page applications. |[View][tab-nested-auth#cs]|[View][tab-nested-auth#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -92,7 +91,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|:-------------|
 |1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js] ![toolkit-icon](assets/toolkit-icon.png) | | |
-|3| Teams Conversation Bot | Messaging and conversation event handling also includes read receipt event functionality in personal scope. | [View][bot-conversation#cs]| [View][bot-conversation#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-conversation#python] | [View][bot-conversation#java] |[View](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
+|3| Teams Conversation Bot | Messaging and conversation event handling also includes read receipt event functionality in personal scope. Also include AI label, Citations,Feedback buttons,Sensitivity label. | [View][bot-conversation#cs]| [View][bot-conversation#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-conversation#python] | [View][bot-conversation#java] |[View](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
 |4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View][bot-message-reaction#cs] |  [View][bot-message-reaction#js] ![toolkit-icon](assets/toolkit-icon.png) | | [View][bot-message-reaction#java]|[View](/samples/bot-message-reaction/csharp/demo-manifest/bot-message-reaction.zip)
 |5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View][bot-teams-authentication#cs]| [View][bot-teams-authentication#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java]|[View](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 |6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View][bot-file-upload#cs] | [View][bot-file-upload#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-file-upload#python] | [View][bot-file-upload#java]|[View](/samples/bot-file-upload/csharp/demo-manifest/bot-file-upload.zip)
@@ -280,8 +279,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [app-complete-auth#nodejs]:samples/app-complete-auth/nodejs
 
 [tab-conversation#nodejs]:samples/tab-conversations/nodejs
-[tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
-[tab-adaptive-cards#js]:samples/tab-adaptive-cards/nodejs
 [tab-stage-view#js]:samples/tab-stage-view/nodejs
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp

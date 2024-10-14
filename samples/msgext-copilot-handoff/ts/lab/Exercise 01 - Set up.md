@@ -34,7 +34,7 @@ Please install the following on your computer:
 
 ## Step 2 - Download the sample code
 
-Please [clone](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples.git) or [download](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples.git) the sample repository: [https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/).
+Please [clone](https://github.com/OfficeDev/Microsoft-Teams-Samples.git) or [download](https://github.com/OfficeDev/Microsoft-Teams-Samples.git) the sample repository: [https://github.com/OfficeDev/Microsoft-Teams-Samples](https://github.com/OfficeDev/Microsoft-Teams-Samples).
 
 Within the cloned or downloaded repository, navigate to the **samples/msgext-northwind-inventory-ts** folder. These labs will refer to this as your "working folder" since this is where you'll be working.
 
