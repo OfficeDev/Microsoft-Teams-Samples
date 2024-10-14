@@ -19,8 +19,8 @@
     "full": "SharePoint List Bot"
   },
   "description": {
-    "short": "Bot sample to save user input in SharePoint.",
-    "full": "This bot stores user input from Teams in a SharePoint List using Bot Framework."
+    "short": "Teams bot that saves user input from adaptive cards to a SharePoint list.",
+    "full": "This Teams bot collects user input via adaptive cards and saves it to a SharePoint list."
   },
   "accentColor": "#FFFFFF",
   "bots": [

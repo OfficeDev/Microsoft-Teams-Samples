@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-formatting-cards-nodejs",
     "source": "officeDev",
     "title": "Different Formatting On Cards",
-    "shortDescription": "Sample which demonstrates different formatting supported in cards using bot.",
+    "shortDescription": "Demonstrates bot-driven adaptive card formatting capabilities in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-formatting-cards/nodejs",
     "longDescription": [
-      "Sample which demonstrates different formatting supported in cards using bot."
+      "This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts."
     ],
     "creationDateTime": "2023-01-28",
-    "updateDateTime": "2023-01-28",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

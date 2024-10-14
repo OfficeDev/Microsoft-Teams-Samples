@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases feature on how to start new message thread inside teams channel.
+description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-no
 
 # Teams - Start new thread in a channel (proactive messaging)
 
-You can interact with this bot by sending it a message. The bot will respond by sending a reply to the channel, and then responding to that reply.
+This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Teams Toolkit in Visual Studio, enabling easy sideloading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.
 
 ## Included Features
 * Bots

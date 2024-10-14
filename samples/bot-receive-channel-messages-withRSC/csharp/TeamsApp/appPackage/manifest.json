@@ -15,8 +15,8 @@
     "full": "Channel messages with RSC"
   },
   "description": {
-    "short": "Receive channel messages with RSC",
-    "full": "This sample demos a bot with RSC permission"
+    "short": "Bot receives all Teams channel messages using RSC permissions.",
+    "full": "This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions."
   },
   "icons": {
     "outline": "outline.png",

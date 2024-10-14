@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-file-upload-nodejs",
     "source": "officeDev",
     "title": "Bot File Upload",
-    "shortDescription": "This is an sample application which showcases file upload/download feature using teams bot.",
+    "shortDescription": "This bot sample for Teams demonstrates file upload capabilities using Bot Framework v4, enabling users to upload files and view inline images within chats.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-file-upload/nodejs",
     "longDescription": [
-      "This is an sample application which showcases action based messaging extension."
+      "This bot allows users to upload files and send inline images directly in Microsoft Teams, utilizing Bot Framework v4 for seamless file handling. It also shows how to manage and process file attachments within chat conversations."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-sharepoint-list-csharp",
     "source": "officeDev",
     "title": "Teams bot saves user input to a SharePoint list",
-    "shortDescription": "This bot allows users in Teams to input data, which is then saved to a SharePoint List for easy access and management. The sample includes setup guidance, authentication details, and deployment instructions for seamless integration with SharePoint..",
+    "shortDescription": "This Teams bot collects user input via adaptive cards and saves it to a SharePoint list.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-sharepoint-list/csharp",
     "longDescription": [
-      "This bot allows users in Teams to input data, which is then saved to a SharePoint List for easy access and management. The sample includes setup guidance, authentication details, and deployment instructions for seamless integration with SharePoint."
+      "This sample bot for Microsoft Teams captures user input using adaptive cards and stores the data in a SharePoint list. It includes setup for SharePoint registration, permissions configuration, and deployment in Teams for streamlined data management."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2024-10-10",
