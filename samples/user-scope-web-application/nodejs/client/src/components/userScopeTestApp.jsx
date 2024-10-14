@@ -4,7 +4,7 @@
 // </copyright>
 
 import React, { useEffect, useState } from 'react';
-import { Avatar, Chat, Divider, Segment, Grid, List, Image, PersonIcon, Text, Flex } from '@fluentui/react-northstar';
+import { Avatar, Chat, Divider, Segment, Grid, List, Image, PersonIcon, Text, Flex, MentionIcon, MenuItemIcon } from '@fluentui/react-northstar';
 import axios from "axios";
 import moment from 'moment'
 import { Provider, Button } from '@fluentui/react-northstar';
@@ -27,6 +27,7 @@ const UserScopeTestApp = () => {
   let msalInstance = undefined;
   const [groupList, setGroupList] = useState([]);
   const [notificationList, setNotificationList] = useState([]);
+  let updatedReadList = [];
 
   const msalConfig = {
     auth: {
@@ -101,39 +102,39 @@ const UserScopeTestApp = () => {
   }, []);
 
   // Return notifications URL
-    const getNotificationsUrl = () => {
-      return axios.post('/api/notifications');
-    };
+  const getNotificationsUrl = () => {
+    return axios.post('/api/notifications');
+  };
 
   //  Fetch notification data
-    const getNotificationsData = async () => {
-      const response = await (getNotificationsUrl());
+  const getNotificationsData = async () => {
+    const response = await (getNotificationsUrl());
     addOrRemoveItem(response.data[0]);
   }
 
   // Function to add or remove an item based on id existence
   const addOrRemoveItem = (newItem) => {
     if (newItem) {
-    // Check if newItem's id already exists in notificationList
-    const itemIndex = notificationList.findIndex(item => item.id === newItem.id);
+      // Check if newItem's id already exists in notificationList
+      const itemIndex = notificationList.findIndex(item => item.id === newItem.id);
 
-    if (itemIndex === -1) {
-      // If id does not exist, add newItem to notificationList
-      setNotificationList(prevList => [...prevList, newItem]);
+      if (itemIndex === -1) {
+        // If id does not exist, add newItem to notificationList
+        setNotificationList(prevList => [...prevList, newItem]);
 
-    } else {
-      // If id exists, remove item from notificationList
-      const updatedList = [...notificationList];
-      updatedList.splice(itemIndex, 1);
-      setNotificationList(updatedList);
-    }
+      } else {
+        // If id exists, remove item from notificationList
+        const updatedList = [...notificationList];
+        updatedList.splice(itemIndex, 1);
+        setNotificationList(updatedList);
+      }
     }
   };
 
   // Function to set group chat As-Read
   const setAsReadById = (itemId) => {
-    const updatedList = notificationList.filter(item => item.id !== itemId);
-    setNotificationList(updatedList);
+    updatedReadList = notificationList.filter(item => item.id !== itemId);
+    setNotificationList(updatedReadList);
   };
 
   // Bind left rail items
@@ -244,39 +245,53 @@ const UserScopeTestApp = () => {
                 setAsReadById(chatId);
                 var response = await axios.get(`/api/changeNotification/getAllMessages?chatId=${chatId}&token=${token}`);
                 messageList = [];
-                messageList.push(response.data);
+                messageList.push(response.data.reverse());
+                var isLastReadLine;
                 messageList[0].forEach((item, index) => {
-                  const isInNotificationList = notificationList.some((listItem) => listItem.lastModifiedDateTime === item.lastModifiedDateTime);
-                  if (item.from) {
-                  if (item.messageType === "message" && item.from.user.displayName == currentUser) {
-                    elements.push({
-                      gutter: <Avatar icon={<PersonIcon />} />,
-                      contentPosition: 'start',
-                      message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()} />,
-                        key: item.id,
-                        children: isInNotificationList ? <Divider content="Last read" color="brand" important /> : null,
-                        key: item.id, // Unique key for the last read divider
-
-                    },
-                      {
-                        children: <Divider content={moment(item.lastModifiedDateTime).format('dddd')} />,
-                        key: item.id, // Unique key for the last read divider
-                        },
-
+                  if (isLastReadLine == undefined) {
+                    const isLastReadLine_1 = notificationList.some((listItem) => listItem.viewpointLastMessageReadDT < item.createdDateTime && listItem.id === item.chatId);
+                    if (isLastReadLine_1 == true) {
+                      isLastReadLine = true;
+                      elements.push(
+                        {
+                          children: isLastReadLine ? <Divider content="Last read" color="brand" important /> : null,
+                          key: item.id
+                        }
                       )
+                    }
                   }
-                  if (item.messageType === "message" && item.from.user.displayName != currentUser) {
-                    elements.push({
-                      contentPosition: 'end',
-                      message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()} />,
-                      key: item.id,
-                    })
-                  }
+                  if (item.from != null && item.from.user != null) {
+                    if (item.from.user.displayName != currentUser) {
+                      elements.push({
+                        gutter: <Avatar icon={<PersonIcon />} />,
+                        contentPosition: 'start',
+                        message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()}
+                          variables={{
+                            hasMention: item.mentions.length > 0
+                          }}
+                        />,
+                        key: item.id
+                      },
+                      )
+                      if (isLastReadLine === true) {
+                        isLastReadLine = false;
+                      }
+                    }
+                    if (item.from.user.displayName == currentUser) {
+                      elements.push({
+                        contentPosition: 'end',
+                        message: <Chat.Message content={parse(item.body.content)} author={item.from.user.displayName} timestamp={moment(item.lastModifiedDateTime).fromNow()}
+                          variables={{
+                            hasMention: item.mentions.length > 0
+                          }} />,
+                        key: item.id,
+                      })
+                    }
                   }
                 });
 
                 setAllMessages([]);
-                setAllMessages(elements.reverse());
+                setAllMessages(elements);
               }}
             />
           }
