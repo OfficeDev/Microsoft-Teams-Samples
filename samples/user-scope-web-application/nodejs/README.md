@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates the use of team/Channel and User Scope Graph subscription that will post notifications when user create/edit/delete team/channel through teams tab.
+description: This sample app demonstrates posting notifications for team/channel changes using Microsoft Graph API in Node.js
 products:
 - office-teams
 - office
@@ -16,10 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-userscope-change-notification-web
 
 # User Scope Change Notifications Using Microsoft Graph API In Node.js
 
-This is a sample application which demonstrates use of Team/Channel and User Scope Graph subscription that will post notifications when user create/edit/delete team/channel.
+This sample application uses Microsoft Graph API to notify users of team or channel changes, such as creation, editing, or deletion. It supports Graph API, MSAL authentication, and user-scope notifications in a Node.js web app.
 
 ## Included Features
-* Tabs
 * Graph API
 * Web Application
 * MSAL Authentication
@@ -34,21 +33,6 @@ This is a sample application which demonstrates use of Team/Channel and User Sco
 -  [NodeJS](https://nodejs.org/en/)
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
-
-## Run the app (Using Teams Toolkit for Visual Studio Code)
-
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
-
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Before running this sample using toolkit, we need to update the .env file values in your code for 'Base64EncodedCertificate' and 'PRIVATE_KEY_PATH'. Follow this documentation for the steps to get the values  - [Create and install Self-Signed certificate](CertificateDocumentation/README.md)
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 **Note:** Please create and install self-signed certificate before running this sample using toolkit or manually.
 
