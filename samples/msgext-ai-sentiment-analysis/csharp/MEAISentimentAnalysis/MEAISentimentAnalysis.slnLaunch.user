@@ -1,14 +1,14 @@
 [
   {
-    "Name": "Microsoft Teams (Browser)",
+    "Name": "Microsoft Temas (Browser)",
     "Projects": [
       {
-        "Path": "MeetingContextApp\\MeetingContextApp.csproj",
+        "Path": "MEAISentimentAnalysis.csproj",
         "Action": "Start",
         "DebugTarget": "Start Project"
       },
       {
-        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Path": "..\\TeamsApp\\TeamsApp.ttkproj",
         "Action": "StartWithoutDebugging",
         "DebugTarget": "Microsoft Teams (Browser)"
       }

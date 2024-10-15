@@ -3,9 +3,9 @@
     "Name": "Microsoft Teams (Browser)",
     "Projects": [
       {
-        "Path": "MeetingContextApp\\MeetingContextApp.csproj",
+        "Path": "AppIconBadgingInMeetings\\AppIconBadgingInMeetings.csproj",
         "Action": "Start",
-        "DebugTarget": "Start Project"
+        "DebugTarget": "Start project"
       },
       {
         "Path": "TeamsApp\\TeamsApp.ttkproj",
