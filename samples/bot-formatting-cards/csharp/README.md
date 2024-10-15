@@ -23,7 +23,7 @@ This sample feature shows how to use different formatting on cards using bot.
 
 ## Interaction with app
 
-![Types Of Cards](BotFormattingCards/Images/Bot_Formatting_Cards_nodejs_gif.gif)
+![Types Of Cards](BotFormattingCards/Images/bot_formatting_cards.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -246,17 +246,21 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![PersonaSet](BotFormattingCards/Images/11.Persona_Set_Icon.png)
 
-**Code Block in Adaptive Card:**
-
-![CodeBlock](BotFormattingCards/Images/12.Code_Block_Adaptive_Card.png)
-
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](BotFormattingCards/Images/13.Layout.png)
+![Layout](BotFormattingCards/Images/12.Layout_Card.png)
+
+**Border Adaptive Card:**
+
+![Border](BotFormattingCards/Images/13.Border.png)
+
+**Rounded Corners Adaptive Card:**
+
+![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
 
 **Mobile:**
 
-![LayoutMobile](BotFormattingCards/Images/14.LayoutMobile.png)
+![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 
