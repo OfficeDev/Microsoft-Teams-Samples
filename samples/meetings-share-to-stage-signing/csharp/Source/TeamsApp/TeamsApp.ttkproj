@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" Sdk="Microsoft.TeamsFx.Sdk">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>09b105d7-92f4-49f6-b28f-4e6904dd1224</ProjectGuid>
+    <ProjectGuid>041a5f2a-44f8-485f-b433-48cfc2fdb1cd</ProjectGuid>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectCapability Include="ProjectConfigurationsDeclaredDimensions" />
   </ItemGroup>

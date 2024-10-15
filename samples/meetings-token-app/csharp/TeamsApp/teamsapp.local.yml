@@ -4,12 +4,12 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:msgext-search-sso-config-csharp
+  sampleTag: Microsoft-Teams-Samples:meetings-token-app-csharp
 
 provision:
   - uses: aadApp/create # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
     with:
-      name: msgext-search-sso-config-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
+      name: meetings-token-app-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
       signInAudience: "AzureADMultipleOrgs" # Multitenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: msgext-search-sso-config-${{TEAMSFX_ENV}}
+      name: meetings-token-app-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 
@@ -54,10 +54,10 @@ provision:
       content:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-        ConnectionName: ${{CONNECTION_NAME}}
-        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-        MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
-        SiteUrl: ${{BOT_ENDPOINT}}
+        AzureAd:
+            TenantId: ${{MICROSOFT_APP_TENANT_ID}}
+            ApplicationIdURI: api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
+        ContentBubbleUrl: https://${{BOT_DOMAIN}}/contentBubble.html
 
   - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
     with:
@@ -91,15 +91,4 @@ provision:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
-
-  - uses: teamsApp/extendToM365
-    with:
-      # Relative path to the build app package.
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-    # Write the information of created resources into environment file for
-    # the specified environment variable(s).
-    writeToEnvironmentFile:
-      titleId: M365_TITLE_ID
-      appId: M365_APP_ID
-
-
+  
