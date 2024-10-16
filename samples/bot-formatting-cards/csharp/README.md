@@ -302,6 +302,14 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
 
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/26.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/27.StarRatingsFeedback.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
