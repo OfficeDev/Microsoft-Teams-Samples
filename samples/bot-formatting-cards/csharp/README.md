@@ -258,6 +258,14 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
 
+**Select Fluent Icon:**
+
+![FluentIconAdaptiveCard](BotFormattingCards/Images/16.FluentIconAdaptiveCard.png)
+
+**Fluent icon in an Adaptive Card:**
+
+![FluentIconsSelectCard](BotFormattingCards/Images/17.FluentIconsSelectCard.png)
+
 **Mobile:**
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
