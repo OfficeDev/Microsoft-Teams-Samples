@@ -18,6 +18,7 @@ const AdaptiveCardBorders = require('../resources/adaptiveCardBorders.json');
 const AdaptiveCardRoundedCorners = require('../resources/adaptiveCardRoundedCorners.json');
 const adaptiveCardFluentIcons = require('../resources/adaptiveCardFluentIcon.json');
 const adaptiveCardMediaElements = require('../resources/adaptiveCardMediaElements.json');
+const adaptiveCardStarRatings = require('../resources/adaptiveCardStarRatings.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -35,7 +36,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements','StarRatings'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -100,9 +101,23 @@ class BotFormattingCards extends ActivityHandler {
                     case "MediaElements":
                         await context.sendActivity({ attachments: [this.SendMediaElementsCard()] });
                         break;
+
+                    case "StarRatings":
+                        await context.sendActivity({ attachments: [this.SendStarRatingsCard()] });
+                        break;
                 }
 
                 await context.sendActivity(`You have Selected <b>${text}</b>`);
+            }
+            else if (context.activity.value != null && context.activity.text == undefined) {
+
+                const activityValue = context.activity.value;
+               
+                // Star ratings in Adaptive Cards
+                if (activityValue.hasOwnProperty('rating1') && activityValue.hasOwnProperty('rating2')) 
+                {
+                    await context.sendActivity(`Ratings Feedback: ${JSON.stringify(activityValue)}`);
+                }
             }
 
             // After the bot has responded send the fromat Cards.
@@ -240,6 +255,13 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
+     Sends a star ratings card as an attachment for displaying or collecting user feedback.
+    */
+     SendStarRatingsCard() {
+        return CardFactory.adaptiveCard(adaptiveCardStarRatings);
+    }
+
+    /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
@@ -319,6 +341,11 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'MediaElements',
                 value: 'MediaElements'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'StarRatings',
+                value: 'StarRatings'
             }
         ];
 
