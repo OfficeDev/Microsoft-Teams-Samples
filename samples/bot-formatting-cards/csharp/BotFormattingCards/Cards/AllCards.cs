@@ -280,5 +280,23 @@ namespace BotAllCards.Cards
             return MediaElementsCardAttachment;
         }
 
+        /// <summary>
+        /// Sends a star ratings card as an attachment for displaying or collecting user feedback.
+        /// </summary>
+        /// <returns>An Attachment object containing the star ratings card, which can display read-only ratings or collect ratings from users.</returns>
+        public static Attachment SendStarRatingsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardStarRatings.json" };
+            var adaptiveCardStarRatingsJson = File.ReadAllText(Path.Combine(paths));
+
+            var StarRatingsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardStarRatingsJson),
+            };
+
+            return StarRatingsCardAttachment;
+        }
+
     }
 }
