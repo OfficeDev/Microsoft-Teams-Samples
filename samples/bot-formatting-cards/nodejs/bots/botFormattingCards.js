@@ -17,6 +17,7 @@ const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiv
 const AdaptiveCardBorders = require('../resources/adaptiveCardBorders.json');
 const AdaptiveCardRoundedCorners = require('../resources/adaptiveCardRoundedCorners.json');
 const adaptiveCardFluentIcons = require('../resources/adaptiveCardFluentIcon.json');
+const adaptiveCardMediaElements = require('../resources/adaptiveCardMediaElements.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -34,7 +35,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -94,6 +95,10 @@ class BotFormattingCards extends ActivityHandler {
 
                     case "FluentIcons":
                         await context.sendActivity({ attachments: [this.SendFluentIconsCard()] });
+                        break;
+
+                    case "MediaElements":
+                        await context.sendActivity({ attachments: [this.SendMediaElementsCard()] });
                         break;
                 }
 
@@ -228,6 +233,13 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
+     Creates and returns an Attachment containing an adaptive card with media elements.
+    */
+    SendMediaElementsCard() {
+        return CardFactory.adaptiveCard(adaptiveCardMediaElements);
+    }
+
+    /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
@@ -302,6 +314,11 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'FluentIcons',
                 value: 'FluentIcons'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'MediaElements',
+                value: 'MediaElements'
             }
         ];
 
