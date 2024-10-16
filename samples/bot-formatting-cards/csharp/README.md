@@ -282,6 +282,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![MediaElementsAdaptiveCard2](BotFormattingCards/Images/21.MediaElementsAdaptiveCard2.png)
 
+**Select Star Ratings:**
+
+![SelectStarRatings](BotFormattingCards/Images/22.SelectStarRatings.png)
+
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/23.StarRatingsAdaptiveCards.png)
+
+**Star ratings in Adaptive Cards validation:**
+
+![StarRatingsAdaptiveCardsValidation](BotFormattingCards/Images/24.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/25.StarRatingsFeedback.png)
+
 **Mobile:**
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
