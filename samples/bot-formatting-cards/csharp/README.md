@@ -302,7 +302,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
 
-**Star ratings in Adaptive Cards:**
+**Star Ratings in Adaptive Cards:**
 
 ![StarRatingsAdaptiveCards](BotFormattingCards/Images/26.StarRatingsAdaptiveCards.png)
 
