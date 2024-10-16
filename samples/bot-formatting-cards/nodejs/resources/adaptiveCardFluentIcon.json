@@ -1,0 +1,43 @@
+{
+  "type": "AdaptiveCard",
+  "speak": "3 minute energy flow with kayo video",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Image",
+      "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Card-Samples/main/samples/author-highlight-video/assets/video_image.png",
+      "altText": "3 Minute Energy Flow with Kayo Video"
+    },
+    {
+      "type": "TextBlock",
+      "text": "3 Minute Energy Flow with Kayo",
+      "wrap": true,
+      "size": "Large",
+      "weight": "Bolder"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Icon",
+              "name": "Calendar",
+              "size": "Medium",
+              "style": "Filled",
+              "color": "Accent",
+              "selectAction": {
+                "type": "Action.OpenUrl"
+              }
+            }
+          ],
+          "spacing": "Small",
+          "verticalContentAlignment": "Center"
+        }
+      ]
+    }
+  ]
+}
