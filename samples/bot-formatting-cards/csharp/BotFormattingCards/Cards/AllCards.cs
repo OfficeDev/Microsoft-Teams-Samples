@@ -262,5 +262,23 @@ namespace BotAllCards.Cards
             return FluentIconsCardAttachment;
         }
 
+        /// <summary>
+        /// Creates and returns an Attachment containing an adaptive card with media elements.
+        /// </summary>
+        /// <returns>An Attachment object with a media elements adaptive card.</returns>
+        public static Attachment SendMediaElementsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardMediaElements.json" };
+            var adaptiveCardMediaElementsJson = File.ReadAllText(Path.Combine(paths));
+
+            var MediaElementsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardMediaElementsJson),
+            };
+
+            return MediaElementsCardAttachment;
+        }
+
     }
 }

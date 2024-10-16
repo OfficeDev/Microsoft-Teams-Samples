@@ -266,6 +266,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![FluentIconsSelectCard](BotFormattingCards/Images/17.FluentIconsSelectCard.png)
 
+**Select Media elements:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/18.MediaElementsAdaptiveCard.png)
+
+**Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/19.MediaElementsAdaptiveCard.png)
+
+**All Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard1](BotFormattingCards/Images/20.MediaElementsAdaptiveCard1.png)
+
+**Play video media elements in an Adaptive Card:**
+
+![MediaElementsAdaptiveCard2](BotFormattingCards/Images/21.MediaElementsAdaptiveCard2.png)
+
 **Mobile:**
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)

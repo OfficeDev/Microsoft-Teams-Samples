@@ -127,6 +127,10 @@ namespace Microsoft.BotBuilderSamples
                     // Adaptive Card Fluent Icons
                     reply.Attachments.Add(AllCards.SendFluentIconsCard());
                     break;
+                case "MediaElements":
+                    // Media elements in Adaptive Card
+                    reply.Attachments.Add(AllCards.SendMediaElementsCard());
+                    break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     reply.Attachments.Add(AllCards.sendFullWidthCardAdaptiveCard());
@@ -140,6 +144,7 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.SendBorderCard());
                     reply.Attachments.Add(AllCards.SendRoundedCornerCard());
                     reply.Attachments.Add(AllCards.SendFluentIconsCard());
+                    reply.Attachments.Add(AllCards.SendMediaElementsCard());
                     break;
             }
 
@@ -177,6 +182,7 @@ namespace Microsoft.BotBuilderSamples
                     new Choice() { Value = "Border", Synonyms = new List<string>() { "Border" } },
                     new Choice() { Value = "RoundedCorners", Synonyms = new List<string>() { "RoundedCorners" } },
                     new Choice() { Value = "FluentIcons", Synonyms = new List<string>() { "FluentIcons" } },
+                    new Choice() { Value = "MediaElements", Synonyms = new List<string>() { "MediaElements" } },
                 };
 
                 return returncardOptions;
