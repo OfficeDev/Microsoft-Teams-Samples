@@ -140,8 +140,8 @@ class Dashboard extends Component {
                 this.setState({
                     dashboardState: DashboardState.Default,
                     selectedEventMeeting: {}                  
-                });                 
-                this.initializeData(this.state.teamsContext.team.app.userId);                
+                });
+                this.initializeData(this.state.teamsContext.user.id);                
             }            
         });
     }
