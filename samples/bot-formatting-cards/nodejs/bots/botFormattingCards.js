@@ -16,6 +16,7 @@ const CodeBlocksCard = require('../resources/codeBlocksCard.json');
 const AdaptiveCardResponsiveLayout = require('../resources/AdaptiveCardResponsiveLayout.json');
 const AdaptiveCardBorders = require('../resources/adaptiveCardBorders.json');
 const AdaptiveCardRoundedCorners = require('../resources/adaptiveCardRoundedCorners.json');
+const adaptiveCardFluentIcons = require('../resources/adaptiveCardFluentIcon.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -33,7 +34,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -89,6 +90,10 @@ class BotFormattingCards extends ActivityHandler {
 
                     case "RoundedCorners":
                         await context.sendActivity({ attachments: [this.sendRoundedCornersCard()] });
+                        break;
+
+                    case "FluentIcons":
+                        await context.sendActivity({ attachments: [this.SendFluentIconsCard()] });
                         break;
                 }
 
@@ -213,6 +218,15 @@ class BotFormattingCards extends ActivityHandler {
         return CardFactory.adaptiveCard(AdaptiveCardRoundedCorners);
     }
 
+     /**
+    Generates an Adaptive Card attachment that includes Fluent icons. 
+    This method reads the adaptive card JSON from a resource file and deserializes it to be included as an attachment with Fluent icons in the card.
+    Fluent icons provide a modern and visually appealing way to enhance the UI within Adaptive Cards.
+    */
+    SendFluentIconsCard() {
+        return CardFactory.adaptiveCard(adaptiveCardFluentIcons);
+    }
+
     /**
    * Send AdaptiveCard Fromats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
@@ -283,6 +297,11 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'RoundedCorners',
                 value: 'RoundedCorners'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'FluentIcons',
+                value: 'FluentIcons'
             }
         ];
 

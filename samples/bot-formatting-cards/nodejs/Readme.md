@@ -247,6 +247,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Rounded Corners Adaptive Card**
 ![Border](Images/17.RoundedCorners.png)
 
+**Rounded Corners Adaptive Card**
+![FluentIconsSelectCard](Images/19.FluentIconsSelectCard.png)
+
+**Rounded Corners Adaptive Card**
+![FluentIconAdaptiveCard](Images/20.FluentIconAdaptiveCard.png)
+
 **Mobile:**
 
 ![LayoutMobile](Images/18.LayoutMobile.png)
