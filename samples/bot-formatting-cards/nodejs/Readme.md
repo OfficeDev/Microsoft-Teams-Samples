@@ -269,9 +269,33 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![MediaElementsAdaptiveCard2](Images/24.MediaElementsAdaptiveCard2.png)
 
+**Select Star Ratings:**
+
+![SelectStarRatings](Images/25.SelectStarRatings.png)
+
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/26.StarRatingsAdaptiveCards.png)
+
+**Star ratings in Adaptive Cards validation:**
+
+![StarRatingsAdaptiveCardsValidation](Images/27.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
+
 **Mobile:**
 
 ![LayoutMobile](Images/18.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/29.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/30.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
