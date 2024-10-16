@@ -239,5 +239,28 @@ namespace BotAllCards.Cards
             return RoundedCornersCardAttachment;
         }
 
+        /// <summary>
+        /// Generates an Adaptive Card attachment that includes Fluent icons. 
+        /// This method reads the adaptive card JSON from a resource file and 
+        /// deserializes it to be included as an attachment with Fluent icons in the card.
+        /// Fluent icons provide a modern and visually appealing way to enhance the UI within Adaptive Cards.
+        /// </summary>
+        /// <returns>
+        /// Returns an Attachment object that contains the Adaptive Card with Fluent icons.
+        /// </returns>
+        public static Attachment SendFluentIconsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardFluentIcon.json" };
+            var adaptiveCardFluentIconsJson = File.ReadAllText(Path.Combine(paths));
+
+            var FluentIconsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardFluentIconsJson),
+            };
+
+            return FluentIconsCardAttachment;
+        }
+
     }
 }

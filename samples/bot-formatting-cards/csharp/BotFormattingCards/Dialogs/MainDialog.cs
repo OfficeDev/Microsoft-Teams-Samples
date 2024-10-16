@@ -123,6 +123,10 @@ namespace Microsoft.BotBuilderSamples
                 case "RoundedCorners":
                     reply.Attachments.Add(AllCards.SendRoundedCornerCard());
                     break;
+                case "FluentIcons":
+                    // Adaptive Card Fluent Icons
+                    reply.Attachments.Add(AllCards.SendFluentIconsCard());
+                    break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     reply.Attachments.Add(AllCards.sendFullWidthCardAdaptiveCard());
@@ -135,6 +139,7 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendResponsiveLayoutCard());
                     reply.Attachments.Add(AllCards.SendBorderCard());
                     reply.Attachments.Add(AllCards.SendRoundedCornerCard());
+                    reply.Attachments.Add(AllCards.SendFluentIconsCard());
                     break;
             }
 
@@ -171,6 +176,7 @@ namespace Microsoft.BotBuilderSamples
                     new Choice() { Value = "Layout", Synonyms = new List<string>() { "Layout" } },
                     new Choice() { Value = "Border", Synonyms = new List<string>() { "Border" } },
                     new Choice() { Value = "RoundedCorners", Synonyms = new List<string>() { "RoundedCorners" } },
+                    new Choice() { Value = "FluentIcons", Synonyms = new List<string>() { "FluentIcons" } },
                 };
 
                 return returncardOptions;
