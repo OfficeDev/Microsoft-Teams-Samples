@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com).
+description: This sample demonstrates how to build Teams apps using Actions in the Microsoft 365 app to streamline task management and enhance productivity by minimizing context switching.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-m365-actions-preview-nodejs
 ---
 
 # Actions across Microsoft 365
+
+This sample showcases how to create Teams apps using Actions in the Microsoft 365 app. It enhances task efficiency and user engagement by allowing users to interact directly with content and streamline workflows without switching between different apps.
 
 Developers have the power to enhance users' productivity by building Actions that streamline task completion, minimizing context switching across various applications. 
 This feature not only benefits users by enabling them to accomplish tasks more efficiently, but it also enhances the visibility and user engagement of your app by 

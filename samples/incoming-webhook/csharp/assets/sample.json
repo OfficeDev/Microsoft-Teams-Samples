@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-incoming-webhook-csharp",
     "source": "officeDev",
     "title": "Incoming webhook",
-    "shortDescription": "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card.",
+    "shortDescription": "This sample demonstrates a Teams tab to send message cards using Incoming Webhook, showcasing the HttpPOST action for interactive cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/incoming-webhook/csharp",
     "longDescription": [
-      "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
+      "This sample shows a Teams tab where users can input Incoming Webhook URLs and send message cards to Teams channels, with support for HttpPOST actions. It also demonstrates how to integrate and test webhooks within Teams, Outlook, and Office apps."
     ],
     "creationDateTime": "2022-04-01",
-    "updateDateTime": "2022-01-20",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

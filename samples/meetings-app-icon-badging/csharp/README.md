@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app shows how to send app icon badging in Teams meetings using targeted notifications API.
+description: This sample app showcases how to implement app icon badging notifications in Teams meetings.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-app-icon-badging-csharp
 
 ## App Icon Badging In Teams Meeting Notification
 
-This sample illustrates how to send app icon badging notification on tab icon in Teams meetings.
+Explore this sample app that demonstrates the implementation of app icon badging during Teams meetings notifications. It highlights features such as bots, in-meeting notifications, and resource-specific consent (RSC) permissions to enhance user interaction.
 
 ## Included Features
 * Bots
