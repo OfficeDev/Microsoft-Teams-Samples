@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates integrating Azure Open AI into a Teams message extension to check a contract proposal's compliance with a policy checklist. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Copilot for Microsoft 365.
+description: This sample demonstrates how to integrate Azure Open AI into a Teams message extension to evaluate contract proposals against policy checklists. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Copilot for Microsoft 365.
 products:
 - office-teams
 - copilot-m365
@@ -15,11 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-msgext-ai-doc-compliance-checker-
 
 # Compliance Checker using Azure Open AI
 
-This sample uses Azure Open AI to compare proposal documents uploaded to an Azure Blob storage with a policy guideline that is also uploaded in the blob.
- 
-The solution makes calls to Azure Open AI to assess compliance against each of the line items mentioned in the policy guideline, and returns a result that is formatted and displayed as an adaptive card. 
- 
-The sample can also be used as a Copilot Plug-in.
+Explore this sample application that integrates Azure Open AI into a Teams message extension, enabling users to evaluate contract proposals for compliance with specific policy guidelines stored in Azure Blob Storage. 
+
+The solution not only presents results as interactive adaptive cards but is also compatible with Microsoft 365 Copilot, offering seamless compliance checks in your workflow.
+
 
 ## Interaction with app
 

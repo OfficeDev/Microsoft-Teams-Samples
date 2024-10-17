@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-csharp",
     "source": "officeDev",
     "title": "Action Based Messaging Extensions",
-    "shortDescription": "This sample app demonstrate how to use action based Messaging Extensions",
+    "shortDescription": "This sample app illustrates how to create an Action-Based Messaging Extension for Teams using Python",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action/python",
     "longDescription": [
-      "This sample app demonstrate how to use action based Messaging Extensions"
+      "This sample showcases the development of an Action-Based Messaging Extension for Microsoft Teams using Python, enabling interactive user experiences. It features bots, message extensions, and action commands, allowing users to create content dynamically within the Teams environment."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-09-22",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

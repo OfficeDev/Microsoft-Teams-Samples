@@ -19,8 +19,8 @@
         "full": "Tab graph toolkit"
     },
     "description": {
-        "short": "Short description for Personal App.",
-        "full": "Full description of Personal App."
+        "short": "Microsoft Teams tab sample showcasing the Microsoft Graph Toolkit components.",
+        "full": "This sample app demonstrates a Microsoft Teams tab using the Microsoft Graph Toolkit to create interactive and collaborative web experiences."
     },
     "accentColor": "#FFFFFF",
     "staticTabs": [

@@ -19,8 +19,8 @@
     "full": "AI Compliance Checker"
   },
   "description": {
-    "short": "Use AI to compare a documents for compliance against a guideline.",
-    "full": "Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not."
+    "short": "Integrate Azure Open AI in Teams to check contract compliance with guidelines.",
+    "full": "This sample demonstrates how to integrate Azure Open AI into a Teams message extension to evaluate contract proposals against policy checklists."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

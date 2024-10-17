@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "description": {
-    "short": "Tab App Navigation",
-    "full": "This sample support types of navigation such as between tabs within the app"
+    "short": "Sample showcasing tab navigation features within a Teams application.",
+    "full": "This sample demonstrates tab navigation functionality, allowing users to switch between tabs in a Teams application."
   },
   "icons": {
     "outline": "outline.png",

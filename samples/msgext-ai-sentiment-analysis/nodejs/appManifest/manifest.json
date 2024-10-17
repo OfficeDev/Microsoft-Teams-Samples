@@ -15,8 +15,8 @@
     "full": "Sentiment analysis using message extension."
   },
   "description": {
-    "short": "Sentiment analysis Using Azure Open AI through messaging extension.",
-    "full": "This sample shows a feature where user can get sentiment analysis for posted messages in Teams chat using messaging extension and Azure Open AI."
+    "short": "Analyze sentiment in Teams chats using Azure Open AI and messaging extension.",
+    "full": "This sample demonstrates how to leverage Azure Open AI for sentiment analysis of messages in Teams chat. Users can categorize sentiments as positive, negative, or neutral, enhancing their understanding of team communication dynamics."
   },
   "icons": {
     "outline": "outline.png",

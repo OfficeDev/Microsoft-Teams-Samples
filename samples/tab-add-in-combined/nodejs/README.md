@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample Outlook add-in and Teams tab app.
+description: This app combines an Outlook add-in and Teams tab for creating and tracking discount offers.
 products:
 - office-teams
 - office

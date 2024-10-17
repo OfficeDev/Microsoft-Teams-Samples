@@ -15,8 +15,8 @@
     "full": "Teams Auth SSO"
   },
   "description": {
-    "short": "Teams Auth SSO app",
-    "full": "The Teams Auth SSO app"
+    "short": "Sample app demonstrating Microsoft Entra authentication in Teams channel tabs.",
+    "full": "This sample application showcases Microsoft Entra authentication within Teams channel tabs for secure access to user profiles."
   },
   "icons": {
     "outline": "outline.png",

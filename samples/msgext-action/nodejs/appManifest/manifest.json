@@ -15,8 +15,8 @@
     "full": "Microsoft Teams Action Based Messaging Extension"
   },
   "description": {
-    "short": "Sample demonstrating an Action Based Messaging Extension",
-    "full": "Sample Action Messaging Extension built with the Bot Builder SDK"
+    "short": "Sample app demonstrating Action-Based Messaging Extensions in Microsoft Teams.",
+    "full": "This sample application showcases how to implement Action-Based Messaging Extensions for Teams using Node.js."
   },
   "icons": {
     "outline": "outline.png",

@@ -15,8 +15,8 @@
     "full": "Bot for Deep linking to tab"
   },
   "description": {
-    "short": "DeepLinkBot for Microsoft Teams",
-    "full": "This sample DeepLink app which demos to navigate to required item in tab."
+    "short": "Sample Teams app showcasing deeplinks for calls, chats, and navigation.",
+    "full": "This Microsoft Teams sample app demonstrates deeplinks for calls, video, chat, and navigation within tabs and apps."
   },
   "icons": {
     "outline": "outline.png",

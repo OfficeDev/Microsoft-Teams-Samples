@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This is an sample tab application which shows the contents of tab context object in a private and shared channel."
+description: "This sample application demonstrates how to access and display the tab context object in both private and shared channels within Microsoft Teams."
 products:
 - office-teams
 - office
@@ -22,7 +22,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 # Tab context in channel
-This sample shows the contents of tab context object in a private and shared channel.
+
+Explore a sample Microsoft Teams tab application that reveals the contents of the tab context object in both private and shared channels. Designed with Node.js, this application allows users to interact with and manipulate the context object, offering features like JSON expansion and copying for enhanced usability in collaborative environments.
 
 ## Included Features
 * Tabs

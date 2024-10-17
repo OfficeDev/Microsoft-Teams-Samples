@@ -19,8 +19,8 @@
     "full": "Microsoft Teams Action Based Messaging Extension with Preview"
   },
   "description": {
-    "short": "Sample demonstrating an Action Based Messaging Extension with Preview",
-    "full": "Sample Action Messaging Extension built with the Bot Builder SDK demonstrating Preview"
+    "short": "Explore a bot demo using card-based Messaging Extensions in Microsoft Teams.",
+    "full": "This sample showcases how to create an Action-Based Messaging Extension in Microsoft Teams, allowing users to generate a card from Task Module inputs. It includes features such as bots, message extensions, and interaction capabilities for a seamless user experience."
   },
   "accentColor": "#FFFFFF",
   "bots": [

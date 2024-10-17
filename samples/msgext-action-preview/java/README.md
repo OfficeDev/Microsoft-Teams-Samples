@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the bot that performs simple card based on parameters entered by the user from a Task Module
+description: Sample app demonstrating card creation in Teams Messaging Extensions.
 products:
 - office-teams
 - office
@@ -18,8 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-preview-java
 Bot Framework v4 Teams Messaging Extension Action Preview sample.
 
 This Messaging Extension has been created using [Bot Framework](https://dev.botframework.com).
-- It shows how to create a simple card based on parameters entered by the user from a Task Module.
-- It also displays the scenario where a Bot sends messages on behalf of a User. Attributing the message to that user can help with engagement and showcase a more natural interaction flow.
+- Explore this sample app that highlights card creation within Teams Messaging Extensions, utilizing user input from a Task Module. 
+- Developed with Spring Boot, it features seamless bot interactions that send messages on behalf of users, fostering a natural and engaging experience in Microsoft Teams.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 

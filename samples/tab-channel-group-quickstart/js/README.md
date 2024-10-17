@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an simple hello world app which showcases channel and group tab.
+description: This sample demonstrates a basic hello world app that features channel and group tabs within Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-js
 
 # Tab Channel quick start Node.js
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+This sample application illustrates how to create channel and group tabs in Microsoft Teams, enabling collaborative spaces for web-based content. It includes setup instructions, prerequisites, and features for embedding Teams-aware webpages directly into your Teams environment.
 
 ## Included Features
 * Tabs

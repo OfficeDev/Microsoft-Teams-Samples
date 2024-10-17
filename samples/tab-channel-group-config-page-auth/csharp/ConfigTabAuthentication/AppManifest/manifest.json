@@ -19,7 +19,7 @@
     "full": "Both Silent and Simple"
   },
   "description": {
-    "short": "Both Silent and Simple",
+    "short": "Sample demonstrating Microsoft Entra ID and silent authentication in Teams.",
     "full": "Both Silent and Simple"
   },
   "accentColor": "#FFFFFF",

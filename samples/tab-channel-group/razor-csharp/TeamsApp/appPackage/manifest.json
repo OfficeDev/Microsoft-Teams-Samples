@@ -15,8 +15,8 @@
     "full": "Channel Group Tab"
   },
   "description": {
-    "short": "short description here",
-    "full": "full description here"
+    "short": "Sample app for custom channel and group tabs using ASP.NET Core Razor pages.",
+    "full": "This sample demonstrates how to create custom channel and group tabs in Microsoft Teams using ASP.NET Core and Razor pages."
   },
   "icons": {
     "outline": "outline.png",

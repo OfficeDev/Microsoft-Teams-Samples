@@ -19,8 +19,8 @@
     "full": "Nav-bar menu in personal tab"
   },
   "description": {
-    "short": "Show Nav-bar menu in personal tab.",
-    "full": "Show Nav-bar menu in personal tab."
+    "short": "Sample app showcasing a navbar menu for personal tabs in Microsoft Teams.",
+    "full": "This sample demonstrates how to implement a navbar menu in a personal tab app for Microsoft Teams, allowing for multiple actions and an overflow menu."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

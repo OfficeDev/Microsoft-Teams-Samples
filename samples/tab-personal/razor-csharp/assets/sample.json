@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-personal-razor-csharp",
     "source": "officeDev",
     "title": "Personal tabs in ASP.NET Core with Razor",
-    "shortDescription": "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and Razor. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.",
+    "shortDescription": "This sample demonstrates how to create a custom personal tab for Microsoft Teams using ASP.NET Core Razor pages.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal/razor-csharp",
     "longDescription": [
-      "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and Razor. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams."
+      "This sample provides a step-by-step guide to building a custom personal tab in Microsoft Teams using C# and ASP.NET Core Razor pages, including how to set up the app manifest and deploy it. It features seamless interaction within Teams, allowing users to upload and test the app in their own environment."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

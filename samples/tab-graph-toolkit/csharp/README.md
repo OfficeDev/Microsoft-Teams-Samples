@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating graph toolkit component
+description: This sample app showcases a Microsoft Teams tab that utilizes the Microsoft Graph Toolkit to interact with user data and enhance the user experience.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-csharp
 ---
 
 # Teams tab with microsoft graph toolkit
+
+This sample app demonstrates the integration of the Microsoft Graph Toolkit within a Microsoft Teams tab, allowing developers to easily access and display user data. With features such as tabs and API interactions, it serves as a practical guide for leveraging the Microsoft Graph API to enhance your Teams applications.
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 

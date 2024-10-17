@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4
+description: This app demonstrates action preview capabilities in Teams Messaging Extensions using Bot Framework v4.
 products:
 - office-teams
 - office
@@ -17,8 +17,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-preview-csharp
 Bot Framework v4 Teams Messaging Extension Action Preview sample.
 
 This Messaging Extension has been created using [Bot Framework](https://dev.botframework.com). 
- - It shows how to create a simple card based on parameters entered by the user from a Task Module.
- - It also displays the scenario where a Bot sends messages on behalf of a User. Attributing the message to that user can help with engagement and showcase a more natural interaction flow.
+- Experience a comprehensive sample app that demonstrates the use of action previews in Teams Messaging Extensions with Bot Framework v4. 
+- It features card creation from user input, seamless bot messaging on behalf of users, and showcases an engaging interaction flow within Microsoft Teams.
 
  ## Included Features
 * Bots

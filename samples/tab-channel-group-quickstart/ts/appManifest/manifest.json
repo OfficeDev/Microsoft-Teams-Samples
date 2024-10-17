@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for My Group Tab.",
-    "full": "Full description of My Group Tab."
+    "short": "Simple hello world app showcasing channel and group tabs in Microsoft Teams.",
+    "full": "This sample demonstrates a basic hello world app featuring channel and group tabs in Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
