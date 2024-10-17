@@ -165,7 +165,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
 |3|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
 |4|Authentication in todo Connector App      | This is a sample app which shows connector authentication and sends notification on task creation.                                        ||[View][auth-in-connector#nodejs] 
-|5|Incoming Webhook      | This is a sample  used to send card using incoming webhook.                                        |[View][incoming-webhook#cs]       |[View][incoming-webhook#nodejs]
+|5|Incoming Webhook      | This sample demonstrates a Teams tab to send message cards using Incoming Webhook, showcasing the HttpPOST action for interactive cards.                                        |[View][incoming-webhook#cs]       |[View][incoming-webhook#nodejs]
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
@@ -203,13 +203,13 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |4|Details Tab in Meetings | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/meetings-details-tab/csharp/demo-manifest/meetings-details-tab.zip)
 |5|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 |6|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
-|7|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
+|7|Meeting Recruitment App | This sample demonstrates a recruitment meeting app with integrated bots for notifications, meeting details, and in-meeting features to assist the interview process.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
 |8|Meeting Transcript App | This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.|[View][meetings-transcription-app#cs] |[View][meetings-transcription-app#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |9|Meeting signing programmatic share to stage|Demonstrating the programmatic share to stage feature, by means of a document signing in a meeting.|[View][meetings-share-to-stage-signing#csharp]||
 |10|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs] ![toolkit-icon](assets/toolkit-icon.png) 
 |11|Anonymous user support| This sample demonstrates how to support anonymous users in Microsoft Teams meeting apps, showcasing the setup and interaction flow for integrating guest and tenant users seamlessly.|[View][app-anonymous-users#cs] |[View][app-anonymous-users#js] ![toolkit-icon](assets/toolkit-icon.png) |      
 |12|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
-|13|Meeting-Tabs|This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.|[View][meetingtabs#csharp]|[View][meetingtabs#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
+|13|Meeting-Tabs|This app allows muting/unmuting Teams meeting audio and displays stage view in the meeting side panel.|[View][meetingtabs#csharp]|[View][meetingtabs#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |14|meetings-attendance-report|This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.|[View][meetings-attendance-report#csharp]|[View][meetings-attendance-report#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |15|meetings-audio-state|This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.||[View][meetings-audio-state#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
 |16|meetings-context-app|This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.|[View][meetings-context-app#csharp]|[View][meetings-context-app#nodejs] ![toolkit-icon](assets/toolkit-icon.png)|
@@ -217,7 +217,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 ## [Actions Preview](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 |    | Sample Name    | Description                                                                      | C#    | JavaScript      |App Manifest|
 |:--:|:---------------|:---------------------------------------------------------------------------------|:------|:----------------|:-------|
-|1|Actions across Microsoft 365 | This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com).| |[View][m365-actions-preview#js] ![toolkit-icon](assets/toolkit-icon.png) 
+|1|Actions across Microsoft 365 | This sample demonstrates how to build Teams apps using Actions in the Microsoft 365 app to streamline task management and enhance productivity by minimizing context switching.| |[View][m365-actions-preview#js] ![toolkit-icon](assets/toolkit-icon.png) 
 
 ## Scenario specific samples
 
@@ -241,7 +241,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |16|App complete auth|This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams.|[View][app-complete-auth#cs]|
 |17|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |18|Link unfurling for 'Share to teams'|This sample demos the feature of link unfurling for Share to teams.||[View][link-unfurling-stt#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
-|19|App Icon Badging In Microsoft Teams Meetings|This sample app shows the feature of sending app icon badging in Teams' meetings.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
+|19|App Icon Badging In Microsoft Teams Meetings|This sample app showcases how to implement app icon badging notifications in Teams meetings.|[View][meetings-app-icon-badging#csharp]|[View][meetings-app-icon-badging#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |20|Teams Open AI Embeddings And Redis Search based On Uploaded File Using Bot|This Open AI sample app demonstrates the user search functionality using Open AI embeddings and completion APIs.||[View][bot-ai-enterprise-search#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |
 |21|Combined Tab and Office Add-in|Demonstrates using add-in to take action on specific Office documents and using tab to aggregate data about all those specific actions.||[View][tab-add-in-combined#ts] ![toolkit-icon](assets/toolkit-icon.png)|[View](/samples/tab-add-in-combined/nodejs/appPackage/build/appPackage.local.zip)|
 |22|Sharepoint tab request approval | This sample app demonstrates the usage of SharePoint Embedded for storage in teams. |[View][sharepoint-tab-request-approval#csharp]||
