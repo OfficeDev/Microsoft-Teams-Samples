@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which are available in bot framework v4
+description: This Node.js sample demonstrates how a bot can receive real-time meeting events within Microsoft Teams, enhancing meeting interactivity.
 products:
 - office-teams
 - office

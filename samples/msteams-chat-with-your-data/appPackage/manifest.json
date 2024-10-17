@@ -16,8 +16,8 @@
         "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
     },
     "description": {
-        "short": "Custom copilot to chat with your data via RAG through Azure OpenAI On Your Data",
-        "full": "Custom copilot to chat with your data via RAG (retrieval augmentation generation) through Azure OpenAI On Your Data supported data sources:  Azure AI Search, Azure Blob Storage, URL/web address, Azure Cosmos DB for MongoDB vCore, uploaded files, and Elasticsearch."
+        "short": "Chat With Your Data: Interact with data using Azure OpenAI and RAG.",
+        "full": "Chat With Your Data is a Teams app template that enables users to interact with their data through a conversational interface powered by Azure OpenAI and retrieval-augmented generation (RAG)"
     },
     "icons": {
         "outline": "outline.png",

@@ -19,8 +19,8 @@
     "full": "QBot"
   },
   "description": {
-    "short": "A Short description of the app",
-    "full": "A Longer description of the app"
+    "short": "QBot for Microsoft Teams enables intelligent Q&A in classroom settings.",
+    "full": "QBot is an innovative solution for Microsoft Teams designed to facilitate intelligent question-and-answer interactions among educators, tutors, and students within classroom settings."
   },
   "accentColor": "#6BB700",
   "configurableTabs": [

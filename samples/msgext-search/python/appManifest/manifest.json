@@ -16,7 +16,7 @@
     },
     "description": {
       "short": "Microsoft Teams V4 Search Messaging Extension Bot and settings",
-      "full": "Sample Search Messaging Extension Bot using V4 Bot Builder SDK and V4 Microsoft Teams Extension SDK"
+      "full": "This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly."
     },
     "icons": {
       "outline": "outline.png",

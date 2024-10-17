@@ -16,8 +16,8 @@
     "full": "Details Tab for Meeting Extensibility"
   },
   "description": {
-    "short": "Details Tab",
-    "full": "Details Tab for Meeting Extensibility"
+    "short": "Create and manage polls in Teams meetings with interactive adaptive cards.",
+    "full": "This sample demonstrates how to create and manage polls during Microsoft Teams meetings, allowing participants to respond and view results through adaptive cards."
   },
   "icons": {
     "outline": "outline.png",

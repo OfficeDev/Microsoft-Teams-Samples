@@ -19,8 +19,8 @@
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "{Short description.}",
-    "full": "{Long description.}"
+    "short": "C# sample showcasing link unfurling in Teams for collaborative meetings.",
+    "full": "This sample demonstrates a C# bot that enables users to share and collaboratively review links in Microsoft Teams meetings."
   },
   "showLoadingIndicator": true,
   "bots": [

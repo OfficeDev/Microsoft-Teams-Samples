@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-details-tab-csharp",
     "source": "officeDev",
     "title": "Meetings Details Tab",
-    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.",
+    "shortDescription": "This sample demonstrates how to create and manage polls during Microsoft Teams meetings, allowing participants to respond and view results through adaptive cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-details-tab/csharp",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots."
+      "This sample application enables the creation of interactive polls within Teams meetings, where participants can submit their answers and view results in real time using adaptive cards. It includes features such as in-meeting tabs, bot interactions, and user-friendly interfaces to enhance engagement during meetings."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

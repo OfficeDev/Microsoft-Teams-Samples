@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-rsc-csharp",
     "source": "officeDev",
     "title": "Resource Specific Consent with Graph API C#",
-    "shortDescription": "Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.",
+    "shortDescription": "This sample application demonstrates how to request Resource Specific Consent (RSC) permissions, use them to call Microsoft Graph, and enumerate permission grants through a Teams tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-rsc/csharp",
     "longDescription": [
-      "Shows how to request RSC permissions, use them to call Microsoft Graph, and hos to enumerate permission grants through teams tab."
+      "This sample app illustrates the use of Resource Specific Consent (RSC) to access Microsoft Graph APIs, enabling the enumeration of permission grants through a Teams tab. It includes features such as tab integration, RSC permissions, and user interaction for seamless app functionality."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2023-09-25",

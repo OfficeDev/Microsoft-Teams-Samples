@@ -6,10 +6,10 @@
     "shortDescription": "This is an sample application which demonstrates how to create multiple Teams meetings at one click within teams tab (using excel sheet upload file).",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-bulk-meetings/csharp",
     "longDescription": [
-      "This is a sample application which demonstrates how to create multiple meeting training meeting event at one click within teams tab (using excel sheet upload file)."
+      "This sample application showcases how to bulk create meetings in Teams using the Graph API, leveraging an Excel sheet for input. It features tabs for user interaction and integrates seamlessly with Microsoft Teams."
     ],
     "creationDateTime": "2022-09-07",
-    "updateDateTime": "2022-09-09",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

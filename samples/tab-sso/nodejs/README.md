@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs.
+description: This sample app demonstrates Azure AD Single Sign-On for Teams tabs, enabling Graph API access.
 products:
 - office-teams
 - office

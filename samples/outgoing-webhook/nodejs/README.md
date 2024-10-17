@@ -18,6 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 
 # Outgoing Webhook Sample Node.js
 
+The Outgoing Webhook Sample Node.js project showcases a basic implementation of an Outgoing Webhook for Microsoft Teams, allowing seamless interaction with external applications. By verifying the identity of the sender, the webhook echoes messages back to the user and supports various card types, including adaptive and hero cards, facilitating dynamic responses within Teams channels. 
+
 ## Summary
 
 This project is an implementation of a very simple [Outgoing Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/custom-bot) for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.

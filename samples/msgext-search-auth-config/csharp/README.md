@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use authentication in search based Messaging Extension
+description: This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions.
 products:
 - office-teams
 - office
@@ -15,8 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-auth-config-csharp
 # Teams Search Auth Config 
 
 Bot Framework v4 sample for Teams expands the [msgext-search-auth-config](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp) sample to include a configuration page and Bot Service authentication.
+This comprehensive C# sample provides a step-by-step guide for building a search-based Messaging Extension in Microsoft Teams that integrates authentication through Azure Active Directory. By utilizing the [Bot Framework](https://dev.botframework.com) and Microsoft Graph API, it showcases how to implement secure user sign-in, access user data, and leverage messaging extension capabilities, enhancing the overall user experience.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension. In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
+In this sample we are assuming the OAuth 2 provider is Azure Active Directory V2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
 
 - `email`
 - `openid`

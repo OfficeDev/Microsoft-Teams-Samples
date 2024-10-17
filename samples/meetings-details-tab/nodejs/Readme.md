@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.
+description: This sample app demonstrates how to implement a Details Tab in Microsoft Teams meetings, allowing users to create polls and gather participant feedback through interactive chats.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-nodejs
 
 # Meeting Details Tab Sample Node.js 
 
-This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
+This sample demonstrates how to extend Microsoft Teams meetings by implementing a Details Tab that allows users to create and manage polls. Participants can submit their feedback through adaptive cards, and the results are easily viewable in both the meeting chat and the tab itself. To try the app, upload the provided manifest to your Teams environment and enhance your meeting experience with interactive features.
 
 ## Included Features
 * Tabs

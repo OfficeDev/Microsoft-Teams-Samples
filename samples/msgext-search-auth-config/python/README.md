@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use Search-based Messaging Extension with a configuration page.
+description: This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication.
 products:
 - office-teams
 - office
@@ -16,7 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-search-auth-config-pyt
 
 # Teams Search Auth Config
 
-[Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
+
+This comprehensive Python sample illustrates the implementation of a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions)  in Microsoft Teams, enhanced with a configuration page for user authentication and settings. By integrating Azure Active Directory for secure sign-in and utilizing the Microsoft Graph API, it enables personalized user experiences and interactions within Teams.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample is built on sample 50.teams-messaging-extension-search, and illustrates how to build a Search-based Messaging Extension with a configuration page, as well as how to sign in from a search Messaging Extension.
 

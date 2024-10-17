@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.
+description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams, including creating chats, adding members, and deleting members using Microsoft Graph APIs with C#.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp
 
 # Chat LifeCycle Application
 
-This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
+This sample application illustrates the lifecycle management of chats in Microsoft Teams, leveraging Microsoft Graph APIs to create chats, add and remove members, and demonstrate various scenarios. Developed in C#, it includes features such as tab integration, adaptive cards, and a welcome card, along with comprehensive setup instructions for registration, tunneling, and deployment using the Teams Toolkit for Visual Studio.
 
 ## Included Features
 * Tabs

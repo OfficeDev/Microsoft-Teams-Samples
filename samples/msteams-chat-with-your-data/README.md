@@ -15,7 +15,8 @@ urlFragment: officedev-microsoft-teams-samples-msteams-chat-with-your-data
 # Chat With Your Data
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=322043759&devcontainer_path=.devcontainer%2Fmsteams-chat-with-your-data%2Fdevcontainer.json&resume=1)
 
-This sample showcases a Teams app template to chat with your data via RAG (retrieval augmentation generation) through Azure OpenAI On Your Data and Azure AI Search.
+This sample showcases Chat With Your Data is a powerful Teams app template designed to facilitate dynamic interactions with various data sources through an intuitive conversational interface. Utilizing Azure OpenAI's language models and retrieval-augmented generation (RAG) technology, users can seamlessly connect to data stored in Azure AI Search, Azure Blob Storage, and more, allowing for insightful and context-rich exchanges that enhance decision-making and data accessibility within Microsoft Teams.
+
 - The user can set up a datasource such as Azure AI Search, Azure Blob Storage, URL/web address, Azure Cosmos DB for MongoDB vCore, uploaded files, or Elasticsearch.
 - The user can then interact with the data through the Teams app template.
 

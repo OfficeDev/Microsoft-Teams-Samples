@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4
+description: This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams.
 products:
 - office-teams
 - office
