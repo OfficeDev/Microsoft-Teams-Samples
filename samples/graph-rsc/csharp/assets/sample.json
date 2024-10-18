@@ -9,7 +9,7 @@
       "This sample app illustrates the use of Resource Specific Consent (RSC) to access Microsoft Graph APIs, enabling the enumeration of permission grants through a Teams tab. It includes features such as tab integration, RSC permissions, and user interaction for seamless app functionality."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2023-09-25",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

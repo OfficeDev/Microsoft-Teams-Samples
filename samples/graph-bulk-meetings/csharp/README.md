@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to create meeting in bulk on Teams calendar through teams tab.
+description: This sample app demonstrates bulk meeting creation on Teams calendars using an Excel upload.
 products:
 - office-teams
 - office

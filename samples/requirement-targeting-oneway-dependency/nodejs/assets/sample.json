@@ -6,7 +6,7 @@
     "shortDescription": "This sample app illustrates how to specify one-way dependency relationships between app capabilities in Microsoft Teams using the 'elementRelationshipSet' property and functionality requirements with 'hostMustSupportFunctionalities'.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/requirement-targeting-oneway-dependency/nodejs",
     "longDescription": [
-      "Microsoft M365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using elementRelationshipSet) and functionality requirements of a particular app capability (using hostMustSupportFunctionalities)."
+      " This sample app illustrates how to define one-way dependencies between various app capabilities in Microsoft Teams, including bots and tabs, using 'elementRelationshipSet' and 'hostMustSupportFunctionalities'. It allows developers to ensure that certain app features depend on the presence of specific capabilities for seamless functionality."
     ],
     "creationDateTime": "2024-08-20",
     "updateDateTime": "2024-10-15",

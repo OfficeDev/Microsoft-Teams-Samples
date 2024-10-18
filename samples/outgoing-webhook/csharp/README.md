@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to implement a Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
+description: This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
 products:
 - office-teams
 - office

@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-outgoing-webhook-nodejs",
     "source": "officeDev",
     "title": "Outgoing webhook in NodeJS",
-    "shortDescription": "TThis sample demonstrates a straightforward implementation of an Outgoing Webhook for Microsoft Teams, echoing messages sent to it while verifying the sender's identity.",
+    "shortDescription": "This sample demonstrates a straightforward implementation of an Outgoing Webhook for Microsoft Teams, echoing messages sent to it while verifying the sender's identity.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/nodejs",
     "longDescription": [
       "he Outgoing Webhook Sample Node.js project provides a simple way to create an Outgoing Webhook in Microsoft Teams that verifies incoming messages and echoes them back. Users can interact with the webhook by sending specific commands to receive various card types, enhancing their Teams experience with external data integration."

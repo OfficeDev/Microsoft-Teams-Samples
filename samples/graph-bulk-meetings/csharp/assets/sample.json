@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-graph-bulk-meetings-csharp",
     "source": "officeDev",
     "title": "Creating teams meetings in bulk using file upload method - C#",
-    "shortDescription": "This is an sample application which demonstrates how to create multiple Teams meetings at one click within teams tab (using excel sheet upload file).",
+    "shortDescription": "This sample app demonstrates bulk meeting creation on Teams calendars using an Excel upload.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-bulk-meetings/csharp",
     "longDescription": [
       "This sample application showcases how to bulk create meetings in Teams using the Graph API, leveraging an Excel sheet for input. It features tabs for user interaction and integrates seamlessly with Microsoft Teams."
