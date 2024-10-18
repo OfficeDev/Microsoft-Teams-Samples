@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Sample demonstrating Microsoft Entra ID and silent authentication in Teams.",
-    "full": "Both Silent and Simple"
+    "full": "This sample showcases how to implement Microsoft Entra ID and silent authentication in a configurable Teams tab, enabling secure access to user profile information."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
