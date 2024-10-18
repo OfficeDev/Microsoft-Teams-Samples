@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { DialogBot } = require('./dialogBot');
+const { DialogBot } = require('./DialogBot');
 
 class Bot extends DialogBot {
     /**

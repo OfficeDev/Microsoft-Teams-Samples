@@ -23,7 +23,7 @@ This sample shows the feature where user can use different formatting on adaptiv
 
 ## Interaction with app
 
-![Types Of Cards](Images/DifferentFormattingCards.gif)
+![Types Of Cards](Images/Bot_Formatting_Cards_nodejs_gif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -191,59 +191,65 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/1.InstallApp.png)
+![InstallApp](Images/1.Install.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](Images/2.WelcomeMessage.png)
+![WelcomeMessage](Images/2.Welcome_Message.png)
 
 **Mention Card:**
 
-![MentionCard](Images/3.MentionCard.png)
+![MentionCard](Images/3.Mention_support_card.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](Images/4.InformationMaskCard.png)
+![InformationMaskCard](Images/4.Info_Mask_card.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](Images/5.FullWidthCard.png)
+![FullWidthCard](Images/5.Full_Width_Card.png)
 
 **Stage View Card:**
 
-![StageViewCard](Images/6.StageViewCard.png)
+![StageViewCard](Images/6.Stage_View_Card.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](Images/7.OverflowMenuCard.png)
+![OverflowMenuCard](Images/7.Over_Flow_Menu_Card.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](Images/8.HTMLFormatCard.png)
+![HTMLFormatCard](Images/8.HTTP_Connector_Card.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](Images/9.CardWithEmoji.png)
+![CardWithEmoji](Images/9.Adaptive_card_with_Emoji.png)
 
 **Persona Card Icon:**
 
-![Persona](Images/10.Persona.png)
+![Persona](Images/10.Persona_Card_Icon.png)
 
 **Persona Set Icon:**
 
-![PersonaSet](Images/11.PersonaSet.png)
+![PersonaSet](Images/11.Persona_Set_Icon.png)
 
 **Code Block in Adaptive Card:**
 
-![CodeBlock](Images/12.CodeBlocks.png)
+![CodeBlock](Images/12.Code_Block_Adaptive_Card.png)
 
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](Images/13.Layout.png)
+![Layout](Images/14.Layout.png)
+
+**Border Adaptive Card**
+![Border](Images/16.Border.png)
+
+**Rounded Corners Adaptive Card**
+![Border](Images/17.RoundedCorners.png)
 
 **Mobile:**
 
-![LayoutMobile](Images/14.LayoutMobile.png)
+![LayoutMobile](Images/18.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 

@@ -94,9 +94,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-![personaltabinstllation](Images/installation.png)
+![personaltabinstllation](Images/1.Install.png)
 
-![personaltab](Images/personaltab.png)
+![personaltab](Images/2.Tab_Page.png)
 
 ## Further Reading
 

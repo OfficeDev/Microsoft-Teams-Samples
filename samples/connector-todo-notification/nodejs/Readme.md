@@ -12,6 +12,9 @@ extensions:
  createdDate: "11/11/2021 11:30:17 PM"
 urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 # Microsoft Teams Sample Connector Todo
 

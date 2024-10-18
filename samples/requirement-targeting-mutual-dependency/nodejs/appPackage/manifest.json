@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.example.com",
+    "privacyUrl": "https://www.example.com/privacy",
+    "termsOfUseUrl": "https://www.example.com/termofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "RT-Sample-App",
+    "full": "Mutual Dependeny RT Sample App"
+  },
+  "description": {
+    "short": "Specify runtime requirements for specific app capabilities",
+    "full": "This sample feature is to cover Mutual Dependency like Bot, Tab, ME depends on each other"
+  },
+  "accentColor": "#FFFFFF",
+  "elementRelationshipSet": {
+    "mutualDependencies": [
+      [
+        {
+          "name": "staticTabs",
+          "id": "staticTab_ID"
+        },
+        {
+          "name": "composeExtensions",
+          "id": "composeExt_ID"
+        },
+        {
+          "name": "bots",
+          "id": "${{BOT_ID}}"
+        }
+      ]
+    ]
+  },
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal",
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "id": "composeExt_ID",
+      "botId": "${{BOT_ID}}",
+      "commands": [
+        {
+          "id": "createCard",
+          "context": [
+            "compose",
+            "message",
+            "commandBox"
+          ],
+          "description": "Command to run action to create a Card from Compose Box",
+          "title": "Create Card",
+          "type": "action",
+          "parameters": [
+            {
+              "name": "title",
+              "title": "Card title",
+              "description": "Title for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "subTitle",
+              "title": "Subtitle",
+              "description": "Subtitle for the card",
+              "inputType": "text"
+            },
+            {
+              "name": "text",
+              "title": "Text",
+              "description": "Text for the card",
+              "inputType": "textarea"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "staticTab_Id",
+      "name": "Personal Tab",
+      "contentUrl": "${{BOT_ENDPOINT}}/tab",
+      "websiteUrl": "${{BOT_ENDPOINT}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}

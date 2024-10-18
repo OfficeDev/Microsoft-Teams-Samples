@@ -211,5 +211,33 @@ namespace BotAllCards.Cards
             return LayoutCardAdaptiveCardAttachment;
         }
 
+        public static Attachment SendBorderCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardBorders.json" };
+            var adaptiveCardBorderJson = File.ReadAllText(Path.Combine(paths));
+
+            var BorderAdaptiveCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardBorderJson),
+            };
+
+            return BorderAdaptiveCardAttachment;
+        }
+
+        public static Attachment SendRoundedCornerCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardRoundedCorners.json" };
+            var adaptiveCardRoundedCornersJson = File.ReadAllText(Path.Combine(paths));
+
+            var RoundedCornersCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardRoundedCornersJson),
+            };
+
+            return RoundedCornersCardAttachment;
+        }
+
     }
 }

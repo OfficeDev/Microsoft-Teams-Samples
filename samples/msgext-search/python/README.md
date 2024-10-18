@@ -110,6 +110,20 @@ There is a secondary, drill down, event illustrated in this sample: clicking on 
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
+## Running the sample
+
+![InstallAppUser1](Images/1.Install.png)
+
+![SelectExtension](Images/2.Select_Extension.png)
+
+![ExtensionSelected](Images/3.Extension_Selected.png)
+
+![SearchQuery](Images/4.Search_Query.png)
+
+![SearchResult](Images/5.Select_result.png)
+
+![InChat](Images/6.Posted_In_Chat.png)
+
 # Further reading
 
 - [Search based messaging extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command)
