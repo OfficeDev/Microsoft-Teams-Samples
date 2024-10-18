@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Microsoft Teams (browser)",
+    "Name": "Microsoft Teams (Browser)",
     "Projects": [
       {
         "Path": "MeetingContextApp\\MeetingContextApp.csproj",
