@@ -1,0 +1,62 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Large",
+      "text": "Rating input"
+    },
+    {
+      "type": "Input.Rating",
+      "id": "rating1",
+      "label": "Pick a rating",
+      "size": "medium",
+      "isRequired": true,
+      "errorMessage": "Please pick a rating"
+    },
+    {
+      "type": "Input.Rating",
+      "id": "rating2",
+      "label": "Pick a rating",
+      "allowHalfSteps": true,
+      "size": "large",
+      "isRequired": true,
+      "errorMessage": "Please pick a rating",
+      "color": "marigold",
+      "value": 3
+    },
+    {
+      "type": "TextBlock",
+      "size": "large",
+      "text": "Read-only ratings",
+      "separator": true,
+      "spacing": "extraLarge"
+    },
+    {
+      "type": "Rating",
+      "value": 3.2,
+      "size": "medium"
+    },
+    {
+      "type": "Rating",
+      "max": 20,
+      "value": 3.2,
+      "color": "marigold"
+    },
+    {
+      "type": "Rating",
+      "style": "compact",
+      "value": 3.2,
+      "color": "marigold",
+      "count": 150
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ]
+}
