@@ -19,8 +19,8 @@
     "full": "Tab Device Permission Demo App"
   },
   "description": {
-    "short": "Tab Device Permission Demo",
-    "full": "Tab Device Permission Demo"
+    "short": "Teams tab app showcasing device permissions for audio, video, and location.",
+    "full": "This Microsoft Teams sample app showcases how to manage device permissions for audio, video, and geolocation within a tab."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample tab application which demonstrates Azure Microsoft Entra authentication using OBO flow in personal teams tab.
+description: This sample application showcases how to implement Single Sign-On (SSO) authentication in personal Teams tabs using Azure Microsoft Entra and Node.js.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js
 
 # Teams Personal Tab SSO Authentication Sample Node.js
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
+This sample application serves as a complete guide for implementing Single Sign-On (SSO) authentication in personal tabs within Microsoft Teams, leveraging Azure Microsoft Entra and Node.js. It covers all necessary steps, including app registration, manifest configuration, and integration with the Microsoft Graph API, allowing for a smooth user experience across Teams and related Microsoft services.
 
 ## Included Features
 * Teams SSO (tabs)

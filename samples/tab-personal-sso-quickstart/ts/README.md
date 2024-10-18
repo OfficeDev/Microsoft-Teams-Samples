@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample tab application which demonstrates Azure Microsoft Entra authentication using OBO flow in personal teams tab.
+description: This sample application demonstrates how to implement Single Sign-On (SSO) authentication in personal Teams tabs using Azure Microsoft Entra and TypeScript.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts
 
 # Teams Personal Tab SSO Authentication Sample TS
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+This sample application serves as a complete guide for implementing Single Sign-On (SSO) authentication in personal tabs within Microsoft Teams, leveraging Azure Microsoft Entra and TypeScript. It provides step-by-step instructions for app registration, integration with MSAL.js 2.0, Graph API, and manifest configuration, ensuring a smooth setup and user experience in collaborative Teams environments.
 
 ## Included Features
 * Teams SSO (tabs)

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-meeting-transcript-recording-csharp",
     "source": "officeDev",
     "title": "This sample shows meeting transcripts and recordings.",
-    "shortDescription": "This sample shows meeting transcripts and recordings.",
+    "shortDescription": "This sample demonstrates how to capture meeting transcripts and recordings in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-meeting-transcript-recording/csharp",
     "longDescription": [
-      "This sample shows meeting transcripts and recordings."
+      " This sample application for Microsoft Teams enables users to automatically capture meeting transcripts and recordings, enhancing meeting documentation and accessibility. With a straightforward setup and integration process, it allows teams to focus on discussions while ensuring all details are preserved."
     ],
     "creationDateTime": "2023-10-13",
     "updateDateTime": "2023-11-03",

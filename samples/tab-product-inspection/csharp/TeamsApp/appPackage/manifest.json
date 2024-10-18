@@ -19,8 +19,8 @@
     "full": "Product Inspection sample"
   },
   "description": {
-    "short": "Product Inspection",
-    "full": "This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected."
+    "short": "Scan products in Teams, approve/reject with image capture functionality.",
+    "full": "This sample application allows users to scan products in Microsoft Teams and mark them as approved or rejected."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

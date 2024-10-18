@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-conversations-nodejs",
     "source": "officeDev",
     "title": "Conversational Tabs",
-    "shortDescription": "Microsoft Teams tab sample app for demonstrating create conversation tab",
+    "shortDescription": "This Microsoft Teams sample app illustrates how to create conversational tabs, enabling users to engage in discussions about sub-entities within the app.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-conversations/nodejs",
     "longDescription": [
-      "Microsoft Teams tab sample app for demonstrating create conversation tab"
+      "This Teams tab sample application showcases the creation of conversational tabs that facilitate discussions around sub-entities, enhancing collaboration among users. It includes detailed setup instructions and a demo manifest for easy deployment within Microsoft Teams."
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

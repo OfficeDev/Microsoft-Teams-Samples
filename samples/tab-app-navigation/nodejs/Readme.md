@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows the tab navigation feature such as navigation between tabs within the app.
+description: This sample demonstrates tab navigation functionality, allowing users to switch between tabs in a Teams application.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-app-navigation-nodejs
 
 ## Tab App Navigation
 
-This sample shows the tab navigation feature such as navigation between tabs within the app.
+Explore a sample Microsoft Teams application that showcases tab navigation capabilities, allowing users to seamlessly move between various tabs within the app. Built with Node.js, this example provides insights into creating intuitive navigation flows that enhance user engagement and improve overall app functionality.
 
 **Interaction with App**
 ![TabAppNavigation](Images/tab-app-navigation.gif)  

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-ai-doc-compliance-checker-js",
     "source": "officeDev",
     "title": "AI Document Compliance Checker in Copilot",
-    "shortDescription": "Use AI to compare a documents for compliance against a guideline.",
+    "shortDescription": "This sample demonstrates how to integrate Azure Open AI into a Teams message extension to evaluate contract proposals against policy checklists.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-doc-compliance-checker",
     "longDescription": [
-      "Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not."
+      "This sample showcases a Teams message extension that utilizes Azure Open AI to assess the compliance of contract proposals against uploaded policy guidelines stored in Azure Blob Storage. It formats the compliance results as adaptive cards for easy viewing and can also function as a Copilot plug-in within Microsoft 365."
     ],
     "creationDateTime": "2024-07-15",
-    "updateDateTime": "2024-07-15",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Microsoft Teams",
       "Microsoft 365 Copilot"

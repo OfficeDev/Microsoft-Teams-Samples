@@ -15,8 +15,8 @@
     "full": "Conversational Tab"
   },
   "description": {
-    "short": "View Tab With Conversations",
-    "full": "This sample demos conversational tabs"
+    "short": "Sample Teams app demonstrating conversational tabs for enhanced user interaction",
+    "full": "This Microsoft Teams sample app illustrates how to create conversational tabs, enabling users to engage in discussions about sub-entities within the app."
   },
   "icons": {
     "outline": "outline.png",

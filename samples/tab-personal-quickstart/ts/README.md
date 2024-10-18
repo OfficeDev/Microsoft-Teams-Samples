@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample personal tab quick-start app.
+description: This sample app demonstrates how to create a personal tab in Microsoft Teams using TypeScript.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-quickstart-ts
 
 # Personal Tabs
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+This sample application serves as a comprehensive guide for creating a personal tab in Microsoft Teams using TypeScript. It includes step-by-step instructions on setting up your development environment, configuring the app manifest, and deploying your tab across Teams, Outlook, and Office, empowering developers to easily implement and test their custom solutions.
 
  ## Included Features
 * Tabs

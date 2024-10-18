@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Personal App.",
-    "full": "Full description of Personal App."
+    "short": "Quick-start app for building personal tabs in Microsoft Teams using TypeScript.",
+    "full": "This quick-start sample provides detailed instructions for developing a personal tab in Microsoft Teams with TypeScript, featuring essential setup and deployment guidance. It covers prerequisites, coding requirements, and steps to run the app, ensuring seamless integration with Teams and other Microsoft applications."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

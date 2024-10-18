@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-preview-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension Action Preview",
-    "shortDescription": "Sample demonstrating an Action Based Messaging Extension with Preview",
+    "shortDescription": "Action-based Teams Messaging Extension sample with interactive previews.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-preview/nodejs",
     "longDescription": [
       "This is an sample app demonstrating an Action Based Messaging Extension with Preview"
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

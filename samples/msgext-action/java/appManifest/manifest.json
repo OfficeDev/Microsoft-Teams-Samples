@@ -15,8 +15,8 @@
     "full": "Microsoft Teams Action Based Messaging Extension"
   },
   "description": {
-    "short": "Sample demonstrating an Action Based Messaging Extension",
-    "full": "Sample Action Messaging Extension built with the Bot Builder SDK"
+    "short": "Sample app showcasing Action-Based Messaging Extensions for Microsoft Teams.",
+    "full": "This sample illustrates the creation of an Action-Based Messaging Extension using a Java Spring Boot application, enabling users to interactively generate content. It features seamless integration with bots, message extensions, and action commands for enhanced functionality within Microsoft Teams."
   },
   "icons": {
     "outline": "icon-outline.png",

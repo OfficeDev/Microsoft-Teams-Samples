@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample demonstrating an Action Based Messaging Extension with Preview.
+description: Action-based Teams Messaging Extension sample with interactive previews.
 products:
 - office-teams
 - office
@@ -15,9 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-preview-nodejs
 
 # Teams Messaging Extensions Action Preview
 
-Sample demonstrating an Action Based Messaging Extension with Preview
-
-Click the Messaging Extension icon in the Compose Box's Messaging Extension menu.
+Explore a sample of an action-based messaging extension for Microsoft Teams, featuring interactive previews and robust capabilities like bot interactions and message extensions. This tool enables users to engage with the bot and access actions directly from the compose box, enhancing the messaging experience.
 
 ## Included Features
 * Bots

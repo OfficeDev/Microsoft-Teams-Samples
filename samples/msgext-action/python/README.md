@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the bot that performs build an Action-based Messaging Extension
+description: This sample app illustrates how to create an Action-Based Messaging Extension for Teams using Python.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-python
 ---
 
 # Teams Messaging Extensions Action
+
+Explore this sample application that demonstrates how to build Action-Based Messaging Extensions for Microsoft Teams using Python. It highlights key functionalities such as bot interactions, message extensions, and customizable action commands, providing a rich and engaging experience for users.
 
 [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
 

@@ -19,8 +19,8 @@
     "full": "Tab Multi Hub"
   },
   "description": {
-    "short": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
-    "full": "Interact with the user's calendar, mail, profile, geolocation from personal tabs app."
+    "short": "Access Calendar, Mail, Profile, and geolocation features in personal tabs.",
+    "full": "This sample demonstrates how to interact with Calendar, Mail, Profile, and geolocation features from a personal tabs app in Microsoft Teams."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

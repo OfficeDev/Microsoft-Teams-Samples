@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-quickstart-js",
     "source": "officeDev",
     "title": "Action messaging extension",
-    "shortDescription": "Simple action messaging extension",
+    "shortDescription": "This sample demonstrates a Messaging Extension that accepts parameters and returns a card in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-quickstart/js",
     "longDescription": [
-      "Simple action messaging extension"
+      "This sample app showcases a Hello World Messaging Extension that processes parameters and generates a card in Microsoft Teams. It also illustrates how to receive and handle forwarded messages, enhancing interaction through action commands and message extensions."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-05",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

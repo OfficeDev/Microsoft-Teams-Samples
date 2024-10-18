@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample application which showcases action based messaging extension.
+description: This sample application showcases how to implement Action-Based Messaging Extensions for Teams using Node.js.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-nodejs
 ---
 
 # Teams Messaging Extensions Action
-Bot Framework v4 Conversation Bot sample for Teams.
+Discover this sample application that demonstrates how to build Action-Based Messaging Extensions in Microsoft Teams with Node.js. It showcases essential features like bot interactions, message extensions, and various action commands, providing an interactive experience for users.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.

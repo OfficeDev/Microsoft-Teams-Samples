@@ -15,8 +15,8 @@
     "full": "Teams Auth SSO"
   },
   "description": {
-    "short": "Teams Auth SSO app",
-    "full": "The Teams Auth SSO app"
+    "short": "Sample tab app showcasing Azure Entra SSO authentication in Teams using C#.",
+    "full": "This sample application demonstrates how to implement SSO authentication in a personal Teams tab using Azure Microsoft Entra and C#."
   },
   "icons": {
     "outline": "outline.png",

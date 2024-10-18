@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows meeting transcripts and recordings.
+description: This sample demonstrates how to capture and manage meeting transcripts and recordings in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-transcript-recording-
 
 ## Meeting Transcripts Recordings
 
-This sample shows meeting transcripts and recordings.
+This Microsoft Teams sample application facilitates the capture and management of meeting transcripts and recordings, ensuring that key discussions are accurately documented. Designed for seamless integration with Node.js, it offers straightforward setup instructions, enabling teams to focus on collaboration while retaining a comprehensive record of their meetings.
 
 **Interaction with app**
 ![MeetingTranscriptRecordingGif](Images/MeetingTranscriptRecording.gif)

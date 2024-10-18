@@ -19,8 +19,8 @@
     "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
   },
   "description": {
-    "short": "App Monetization in tab.",
-    "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
+    "short": "Sample app demonstrating purchase flow using Teams JS SDK in a tab.",
+    "full": "This sample demonstrates a Teams tab application that opens a purchase dialog and triggers a monetization flow through the Teams JS SDK. Users can experience app monetization features seamlessly integrated within Microsoft Teams."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

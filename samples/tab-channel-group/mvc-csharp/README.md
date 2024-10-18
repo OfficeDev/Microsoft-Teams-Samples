@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample app showing custom group and channel Tab with ASP. NET Core
+description: This sample application demonstrates how to build custom channel and group tabs in Microsoft Teams using ASP.NET Core and MVC.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-mvc-csharp
 
 # Channel and group tabs in ASP.NET Core with MVC
 
-In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
+Discover how to create custom channel and group tabs in Microsoft Teams using ASP.NET Core and MVC in this comprehensive sample app. This guide walks you through the entire process, from setting up your development environment and configuring the app manifest to testing the integration with local tunneling solutions like Ngrok
 
 ## Prerequisites
 

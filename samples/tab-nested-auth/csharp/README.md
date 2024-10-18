@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in C#.
+description: This sample showcases Azure AD single sign-on (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of (OBO) flow to call Microsoft Graph APIs in C#.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 ---
 ## Nested app authentication
 
-Nested app authentication (NAA) is a new authentication protocol for single page applications embedded in host environments like Teams, Outlook, and Microsoft 365, simplifying the authentication process to facilitate single sign-on (SSO) across nested applications and offering several advantages over the On-Behalf-Of (OBO) flow.
+This sample application for Microsoft Teams illustrates how to implement Azure AD single sign-on (SSO) within a Teams tab using the On-Behalf-Of (OBO) flow to securely call Microsoft Graph APIs in C#. Leveraging nested app authentication, it simplifies the authentication process, enhancing user experience across Microsoft 365 environments by enabling seamless access to nested applications.
 
 **Interaction with app**
 ![tab-nested-auth](Images/tab-nested-auth.gif)

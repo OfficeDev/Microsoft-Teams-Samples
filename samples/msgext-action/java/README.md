@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the bot that performs build an Action-based Messaging Extension
+description: Sample app showcasing Action-Based Messaging Extensions for Microsoft Teams.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-java
 
 # Teams Message Extension Action Bot
 
-Bot Framework v4 Conversation Bot sample for Teams.
+Explore this sample app that demonstrates how to build an Action-Based Messaging Extension for Microsoft Teams using Java and Spring Boot. It highlights key features such as bot interactions, message extensions, and dynamic content creation, allowing users to engage effectively within the Teams environment.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build an Action-based Messaging Extension.

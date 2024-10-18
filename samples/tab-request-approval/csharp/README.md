@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
+description: This sample app enables users to request task approvals through activity feed notifications, allowing managers to easily approve or reject requests.
 products:
 - office-teams
 - office
@@ -15,9 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-request-approval-csharp
 
 # Send task approvals using activity feed notification (Graph APIs)
 
-This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
-2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
+This sample application streamlines the task approval process in Microsoft Teams, enabling users to send approval requests directly to their managers via activity feed notifications. Managers can quickly view and manage pending requests, making use of Teams SSO and Graph API to enhance productivity and collaboration in task management.
 
 ## Included Features
 * Teams SSO (tabs)

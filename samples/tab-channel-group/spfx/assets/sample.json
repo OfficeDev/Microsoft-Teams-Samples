@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-channel-group-spfx",
     "source": "officeDev",
-    "title": "Channel/group tab in SharePoint Framework",
+    "title": "This sample demonstrates how to create Microsoft Teams tabs using the SharePoint Framework, simplifying development by hosting directly within SharePoint.",
     "shortDescription": "Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group/spfx",
     "longDescription": [
-      "Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services"
+      "This guide provides a step-by-step walkthrough for building Microsoft Teams tabs with the SharePoint Framework, enabling seamless integration and hosting within SharePoint. It covers prerequisites, setup, packaging, and deployment processes for your custom tab application."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

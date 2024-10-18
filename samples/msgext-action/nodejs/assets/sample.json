@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension Action",
-    "shortDescription": "This is an sample application which showcases action based messaging extension.",
+    "shortDescription": "This sample application showcases how to implement Action-Based Messaging Extensions for Teams using Node.js.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action/nodejs",
     "longDescription": [
-      "This is an sample application which showcases action based messaging extension."
+      "This sample app illustrates the creation of Action-Based Messaging Extensions in Microsoft Teams, using Node.js to enable interactive conversations. It includes features such as bot interactions, message extensions, and action commands, allowing users to engage seamlessly within the Teams environment."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use action based Messaging Extensions
+description: Demo app for using Action-Based Messaging Extensions in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -13,6 +13,8 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-action-csharp
 ---
 # Teams Messaging Extensions Action
+
+Explore the capabilities of Action-Based Messaging Extensions in Microsoft Teams with this sample app. It showcases how to implement interactive features, including bots and message extensions, allowing users to create content dynamically through a user-friendly interface.
 
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
 

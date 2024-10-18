@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension.
+description: This sample demonstrates a Messaging Extension that accepts parameters and returns a card in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 
 # Bots/Messaging Extension
 
-*Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
+Discover this Hello World Messaging Extension that demonstrates how to accept parameters and return interactive cards in Microsoft Teams. With features like action commands and message handling, this sample enables seamless integration with your web service, allowing users to initiate actions and interact directly within Teams.
 
 ## Included Features
 * Bots

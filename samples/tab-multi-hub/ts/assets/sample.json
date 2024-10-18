@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-multi-hub-ts",
     "source": "officeDev",
     "title": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
-    "shortDescription": "This sample shows how to interact with calendar, mail, profile, geolocation from personal tabs app.",
+    "shortDescription": "This sample demonstrates how to interact with Calendar, Mail, Profile, and geolocation features from a personal tabs app in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-multi-hub/ts",
     "longDescription": [
-      "This sample app shows how to interact with the user's calendar, mail, profile, geolocation from personal tabs app."
+      "This sample application allows users to seamlessly interact with their Calendar, Mail, Profile, and geolocation from personal tabs within Microsoft Teams. With easy setup and integration using TypeScript, it enhances user productivity by centralizing essential tools in one place."
     ],
     "creationDateTime": "2023-06-19",
-    "updateDateTime": "2023-07-04",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

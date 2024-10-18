@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js",
     "source": "officeDev",
     "title": "Starter solution: Personal tab with SSO  in JavaScript",
-    "shortDescription": "Create React App personal tab in JavaScript with Azure AD Single Sign-On",
+    "shortDescription": "This API server sample facilitates token exchange between Microsoft Teams and Google OAuth to access user profile information from the Graph API.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/js",
     "longDescription": [
-      "Create React App personal tab in JavaScript with Azure AD Single Sign-On"
+      "This sample API server is designed to exchange access tokens provided by Microsoft Teams for Graph API access, specifically to read user profile data. It enables developers to display the logged-in user's profile picture by integrating Google OAuth for authentication."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],
