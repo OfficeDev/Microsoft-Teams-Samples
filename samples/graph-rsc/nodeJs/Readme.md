@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Shows how to request RSC permissions, use them to call Microsoft Graph, and how to enumerate permission grants through teams tab.
+description: This sample application demonstrates how to request Resource Specific Consent (RSC) permissions to call Microsoft Graph and enumerate permission grants through a Teams tab.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs
 
 # Resource specific consent with Graph API
 
-This sample illustrates you can use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API.
+This sample application illustrates how to utilize [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Microsoft Graph APIs within Microsoft Teams. It includes features for requesting permissions, interacting via a Teams tab, and sending activity feed notifications, providing a seamless integration experience.
 
 ## Included Features
 * Tabs

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-sso-csharp",
     "source": "officeDev",
     "title": "Teams Tab SSO Authentication (C#)",
-    "shortDescription": "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in C#.",
+    "shortDescription": "This sample app showcases Azure Active Directory Single Sign-On (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of flow to call Microsoft Graph APIs with C#.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-sso/csharp",
     "longDescription": [
-      "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in C#."
+      "The Tabs Azure AD SSO Sample demonstrates how to implement Azure AD Single Sign-On in a Teams tab using C#. This application leverages the OBO flow to access Microsoft Graph APIs, enabling seamless user authentication and enhanced functionality within Teams."
     ],
     "creationDateTime": "2021-12-03",
-    "updateDateTime": "2022-06-20",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

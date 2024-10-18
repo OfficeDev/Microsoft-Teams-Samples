@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.
+description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Node.js and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 
 # ChatLifecycle Application
 
-This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
+This sample application showcases the management of chat lifecycles in Microsoft Teams, utilizing Microsoft Graph APIs for creating chats, adding members, and removing members in various scenarios. Developed in Node.js, it includes features such as tab integration, adaptive cards, and a welcome card, along with detailed instructions for registration, tunneling, and deployment using the Teams Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs

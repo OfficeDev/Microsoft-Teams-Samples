@@ -19,8 +19,8 @@
     "full": "Reddit Link Unfurler"
   },
   "description": {
-    "short": "Adds Reddit link unfurling & card posts",
-    "full": "Make pasted Reddit links better!"
+    "short": "C# Messaging Extension for Reddit links with link unfurling support.",
+    "full": "This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams."
   },
   "accentColor": "#FC4518",
   "bots": [

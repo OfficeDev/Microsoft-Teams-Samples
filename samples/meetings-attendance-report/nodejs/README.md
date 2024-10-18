@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
+description: This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in Microsoft Teams chat.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-nodejs
 
 # Meeting attendance report
 
-This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
+This sample application showcases the use of the Graph API to fetch meeting attendance reports and send them through a bot in Microsoft Teams chat. With features such as automated report delivery at the end of meetings, it provides an efficient way to track participant engagement and improve meeting effectiveness.
 
 ## Included Features
 * Bots

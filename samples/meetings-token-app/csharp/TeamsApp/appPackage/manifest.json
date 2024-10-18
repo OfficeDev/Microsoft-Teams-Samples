@@ -18,8 +18,8 @@
     "short": "Meeting Token App"
   },
   "description": {
-    "short": "Meeting Token App",
-    "full": "Token app optimized for meetings to generate sequential tokens for paticipants"
+    "short": "Generate meeting tokens in Teams to enhance participant interaction in meetings.",
+    "full": "The Meeting Token Generator app for Microsoft Teams allows participants to request and manage interaction tokens, ensuring equitable participation during meetings like scrums and Q&A sessions."
   },
   "icons": {
     "outline": "outline.png",

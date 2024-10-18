@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-change-notification-csharp",
     "source": "officeDev",
     "title": "Change Notification sample",
-    "shortDescription": "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.",
+    "shortDescription": "This sample application demonstrates how to send real-time change notifications for user presence in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/csharp",
     "longDescription": [
-      "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams."
+      "This sample app showcases the ability to send real-time notifications to users in Microsoft Teams based on their presence status using the Bot Framework and Graph API. It provides a straightforward setup process and includes features like adaptive cards for displaying user statuses."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

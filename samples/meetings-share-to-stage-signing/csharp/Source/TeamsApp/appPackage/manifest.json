@@ -15,8 +15,8 @@
     "full": "In-Meeting Document Signing"
   },
   "description": {
-    "short": "In-meeting document signing app",
-    "full": "A proof of concept showcasing a in-meeting document signing app."
+    "short": "In-meeting document signing app for Microsoft Teams.",
+    "full": "This Microsoft Teams sample app enables users to review and sign documents in real time during meetings, facilitating seamless collaboration."
   },
   "icons": {
     "outline": "outlineIcon.png",

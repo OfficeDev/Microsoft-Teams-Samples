@@ -19,8 +19,8 @@
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Link Unfurling sample",
-    "full": "This sample demonstrates Link Unfurling for *.BotFramework.com urls."
+    "short": "Teams bot sample demonstrating link unfurling using Java and Spring Boot.",
+    "full": "This sample app illustrates a Teams bot that performs link unfurling using Java and the Bot Framework v4."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

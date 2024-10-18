@@ -15,8 +15,8 @@
     "full": "Chat Lifecycle App"
   },
   "description": {
-    "short": "Chat Lifecycle Application",
-    "full": "Chat Lifecycle Application for showing all the scopes of adding users and installing polly app."
+    "short": "Manage chat lifecycle in Teams with Microsoft Graph APIs using C#.",
+    "full": "This sample demonstrates how to manage the chat lifecycle in Microsoft Teams, including creating chats, adding members, and deleting members using Microsoft Graph APIs with C#."
   },
   "icons": {
     "outline": "outline.png",

@@ -3,12 +3,12 @@
     "name": "officedev-microsoft-teams-samples-sharepoint-tab-request-approval-csharp",
     "source": "officeDev",
     "title": "Send task approvals using activity feed notifications (Graph API) and store them using SharePoint Embedded",
-    "shortDescription": "This sample shows a feature where the requester can request for any task approval from manager and the manager can see the pending request by user on the click of activity feed notification and can approve or reject the request. The data is stored using SharePoint respository service.",
+    "shortDescription": "This sample app demonstrates the integration of SharePoint Embedded for storage management within the Teams Tab Request Approval application, featuring Teams SSO, activity feed notifications, and Graph API support.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/sharepoint-tab-request-approval/csharp",
     "longDescription": [
-      "This sample shows a feature where the requester can request for any task approval from manager and the manager can see the pending request by user on the click of activity feed notification and can approve or reject the request. The data is stored using SharePoint respository service."    ],
+      "The Tab Request Approval app has been enhanced to utilize the SharePoint Embedded API for effective storage management in Microsoft Teams. It maintains the original app's functionality while adding features such as Teams Single Sign-On, activity feed notifications, and change notification subscriptions, showcasing how to programmatically manage storage requirements."    ],
     "creationDateTime": "2023-12-19",
-    "updateDateTime": "2023-12-19",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

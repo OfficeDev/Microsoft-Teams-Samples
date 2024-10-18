@@ -19,8 +19,8 @@
     "full": "Change Notifications"
   },
   "description": {
-    "short": "Get change notifications for teams and channels using Microsoft Graph.",
-    "full": "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel."
+    "short": "Receive notifications for team/channel changes in Microsoft Teams.",
+    "full": "This sample application showcases how to post notifications in Microsoft Teams when users create, edit, or delete teams and channels using Microsoft Graph and C#."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

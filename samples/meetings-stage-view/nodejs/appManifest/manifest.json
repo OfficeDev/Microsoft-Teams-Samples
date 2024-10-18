@@ -19,8 +19,8 @@
     "full": "App In Meeting"
   },
   "description": {
-    "short": "App In Meeting",
-    "full": "This example shows how to add app before, after or during the meeting"
+    "short": "Enable and configure apps for Teams meetings with shared stage view.",
+    "full": "This sample app demonstrates how to enable and configure applications for Microsoft Teams meetings, utilizing the Live Share SDK to facilitate a shared meeting stage experience."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

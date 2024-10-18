@@ -19,8 +19,8 @@
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Link Unfurling sample",
-    "full": "This sample demonstrates Link Unfurling for *.BotFramework.com urls."
+    "short": "Teams bot sample demonstrating link unfurling in messaging extensions.",
+    "full": "This sample app demonstrates how to implement link unfurling in a Teams messaging extension using the Bot Framework v4."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

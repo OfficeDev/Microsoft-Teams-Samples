@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-sso-nodejs",
     "source": "officeDev",
     "title": "Teams Tab SSO Authentication (NodeJS)",
-    "shortDescription": "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs.",
+    "shortDescription": "This sample app demonstrates Azure AD Single Sign-On for Teams tabs, enabling Graph API access.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-sso/nodejs",
     "longDescription": [
-      "Microsoft Teams sample app which showcases Azure AD SSO within teams tab using OBO flow to call Graph APIs in nodejs."
+      "This sample app showcases Azure AD Single Sign-On (SSO) for Microsoft Teams tabs using Node.js, allowing users to authenticate and obtain an access token. It also enables calls to the Microsoft Graph API to retrieve user profiles through the on-behalf-of flow."
     ],
     "creationDateTime": "2021-12-03",
-    "updateDateTime": "2022-06-20",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

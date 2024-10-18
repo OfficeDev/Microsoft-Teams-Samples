@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use Messaging Extensions Search
+description: This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly.
 products:
 - office-teams
 - office
@@ -16,7 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-extension-python
 
 # Teams Messaging Extensions Search
 
-[Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
+
+This comprehensive Python sample provides a detailed guide on building a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, empowering users to conduct searches and retrieve results efficiently. By leveraging the [Bot Framework](https://dev.botframework.com), this extension enhances user interaction within Teams, demonstrating features such as search commands, message handling, and result display.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build a Search-based Messaging Extension.

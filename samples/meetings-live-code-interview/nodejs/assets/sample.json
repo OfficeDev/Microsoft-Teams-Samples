@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-live-code-interview-nodejs",
     "source": "officeDev",
     "title": "Live coding interview using Shared meeting stage",
-    "shortDescription": "This sample demos live coding in a teams meeting stage using live share SDK. The tab is loaded as side panel which contains various coding questions.",
+    "shortDescription": "This sample application demonstrates live coding interviews in Microsoft Teams using the Live Share SDK, enabling participants to collaboratively solve coding questions in real time.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-live-code-interview/nodejs",
     "longDescription": [
-      "This sample demos live coding in a teams meeting stage using live share SDK. The tab is loaded as side panel which contains various coding questions."
+      "This sample application showcases live coding interviews in Microsoft Teams, leveraging the Live Share SDK for real-time collaboration. Participants can select coding questions from a side panel, allowing them to write and edit code together, with all changes instantly reflected for everyone in the meeting."
     ],
     "creationDateTime": "2022-03-24",
-    "updateDateTime": "2022-06-21",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-token-app-nodejs",
     "source": "officeDev",
     "title": "Meeting Token Generator",
-    "shortDescription": "Microsoft Teams meeting extensibility sample - token passing",
+    "shortDescription": "The Meeting Token Generator app allows participants to request and manage tokens for equitable interaction during Teams meetings.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-token-app/nodejs",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample - token passing"
+      "The Meeting Token Generator app enables participants to sequentially request interaction tokens, fostering fair engagement in meetings. It features real-time updates, a user list, and token management for efficient meeting flow."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-06-21",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

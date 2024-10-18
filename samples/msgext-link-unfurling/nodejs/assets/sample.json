@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-link-unfurling-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension Link Unfurling",
-    "shortDescription": "This sample showcases messaging extension feature along with link unfurling.",
+    "shortDescription": "This sample app showcases a Node.js bot that implements link unfurling within Microsoft Teams messaging extensions.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-link-unfurling/nodejs",
     "longDescription": [
-      "This sample showcases messaging extension feature along with link unfurling."
+      "This sample demonstrates a Node.js bot that performs link unfurling in Microsoft Teams, enhancing user interaction within messaging extensions. It includes features like search commands and can be easily deployed via Azure and Teams Toolkit."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

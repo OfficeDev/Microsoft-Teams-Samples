@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-notification-csharp",
     "source": "officeDev",
     "title": "In-meeting notification app",
-    "shortDescription": "Illustrates how to implement the \"in-meeting notification\" and \"targeted meeting notification\" experience",
+    "shortDescription": "This sample application demonstrates how to implement targeted in-meeting notifications in Microsoft Teams using adaptive cards and bot interactions.",
      "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-notification/nodejs",
     "longDescription": [
-      "Illustrate how to implement the \"targeted in-meeting notifications\" experience"
+      "This sample application showcases the implementation of targeted in-meeting notifications within Microsoft Teams, allowing users to receive and respond to agenda items via adaptive cards. Users can interact with the bot to send notifications and provide feedback, enhancing engagement during meetings."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2023-02-03",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

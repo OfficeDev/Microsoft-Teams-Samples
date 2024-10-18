@@ -19,8 +19,8 @@
     "full": "App to get staggered permissions"
   },
   "description": {
-    "short": "App to get staggered permissions",
-    "full": "This sample demos to get staggered graph api permissions"
+    "short": "Demo app to obtain staggered Graph API permissions in Teams tabs.",
+    "full": "This sample demonstrates how to request staggered Graph API permissions in a Microsoft Teams tab, prompting users only when specific features are accessed."
   },
   "accentColor": "#235EA5",
  "staticTabs": [

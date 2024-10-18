@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows messaging extension with adaptive card-based loop components functionality.
+description: This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that utilizes adaptive card-based loop components, enabling link unfurling and dynamic interactions within the compose area.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-unfurling-ac-loop-componen
 ---
 
 # Messaging Extension with Adaptive Card Loop Components
+
+This comprehensive Node.js sample illustrates the development of a Messaging Extension for Microsoft Teams, featuring adaptive card-based loop components that facilitate link unfurling and user interaction. By enabling users to copy and paste URLs from platforms like GitHub, the extension enriches the messaging experience with rich previews and dynamic functionality, making it easier to engage with shared content.
 
 If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main` or your ngrok base url, it wil unfurl inside compose area.
 

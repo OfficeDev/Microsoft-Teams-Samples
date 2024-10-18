@@ -19,8 +19,8 @@
         "full": "full name for linkunfurling-reddit"
     },
     "description": {
-        "short": "short description of linkunfurling-reddit",
-        "full": "full description of linkunfurling-reddit"
+        "short": "Node.js Messaging Extension for Reddit links with link unfurling support.",
+        "full": "This sample demonstrates a Node.js Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams."
     },
     "accentColor": "#FFFFFF",
     "bots": [],

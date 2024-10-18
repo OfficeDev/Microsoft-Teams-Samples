@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-meeting-notification-nodejs",
     "source": "officeDev",
     "title": "Online Teams Meeting Subscription",
-    "shortDescription": "Online meeting subscription to post notifications using bot when user joined/left meeting.",
+    "shortDescription": "This sample application showcases online meeting subscriptions that notify users in chat about meeting events, including when users join or leave and when meetings start or end.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-meeting-notification/nodejs",
     "longDescription": [
-      "This is a sample application which demonstrates use of online meeting subscription that will post notifications using bot when user joined/left and when meeting start/end."
+      "This sample application demonstrates the use of online meeting subscriptions in Microsoft Teams, sending real-time chat notifications for events such as user joins/leaves and meeting start/end. Built with Node.js, it features bot interactions, change notifications, and integrates with the Microsoft Graph API for seamless communication."
     ],
     "creationDateTime": "2022-09-24",
-    "updateDateTime": "2022-09-24",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

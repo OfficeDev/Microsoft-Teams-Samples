@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: In-Meeting Document Signing
+description: This Microsoft Teams sample app enables users to review and sign documents in real time during meetings, facilitating seamless collaboration.
 products:
 - office-teams
 - office
@@ -14,7 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-c
 ---
 
 # In-Meeting Document Signing
-Meeting Signing is a Teams sample app that demonstrates the scenario of enabling users to [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings, making it possible to review and sign documents in a single session. This sample lets users electronically sign documents with their current tenant identity. Some example documents that can be signed during meetings are Purchase Agreements and Purchase Orders. This template is also applicable, and could be adapted for other scenarios like reviewing and approving code reviews or collaborative reviewing of documents.
+
+This sample application demonstrates the in-meeting document signing functionality within Microsoft Teams, enabling users to review and [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings. With features like Teams SSO, adaptive cards, and programmatic content sharing, this app supports multiple personas including document creators, signers, and readers, making it suitable for various collaborative scenarios.
 
 The sample app could be customized to incorporate other kind of signatures like handwritten signatures or certificate based signatures. 
 

@@ -19,8 +19,8 @@
     "full": "Meeting Transcript Bot"
   },
   "description": {
-    "short": "Bot to show the transcript of the meeting using Microsoft Graph API.",
-    "full": "This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module."
+    "short": "Fetch and display meeting transcripts using Microsoft Graph API in Teams.",
+    "full": "This sample app retrieves meeting transcripts via the Graph API and displays them in a task module."
   },
   "accentColor": "#235EA5",
   "bots": [

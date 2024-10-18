@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-link-unfurling-python",
     "source": "officeDev",
     "title": "Link Unfurling in Messaging Extension using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4",
+    "shortDescription": "This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-link-unfurling/python",
     "longDescription": [
-      "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4"
+      "This sample app demonstrates a Python bot designed for Microsoft Teams, showcasing the link unfurling feature within messaging extensions. It includes functionalities such as search commands and can be easily deployed using Azure."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-09-22",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

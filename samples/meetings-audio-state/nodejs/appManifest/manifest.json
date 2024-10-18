@@ -19,8 +19,8 @@
     "full": "Mute/Unmute Teams meeting audio call"
   },
   "description": {
-    "short": "Mute/Unmute audio call",
-    "full": "This sample shows how to Mute/Unmute Teams meeting audio call."
+    "short": "Mute and unmute Teams meeting audio via a tab.",
+    "full": "TThis sample tab application demonstrates how to control meeting audio in Microsoft Teams by muting and unmuting using the Incoming Client Audio API."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension showcases copilot handoff along with allowings users to query the Northwind Database.
+description: This sample showcases a Teams message extension that serves as a plugin for Microsoft Copilot, enabling users to query the Northwind Database.
 products:
 - office-teams
 - copilot-m365
@@ -12,7 +12,7 @@ languages:
 
 ![License.](https://img.shields.io/badge/license-MIT-green.svg)
 
-This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension allows users to query the [Northwind Database](https://learn.microsoft.com/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases).
+This sample demonstrates a Teams message extension that integrates with Microsoft Copilot, allowing users to query the [Northwind Database](https://learn.microsoft.com/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases) efficiently. It supports copilot handoffs for a smooth transition to custom bot interactions, enhancing the user experience.
 
 ![Screenshot of the sample extension working in Copilot in Microsoft Teams](./lab/images/03-03a-response-on-chai.png)
 

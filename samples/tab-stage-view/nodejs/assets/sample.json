@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-stage-view-nodejs",
     "source": "officeDev",
     "title": "Stage View",
-    "shortDescription": "Microsoft Teams tab sample app for demonstrating tab in stage view",
+    "shortDescription": "This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-stage-view/nodejs",
     "longDescription": [
-      "Microsoft Teams tab sample app for demonstrating tab in stage view"
+      "The Stage View sample app illustrates the functionality of Microsoft Teams tabs in stage view with a Node.js implementation, highlighting features like multi-window support and collaborative interactions. Users can engage through adaptive cards and deep links, enhancing their experience within Teams."
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2022-10-21",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

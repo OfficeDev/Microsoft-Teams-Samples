@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.
+description: This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework.
 urlFragment: teams-graph-change-notification-nodejs
 products:
 - office-teams
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-nodejs
 
 Bot Framework v4 ChangeNotification sample.
 
-This sample app demonstrates sending notifications to users when presence status is changed.
+This sample application provides a comprehensive guide for sending real-time notifications about user presence changes in Microsoft Teams using Node.js and the Bot Framework. It covers the entire setup process, including Azure AD registration, bot configuration, and integration with Teams, allowing developers to create interactive experiences that respond to user presence
 
 ## Included Features
 * Bots

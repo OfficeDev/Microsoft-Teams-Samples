@@ -21,8 +21,8 @@
     "full": "Expert Finder"
   },
   "description": {
-    "short": "Search for candidates and share profiles matching a criteria.",
-    "full": "Get candidate profiles and share them in a conversation. Search for candidates by skills, location or availability."
+    "short": "Teams message extension for Copilot to find experts by skills and location.",
+    "full": "This sample implements a Teams message extension for Copilot, enabling users to query a database of candidates based on skills, location, and availability."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

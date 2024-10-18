@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.
+description: This sample demonstrates a C# bot that enables users to share and collaboratively review links in Microsoft Teams meetings.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-meeting-csh
 
 # Link unfurling meeting sample
 
-This sample illustrates a common scenario where a user shares a link to a resource (dashboard in this sample) with a group of users, and they collaborate to review it in a meeting.
+This sample application highlights a C# bot designed for Microsoft Teams, showcasing the link unfurling feature that enhances collaboration in meetings. By allowing users to share links and review content through adaptive cards, the bot streamlines the process of discussing resources during group discussions.
 
 ### 1. Workflow:
 * User shares a link to a dashboard with a group of users.

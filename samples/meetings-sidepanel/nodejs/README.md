@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting
+description: This sample app for Microsoft Teams showcases how to implement a side panel for real-time interaction during meetings, allowing organizers to manage agendas.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 
 # Meetings SidePanel
 
-This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
+This sample application illustrates how to create an interactive [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) for Microsoft Teams meetings, allowing organizers to manage and publish meeting agendas in real-time. Utilizing the Live Share SDK and adaptive cards, this app provides a seamless experience for users to enhance collaboration, while also supporting theme customization for a tailored look and feel.
 
 ## Included Features
 * Meeting Stage

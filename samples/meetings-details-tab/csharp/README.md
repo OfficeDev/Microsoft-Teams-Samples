@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.
+description: This sample demonstrates how to create and manage polls during Microsoft Teams meetings, allowing participants to respond and view results through adaptive cards.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-csharp
 
 # Meetings Details Tab Sample C#
 
-This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
+This sample application showcases the extensibility of Microsoft Teams meetings by allowing users to create and participate in polls through in-meeting tabs and adaptive cards. Participants can submit their responses, view real-time results, and interact with the bot, making meetings more engaging and collaborative. To try the app, upload the provided manifest to your Teams environment and enhance your meeting experience.
 
 ## Included Features
 * Tabs

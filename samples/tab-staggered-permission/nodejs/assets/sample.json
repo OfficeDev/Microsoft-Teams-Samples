@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-staggered-permission-nodejs",
     "source": "officeDev",
     "title": "Staggered permission sample",
-    "shortDescription": "This sample demos to get staggered graph api permissions in teams tab.",
+    "shortDescription": "This sample demonstrates how to request staggered Graph API permissions in a Microsoft Teams tab, prompting users only when specific features are accessed.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-staggered-permission/nodejs",
     "longDescription": [
-      "This sample demos to get staggered graph api permissions in teams tab."
+      "The Staggered Permission sample app provides a Node.js implementation to manage Graph API permissions in a staggered fashion within Microsoft Teams. Users are prompted for permissions—such as accessing photos or emails—only when they attempt to use those features, streamlining the consent process and enhancing user experience."
     ],
     "creationDateTime": "2022-07-03",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

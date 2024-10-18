@@ -19,8 +19,8 @@
     "full": "Channel Lifecycle sample"
   },
   "description": {
-    "short": "Channel Lifecycle",
-    "full": "This example show the Channel Lifecycle, which includes channel creation , update and delete"
+    "short": "Manage channel lifecycle events in Microsoft Teams using Graph API.",
+    "full": "This sample application demonstrates how to manage the channel lifecycle—create, update, and delete channels—using the Microsoft Graph API through a Teams tab."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

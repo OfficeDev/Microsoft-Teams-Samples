@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-support-offline-nodejs",
     "source": "officeDev",
     "title": "A classic CRUD app working in offline mode inside Microsoft Teams.",
-    "shortDescription": "This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage.",
+    "shortDescription": "This sample app demonstrates a CRUD application that functions offline in Microsoft Teams, allowing users to manage data without an internet connection and automatically sync with blob storage when reconnected.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-support-offline/nodejs",
     "longDescription": [
-      "This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage."
+      "The Offline Support Tickets sample app showcases a classic CRUD application designed for Microsoft Teams, enabling users to perform create, read, update, and delete operations without needing an internet connection. When the device reconnects, the app seamlessly syncs all locally stored data with blob storage, ensuring data consistency across devices."
     ],
     "creationDateTime": "2024-08-28",
-    "updateDateTime": "2024-08-28",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

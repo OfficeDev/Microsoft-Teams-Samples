@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-outgoing-webhook-csharp",
     "source": "officeDev",
     "title": "Outgoing webhook in C#",
-    "shortDescription": "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.",
+    "shortDescription": "This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/csharp",
     "longDescription": [
-      "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it."
+      "The Outgoing Webhook Sample C# project provides a simple way for Microsoft Teams to interact with external applications through HTTP POST requests. By integrating an outgoing webhook, users can send messages and receive rich responses, enhancing their Teams experience without the need for a full bot implementation."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+description: This sample app illustrates how to specify one-way dependency relationships between app capabilities in Microsoft Teams using the "elementRelationshipSet" property and functionality requirements with "hostMustSupportFunctionalities".
 extensions:
   contentType: samples
   createdDate: 08/21/2024 10:02:21 PM
@@ -14,7 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 # Microsoft 365 RT Sample App Feature.
 
-- Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+The Microsoft 365 RT Sample App Feature is a Node.js application designed to showcase one-way dependency relationships between various capabilities within Microsoft Teams, including bots, tabs, and message extensions. By utilizing the 'elementRelationshipSet' property and the 'hostMustSupportFunctionalities' feature, this sample enables developers to define dependencies that ensure proper functionality, enhancing the integration and usability of Teams apps across the Microsoft 365 ecosystem.
+
 
 ## Included Features
 * Tabs

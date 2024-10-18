@@ -19,8 +19,8 @@
     "full": "Create Meetings"
   },
   "description": {
-    "short": "This is an sample application which shows how to create teams meetings in bulk.",
-    "full": "This sample application which shows how to create meetings in bulk using Excel file upload method."
+    "short": "Easily create multiple Teams meetings in bulk using file uploads.",
+    "full": "This sample application demonstrates bulk creation of Teams meetings using file uploads."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

@@ -16,8 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-samples-msteams-application-resou
 
 
 # Resource Hub 
-All the help you need to use Teams, all in one place. Get up and running with just the basics, dive into popular topics, master features designed for your work style or industry, get answers to frequently asked questions, and see what’s new.
-Resources HUB - One single point of view for Product information like Features, What’s new, Scenarios, Apps. Available “at hand” to help discover product potential in every moment of organization Teams journey (onboard, adopt or transform) and tailor the message to their business size/department/industry (filters available). 
+Resource Hub is an innovative solution crafted to enhance the Microsoft Teams experience by consolidating essential resources and support into a single accessible platform. Users can easily navigate through foundational guides, explore trending topics, and utilize advanced features tailored to their specific work environments, while tools like custom Bing search and a comprehensive FAQ section ensure that all users have the assistance they need at their fingertips, facilitating a smoother onboarding and adoption process.
+
 Show users Art of Possible in Teams
 
 ## Quick links

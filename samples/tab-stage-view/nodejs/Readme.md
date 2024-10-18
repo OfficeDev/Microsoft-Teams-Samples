@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating tab in stage view
+description: This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities.
 products:
 - office-teams
 - office
@@ -15,7 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 
 # Stage View
 
+This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Node.js. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
 This App talks about the Teams tab in stage view with Nodejs.
+
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling)
 
 ## Included Features

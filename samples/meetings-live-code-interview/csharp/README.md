@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample demos live coding in a teams meeting stage using live share SDK. The tab is loaded as side panel which contains various coding questions."
+description: "This sample application showcases live coding interviews in Microsoft Teams using the Live Share SDK, allowing participants to collaborate in real-time on coding questions."
 products:
 - office-teams
 - office
@@ -15,8 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-csha
 
 # Live coding interview using Shared meeting stage 
 
-This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
-Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
+This sample application demonstrates how to conduct live coding interviews in Microsoft Teams using the Live Share SDK. Featuring a side panel for coding questions and real-time collaboration, this app allows participants to engage in interactive coding sessions, making it an ideal tool for remote technical interviews.
 
 ## Included Features
 * Meeting Stage

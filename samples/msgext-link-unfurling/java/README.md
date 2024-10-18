@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the bot that performs link unfurling in Teams
+description: This sample app illustrates a Teams bot that performs link unfurling using Java and the Bot Framework v4.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-java
 
 # Teams Link Unfurl Bot Java
 
-Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.
+This sample demonstrates a Java-based Teams bot that utilizes [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) in messaging extensions, built with the Bot Framework v4 and Spring Boot. Users can experience enhanced link previews and seamless integration within Microsoft Teams by uploading the app manifest.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that performs link unfurling in Teams.
 

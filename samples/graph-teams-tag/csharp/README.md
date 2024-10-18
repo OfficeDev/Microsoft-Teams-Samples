@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CRUD Graph operations within tab related to team tags.
+description: This sample application demonstrates how to perform CRUD operations on team tags using Microsoft Graph API within a Microsoft Teams tab.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 
 # Graph teams tag
 
-This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
+This sample application illustrates how to implement CRUD operations for team tags using the Microsoft Graph API within a Microsoft Teams tab. Users can easily create, update, and manage tags, with full integration of Teams Single Sign-On (SSO) and Graph API functionalities, providing a complete solution for teamwork and collaboration.
 
 ## Included Features
 * Teams SSO (tabs)

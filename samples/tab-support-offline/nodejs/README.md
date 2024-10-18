@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage.
+description: This sample app demonstrates a CRUD application that functions offline in Microsoft Teams, allowing users to manage data without an internet connection and automatically sync with blob storage when reconnected.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-support-offline-nodejs
 
 ## Offline Support Tickets
 
-This sample app illustrates a classic CRUD application that operates offline within Microsoft Teams. Users can perform create, read, update, and delete operations without an internet connection. When the Android device reconnects to the internet, the app automatically syncs the locally stored data with blob storage. This ensures that all offline changes are updated and integrated into the central storage, maintaining data consistency across devices. The app effectively demonstrates handling data persistence and synchronization in environments with intermittent connectivity.
+This sample app illustrates a robust CRUD application that operates effectively offline within Microsoft Teams, empowering users to manage their data without internet access. Upon reconnection, the app automatically syncs local changes with blob storage, maintaining data integrity and providing a reliable solution for users in environments with intermittent connectivity.
 
 **Interaction with app - Desktop**
 

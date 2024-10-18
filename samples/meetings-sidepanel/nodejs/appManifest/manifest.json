@@ -19,8 +19,8 @@
     "full": "Side Panel for Meeting"
   },
   "description": {
-    "short": "Side Panel",
-    "full": "Side Panel for Meeting Extensibility"
+    "short": "Sample app demonstrating Microsoft Teams side panel interaction during meetings.",
+    "full": "This sample app for Microsoft Teams showcases how to implement a side panel for real-time interaction during meetings, allowing organizers to manage agendas."
   },
   "accentColor": "#5558AF",
   "bots": [

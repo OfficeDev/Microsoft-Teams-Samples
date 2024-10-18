@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to create meeting in bulk on Teams calendar through teams tab.
+description: This sample application demonstrates bulk creation of Teams meetings using file uploads.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 # Graph bulk meetings
 
-This is an sample application which shows how to create teams meetings in bulk using file upload method.
+This sample application demonstrates how to bulk create meetings in Microsoft Teams using file uploads via an intuitive tab interface. It utilizes the Graph API for interaction, includes prerequisites for setup, and provides comprehensive instructions for Azure registration, bot setup, and manifest configuration.
 
 ## Included Features
 * Tabs

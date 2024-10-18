@@ -19,8 +19,8 @@
     "full": "ME Auth for Search, Action and link unfurling"
   },
   "description": {
-    "short": "ME Authentication for Search, Action and Link unfurling",
-    "full": "ME Authentication sample code for all authentication merged"
+    "short": "C# Messaging Extension demonstrating authentication in search-based extensions.",
+    "full": "This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

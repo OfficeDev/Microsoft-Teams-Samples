@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-token-app-csharp",
     "source": "officeDev",
     "title": "Meeting Token Generator",
-    "shortDescription": "Helps orchestrate who speaks when by issuing tokens to meeting attendees and display the token who should be speaking now",
+    "shortDescription": "The Meeting Token Generator app for Microsoft Teams allows participants to request and manage interaction tokens, ensuring equitable participation during meetings like scrums and Q&A sessions.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-token-app/csharp",
     "longDescription": [
-      "Helps orchestrate who speaks when by issuing tokens to meeting attendees and display the token who should be speaking now"
+      "This sample app enhances Microsoft Teams meetings by allowing participants to request sequential tokens for interaction, promoting fair engagement. Built with the Live Share SDK, it updates data in real-time for all meeting attendees, making it ideal for collaborative settings."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-06-21",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

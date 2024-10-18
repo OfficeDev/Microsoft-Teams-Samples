@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-nodejs",
     "source": "officeDev",
     "title": "Search Based Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use search based Messaging Extension.",
+    "shortDescription": "This sample demonstrates how to create a Node.js Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search/nodejs",
     "longDescription": [
-      "This sample app demonstrate how to use search based Messaging Extension."
+      "This Node.js sample illustrates the development of a search-based Messaging Extension for Microsoft Teams, allowing users to search for information directly within their Teams environment. It showcases how to handle search commands, interact with the Bot Framework, and display search results effectively."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-10",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

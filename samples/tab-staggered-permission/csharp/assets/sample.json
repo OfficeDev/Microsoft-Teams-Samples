@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-staggered-permission-csharp",
     "source": "officeDev",
     "title": "Staggered Permission sample",
-    "shortDescription": "This sample demos to get staggered graph api permissions in teams tab.",
+    "shortDescription": "This sample demonstrates how to obtain staggered Graph API permissions in a Microsoft Teams tab, prompting users for permissions only when specific features are accessed.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-staggered-permission/csharp",
     "longDescription": [
-      "This sample demos to get staggered graph api permissions in teams tab."
+      "The Staggered Permission sample app illustrates a C# implementation that retrieves Graph API permissions in a staggered manner within Microsoft Teams. Users are only prompted for permissions, such as access to photos or emails, when they attempt to use those features, enhancing the user experience by minimizing unnecessary consent requests."
     ],
     "creationDateTime": "2022-03-17",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

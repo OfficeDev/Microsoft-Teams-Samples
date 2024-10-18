@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-link-unfurling-reddit-csharp",
     "source": "officeDev",
     "title": "Custom display of Reddit links",
-    "shortDescription": "Messaging extension that detects Reddit links and shows a custom \"unfurling\" experience",
+    "shortDescription": "This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-link-unfurling-reddit/csharp",
     "longDescription": [
-      "Messaging extension that detects Reddit links and shows a custom \"unfurling\" experience"
+      "This sample showcases a C# Messaging Extension designed to unfurl Reddit links within Microsoft Teams. It includes features like user authentication, message extension settings, and a logout option, enhancing the user experience."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

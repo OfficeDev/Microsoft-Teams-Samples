@@ -19,8 +19,8 @@
     "full": "Send notification to user wwhen their status changes."
   },
   "description": {
-    "short": "App to track NotificationApp.",
-    "full": "App to track NotificationApp present channel."
+    "short": "Receive real-time notifications for user presence changes in Microsoft Teams.",
+    "full": "This sample application demonstrates how to send real-time change notifications for user presence in Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "bots": [

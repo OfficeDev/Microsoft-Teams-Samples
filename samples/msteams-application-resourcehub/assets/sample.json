@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-samples-msteams-application-resourcehub",
     "source": "officeDev",
     "title": "ResourceHub",
-    "shortDescription": "Get help using Teams with FAQs, troubleshooting, and video tutorials.",
+    "shortDescription": "Resource Hub is a comprehensive solution designed to provide users with all the essential help and resources they need to effectively utilize Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msteams-application-resourcehub",
     "longDescription": [
-      "All the help you need to use Teams, all in one place. Get up and running with just the basics, dive into popular topics, master features designed for your work style or industry, get answers to frequently asked questions, and see what’s new."
+      "Resource Hub is an integrated platform that centralizes support and resources for Microsoft Teams, allowing users to quickly access basic guides, popular topics, and advanced features tailored to their work style or industry. With functionalities like custom Bing search, troubleshooting resources, and trending topics, it empowers organizations to maximize their Teams experience and adapt to new features seamlessly."
     ],
     "creationDateTime": "2022-09-19",
-    "updateDateTime": "2022-09-19",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

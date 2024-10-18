@@ -15,8 +15,8 @@
     "full": "Teams Proactive Sampler Application"
   },
   "description": {
-    "short": "Samples of Proactive Messaging in Teams",
-    "full": "Samples for getting conversation coordinates and sending proactive messages in Microsoft Teams."
+    "short": "Sample app for proactive installation and notifications in Microsoft Teams.",
+    "full": "This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs."
   },
   "icons": {
     "outline": "outline.png",

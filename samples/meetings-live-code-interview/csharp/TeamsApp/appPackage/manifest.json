@@ -19,8 +19,8 @@
     "full": "Live coding interview"
   },
   "description": {
-    "short": "Live coding interview",
-    "full": "This sample demos a live coding in a teams meeting stage using live share SDK."
+    "short": "Demo app for live coding interviews in Teams using the Live Share SDK.",
+    "full": "This sample application showcases live coding interviews in Microsoft Teams using the Live Share SDK, allowing participants to collaborate in real-time on coding questions."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

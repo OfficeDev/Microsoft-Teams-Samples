@@ -18,8 +18,8 @@
     "short": "Side Panel"
   },
   "description": {
-    "short": "Side Panel",
-    "full": "Side Panel for Meeting Extensibility using live share SDK."
+    "short": "Sample app showcasing real-time data sharing in Teams meeting side panels.",
+    "full": "This Microsoft Teams sample app demonstrates how to use the Live Share SDK to implement a side panel that allows for real-time data sharing during meetings."
   },
   "accentColor": "#5558AF",
   "bots": [

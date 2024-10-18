@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-python",
     "source": "officeDev",
     "title": "Search Based Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use search based Messaging Extension",
+    "shortDescription": "This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search/python",
     "longDescription": [
-      "This sample app demonstrate how to use search based Messaging Extension"
+      "This Python sample illustrates the development of a search-based Messaging Extension for Microsoft Teams, allowing users to search for information directly within their Teams environment. It showcases how to handle search commands, interact with the Bot Framework, and display search results effectively."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

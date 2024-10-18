@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft 365 RT sample app in Node.js which specify mutual-dependency relationships between app capabilities (using "elementRelationshipSet") property in app manifest.
+description: This sample Node.js app showcases how to specify mutual-dependency relationships between app capabilities in Microsoft Teams using the 'elementRelationshipSet' property in the app manifest.
 extensions:
   contentType: samples
   createdDate: 08/20/2024 10:02:21 PM
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-mutual-depe
 
 # Microsoft 365 RT Sample App Feature.
 
-- Microsoft 365 RT sample app in Node.js which specify mutual-dependency relationships between app capabilities (using "elementRelationshipSet") property in app manifest.
+- The Microsoft 365 RT Sample App Feature is a Node.js application designed to illustrate mutual-dependency relationships between various capabilities within Microsoft Teams, such as bots, tabs, and message extensions. Leveraging the 'elementRelationshipSet' property in the app manifest, this sample enables developers to define and manage dependencies, ensuring a cohesive and integrated app experience that meets the specific requirements of users in Microsoft 365 environments.
 
 ## Included Features
 * Tabs

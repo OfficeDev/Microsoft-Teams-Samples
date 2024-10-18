@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-java",
     "source": "officeDev",
     "title": "Search Based Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use search based Messaging Extension",
+    "shortDescription": "This sample demonstrates how to create a Java Messaging Extension in Microsoft Teams that allows users to perform searches and retrieve results.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search/java",
     "longDescription": [
-      "This sample app demonstrate how to use search based Messaging Extension"
+      "This Java sample illustrates the development of a search-based Messaging Extension for Microsoft Teams, enabling users to search for information directly within their Teams environment. It showcases how to handle search commands and interact with the Bot Framework for a seamless user experience"
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

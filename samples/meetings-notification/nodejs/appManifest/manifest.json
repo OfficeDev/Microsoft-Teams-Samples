@@ -19,8 +19,8 @@
     "full": "Targeted Meeting Notification Demo"
   },
   "description": {
-    "short": "Targeted In-Meeting Notification demo",
-    "full": "This sample app shows how to send in meeting targeted notifications."
+    "short": "Sample app for targeted in-meeting notifications in Microsoft Teams meetings.",
+    "full": "This sample application demonstrates how to implement targeted in-meeting notifications in Microsoft Teams using adaptive cards and bot interactions."
   },
   "accentColor": "#FFFFFF",
   "bots": [

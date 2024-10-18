@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.sample",
+  "id": "${{AAD_APP_CLIENT_ID}}",
+  "packageName": "com.microsoft.teams.samples.msgExt",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -15,17 +15,17 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Config Auth Search",
-    "full": "Config Auth Search"
+    "short": "Messaging Extension SSO",
+    "full": "ME SSO for Search, Action and link unfurling"
   },
   "description": {
-    "short": "Python Messaging Extension with authentication and configuration page.",
-    "full": "This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication."
+    "short": "C# sample demonstrating a search-based Messaging Extension in Microsoft Teams.",
+    "full": "This sample app illustrates how to create a search-based Messaging Extension in Microsoft Teams using C#, allowing users to perform searches and interact with external services."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "59727dd2-1fae-417c-9035-3abd23172ff3",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -37,7 +37,8 @@
           "fetchTask": false,
           "context": [
             "commandBox",
-            "compose"
+            "compose",
+            "message"
           ],
           "parameters": [
             {
@@ -48,22 +49,24 @@
             }
           ]
         },
-        {
-          "id": "SignOutCommand",
-          "type": "action",
-          "title": "Sign Out",
-          "description": "Sign out from authenticated services.",
+		{
+          "id": "mailQuery",
+          "type": "query",
+          "title": "Mail",
+          "description": "Perform a mail search",
           "initialRun": false,
-          "fetchTask": true,
+          "fetchTask": false,
           "context": [
             "commandBox",
-            "compose"
+            "compose",
+            "message"
           ],
           "parameters": [
             {
-              "name": "param",
-              "title": "param",
-              "description": ""
+              "name": "mailQuery",
+              "title": "Mail",
+              "description": "Perform a mail search",
+              "inputType": "text"
             }
           ]
         }
@@ -74,8 +77,12 @@
     "identity"
   ],
   "validDomains": [
-    "*.botframeworksamples.blob.core.windows.net",
-    "{{domain-name}}",
-    "*.botframework.com"
-  ]
+    "*.githubusercontent.com",
+    "*.botframework.com",
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+  }
 }

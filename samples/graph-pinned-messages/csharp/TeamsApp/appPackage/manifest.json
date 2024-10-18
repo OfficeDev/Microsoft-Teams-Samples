@@ -19,8 +19,8 @@
     "full": "Graph Pin message"
   },
   "description": {
-    "short": "This is a sample showing how to pin messages in chat using Graph api.",
-    "full": "This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat."
+    "short": "Sample app for pinning chat messages in Teams using the Graph API.",
+    "full": "This sample application demonstrates how to pin messages in Microsoft Teams chat using the Graph API and displays all pinned messages in a group chat."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

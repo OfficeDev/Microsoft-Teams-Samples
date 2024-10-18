@@ -19,8 +19,8 @@
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Link Unfurling sample",
-    "full": "This sample demonstrates Link Unfurling for *.BotFramework.com urls."
+    "short": "Node.js sample app demonstrating link unfurling in Teams messaging extensions.",
+    "full": "This sample app showcases a Node.js bot that implements link unfurling within Microsoft Teams messaging extensions."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

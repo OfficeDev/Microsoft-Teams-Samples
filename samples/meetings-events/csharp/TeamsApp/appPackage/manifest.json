@@ -15,8 +15,8 @@
     "full": "Sample for meeting events and meeting participant events"
   },
   "description": {
-    "short": "Access real-time meeting events and meeting participant events",
-    "full": "This sample demos a bot with access to meeting events and meeting participant events"
+    "short": "Receive real-time meeting and participant events with this Teams bot sample.",
+    "full": "This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",

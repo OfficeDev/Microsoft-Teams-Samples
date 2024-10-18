@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel",
     "source": "officeDev",
     "title": "Graph Change Notification Team/Channel",
-    "shortDescription": "Graph change notification for team and channel",
+    "shortDescription": "This sample application demonstrates how to send notifications for team and channel events, such as creation, editing, or deletion, in Microsoft Teams using Node.js and the Microsoft Graph API.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/nodejs",
     "longDescription": [
-      "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel through teams tab."
+      "This application illustrates the use of team and channel subscriptions to deliver notifications in Microsoft Teams whenever a user creates, edits, or deletes a team or channel. Leveraging Node.js and the Microsoft Graph API, it supports RSC permissions and provides a seamless interaction through a Teams tab."
     ],
     "creationDateTime": "2022-10-03",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],
