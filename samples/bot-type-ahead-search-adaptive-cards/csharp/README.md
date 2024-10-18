@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards using sent bot.
+description: Demonstrating the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards using sent bot.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-ca
 ---
 # Typeahead search control in Adaptive Cards C#
 
-This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
+This sample shows the feature of typeahead search (static, dynamic and dependant) control in Adaptive Cards.
 
 ## Included Features
 * Bots
@@ -138,6 +138,19 @@ Static tpyedhead detail after submission
 `On `Submit` button click, the bot will return the choice that we have selected:`
 
 ![dynamic search results](TypeaheadSearch/Images/8.SelectedDynamicSearch.png)
+
+`Dependant Dropdown search:`
+ Dependant typeahead search allows users to select data based on one of the dropdown if the data of the main dropdown changes the data of the dependant dropdown changes with it. The data sets are loaded dynamically from the dataset specified in the card payload.
+
+![dependant dropdown search card](TypeaheadSearch/Images/9.DependantDropdown.png)
+
+![dependant dropdown search Countries](TypeaheadSearch/Images/10.CountryOptions.png)
+
+![dependant dropdown search cities](TypeaheadSearch/Images/11.CitiesAsPerTheCountry.png)
+
+`On `Submit` button click, the bot will return the choice that we have selected:`
+
+![dependant dropdown results](TypeaheadSearch/Images/12.SelectedDependantDropdown.png)
 
 ## Further reading
 

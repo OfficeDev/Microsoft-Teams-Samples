@@ -32,9 +32,14 @@ class TeamsBot extends TeamsActivityHandler {
 
           await context.sendActivity({ attachments: [userCard] });
         }
+        else if (context.activity.text.toLowerCase().trim() == "dependantdropdown") {
+          const userCard = CardFactory.adaptiveCard(this.adaptiveCardForDependantSearch());
+
+          await context.sendActivity({ attachments: [userCard] });
+        }
       }
       else if (context.activity.value != null) {
-        await context.sendActivity("Selected option is: " + context.activity.value.choiceselect);
+          await context.sendActivity("Selected option is: " + context.activity.value.choiceselect);
       }
 
       // By calling next() you ensure that the next BotHandler is run.
@@ -43,61 +48,106 @@ class TeamsBot extends TeamsActivityHandler {
   }
 
   async onInvokeActivity(context) {
-    if (context._activity.name == 'application/search') {
-      let searchQuery = context._activity.value.queryText;
-      const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
-      let npmPackages = [];
+    if (context._activity.name === 'application/search') {
+        let dropdownCard = context._activity.value.data.choiceselect; // Get the country from the dropdown card
+        let searchQuery = context._activity.value.queryText;
+        
+        // Fetch npm packages based on the search query
+        const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
+        let npmPackages = [];
 
-      response.data.objects.forEach(obj => {
-        const attatchment = {
-          "title": obj.package.name,
-          "value": `${obj.package.name} - ${obj.package.description}`
-        };
+        response.data.objects.forEach(obj => {
+            const attachment = {
+                "title": obj.package.name,
+                "value": `${obj.package.name} - ${obj.package.description}`
+            };
+            npmPackages.push(attachment);
+        });
 
-        npmPackages.push(attatchment);
-      });
+        if (response.status === 200) {
+            let searchResponseData;
 
-      if (response.status == 200){
-        var successResult = {
-          status: 200,
-          body:{
-            "type": "application/vnd.microsoft.search.searchResponse",
-            "value": {
-              "results": npmPackages
-          }
+            // Handle country-specific results
+            if (dropdownCard) {
+                const country = dropdownCard.toLowerCase();
+                let results;
+
+                switch (country) {
+                    case 'usa':
+                        results = [
+                            { title: "CA", value: "CA" },
+                            { title: "FL", value: "FL" },
+                            { title: "TX", value: "TX" }
+                        ];
+                        break;
+                    case 'france':
+                        results = [
+                            { title: "Paris", value: "Paris" },
+                            { title: "Lyon", value: "Lyon" },
+                            { title: "Nice", value: "Nice" }
+                        ];
+                        break;
+                    default: // Default to India if the country is not recognized
+                        results = [
+                            { title: "Delhi", value: "Delhi" },
+                            { title: "Mumbai", value: "Mumbai" },
+                            { title: "Pune", value: "Pune" }
+                        ];
+                        break;
+                }
+
+                searchResponseData = {
+                    status: 200,
+                    body: {
+                        "type": "application/vnd.microsoft.search.searchResponse",
+                        "value": {
+                            "results": results
+                        }
+                    }
+                };
+
+                return searchResponseData;
+            } else {
+                // If no country is specified, return npm package results
+                const successResult = {
+                    status: 200,
+                    body: {
+                        "type": "application/vnd.microsoft.search.searchResponse",
+                        "value": {
+                            "results": npmPackages
+                        }
+                    }
+                };
+                return successResult;
+            }
+        } else if (response.status === 204) {
+            // No results found
+            const noResultFound = {
+                status: 204,
+                body: {
+                    "type": "application/vnd.microsoft.search.searchResponse"
+                }
+            };
+            return noResultFound;
+        } else if (response.status === 500) {
+            // Internal server error
+            const errorResult = {
+                status: 500,
+                body: {
+                    "type": "application/vnd.microsoft.error",
+                    "value": {
+                        "code": "500",
+                        "message": "Error message: Internal Server Error"
+                    }
+                }
+            };
+            return errorResult;
         }
-      }
-  
-        return successResult;
-      }
-      else if(response.status == 204){
-        var noResultFound = {
-          status: 204,
-          body:{
-            "type": "application/vnd.microsoft.search.searchResponse" 
-          }
-        }
-  
-        return noResultFound;
-      }
-      else if(response.status == 500){
-        var errorResult = {
-          status: 500,
-          body:{
-            "type": "application/vnd.microsoft.error",
-            "value": {
-              "code": "500", 
-              "message": "error message: internal Server Error" 
-          }
-        }
-      }
-
-        return errorResult;
-      }
     }
 
     return null;
-  }
+}
+
 
   // Adaptive card for static search.
   adaptiveCardForStaticSearch = () => ({
@@ -265,6 +315,68 @@ class TeamsBot extends TeamsActivityHandler {
         "type": "Action.Submit",
         "id": "submitdynamic",
         "title": "Submit"
+      }
+    ]
+  });
+
+  adaptiveCardForDependantSearch = () => ({
+    "type": "AdaptiveCard",
+    "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "body": [
+      {
+        "size": "ExtraLarge",
+        "text": "Country Picker",
+        "weight": "Bolder",
+        "wrap": true,
+        "type": "TextBlock"
+      },
+      {
+        "id": "choiceselect",
+        "type": "Input.ChoiceSet",
+        "label": "Select a country or region:",
+        "choices": [
+          {
+            "title": "USA",
+            "value": "usa"
+          },
+          {
+            "title": "France",
+            "value": "france"
+          },
+          {
+            "title": "India",
+            "value": "india"
+          }
+        ],
+        "valueChangedAction": {
+          "type": "Action.ResetInputs",
+          "targetInputIds": [
+            "city"
+          ]
+        },
+        "isRequired": true,
+        "errorMessage": "Please select a country or region"
+      },
+      {
+        "style": "filtered",
+        "choices.data": {
+          "type": "Data.Query",
+          "dataset": "cities",
+          "associatedInputs": "auto"
+        },
+        "id": "city",
+        "type": "Input.ChoiceSet",
+        "label": "Select a city:",
+        "placeholder": "Type to search for a city in the selected country",
+        "isRequired": true,
+        "errorMessage": "Please select a city"
+      }
+    ],
+    "actions": [
+      {
+        "title": "Submit",
+        "type": "Action.Submit"
       }
     ]
   });

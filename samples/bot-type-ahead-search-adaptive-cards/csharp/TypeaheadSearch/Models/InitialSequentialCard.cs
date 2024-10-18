@@ -19,4 +19,18 @@ namespace TypeaheadSearch.Models
     {
         public string queryText { get; set; }
     }
+
+    /// <summary>
+    /// Dependant Dropdown Card model class.
+    /// </summary>
+    public class DependantDropdownCard
+    {
+        public Data Data { get; set; }
+    }
+  
+
+    public class Data
+    {
+        public string choiceSelect { get; set; }
+    }
 }
