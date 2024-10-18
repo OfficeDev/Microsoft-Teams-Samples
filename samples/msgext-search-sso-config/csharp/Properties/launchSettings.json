@@ -1,9 +1,10 @@
 ﻿{
   "profiles": {
+   
     "Start Project": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7130;http://localhost:3978",
+      "applicationUrl": "https://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

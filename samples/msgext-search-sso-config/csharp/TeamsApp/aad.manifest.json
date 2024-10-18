@@ -120,6 +120,10 @@
     ],
     "replyUrlsWithType":[
       {
+          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+          "type": "Web"
+        },
+        {
 			  "url": "https://token.botframework.com/.auth/web/redirect",
 			  "type": "Web"
 		  }
