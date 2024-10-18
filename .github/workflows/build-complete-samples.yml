@@ -530,7 +530,7 @@ jobs:
 
             - project_path: 'samples/app-sso/nodejs/client'
               name: 'app-sso-client'
-              version: '18.x'
+              version: '14.x'
 
             - project_path: 'samples/app-task-module/nodejs'
               name: 'app-task-module'
