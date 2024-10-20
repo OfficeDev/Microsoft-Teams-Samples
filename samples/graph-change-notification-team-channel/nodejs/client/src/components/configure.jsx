@@ -11,40 +11,64 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const Configure = props => {
 
     const handleChange = (e, props) => {
-        if(props.value==='1'){
-            microsoftTeams.app.initialize().then(() => {
-                microsoftTeams.app.notifySuccess();
-                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
-                    microsoftTeams.pages.config.setConfig({
-                        entityID: "ChannelNotification",
-                         // passing pageId to Selected channel/team notifications component with route url.
-                        contentUrl: `${window.location.origin}/channel/1`,
-                        suggestedTabName: "Channel Notification",
-                        websiteUrl: `${window.location.origin}/channel/1`,
+
+        switch (props.value) {
+            case '1':
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.app.notifySuccess();
+                    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                        microsoftTeams.pages.config.setConfig({
+                            entityID: "ChannelNotification",
+                            // passing pageId to Selected channel/team notifications component with route url.
+                            contentUrl: `${window.location.origin}/channel/1`,
+                            suggestedTabName: "Channel Notification",
+                            websiteUrl: `${window.location.origin}/channel/1`,
+                        });
+                        saveEvent.notifySuccess();
                     });
-                    saveEvent.notifySuccess();
+                    microsoftTeams.pages.config.setValidityState(true);
                 });
-                microsoftTeams.pages.config.setValidityState(true);
-            });
-        }
-        else{
-            microsoftTeams.app.initialize().then(() => {
-                microsoftTeams.app.notifySuccess();
-                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
-                    microsoftTeams.pages.config.setConfig({
-                        entityID: "TeamNotification",
-                         // passing pageId to Selected channel/team notifications component with route url.
-                        contentUrl: `${window.location.origin}/team/2`,
-                        suggestedTabName: "Team Notification",
-                        websiteUrl: `${window.location.origin}/team/2`,
+                break;
+            case '2':
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.app.notifySuccess();
+                    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                        microsoftTeams.pages.config.setConfig({
+                            entityID: "TeamNotification",
+                            // passing pageId to Selected channel/team notifications component with route url.
+                            contentUrl: `${window.location.origin}/team/2`,
+                            suggestedTabName: "Team Notification",
+                            websiteUrl: `${window.location.origin}/team/2`,
+                        });
+
+                        saveEvent.notifySuccess();
                     });
-                    
-                    saveEvent.notifySuccess();
+                    microsoftTeams.pages.config.setValidityState(true);
                 });
-                microsoftTeams.pages.config.setValidityState(true);
-            });
+                break;
+
+            case '3':
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.app.notifySuccess();
+                    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                        microsoftTeams.pages.config.setConfig({
+                            entityID: "GraphNotifications",
+                            // passing pageId to Selected channel/team notifications component with route url.
+                            contentUrl: `${window.location.origin}/subscription/3`,
+                            suggestedTabName: "Graph Notification",
+                            websiteUrl: `${window.location.origin}/subscription/3`,
+                        });
+
+                        saveEvent.notifySuccess();
+                    });
+                    microsoftTeams.pages.config.setValidityState(true);
+                });
+                break;
+            default:
+            // code 
         }
     };
+
     return (
         <div>
             <Text size="larger" weight="semibold" content="Team and Channel Subscription" /><br />
@@ -62,8 +86,13 @@ const Configure = props => {
                         label: 'Team Subscription',
                         value: '2',
                     },
+                    {
+                        key: '3',
+                        label: 'GraphNotifications',
+                        value: '3',
+                    },
                 ]}
-            /> 
+            />
             <Text size="small" content="Please click save button to proceed." weight="semibold" />
         </div>
     );

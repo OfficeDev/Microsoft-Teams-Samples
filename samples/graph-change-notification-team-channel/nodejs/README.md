@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates the use of team/Channel subscription that will post notifications when user create/edit/delete team/channel through teams tab.
+description: This is a sample application which demonstrates the use of team/Channel and User Scope Graph subscription that will post notifications when user create/edit/delete team/channel through teams tab.
 products:
 - office-teams
 - office
@@ -16,17 +16,19 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 # Change Notifications For Team and Channel Using Microsoft Graph Node.js
 
-This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
+This is a sample application which demonstrates use of Team/Channel and User Scope Graph subscription that will post notifications when user create/edit/delete team/channel.
 
 ## Included Features
 * Tabs
 * Graph API
 * RSC Permissions
-* Change Notifications
+* Change Notifications For Teams and Channel
+* User-Scope Graph Notifications
 
-## Interaction with bot
+## Interaction with Tab
+![User-Scope](Images/UserScopeNotifications.gif)
+
 ![Notifications](Images/ChangeNotifications.gif)
-
 
 ## Prerequisites
 
@@ -156,9 +158,39 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 You can interact with Teams Tab by subscribing the teams/channel for notifications.
 
+## User Scope Graph API Notifications
+
+1. **Installation To Group Chat**
+![Sample](Images/2.SelectGroupChat.png)
+
+1. **Select Subscription Tab**
+![Sample](Images/3.SelectSubscriptionsTab.png)
+
+1. **Subscription Tab**
+![Sample](Images/4.SubscriptionTab.png)
+
+1. **Notification Of Specific Group Updates**
+![Sample](Images/5.SpecificGroupUpdated.png)
+
+1. **Notification of Any-Grpup Updates**
+![Sample](Images/6.AnyGroupUpdates.png)
+
+1. **Graph Notification**
+![Sample](Images/7.GraphNotifications.png)
+
+## Left Rail Experience
+
+1. **Once the meeting chat is created it will be in hidden stage and after sending message to that chat, hidden property will becomes `false` and by this left rail of teams will be updated and it appears in `recent`**
+
+![Sample](Images/8.Hidden-True.png)
+
+![Sample](Images/9.SendingMsgToChat.png)
+
+![Sample](Images/10.HiddenFalse.png)
+
 1. **Show Welcome - Channel**
 Welcome Message when Channel selected for subscription.
-![Channel-Welcome](Images/Channel-Welcome.png)
+![Sample](Images/Channel-Welcome.png)
 
 2. **Channel Notifications**
 Channel Created Update Delete Message
@@ -176,7 +208,7 @@ Welcome Message when Team selected for subscription.
 ## Further reading
 - [Change notifications for Microsoft Teams channel](https://docs.microsoft.com/en-us/graph/teams-changenotifications-team-and-channel)
 - [Create subscription permissions for supported resource](https://docs.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http#team-channel-and-chat)
-
+- [Get change notifications for chats using Microsoft Graph](https://review.learn.microsoft.com/en-us/graph/teams-changenotifications-chat?branch=main&branchFallbackFrom=pr-en-us-24192)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-change-notification-team-channel-nodejs" />

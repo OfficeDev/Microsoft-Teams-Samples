@@ -7,6 +7,7 @@ import {
 import Configure from "../components/configure";
 import ChannelNotification from "../components/channel-notification";
 import TeamNotification from "../components/team-notification";
+import Subscriptions from "../components/subscriptionPage";
 
 export const AppRoute = () => {
     return (
@@ -16,6 +17,7 @@ export const AppRoute = () => {
                     <Route path="/configure" element={<Configure />}/>
                     <Route path="/channel/:pageId" element={<ChannelNotification />}/>
                     <Route path="/team/:pageId" element={<TeamNotification />}/>
+                    <Route path="/subscription/:pageId" element={<Subscriptions />}/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>

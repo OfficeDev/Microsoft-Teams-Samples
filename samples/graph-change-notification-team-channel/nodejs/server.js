@@ -23,42 +23,40 @@ require('dotenv').config({ path: ENV_FILE });
 app.use(express.json());
 
 // Define route for the controller.
-app.use('/api/changeNotification', require('./controller'))
+app.use('/api/changeNotification', require('./controller'));
 
 // Listen for incoming requests.
 app.post('/api/notifications', async (req, res) => {
     let status;
     var decryptedData = [];
-
+    
     if (req.query && req.query.validationToken) {
         status = 200;
         res.send(req.query.validationToken);
     }
     else {
         var notification = req.body;
-
         if (JSON.stringify(notification) === '{}') {
-            console.log("please create/update/delete channel/team to get response data");
+            console.log("please create/update/delete channel/team/GroupChat to get Graph Notifications !!");
             res.send(notificationList);
-
         }
         else {
             notification = req.body.value;
             decryptedData = await DecryptionHelper.processEncryptedNotification(notification);
             notificationResponse.push(decryptedData);
-
+            notificationList = [];
             notificationResponse.forEach(element => {
                 notificationList.push({
                     createdDate: element.createdDateTime,
-                    displayName: element.displayName,
-                    changeType: element.changeType
+                    displayName: element.topic,
+                    changeType: element.changeType,
+                    isHidden: element.isHiddenForAllMembers,
+                    lastUpdate: element.lastUpdatedDateTime
                 })
             });
 
-            console.log("Graph Api Notifications For Team and Channel");
-
             /** Send Respond to view **/
-            res.send(notificationList);
+            res.send(notificationList.reverse());
         }
     }
 });

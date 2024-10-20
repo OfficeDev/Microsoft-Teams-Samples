@@ -20,6 +20,7 @@
 .input-fields-label {
     width: 160px;
 }
+
 .headColor {
     color: #5b5fc7;
 }
@@ -30,4 +31,110 @@
 
 .deleteStatus {
     color: crimson;
+}
+
+.primary {
+    background-color: hwb(205 19% 14%);
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 3px 1px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.secondary {
+    background-color: hwb(0 31% 21%);
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 3px 1px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+.label {
+    border: none;
+    color: white;
+    padding: 10px;
+    font-family: Arial;
+    padding: 8px;
+    margin: 10px 10px;
+    border-radius: 2px;
+}
+
+.header {
+    margin-left: 10px;
+    height: 5rem;
+}
+
+/* Table */
+#subscriptions {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 5px;
+}
+
+#subscriptions td,
+#subscriptions th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#subscriptions tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#subscriptions tr:hover {
+    background-color: #ddd;
+}
+
+#subscriptions th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: hwb(205 19% 14%);;
+    color: white;
+}
+
+/* Table Notifications */
+#notifications {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 5px;
+}
+
+#notifications td,
+#notifications th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#notifications tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#notifications tr:hover {
+    background-color: #ddd;
+}
+
+#notifications th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #505352;
+    color: white;
 }
