@@ -123,13 +123,13 @@ namespace TabRequestApproval.Controllers
                               .GetAsync();
 
                     // Retrieve installed apps for the user from Microsoft Graph API
-                    var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
+                    var installedApps = await graphClient.Users[user.UserPrincipalName].Teamwork.InstalledApps
                                        .Request()
-                                       .Expand("teamsApp")
+                                       .Expand("teamsAppDefinition")
                                        .GetAsync();
 
                     // Filter installed apps to find the one with DisplayName "Tab Request Approval"
-                    var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Request Approval").Select(x => x.TeamsApp.Id);
+                    var installationId = installedApps.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.Id);
 
                     // Check if there is at least one matching installationId
                     if (installationId.Any())
@@ -153,13 +153,13 @@ namespace TabRequestApproval.Controllers
 
                         // Create template parameters for the notification
                         var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-                        {
-                            new Microsoft.Graph.KeyValuePair
-                            {
-                                Name = "approvalTaskId",
-                                Value = taskInfo.title
-                            }
-                        };
+                {
+                    new Microsoft.Graph.KeyValuePair
+                    {
+                        Name = "approvalTaskId",
+                        Value = taskInfo.title
+                    }
+                };
                         // Send the activity notification using Microsoft Graph API
                         await graphClient.Users[user.Id].Teamwork
                             .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)

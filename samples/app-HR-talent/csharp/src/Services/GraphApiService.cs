@@ -58,7 +58,7 @@ namespace TeamsTalentMgmtApp.Services
             var installedApps = await graphClient.Users[upn].Teamwork.InstalledApps
                 .Request()
                 .Filter($"teamsApp/externalId eq '{_configuration["TeamsAppId"]}'")
-                .Expand("teamsApp")
+                .Expand("teamsAppDefinition")
                 .GetAsync(cancellationToken);
 
             var app = installedApps.FirstOrDefault();
