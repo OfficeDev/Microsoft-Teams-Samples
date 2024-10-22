@@ -116,55 +116,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab.
-
-To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
-```bash
-"staticTabs": [
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  }
-],
-```
-
-To set the **Tab as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
-```bash
-"staticTabs": [
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  }
-],
-```
-
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/nodejs/src/bot.js#L38) line and put your debugger for local debug.
 
 ## Running the sample
 
 **Install App:**
 
-![InstallApp](Images/Install.png)
+![InstallApp](Images/Install.png.png)
 
 **Hello World Bot:**
 
