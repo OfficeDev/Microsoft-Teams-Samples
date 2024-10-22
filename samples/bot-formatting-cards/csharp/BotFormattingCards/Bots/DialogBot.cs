@@ -15,6 +15,7 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -106,11 +107,21 @@ namespace Microsoft.BotBuilderSamples
                 await turnContext.SendActivityAsync(MessageFactory.Text("Type anything to see all card."), cancellationToken);
                 
             }
+            else if (turnContext.Activity.Value != null && turnContext.Activity.Text == null)
+            {
+                JObject activityValue = (JObject)turnContext.Activity.Value;
+                // Star ratings in Adaptive Cards
+                if (activityValue.ContainsKey("rating1") && activityValue.ContainsKey("rating2"))
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Ratings Feedback: " + turnContext.Activity.Value), cancellationToken);
+                }
+            }
             else
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
+
         }
     }
 }
