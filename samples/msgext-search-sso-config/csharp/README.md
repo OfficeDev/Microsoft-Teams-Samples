@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.
+description: This sample app demonstrate how to use search based Messaging Extension
 products:
 - office-teams
 - office

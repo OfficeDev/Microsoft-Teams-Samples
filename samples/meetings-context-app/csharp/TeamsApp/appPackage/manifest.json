@@ -19,8 +19,8 @@
     "full": "Meeting Context App"
   },
   "description": {
-    "short": "Tab and bot context for meeting.",
-    "full": "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user."
+    "short": "Explore meeting context and participant details in Teams using bot APIs.",
+    "full": "This sample demonstrates how to retrieve and display meeting context and participant details in Microsoft Teams using bot APIs."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
