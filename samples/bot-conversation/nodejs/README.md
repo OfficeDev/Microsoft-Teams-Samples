@@ -25,6 +25,10 @@ how to incorporate basic conversational flow into a Teams application. It also i
 * Adaptive Cards
 * Teams Conversation Events
 * Immersive Reading Support for Cards
+* AI label
+* Citations
+* Feedback buttons
+* Sensitivity label
 
 ## Interaction with bot
 

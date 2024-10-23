@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-formatting-cards/nodejs/Images/DifferentFormattingCards.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-formatting-cards/nodejs/Images/Bot_Formatting_Cards_nodejs_gif.gif",
         "alt": "Solution UX showing different formatting on Cards"
       }
     ],

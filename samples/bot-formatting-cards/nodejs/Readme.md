@@ -239,11 +239,17 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Adaptive Card updated to be responsive using targetWidth:**
 
-![Layout](Images/13.Layout.png)
+![Layout](Images/14.Layout.png)
+
+**Border Adaptive Card**
+![Border](Images/16.Border.png)
+
+**Rounded Corners Adaptive Card**
+![Border](Images/17.RoundedCorners.png)
 
 **Mobile:**
 
-![LayoutMobile](Images/14.LayoutMobile.png)
+![LayoutMobile](Images/18.LayoutMobile.png)
 
 ## Deploy the bot to Azure
 

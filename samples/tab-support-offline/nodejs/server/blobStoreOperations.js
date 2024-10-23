@@ -3,8 +3,8 @@ const { DefaultAzureCredential } = require("@azure/identity");
 const { BlobServiceClient } = require("@azure/storage-blob");
 
 // Replace these values with your Azure Storage account details
-const accountName = 'supportricketblob';
-const containerName = 'aircraft-issue-list';
+const accountName = '{{ account-Name }}';
+const containerName = '{{ container-Name }}';
 
 const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, new DefaultAzureCredential());
 
