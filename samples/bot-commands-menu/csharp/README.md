@@ -97,6 +97,8 @@ Verify you have the right account for building Teams apps and install some recom
 
 ![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
 
+![5.ViewPrompts](Images/5.ViewPrompts.png)
+
 ## Further reading
 
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
