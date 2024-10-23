@@ -15,7 +15,7 @@
   },
   "description": {
     "short": "Create a commands menu",
-    "full": "This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command."
+    "full": "This sample add a command menu with a dropdown list of commands for your bot. Users can select a command from the list, which will insert the command title into the compose box. Then, they can select Send to execute the command."
   },
   "icons": {
     "outline": "outline.png",
@@ -50,7 +50,7 @@
             },
             {
               "title":"Best Time to Fly",
-              "description":"Best time to fly to London for a 5 day trip this summer"
+              "description":"Best time to fly to London for a 5 day trip is summer"
             }
           ]
         }

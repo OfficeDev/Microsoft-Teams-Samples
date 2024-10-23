@@ -108,7 +108,6 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 **Install App Personal**
 ![image](Images/1.InstallApp.png)
 
-**Prompt starters**
 ![2.PromptStarters](Images/2.PromptStarters.png)
 
 ![3.SearchFlights](Images/3.SearchFlights.png)
@@ -118,6 +117,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 ![3.SearchFlightsDetails](Images/3.SearchFlightsDetails.png)
 
 ![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
+
+![5.ViewPrompts](Images/5.ViewPrompts.png)
 ## Further reading
 
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
