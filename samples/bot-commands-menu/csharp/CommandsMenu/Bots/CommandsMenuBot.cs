@@ -38,7 +38,7 @@ namespace CommandsMenu.Bots
                 else if (text.Contains("help"))
                     await turnContext.SendActivityAsync(MessageFactory.Text("Displays this help message."));
                 else if (text.Contains("best time to fly"))
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip this summer."));
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip is summer."));
             }
             else if (turnContext.Activity.Value != null)
             {
