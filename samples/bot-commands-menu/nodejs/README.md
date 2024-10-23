@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-commands-menu-nodejs
 ---
 
 # Create a commands menu
-This sample add a command menu with a dropdown list of commands for your bot.Users can select a command from the list, which will insert the command string into the message box. Then, they can select Send to execute the command.
+This sample add a command menu with a dropdown list of commands for your bot. Users can select a command from the list, which will insert the command title into the compose box. Then, they can select Send to execute the command.
 
 ## Included Features
 * Bots
