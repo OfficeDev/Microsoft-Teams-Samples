@@ -11,22 +11,11 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: linkunfurling-reddit-${{TEAMSFX_ENV}}
+      name: linkunfurling-reddit${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
-
-  # Create or reuse an existing Azure Active Directory application for bot.
-  - uses: botAadApp/create
-    with:
-      # The Azure Active Directory application's display name
-      name: linkunfurling-reddit-${{TEAMSFX_ENV}}
-    writeToEnvironmentFile:
-      # The Azure Active Directory application's client id created for bot.
-      botId: BOT_ID
-      # The Azure Active Directory application's client secret created for bot.
-      botPassword: SECRET_BOT_PASSWORD
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:

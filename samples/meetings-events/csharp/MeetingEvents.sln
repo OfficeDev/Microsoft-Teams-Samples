@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingEvents", "MeetingEvents\MeetingEvents.csproj", "{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{1694B6F5-8B63-41B6-8BA0-CA213F2A0449}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2F7A97F5-3822-461A-87BB-07E9C39EFCA0}"
+	ProjectSection(SolutionItems) = preProject
+		MeetingEvents.slnLaunch.user = MeetingEvents.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1694B6F5-8B63-41B6-8BA0-CA213F2A0449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1694B6F5-8B63-41B6-8BA0-CA213F2A0449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1694B6F5-8B63-41B6-8BA0-CA213F2A0449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1694B6F5-8B63-41B6-8BA0-CA213F2A0449}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

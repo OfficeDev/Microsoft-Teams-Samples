@@ -24,7 +24,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: app-link-unfurling-in-share-to-teams-${{TEAMSFX_ENV}}
+      name: app-link-unfurling-in-share-to-teams${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile: 

@@ -85,7 +85,7 @@ class TeamsTaskModuleBot extends TeamsActivityHandler {
 
     getTaskModuleHeroCardOptions() {
         return CardFactory.heroCard(
-            'Task Module Invocation from Hero Card',
+            'Dialog (referred as task modules in TeamsJS v1.x) Invocation from Hero Card',
             '',
             null, // No images
             Actions.map((cardType) => {
@@ -109,7 +109,7 @@ class TeamsTaskModuleBot extends TeamsActivityHandler {
             body: [
                 {
                     type: 'TextBlock',
-                    text: 'Task Module Invocation from Adaptive Card',
+                    text: 'Dialog (referred as task modules in TeamsJS v1.x) Invocation from Adaptive Card',
                     weight: 'bolder',
                     size: 3
                 }

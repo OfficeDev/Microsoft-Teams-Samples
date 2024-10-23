@@ -21,6 +21,9 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ## Included Features
 * Bots
 * Stage View (tabs)
+* Collaborative Stageview
+* Stageview Multi-window (PopOut)
+* Stageview Modal
 
 ## Interaction with app
 
@@ -42,6 +45,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -107,7 +125,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id or Bot-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id or Bot-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `TabInStageView\AppManifest_Hub` folder with the required values.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `AppManifest_Hub` folder to create a `AppManifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
@@ -115,7 +133,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/csharp/TabInStageView/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
@@ -129,33 +147,36 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Install App:**
 
-![InstallApp](TabInStageView/Images/Install.png)
+![InstallApp](TabInStageView/Images/1.Install.png)
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
-![Welcome Message](TabInStageView/Images/welcomeAction.png)
+![Welcome Message](TabInStageView/Images/2.WelcomeCard.png)
 
 **Open the URL in tab stage view:**
 
-![InstallApp](TabInStageView/Images/ClickButton.png)
+![InstallApp](TabInStageView/Images/3.Bot-ViewViaCardAction.png)
 
 **Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
-![Stage View in tab](TabInStageView/Images/CollaborativeStageView.png)
+![Stage View in tab](TabInStageView/Images/7.Tab-PopOutWithChat.png)
 
 **Opening stage view from Adaptive card via deep link:**
 
-![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
+![Stage View Deep Link](TabInStageView/Images/4.Bot-OpenViaDeeplinkLinkButton.png)
 
 ![LinkUnfurlingStageView](TabInStageView/Images/LinkUnfurlingStageView.png)
 
-**Opening stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
 
 ![LinkUnfurlingText](TabInStageView/Images/LinkUnfurlingText.png)
 
 **Tab with execute deep link action to open stage view:**
 
-![Tab View](TabInStageView/Images/viaTabDeeplink.png)  
+![OpenMode Model](TabInStageView/Images/5.Tab-Model.png) 
+
+![OpenMode PopOut](TabInStageView/Images/6.Tab-PopOut.png)
+ 
 
 
 ## Outlook on the web
@@ -180,7 +201,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![OpenAppIcon](TabInStageView/Images/OpenAppIcon.png)
 
-**Opening the stage view from unfurling link. If you copy and paste a link from https://www.BotFramework.com into the compose message area the link will unfurl.**
+**Opening the stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
 
 ![Outlook Unfurling](TabInStageView/Images/OutlookUnfurling.png)
 

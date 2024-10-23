@@ -21,6 +21,8 @@ Microsoft Teams sample which displays deeplinks for call, video, chat, navigate 
 * Tabs
 * Bots
 * Deep Links
+* Share To Teams From Web Apps
+* Share To Teams For Education
 
 ## Interaction with app.
 
@@ -77,6 +79,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
   - Update the `.env` configuration for the bot to use the `YOUR-MICROSOFT-APP-ID`, `YOUR-MICROSOFT-APP-PASSWORD` and `BASE-URL` is tunnel url eg. 124.ngrok-free.app. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+
+  - navigate to `Deeplink.html` page at line number `58` Update the `data-app-id` attribute with your application id.
+    
+    ```bash
+    data-app-id="{{Your-App-Id}}"
+    ```
 
     - In a terminal, navigate to `samples/tab-deeplink/nodejs`
 
@@ -150,42 +158,66 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 `@mention` bot in meeting chat to get an adaptive card.
 
-![Bot-Adaptive-Card](DeepLinkBot/images/BotAdaptiveCard.png)
+![Bot-Adaptive-Card](Images/BotAdaptiveCard.png)
 
 Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 **Note:** When the deeplink is opened outside meeting, it will redirect to meeting details tab.
-![Meeting-Sidepanel](DeepLinkBot/images/Sidepanel.PNG)
+![Meeting-Sidepanel](Images/Sidepanel.PNG)
 
 
 **Tab interaction:**
    
 **Deeplink to Audio Call:**
 
-![Audio-Deeplink](images/AudioCall.png)
+![Audio-Deeplink](Images/AudioCall.png)
 
 **Deeplink to Video Call:**
    
-![Video-Deeplink](images/VideoCall.png)
+![Video-Deeplink](Images/VideoCall.png)
 
 **Deeplink to Meeting schedule:**
    
-![Meeting-Schedule](images/MeetingSchedule.png)
+![Meeting-Schedule](Images/MeetingSchedule.png)
 
 **Deeplink to Polly app install dialog:**
    
-![App-Install-Dialog](images/AppInstall.png)
+![App-Install-Dialog](Images/AppInstall.png)
 
 **Deeplink to start new chat:**
    
-![Start-New-Chat](images/StartChatDeeplink.png)
+![Start-New-Chat](Images/StartChatDeeplink.png)
 
-![New-Chat](images/StartNewChat.png)
+![New-Chat](Images/StartNewChat.png)
 
 **Deeplink to channel conversation:**
    
-![Show-Channel-Conversation ](images/GroupChatDeeplink.png)
+![Show-Channel-Conversation ](Images/GroupChatDeeplink.png)
    
-![channel-Conversation](images/GroupChat.png)
+![channel-Conversation](Images/GroupChat.png)
+
+**Share To Teams Web Apps:**
+
+![Teams Button](Images/ShareToTeamWebApps.png)
+
+![Present Now Feature](Images/PresentNow_Button.png)
+   
+![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
+
+![SharedFromWebApp](Images/ShareToTeams_LinkSharedFromWebApp.png)
+
+**Share To Teams For Education:**
+
+> **Note:** The `Share to Teams for EDU` feature is exclusively supported in Education (EDU) tenants. Ensure that your application is deployed and tested in an EDU tenant environment for this functionality to work correctly.
+
+![ClickTeamsIcon](Images/ShareToTeamsEDU_1.png)
+
+![CreateAssignment](Images/ShareToTeamsEDU_2.png)
+   
+![AssignmentCreated](Images/ShareToTeamsEDU_3.png)
+
+![ViewCreatedAssignment](Images/ShareToTeamsEDU_4.png)
+
+![VerifyAssignmentTitle](Images/ShareToTeamsEDU_5.png)
 
 ## Outlook on the web
 
@@ -222,6 +254,8 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
  ## Further reading
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+- [Share to teams web apps](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
 
 
 

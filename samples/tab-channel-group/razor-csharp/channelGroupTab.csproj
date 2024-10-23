@@ -4,19 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <PostBuildEvent>powershell.exe Compress-Archive -Path \"$(ProjectDir)AppManifest\*\" -DestinationPath \"$(TargetDir)Tab.zip\" -Force</PostBuildEvent>
-  </PropertyGroup>
-
+  
   <ItemGroup>
-    <EmbeddedResource Include="AppManifest\manifest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
+    <Compile Remove="appPackage\**" />
+    <Content Remove="appPackage\**" />
+    <EmbeddedResource Remove="appPackage\**" />
+    <None Remove="appPackage\**" />
   </ItemGroup>
 
 </Project>

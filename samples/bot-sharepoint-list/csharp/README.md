@@ -19,6 +19,11 @@ Bot Framework v4 SPListBot sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and save it into sharepoint's List.
 
+## Interaction with app
+
+![SPListBot](SPListBot/Images/Preview.gif)
+
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -27,6 +32,21 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   # determine dotnet version
   dotnet --version
   ```
+
+  [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+  
+## Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## To try this sample
 
@@ -98,7 +118,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ### This steps is specific to Microsoft Teams
 
-- Navigate to `AppManifest` folder
+- Navigate to `appPackage` folder
 - Select the `Manifest.json` and update it with your `Your Bot Id`
 - Now zip the manifest.json along with icons
 - Go to teams and do `Upload a Custom App` 
@@ -116,15 +136,15 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 ### Screenshots
 **Upload the custom app in Teams**
 
-![image](https://user-images.githubusercontent.com/50989436/109759882-c36f3480-7c13-11eb-9a38-e69d2c7139e7.png)
+![image](SPListBot/Images/1.Install.png)
 
 **Interaction with the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109759972-eb5e9800-7c13-11eb-9246-e8fa02fbef64.png)
+![image](SPListBot/Images/2.Installed.png)
 
 **Ping the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png)
+![image](SPListBot/Images/3.Interaction_with_bot.png)
 
 
 ## Further reading

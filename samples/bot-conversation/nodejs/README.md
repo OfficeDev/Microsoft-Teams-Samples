@@ -25,10 +25,14 @@ how to incorporate basic conversational flow into a Teams application. It also i
 * Adaptive Cards
 * Teams Conversation Events
 * Immersive Reading Support for Cards
+* AI label
+* Citations
+* Feedback buttons
+* Sensitivity label
 
 ## Interaction with bot
 
-![Conversation Bot](Images/bot-conversation.gif)
+![Conversation Bot](Images/Bot_Conversation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -126,35 +130,35 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Personal Scope Interactions:**
 
    **Adding bot UI:**
-  ![personal-AddBot ](Images/personal-AddBot.png)
+  ![personal-AddBot ](Images/1.Adding_personal_Scope.png)
 
    **Added bot UI:**
-  ![personal-AddedBot ](Images/personal-AddedBot.png)
+  ![personal-AddedBot ](Images/2.Added.png)
 
    **Show Welcome command interaction:**
-  ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCommand-Cards.png)
+  ![personal-WelcomeCard-Interaction ](Images/3.Welcome_Card.png)
 
    - **Group Chat Scope Interactions:**
 
    **Adding bot UI:**
-  ![groupChat-AddBot ](Images/groupChat-AddBot.png)
+  ![groupChat-AddBot ](Images/4.Adding_to_GC.png)
 
    **Added bot UI:**
-  ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
+  ![groupChat-AddedBot ](Images/5.Addes_GC.png)
 
    **Show Welcome command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interaction.png)
+  ![groupChat-BotCommands-interactions ](Images/6.Welcome_Card_GC.png)
 
   - **Team Scope Interactions:**
 
    **Adding bot UI:**
-  ![team-AddBot ](Images/team-AddBot.png)
+  ![team-AddBot ](Images/7.Adding_to_Team.png)
 
    **Added bot UI:**
-  ![team-AddedBot ](Images/team-AddedBot.png)
+  ![team-AddedBot ](Images/8.Added_to_Team.png)
 
    **Show Welcome command interaction:**
-  ![team-WelcomeCommand-Card ](Images/team-WelcomeCommand-Card.png)
+  ![team-WelcomeCommand-Card ](Images/9.Welcome_Card_Team.png)
 
 2. **MentionMe**
   - **Result:** The bot will respond to the message and mention the user
@@ -163,17 +167,17 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Personal Scope Interactions:**
 
    **MentionMe command interaction:**
-  ![personal-MentionMeCommand ](Images/personal-MentionMeCommand.png)
+  ![personal-MentionMeCommand ](Images/10.Mention_Me_Chat.png)
 
    - **Group Chat Scope Interactions:**
 
    **MentionMe command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+  ![groupChat-BotCommands-interactions ](Images/11.Mention_Me_GC.png)
 
   - **Team Scope Interactions:**
 
    **MentionMe command interaction:**
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
+  ![team-MentionCommand-Interaction ](Images/12.Mention_Me_Team.png)
 
 3. **MessageAllMembers**
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
@@ -182,51 +186,34 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Personal Scope Interactions:**
 
    **MessageAllMembers command interaction:**
-  ![personal-MessageAllMembersCommand ](Images/personal-MessageAllMembersCommand.png)
+  ![personal-MessageAllMembersCommand ](Images/13.Message_all_Members_chat.png)
 
    - **Group Chat Scope Interactions:**
 
    **MessageAllMembers command interaction:**
-   ![groupChat-MessageAllMembers-interaction ](Images/groupChat-MessageAllMembers-interaction.png)
+   ![groupChat-MessageAllMembers-interaction ](Images/14.Message_all_Members_GC.png)
 
   - **Team Scope Interactions:**
 
    **MessageAllMembers command interaction:**
-  ![team-MessageAllMembers-interactions ](Images/team-MessageAllMembers-interactions.png)
+  ![team-MessageAllMembers-interactions ](Images/15.Message_all_Members_Team.png)
 
   4.**Read Receipt**
   **Check Read count**
   - **Result:** The bot will check the count of members who have read your message which sent through `MessageAllMembers`. User can also reset the count using `Reset read count` command
   - **Valid Scopes:** personal, group chat, team chat
 
-  - **Personal Scope Interactions:**
-   **Check Read count command interaction:**
-  ![personal-CheckReadCount-interaction2 ](Images/personal-CheckReadCount-interaction2.png)
-
-   **Reset Read count command interaction:**
-  ![personal-ResetReadCount-interaction1 ](Images/personal-ResetReadCount-interaction1.png)
-
    - **Group Chat Scope Interactions:**
    **Check Read count command interaction:**
-  ![groupChat-CheckReadCount-interaction ](Images/groupChat-CheckReadCount-interaction.png)
+  ![groupChat-CheckReadCount-interaction](Images/Check_Read_Count_Before.png)
 
    **Reset Read count command interaction:**
-  ![groupChat-ResetReadCount-interaction ](Images/groupChat-ResetReadCount-interaction.png)
-
-  - **Team Scope Interactions:**
-  **Check Read count command interaction:**
-  ![team-CheckReadCount-interaction ](Images/team-CheckReadCount-interaction.png)
-
-  **Reset Read count command interaction:**
-  ![team-ResetReadCount-interaction ](Images/team-ResetReadCount-interaction.png)
+  ![groupChat-ResetReadCount-interaction](Images/Reset_Read_Count.png)
 
  5. **ImmersiveReader**
 - You can use the immersive reader property of adaptive cards by using the speak property.
 `immersivereader` command will send an adpative card in teams chat.
-![immersive-reader-card](Images/immersiveReaderCard.png)
-
-- Select the immersive reader option for running the speak property.
-![immersive-reader-option](Images/immersiveReaderOption.png)
+![immersive-reader-card](Images/34.Immersive_Reader_card_chat.png)
 
 - A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
 ![immersive-reader-screen](Images/immersiveReaderScreen.png)
@@ -235,13 +222,37 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - You will recieve event updates for message edit/delete features.
 
 - Message is edited
-![message-edit](Images/messageEditEvent.png)
+![message-edit](Images/36.Message_Edited.png)
 
 - Message is soft-deleted
-![message-soft-delete](Images/softDeleteMessage.png)
+![message-soft-delete](Images/37.Message_Deleted.png)
 
 - Message is restored
-![message-undelete](Images/messageUndelete.png)
+![message-undelete](Images/38.Message_Restored.png)
+
+ 7. **Format AI bot messages**
+- Consists features such as citations, feedback buttons, and sensitivity label that enables better user engagement
+
+- `AI label` - enables user to identify that the message was generated using AI.
+![AI-label](Images/AI-label.png)
+
+- `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
+![Citations](Images/citations.png)
+
+- `Feedback buttons` - enables user to provide positive or negative feedback based on their experience.
+![Feedback-buttons](Images/Feedback-buttons.png)
+
+![Feedback-buttons1](Images/Feedback-buttons1.png)
+
+![Feedback-buttons2](Images/Feedback-buttons2.png)
+
+![Feedback-buttons3](Images/Feedback-buttons3.png)
+
+- `Sensitivity label` - enables user to understand the confidentiality of the bot's message.
+![Sensitivity-label](Images/Sensitivity-label.png)
+
+- `Send AI message` - Replies back with a bot message containing all formats: AI label, Citations, Feedback buttons, and Sensitivity label.
+![sendtext](Images/sendtext.png)
 
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
@@ -257,6 +268,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Receive a read receipt](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?branch=pr-en-us-9184&tabs=dotnet1%2Capp-manifest-v112-or-later%2Cdotnet2%2Cdotnet3%2Cdotnet4%2Cdotnet5%2Cdotnet#receive-a-read-receipt)
+- [Format AI bot messages](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/format-ai-bot-messages?branch=pr-en-us-10798&tabs=js)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-nodejs" />

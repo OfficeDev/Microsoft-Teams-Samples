@@ -6,6 +6,7 @@
         integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
         crossorigin="anonymous"></script>
     <script src="DeepLinkModel.js"></script>
+    <script async defer src="https://teams.microsoft.com/share/launcher.js"></script>
     <script type="text/javascript">
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
@@ -39,6 +40,19 @@
             })
         });
     </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,6 +61,32 @@
     <div id="taskContent"
         style="margin-top:-23px;margin-left:80px;color:Highlight;font-family:'Segoe UI';font-size:15px"></div>
     <div id="list-content" style="margin-top:3rem"></div>
+    <div class="surface">
+        <div class="row">
+            <div class="column">
+                <div class="panel">
+                    <h3>Share to Teams using a web page</h3>
+                    <p>Click below Teams button to open popup</p>
+                    <span class="teams-share-button"
+                        data-href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1#embed-a-share-to-teams-button"
+                        data-msg-text="Test Message" data-icon-px-size="64" data-allow-share-in-meeting="true"
+                        data-app-id="{{Your-App-Id}}" data-preview="true">
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <div class="panel">
+                    <h3>Share to Teams for Education</h3>
+                    <p>Click below Teams button to open popup</p>
+                    <span class="teams-share-button" data-href="https://www.microsoft.com/education/products/teams"
+                        data-msg-text="Default Message" data-icon-px-size="64"
+                        data-assign-title="Default Assignment Title" data-assign-instr="Default Assignment Instructions"
+                        data-preview="true">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div style="margin-top:1rem;">
         <span class="container" style="font-size:20px;font-weight:700;">
             Extended Deep link features
