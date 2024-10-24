@@ -1,12 +1,13 @@
-{
+﻿{
   "profiles": {
-    "CommandsMenu": {
+    "Start Project": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:3978",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:54765;http://localhost:54766"
+      "hotReloadProfile": "aspnetcore"
     }
   }
 }
