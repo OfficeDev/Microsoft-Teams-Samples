@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Sample tab app displaying tab context in private and shared channels.",
-    "full": "This sample application demonstrates how to access and display the tab context object in both private and shared channels within Microsoft Teams."
+    "full": "This sample illustrates the capabilities of a tab application that shows the tab context object specifically for private and shared channels in Microsoft Teams. Users can expand and copy JSON slices from the context object, providing valuable insights based on the channel type."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Microsoft Teams sample app showcases how to implement Google authentication using OAuth2 with external auth providers.
+description: This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly.
 products:
 - office-teams
 - office

@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-multiple-capability-discounts-ts",
     "source": "officeDev",
     "title": "Blue Yonder Airlines Discounts",
-    "shortDescription": "This app combines an Outlook add-in and Teams tab for creating and tracking discount offers.",
+    "shortDescription": "Integrated Outlook add-in and Teams tab for managing discount offers.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-add-in-combined/nodejs",
     "longDescription": [
       "This sample app integrates an Outlook add-in with a Teams tab to streamline the creation and management of discount offers. Users can insert discounts into emails and view consolidated data within Teams, enhancing collaboration and efficiency."

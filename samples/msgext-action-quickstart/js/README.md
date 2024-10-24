@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates a Messaging Extension that accepts parameters and returns a card in Microsoft Teams.
+description: This sample app showcases a Hello World Messaging Extension that processes parameters and generates a card in Microsoft Teams. It also illustrates how to receive and handle forwarded messages, enhancing interaction through action commands and message extensions.
 products:
 - office-teams
 - office

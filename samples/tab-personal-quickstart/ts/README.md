@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how to create a personal tab in Microsoft Teams using TypeScript.
+description: This quick-start sample provides detailed instructions for developing a personal tab in Microsoft Teams with TypeScript, featuring essential setup and deployment guidance.
 products:
 - office-teams
 - office

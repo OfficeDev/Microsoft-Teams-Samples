@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create a personal tab in Microsoft Teams using JavaScript.
+description: This quick-start sample guides you through building a personal tab for Microsoft Teams, featuring seamless integration and interaction within the app.
 products:
 - office-teams
 - office

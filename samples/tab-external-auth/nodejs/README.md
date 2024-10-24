@@ -1,5 +1,5 @@
 ### API Server
-This API server sample facilitates token exchange between Microsoft Teams and Google OAuth to access user profile information from the Graph API.
+This sample API server is designed to exchange access tokens provided by Microsoft Teams for Graph API access, specifically to read user profile data. It enables developers to display the logged-in user's profile picture by integrating Google OAuth for authentication.
 
 ### Prerequisites
 - NodeJS

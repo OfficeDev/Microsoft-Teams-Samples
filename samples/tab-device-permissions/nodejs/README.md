@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Microsoft Teams sample app showcases how to manage device permissions for audio, video, and geolocation within a tab.
+description: This sample app for Microsoft Teams demonstrates how to handle device permissions, including audio, video, and geolocation, within a tab interface. It provides insights into device permission usage across desktop and mobile views, allowing developers to enhance user interactions effectively.
 products:
 - office-teams
 - office

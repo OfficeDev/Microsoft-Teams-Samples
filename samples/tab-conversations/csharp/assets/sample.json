@@ -6,7 +6,7 @@
     "shortDescription": "This Microsoft Teams sample app showcases how to create conversational tabs for users to discuss sub-entities within a tab, enhancing collaboration and interaction.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-conversations/csharp",
     "longDescription": [
-      "This sample application for Microsoft Teams demonstrates the creation of conversational tabs, allowing users to engage in discussions about sub-entities directly within the app. It includes detailed setup instructions using the Teams Toolkit for Visual Studio and provides a demo manifest for easy deployment and testing."
+      "This Microsoft Teams sample app showcases how to create conversational tabs for users to discuss sub-entities within a tab, enhancing collaboration and interaction."
     ],
     "creationDateTime": "2021-06-10",
     "updateDateTime": "2024-10-15",

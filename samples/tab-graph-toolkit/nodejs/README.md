@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates a Microsoft Teams tab using the Microsoft Graph Toolkit to create interactive and collaborative web experiences.
+description: This demo showcases a Microsoft Teams tab built with the Microsoft Graph Toolkit, featuring components like a sign-in card and various interactive elements. It allows users to easily integrate and display Microsoft 365 data, enhancing collaboration within Teams.
 products:
 - office-teams
 - office

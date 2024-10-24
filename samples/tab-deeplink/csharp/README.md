@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This Microsoft Teams sample app demonstrates deeplinks for calls, video, chat, and navigation within tabs and apps.
+description: This Teams sample application highlights deeplinks for various functionalities, such as initiating calls, chats, and navigating within tabs and apps. It features a comprehensive setup guide and supports interactions with both bots and tabs for enhanced user engagement.
 products:
 - office-teams
 - office

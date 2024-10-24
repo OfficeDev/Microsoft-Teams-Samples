@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to interact with Calendar, Mail, Profile, and geolocation features from a personal tabs app in Microsoft Teams.
+description: This sample application allows users to seamlessly interact with their Calendar, Mail, Profile, and geolocation from personal tabs within Microsoft Teams. With easy setup and integration using TypeScript, it enhances user productivity by centralizing essential tools in one place.
 products:
 - office-teams
 - office

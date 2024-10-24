@@ -15,8 +15,8 @@
     "full": "Microsoft Teams Action Based Messaging Extension"
   },
   "description": {
-    "short": "Sample app demonstrating Action-Based Messaging Extensions in Microsoft Teams.",
-    "full": "This sample app illustrates how to create an Action-Based Messaging Extension for Teams using Python."
+    "short": "This sample app illustrates how to implement Action-Based Messaging Extensions.",
+    "full": "This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality."
   },
   "icons": {
     "outline": "icon-outline.png",

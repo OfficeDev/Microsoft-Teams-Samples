@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how to create a custom personal tab for Microsoft Teams using ASP.NET Core MVC.
+description: This sample showcases the development of a custom personal tab for Microsoft Teams, utilizing ASP.NET Core MVC to enhance user interaction. 
 products:
 - office-teams
 - office

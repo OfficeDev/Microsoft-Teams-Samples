@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases nested app authentication (NAA), a protocol that simplifies single sign-on (SSO) for single-page applications in environments like Microsoft Teams and Outlook.
+description: This sample showcases Azure AD single sign-on (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of (OBO) flow to call
 products:
 - office-teams
 - office

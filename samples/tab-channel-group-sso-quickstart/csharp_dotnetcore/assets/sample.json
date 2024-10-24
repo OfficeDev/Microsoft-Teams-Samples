@@ -6,7 +6,7 @@
     "shortDescription": "This sample application showcases Microsoft Entra authentication within Teams channel tabs for secure access to user profiles.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "This sample application illustrates how to implement Microsoft Entra SSO authentication in channel tabs within Microsoft Teams, enabling secure access to user data. It includes detailed setup instructions and demonstrates how to register the app, configure permissions, and run the app using the Teams Toolkit for Visual Studio."
+      "This sample application illustrates how to implement Microsoft Entra SSO authentication in channel tabs within Microsoft Teams, enabling secure access to user data."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2024-10-15",

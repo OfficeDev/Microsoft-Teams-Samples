@@ -3,7 +3,7 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-preview-csharp",
     "source": "officeDev",
     "title": "Action based Messaging Extension with preview using Bot Framework v4",
-    "shortDescription": " This app demonstrates action preview capabilities in Teams Messaging Extensions using Bot Framework v4.",
+    "shortDescription": "Explore a bot demo using card-based Messaging Extensions in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-preview/csharp",
     "longDescription": [
       "This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users."

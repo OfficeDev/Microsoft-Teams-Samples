@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates a basic hello world app that features channel and group tabs within Microsoft Teams.
+description: This sample application illustrates how to create channel and group tabs in Microsoft Teams, enabling collaborative spaces for web-based content. It includes setup instructions, prerequisites, and features for embedding Teams-aware webpages directly into your Teams environment.
 products:
 - office-teams
 - office

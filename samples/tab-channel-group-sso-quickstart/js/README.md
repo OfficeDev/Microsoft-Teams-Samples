@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application showcases Microsoft Entra SSO authentication in Teams personal tabs, enabling secure user profile access.
+description: This application demonstrates how to implement Microsoft Entra SSO authentication in Microsoft Teams personal tabs, providing secure access to user profiles and APIs.
 products:
 - office-teams
 - office

@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Sample app demonstrating Microsoft Entra authentication in Teams channel tabs.",
-    "full": "This sample application showcases Microsoft Entra authentication within Teams channel tabs for secure access to user profiles."
+    "full": "This sample application illustrates how to implement Microsoft Entra SSO authentication in channel tabs within Microsoft Teams, enabling secure access to user data."
   },
   "icons": {
     "outline": "outline.png",

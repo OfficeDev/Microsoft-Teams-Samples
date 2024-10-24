@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application allows users to scan products in Microsoft Teams and mark them as approved or rejected.
+description: This application demonstrates how to scan products directly within Microsoft Teams, capturing images and allowing users to approve or reject items.
 products:
 - office-teams
 - office

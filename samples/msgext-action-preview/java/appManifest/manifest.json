@@ -20,7 +20,7 @@
     },
     "description": {
         "short": "Explore a bot demo using card-based Messaging Extensions in Microsoft Teams.",
-        "full": "This sample app illustrates the creation of simple cards in Teams Messaging Extensions based on parameters entered by users in a Task Module. Built with Spring Boot, it also demonstrates how a bot can send messages on behalf of users, enhancing engagement and interaction flow."
+        "full": "This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users."
     },
     "accentColor": "#FFFFFF",
     "bots": [

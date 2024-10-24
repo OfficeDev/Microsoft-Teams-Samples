@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application illustrates Microsoft Entra SSO authentication in Teams channel tabs, enabling secure access to user profiles and collaborative web content.
+description: This application showcases how to implement Microsoft Entra SSO authentication within channel tabs in Microsoft Teams, facilitating seamless user profile access and collaborative spaces.
 products:
 - office-teams
 - office

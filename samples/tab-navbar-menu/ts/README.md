@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to implement a navbar menu in a personal tab app for Microsoft Teams, allowing for multiple actions and an overflow menu.
+description: This sample application illustrates the use of a navbar menu in personal tabs within Microsoft Teams, enabling users to access multiple actions seamlessly. Designed for mobile clients, it includes features like an overflow menu for additional actions, enhancing user navigation and experience.
 products:
 - office-teams
 - office

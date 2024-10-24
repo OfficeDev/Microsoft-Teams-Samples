@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Scan products in Teams, approve/reject with image capture functionality.",
-    "full": "This sample application allows users to scan products in Microsoft Teams and mark them as approved or rejected."
+    "full": "This application demonstrates how to scan products directly within Microsoft Teams, capturing images and allowing users to approve or reject items. It includes features like device permissions for media access and interactive app integration, enhancing the product inspection process."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app combines an Outlook add-in and Teams tab for creating and tracking discount offers.
+description: This sample app integrates an Outlook add-in with a Teams tab to streamline the creation and management of discount offers. Users can insert discounts into emails and view consolidated data within Teams, enhancing collaboration and efficiency.
 products:
 - office-teams
 - office

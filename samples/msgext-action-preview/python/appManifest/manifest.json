@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Explore a bot demo using card-based Messaging Extensions in Microsoft Teams.",
-    "full": "This sample showcases how to create an Action-Based Messaging Extension in Microsoft Teams, allowing users to generate a card from Task Module inputs. It includes features such as bots, message extensions, and interaction capabilities for a seamless user experience."
+    "full": "This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users."
   },
   "accentColor": "#FFFFFF",
   "bots": [

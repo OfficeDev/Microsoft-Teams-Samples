@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample app demonstrating card creation in Teams Messaging Extensions.
+description: This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users.
 products:
 - office-teams
 - office

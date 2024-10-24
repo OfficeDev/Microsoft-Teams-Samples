@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample allows users to analyze the sentiment of chat messages in Teams using a messaging extension integrated with Azure Open AI.
+description: This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions.
 products:
 - office-teams
 - office

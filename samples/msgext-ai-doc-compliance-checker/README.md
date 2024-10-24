@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to integrate Azure Open AI into a Teams message extension to evaluate contract proposals against policy checklists. It works with Teams Toolkit for Visual Studio Code and JavaScript and can be used in Copilot for Microsoft 365.
+description: This sample demonstrates how to integrate Open AI into a Teams message extension to evaluate contract proposals against policy checklists.
 products:
 - office-teams
 - copilot-m365

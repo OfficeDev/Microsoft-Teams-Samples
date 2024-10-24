@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-msgext-action-preview-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension Action Preview",
-    "shortDescription": "Action-based Teams Messaging Extension sample with interactive previews.",
+    "shortDescription": "Explore a bot demo using card-based Messaging Extensions in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-preview/nodejs",
     "longDescription": [
-      "This is an sample app demonstrating an Action Based Messaging Extension with Preview"
+      "This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users."
     ],
     "creationDateTime": "2022-10-04",
     "updateDateTime": "2024-10-11",

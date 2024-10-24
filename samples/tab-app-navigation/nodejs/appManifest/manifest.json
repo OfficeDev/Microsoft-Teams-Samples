@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Sample showcasing tab navigation features within a Teams application.",
-    "full": "This sample demonstrates tab navigation functionality, allowing users to switch between tabs in a Teams application."
+    "full": "This sample illustrates the tab navigation feature in a Microsoft Teams application, enabling smooth transitions between different tabs. Designed for use with Node.js, it highlights how users can effectively navigate within the app for an enhanced experience."
   },
   "icons": {
     "outline": "outline.png",

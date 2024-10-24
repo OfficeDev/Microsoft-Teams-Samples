@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Sample Teams tab app demonstrating Azure Entra SSO using Node.js and TypeScript.",
-    "full": "This sample application demonstrates how to implement Single Sign-On (SSO) authentication in personal Teams tabs using Azure Microsoft Entra and TypeScript."
+    "full": "This comprehensive sample illustrates the setup of Single Sign-On (SSO) authentication for personal tabs in Microsoft Teams, utilizing Azure Microsoft Entra and TypeScript. It includes features like MSAL.js 2.0 support, Graph API integration enhance user interaction within Teams."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

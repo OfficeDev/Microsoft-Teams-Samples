@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Sample app demonstrating Entra SSO authentication in Microsoft Teams tabs.",
-    "full": "This sample application showcases Microsoft Entra SSO authentication in Teams personal tabs, enabling secure user profile access."
+    "full": "This application demonstrates how to implement Microsoft Entra SSO authentication in Microsoft Teams personal tabs, providing secure access to user profiles and APIs."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

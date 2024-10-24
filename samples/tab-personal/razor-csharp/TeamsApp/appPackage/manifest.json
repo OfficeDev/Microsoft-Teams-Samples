@@ -17,7 +17,7 @@
   },
   "description": {
     "short": "Custom personal tab app built with ASP.NET Core Razor for Microsoft Teams.",
-    "full": "This sample demonstrates how to create a custom personal tab for Microsoft Teams using ASP.NET Core Razor pages."
+    "full": "This sample provides a step-by-step guide to building a custom personal tab in Microsoft Teams using C# and ASP.NET Core Razor pages, including how to set up the app manifest and deploy it. It features seamless interaction within Teams, allowing users to upload and test the app in their own environment."
   },
   "icons": {
     "outline": "outline.png",

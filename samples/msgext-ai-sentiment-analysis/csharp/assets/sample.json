@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-csharp",
     "source": "officeDev",
-    "title": "Sentiment analysis of Teams chat message using messaging extension and Azure Open AI",
-    "shortDescription": "This sample demonstrates how to analyze the sentiment of chat messages in Teams using a messaging extension powered by Azure Open AI.",
+    "title": "Sentiment analysis of Teams chat message using messaging extension and Open AI",
+    "shortDescription": "This sample demonstrates how to analyze the sentiment of chat messages in Teams using a messaging extension powered by Open AI.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-ai-sentiment-analysis/csharp",
     "longDescription": [
-      "This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Azure Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions."
+      "This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions."
     ],
     "creationDateTime": "2023-10-17",
     "updateDateTime": "2024-10-11",

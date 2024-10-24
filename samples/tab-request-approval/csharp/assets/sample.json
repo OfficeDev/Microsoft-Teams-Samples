@@ -6,7 +6,7 @@
     "shortDescription": "This sample app enables users to request task approvals through activity feed notifications, allowing managers to easily approve or reject requests.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp",
     "longDescription": [
-      " This application facilitates task approval requests in Microsoft Teams, where requesters can send notifications to their managers and track their request status. Managers can view pending requests through the activity feed and respond by approving or rejecting them, leveraging Teams SSO and Graph API for seamless interaction."
+      "This application facilitates task approval requests in Microsoft Teams, where requesters can send notifications to their managers and track their request status. Managers can view pending requests through the activity feed and respond by approving or rejecting them, leveraging Teams SSO and Graph API for seamless interaction."
     ],
     "creationDateTime": "2021-11-29",
     "updateDateTime": "2024-10-15",

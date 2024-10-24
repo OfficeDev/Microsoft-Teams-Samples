@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create custom channel and group tabs in Microsoft Teams using ASP.NET Core and Razor pages.
+description: This quickstart guide shows how to create custom channel and group tabs for Microsoft Teams with ASP.NET Core and Razor Pages. It covers the complete setup process, including manifest configuration and local testing using tools like Ngrok and the Teams Toolkit for Visual Studio.
 products:
 - office-teams
 - office

@@ -6,7 +6,7 @@
     "shortDescription": "This sample app allows users to scan products in Microsoft Teams and mark them as approved or rejected.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-product-inspection/nodejs",
     "longDescription": [
-      "This application enables users to scan product barcodes within Microsoft Teams, capturing images for approval or rejection. Key features include device permissions for media access, interaction with the app, and a user-friendly interface for product inspection."
+      "This application demonstrates how to scan products directly within Microsoft Teams, capturing images and allowing users to approve or reject items. It includes features like device permissions for media access and interactive app integration, enhancing the product inspection process."
     ],
     "creationDateTime": "2021-11-16",
     "updateDateTime": "2024-10-15",

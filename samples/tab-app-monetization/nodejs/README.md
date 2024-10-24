@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample tab application showcases how to initiate a purchase flow using the Teams JS SDK."
+description: "This sample demonstrates a Teams tab application that opens a purchase dialog and triggers a monetization flow through the Teams JS SDK. Users can experience app monetization features seamlessly integrated within Microsoft Teams."
 products:
 - office-teams
 - office

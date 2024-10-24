@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to capture and manage meeting transcripts and recordings in Microsoft Teams.
+description: This sample application for Microsoft Teams allows users to capture meeting transcripts and recordings, providing an efficient way to document discussions and decisions. With easy setup and integration using Node.js, it enhances team collaboration and ensures that important meeting details are never lost.
 products:
 - office-teams
 - office

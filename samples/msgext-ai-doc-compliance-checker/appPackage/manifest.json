@@ -19,8 +19,8 @@
     "full": "AI Compliance Checker"
   },
   "description": {
-    "short": "Integrate Azure Open AI in Teams to check contract compliance with guidelines.",
-    "full": "This sample demonstrates how to integrate Azure Open AI into a Teams message extension to evaluate contract proposals against policy checklists."
+    "short": "Integrate Open AI in Teams to check contract compliance with guidelines.",
+    "full": "This sample showcases a Teams message extension that utilizes Open AI to assess the compliance of contract proposals against uploaded policy guidelines stored in Azure Blob Storage. It formats the compliance results as adaptive cards for easy viewing and can also function as a Copilot plug-in within Microsoft 365."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

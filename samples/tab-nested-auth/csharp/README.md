@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases Azure AD single sign-on (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of (OBO) flow to call Microsoft Graph APIs in C#.
+description: This sample showcases Azure AD single sign-on (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of (OBO) flow to call
 products:
 - office-teams
 - office

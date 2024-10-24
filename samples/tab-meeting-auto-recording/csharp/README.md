@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to automatically record meetings and generate transcripts in Microsoft Teams.
+description: This sample showcases a Microsoft Teams app that enables automatic meeting recordings and transcripts, enhancing collaboration and record-keeping. With a user-friendly interface and seamless integration, it empowers teams to focus on discussions without worrying about missing key details.
 products:
 - office-teams
 - office

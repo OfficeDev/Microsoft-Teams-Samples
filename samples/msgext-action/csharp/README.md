@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demo app for using Action-Based Messaging Extensions in Microsoft Teams.
+description: This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality.
 products:
 - office-teams
 - office
