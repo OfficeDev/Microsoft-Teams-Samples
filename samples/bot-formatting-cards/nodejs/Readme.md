@@ -285,18 +285,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
 
-**Mobile:**
-
-![LayoutMobile](Images/18.LayoutMobile.png)
-
-**Star Ratings in Adaptive Cards:**
-
-![StarRatingsAdaptiveCards](Images/29.StarRatingsAdaptiveCards.png)
-
-**Star Ratings Feedback:**
-
-![StarRatingsFeedback](Images/30.StarRatingsFeedback.png)
-
 **Conditinal Action and Scrollable Container Buttons:**
 
 ![ConditionalAndScrollableButtons](Images/31.ConditionalAndScrollableButtons.png)
@@ -320,6 +308,18 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Compound Button Adaptive Card:**
 
 ![CompoundButtonAdaptiveCard](Images/36.CompoundButtonAdaptiveCard.png)
+
+**Mobile:**
+
+![LayoutMobile](Images/18.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/29.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/30.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
