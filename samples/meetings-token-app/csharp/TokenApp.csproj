@@ -27,6 +27,7 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(ClientAppRoot)**" />
+    <Content Remove="TeamsApp\**" />
     <None Remove="$(ClientAppRoot)**" />
     <None Include="$(ClientAppRoot)**" Exclude="$(ClientAppRoot)node_modules\**" />
   </ItemGroup>
@@ -52,8 +53,11 @@
   
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="TeamsApp\**" />
     <Content Remove="$(SpaRoot)**" />
+    <EmbeddedResource Remove="TeamsApp\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="TeamsApp\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -81,5 +85,7 @@
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </ResolvedFileToPublish>
     </ItemGroup>
+
+  
   </Target>
 </Project>

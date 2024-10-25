@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamsMessagingExtensionsSearchSSO", "TeamsMessagingExtensionsSearchSSO.csproj", "{50AD08D1-9FDF-400E-9065-908E8DD691AB}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{A960AE0B-4514-441C-9D84-F51FA536CF04}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{09B105D7-92F4-49F6-B28F-4E6904DD1224}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D270A19-4076-4966-A89D-8D0ADA19C493}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A510125A-350F-4339-9B4F-8D0C0A446C5C}"
 	ProjectSection(SolutionItems) = preProject
 		TeamsMessagingExtensionsSearchSSO.slnLaunch.user = TeamsMessagingExtensionsSearchSSO.slnLaunch.user
 	EndProjectSection
@@ -22,10 +22,10 @@ Global
 		{50AD08D1-9FDF-400E-9065-908E8DD691AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50AD08D1-9FDF-400E-9065-908E8DD691AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50AD08D1-9FDF-400E-9065-908E8DD691AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A960AE0B-4514-441C-9D84-F51FA536CF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A960AE0B-4514-441C-9D84-F51FA536CF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A960AE0B-4514-441C-9D84-F51FA536CF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A960AE0B-4514-441C-9D84-F51FA536CF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B105D7-92F4-49F6-B28F-4E6904DD1224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B105D7-92F4-49F6-B28F-4E6904DD1224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B105D7-92F4-49F6-B28F-4E6904DD1224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B105D7-92F4-49F6-B28F-4E6904DD1224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
