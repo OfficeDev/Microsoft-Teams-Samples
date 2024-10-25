@@ -480,6 +480,10 @@ jobs:
               name: 'tab-nested-auth'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-commands-menu/csharp/CommandsMenu/CommandsMenu.csproj'
+              name: 'bot-commands-menu'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
