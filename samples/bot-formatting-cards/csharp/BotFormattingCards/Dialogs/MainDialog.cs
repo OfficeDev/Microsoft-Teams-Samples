@@ -118,10 +118,36 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendResponsiveLayoutCard());
                     break;
                 case "Border":
+                    // Adaptive Card Borders
                     reply.Attachments.Add(AllCards.SendBorderCard());
                     break;
                 case "RoundedCorners":
+                    // Adaptive Card Rounded Corners
                     reply.Attachments.Add(AllCards.SendRoundedCornerCard());
+                    break;
+                case "FluentIcons":
+                    // Adaptive Card Fluent Icons
+                    reply.Attachments.Add(AllCards.SendFluentIconsCard());
+                    break;
+                case "MediaElements":
+                    // Media elements in Adaptive Card
+                    reply.Attachments.Add(AllCards.SendMediaElementsCard());
+                    break;
+                case "StarRatings":
+                    // Star ratings in Adaptive Cards
+                    reply.Attachments.Add(AllCards.SendStarRatingsCard());
+                    break;
+                case "ConditionalCard":
+                    // Adaptive Card Conditional Enablement
+                    reply.Attachments.Add(AllCards.SendConditionalCard());
+                    break;
+                case "ScrollableCard":
+                    // Adaptive Card Scrollable Container
+                    reply.Attachments.Add(AllCards.SendScrollableCard());
+                    break;
+                case "CompoundButton":
+                    // Adaptive Card Compound Button
+                    reply.Attachments.Add(AllCards.SendCompoundButtonCard());
                     break;
                 default:
                     reply.Attachments.Add(AllCards.sendInfoMasking());
@@ -135,6 +161,12 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendResponsiveLayoutCard());
                     reply.Attachments.Add(AllCards.SendBorderCard());
                     reply.Attachments.Add(AllCards.SendRoundedCornerCard());
+                    reply.Attachments.Add(AllCards.SendFluentIconsCard());
+                    reply.Attachments.Add(AllCards.SendMediaElementsCard());
+                    reply.Attachments.Add(AllCards.SendStarRatingsCard());
+                    reply.Attachments.Add(AllCards.SendConditionalCard());
+                    reply.Attachments.Add(AllCards.SendScrollableCard());
+                    reply.Attachments.Add(AllCards.SendCompoundButtonCard());
                     break;
             }
 
@@ -171,6 +203,12 @@ namespace Microsoft.BotBuilderSamples
                     new Choice() { Value = "Layout", Synonyms = new List<string>() { "Layout" } },
                     new Choice() { Value = "Border", Synonyms = new List<string>() { "Border" } },
                     new Choice() { Value = "RoundedCorners", Synonyms = new List<string>() { "RoundedCorners" } },
+                    new Choice() { Value = "FluentIcons", Synonyms = new List<string>() { "FluentIcons" } },
+                    new Choice() { Value = "MediaElements", Synonyms = new List<string>() { "MediaElements" } },
+                    new Choice() { Value = "StarRatings", Synonyms = new List<string>() { "StarRatings" } },
+                    new Choice() { Value = "ConditionalCard", Synonyms = new List<string>() { "ConditionalCard" } },
+                    new Choice() { Value = "ScrollableCard", Synonyms = new List<string>() { "ScrollableCard" } },
+                    new Choice() { Value = "CompoundButton", Synonyms = new List<string>() { "CompoundButton" } }
                 };
 
                 return returncardOptions;
