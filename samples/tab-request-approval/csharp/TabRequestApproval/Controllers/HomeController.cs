@@ -125,17 +125,17 @@ namespace TabRequestApproval.Controllers
                     // Retrieve installed apps for the user from Microsoft Graph API
                     var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
                                        .Request()
-                                       .Expand("teamsApp")
+                                       .Expand("teamsAppDefinition")
                                        .GetAsync();
 
                     // Filter installed apps to find the one with DisplayName "Tab Request Approval"
-                    var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Request Approval").Select(x => x.TeamsApp.Id);
+                    var installationId = installedApps.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.Id);
 
                     // Check if there is at least one matching installationId
                     if (installationId.Any())
                     {
                         // Construct URL for the Teams entity
-                        var url = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
+                        var url = "https://teams.microsoft.com/l/entity/" + _configuration["AzureAd:MicrosoftAppId"] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
 
                         // Create a TeamworkActivityTopic for the notification
                         var topic = new TeamworkActivityTopic
