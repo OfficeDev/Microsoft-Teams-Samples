@@ -126,7 +126,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab.
+This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab. Without configuring this, Microsoft Teams defaults to landing on the bot in desktop clients and tab in mobile clients.
 
 To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
 ```bash
