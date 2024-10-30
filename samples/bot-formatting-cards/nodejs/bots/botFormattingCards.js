@@ -136,7 +136,7 @@ class BotFormattingCards extends ActivityHandler {
             }
 
             // After the bot has responded send the fromat Cards.
-            await this.sendAdaptiveCardFromats(context);
+            await this.sendAdaptiveCardFormats(context);
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
@@ -158,7 +158,7 @@ class BotFormattingCards extends ActivityHandler {
                 await turnContext.sendActivity(welcomeMessage);
 
                 //send the adaptive card formats.
-                await this.sendAdaptiveCardFromats(turnContext);
+                await this.sendAdaptiveCardFormats(turnContext);
             }
         }
     }
@@ -298,10 +298,10 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
-   * Send AdaptiveCard Fromats to the user.
+   * Send AdaptiveCard Formats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
-    async sendAdaptiveCardFromats(turnContext) {
+    async sendAdaptiveCardFormats(turnContext) {
         const cardActions = [
             {
                 type: ActionTypes.ImBack,

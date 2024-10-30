@@ -285,7 +285,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
 
-**Conditinal Action and Scrollable Container Buttons:**
+**Conditional Action and Scrollable Container Buttons:**
 
 ![ConditionalAndScrollableButtons](Images/31.ConditionalAndScrollableButtons.png)
 

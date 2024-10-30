@@ -307,7 +307,7 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Conditinal enablement of action button
+        /// Conditional enablement of action button
         /// To enable your Action.Submit button only when the user fills out at least one input field and disables the button again if the user clears the input.
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
@@ -326,7 +326,7 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Scorrable container for adaptive Card
+        /// Scrollable container for adaptive Card
         /// If you have a long list of items in a container within an adaptive card, it can make the card quite tall. To address this, you can use a scrollable container to limit the card's height.
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
