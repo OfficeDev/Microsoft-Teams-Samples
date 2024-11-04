@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.2",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.meetingsigning",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Meeting Signing",
+    "full": "In-Meeting Document Signing"
+  },
+  "description": {
+    "short": "In-meeting document signing app",
+    "full": "A proof of concept showcasing a in-meeting document signing app."
+  },
+  "icons": {
+    "outline": "outlineIcon.png",
+    "color": "colorIcon.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupChat"
+      ],
+      "context": [
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "bots": [],
+  "composeExtensions": [],
+  "permissions": [],
+  "validDomains": [
+    "localhost:44326",
+    "${{BOT_DOMAIN}}"
+  ],
+  "meetingExtensionDefinition": {
+    "supportsAnonymousGuestUsers": true
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}
