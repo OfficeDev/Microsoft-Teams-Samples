@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp",
     "source": "officeDev",
     "title": "Bot daily task reminder",
-    "shortDescription": "This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time using bot.",
+    "shortDescription": "This bot allows users to schedule recurring tasks and receive reminders in Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-daily-task-reminder/csharp",
     "longDescription": [
-      "This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time."
+      "This Teams bot helps users schedule recurring tasks and receive reminders at specified times. It supports adaptive cards and task modules, utilizing the Quartz Scheduler to manage reminders."
     ],
     "creationDateTime": "2021-11-24",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

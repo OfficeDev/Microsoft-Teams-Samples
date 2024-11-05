@@ -15,8 +15,8 @@
     "full": "Adaptive card with people picker."
   },
   "description": {
-    "short": "Adaptive card with people picker",
-    "full": "This sample shows the feature of people picker on Adaptive Cards."
+    "short": "Bot demonstrating people picker control in Adaptive Cards for Teams.",
+    "full": "This bot showcases how to use the people picker control within Adaptive Cards on Teams."
   },
   "icons": {
     "outline": "outline.png",

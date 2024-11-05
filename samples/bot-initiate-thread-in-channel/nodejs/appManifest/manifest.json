@@ -19,8 +19,8 @@
     "full": "This sample showcases feature on how to start new message thread inside teams channel."
   },
   "description": {
-    "short": "This sample showcases how to start new message thread inside teams channel.",
-    "full": "This sample showcases feature on how to start new message thread inside teams channel."
+    "short": "Start a thread in a Microsoft Teams channel using Bot Framework v4.",
+    "full": "This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4."
   },
   "accentColor": "#FFFFFF",
   "bots": [
