@@ -15,8 +15,8 @@
     "full": "TeamsToDo Connector in .NET/C# - full name"
   },
   "description": {
-       "short": "Office 365 Connector to generate task notifications in Microsoft Teams.",
-    "full": "This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector."
+    "short": "This is a small sample app we made for you, in .NET/C#!",
+    "full": "This is a small sample app we made for you, in .NET/C#! This app has connector. The task content is hosted for illustrative purposes only."
   },
   "icons": {
     "outline": "outline.png",

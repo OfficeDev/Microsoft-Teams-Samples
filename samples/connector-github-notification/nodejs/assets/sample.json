@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-connector-github-notification-nodejs",
     "source": "officeDev",
     "title": "Github connector for Microsoft Teams",
-    "shortDescription": "This sample demonstrates how to build a GitHub connector for Microsoft Teams, enabling integration with GitHub's APIs for streamlined notifications.",
+    "shortDescription": "Sends notifications based on Github activity (this is not the source code for the Github connector in Teams/Outlook/Yammer)",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-github-notification/nodejs",
     "longDescription": [
-      "This sample shows how to create a GitHub connector for Microsoft Teams using GitHub's APIs. It allows users to receive real-time notifications within Teams, making it easier to track updates and collaborate."
+      "Sends notifications based on Github activity (this is not the source code for the Github connector in Teams/Outlook/Yammer)"
     ],
     "creationDateTime": "2017-08-21",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2022-06-21",
     "products": [
       "Teams"
     ],

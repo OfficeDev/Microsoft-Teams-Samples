@@ -15,8 +15,8 @@
     "full": "FileUpload"
   },
   "description": {
-    "short": "Upload and manage files in Teams with a bot using Bot Framework v4.",
-    "full": "This bot sample for Teams demonstrates file upload capabilities using Bot Framework v4, enabling users to upload files and view inline images within chats."
+    "short": "Sample bot using V4 SDK to demo bot file features",
+    "full": "Sample bot using V4 Bot Builder SDK and V4 Microsoft Teams Extension SDK to demo bot file features"
   },
   "icons": {
     "outline": "icon-outline.png",

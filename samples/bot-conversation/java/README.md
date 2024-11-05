@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app demonstrates using bot conversation events in Microsoft Teams, supporting adaptive cards, read receipts, and message update events. It includes immersive reader support for enhanced accessibility.
+description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
 products:
 - office-teams
 - office
@@ -14,7 +14,6 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-java
 ---
 
 # Teams Conversation Bot
-This sample app demonstrates how to handle various bot conversation events in Microsoft Teams, including read receipts and adaptive card interactions. It showcases capabilities such as immersive reader support and message update tracking, making it ideal for personal, group, and team chat scopes.
 
 Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
 

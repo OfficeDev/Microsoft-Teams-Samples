@@ -18,9 +18,6 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\abf0-2401-4900-6585-3f12-c0f7-7c2c-95fa-d960.ngrok-free.app4B45FF9799AF092F01AE26C8A0D62A85.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
     <ItemGroup>

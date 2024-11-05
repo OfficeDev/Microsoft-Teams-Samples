@@ -18,10 +18,10 @@
         "short": "AI-EnterpriseSearch${{APP_NAME_SUFFIX}}",
         "full": "full name for AI-EnterpriseSearch"
     },
-  "description": {
-    "short": "This sample app demonstrate Azure Open AI-EnterpriseSearch",
-    "full": "This Azure Open AI sample app integrates user search with Azure Open AI embeddings, Redis DB, and Teams bot for queries based on uploaded files."
-  },
+    "description": {
+        "short": "short description for AI-EnterpriseSearch",
+        "full": "full description for AI-EnterpriseSearch"
+    },
     "accentColor": "#FFFFFF",
     "bots": [
         {

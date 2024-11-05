@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector.
+description: Sample which demonstrates an Office 365 Connector which generates and sends notifications for teams channel.
 products:
 - office-teams
 - office
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodej
 
 # Microsoft Teams Sample Connector Todo
 
-This sample provides a comprehensive guide to building an Office 365 Connector that sends task notifications to a Microsoft Teams channel. The app simulates a task management system where users can create, view, and update tasks, showcasing how to send notifications through connectors to enhance productivity in Teams.
+This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 
 ## Included Features
 * Connectors

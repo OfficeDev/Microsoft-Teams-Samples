@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Teams Catering Bot: Order food via Adaptive Cards in Microsoft Teams.
+description: Teams catering bot demonstrating how to use Universal adaptive cards in Teams
 products:
 - office-teams
 - office
@@ -15,7 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-teams-catering-csharp
 
 # Teams Catering Bot
 
-This Teams Catering Bot allows users to place food and drink orders seamlessly within Microsoft Teams. It leverages Universal Adaptive Cards for dynamic interactions and supports features like recent orders and order confirmation.
+Bot Framework v1.4 TeamsCateringBot sample.
+
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V2.
 
 ## Document Manager  
 

@@ -18,9 +18,9 @@
     "full": "Integrating and Managing Apps in Federated Group Chats."
   },
   "description": {
-    "short": "Easily view and manage group members in federated Teams chat with this bot.",
-    "full": "This app allows users to quickly view, add, and manage group members in federated Teams chat."
-  },
+    "short": "This sample showcases how apps function within federated group chats.",
+    "full": "This sample showcases the integration, functionality, and management of apps within federated group chats. It includes insights on app behavior, permissions, and best practices for using apps in a cross-organization chat environment."
+   },
   "accentColor": "#FFFFFF",
   "bots": [
     {

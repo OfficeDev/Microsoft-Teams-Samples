@@ -18,10 +18,10 @@
         "short": "${{CONFIG__MANIFEST__APPNAME__SHORT}}",
         "full": "${{CONFIG__MANIFEST__APPNAME__FULL}}"
     },
-  "description": {
-    "short": "Bot sample for proactive notifications ${{CONFIG__MANIFEST__APPNAME__SHORT}}",
-    "full": "This bot sends proactive reminders by saving conversation references in Teams. ${{CONFIG__MANIFEST__APPNAME__SHORT}}"
-  },
+    "description": {
+        "short": "Short description of ${{CONFIG__MANIFEST__APPNAME__SHORT}}",
+        "full": "Full description of ${{CONFIG__MANIFEST__APPNAME__SHORT}}"
+    },
     "accentColor": "#FFFFFF",
     "bots": [
         {

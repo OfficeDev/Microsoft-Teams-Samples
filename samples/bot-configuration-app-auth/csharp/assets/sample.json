@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-configuration-app-auth-csharp",
     "source": "officeDev",
     "title": "Bot configuration app with type ahead search control",
-    "shortDescription": "This Teams bot enables configuration and reconfiguration with dynamic search capabilities on Adaptive Cards.",
+    "shortDescription": "This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-configuration-app-auth/csharp",
     "longDescription": [
-      "This sample demonstrates a configurable Teams bot that supports both static and dynamic type-ahead search controls on Adaptive Cards. It offers flexible bot configuration and reconfiguration for team and group chats."
+      "This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards."
     ],
     "creationDateTime": "2024-04-03",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2024-04-03",
     "products": [
       "Teams"
     ],

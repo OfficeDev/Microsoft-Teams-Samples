@@ -15,8 +15,8 @@
     "full": "Fetch groupchat messages with graph api"
   },
   "description": {
-    "short": "Archive Teams group chat messages and send them as files via bot.",
-    "full": "This sample bot archives Teams group chat messages and sends them as files to users."
+    "short": "Fetch groupchat messages.",
+    "full": "This sample demos a bot which fetch and archive groupchat messages"
   },
   "icons": {
     "outline": "outline.png",

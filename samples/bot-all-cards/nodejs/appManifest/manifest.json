@@ -15,8 +15,8 @@
     "full": "Types Of Cards"
   },
   "description": {
-    "short": "Bot demo sending various card types in Teams: Adaptive, Hero, Thumbnail, etc.",
-    "full": "This sample showcases how to send various types of cards using a bot in Microsoft Teams."
+    "short": "Types Of Cards",
+    "full": "This sample shows the feature where user can send different types of cards using bot."
   },
   "icons": {
     "outline": "outline.png",

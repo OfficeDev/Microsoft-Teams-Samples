@@ -19,8 +19,8 @@
     "full": "This sample showcases usage of various conversation events for teams bot."
   },
   "description": {
-    "short": "Demo bot for Teams showing conversation events with adaptive card support.",
-    "full": "This sample app showcases Teams bot conversation events and adaptive cards."
+    "short": "This sample showcases usage of various conversation events for teams bot.",
+    "full": "This sample showcases usage of various conversation events for teams bot for both personal and teams scope."
   },
   "accentColor": "#FFFFFF",
   "bots": [

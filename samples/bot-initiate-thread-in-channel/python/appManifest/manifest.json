@@ -19,8 +19,8 @@
     "full": "TeamsStartThreadInChannel"
   },
   "description": {
-    "short": "Start a thread in a Microsoft Teams channel using Bot Framework v4.",
-    "full": "This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4."
+    "short": "TeamsStartThreadInChannel",
+    "full": "TeamsStartThreadInChannel"
   },
   "accentColor": "#FFFFFF",
   "bots": [
