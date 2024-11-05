@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows anonymous users support in meeting apps.
+description: Add this sample app to enable anonymous user participation and interaction in Microsoft Teams meetings.
 products:
 - office-teams
 - office
@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-app-anonymous-users-csharp
 
 ---
 
-## Anonymous User Support
+## Anonymous User Support in Microsoft Teams Apps
 
-This sample shows anonymous users support in meeting apps.
+This sample demonstrates how to enable anonymous user support in Microsoft Teams meeting apps. It provides guidance on configuring and integrating various Microsoft services, like Azure Active Directory (AAD) and the Microsoft Bot Framework, to allow guest users to interact with meeting apps seamlessly.
 
 **Interaction with app**
 ![appanonymoususersGif](Images/anonymoususersupport.gif)

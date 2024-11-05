@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample application which showcases Microsoft Entra authentication in channel tab.
+description: This application demonstrates how to implement Microsoft Entra SSO authentication in Microsoft Teams personal tabs, providing secure access to user profiles and APIs.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 
 # Teams Tab SSO Authentication Sample Node.js
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
+Explore this sample application that showcases Microsoft Entra SSO authentication within personal tabs in Microsoft Teams, allowing users to securely access their profiles and application APIs. With detailed setup guidance, including app registration, permissions configuration, and deployment using Teams Toolkit for Visual Studio, this sample is ideal for developers aiming to enhance their Teams applications with robust authentication features.
 
 ## Interaction with app
 

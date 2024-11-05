@@ -15,8 +15,8 @@
     "full": "Complete Sample App"
   },
   "description": {
-    "short": "Bot Template - a template for creating a bot",
-    "full": "The Bot Template is meant to create an environment in which to easily create a bot."
+    "short": "Sample for Teams bot with Facebook auth, messaging extensions, and tabs.",
+    "full": "Explore a sample that demonstrates building a Microsoft Teams bot using SDK v4, featuring messaging extensions, adaptive cards, and Facebook authentication."
   },
   "icons": {
     "outline": "outline.png",

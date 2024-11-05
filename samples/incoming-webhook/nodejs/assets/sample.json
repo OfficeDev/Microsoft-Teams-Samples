@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-incoming-webhook-nodejs",
     "source": "officeDev",
     "title": "Incoming webhook",
-    "shortDescription": "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card.",
+    "shortDescription": "This sample demonstrates sending message cards through Incoming Webhooks in Microsoft Teams and includes an HttpPOST action in the card.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/incoming-webhook/nodejs",
     "longDescription": [
-      "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
+      "This sample showcases sending message cards in Microsoft Teams using Incoming Webhooks. It also demonstrates the HttpPOST action feature in the cards, enhancing interaction capabilities."
     ],
     "creationDateTime": "2022-07-01",
-    "updateDateTime": "2022-01-20",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

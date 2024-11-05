@@ -19,8 +19,8 @@
     "full": "Show App Icon Badging In Teams Meetings"
   },
   "description": {
-    "short": "App Icon Badging In-Meeting Notification demo",
-    "full": "This sample app shows how to send app icon badging in Microsoft Teams meetings using targeted notifications API."
+    "short": "Sample app demonstrating Teams app icon badging during meetings notifications.",
+    "full": "This sample app showcases how to implement app icon badging notifications in Teams meetings."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

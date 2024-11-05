@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-csharp_dotnetcore",
     "source": "officeDev",
     "title": "Starter solution: Channel/Group tab with SSO in C#",
-    "shortDescription": "ASP.NET MVC channel/group tab provides a jQuery SPA with an access token using SSO",
+    "shortDescription": "This sample application showcases Microsoft Entra authentication within Teams channel tabs for secure access to user profiles.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "ASP.NET MVC channel/group tab provides a jQuery SPA with an access token using SSO"
+      "This sample application illustrates how to implement Microsoft Entra SSO authentication in channel tabs within Microsoft Teams, enabling secure access to user data."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

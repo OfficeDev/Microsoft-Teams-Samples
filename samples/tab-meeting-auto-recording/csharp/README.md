@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows meeting auto recording.
+description: This sample showcases a Microsoft Teams app that enables automatic meeting recordings and transcripts, enhancing collaboration and record-keeping. With a user-friendly interface and seamless integration, it empowers teams to focus on discussions without worrying about missing key details.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ## Tab Meeting Recording and transcript with auto recording
 
-Meeting recording and transcript with auto recording.
+This sample application for Microsoft Teams provides an automated solution for meeting recordings and transcripts, streamlining the documentation process for users. Leveraging .NET and the Teams Toolkit, it allows for easy setup and integration, ensuring that every meeting is accurately captured for future reference and collaboration.
 
 **Interaction with app**
 ![MeetingAutoRecording](MeetingAutoRecording/Images/MeetingTranscriptRecording.gif)

@@ -19,8 +19,8 @@
     "full": "App Installation sample"
   },
   "description": {
-    "short": "App Installation",
-    "full": "This example show the App Installation, which includes app creation , update and delete"
+    "short": "Sample demonstrating Teams app installation lifecycle using Microsoft Graph API.",
+    "full": "This sample showcases how to manage the installation lifecycle of Teams apps using Microsoft Graph APIs through a Teams tab."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

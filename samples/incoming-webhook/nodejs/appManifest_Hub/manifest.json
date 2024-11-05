@@ -19,8 +19,8 @@
     "full": "Sample to show incoming webhook card"
   },
   "description": {
-    "short": "Incoming webhook",
-    "full": "This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. "
+    "short": "Demo for sending message cards via Incoming Webhooks in Microsoft Teams.",
+    "full": "This sample demonstrates sending message cards through Incoming Webhooks in Microsoft Teams and includes an HttpPOST action in the card."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

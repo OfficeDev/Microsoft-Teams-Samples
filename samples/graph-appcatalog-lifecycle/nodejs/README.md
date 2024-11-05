@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs through bot.
+description: This sample demonstrates programmatic management of Teams app lifecycles in the catalog through Microsoft Graph APIs via a bot.
 products:
 - office-teams
 - office
@@ -14,9 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-appcatalog-lifecycle-nodejs
 ---
 # AppCatalog sample
 
-Bot Framework v4 AppCatalog sample for Teams
-
-This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalog followed by commands given to Bot.
+This sample illustrates how to manage the lifecycle of Teams apps in the app catalog programmatically using Microsoft Graph APIs through a bot. It includes features like Teams SSO, Adaptive Cards, and bot commands for publishing, updating, deleting, and listing applications, enhancing your Teams app management experience.
 
 ## Included Features
 * Teams SSO (bots)

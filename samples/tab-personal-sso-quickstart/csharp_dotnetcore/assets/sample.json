@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-csharp_dotnetcore",
     "source": "officeDev",
     "title": "Starter solution: Personal tab with SSO  in C#",
-    "shortDescription": "ASP.NET MVC personal tab provides a jQuery SPA with an access token using SSO",
+    "shortDescription": "This sample application demonstrates how to implement SSO authentication in a personal Teams tab using Azure Microsoft Entra and C#.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab."
+      "This comprehensive sample illustrates how to implement SSO authentication for personal tabs in Microsoft Teams using Azure Microsoft Entra and C#. It includes setup instructions, integration with MSAL.js 2.0, Graph API usage, and guidance for running the app in local and production environments."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

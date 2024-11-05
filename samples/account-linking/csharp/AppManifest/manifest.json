@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://contoso.com/tou"
   },
   "description": {
-    "short": "An example of linking a user's M365 identity with a GitHub identity",
-    "full": "An example of linking a user's M365 identity with a GitHub identity so they only need to log in once across features (bot/messaging extension/tab) and devices"
+    "short": "Sample for Azure AD & Facebook auth in Teams bot, tab, and messaging extension.",
+    "full": "This sample demonstrates authentication integration using Azure AD, Facebook, and username/password methods across bot, tab, and messaging extension functionalities in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",
