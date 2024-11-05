@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats.
+description: This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat.
 products:
 - office-teams
 - office
@@ -14,7 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-configuration-app-nodejs
 ---
 # Bot Configuration 
 
-This sample demonstrates a bot for configuring and reconfiguring adaptive cards in team and group chats. It supports static and dynamic type-ahead search, allowing for enhanced interactivity and control customization.
+This sample demonstrates the features of bot configuration and reconfiguration for both teams and group chats, including a type-ahead search (static and dynamic) control on Adaptive Cards.
+
+To get a configurable card with a static typeahead search control, add the bot to a Teams or group chat scope. Upon submission, the card will be updated to include a dynamic typeahead search control.
 
 ## Included Features
 * Bots

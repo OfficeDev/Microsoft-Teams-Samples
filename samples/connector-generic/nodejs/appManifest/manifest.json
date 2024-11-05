@@ -16,8 +16,8 @@
 	},
 	"accentColor": "#FFFFFF",
 	"description": {
-		"full": "This sample provides a customizable connector for integrating webhook-supported systems with Microsoft Teams",
-		"short": "Customizable connector sample for webhook-enabled systems integration."
+		"full": "Sample to show how to configure a connector and  send notifications inside teams",
+		"short": "Sample to show how connector works inside teams"
 	},
 	"icons": {
 		"outline": "outline.png",

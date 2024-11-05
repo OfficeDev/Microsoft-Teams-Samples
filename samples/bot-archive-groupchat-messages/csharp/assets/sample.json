@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-archive-groupchat-messages-csharp",
     "source": "officeDev",
     "title": "Archive groupchat messages",
-    "shortDescription": "This sample bot archives Teams group chat messages and sends them as files to users.",
+    "shortDescription": "Sample which demonstrates how to archive groupchat messages and send it to user as a file using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-archive-groupchat-messages/csharp",
     "longDescription": [
-      "This sample demonstrates a bot that archives group chat messages in Microsoft Teams and sends them to users as downloadable files. It supports Teams SSO, Adaptive Cards, and Graph API integration for enhanced functionality."
+      "Sample which demonstrates how to archive groupchat messages and send it to user as a file using bot."
     ],
     "creationDateTime": "2021-11-10",
-    "updateDateTime": "2022-10-10",
+    "updateDateTime": "2022-05-17",
     "products": [
       "Teams"
     ],

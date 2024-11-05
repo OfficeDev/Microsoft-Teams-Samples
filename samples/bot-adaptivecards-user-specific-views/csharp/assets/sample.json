@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp",
     "source": "officeDev",
     "title": "User Specific Views in Adaptive Cards",
-    "shortDescription": "This sample app shows how to create user-specific adaptive card views for Teams, enabling personalized content and auto-updating across various chat contexts.",
+    "shortDescription": "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptivecards-user-specific-views/csharp",
     "longDescription": [
-      "This sample demonstrates how to create user-specific views in Adaptive Cards within Microsoft Teams, using features like Action.Execute and auto-refresh for dynamic updates. The app enables personalized content, allowing seamless interaction across personal, group, and team contexts."
+      "This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards using bot."
     ],
     "creationDateTime": "2022-03-09",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2022-06-21",
     "products": [
       "Teams"
     ],

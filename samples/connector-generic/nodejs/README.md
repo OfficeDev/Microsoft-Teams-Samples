@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample provides a customizable Node.js connector for systems with webhook support, ideal for integration with Microsoft Teams.
+description: Sample code for a generic connector that's easy to customize for any system which supports webhooks.
 products:
 - office-teams
 - office
@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
 
 # Generic Connector 
 
-This generic connector, built with Node.js, is customizable for any system that supports webhooks, enabling quick and efficient integration with Microsoft Teams. By following the provided setup, users can configure this connector to send notifications from various sources directly into Teams channels, enhancing workflow and communication.
+This contains the source for a generic connector that's easy to customize for any system which supports webhooks.
 
 ## Included Features
 * Connectors

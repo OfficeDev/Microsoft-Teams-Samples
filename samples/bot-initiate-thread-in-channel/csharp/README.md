@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
+description: This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4
 products:
 - office-teams
 - office
@@ -14,7 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-cs
 ---
 # Microsoft Teams - Start Thread In A Specific Channel of a Team
 
-This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Teams Toolkit in Visual Studio, enabling easy sideloading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.
+Bot Framework v4 Conversation Bot sample for Teams.
+
+This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows how to create a new conversation thread in a channel in Microsoft Teams. It is important to note the use of the `channelId` - you can [get the list of channels in a team](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/get-teams-context?tabs=dotnet#get-the-list-of-channels-in-a-team) to get this .
 
 ## Included Features
 * Bots

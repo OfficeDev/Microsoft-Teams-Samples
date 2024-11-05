@@ -19,8 +19,8 @@
     "full": "User specific views sample"
   },
   "description": {
-    "short": "Sample app demonstrating user-specific views in Teams Adaptive Cards.",
-    "full": "This sample app shows how to create user-specific adaptive card views for Teams, enabling personalized content and auto-updating across various chat contexts."
+    "short": "User specific views in Adaptive cards",
+    "full": "Sample shows different ways developers can consume user specific views in Adaptive cards"
   },
   "accentColor": "#FFFFFF",
   "bots": [

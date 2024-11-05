@@ -18,10 +18,10 @@
       "short": "TeamsConversationBot",
       "full": "TeamsConversationBot"
     },
-  "description": {
-    "short": "Demo bot for Teams showing conversation events with adaptive card support.",
-    "full": "This sample app showcases Teams bot conversation events and adaptive cards."
-  },
+    "description": {
+      "short": "TeamsConversationBot",
+      "full": "TeamsConversationBot"
+    },
     "accentColor": "#FFFFFF",
     "bots": [
       {

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-calling-meeting-csharp",
     "source": "officeDev",
     "title": "Calling and Meeting Bot Sample V4",
-    "shortDescription": "This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.",
+    "shortDescription": "This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-calling-meeting/csharp",
     "longDescription": [
-      "This bot sample showcases the integration of Microsoft Teams and Azure Bot services, enabling functionalities such as call creation, meeting joining, and call transfer. It utilizes cloud communication APIs to streamline the meeting and calling experience in Microsoft Teams."
+      "This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call"
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2022-05-17",
     "products": [
       "Teams"
     ],

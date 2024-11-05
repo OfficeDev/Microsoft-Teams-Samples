@@ -19,8 +19,8 @@
     "full": "Conversation Bot"
   },
   "description": {
-    "short": "Quickly set up Teams bot with SSO for seamless user authentication.",
-    "full": "This sample bot demonstrates implementing SSO in Microsoft Teams using Azure AD."
+    "short": "Short description for Conversation Bot.",
+    "full": "Full description of Conversation Bot."
   },
   "accentColor": "#FFFFFF",
   "bots": [

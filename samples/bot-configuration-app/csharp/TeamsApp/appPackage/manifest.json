@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Bot Configuration Sample App",
-    "full": "This bot enables configuration and reconfiguration within Teams and group chats, featuring adaptive cards with static and dynamic controls."
+    "full": "This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat"
   },
   "icons": {
     "outline": "outline.png",

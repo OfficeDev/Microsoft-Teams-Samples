@@ -19,8 +19,8 @@
     "full": "MessageReactionBot"
   },
   "description": {
-    "short": "Sample app demonstrating bot reactions to Teams messages using Bot Framework.",
-    "full": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework."
+    "short": "MessageReactionBot",
+    "full": "MessageReactionBot"
   },
   "accentColor": "#FFFFFF",
   "bots": [

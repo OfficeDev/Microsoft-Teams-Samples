@@ -19,8 +19,8 @@
     "full": "Release Management"
   },
   "description": {
-    "short": "Bot for Teams notifications on Azure DevOps work items via service hooks.",
-    "full": "This bot app notifies Teams when Azure DevOps work items are created via service hooks."
+    "short": "Bot to create a group chat and send work item notification using Azure webhooks.",
+    "full": "This is a sample app with capability to send notification when user creates a work item in Azure DevOps via webhooks"
   },
   "accentColor": "#235EA5",
   "bots": [

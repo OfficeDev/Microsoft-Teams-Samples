@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Quickly set up Teams bot with SSO for seamless user authentication.
+description: Sample which demonstrates Azure AD authentication in teams using bot.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-c
 
 # Teams Conversation Bot SSO quick-start
 
-This sample demonstrates how to implement Single Sign-On (SSO) for Teams bots using Azure Active Directory and the Bot Framework. It includes comprehensive setup instructions for authentication, tunneling, and deploying to Azure, offering a streamlined way to authenticate users and access Microsoft Graph data directly within Teams.
+Teams Bot with SSO using Bot Framework v4.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with SSO in a bot for Microsoft Teams.
 

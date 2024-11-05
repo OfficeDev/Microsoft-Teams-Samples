@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-proactive-messaging-csharp",
     "source": "officeDev",
     "title": "Teams Proactive Messaging Samples",
-    "shortDescription": "This sample provides solutions for proactive messaging in Teams, including user and channel coordinate logging and message throttling.",
+    "shortDescription": "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging/csharp",
     "longDescription": [
-      "This sample demonstrates proactive messaging in Microsoft Teams with two solutions: logging user and channel coordinates, and sending messages with throttling policies to handle rate limits. These examples use the Bot Framework v4 in C# to enhance Teams app functionality."
+      "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
     ],
     "creationDateTime": "2022-05-17",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2022-05-17",
     "products": [
       "Teams"
     ],

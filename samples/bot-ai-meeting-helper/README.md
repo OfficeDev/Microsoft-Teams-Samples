@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample uses Azure OpenAI to extract meeting action items and summaries, sending them directly to subscribed participants in Microsoft Teams..
+description: This example demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.
 products:
 - office-teams
 languages:
@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-ai-meeting-helper-nodejs
 
 # Meeting Helper with Azure Open AI
 
-This sample leverages Azure OpenAI to automatically extract action items and generate summaries from meeting transcriptions, delivering them to subscribed users in Microsoft Teams. It utilizes Graph API, Azure Table Storage, and self-signed certificates for a seamless and secure experience.
+This sample demonstrates generating action items and a meeting summary based on the attendees and transcription, then sending them to all participants.
 
 - To achieve this process, the user will schedule a meeting, which can be either a one-time or recurring event. Attendees interested in receiving the meeting summary and action items must individually subscribe to the meeting. For recurring meetings, multiple instances will be displayed, allowing users to subscribe to each instance separately.
  

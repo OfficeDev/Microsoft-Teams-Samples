@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-adaptivecard-actions-csharp",
     "source": "officeDev",
     "title": "Send Adaptive Card Including Different Actions",
-    "shortDescription": "This sample shows how to send Adaptive Cards with multiple action types using a Teams bot.",
+    "shortDescription": "Sample which demonstrates different Adaptive Card action types using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptive-card-actions/csharp",
     "longDescription": [
-      "This sample demonstrates how to create and send Adaptive Cards with different action types using a Microsoft Teams bot. It includes features like submitting actions, showing cards, toggling visibility, and more."
+      "Sample which demonstrates different Adaptive Card action types using bot."
     ],
     "creationDateTime": "2022-12-27",
-    "updateDateTime": "2024-10-10",
+    "updateDateTime": "2022-12-27",
     "products": [
       "Teams"
     ],
