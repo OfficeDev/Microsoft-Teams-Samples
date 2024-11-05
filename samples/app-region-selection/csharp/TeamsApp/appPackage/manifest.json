@@ -19,8 +19,8 @@
     "full": "It will help to select Data center's region"
   },
   "description": {
-    "short": "Region Selection App",
-    "full": "Data Center's Region Selection Bot and Tab Application"
+    "short": "Microsoft Teams app for region selection using Bot and Tab with adaptive cards.",
+    "full": "This Microsoft Teams app allows users to select and set a region using a Bot and Tab."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

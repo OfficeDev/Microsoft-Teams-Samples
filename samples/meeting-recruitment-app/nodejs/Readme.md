@@ -16,9 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-recruitment-app-nodejs
 
 # Recruitment App Sample using Apps in Meetings
 
-This sample illustrates a meeting experience for recruitment.
-
-It has meeting details and in-meeting app that helps in the interview process.
+This sample app demonstrates how to enhance recruitment meetings in Microsoft Teams using bots to send notifications and provide in-meeting functionality. It includes features such as managing candidate information, adding interview questions, sharing assets, and capturing feedback in the meeting side panel.
 
 ## Included Features
 * Bots

@@ -19,8 +19,8 @@
     "full": "Meeting-Tabs-Nodejs"
   },
   "description": {
-    "short": "Meeting-Tabs",
-    "full": "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab."
+    "short": "Sample demonstrating Mute/Unmute controls in Teams meeting side panel.",
+    "full": "This sample showcases a Teams meeting side panel with Mute/Unmute audio controls."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

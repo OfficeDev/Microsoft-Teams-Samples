@@ -19,8 +19,8 @@
     "full": "This sample demos the feature of link unfurling in share to teams"
   },
   "description": {
-    "short": "Sample to test link unfurling in STT",
-    "full": "This sample demos the feature of link unfurling in share to teams"
+    "short": "Sample app demonstrating link unfurling for sharing in Microsoft Teams.",
+    "full": "This sample app showcases the link unfurling feature for sharing content in Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

@@ -16,8 +16,8 @@
     "full": "JDDetails Tab full name"
   },
   "description": {
-    "short": "Details Tab",
-    "full": "Details Tab for Meeting Extensibility"
+    "short": "Meeting recruitment app using bots for notifications and interview management.",
+    "full": "This sample demonstrates a recruitment meeting app with integrated bots for notifications, meeting details, and in-meeting features to assist the interview process."
   },
   "icons": {
     "outline": "outline.png",

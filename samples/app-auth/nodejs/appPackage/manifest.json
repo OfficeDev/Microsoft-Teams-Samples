@@ -22,8 +22,8 @@
     "short": "App auth"
   },
   "description": {
-    "short": "Authentication sample for Microsoft Teams",
-    "full": "Authentication sample for Microsoft Teams"
+    "short": "Sample app for Microsoft Teams authentication using bot and tab methods.",
+    "full": "This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab, supporting Teams SSO with MSAL.js 2.0."
   },
   "staticTabs": [
     {

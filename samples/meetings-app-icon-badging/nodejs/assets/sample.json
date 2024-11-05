@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-app-icon-badging-nodejs",
     "source": "officeDev",
     "title": "Meetings-App-Icon-Badging",
-    "shortDescription": "Illustrates how to implement app icon badging \"in-meeting notification\" using \"targeted meeting notification\" API",
+    "shortDescription": "This sample demonstrates how to utilize the targeted notifications API for app icon badging during Teams meetings.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-app-icon-badging/nodejs",
     "longDescription": [
-      "Illustrate how to send app icon badging using \"targeted in-meeting notifications \" API"
+      "This sample showcases the implementation of app icon badging notifications in Teams meetings using the targeted notifications API. Key features include bots, in-meeting notifications, RSC permissions, and seamless integration for enhancing user engagement."
     ],
     "creationDateTime": "2023-05-23",
-    "updateDateTime": "2023-06-07",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

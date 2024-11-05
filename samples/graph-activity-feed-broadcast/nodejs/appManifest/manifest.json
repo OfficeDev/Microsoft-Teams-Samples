@@ -19,8 +19,8 @@
     "full": "Activity feed notification to notify any message to all members of the organisation"
   },
   "description": {
-    "short": "Activity feed notification to notify any message to the organisation",
-    "full": "Activity feed notification to notify any message to all members of the organisation"
+    "short": "Broadcast messages to all members using Teams activity feed notifications.",
+    "full": "This sample allows users to broadcast messages to all organization members via Teams activity feed notifications using Graph APIs."
   },
   "accentColor": "#235EA5",
   "staticTabs": [

@@ -32,8 +32,8 @@
     "full": "Localization App"
   },
   "description": {
-    "short": "Localization App for Microsoft Teams",
-    "full": "This sample app provides a very simple localization app. You can extend this to add more content and capabilities."
+    "short": "Sample app showcasing Microsoft Teams localization with Bot and Tab integration.",
+    "full": "This sample demonstrates how to implement localization for Microsoft Teams apps using Bots and Tabs."
   },
   "icons": {
     "outline": "outline.png",

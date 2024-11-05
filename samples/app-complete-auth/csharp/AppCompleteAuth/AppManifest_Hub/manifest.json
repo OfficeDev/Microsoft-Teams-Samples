@@ -19,8 +19,8 @@
     "full": "Authentication sample for Microsoft Teams"
   },
   "description": {
-    "short": "Authentication sample for Microsoft Teams",
-    "full": "Authentication sample for Microsoft Teams"
+    "short": "Sample demonstrating Azure AD and Facebook authentication for Teams apps.",
+    "full": "This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
