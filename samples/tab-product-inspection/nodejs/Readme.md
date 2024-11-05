@@ -1,7 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating a feature where user can scan a product from teams tab and mark it as approved/rejected.
-products:
+description: This application demonstrates how to scan products directly within Microsoft Teams, capturing images and allowing users to approve or reject items.
 - office-teams
 - office
 - office-365
@@ -15,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-nodejs
 
 # Product Inspection
 
-This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
+This sample application provides a streamlined product inspection process in Microsoft Teams, allowing users to scan barcodes, capture images, and easily mark products as approved or rejected. With essential features like media device permissions and interactive tabs, it enhances productivity and collaboration in product management.
 
  ## Included Features
 * Tabs

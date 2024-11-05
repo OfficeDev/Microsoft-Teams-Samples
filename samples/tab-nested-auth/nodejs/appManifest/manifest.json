@@ -19,8 +19,8 @@
     "full": "Nested App Authentication"
   },
   "description": {
-    "short": "This sample shows nested app authentication.",
-    "full": "This sample shows nested app authenticationis a new protocol that simplifies single sign-on (SSO) for single page applications."
+    "short": "Sample app demonstrating nested app authentication for simplified SSO in Teams.",
+    "full": "This Microsoft Teams sample demonstrates nested app authentication (NAA), a new protocol designed to streamline single sign-on (SSO) for single-page applications. By facilitating smoother authentication across nested applications, it offers advantages over traditional On-Behalf-Of (OBO) flows within the Microsoft 365 ecosystem."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
