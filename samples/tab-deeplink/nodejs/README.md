@@ -21,6 +21,8 @@ Microsoft Teams sample which displays deeplinks for call, video, chat, navigate 
 * Tabs
 * Bots
 * Deep Links
+* Share To Teams From Web Apps
+* Share To Teams For Education
 
 ## Interaction with app.
 
@@ -202,6 +204,20 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 ![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
 
 ![SharedFromWebApp](Images/ShareToTeams_LinkSharedFromWebApp.png)
+
+**Share To Teams For Education:**
+
+> **Note:** The `Share to Teams for EDU` feature is exclusively supported in Education (EDU) tenants. Ensure that your application is deployed and tested in an EDU tenant environment for this functionality to work correctly.
+
+![ClickTeamsIcon](Images/ShareToTeamsEDU_1.png)
+
+![CreateAssignment](Images/ShareToTeamsEDU_2.png)
+   
+![AssignmentCreated](Images/ShareToTeamsEDU_3.png)
+
+![ViewCreatedAssignment](Images/ShareToTeamsEDU_4.png)
+
+![VerifyAssignmentTitle](Images/ShareToTeamsEDU_5.png)
 
 ## Outlook on the web
 

@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Microsoft Teams (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "M365 (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "M365 (browser)"
+      }
+    ]
+  }
+]
