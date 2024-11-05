@@ -19,8 +19,8 @@
     "full": "SharePoint List Bot"
   },
   "description": {
-    "short": "SharePoint Bot app for Microsoft Teams",
-    "full": "This app will save conversation data to SharePoint list"
+    "short": "Teams bot that saves user input from adaptive cards to a SharePoint list.",
+    "full": "This Teams bot collects user input via adaptive cards and saves it to a SharePoint list."
   },
   "accentColor": "#FFFFFF",
   "bots": [

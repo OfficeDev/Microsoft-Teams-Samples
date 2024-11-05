@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-initiate-thread-in-channel",
     "source": "officeDev",
     "title": "Bot Initiate Thread.",
-    "shortDescription": "This sample showcases feature on how to start new message thread inside teams channel.",
+    "shortDescription": "This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-initiate-thread-in-channel/nodejs",
     "longDescription": [
-      "This sample showcases feature on how to start new messages thread inside teams channel."
+      "This sample app shows how to start a new conversation thread in a specific Microsoft Teams channel using Bot Framework v4. It features adaptive cards and bot interactions, and includes setup guidance for Teams Toolkit integration."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

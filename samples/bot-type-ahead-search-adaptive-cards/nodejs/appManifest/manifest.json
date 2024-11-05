@@ -43,6 +43,10 @@
             {
               "title": "dynamicsearch",
               "description": "To get dynamic type ahead search Adaptive Card"
+            },
+            {
+              "title": "dependantdropdown",
+              "description": "To get dependant dropdown type ahead search Adaptive Card"
             }
           ]
         }

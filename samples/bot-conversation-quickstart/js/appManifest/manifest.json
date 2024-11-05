@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Conversation Bot.",
-    "full": "Full description of Conversation Bot."
+    "short": "Quickstart guide for Teams bot conversation and messaging extensions in Node.js.",
+    "full": "This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Bot Framework v4."
   },
   "accentColor": "#FFFFFF",
   "bots": [

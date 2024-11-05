@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-message-reaction-nodejs",
     "source": "officeDev",
     "title": "Message Reactions Bot",
-    "shortDescription": "This sample showcases feature on how to capture reaction events when reactions are passed to the bot through personal/teams messages.",
+    "shortDescription": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-reaction/nodejs",
     "longDescription": [
-      "This sample showcases feature on how to capture reaction events when reactions are passed to the bot through personal/teams messages."
+      "This sample bot, built on the Bot Framework, responds to message reactions in Microsoft Teams. It showcases features such as adaptive cards and supports multiple scopes, including personal, group, and team interactions."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2022-10-04",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

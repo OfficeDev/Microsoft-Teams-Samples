@@ -15,8 +15,8 @@
     "full": "User can send task request to his manager using bot"
   },
   "description": {
-    "short": "Bot request approval",
-    "full": "This sample shows feature where user can send task request to his manager and manager can approve/reject request."
+    "short": "Send task approval requests in Teams group chat for manager's decision via bot.",
+    "full": "This bot allows users to request task approval from managers in Teams group chats."
   },
   "icons": {
     "outline": "outline.png",

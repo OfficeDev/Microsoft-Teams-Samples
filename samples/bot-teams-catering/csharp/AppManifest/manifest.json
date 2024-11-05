@@ -19,8 +19,8 @@
     "full": "Teams Catering Bot"
   },
   "description": {
-    "short": "Catering bot helps you place orders using adaptive cards",
-    "full": "It uses adaptive cards to place food and drinks order"
+    "short": "Teams Catering Bot: Order food via Adaptive Cards in Microsoft Teams.",
+    "full": "This Teams Catering Bot allows users to place food and drink orders seamlessly within Microsoft Teams. It leverages Universal Adaptive Cards for dynamic interactions and supports features like recent orders and order confirmation."
   },
   "accentColor": "#FFFFFF",
   "bots": [

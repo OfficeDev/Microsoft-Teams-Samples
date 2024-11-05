@@ -15,8 +15,8 @@
     "full": "Cards Formatting"
   },
   "description": {
-    "short": "This sample shows how to use different formatting on cards.",
-    "full": "This sample shows how to use different formatting on Adaptive Cards."
+    "short": "Showcase bot with various adaptive card formatting styles in Microsoft Teams.",
+    "full": "Demonstrates bot-driven adaptive card formatting capabilities in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",
