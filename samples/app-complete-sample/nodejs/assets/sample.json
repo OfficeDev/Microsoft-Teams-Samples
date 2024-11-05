@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-complete-sample-nodejs",
     "source": "officeDev",
     "title": "Bot, Tabs, and Messaging Extension",
-    "shortDescription": "Sample that shows how to use dialog bot with bot sdk v4, messaging extension and facebook auth flow in Nodejs.",
+    "shortDescription": "Explore a sample that demonstrates building a Microsoft Teams bot using SDK v4, featuring messaging extensions, adaptive cards, and Facebook authentication.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-sample/nodejs",
     "longDescription": [
-      "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)"
+      "This sample showcases the integration of a dialog bot in Microsoft Teams using the Bot SDK v4, along with messaging extensions and adaptive cards. It also includes Facebook authentication to enhance user interaction and streamline access within the app."
     ],
     "creationDateTime": "2017-05-08",
-    "updateDateTime": "2022-06-21",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

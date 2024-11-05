@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-virtual-assistant-csharp",
     "source": "officeDev",
     "title": "Virtual Assistant",
-    "shortDescription": "Customized virtual assistant template to support teams capabilities.",
+    "shortDescription": "This sample showcases a customizable virtual assistant template that integrates seamlessly with Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-virtual-assistant/csharp",
     "longDescription": [
-      "Customized virtual assistant template to support teams capabilities."
+      "This sample provides a customizable virtual assistant template designed to enhance Microsoft Teams capabilities. It supports various features such as deployment, customization, and integration with Office 365 applications."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

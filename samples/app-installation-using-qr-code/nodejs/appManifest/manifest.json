@@ -15,8 +15,8 @@
     "full": "Install app by QR"
   },
   "description": {
-    "short": "Install app by QR",
-    "full": "This sample demos app installation using QR code which has application app id"
+    "short": "Sample demonstrating app installation via QR code in Microsoft Teams.",
+    "full": "This sample demonstrates how to install a Microsoft Teams app using a QR code, enabling users to generate and scan QR codes for easy installation."
   },
   "icons": {
     "outline": "outline.png",

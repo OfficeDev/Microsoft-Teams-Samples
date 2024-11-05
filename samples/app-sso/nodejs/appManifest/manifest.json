@@ -23,8 +23,8 @@
     "full": "App SSO Node"
   },
   "description": {
-    "short": "App SSO Node",
-    "full": "App SSO Node for Bot Tab ME Scenario"
+    "short": "Microsoft Teams app with SSO for Tab, Bot, and Messaging Extensions.",
+    "full": "This Microsoft Teams sample app demonstrates single sign-on (SSO) integration for Tabs, Bots, and Messaging Extensions, leveraging Azure AD and MSAL.js."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

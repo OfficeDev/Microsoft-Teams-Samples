@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-sso-csharp",
     "source": "officeDev",
     "title": "App SSO C#",
-    "shortDescription": "Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl",
+    "shortDescription": "This sample app demonstrates Teams SSO integration for Tab, Bot, and Messaging Extension, using C# and Azure AD for secure authentication.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/csharp",
     "longDescription": [
-      "Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl"
+      "This C# sample app provides single sign-on (SSO) functionality for Microsoft Teams. It includes authentication support for Teams Tab, Bot, and Messaging Extension with features like user profile retrieval and secure API access using Azure AD."
     ],
     "creationDateTime": "2021-02-09",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

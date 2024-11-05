@@ -15,8 +15,8 @@
     "full": "Sample-App-csharp"
   },
   "description": {
-    "short": "This is a small sample app we made for you!",
-    "full": "This is a small sample app we made for you! This app has samples of all capabilities MS Teams supports."
+    "short": "Build a Microsoft Teams bot in C# with Bot Framework v4 and Facebook auth.",
+    "full": "This sample demonstrates how to create a Microsoft Teams bot in C# using Bot Framework v4, featuring Facebook authentication and various integration capabilities."
   },
   "icons": {
     "outline": "outline.png",

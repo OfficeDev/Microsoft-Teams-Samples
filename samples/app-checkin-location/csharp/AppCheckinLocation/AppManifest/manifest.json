@@ -15,8 +15,8 @@
     "full": "Get check in location of user"
   },
   "description": {
-    "short": "App check in location",
-    "full": "This sample shows feature where user can checkin with current location and view all previous checkins."
+    "short": "Check in with your location and view past check-ins using a Teams bot.",
+    "full": "This sample showcases a Microsoft Teams bot that allows users to check in their current location and view all previous check-ins seamlessly."
   },
   "icons": {
     "outline": "outline.png",

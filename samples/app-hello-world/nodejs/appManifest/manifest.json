@@ -14,8 +14,8 @@
     "full": "Hello World App for Microsoft Teams"
   },
   "description": {
-    "short": "Hello World App for Microsoft Teams",
-    "full": "This sample app provides a very simple app for Microsoft Teams. You can extend this to add more content and capabilities."
+    "short": "Microsoft Teams hello world sample showcasing tabs, bots, and messaging.",
+    "full": " This Microsoft Teams Hello World sample app demonstrates the integration of tabs, bots, and messaging extensions using JavaScript, providing a comprehensive foundation for building interactive and engaging Teams applications. Experience the full capabilities of Teams by exploring features that enhance collaboration and productivity within the platform."
   },
   "icons": {
     "outline": "outline.png",

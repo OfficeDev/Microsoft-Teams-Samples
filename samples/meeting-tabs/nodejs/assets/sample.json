@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meeting-tabs-nodejs",
     "source": "officeDev",
     "title": "Meeting-Tabs",
-    "shortDescription": "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.",
+    "shortDescription": "This sample showcases a Teams meeting side panel with Mute/Unmute audio controls.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-tabs/nodejs",
     "longDescription": [
-      "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab."
+      "This sample illustrates a Teams meeting side panel that enables users to Mute and Unmute audio during meetings. It features an interactive app stage view and supports Teams themes for enhanced user experience."
     ],
     "creationDateTime": "2023-01-23",
-    "updateDateTime": "2023-01-24",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Teams"
     ],

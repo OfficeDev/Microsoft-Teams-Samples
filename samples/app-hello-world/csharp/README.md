@@ -7,7 +7,7 @@ products:
 languages:
 - csharp
 title: Microsoft Teams C# Helloworld Sample
-description: Microsoft Teams "Hello world" application for .NET/C# which showcases tab, bot and messaging extension.
+description: A Microsoft Teams Hello World sample app built with .NET/C# that demonstrates essential features like tabs, bots, and messaging extensions for seamless interaction within the Teams environment.
 extensions:
   contentType: samples
   platforms:
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 # Microsoft Teams hello world sample app.
 
-- Microsoft Teams hello world sample app.
+- The Microsoft Teams Hello World application, built with .NET/C#, serves as an introductory sample showcasing fundamental Microsoft Teams capabilities, including tabs, bots, and messaging extensions. This application provides a hands-on experience for developers looking to explore the Teams platform and its integration options.
 
 ## Included Features
 * Tabs

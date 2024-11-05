@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-localization-csharp",
     "source": "officeDev",
     "title": "Teams App Localization",
-    "shortDescription": "Microsoft Teams app localization using Bot and Tab",
+    "shortDescription": "This sample demonstrates how to implement localization for Microsoft Teams apps using Bots and Tabs.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/csharp",
     "longDescription": [
-      "Microsoft Teams app localization using Bot and Tab"
+      "This sample demonstrates how to add localization support to Microsoft Teams apps with Bots and Tabs integration. It includes detailed steps for enabling language-specific content and interactions for a seamless multilingual experience."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

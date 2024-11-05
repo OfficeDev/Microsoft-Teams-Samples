@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+description: This app allows muting/unmuting Teams meeting audio and displays stage view in the meeting side panel.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-csharp
 
 ## Meeting Tabs Sample
 
-This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+This sample showcases muting/unmuting Teams meeting audio directly from the side panel tab with stage view integration. It also features Teams theme handling and RSC permissions support, making it ideal for enhancing your meeting experience.
 
 ## Included Features
 * Meeting Stage

@@ -19,8 +19,8 @@
     "full": "To Do action app"
   },
   "description": {
-    "short": "To Do action app",
-    "full": "To Do action app"
+    "short": "Build Teams apps with Actions to streamline tasks across Microsoft 365 apps.",
+    "full": "This sample demonstrates how to build Teams apps using Actions in the Microsoft 365 app to streamline task management and enhance productivity by minimizing context switching."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

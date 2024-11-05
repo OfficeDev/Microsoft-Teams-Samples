@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "Sample which demonstrates launching of task module from tab and bot."
+description: "This sample showcases how to launch task modules from tabs and bots in Microsoft Teams."
 urlFragment: ms-teams-task-sample
 products:
 - dotnet
@@ -15,6 +15,8 @@ urlFragment: officedev-microsoft-teams-samples-app-task-module-csharp
 ---
 
 # Microsoft Teams task module
+This sample demonstrates launching task modules from a Microsoft Teams tab and bot. It includes examples for displaying embedded content, Adaptive Cards, and custom HTML forms, making it easy to create rich, interactive experiences in your Teams applications. The sample leverages the Teams SDK and supports both web and Outlook integration, offering a versatile template for extending your Teams apps across Microsoft 365.
+
 A task module allows you to create modal popup experiences in your Teams application. Inside the popup, you can run your own custom HTML/JavaScript code, show an `<iframe>`-based widget such as a YouTube or Microsoft Stream video, or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
