@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-conversations-csharp",
     "source": "officeDev",
     "title": "Conversational Tabs",
-    "shortDescription": "Microsoft Teams tab sample app for demonstrating create conversation tab",
+    "shortDescription": "This Microsoft Teams sample app showcases how to create conversational tabs for users to discuss sub-entities within a tab, enhancing collaboration and interaction.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-conversations/csharp",
     "longDescription": [
-      "Microsoft Teams tab sample app for demonstrating create conversation tab"
+      "This Microsoft Teams sample app showcases how to create conversational tabs for users to discuss sub-entities within a tab, enhancing collaboration and interaction."
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

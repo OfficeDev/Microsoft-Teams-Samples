@@ -19,8 +19,8 @@
     "full": "Tab graph toolkit"
   },
   "description": {
-    "short": "Microsoft graph toolkit teams tab",
-    "full": "This sample demos building teams tab using microsoft graph toolkit."
+    "short": "Microsoft Teams tab sample demonstrating the Microsoft Graph Toolkit usage.",
+    "full": "This demo app illustrates how to implement a Microsoft Teams tab using the Microsoft Graph Toolkit, enabling seamless interaction with user data. It includes features like tabs and easy integration with Microsoft Graph for enhanced functionality."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

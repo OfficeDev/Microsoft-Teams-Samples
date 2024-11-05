@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Channel Group Tab.",
-    "full": "Full description of Channel Group Tab."
+    "short": "Sample app demonstrating Entra SSO authentication in Microsoft Teams tabs.",
+    "full": "This application demonstrates how to implement Microsoft Entra SSO authentication in Microsoft Teams personal tabs, providing secure access to user profiles and APIs."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

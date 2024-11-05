@@ -16,8 +16,8 @@
     "full": "personalTab"
   },
   "description": {
-    "short": "short description here",
-    "full": "full description here"
+    "short": "Custom personal tab app built with ASP.NET Core for Microsoft Teams.",
+    "full": "This sample showcases the development of a custom personal tab for Microsoft Teams, utilizing ASP.NET Core MVC to enhance user interaction. It includes instructions for manifest configuration, local testing with tunneling solutions, and deployment within Teams and Office applications."
   },
   "icons": {
     "outline": "outline.png",

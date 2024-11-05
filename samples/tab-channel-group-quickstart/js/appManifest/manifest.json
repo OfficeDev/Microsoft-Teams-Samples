@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for My Group Tab.",
-    "full": "Full description of My Group Tab."
+    "short": "Simple hello world app showcasing channel and group tabs in Microsoft Teams.",
+    "full": "This sample application illustrates how to create channel and group tabs in Microsoft Teams, enabling collaborative spaces for web-based content. It includes setup instructions, prerequisites, and features for embedding Teams-aware webpages directly into your Teams environment."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

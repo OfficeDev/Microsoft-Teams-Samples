@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases Google authentication using external auth providers.
+description: This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-external-auth-csharp
 ---
 # Tab external auth - C#
 
-This sample illustrates how to implement Google auth using external auth providers.
+This Microsoft Teams sample app illustrates the implementation of Google authentication using OAuth2, enabling seamless user sign-in via external providers. It includes a tab interface for easy interaction, showcasing best practices for integrating authentication within Teams applications.
 
 ## Included Features
 * External Auth (Google Oauth2)

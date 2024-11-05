@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-deeplink-csharp",
     "source": "officeDev",
     "title": "DeepLink",
-    "shortDescription": "Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.",
+    "shortDescription": "This Microsoft Teams sample app demonstrates deeplinks for calls, video, chat, and navigation within tabs and apps.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink/csharp",
     "longDescription": [
-      "Microsoft Teams sample which displsays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot."
+      "This Teams sample application highlights deeplinks for various functionalities, such as initiating calls, chats, and navigating within tabs and apps. It features a comprehensive setup guide and supports interactions with both bots and tabs for enhanced user engagement."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],
