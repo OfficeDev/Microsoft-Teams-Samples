@@ -168,10 +168,6 @@ jobs:
               name: 'app-region-selection'
               version: '6.0.x'
 
-            - project_path: 'samples/tab-adaptive-cards/csharp/TabWithAdpativeCardFlow/TabWithAdpativeCardFlow.csproj'
-              name: 'tab-adaptive-cards'
-              version: '6.0.x'
-
             - project_path: 'samples/tab-external-auth/csharp/TabExternalAuth/TabExternalAuth.csproj'
               name: 'tab-external-auth'
               version: '6.0.x'
@@ -484,6 +480,10 @@ jobs:
               name: 'tab-nested-auth'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-commands-menu/csharp/CommandsMenu/CommandsMenu.csproj'
+              name: 'bot-commands-menu'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -530,7 +530,7 @@ jobs:
 
             - project_path: 'samples/app-sso/nodejs'
               name: 'app-sso'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/app-sso/nodejs/client'
               name: 'app-sso-client'
@@ -658,10 +658,6 @@ jobs:
 
             - project_path: 'samples/msgext-message-reminder/nodejs'
               name: 'msgext-message-reminder'
-              version: '14.x'
-
-            - project_path: 'samples/tab-adaptive-cards/nodejs'
-              name: 'tab-adaptive-cards'
               version: '14.x'
 
             - project_path: 'samples/tab-conversations/nodejs'
@@ -1021,6 +1017,10 @@ jobs:
 
             - project_path: 'samples/m365-actions-preview/nodejs/api'
               name: 'm365-actions-preview-api'
+              version: '18.x'
+
+            - project_path: 'samples/bot-commands-menu/nodejs'
+              name: 'bot-commands-menu'
               version: '18.x'
 
             - project_path: 'samples/bot-feed-members/nodejs'

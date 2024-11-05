@@ -1,0 +1,83 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.appiconbadging",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://microsoft.com/privacy",
+    "termsOfUseUrl": "https://microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meetings-App-Icon-Badging",
+    "full": "Show App Icon Badging In Teams Meetings"
+  },
+  "description": {
+    "short": "Sample app demonstrating Teams app icon badging during meetings notifications.",
+    "full": "This sample app showcases how to implement app icon badging notifications in Teams meetings."
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat"
+      ],
+      "context": [
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "SendNotification",
+              "description": "Sends app icon badging notification in Teams meetings."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingNotification.Send.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}

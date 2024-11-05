@@ -67,7 +67,7 @@ const createUserArray = (
 export function CreateDocumentButton({
   userIsAnonymous,
 }: CreateDocumentButtonProps) {
-  const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
+  const [userHasConsented, setUserHasConsented] = useState<boolean>(true);
   const [documentInput, setDocumentInput] = useState<DocumentInput | undefined>(
     undefined,
   );
