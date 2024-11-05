@@ -15,8 +15,8 @@
     "full": "Tab External Auth App"
   },
   "description": {
-    "short": "Sample which showcases external authentication using OAuth providers",
-    "full": "Sample which showcases external authentication using OAuth providers"
+    "short": "Microsoft Teams sample app demonstrating Google authentication with OAuth2.",
+    "full": "This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly."
   },
   "icons": {
     "outline": "outline.png",

@@ -19,8 +19,8 @@
     "full": "Meeting Transcripts Recordings"
   },
   "description": {
-    "short": "Sample Teams Meeting Transcripts and Recordings.",
-    "full": "Sample Teams Meeting Transcripts and Recordings."
+    "short": "Capture meeting transcripts and recordings seamlessly in Microsoft Teams.",
+    "full": "This sample application for Microsoft Teams enables users to automatically capture meeting transcripts and recordings, enhancing meeting documentation and accessibility. With a straightforward setup and integration process, it allows teams to focus on discussions while ensuring all details are preserved."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

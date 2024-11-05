@@ -15,8 +15,8 @@
     "full": "Channel Group Tab"
   },
   "description": {
-    "short": "short description here",
-    "full": "full description here"
+    "short": "Sample app for creating custom channel and group tabs with ASP.NET Core.",
+    "full": "This quickstart guide shows how to create custom channel and group tabs for Microsoft Teams with ASP.NET Core and MVC. It covers the complete setup process, including manifest configuration and local testing using tools like Ngrok and the Teams Toolkit for Visual Studio."
   },
   "icons": {
     "outline": "outline.png",

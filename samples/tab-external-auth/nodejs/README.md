@@ -1,5 +1,5 @@
 ### API Server
-The API server is used to exchange the access token provided by Teams to get a token for accessing graph resources that you need for your app. This sample is requesting permission to read the user's profile to display the current logged in user's profile picture.
+This sample API server is designed to exchange access tokens provided by Microsoft Teams for Graph API access, specifically to read user profile data. It enables developers to display the logged-in user's profile picture by integrating Google OAuth for authentication.
 
 ### Prerequisites
 - NodeJS

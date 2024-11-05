@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts",
     "source": "officeDev",
     "title": "Starter solution: Personal tab with SSO in TypeScript",
-    "shortDescription": "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab.",
+    "shortDescription": "This sample application demonstrates how to implement Single Sign-On (SSO) authentication in personal Teams tabs using Azure Microsoft Entra and TypeScript.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/ts",
     "longDescription": [
-      "This is an sample tab application which demonstrates Azure AAD authentication using OBO flow in personal teams tab."
+      "This comprehensive sample illustrates the setup of Single Sign-On (SSO) authentication for personal tabs in Microsoft Teams, utilizing Azure Microsoft Entra and TypeScript. It includes features like MSAL.js 2.0 support, Graph API integration, and detailed guidance for app registration and configuration to enhance user interaction within Teams."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

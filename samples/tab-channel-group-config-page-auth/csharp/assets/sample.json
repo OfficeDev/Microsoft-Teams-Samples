@@ -6,7 +6,7 @@
     "shortDescription": "This sample demonstrates AAD and Silent Authentication inside teams configurable tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-config-page-auth/csharp",
     "longDescription": [
-      "This sample demonstrates AAD and Silent Authentication inside teams configurable tab."
+      "This sample showcases how to implement Microsoft Entra ID and silent authentication in a configurable Teams tab, enabling secure access to user profile information."
     ],
     "creationDateTime": "2021-03-20",
     "updateDateTime": "2022-06-20",
