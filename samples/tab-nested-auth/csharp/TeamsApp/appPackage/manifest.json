@@ -19,8 +19,8 @@
     "full": "Nested App Authentication"
   },
   "description": {
-    "short": "This sample shows nested app authentication.",
-    "full": "This sample shows nested app authenticationis a new protocol that simplifies single sign-on (SSO) for single page applications."
+    "short": "Sample app demonstrating Azure AD SSO in Teams using OBO flow with C#.",
+    "full": "This Microsoft Teams sample app demonstrates the implementation of Azure AD single sign-on (SSO) using the On-Behalf-Of (OBO) flow to access Graph APIs in a Teams tab. It features nested app authentication, streamlining user authentication across Microsoft 365 applications for a seamless experience."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

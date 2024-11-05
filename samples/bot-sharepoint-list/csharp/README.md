@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end
+description: This Teams bot collects user input via adaptive cards and saves it to a SharePoint list.
 products:
 - office-teams
 - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
 
 Bot Framework v4 SPListBot sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and save it into sharepoint's List.
+This bot has been created using [Bot Framework](https://dev.botframework.com), This Microsoft Teams bot sample demonstrates how to capture user input through adaptive cards and store it in a SharePoint list. Built on the Bot Framework, it offers a seamless way to manage data directly from the Teams interface. The setup includes SharePoint registration, permissions configuration, and deployment in Teams, allowing easy integration and data handling within your Teams environment.
 
 ## Interaction with app
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use message reactions using bot.
+description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
 products:
 - office-teams
 - office
@@ -15,11 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-reaction-java
 
 # Teams Message Reactions Bot Java Sample
 
-Bot Framework v4 core bot sample.
-
-Bot Framework [message reactions](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events) bot sample.
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that responds to Message Reactions.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 

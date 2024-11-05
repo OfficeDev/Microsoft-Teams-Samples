@@ -19,8 +19,8 @@
     "full": "OneWay Dependency RT-Sample-App"
   },
   "description": {
-    "short": "Specify runtime requirements for specific app capabilities",
-    "full": "This sample feature is to cover Oneway Dependency like ME and Bot are dependent on each other"
+    "short": "App demonstrating one-way dependency relationships in Teams capabilities.",
+    "full": "This sample app illustrates how to specify one-way dependency relationships between app capabilities in Microsoft Teams using the 'elementRelationshipSet' property and functionality requirements with 'hostMustSupportFunctionalities'."
   },
   "accentColor": "#FFFFFF",
   "elementRelationshipSet": {

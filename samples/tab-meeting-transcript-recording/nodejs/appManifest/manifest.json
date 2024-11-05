@@ -19,8 +19,8 @@
     "full": "Meeting Transcripts Recordings"
   },
   "description": {
-    "short": "Sample Teams Meeting Transcripts and Recordings.",
-    "full": "Sample Teams Meeting Transcripts and Recordings."
+    "short": "Capture and manage meeting transcripts and recordings in Microsoft Teams.",
+    "full": "This sample application for Microsoft Teams allows users to capture meeting transcripts and recordings, providing an efficient way to document discussions and decisions. With easy setup and integration using Node.js, it enhances team collaboration and ensures that important meeting details are never lost."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

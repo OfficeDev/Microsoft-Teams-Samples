@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos linking user's Microsoft Entra ID with Facebook and Google account of user from bot, ME and tab.
+description: This sample demonstrates authentication integration using Azure AD, Facebook, and username/password methods across bot, tab, and messaging extension functionalities in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,9 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 
 # External OAuth identity linking in Teams Apps.
 
-This sample demos linking user's Microsoft Entra ID with their GitHub identity. 
-
-The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API.
+This sample demonstrates how to link a user's Microsoft Entra ID with external OAuth identities like GitHub, Google, or Facebook across multiple Teams capabilities, including tabs, conversational bots, and messaging extensions. It provides a robust implementation for handling OAuth2.0 identity linking and token management, ensuring seamless access and persistent authentication across devices and Teams components.
 
 ![Account Linking Sample](Source/Images/account-linking-sample.gif)
 

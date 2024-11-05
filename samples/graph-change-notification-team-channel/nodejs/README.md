@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates the use of team/Channel subscription that will post notifications when user create/edit/delete team/channel through teams tab.
+description: This sample application demonstrates how to send notifications for team and channel events, such as creation, editing, or deletion, in Microsoft Teams using Node.js and the Microsoft Graph API.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 # Change Notifications For Team and Channel Using Microsoft Graph Node.js
 
-This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
+This sample application showcases how to utilize team and channel subscriptions in Microsoft Teams to send real-time notifications for various user actions, such as creating, editing, or deleting teams and channels. Built with Node.js and Microsoft Graph API, this application includes comprehensive setup instructions, covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Teams Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs

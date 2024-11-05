@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details are sent to user.
+description: This sample demonstrates how to retrieve and display meeting context and participant details in Microsoft Teams using bot APIs.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-context-app-csharp
 
 # Teams Meeting Context Sample C# 
 
-This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
+This sample application illustrates how to display the contents of the meeting context object in a Microsoft Teams meeting tab. By using the bot's meeting APIs, it enables users to retrieve and interact with detailed information about meeting participants and the meeting itself, including start times, end times, and joining URLs, thus enhancing the collaborative experience within Teams.
 
 ## Included Features
 * Bots

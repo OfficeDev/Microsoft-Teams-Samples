@@ -18,10 +18,10 @@
         "short": "TeamsStartThreadInChannel",
         "full": "TeamsStartThreadInChannel"
     },
-    "description": {
-        "short": "TeamsStartThreadInChannel",
-        "full": "TeamsStartThreadInChannel"
-    },
+  "description": {
+    "short": "Start a thread in a Microsoft Teams channel using Bot Framework v4.",
+    "full": "This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4."
+  },
     "accentColor": "#FFFFFF",
     "bots": [
         {

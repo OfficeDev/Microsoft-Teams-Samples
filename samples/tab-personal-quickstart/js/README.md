@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample personal tab quick-start app.
+description: This quick-start sample guides you through building a personal tab for Microsoft Teams, featuring seamless integration and interaction within the app.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-quickstart-js
 
 # Personal Tabs
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+This sample application provides a comprehensive guide for developing a personal tab in Microsoft Teams using JavaScript. It covers all necessary prerequisites, from setting up the development environment to configuring the app manifest, enabling developers to quickly deploy and test their custom tab within Teams and other Microsoft platforms like Outlook and Office.
 
  ## Included Features
 * Tabs

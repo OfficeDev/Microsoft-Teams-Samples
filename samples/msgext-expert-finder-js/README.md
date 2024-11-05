@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample implements a Teams message extension that can be used within Copilot to query a database of candidates based on their skills, location and availability. The sample further demonstrates SSO and Copilot's ability to perform multi-parameter search.
+description: This sample implements a Teams message extension for Copilot, enabling users to query a database of candidates based on skills, location, and availability.
 products:
 - office-teams
 - copilot-m365
@@ -13,6 +13,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-expert-finder-js
 ---
 
 # Expert Finder message extension sample with SSO
+
+This sample demonstrates a Teams message extension integrated with Microsoft Copilot, enabling users to efficiently search a database of candidates based on their skills, location, and availability. The extension features Single Sign-On (SSO) for enhanced user experience and authentication.
+
 
 ## Interaction with app
 

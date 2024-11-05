@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp",
     "source": "officeDev",
     "title": "This sample shows meeting auto recording.",
-    "shortDescription": "This sample shows meeting auto recording.",
+    "shortDescription": "This sample demonstrates how to automatically record meetings and generate transcripts in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-meeting-auto-recording/csharp",
     "longDescription": [
-      "This sample shows meeting auto recording."
+      "This sample showcases a Microsoft Teams app that enables automatic meeting recordings and transcripts, enhancing collaboration and record-keeping. With a user-friendly interface and seamless integration, it empowers teams to focus on discussions without worrying about missing key details."
     ],
     "creationDateTime": "2024-07-30",
-    "updateDateTime": "2024-07-30",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

@@ -19,8 +19,8 @@
     "full": "Adaptive Card based loop components."
   },
   "description": {
-    "short": "This sample shows msgext with adaptive card-based loop components functionality.",
-    "full": "This sample shows messaging extension with adaptive card-based loop components functionality."
+    "short": "C# Messaging Extension with adaptive card-based loop components functionality.",
+    "full": "This sample demonstrates a C# Messaging Extension for Microsoft Teams that utilizes adaptive card-based loop components, enabling link unfurling and dynamic interactions within the compose area."
   },
   "accentColor": "#FFFFFF",
   "bots": [

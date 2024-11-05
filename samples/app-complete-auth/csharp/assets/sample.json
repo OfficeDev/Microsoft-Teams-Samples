@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-complete-auth-csharp",
     "source": "officeDev",
     "title": "Authentication complete sample",
-    "shortDescription": "This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension.",
+    "shortDescription": "This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-auth/csharp",
     "longDescription": [
-      "This sample demos Azure AD and facebook authentication feature in bot, tab and messaging extension."
+      "This sample demonstrates robust authentication capabilities, including Azure AD and Facebook integration, for bots, tabs, and messaging extensions in Microsoft Teams. It features single sign-on (SSO), Adaptive Cards, Task Modules, Graph API, and supports MSAL.js 2.0."
     ],
     "creationDateTime": "2022-02-25",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

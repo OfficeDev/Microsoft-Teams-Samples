@@ -19,8 +19,8 @@
     "full": "Meeting Notification App."
   },
   "description": {
-    "short": "This is a sample demonstrates use of online meeting subscription.",
-    "full": "This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end."
+    "short": "Receive chat notifications for online meeting events using a Teams bot.",
+    "full": "This sample application demonstrates how to use an online meeting subscription to send notifications in Microsoft Teams chat when users join, leave, or when meetings start and end."
   },
   "accentColor": "#FFFFFF",
   "bots": [

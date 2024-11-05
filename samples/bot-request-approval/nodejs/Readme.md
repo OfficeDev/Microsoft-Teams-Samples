@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat through bot.
+description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
 ---
 
 # Bot request approval
-This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
+This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Teams Toolkit for Visual Studio.
 
 ## Included Features
 * Bots

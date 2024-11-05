@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension sample with Link Unfurling feature for Reddit Links
+description: This sample demonstrates a Node.js Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,8 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-reddit-node
 # Link Unfurling for Reddit Links
 
 ![Preview Image](doc/image/link.png)
-
-This repository is a full implementation of [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) for [Reddit](https://reddit.com) links in nodejs.
+This comprehensive Node.js sample illustrates how to implement a Messaging Extension for [Reddit](https://reddit.com) links in Microsoft Teams, featuring robust [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) capabilities. With easy configuration and user authentication, the extension enhances the sharing and interaction with Reddit content directly in Teams.
 
 This sample demonstrates the following concepts: 
 - Link Unfurling

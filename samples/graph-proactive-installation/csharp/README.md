@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot.
+description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-csha
 
 # Proactive Installation Sample App
 
-This sample app illustartes the proactive installation of app using Graph API and sending proactive notification to users from GroupChat or Channel.
+This sample application showcases proactive installation of a Microsoft Teams app, allowing you to send notifications to users via Microsoft Graph APIs. With integrated bot functionality, this app facilitates user interaction and demonstrates how to efficiently manage app installations within Teams channels and group chats.s
 
 Language Used : C#
 

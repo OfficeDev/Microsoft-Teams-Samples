@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample API application that demonstrates how to perform RAG-based semantic search using Azure CosmosDB NoSQL.
+description: This is a sample RAG-based semantic search using Azure CosmosDB NoSQL, demonstrating document ingestion, embedding generation, and prompt-based queries.
 products:
 - azure-cosmos-db
 - azure-openai

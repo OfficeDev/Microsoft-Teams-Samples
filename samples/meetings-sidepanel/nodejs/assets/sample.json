@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-sidepanel-nodejs",
     "source": "officeDev",
     "title": "Meetings SidePanel",
-    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting",
+    "shortDescription": "This sample app for Microsoft Teams showcases how to implement a side panel for real-time interaction during meetings, allowing organizers to manage agendas.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-sidepanel/nodejs",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting"
+      "This sample application demonstrates the integration of a side panel in Microsoft Teams meetings, enabling meeting organizers to add and publish agenda items in real-time. Key features include the use of the Live Share SDK, adaptive cards, and support for app themes, enhancing collaborative experiences during meetings."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

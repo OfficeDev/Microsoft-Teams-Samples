@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an example to show how to write a connector for Microsoft Teams using GitHub's APIs.
+description: This sample demonstrates how to build a GitHub connector for Microsoft Teams, enabling integration with GitHub's APIs for streamlined notifications.
 products:
 - office-teams
 - office-365
@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-github-notification-nod
 
 # GitHub Connector for Microsoft Teams
 
-This is an example to show how to write a connector for Microsoft Teams using GitHub's APIs. It is not the source code for the GitHub connector in Teams/Outlook/Yammer.
+This sample illustrates how to develop a GitHub connector for Microsoft Teams using Node.js, allowing teams to receive GitHub notifications directly within their Teams channels. The setup guides you through creating an OAuth application on GitHub, configuring a tunnel for local testing, and sideloading the connector into Teams, making it convenient to monitor GitHub activities.
  
 #### Prerequisites
 1. Register a new OAuth application at GitHub. Note the GitHub client id and secret.

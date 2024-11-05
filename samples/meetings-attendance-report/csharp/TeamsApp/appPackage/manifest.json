@@ -19,8 +19,8 @@
     "full": "Meeting Attendance Bot"
   },
   "description": {
-    "short": "Bot sent meeting attendance report in chat.",
-    "full": "This is a sample application which demonstrates how to get attendance reports using Graph API and send it in meeting chat."
+    "short": "Sample app to fetch and send meeting attendance reports via Graph API bot.",
+    "full": "This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in the meeting chat."
   },
   "accentColor": "#235EA5",
   "bots": [

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app show end user region selection using Bot and Tab
+description: This Microsoft Teams app allows users to select and set a region using a Bot and Tab.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-app-region-selection-csharp
 ---
 
 # Region Selection App
+
+A Microsoft Teams sample app for region selection, leveraging both Bot and Tab interactions. The app features Adaptive Cards to facilitate region configuration and provides a seamless experience to manage data center selection through the Teams client.
 
 Bot Framework v4 Region Selection sample.
 

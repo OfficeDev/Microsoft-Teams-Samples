@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app localization using Bot and Tab
+description: This sample demonstrates how to implement localization for Microsoft Teams apps using Bots and Tabs.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 ---
 
 # Teams App Localization
+A comprehensive sample that illustrates how to implement localization for Microsoft Teams apps using Bots and Tabs. This sample covers app registration, setup, and configuration to enable language-specific content in Microsoft Teams, Outlook, and Office on the web. Supports multiple languages, such as en-US, fr-CA, hi-IN, and es-MX, and includes integration with Microsoft Entra ID and Azure Bot Service.
+
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
 ## Included Features

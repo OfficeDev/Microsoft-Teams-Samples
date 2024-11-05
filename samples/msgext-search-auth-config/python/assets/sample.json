@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-auth-config-python",
     "source": "officeDev",
     "title": "Search Auth Config In Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use authentication in Search based Messaging Extension.",
+    "shortDescription": "This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/python",
     "longDescription": [
-      "This sample app demonstrate how to use authentication in Search based Messaging Extension."
+      "This Python sample builds upon the search-based Messaging Extension to include a configuration page for user settings and authentication. It showcases how to securely sign in and manage user interactions while leveraging the Microsoft Graph API."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-09-22",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

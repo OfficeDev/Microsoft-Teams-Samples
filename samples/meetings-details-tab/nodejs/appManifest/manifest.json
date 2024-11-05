@@ -16,8 +16,8 @@
     "full": "Details Tab for Meeting"
   },
   "description": {
-    "short": "Details Tab",
-    "full": "Details Tab for Meeting Extensibility"
+    "short": "Create and manage polls in Teams meetings with interactive tabs and bots.",
+    "full": "This sample app demonstrates how to implement a Details Tab in Microsoft Teams meetings, allowing users to create polls and gather participant feedback through interactive chats."
   },
   "icons": {
     "outline": "icon-outline.png",

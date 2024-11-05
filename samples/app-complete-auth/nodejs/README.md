@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos Azure AD and facebook authentication feature in bot,tab and messaging extension.
+description: This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 
 # Authentication complete sample
 
-Using this nodejs sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
+Experience seamless authentication with this sample application, which integrates Azure AD and Facebook authentication across Microsoft Teams bots, tabs, and messaging extensions. It supports single sign-on (SSO), Adaptive Cards, Task Modules, and Microsoft Graph API, ensuring a rich and secure user experience.
 
 ## Included Features
 * Teams SSO (tabs, bots, messaging extensions, link unfurling)
