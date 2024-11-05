@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-change-notification-nodejs",
     "source": "officeDev",
     "title": "Change Notification sample using nodejs",
-    "shortDescription": "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.",
+    "shortDescription": "This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/nodejs",
     "longDescription": [
-      "This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams."
+      "This sample app allows developers to send real-time notifications to users in Microsoft Teams when their presence status changes, leveraging Node.js and the Graph API. It includes setup instructions for Azure AD, bot configuration, and installation steps, ensuring a smooth integration experience."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-19",
+    "updateDateTime": "2022-10-14",
     "products": [
       "Teams"
     ],

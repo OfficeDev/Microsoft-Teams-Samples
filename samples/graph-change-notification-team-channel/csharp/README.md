@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates the use of team/Channel subscription that will post notifications when user create/edit/delete team/channel through teams tab.
+description: This sample application showcases how to post notifications in Microsoft Teams when users create, edit, or delete teams and channels using Microsoft Graph and C#.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 # Change Notifications For Team and Channel Using Microsoft Graph C#
 
-This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
+This sample application illustrates how to implement team and channel subscriptions in Microsoft Teams, enabling real-time notifications for user actions such as creating, editing, or deleting teams and channels. Built using C# and the Microsoft Graph API, it provides detailed setup instructions, including Azure AD registration, bot configuration, and certificate management, making it easy for developers to create interactive and responsive applications.
 
 ## Included Features
 * Tabs

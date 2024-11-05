@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs through teams tab.
+description: This sample application demonstrates how to manage the channel lifecycle—create, update, and delete channels—using the Microsoft Graph API through a Teams tab.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp
 
 # Channel life cycle using C#
 
-This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel.
+This sample application illustrates how to effectively manage the lifecycle of channels in Microsoft Teams using the Microsoft Graph API. It enables users to create, update, and delete channels directly through a Teams tab and is built with C# to demonstrate integration with the Teams Toolkit, complete with setup instructions for registration, tunneling, and deployment.
 
 ## Included Features
 * Tabs

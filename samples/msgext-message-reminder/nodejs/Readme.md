@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
+description: This sample demonstrates a Node.js Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-nodejs
 
 # Message reminder with messaging extension action
 
-This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
+This comprehensive Node.js sample illustrates how to create a Messaging Extension that enables users to schedule tasks from within Microsoft Teams, complete with reminder cards sent at the scheduled times. With straightforward setup and seamless integration, this extension enhances productivity by allowing users to efficiently manage their tasks and reminders.
 
 ## Interaction with app
 

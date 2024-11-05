@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-message-reminder-csharp",
     "source": "officeDev",
     "title": "Message reminder with messaging extension action",
-    "shortDescription": "This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.",
+    "shortDescription": "This sample demonstrates a C# Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-message-reminder/csharp",
     "longDescription": [
-      "This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time."
+      "This C# sample showcases a Messaging Extension where users can schedule tasks directly from messages and receive reminders at specified times. It provides a user-friendly interface for managing reminders within Microsoft Teams."
     ],
     "creationDateTime": "2021-11-24",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

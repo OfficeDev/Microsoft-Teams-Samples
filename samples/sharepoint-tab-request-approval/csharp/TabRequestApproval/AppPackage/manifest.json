@@ -19,8 +19,8 @@
         "full": "App using SharePoint Embedded for storage of task approvals being sent to the manager."
     },
     "description": {
-        "short": "App helps user to raise a request and notify manager for approve or reject it.",
-        "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection. Data is stored using SharePoint Embedded."
+        "short": "Sample app showcasing SharePoint Embedded for storage in Teams tab.",
+        "full": "This sample app demonstrates the integration of SharePoint Embedded for storage management within the Teams Tab Request Approval application, featuring Teams SSO, activity feed notifications, and Graph API support."
     },
     "accentColor": "#235EA5",
     "configurableTabs": [

@@ -15,8 +15,8 @@
     "full": "Tab UI Templates"
   },
   "description": {
-    "short": "Experience how Teams apps should look and behave in common scenarios.",
-    "full": "The Teams Sample App includes interactive content to help you better understand how your app should look and behave in Teams. Try out forms, dashboards, and other UI templates that meet Teams design standards."
+    "short": "Sample app showcasing high-quality UI templates for Microsoft Teams.",
+    "full": "This sample app provides tested, high-quality UI templates to help developers understand how to create effective applications for Microsoft Teams, covering common use cases like dashboards and forms."
   },
   "icons": {
     "outline": "icon-outline.png",

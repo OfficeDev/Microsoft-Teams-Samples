@@ -19,8 +19,8 @@
     "full": "Config Auth Search"
   },
   "description": {
-    "short": "Config Auth Search",
-    "full": "Config Auth Search"
+    "short": "Python Messaging Extension with authentication and configuration page.",
+    "full": "This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

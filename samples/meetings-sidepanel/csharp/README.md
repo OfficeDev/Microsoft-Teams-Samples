@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample app which demonstrates how to use live share SDK inside meeting side panel.
+description: This Microsoft Teams sample app demonstrates how to use the Live Share SDK to implement a side panel that allows for real-time data sharing during meetings.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-csharp
 
 # Meetings SidePanel
 
-This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience and uses [Live Share SDK](https://aka.ms/livesharedocs) to share data in realtime.
+This sample application demonstrates the implementation of a [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) in Microsoft Teams meetings, leveraging the Live Share SDK for real-time data sharing. Users can add agenda items, publish them to the meeting chat, and interact with the app through adaptive cards and customizable themes, enhancing the overall meeting experience.
 
 ## Included Features
 * Meeting Stage

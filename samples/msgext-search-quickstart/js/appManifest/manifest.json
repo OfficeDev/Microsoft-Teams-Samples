@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Messaging Extension Search.",
-    "full": "Full description of Messaging Extension Search."
+    "short": "Messaging Extension quick start for handling search requests.",
+    "full": "This sample demonstrates a simple JavaScript-based Messaging Extension that accepts search requests and returns results within Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

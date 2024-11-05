@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension sample with Link Unfurling feature for Reddit Links
+description: This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -16,8 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-reddit-csha
 # Link Unfurling for Reddit Links
 
 ![Preview Image](doc/images/Preview.gif)
+This comprehensive C# sample illustrates how to implement a Messaging Extension for [Reddit](https://reddit.com) links in Microsoft Teams, featuring robust  [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) capabilities. With built-in user authentication and configurable settings, the extension streamlines the process of sharing and interacting with Reddit content seamlessly in Teams.
 
-This repository is a full implementation of [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) for [Reddit](https://reddit.com) links in dotnet.
 
 This sample demonstrates the following concepts: 
 - Link Unfurling

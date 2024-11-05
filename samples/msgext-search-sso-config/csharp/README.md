@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-
 ---
 # Teams Messaging Extensions Search
 
-[Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
+This comprehensive C# sample showcases the development of a search-based [Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) for Microsoft Teams, designed to enhance user interaction with external services through the [Bot Framework](https://dev.botframework.com) v4. It facilitates search functionality directly from the Teams client, enabling users to easily retrieve relevant information from connected systems.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build a Search-based Messaging Extension.

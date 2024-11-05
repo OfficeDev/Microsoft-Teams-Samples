@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting notifications
+description: This sample application demonstrates how to implement targeted in-meeting notifications in Microsoft Teams using adaptive cards and bot interactions.
 products:
 - office-teams
 - office
@@ -15,7 +15,8 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-nodejs
 
 ## Targeted In-Meeting Notification
 
-This sample illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
+This sample application illustrates how to implement [Targeted In-Meeting Notification](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api) within Microsoft Teams. By utilizing adaptive cards and bot interactions, it enables users to send and receive notifications, view meeting agendas, and provide feedback, fostering a more interactive and efficient meeting experience.
+
 
 ## Included Features
 * Bots

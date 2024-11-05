@@ -19,8 +19,8 @@
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Link Unfurling sample",
-    "full": "This sample demonstrates Link Unfurling for *.BotFramework.com urls."
+    "short": "Python bot sample demonstrating link unfurling in Teams messaging extensions",
+    "full": "This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

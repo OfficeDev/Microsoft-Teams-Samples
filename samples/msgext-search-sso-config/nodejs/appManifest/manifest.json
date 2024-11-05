@@ -19,8 +19,8 @@
     "full": "ME SSO for Search, Action and link unfurling"
   },
   "description": {
-    "short": "ME Authentication for Search, Action and Link unfurling",
-    "full": "ME Authentication sample code for all authentication merged"
+    "short": "Node.js Messaging Extension with configuration page and SSO authentication.",
+    "full": "This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that includes a configuration page and supports SSO authentication for enhanced user experience."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
