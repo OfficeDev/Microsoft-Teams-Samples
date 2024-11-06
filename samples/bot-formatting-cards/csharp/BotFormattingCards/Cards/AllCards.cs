@@ -239,5 +239,64 @@ namespace BotAllCards.Cards
             return RoundedCornersCardAttachment;
         }
 
+        /// <summary>
+        /// Generates an Adaptive Card attachment that includes Fluent icons. 
+        /// This method reads the adaptive card JSON from a resource file and 
+        /// deserializes it to be included as an attachment with Fluent icons in the card.
+        /// Fluent icons provide a modern and visually appealing way to enhance the UI within Adaptive Cards.
+        /// </summary>
+        /// <returns>
+        /// Returns an Attachment object that contains the Adaptive Card with Fluent icons.
+        /// </returns>
+        public static Attachment SendFluentIconsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardFluentIcon.json" };
+            var adaptiveCardFluentIconsJson = File.ReadAllText(Path.Combine(paths));
+
+            var FluentIconsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardFluentIconsJson),
+            };
+
+            return FluentIconsCardAttachment;
+        }
+
+        /// <summary>
+        /// Creates and returns an Attachment containing an adaptive card with media elements.
+        /// </summary>
+        /// <returns>An Attachment object with a media elements adaptive card.</returns>
+        public static Attachment SendMediaElementsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardMediaElements.json" };
+            var adaptiveCardMediaElementsJson = File.ReadAllText(Path.Combine(paths));
+
+            var MediaElementsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardMediaElementsJson),
+            };
+
+            return MediaElementsCardAttachment;
+        }
+
+        /// <summary>
+        /// Sends a star ratings card as an attachment for displaying or collecting user feedback.
+        /// </summary>
+        /// <returns>An Attachment object containing the star ratings card, which can display read-only ratings or collect ratings from users.</returns>
+        public static Attachment SendStarRatingsCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardStarRatings.json" };
+            var adaptiveCardStarRatingsJson = File.ReadAllText(Path.Combine(paths));
+
+            var StarRatingsCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardStarRatingsJson),
+            };
+
+            return StarRatingsCardAttachment;
+        }
+
     }
 }

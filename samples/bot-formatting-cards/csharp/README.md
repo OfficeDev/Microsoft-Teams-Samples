@@ -258,9 +258,57 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
 
+**Select Fluent Icon:**
+
+![FluentIconAdaptiveCard](BotFormattingCards/Images/16.FluentIconAdaptiveCard.png)
+
+**Fluent icon in an Adaptive Card:**
+
+![FluentIconsSelectCard](BotFormattingCards/Images/17.FluentIconsSelectCard.png)
+
+**Select Media elements:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/18.MediaElementsAdaptiveCard.png)
+
+**Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/19.MediaElementsAdaptiveCard.png)
+
+**All Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard1](BotFormattingCards/Images/20.MediaElementsAdaptiveCard1.png)
+
+**Play video media elements in an Adaptive Card:**
+
+![MediaElementsAdaptiveCard2](BotFormattingCards/Images/21.MediaElementsAdaptiveCard2.png)
+
+**Select Star Ratings:**
+
+![SelectStarRatings](BotFormattingCards/Images/22.SelectStarRatings.png)
+
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/23.StarRatingsAdaptiveCards.png)
+
+**Star ratings in Adaptive Cards validation:**
+
+![StarRatingsAdaptiveCardsValidation](BotFormattingCards/Images/24.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/25.StarRatingsFeedback.png)
+
 **Mobile:**
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/26.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/27.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
@@ -270,6 +318,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
 - [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
-
+- [Fluent icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?branch=pr-en-us-11655&tabs=adaptive-md%2Cdesktop%2Cconnector-html)
+- [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />
