@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventMeeting", "EventMeeting\EventMeeting.csproj", "{72F9A2D9-07B2-460C-892F-1C57D0D19893}"
 EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{C7FD0E24-2254-4184-BF12-6C75D2752F28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{72F9A2D9-07B2-460C-892F-1C57D0D19893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F9A2D9-07B2-460C-892F-1C57D0D19893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F9A2D9-07B2-460C-892F-1C57D0D19893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FD0E24-2254-4184-BF12-6C75D2752F28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
