@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts.
+description: Sample which demonstrates different formatting supported in cards using bot.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
 ---
 ## Different Formatting Cards
 
-Explore adaptive card formatting in Microsoft Teams with this bot sample. It includes features like mentions, emojis, persona icons, and different card layouts to enhance user interaction and presentation.
+This sample shows the feature where user can use different formatting on adaptive cards using bot.
 
 ## Included Features
 * Bots
@@ -197,71 +197,67 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![WelcomeMessage](Images/2.Welcome_Message.png)
 
-**Mention Card:**
+**Option Page 2:**
 
-![MentionCard](Images/3.Mention_support_card.png)
+![OptionsPage2](Images/3.OptionsPage2.png)
 
-**Information Mask Card:**
+**Option Page 3:**
 
-![InformationMaskCard](Images/4.Info_Mask_card.png)
+![OptionsPage3](Images/4.OptionsPage3.png)
 
-**FullWidth Adaptive Card:**
+**Option Page 4:**
 
-![FullWidthCard](Images/5.Full_Width_Card.png)
+![OptionsPage4](Images/5.OptionsPage4.png)
 
-**Stage View Card:**
+**Option Page 5:**
 
-![StageViewCard](Images/6.Stage_View_Card.png)
+![OptionsPage5](Images/6.OptionsPage5.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](Images/7.Over_Flow_Menu_Card.png)
+![OverflowMenuCard](Images/7.Mention_support_card.png)
 
-**HTML Connector Card:**
+**Mention support card:**
 
-![HTMLFormatCard](Images/8.HTTP_Connector_Card.png)
+![Mentionsupportcard](Images/8.HTTP_Connector_Card.png)
 
-**AdaptiveCard With Emoji:**
+**Full Width Card:**
 
-![CardWithEmoji](Images/9.Adaptive_card_with_Emoji.png)
+![FullWidthCard](Images/9.Full_Width_Card.png)
 
-**Persona Card Icon:**
+**Stage View Card:**
 
-![Persona](Images/10.Persona_Card_Icon.png)
+![StageViewCard](Images/10.Stage_View_Card.png)
 
-**Persona Set Icon:**
+**Over Flow Menu Card:**
 
-![PersonaSet](Images/11.Persona_Set_Icon.png)
+![OverFlowMenuCard](Images/11.Over_Flow_Menu_Card.png)
 
-**Code Block in Adaptive Card:**
+**HTTP Connector Card:**
 
-![CodeBlock](Images/12.Code_Block_Adaptive_Card.png)
+![HTTPConnectorCard](Images/12.HTTP_Connector_Card.png)
 
-**Adaptive Card updated to be responsive using targetWidth:**
+**Adaptive card with Emoji:**
 
-![Layout](Images/14.Layout.png)
+![AdaptivecardwithEmoji](Images/13.Adaptive_card_with_Emoji.png)
 
-**Border Adaptive Card**
-![Border](Images/16.Border.png)
+**Persona Card Icon**
+![PersonaCardIcon](Images/14.Persona_Card_Icon.png)
 
-**Rounded Corners Adaptive Card**
-![Border](Images/17.RoundedCorners.png)
+**Persona Set Icon**
+![PersonaSetIcon](Images/15.Persona_Set_Icon.png)
 
-**Select Fluent Icon:**
-![FluentIconsSelectCard](Images/19.FluentIconsSelectCard.png)
+**Rounded Corners:**
+![RoundedCorners](Images/19.RoundedCorners.png)
 
-**Fluent icon in an Adaptive Card:**
-![FluentIconAdaptiveCard](Images/20.FluentIconAdaptiveCard.png)
+**Fluent Icon Adaptive Card:**
+![FluentIconAdaptiveCard](Images/21.FluentIconAdaptiveCard.png)
 
-**Select Media elements:**
-
-![MediaElementsAdaptiveCard](Images/21.MediaElementsAdaptiveCard.png)
-
-**Media elements in Adaptive Card:**
+**Media Elements Adaptive Card:**
 
 ![MediaElementsAdaptiveCard](Images/22.MediaElementsAdaptiveCard.png)
 
-**All Media elements in Adaptive Card:**
+**Media Elements Adaptive Card1:**
 
 ![MediaElementsAdaptiveCard1](Images/23.MediaElementsAdaptiveCard1.png)
 
@@ -269,57 +265,81 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![MediaElementsAdaptiveCard2](Images/24.MediaElementsAdaptiveCard2.png)
 
-**Select Star Ratings:**
+**Star Ratings Adaptive Cards:**
 
-![SelectStarRatings](Images/25.SelectStarRatings.png)
+![StarRatingsAdaptiveCards](Images/25.StarRatingsAdaptiveCards.png)
 
-**Star ratings in Adaptive Cards:**
+**Star Ratings Adaptive Cards Validation:**
 
-![StarRatingsAdaptiveCards](Images/26.StarRatingsAdaptiveCards.png)
-
-**Star ratings in Adaptive Cards validation:**
-
-![StarRatingsAdaptiveCardsValidation](Images/27.StarRatingsAdaptiveCardsValidation.png)
+![StarRatingsAdaptiveCardsValidation](Images/26.StarRatingsAdaptiveCardsValidation.png)
 
 **Star Ratings Feedback:**
 
-![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
+![StarRatingsFeedback](Images/27.StarRatingsFeedback.png.png)
 
-**Conditional Action and Scrollable Container Buttons:**
+**Conditional Card Before Input:**
 
-![ConditionalAndScrollableButtons](Images/31.ConditionalAndScrollableButtons.png)
+![ConditionalCardBeforeInput](Images/30.ConditionalCardBeforeInput.png)
 
-**Conditional Action button adaptive card before input:**
+**Conditional Card After Input:**
 
-![ConditionalButtonBeforeInput](Images/32.ConditionalCardBeforeInput.png)
+![ConditionalCardAfterInput](Images/31.ConditionalCardAfterInput.png)
 
-**Conditional Action button adaptive card after input:**
+**Scrollable Container Card:**
 
-![ConditionalButtonAfterInput](Images/33.ConditionalCardAfterInput.png)
-
-**Scrollable Container Adaptive Card:**
-
-![ScrollableContainerAdaptiveCard](Images/34.ScrollableContainerCard.png)
-
-**Compound Button Option:**
-
-![CompoundButtonOption](Images/35.CompoundButtonOption.png)
+![ScrollableContainerCard](Images/32.ScrollableContainerCard.png)
 
 **Compound Button Adaptive Card:**
 
-![CompoundButtonAdaptiveCard](Images/36.CompoundButtonAdaptiveCard.png)
+![CompoundButtonAdaptiveCard](Images/33.CompoundButtonAdaptiveCard.png)
+
+**Container Layout:**
+
+![ContainerLayout](Images/34.ContainerLayout.png)
+
+**Donut Chart:**
+
+![DonutChart](Images/35.DonutChart.png)
+
+**Gauge Chart:**
+
+![Gauge Chart](Images/36.GaugeChart.png)
+
+**Horizontal Bar chart:**
+
+![HorizontalBarchart](Images/37.HorizontalBarchart.png)
+
+**Horizontal Bar Stacked Chart:**
+
+![HorizontalBarStackedChart](Images/38.HorizontalBarStackedChart.png)
+
+**Line Chart:**
+
+![LineChart](Images/39.LineChart.png)
+
+**Donut Chart Card:**
+
+![Pie Chart](Images/40.PieChart.png)
+
+**Vertical Bar Chart:**
+
+![VerticalBarChart](Images/41.VerticalBarChart.png)
+
+**Vertical Bar Grouped Chart:**
+
+![VerticalBarGroupedChart](Images/42.VerticalBarGroupedChart.png)
 
 **Mobile:**
 
-![LayoutMobile](Images/18.LayoutMobile.png)
+![LayoutMobile](Images/20.LayoutMobile.png)
 
 **Star Ratings in Adaptive Cards:**
 
-![StarRatingsAdaptiveCards](Images/29.StarRatingsAdaptiveCards.png)
+![StarRatingsAdaptiveCards](Images/28.StarRatingsAdaptiveCards.png)
 
 **Star Ratings Feedback:**
 
-![StarRatingsFeedback](Images/30.StarRatingsFeedback.png)
+![StarRatingsFeedback](Images/29.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 

@@ -322,9 +322,57 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![CompoundButtonAdaptiveCard](BotFormattingCards/Images/33.CompoundButtonAdaptiveCard.png)
 
+**Container Layout and Donut Chart Buttons:**
+
+![ContainerLayoutandDonutChartButtons](BotFormattingCards/Images/34.ContainerAndDonutOptions.png)
+
+**Chart Buttons:**
+
+![ChartButtons](BotFormattingCards/Images/35.ChartOptions.png)
+
+**Remaining Chart Buttons:**
+
+![RemainingChartButtons](BotFormattingCards/Images/36.RemainingChartOptions.png)
+
+**Container Layout:**
+
+![ContainerLayout](BotFormattingCards/Images/37.ContainerLayout.png)
+
+**Donut Chart:**
+
+![DonutChart](BotFormattingCards/Images/38.DonutChart.png)
+
+**Gauge Chart:**
+
+![GaugeChart](BotFormattingCards/Images/39.GaugeChart.png)
+
+**Horizontal Chart:**
+
+![HorizontalChart](BotFormattingCards/Images/40.HorizontalChart.png)
+
+**Horizontal Stacked Chart:**
+
+![HorizontalStackedChart](BotFormattingCards/Images/41.HorizontalChartStacked.png)
+
+**Line Chart:**
+
+![LineChart](BotFormattingCards/Images/42.LineChart.png)
+
+**Pie Chart:**
+
+![PieChart](BotFormattingCards/Images/43.PieChart.png)
+
+**Vertical Bar Chart:**
+
+![VerticalBarChart](BotFormattingCards/Images/44.VerticalBarChart.png)
+
+**Vertical Bar Grouped Chart:**
+
+![Vertical Bar Chart](BotFormattingCards/Images/45.VerticalBarGroupedChart.png)
+
 **Mobile:**
 
-![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
+![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.jpg)
 
 **Star Ratings in Adaptive Cards:**
 
