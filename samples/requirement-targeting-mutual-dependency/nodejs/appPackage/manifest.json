@@ -94,7 +94,7 @@
   ],
   "staticTabs": [
     {
-      "entityId": "staticTab_Id",
+      "entityId": "staticTab_ID",
       "name": "Personal Tab",
       "contentUrl": "${{BOT_ENDPOINT}}/tab",
       "websiteUrl": "${{BOT_ENDPOINT}}/tab",
