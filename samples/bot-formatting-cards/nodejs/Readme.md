@@ -217,10 +217,6 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![OverflowMenuCard](Images/7.Mention_support_card.png)
 
-**Mention support card:**
-
-![Mentionsupportcard](Images/8.HTTP_Connector_Card.png)
-
 **Full Width Card:**
 
 ![FullWidthCard](Images/9.Full_Width_Card.png)
@@ -275,7 +271,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Star Ratings Feedback:**
 
-![StarRatingsFeedback](Images/27.StarRatingsFeedback.png.png)
+![StarRatingsFeedback](Images/27.StarRatingsFeedback.png)
 
 **Conditional Card Before Input:**
 

@@ -372,7 +372,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Mobile:**
 
-![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.jpg)
+![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
 
 **Star Ratings in Adaptive Cards:**
 
