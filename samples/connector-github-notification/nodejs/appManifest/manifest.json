@@ -11,8 +11,8 @@
     "termsOfUseUrl": "https://www.microsoft.com"
   },
   "description": {
-    "full": "GitHubConnector",
-    "short": "GitHubConnector"
+    "full": "This sample demonstrates building a GitHub connector for Microsoft Teams using GitHub’s APIs for real-time notifications.",
+    "short": "GitHub connector for Microsoft Teams using GitHub API integration sample"
   },
   "icons": {
     "outline": "https://outlook.office.com/connectors/Content/Images/IncomingWebhook.jpg",

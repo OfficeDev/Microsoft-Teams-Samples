@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Messaging Extension Action.",
-    "full": "Full description of Messaging Extension Action."
+    "short": "Hello World Messaging Extension that creates a card and accepts parameters.",
+    "full": "This sample app showcases a Hello World Messaging Extension that processes parameters and generates a card in Microsoft Teams. It also illustrates how to receive and handle forwarded messages, enhancing interaction through action commands and message extensions."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

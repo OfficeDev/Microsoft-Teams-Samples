@@ -19,8 +19,8 @@
     "full": "Channel Lifecycle sample"
   },
   "description": {
-    "short": "Channel Lifecycle Node js",
-    "full": "This example show the Channel Lifecycle, which includes channel creation , update and delete"
+    "short": "Manage channel lifecycle in Teams using Graph API with Node.js.",
+    "full": "This sample demonstrates how to manage the lifecycle of channels in Microsoft Teams using the Graph API with Node.js."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

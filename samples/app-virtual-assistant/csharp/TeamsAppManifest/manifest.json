@@ -19,8 +19,8 @@
 		"full": "Customized Virtual Assistant"
 	},
 	"description": {
-		"short": "Virtual Assistant",
-		"full": "Customized Virtual Assistant"
+		"short": "Virtual assistant template designed for enhanced Teams capabilities.",
+		"full": "This sample showcases a customizable virtual assistant template that integrates seamlessly with Microsoft Teams."
 	},
 	"bots": [
 		{

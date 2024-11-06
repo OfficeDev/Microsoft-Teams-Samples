@@ -19,8 +19,8 @@
     "full": "ME SSO for Search, Action and link unfurling"
   },
   "description": {
-    "short": "ME Authentication for Search, Action and Link unfurling",
-    "full": "ME Authentication sample code for all authentication merged"
+    "short": "C# sample demonstrating a search-based Messaging Extension in Microsoft Teams.",
+    "full": "This sample app illustrates how to create a search-based Messaging Extension in Microsoft Teams using C#, allowing users to perform searches and interact with external services."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

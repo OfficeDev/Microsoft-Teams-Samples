@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Channel Group Tab.",
-    "full": "Full description of Channel Group Tab."
+    "short": "Sample app demonstrating Microsoft Entra SSO in Teams channel tabs.",
+    "full": "This application showcases how to implement Microsoft Entra SSO authentication within channel tabs in Microsoft Teams, facilitating seamless user profile access and collaborative spaces. Comprehensive setup instructions, including Azure AD registration and local testing using tunneling solutions, ensure an efficient development process."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

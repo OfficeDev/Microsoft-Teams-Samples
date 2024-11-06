@@ -19,8 +19,8 @@
     "full": "People picker functionality in tab."
   },
   "description": {
-    "short": "This sample shows tab capability with the feature of client sdk people picker.",
-    "full": "This sample shows tab capability with the feature of client sdk people picker."
+    "short": "Tab app demonstrating the People Picker feature using Teams JS client SDK.",
+    "full": "This Microsoft Teams tab app highlights the People Picker feature, enabling users to search and select individuals from their organization using the Teams JavaScript client SDK. It includes functionalities such as organization-wide searches, scoped searches, and a single-select option for enhanced user interaction."
   },
   "accentColor": "#235EA5",
   "configurableTabs": [

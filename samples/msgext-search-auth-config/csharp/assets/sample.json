@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-auth-config-csharp",
     "source": "officeDev",
     "title": "Search Auth Config In Messaging Extension",
-    "shortDescription": "This sample app demonstrate how to use authentication in Search based Messaging Extension.",
+    "shortDescription": "This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-auth-config/csharp",
     "longDescription": [
-      "This sample app demonstrate how to use authentication in Search based Messaging Extension."
+      "This C# sample illustrates how to create a search-based Messaging Extension in Microsoft Teams that incorporates authentication via Azure Active Directory. It features a configuration page for the bot and demonstrates how to securely sign in and access user-specific data using the Microsoft Graph API."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

@@ -19,8 +19,8 @@
     "full": ""
   },
   "description": {
-    "short": "Short description for Personal App.",
-    "full": "Full description of Personal App."
+    "short": "Quick-start sample for creating personal tabs in Microsoft Teams with JavaScript",
+    "full": "This quick-start sample guides you through building a personal tab for Microsoft Teams, featuring seamless integration and interaction within the app. It includes setup instructions, deployment steps, and requirements to ensure you can easily run and test your tab in a Teams environment."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-task-module-csharp",
     "source": "officeDev",
     "title": "Launch task module from tab and bot",
-    "shortDescription": "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)",
+    "shortDescription": "This sample showcases how to launch task modules from tabs and bots in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-task-module/csharp",
     "longDescription": [
-      "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)"
+      "This sample illustrates how to create and launch task modules using tabs and bots in Microsoft Teams. It demonstrates integrating Adaptive Cards, custom HTML forms, and embedded content in task modules."
     ],
     "creationDateTime": "2018-09-26",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

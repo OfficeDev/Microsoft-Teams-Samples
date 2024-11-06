@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-sidepanel-csharp",
     "source": "officeDev",
     "title": "Meetings SidePanel",
-    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting",
+    "shortDescription": "This Microsoft Teams sample app demonstrates how to use the Live Share SDK to implement a side panel that allows for real-time data sharing during meetings.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-sidepanel/csharp",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting"
+      "This sample application illustrates the integration of a side panel within Microsoft Teams meetings, utilizing the Live Share SDK for real-time collaboration. Key features include the ability to add and publish agenda items, enhanced user interaction through adaptive cards, and support for various app themes."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-10-21",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

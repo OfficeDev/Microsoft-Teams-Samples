@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-details-tab-nodejs",
     "source": "officeDev",
     "title": "Meetings Details Tab",
-    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.",
+    "shortDescription": "This sample app demonstrates how to implement a Details Tab in Microsoft Teams meetings, allowing users to create polls and gather participant feedback through interactive chats.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-details-tab/nodejs",
     "longDescription": [
-      "Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots."
+      "This sample application showcases the implementation of a Details Tab within Microsoft Teams meetings, enabling users to create and post polls for participant feedback. Participants can submit their responses via adaptive cards, and results are accessible both in the meeting chat and on the Details Tab, enhancing engagement and interactivity."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

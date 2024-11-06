@@ -19,8 +19,8 @@
     "full": "Meeting-Tabs-csharp"
   },
   "description": {
-    "short": "Meeting-Tabs",
-    "full": "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab."
+    "short": "App to mute/unmute Teams meeting audio from side panel with stage view support.",
+    "full": "This app allows muting/unmuting Teams meeting audio and displays stage view in the meeting side panel."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

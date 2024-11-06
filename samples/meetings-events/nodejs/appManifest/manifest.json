@@ -15,8 +15,8 @@
     "full": "Sample for meeting events and meeting participant events"
   },
   "description": {
-    "short": "Access real-time meeting events and meeting participant events",
-    "full": "This sample demos a bot with access to meeting events and meeting participant events"
+    "short": "Receive real-time meeting events in Microsoft Teams using Node.js bot sample.",
+    "full": "This Node.js sample demonstrates how a bot can receive real-time meeting events within Microsoft Teams, enhancing meeting interactivity."
   },
   "icons": {
     "outline": "outline.png",

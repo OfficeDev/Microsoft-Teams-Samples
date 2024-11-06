@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how a Bot can create a call, join a meeting and transfer the call
+description: This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.
 products:
   - office-teams
   - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
 
 ## Summary
 
-Calling and Meeting Bot provides basic functionality like Create Call, Join a call, Transfer/Redirect a call, Join a scheduled meeting and invite the participants by integrating cloud communications API Graph API.
+This sample app demonstrates a bot's ability to create, join, and manage calls and meetings within Microsoft Teams using Microsoft Graph APIs. Users can leverage this bot to transfer calls, join scheduled meetings, and handle participant invitations, offering a comprehensive communication solution in a unified interface.
 
 - **Interaction with bot**
   ![bot-calling-meeting ](Images/bot-calling-meeting.gif)

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases messaging extension feature along with link unfurling.
+description: This sample app showcases a Node.js bot that implements link unfurling within Microsoft Teams messaging extensions.
 products:
 - office-teams
 - office
@@ -15,6 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling
 
 # Teams Link Unfurl Bot Node.js
 
+This sample app illustrates a Node.js bot designed for Microsoft Teams, showcasing the link unfurling feature within messaging extensions. By integrating with Azure, it enables seamless interaction with links shared in chat, improving the user experience.
 If you copy and paste the link `https://teamstestdomain.com/teams/test` or your tunnel base url, it wil unfurl inside compose area.
 
 - Note : To enable link unfurling for your domain, add your domain to the manifest.json file under message handlers.

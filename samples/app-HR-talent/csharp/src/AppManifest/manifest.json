@@ -15,8 +15,8 @@
     "full": "Contoso Talent and Recruiting App"
   },
   "description": {
-    "short": "Talent app for Contoso managers and recruiters",
-    "full": "This sample Recruiting and Talent app showcases many of the capabilities Microsoft Teams supports.  App content is hosted for illustrative purposes only."
+    "short": "Simulates a recruiting and talent management system using Microsoft Teams Bot.",
+    "full": "This sample app demonstrates integration with a simulated recruiting and talent management system, allowing users to create, manage, and search positions and candidates using Microsoft Teams' bots, tabs, and messaging extensions."
   },
   "icons": {
     "outline": "outline_icon.png",

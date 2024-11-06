@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample which demonstrates different formatting supported in cards using bot.
+description: This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
 ---
 ## Different Formatting Cards
 
-This sample shows the feature where user can use different formatting on adaptive cards using bot.
+Explore adaptive card formatting in Microsoft Teams with this bot sample. It includes features like mentions, emojis, persona icons, and different card layouts to enhance user interaction and presentation.
 
 ## Included Features
 * Bots

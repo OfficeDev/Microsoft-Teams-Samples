@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample app showing custom personal Tab with ASP. NET Core
+description: This sample demonstrates how to create a custom personal tab for Microsoft Teams using ASP.NET Core Razor pages.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-razor-csharp
 
 # Personal Tab with ASP.NET Core
 
-In this quickstart we'll walk-through creating a custom personal tab with C# and ASP.Net Core Razor pages. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
+This sample application illustrates the process of developing a custom personal tab in Microsoft Teams using ASP.NET Core Razor pages. It covers the necessary prerequisites, app setup, and manifest configuration, enabling developers to easily deploy and interact with their custom tab within the Teams ecosystem.
 
  ## Included Features
 * Tabs

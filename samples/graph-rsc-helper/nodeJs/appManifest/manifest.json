@@ -19,8 +19,8 @@
     "full": "Graph API Explorer for RSC Permissions"
   },
   "description": {
-    "short": "Graph API Explorer for RSC",
-    "full": "Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization"
+    "short": "Sample for configuring RSC permissions and calling Microsoft Graph API.",
+    "full": "This sample demonstrates how to configure Resource Specific Consent (RSC) permissions in a Teams app manifest and use them to call Microsoft Graph, allowing you to observe real API responses in both team channels and group chats."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

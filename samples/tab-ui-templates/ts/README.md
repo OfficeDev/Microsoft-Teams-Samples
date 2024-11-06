@@ -8,7 +8,7 @@ languages:
   - typescript
   - javascript
   - html
-description: "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)."
+description: "This sample app provides tested, high-quality UI templates to help developers understand how to create effective applications for Microsoft Teams, covering common use cases like dashboards and forms."
 extensions:
   contentType: samples
   createdDate: "12/08/2020 05:06:47 PM"
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 
 # Deploying the Microsoft Teams UI templates sample app
 
-This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
+This sample app illustrates best practices for designing applications within Microsoft Teams, featuring a collection of high-quality UI templates that have been rigorously tested for various common use cases, including dashboards and forms. By leveraging these templates, developers can create visually appealing and user-friendly applications that enhance the overall Teams experience.
 
  ## Included Features
 * Tabs

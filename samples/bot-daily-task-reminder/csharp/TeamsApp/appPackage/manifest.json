@@ -15,8 +15,8 @@
     "full": "Daily task reminder"
   },
   "description": {
-    "short": "Daily task reminder",
-    "full": "This sample shows a feature where user can schedule a recurring task and get a reminder on the scheduled time."
+    "short": "Teams bot to schedule recurring tasks and receive reminders at set times.",
+    "full": "This bot allows users to schedule recurring tasks and receive reminders in Teams."
   },
   "icons": {
     "outline": "outline.png",

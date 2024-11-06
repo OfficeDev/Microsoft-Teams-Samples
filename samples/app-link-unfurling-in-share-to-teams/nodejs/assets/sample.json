@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-nodejs",
     "source": "officeDev",
     "title": "App link unfurling in share to teams",
-    "shortDescription": "Demonstrating feature of link unfurling in share to teams.",
+    "shortDescription": "This sample demonstrates how to implement link unfurling in Share to Teams for seamless sharing of site content directly to individual contacts or groups on Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-link-unfurling-in-share-to-teams/nodejs",
     "longDescription": [
-      "This sample shows the feature of link unfurling in share to teams."
+      "This sample showcases the implementation of link unfurling in the Share to Teams feature, enabling users to easily share site content and context within Microsoft Teams. It supports sharing links directly to individual contacts or groups, and displays rich link previews for enhanced collaboration."
     ],
     "creationDateTime": "2022-12-14",
-    "updateDateTime": "2023-02-08",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

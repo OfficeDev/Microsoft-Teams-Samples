@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-connector-generic-nodejs",
     "source": "officeDev",
     "title": "Generic Connector",
-    "shortDescription": "Generic connector that's easy to customize for any system which supports webhooks",
+    "shortDescription": "This sample provides a customizable Node.js connector for systems with webhook support, ideal for integration with Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-generic/nodejs",
     "longDescription": [
-      "Generic connector that's easy to customize for any system which supports webhooks"
+      "This sample offers a flexible Node.js connector that you can easily adapt for any system supporting webhooks. It facilitates seamless integration with Microsoft Teams to send notifications to channels and supports extensive configuration options."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

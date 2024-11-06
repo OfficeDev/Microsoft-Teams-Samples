@@ -15,8 +15,8 @@
     "full": "Bot Configuration auth Sample App"
   },
   "description": {
-    "short": "Bot Configuration auth Sample App",
-    "full": "This sample shows the feature of bot configuration and reconfiguration for bots in team and group chat"
+    "short": "Configurable Teams bot with dynamic type-ahead search and Adaptive Cards.",
+    "full": "This Teams bot enables configuration and reconfiguration with dynamic search capabilities on Adaptive Cards."
   },
   "icons": {
     "outline": "outline.png",

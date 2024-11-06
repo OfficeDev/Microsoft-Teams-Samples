@@ -15,8 +15,8 @@
     "full": "Message reminder setup through messaging extension action command."
   },
   "description": {
-    "short": "Message reminder setup through messaging extension action command.",
-    "full": "This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled date and time."
+    "short": "Node.js Messaging Extension for scheduling tasks and sending reminder cards.",
+    "full": "This sample demonstrates a Node.js Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",

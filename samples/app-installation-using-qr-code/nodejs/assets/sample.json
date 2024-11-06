@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs",
     "source": "officeDev",
     "title": "Install app using barcode sample",
-    "shortDescription": "This sample demos app installation using QR code of application's app id",
+    "shortDescription": "This sample demonstrates how to install a Microsoft Teams app using a QR code, enabling users to generate and scan QR codes for easy installation.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-installation-using-qr-code/nodejs",
     "longDescription": [
-      "This sample demos app installation using QR code of application's app id"
+      "This sample showcases the installation of a Microsoft Teams app through a QR code, allowing users to generate a QR code containing the app ID and easily install the app by scanning it. Key features include bot integration, Teams SSO, adaptive cards, task modules, and device permissions, all accessible via mobile clients."
     ],
     "creationDateTime": "2021-11-10",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

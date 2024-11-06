@@ -19,8 +19,8 @@
     "full": "Offline Support Tickets"
   },
   "description": {
-    "short": "A classic CRUD app working in offline mode inside Microsoft Teams.",
-    "full": "This sample app demonstrates a classic CRUD application that functions offline within Microsoft Teams. When the Android device reconnects to the internet, users can sync their data with blob storage."
+    "short": "CRUD app for Teams with offline support, syncing data when online.",
+    "full": "This sample app demonstrates a CRUD application that functions offline in Microsoft Teams, allowing users to manage data without an internet connection and automatically sync with blob storage when reconnected."
   },
   "accentColor": "#5296d5",
   "staticTabs": [
