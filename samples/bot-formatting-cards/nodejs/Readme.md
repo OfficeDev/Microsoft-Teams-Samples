@@ -247,9 +247,79 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Rounded Corners Adaptive Card**
 ![Border](Images/17.RoundedCorners.png)
 
+**Select Fluent Icon:**
+![FluentIconsSelectCard](Images/19.FluentIconsSelectCard.png)
+
+**Fluent icon in an Adaptive Card:**
+![FluentIconAdaptiveCard](Images/20.FluentIconAdaptiveCard.png)
+
+**Select Media elements:**
+
+![MediaElementsAdaptiveCard](Images/21.MediaElementsAdaptiveCard.png)
+
+**Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard](Images/22.MediaElementsAdaptiveCard.png)
+
+**All Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard1](Images/23.MediaElementsAdaptiveCard1.png)
+
+**Play video media elements in an Adaptive Card:**
+
+![MediaElementsAdaptiveCard2](Images/24.MediaElementsAdaptiveCard2.png)
+
+**Select Star Ratings:**
+
+![SelectStarRatings](Images/25.SelectStarRatings.png)
+
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/26.StarRatingsAdaptiveCards.png)
+
+**Star ratings in Adaptive Cards validation:**
+
+![StarRatingsAdaptiveCardsValidation](Images/27.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
+
+**Conditional Action and Scrollable Container Buttons:**
+
+![ConditionalAndScrollableButtons](Images/31.ConditionalAndScrollableButtons.png)
+
+**Conditional Action button adaptive card before input:**
+
+![ConditionalButtonBeforeInput](Images/32.ConditionalCardBeforeInput.png)
+
+**Conditional Action button adaptive card after input:**
+
+![ConditionalButtonAfterInput](Images/33.ConditionalCardAfterInput.png)
+
+**Scrollable Container Adaptive Card:**
+
+![ScrollableContainerAdaptiveCard](Images/34.ScrollableContainerCard.png)
+
+**Compound Button Option:**
+
+![CompoundButtonOption](Images/35.CompoundButtonOption.png)
+
+**Compound Button Adaptive Card:**
+
+![CompoundButtonAdaptiveCard](Images/36.CompoundButtonAdaptiveCard.png)
+
 **Mobile:**
 
 ![LayoutMobile](Images/18.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/29.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/30.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
@@ -259,6 +329,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
 - [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
+- [Fluent icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?branch=pr-en-us-11655&tabs=adaptive-md%2Cdesktop%2Cconnector-html)
+- [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-nodejs" />
