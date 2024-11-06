@@ -285,6 +285,30 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![StarRatingsFeedback](Images/28.StarRatingsFeedback.png)
 
+**Conditional Action and Scrollable Container Buttons:**
+
+![ConditionalAndScrollableButtons](Images/31.ConditionalAndScrollableButtons.png)
+
+**Conditional Action button adaptive card before input:**
+
+![ConditionalButtonBeforeInput](Images/32.ConditionalCardBeforeInput.png)
+
+**Conditional Action button adaptive card after input:**
+
+![ConditionalButtonAfterInput](Images/33.ConditionalCardAfterInput.png)
+
+**Scrollable Container Adaptive Card:**
+
+![ScrollableContainerAdaptiveCard](Images/34.ScrollableContainerCard.png)
+
+**Compound Button Option:**
+
+![CompoundButtonOption](Images/35.CompoundButtonOption.png)
+
+**Compound Button Adaptive Card:**
+
+![CompoundButtonAdaptiveCard](Images/36.CompoundButtonAdaptiveCard.png)
+
 **Mobile:**
 
 ![LayoutMobile](Images/18.LayoutMobile.png)

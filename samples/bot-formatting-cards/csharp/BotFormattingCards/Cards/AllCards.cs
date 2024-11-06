@@ -211,6 +211,10 @@ namespace BotAllCards.Cards
             return LayoutCardAdaptiveCardAttachment;
         }
 
+        /// <summary>
+        /// Adaptive Card showcasing the border feature.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendBorderCard()
         {
             var paths = new[] { ".", "Resources", "adaptiveCardBorders.json" };
@@ -225,6 +229,10 @@ namespace BotAllCards.Cards
             return BorderAdaptiveCardAttachment;
         }
 
+        /// <summary>
+        /// Adaptive Card showcasing the rounded corner for different elements of adaptive card.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendRoundedCornerCard()
         {
             var paths = new[] { ".", "Resources", "adaptiveCardRoundedCorners.json" };
@@ -298,5 +306,61 @@ namespace BotAllCards.Cards
             return StarRatingsCardAttachment;
         }
 
+        /// <summary>
+        /// Conditional enablement of action button
+        /// To enable your Action.Submit button only when the user fills out at least one input field and disables the button again if the user clears the input.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendConditionalCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardConditional.json" };
+            var adaptiveCardConditionalJson = File.ReadAllText(Path.Combine(paths));
+
+            var ConditionalCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardConditionalJson),
+            };
+
+            return ConditionalCardAttachment;
+        }
+
+        /// <summary>
+        /// Scrollable container for adaptive Card
+        /// If you have a long list of items in a container within an adaptive card, it can make the card quite tall. To address this, you can use a scrollable container to limit the card's height.
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendScrollableCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardScrollable.json" };
+            var adaptiveCardScrollableJson = File.ReadAllText(Path.Combine(paths));
+
+            var ScrollableCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardScrollableJson),
+            };
+
+            return ScrollableCardAttachment;
+        }
+
+        /// <summary>
+        /// Compound Button adaptive Card
+        /// Sends adaptive card showing compound button
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendCompoundButtonCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardCompoundButton.json" };
+            var adaptiveCardCompoundButtonJson = File.ReadAllText(Path.Combine(paths));
+
+            var CompoundButtonCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardCompoundButtonJson),
+            };
+
+            return CompoundButtonCardAttachment;
+        }
     }
 }

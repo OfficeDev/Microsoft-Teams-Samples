@@ -19,6 +19,9 @@ const AdaptiveCardRoundedCorners = require('../resources/adaptiveCardRoundedCorn
 const adaptiveCardFluentIcons = require('../resources/adaptiveCardFluentIcon.json');
 const adaptiveCardMediaElements = require('../resources/adaptiveCardMediaElements.json');
 const adaptiveCardStarRatings = require('../resources/adaptiveCardStarRatings.json');
+const adaptiveCardConditional = require('../resources/adaptiveCardConditional.json');
+const adaptiveCardScrollable = require('../resources/adaptiveCardScrollable.json');
+const adaptiveCardCompoundButton = require('../resources/adaptiveCardCompoundButton.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -36,7 +39,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements','StarRatings'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements','StarRatings', 'ConditionalCard', 'ScrollableContainer', 'CompoundButton'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -105,6 +108,18 @@ class BotFormattingCards extends ActivityHandler {
                     case "StarRatings":
                         await context.sendActivity({ attachments: [this.SendStarRatingsCard()] });
                         break;
+
+                    case "ConditionalCard":
+                        await context.sendActivity({ attachments: [this.SendConditionalCard()] });
+                        break;
+
+                    case "ScrollableContainer":
+                        await context.sendActivity({ attachments: [this.SendScrollableCard()] });
+                        break;
+
+                    case "CompoundButton":
+                        await context.sendActivity({ attachments: [this.SendCompoundButtonCard()] });
+                        break;
                 }
 
                 await context.sendActivity(`You have Selected <b>${text}</b>`);
@@ -121,7 +136,7 @@ class BotFormattingCards extends ActivityHandler {
             }
 
             // After the bot has responded send the fromat Cards.
-            await this.sendAdaptiveCardFromats(context);
+            await this.sendAdaptiveCardFormats(context);
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
@@ -143,7 +158,7 @@ class BotFormattingCards extends ActivityHandler {
                 await turnContext.sendActivity(welcomeMessage);
 
                 //send the adaptive card formats.
-                await this.sendAdaptiveCardFromats(turnContext);
+                await this.sendAdaptiveCardFormats(turnContext);
             }
         }
     }
@@ -262,10 +277,31 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
-   * Send AdaptiveCard Fromats to the user.
+     Sends a Conditional Action.submit button enable card
+    */
+     SendConditionalCard() {
+        return CardFactory.adaptiveCard(adaptiveCardConditional);
+    }
+
+    /**
+     Sends a Scrollable container adaptive card
+    */
+     SendScrollableCard() {
+        return CardFactory.adaptiveCard(adaptiveCardScrollable);
+    }
+
+    /**
+     Sends a Compound Button adaptive card
+    */
+     SendCompoundButtonCard() {
+        return CardFactory.adaptiveCard(adaptiveCardCompoundButton);
+    }
+
+    /**
+   * Send AdaptiveCard Formats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
-    async sendAdaptiveCardFromats(turnContext) {
+    async sendAdaptiveCardFormats(turnContext) {
         const cardActions = [
             {
                 type: ActionTypes.ImBack,
@@ -346,6 +382,21 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'StarRatings',
                 value: 'StarRatings'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'ConditionalCard',
+                value: 'ConditionalCard'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'ScrollableContainer',
+                value: 'ScrollableContainer'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'CompoundButton',
+                value: 'CompoundButton'
             }
         ];
 
