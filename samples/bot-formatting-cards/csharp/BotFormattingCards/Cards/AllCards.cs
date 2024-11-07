@@ -362,5 +362,176 @@ namespace BotAllCards.Cards
 
             return CompoundButtonCardAttachment;
         }
+
+        /// <summary>
+        /// Container Layout adaptive Card
+        /// Sends adaptive card showing Container Layout
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendContainerLayoutCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardContainerLayouts.json" };
+            var adaptiveCardContainerLayoutJson = File.ReadAllText(Path.Combine(paths));
+
+            var ContainerLayoutCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardContainerLayoutJson),
+            };
+
+            return ContainerLayoutCardAttachment;
+        }
+
+        /// <summary>
+        /// Donut Chart adaptive Card
+        /// Sends adaptive card showing Donut Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendDonutChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardDonutChart.json" };
+            var adaptiveCardDonutChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var DonutChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardDonutChartJson),
+            };
+
+            return DonutChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Gauge Chart adaptive Card
+        /// Sends adaptive card showing Gauge Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendGaugeChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardGaugeChart.json" };
+            var adaptiveCardGaugeChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var GaugeChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardGaugeChartJson),
+            };
+
+            return GaugeChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Horizontal Bar Chart adaptive Card
+        /// Sends adaptive card showing Horizontal Bar Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendHorizontalBarChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardHorizontalBarChart.json" };
+            var adaptiveCardHorizontalBarChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var HorizontalBarChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardHorizontalBarChartJson),
+            };
+
+            return HorizontalBarChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Horizontal Bar Chart adaptive Card
+        /// Sends adaptive card showing Horizontal Bar Stacked Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendHorizontalBarStackedChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardHorizontalBarStacked.json" };
+            var adaptiveCardHorizontalBarStackedChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var HorizontalBarStackedChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardHorizontalBarStackedChartJson),
+            };
+
+            return HorizontalBarStackedChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Line Chart adaptive Card
+        /// Sends adaptive card showing Line Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendLineChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardLineChart.json" };
+            var adaptiveCardLineChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var LineChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardLineChartJson),
+            };
+
+            return LineChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Pie Chart adaptive Card
+        /// Sends adaptive card showing Pie Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendPieChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardPieChart.json" };
+            var adaptiveCardPieChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var PieChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardPieChartJson),
+            };
+
+            return PieChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Vertical Bar Chart adaptive Card
+        /// Sends adaptive card showing Vertical Bar Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendVerticalBarChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardVerticalBarChart.json" };
+            var adaptiveCardVerticalBarChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var VerticalBarChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardVerticalBarChartJson),
+            };
+
+            return VerticalBarChartCardAttachment;
+        }
+
+        /// <summary>
+        /// Vertical Bar Grouped Chart adaptive Card
+        /// Sends adaptive card showing Vertical Bar Grouped Chart
+        /// </summary>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendVerticalBarGroupedChartCard()
+        {
+            var paths = new[] { ".", "Resources", "adaptiveCardVerticalBarGroupedChart.json" };
+            var adaptiveCardVerticalBarGroupedChartJson = File.ReadAllText(Path.Combine(paths));
+
+            var VerticalBarGroupedChartCardAttachment = new Attachment()
+            {
+                ContentType = contentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardVerticalBarGroupedChartJson),
+            };
+
+            return VerticalBarGroupedChartCardAttachment;
+        }
     }
 }

@@ -1,0 +1,52 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Chart.HorizontalBar.Stacked",
+      "title": "Sample",
+      "data": [
+        {
+          "title": "Outlook",
+          "data": [
+            {
+              "legend": "2023-05-01",
+              "value": 24,
+              "color": "good"
+            },
+            {
+              "legend": "2023-05-02",
+              "value": 27,
+              "color": "warning"
+            },
+            {
+              "legend": "2023-05-03",
+              "value": 18,
+              "color": "attention"
+            }
+          ]
+        },
+        {
+          "title": "Teams",
+          "data": [
+            {
+              "legend": "2023-05-01",
+              "value": 9,
+              "color": "good"
+            },
+            {
+              "legend": "2023-05-02",
+              "value": 100,
+              "color": "warning"
+            },
+            {
+              "legend": "2023-05-03",
+              "value": 22,
+              "color": "attention"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
