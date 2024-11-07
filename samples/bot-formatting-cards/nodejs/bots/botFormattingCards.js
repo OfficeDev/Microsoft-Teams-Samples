@@ -22,6 +22,15 @@ const adaptiveCardStarRatings = require('../resources/adaptiveCardStarRatings.js
 const adaptiveCardConditional = require('../resources/adaptiveCardConditional.json');
 const adaptiveCardScrollable = require('../resources/adaptiveCardScrollable.json');
 const adaptiveCardCompoundButton = require('../resources/adaptiveCardCompoundButton.json');
+const adaptiveCardContainerLayouts = require('../resources/adaptiveCardContainerLayouts.json');
+const adaptiveCardDonutChart = require('../resources/adaptiveCardDonutChart.json');
+const adaptiveCardGaugeChart = require('../resources/adaptiveCardGaugeChart.json');
+const adaptiveCardHorizontalBarChart = require('../resources/adaptiveCardHorizontalBarChart.json');
+const adaptiveCardHorizontalBarStackedChart = require('../resources/adaptiveCardHorizontalBarStacked.json');
+const adaptiveCardLineChart = require('../resources/adaptiveCardLineChart.json');
+const adaptiveCardPieChart = require('../resources/adaptiveCardPieChart.json');
+const adaptiveCardVerticalBarChart = require('../resources/adaptiveCardVerticalBarChart.json');
+const adaptiveCardVerticalBarGroupedChart = require('../resources/adaptiveCardVerticalBarGroupedChart.json');
 
 class BotFormattingCards extends ActivityHandler {
     constructor() {
@@ -39,7 +48,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements','StarRatings', 'ConditionalCard', 'ScrollableContainer', 'CompoundButton'];
+            const adaptiveFormatCards = ['CodeBlock', 'MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji','Persona','PersonaSet','Layout', 'Borders', 'RoundedCorners', 'FluentIcons', 'MediaElements','StarRatings', 'ConditionalCard', 'ScrollableContainer', 'CompoundButton', 'ContainerLayout', 'DonutChart', 'GaugeChart', 'HorizontalChart', 'HorizontalChartStacked', 'LineChart', 'PieChart', 'VerticalBarChart', 'VerticalBarGroupedChart'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -119,6 +128,42 @@ class BotFormattingCards extends ActivityHandler {
 
                     case "CompoundButton":
                         await context.sendActivity({ attachments: [this.SendCompoundButtonCard()] });
+                        break;
+
+                    case "ContainerLayout":
+                        await context.sendActivity({ attachments: [this.SendContainerLayoutCard()] });
+                        break;
+
+                    case "DonutChart":
+                        await context.sendActivity({ attachments: [this.SendDonutChartCard()] });
+                        break;
+
+                    case "GaugeChart":
+                        await context.sendActivity({ attachments: [this.SendGaugeChartCard()] });
+                        break;
+
+                    case "HorizontalChart":
+                        await context.sendActivity({ attachments: [this.SendHorizontalBarChartCard()] });
+                        break;
+
+                    case "HorizontalChartStacked":
+                        await context.sendActivity({ attachments: [this.SendHorizontalBarStackedChartCard()] });
+                        break;
+                    
+                    case "LineChart":
+                        await context.sendActivity({ attachments: [this.SendLineChartCard()] });
+                        break;
+
+                    case "PieChart":
+                        await context.sendActivity({ attachments: [this.SendPieChartCard()] });
+                        break;
+                    
+                    case "VerticalBarChart":
+                        await context.sendActivity({ attachments: [this.SendVerticalBarChartCard()] });
+                        break;
+
+                    case "VerticalBarGroupedChart":
+                        await context.sendActivity({ attachments: [this.SendVerticalBarGroupedChartCard()] });
                         break;
                 }
 
@@ -298,6 +343,69 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
+     Sends a Container Layout adaptive card
+    */
+     SendContainerLayoutCard() {
+        return CardFactory.adaptiveCard(adaptiveCardContainerLayouts);
+    }
+
+    /**
+     Sends a Donut Chart adaptive card
+    */
+     SendDonutChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardDonutChart);
+    }
+
+    /**
+     Sends a Gauge Chart adaptive card
+    */
+     SendGaugeChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardGaugeChart);
+    }
+
+    /**
+     Sends a Horizontal Bar Chart adaptive card
+    */
+     SendHorizontalBarChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardHorizontalBarChart);
+    }
+
+    /**
+     Sends a Horizontal Bar Stacked Chart adaptive card
+    */
+     SendHorizontalBarStackedChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardHorizontalBarStackedChart);
+    }
+
+    /**
+     Sends a Line Chart adaptive card
+    */
+     SendLineChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardLineChart);
+    }
+
+    /**
+     Sends a Pie Chart adaptive card
+    */
+     SendPieChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardPieChart);
+    }
+
+    /**
+     Sends a Vertical Bar Chart adaptive card
+    */
+     SendVerticalBarChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardVerticalBarChart);
+    }
+
+    /**
+     Sends a Vertical Bar Grouped Chart adaptive card
+    */
+     SendVerticalBarGroupedChartCard() {
+        return CardFactory.adaptiveCard(adaptiveCardVerticalBarGroupedChart);
+    }
+
+    /**
    * Send AdaptiveCard Formats to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
@@ -397,6 +505,51 @@ class BotFormattingCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'CompoundButton',
                 value: 'CompoundButton'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'ContainerLayout',
+                value: 'ContainerLayout'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'DonutChart',
+                value: 'DonutChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'GaugeChart',
+                value: 'GaugeChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'HorizontalChart',
+                value: 'HorizontalChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'HorizontalChartStacked',
+                value: 'HorizontalChartStacked'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'LineChart',
+                value: 'LineChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'PieChart',
+                value: 'PieChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'VerticalBarChart',
+                value: 'VerticalBarChart'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'VerticalBarGroupedChart',
+                value: 'VerticalBarGroupedChart'
             }
         ];
 
