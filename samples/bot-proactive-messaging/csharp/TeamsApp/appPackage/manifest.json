@@ -3,7 +3,7 @@
   "manifestVersion": "1.16",
   "version": "1.0.0",
   "showLoadingIndicator": false,
-  "id": "{{BOT-ID}}",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.example.contoso",
   "developer": {
     "name": "Contoso",
@@ -27,7 +27,7 @@
   "staticTabs": [],
   "bots": [
     {
-      "botId": "{{BOT-ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team"
@@ -41,6 +41,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<App Domain>>"
+    "${{BOT_DOMAIN}}"
   ]
 }
