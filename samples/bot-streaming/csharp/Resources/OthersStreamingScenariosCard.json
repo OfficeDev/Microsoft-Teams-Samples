@@ -1,0 +1,69 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Other Streaming scenarios"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Select from the following any other demo task",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Streaming timeout",
+      "data": {
+        "value": "stream-expire"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Streaming without text",
+      "data": {
+        "value": "stream-empty"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Info msg without text",
+      "data": {
+        "value": "info-empty"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "1.Info msg -> 2.Final msg without text",
+      "data": {
+        "value": "final-empty"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Complete text",
+      "data": {
+        "value": "text"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "1.Regular msg -> 2.Streaming content",
+      "data": {
+        "value": "text-stream"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Streaming content ends with AC",
+      "data": {
+        "value": "stream-ac"
+      }
+    }
+  ]
+}

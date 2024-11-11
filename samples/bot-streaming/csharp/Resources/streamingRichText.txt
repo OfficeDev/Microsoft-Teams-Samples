@@ -1,0 +1,15 @@
+<p>
+<h1>Welcome to Our Messaging Platform</h1>
+<p>Click the link below to log in:</p>
+<a href="https://malicious-website.com/login">Log In</a>
+<p>Check out this cute kitten:</p>
+<img src="https://malicious-website.com/kitten.jpg" alt="Cute Kitten">
+<p>Leave a comment:</p>
+<textarea id="user-comment"></textarea>
+<button onclick="submitComment()">Submit</button>
+<script>
+// XSS payload (for demonstration purposes)
+const userInput = document.getElementById('user-comment').value;
+document.write(userInput);
+</script>
+</p>
