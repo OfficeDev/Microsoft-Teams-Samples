@@ -25,6 +25,9 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 > [!IMPORTANT]
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
 
+## Interaction with bot
+![Conversation Bot](Images/bot-streaming.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -104,6 +107,29 @@ the Teams service needs to call into the bot.
     - With CTRL + Alt + Shift + 8 open the UI dev tools pane. Go to "Settings" and search `enablebotstreaming`. Enable the flag and reload the page for the UI to reflect the changes and allow UI to reflect streaming feature changes.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-streaming/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
+## Running the sample
+
+You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+
+**Install App in Teams:**
+![InstallApp ](Images/1.InstallApp.png)
+
+**Welcome Streaming Card Displayed in Teams:**
+![2.WelcomeStreaming ](Images/2.WelcomeStreaming.png)
+
+**User Asking a Question to the Bot:**
+![3.AskQuestion ](Images/3.AskQuestion.png)
+
+**Streaming Results from the Bot in Teams:**
+![4.AskQuestion1 ](Images/4.AskQuestion1.png)
+
+**Bot's Response to the User's Question:**
+![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
+
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
