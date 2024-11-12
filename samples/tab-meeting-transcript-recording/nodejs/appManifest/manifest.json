@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{{Microsoft-App-id}}",
-  "packageName": "com.teams.meetingtranscriptrecording",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "https://{{domain-name}}",

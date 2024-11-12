@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{{Your Teams App Id Here}}",
-  "packageName": "com.example.reddit-link-unfurler",
   "developer": {
     "name": "{{Company Name}}",
     "websiteUrl": "{{Company Website}}",
