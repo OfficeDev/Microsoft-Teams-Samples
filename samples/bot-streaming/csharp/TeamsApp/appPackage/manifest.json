@@ -15,8 +15,8 @@
     "color": "icon-color.png"
   },
   "name": {
-    "short": "Solangeal-Streaming Bot",
-    "full": "Solangeal-Streaming Bot - This sample showcases the conversational streaming token scenario."
+    "short": "Streaming Bot",
+    "full": "Streaming Bot - This sample showcases the conversational streaming token scenario."
   },
   "description": {
     "short": "This sample showcases the conversational streaming token scenario.",
