@@ -8,6 +8,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "11/12/2024"
+ urlFragment: officedev-microsoft-teams-samples-bot-streaming-csharp
 ---
 
 # Teams Streaming Bot Sample
