@@ -8,7 +8,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 
 # Sample lists
 
-1. [Copilot for Microsoft 365 samples](#Copilot-for-Microsoft-365-samples)
+1. [Microsoft 365 Copilot samples](#Microsoft-365-Copilot-samples)
 1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
 1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
 1. [Tabs samples](#Tabs-samples)
@@ -21,7 +21,7 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Actions Preview](#Actions-preview)
 1. [Scenario specific samples](#Scenario-specific-samples)
 
-## [Copilot for Microsoft 365 samples](https://github.com/OfficeDev/Copilot-for-M365-Samples)
+## [Microsoft 365 Copilot samples](https://github.com/OfficeDev/Copilot-for-M365-Samples)
 | Name    | Description |  .NET    | TypeScript   | JavaScript |
 | -------- | :------- | ------- | ------- | ------- |
 | Northwind Inventory  | Plugin that allows users to query the Northwind Database | [View](https://github.com/OfficeDev/Copilot-for-M365-Samples/tree/main/samples/msgext-northwind-inventory-csharp)| [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
