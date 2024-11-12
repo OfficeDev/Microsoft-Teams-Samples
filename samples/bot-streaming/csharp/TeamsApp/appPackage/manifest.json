@@ -5,7 +5,7 @@
   "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.sample.teamsconversationbot",
   "developer": {
-    "name": "Solange Alpuche Ordaz",
+    "name": "TeamsStreamingBot",
     "websiteUrl": "https://www.microsoft.com",
     "privacyUrl": "https://www.teams.com/privacy",
     "termsOfUseUrl": "https://www.teams.com/termsofuser"
