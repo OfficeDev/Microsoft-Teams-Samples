@@ -6,7 +6,7 @@ const { StreamType, ChannelData } = require('./streamingModels'); // Models for 
 const { AdaptiveCardTemplate } = require('adaptivecards-templating'); // For Adaptive Card templating
 
 class TeamsConversationBot extends ActivityHandler {
-    constructor(config) {
+    constructor() {
         super();
 
         this._appId = process.env.MicrosoftAppId;
@@ -15,15 +15,13 @@ class TeamsConversationBot extends ActivityHandler {
         this._endpoint = process.env.AzureOpenAIEndpoint; // Azure OpenAI Endpoint (e.g., https://<resource-name>.openai.azure.com/)
         this._key = process.env.AzureOpenAIKey; // Azure OpenAI API Key
         this._deployment = process.env.AzureOpenAIDeployment; // Deployment name (model)
-
-        // Initialize Azure OpenAI Client
-        const credential = new AzureKeyCredential(this._key);
-        this.openAIClient = new OpenAIClient(this._endpoint, credential);
-        
         this.adaptiveCardTemplate = path.join(__dirname, "Resources", "CardTemplate.json");
     }
 
     async onMessageActivity(turnContext) {
+        // Create an instance of OpenAIClient with the given endpoint and API key
+        const client = new OpenAIClient(this._endpoint, new AzureKeyCredential(this._key));
+
         let userInput = turnContext.activity.text.trim().toLowerCase();
         try {
             let contentBuilder = '';
@@ -37,21 +35,39 @@ class TeamsConversationBot extends ActivityHandler {
             });
 
             let streamId = await this.buildAndSendStreamingActivity(turnContext, "Getting the information...", channelData);
+            
+            // Prepare the messages to be sent to the AI model
+            const messages = [
+                { role: "system", content: 'You are an AI great at storytelling which creates compelling fantastical stories.' },
+                { role: "user", content: userInput }
+            ];
+            //----------------------
+            const response1 = await client.getChatCompletions(this._deployment, messages, {
+                temperature: 0.7,
+                frequencyPenalty: 0,
+                presencePenalty: 0,
+            });
+            console.log(response1.choices);
 
-            // Request to Azure OpenAI API to generate a chat response (streaming)
-            const response = await this.openAIClient.getChatCompletions(this._deployment, [
-                { role: 'system', content: 'You are an AI great at storytelling which creates compelling fantastical stories.' },
-                { role: 'user', content: userInput }
-            ], {
-                streaming: true,
+            //---------------------
+            const response = await client.streamChatCompletions(this._deployment, messages, 
+            {
+                temperature: 0.7,
+                frequencyPenalty: 0,
+                presencePenalty: 0,
+                stream: true // For streaming responses
             });
 
             const stopwatch = new Date();
             for await (const message of response) {
                 streamSequence++;
                 
-                if (message.choices[0].finish_reason) {
+                if (message.choices[0].finish_reason) 
+                {
                     channelData.streamType = StreamType.Final;
+                    channelData.streamSequence = streamSequence;
+                    channelData.streamId = streamId;
+                    
                     await this.buildAndSendStreamingActivity(turnContext, contentBuilder, channelData);
                     break;
                 }
@@ -59,8 +75,12 @@ class TeamsConversationBot extends ActivityHandler {
                 contentBuilder += message.choices[0].delta.content;
 
                 // Send chunks once RPS is reached
-                if (contentBuilder.length > 0 && new Date() - stopwatch > rps) {
+                if (contentBuilder.length > 0 && new Date() - stopwatch > rps) 
+                    {
                     channelData.streamType = StreamType.Streaming;
+                    channelData.streamSequence = streamSequence;
+                    channelData.streamId = streamId;
+
                     await this.buildAndSendStreamingActivity(turnContext, contentBuilder, channelData);
                     stopwatch.setTime(new Date().getTime()); // Restart the stopwatch
                 }
@@ -72,12 +92,16 @@ class TeamsConversationBot extends ActivityHandler {
 
     async buildAndSendStreamingActivity(turnContext, text, channelData) {
         const isStreamFinal = channelData.streamType === StreamType.Final;
+
         const streamingActivity = {
             type: isStreamFinal ? 'message' : 'typing',
             id: channelData.streamId,
             channelData: channelData,
-            text: text,
         };
+
+        if (text) {
+            streamingActivity.text = text;
+        }
 
         // Include streaming info in entities
         streamingActivity.entities = [{
