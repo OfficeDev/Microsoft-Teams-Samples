@@ -188,7 +188,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             /*
              * We are sending the final streamed mesage as an Adaptive Card Attachment built 
-             * using a templated.
+             * using a template.
              */
             if (isStreamFinal) 
             {
@@ -206,7 +206,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 
                 streamingActivity.Attachments = new List<Attachment>() { attachment };
 
-                //Add text to the activuty
+                //Add text to the activity
                 streamingActivity.Text = "This is what I've got:";
             }
 
