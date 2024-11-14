@@ -187,7 +187,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
 
             /*
-             * We are sending the final streamed mesage as an Adaptive Card Attachment built 
+             * We are sending the final streamed message as an Adaptive Card Attachment built 
              * using a template.
              */
             if (isStreamFinal) 
