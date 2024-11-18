@@ -1,43 +1,32 @@
 ---
 page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
+description: This sample app can be use to streaming scenarios in Teams using Azure Open AI and Bot Framework v4 for personal scope.
 products:
 - office-teams
-- office
-- office-365
 languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "10-04-2022 20:15:25"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-nodejs
+ createdDate: "11/18/2024"
+urlFragment: officedev-microsoft-teams-samples-bot-streaming-nodejs
 ---
 
-# Teams Conversation Bot
+# Teams Streaming Bot Sample
 
-Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
+This bot has been created using [Bot Framework](https://dev.botframework.com) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) as a secondary/alternative option to using [Teams AI SDK](https://github.com/microsoft/teams-ai/tree/main/js/samples/04.ai-apps/i.teamsChefBot-streaming). 
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
-how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
+Its main purpose is to demonstrate how to build a bot connected to an LLM and send messages through Teams.
 
 ## Included Features
 * Bots
-* Adaptive Cards
-* Teams Conversation Events
-* Immersive Reading Support for Cards
-* AI label
-* Citations
-* Feedback buttons
-* Sensitivity label
+* Azure Open AI
+* Streaming
+
+> [!IMPORTANT]
+> This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
 
 ## Interaction with bot
-
-![Conversation Bot](Images/Bot_Conversation.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Conversation Bot:** [Manifest](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
+![Conversation Bot](Images/bot-streaming.gif)
 
 ## Prerequisites
 
@@ -59,7 +48,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 > If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-## Run the app (Manually Uploading to Teams)
+## Create an Azure Open AI service
+
+- In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
+- **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
+- Collect `AzureOpenAIEndpoint`, `AzureOpenAIKey`, `AzureOpenAIDeployment` values and save these values to update in `.env` file later.
+
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -75,9 +70,9 @@ the Teams service needs to call into the bot.
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+1) Setup for Bot
 
-## Setup for bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
     - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
@@ -86,14 +81,13 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
-## Setup for code
 1) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-conversation/nodejs`
+1) In a terminal, navigate to `samples/bot-streaming/nodejs`
 
 1) Install modules
 
@@ -111,150 +105,28 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
-   
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation/nodejs/index.js#L46) line and put your debugger for local debug.
+    - Add the app to personal scope (Supported scopes)
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-streaming/nodejs/index.js#L46) line and put your debugger for local debug.
 
 ## Running the sample
 
-You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+**Install App in Teams:**
+![InstallApp ](Images/1.InstallApp.png)
 
-1. **Show Welcome**
-  - **Result:** The bot will send the welcome card for you to interact with
-  - **Valid Scopes:** personal, group chat, team chat
+**Welcome Streaming Card Displayed in Teams:**
+![2.WelcomeStreaming ](Images/2.WelcomeStreaming.png)
 
-  - **Personal Scope Interactions:**
+**User Asking a Question to the Bot:**
+![3.AskQuestion ](Images/3.AskQuestion.png)
 
-   **Adding bot UI:**
-  ![personal-AddBot ](Images/1.Adding_personal_Scope.png)
+**Streaming Results from the Bot in Teams:**
+![4.AskQuestion1 ](Images/4.AskQuestion1.png)
 
-   **Added bot UI:**
-  ![personal-AddedBot ](Images/2.Added.png)
-
-   **Show Welcome command interaction:**
-  ![personal-WelcomeCard-Interaction ](Images/3.Welcome_Card.png)
-
-   - **Group Chat Scope Interactions:**
-
-   **Adding bot UI:**
-  ![groupChat-AddBot ](Images/4.Adding_to_GC.png)
-
-   **Added bot UI:**
-  ![groupChat-AddedBot ](Images/5.Addes_GC.png)
-
-   **Show Welcome command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/6.Welcome_Card_GC.png)
-
-  - **Team Scope Interactions:**
-
-   **Adding bot UI:**
-  ![team-AddBot ](Images/7.Adding_to_Team.png)
-
-   **Added bot UI:**
-  ![team-AddedBot ](Images/8.Added_to_Team.png)
-
-   **Show Welcome command interaction:**
-  ![team-WelcomeCommand-Card ](Images/9.Welcome_Card_Team.png)
-
-2. **MentionMe**
-  - **Result:** The bot will respond to the message and mention the user
-  - **Valid Scopes:** personal, group chat, team chat
-
-  - **Personal Scope Interactions:**
-
-   **MentionMe command interaction:**
-  ![personal-MentionMeCommand ](Images/10.Mention_Me_Chat.png)
-
-   - **Group Chat Scope Interactions:**
-
-   **MentionMe command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/11.Mention_Me_GC.png)
-
-  - **Team Scope Interactions:**
-
-   **MentionMe command interaction:**
-  ![team-MentionCommand-Interaction ](Images/12.Mention_Me_Team.png)
-
-3. **MessageAllMembers**
-  - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
-  - **Valid Scopes:** personal, group chat, team chat
-
-  - **Personal Scope Interactions:**
-
-   **MessageAllMembers command interaction:**
-  ![personal-MessageAllMembersCommand ](Images/13.Message_all_Members_chat.png)
-
-   - **Group Chat Scope Interactions:**
-
-   **MessageAllMembers command interaction:**
-   ![groupChat-MessageAllMembers-interaction ](Images/14.Message_all_Members_GC.png)
-
-  - **Team Scope Interactions:**
-
-   **MessageAllMembers command interaction:**
-  ![team-MessageAllMembers-interactions ](Images/15.Message_all_Members_Team.png)
-
-  4.**Read Receipt**
-  **Check Read count**
-  - **Result:** The bot will check the count of members who have read your message which sent through `MessageAllMembers`. User can also reset the count using `Reset read count` command
-  - **Valid Scopes:** personal, group chat, team chat
-
-   - **Group Chat Scope Interactions:**
-   **Check Read count command interaction:**
-  ![groupChat-CheckReadCount-interaction](Images/Check_Read_Count_Before.png)
-
-   **Reset Read count command interaction:**
-  ![groupChat-ResetReadCount-interaction](Images/Reset_Read_Count.png)
-
- 5. **ImmersiveReader**
-- You can use the immersive reader property of adaptive cards by using the speak property.
-`immersivereader` command will send an adpative card in teams chat.
-![immersive-reader-card](Images/34.Immersive_Reader_card_chat.png)
-
-- A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
-![immersive-reader-screen](Images/immersiveReaderScreen.png)
-
- 6. **Message update events for user messages**
-- You will recieve event updates for message edit/delete features.
-
-- Message is edited
-![message-edit](Images/36.Message_Edited.png)
-
-- Message is soft-deleted
-![message-soft-delete](Images/37.Message_Deleted.png)
-
-- Message is restored
-![message-undelete](Images/38.Message_Restored.png)
-
- 7. **Format AI bot messages**
-- Consists features such as citations, feedback buttons, and sensitivity label that enables better user engagement
-
-- `AI label` - enables user to identify that the message was generated using AI.
-![AI-label](Images/AI-label.png)
-
-- `Citations` - enables user to refer to the source of the bot's message through in-text citations and the reference.
-![Citations](Images/citations.png)
-
-- `Feedback buttons` - enables user to provide positive or negative feedback based on their experience.
-![Feedback-buttons](Images/Feedback-buttons.png)
-
-![Feedback-buttons1](Images/Feedback-buttons1.png)
-
-![Feedback-buttons2](Images/Feedback-buttons2.png)
-
-![Feedback-buttons3](Images/Feedback-buttons3.png)
-
-- `Sensitivity label` - enables user to understand the confidentiality of the bot's message.
-![Sensitivity-label](Images/Sensitivity-label.png)
-
-- `Send AI message` - Replies back with a bot message containing all formats: AI label, Citations, Feedback buttons, and Sensitivity label.
-![sendtext](Images/sendtext.png)
-
-You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
+**Bot's Response to the User's Question:**
+![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
 
 ## Deploy the bot to Azure
 
@@ -264,11 +136,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
-- [Receive a read receipt](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?branch=pr-en-us-9184&tabs=dotnet1%2Capp-manifest-v112-or-later%2Cdotnet2%2Cdotnet3%2Cdotnet4%2Cdotnet5%2Cdotnet#receive-a-read-receipt)
-- [Format AI bot messages](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/format-ai-bot-messages?branch=pr-en-us-10798&tabs=js)
+- [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api) 
 
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-streaming-nodejs" />
