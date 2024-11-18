@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { StreamType, ChannelData } = require('./streamingModels'); // Models for streaming
 
-class TeamsConversationBot extends ActivityHandler {
+class TeamsStreamingBot extends ActivityHandler {
     constructor() {
         super();
 
@@ -153,4 +153,4 @@ class TeamsConversationBot extends ActivityHandler {
     }
 }
 
-module.exports.TeamsConversationBot = TeamsConversationBot;
+module.exports.TeamsStreamingBot = TeamsStreamingBot;

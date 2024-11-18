@@ -26,7 +26,7 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
 
 ## Interaction with bot
-![Conversation Bot](Images/bot-streaming.gif)
+![StreamingBot](Images/bot-streaming.gif)
 
 ## Prerequisites
 

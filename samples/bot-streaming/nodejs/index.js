@@ -19,7 +19,7 @@ const {
     ConfigurationBotFrameworkAuthentication
 } = require('botbuilder');
 
-const { TeamsConversationBot } = require('./bots/teamsConversationBot');
+const { TeamsStreamingBot } = require('./bots/teamsStreamingBot');
 
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
@@ -47,7 +47,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new TeamsConversationBot();
+const bot = new TeamsStreamingBot();
 
 // Create HTTP server.
 const server = restify.createServer();

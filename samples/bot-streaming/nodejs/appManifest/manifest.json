@@ -3,7 +3,7 @@
   "manifestVersion": "1.14",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.sample.teamsconversationbot",
+  "packageName": "com.teams.sample.teamsstreamingbot",
   "developer": {
     "name": "TeamsStreamingBot",
     "websiteUrl": "https://www.microsoft.com",
