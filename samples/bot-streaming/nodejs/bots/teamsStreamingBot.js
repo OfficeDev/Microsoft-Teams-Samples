@@ -1,7 +1,5 @@
-const { ActivityHandler, MessageFactory } = require('botbuilder');
+const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
-const fs = require('fs');
-const path = require('path');
 const { StreamType, ChannelData } = require('./streamingModels'); // Models for streaming
 
 class TeamsStreamingBot extends ActivityHandler {
@@ -14,7 +12,6 @@ class TeamsStreamingBot extends ActivityHandler {
         this._endpoint = process.env.AzureOpenAIEndpoint; // Azure OpenAI Endpoint (e.g., https://<resource-name>.openai.azure.com/)
         this._key = process.env.AzureOpenAIKey; // Azure OpenAI API Key
         this._deployment = process.env.AzureOpenAIDeployment; // Deployment name (model)
-        this.adaptiveCardTemplate = path.join(__dirname, "..", "Resources", "CardTemplate.json");
     }
 
     async onMessageActivity(turnContext) {
@@ -92,8 +89,7 @@ class TeamsStreamingBot extends ActivityHandler {
 
         const streamingActivity = {
             type: isStreamFinal ? 'message' : 'typing',
-            id: channelData.streamId,
-            channelData: channelData,
+            id: channelData.streamId
         };
 
         if (text) {
@@ -103,27 +99,27 @@ class TeamsStreamingBot extends ActivityHandler {
         // Include streaming info in entities
         streamingActivity.entities = [{
             type: 'streaminfo',
-            properties: {
-                streamId: channelData.streamId,
-                streamType: channelData.streamType.toString(),
-                streamSequence: channelData.streamSequence
-            }
+            streamId: channelData.streamId,
+            streamType: channelData.streamType.toString(),
+            streamSequence: channelData.streamSequence
         }];
 
         if (isStreamFinal) {
             try {
-                const templateString = fs.readFileSync(this.adaptiveCardTemplate, 'utf8');
-                const AdaptiveCards = require('adaptivecards-templating');
-                const template = new AdaptiveCards.Template(templateString);
-    
-                const cardData = { finalStreamText: text };
-                const adaptiveCardContent = template.expand(cardData);
-    
-                const attachment = {
-                    contentType: "application/vnd.microsoft.card.adaptive",
-                    content: JSON.parse(adaptiveCardContent),
-                };
-                streamingActivity.attachments = [attachment];
+                var cardJson = {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "version": "1.5",
+                    "type": "AdaptiveCard",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "wrap": true,
+                        "text": text
+                      }
+                    ]
+                  };
+      
+                streamingActivity.attachments = [CardFactory.adaptiveCard(cardJson)];
                 streamingActivity.text = "This is what I've got:";
             } catch (error) {
                 console.error("Error creating adaptive card:", error);
@@ -135,10 +131,10 @@ class TeamsStreamingBot extends ActivityHandler {
 
     async sendStreamingActivity(turnContext, streamingActivity) {
         try {
+            console.log(streamingActivity);
             const response = await turnContext.sendActivity(streamingActivity);
             return response.id;
         } catch (error) {
-            console.error("Error while sending streaming activity: ", error);
             await turnContext.sendActivity(MessageFactory.text("Error while sending streaming activity: " + error.message));
             throw new Error("Error sending activity: " + error.message);
         }
