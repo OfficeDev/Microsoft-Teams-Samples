@@ -61,10 +61,6 @@ class TeamsStreamingBot extends ActivityHandler {
 
                 // Loop through the choices in each event
                 for (const choice of event.choices) {
-                    // Log the event choices for debugging purposes
-                    console.log(choice);
-                    console.log(choice.delta?.content);
-
                     // If streaming is finished, send the final response and break out of the loop
                     if (choice.finishReason !== null) {
                         channelData.streamType = StreamType.Final; // Mark the stream as finished
@@ -153,7 +149,6 @@ class TeamsStreamingBot extends ActivityHandler {
     // Send the streaming activity to the user
     async sendStreamingActivity(turnContext, streamingActivity) {
         try {
-            console.log(streamingActivity); // Log the activity for debugging
             const response = await turnContext.sendActivity(streamingActivity);
             return response.id; // Return the activity ID for tracking
         } catch (error) {

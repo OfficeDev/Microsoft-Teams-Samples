@@ -125,6 +125,9 @@ the Teams service needs to call into the bot.
 **Streaming Results from the Bot in Teams:**
 ![4.AskQuestion1 ](Images/4.AskQuestion1.png)
 
+**Getting the information:**
+![4.GettingInformation ](Images/4.GettingInformation.png)
+
 **Bot's Response to the User's Question:**
 ![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
 
