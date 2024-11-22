@@ -62,14 +62,15 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
   
-  Install node modules
+   - Install node modules
 
-   Inside js folder,  navigate to `samples/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+     Inside js folder,  navigate to `samples/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual   
+     Studio code terminal by opening the project in Visual Studio code.
 
-    ```bash
-    npm install
-    ```
-
+     ```bash
+     npm install
+     ```
+    
   - Navigate to `./cookies.js` and go to line 23. Replace `{{DOMAIN-NAME}}` with your domain. E.g. if you   are using ngrok it would be `https://1234.ngrok-free.app` then your DOMAIN-NAME will be `1234.ngrok-free.app`
     
     ```javascript
