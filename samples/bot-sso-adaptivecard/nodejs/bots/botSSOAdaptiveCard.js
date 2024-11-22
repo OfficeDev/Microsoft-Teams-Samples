@@ -183,7 +183,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
 
         var loginReqResponse = {
             StatusCode: 401,
-            Type: "application/vnd.microsoft.card.loginRequest",
+            Type: "application/vnd.microsoft.activity.loginRequest",
             Value: oAuthCard
         }
 
