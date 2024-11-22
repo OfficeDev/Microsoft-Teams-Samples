@@ -1,10 +1,10 @@
 [
     {
-      "name": "officedev-microsoft-teams-samples-cookie-app-js",
+      "name": "officedev-microsoft-teams-samples-tab-app-cookie-js",
       "source": "officeDev",
       "title": "Microsoft Teams Cookie App",
       "shortDescription": "This sample application demonstrates to test upcoming SameSite cookie changes in Chromium and explore cookie behavior in various scenarios.",
-      "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-live-code-interview/nodejs",
+      "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-app-cookie/js",
       "longDescription": [
         "This sample application demonstrates key web storage features, including managing cookies, SameSite cookies, and partitioned cookies. It also covers local storage and IndexedDB for data persistence in modern web applications."
       ],
@@ -35,8 +35,8 @@
         {
           "type": "image",
           "order": 100,
-          "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-code-interview/nodejs/Images/MeetinLiveCodeInterview.gif",
-          "alt": "Solution UX showing an app to test and explore cookies."
+          "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-app-cookie/js/Images/Cookie_App.gif",
+          "alt": "Solution UX showcasing an app for testing and exploring cookies."
         }
       ],
       "authors": [

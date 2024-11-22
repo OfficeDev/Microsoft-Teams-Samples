@@ -1,22 +1,21 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.5",
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
     "version": "1.0.0",
     "id": "{{ANY-GUID-ID}}",
-    "packageName": "net.azurewebsites.teams-cookie-app",
     "developer": {
-        "name": "Yuri",
-        "websiteUrl": "https://net.azurewebsites.teams-cookie-app",
-        "privacyUrl": "https://net.azurewebsites.teams-cookie-app/privacy",
-        "termsOfUseUrl": "https://net.azurewebsites.teams-cookie-app/termsofuse"
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuser"
     },
     "icons": {
         "color": "color.png",
         "outline": "outline.png"
     },
     "name": {
-        "short": "Cookie App",
-        "full": "Microsoft Teams Cookie App"
+        "short": "Tab App Cookie",
+        "full": "Microsoft Teams Tab App Cookie"
     },
     "description": {
         "short": "An app to test and explore cookies.",

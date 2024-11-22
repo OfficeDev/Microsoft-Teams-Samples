@@ -20,7 +20,7 @@ function getCookies() {
 }
 
 function popOutApp() {
-  window.open("https://teams-cookie-app.azurewebsites.net/partitioned-cookies.html");
+  window.open("https://{{DOMAIN-NAME}}/partitioned-cookies.html");
 }
 
 function setCookiesFromApi() {

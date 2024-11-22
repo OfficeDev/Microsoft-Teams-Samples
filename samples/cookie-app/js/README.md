@@ -10,7 +10,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "11/22/2024 12:30:00 PM"
-urlFragment: officedev-microsoft-teams-samples-cookie-app-js
+urlFragment: officedev-microsoft-teams-samples-tab-app-cookie-js
 ---
 
 # Microsoft Teams Cookie App
@@ -31,7 +31,7 @@ This sample application provides an interactive demonstration of cookie manageme
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Microsoft Teams Cookie App Demo Manifest:** [Manifest](/samples/cookie-app/js/demo-manifest/cookie-app.zip)
+**Microsoft Teams Cookie App Demo Manifest:** [Manifest](/samples/tab-app-cookie/js/demo-manifest/tab-app-cookie.zip)
 
 ## Prerequisites
 
@@ -64,13 +64,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   
   Install node modules
 
-   Inside js folder,  navigate to `samples/cookie-app/js` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
-
-   - Repeat the same step in folder `samples/cookie-app/js`
+   Inside js folder,  navigate to `samples/tab-app-cookie/js` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
     ```
+
+  - Navigate to `./cookies.js` and go to line 23. Replace `{{DOMAIN-NAME}}` with your domain. E.g. if you   are using ngrok it would be `https://1234.ngrok-free.app` then your DOMAIN-NAME will be `1234.ngrok-free.app`
+    
+    ```javascript
+      function popOutApp() {
+        window.open("https://{{DOMAIN-NAME}}/partitioned-cookies.html");
+    }
+    ```
+
   - Run the sample by following command:
 
     ```
@@ -79,7 +86,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{ANY-GUID-ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` file located in the ./appPackage folder  and replace the placeholder `{{ANY-GUID-ID}}` with the corresponding GUID.
     - **Edit** the `manifest.json` for `validDomains` and replace `{{DOMAIN-NAME}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your DOMAIN-NAME will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -100,8 +107,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 **Page Cookie**
 ![shared content second user](Images/3.Page_Cookie.png)
 
-**Seam Site Cookie**
-![shared content](Images/4.Page_SeamsiteCookie.png)
+**SameSite Cookie**
+![shared content](Images/4.Page_SameSiteCookie.png)
 
 **Partitioned Cookie:**
 ![shared content](Images/5.Page_PartitionedCookie.png)
@@ -117,4 +124,4 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [Will update once the document is confirmed](https://Needs_To_Be_Added)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/cookie-app-js" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-app-cookie-js" />
