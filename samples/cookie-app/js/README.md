@@ -88,7 +88,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` file located in the ./appPackage folder  and replace the placeholder `{{ANY-GUID-ID}}` with the corresponding GUID.
     - **Edit** the `manifest.json` for `validDomains` and replace `{{DOMAIN-NAME}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your DOMAIN-NAME will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** the contents of the `appPackage` folder to create a `manifest.zip` (Make sure the zip file does not contain any subfolders, as this will result in an error when uploading your .zip package).
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
