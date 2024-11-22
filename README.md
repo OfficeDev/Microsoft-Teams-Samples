@@ -128,7 +128,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
 |2| Sharepoint List Bot| This sample bot for Microsoft Teams captures user input using adaptive cards and stores the data in a SharePoint list. It includes setup for SharePoint registration, permissions configuration, and deployment in Teams for streamlined data management.| [View][bot-sharepoint-list#cs] |  |  |
 |3|Teams Virtual Assistant| Customized virtual assistant template to support teams capabilities.        |[View][app-virtual-assistant#cs]|
-|3|User Scope Web App| This sample app demonstrates posting notifications for team/channel changes using Microsoft Graph API in Node.js||[View][user-scope-web-application#js]
+|4|User Scope Web App| This sample app demonstrates posting notifications for team/channel changes using Microsoft Graph API in Node.js||[View][user-scope-web-application#js]
+|5|Microsoft Teams Cookie App| This sample application demonstrates key web storage features, including managing cookies, SameSite cookies, and partitioned cookies. It also covers local storage and IndexedDB for data persistence in modern web applications.||[View][cookie-app#js]
 
 ## [Messaging Extensions samples](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) (using the v4 SDK)
 >NOTE:
@@ -346,6 +347,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
 [user-scope-web-application#js]:samples/user-scope-web-application/nodejs
+[cookie-app#js]:samples/cookie-app/js
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx
