@@ -105,8 +105,8 @@ Modify the `appsettings.json` file with the following details:
 
 1) Modify the `manifest.json` in the `/appPackage` folder 
 Replace the following details:
-    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing Microsoft Entra ID app registration in your Azure portal.
-    - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - `{{AAD_APP_CLIENT_ID}}` with your MicrosoftAppId received after doing Microsoft Entra ID app registration in your Azure portal.
+    - `{{BOT_DOMAIN}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
