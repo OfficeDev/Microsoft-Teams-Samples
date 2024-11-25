@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "This sample shows anonymous users support in Teams meeting apps.",
-    "full": "This sample shows anonymous users support in Teams meeting apps."
+    "full": "This sample app enables anonymous user support in Microsoft Teams meeting apps using Azure AD, Bot Framework, and tunneling setup, allowing guest users to interact seamlessly through features like meeting tabs and stage views."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [

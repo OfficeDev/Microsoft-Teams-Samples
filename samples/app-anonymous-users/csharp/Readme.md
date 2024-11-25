@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Add this sample app to enable anonymous user participation and interaction in Microsoft Teams meetings.
+description: This sample app enables anonymous user support in Microsoft Teams meeting apps using Azure AD, Bot Framework, and tunneling setup, allowing guest users to interact seamlessly through features like meeting tabs and stage views.
 products:
 - office-teams
 - office
