@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "<<Microsoft-App-Id>>",
-  "packageName": "com.microsoft.teams.botsharepointfileviewer",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,11 +10,11 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Bot SharePoint file viewer",
+    "short": "Bot SharePoint File Viewer",
     "full": "Bot SharePoint file viewer"
   },
   "description": {
-    "short": "Bot SharePoint file viewer",
+    "short": "Bot SharePoint File Viewer",
     "full": "This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer."
   },
   "icons": {
@@ -24,7 +23,7 @@
   },
   "bots": [
     {
-      "botId": "<<Microsoft-App-Id>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -55,11 +54,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<Domain-name>>",
+    "${{BOT_DOMAIN}}",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "<<Microsoft-App-Id>>",
-    "resource": "api://botid-<<Microsoft-App-Id>>"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
   }
 }
