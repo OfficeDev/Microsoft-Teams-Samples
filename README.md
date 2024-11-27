@@ -22,12 +22,13 @@ The easy way to browse through all the samples is to visit the [Microsoft 365 Sa
 1. [Scenario specific samples](#Scenario-specific-samples)
 
 ## [Microsoft 365 Copilot samples](https://github.com/OfficeDev/Copilot-for-M365-Samples)
-| Name    | Description |  .NET    | TypeScript   | JavaScript |
-| -------- | :------- | ------- | ------- | ------- |
-| Northwind Inventory  | Plugin that allows users to query the Northwind Database | [View](https://github.com/OfficeDev/Copilot-for-M365-Samples/tree/main/samples/msgext-northwind-inventory-csharp)| [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
-| Document Search | Plugin that enables Hybrid Search (Vector + Semantic) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-csharp)  | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-js) | |
-| Product support | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-product-support-sso-csharp) | |
-| Multi Parameters  |Plugin that demonstrates how to implement complex utterances and support deep retrieval | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-csharp)  |[View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-ts) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-js)|
+| Name    | Description | Level      | .NET    | TypeScript   | JavaScript |
+| -------- | :------- | :-------: | ------- | ------- | ------- |
+| Northwind Inventory  | Plugin that allows users to query the Northwind Database | Intermediate | [View](https://github.com/OfficeDev/Copilot-for-M365-Samples/tree/main/samples/msgext-northwind-inventory-csharp) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts) | |
+| Document Search | Plugin that enables Hybrid Search (Vector + Semantic) | Advanced | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-csharp)  | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-doc-search-js) | |
+| Product support | Plugin that allows users to query the Products held in SharePoint Online team site via Microsoft Graph | Beginner | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-product-support-sso-csharp) | | |
+| Multi Parameters  | Plugin that demonstrates how to implement complex utterances and support deep retrieval | Advanced | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-csharp)  | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-ts) | [View](https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-multiparam-js) |
+
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -36,9 +37,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
-|    | Sample Name        | Description                                                                                                                | C#    | TypeScript | App Manifest  
-|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|Hello World|A Microsoft Teams Hello World sample app built with .NET/NodeJS that demonstrates essential features like tabs, bots, and messaging extensions for seamless interaction within the Teams environment.|[View][app-hello-world#cs]|[View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) |[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
+|    | Sample Name        | Description                                                                                                                | Level       | C#    | TypeScript | App Manifest  |
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:-----------:|:--------|:-------------|:-------------|
+| 1  | Hello World        | A Microsoft Teams Hello World sample app built with .NET/NodeJS that demonstrates essential features like tabs, bots, and messaging extensions for seamless interaction within the Teams environment. | Beginner    | [View][app-hello-world#cs] | [View][app-hello-world#ts] ![toolkit-icon](assets/toolkit-icon.png) | [View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip) |
 
 ## [AI samples](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0)
 
