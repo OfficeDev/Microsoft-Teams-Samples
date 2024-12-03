@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "2.0.0",
-  "id": "<<YourAppId>>",
-  "packageName": "teams.catering.bot",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Microsoft Corp.",
     "websiteUrl": "https://www.microsoft.com/",
@@ -25,11 +24,11 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<YourBotId>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal",
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "supportsFiles": true,
       "isNotificationOnly": false
@@ -40,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<domain-name>>"
+    "${{BOT_DOMAIN}}"
   ]
 }
