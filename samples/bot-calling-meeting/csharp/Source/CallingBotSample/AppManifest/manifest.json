@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "version": "1.0.3",
-  "manifestVersion": "1.14",
+  "manifestVersion": "1.19",
   "id": "<<app-id>>",
-  "packageName": "com.acs.sample",
   "developer": {
     "name": "Contoso",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -29,7 +28,7 @@
       "scopes": [
         "personal",
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "commandLists": [
         {
