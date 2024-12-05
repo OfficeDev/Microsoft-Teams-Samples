@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.appcheckinlocation",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -24,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "personal"
       ],
@@ -56,6 +57,6 @@
     "geolocation"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{BOT_DOMAIN}}"
   ]
 }

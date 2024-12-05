@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "<<Your Microsoft App Id>>",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.botmeetingevents",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -20,7 +21,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{BASE-URL}}/configure",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -34,7 +35,7 @@
   },
   "bots": [
     {
-      "botId": "<<Your Microsoft App Id>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "team",
         "personal",
@@ -45,12 +46,12 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<domain-name>>",
+    "${{BOT_DOMAIN}}",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "<<Your Microsoft App Id>>",
-    "resource": "https://{{BASE-URL}}",
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://${{BOT_DOMAIN}}",
     "applicationPermissions": [
       "OnlineMeeting.ReadBasic.Chat"
     ]

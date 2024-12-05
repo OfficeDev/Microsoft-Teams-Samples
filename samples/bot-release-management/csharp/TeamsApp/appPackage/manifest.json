@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "<AppID>",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.releasemanagement",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -24,7 +25,7 @@
   "accentColor": "#235EA5",
   "bots": [
     {
-      "botId": "<BotId>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
         "groupChat"
       ],
@@ -32,7 +33,7 @@
     }
   ],
   "validDomains": [
-    "<<domain-name>>"
+    "${{BOT_DOMAIN}}"
   ],
   "permissions": [
     "messageTeamMembers"
