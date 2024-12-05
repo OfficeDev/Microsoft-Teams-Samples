@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.teams.sample.linkunfurling",
   "developer": {
     "name": "Link Unfurling",
     "websiteUrl": "https://www.microsoft.com",
@@ -10,8 +11,8 @@
     "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "Link Unfurling",
@@ -24,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "commands": [
         {
           "id": "searchQuery",
@@ -49,6 +50,7 @@
           "type": "link",
           "value": {
             "domains": [
+              "${{BOT_DOMAIN}}",
               "*.botframework.com"
             ]
           }
