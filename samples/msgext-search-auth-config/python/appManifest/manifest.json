@@ -2,7 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.sample",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -24,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -74,7 +75,7 @@
   ],
   "validDomains": [
     "*.botframeworksamples.blob.core.windows.net",
-    "{{domain-name}}",
+    "${{BOT_DOMAIN}}",
     "*.botframework.com"
   ]
 }
