@@ -43,10 +43,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
 5.In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
 6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
-7.To test facebook auth flow create a facebookapp and get client id and secret for facebook app. Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+7.To test facebook auth flow create a facebookapp and get client id and secret for facebook app. Now go to your bot channel registration -> configuration -> Add OAuth connection string
 
 Provide connection Name : for eg facebookconnection. You'll use this name in your bot in the appsettings.json file.
-Select service provider ad facebook
+Select service provider as Facebook.
 Update {{FacebookAppId}} and {{FacebookAppPassword}} in appsetting.json.
 8.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
 9.In the browser that launches, select the Add button to install the app to Teams.
@@ -116,7 +116,7 @@ If you do not have permission to upload custom apps (sideloading), Teams Toolkit
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
-    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+    Now go to your bot channel registration -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
    - Select service provider ad `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
