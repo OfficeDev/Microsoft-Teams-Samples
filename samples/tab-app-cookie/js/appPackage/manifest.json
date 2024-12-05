@@ -1,0 +1,43 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "{{ANY-GUID-ID}}",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Tab App Cookie",
+        "full": "Microsoft Teams Tab App Cookie"
+    },
+    "description": {
+        "short": "An app to test and explore cookies.",
+        "full": "An app designed to test upcoming SameSite cookie changes in Chromium and explore cookie behavior in various scenarios."
+    },
+    "accentColor": "#F9F9FA",
+    "staticTabs": [
+        {
+            "entityId": "cookie",
+            "name": "Cookie",
+            "contentUrl": "https://{{DOMAIN-NAME}}/",
+            "websiteUrl": "https://{{DOMAIN-NAME}}/",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "{{DOMAIN-NAME}}"
+    ]
+}
