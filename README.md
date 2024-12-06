@@ -123,12 +123,13 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 31 | Secure Communication Bot                     | This bot ensures encrypted communication using security tools, including Multi-Factor Authentication.          | Advanced   | [View](securecommunicationbot#csharp)                                | [View](securecommunicationbot#nodejs) ![toolkit-icon](assets/toolkit-icon.png) |                                                                        |                                                                        |                                                                    |
 
 #### Additional samples
-| #  | Sample Name              | Description                                                                                                                                               | Level      | .NET                                                                | JavaScript                                                          |
-|----|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|---------------------------------------------------------------------|---------------------------------------------------------------------|
-| 1  | Proactive Messaging       | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                                | Intermediate | [View](bot-proactive-msg#cs)                                         |                                                                     |
-| 2  | Teams Virtual Assistant   | Customized virtual assistant template to support Teams capabilities.                                                                                     | Intermediate | [View](app-virtual-assistant#cs)                                    |                                                                     |
-| 3  | Sharepoint List Bot       | This sample bot for Microsoft Teams captures user input using adaptive cards and stores the data in a SharePoint list. It includes setup for SharePoint registration, permissions configuration, and deployment in Teams for streamlined data management. | Advanced   | [View](bot-sharepoint-list#cs)                                       |                                                                     |
-| 4  | User Scope Web App        | This sample app demonstrates posting notifications for team/channel changes using Microsoft Graph API in Node.js.                                          | Advanced   |                                                                     | [View](user-scope-web-application#js)                               |
+|    | Sample Name | Description | .NET | JavaScript | 
+|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
+|2| Sharepoint List Bot| This sample bot for Microsoft Teams captures user input using adaptive cards and stores the data in a SharePoint list. It includes setup for SharePoint registration, permissions configuration, and deployment in Teams for streamlined data management.| [View][bot-sharepoint-list#cs] |  |  |
+|3|Teams Virtual Assistant| Customized virtual assistant template to support teams capabilities.        |[View][app-virtual-assistant#cs]|
+|4|User Scope Web App| This sample app demonstrates posting notifications for team/channel changes using Microsoft Graph API in Node.js||[View][user-scope-web-application#js]
+|5|Microsoft Teams Tab App Cookie| This sample application demonstrates key web storage features, including managing cookies, SameSite cookies, and partitioned cookies. It also covers local storage and IndexedDB for data persistence in modern web applications.||[View][tab-app-cookie#js]
 
 ## [Messaging Extensions samples](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) (using the v4 SDK)
 >NOTE:
@@ -348,6 +349,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
 [user-scope-web-application#js]:samples/user-scope-web-application/nodejs
+[tab-app-cookie#js]:samples/tab-app-cookie/js
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx

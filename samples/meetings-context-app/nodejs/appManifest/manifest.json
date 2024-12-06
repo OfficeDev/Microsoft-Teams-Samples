@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
- "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.meetingtabcontext",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -29,7 +28,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "meetingChatTab",
@@ -40,7 +39,7 @@
   "bots": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
-      "scopes": [ "groupchat" ],
+      "scopes": [ "groupChat" ],
       "commandLists": [
         {
           "commands": [
@@ -53,7 +52,7 @@
               "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
             }
           ],
-          "scopes": ["groupchat"]
+          "scopes": ["groupChat"]
         }
       ]
 
