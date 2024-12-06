@@ -1,6 +1,6 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
-    "name": "${{CONFIG__MANIFEST__APPNAME__SHORT}}-aad",
+    "name": "${{CONFIG_APPNAME_SHORT}}-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADMyOrg",
     "optionalClaims": {
@@ -93,7 +93,7 @@
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/auth-end.html",
+            "url": "${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/auth-end.html",
             "type": "Web"
         }
     ]

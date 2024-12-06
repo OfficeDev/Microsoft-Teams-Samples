@@ -14,12 +14,12 @@
         "outline": "resources/outline.png"
     },
     "name": {
-        "short": "${{CONFIG__APPNAME__SHORT}}",
-        "full": "${{CONFIG__MANIFEST__APPNAME__FULL}}"
+        "short": "${{CONFIG_APPNAME_SHORT}}",
+        "full": "${{CONFIG_MANIFEST_APPNAME_FULL}}"
     },
   "description": {
-    "short": "Bot sample for proactive notifications ${{CONFIG__MANIFEST__APPNAME__SHORT}}",
-    "full": "This bot sends proactive reminders by saving conversation references in Teams. ${{CONFIG__MANIFEST__APPNAME__SHORT}}"
+    "short": "Bot sample for proactive notifications ${{CONFIG_APPNAME_SHORT}}",
+    "full": "This bot sends proactive reminders by saving conversation references in Teams. ${{CONFIG_APPNAME_SHORT}}"
   },
     "accentColor": "#FFFFFF",
     "bots": [
@@ -61,6 +61,6 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-        "${{PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN}}"
+        "${{PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN}}"
     ]
 }
