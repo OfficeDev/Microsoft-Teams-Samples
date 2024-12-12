@@ -3,7 +3,7 @@ page_type: sample
 products:
 - office-365
 languages:
-- javascript
+- python
 title: Microsoft Teams python Helloworld Sample
 description: Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.
 extensions:

@@ -6,4 +6,3 @@ version: v1.2
 additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:app-hello-world-python
 environmentFolderPath: ./env
-projectId: ed4559fa-2b95-480a-afd4-02bf413be3ba
