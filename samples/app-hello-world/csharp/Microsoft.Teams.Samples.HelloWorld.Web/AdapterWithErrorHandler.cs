@@ -1,32 +1,23 @@
-﻿// <copyright file="AdapterWithErrorHandler.cs" company="Microsoft Corporation">
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// </copyright>
-
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+//
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.6.2
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder.TraceExtensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
-    using Microsoft.Bot.Builder.Integration.AspNet.Core;
-    using Microsoft.Bot.Builder.TraceExtensions;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-
-    /// <summary>
-    /// A custom BotFrameworkHttpAdapter with error handling capabilities.
-    /// </summary>
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
-        /// </summary>
-        /// <param name="configuration">The configuration for the bot.</param>
-        /// <param name="logger">The logger to use for logging errors.</param>
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
             : base(configuration, logger)
         {
-            this.OnTurnError = async (turnContext, exception) =>
+            OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
-                logger.LogError(exception, "[OnTurnError] unhandled error : {Message}", exception.Message);
+                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
                 // Uncomment below commented line for local debugging.
                 // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
