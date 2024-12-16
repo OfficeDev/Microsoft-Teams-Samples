@@ -1,0 +1,47 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Search Hotels",
+        "weight": "bolder",
+        "size": "medium"
+      },
+      {
+        "type": "TextBlock",
+        "text": "Please enter your travel details to search for hotels.",
+        "wrap": true
+      },
+      {
+        "type": "Input.Date",
+        "id": "checkinDate",
+        "title": "Check-in Date"
+      },
+      {
+        "type": "Input.Date",
+        "id": "checkoutDate",
+        "title": "Check-out Date"
+      },
+      {
+        "type": "Input.Number",
+        "id": "numberOfGuests",
+        "title": "Number of Guests",
+        "min": 1,
+        "max": 10
+      },
+      {
+        "type": "Input.Text",
+        "id": "location",
+        "title": "Location",
+        "placeholder": "City, State or Country"
+      }
+    ],
+    "actions": [
+      {
+        "type": "Action.Submit",
+        "title": "Search"
+      }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6"
+  }
