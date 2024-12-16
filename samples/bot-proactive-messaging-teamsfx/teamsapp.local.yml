@@ -16,7 +16,7 @@ provision:
 
   - uses: botAadApp/create # Creates a new AAD app for bot if BOT_ID environment variable is empty
     with:
-      name: ${{CONFIG__MANIFEST__APPNAME__SHORT}}-bot
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
     writeToEnvironmentFile:
       botId: BOT_ID
       botPassword: SECRET_BOT_PASSWORD
@@ -25,8 +25,8 @@ provision:
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: ${{CONFIG__MANIFEST__APPNAME__SHORT}}-bot
-      messagingEndpoint: ${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/api/messages
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
+      messagingEndpoint: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/api/messages
       description: ""
       channels:
         - name: msteams
@@ -59,7 +59,7 @@ deploy:
     with:
       target: ./bot/.env.teamsfx.local
       envs:
-        INITIATE_LOGIN_ENDPOINT: ${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/auth-start.html
+        INITIATE_LOGIN_ENDPOINT: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/auth-start.html
         M365_APPLICATION_ID_URI: api://botid-${{BOT_ID}}
 
   # Run npm command
