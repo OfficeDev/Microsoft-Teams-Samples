@@ -25,7 +25,7 @@ class TeamsBot extends TeamsActivityHandler {
       
       for (let cnt = 0; cnt < membersAdded.length; cnt++) {
         if (membersAdded[cnt].id !== context.activity.recipient.id) {
-          const welcomeMessage = `Welcome to the Proactive Bot sample.  Navigate to ${process.env.PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}/api/notify to proactively message everyone who has previously messaged this bot.`;
+          const welcomeMessage = `Welcome to the Proactive Bot sample.  Navigate to ${process.env.PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}/api/notify to proactively message everyone who has previously messaged this bot.`;
           await context.sendActivity(welcomeMessage);
         }
       }
@@ -38,7 +38,7 @@ class TeamsBot extends TeamsActivityHandler {
       this.addConversationReference(context.activity);
 
       // Echo back what the user said
-      await context.sendActivity(`You sent '${context.activity.text}'. Navigate to ${process.env.PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}/api/notify to proactively message everyone who has previously messaged this bot.`);
+      await context.sendActivity(`You sent '${context.activity.text}'. Navigate to ${process.env.PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}/api/notify to proactively message everyone who has previously messaged this bot.`);
       await next();
     });
 

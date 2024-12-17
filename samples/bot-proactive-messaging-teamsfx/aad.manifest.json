@@ -93,7 +93,7 @@
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/auth-end.html",
+            "url": "${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/auth-end.html",
             "type": "Web"
         }
     ]
