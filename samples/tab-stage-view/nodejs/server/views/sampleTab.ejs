@@ -13,12 +13,11 @@
         microsoftTeams.app.initialize().then(() => {
         });
         function createLink() {
-            var appId =  "<%-microsoftAppId%>";
+            var appId =  "<%-teamsAppId%>";
             var baseUrl =  "<%-baseUrl%>";
 
             // Passing the values and encoding the url while implementing the deeplink from tab
             let url = "https://teams.microsoft.com/l/stage/"+appId+"/0?context={\"contentUrl\":\""+baseUrl+"/content\",\"websiteUrl\":\""+baseUrl+"/content\",\"name\":\"DemoStageView\"}";
-            alert("URL - " + url);
             microsoftTeams.app.openLink(url);
         };
     </script>

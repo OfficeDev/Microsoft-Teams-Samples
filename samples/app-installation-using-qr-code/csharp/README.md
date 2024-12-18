@@ -52,26 +52,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-
-## Run the app (Using Teams Toolkit for Visual Studio)
-
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.10 Preview 4 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
-1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
-1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
-1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
-1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
-
-**Note:** Add the following manually under 'Azure API permissions':
-- Delegated Permissions
-  1. TeamsAppInstallation.ReadWriteAndConsentSelfForTeam
-  2. TeamsAppInstallation.ReadWriteAndConsentForTeam
-
 ## Setup
 
 1) Setup for Bot SSO
@@ -83,7 +63,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-2) Setup NGROK
+2) Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -\> Delegated permissions.
+    * User.Read (enabled by default)
+    * TeamsAppInstallation.ReadWriteAndConsentForTeam
+    
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3) Setup NGROK
 -  Run ngrok - point to port 3978
 
     ```bash
@@ -95,7 +83,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Setup for code
+4) Setup for code
 - Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git

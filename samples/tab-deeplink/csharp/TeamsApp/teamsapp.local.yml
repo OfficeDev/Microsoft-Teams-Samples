@@ -42,6 +42,7 @@ provision:
     with:
       target: ../DeepLinkBot/appsettings.json
       content:
+        TeamsAppId: ${{TEAMS_APP_ID}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         BaseURL: ${{BOT_DOMAIN}}

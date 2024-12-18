@@ -24,7 +24,7 @@ namespace LinkUnfurlingInShareToTeams.Bots
         public ActivityBot(IConfiguration configuration)
         {
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
-            _microsoftAppId= configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
+            _microsoftAppId= configuration["TeamsAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
         }
 
         /// <summary>
