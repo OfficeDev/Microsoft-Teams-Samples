@@ -199,11 +199,14 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
     async addFeedbackButtons(turnContext) {
+        // Send a message with a custom feedback loop
         await turnContext.sendActivity({
             type: ActivityTypes.Message,
-            text: `This is an example for Feedback buttons that helps to provide feedback for a bot message`,
+            text: "We'd love to hear your thoughts! Please click below to provide feedback.",
             channelData: {
-                feedbackLoopEnabled: true // Enable feedback buttons
+                feedbackLoop: {
+                    type: "custom" // This triggers the custom feedback flow
+                }
             },
         });
     }
@@ -211,35 +214,39 @@ class TeamsConversationBot extends TeamsActivityHandler {
     async addCitations(turnContext) {
         await turnContext.sendActivity({
             type: ActivityTypes.Message,
-            text: `Hey I'm a friendly AI bot. This message is an example for Citaion - [1]`, // cite with [1]
+            text: `Hey I'm a friendly AI bot. This message is generated through AI [1]`, // cite with [1],
             entities: [
-                {
-                    type: "https://schema.org/Message",
-                    "@type": "Message",
-                    "@context": "https://schema.org",
-                    "@id": "",
-                    citation: [
-                        {
-                            "@type": "Claim",
-                            position: 1, // Required. Should match the [1] in the text above
-                            appearance: {
-                                "@type": "DigitalDocument",
-                                name: "Some secret citation", // Title
-                                url: "https://example.com/claim-1", // Hyperlink on the title
-                                abstract: "Excerpt", // Excerpt (abstract)
-                                encodingFormat: "docx",
-                                keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // Keywords
-                                usageInfo: {
-                                    "@type": "CreativeWork",
-                                    name: "Confidential \\ Contoso FTE", // Sensitivity title
-                                    description: "Only accessible to Contoso FTE", // Sensitivity description
-                                },
-                            },
-                        },
-                    ],
+            {
+              type: "https://schema.org/Message",
+              "@type": "Message",
+              "@context": "https://schema.org",
+              citation: [
+              {
+                "@type": "Claim",
+                position: 1, // Required. Must match the [1] in the text above
+                appearance: {
+                  "@type": "DigitalDocument",
+                  name: "AI bot", // Title
+                  url: "https://example.com/claim-1", // Hyperlink on the title
+                  abstract: "Excerpt description", // Appears in the citation pop-up window
+                  text: "{\"type\":\"AdaptiveCard\",\"$schema\":\"http://adaptivecards.io/schemas/adaptive-card.json\",\"version\":\"1.6\",\"body\":[{\"type\":\"TextBlock\",\"text\":\"Adaptive Card text\"}]}", // Appears as a stringified Adaptive Card
+                  keywords: ["keyword 1", "keyword 2", "keyword 3"], // Appears in the citation pop-up window
+                  encodingFormat: "application/vnd.microsoft.card.adaptive",
+                  usageInfo: {
+                    "@type": "CreativeWork",
+                    name: "Confidential \\ Contoso FTE", // Sensitivity title
+                    description: "Only accessible to Contoso FTE", // Sensitivity description
+                  },
+                  image: {
+                    "@type": "ImageObject",
+                    name: "Microsoft Word"
+                  },
+                 },
                 },
-            ],
-        });
+              ],
+            },
+          ],
+        })
     }
 
     // Checks the count of members who have read the message sent by MessageAllMembers command.
@@ -255,6 +262,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
     async onInvokeActivity(context) {
         try {
             switch (context.activity.name) {
+                case "message/fetchTask":
+                    return {
+                        task: {
+                            type: "continue",
+                            value: {
+                                title: "Task Module Title",
+                                height: 500,
+                                width: "medium",
+                                url: "https://contoso.com/msteams/taskmodules/newcustomer",
+                                fallbackUrl: "https://contoso.com/msteams/taskmodules/newcustomer"
+                            }
+                        }
+                    };
                 case "message/submitAction":
                     return await context.sendActivity("Provided reaction : " + context.activity.value.actionValue.reaction + "<br> Feedback : " + JSON.parse(context.activity.value.actionValue.feedback).feedbackText);
                 default:
