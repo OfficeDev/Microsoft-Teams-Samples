@@ -6,10 +6,27 @@ const { TeamsActivityHandler, CardFactory, TeamsInfo, MessageFactory } = require
 const baseurl = process.env.BaseUrl;
 
 class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
-	constructor() {
+    constructor() {
         super();
-	}
-	
+    }
+
+    // Method to get the image icon for the file based on its extension
+    getFileIcon(fileName) {
+        if (fileName.endsWith(".pdf")) {
+            return `${ baseurl }/icons/PDFIcons.png`; // Replace with actual PDF icon URL
+        } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+            return `${ baseurl }/icons/WordIcons.png`; // Replace with actual Word icon URL
+        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+            return `${ baseurl }/icons/ExcelIcon.png`; // Replace with actual Excel icon URL
+        } else if (fileName.endsWith(".png")) {
+            return `${ baseurl }/icons/ImageIcon.png`; // Replace with actual PNG icon URL
+        } else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+            return `${ baseurl }/icons/ImageIcon.png`; // Replace with actual JPG icon URL
+        } else {
+            return `${ baseurl }/icons/ImageIcon.png`; // Default icon URL
+        }
+    }
+
     async handleTeamsMessagingExtensionSubmitAction(context, action) {
         const userInput = action.data;
         const card = CardFactory.adaptiveCard({
@@ -18,6 +35,17 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
             body: userInput.map(file => ({
                 type: "ColumnSet",
                 columns: [
+                    {
+                        type: "Column",
+                        width: "auto",
+                        items: [
+                            {
+                                type: "Image",
+                                url: this.getFileIcon(file.name), // Get the file icon URL
+                                size: "Small" // Adjust the size of the icon
+                            }
+                        ]
+                    },
                     {
                         type: "Column",
                         width: "stretch",
@@ -37,20 +65,20 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
                         items: [
                             {
                                 type: "ActionSet",
-                            actions: [
-                                {
-                                    type: "Action.Submit",
-                                    title: "Edit",
-                                    data: {
-                                        action: "editFile",
-                                        file: {
-                                            name: file.name,
-                                            type: file.type,
-                                            size: file.size
+                                actions: [
+                                    {
+                                        type: "Action.Submit",
+                                        title: "Edit",
+                                        data: {
+                                            action: "editFile",
+                                            file: {
+                                                name: file.name,
+                                                type: file.type,
+                                                size: file.size
+                                            }
                                         }
                                     }
-                                }
-                            ]
+                                ]
                             }
                         ]
                     }
@@ -66,7 +94,7 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
         };
     }
 
-    async onTeamsTaskModuleFetch(context, taskModuleRequest) {
+    async handleTeamsTaskModuleFetch(context, taskModuleRequest) {
         const { action, file } = taskModuleRequest.data;
     
         if (action === "editFile") {
@@ -78,13 +106,11 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
                         width: 550,
                         height: 400,
                         url: `${ baseurl }/customForm`
-                        //url: `https://your-edit-file-url?name=${encodeURIComponent(file.name)}&type=${encodeURIComponent(file.type)}&size=${file.size}`
                     }
                 }
             };
         }
     }
-    
 
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         console.log("Context", context);

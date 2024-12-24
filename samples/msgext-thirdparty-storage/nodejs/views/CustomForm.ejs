@@ -9,7 +9,7 @@
             integrity="sha384-gqPg5qCjdUgTGRZ/stLskrnJllL5h5+f4kTqvxVqtl2FdT7PVRa9Q7zq4gFlZ7bO"
             crossorigin="anonymous"></script>
 
-    <style src="../style/DragAndDropFiles.css"></style>
+    <link rel="stylesheet" href="/styles.css">
 
     <script>
         let mediaData = []; // Array to store media details
@@ -44,7 +44,25 @@
 
                                 // Column: Media Name
                                 const nameCell = document.createElement("td");
-                                nameCell.textContent = media.name;
+                                const iconImg = document.createElement("img");
+                                iconImg.style.marginRight = "8px";
+                                iconImg.style.width = "20px";
+                                iconImg.style.height = "20px";
+
+                                if (media.name.endsWith(".pdf")) {
+                                    iconImg.src = "/icons/PDFIcons.png";
+                                } else if (media.name.endsWith(".doc") || media.name.endsWith(".docx")) {
+                                    iconImg.src = "/icons/WordIcons.png";
+                                } else if (media.name.endsWith(".xls") || media.name.endsWith(".xlsx")) {
+                                    iconImg.src = "/icons/ExcelIcon.png";
+                                } else if (media.name.endsWith(".png")) {
+                                    iconImg.src = "/icons/ImageIcon.png";
+                                } else if (media.name.endsWith(".jpg") || media.name.endsWith(".jpeg")) {
+                                    iconImg.src = "/icons/ImageIcon.png";
+                                }
+
+                                nameCell.appendChild(iconImg);
+                                nameCell.appendChild(document.createTextNode(media.name));
                                 row.appendChild(nameCell);
 
                                 // Column: Progress Bar
@@ -60,7 +78,7 @@
                                 // Column: Status (Success Tick Mark)
                                 const statusCell = document.createElement("td");
                                 statusCell.style.textAlign = "center";
-                                statusCell.textContent = ""; // Initially empty
+                                statusCell.textContent = "";
                                 row.appendChild(statusCell);
 
                                 // Append row to table
@@ -81,15 +99,15 @@
 
                                     if (progress >= 100) {
                                         clearInterval(interval);
-                                        progressFill.style.backgroundColor = "green"; // Change color to green
-                                        statusCell.textContent = "✔"; // Add success tick mark
-                                        statusCell.style.color = "green"; // Style the tick mark
+                                        progressFill.style.backgroundColor = "green";
+                                        statusCell.textContent = "✔";
+                                        statusCell.style.color = "green";
 
                                         // Increment completed files and check if all are done
                                         completedFiles++;
                                         enableUploadButton();
                                     }
-                                }, 500);
+                                }, 110);
                             });
                         });
                     } catch (error) {
@@ -109,7 +127,7 @@
             microsoftTeams.initialize();
             console.log("Submitting the following data:", mediaData);
             microsoftTeams.tasks.submitTask(mediaData);
-            return false; // Prevent default form submission
+            return false;
         }
     </script>
 </head>

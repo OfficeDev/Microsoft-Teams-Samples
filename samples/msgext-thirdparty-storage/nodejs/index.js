@@ -49,7 +49,12 @@ server.listen(port, () => {
     console.log(`Server listening on http://localhost:${port}`);
 });
 
-server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
+server.use((req, res, next) => {
+    console.log(`Request URL: ${req.url}`);
+    next();
+})
+
+server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('/customForm', (req, res, next) => {
     res.render('./views/CustomForm')
@@ -62,6 +67,8 @@ server.get('/staticPage', (req, res, next) => {
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
+
+server.use(express.static(path.join(__dirname, 'public')));
 
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
