@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality.
+description: This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently.
 products:
 - office-teams
 - office
@@ -9,29 +9,20 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "10-04-2022 17:00:25"
+ createdDate: "26-12-2024 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-thirdparty-storage-nodejs
 ---
 
-# Teams Messaging Extensions Action
-Explore the capabilities of Action-Based Messaging Extensions in Microsoft Teams with this sample app. It showcases how to implement interactive features, including bots and message extensions, allowing users to create content dynamically through a user-friendly interface.
+# Third-Party Storage Integration in Microsoft Teams
+Microsoft Teams allows users to integrate third-party cloud storage providers by modifying the default storage options from OneDrive and SharePoint. This capability enables files that are dragged and dropped into the Teams chat or message compose area to be stored in a third-party storage service. Using the Microsoft Teams JavaScript client library (TeamsJS), third-party apps can capture these files through the getDragAndDropFiles API and then upload them to their own cloud storage.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
-how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
+To enable this feature, the latest version of the TeamsJS SDK is required, along with a properly configured app manifest and the app ID of the third-party storage provider. When a file is dragged and dropped, it is temporarily cached in Teams before being fetched by the third-party app and uploaded to its storage. This seamless integration enhances flexibility for businesses using external storage solutions within the Teams environment.
 
 ## Included Features
-* Bots
 * Message Extensions
-* Action Commands
 
 - **Interaction with bot**
-![Messaging Extension](Images/MsgExtAction.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Messaging Extensions Action:** [Manifest](/samples/msgext-thirdparty-storage/csharp/demo-manifest/msgext-thirdparty-storage.zip)
-
+![msgext-thirdparty-storage](Images/msgext-thirdparty-storage.gif)
 
 ## Prerequisites
 
@@ -118,28 +109,39 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 > Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.
 
-1) Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code.
+![1.UploadApp](Images/1.UploadApp.png)
 
-![Install](Images/1.Install.png)
+![2.BuildOrgApp](Images/2.BuildOrgApp.png)
 
-![ME-Card ](Images/2.SelectActionMessageExtension.png)
+![3.AdminCenter](Images/3.AdminCenter.png)
 
-![ME-Card ](Images/2.CreateCard.png)
+![4.AdminSettings](Images/4.AdminSettings.png)
 
-![ME-Posted-Card ](Images/3.SendCard.png)
+![5.InstallApp](Images/5.InstallApp.png)
 
+![6.SelectChannelChat](Images/6.SelectChannelChat.png)
 
-2) Selecting the **Fetch Roster** command from the Compose Box command list. You will presented with prompt for Just In Time installation if app is not already added to current team/chat.
+![7.OpenChannel](Images/7.OpenChannel.png)
 
-![Roster-Fetch ](Images/4.FetchRoaster.png)
+![8.drag_drop_all_file](Images/8.drag_drop_all_file.png)
 
-3) You can try with other supported commands as well like: **Adaptive Card**, **Web View**, **HTML**, **Razor View**
+![9.drag_drop_files](Images/9.drag_drop_files.png)
 
-![Static-Tab ](Images/7.StaticHtml.png)
+![10.drag_drop_files_task_module](Images/10.drag_drop_files_task_module.png)
 
-![Web-View ](Images/5.EnterDetailsCard_WebView.png)
+![11.Upload_ComposeFile](Images/11.Upload_ComposeFile.png)
 
-![Web-View ](Images/6.SendEmpDetails.png)
+![12.SendComposeFile](Images/12.SendComposeFile.png)
+
+![13.drag_drop_all_file_chat](Images/13.drag_drop_all_file_chat.png)
+
+![14.drag_drop_file_Chat](Images/14.drag_drop_file_Chat.png)
+
+![15.drag_drop_file_load_Task_module](Images/15.drag_drop_file_load_Task_module.png)
+
+![16.UploadChat](Images/16.UploadChat.png)
+
+![17.SendChat](Images/17.SendChat.png)
 
 ## Deploy the bot to Azure
 
@@ -147,11 +149,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Messaging extension action](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-
+- [Third-party storage capability](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/third-party-storage-capability?branch=pr-en-us-11741)
+- [Admin settings for file drag-drop to third-party storage](https://review.learn.microsoft.com/en-us/microsoftteams/admin-settings-for-file-drag-drop-to-third-party-storage?branch=main&branchFallbackFrom=pr-en-us-11741)
+- [App manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema?branch=main)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-thirdparty-storage-nodejs" />

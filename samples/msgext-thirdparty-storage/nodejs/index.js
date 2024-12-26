@@ -60,10 +60,6 @@ server.get('/customForm', (req, res, next) => {
     res.render('./views/CustomForm')
 });
 
-server.get('/staticPage', (req, res, next) => {
-    res.render('./views/StaticPage')
-});
-
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
