@@ -21,7 +21,7 @@ To enable this feature, the latest version of the TeamsJS SDK is required, along
 ## Included Features
 * Message Extensions
 
-- **Interaction with bot**
+**Interaction with bot**
 ![msgext-thirdparty-storage](Images/msgext-thirdparty-storage.gif)
 
 ## Prerequisites
@@ -107,40 +107,55 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 ## Running the sample
 
-> Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.
-
+**Upload an Application to Teams**
 ![1.UploadApp](Images/1.UploadApp.png)
 
+**Select the Build for Your Organizatio**
 ![2.BuildOrgApp](Images/2.BuildOrgApp.png)
 
+**Log in to Admin Center and Copy App ID**
 ![3.AdminCenter](Images/3.AdminCenter.png)
 
+**Admin Settings for File Drag-and-Drop to Third-Party Storage**
 ![4.AdminSettings](Images/4.AdminSettings.png)
 
+**Install the Application in Teams**
 ![5.InstallApp](Images/5.InstallApp.png)
 
+**Select a Channel for File Upload**
 ![6.SelectChannelChat](Images/6.SelectChannelChat.png)
 
+**Open the Channels to Access Files**
 ![7.OpenChannel](Images/7.OpenChannel.png)
 
+**Drag and Drop All Files into Teams**
 ![8.drag_drop_all_file](Images/8.drag_drop_all_file.png)
 
+**Files Successfully Dragged and Dropped**
 ![9.drag_drop_files](Images/9.drag_drop_files.png)
 
+**All Files Loaded in Task Module**
 ![10.drag_drop_files_task_module](Images/10.drag_drop_files_task_module.png)
 
+**Files Loaded into the Compose Area**
 ![11.Upload_ComposeFile](Images/11.Upload_ComposeFile.png)
 
+**Send All Dragged and Dropped Files**
 ![12.SendComposeFile](Images/12.SendComposeFile.png)
 
+**Drag and Drop Files in Chat**
 ![13.drag_drop_all_file_chat](Images/13.drag_drop_all_file_chat.png)
 
+**Drop Files in the Chat Window**
 ![14.drag_drop_file_Chat](Images/14.drag_drop_file_Chat.png)
 
+**Load All Files in the Task Module**
 ![15.drag_drop_file_load_Task_module](Images/15.drag_drop_file_load_Task_module.png)
 
+**Upload All Files in the Chat**
 ![16.UploadChat](Images/16.UploadChat.png)
 
+**Send Files in the Chat**
 ![17.SendChat](Images/17.SendChat.png)
 
 ## Deploy the bot to Azure
