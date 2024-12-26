@@ -110,13 +110,15 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 **Upload an Application to Teams**
 ![1.UploadApp](Images/1.UploadApp.png)
 
-**Select the Build for Your Organizatio**
+**Select the Build for Your Organization**
 ![2.BuildOrgApp](Images/2.BuildOrgApp.png)
 
 **Log in to Admin Center and Copy App ID**
 ![3.AdminCenter](Images/3.AdminCenter.png)
 
-**Admin Settings for File Drag-and-Drop to Third-Party Storage**
+**Admin Settings for File Drag-and-Drop to Third-Party Storage** 
+- [Admin settings for file drag-drop to third-party storage](https://review.learn.microsoft.com/en-us/microsoftteams/admin-settings-for-file-drag-drop-to-third-party-storage?branch=main&branchFallbackFrom=pr-en-us-11741)
+
 ![4.AdminSettings](Images/4.AdminSettings.png)
 
 **Install the Application in Teams**
