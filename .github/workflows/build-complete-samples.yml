@@ -1038,6 +1038,10 @@ jobs:
             - project_path: 'samples/tab-nested-auth/nodejs'
               name: 'tab-nested-auth'
               version: '18.x'
+            
+            - project_path: 'samples/msgext-thirdparty-storage/nodejs'
+              name: 'msgext-thirdparty-storage'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
