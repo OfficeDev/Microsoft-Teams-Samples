@@ -24,15 +24,17 @@
         }
 
         microsoftTeams.initialize(() => {
-            console.log("Custom Form Loaded");
 
             microsoftTeams.getContext((context) => {
-                console.log(`Context is ${JSON.stringify(context)}`);
 
-                let inputthreadId = context.teamId;
+                let inputThreadId = context.teamId || ""; // Use threadId from context
+                let replyChainIdForChats = context.chatId || ""; // Use replyChainId if present
+
+                const uniqueIdForChats = replyChainIdForChats + inputThreadId;
+
                 if (microsoftTeams.thirdPartyCloudStorage && microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles) {
                     try {
-                        microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles(inputthreadId, (medias, err) => {
+                        microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles(uniqueIdForChats, (medias, err) => {
                             if (err) {
                                 console.error(err);
                                 return;
@@ -121,11 +123,9 @@
 
         function validateForm() {
             if (!document.getElementById("uploadBtn").classList.contains("enabled")) {
-                alert("Please wait until all files are processed.");
                 return false;
             }
             microsoftTeams.initialize();
-            console.log("Submitting the following data:", mediaData);
             microsoftTeams.tasks.submitTask(mediaData);
             return false;
         }

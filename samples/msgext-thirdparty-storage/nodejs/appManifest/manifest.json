@@ -10,13 +10,13 @@
     "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
   },
   "name": {
-        "short": "ThirdpartyTest",
-        "full": "test"
-  },
-  "description": {
-      "short": "short description of test",
-      "full": "full description of test"
-  },
+    "short": "Third-Party Cloud Storage",
+    "full": "Third-Party Cloud Storage Integration"
+},
+"description": {
+    "short": "Enable drag-and-drop file uploads to third-party cloud storage.",
+    "full": "This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently."
+},
   "icons": {
     "outline": "outline.png",
     "color": "color.png"

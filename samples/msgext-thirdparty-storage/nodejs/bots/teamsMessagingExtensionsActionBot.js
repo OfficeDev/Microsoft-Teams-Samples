@@ -58,29 +58,6 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
                                 size: "Medium"
                             }
                         ]
-                    },
-                    {
-                        type: "Column",
-                        width: "auto",
-                        items: [
-                            {
-                                type: "ActionSet",
-                                actions: [
-                                    {
-                                        type: "Action.Submit",
-                                        title: "Edit",
-                                        data: {
-                                            action: "editFile",
-                                            file: {
-                                                name: file.name,
-                                                type: file.type,
-                                                size: file.size
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             }))
@@ -94,45 +71,25 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
         };
     }
 
-    async handleTeamsTaskModuleFetch(context, taskModuleRequest) {
-        const { action, file } = taskModuleRequest.data;
-    
-        if (action === "editFile") {
+    async handleTeamsMessagingExtensionFetchTask(context, action) {
+        const value = context.activity.value;
+
+        // Check for specific conditions
+        if (value.messagePayload?.replyToId === '' && value.commandContext === 'thirdParty') {
             return {
                 task: {
-                    type: "continue",
+                    type: 'continue',
                     value: {
-                        title: "Edit File",
-                        width: 550,
-                        height: 400,
-                        url: `${ baseurl }/customForm`
+                        width: 700,
+                        height: 450,
+                        title: 'Task module WebView',
+                        url: `${baseurl}/customForm`
                     }
                 }
             };
         }
     }
-
-    async handleTeamsMessagingExtensionFetchTask(context, action) {
-        console.log("Context", context);
-        const value = context.activity.value;
-        const channelData = context.activity.channelData;
-        console.log('Source Info:', channelData.source);
-        console.log("Command ID:", value.commandId);
-        console.log("Command Context:", value.commandContext);
-        console.log("Context Object:", value.context);
-        console.log("Message Payload:", value.messagePayload);
-        return {
-            task: {
-                type: 'continue',
-                value: {
-                    width: 700,
-                    height: 450,
-                    title: 'Task module WebView',
-                    url: `${ baseurl }/customForm`
-                }
-            }
-        };
-    }
+    
 }
 
 module.exports.TeamsMessagingExtensionsActionBot = TeamsMessagingExtensionsActionBot;
