@@ -7,8 +7,8 @@ languages:
 title: Microsoft Teams NodeJS Helloworld Sample
 description: Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.
 extensions:
-  contentType: samples
-  createdDate: 10/19/2022 10:02:21 PM
+ contentType: samples
+ createdDate: 10/19/2022 10:02:21 PM
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 ---
 
@@ -32,13 +32,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Prerequisites
 
--  Microsoft Teams is installed and you have an account (not a guest account)
+- Microsoft Teams is installed and you have an account (not a guest account)
 
--  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher)
 
--  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 
--  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -66,33 +66,33 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+ > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
 1) Run ngrok - point to port 3333
 
-    ```bash
-    ngrok http 3333 --host-header="localhost:3333"
-    ```
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+ ```bash
+ ngrok http 3333 --host-header="localhost:3333"
+ ```
+ Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-   ```bash
-   devtunnel host -p 3333 --allow-anonymous
-   ```
+ ```bash
+ devtunnel host -p 3333 --allow-anonymous
+ ```
 
 ### 3. Setup for code
 1) Clone the repository
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+ ```bash
+ git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+ ```
 2) In a terminal, navigate to `samples/app-hello-world/nodejs`
 
 3) Install modules
 
-    ```bash
-    npm install
-    ```
+ ```bash
+ npm install
+ ```
 
 4) Update the `custom-environment-variables` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url.
 
@@ -100,61 +100,61 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 5) Run your app
 
-    ```bash
-    npm start
-    ```
+ ```bash
+ npm start
+ ```
 ### 4. Setup Manifest for Teams
 
  - **This step is specific to Teams.**
 
-    - **Edit** the `manifest.json` contained in the `app-hello-world/nodejs/appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` and `validDomains`. Replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-hello-world/nodejs/appManifest_Hub` folder with the required values.
+ - **Edit** the `manifest.json` contained in the `app-hello-world/nodejs/appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+ - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` and `validDomains`. Replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+ 
+ **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-hello-world/nodejs/appManifest_Hub` folder with the required values.
 
-    - **Zip** up the contents of the `app-hello-world/nodejs/appManifest` folder to create a `manifest.zip` or `app-hello-world/nodejs/appManifest_Hub` folder into a `Manifest_Hub.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+ - **Zip** up the contents of the `app-hello-world/nodejs/appManifest` folder to create a `manifest.zip` or `app-hello-world/nodejs/appManifest_Hub` folder into a `Manifest_Hub.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+ - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+ - Add the app to personal/team/groupChat scope (Supported scopes)
 
 This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab. Without configuring this, Microsoft Teams defaults to landing on the bot in desktop clients and tab in mobile clients.
 
 To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
 ```bash
 "staticTabs": [
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  }
+ {
+ "entityId": "conversations",
+ "scopes": [
+ "personal"
+ ]
+ },
+ {
+ "entityId": "com.contoso.helloworld.hellotab",
+ "name": "Hello Tab",
+ "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+ "scopes": [
+ "personal"
+ ]
+ }
 ],
 ```
 
 To set the **Tab as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
 ```bash
 "staticTabs": [
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  }
+ {
+ "entityId": "com.contoso.helloworld.hellotab",
+ "name": "Hello Tab",
+ "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+ "scopes": [
+ "personal"
+ ]
+ },
+ {
+ "entityId": "conversations",
+ "scopes": [
+ "personal"
+ ]
+ }
 ],
 ```
 
