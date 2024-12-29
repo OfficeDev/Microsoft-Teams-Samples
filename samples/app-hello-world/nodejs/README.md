@@ -1,10 +1,11 @@
+```markdown
 ---
 page_type: sample
 products:
 - office-365
 languages:
 - javascript
-title: Microsoft Teams NodeJS Helloworld Sample
+title: Microsoft Teams NodeJS HelloWorld Sample
 description: Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.
 extensions:
   contentType: samples
@@ -12,205 +13,174 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 ---
 
-# Microsoft Teams hello world sample app.
+# Microsoft Teams HelloWorld Sample App
 
-- This Hello World sample app showcases the fundamental features of Microsoft Teams, including tabs, bots, and messaging extensions, all built with Node.js.
+This HelloWorld sample app demonstrates the core features of Microsoft Teams using Node.js, including tabs, bots, and messaging extensions.
 
-## Included Features
-* Tabs
-* Bots
-* Messaging Extensions
+## Features Included
 
-## Interaction with app
+- Tabs
+- Bots
+- Messaging Extensions
+
+## App Interaction
 
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+## Experience the App
 
-**Microsoft Teams hello world sample app:** [Manifest](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
+Try the app in your Microsoft Teams client using the demo manifest deployed on Microsoft Azure. Upload the app package [.zip file](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip) as a personal app or within your teams. Ensure [sideloading is enabled for your tenant](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).
 
 ## Prerequisites
 
--  Microsoft Teams is installed and you have an account (not a guest account)
+- Microsoft Teams installed with an account (not a guest account).
+- NodeJS (version 16.14.2 or higher) installed on your development machine.
+- [Dev Tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) or a similar tunneling solution.
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with permissions to install apps.
+- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one).
 
--  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+## Run the App with Teams Toolkit for Visual Studio Code
 
--  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
+Simplify your experience by using the Teams Toolkit for Visual Studio Code.
 
--  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+1. Install [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview).
+2. Install [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension).
+3. Open this sample's directory using **File > Open Folder** in VS Code.
+4. Sign in with your Microsoft 365 account with permissions to upload custom apps using the extension.
+5. Select **Debug > Start Debugging** or press **F5** to launch the app in a browser for Teams integration.
+6. Click the **Add** button to install the app in Teams.
 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+> If custom app uploading is unavailable, consider getting a [Microsoft 365 Developer Program account](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the App (Manual Upload to Teams)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+> Teams requires a tunnelling solution for local machine runs to communicate with the bot.
 
-1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
+### Step-by-Step Guide
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+#### 1. Bot Setup
+- Create an [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2) in the Azure portal.
+- [Enable the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
+- Use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint while registering the bot.
 
-## Run the app (Manually Uploading to Teams)
+#### 2. NGROK Setup
+Run ngrok pointing to port 3333:
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
+```bash
+ngrok http 3333 --host-header="localhost:3333"
+```
 
-### 1. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
+Alternatively, use Dev Tunnels:
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+```bash
+devtunnel host -p 3333 --allow-anonymous
+```
 
-- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+#### 3. Code Setup
 
-### 2. Setup NGROK
-1) Run ngrok - point to port 3333
-
-    ```bash
-    ngrok http 3333 --host-header="localhost:3333"
-    ```
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3333 --allow-anonymous
-   ```
-
-### 3. Setup for code
-1) Clone the repository
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) In a terminal, navigate to `samples/app-hello-world/nodejs`
 
-3) Install modules
+2. Navigate to `samples/app-hello-world/nodejs`.
+3. Install modules:
 
     ```bash
     npm install
     ```
 
-4) Update the `custom-environment-variables` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url.
-
-5) Update the `default` configuration for the bot to use the `appId` and `appPassword`.
-
-5) Run your app
+4. Update `custom-environment-variables` and `default` for bot App ID, App Password, and Base URL.
+5. Run the app:
 
     ```bash
     npm start
     ```
-### 4. Setup Manifest for Teams
 
- - **This step is specific to Teams.**
+#### 4. Teams Manifest Setup
 
-    - **Edit** the `manifest.json` contained in the `app-hello-world/nodejs/appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` and `validDomains`. Replace `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-hello-world/nodejs/appManifest_Hub` folder with the required values.
+- Edit `manifest.json` in `app-hello-world/nodejs/appManifest`. Update placeholders with your App ID.
+- Adjust `configurationUrl` in `configurableTabs` and replace `{{domain-name}}` with your base URL domain.
 
-    - **Zip** up the contents of the `app-hello-world/nodejs/appManifest` folder to create a `manifest.zip` or `app-hello-world/nodejs/appManifest_Hub` folder into a `Manifest_Hub.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+**Scenario Examples:**
 
-This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab. Without configuring this, Microsoft Teams defaults to landing on the bot in desktop clients and tab in mobile clients.
+1. For NGROK: `https://1234.ngrok-free.app`
+2. For Dev Tunnels: `12345.devtunnels.ms`
 
-To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
-```bash
-"staticTabs": [
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  }
-],
-```
+- Zip contents into `manifest.zip` or `Manifest_Hub.zip` for Office multiple hub environment testing.
+- Upload `manifest.zip` to Teams in Teams Apps > Manage your apps and click "Upload an app".
+  
+> Set the default landing capability in the manifest configuration:
+  
+- **Bot Default:**
+  ```json
+  "staticTabs": [
+    {"entityId": "conversations", "scopes": ["personal"]},
+    {"entityId": "com.contoso.helloworld.hellotab", "name": "Hello Tab", "contentUrl": "https://${{BOT_DOMAIN}}/hello", "scopes": ["personal"]}
+  ]
+  ```
 
-To set the **Tab as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
-```bash
-"staticTabs": [
-  {
-    "entityId": "com.contoso.helloworld.hellotab",
-    "name": "Hello Tab",
-    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
-    "scopes": [
-      "personal"
-    ]
-  },
-  {
-    "entityId": "conversations",
-    "scopes": [
-      "personal"
-    ]
-  }
-],
-```
+- **Tab Default:**
+  ```json
+  "staticTabs": [
+    {"entityId": "com.contoso.helloworld.hellotab", "name": "Hello Tab", "contentUrl": "https://${{BOT_DOMAIN}}/hello", "scopes": ["personal"]},
+    {"entityId": "conversations", "scopes": ["personal"]}
+  ]
+  ```
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/nodejs/src/bot.js#L38) line and put your debugger for local debug.
+> Tip: If encountering issues, activate debugging by commenting the [specific line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/nodejs/src/bot.js#L38).
 
-## Running the sample
+## Usage
 
-**Install App:**
+### Install the App
 
 ![InstallApp](Images/Install.png)
 
-**Hello World Bot:**
+### HelloWorld Bot Feature
 
 ![HelloWorld](Images/Bot.png)
 
-**Hello Wrold Tab:**
+### HelloWorld Tab Feature
 
 ![HelloWorld](Images/Tab.png)
 
-## Outlook on the web
+## Additional Applications
 
-- To view your app in Outlook on the web.
+### Outlook on the Web
 
-- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+Access via [Outlook on the web](https://outlook.office.com/mail/).
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
-
+- Select **More Apps** to find installed apps including your sideloaded app.
+  
 ![InstallOutlook](Images/InstallOutlook.png)
 
-**Select your app icon to launch and preview your app running in Outlook on the web**
+- Launch your app by selecting its icon.
 
 ![AppOutlook](Images/AppOutlook.png)
 
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+> Desktop testing is also available.
 
-## Office on the web
+### Office on the Web
 
-- To preview your app running in Office on the web.
+Preview your app on [office.com](https://office.com).
 
-- Log into office.com with test tenant credentials
-
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+- Use test tenant credentials for login.
+- Find your installed app under **Apps** on the sidebar.
 
 ![InstallOffice](Images/InstallOffice.png)
 
-**Select your app icon to launch your app in Office on the web**
+- Launch your app via its icon.
 
 ![AppOffice](Images/AppOffice.png)
 
-**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+> Desktop testing available on the Office 365 app.
 
-## Deploy the bot to Azure
+## Deploy the Bot to Azure
 
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+For deploying your bot to Azure, refer to [Deploy your bot to Azure](https://aka.ms/azuredeployment) for detailed instructions.
 
-## Further reading
+## Additional Resources
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
@@ -219,3 +189,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-hello-world-nodejs" />
+```
