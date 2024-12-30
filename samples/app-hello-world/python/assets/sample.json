@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-app-hello-world-python",
     "source": "officeDev",
-    "title": "Microsoft Teams python Helloworld Sample",
-    "shortDescription": "Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.",
+    "title": "Microsoft Teams Python Hello World Sample",
+    "shortDescription": "The Microsoft Teams Python Hello World Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It’s a great starting point for developing and deploying custom Teams apps.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/python",
     "longDescription": [
-      "This Microsoft Teams Hello World sample app demonstrates the integration of tabs, bots, and messaging extensions using JavaScript, providing a comprehensive foundation for building interactive and engaging Teams applications. Experience the full capabilities of Teams by exploring features that enhance collaboration and productivity within the platform."
+      "The Microsoft Teams Python Hello World Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It’s a great starting point for developing and deploying custom Teams apps."
     ],
     "creationDateTime": "2024-12-12",
     "updateDateTime": "2024-12-12",

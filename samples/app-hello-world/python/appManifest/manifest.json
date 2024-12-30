@@ -14,8 +14,8 @@
     "full": "Hello World App for Microsoft Teams"
   },
   "description": {
-    "short": "Microsoft Teams hello world sample showcasing tabs, bots, and messaging Ext.",
-    "full": " This Microsoft Teams Hello World sample app demonstrates the integration of tabs, bots, and messaging extensions using JavaScript, providing a comprehensive foundation for building interactive and engaging Teams applications. Experience the full capabilities of Teams by exploring features that enhance collaboration and productivity within the platform."
+    "short": "Microsoft Teams Hello World sample showcasing tabs, bots, and messaging Ext.",
+    "full": "The Microsoft Teams Python Hello World Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It’s a great starting point for developing and deploying custom Teams apps."
   },
   "icons": {
     "outline": "outline.png",
