@@ -83,7 +83,7 @@ class MainDialog extends LogoutDialog {
             return userState;
         }
         catch (e) {
-            console.log("Error--" + e);
+            console.log(`Error fetching user state: ${e.message}`);
         }
     }
 }

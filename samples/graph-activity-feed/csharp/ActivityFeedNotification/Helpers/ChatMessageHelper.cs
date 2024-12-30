@@ -54,7 +54,7 @@ namespace TabActivityFeed.Helpers
                         .AddAsync(chatMessage);
 
                     // Return the created message
-                    return createdMessage; //
+                    return createdMessage;
 
                 }
             }
