@@ -10,11 +10,11 @@ const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 const { SubscriptionManagementService } = require('../Helper/SubscriptionManager');
 const { subscriptionConfiguration } = require('../constant');
+const { Client } = require('@microsoft/microsoft-graph-client');
 
 class MainDialog extends LogoutDialog {
     constructor() {
-        super(MAIN_DIALOG, process.env.connectionName);
-
+        super(MAIN_DIALOG, process.env.connectionName); 
         this.addDialog(new OAuthPrompt(OAUTH_PROMPT, {
             connectionName: process.env.connectionName,
             text: 'Please Sign In',
@@ -27,7 +27,6 @@ class MainDialog extends LogoutDialog {
             this.promptStep.bind(this),
             this.loginStep.bind(this)
         ]));
-
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
     }
 
@@ -55,6 +54,7 @@ class MainDialog extends LogoutDialog {
         // Get the token from the previous step. Note that we could also have gotten the
         // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
+        this.accessToken = tokenResponse.token;
         if (tokenResponse) {
             const subscriptionManager = new SubscriptionManagementService(tokenResponse.token);
             //subscribe user presence
@@ -63,6 +63,28 @@ class MainDialog extends LogoutDialog {
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
         return await stepContext.endDialog();
+    }
+
+    getGraphClient() {
+        const client = Client.init({
+            authProvider: (done) => {
+                done(null, this.accessToken);
+            }
+        });
+        return client;
+    }
+
+    async getUserState(userStateURL) {
+        try {
+            let userState = null;
+            const client = this.getGraphClient();
+            userState = await client.api(userStateURL).get(); //get user state
+            
+            return userState;
+        }
+        catch (e) {
+            console.log("Error--" + e);
+        }
     }
 }
 

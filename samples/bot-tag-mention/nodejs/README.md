@@ -166,6 +166,13 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 **Team channel Scope**
 
+**Create tags within the team channel**
+To create tags in Microsoft Teams, follow these steps:
+
+1. Select Teams on the left side of the app and choose the team you want to create tags for.
+2. Click the "More options" button (three dots) next to the team name and select "Manage tags".
+3. Click "Create tag" and provide a name, description, and assign team members to the tag .
+
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with necessary commands
   - **Valid Scopes:** team chat

@@ -70,7 +70,14 @@ class TeamsMessagingExtensionsActionPreviewBot extends TeamsActivityHandler {
                 }
             };
         }
-        await context.sendActivity(responseActivity);
+        return {
+            composeExtension: {
+                type: 'result',
+                attachmentLayout: 'list',
+                attachments: [adaptiveCard]
+            }
+        };
+        // await context.sendActivity(responseActivity);
     }
 
     async handleTeamsMessagingExtensionCardButtonClicked(context, obj) {

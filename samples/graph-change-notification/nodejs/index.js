@@ -93,9 +93,10 @@ const notification = async (req, res, next) => {
         console.log("In Response");
         clientStatesValid = false;
         console.log(req.body.value[0].resourceData);
-        let userstatus = req.body.value[0].resourceData;
-        console.log(userstatus.activity);
-        console.log(userstatus.availability);
+        
+        // Call the API
+        const userstatus = await dialog.getUserState("communications/presences/" + req.body.value[0].resourceData.id);
+         
         status = 202;
         //for storing step context
         const dbot = new DialogBot(conversationState, userState, dialog, conversationReferences);
@@ -110,8 +111,5 @@ const notification = async (req, res, next) => {
     }
 }
 
-
 // Listen for incoming requests.
 server.post('/api/notifications', notification);
-
-

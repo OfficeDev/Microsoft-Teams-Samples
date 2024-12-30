@@ -85,7 +85,7 @@
             teamId = context.team.groupId;
         });
 
-        var encodedWebUrl = encodeURI(window.location.origin
+        var encodedWebUrl = encodeURI(window.location.origin);
         var encodedContext = encodeURI('{"subEntityId": "task456"}');
         var taskItemUrl = 'https://teams.microsoft.com/l/entity/<appid>/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
         var empty = true;
@@ -104,8 +104,10 @@
 
             microsoftTeams.app.getContext().then((context) => {
                 id = context.team.groupId;
-
+               
+                console.log(context);
                 let taskDetails = {
+                  
                     title: $('#title').val(),
                     description: $('#description').val(),
                     userName: username,
@@ -131,7 +133,12 @@
         function customTopicTeamNotification() {
 
             var action = "customTopic";
+            var id = ""; 
 
+            microsoftTeams.app.getContext().then((context) => {
+
+                id = context.team.groupId;
+                
             let taskDetails = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
@@ -140,7 +147,7 @@
                 channelId: teamchannelID,
                 access_token: token,
                 taskItemLink: taskItemUrl,
-                teamId: teamId
+                teamId: id
             };
 
             $.ajax({
@@ -149,7 +156,7 @@
                 dataType: 'json',
                 data: taskDetails
             });
-
+            });
             return true;
         };
 
@@ -175,9 +182,11 @@
         };
 
         function channelTabTeamNotification() {
-
+         
             var action = "channelTab";
-
+            var id = "";
+             microsoftTeams.app.getContext().then((context) => {
+                id = context.team.groupId;
             let taskDetails = {
                 reservationId: $("#reservationId").val(),
                 DeployementTitle: $('#reservationTitle').val(),
@@ -187,7 +196,7 @@
                 channelId: teamchannelID,
                 access_token: token,
                 taskItemLink: taskItemUrl,
-                teamId: teamId
+                teamId: id
 
             };
 
@@ -197,7 +206,7 @@
                 dataType: 'json',
                 data: taskDetails
             });
-
+            });
             return true;
         };
     </script>
