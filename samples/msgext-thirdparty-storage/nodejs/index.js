@@ -57,7 +57,12 @@ server.use((req, res, next) => {
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('/customForm', (req, res, next) => {
-    res.render('./views/CustomForm')
+    try {
+        res.render('./views/CustomForm');
+    } catch (error) {
+        console.error(`Error rendering CustomForm: ${error.message}`);
+        res.status(500).json({ error: 'An error occurred while rendering the CustomForm page.' });
+    }
 });
 
 server.get('*', (req, res) => {

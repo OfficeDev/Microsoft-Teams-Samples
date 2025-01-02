@@ -9,6 +9,6 @@ esbuild.build({
         console.log(`Build succeeded.`);
     })
     .catch((e) => {
-        console.log("Error building:", e.message);
+        console.log("Build failed with error:", e.message);
         process.exit(1);
     });
