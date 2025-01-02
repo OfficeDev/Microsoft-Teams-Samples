@@ -121,6 +121,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 29 | Teams Bot with AI integration                | Demonstrates using AI for automated responses and intelligent suggestions.                                      | Advanced   | [View](TeamsBotWithAI#csharp)   | [View](TeamsBotWithAI#nodejs)              | -                                  | -                                  | -                                                                  |
 | 30 | Microsoft Graph API integration             | Demonstrates connecting to the Microsoft Graph API to retrieve information into a bot.                         | Advanced   | [View](TeamsGraphAPIBot#csharp) | [View](TeamsGraphAPIBot#nodejs)            | -                                  | -                                  | -                                                                  |
 | 31 | Secure Communication Bot                     | Ensures encrypted communication using security tools like Multi-Factor Authentication.                         | Advanced   | [View](securecommunicationbot#csharp) | [View](securecommunicationbot#nodejs)     | -                                  | -                                  | -                                                                  |
+| 32 | Streaming Bot                                | This sample showcases the conversational streaming token scenario for teams bot in personal scope.              | Advanced   | [View](botstreaming#csharp) | [View](botstreaming#nodejs)     | -                                  | -                                  | -                                                                  |
 
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
@@ -393,6 +394,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
 [botadaptivecardsuserspecificviews#csharp]:samples/bot-adaptivecards-user-specific-views/csharp
 [botstreaming#csharp]:samples/bot-streaming/csharp
+[botstreaming#nodejs]:samples/bot-streaming/nodejs
 [Tagmention#csharp]:samples/bot-tag-mention/csharp
 [Tagmention#nodejs]:samples/bot-tag-mention/nodejs
 [CommandsMenu#csharp]:samples/bot-commands-menu/csharp
