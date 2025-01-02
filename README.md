@@ -165,11 +165,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 | #  | Sample Name                      | Description                                                                                             | Level      | C#                                | JavaScript                          |
 |----|-----------------------------------|---------------------------------------------------------------------------------------------------------|------------|-----------------------------------|-------------------------------------|
-| 1  | Connectors                        | Sample Office 365 Connector generating notifications to Teams channel.                                  | Intermediate| [View](connector#cs)              | [View](connector#ts)               |
-| 2  | Generic connectors sample         | Sample code for a generic connector that's easy to customize for any system which supports webhooks.     | Intermediate|                                   | [View](connector-generic#ts)       |
-| 3  | Incoming Webhook                  | This sample demonstrates a Teams tab to send message cards using Incoming Webhook, showcasing the HttpPOST action for interactive cards. | Intermediate| [View](incoming-webhook#cs)       | [View](incoming-webhook#nodejs)    |
-| 4  | Outgoing Webhooks                 | Implement Outgoing Webhook for Microsoft Teams for external integrations.                                | Intermediate| [View](outgoing-webhook#cs)       | [View](outgoing-webhook#ts)        |
-| 5  | Authentication in Todo Connector App | This is a sample app which shows connector authentication and sends notification on task creation.       | Advanced   |                                   | [View](auth-in-connector#nodejs)   |
+| 1  | Connectors                        | Sample Office 365 Connector generating notifications to Teams channel.                                  | Intermediate| [View][connector#cs]              | [View][connector#ts]               |
+| 2  | Generic connectors sample         | Sample code for a generic connector that's easy to customize for any system which supports webhooks.     | Intermediate|                                   | [View][connector-generic#ts]       |
+| 3  | Incoming Webhook                  | This sample demonstrates a Teams tab to send message cards using Incoming Webhook, showcasing the HttpPOST action for interactive cards. | Intermediate| [View][incoming-webhook#cs]       | [View][incoming-webhook#nodejs]    |
+| 4  | Outgoing Webhooks                 | Implement Outgoing Webhook for Microsoft Teams for external integrations.                                | Intermediate| [View][outgoing-webhook#cs]       | [View][outgoing-webhook#ts]        |
+| 5  | Authentication in Todo Connector App | This is a sample app which shows connector authentication and sends notification on task creation.       | Advanced   |                                   | [View][auth-in-connector#nodejs]   |
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
