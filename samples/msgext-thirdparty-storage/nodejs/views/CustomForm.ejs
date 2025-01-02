@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microsoft Teams ME Action WebView</title>
 
+    <!-- Microsoft Teams SDK for JavaScript -->
     <script src="https://res.cdn.office.net/teams-js/2.26.0/js/MicrosoftTeams.min.js"
             integrity="sha384-gqPg5qCjdUgTGRZ/stLskrnJllL5h5+f4kTqvxVqtl2FdT7PVRa9Q7zq4gFlZ7bO"
             crossorigin="anonymous"></script>
 
+    <!-- External CSS for styling -->
     <link rel="stylesheet" href="/styles.css">
 
     <script>
-        let mediaData = []; // Array to store media details
-        let completedFiles = 0; // Counter for completed progress
+        // Array to store media details and counter for completed file uploads
+        let mediaData = [];
+        let completedFiles = 0;
 
+        // Enable the upload button once all file uploads are complete
         function enableUploadButton() {
             const uploadBtn = document.getElementById("uploadBtn");
             if (completedFiles === mediaData.length) {
@@ -23,15 +27,16 @@
             }
         }
 
+        // Initialize Microsoft Teams SDK and handle file drag-and-drop events
         microsoftTeams.initialize(() => {
 
+            // Get Teams context to fetch teamId or chatId for unique identification
             microsoftTeams.getContext((context) => {
-
-                let inputThreadId = context.teamId || ""; // Use threadId from context
-                let replyChainIdForChats = context.chatId || ""; // Use replyChainId if present
-
+                const inputThreadId = context.teamId || "";
+                const replyChainIdForChats = context.chatId || "";
                 const uniqueIdForChats = replyChainIdForChats + inputThreadId;
 
+                // Check if drag-and-drop API is available in the SDK
                 if (microsoftTeams.thirdPartyCloudStorage && microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles) {
                     try {
                         microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles(uniqueIdForChats, (medias, err) => {
@@ -39,18 +44,21 @@
                                 console.error(err);
                                 return;
                             }
+
                             const mediaTableBody = document.querySelector("#mediaTable tbody");
+
                             medias.forEach((media) => {
-                                // Create a new row
+                                // Create a new table row for each file
                                 const row = document.createElement("tr");
 
-                                // Column: Media Name
+                                // Column: Media Name with corresponding file icon
                                 const nameCell = document.createElement("td");
                                 const iconImg = document.createElement("img");
                                 iconImg.style.marginRight = "8px";
                                 iconImg.style.width = "20px";
                                 iconImg.style.height = "20px";
 
+                                // Set appropriate icons based on file extension
                                 if (media.name.endsWith(".pdf")) {
                                     iconImg.src = "/icons/PDFIcons.png";
                                 } else if (media.name.endsWith(".doc") || media.name.endsWith(".docx")) {
@@ -67,7 +75,7 @@
                                 nameCell.appendChild(document.createTextNode(media.name));
                                 row.appendChild(nameCell);
 
-                                // Column: Progress Bar
+                                // Column: Progress Bar for upload simulation
                                 const progressCell = document.createElement("td");
                                 const progressBar = document.createElement("div");
                                 progressBar.className = "progress-bar";
@@ -77,23 +85,23 @@
                                 progressCell.appendChild(progressBar);
                                 row.appendChild(progressCell);
 
-                                // Column: Status (Success Tick Mark)
+                                // Column: Status (e.g., Success Tick Mark)
                                 const statusCell = document.createElement("td");
                                 statusCell.style.textAlign = "center";
                                 statusCell.textContent = "";
                                 row.appendChild(statusCell);
 
-                                // Append row to table
+                                // Append the row to the media table
                                 mediaTableBody.appendChild(row);
 
-                                // Store media details in mediaData array
+                                // Store media details for task submission
                                 mediaData.push({
                                     name: media.name,
                                     type: media.type,
                                     size: media.size,
                                 });
 
-                                // Simulate progress for demonstration purposes
+                                // Simulate upload progress for demonstration
                                 let progress = 0;
                                 const interval = setInterval(() => {
                                     progress += 10;
@@ -105,7 +113,7 @@
                                         statusCell.textContent = "✔";
                                         statusCell.style.color = "green";
 
-                                        // Increment completed files and check if all are done
+                                        // Increment completed files counter and check if all are done
                                         completedFiles++;
                                         enableUploadButton();
                                     }
@@ -121,19 +129,23 @@
             });
         });
 
+        // Validate form submission and send task data to Teams
         function validateForm() {
             if (!document.getElementById("uploadBtn").classList.contains("enabled")) {
                 return false;
             }
+
+            // Reinitialize Teams SDK and submit the collected media data
             microsoftTeams.initialize();
             microsoftTeams.tasks.submitTask(mediaData);
-            return false;
+            return false; // Prevent default form submission
         }
     </script>
 </head>
 <body>
 <div class="surface theme-light">
     <div class="panel">
+        <!-- Form for file upload -->
         <form id="empForm" onsubmit="return validateForm()">
             <div id="fileList">
                 <table id="mediaTable">
@@ -145,11 +157,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Rows will be added dynamically here -->
+                    <!-- File rows will be added dynamically here -->
                     </tbody>
                 </table>
             </div>
             <div class="button-container">
+                <!-- Disabled upload button, activated after all files are processed -->
                 <input type="submit" id="uploadBtn" value="Upload" disabled>
             </div>
         </form>
