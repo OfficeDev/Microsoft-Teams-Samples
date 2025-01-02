@@ -71,10 +71,8 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
                 .ToAttachment()
                 .ToMessagingExtensionAttachment();
         }
-
         protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject query, CancellationToken cancellationToken)
         {
-
             return Task.FromResult(new MessagingExtensionResponse
             {
                 ComposeExtension = new MessagingExtensionResult

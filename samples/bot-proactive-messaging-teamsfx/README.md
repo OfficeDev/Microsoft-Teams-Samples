@@ -16,10 +16,10 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
   - Install [dev tunnel cli](https://aka.ms/teamsfx-install-dev-tunnel).
   - Login with your M365 Account using the command `devtunnel user login`.
   - Start your local tunnel service by running the command `devtunnel host -p 3978 --protocol http --allow-anonymous`.
-  - In the `env/.env.local` file, fill in the values for `PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN` and `PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT` with your dev tunnel URL.
+  - In the `env/.env.local` file, fill in the values for `PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN` and `PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT` with your dev tunnel URL.
     ```
-    PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN=sample-id-3978.devtunnels.ms
-    PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT=https://sample-id-3978.devtunnels.ms
+    PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN=sample-id-3978.devtunnels.ms
+    PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT=https://sample-id-3978.devtunnels.ms
     ```
   - Executing the command `teamsapp provision --env local` in your project directory.
   - Executing the command `teamsapp deploy --env local` in your project directory.
