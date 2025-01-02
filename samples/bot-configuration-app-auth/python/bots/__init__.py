@@ -1,3 +1,3 @@
-from .bot_commands_menu import TeamsBot
+from .bot_configuration_auth import TeamsBot
 
 __all__ = ["TeamsBot"]
