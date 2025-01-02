@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "26-12-2024 17:00:25"
+ createdDate: "2024-12-26 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-thirdparty-storage-nodejs
 ---
 
