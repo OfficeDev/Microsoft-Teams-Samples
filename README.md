@@ -196,7 +196,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |----|-----------------------|-------------------------------------------------------------------------------------------------------------------|------------|---------------------------------------|
 | 1  | Local Media Samples    | Local media samples give the developer direct access to the inbound and outbound media streams.                   | Intermediate| [View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) |
 | 2  | Remote Media Samples   | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot. | Intermediate| [View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples) |
-| 3  | Calling and Meeting bot| This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.        | Advanced   | [View](bot-calling-meeting#csharp)    |
+| 3  | Calling and Meeting bot| This sample demonstrates how a bot can create, join, and transfer calls or meetings within Microsoft Teams.        | Advanced   | [View][bot-calling-meeting#csharp]    |
 
 ## [Meetings samples](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
 
