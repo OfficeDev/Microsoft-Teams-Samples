@@ -72,7 +72,7 @@ async def hello(request):
 async def first(request):
     return web.FileResponse('src/views/first.html')
 
-# aiohttp route for /first
+# aiohttp route for /second
 async def second(request):
     return web.FileResponse('src/views/second.html')
 
@@ -80,16 +80,11 @@ async def second(request):
 async def configure(request):
     return web.FileResponse('src/views/configure.html')
 
-# aiohttp route for /configure
-async def msteams(request):
-    return web.FileResponse('src/views/styles/msteams-16.css')
-
-
+# Assign APP_ID from SETTINGS.app_id if it exists; otherwise, generate a new unique UUID.
 APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
 # Create the Bot
 BOT = HelloWorldBot(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-
 
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
