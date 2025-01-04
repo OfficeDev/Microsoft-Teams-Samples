@@ -85,6 +85,7 @@ deploy:
     with:
       target: ./.env
       envs:
+        TeamsAppId: ${{TEAMS_APP_ID}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         Base_URL: ${{BOT_ENDPOINT}}

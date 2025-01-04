@@ -83,7 +83,7 @@ class TeamsConversationBot(TeamsActivityHandler):
         for e in template_json["msteams"]["entities"]:
             e["text"] = e["text"].replace("${userName}", member.name)
             e["mentioned"]["id"] = e["mentioned"]["id"].replace("${userUPN}", member.user_principal_name)
-            e["mentioned"]["id"] = e["mentioned"]["id"].replace("${userAAD}", member.additional_properties["aadObjectId"])
+            e["mentioned"]["id"] = e["mentioned"]["id"].replace("${userAAD}", member.aad_object_id)
             e["mentioned"]["name"] = e["mentioned"]["name"].replace("${userName}", member.name)
         
         adaptive_card_attachment = Activity(
