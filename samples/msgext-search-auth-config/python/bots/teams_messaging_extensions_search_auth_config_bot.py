@@ -126,6 +126,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
     def convert_to_dict(self, response: MessagingExtensionResponse) -> dict:
         """Manually convert MessagingExtensionResponse and MessagingExtensionResult to a JSON-serializable dictionary."""
         compose_extension = response.compose_extension
+        if compose_extension is None: return {}
         # Manually serialize the MessagingExtensionResult
         result_dict = {
             "attachmentLayout": compose_extension.attachment_layout,
