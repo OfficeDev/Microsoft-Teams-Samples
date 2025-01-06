@@ -1,4 +1,4 @@
-﻿using AdaptiveCards;
+using AdaptiveCards;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Graph.Auth;
@@ -55,17 +55,13 @@ namespace TabActivityFeed.Helpers
 
                     // Return the created message
                     return createdMessage;
-
                 }
             }
             catch (ServiceException ex)
             {
                 Console.WriteLine($"Error adding message: {ex.Message}");
-                // You might want to handle the error further here or return null
-
             }
             return null;
-            
         }
 
         public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskDetails taskDetails, string accessToken)
@@ -74,36 +70,36 @@ namespace TabActivityFeed.Helpers
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
-        {
-            new AdaptiveTextBlock()
-            {
-                Text = "Here is Your Reservation Details:",
-                Weight = AdaptiveTextWeight.Bolder,
-                Size = AdaptiveTextSize.Large,
-                Id = "taskDetails"
-            },
-            new AdaptiveTextBlock()
-            {
-                Text = taskDetails.reservationId,
-                Weight = AdaptiveTextWeight.Lighter,
-                Size = AdaptiveTextSize.Medium,
-                Id = "taskTitle"
-            },
-            new AdaptiveTextBlock()
-            {
-                Text = taskDetails.DeployementTitle,
-                Weight = AdaptiveTextWeight.Lighter,
-                Size = AdaptiveTextSize.Medium,
-                Id = "taskdesc"
-            },
-            new AdaptiveTextBlock()
-            {
-                Text = taskDetails.currentSlot,
-                Weight = AdaptiveTextWeight.Lighter,
-                Size = AdaptiveTextSize.Medium,
-                Id = "taskslot"
-            }
-        }
+                {
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Here is Your Reservation Details:",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Size = AdaptiveTextSize.Large,
+                        Id = "taskDetails"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.reservationId,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskTitle"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.DeployementTitle,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskdesc"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.currentSlot,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskslot"
+                    }
+                }
             };
 
             var chatMessage = new ChatMessage
@@ -115,17 +111,17 @@ namespace TabActivityFeed.Helpers
                     Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
                 },
                 Attachments = new List<ChatMessageAttachment>
-        {
-            new ChatMessageAttachment
-            {
-                Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                ContentUrl = null,
-                Content = JsonConvert.SerializeObject(Card),
-                Name = null,
-                ThumbnailUrl = null
-            }
-        }
+                {
+                    new ChatMessageAttachment
+                    {
+                        Id = "74d20c7f34aa4a7fb74e2b30004247c5",
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        ContentUrl = null,
+                        Content = JsonConvert.SerializeObject(Card),
+                        Name = null,
+                        ThumbnailUrl = null
+                    }
+                }
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
@@ -147,18 +143,14 @@ namespace TabActivityFeed.Helpers
                         .AddAsync(chatMessage);
 
                     // Return the created message
-                    return createdMessage; //
-
+                    return createdMessage;
                 }
             }
             catch (ServiceException ex)
             {
                 Console.WriteLine($"Error adding message: {ex.Message}");
-                // You might want to handle the error further here or return null
-
             }
             return null;
-           
         }
 
         public async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskDetails, string accessToken)
@@ -167,29 +159,29 @@ namespace TabActivityFeed.Helpers
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
-        {
-            new AdaptiveTextBlock()
-            {
-                Text = "Here is Your Task Details in Teams",
-                Weight = AdaptiveTextWeight.Bolder,
-                Size = AdaptiveTextSize.Large,
-                Id = "taskDetails"
-            },
-            new AdaptiveTextBlock()
-            {
-                Text = taskDetails.title,
-                Weight = AdaptiveTextWeight.Lighter,
-                Size = AdaptiveTextSize.Medium,
-                Id = "taskTitle"
-            },
-            new AdaptiveTextBlock()
-            {
-                Text = taskDetails.description,
-                Weight = AdaptiveTextWeight.Lighter,
-                Size = AdaptiveTextSize.Medium,
-                Id = "taskdesc"
-            },
-        }
+                {
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Here is Your Task Details in Teams",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Size = AdaptiveTextSize.Large,
+                        Id = "taskDetails"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.title,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskTitle"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.description,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskdesc"
+                    },
+                }
             };
 
             var chatMessage = new ChatMessage
@@ -201,17 +193,17 @@ namespace TabActivityFeed.Helpers
                     Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
                 },
                 Attachments = new List<ChatMessageAttachment>()
-        {
-            new ChatMessageAttachment
-            {
-                Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                ContentUrl = null,
-                Content = JsonConvert.SerializeObject(Card),
-                Name = null,
-                ThumbnailUrl = null
-            }
-        }
+                {
+                    new ChatMessageAttachment
+                    {
+                        Id = "74d20c7f34aa4a7fb74e2b30004247c5",
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        ContentUrl = null,
+                        Content = JsonConvert.SerializeObject(Card),
+                        Name = null,
+                        ThumbnailUrl = null
+                    }
+                }
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
@@ -234,18 +226,14 @@ namespace TabActivityFeed.Helpers
                         .AddAsync(chatMessage);
 
                     // Return the created message
-                    return createdMessage; //
-
+                    return createdMessage;
                 }
             }
             catch (ServiceException ex)
             {
                 Console.WriteLine($"Error adding message: {ex.Message}");
-                // You might want to handle the error further here or return null
-
             }
             return null;
-            //return null; // Ensure a return value is provided here
         }
 
 
