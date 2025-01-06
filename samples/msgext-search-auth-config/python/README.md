@@ -118,12 +118,11 @@ Once the Messaging Extension is installed, click the icon for **Config Auth Sear
 
 ![search ](Images/3.search.PNG)
 
-![search ](Images/4.search.PNG)
-
-![search ](Images/5.search.PNG)
-
 ![search ](Images/6.search.PNG)
 
+![search ](Images/7.search.PNG)
+
+![search ](Images/8.zero_install.PNG)
 
 ## Deploy the bot to Azure
 
