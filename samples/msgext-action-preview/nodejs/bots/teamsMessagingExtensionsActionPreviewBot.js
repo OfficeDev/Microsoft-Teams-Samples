@@ -77,7 +77,6 @@ class TeamsMessagingExtensionsActionPreviewBot extends TeamsActivityHandler {
                 attachments: [adaptiveCard]
             }
         };
-        // await context.sendActivity(responseActivity);
     }
 
     async handleTeamsMessagingExtensionCardButtonClicked(context, obj) {
