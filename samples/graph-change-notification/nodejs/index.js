@@ -96,7 +96,6 @@ const notification = async (req, res, next) => {
         
         // Call the API
         const userstatus = await dialog.getUserState("communications/presences/" + req.body.value[0].resourceData.id);
-         
         status = 202;
         //for storing step context
         const dbot = new DialogBot(conversationState, userState, dialog, conversationReferences);
