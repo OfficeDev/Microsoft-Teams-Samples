@@ -1,4 +1,4 @@
-﻿@model TabActivityFeed.Model.TaskDetails
+@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -99,15 +99,10 @@
 
         function SendNotificationToChannel() {
             var action = "EntityTopic";
-
             var id = "";
-
             microsoftTeams.app.getContext().then((context) => {
                 id = context.team.groupId;
-               
-                console.log(context);
                 let taskDetails = {
-                  
                     title: $('#title').val(),
                     description: $('#description').val(),
                     userName: username,
@@ -124,45 +119,38 @@
                     dataType: 'json',
                     data: taskDetails
                 });
-
             });
-
             return true;
         };
 
         function customTopicTeamNotification() {
-
             var action = "customTopic";
             var id = ""; 
 
             microsoftTeams.app.getContext().then((context) => {
-
                 id = context.team.groupId;
-                
-            let taskDetails = {
-                DeployementTitle: $('#DeployementTitle').val(),
-                DeploymentDescription: $('#DeploymentDescription').val(),
-                taskInfoAction: action,
-                userName: username,
-                channelId: teamchannelID,
-                access_token: token,
-                taskItemLink: taskItemUrl,
-                teamId: id
-            };
+                let taskDetails = {
+                    DeployementTitle: $('#DeployementTitle').val(),
+                    DeploymentDescription: $('#DeploymentDescription').val(),
+                    taskInfoAction: action,
+                    userName: username,
+                    channelId: teamchannelID,
+                    access_token: token,
+                    taskItemLink: taskItemUrl,
+                    teamId: id
+                };
 
-            $.ajax({
-                type: 'POST',
-                url: '/sendNotificationToTeam',
-                dataType: 'json',
-                data: taskDetails
-            });
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
             });
             return true;
         };
 
-
         function SendDefaultNotification() {
-            alert("hello");
             let taskDetails = {
                 userName: username,
                 channelId: teamchannelID,
@@ -182,12 +170,13 @@
         };
 
         function channelTabTeamNotification() {
-         
             var action = "channelTab";
             var id = "";
-             microsoftTeams.app.getContext().then((context) => {
+
+            microsoftTeams.app.getContext().then((context) => {
                 id = context.team.groupId;
-            let taskDetails = {
+
+                let taskDetails = {
                 reservationId: $("#reservationId").val(),
                 DeployementTitle: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -197,15 +186,14 @@
                 access_token: token,
                 taskItemLink: taskItemUrl,
                 teamId: id
+                };
 
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: '/sendNotificationToTeam',
-                dataType: 'json',
-                data: taskDetails
-            });
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
             });
             return true;
         };
