@@ -141,7 +141,7 @@ namespace RSCWithGraphAPI.Controllers
 
                         foreach(AppData element in installedAppList)
                         {
-                            if (element.TeamsAppDefinition.DisplayName == "RSC feed")
+                            if (element.TeamsAppDefinition.DisplayName == "RSC-GraphAPI ")
                             {
                                 appId = element.Id;
                             }

@@ -1,4 +1,4 @@
-﻿using AdaptiveCards;
+using AdaptiveCards;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Graph.Auth;
@@ -38,14 +38,28 @@ namespace TabActivityFeed.Helpers
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
             try
             {
-                var channelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
-                return channelMessage;
+                // First, get the list of channels to find the default channel ID
+                var channels = await graphClientChat.Teams[taskDetails.teamId].Channels
+                 .Request()
+                 .GetAsync();
+
+                // Assuming "General" is the name of the default channel
+                var defaultChannel = channels.CurrentPage.FirstOrDefault(c => c.DisplayName.Equals("General", StringComparison.OrdinalIgnoreCase));
+
+                if (defaultChannel != null)
+                {
+                    // Add the message to the default channel
+                    var createdMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[defaultChannel.Id].Messages
+                        .Request()
+                        .AddAsync(chatMessage);
+
+                    // Return the created message
+                    return createdMessage;
+                }
             }
-            catch(Exception e)
+            catch (ServiceException ex)
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"Error adding message: {ex.Message}");
             }
             return null;
         }
@@ -56,102 +70,119 @@ namespace TabActivityFeed.Helpers
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
-                          {
-                         new AdaptiveTextBlock()
-                              {
-                                  Text="Here is Your Reservation Details:",
-                                  Weight = AdaptiveTextWeight.Bolder,
-                                  Size = AdaptiveTextSize.Large,
-                                  Id="taskDetails"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskDetails.reservationId,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskTitle"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskDetails.DeployementTitle,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskdesc"
-                              },
-                               new AdaptiveTextBlock()
-                              {
-                                  Text=taskDetails.currentSlot,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskslot"
-                               }
-                          }
-
+                {
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Here is Your Reservation Details:",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Size = AdaptiveTextSize.Large,
+                        Id = "taskDetails"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.reservationId,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskTitle"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.DeployementTitle,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskdesc"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.currentSlot,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskslot"
+                    }
+                }
             };
-
 
             var chatMessage = new ChatMessage
             {
-                Subject = "Reservation Activtity:",
+                Subject = "Reservation Activity:",
                 Body = new ItemBody
                 {
                     ContentType = BodyType.Html,
                     Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
                 },
-                Attachments = new List<ChatMessageAttachment>()
-                              {
-                                  new ChatMessageAttachment
-                                    {
-                                          Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                                          ContentType = "application/vnd.microsoft.card.adaptive",
-                                          ContentUrl = null,
-                                          Content =  JsonConvert.SerializeObject(Card),
-                                          Name = null,
-                                          ThumbnailUrl = null
-                                }
-                           }
+                Attachments = new List<ChatMessageAttachment>
+                {
+                    new ChatMessageAttachment
+                    {
+                        Id = "74d20c7f34aa4a7fb74e2b30004247c5",
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        ContentUrl = null,
+                        Content = JsonConvert.SerializeObject(Card),
+                        Name = null,
+                        ThumbnailUrl = null
+                    }
+                }
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
+            try
+            {
+                // First, get the list of channels to find the default channel ID
+                var channels = await graphClientChat.Teams[taskDetails.teamId].Channels
                  .Request()
-                 .AddAsync(chatMessage);
-            return getChannelMessage;
+                 .GetAsync();
 
+                // Assuming "General" is the name of the default channel
+                var defaultChannel = channels.CurrentPage.FirstOrDefault(c => c.DisplayName.Equals("General", StringComparison.OrdinalIgnoreCase));
+
+                if (defaultChannel != null)
+                {
+                    // Add the message to the default channel
+                    var createdMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[defaultChannel.Id].Messages
+                        .Request()
+                        .AddAsync(chatMessage);
+
+                    // Return the created message
+                    return createdMessage;
+                }
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error adding message: {ex.Message}");
+            }
+            return null;
         }
 
-        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskDetails, string accessToken)
+        public async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskDetails taskDetails, string accessToken)
         {
-            GraphServiceClient graphClientChat= SimpleGraphClient.GetGraphClient(accessToken);
+            GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
-                          {
-                         new AdaptiveTextBlock()
-                              {
-                                  Text="Here is Your Task Details in Teams",
-                                  Weight = AdaptiveTextWeight.Bolder,
-                                  Size = AdaptiveTextSize.Large,
-                                  Id="taskDetails"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskDetails.title,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskTitle"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskDetails.description,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskdesc"
-                              },
-                          }
-
+                {
+                    new AdaptiveTextBlock()
+                    {
+                        Text = "Here is Your Task Details in Teams",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Size = AdaptiveTextSize.Large,
+                        Id = "taskDetails"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.title,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskTitle"
+                    },
+                    new AdaptiveTextBlock()
+                    {
+                        Text = taskDetails.description,
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Size = AdaptiveTextSize.Medium,
+                        Id = "taskdesc"
+                    },
+                }
             };
-
 
             var chatMessage = new ChatMessage
             {
@@ -162,25 +193,49 @@ namespace TabActivityFeed.Helpers
                     Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
                 },
                 Attachments = new List<ChatMessageAttachment>()
-                              {
-                                  new ChatMessageAttachment
-                                    {
-                                          Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                                          ContentType = "application/vnd.microsoft.card.adaptive",
-                                          ContentUrl = null,
-                                          Content =  JsonConvert.SerializeObject(Card),
-                                          Name = null,
-                                          ThumbnailUrl = null
-                                }
-                           }
+                {
+                    new ChatMessageAttachment
+                    {
+                        Id = "74d20c7f34aa4a7fb74e2b30004247c5",
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        ContentUrl = null,
+                        Content = JsonConvert.SerializeObject(Card),
+                        Name = null,
+                        ThumbnailUrl = null
+                    }
+                }
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[taskDetails.channelId].Messages
+
+            try
+            {
+                // First, get the list of channels to find the default channel ID
+                var channels = await graphClientChat.Teams[taskDetails.teamId].Channels
                  .Request()
-                 .AddAsync(chatMessage);
-            return getChannelMessage;
+                 .GetAsync();
+
+                // Assuming "General" is the name of the default channel
+                var defaultChannel = channels.CurrentPage.FirstOrDefault(c => c.DisplayName.Equals("General", StringComparison.OrdinalIgnoreCase));
+
+                if (defaultChannel != null)
+                {
+                    // Add the message to the default channel
+                    var createdMessage = await graphClientChat.Teams[taskDetails.teamId].Channels[defaultChannel.Id].Messages
+                        .Request()
+                        .AddAsync(chatMessage);
+
+                    // Return the created message
+                    return createdMessage;
+                }
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error adding message: {ex.Message}");
+            }
+            return null;
         }
+
 
         public async Task<ChatMessage> CreateGroupChatMessage(TaskDetails taskDetails, string accessToken)
         {
