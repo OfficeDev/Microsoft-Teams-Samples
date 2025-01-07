@@ -18,22 +18,27 @@ namespace Microsoft.BotBuilderSamples
         public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger, IConfiguration configuration)
             : base(conversationState, userState, dialog, logger, configuration["ConnectionName"])
         {
+            if (string.IsNullOrEmpty(configuration["ConnectionName"]))
+            {
+                logger.LogError("ConnectionName is missing from configuration.");
+            }
         }
 
         /// <summary>
-        /// Override this in a derived class to provide logic for when members other than the bot join the conversation, such as your bot's welcome logic.
+        /// Override this in a derived class to provide logic for when members, except the bot, join the conversation, such as your bot's welcome logic.
         /// </summary>
-        /// <param name="membersAdded">A list of all the members added to the conversation, as described by the conversation update activity.</param>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var member in turnContext.Activity.MembersAdded)
+            // Iterate over all members added to the conversation.
+            foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to Universal Adaptive Cards. Type 'login' to get sign in universal sso."), cancellationToken);
+                    // Send a welcome message to new members.
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to Universal Adaptive Cards. Type 'login' to sign in using Universal SSO."), cancellationToken);
                 }
             }
         }
