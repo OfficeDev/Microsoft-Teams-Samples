@@ -27,12 +27,13 @@ namespace Microsoft.BotBuilderSamples
     // All BotState objects should be saved at the end of a turn.
     public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
-        protected readonly BotState _conversationState;
-        protected readonly Dialog _dialog;
-        protected readonly ILogger _logger;
-        protected readonly BotState _userState;
-        protected string _connectionName { get; }
+        protected readonly BotState _conversationState;  // Represents the conversation state
+        protected readonly Dialog _dialog;               // The dialog logic to run
+        protected readonly ILogger _logger;              // Logger for debugging and tracing
+        protected readonly BotState _userState;          // Represents the user state
+        protected string _connectionName { get; }        // Connection name for OAuth
 
+        // Constructor to initialize the bot with necessary dependencies
         public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, string connectionName)
         {
             _conversationState = conversationState;
@@ -42,7 +43,7 @@ namespace Microsoft.BotBuilderSamples
             _connectionName = connectionName;
         }
 
-        // Get sign-in link
+        // Get the sign-in link for OAuth
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
@@ -50,7 +51,7 @@ namespace Microsoft.BotBuilderSamples
             return resource.SignInLink;
         }
 
-        // OnTurnAsync: Parallelize saving state changes
+        // OnTurnAsync: Handles parallel saving of conversation and user state changes
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -62,14 +63,14 @@ namespace Microsoft.BotBuilderSamples
             );
         }
 
-        // Simplified message activity handling using a helper function
+        // Simplified message activity handling to trigger appropriate adaptive card based on the message command
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
             await HandleCommandAsync(turnContext.Activity.Text, turnContext, signInLink, cancellationToken);
         }
 
-        // New helper function to handle commands and send the appropriate adaptive card
+        // Helper function to handle commands and send the appropriate adaptive card
         private async Task HandleCommandAsync(string command, ITurnContext<IMessageActivity> turnContext, string signInLink, CancellationToken cancellationToken)
         {
             var commandToFileMap = new Dictionary<string, string>
@@ -142,7 +143,7 @@ namespace Microsoft.BotBuilderSamples
             return null;
         }
 
-        // Method to create adaptive card invoke response
+        // Method to create adaptive card invoke response with dynamic data
         private InvokeResponse CreateAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
         {
             string authResultData = (authentication != null) ? "SSO success" : (state != null && state != "") ? "OAuth success" : "SSO/OAuth failed";

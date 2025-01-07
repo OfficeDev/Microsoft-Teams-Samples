@@ -15,9 +15,11 @@ namespace Microsoft.BotBuilderSamples
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
     public class TeamsBot : DialogBot<MainDialog>
     {
+        // Constructor to initialize the bot with necessary dependencies
         public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger, IConfiguration configuration)
             : base(conversationState, userState, dialog, logger, configuration["ConnectionName"])
         {
+            // Check if the ConnectionName exists in the configuration
             if (string.IsNullOrEmpty(configuration["ConnectionName"]))
             {
                 logger.LogError("ConnectionName is missing from configuration.");
@@ -35,6 +37,7 @@ namespace Microsoft.BotBuilderSamples
             // Iterate over all members added to the conversation.
             foreach (var member in membersAdded)
             {
+                // Ensure that the bot doesn't greet itself
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     // Send a welcome message to new members.
