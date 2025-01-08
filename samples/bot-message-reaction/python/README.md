@@ -9,7 +9,7 @@ languages:
 - Python
 extensions:
  contentType: samples
- createdDate: "12-12-2024 17:00:25"
+ createdDate: "2024-12-12"
 urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-Python
 ---
 
