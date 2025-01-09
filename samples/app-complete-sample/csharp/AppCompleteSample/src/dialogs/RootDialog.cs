@@ -104,7 +104,7 @@ namespace AppCompleteSample.Dialogs
             else if (command == DialogMatches.MultiDialog2Match)
             {
                 return await stepContext.BeginDialogAsync(
-                        nameof(MultiDialog2));
+                        nameof(ThumbnailcardDialog));
             }
             else if (command == DialogMatches.FecthLastExecutedDialogMatch)
             {

@@ -93,7 +93,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "${{BOT_DOMAIN}}"
             ],
             "supportsAnonymizedPayloads": true
           }

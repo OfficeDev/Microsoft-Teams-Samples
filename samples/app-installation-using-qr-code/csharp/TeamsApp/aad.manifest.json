@@ -27,27 +27,11 @@
             "type": "Scope"
           },
           {
-            "id": "AccessReview.ReadWrite.All",
+            "id": "TeamsAppInstallation.ReadWriteAndConsentForTeam",
             "type": "Scope"
           },
           {
-            "id": "Mail.Read",
-            "type": "Scope"
-          },
-          {
-            "id": "Mail.Send",
-            "type": "Scope"
-          },
-          {
-            "id": "openid",
-            "type": "Scope"
-          },
-          {
-            "id": "profile",
-            "type": "Scope"
-          },
-          {
-            "id": "User.ReadBasic.All",
+            "id": "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam",
             "type": "Scope"
           }
         ]

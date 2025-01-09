@@ -39,14 +39,14 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
 
-1.Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
-2.Install Teams Toolkit for Visual Studio Teams Toolkit extension
-3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
-4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
-5.In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
-6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
-7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
-8.In the browser that launches, select the Add button to install the app to Teams.
+1. Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
+2. Install Teams Toolkit for Visual Studio Teams Toolkit extension
+3. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+4. In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
+5. In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
+6. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+7. Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
+8. In the browser that launches, select the Add button to install the app to Teams.
 
 If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
@@ -171,6 +171,14 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    ![groupChat-BotCommands-interactions ](Images/2.LoginWithPersonalScope.png)
 
 **Team channel Scope**
+
+**Create tags within the team channel**
+To create tags in Microsoft Teams, follow these steps:
+
+1. Select Teams on the left side of the app and choose the team you want to create tags for.
+2. Click the "More options" button (three dots) next to the team name and select "Manage tags".
+3. Click "Create tag" and provide a name, description, and assign team members to the tag .
+
 
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with necessary commands

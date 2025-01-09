@@ -138,7 +138,7 @@ namespace TabRequestApproval.Controllers
                             {
                                 Source = TeamworkActivityTopicSource.Text,
                                 Value = $"{taskInfo.title}",
-                                WebUrl = "https://teams.microsoft.com/l/entity/" + _configuration["AzureAd:MicrosoftAppId"] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}"
+                                WebUrl = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}"
                             },
                             ActivityType = "approvalRequired",
                             PreviewText = new ItemBody
