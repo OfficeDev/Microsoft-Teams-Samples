@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Microsoft Teams Hello World Sample App</title>
   <!-- Microsoft Teams JavaScript API (via CDN) -->
   <script src="https://res.cdn.office.net/teams-js/2.24.0/js/MicrosoftTeams.min.js"
@@ -15,7 +16,6 @@
     <div class="panel">
       <div class="font-semibold font-title">
         Configure your app here
-        <p>
         <div>
           <label for="tabChoice">Select the tab you would like to see:</label>
           <select id="tabChoice" name="tabChoice">
@@ -24,7 +24,6 @@
             <option value="second">Second</option>
           </select>
         </div>
-        </p>
       </div>
       <p>
         <strong>Selected Tab:</strong> <span id="selectedValue">(none)</span>
@@ -34,8 +33,9 @@
 
   <script>
     (function () {
+      // Initialize Microsoft Teams SDK
       microsoftTeams.app.initialize().then(() => {
-        // Check the initial theme user chose and respect it
+        // Check the initial theme the user chose and respect it
         microsoftTeams.getContext(function (context) {
           if (context && context.theme) {
             setTheme(context.theme);
@@ -47,54 +47,50 @@
           setTheme(theme);
         });
 
-        // Handle save for configurable tab.
-
+        // Handle save for configurable tab
         microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
           const configPromise = microsoftTeams.pages.config.setConfig({
-            websiteUrl: createTabUrl(),
-            contentUrl: createTabUrl(),
-            entityId: createTabUrl(),
+            websiteUrl: getTabUrl(),
+            contentUrl: getTabUrl(),
+            entityId: getTabUrl(),
           });
-          configPromise.
-            then((result) => { saveEvent.notifySuccess() }).
-            catch((error) => { saveEvent.notifyFailure("failure message") });
+          configPromise
+            .then((result) => { saveEvent.notifySuccess(); })
+            .catch((error) => { saveEvent.notifyFailure("Failed to save configuration"); });
         });
 
         // Logic to let the user configure what they want to see in the tab being loaded
         const tabChoice = document.getElementById('tabChoice');
         const selectedValue = document.getElementById('selectedValue');
-        tabChoice.onchange = function () {
+
+        // Event listener for tab selection
+        tabChoice.addEventListener('change', function () {
           // Get the selected value
           const selectedTab = tabChoice.value;
 
           // Display the selected value in the span element
           selectedValue.textContent = selectedTab ? selectedTab : '(none)';
 
+          // Set the validity state based on the selected tab
           microsoftTeams.pages.config.setValidityState(
             selectedTab === 'first' || selectedTab === 'second'
           );
-        }
+        });
 
-        // Set the desired theme
+        // Set the desired theme based on the user context
         function setTheme(theme) {
           if (theme) {
-            // Possible values for theme: 'default', 'light', 'dark' and 'contrast'
+            // Apply the appropriate theme class to the body
             document.body.className =
               'theme-' + (theme === 'default' ? 'light' : theme);
           }
         }
 
-        // Create the URL that Microsoft Teams will load in the tab. You can compose any URL even with query strings.
-        function createTabUrl() {
+        // Create the URL that Microsoft Teams will load in the tab
+        function getTabUrl() {
           const tabChoice = document.getElementById('tabChoice');
           const selectedTab = tabChoice.value;
-          return (
-            window.location.protocol +
-            '//' +
-            window.location.host +
-            '/' +
-            selectedTab
-          );
+          return window.location.protocol + '//' + window.location.host + '/' + selectedTab;
         }
       });
     })();
