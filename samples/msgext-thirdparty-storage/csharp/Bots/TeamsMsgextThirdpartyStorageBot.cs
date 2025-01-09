@@ -168,18 +168,45 @@ namespace Microsoft.BotBuilderSamples.Bots
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A task that represents the messaging extension response.</returns>
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(
-            ITurnContext<IInvokeActivity> turnContext,
-            MessagingExtensionAction action,
-            CancellationToken cancellationToken)
+        ITurnContext<IInvokeActivity> turnContext,
+        MessagingExtensionAction action,
+        CancellationToken cancellationToken)
         {
             try
             {
-                return CreateMediaNameDetailsTaskResponse(turnContext, action);
+                // Check if the replyToId is empty and commandContext is "thirdParty"
+                var activityValue = turnContext.Activity.Value as JObject;
+                var commandContext = activityValue?["commandContext"]?.ToString();
+                var replyToId = activityValue?["messagePayload"]?["replyToId"]?.ToString();
+
+                // Process if conditions are met
+                if (replyToId == "" && commandContext == "thirdParty")
+                {
+                    // Call the method to generate the response based on context
+                    return CreateMediaNameDetailsTaskResponse(turnContext, action);
+                }
+
+                // Default response for other conditions
+                return new MessagingExtensionActionResponse
+                {
+                    Task = new TaskModuleContinueResponse
+                    {
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Title = "Default Task",
+                            Height = 200,
+                            Width = 400,
+                            Url = null
+                        }
+                    }
+                };
             }
             catch (Exception ex)
             {
-                // Log the exception
+                // Log the exception for debugging
                 Console.WriteLine($"Error in OnTeamsMessagingExtensionFetchTaskAsync: {ex.Message}");
+
+                // Return an error response
                 return new MessagingExtensionActionResponse
                 {
                     Task = new TaskModuleContinueResponse
