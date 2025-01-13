@@ -72,20 +72,12 @@
                 "capabilities": [
                     {
                         "name": "Mailbox",
-                        "minVersion": "1.3"
+                        "minVersion": "1.14"
                     }
                 ]
             },
             "runtimes": [
                 {
-                    "requirements": {
-                        "capabilities": [
-                            {
-                                "name": "Mailbox",
-                                "minVersion": "1.3"
-                            }
-                        ]
-                    },
                     "id": "TaskPaneRuntime",
                     "type": "general",
                     "code": {
@@ -118,15 +110,15 @@
                                     "icons": [
                                         {
                                             "size": 16,
-                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
+                                            "url": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
                                         },
                                         {
                                             "size": 32,
-                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
+                                            "url": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
                                         },
                                         {
                                             "size": 80,
-                                            "file": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
+                                            "url": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
                                         }
                                     ],
                                     "controls": [
@@ -137,15 +129,15 @@
                                             "icons": [
                                                 {
                                                     "size": 16,
-                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
+                                                    "url": "https://localhost:3000/assets/BlueYonderDiscountIcon16.png"
                                                 },
                                                 {
                                                     "size": 32,
-                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
+                                                    "url": "https://localhost:3000/assets/BlueYonderDiscountIcon32.png"
                                                 },
                                                 {
                                                     "size": 80,
-                                                    "file": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
+                                                    "url": "https://localhost:3000/assets/BlueYonderDiscountIcon80.png"
                                                 }
                                             ],
                                             "supertip": {
