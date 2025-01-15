@@ -22,7 +22,8 @@ function App() {
     themeNames.Default
   );
 
-  useEffect(() => {
+  useEffect(() => {  
+    microsoftTeams.app.initialize();
     /**
      * With the context properties in hand, your app has a solid understanding of what's happening around it in Teams.
      * https://docs.microsoft.com/en-us/javascript/api/@microsoft/teams-js/context?view=msteams-client-js-latest&preserve-view=true
