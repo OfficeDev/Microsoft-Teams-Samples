@@ -29,7 +29,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "meetingChatTab",
@@ -50,7 +50,7 @@
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "needsChannelSelector": false,
       "isNotificationOnly": false,
