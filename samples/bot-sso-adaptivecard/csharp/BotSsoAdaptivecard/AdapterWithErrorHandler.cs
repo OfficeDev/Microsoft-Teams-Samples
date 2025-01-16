@@ -1,4 +1,8 @@
-﻿using Microsoft.Bot.Builder;
+﻿// <copyright file="AdapterWithErrorHandler.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;

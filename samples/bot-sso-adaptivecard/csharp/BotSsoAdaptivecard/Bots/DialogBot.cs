@@ -21,10 +21,11 @@ using BotSsoAdaptivecard.Helper;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // This IBot implementation can run any type of Dialog. 
-    // The use of type parameterization allows multiple bots to run at different endpoints within the same project.
-    // ConversationState is used by the Dialog system, while UserState may or may not be used in a Dialog implementation.
-    // All BotState objects should be saved at the end of a turn.
+    // This IBot implementation can run any type of Dialog. The use of type parameterization is to allows multiple different bots
+    // to be run at different endpoints within the same project. This can be achieved by defining distinct Controller types
+    // each with dependency on distinct IBot types, this way ASP Dependency Injection can glue everything together without ambiguity.
+    // The ConversationState is used by the Dialog system. The UserState isn't, however, it might have been used in a Dialog implementation,
+    // and the requirement is that all BotState objects are saved at the end of a turn.
     public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
         protected readonly BotState _conversationState;  // Represents the conversation state
@@ -43,6 +44,12 @@ namespace Microsoft.BotBuilderSamples
             _connectionName = connectionName;
         }
 
+        /// <summary>
+        /// Get sign in link
+        /// </summary>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         // Get the sign-in link for OAuth
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
@@ -51,6 +58,12 @@ namespace Microsoft.BotBuilderSamples
             return resource.SignInLink;
         }
 
+        /// <summary>
+        /// Add logic to apply after the type-specific logic after the call to the base class method.
+        /// </summary>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         // OnTurnAsync: Handles parallel saving of conversation and user state changes
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -63,6 +76,12 @@ namespace Microsoft.BotBuilderSamples
             );
         }
 
+        /// <summary>
+        /// Override this in a derived class to provide logic specific to Message activities, such as the conversational logic.
+        /// </summary>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         // Simplified message activity handling to trigger appropriate adaptive card based on the message command
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -92,6 +111,12 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
+        /// <summary>
+        /// The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
+        /// </summary>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         // Override to handle invoke activities, such as OAuth and adaptive card actions
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -143,7 +168,17 @@ namespace Microsoft.BotBuilderSamples
             return null;
         }
 
-        // Method to create adaptive card invoke response with dynamic data
+        /// <summary>
+        /// Authentication success.
+        /// AuthToken or state is present. Verify token/state in invoke payload and return AC response
+        /// </summary>
+        /// <param name="authentication">authToken are absent, handle verb</param>
+        /// <param name="state">state are absent, handle verb</param>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="isBasicRefresh">Refresh type</param>
+        /// <param name="fileName">AdaptiveCardResponse.json</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private InvokeResponse CreateAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
         {
             string authResultData = (authentication != null) ? "SSO success" : (state != null && state != "") ? "OAuth success" : "SSO/OAuth failed";
@@ -169,7 +204,12 @@ namespace Microsoft.BotBuilderSamples
             return CreateInvokeResponse(adaptiveCardResponse);
         }
 
-        // Method to initiate SSO flow by sending OAuth card
+        /// <summary>
+        /// when token is absent in the invoke. We can initiate SSO in response to the invoke
+        /// </summary>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<InvokeResponse> InitiateSSOAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
@@ -202,6 +242,14 @@ namespace Microsoft.BotBuilderSamples
             return CreateInvokeResponse(loginReqResponse);
         }
 
+        /// <summary>
+        /// Get Adaptive Card
+        /// </summary>
+        /// <param name="filepath">json path</param>
+        /// <param name="signInLink">Get sign in link</param>
+        /// <param name="name">createdBy</param>
+        /// <param name="userMRI">createdById</param>
+        /// <returns></returns>
         // Method to retrieve adaptive card from a file and expand with dynamic data
         private Attachment GetAdaptiveCardFromFileName(string[] filepath, string signInLink, string name = null, string userMRI = null)
         {

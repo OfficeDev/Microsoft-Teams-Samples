@@ -1,4 +1,4 @@
-﻿// <copyright file="GraphServiceClientHelper.cs" company="Microsoft">
+﻿// <copyright file="SimpleGraphClient.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
