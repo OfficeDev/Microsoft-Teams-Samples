@@ -16,6 +16,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
+    // Startup class to configure services and HTTP request pipeline for the HelloWorld Bot app.
+    // This class configures the bot services, localization, and routing for the app.
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,7 +27,8 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // ConfigureServices method is used to add services to the DI container.
+        // It configures MVC, localization, and Bot Framework services.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -41,8 +44,9 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             services.AddTransient<IBot, CommandsMenuBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // Configure method sets up the HTTP request pipeline.
+        // It configures middleware for error handling, localization, routing, and static files.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<RequestLocalizationOptions> locOptions)
         {
             if (env.IsDevelopment())
             {
@@ -56,7 +60,6 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             app.UseStaticFiles();
             app.UseWebSockets();
 
-            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
             // Runs matching. An endpoint is selected and set on the HttpContext if a match is found.
@@ -70,8 +73,6 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
                    name: "default",
                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            //app.UseHttpsRedirection();
         }
     }
 }

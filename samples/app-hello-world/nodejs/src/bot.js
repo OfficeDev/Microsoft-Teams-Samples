@@ -29,8 +29,8 @@ adapter.onTurnError = async (context, error) => {
     // Send error message to user.
     await context.sendActivity(errorMsg);
 
-    // For local debugging, uncomment the line below to send detailed error message.
-    // await context.sendActivity(`Sorry, something went wrong. Exception: ${errorMsg}`);
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${errorMsg}`);
 };
 
 // Define in-memory storage for the bot's conversation state.
