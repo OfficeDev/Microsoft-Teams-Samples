@@ -1,6 +1,7 @@
 ---
 page_type: sample
 description: This sample app for Microsoft Teams illustrates the creation and usage of dynamic deep links to pass contextual values to tab and standalone web applications. It highlights the differences in link formatting and consumption based on the user’s access environment, enhancing navigation and data display capabilities.
+products:
 - office-teams
 - office
 - office-365
