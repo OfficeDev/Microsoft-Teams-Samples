@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality.
+description: This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently.
 products:
 - office-teams
 - office
@@ -9,26 +9,20 @@ languages:
 - python
 extensions:
  contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-msgext-thirdparty-storage-python
+ createdDate: "2025-01-17 17:00:25"
+urlFragment: officedev-microsoft-teams-samples-msgext-thirdparty-storage-python
 ---
 
-# Teams Messaging Extensions Action
+# Third-Party Storage Integration in Microsoft Teams
+Microsoft Teams allows users to integrate third-party cloud storage providers by modifying the default storage options from OneDrive and SharePoint. This capability enables files that are dragged and dropped into the Teams chat or message compose area to be stored in a third-party storage service. Using the Microsoft Teams JavaScript client library (TeamsJS), third-party apps can capture these files through the getDragAndDropFiles API and then upload them to their own cloud storage.
 
-Explore the capabilities of Action-Based Messaging Extensions in Microsoft Teams with this sample app. It showcases how to implement interactive features, including bots and message extensions, allowing users to create content dynamically through a user-friendly interface.
-
-[Messaging Extensions](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
-
-There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
-build an Action-based Messaging Extension.
+To enable this feature, the latest version of the TeamsJS SDK is required, along with a properly configured app manifest and the app ID of the third-party storage provider. When a file is dragged and dropped, it is temporarily cached in Teams before being fetched by the third-party app and uploaded to its storage. This seamless integration enhances flexibility for businesses using external storage solutions within the Teams environment.
 
 ## Included Features
-* Bots
 * Message Extensions
-* Action Commands
 
-- **Interaction with Messaging Extension**
-![MsgExtAction](Images/MsgExtAction.gif)
+**Interaction with bot**
+![msgext-thirdparty-storage](Images/msgext-thirdparty-storage.gif)
 
 ## Prerequisites
 
@@ -87,6 +81,8 @@ the Teams service needs to call into the bot.
 
 1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
+1) Set "BASE_URL" in the `config.py` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok-free.app`) after starting ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -98,36 +94,67 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 
-> Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.  Also note this bot does not process incoming Messages, but responds only to Messaging Extension commands. 
+**Upload an Application to Teams**
+![1.UploadApp](Images/1.UploadApp.png)
 
-1) Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code. 
+**Select the Build for Your Organization**
+![2.BuildOrgApp](Images/2.BuildOrgApp.png)
 
-or
+**Log in to Admin Center and Copy App ID**
+![3.AdminCenter](Images/3.AdminCenter.png)
 
-2) Selecting the **Share Message** command from the Message command list.  
+**Admin Settings for File Drag-and-Drop to Third-Party Storage** 
+- [Admin settings for file drag-drop to third-party storage](https://review.learn.microsoft.com/en-us/microsoftteams/admin-settings-for-file-drag-drop-to-third-party-storage?branch=main&branchFallbackFrom=pr-en-us-11741)
 
-![1.InstallApp](Images/1.InstallApp.png)
+![4.AdminSettings](Images/4.AdminSettings.png)
 
-![2.SelectMsgextAction](Images/2.SelectMsgextAction.png)
+**Install the Application in Teams**
+![5.InstallApp](Images/5.InstallApp.png)
 
-![3.CardMsgextActionDetails ](Images/3.CardMsgextActionDetails.png)
+**Select a Channel for File Upload**
+![6.SelectChannelChat](Images/6.SelectChannelChat.png)
 
-![4.CardDetailsMsgextAction](Images/4.CardDetailsMsgextAction.png)
+**Open the Channels to Access Files**
+![7.OpenChannel](Images/7.OpenChannel.png)
 
-![5.CardDetailsMsgextAction1](Images/5.CardDetailsMsgextAction1.png)
+**Drag and Drop All Files into Teams**
+![8.drag_drop_all_file](Images/8.drag_drop_all_file.png)
 
-![5.CardDetailsMsgextAction2](Images/5.CardDetailsMsgextAction2.png)
+**Files Successfully Dragged and Dropped**
+![9.drag_drop_files](Images/9.drag_drop_files.png)
+
+**All Files Loaded in Task Module**
+![10.drag_drop_files_task_module](Images/10.drag_drop_files_task_module.png)
+
+**Files Loaded into the Compose Area**
+![11.Upload_ComposeFile](Images/11.Upload_ComposeFile.png)
+
+**Send All Dragged and Dropped Files**
+![12.SendComposeFile](Images/12.SendComposeFile.png)
+
+**Drag and Drop Files in Chat**
+![13.drag_drop_all_file_chat](Images/13.drag_drop_all_file_chat.png)
+
+**Drop Files in the Chat Window**
+![14.drag_drop_file_Chat](Images/14.drag_drop_file_Chat.png)
+
+**Load All Files in the Task Module**
+![15.drag_drop_file_load_Task_module](Images/15.drag_drop_file_load_Task_module.png)
+
+**Upload All Files in the Chat**
+![16.UploadChat](Images/16.UploadChat.png)
+
+**Send Files in the Chat**
+![17.SendChat](Images/17.SendChat.png)
 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-# Further reading
+## Further reading
 
-- [Messaging extension action](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Third-party storage capability](https://review.learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/third-party-storage-capability?branch=pr-en-us-11741)
+- [Admin settings for file drag-drop to third-party storage](https://review.learn.microsoft.com/en-us/microsoftteams/admin-settings-for-file-drag-drop-to-third-party-storage?branch=main&branchFallbackFrom=pr-en-us-11741)
+- [App manifest](https://review.learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema?branch=main)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-thirdparty-storage-python" />

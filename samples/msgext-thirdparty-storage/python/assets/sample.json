@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-msgext-thirdparty-storage-csharp",
+    "name": "officedev-microsoft-teams-samples-msgext-thirdparty-storage-python",
     "source": "officeDev",
-    "title": "Action Based Messaging Extensions",
-    "shortDescription": "This sample app illustrates how to implement Action-Based Messaging Extensions.",
+    "title": "Third-Party Cloud Storage",
+    "shortDescription": "Enable drag-and-drop file uploads to third-party cloud storage.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-thirdparty-storage/python",
     "longDescription": [
-      "This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality."
+      "This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently."
     ],
-    "creationDateTime": "2019-10-17",
-    "updateDateTime": "2024-10-11",
+    "creationDateTime": "2025-01-15",
+    "updateDateTime": "2025-01-18",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-thirdparty-storage/python/Images/MsgExtAction.gif",
-        "alt": "Solution UX showing action based Messaging Extensions"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-thirdparty-storage/python/Images/msgext-thirdparty-storage.gif",
+        "alt": "Solution UX showing third-party cloud storage"
       }
     ],
     "authors": [
