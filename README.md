@@ -344,6 +344,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
 [msgext-copilot-handoff#js]:samples/msgext-copilot-handoff/ts
 [msgext-thirdparty-storage#nodejs]:samples/msgext-thirdparty-storage/nodejs
+[msgext-thirdparty-storage#cs]:samples/msgext-thirdparty-storage/csharp
+[msgext-thirdparty-storage#python]:samples/msgext-thirdparty-storage/python
 [msgext-expert-finder#nodejs]:samples/msgext-expert-finder-js
 
 [tab-sso#ts]:samples/tab-sso/nodejs
