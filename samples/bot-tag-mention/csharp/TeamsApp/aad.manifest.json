@@ -22,10 +22,18 @@
         {
             "resourceAppId": "Microsoft Graph",
             "resourceAccess": [
-                {
-                    "id": "User.Read",
-                    "type": "Scope"
-                }
+              {
+                "id": "User.Read",
+                "type": "Scope"
+              },
+              {
+                "id": "TeamworkTag.Read",
+                "type": "Scope"
+              },
+              {
+                "id": "TeamworkTag.ReadWrite",
+                "type": "Scope"
+              }
             ]
         }
     ],
@@ -96,12 +104,8 @@
     ],
     "replyUrlsWithType":[
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-          "type": "Web"
-        },
-        {
 			"url": "https://token.botframework.com/.auth/web/redirect",
 			"type": "Web"
-		}
+		    }
     ]
 }
