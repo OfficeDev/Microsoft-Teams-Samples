@@ -3,14 +3,14 @@
     "Name": "Microsoft Teams (browser)",
     "Projects": [
       {
-        "Path": "TeamsFileUpload.csproj",
-        "Action": "Start",
-        "DebugTarget": "Start Project"
-      },
-      {
         "Path": "TeamsApp\\TeamsApp.ttkproj",
         "Action": "StartWithoutDebugging",
         "DebugTarget": "Microsoft Teams (browser)"
+      },
+      {
+        "Path": "TeamsFileUpload\\TeamsFileUpload.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
       }
     ]
   }

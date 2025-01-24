@@ -52,12 +52,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                         await t.SendActivityAsync(MessageFactory.Text("This is the first response in the newly created thread"), ct);
                     },
                     cancellationToken: cancellationToken);
-            }
-            catch (System.Exception ex)
-            {
-                // Uncomment below commented line for local debugging.
-                // await context.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {ex.Message}");
-            }
+
         }
     }
 }

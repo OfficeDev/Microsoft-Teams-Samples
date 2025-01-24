@@ -3,6 +3,7 @@
 
 using AdaptiveCards;
 using BotDailyTaskReminder.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -40,14 +41,14 @@ namespace BotDailyTaskReminder.Controllers
         }
 
         /// <summary>
-        /// This enpoint is called to send task reminder card.
+        /// This endpoint is called to send task reminder cards.
         /// </summary>
         [HttpGet]
         public async void GetTaskReminder()
         {
             foreach (var conversationReference in _conversationReferences.Values)
             {
-                await((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
+                await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
             }
         }
 
@@ -64,18 +65,21 @@ namespace BotDailyTaskReminder.Controllers
 
             foreach (var task in taskList)
             {
-                var time = new DateTimeOffset(DateTime.Now);
+                var currentDateTime = DateTime.Now;
 
-                if (task.DateTime.Minute == time.Minute && task.DateTime.Hour == time.Hour)
+                if (task.DateTime.Hour == currentDateTime.Hour &&
+                    task.DateTime.Minute == currentDateTime.Minute &&
+                    task.DateTime.Date == currentDateTime.Date)
                 {
                     foreach (var day in task.SelectedDays)
                     {
-                        if (Convert.ToInt32(day) == ((int)time.DayOfWeek) || (Convert.ToInt32(day) == 7 && ((int)time.DayOfWeek) == 0))
+                        if (Convert.ToInt32(day) == (int)currentDateTime.DayOfWeek ||
+                            (Convert.ToInt32(day) == 7 && (int)currentDateTime.DayOfWeek == 0))
                         {
-                             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
+                            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
                         }
-                    }                        
-                }             
+                    }
+                }
             }
         }
 

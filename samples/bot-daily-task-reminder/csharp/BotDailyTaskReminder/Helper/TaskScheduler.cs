@@ -2,9 +2,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using System;
 using Quartz;
 using Quartz.Impl;
+using System;
 
 namespace BotDailyTaskReminder
 {
@@ -13,21 +13,34 @@ namespace BotDailyTaskReminder
         // Method to schedule task.
         public void Start(int hour, int min, string baseUrl, DayOfWeek[] selectedDays)
         {
-            var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
-            scheduler.Start();
+            try
+            {
+                // Synchronously get the scheduler and start it
+                var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
+                scheduler.Start();
 
-            IJobDetail job = JobBuilder.Create<ScheduleTaskReminder>().
-                                    UsingJobData("baseUrl", baseUrl).
-                                    Build();
+                IJobDetail job = JobBuilder.Create<ScheduleTaskReminder>()
+                                           .UsingJobData("baseUrl", baseUrl)
+                                           .Build();
 
-            CronScheduleBuilder csb = CronScheduleBuilder
-                .AtHourAndMinuteOnGivenDaysOfWeek(hour, min, selectedDays);
+                // Create the cron schedule for the selected days and time
+                CronScheduleBuilder csb = CronScheduleBuilder
+                    .AtHourAndMinuteOnGivenDaysOfWeek(hour, min, selectedDays);
 
-            ICronTrigger trigger = (ICronTrigger)TriggerBuilder
-                .Create()
-                .WithSchedule(csb)
-                .Build();
-            scheduler.ScheduleJob(job, trigger);
+                ICronTrigger trigger = (ICronTrigger)TriggerBuilder
+                    .Create()
+                    .WithSchedule(csb)
+                    .Build();
+
+                // Schedule the job
+                scheduler.ScheduleJob(job, trigger);
+                Console.WriteLine("Task successfully scheduled.");
+            }
+            catch (SchedulerException ex)
+            {
+                // Log the exception or handle it as needed
+                Console.WriteLine($"Scheduler error: {ex.Message}");
+            }
         }
     }
 }

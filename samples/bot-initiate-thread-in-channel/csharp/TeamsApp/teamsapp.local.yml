@@ -40,7 +40,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../TeamsStartNewThreadInTeam/appsettings.json
+      target: ../appsettings.json
       content:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
