@@ -238,7 +238,7 @@
                         };
 
                         //Dialogs (referred as dialogs (referred as task modules in TeamsJS v1.x) in TeamsJS v1.x) invoked from a tab
-                        microsoftTeams.dialog.open(taskInfo_1, submitHandler);
+                        microsoftTeams.tasks.startTask(taskInfo_1, submitHandler);
                         break;
 
                     default:
