@@ -1,0 +1,53 @@
+# Developing Custom Applications for Microsoft Teams
+
+Microsoft Teams provides a suite of apps created by Microsoft and external developers. By using tabs, bots, and message extensions, these apps can greatly enhance the collaborative environment within Teams. It is also possible to extend these applications for use in Outlook and Microsoft 365. 
+
+Applications in Teams can be personal or shared. Personal apps facilitate direct communications between two users, while shared apps allow multiple users to collaborate in a common workspace.
+
+## Utilizing Applications for Organizational Objectives
+
+In an increasingly digital word, applications have become essential for effective communication and collaboration. Microsoft Teams applications integrate necessary services, streamline teamwork, and improve accessibility, making them a popular choice for businesses. 
+
+![Image showing benefits of building Teams App](https://learn.microsoft.com/en-us/microsoftteams/platform/assets/images/overview/why-teams-apps.png)
+
+Teams apps can help by:
+
+- Increasing user engagement on desktop, web, and mobile platforms.
+- Making your application easily discoverable on the Microsoft Teams Store.
+- Enhancing mobility and securing customer data.
+- Streamlining communication between users.
+- Automating repetitive tasks and simplifying tasks using bots, such as Q&A and helpdesk.
+
+Whether creating a new app or integrating an existing one, the Teams platform can be tailored to fit your requirements. This offers significant advantages in fostering teamwork and collaboration via Microsoft 365.
+
+## Enhancing Teams with Abstractisation
+
+Teams apps can significantly boost productivity by delivering key information, common tools, and trusted processes to users. 
+
+Teams is particularly advantageous for app development due to its:
+
+* **Communication and collaboration capabilities:** Teams enables pulling data from other systems, discussing it, and initiating action -- all within the Teams client. You can even push information to a targeted audience based on actions in an external system.
+
+* **Social interaction capabilities:** Teams provides a social platform for interacting and sharing feedback. This can help to foster company culture and improve collaboration.
+
+![Screenshot shows the Teams app promoting team culture](https://learn.microsoft.com/en-us/microsoftteams/platform/assets/images/overview/scenario-social.png)
+
+* **Ability to handle common business processes:** Teams can help to streamline repetitive tasks such as sales report creation, project timeline tracking, resource reservation, help desk request submission, and expense report generation.
+
+![Screenshot shows the Teams app aiding in internal processes](https://learn.microsoft.com/en-us/microsoftteams/platform/assets/images/overview/scenario-approval-flow.png)
+
+* **Support for personal apps with tabs and bots:** Teams supports one-to-one bot conversations, tabs, and task modules. These can simplify information sets, replace emails and phone calls with chatbots, and increase user engagement.
+
+* **Ability to integrate existing apps:** If you have a web-based application, you can enable it for use in Teams. This can help to expand your user base and improve user engagement.
+
+![Screenshot shows SharePoint site enabled as a Teams tab](https://learn.microsoft.com/en-us/microsoftteams/platform/assets/images/overview/scenario-dashboard.png)
+
+* **Teams Store advantage:** Placing your app on the Teams Store can improve its visibility. For startups, this can offer an excellent marketing opportunity and effective platform for reaching a wider audience.
+
+* **Cross-platform capabilities:** Teams allows you to develop your app once and run it across all Microsoft 365 environments. This can enhance productivity by allowing users to work without switching apps. It also simplifies the management and deployment process for administrators.
+
+In conclusion, Microsoft Teams offers a robust platform for developing applications that cater to specific business needs. By utilizing the features and advantages outlined above, you can construct an efficient and effective working environment that increases productivity and boosts engagement.
+
+## Moving Forward
+
+[Turning Ideas into a Teams App](overview-story.md)
