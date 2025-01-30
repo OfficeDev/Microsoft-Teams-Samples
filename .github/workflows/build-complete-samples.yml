@@ -268,11 +268,11 @@ jobs:
               name: 'bot-conversation'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload.csproj'
+            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload/TeamsFileUpload.csproj'
               name: 'bot-file-upload'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam.csproj'
+            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam/TeamsStartNewThreadInTeam.csproj'
               name: 'bot-initiate-thread-in-channel'
               version: '6.0.x'
 

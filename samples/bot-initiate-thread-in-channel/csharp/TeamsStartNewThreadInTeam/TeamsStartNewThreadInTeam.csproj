@@ -6,13 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TeamsApp\**" />
-    <Content Remove="TeamsApp\**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
-    <None Remove="TeamsApp\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
   </ItemGroup>
@@ -24,34 +17,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Files\teams-logo.png">
+    <None Update="Images\add-App-To-Teams-Channel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\add-App.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\attachment-File-Upload.png">
+    <None Update="Images\added-App.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\attachment-File-Uploaded.png">
+    <None Update="Images\mentionedBot-NewThread.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\bot-file-upload.gif">
+    <None Update="Images\new-Thread-In-Channel-Gif.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\file-Card-Uploaded.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\file-Card.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\inline-Image-Send.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\inline-Image-Uploaded.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\inline-Image.png">
+    <None Update="Images\new-Thread-In-Channel.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

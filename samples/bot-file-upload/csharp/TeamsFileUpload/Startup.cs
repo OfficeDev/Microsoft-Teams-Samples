@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using Microsoft.BotBuilderSamples.Bots;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Bot.Connector.Authentication;
@@ -25,19 +26,25 @@ namespace Microsoft.BotBuilderSamples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient().AddControllers().AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
-            });
+            // Configure HttpClient and add necessary JSON settings for the bot
+            services.AddHttpClient()
+                .AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
+                });
 
-            // Create the Bot Framework Authentication to be used with the Bot Adapter.
+            // Register the Bot Framework Authentication service (for authentication with the Bot Framework).
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
-            // Create the Bot Adapter with error handling enabled.
+            // Register the Bot Adapter with error handling enabled (helps in handling errors globally).
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, TeamsStartNewThreadInTeam>();
+            // The Bot needs an HttpClient to download and upload files, registered above.
+            // No need to register HttpClient again, as it's already added above.
+
+            // Register the bot implementation (TeamsFileUploadBot) as a transient service.
+            services.AddTransient<IBot, TeamsFileUploadBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,14 +56,16 @@ namespace Microsoft.BotBuilderSamples
             }
 
             app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseRouting()
-                .UseAuthorization()
+                .UseStaticFiles() // Enable serving static files (like images, CSS, etc.)
+                .UseRouting() // Set up routing for controllers
+                .UseAuthorization() // Ensure authorization is handled
                 .UseEndpoints(endpoints =>
                 {
+                    // Map controller routes
                     endpoints.MapControllers();
                 });
 
+            // Uncomment the line below to enable HTTPS redirection in production
             // app.UseHttpsRedirection();
         }
     }

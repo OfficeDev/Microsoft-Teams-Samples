@@ -10,10 +10,26 @@ with open("resources/searchHotels.json", "r") as hotels_file:
     SearchHotelsCardTemplate = json.load(hotels_file)
 
 class TeamsCommandsMenuBot(ActivityHandler):
+    """
+    TeamsCommandsMenuBot is a bot that handles commands such as searching flights and hotels. 
+    It processes incoming messages and sends adaptive cards based on user input.
+    """
+
     def __init__(self):
+        """
+        Initializes the TeamsCommandsMenuBot class.
+        Sets up the message activity handler to respond to user commands.
+        """
         super(TeamsCommandsMenuBot, self).__init__()
 
         async def on_message_activity(context: TurnContext):
+            """
+            Handles incoming message activities. It processes text commands and sends appropriate responses.
+            Supports commands like 'search flights', 'search hotels', 'help', and 'best time to fly'.
+            
+            Args:
+                context (TurnContext): The context of the incoming activity.
+            """
             # Remove mentions from the message text
             activity = TurnContext.remove_mention_text(context.activity, context.activity.recipient.id)
 
@@ -47,7 +63,12 @@ class TeamsCommandsMenuBot(ActivityHandler):
         self.on_message_activity = on_message_activity
 
     async def search_flights_reader_card_async(self, context: TurnContext):
-        """Send the flight details Adaptive Card."""
+        """
+        Sends the flight details Adaptive Card to the user.
+        
+        Args:
+            context (TurnContext): The context of the incoming activity.
+        """
         await context.send_activity(
             Activity(
                 attachments=[CardFactory.adaptive_card(FlightsDetailsCardTemplate)]
@@ -55,7 +76,12 @@ class TeamsCommandsMenuBot(ActivityHandler):
         )
 
     async def search_hotels_reader_card_async(self, context: TurnContext):
-        """Send the hotel search Adaptive Card."""
+        """
+        Sends the hotel search Adaptive Card to the user.
+        
+        Args:
+            context (TurnContext): The context of the incoming activity.
+        """
         await context.send_activity(
             Activity(
                 attachments=[CardFactory.adaptive_card(SearchHotelsCardTemplate)]

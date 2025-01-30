@@ -8,7 +8,7 @@ esbuild.build({
     .then((r) => {
         console.log(`Build succeeded.`);
     })
-    .catch((e) => {
-        console.log("Error building:", e.message);
+    .catch((error) => {
+        console.error("Error building:", error.message);
         process.exit(1);
     });

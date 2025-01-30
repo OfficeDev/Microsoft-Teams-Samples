@@ -60,31 +60,42 @@ ADAPTER.on_turn_error = on_error
 # We generate a random AppId for this case only. This is not required for production, since
 # the AppId will have a value.
 
+FILE_PATHS = {
+    "home": 'src/views/hello.html',
+    "first": 'src/views/first.html',
+    "second": 'src/views/second.html',
+    "configure": 'src/views/configure.html'
+}
 # aiohttp route for home page
 async def home(request):
-    return web.FileResponse('src/views/hello.html')
+    """Handles requests to the home page."""
+    return web.FileResponse(FILE_PATHS["home"])
 
 # aiohttp route for /hello
 async def hello(request):
-    return web.FileResponse('src/views/hello.html')
+    """Handles requests to the hello page."""
+    return web.FileResponse(FILE_PATHS["home"])
 
 # aiohttp route for /first
 async def first(request):
-    return web.FileResponse('src/views/first.html')
+    """Handles requests to the first page."""
+    return web.FileResponse(FILE_PATHS["first"])
 
 # aiohttp route for /second
 async def second(request):
-    return web.FileResponse('src/views/second.html')
+    """Handles requests to the second page."""
+    return web.FileResponse(FILE_PATHS["second"])
 
 # aiohttp route for /configure
 async def configure(request):
-    return web.FileResponse('src/views/configure.html')
+    """Handles requests to the configure page."""
+    return web.FileResponse(FILE_PATHS["configure"])
 
 # Assign APP_ID from SETTINGS.app_id if it exists; otherwise, generate a new unique UUID.
 APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
 # Create the Bot
-BOT = HelloWorldBot(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
+bot = HelloWorldBot(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
@@ -97,7 +108,7 @@ async def messages(req: Request) -> Response:
     activity = Activity().deserialize(body)
     auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
 
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+    response = await ADAPTER.process_activity(activity, auth_header, bot.on_turn)
     if response:
         return json_response(data=response.body, status=response.status)
     return Response(status=HTTPStatus.OK)
@@ -111,7 +122,6 @@ APP.router.add_get("/hello", hello)
 APP.router.add_get("/first", first)
 APP.router.add_get("/second", second)
 APP.router.add_get("/configure", configure)
-APP.router.add_get("/msteams-16", msteams)
 APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":

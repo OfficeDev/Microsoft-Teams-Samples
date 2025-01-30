@@ -34,7 +34,9 @@
       "commandLists": [
         {
           "scopes": [
-            "personal"
+            "personal",
+            "team",
+            "groupChat"
           ],
           "commands": [
             {
