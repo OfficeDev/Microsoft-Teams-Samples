@@ -121,7 +121,7 @@ namespace TagMentionBot
                             var result = await client.GetTag(teamDetails.AadGroupId);
                             foreach (var tagDetails in result.CurrentPage)
                             {
-                                if (tagDetails.DisplayName == stepContext.Context.Activity.Text.Trim().ToLower())
+                                if (tagDetails.DisplayName.ToLower() == stepContext.Context.Activity.Text.Trim().ToLower())
                                 {
                                     tagExists = true;
                                     await TagMentionAdaptivecard(stepContext, cancellationToken, tagDetails.DisplayName, tagDetails.Id);

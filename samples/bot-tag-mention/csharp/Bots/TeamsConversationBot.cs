@@ -59,5 +59,14 @@ namespace TagMentionBot.Bots
                 await turnContext.SendActivityAsync("Welcome to Tag mention demo bot. Type anything to get logged in. Type 'logout' to sign-out");
             }
         }
+
+        protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
+
+            // The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
+            // Run the Dialog with the new Invoke Activity.
+            await _dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+        }
     }
 }
