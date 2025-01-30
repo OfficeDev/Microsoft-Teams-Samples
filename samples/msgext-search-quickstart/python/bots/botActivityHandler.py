@@ -31,7 +31,7 @@ class BotActivityHandler(TeamsActivityHandler):
 
         # Prepare messaging attachments for the top 5 search results
         attachments = []
-        for obj in data["objects"][:5]:  # Iterate through the first 5 search results
+        for obj in data["objects"][:8]:  # Iterate through the first 5 search results
             package = obj.get("package", {})
             package_name = package.get("name", "Unknown Package")  # Fallback if name is missing
             description = package.get("description", "No description available")  # Fallback for missing description
