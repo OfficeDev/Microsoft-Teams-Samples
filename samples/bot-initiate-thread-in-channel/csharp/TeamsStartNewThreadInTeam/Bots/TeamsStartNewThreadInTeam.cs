@@ -37,21 +37,19 @@ namespace Microsoft.BotBuilderSamples.Bots
             // Create a message activity to send to the Teams channel.
             var activity = MessageFactory.Text("Starting a new thread in the specified channel.");
 
-            try
-            {
-                // Send a message to the Teams channel and retrieve details for continuing the conversation.
-                var details = await TeamsInfo.SendMessageToTeamsChannelAsync(turnContext, activity, teamsChannelId, _appId, cancellationToken);
+            // Send a message to the Teams channel and retrieve details for continuing the conversation.
+            var details = await TeamsInfo.SendMessageToTeamsChannelAsync(turnContext, activity, teamsChannelId, _appId, cancellationToken);
 
-                // Continue the conversation in the new thread.
-                await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
-                    botAppId: _appId,
-                    reference: details.Item1,
-                    callback: async (t, ct) =>
-                    {
-                        // Send the first response in the newly created thread.
-                        await t.SendActivityAsync(MessageFactory.Text("This is the first response in the newly created thread"), ct);
-                    },
-                    cancellationToken: cancellationToken);
+            // Continue the conversation in the new thread.
+            await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
+                botAppId: _appId,
+                reference: details.Item1,
+                callback: async (t, ct) =>
+                {
+                    // Send the first response in the newly created thread.
+                    await t.SendActivityAsync(MessageFactory.Text("This is the first response in the newly created thread"), ct);
+                },
+                cancellationToken: cancellationToken);
 
         }
     }
