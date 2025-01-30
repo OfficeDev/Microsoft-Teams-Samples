@@ -27,17 +27,6 @@ LOCALES_DIR = "./translations"
 DEFAULT_LOCALE = "en-us"
 env = Environment(loader=FileSystemLoader("templates"))
 
-def get_translation(locale):
-    """Fetch the translation file for the given locale."""
-    try:
-        with open(f"{LOCALES_DIR}/{locale}/common.json", "r") as file:
-            import json
-            return json.load(file)
-    except FileNotFoundError:
-        with open(f"{LOCALES_DIR}/{DEFAULT_LOCALE}/common.json", "r") as file:
-            import json
-            return json.load(file)
-
 # Create adapter.
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
