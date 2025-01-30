@@ -9,11 +9,11 @@ languages:
 - python
 extensions:
  contentType: samples
- createdDate: "13/12/2024 01:38:26 PM"
+ createdDate: "19/12/2024 01:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-python
 ---
 
-# Bot Conversation Quickstart (Python) 
+# Bot Conversation QuickStart (Python) 
 
 This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python. It highlights key features such as sending Hero Cards, handling user messages, and participating in Teams conversations.
 
