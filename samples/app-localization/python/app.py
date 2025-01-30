@@ -37,7 +37,7 @@ async def on_error(context: TurnContext, error: Exception):
     traceback.print_exc()
 
     # Send a message to the user
-    await context.send_activity("The bot encountered an error or bug.")
+    await context.send_activity("The bot encountered an unexpected error. Please check the bot's logs for more details.")
     await context.send_activity(
         "To continue to run this bot, please fix the bot source code."
     )
