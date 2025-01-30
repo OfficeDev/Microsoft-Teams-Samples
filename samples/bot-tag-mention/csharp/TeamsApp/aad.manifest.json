@@ -106,6 +106,6 @@
         {
 			"url": "https://token.botframework.com/.auth/web/redirect",
 			"type": "Web"
-		    }
+		}
     ]
 }
