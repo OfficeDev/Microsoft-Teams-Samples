@@ -148,7 +148,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 9  | Messaging Extensions AI - Sentiment Analysis | Messaging Extension with AI capability that performs sentiment analysis (positive/negative/neutral) for messages posted in Microsoft Teams chat               | Advanced    | [View][msgext-ai-sentiment-analysis#cs]                             | [View][msgext-ai-sentiment-analysis#js] ![toolkit-icon](assets/toolkit-icon.png) |        |      |                                                             |
 | 10 | Messaging extension - Adaptive Card based loop components | Demonstrates a Messaging Extension for Microsoft Teams that utilizes adaptive card-based loop components, enabling link unfurling and dynamic interactions within the compose area. | Advanced    | [View][msgext-unfurling-ac-loop-components#cs]                     | [View][msgext-unfurling-ac-loop-components#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |        |      | [View](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip) |
 | 11 | Copilot Handoff                            | This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension showcases copilot handoff along with allowing users to query the Northwind Database | Advanced    | | [View][msgext-copilot-handoff#js] ![toolkit-icon](assets/toolkit-icon.png) |        |      |                                                             |
-| 12 | Third-Party Cloud Storage | This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently. | Advanced |  | [View][msgext-thirdparty-storage#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |    |    |   |
+| 12 | Third-Party Cloud Storage | This app enables seamless integration with third-party cloud storage providers for files dragged and dropped in Teams chats or channels. It uses the Microsoft Teams JavaScript SDK's thirdPartyCloudStorage module to fetch and upload files efficiently. | Advanced | [View][msgext-thirdparty-storage#cs]  | [View][msgext-thirdparty-storage#nodejs] ![toolkit-icon](assets/toolkit-icon.png) |  [View][msgext-thirdparty-storage#python]  |    |   |
 
 #### Additional samples
 
@@ -344,6 +344,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-sso-config#cs]:samples/msgext-search-sso-config/csharp
 [msgext-copilot-handoff#js]:samples/msgext-copilot-handoff/ts
 [msgext-thirdparty-storage#nodejs]:samples/msgext-thirdparty-storage/nodejs
+[msgext-thirdparty-storage#cs]:samples/msgext-thirdparty-storage/csharp
+[msgext-thirdparty-storage#python]:samples/msgext-thirdparty-storage/python
 [msgext-expert-finder#nodejs]:samples/msgext-expert-finder-js
 
 [tab-sso#ts]:samples/tab-sso/nodejs

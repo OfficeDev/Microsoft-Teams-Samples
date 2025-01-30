@@ -7,11 +7,12 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using Microsoft.BotBuilderSamples.Bots;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Bot.Connector.Authentication;
 
-using ReceiveMessagesWithRSC.Bots;
-
-namespace ReceiveMessagesWithRSC
+namespace Microsoft.BotBuilderSamples
 {
     public class Startup
     {
@@ -25,13 +26,23 @@ namespace ReceiveMessagesWithRSC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers();
+            services.AddHttpClient();
+            services.AddMvc();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
+            });
+            services.AddRazorPages();
 
-            // Create the Bot Framework Adapter with error handling enabled.
+            // Create the Bot Framework Authentication to be used with the Bot Adapter.
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+            // Create the Bot Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, ActivityBot>();
+            services.AddTransient<IBot, TeamsMsgextThirdpartyStorageBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,15 +53,19 @@ namespace ReceiveMessagesWithRSC
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseWebSockets()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            // Runs matching. An endpoint is selected and set on the HttpContext if a match is found.
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                // Mapping of endpoints goes here:
+                endpoints.MapControllers();
+            });
+
         }
     }
 }

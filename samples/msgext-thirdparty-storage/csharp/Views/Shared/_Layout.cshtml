@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Microsoft Teams Third-party storage capability Sample App</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <script src="https://res.cdn.office.net/teams-js/2.26.0/js/MicrosoftTeams.min.js" 
+            integrity="sha384-gqPg5qCjdUgTGRZ/stLskrnJllL5h5+f4kTqvxVqtl2FdT7PVRa9Q7zq4gFlZ7bO"
+            crossorigin="anonymous"></script>
+
+    @RenderSection("scripts", required: false)
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
