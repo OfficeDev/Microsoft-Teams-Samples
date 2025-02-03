@@ -9,6 +9,7 @@ const ThumbnailCard = require('../resources/thumbnailCard.json');
 const ListCard = require('../resources/listCard.json');
 const CollectionCard = require('../resources/collectionsCard.json');
 const path = require('path');
+const { title } = require('process');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
@@ -199,7 +200,17 @@ class BotTypeOfCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'ThumbnailCard',
                 value: 'ThumbnailCard'
-            }
+            },
+            {
+                type : ActionTypes.ImBack,
+                title: 'OAuth',
+                title: 'OAuth'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'ThumbnailCard',
+                value: 'ThumbnailCard'
+            },
         ];
 
         // Returns a simple text message.
