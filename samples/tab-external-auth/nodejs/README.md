@@ -8,8 +8,18 @@ This sample API server is designed to exchange access tokens provided by Microso
 ## Setup
 
 1. Create Google Ouath app [Google API Console](https://console.developers.google.com/)
+ 
+ - Create project
+ ![oauthapp5](Images/oauthapp5.png)
+
+ - Enter project name
+ ![oauthapp6](Images/oauthapp6.png)
+
+ - Click configure consent screen
+ ![oauthapp7](Images/oauthapp7.png)
+
  - Select Oauth client Id for app creation
- ![oauthapp1](Images/oauthapp1.png)
+ ![oauthapp8](Images/oauthapp8.png) 
 
  - Select application type as `Web application` and give a suitable app name
  ![oauthapp3](Images/oauthapp3.png)
@@ -23,10 +33,13 @@ This sample API server is designed to exchange access tokens provided by Microso
  - Once the app is created, copy the client id and client seret
  ![oauthapp2](Images/oauthapp2.png)
 
+  - OAuth Created
+ ![oauthapp9](Images/oauthapp9.png) 
+
  - Enable access to the [Google People API](https://developers.google.com/people/).
  ![people-api](Images/peopleapi1.png)
 
-  ![people-api2](Images/peopleapi2.png)
+ ![people-api2](Images/peopleapi2.png)
 
 2. Setup NGROK
 - Run ngrok - point to port 3978
