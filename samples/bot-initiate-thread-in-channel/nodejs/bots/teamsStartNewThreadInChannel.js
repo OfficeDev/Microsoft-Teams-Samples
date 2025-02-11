@@ -8,6 +8,11 @@ const {
     CardFactory
 } = require('botbuilder');
 
+/**
+ * TeamsStartNewThreadInChannel class extends TeamsActivityHandler
+ * and provides functionality to interact with Microsoft Teams,
+ * including listing channels, starting new threads, and retrieving team members.
+ */
 class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
     constructor() {
         super();
@@ -31,11 +36,16 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
         });
     }
 
+    /**
+     * Starts a new thread in the current Teams channel.
+     * @param {TurnContext} context - The bot context.
+     */
     async startNewThreadInChannel(context) {
         try {
             const teamsChannelId = context.activity.channelData.channel.id;
             const activity = MessageFactory.text("This will start a new thread in the channel.");
             
+            // Send a message to the channel and get a reference to the new thread.
             const [reference] = await TeamsInfo.sendMessageToTeamsChannel(
                 context,
                 activity,
@@ -43,6 +53,7 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
                 process.env.MicrosoftAppId
             );
 
+            // Continue the conversation in the new thread.
             await context.adapter.continueConversationAsync(
                 process.env.MicrosoftAppId,
                 reference,
@@ -56,6 +67,10 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
         }
     }
 
+    /**
+     * Lists all channels in the current team.
+     * @param {TurnContext} context - The bot context.
+     */
     async listTeamChannels(context) {
         try {
             const teamId = context.activity.channelData.team.id;
@@ -72,6 +87,7 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
                 body: [{ type: "TextBlock", text: "List of Channels", weight: "Bolder", size: "Medium" }],
             };
 
+            // Add each channel name to the card.
             channels.forEach((channel, index) => {
                 cardContent.body.push({
                     type: "TextBlock",
@@ -88,6 +104,10 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
         }
     }
 
+    /**
+     * Retrieves the details of the user who sent the message.
+     * @param {TurnContext} context - The bot context.
+     */
     async getTeamMember(context) {
         try {
             const aadObjectId = context.activity.from.aadObjectId;
@@ -122,6 +142,10 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
         }
     }
 
+    /**
+     * Retrieves all team members in a paginated manner.
+     * @param {TurnContext} context - The bot context.
+     */
     async getPagedTeamMembers(context) {
         try {
             const teamId = context.activity.channelData.team.id;
