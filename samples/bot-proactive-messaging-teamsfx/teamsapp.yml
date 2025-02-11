@@ -16,12 +16,6 @@ provision:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       teamsAppId: TEAMS_APP_ID
-  - uses: botAadApp/create # Creates a new AAD app for Bot Registration.
-    with:
-      name: ProactiveMessagesTeamsFxbt${{RESOURCE_SUFFIX}}
-    writeToEnvironmentFile:
-      botId: BOT_ID
-      botPassword: SECRET_BOT_PASSWORD
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
       subscriptionId: ${{AZURE_SUBSCRIPTION_ID}} # The AZURE_SUBSCRIPTION_ID is a built-in environment variable. TeamsFx will ask you select one subscription if its value is empty. You're free to reference other environment varialbe here, but TeamsFx will not ask you to select subscription if it's empty in this case.
