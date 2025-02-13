@@ -124,7 +124,13 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Add-App-To-Teams-Channel](Images/2.SelectTeams.png)
 
-![Mentioned Bot](Images/3.MentionInTeams.png)
+![ListChannels](Images/3.ListChannels.png)
+
+![ThreadChannel](Images/4.ThreadChannel.png)
+
+![GetteamMember](Images/5.GetteamMember.png)
+
+![6.GetpagedteamMembers](Images/6.GetpagedteamMembers.png)
 
 **Mention the bot in a team's channel using "@" with any message like: '@yourbotname Hello' :**
 ![Response In Thread](Images/4.FirstResponseInThread.png)
