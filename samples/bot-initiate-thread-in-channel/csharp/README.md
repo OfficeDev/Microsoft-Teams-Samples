@@ -133,11 +133,8 @@ You can interact with this bot by sending it a message. The bot will respond by 
 **Mention the bot in a team's channel using "@" with any message like: '@yourbotname getteammember' :**
 ![GetteamMember](Images/5.GetteamMember.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname getteammember' :**
-![6.GetpagedteamMembers](Images/6.GetpagedteamMembers.png)
-
 **Mention the bot in a team's channel using "@" with any message like: '@yourbotname getpagedteammembers' :**
-![Response In Thread](Images/4.FirstResponseInThread.png)
+![6.GetpagedteamMembers](Images/6.GetpagedteamMembers.png)
 
 ## Deploy the bot to Azure
 
