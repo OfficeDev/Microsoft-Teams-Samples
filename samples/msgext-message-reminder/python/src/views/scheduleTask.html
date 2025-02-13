@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .container {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+    </style>
+
+    <script>
+        var title;
+        var description;
+
+        microsoftTeams.initialize(() => {
+            const params = new URLSearchParams(window.location.search);
+            title = params.get("title") || "";
+            description = params.get("description") || "";
+
+            $("#taskTitle").text(decodeURIComponent(title));
+
+            if (!description) {
+                $("#taskdescriptionteam").hide();
+            } else {
+                $("#taskdescriptionteam").text(decodeURIComponent(description));
+                $("#taskdescription").hide();
+            }
+        });
+
+        // Submit task details.
+        function submit() {
+            var isValid = true;
+            var taskDateTime = $('#taskdatetime');
+
+            if ($.trim(taskDateTime.val()) === '') {
+                isValid = false;
+                taskDateTime.css({ "border": "1px solid red" });
+            } else {
+                taskDateTime.css({ "border": "", "background": "" });
+            }
+
+            if (!isValid) {
+                return false;
+            }
+
+            var datetimeLocal = taskDateTime.val();
+            var datetimeUTC = new Date(datetimeLocal).toUTCString();
+            var date = new Date(datetimeUTC);
+
+            let taskInfo = {
+                title: decodeURIComponent(title),
+                dateTime: date,
+                description: description ? decodeURIComponent(description) : $('#taskdescription').val(),
+            };
+
+            microsoftTeams.tasks.submitTask(taskInfo);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="container">
+                <label for="title" class="title">Task title</label>
+                <br>
+                <label id="taskTitle"></label>
+                <br><br>
+                <label for="description" class="description">Task description</label>
+                <br>
+                <input type="text" name="taskdescription">
+                <br><br>
+                <label for="taskdatetime">Date and time</label>
+                <br>
+                <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br><br>
+                <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
