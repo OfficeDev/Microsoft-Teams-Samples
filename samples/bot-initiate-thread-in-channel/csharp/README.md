@@ -124,16 +124,16 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Add-App-To-Teams-Channel](Images/2.SelectTeams.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname listchannels' :**
+**Mention the bot in a team's channel using "@" like: '@yourbotname listchannels' :**
 ![ListChannels](Images/3.ListChannels.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname threadchannel' :**
+**Mention the bot in a team's channel using "@" like: '@yourbotname threadchannel' :**
 ![ThreadChannel](Images/4.ThreadChannel.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname getteammember' :**
+**Mention the bot in a team's channel using "@" like: '@yourbotname getteammember' :**
 ![GetteamMember](Images/5.GetteamMember.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname getpagedteammembers' :**
+**Mention the bot in a team's channel using "@" like: '@yourbotname getpagedteammembers' :**
 ![6.GetpagedteamMembers](Images/6.GetpagedteamMembers.png)
 
 ## Deploy the bot to Azure
