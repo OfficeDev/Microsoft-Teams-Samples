@@ -15,13 +15,8 @@ provision:
       name: bot-conversation-python${{APP_NAME_SUFFIX}} # Teams app name
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
-      teamsAppId: TEAMS_APP_ID
-  - uses: botAadApp/create # Creates a new AAD app for Bot Registration.
-    with:
-      name: bot-conversation-python${{RESOURCE_SUFFIX}}
-    writeToEnvironmentFile:
-      botId: BOT_ID
-      botPassword: SECRET_BOT_PASSWORD
+      teamsAppId: TEAMS_APP_PUBLISHED_APP_ID
+
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
       subscriptionId: ${{AZURE_SUBSCRIPTION_ID}} # The AZURE_SUBSCRIPTION_ID is a built-in environment variable. TeamsFx will ask you select one subscription if its value is empty. You're free to reference other environment varialbe here, but TeamsFx will not ask you to select subscription if it's empty in this case.
@@ -31,6 +26,7 @@ provision:
           parameters: ./infra/azure.parameters.json # Relative path to this file. Placeholders will be replaced with corresponding environment variable before ARM deployment.
           deploymentName: teams_toolkit_deployment # Required when deploy ARM template
       bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+
   - uses: teamsApp/validateManifest # Validate using manifest schema
     with:
       manifestPath: ./appManifest/manifest.json # Path to manifest template
@@ -39,6 +35,7 @@ provision:
       manifestPath: ./appManifest/manifest.json # Path to manifest template
       outputZipPath: ./build/appManifest/appManifest.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./build/appManifest/manifest.${{TEAMSFX_ENV}}.json
+      
   - uses: teamsApp/validateAppPackage # Validate app package using validation rules
     with:
       appPackagePath: ./build/appManifest/appManifest.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
@@ -87,4 +84,3 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 9bf193d2-73ae-4475-9045-240b8a0ebec7
