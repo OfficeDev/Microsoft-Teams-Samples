@@ -98,7 +98,7 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message. It will respond by creating a new thread within the channel and replying to the new thread it just started.
 
 **Adding the bot to a team's channel :**
-![Add-App](Images/1.Install.png)
+![Add-App](Images/1.InstallApp.png)
 
 ![Add-App-To-Teams-Channel](Images/2.SelectTeams.png)
 
