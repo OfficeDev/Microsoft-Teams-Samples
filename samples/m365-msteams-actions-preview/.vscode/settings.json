@@ -1,0 +1,8 @@
+{
+    "azureFunctions.stopFuncTaskPostDebug": false,
+    "azureFunctions.showProjectWarning": false,
+    "csharp.suppressDotnetRestoreNotification": true,
+    "debug.onTaskErrors": "abort",
+    "appService.defaultWebAppToDeploy": "/subscriptions/6c7e37d5-4fba-4c68-ba0a-f7b5c50adc04/resourceGroups/TodoDataRG/providers/Microsoft.Web/sites/todolist0573batab",
+    "appService.deploySubpath": "tabs\\build",
+}
