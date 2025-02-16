@@ -40,12 +40,6 @@
       "name": "List",
       "contentUrl": "https://{{HOSTNAME}}/list",
       "scopes": [ "personal" ]
-    },
-    {
-      "entityId": "sample.app.boards",
-      "name": "Task boards",
-      "contentUrl": "https://{{HOSTNAME}}/board",
-      "scopes": [ "personal" ]
     }
   ],
   "validDomains": [ "{{HOSTNAME}}" ]
