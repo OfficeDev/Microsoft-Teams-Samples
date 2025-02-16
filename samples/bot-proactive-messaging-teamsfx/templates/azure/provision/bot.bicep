@@ -1,9 +1,12 @@
 @secure()
 param provisionParameters object
 param userAssignedIdentityId string
+param identityName string = provisionParameters.resourceBaseName
+param identityResourceId string
+param identityClientId string
+param identityTenantId string
 
 var resourceBaseName = provisionParameters.resourceBaseName
-var botAadAppClientId = provisionParameters['botAadAppClientId'] // Read AAD app client id for Azure Bot Service from parameters
 var botServiceName = contains(provisionParameters, 'botServiceName') ? provisionParameters['botServiceName'] : '${resourceBaseName}' // Try to read name for Azure Bot Service from parameters
 var botServiceSku = contains(provisionParameters, 'botServiceSku') ? provisionParameters['botServiceSku'] : 'F0' // Try to read SKU for Azure Bot Service from parameters
 var botDisplayName = contains(provisionParameters, 'botDisplayName') ? provisionParameters['botDisplayName'] : '${resourceBaseName}' // Try to read display name for Azure Bot Service from parameters
@@ -19,11 +22,20 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   properties: {
     displayName: botDisplayName
     endpoint: uri('https://${webApp.properties.defaultHostName}', '/api/messages')
-    msaAppId: botAadAppClientId
+    msaAppId: identityClientId
+    msaAppMSIResourceId: identityResourceId
+    msaAppTenantId:identityTenantId
+    msaAppType:'UserAssignedMSI'
   }
   sku: {
     name: botServiceSku // You can follow https://aka.ms/teamsfx-bicep-add-param-tutorial to add botServiceSku property to provisionParameters to override the default value "F0".
   }
+}
+
+// Managed Identity resource
+resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  location: resourceGroup().location
+  name: identityName
 }
 
 // Connect the bot service to Microsoft Teams
@@ -78,6 +90,8 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
 output botWebAppSKU string = webAppSKU
 output botWebAppName string = webAppName
 output botDomain string = webApp.properties.defaultHostName
+output BOT_ID string = identity.properties.clientId
+output BOT_TENANT_ID string = identity.properties.tenantId
 output appServicePlanName string = serverfarmsName
 output botServiceName string = botServiceName
 output botWebAppResourceId string = webApp.id

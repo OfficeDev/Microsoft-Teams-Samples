@@ -5,9 +5,6 @@
       "resourceBaseName": {
         "value": "bot${{RESOURCE_SUFFIX}}"
       },
-      "botAadAppClientId": {
-        "value": "${{AAD_APP_CLIENT_ID}}"
-      },
       "botAppDomain": {
         "value": "${{BOT_DOMAIN}}"
       },
