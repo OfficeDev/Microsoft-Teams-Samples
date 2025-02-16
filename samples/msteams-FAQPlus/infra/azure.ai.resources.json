@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "searchServices_name": {
+            "defaultValue": "faqbot-search",
+            "type": "string"
+        },
+        "accounts_azure_openai_name": {
+            "defaultValue": "faqbot-cognitive",
+            "type": "string"
+        },
+        "location":{
+            "defaultValue": "west us",
+            "type": "string"
+        },
+        "capacity":{
+            "defaultValue": 50,
+            "type": "int"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2024-04-01-preview",
+            "name": "[parameters('accounts_azure_openai_name')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "S0"
+            },
+            "kind": "OpenAI",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Search/searchServices",
+            "apiVersion": "2024-03-01-preview",
+            "name": "[parameters('searchServices_name')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "standard"
+            },
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts/deployments",
+            "apiVersion": "2024-04-01-preview",
+            "name": "[concat(parameters('accounts_azure_openai_name'), '/gpt-4o')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('accounts_azure_openai_name'))]"
+            ],
+            "sku": {
+                "name": "Standard",
+                "capacity": "[parameters('capacity')]"
+            },
+            "properties": {
+                "model": {
+                    "format": "OpenAI",
+                    "name": "gpt-4o",
+                    "version": "2024-05-13"
+                },
+                "versionUpgradeOption": "OnceCurrentVersionExpired",
+                "currentCapacity": 150,
+                "raiPolicyName": "Microsoft.Default"
+            }
+        }
+    ]
+}
