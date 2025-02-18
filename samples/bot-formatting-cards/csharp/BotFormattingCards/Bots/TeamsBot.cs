@@ -14,7 +14,7 @@ namespace Microsoft.BotBuilderSamples
 {
 
     /// <summary>
-    /// RichCardsBot prompts a user to select a Rich Card and then returns the card
+    /// TeamsBot prompts a user to select a Rich Card and then returns the card
     /// that matches the user's selection.
     /// </summary>
     public class TeamsBot : DialogBot<MainDialog>
@@ -39,10 +39,7 @@ namespace Microsoft.BotBuilderSamples
                 // To learn more about Adaptive Cards, see https://aka.ms/msbot-adaptivecards for more details.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    var reply = MessageFactory.Text("Welcome to Adaptive Card Format."
-                        + " This bot will introduce you to different types of formats."
-                        + " Please type anything to get started.");
-
+                    var reply = MessageFactory.Text("Welcome to Adaptive Card Format. This bot will introduce you to different types of formats. Please type anything to get started.");
                     await turnContext.SendActivityAsync(reply, cancellationToken);
                 }
             }
