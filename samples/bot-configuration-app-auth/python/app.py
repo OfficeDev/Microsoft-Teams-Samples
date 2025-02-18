@@ -27,10 +27,13 @@ CONFIG = DefaultConfig()
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
 
-
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
+    """
+    Handles errors that occur during bot processing.
+    Logs the error and sends a message to the user.
+    """
+    # This check writes out errors to console log vs. app insights.
     # NOTE: In production environment, you should consider logging this to Azure
     #       application insights.
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
@@ -55,7 +58,7 @@ async def on_error(context: TurnContext, error: Exception):
         # Send a trace activity, which will be displayed in Bot Framework Emulator
         await context.send_activity(trace_activity)
 
-
+# Set the error handler for the adapter
 ADAPTER.on_turn_error = on_error
 
 # If the channel is the Emulator, and authentication is not in use, the AppId will be null.
@@ -63,13 +66,16 @@ ADAPTER.on_turn_error = on_error
 # the AppId will have a value.
 APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 BASE_URL = CONFIG.BOT_ENDPOINT
+
 # Create the Bot
 BOT = TeamsBot()
 
-
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
+    """
+    Main bot message handler.
+    Processes incoming requests and sends responses.
+    """
     if "application/json" in req.headers["Content-Type"]:
         body = await req.json()
     else:
@@ -83,7 +89,7 @@ async def messages(req: Request) -> Response:
         return json_response(data=response.body, status=response.status)
     return Response(status=HTTPStatus.OK)
 
-
+# Create the web application and add the message handler route
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)
 
