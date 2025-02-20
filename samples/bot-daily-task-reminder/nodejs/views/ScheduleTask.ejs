@@ -30,7 +30,7 @@
          */
         function submit() {
             let isValid = true;
-            let checkboxArray = [];
+            const checkboxArray = [];
 
             // Validate input fields for task title, description, and date/time
             $('#taskTitle, #taskdatetime, #taskdescription').each(function () {
@@ -62,7 +62,7 @@
             });
 
             // Create task information object
-            let taskInfo = {
+            const taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: $('#taskdatetime').val(),
                 description: $('#taskdescription').val(),

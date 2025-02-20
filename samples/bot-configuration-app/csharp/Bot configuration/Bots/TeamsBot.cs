@@ -17,38 +17,44 @@ using System.IO;
 
 namespace Botconfiguration.Bots
 {
+    /// <summary>
+    /// TeamsBot handles Teams-specific activities.
+    /// </summary>
     public class TeamsBot : TeamsActivityHandler
     {
-        private string _chosenFlow = "";
+        private string chosenFlow = "";
 
+        /// <summary>
+        /// Handles members added to the conversation.
+        /// </summary>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var imagePath = "Images/configbutton.png";
             var imageData = Convert.ToBase64String(File.ReadAllBytes(imagePath));
 
-            var adaptiveCardJson = @"
-            {
-                ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                ""type"": ""AdaptiveCard"",
-                ""version"": ""1.0"",
-                ""body"": [
-                            {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card."",
-                                ""wrap"": true,
-                                ""size"": ""large"",
-                                ""weight"": ""bolder""
-                            },
-                            {
-                                ""type"": ""Image"",
-                                ""url"": ""data:image/png;base64," + imageData + @""",
-                                ""size"": ""auto""
-                            }
-                          ],
-                ""fallbackText"": ""This card requires Adaptive Card support.""
-            }";
+            var adaptiveCardJson = $@"
+                {{
+                    ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
+                    ""type"": ""AdaptiveCard"",
+                    ""version"": ""1.0"",
+                    ""body"": [
+                        {{
+                            ""type"": ""TextBlock"",
+                            ""text"": ""Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card."",
+                            ""wrap"": true,
+                            ""size"": ""large"",
+                            ""weight"": ""bolder""
+                        }},
+                        {{
+                            ""type"": ""Image"",
+                            ""url"": ""data:image/png;base64,{imageData}"",
+                            ""size"": ""auto""
+                        }}
+                    ],
+                    ""fallbackText"": ""This card requires Adaptive Card support.""
+                }}";
 
-            var attachment = new Microsoft.Bot.Schema.Attachment()
+            var attachment = new Attachment
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson)
@@ -58,170 +64,55 @@ namespace Botconfiguration.Bots
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        /// <summary>
+        /// Handles message activities.
+        /// </summary>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Text != null)
             {
-                string text = turnContext.Activity.Text.ToLower().Trim();
+                var text = turnContext.Activity.Text.ToLower().Trim();
                 if (text == "chosen flow" || text == "<at>typeahead search adaptive card</at> chosen flow")
                 {
-                    await turnContext.SendActivityAsync($"Bot configured for {_chosenFlow} flow", cancellationToken: cancellationToken);
+                    await turnContext.SendActivityAsync($"Bot configured for {chosenFlow} flow", cancellationToken: cancellationToken);
                 }
             }
             else if (turnContext.Activity.Value != null)
             {
-                var choiceselect = turnContext.Activity.Value;
-                await turnContext.SendActivityAsync($"Selected option is: {choiceselect}", cancellationToken: cancellationToken);
+                var choiceSelect = turnContext.Activity.Value;
+                await turnContext.SendActivityAsync($"Selected option is: {choiceSelect}", cancellationToken: cancellationToken);
             }
         }
 
+        /// <summary>
+        /// Handles configuration fetch requests.
+        /// </summary>
         protected override Task<ConfigResponseBase> OnTeamsConfigFetchAsync(ITurnContext<IInvokeActivity> turnContext, JObject configData, CancellationToken cancellationToken)
         {
-            ConfigResponseBase response = adaptiveCardForContinue();
+            var response = CreateAdaptiveCardForContinue();
             return Task.FromResult(response);
         }
 
-        protected override Task<ConfigResponseBase> OnTeamsConfigSubmitAsync(ITurnContext<IInvokeActivity> turnContext, JObject configData, CancellationToken cancellationToken)
+        /// <summary>
+        /// Handles configuration submit requests.
+        /// </summary>
+        protected override async Task<ConfigResponseBase> OnTeamsConfigSubmitAsync(ITurnContext<IInvokeActivity> turnContext, JObject configData, CancellationToken cancellationToken)
         {
             try
             {
-                JObject data = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
+                var data = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
+                var card = CreateAdaptiveCardFromData(data);
 
-                string dropdown01Value = data["data"]?["dropdown01"].ToString();
-                string dropdown02Value = data["data"]?["dropdown02"]?.ToString();
-                string dropdown1Value = data["data"]?["dropdown1"]?.ToString();
-                string dropdown2Value = data["data"]?["dropdown2"]?.ToString();
-                string dropdown3Value = data["data"]?["dropdown3"]?.ToString();
-                string dropdown4Value = data["data"]?["dropdown4"]?.ToString();
-                string togglestatus = data["data"]?["togglestatus"]?.ToString();
-                string toggleAssign = data["data"]?["toggleAssign"]?.ToString();
-                string toggleComment = data["data"]?["toggleComment"]?.ToString();
-                string toggleTransition = data["data"]?["toggleTransition"]?.ToString();
-
-
-                AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0))
-                {
-                    Body = new List<AdaptiveElement>()
-                    {
-                        new AdaptiveTextBlock()
-                        {
-                            Text = "The selection you requested is as follows:",
-                            Weight = AdaptiveTextWeight.Bolder,
-                            Type = "TextBlock",
-                            Wrap = true
-                        }
-                    }
-                };
-
-                if (!string.IsNullOrEmpty(dropdown01Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Type : " + dropdown01Value,
-                        Wrap = true
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(dropdown02Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Priority : " + dropdown02Value,
-                        Wrap = true
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(dropdown1Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Issue : " + dropdown1Value,
-                        Wrap = true
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(dropdown2Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Comment : " + dropdown2Value,
-                        Wrap = true
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(dropdown3Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Assignee : " + dropdown3Value,
-                        Wrap = true
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(dropdown4Value))
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Status : " + dropdown4Value,
-                        Wrap = true
-                    });
-                }
-
-                card.Body.Add(new AdaptiveTextBlock()
-                {
-                    Text = "Actions to be displayed:",
-                    Weight = AdaptiveTextWeight.Bolder,
-                    Type = "TextBlock"
-                });
-
-                if (togglestatus == "True")
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Status : " + togglestatus,
-                        Wrap = true
-                    });
-                }
-
-                if (toggleAssign == "True")
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Assign : " + toggleAssign,
-                        Wrap = true
-                    });
-                }
-
-                if (toggleComment == "True")
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Comment : " + toggleComment,
-                        Wrap = true
-                    });
-                }
-
-                if (toggleTransition=="True")
-                {
-                    card.Body.Add(new AdaptiveTextBlock()
-                    {
-                        Text = "Transition : " + toggleTransition,
-                        Wrap = true
-                    });
-                }
-
-                string json = JsonConvert.SerializeObject(card);
-
-                var attachment = new Microsoft.Bot.Schema.Attachment()
+                var attachment = new Attachment
                 {
                     ContentType = "application/vnd.microsoft.card.adaptive",
-                    Content = JsonConvert.DeserializeObject(json)
+                    Content = card
                 };
 
                 var reply = MessageFactory.Attachment(attachment);
-                turnContext.SendActivityAsync(reply, cancellationToken);
+                await turnContext.SendActivityAsync(reply, cancellationToken);
 
-                ConfigResponseBase response = new ConfigResponse<TaskModuleResponseBase>
+                var response = new ConfigResponse<TaskModuleResponseBase>
                 {
                     Config = new TaskModuleMessageResponse
                     {
@@ -230,7 +121,7 @@ namespace Botconfiguration.Bots
                     }
                 };
 
-                return Task.FromResult(response);
+                return response;
             }
             catch (Exception ex)
             {
@@ -239,315 +130,125 @@ namespace Botconfiguration.Bots
             }
         }
 
-        private ConfigResponseBase adaptiveCardForContinue()
+        /// <summary>
+        /// Creates an adaptive card for the continue response.
+        /// </summary>
+        private ConfigResponseBase CreateAdaptiveCardForContinue()
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 4))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 4))
             {
-                Body = new List<AdaptiveElement>()
-                {
-                    new AdaptiveColumnSet()
+                Body = new List<AdaptiveElement>
                     {
-                        Columns = new List<AdaptiveColumn>()
+                        new AdaptiveColumnSet
                         {
-                            new AdaptiveColumn()
+                            Columns = new List<AdaptiveColumn>
                             {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
+                                new AdaptiveColumn
                                 {
-                                    new AdaptiveTextBlock()
+                                    Width = "stretch",
+                                    Items = new List<AdaptiveElement>
                                     {
-                                        Text = "For issues that match these criteria:",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
-                        {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Type",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown01",
-                                        Choices = new List<AdaptiveChoice>()
+                                        new AdaptiveTextBlock
                                         {
-                                            new AdaptiveChoice() { Title = "Bug", Value = "Bug" },
-                                            new AdaptiveChoice() { Title = "Feature Request", Value = "Feature Request" },
-                                            new AdaptiveChoice() { Title = "Task", Value = "Task" }
-                                        }
-                                    }
-                                }
-                            },
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Priority",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown02",
-                                        Choices = new List<AdaptiveChoice>()
-                                        {
-                                            new AdaptiveChoice() { Title = "Low", Value = "Low" },
-                                            new AdaptiveChoice() { Title = "Medium", Value = "Medium" },
-                                            new AdaptiveChoice() { Title = "High", Value = "High" }
+                                            Text = "For issues that match these criteria:",
+                                            Weight = AdaptiveTextWeight.Bolder,
+                                            Type = "TextBlock"
                                         }
                                     }
                                 }
                             }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
+                        },
+                        CreateDropdownColumnSet("Type", "dropdown01", new List<AdaptiveChoice>
                         {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Post to channel when :",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
+                            new AdaptiveChoice { Title = "Bug", Value = "Bug" },
+                            new AdaptiveChoice { Title = "Feature Request", Value = "Feature Request" },
+                            new AdaptiveChoice { Title = "Task", Value = "Task" }
+                        }),
+                        CreateDropdownColumnSet("Priority", "dropdown02", new List<AdaptiveChoice>
                         {
-                            new AdaptiveColumn()
+                            new AdaptiveChoice { Title = "Low", Value = "Low" },
+                            new AdaptiveChoice { Title = "Medium", Value = "Medium" },
+                            new AdaptiveChoice { Title = "High", Value = "High" }
+                        }),
+                        new AdaptiveColumnSet
+                        {
+                            Columns = new List<AdaptiveColumn>
                             {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
+                                new AdaptiveColumn
                                 {
-                                    new AdaptiveTextBlock()
+                                    Width = "stretch",
+                                    Items = new List<AdaptiveElement>
                                     {
-                                        Text = "Issue",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown1",
-                                        IsMultiSelect = true,
-                                        Choices = new List<AdaptiveChoice>()
+                                        new AdaptiveTextBlock
                                         {
-                                            new AdaptiveChoice() { Title = "Software Issue", Value = "Software Issue" },
-                                            new AdaptiveChoice() { Title = "Server Issue", Value = "Server Issue" },
-                                            new AdaptiveChoice() { Title = "Network Issue", Value = "Network Issue" }
-                                        }
-                                    }
-                                }
-                            },
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Comment",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown2",
-                                        Choices = new List<AdaptiveChoice>()
-                                        {
-                                            new AdaptiveChoice() { Title = "Network problem in server", Value = "Network problem in server" },
-                                            new AdaptiveChoice() { Title = "Loadbalancer issue", Value = "Loadbalancer issue" },
-                                            new AdaptiveChoice() { Title = "Software needs to be updated", Value = "Software needs to be updated" }
+                                            Text = "Post to channel when :",
+                                            Weight = AdaptiveTextWeight.Bolder,
+                                            Type = "TextBlock"
                                         }
                                     }
                                 }
                             }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
+                        },
+                        CreateDropdownColumnSet("Issue", "dropdown1", new List<AdaptiveChoice>
                         {
-                            new AdaptiveColumn()
+                            new AdaptiveChoice { Title = "Software Issue", Value = "Software Issue" },
+                            new AdaptiveChoice { Title = "Server Issue", Value = "Server Issue" },
+                            new AdaptiveChoice { Title = "Network Issue", Value = "Network Issue" }
+                        }, true),
+                        CreateDropdownColumnSet("Comment", "dropdown2", new List<AdaptiveChoice>
+                        {
+                            new AdaptiveChoice { Title = "Network problem in server", Value = "Network problem in server" },
+                            new AdaptiveChoice { Title = "Loadbalancer issue", Value = "Loadbalancer issue" },
+                            new AdaptiveChoice { Title = "Software needs to be updated", Value = "Software needs to be updated" }
+                        }),
+                        CreateDropdownColumnSet("Assignee", "dropdown3", new List<AdaptiveChoice>
+                        {
+                            new AdaptiveChoice { Title = "Jasmine Smith", Value = "Jasmine Smith" },
+                            new AdaptiveChoice { Title = "Ethan Johnson", Value = "Ethan Johnson" },
+                            new AdaptiveChoice { Title = "Maya Rodriguez", Value = "Maya Rodriguez" }
+                        }),
+                        CreateDropdownColumnSet("Status changed", "dropdown4", new List<AdaptiveChoice>
+                        {
+                            new AdaptiveChoice { Title = "Open", Value = "Open" },
+                            new AdaptiveChoice { Title = "Inprogress", Value = "Inprogress" },
+                            new AdaptiveChoice { Title = "Completed", Value = "Completed" }
+                        }),
+                        new AdaptiveColumnSet
+                        {
+                            Columns = new List<AdaptiveColumn>
                             {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
+                                new AdaptiveColumn
                                 {
-                                    new AdaptiveTextBlock()
+                                    Width = "stretch",
+                                    Items = new List<AdaptiveElement>
                                     {
-                                        Text = "Assignee",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown3",
-                                        Choices = new List<AdaptiveChoice>()
+                                        new AdaptiveTextBlock
                                         {
-                                            new AdaptiveChoice() { Title = "Jasmine Smith", Value = "Jasmine Smith" },
-                                            new AdaptiveChoice() { Title = "Ethan Johnson", Value = "Ethan Johnson" },
-                                            new AdaptiveChoice() { Title = "Maya Rodriguez", Value = "Maya Rodriguez" }
-                                        }
-                                    }
-                                }
-                            },
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Status changed",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    },
-                                    new AdaptiveChoiceSetInput()
-                                    {
-                                        Id = "dropdown4",
-                                        Choices = new List<AdaptiveChoice>()
-                                        {
-                                            new AdaptiveChoice() { Title = "Open", Value = "Open" },
-                                            new AdaptiveChoice() { Title = "Inprogress", Value = "Inprogress" },
-                                            new AdaptiveChoice() { Title = "Completed", Value = "Completed" }
+                                            Text = "Actions to display",
+                                            Weight = AdaptiveTextWeight.Bolder,
+                                            Type = "TextBlock"
                                         }
                                     }
                                 }
                             }
-                        }
+                        },
+                        CreateToggleColumnSet("Assign", "toggleAssign"),
+                        CreateToggleColumnSet("Comment", "toggleComment"),
+                        CreateToggleColumnSet("Transition", "toggleTransition"),
+                        CreateToggleColumnSet("Update status", "toggleStatus")
                     },
-                    new AdaptiveColumnSet()
+                Actions = new List<AdaptiveAction>
                     {
-                        Columns = new List<AdaptiveColumn>()
+                        new AdaptiveSubmitAction
                         {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveTextBlock()
-                                    {
-                                        Text = "Actions to display",
-                                        Weight = AdaptiveTextWeight.Bolder,
-                                        Type = "TextBlock"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
-                        {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveToggleInput()
-                                    {
-                                        Title = "Assign",
-                                        Id = "toggleAssign",
-                                        Value = "false"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
-                        {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveToggleInput()
-                                    {
-                                        Title = "Comment",
-                                        Id = "toggleComment",
-                                        Value = "false"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
-                        {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveToggleInput()
-                                    {
-                                        Title = "Transition",
-                                        Id = "toggleTransition",
-                                        Value = "false"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    new AdaptiveColumnSet()
-                    {
-                        Columns = new List<AdaptiveColumn>()
-                        {
-                            new AdaptiveColumn()
-                            {
-                                Width = "stretch",
-                                Items = new List<AdaptiveElement>()
-                                {
-                                    new AdaptiveToggleInput()
-                                    {
-                                        Title = "Update status",
-                                        Id = "togglestatus",
-                                        Value = "false"
-                                    }
-                                }
-                            }
+                            Type = AdaptiveSubmitAction.TypeName,
+                            Id = "submit",
+                            Title = "Submit"
                         }
                     }
-                },
-                Actions = new List<AdaptiveAction>()
-                {
-                    new AdaptiveSubmitAction()
-                    {
-                        Type = AdaptiveSubmitAction.TypeName,
-                        Id = "submit",
-                        Title = "Submit"
-                    }
-                }
             };
 
-            ConfigResponseBase response = new ConfigResponse<TaskModuleResponseBase>
+            var response = new ConfigResponse<TaskModuleResponseBase>
             {
                 Config = new TaskModuleContinueResponse
                 {
@@ -556,7 +257,7 @@ namespace Botconfiguration.Bots
                         Height = 500,
                         Width = 600,
                         Title = "Task module fetch response",
-                        Card = new Microsoft.Bot.Schema.Attachment
+                        Card = new Attachment
                         {
                             ContentType = AdaptiveCard.ContentType,
                             Content = card
@@ -567,6 +268,135 @@ namespace Botconfiguration.Bots
             };
 
             return response;
+        }
+
+        /// <summary>
+        /// Creates an adaptive card from the provided data.
+        /// </summary>
+        private AdaptiveCard CreateAdaptiveCardFromData(JObject data)
+        {
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0))
+            {
+                Body = new List<AdaptiveElement>
+                    {
+                        new AdaptiveTextBlock
+                        {
+                            Text = "The selection you requested is as follows:",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Type = "TextBlock",
+                            Wrap = true
+                        }
+                    }
+            };
+
+            AddTextBlockIfNotEmpty(card, "Type", data["data"]?["dropdown01"]?.ToString());
+            AddTextBlockIfNotEmpty(card, "Priority", data["data"]?["dropdown02"]?.ToString());
+            AddTextBlockIfNotEmpty(card, "Issue", data["data"]?["dropdown1"]?.ToString());
+            AddTextBlockIfNotEmpty(card, "Comment", data["data"]?["dropdown2"]?.ToString());
+            AddTextBlockIfNotEmpty(card, "Assignee", data["data"]?["dropdown3"]?.ToString());
+            AddTextBlockIfNotEmpty(card, "Status", data["data"]?["dropdown4"]?.ToString());
+
+            card.Body.Add(new AdaptiveTextBlock
+            {
+                Text = "Actions to be displayed:",
+                Weight = AdaptiveTextWeight.Bolder,
+                Type = "TextBlock"
+            });
+
+            AddTextBlockIfTrue(card, "Status", data["data"]?["toggleStatus"]?.ToString());
+            AddTextBlockIfTrue(card, "Assign", data["data"]?["toggleAssign"]?.ToString());
+            AddTextBlockIfTrue(card, "Comment", data["data"]?["toggleComment"]?.ToString());
+            AddTextBlockIfTrue(card, "Transition", data["data"]?["toggleTransition"]?.ToString());
+
+            return card;
+        }
+
+        /// <summary>
+        /// Adds a text block to the card if the value is not empty.
+        /// </summary>
+        private void AddTextBlockIfNotEmpty(AdaptiveCard card, string label, string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                card.Body.Add(new AdaptiveTextBlock
+                {
+                    Text = $"{label} : {value}",
+                    Wrap = true
+                });
+            }
+        }
+
+        /// <summary>
+        /// Adds a text block to the card if the value is "True".
+        /// </summary>
+        private void AddTextBlockIfTrue(AdaptiveCard card, string label, string value)
+        {
+            if (value == "True")
+            {
+                card.Body.Add(new AdaptiveTextBlock
+                {
+                    Text = $"{label} : {value}",
+                    Wrap = true
+                });
+            }
+        }
+
+        /// <summary>
+        /// Creates a dropdown column set.
+        /// </summary>
+        private AdaptiveColumnSet CreateDropdownColumnSet(string label, string id, List<AdaptiveChoice> choices, bool isMultiSelect = false)
+        {
+            return new AdaptiveColumnSet
+            {
+                Columns = new List<AdaptiveColumn>
+                    {
+                        new AdaptiveColumn
+                        {
+                            Width = "stretch",
+                            Items = new List<AdaptiveElement>
+                            {
+                                new AdaptiveTextBlock
+                                {
+                                    Text = label,
+                                    Weight = AdaptiveTextWeight.Bolder,
+                                    Type = "TextBlock"
+                                },
+                                new AdaptiveChoiceSetInput
+                                {
+                                    Id = id,
+                                    Choices = choices,
+                                    IsMultiSelect = isMultiSelect
+                                }
+                            }
+                        }
+                    }
+            };
+        }
+
+        /// <summary>
+        /// Creates a toggle column set.
+        /// </summary>
+        private AdaptiveColumnSet CreateToggleColumnSet(string title, string id)
+        {
+            return new AdaptiveColumnSet
+            {
+                Columns = new List<AdaptiveColumn>
+                    {
+                        new AdaptiveColumn
+                        {
+                            Width = "stretch",
+                            Items = new List<AdaptiveElement>
+                            {
+                                new AdaptiveToggleInput
+                                {
+                                    Title = title,
+                                    Id = id,
+                                    Value = "false"
+                                }
+                            }
+                        }
+                    }
+            };
         }
     }
 }
