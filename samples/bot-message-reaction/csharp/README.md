@@ -22,7 +22,7 @@ This sample app demonstrates the implementation of message reactions in Microsof
 * Adaptive Cards
 
 ## Interaction with bot
-![bot-message-reaction ](Images/bot-message-reaction.gif)
+![bot-message-reaction ](MessageReaction/Images/bot-message-reaction.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -84,11 +84,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1) If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-message-reaction/csharp` folder
-   - Select `MessageReaction.csproj` or `MessageReaction.sln`file
+   - Navigate to `samples/bot-message-reaction/csharp/MessageReaction` folder
+   - Select `MessageReaction.csproj` file
+   - Press `F5` to run the project 
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `appsettings.json` configuration for the bot to use the BOT_ID, BOT_PASSWORD, BOT_TENANT_ID generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set BOT_TYPE in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -107,21 +108,21 @@ Message the bot and it will respond with an 'Echo: [your message]'.  Add a messa
 
 - **Personal Scope Interactions:**
 
-![personalScope-AddApp ](Images/1.Install.png)
+![personalScope-AddApp ](MessageReaction/Images/1.Install.png)
 
-![personalScope-Interaction ](Images/2.PersonalChat.png)
+![personalScope-Interaction ](MessageReaction/Images/2.PersonalChat.png)
 
 - **Group Chat Scope Interactions:**
 
-![groupChat-AddApp ](Images/5.AddToGC.png)
+![groupChat-AddApp ](MessageReaction/Images/5.AddToGC.png)
 
-![groupChat-Interaction ](Images/6.GroupChat.png)
+![groupChat-Interaction ](MessageReaction/Images/6.GroupChat.png)
 
 - **Team Scope Interactions:**
 
-![teamScope-AddApp ](Images/3.AddToTeams.png)
+![teamScope-AddApp ](MessageReaction/Images/3.AddToTeams.png)
 
-![teamScope-Interaction ](Images/4.TeamsChat.png)
+![teamScope-Interaction ](MessageReaction/Images/4.TeamsChat.png)
 
 
 ## Deploy the bot to Azure
