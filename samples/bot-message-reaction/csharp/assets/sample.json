@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/csharp/Images/bot-message-reaction.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/csharp/MessageReaction/Images/bot-message-reaction.gif",
         "alt": "Solution UX showing how to use message reactions bot"
       }
     ],

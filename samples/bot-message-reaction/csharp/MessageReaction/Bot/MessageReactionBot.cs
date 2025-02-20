@@ -1,15 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using MessageReaction.Log;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 
-namespace Microsoft.BotBuilderSamples.Bots
+namespace MessageReaction.Bot
 {
-    public class MessageReactionBot : ActivityHandler
+    public class MessageReactionBot : TeamsActivityHandler
     {
         private readonly ActivityLog _log;
 
@@ -23,7 +19,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             await SendMessageAndLogActivityId(turnContext, $"echo: {turnContext.Activity.Text}", cancellationToken);
         }
 
-        protected override async Task OnReactionsAddedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        protected override async Task OnReactionsAddedAsync(IList<Microsoft.Bot.Schema.MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var reaction in messageReactions)
             {
@@ -41,7 +37,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
-        protected override async Task OnReactionsRemovedAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        protected override async Task OnReactionsRemovedAsync(IList<Microsoft.Bot.Schema.MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var reaction in messageReactions)
             {
@@ -68,3 +64,4 @@ namespace Microsoft.BotBuilderSamples.Bots
         }
     }
 }
+
