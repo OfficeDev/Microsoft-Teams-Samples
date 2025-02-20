@@ -5,11 +5,8 @@
       "resourceBaseName": {
         "value": "bot${{RESOURCE_SUFFIX}}"
       },
-      "botAadAppClientId": {
-        "value": "${{AAD_APP_CLIENT_ID}}"
-      },
-      "botAppDomain": {
-        "value": "${{BOT_DOMAIN}}"
+      "webAppSKU": {
+        "value": "B1"
       },
       "botDisplayName": {
         "value": "TeamsConversationBot"
