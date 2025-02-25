@@ -5,7 +5,7 @@ products:
 - office-teams
 - office
 - office-365
-languages:
+lanGauges:
 - python
 extensions:
  contentType: samples
@@ -279,9 +279,9 @@ the Teams service needs to call into the bot.
 
 ![Donut_Card](Images/23.Donut_Card.png)
 
-**Guage Chart :**
+**Gauge Chart :**
 
-![GuageChart_Card](Images/24.GuageChart_Card.png)
+![GaugeChart_Card](Images/24.GaugeChart_Card.png)
 
 **Horizontal Chart :**
 

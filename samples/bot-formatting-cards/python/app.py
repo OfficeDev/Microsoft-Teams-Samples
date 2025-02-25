@@ -27,7 +27,7 @@ ADAPTER = BotFrameworkAdapter(SETTINGS)
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
+    # This check writes out errors to console log vs. app insights.
     # NOTE: In production environment, you should consider logging this to Azure
     #       application insights.
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
