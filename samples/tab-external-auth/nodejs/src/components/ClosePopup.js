@@ -10,9 +10,14 @@ class ClosePopup extends React.Component {
     componentDidMount() {
         const params = new URLSearchParams(window.location.search);
         const result = params.get('code');
-        const { authId, method } = JSON.parse(params.get('state'));
+        const { authId, method, hostRedirectUrl } = JSON.parse(params.get('state'));
+        alert(`ClosePopup-authId: ${authId}, result: ${result}, hostRedirectUrl: ${hostRedirectUrl}`);
+
+        // Extract base URL before "?"
+        const baseUrl = hostRedirectUrl.split('?')[0];
+
         if (method === 'deeplink') {
-            window.location.href = `msteams://teams.microsoft.com/l/auth-callback?authId=${authId}&result=${result}`
+            window.location.href = `${baseUrl}?authId=${authId}&result=${result}`
         } else {
             alert("failed");
         }
