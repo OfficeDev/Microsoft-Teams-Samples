@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Details</title>
+    <script>
+        async function fetchMeetingDetails() {
+            try {
+                let response = await fetch("/meeting-details");
+                let data = await response.json();
+                document.getElementById("meeting-info").innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById("meeting-info").innerText = "Error fetching meeting details: " + error;
+            }
+        }
+        window.onload = fetchMeetingDetails;
+    </script>
+</head>
+<body>
+    <h1>Meeting Details</h1>
+    <pre id="meeting-info">Loading...</pre>
+</body>
+</html>
