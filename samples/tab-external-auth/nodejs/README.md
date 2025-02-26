@@ -7,7 +7,7 @@ This sample API server is designed to exchange access tokens provided by Microso
 
 ## Setup
 
-1. Create Google Ouath app [Google API Console](https://console.developers.google.com/)
+1. Create Google OAuth app [Google API Console](https://console.developers.google.com/)
  
  - Create project
  ![oauthapp5](Images/oauthapp5.png)
@@ -27,10 +27,10 @@ This sample API server is designed to exchange access tokens provided by Microso
  - For authorized javascript url, give your app's base url
  ![oauthapp3](Images/oauthapp3.png)
 
- - For redirect url, give url in below format `https://<<base-url>>/auth-end` where `base-url` is your application's base url. For eg,
+ - For redirect url, give the URL in the format below `https://<<base-url>>/auth-end` where `base-url` is your application's base url. For eg,
  ![oauthapp4](Images/oauthapp4.png)
 
- - Once the app is created, copy the client id and client seret
+ - Once the app is created, copy the client id and client secret
  ![oauthapp2](Images/oauthapp2.png)
 
   - OAuth Created

@@ -38,7 +38,7 @@ This Microsoft Teams sample app illustrates the implementation of Google authent
 
 ## Setup
 
-1. Create Google Ouath app [Google API Console](https://console.developers.google.com/)
+1. Create Google OAuth app [Google API Console](https://console.developers.google.com/)
  - Create project
   ![oauthapp5](Images/oauthapp5.png)
  
@@ -54,13 +54,13 @@ This Microsoft Teams sample app illustrates the implementation of Google authent
   - Select application type as `Web application` and give a suitable app name
   ![oauthapp3](Images/oauthapp3.png)
  
-  - For authorized javascript url, give your app's base url
+  - For authorized javascript url, provide your app's base URL
   ![oauthapp3](Images/oauthapp3.png)
  
   - For redirect url, give url in below format `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
   ![oauthapp4](Images/oauthapp4.png)
  
-  - Once the app is created, copy the client id and client seret
+  - Once the app is created, copy the client id and client secret
   ![oauthapp2](Images/oauthapp2.png)
  
    - OAuth Created
