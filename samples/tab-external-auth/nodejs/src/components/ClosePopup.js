@@ -11,9 +11,9 @@ class ClosePopup extends React.Component {
         const params = new URLSearchParams(window.location.search);
         const result = params.get('code');
         const { authId, method, hostRedirectUrl } = JSON.parse(params.get('state'));
-        const baseUrl = hostRedirectUrl.split('?')[0];
+        const baseUrl = hostRedirectUrl.split('authId')[0];
         if (method === 'deeplink') {
-            window.location.href = `${baseUrl}?authId=${authId}&result=${result}`
+            window.location.href = `${baseUrl}authId=${authId}&result=${result}`
         } else {
             alert("failed");
         }

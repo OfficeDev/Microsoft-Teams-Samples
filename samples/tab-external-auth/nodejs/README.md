@@ -77,13 +77,44 @@ In the root directory, execute:
 
 ## Running the sample
 
-### Google OAuth 2.0
+**Note:** Supported on Teams, Outlook, and Office for Desktop, as well as Outlook and Office for Mobile.
+Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
+
+## Google OAuth 2.0 -Teams desktop
 
 ![tab-page](Images/tab.png)
 
 ![redirect-page](Images/redirect-page.png)
 
 ![tab-auth-page](Images/tab1.png)
+
+## Outlook on the desktop
+
+- To view your app in Outlook on the desktop.
+
+![OutlookDesktop1](Images/OutlookDesktop1.png)
+
+![OutlookDesktop2](Images/OutlookDesktop2.png)
+
+![OutlookDesktop3](Images/OutlookDesktop3.png)
+
+![OutlookDesktop4](Images/OutlookDesktop4.png)
+
+## Office on the desktop
+
+- To preview your app running in Office on the desktop.
+
+![officeDesktop1](Images/officeDesktop1.png)
+
+![officeDesktop2](Images/officeDesktop2.png)
+
+![officeDesktop3](Images/officeDesktop3.png)
+
+![officeDesktop4](Images/officeDesktop4.png)
+
+![officeDesktop5](Images/officeDesktop5.png)
+
+![officeDesktop6](Images/officeDesktop6.png)
 
 ## Outlook on the mobile
 
@@ -100,8 +131,6 @@ In the root directory, execute:
 **Click get Details**
 
 ![outlook3](Images/outlook3.jpg)
-
-**Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
 ## Office on the mobile
 
