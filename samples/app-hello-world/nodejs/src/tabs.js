@@ -1,26 +1,28 @@
 import send from 'send';
 
+/**
+ * Sets up routes for handling the tabs and their content in the application.
+ * 
+ * @param {Object} server - The Restify server instance.
+ */
 export default function tabs(server) {
-    // Setup home page
-    server.get('/', (req, res, next) => {
-        send(req, 'src/views/hello.html').pipe(res);
-    });
+    // Helper function to streamline serving static HTML files.
+    const serveHtml = (filePath, req, res, next) => {
+        send(req, filePath).pipe(res).on('error', next);  // Handle errors in the send pipe.
+    };
 
-    // Setup the static tab
-    server.get('/hello', (req, res, next) => {
-        send(req, 'src/views/hello.html').pipe(res);
-    });
+    // Setup home page route.
+    server.get('/', (req, res, next) => serveHtml('src/views/hello.html', req, res, next));
 
-    // Setup the configure tab, with first and second as content tabs
-    server.get('/configure', (req, res, next) => {
-        send(req, 'src/views/configure.html').pipe(res);
-    });
+    // Setup the static tab route.
+    server.get('/hello', (req, res, next) => serveHtml('src/views/hello.html', req, res, next));
 
-    server.get('/first', (req, res, next) => {
-        send(req, 'src/views/first.html').pipe(res);
-    });
+    // Setup the configure tab route.
+    server.get('/configure', (req, res, next) => serveHtml('src/views/configure.html', req, res, next));
 
-    server.get('/second', (req, res, next) => {
-        send(req, 'src/views/second.html').pipe(res);
-    });
+    // Setup content tab with separate 'First' view.
+    server.get('/first', (req, res, next) => serveHtml('src/views/first.html', req, res, next));
+
+    // Setup content tab with separate 'second' view.
+    server.get('/second', (req, res, next) => serveHtml('src/views/second.html', req, res, next));
 }

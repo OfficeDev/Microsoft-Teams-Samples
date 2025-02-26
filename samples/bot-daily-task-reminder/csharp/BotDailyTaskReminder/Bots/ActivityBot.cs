@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-// Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
 using System;
 using System.Collections.Concurrent;
@@ -19,7 +18,7 @@ using Newtonsoft.Json.Linq;
 namespace BotDailyTaskReminder.Bots
 {
     /// <summary>
-    /// Bot Activity handler class.
+    /// Handles incoming bot activities such as messages, task module fetch, and task module submission.
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
@@ -28,10 +27,12 @@ namespace BotDailyTaskReminder.Bots
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
         private readonly ConcurrentDictionary<string, List<SaveTaskDetail>> _taskDetails;
 
-        public ActivityBot(IConfiguration configuration, 
-            ConversationState conversationState, 
-            ConcurrentDictionary<string, 
-            ConversationReference> conversationReferences, 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActivityBot"/> class.
+        /// </summary>
+        public ActivityBot(IConfiguration configuration,
+            ConversationState conversationState,
+            ConcurrentDictionary<string, ConversationReference> conversationReferences,
             ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails)
         {
             _conversationReferences = conversationReferences;
@@ -41,60 +42,62 @@ namespace BotDailyTaskReminder.Bots
         }
 
         /// <summary>
-        /// Handle when a message is addressed to the bot.
+        /// Handles when a message is addressed to the bot.
         /// </summary>
-        /// <param name="turnContext">The turn context.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <param name="turnContext">The turn context of the message activity.</param>
+        /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Text.ToLower().Trim() == "create-reminder")
             {
+                // Adds the current conversation reference and sends the task scheduling adaptive card
                 AddConversationReference(turnContext.Activity as Activity);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
-            }           
+            }
         }
 
         /// <summary>
-        /// Handle request from bot.
+        /// Handles the completion of a turn, saving any state changes.
         /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <param name="turnContext">The context of the current turn.</param>
+        /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
 
-            // Save any state changes that might have occurred during the turn.
+            // Save any changes made to conversation state during this turn.
             await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
         /// <summary>
-        /// Invoked when bot (like a user) are added to the conversation.
+        /// Invoked when the bot is added to a conversation.
+        /// Sends a welcome message to new members.
         /// </summary>
-        /// <param name="membersAdded">A list of all the members added to the conversation.</param>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="membersAdded">The members added to the conversation.</param>
+        /// <param name="turnContext">The context of the current turn.</param>
+        /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in turnContext.Activity.MembersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a recurring task and get reminder on the scheduled time.(use command 'create-reminder')."), cancellationToken);
+                    // Sends a greeting message when a new user is added
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! Use the command 'create-reminder' to schedule a recurring task and receive reminders."), cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        /// Handle task module is fetch.
+        /// Handles task module fetch requests.
         /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
+        /// <param name="turnContext">The context of the turn.</param>
+        /// <param name="taskModuleRequest">The request payload for the task module.</param>
+        /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
+        /// <returns>The task module response to send back.</returns>
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -108,7 +111,7 @@ namespace BotDailyTaskReminder.Bots
                     Type = "continue",
                     Value = new TaskModuleTaskInfo()
                     {
-                        Url = _applicationBaseUrl + "/" + "ScheduleTask",
+                        Url = _applicationBaseUrl + "/ScheduleTask",
                         Height = 450,
                         Width = 450,
                         Title = "Schedule a task",
@@ -120,12 +123,12 @@ namespace BotDailyTaskReminder.Bots
         }
 
         /// <summary>
-        /// Handle task module is submit.
+        /// Handles task module submission requests.
         /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
+        /// <param name="turnContext">The context of the turn.</param>
+        /// <param name="taskModuleRequest">The request payload for the task module.</param>
+        /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
+        /// <returns>The task module response to send back.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -136,6 +139,7 @@ namespace BotDailyTaskReminder.Bots
             var selectedDays = selectedDaysObject.ToObject<DayOfWeek[]>();
             var date = dateTime.ToLocalTime();
 
+            // Prepare task details
             var recurringDays = string.Join(",", selectedDays);
             var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
@@ -149,7 +153,8 @@ namespace BotDailyTaskReminder.Bots
                 SelectedDays = selectedDays
             };
 
-            if(currentTaskList == null)
+            // Add the task to the task list
+            if (currentTaskList == null)
             {
                 taskList.Add(taskDetails);
                 _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
@@ -159,17 +164,21 @@ namespace BotDailyTaskReminder.Bots
                 currentTaskList.Add(taskDetails);
                 _taskDetails.AddOrUpdate("taskDetails", currentTaskList, (key, newValue) => currentTaskList);
             }
-            
+
+            // Schedule the task
             TaskScheduler taskSchedule = new TaskScheduler();
             taskSchedule.Start(date.Hour, date.Minute, _applicationBaseUrl, selectedDays);
+
+            // Send a success message to the user
             await turnContext.SendActivityAsync("Task submitted successfully, you will get a recurring reminder for the task at a scheduled time");
 
             return null;
         }
 
         /// <summary>
-        /// Sample Adaptive card for schedule task in button.
+        /// Creates and returns the adaptive card for scheduling a task.
         /// </summary>
+        /// <returns>The adaptive card as an attachment.</returns>
         private Attachment GetAdaptiveCardForTaskModule()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
@@ -208,9 +217,9 @@ namespace BotDailyTaskReminder.Bots
         }
 
         /// <summary>
-        /// Method to add conversation reference.
+        /// Adds a conversation reference for the current activity.
         /// </summary>
-        /// <param name="activity">Bot activity</param>
+        /// <param name="activity">The bot activity.</param>
         private void AddConversationReference(Activity activity)
         {
             var conversationReference = activity.GetConversationReference();

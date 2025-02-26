@@ -5,14 +5,14 @@
     await microsoftTeams.app.initialize();
 
     // Check the initial theme user chose and respect it
-    microsoftTeams.getContext(function (context) {
-        if (context && context.theme) {
+    microsoftTeams.getContext((context)=>{
+        if (context.theme) {
             setTheme(context.theme);
         }
     });
     
     // Handle theme changes
-    microsoftTeams.registerOnThemeChangeHandler(function (theme) {
+    microsoftTeams.registerOnThemeChangeHandler((theme) => {
         setTheme(theme);
     });
 
@@ -23,9 +23,12 @@
             contentUrl: createTabUrl(),
             entityId: createTabUrl(),
         });
-        configPromise.
-            then((result) => { saveEvent.notifySuccess() }).
-            catch((error) => { saveEvent.notifyFailure("failure message") });
+        configPromise.then(() => {
+             saveEvent.notifySuccess();
+             }).
+            catch((error) => {
+                 saveEvent.notifyFailure("failure message")
+         });
     });
 
     // Logic to let the user configure what they want to see in the tab being loaded

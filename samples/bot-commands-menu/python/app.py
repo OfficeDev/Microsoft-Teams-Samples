@@ -22,26 +22,21 @@ from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
+# Create bot adapter settings and bot adapter.
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
 
-
-# Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
-    # NOTE: In production environment, you should consider logging this to Azure
-    #       application insights.
+    """Handles errors encountered during bot operation."""
+    # Log error details for debugging.
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
     traceback.print_exc()
 
-    # Send a message to the user
+    # Inform the user about the error in the bot.
     await context.send_activity("The bot encountered an error or bug.")
-    await context.send_activity(
-        "To continue to run this bot, please fix the bot source code."
-    )
-    # Send a trace activity if we're talking to the Bot Framework Emulator
+    await context.send_activity("To continue running this bot, please fix the source code.")
+
+    # Send detailed trace activity if running in Bot Framework Emulator.
     if context.activity.channel_id == "emulator":
         # Create a trace activity that contains the error object
         trace_activity = Activity(
@@ -52,43 +47,42 @@ async def on_error(context: TurnContext, error: Exception):
             value=f"{error}",
             value_type="https://www.botframework.com/schemas/error",
         )
-        # Send a trace activity, which will be displayed in Bot Framework Emulator
         await context.send_activity(trace_activity)
 
-
+# Set up error handling for the adapter.
 ADAPTER.on_turn_error = on_error
 
-# If the channel is the Emulator, and authentication is not in use, the AppId will be null.
-# We generate a random AppId for this case only. This is not required for production, since
-# the AppId will have a value.
+# Handle App ID logic for Emulator or other channels.
 APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
-# Create the Bot
-BOT = TeamsCommandsMenuBot()
+# Initialize the Bot.
+teams_commands_menu_bot = TeamsCommandsMenuBot()
 
-
-# Listen for incoming requests on /api/messages.
-async def messages(req: Request) -> Response:
-    # Main bot message handler.
+async def handle_incoming_messages(req: Request) -> Response:
+    """Processes incoming messages and routes them to the bot."""
     if "application/json" in req.headers["Content-Type"]:
         body = await req.json()
     else:
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
 
     activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
+    auth_header = req.headers.get("Authorization", "")
 
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+    # Process the activity using the adapter and bot.
+    response = await ADAPTER.process_activity(activity, auth_header, teams_commands_menu_bot.on_turn)
     if response:
         return json_response(data=response.body, status=response.status)
+    
     return Response(status=HTTPStatus.OK)
 
-
+# Create and configure the web application to listen for bot messages.
 APP = web.Application(middlewares=[aiohttp_error_middleware])
-APP.router.add_post("/api/messages", messages)
+APP.router.add_post("/api/messages", handle_incoming_messages)
 
 if __name__ == "__main__":
     try:
+        # Run the web server.
         web.run_app(APP, host="localhost", port=CONFIG.PORT)
     except Exception as error:
+        # Handle any errors during server startup.
         raise error

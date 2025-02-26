@@ -74,7 +74,7 @@ jobs:
 
             - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
               name: 'bot-receive-channel-messages-withRSC'
-              version: '6.0.x'
+              version: '8.0.x'
 
             - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval/BotRequestApproval.csproj'
               name: 'bot-request-approval'
@@ -268,11 +268,11 @@ jobs:
               name: 'bot-conversation'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload.csproj'
+            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload/TeamsFileUpload.csproj'
               name: 'bot-file-upload'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam.csproj'
+            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam/TeamsStartNewThreadInTeam.csproj'
               name: 'bot-initiate-thread-in-channel'
               version: '6.0.x'
 
@@ -1176,6 +1176,10 @@ jobs:
               
             - project_path: 'samples/msgext-search-auth-config/python'
               name: 'msgext-search-auth-config'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-thirdparty-storage/python'
+              name: 'msgext-thirdparty-storage'
               version: '3.10.x'
 
       fail-fast: false

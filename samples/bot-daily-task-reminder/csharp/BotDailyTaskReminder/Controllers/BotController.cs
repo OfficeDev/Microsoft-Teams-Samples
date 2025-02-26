@@ -3,9 +3,11 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.14.0
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using System;
 using System.Threading.Tasks;
 
 namespace BotDailyTaskReminder.Controllers
@@ -17,21 +19,31 @@ namespace BotDailyTaskReminder.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
-        private readonly IBot Bot;
+        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly IBot _bot;
 
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
-            Adapter = adapter;
-            Bot = bot;
+            _adapter = adapter ?? throw new ArgumentNullException(nameof(adapter));
+            _bot = bot ?? throw new ArgumentNullException(nameof(bot));
         }
 
-        [HttpPost, HttpGet]
+        // Handles both POST and GET requests to process messages for the bot.
+        [HttpPost]
         public async Task PostAsync()
         {
             // Delegate the processing of the HTTP POST to the adapter.
             // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            try
+            {
+                await _adapter.ProcessAsync(Request, Response, _bot);
+            }
+            catch (Exception ex)
+            {
+                // You can log the exception here if necessary
+                // For example, use a logger to record the error
+                await Response.WriteAsync($"Error: {ex.Message}");
+            }
         }
     }
 }

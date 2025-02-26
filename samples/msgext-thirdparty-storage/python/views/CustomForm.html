@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Teams ME Action WebView</title>
+
+    <!-- Microsoft Teams SDK for JavaScript -->
+    <script src="https://res.cdn.office.net/teams-js/2.26.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-gqPg5qCjdUgTGRZ/stLskrnJllL5h5+f4kTqvxVqtl2FdT7PVRa9Q7zq4gFlZ7bO"
+            crossorigin="anonymous"></script>
+
+    <!-- External CSS for styling -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script>
+        // Array to store media details and counter for completed file uploads
+        let mediaData = [];
+        let completedFiles = 0;
+
+        // Enable the upload button once all file uploads are complete
+        function enableUploadButton() {
+            const uploadBtn = document.getElementById("uploadBtn");
+            if (completedFiles === mediaData.length) {
+                uploadBtn.classList.add("enabled");
+                uploadBtn.disabled = false;
+            }
+        }
+
+        // Initialize Microsoft Teams SDK and handle file drag-and-drop events
+        microsoftTeams.initialize(() => {
+
+            // Get Teams context to fetch teamId or chatId for unique identification
+            microsoftTeams.getContext((context) => {
+                const inputThreadId = context.teamId || "";
+                const replyChainIdForChats = context.chatId || "";
+                const uniqueIdForChats = replyChainIdForChats + inputThreadId;
+
+                // Check if drag-and-drop API is available in the SDK
+                if (microsoftTeams.thirdPartyCloudStorage && microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles) {
+                    try {
+                        microsoftTeams.thirdPartyCloudStorage.getDragAndDropFiles(uniqueIdForChats, (medias, err) => {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+
+                            const mediaTableBody = document.querySelector("#mediaTable tbody");
+
+                            medias.forEach((media) => {
+                                // Create a new table row for each file
+                                const row = document.createElement("tr");
+
+                                // Column: Media Name with corresponding file icon
+                                const nameCell = document.createElement("td");
+                                const iconImg = document.createElement("img");
+                                iconImg.style.marginRight = "8px";
+                                iconImg.style.width = "20px";
+                                iconImg.style.height = "20px";
+
+                                // Set appropriate icons based on file extension
+                                if (media.name.endsWith(".pdf")) {
+                                    iconImg.src = "/icons/PDFIcons.png";
+                                } else if (media.name.endsWith(".doc") || media.name.endsWith(".docx")) {
+                                    iconImg.src = "/icons/WordIcons.png";
+                                } else if (media.name.endsWith(".xls") || media.name.endsWith(".xlsx")) {
+                                    iconImg.src = "/icons/Excel_Icons.png";
+                                } else if (media.name.endsWith(".png")) {
+                                    iconImg.src = "/icons/ImageIcon.png";
+                                } else if (media.name.endsWith(".jpg") || media.name.endsWith(".jpeg")) {
+                                    iconImg.src = "/icons/ImageIcon.png";
+                                }
+
+                                nameCell.appendChild(iconImg);
+                                nameCell.appendChild(document.createTextNode(media.name));
+                                row.appendChild(nameCell);
+
+                                // Column: Progress Bar for upload simulation
+                                const progressCell = document.createElement("td");
+                                const progressBar = document.createElement("div");
+                                progressBar.className = "progress-bar";
+                                const progressFill = document.createElement("div");
+                                progressFill.className = "progress-fill";
+                                progressBar.appendChild(progressFill);
+                                progressCell.appendChild(progressBar);
+                                row.appendChild(progressCell);
+
+                                // Column: Status (e.g., Success Tick Mark)
+                                const statusCell = document.createElement("td");
+                                statusCell.style.textAlign = "center";
+                                statusCell.textContent = "";
+                                row.appendChild(statusCell);
+
+                                // Append the row to the media table
+                                mediaTableBody.appendChild(row);
+
+                                // Store media details for task submission
+                                mediaData.push({
+                                    name: media.name,
+                                    type: media.type,
+                                    size: media.size,
+                                });
+
+                                // Simulate upload progress for demonstration
+                                let progress = 0;
+                                const interval = setInterval(() => {
+                                    progress += 10;
+                                    progressFill.style.width = `${progress}%`;
+
+                                    if (progress >= 100) {
+                                        clearInterval(interval);
+                                        progressFill.style.backgroundColor = "green";
+                                        statusCell.textContent = "✔";
+                                        statusCell.style.color = "green";
+
+                                        // Increment completed files counter and check if all are done
+                                        completedFiles++;
+                                        enableUploadButton();
+                                    }
+                                }, 110);
+                            });
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+                } else {
+                    console.error("getDragAndDropFiles API is not available in the SDK.");
+                }
+            });
+        });
+
+        // Validate form submission and send task data to Teams
+        function validateForm() {
+            if (!document.getElementById("uploadBtn").classList.contains("enabled")) {
+                return false;
+            }
+
+            // Reinitialize Teams SDK and submit the collected media data
+            microsoftTeams.initialize();
+            microsoftTeams.tasks.submitTask(mediaData);
+            return false; // Prevent default form submission
+        }
+    </script>
+</head>
+<body>
+<div class="surface theme-light">
+    <div class="panel">
+        <!-- Form for file upload -->
+        <form id="empForm" onsubmit="return validateForm()">
+            <div id="fileList">
+                <table id="mediaTable">
+                    <thead>
+                    <tr>
+                        <th>Media Name</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- File rows will be added dynamically here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="button-container">
+                <!-- Disabled upload button, activated after all files are processed -->
+                <input type="submit" id="uploadBtn" value="Upload" disabled>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
