@@ -20,7 +20,6 @@ class ConsentPopup extends React.Component {
             method: method,
             hostRedirectUrl: hostRedirectUrl
         });
-        
         const queryObj = {
             state: encodeURIComponent(state), // Ensure proper URL encoding
             client_id: params.get('googleId'),

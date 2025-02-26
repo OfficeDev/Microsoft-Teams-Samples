@@ -85,6 +85,40 @@ In the root directory, execute:
 
 ![tab-auth-page](Images/tab1.png)
 
+## Outlook on the mobile
+
+- To view your app in Outlook on the mobile.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/outlook1.jpg)
+
+**Select your app icon to launch and preview your app running in Outlook on the mobile**
+
+![outlook2](Images/outlook2.jpg)
+
+**Click get Details**
+
+![outlook3](Images/outlook3.jpg)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the mobile
+
+- To preview your app running in Office on the mobile.
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![Office1](Images/Office1.jpg)
+
+**Select your app icon to launch your app in Office on the mobile**
+
+![Office2](Images/Office2.jpg)
+
+**Click get Details**
+
+![Office3](Images/Office3.jpg)
+
 ## Further Reading.
 [External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
 
