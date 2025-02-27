@@ -5,7 +5,7 @@ from botbuilder.core import ActivityHandler, MessageFactory,TurnContext
 
 # This class represents a bot that handles message activities and reactions in Microsoft Teams.
 class MessageReactionBot(ActivityHandler):
-    def __init__(self, app_id, app_password, activity_log):
+    def __init__(self, activity_log):
         """
         Initialize the bot with app credentials and an activity log for storing activity data.
         :param app_id: The Microsoft app ID for the bot.
@@ -13,8 +13,6 @@ class MessageReactionBot(ActivityHandler):
         :param activity_log: An object to manage logging of activity IDs and their associated data.
         """
         super().__init__()
-        self.app_id = app_id
-        self.app_password = app_password
         self._log = activity_log  # Reference to an activity log instance for storing and retrieving activities.
         
     async def on_message_activity(self, turn_context:TurnContext, next_handler=None):
