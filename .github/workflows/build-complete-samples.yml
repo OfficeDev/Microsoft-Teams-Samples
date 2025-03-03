@@ -876,7 +876,7 @@ jobs:
               name: 'meetings-context-app-client'
               version: '16.x'
 
-            - project_path: 'samples/meetings-context-app/nodejs/server'
+            - project_path: 'samples/meetings-context-app/nodejs'
               name: 'meetings-context-app-server'
               version: '16.x'
 
