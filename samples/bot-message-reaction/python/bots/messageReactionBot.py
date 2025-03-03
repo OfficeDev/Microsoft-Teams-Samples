@@ -8,8 +8,6 @@ class MessageReactionBot(ActivityHandler):
     def __init__(self, activity_log):
         """
         Initialize the bot with app credentials and an activity log for storing activity data.
-        :param app_id: The Microsoft app ID for the bot.
-        :param app_password: The Microsoft app password for the bot.
         :param activity_log: An object to manage logging of activity IDs and their associated data.
         """
         super().__init__()
