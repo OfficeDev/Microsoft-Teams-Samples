@@ -9,149 +9,147 @@ using Newtonsoft.Json;
 
 namespace BotAllCards.Cards
 {
+    /// <summary>
+    /// Provides methods to create various types of cards.
+    /// </summary>
     public static class AllCards
     {
         /// <summary>
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Creates an Adaptive Card attachment.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the Adaptive Card.</returns>
         public static Attachment CreateAdaptiveCardAttachment()
         {
             var paths = new[] { ".", "Resources", "adaptiveCard.json" };
             var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var adaptiveCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
-
-            return adaptiveCardAttachment;
         }
 
         /// <summary>
+        /// Creates a Hero Card attachment.
         /// This card typically contains a single large image, one or more buttons, and a small amount of text.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the Hero Card.</returns>
         public static Attachment GetHeroCard()
         {
             var paths = new[] { ".", "Resources", "heroCard.json" };
             var heroCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var heroCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.hero",
                 Content = JsonConvert.DeserializeObject(heroCardJson),
             };
-
-            return heroCardAttachment;
         }
 
         /// <summary>
+        /// Creates a Thumbnail Card attachment.
         /// This card typically contains a single thumbnail image, some short text, and one or more buttons.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the Thumbnail Card.</returns>
         public static Attachment GetThumbnailCard()
         {
-            var paths = new[] { ".", "Resources", "heroCard.json" };
+            var paths = new[] { ".", "Resources", "thumbnailCard.json" };
             var thumbnailCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var thumbnailCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.thumbnail",
                 Content = JsonConvert.DeserializeObject(thumbnailCardJson),
             };
-
-            return thumbnailCardAttachment;
         }
 
         /// <summary>
+        /// Creates a Sign-in Card.
         /// This card enables a bot to request that a user signs in.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.SigninCard results.</returns>
+        /// <returns>A Microsoft.Bot.Schema.SigninCard representing the Sign-in Card.</returns>
         public static SigninCard GetSigninCard()
         {
-            var signinCard = new SigninCard
+            return new SigninCard
             {
                 Text = "BotFramework Sign-in Card",
                 Buttons = new List<CardAction>
-                {
-                    new CardAction(
-                        ActionTypes.OpenUrl, "Sign-in", value: "https://login.microsoftonline.com/") },
+                    {
+                        new CardAction(ActionTypes.OpenUrl, "Sign-in", value: "https://login.microsoftonline.com/")
+                    },
             };
-
-            return signinCard;
         }
 
         /// <summary>
+        /// Creates a Collections Card attachment.
         /// This card collection is used to return multiple items in a single response.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the Collections Card.</returns>
         public static Attachment CollectionsCardAttachment()
         {
             var paths = new[] { ".", "Resources", "collectionsCard.json" };
             var collectionsCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var collectionsCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(collectionsCardJson),
             };
-
-            return collectionsCardAttachment;
         }
 
         /// <summary>
+        /// Creates an Office 365 Connector Card attachment.
         /// This card has a flexible layout with multiple sections, fields, images, and actions.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the Office 365 Connector Card.</returns>
         public static Attachment Office365ConnectorCard()
         {
             var paths = new[] { ".", "Resources", "o365ConnectorCard.json" };
-            var OfficeCardJson = File.ReadAllText(Path.Combine(paths));
+            var officeCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var OfficeCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.teams.card.o365connector",
-                Content = JsonConvert.DeserializeObject(OfficeCardJson),
+                Content = JsonConvert.DeserializeObject(officeCardJson),
             };
-
-            return OfficeCardAttachment;
         }
 
         /// <summary>
-        /// This card enables a bot to request that a user OAuth Card
+        /// Creates an OAuth Card.
+        /// This card enables a bot to request that a user signs in using OAuth.
         /// </summary>
-        /// <returns>>Return Microsoft.Bot.Schema.Attachment results</returns>
-        public static OAuthCard GetOAuthCard(string ConnectionName)
+        /// <param name="connectionName">The connection name for the OAuth provider.</param>
+        /// <returns>A Microsoft.Bot.Schema.OAuthCard representing the OAuth Card.</returns>
+        public static OAuthCard GetOAuthCard(string connectionName)
         {
-            var oauthCard = new OAuthCard
+            return new OAuthCard
             {
                 Text = "BotFramework OAuth Card",
-                ConnectionName = ConnectionName,
-                Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Sign In", value: "https://login.microsoftonline.com/") },
+                ConnectionName = connectionName,
+                Buttons = new List<CardAction>
+                    {
+                        new CardAction(ActionTypes.OpenUrl, "Sign In", value: "https://login.microsoftonline.com/")
+                    },
             };
-
-            return oauthCard;
         }
 
         /// <summary>
+        /// Creates a List Card attachment.
         /// This card contains a scrolling list of items.
         /// </summary>
-        /// <returns>>Return Microsoft.Bot.Schema.Attachment results</returns>
+        /// <returns>A Microsoft.Bot.Schema.Attachment representing the List Card.</returns>
         public static Attachment CreateListCardAttachment()
         {
             var paths = new[] { ".", "Resources", "listCard.json" };
             var listCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var listCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.teams.card.list",
                 Content = JsonConvert.DeserializeObject(listCardJson),
             };
-
-            return listCardAttachment;
         }
-
     }
 }

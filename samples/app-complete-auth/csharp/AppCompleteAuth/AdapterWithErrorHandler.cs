@@ -12,12 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace AppCompleteAuth
 {
+    /// <summary>
+    /// AdapterWithErrorHandler class to handle errors in the bot adapter.
+    /// </summary>
     public class AdapterWithErrorHandler : CloudAdapter
     {
         public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<BotFrameworkHttpAdapter> logger, IConfiguration configuration, IStorage storage)
             : base(auth, logger)
         {
-            base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
+            Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
