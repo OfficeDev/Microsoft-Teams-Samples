@@ -24,6 +24,8 @@ namespace TypeaheadSearch.Bots
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
+        private static readonly HttpClient HttpClient = new HttpClient();
+
         /// <summary>
         /// Handle when a message is addressed to the bot.
         /// </summary>
@@ -34,30 +36,7 @@ namespace TypeaheadSearch.Bots
         {
             if (turnContext.Activity.Text != null)
             {
-                if (turnContext.Activity.Text.ToLower().Trim() == "staticsearch")
-                {
-                    string[] path = { ".", "Cards", "StaticSearchCard.json" };
-                    var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                    var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name, member.Id);
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
-                }
-                else if (turnContext.Activity.Text.ToLower().Trim() == "dynamicsearch")
-                {
-                    string[] path = { ".", "Cards", "DynamicSearchCard.json" };
-                    var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                    var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name, member.Id);
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
-                }
-                else if (turnContext.Activity.Text.ToLower().Trim() == "dependantdropdown")
-                {
-                    string[] path = { ".", "Cards", "DependentDropdown.json" };
-                    var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                    var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name, member.Id);
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
-                }
+                await HandleTextMessageAsync(turnContext, cancellationToken);
             }
             else if (turnContext.Activity.Value != null)
             {
@@ -67,13 +46,42 @@ namespace TypeaheadSearch.Bots
         }
 
         /// <summary>
+        /// Handles text messages sent to the bot.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        private async Task HandleTextMessageAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var text = turnContext.Activity.Text.ToLower().Trim();
+            string[] path;
+            switch (text)
+            {
+                case "staticsearch":
+                    path = new[] { ".", "Cards", "StaticSearchCard.json" };
+                    break;
+                case "dynamicsearch":
+                    path = new[] { ".", "Cards", "DynamicSearchCard.json" };
+                    break;
+                case "dependantdropdown":
+                    path = new[] { ".", "Cards", "DependentDropdown.json" };
+                    break;
+                default:
+                    return;
+            }
+
+            var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
+            var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name, member.Id);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
+        }
+
+        /// <summary>
         /// Invoked when bot (like a user) are added to the conversation.
         /// </summary>
         /// <param name="membersAdded">A list of all the members added to the conversation.</param>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in turnContext.Activity.MembersAdded)
@@ -86,137 +94,103 @@ namespace TypeaheadSearch.Bots
         }
 
         /// <summary>
-        ///  Invoked when an invoke activity is received from the connector.
+        /// Invoked when an invoke activity is received from the connector.
         /// </summary>
         /// <param name="turnContext">The turn context.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            InvokeResponse adaptiveCardResponse;
-
-            // Check if the activity is of the expected type
             if (turnContext.Activity.Name == "application/search")
             {
-                // Deserialize the incoming activity value to get dropdown and search data
-                var dropdownCard = JsonConvert.DeserializeObject<DependantDropdownCard>(turnContext.Activity.Value.ToString());
-                var searchData = JsonConvert.DeserializeObject<DynamicSearchCard>(turnContext.Activity.Value.ToString());
-
-                // Fetch package data from the external API
-                var packageResult = JObject.Parse(await (new HttpClient()).GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
-
-                // Check if a country was specified in the dropdown data
-                if (dropdownCard.Data.choiceSelect != "")
-                {
-                    Object searchResponseData;
-
-                    // Define city options based on different countries
-                    var usa = new[]
-                    {
-                        new { title = "CA", value = "CA" },
-                        new { title = "FL", value = "FL" },
-                        new { title = "TX", value = "TX" }
-                    };
-
-                    var france = new[]
-                    {
-                        new { title = "Paris", value = "Paris" },
-                        new { title = "Lyon", value = "Lyon" },
-                        new { title = "Nice", value = "Nice" }
-                    };
-
-                    var india = new[]
-                    {
-                        new { title = "Delhi", value = "Delhi" },
-                        new { title = "Mumbai", value = "Mumbai" },
-                        new { title = "Pune", value = "Pune" }
-                    };
-
-                    // Normalize the country name to lowercase for comparison
-                    string country = dropdownCard.Data.choiceSelect.ToLower();
-
-                    if (country == "usa")
-                    {
-                        searchResponseData = new
-                        {
-                            type = "application/vnd.microsoft.search.searchResponse",
-                            value = new
-                            {
-                                results = usa
-                            }
-                        };
-                    }
-                    else if (country == "france")
-                    {
-                        searchResponseData = new
-                        {
-                            type = "application/vnd.microsoft.search.searchResponse",
-                            value = new
-                            {
-                                results = france
-                            }
-                        };
-                    }
-                    else
-                    {
-                        searchResponseData = new
-                        {
-                            type = "application/vnd.microsoft.search.searchResponse",
-                            value = new
-                            {
-                                results = india
-                            }
-                        };
-                    }
-
-                    // Serialize the response data to JSON
-                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
-                    JObject jsonData = JObject.Parse(jsonString);
-
-                    // Create the response with a 200 status code
-                    adaptiveCardResponse = new InvokeResponse()
-                    {
-                        Status = 200,
-                        Body = jsonData
-                    };
-                }
-                else
-                {
-                    // If no country is specified, process the package results
-                    var packages = packageResult["data"].Select(item => (item["id"].ToString(), item["description"].ToString()));
-                    var packageList = packages.Select(item => { var obj = new { title = item.Item1, value = item.Item1 + " - " + item.Item2 }; return obj; }).ToList();
-
-                    // Build the response data for the package list
-                    var searchResponseData = new
-                    {
-                        type = "application/vnd.microsoft.search.searchResponse",
-                        value = new
-                        {
-                            results = packageList
-                        }
-                    };
-
-                    // Serialize the response data to JSON
-                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
-                    JObject jsonData = JObject.Parse(jsonString);
-
-                    // Create the response with a 200 status code
-                    adaptiveCardResponse = new InvokeResponse()
-                    {
-                        Status = 200,
-                        Body = jsonData
-                    };
-                }
-
-                // Return the adaptive card response
-                return adaptiveCardResponse;
+                return await HandleSearchInvokeAsync(turnContext, cancellationToken);
             }
 
-            // Return null if the activity is not recognized
             return null;
-    }
+        }
 
-        // Get intial card.
+        /// <summary>
+        /// Handles search invoke activities.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        private async Task<InvokeResponse> HandleSearchInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var dropdownCard = JsonConvert.DeserializeObject<DependantDropdownCard>(turnContext.Activity.Value.ToString());
+            var searchData = JsonConvert.DeserializeObject<DynamicSearchCard>(turnContext.Activity.Value.ToString());
+
+            var packageResult = JObject.Parse(await HttpClient.GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
+
+            if (!string.IsNullOrEmpty(dropdownCard.Data.choiceSelect))
+            {
+                var searchResponseData = GetCountrySpecificData(dropdownCard.Data.choiceSelect.ToLower());
+                return new InvokeResponse
+                {
+                    Status = 200,
+                    Body = JObject.Parse(JsonConvert.SerializeObject(searchResponseData))
+                };
+            }
+            else
+            {
+                var packages = packageResult["data"].Select(item => new { title = item["id"].ToString(), value = item["id"] + " - " + item["description"] });
+                var searchResponseData = new
+                {
+                    type = "application/vnd.microsoft.search.searchResponse",
+                    value = new { results = packages }
+                };
+
+                return new InvokeResponse
+                {
+                    Status = 200,
+                    Body = JObject.Parse(JsonConvert.SerializeObject(searchResponseData))
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets country-specific data for the dropdown.
+        /// </summary>
+        /// <param name="country">The country name.</param>
+        /// <returns>The country-specific data.</returns>
+        private object GetCountrySpecificData(string country)
+        {
+            var usa = new[]
+            {
+                    new { title = "CA", value = "CA" },
+                    new { title = "FL", value = "FL" },
+                    new { title = "TX", value = "TX" }
+                };
+
+            var france = new[]
+            {
+                    new { title = "Paris", value = "Paris" },
+                    new { title = "Lyon", value = "Lyon" },
+                    new { title = "Nice", value = "Nice" }
+                };
+
+            var india = new[]
+            {
+                    new { title = "Delhi", value = "Delhi" },
+                    new { title = "Mumbai", value = "Mumbai" },
+                    new { title = "Pune", value = "Pune" }
+                };
+
+            return country switch
+            {
+                "usa" => new { type = "application/vnd.microsoft.search.searchResponse", value = new { results = usa } },
+                "france" => new { type = "application/vnd.microsoft.search.searchResponse", value = new { results = france } },
+                _ => new { type = "application/vnd.microsoft.search.searchResponse", value = new { results = india } }
+            };
+        }
+
+        /// <summary>
+        /// Gets the initial adaptive card.
+        /// </summary>
+        /// <param name="filepath">The file path to the adaptive card JSON.</param>
+        /// <param name="name">The name of the user.</param>
+        /// <param name="userMRI">The user MRI.</param>
+        /// <returns>The adaptive card attachment.</returns>
         private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
@@ -227,15 +201,12 @@ namespace TypeaheadSearch.Bots
                 createdBy = name
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
-            var cardJsonstring = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
+            var cardJsonString = template.Expand(payloadData);
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJsonstring),
+                Content = JsonConvert.DeserializeObject(cardJsonString),
             };
-
-            return adaptiveCardAttachment;
         }
     }
 }

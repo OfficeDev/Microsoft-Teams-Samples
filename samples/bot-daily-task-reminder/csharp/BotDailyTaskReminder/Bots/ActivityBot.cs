@@ -63,7 +63,7 @@ namespace BotDailyTaskReminder.Bots
         /// <param name="turnContext">The context of the current turn.</param>
         /// <param name="cancellationToken">Cancellation token for the asynchronous task.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
 
@@ -109,7 +109,7 @@ namespace BotDailyTaskReminder.Bots
                 taskModuleResponse.Task = new TaskModuleContinueResponse
                 {
                     Type = "continue",
-                    Value = new TaskModuleTaskInfo()
+                    Value = new TaskModuleTaskInfo
                     {
                         Url = _applicationBaseUrl + "/ScheduleTask",
                         Height = 450,
@@ -140,12 +140,7 @@ namespace BotDailyTaskReminder.Bots
             var date = dateTime.ToLocalTime();
 
             // Prepare task details
-            var recurringDays = string.Join(",", selectedDays);
-            var currentTaskList = new List<SaveTaskDetail>();
-            List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
-            _taskDetails.TryGetValue("taskDetails", out currentTaskList);
-
-            var taskDetails = new SaveTaskDetail()
+            var taskDetails = new SaveTaskDetail
             {
                 Description = description,
                 Title = title,
@@ -154,20 +149,15 @@ namespace BotDailyTaskReminder.Bots
             };
 
             // Add the task to the task list
-            if (currentTaskList == null)
-            {
-                taskList.Add(taskDetails);
-                _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
-            }
-            else
+            _taskDetails.AddOrUpdate("taskDetails", new List<SaveTaskDetail> { taskDetails }, (key, currentTaskList) =>
             {
                 currentTaskList.Add(taskDetails);
-                _taskDetails.AddOrUpdate("taskDetails", currentTaskList, (key, newValue) => currentTaskList);
-            }
+                return currentTaskList;
+            });
 
             // Schedule the task
-            TaskScheduler taskSchedule = new TaskScheduler();
-            taskSchedule.Start(date.Hour, date.Minute, _applicationBaseUrl, selectedDays);
+            var taskScheduler = new TaskScheduler();
+            taskScheduler.Start(date.Hour, date.Minute, _applicationBaseUrl, selectedDays);
 
             // Send a success message to the user
             await turnContext.SendActivityAsync("Task submitted successfully, you will get a recurring reminder for the task at a scheduled time");
@@ -181,35 +171,35 @@ namespace BotDailyTaskReminder.Bots
         /// <returns>The adaptive card as an attachment.</returns>
         private Attachment GetAdaptiveCardForTaskModule()
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
-                {
-                    new AdaptiveTextBlock
                     {
-                        Text = "Please click here to schedule a recurring task reminder",
-                        Weight = AdaptiveTextWeight.Bolder,
-                        Spacing = AdaptiveSpacing.Medium,
-                    }
-                },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveSubmitAction
-                    {
-                        Title = "Schedule task",
-                        Data = new AdaptiveCardAction
+                        new AdaptiveTextBlock
                         {
-                            MsteamsCardAction = new CardAction
+                            Text = "Please click here to schedule a recurring task reminder",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Spacing = AdaptiveSpacing.Medium,
+                        }
+                    },
+                Actions = new List<AdaptiveAction>
+                    {
+                        new AdaptiveSubmitAction
+                        {
+                            Title = "Schedule task",
+                            Data = new AdaptiveCardAction
                             {
-                                Type = "task/fetch",
+                                MsteamsCardAction = new CardAction
+                                {
+                                    Type = "task/fetch",
+                                },
+                                Id = "schedule"
                             },
-                            Id = "schedule"
-                        },
-                    }
-                },
+                        }
+                    },
             };
 
-            return new Attachment()
+            return new Attachment
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,

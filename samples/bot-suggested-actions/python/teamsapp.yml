@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-suggested-actions-python
 
 environmentFolderPath: ./env
+projectId: 83682327-2c9c-4add-987b-13f44acd9ba8

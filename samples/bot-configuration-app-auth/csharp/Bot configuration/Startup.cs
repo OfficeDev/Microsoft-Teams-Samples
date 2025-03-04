@@ -18,32 +18,45 @@ using System.Globalization;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
+    /// <summary>
+    /// The Startup class configures services and the app's request pipeline.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
-            services.Configure<RequestLocalizationOptions>(Options =>
+            services.Configure<RequestLocalizationOptions>(options =>
             {
-                var culturSupported = new[]
+                var culturesSupported = new[]
                 {
-                    new CultureInfo("en-US"),
-                    new CultureInfo("fr-CA"),
-                    new CultureInfo("hi-IN"),
-                    new CultureInfo("es-MX")
+                        new CultureInfo("en-US"),
+                        new CultureInfo("fr-CA"),
+                        new CultureInfo("hi-IN"),
+                        new CultureInfo("es-MX")
                 };
-                Options.DefaultRequestCulture = new RequestCulture("en-US");
-                Options.SupportedCultures = culturSupported;
-                Options.SupportedUICultures = culturSupported;
-                Options.FallBackToParentCultures = false;
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.SupportedCultures = culturesSupported;
+                options.SupportedUICultures = culturesSupported;
+                options.FallBackToParentCultures = false;
             });
 
             services.AddControllers();
@@ -59,7 +72,11 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             services.AddTransient<IBot, TeamsBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

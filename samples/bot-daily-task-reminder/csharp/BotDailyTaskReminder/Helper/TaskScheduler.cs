@@ -8,9 +8,18 @@ using System;
 
 namespace BotDailyTaskReminder
 {
+    /// <summary>
+    /// Class to handle task scheduling.
+    /// </summary>
     public class TaskScheduler
     {
-        // Method to schedule task.
+        /// <summary>
+        /// Schedules a task to run at the specified time on the selected days.
+        /// </summary>
+        /// <param name="hour">The hour at which the task should run.</param>
+        /// <param name="min">The minute at which the task should run.</param>
+        /// <param name="baseUrl">The base URL for the task reminder API.</param>
+        /// <param name="selectedDays">The days of the week on which the task should run.</param>
         public void Start(int hour, int min, string baseUrl, DayOfWeek[] selectedDays)
         {
             try
@@ -19,15 +28,15 @@ namespace BotDailyTaskReminder
                 var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
                 scheduler.Start();
 
-                IJobDetail job = JobBuilder.Create<ScheduleTaskReminder>()
-                                           .UsingJobData("baseUrl", baseUrl)
-                                           .Build();
+                var job = JobBuilder.Create<ScheduleTaskReminder>()
+                                    .UsingJobData("baseUrl", baseUrl)
+                                    .Build();
 
                 // Create the cron schedule for the selected days and time
-                CronScheduleBuilder csb = CronScheduleBuilder
+                var csb = CronScheduleBuilder
                     .AtHourAndMinuteOnGivenDaysOfWeek(hour, min, selectedDays);
 
-                ICronTrigger trigger = (ICronTrigger)TriggerBuilder
+                var trigger = (ICronTrigger)TriggerBuilder
                     .Create()
                     .WithSchedule(csb)
                     .Build();

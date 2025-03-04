@@ -41,12 +41,10 @@ class Tab extends React.Component {
   getGoogleIdToken() {
     var googleId = process.env.REACT_APP_GOOGLE_APP_ID; // Google app client id
 
-    // Redirect url path
-    var url = window.location.origin + "/auth-end";
     return new Promise((resolve, reject) => {
       app.initialize().then(() => {
         authentication.authenticate({
-          url: `${window.location.origin}/auth-start?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl=${url}&googleId=${googleId}`,
+          url: `${window.location.origin}/auth-start?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl={hostRedirectUrl}&googleId=${googleId}`,
           isExternal: true
         }).then((result) => {
           this.getGoogleServerSideToken(result);
