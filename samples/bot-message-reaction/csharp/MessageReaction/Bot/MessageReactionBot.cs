@@ -29,7 +29,7 @@ namespace MessageReaction.Bot
             await HandleReactionsAsync(messageReactions, turnContext, cancellationToken, "removed");
         }
 
-        private async Task HandleReactionsAsync(IList<MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken, string action)
+        private async Task HandleReactionsAsync(IList<Microsoft.Bot.Schema.MessageReaction> messageReactions, ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken, string action)
         {
             foreach (var reaction in messageReactions)
             {
