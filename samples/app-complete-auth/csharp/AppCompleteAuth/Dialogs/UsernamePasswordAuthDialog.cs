@@ -33,40 +33,44 @@ namespace AppCompleteAuth.Dialogs
 
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            var value = JObject.FromObject(stepContext.Context.Activity.Value).ToString();
-            if (value != "{}")
+            if (stepContext.Context.Activity.Value != null)
             {
-                var asJobject = JObject.FromObject(stepContext.Context.Activity.Value);
-                var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
-                if (state.ToString() == "CancelledByUser")
+                var value = JObject.FromObject(stepContext.Context.Activity.Value).ToString();
+                if (value != "{ }")
                 {
-                    await stepContext.Context.SendActivityAsync("Sign in cancelled by user");
-                    return await stepContext.EndDialogAsync(null, cancellationToken);
-                }
-                else
-                {
-                    var cred = JObject.Parse(state);
-                    var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
-                    var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
-
-                    if (userName == Constant.UserName && password == Constant.Password)
+                    var asJobject = JObject.FromObject(stepContext.Context.Activity.Value);
+                    var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
+                    if (state != null && state.ToString() == "CancelledByUser")
                     {
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-                        return await stepContext.PromptAsync(
-                         nameof(TextPrompt),
-                         new PromptOptions
-                         {
-                             Prompt = MessageFactory.Text("What is your preferred user name?"),
-                         },
-                         cancellationToken);
-                    }
-                    else
-                    {
-                        await stepContext.Context.SendActivityAsync("Invalid username or password");
+                        await stepContext.Context.SendActivityAsync("Sign in cancelled by user");
                         return await stepContext.EndDialogAsync(null, cancellationToken);
+                    }
+                    else if (state != null)
+                    {
+                        var cred = JObject.Parse(state);
+                        var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
+                        var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
+
+                        if (userName == Constant.UserName && password == Constant.Password)
+                        {
+                            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
+                            return await stepContext.PromptAsync(
+                                nameof(TextPrompt),
+                                new PromptOptions
+                                {
+                                    Prompt = MessageFactory.Text("What is your preferred user name?"),
+                                },
+                                cancellationToken);
+                        }
+                        else
+                        {
+                            await stepContext.Context.SendActivityAsync("Invalid username or password");
+                            return await stepContext.EndDialogAsync(null, cancellationToken);
+                        }
                     }
                 }
             }
+
             await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
@@ -78,8 +82,8 @@ namespace AppCompleteAuth.Dialogs
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
-            // Get sign in card.
-            private Attachment GetPopUpSignInCard()
+        // Get sign in card.
+        private Attachment GetPopUpSignInCard()
         {
             var heroCard = new HeroCard
             {

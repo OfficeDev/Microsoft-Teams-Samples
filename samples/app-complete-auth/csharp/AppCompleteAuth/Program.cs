@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace AppCompleteAuth
 {
+    /// <summary>
+    /// Program class to configure and run the application.
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)
@@ -15,6 +18,11 @@ namespace AppCompleteAuth
             CreateHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// Creates the host builder.
+        /// </summary>
+        /// <param name="args">Command line arguments.</param>
+        /// <returns>An IHostBuilder instance.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

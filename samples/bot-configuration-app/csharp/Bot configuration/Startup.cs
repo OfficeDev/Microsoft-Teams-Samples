@@ -18,6 +18,9 @@ using System.Globalization;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
+    /// <summary>
+    /// Configures services and the app's request pipeline.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -27,29 +30,31 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Adds services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
-            services.Configure<RequestLocalizationOptions>(Options =>
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.Configure<RequestLocalizationOptions>(options =>
             {
-                var culturSupported = new[]
+                var supportedCultures = new[]
                 {
-                    new CultureInfo("en-US"),
-                    new CultureInfo("fr-CA"),
-                    new CultureInfo("hi-IN"),
-                    new CultureInfo("es-MX")
+                        new CultureInfo("en-US"),
+                        new CultureInfo("fr-CA"),
+                        new CultureInfo("hi-IN"),
+                        new CultureInfo("es-MX")
                 };
-                Options.DefaultRequestCulture = new RequestCulture("en-US");
-                Options.SupportedCultures = culturSupported;
-                Options.SupportedUICultures = culturSupported;
-                Options.FallBackToParentCultures = false;
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.FallBackToParentCultures = false;
             });
 
             services.AddControllers();
             services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-                opts => { opts.ResourcesPath = "Resources"; })
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix, options => options.ResourcesPath = "Resources")
                 .AddDataAnnotationsLocalization();
 
             // Create the Bot Framework Adapter with error handling enabled.
@@ -59,7 +64,9 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             services.AddTransient<IBot, TeamsBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -70,6 +77,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             {
                 app.UseHsts();
             }
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseWebSockets();
@@ -77,19 +85,17 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
-            // Runs matching. An endpoint is selected and set on the HttpContext if a match is found.
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                // Mapping of endpoints goes here:
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                    name: "default",
                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
         }
     }
 }

@@ -17,10 +17,19 @@ using AdaptiveCards;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // RichCardsBot prompts a user to select a Rich Card and then returns the card
-    // that matches the user's selection.
+    /// <summary>
+    /// TeamsBot prompts a user to select a Rich Card and then returns the card
+    /// that matches the user's selection.
+    /// </summary>
     public class TeamsBot : DialogBot<MainDialog>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamsBot"/> class.
+        /// </summary>
+        /// <param name="conversationState">The conversation state.</param>
+        /// <param name="userState">The user state.</param>
+        /// <param name="dialog">The dialog to run.</param>
+        /// <param name="logger">The logger instance.</param>
         public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)
             : base(conversationState, userState, dialog, logger)
         {
@@ -41,35 +50,25 @@ namespace Microsoft.BotBuilderSamples
                 // To learn more about Adaptive Cards, see https://aka.ms/msbot-adaptivecards for more details.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    var reply = MessageFactory.Text("Welcome to Card Bot."
-                        + " This bot will show you different types of Cards."
-                        + " Please type anything to get started.");
-
+                    var reply = MessageFactory.Text("Welcome to Card Bot. This bot will show you different types of Cards. Please type anything to get started.");
                     await turnContext.SendActivityAsync(reply, cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        /// Media url submitted.
-        /// Refreshes the adaptive card with the media file.
+        /// Creates an adaptive card invoke response with the provided media URL.
         /// </summary>
-        /// <param name="url">Url of the media file</param>
-        /// <param name="turnContext">The context for the current turn.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        private InvokeResponse createAdaptiveCardInvokeResponseAsync(string url)
+        /// <param name="url">URL of the media file.</param>
+        /// <returns>An <see cref="InvokeResponse"/> containing the adaptive card.</returns>
+        private InvokeResponse CreateAdaptiveCardInvokeResponse(string url)
         {
-            string[] filepath = new[] { ".", "Resources", "adaptiveCardMedia.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
-            {
-                mediaUrl = url,
-            };
-
+            var filepath = Path.Combine(".", "Resources", "adaptiveCardMedia.json");
+            var adaptiveCardJson = File.ReadAllText(filepath);
+            var template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var payloadData = new { mediaUrl = url };
             var cardJsonString = template.Expand(payloadData);
-            var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+            var adaptiveCardResponse = new AdaptiveCardInvokeResponse
             {
                 StatusCode = 200,
                 Type = AdaptiveCard.ContentType,
@@ -80,8 +79,7 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Media url submitted.
-        /// checks whether the media URL is present and sends invokeresponse with the media 
+        /// Handles invoke activities, such as adaptive card actions.
         /// </summary>
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -93,19 +91,19 @@ namespace Microsoft.BotBuilderSamples
                 if (turnContext.Activity.Value == null)
                     return null;
 
-                JObject value = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
+                var value = JsonConvert.DeserializeObject<JObject>(turnContext.Activity.Value.ToString());
 
                 if (value["action"] == null)
                     return null;
 
-                JObject actiondata = JsonConvert.DeserializeObject<JObject>(value["action"]["data"].ToString());
+                var actionData = JsonConvert.DeserializeObject<JObject>(value["action"]["data"].ToString());
 
-                if (actiondata["url"] == null)
+                if (actionData["url"] == null)
                     return null;
 
-                string url = actiondata["url"].ToString();
+                var url = actionData["url"].ToString();
 
-                return createAdaptiveCardInvokeResponseAsync(url);
+                return CreateAdaptiveCardInvokeResponse(url);
             }
 
             return null;

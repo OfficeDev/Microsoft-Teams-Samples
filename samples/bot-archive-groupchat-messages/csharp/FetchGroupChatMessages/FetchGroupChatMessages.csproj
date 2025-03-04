@@ -26,8 +26,4 @@
       <None Include="wwwroot\chat.txt" />
     </ItemGroup>
 
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
-
 </Project>
