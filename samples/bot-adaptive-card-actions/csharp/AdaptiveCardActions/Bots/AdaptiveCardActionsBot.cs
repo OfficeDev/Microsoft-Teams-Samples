@@ -18,7 +18,7 @@ namespace Microsoft.BotBuilderSamples
     // can tap to provide input. 
     public class AdaptiveCardActionsBot : ActivityHandler
     {
-        public string commandString = "Please use one of these commands: **Card Actions** for  Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card";
+        private const string CommandString = "Please use one of these commands: **Card Actions** for Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card";
 
         /// <summary>
         /// provide logic for when members other than the bot join the conversation
@@ -30,8 +30,7 @@ namespace Microsoft.BotBuilderSamples
 
             // Sends an activity to the sender of the incoming activity.
             await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText), cancellationToken);
-
-            await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(CommandString), cancellationToken);
         }
 
         /// <summary>
@@ -46,32 +45,21 @@ namespace Microsoft.BotBuilderSamples
 
                 if (text.Contains("card actions"))
                 {
-                    string[] path = { ".", "Cards", "AdaptiveCardActions.json" };
-                    var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
+                    await SendAdaptiveCardAsync(turnContext, cancellationToken, "AdaptiveCardActions.json");
                 }
                 else if (text.Contains("suggested actions"))
                 {
-                    //Respond to the user.
+                    // Respond to the user.
                     await turnContext.SendActivityAsync("Please Enter a color from the suggested action choices", cancellationToken: cancellationToken);
-
-                    string[] path = { ".", "Cards", "SuggestedActions.json" };
-                    var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
-
-                    // Sends an activity to the sender of the incoming activity.
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
-
-                    //sends a suggested action card
+                    await SendAdaptiveCardAsync(turnContext, cancellationToken, "SuggestedActions.json");
+                    // Sends a suggested action card
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
-
                 }
                 else if (text.Contains("togglevisibility"))
                 {
-                    string[] path = { ".", "Cards", "ToggleVisibleCard.json" };
-                    var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
+                    await SendAdaptiveCardAsync(turnContext, cancellationToken, "ToggleVisibleCard.json");
                 }
-                else if (text.Contains("red") || (text.Contains("blue")) || text.Contains("yellow"))
+                else if (text.Contains("red") || text.Contains("blue") || text.Contains("yellow"))
                 {
                     var responseText = ProcessInput(text);
                     await turnContext.SendActivityAsync(responseText, cancellationToken: cancellationToken);
@@ -79,37 +67,26 @@ namespace Microsoft.BotBuilderSamples
                 }
                 else
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(CommandString), cancellationToken);
                 }
             }
-            await SendDataOnCardActions(turnContext, cancellationToken);
+            await SendDataOnCardActionsAsync(turnContext, cancellationToken);
         }
 
         /// <summary>
         /// ProcessInput takes input string and returns message
-        /// <summary>
+        /// </summary>
         private static string ProcessInput(string text)
         {
             const string colorText = "is the best color, I agree.";
-            switch (text)
-            {
-                case "red":
-                    {
-                        return $"Red {colorText}";
-                    }
-                case "yellow":
-                    {
-                        return $"Yellow {colorText}";
-                    }
-                case "blue":
-                    {
-                        return $"Blue {colorText}";
-                    }
-                default:
-                    {
-                        return "Please select a color from the suggested action choices";
-                    }
-            }
+            var colorResponses = new Dictionary<string, string>
+                {
+                    { "red", $"Red {colorText}" },
+                    { "yellow", $"Yellow {colorText}" },
+                    { "blue", $"Blue {colorText}" }
+                };
+
+            return colorResponses.TryGetValue(text, out var response) ? response : "Please select a color from the suggested action choices";
         }
 
         /// <summary>
@@ -120,39 +97,41 @@ namespace Microsoft.BotBuilderSamples
         /// </summary>
         private static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            try
+            var reply = MessageFactory.Text("What is your favorite color?");
+            reply.SuggestedActions = new SuggestedActions
             {
-                var reply = MessageFactory.Text("What is your favorite color?");
-                reply.SuggestedActions = new SuggestedActions()
-                {
-                    Actions = new List<CardAction>()
+                Actions = new List<CardAction>
                     {
-                    new CardAction() { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
-                    new CardAction() { Title = "Yellow", Type = ActionTypes.ImBack, Value = "Yellow" },
-                    new CardAction() { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" },
+                        new CardAction { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
+                        new CardAction { Title = "Yellow", Type = ActionTypes.ImBack, Value = "Yellow" },
+                        new CardAction { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" }
                     },
-                    To = new List<string> { turnContext.Activity.From.Id },
-                };
+                To = new List<string> { turnContext.Activity.From.Id }
+            };
 
-                await turnContext.SendActivityAsync(reply, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                throw (e);
-            }
+            await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
         /// <summary>
         /// sends the response on card action.submit
         /// </summary>
-        private async Task SendDataOnCardActions(ITurnContext turnContext, CancellationToken cancellationToken)
+        private async Task SendDataOnCardActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Value != null)
             {
-                var reply = MessageFactory.Text("");
-                reply.Text = $"Data Submitted : {turnContext.Activity.Value}";
-                await turnContext.SendActivityAsync(MessageFactory.Text(reply.Text), cancellationToken);
+                var reply = MessageFactory.Text($"Data Submitted: {turnContext.Activity.Value}");
+                await turnContext.SendActivityAsync(reply, cancellationToken);
             }
+        }
+
+        /// <summary>
+        /// Sends an adaptive card to the user.
+        /// </summary>
+        private async Task SendAdaptiveCardAsync(ITurnContext turnContext, CancellationToken cancellationToken, string cardFileName)
+        {
+            string[] path = { ".", "Cards", cardFileName };
+            var adaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCard), cancellationToken);
         }
 
         /// <summary>
@@ -161,22 +140,20 @@ namespace Microsoft.BotBuilderSamples
         private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var template = new AdaptiveCardTemplate(adaptiveCardJson);
             var payloadData = new
             {
                 createdById = userMRI,
                 createdBy = name
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
-            var cardJsonstring = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
+            // "Expand" the template - this generates the final Adaptive Card payload
+            var cardJsonString = template.Expand(payloadData);
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJsonstring),
+                Content = JsonConvert.DeserializeObject(cardJsonString)
             };
-
-            return adaptiveCardAttachment;
         }
     }
 }

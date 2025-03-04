@@ -38,26 +38,38 @@ This Microsoft Teams sample app illustrates the implementation of Google authent
 
 ## Setup
 
-1. Create Google Ouath app [Google API Console](https://console.developers.google.com/)
- - Select Oauth client Id for app creation
- ![oauthapp1](Images/oauthapp1.png)
-
- - Select application type as `Web application` and give a suitable app name
- ![oauthapp3](Images/oauthapp3.png)
-
- - For authorized javascript url, give your app's base url
- ![oauthapp3](Images/oauthapp3.png)
-
- - For redirect url, give url in below format `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
- ![oauthapp4](Images/oauthapp4.png)
-
- - Once the app is created, copy the client id and client seret
- ![oauthapp2](Images/oauthapp2.png)
-
- - Enable access to the [Google People API](https://developers.google.com/people/).
- ![people-api](Images/peopleapi1.png)
-
-  ![people-api2](Images/peopleapi2.png)
+1. Create Google OAuth app [Google API Console](https://console.developers.google.com/)
+ - Create project
+  ![oauthapp5](Images/oauthapp5.png)
+ 
+  - Enter project name
+  ![oauthapp6](Images/oauthapp6.png)
+ 
+  - Click configure consent screen
+  ![oauthapp7](Images/oauthapp7.png)
+ 
+  - Select Oauth client Id for app creation
+  ![oauthapp8](Images/oauthapp8.png) 
+ 
+  - Select application type as `Web application` and give a suitable app name
+  ![oauthapp3](Images/oauthapp3.png)
+ 
+  - For authorized javascript url, provide your app's base URL
+  ![oauthapp3](Images/oauthapp3.png)
+ 
+  - For redirect url, give url in below format `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
+  ![oauthapp4](Images/oauthapp4.png)
+ 
+  - Once the app is created, copy the client id and client secret
+  ![oauthapp2](Images/oauthapp2.png)
+ 
+   - OAuth Created
+  ![oauthapp9](Images/oauthapp9.png) 
+ 
+  - Enable access to the [Google People API](https://developers.google.com/people/).
+  ![people-api](Images/peopleapi1.png)
+ 
+   ![people-api2](Images/peopleapi2.png)
 
 2. Setup NGROK
 - Run ngrok - point to port 3978

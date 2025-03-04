@@ -17,38 +17,47 @@ using System.IO;
 
 namespace Botconfiguration.Bots
 {
+    /// <summary>
+    /// TeamsBot class handles bot activities for Microsoft Teams.
+    /// </summary>
     public class TeamsBot : TeamsActivityHandler
     {
-        private string _chosenFlow = "";
+        private string _chosenFlow = string.Empty;
 
+        /// <summary>
+        /// Handles the event when members are added to the channel.
+        /// </summary>
+        /// <param name="membersAdded">List of members added.</param>
+        /// <param name="turnContext">Turn context.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var imagePath = "Images/configbutton.png";
-            var imageData = Convert.ToBase64String(File.ReadAllBytes(imagePath));
+            const string imagePath = "Images/configbutton.png";
+            var imageData = Convert.ToBase64String(await File.ReadAllBytesAsync(imagePath));
 
-            var adaptiveCardJson = @"
-            {
-                ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                ""type"": ""AdaptiveCard"",
-                ""version"": ""1.0"",
-                ""body"": [
-                            {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card."",
-                                ""wrap"": true,
-                                ""size"": ""large"",
-                                ""weight"": ""bolder""
-                            },
-                            {
-                                ""type"": ""Image"",
-                                ""url"": ""data:image/png;base64," + imageData + @""",
-                                ""size"": ""auto""
-                            }
-                          ],
-                ""fallbackText"": ""This card requires Adaptive Card support.""
-            }";
+            var adaptiveCardJson = $@"
+                {{
+                    ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
+                    ""type"": ""AdaptiveCard"",
+                    ""version"": ""1.0"",
+                    ""body"": [
+                        {{
+                            ""type"": ""TextBlock"",
+                            ""text"": ""Hello and welcome! With this sample, you can experience the functionality of bot configuration. To access Bot configuration, click on the settings button in the bot description card."",
+                            ""wrap"": true,
+                            ""size"": ""large"",
+                            ""weight"": ""bolder""
+                        }},
+                        {{
+                            ""type"": ""Image"",
+                            ""url"": ""data:image/png;base64,{imageData}"",
+                            ""size"": ""auto""
+                        }}
+                    ],
+                    ""fallbackText"": ""This card requires Adaptive Card support.""
+                }}";
 
-            var attachment = new Microsoft.Bot.Schema.Attachment()
+            var attachment = new Attachment
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson)
@@ -58,50 +67,69 @@ namespace Botconfiguration.Bots
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        /// <summary>
+        /// Handles the event when a message activity is received.
+        /// </summary>
+        /// <param name="turnContext">Turn context.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (turnContext.Activity.Text != null)
+            var activity = turnContext.Activity;
+            if (!string.IsNullOrEmpty(activity.Text))
             {
-                string text = turnContext.Activity.Text.ToLower().Trim();
+                var text = activity.Text.ToLower().Trim();
                 if (text == "chosen flow" || text == "<at>typeahead search adaptive card</at> chosen flow")
                 {
                     await turnContext.SendActivityAsync($"Bot configured for {_chosenFlow} flow", cancellationToken: cancellationToken);
                 }
             }
-            else if (turnContext.Activity.Value != null)
+            else if (activity.Value != null)
             {
-                var choiceselect = turnContext.Activity.Value;
-                await turnContext.SendActivityAsync($"Selected option is: {choiceselect}", cancellationToken: cancellationToken);
+                await turnContext.SendActivityAsync($"Selected option is: {activity.Value}", cancellationToken: cancellationToken);
             }
         }
 
+        /// <summary>
+        /// Handles the event when a configuration fetch is requested.
+        /// </summary>
+        /// <param name="turnContext">Turn context.</param>
+        /// <param name="configData">Configuration data.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Configuration response.</returns>
         protected override Task<ConfigResponseBase> OnTeamsConfigFetchAsync(ITurnContext<IInvokeActivity> turnContext, JObject configData, CancellationToken cancellationToken)
         {
-            ConfigResponseBase response = new ConfigResponse<BotConfigAuth>
+            var response = new ConfigResponse<BotConfigAuth>
             {
                 Config = new BotConfigAuth
                 {
                     SuggestedActions = new SuggestedActions
                     {
                         Actions = new List<CardAction>
-                {
-                    new CardAction
-                    {
-                        Type = "openUrl",
-                        Title = "Sign in to this app",
-                        Value = "https://example.com/auth"
-                    }
-                }
+                            {
+                                new CardAction
+                                {
+                                    Type = ActionTypes.OpenUrl,
+                                    Title = "Sign in to this app",
+                                    Value = "https://example.com/auth"
+                                }
+                            }
                     },
                     Type = "auth"
                 }
             };
-            return Task.FromResult(response);
+            return Task.FromResult<ConfigResponseBase>(response);
         }
 
+        /// <summary>
+        /// Handles the event when a configuration submit is requested.
+        /// </summary>
+        /// <param name="turnContext">Turn context.</param>
+        /// <param name="configData">Configuration data.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Configuration response.</returns>
         protected override Task<ConfigResponseBase> OnTeamsConfigSubmitAsync(ITurnContext<IInvokeActivity> turnContext, JObject configData, CancellationToken cancellationToken)
         {
-            ConfigResponseBase response = new ConfigResponse<TaskModuleResponseBase>
+            var response = new ConfigResponse<TaskModuleResponseBase>
             {
                 Config = new TaskModuleMessageResponse
                 {
@@ -110,7 +138,7 @@ namespace Botconfiguration.Bots
                 }
             };
 
-            return Task.FromResult(response);
+            return Task.FromResult<ConfigResponseBase>(response);
         }
     }
 }

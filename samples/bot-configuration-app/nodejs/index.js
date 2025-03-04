@@ -1,23 +1,19 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const { BotFrameworkAdapter } = require('botbuilder');
+const { TeamsBot } = require('./teamsBot');
+const config = require("./config");
+
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
+
 const PORT = process.env.PORT || 3978;
 const server = express();
 
 server.use(cors());
 server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
-
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
-
-const { TeamsBot } = require('./teamsBot');
-const config = require("./config");
+server.use(express.urlencoded({ extended: true }));
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -26,11 +22,12 @@ const adapter = new BotFrameworkAdapter({
     appPassword: config.botPassword
 });
 
-adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights. See https://aka.ms/bottelemetry for telemetry 
-    //       configuration instructions.
+/**
+ * Handles errors that occur during the bot's turn.
+ * @param {Object} context - The context object.
+ * @param {Error} error - The error object.
+ */
+const onTurnErrorHandler = async (context, error) => {
     console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
@@ -45,6 +42,8 @@ adapter.onTurnError = async (context, error) => {
     await context.sendActivity('The bot encountered an error or bug.');
     await context.sendActivity('To continue to run this bot, please fix the bot source code.');
 };
+
+adapter.onTurnError = onTurnErrorHandler;
 
 // Create the bot that will handle incoming messages.
 const bot = new TeamsBot();
