@@ -4,8 +4,8 @@
 }
 
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.4.2/js/MicrosoftTeams.min.js"
-            integrity="sha384-M1BiuUWGXFEu6jscBr/dyRZl4uojmiT5eMSu50lpG3eUyacKjwXE0eWRa2ZIdOmQ"
+    <script src="https://res.cdn.office.net/teams-js/2.33.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-hCfPVLNt9JPTceReb/qZGZR7IbUaPeoExYnER2H//kiykKfhcVEMVQiCR0eAtCCs"
             crossorigin="anonymous"></script>
     <style>
         h3 {
@@ -73,15 +73,12 @@
         // Google app client id
         var googleId = "@ViewBag.GoogleAppId"; // Google app client id
 
-        // Redirect url path
-        var url = window.location.origin + "/Auth/GoogleEnd";
-
         // Fetch id token
         function getGoogleIdToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.app.initialize().then(() => {
                     microsoftTeams.authentication.authenticate({
-                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl=${url}&googleId=${googleId}`,
+                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl={hostRedirectUrl}&googleId=${googleId}`,
                         isExternal: true
                     }).then((result) => {
                         getGoogleServerSideToken(result);
