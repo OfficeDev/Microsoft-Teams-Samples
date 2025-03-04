@@ -16,6 +16,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
+    /// <summary>
+    /// A Teams bot that handles various commands to interact with Teams channels and members.
+    /// Supports listing channels, starting new threads, and retrieving team member details.
+    /// </summary>
     public class TeamsStartNewThreadInTeam : ActivityHandler
     {
         private readonly string _appId;
@@ -27,6 +31,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             _tenantId = configuration["MicrosoftAppTenantId"];
         }
 
+        /// <summary>
+        /// Processes incoming messages and triggers appropriate functions based on the command received.
+        /// </summary>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var text = turnContext.Activity.Text?.Trim().ToLower();
@@ -55,6 +62,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// Starts a new thread in a specified Teams channel.
+        /// </summary>
         private async Task StartNewThreadInChannelAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
@@ -83,6 +93,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// Lists all channels in the current team and presents them in an Adaptive Card.
+        /// </summary>
         private async Task ListTeamChannelsAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             try
@@ -139,6 +152,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// Retrieves and displays information about a specific team member.
+        /// </summary>
         private async Task GetTeamMemberAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             try
@@ -210,6 +226,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        /// <summary>
+        /// Retrieves paged team members from the current team and displays them in an Adaptive Card.
+        /// </summary>
         private async Task GetPagedTeamMembersAsync(ITurnContext<IMessageActivity> turnContext, string tenantId, CancellationToken cancellationToken)
         {
             try

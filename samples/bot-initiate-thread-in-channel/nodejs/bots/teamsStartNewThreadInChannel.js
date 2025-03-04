@@ -100,7 +100,7 @@ class TeamsStartNewThreadInChannel extends TeamsActivityHandler {
             await context.sendActivity({ attachments: [cardAttachment] });
         } catch (error) {
             console.error('Error listing channels:', error);
-            await context.sendActivity("Error listing channels: " + error.message);
+            await context.sendActivity("An error occurred while trying to list the channels. Please check the team ID and your network connection. Error details: " + error.message);
         }
     }
 
