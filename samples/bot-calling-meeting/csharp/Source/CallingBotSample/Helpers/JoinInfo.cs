@@ -27,10 +27,11 @@ namespace CallingBotSample.Helpers
             var decodedURL = WebUtility.UrlDecode(joinURL);
 
             //// URL being needs to be in this format.
+            /// https://gov.teams.microsoft.us/l/meetup-join/19:gcch:meeting_a58ee79c201f412a84a2cd5d80bf45bb@thread.v2/0?context={"Tid":"fef24bbe-18d9-453d-a4c9-3471d278af0c","Oid":"d7383a51-18d8-4fbf-b01f-f3c8c5bbe473"}
             //// https://teams.microsoft.com/l/meetup-join/19:cd9ce3da56624fe69c9d7cd026f9126d@thread.skype/1509579179399?context={"Tid":"72f988bf-86f1-41af-91ab-2d7cd011db47","Oid":"550fae72-d251-43ec-868c-373732c2704f","MessageId":"1536978844957"}
             //// https://teams.microsoft.com/l/meetup-join/19:meeting_MDQzYmJlMDctMWJiZS00OGExLTlmYjUtZTczNzVhZGM1OTQx@thread.v2/0?context={"Tid":"c80f38d3-c04c-49bf-a48b-9d99278d4ac6","Oid":"782f076f-f6f9-4bff-9673-ea1997283e9c"}
 
-            var regex = new Regex("https://teams\\.microsoft\\.com.*/(?<thread>[^/]+)/(?<message>[^/]+)\\?context=(?<context>{.*})");
+            var regex = new Regex("https://gov\\.teams\\.microsoft\\.us.*/(?<thread>[^/]+)/(?<message>[^/]+)\\?context=(?<context>{.*})");
             var match = regex.Match(decodedURL);
             if (!match.Success)
             {
