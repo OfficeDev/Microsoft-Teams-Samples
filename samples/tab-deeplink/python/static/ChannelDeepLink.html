@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <title></title>
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+        crossorigin="anonymous"></script>
+    <script src="DeepLinkModel.js"></script>
+    <script src="LinkDescription.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+
+    <script>
+        var deepLinkString = "";
+        function callSidePanelDeeplink() {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.openLink(deepLinkString);
+            })
+        }
+
+        function shareAppContentToStage() {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                    if (result) {
+                        // handle success
+                        console.log(result);
+                    }
+                    if (err) {
+                        // handle error
+                        alert(JSON.stringify(err))
+                    }
+                }, `${window.location.origin}/ChannelDeepLink.html`);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="taskDiv" style="margin-top:10px;width:70px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;">
+    </div>
+    <div id="taskContent"
+        style="margin-top:-23px;margin-left:80px;color:Highlight;font-family:'Segoe UI';font-size:15px"></div>
+    <div id="list-content" style="margin-top:3rem"></div>
+
+    <div id="extended-deeplink">
+        <div style="margin-top:1rem;">
+            <span class="container" style="font-size:20px;font-weight:700;">
+                Extended Deep link features
+            </span>
+        </div>
+        <div>
+            <object type="text/html" data="ExtendedDeepLink.html" width="1630rem" height="500">
+            </object>
+        </div>
+    </div>
+
+    <a href="ChannelTasklist.html" id="taskList" style="font-family:'Segoe UI';font-size:20px;">Back To List</a>
+
+    <div id="side-panel-content" class="container" style="color:white;display:none;margin-top:3rem;">
+        <div>
+            This is a Side Panel tab.
+        </div>
+        <button data-id="default" class="callDeeplinkButton" onclick="shareAppContentToStage()"
+            style="width: 162px;margin:1rem 0;">
+            Share content to stage.
+        </button>
+    </div>
+
+    <div id="side-panel-deeplink" class="container" style="color:white;display:none">
+        <div class="card-container-div">
+            <div>
+                <div class="card" style="width:100%">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <b>Open side panel using deeplink</b>
+                        </div>
+                        <div class="configure-header">
+                            To use this, configure the deeplink with following parameters
+                            <!-- Since we are using pre tag for having the code snippet in specified format ignoring the indentation here -->
+                            <pre style="overflow: hidden;">
+microsoftTeams.app.openLink("https://teams.microsoft.com/l/entity/{appId}/{entityId}?context={"chatId": "{meetingId}","contextType":"chat"}")
+                            </pre>
+                        </div>
+                        <div>Click on button to open meeting side panel.</div>
+                    </div>
+                    <button data-id="default" class="callDeeplinkButton" onclick="callSidePanelDeeplink()"
+                        style="width:210px">
+                        Open Teams meeting side panel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
