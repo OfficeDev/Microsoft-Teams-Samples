@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.deeplinkbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Deep Link Bot",
+    "full": "Bot for Deep linking to tab"
+  },
+  "description": {
+    "short": "Teams sample app showcasing deeplinks for calls, chats, and navigation.",
+    "full": "This Teams sample application illustrates how to use deeplinks for initiating calls, video chats, and navigating within various app tabs. It includes detailed setup instructions and supports interactions with bots and tabs to enhance user experience."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/Configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ],
+      "context": [
+        "channelTab",
+        "privateChatTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "meetingChatTab",
+        "meetingDetailsTab"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "contentUrl": "https://${{BOT_DOMAIN}}/DeepLink.html",
+      "websiteUrl": "https://${{BOT_DOMAIN}}",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}",
+    "${{BOT_DOMAIN}}"
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "groupchat",
+        "personal",
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}
