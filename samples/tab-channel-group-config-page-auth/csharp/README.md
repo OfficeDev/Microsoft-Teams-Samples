@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates Microsoft Entra ID and Silent Authentication inside teams configurable tab.
+description: This sample showcases how to implement Microsoft Entra ID and silent authentication in a configurable Teams tab, enabling secure access to user profile information.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-aut
 ---
 
 # Config Tab Authentication
+
+Explore how to integrate Microsoft Entra ID and silent authentication in your Microsoft Teams tabs with this comprehensive sample application. The guide walks you through the necessary setup, including OAuth 2.0 implementation, app registration, and the configuration of user authentication flows, ensuring seamless access to Microsoft Graph user profile data.
 
 ## Summary
 

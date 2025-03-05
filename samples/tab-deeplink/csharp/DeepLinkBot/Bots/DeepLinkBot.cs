@@ -61,11 +61,11 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
             else
             {
-                tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "topic1");
-                tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "topic2");
-                tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "topic3");
-                extendedDeepLink = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["ManifestAppId"], _configuration["TabEntityId"], "");
-                sidePanelLink = deeplinkHelper.GetDeepLinkToMeetingSidePanel(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], _configuration["ChannelEntityId"], turnContext.Activity.Conversation.Id, "chat");
+                tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["TeamsAppId"], _configuration["TabEntityId"], "topic1");
+                tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["TeamsAppId"], _configuration["TabEntityId"], "topic2");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["TeamsAppId"], _configuration["TabEntityId"], "topic3");
+                extendedDeepLink = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["TeamsAppId"], _configuration["TabEntityId"], "");
+                sidePanelLink = deeplinkHelper.GetDeepLinkToMeetingSidePanel(teamsUrl, _configuration["TeamsAppId"], _configuration["BaseURL"], _configuration["ChannelEntityId"], turnContext.Activity.Conversation.Id, "chat");
             }
 
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))

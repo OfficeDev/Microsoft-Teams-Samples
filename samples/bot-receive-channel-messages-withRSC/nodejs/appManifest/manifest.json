@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.botrsc",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Channel messages with RSC"
   },
   "description": {
-    "short": "Receive channel messages with RSC",
-    "full": "This sample demos a bot with RSC permission"
+    "short": "Bot receives all Teams channel messages using RSC permissions.",
+    "full": "This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions."
   },
   "icons": {
     "outline": "outline.png",
@@ -28,7 +27,7 @@
       "scopes": [
         "team",
         "personal",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false
     }

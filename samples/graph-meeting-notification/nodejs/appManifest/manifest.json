@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.meeting.notification",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,15 +18,15 @@
     "full": "Meeting Notification App."
   },
   "description": {
-    "short": "This is a sample demonstrates use of online meeting subscription.",
-    "full": "This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end."
+    "short": "Get chat notifications for online meeting events using a Teams bot.",
+    "full": "This sample application showcases online meeting subscriptions that notify users in chat about meeting events, including when users join or leave and when meetings start or end."
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "supportsFiles": false,
       "isNotificationOnly": false

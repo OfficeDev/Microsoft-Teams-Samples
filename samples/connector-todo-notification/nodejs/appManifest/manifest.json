@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "<<Manifest-Id>>",
-  "packageName": "com.microsoft.teams.samples.todoconnectorapp",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "TODO Connector App"
   },
   "description": {
-    "short": "This is a small sample app we made for you, in nodejs",
-    "full": "This is a small sample app which shows connector authentication and sends notification on task creation."
+    "short": "Office 365 Connector to generate task notifications in Microsoft Teams.",
+    "full": "This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector."
   },
   "icons": {
     "outline": "outline.png",

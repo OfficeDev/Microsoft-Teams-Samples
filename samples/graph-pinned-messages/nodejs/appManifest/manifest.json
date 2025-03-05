@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.graphpinmessage",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +18,8 @@
     "full": "Graph Pin message"
   },
   "description": {
-    "short": "This is a sample showing how to pin messages in chat using Graph api.",
-    "full": "This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat."
+    "short": "Sample app for pinning chat messages in Teams using the Graph API.",
+    "full": "This sample application demonstrates how to pin and display messages in Microsoft Teams chat using the Graph API."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -28,7 +27,7 @@
       "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "groupchat"
+        "groupChat"
       ]
     }
   ],

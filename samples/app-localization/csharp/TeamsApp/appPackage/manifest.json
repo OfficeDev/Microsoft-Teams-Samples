@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.1",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.contoso.localization",
   "localizationInfo": {
     "defaultLanguageTag": "en-us",
     "additionalLanguages": [
@@ -32,8 +31,8 @@
     "full": "Localization App"
   },
   "description": {
-    "short": "Localization App for Microsoft Teams",
-    "full": "This sample app provides a very simple localization app. You can extend this to add more content and capabilities."
+    "short": "Sample app showcasing Microsoft Teams localization with Bot and Tab integration.",
+    "full": "This sample demonstrates how to implement localization for Microsoft Teams apps using Bots and Tabs."
   },
   "icons": {
     "outline": "outline.png",

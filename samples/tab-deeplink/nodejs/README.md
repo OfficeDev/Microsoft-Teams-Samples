@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
+description: This Teams sample application illustrates how to use deeplinks for initiating calls, video chats, and navigating within various app tabs. It includes detailed setup instructions and supports interactions with bots and tabs to enhance user experience.
 products:
 - office-teams
 - office
@@ -15,14 +15,12 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 # DeepLink
 
-Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+Explore this Microsoft Teams sample app designed to demonstrate the use of deeplinks for seamless interactions, including calls, chats, and navigation across tabs and applications. Featuring bot integration and comprehensive setup guidance, this app empowers developers to create engaging and efficient communication experiences within Teams.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
 
  ## Included Features
 * Tabs
 * Bots
 * Deep Links
-* Share To Teams From Web Apps
-* Share To Teams For Education
 
 ## Interaction with app.
 
@@ -204,20 +202,6 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 ![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
 
 ![SharedFromWebApp](Images/ShareToTeams_LinkSharedFromWebApp.png)
-
-**Share To Teams For Education:**
-
-> **Note:** The `Share to Teams for EDU` feature is exclusively supported in Education (EDU) tenants. Ensure that your application is deployed and tested in an EDU tenant environment for this functionality to work correctly.
-
-![ClickTeamsIcon](Images/ShareToTeamsEDU_1.png)
-
-![CreateAssignment](Images/ShareToTeamsEDU_2.png)
-   
-![AssignmentCreated](Images/ShareToTeamsEDU_3.png)
-
-![ViewCreatedAssignment](Images/ShareToTeamsEDU_4.png)
-
-![VerifyAssignmentTitle](Images/ShareToTeamsEDU_5.png)
 
 ## Outlook on the web
 

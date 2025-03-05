@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
+description: This sample app enables users to request task approvals through activity feed notifications, allowing managers to easily approve or reject requests.
 products:
 - office-teams
 - office

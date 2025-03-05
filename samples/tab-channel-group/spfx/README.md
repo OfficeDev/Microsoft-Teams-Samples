@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample app showing Microsoft Teams tabs using SharePoint Framework
+description: This sample demonstrates how to create Microsoft Teams tabs using the SharePoint Framework, simplifying development by hosting directly within SharePoint.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 
 # Microsoft Teams tab using SharePoint Framework
 
-Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services.
+Discover how to build Microsoft Teams tabs using the SharePoint Framework in this detailed sample application. This guide walks you through the entire process—from initial setup and development to packaging and deployment—highlighting how to leverage SharePoint for a streamlined Teams tab experience.
 
 ## Included Features
 * Tabs

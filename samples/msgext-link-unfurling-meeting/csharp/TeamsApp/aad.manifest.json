@@ -107,9 +107,9 @@
             ]
         }
     ],
-    "identifierUris":[
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
-    ],
+  "identifierUris": [
+    "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  ],
   "replyUrlsWithType": [
     {
       "url": "https://${{BOT_DOMAIN}}/auth-end",

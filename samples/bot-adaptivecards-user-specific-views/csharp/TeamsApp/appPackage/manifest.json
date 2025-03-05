@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples.userpsecificviews",
   "developer": {
     "name": "Contoso",
     "websiteUrl": "https://www.contoso.com",
@@ -19,8 +18,8 @@
     "full": "User specific views sample"
   },
   "description": {
-    "short": "User specific views in Adaptive cards",
-    "full": "Sample shows different ways developers can consume user specific views in Adaptive cards"
+    "short": "Sample app demonstrating user-specific views in Teams Adaptive Cards.",
+    "full": "This sample app shows how to create user-specific adaptive card views for Teams, enabling personalized content and auto-updating across various chat contexts."
   },
   "accentColor": "#FFFFFF",
   "bots": [

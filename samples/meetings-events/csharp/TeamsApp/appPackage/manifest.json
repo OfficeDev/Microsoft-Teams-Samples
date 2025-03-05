@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.botallmeetingevents",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Sample for meeting events and meeting participant events"
   },
   "description": {
-    "short": "Access real-time meeting events and meeting participant events",
-    "full": "This sample demos a bot with access to meeting events and meeting participant events"
+    "short": "Receive real-time meeting and participant events with this Teams bot sample.",
+    "full": "This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",
@@ -28,7 +27,7 @@
       "scopes": [
         "team",
         "personal",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false
     }

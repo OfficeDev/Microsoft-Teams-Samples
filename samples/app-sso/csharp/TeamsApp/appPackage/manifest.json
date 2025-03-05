@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples.AppSSO",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -19,8 +18,8 @@
     "full": "Teams Single Sign On Sample"
   },
   "description": {
-    "short": "App SSO in csharp",
-    "full": "This sample app demonstrates SSO for Tab Bot and ME (Link Unfurl, Action and Search Config"
+    "short": "Single Sign-On app for Teams Tab, Bot, and Messaging Extension with C#.",
+    "full": "This sample app demonstrates Teams SSO integration for Tab, Bot, and Messaging Extension, using C# and Azure AD for secure authentication."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [

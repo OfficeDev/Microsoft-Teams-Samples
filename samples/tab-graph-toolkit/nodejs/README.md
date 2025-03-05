@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating graph toolkit component
+description: This demo showcases a Microsoft Teams tab built with the Microsoft Graph Toolkit, featuring components like a sign-in card and various interactive elements. It allows users to easily integrate and display Microsoft 365 data, enhancing collaboration within Teams.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-nodejs
 
 # Teams tab with microsoft graph toolkit
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+This sample application illustrates the use of the Microsoft Graph Toolkit within a Microsoft Teams tab, enabling the display and interaction of user data in a collaborative environment. With features such as tabs, sign-in cards, and integration capabilities, it serves as a practical guide for developers looking to enhance their Teams applications with Microsoft Graph functionalities.
 
  ## Included Features
 * Tabs

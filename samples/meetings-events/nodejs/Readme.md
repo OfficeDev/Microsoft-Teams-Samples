@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates use of various meeting events which are available in bot framework v4
+description: This Node.js sample demonstrates how a bot can receive real-time meeting events within Microsoft Teams, enhancing meeting interactivity.
 products:
 - office-teams
 - office
@@ -15,6 +15,8 @@ urlFragment: officedev-microsoft-teams-samples-meetings-events-nodejs
 
 # Realtime meeting events
 
+ Experience real-time meeting and participant events with this C# bot sample for Microsoft Teams. Currently available in public developer preview, it supports Adaptive Cards, bot interactions, and RSC permissions, allowing seamless integration for enhanced meeting management. To try it out, simply upload the provided manifest in your Teams client.
+ 
 Using this Node JS sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 

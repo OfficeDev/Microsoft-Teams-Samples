@@ -23,6 +23,6 @@ resource botWebAppSettings 'Microsoft.Web/sites/config@2021-02-01' = {
     BOT_ID: identity.properties.clientId // ID of your bot
     BOT_TENANT_ID: identity.properties.tenantId // Secret of your bot
     IDENTITY_ID: provisionOutputs.identityOutput.value.identityClientId // User assigned identity id, the identity is used to access other Azure resources
-    PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT : provisionOutputs.botOutput.value.siteEndpoint // Site endpoint of AAD application
+    PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT : provisionOutputs.botOutput.value.siteEndpoint // Site endpoint of AAD application
   }, currentAppSettings)
 }

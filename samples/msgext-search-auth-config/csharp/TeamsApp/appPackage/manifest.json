@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.1",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.sample",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -19,8 +18,8 @@
     "full": "ME Auth for Search, Action and link unfurling"
   },
   "description": {
-    "short": "ME Authentication for Search, Action and Link unfurling",
-    "full": "ME Authentication sample code for all authentication merged"
+    "short": "C# Messaging Extension demonstrating authentication in search-based extensions.",
+    "full": "This sample demonstrates how to implement authentication in a C# Messaging Extension for Microsoft Teams, enabling secure access and user-specific interactions."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
@@ -94,7 +93,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "${{BOT_DOMAIN}}"
             ],
             "supportsAnonymizedPayloads": true
           }

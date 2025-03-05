@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.sample.meetingtoken",
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
     "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
@@ -15,11 +14,12 @@
     "termsOfUseUrl": "https://${{BOT_DOMAIN}}/termsofuse"
   },
   "name": {
-    "short": "Meeting Token App"
+    "short": "Meeting Token App",
+    "full": "Meeting token App"
   },
   "description": {
-    "short": "Meeting Token App",
-    "full": "Token app optimized for meetings to generate sequential tokens for paticipants"
+    "short": "Generate meeting tokens in Teams to enhance participant interaction in meetings.",
+    "full": "The Meeting Token Generator app for Microsoft Teams allows participants to request and manage interaction tokens, ensuring equitable participation during meetings like scrums and Q&A sessions."
   },
   "icons": {
     "outline": "outline.png",
@@ -31,7 +31,7 @@
       "configurationUrl": "https://${{BOT_DOMAIN}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "meetingChatTab",
@@ -51,7 +51,7 @@
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "needsChannelSelector": false,
       "isNotificationOnly": false,
@@ -59,7 +59,7 @@
       "commandLists": [
         {
           "scopes": [
-            "groupchat"
+            "groupChat"
           ],
           "commands": [
             {

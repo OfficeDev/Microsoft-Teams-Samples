@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.teams.sample.messageReaction",
   "developer": {
     "name": "MessageReactionBot",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,15 +18,15 @@
     "full": "MessageReactionBot"
   },
   "description": {
-    "short": "MessageReactionBot",
-    "full": "MessageReactionBot"
+    "short": "Sample app demonstrating bot reactions to Teams messages using Bot Framework.",
+    "full": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework."
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
-        "groupchat",
+        "groupChat",
         "team",
         "personal"
       ],

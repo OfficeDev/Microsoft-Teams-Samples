@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-hello-world-nodejs",
     "source": "officeDev",
     "title": "Microsoft Teams NodeJS Helloworld Sample",
-    "shortDescription": "Microsoft Teams hello world sample app in Node.js which showcase tab, bot and messaging extension.",
+    "shortDescription": "Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs",
     "longDescription": [
-      "Microsoft Teams hello world sample app in Node.js which showcase tab, bot and messaging extension."
+      "This Microsoft Teams Hello World sample app demonstrates the integration of tabs, bots, and messaging extensions using JavaScript, providing a comprehensive foundation for building interactive and engaging Teams applications. Experience the full capabilities of Teams by exploring features that enhance collaboration and productivity within the platform."
     ],
     "creationDateTime": "2017-11-03",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

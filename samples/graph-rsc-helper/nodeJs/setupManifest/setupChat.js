@@ -1,7 +1,7 @@
 const fs = require("fs");
 const content = fs.readFileSync("../appManifest/manifest.json", "utf8");
 const manifest = JSON.parse(content);
-manifest.configurableTabs[0].scopes = ["groupchat"];
+manifest.configurableTabs[0].scopes = ["groupChat"];
 const permissions = [
   {
       "name": "Calls.AccessMedia.Chat",

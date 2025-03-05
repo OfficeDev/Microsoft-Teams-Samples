@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.meetingslivecaption",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,15 +18,15 @@
     "full": "Meeting Live Caption"
   },
   "description": {
-    "short": "Meeting side panel application uses CART link to send caption in live meeting.",
-    "full": "This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.Meeting side panel application uses CART link to send caption in live meeting."
+    "short": "Sample app using CART link for live captions in Microsoft Teams meetings.",
+    "full": "This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings."
   },
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
       "configurationUrl": "https://${{TAB_DOMAIN}}/Home/Configure",
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "canUpdateConfiguration": true,
       "context": [

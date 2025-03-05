@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.teams.sample.linkunfurling",
   "developer": {
     "name": "Link Unfurling",
@@ -11,21 +11,21 @@
     "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "Link Unfurling",
     "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Link Unfurling sample",
-    "full": "This sample demonstrates Link Unfurling for *.BotFramework.com urls."
+    "short": "Python bot sample demonstrating link unfurling in Teams messaging extensions",
+    "full": "This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "commands": [
         {
           "id": "searchQuery",
@@ -50,6 +50,7 @@
           "type": "link",
           "value": {
             "domains": [
+              "${{BOT_DOMAIN}}",
               "*.botframework.com"
             ]
           }

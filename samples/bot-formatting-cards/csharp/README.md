@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample which demonstrates different formatting supported in cards using bot.
+description: This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
 ---
 ## Different formatting on cards
 
-This sample feature shows how to use different formatting on cards using bot.
+Explore adaptive card formatting in Microsoft Teams with this bot sample. It includes features like mentions, emojis, persona icons, and different card layouts to enhance user interaction and presentation.
 
 ## Included Features
 * Bots
@@ -258,9 +258,129 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Rounded Corners](BotFormattingCards/Images/14.RoundedCorners.png)
 
+**Select Fluent Icon:**
+
+![FluentIconAdaptiveCard](BotFormattingCards/Images/16.FluentIconAdaptiveCard.png)
+
+**Fluent icon in an Adaptive Card:**
+
+![FluentIconsSelectCard](BotFormattingCards/Images/17.FluentIconsSelectCard.png)
+
+**Select Media elements:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/18.MediaElementsAdaptiveCard.png)
+
+**Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard](BotFormattingCards/Images/19.MediaElementsAdaptiveCard.png)
+
+**All Media elements in Adaptive Card:**
+
+![MediaElementsAdaptiveCard1](BotFormattingCards/Images/20.MediaElementsAdaptiveCard1.png)
+
+**Play video media elements in an Adaptive Card:**
+
+![MediaElementsAdaptiveCard2](BotFormattingCards/Images/21.MediaElementsAdaptiveCard2.png)
+
+**Select Star Ratings:**
+
+![SelectStarRatings](BotFormattingCards/Images/22.SelectStarRatings.png)
+
+**Star ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/23.StarRatingsAdaptiveCards.png)
+
+**Star ratings in Adaptive Cards validation:**
+
+![StarRatingsAdaptiveCardsValidation](BotFormattingCards/Images/24.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/25.StarRatingsFeedback.png)
+
+**Conditional and Scrollable buttons:**
+
+![ConditionalAndScrollableButtons](BotFormattingCards/Images/28.ConditionalAndScrollableButtons.png)
+
+**Conditional Card Before Input:**
+
+![ConditionalCardBeforeInput](BotFormattingCards/Images/29.ConditionalCardBeforeInput.png)
+
+**Conditional Card After Input:**
+
+![ConditionalCardBeforeInput](BotFormattingCards/Images/30.ConditionalCardAfterInput.png)
+
+**Scrollable Container Card:**
+
+![ScrollableContainerCard](BotFormattingCards/Images/31.ScrollableAdaptiveCard.png)
+
+**Compound Button Option:**
+
+![CompoundButtonOption](BotFormattingCards/Images/32.CompoundButton.png)
+
+**Compound Button Adaptive Card:**
+
+![CompoundButtonAdaptiveCard](BotFormattingCards/Images/33.CompoundButtonAdaptiveCard.png)
+
+**Container Layout and Donut Chart Buttons:**
+
+![ContainerLayoutandDonutChartButtons](BotFormattingCards/Images/34.ContainerAndDonutOptions.png)
+
+**Chart Buttons:**
+
+![ChartButtons](BotFormattingCards/Images/35.ChartOptions.png)
+
+**Remaining Chart Buttons:**
+
+![RemainingChartButtons](BotFormattingCards/Images/36.RemainingChartOptions.png)
+
+**Container Layout:**
+
+![ContainerLayout](BotFormattingCards/Images/37.ContainerLayout.png)
+
+**Donut Chart:**
+
+![DonutChart](BotFormattingCards/Images/38.DonutChart.png)
+
+**Gauge Chart:**
+
+![GaugeChart](BotFormattingCards/Images/39.GaugeChart.png)
+
+**Horizontal Chart:**
+
+![HorizontalChart](BotFormattingCards/Images/40.HorizontalChart.png)
+
+**Horizontal Stacked Chart:**
+
+![HorizontalStackedChart](BotFormattingCards/Images/41.HorizontalChartStacked.png)
+
+**Line Chart:**
+
+![LineChart](BotFormattingCards/Images/42.LineChart.png)
+
+**Pie Chart:**
+
+![PieChart](BotFormattingCards/Images/43.PieChart.png)
+
+**Vertical Bar Chart:**
+
+![VerticalBarChart](BotFormattingCards/Images/44.VerticalBarChart.png)
+
+**Vertical Bar Grouped Chart:**
+
+![Vertical Bar Chart](BotFormattingCards/Images/45.VerticalBarGroupedChart.png)
+
 **Mobile:**
 
 ![LayoutMobile](BotFormattingCards/Images/15.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](BotFormattingCards/Images/26.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](BotFormattingCards/Images/27.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
@@ -270,6 +390,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
 - [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
-
+- [Fluent icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?branch=pr-en-us-11655&tabs=adaptive-md%2Cdesktop%2Cconnector-html)
+- [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-csharp" />

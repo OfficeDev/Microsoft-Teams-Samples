@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.
+description: This sample application demonstrates how to send real-time change notifications for user presence in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-csharp
 
 Bot Framework v4 ChangeNotification sample.
 
-This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+This sample application allows developers to send real-time notifications about user presence changes in Microsoft Teams, leveraging the Bot Framework and Graph API. It includes comprehensive setup instructions for Azure AD registration, bot configuration, and integration with the Teams interface, making it easy to build interactive experiences based on user presence.
 
 ## Included Features
 * Bots

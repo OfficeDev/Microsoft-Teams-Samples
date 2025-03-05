@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-open-ai-search-file-upload-nodejs",
     "source": "officeDev",
     "title": "Teams Azure Open AI Embeddings And Redis Search based On Uploaded File Using Bot",
-    "shortDescription": "This Azure Open AI sample app demonstrates the user search functionality using Azure Open AI embeddings and completion APIs.",
+    "shortDescription": "This Azure Open AI sample app integrates user search with Azure Open AI embeddings, Redis DB, and Teams bot for queries based on uploaded files..",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-ai-enterprise-search/nodejs",
     "longDescription": [
-      "This Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings, Redis DB search and completion APIs for user queries, and it is based on files uploaded by an admin using a bot."
+      "Built with Azure Open AI and Redis, this app enables user searches on file content uploaded by an admin via a Teams bot. Key capabilities include Adaptive Cards, Azure Blob Storage, and support for Node.js in a Microsoft 365 environment."
     ],
     "creationDateTime": "2023-07-28",
-    "updateDateTime": "2023-07-28",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

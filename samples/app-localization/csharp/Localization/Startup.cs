@@ -27,69 +27,84 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method is used to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
-            services.Configure<RequestLocalizationOptions>(Options =>
+            // Add localization services and set the resources path.
+            services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
+
+            // Configure request localization options (supported cultures, fallback logic, etc.)
+            services.Configure<RequestLocalizationOptions>(options =>
             {
-                var culturSupported = new[]
+                var supportedCultures = new[]
                 {
                     new CultureInfo("en-US"),
                     new CultureInfo("fr-CA"),
                     new CultureInfo("hi-IN"),
                     new CultureInfo("es-MX")
                 };
-                Options.DefaultRequestCulture = new RequestCulture("en-US");
-                Options.SupportedCultures = culturSupported;
-                Options.SupportedUICultures = culturSupported;
-                Options.FallBackToParentCultures = false;
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.FallBackToParentCultures = false; // Don't fallback to parent cultures
             });
 
+            // Add MVC services for controller handling.
             services.AddControllers();
+
+            // Configure MVC to use Razor views and add localization support.
             services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-                opts => { opts.ResourcesPath = "Resources"; })
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix, opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-            // Create the Bot Framework Adapter with error handling enabled.
+            // Register the Bot Framework adapter with error handling.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+            // Register the bot as a transient service.
             services.AddTransient<IBot, LocalizerBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method configures the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Enable detailed error pages in development environment.
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                // Enable HSTS for production to enhance security.
                 app.UseHsts();
             }
+
+            // Serve static files and default files (like index.html).
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            // Enable WebSockets (for real-time communication if needed).
             app.UseWebSockets();
 
-            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(locOptions.Value);
+            // Apply localization middleware.
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(localizationOptions.Value);
 
-            // Runs matching. An endpoint is selected and set on the HttpContext if a match is found.
+            // Configure routing and endpoint mapping.
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                // Mapping of endpoints goes here:
+                // Map controller endpoints.
                 endpoints.MapControllers();
+
+                // Map default controller route.
                 endpoints.MapControllerRoute(
                    name: "default",
                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //app.UseHttpsRedirection();
+            // Optionally, uncomment the line below for HTTPS redirection in production.
+            // app.UseHttpsRedirection();
         }
     }
 }

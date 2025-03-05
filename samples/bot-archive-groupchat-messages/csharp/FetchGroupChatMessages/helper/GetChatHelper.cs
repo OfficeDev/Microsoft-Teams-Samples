@@ -10,10 +10,19 @@ using System.Threading.Tasks;
 
 namespace FetchGroupChatMessagesWithRSC.helper
 {
+    /// <summary>
+    /// Helper class for fetching and sending group chat messages.
+    /// </summary>
     public class GetChatHelper
     {
-        // Get groupchat message
-        public static async Task<IChatMessagesCollectionPage> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string Chatid)
+        /// <summary>
+        /// Gets group chat messages.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="tokenResponse">The token response.</param>
+        /// <param name="chatId">The chat ID.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the chat messages collection.</returns>
+        public static async Task<IChatMessagesCollectionPage> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
         {
             if (turnContext == null)
             {
@@ -28,23 +37,31 @@ namespace FetchGroupChatMessagesWithRSC.helper
             try
             {
                 var client = new SimpleGraphClient(tokenResponse.Token);
-                var messages = await client.GetGroupChatMessages(Chatid);
+                var messages = await client.GetGroupChatMessages(chatId);
                 return messages;
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 
-        // Send archive messages file to user.
-        public static async Task SendGroupChatMessage(ITurnContext turnContext, long fileSize,string microsoftAppId, string microsoftAppPassword,  CancellationToken cancellationToken)
+        /// <summary>
+        /// Sends archive messages file to the user.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="fileSize">The file size.</param>
+        /// <param name="microsoftAppId">The Microsoft app ID.</param>
+        /// <param name="microsoftAppPassword">The Microsoft app password.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        public static async Task SendGroupChatMessage(ITurnContext turnContext, long fileSize, string microsoftAppId, string microsoftAppPassword, CancellationToken cancellationToken)
         {
-
             if (turnContext == null)
             {
                 throw new ArgumentNullException(nameof(turnContext));
             }
+
             try
             {
                 string filename = "chat.txt";
@@ -55,34 +72,32 @@ namespace FetchGroupChatMessagesWithRSC.helper
                     Id = turnContext.Activity.From.Id
                 };
 
-                ConversationReference conversationReference = null;
-
                 var conversationParameters = new ConversationParameters
                 {
                     IsGroup = false,
                     Bot = turnContext.Activity.Recipient,
-                    Members = new ChannelAccount[] { member },
+                    Members = new[] { member },
                     TenantId = turnContext.Activity.Conversation.TenantId,
                 };
 
                 var credentials = new MicrosoftAppCredentials(microsoftAppId, microsoftAppPassword);
                 var serviceUrl = turnContext.Activity.ServiceUrl;
 
-                // Creates a conversation on the specified groupchat and send file consent card on that conversation.
+                // Creates a conversation on the specified group chat and sends a file consent card in that conversation.
                 await ((BotFrameworkAdapter)turnContext.Adapter).CreateConversationAsync(
-                   turnContext.Activity.ChannelId, 
-                   serviceUrl,
-                   credentials,
-                   conversationParameters,
+                    turnContext.Activity.ChannelId,
+                    serviceUrl,
+                    credentials,
+                    conversationParameters,
                     async (conversationTurnContext, conversationCancellationToken) =>
                     {
-                        conversationReference = conversationTurnContext.Activity.GetConversationReference();
+                        var conversationReference = conversationTurnContext.Activity.GetConversationReference();
                         await ((BotFrameworkAdapter)turnContext.Adapter).ContinueConversationAsync(
                             microsoftAppId,
                             conversationReference,
                             async (conversationContext, conversationCancellation) =>
                             {
-                                var replyActivity = SendFileCardAsync(turnContext, filename, fileSize);
+                                var replyActivity = CreateFileConsentCard(turnContext, filename, fileSize);
                                 await conversationContext.SendActivityAsync(replyActivity, conversationCancellation);
                             },
                             cancellationToken);
@@ -90,22 +105,28 @@ namespace FetchGroupChatMessagesWithRSC.helper
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 
-        // Send consent card to user.
-        private static Activity SendFileCardAsync(ITurnContext turnContext, string filename, long filesize)
+        /// <summary>
+        /// Creates a file consent card activity.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="filename">The file name.</param>
+        /// <param name="fileSize">The file size.</param>
+        /// <returns>The activity with the file consent card.</returns>
+        private static Activity CreateFileConsentCard(ITurnContext turnContext, string filename, long fileSize)
         {
             var consentContext = new Dictionary<string, string>
-            {
-                { "filename", filename },
-            };
+                {
+                    { "filename", filename },
+                };
 
             var fileCard = new FileConsentCard
             {
                 Description = "This is the archive chat file I want to send you",
-                SizeInBytes = filesize,
+                SizeInBytes = fileSize,
                 AcceptContext = consentContext,
                 DeclineContext = consentContext,
             };
@@ -118,7 +139,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
             };
 
             var replyActivity = turnContext.Activity.CreateReply();
-            replyActivity.Attachments = new List<Microsoft.Bot.Schema.Attachment>() { asAttachment };
+            replyActivity.Attachments = new List<Microsoft.Bot.Schema.Attachment> { asAttachment };
             return replyActivity;
         }
     }

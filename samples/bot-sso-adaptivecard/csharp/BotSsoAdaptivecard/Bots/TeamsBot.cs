@@ -15,13 +15,19 @@ namespace Microsoft.BotBuilderSamples
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
     public class TeamsBot : DialogBot<MainDialog>
     {
+        // Constructor to initialize the bot with necessary dependencies
         public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger, IConfiguration configuration)
             : base(conversationState, userState, dialog, logger, configuration["ConnectionName"])
         {
+            // Check if the ConnectionName exists in the configuration
+            if (string.IsNullOrEmpty(configuration["ConnectionName"]))
+            {
+                logger.LogError("ConnectionName is missing from configuration.");
+            }
         }
 
         /// <summary>
-        /// Override this in a derived class to provide logic for when members other than the bot join the conversation, such as your bot's welcome logic.
+        /// Override this in a derived class to provide logic for when members, except the bot, join the conversation, such as your bot's welcome logic.
         /// </summary>
         /// <param name="membersAdded">A list of all the members added to the conversation, as described by the conversation update activity.</param>
         /// <param name="turnContext">A strongly-typed context object for this turn.</param>
@@ -29,11 +35,14 @@ namespace Microsoft.BotBuilderSamples
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var member in turnContext.Activity.MembersAdded)
+            // Iterate over all members added to the conversation.
+            foreach (var member in membersAdded)
             {
+                // Ensure that the bot doesn't greet itself
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to Universal Adaptive Cards. Type 'login' to get sign in universal sso."), cancellationToken);
+                    // Send a welcome message to new members.
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to Universal Adaptive Cards. Type 'login' to sign in using Universal SSO."), cancellationToken);
                 }
             }
         }

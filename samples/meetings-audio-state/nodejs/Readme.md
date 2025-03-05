@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
+description: This sample tab application demonstrates how to control meeting audio in Microsoft Teams by muting and unmuting using the Incoming Client Audio API.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 
 # Meeting Audio State Sample
 
-This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
+This sample tab application showcases how to manage audio states in Microsoft Teams meetings by muting and unmuting using the Incoming Client Audio API. With features like meeting side panel integration, support for Teams themes, and RSC permissions, it provides a streamlined experience for controlling audio directly from the app.
 
 ## Included Features
 * Meeting SidePanel

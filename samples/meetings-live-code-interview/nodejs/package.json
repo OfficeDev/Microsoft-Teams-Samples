@@ -11,18 +11,20 @@
     "@microsoft/live-share": "1.0.0-preview.8",
     "@microsoft/live-share-media": "1.0.0-preview.8",
     "@microsoft/teams-js": "^2.5.0",
-    "@monaco-editor/react": "^4.3.1",
+    "@monaco-editor/react": "^4.4.6",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.21.4",
+    "browserslist": "^4.24.2",
     "cors": "^2.8.5",
     "fluid-framework": "~0.59.0",
     "has-cors": "^1.1.0",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.52.2",
     "msteams-ui-components-react": "^0.8.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "^4.0.0",
     "use-resize-observer": "^8.0.0",
@@ -30,21 +32,25 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@fluidframework/test-client-utils": "~0.59.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@fluidframework/test-client-utils": "^0.59.4003",
     "env-cmd": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
     "prettier": "^2.5.0",
-    "start-server-and-test": "^1.11.6"
+    "start-server-and-test": "^1.11.6",
+    "webpack": "4.44.2",
+    "webpack-cli": "^6.0.1"
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
     "clean": "npx shx rm -rf build",
     "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
-    "start:client": "set PORT=3978 HTTPS=true && react-scripts start",
+    "start:client": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,7 +64,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "last 2 versions"
     ],
     "development": [
       "last 1 chrome version",

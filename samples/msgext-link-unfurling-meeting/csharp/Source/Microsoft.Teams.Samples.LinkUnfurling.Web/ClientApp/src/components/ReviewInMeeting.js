@@ -23,9 +23,13 @@ export class ReviewInMeeting extends Component {
     this.initiateSSO = this.initiateSSO.bind(this);
   }
 
-  componentDidMount() {
-    // Initialize teams library and set context.
-    this.initialize();
+    componentDidMount() {
+        // Initialize teams library and set context.
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context, error) => {
+        this.setState({ context: context });
+      });
+      microsoftTeams.appInitialization.notifySuccess();
 
     // SSO.
     this.initiateSSO();
@@ -61,19 +65,6 @@ export class ReviewInMeeting extends Component {
         {errorMessage}
       </div>
     );
-  }
-
-  initialize() {
-    // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize(() => {
-      // Get the user context from Teams and set it in the state
-      microsoftTeams.getContext((context, error) => {
-        this.setState({ context: context });
-      });
-
-      // Notify sucess.
-      microsoftTeams.appInitialization.notifySuccess();
-    });
   }
 
   initiateSSO() {

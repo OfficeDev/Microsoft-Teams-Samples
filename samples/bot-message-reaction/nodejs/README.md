@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases feature on how to capture reaction events when reactions are passed to the bot through personal/teams messages.
+description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
 
 # Teams Message Reactions Bot Node.js Sample
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bot's response, and the bot will reply accordingly.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
 
 ## Included Features
 * Bots

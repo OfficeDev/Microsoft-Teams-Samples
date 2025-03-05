@@ -7,14 +7,13 @@ products:
 languages:
 - typescript
 - nodejs
-description: "Sample which demonstrates launching of task module from tab and bot."
+description: "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML."
 urlFragment: teams-module-node
 extensions:
   contentType: samples
   createdDate: "09/17/2018 06:53:22 PM"
 urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
-
 
 # Microsoft Teams task module
 

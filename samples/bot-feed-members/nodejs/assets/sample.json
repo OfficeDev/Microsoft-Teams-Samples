@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-feed-members-nodejs",
     "source": "officeDev",
     "title": "Apps in Federated",
-    "shortDescription": "This sample showcases how apps function within federated group chats.",
+    "shortDescription": "This app allows users to quickly view, add, and manage group members in federated Teams chat.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-feed-members/nodejs",
     "longDescription": [
-      "This sample showcases the integration, functionality, and management of apps within federated group chats. It includes insights on app behavior, permissions, and best practices for using apps in a cross-organization chat environment."
+      "This sample bot enables users to list and manage members within federated Teams group chats. It showcases member details in real-time with easy integration using Microsoft Teams and Azure."
     ],
     "creationDateTime": "2024-08-08",
-    "updateDateTime": "2024-08-08",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

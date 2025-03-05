@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Shows how to config RSC permissions in manifest, use them to call Microsoft Graph, and watch the real response with the scope installed.
+description: This sample demonstrates how to configure Resource Specific Consent (RSC) permissions in a Teams app manifest and use them to call Microsoft Graph, allowing you to observe real API responses in both team channels and group chats.
 products:
 - office-teams
 languages:
@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs-helper
 
 # Resource specific consent with Graph API
 
-This sample demonstrates how to use [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) to call Graph API in Microsoft teams channel and group chat. You can observe the real API response with the scope installed.
+This sample application showcases how to configure [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) permissions in a Microsoft Teams app manifest to facilitate calls to Microsoft Graph. It includes features for installation in team channels and group chats, allowing users to observe real API responses based on granted permissions, while leveraging the Teams Toolkit for easy setup and debugging.
 
 ## Included Features
 * Tab

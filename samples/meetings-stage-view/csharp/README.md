@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Enable and configure your apps for Teams meetings to use in stage view
+description: This sample app demonstrates how to enable and configure applications for Microsoft Teams meetings, allowing users to interact with a shared meeting stage using the Live Share SDK.
 products:
 - office-teams
 - office
@@ -15,8 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-csharp
 
 # Meetings Stage View
 
-This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
-For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
+This sample application enables the configuration and use of shared meeting stages within Microsoft Teams, leveraging the [Live Share SDK](https://aka.ms/livesharedocs) for real-time interaction. It includes features such as a meeting side panel and theme customization options, allowing users to enhance their collaborative experience during meetings. The demo manifest is available for testing in your Microsoft Teams client.
 
 ## Included Features
 * Meeting Stage
