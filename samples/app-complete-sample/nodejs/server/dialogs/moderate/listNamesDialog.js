@@ -1,51 +1,68 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 const { TeamsInfo, CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+
 const LISTNAMES = 'ListNames';
 
+/**
+ * Dialog to list names of members in a Microsoft Teams channel.
+ */
 class ListNamesDialog extends ComponentDialog {
+    /**
+     * Creates a new instance of the ListNamesDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {Object} conversationDataAccessor - The conversation state accessor.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
+
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(LISTNAMES, [
             this.beginListNamesDialog.bind(this),
         ]));
     }
 
+    /**
+     * Begins the ListNamesDialog.
+     * @param {Object} stepContext - The step context.
+     * @returns {Promise} - A promise representing the asynchronous operation.
+     */
     async beginListNamesDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "ListNamesDialog";
-        var members = await TeamsInfo.getMembers(stepContext.context);
-        var reply = stepContext.context._activity;
-        if (reply.attachments != null && reply.entities.length > 1) {
+
+        const members = await TeamsInfo.getMembers(stepContext.context);
+        const reply = stepContext.context._activity;
+
+        if (reply.attachments && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
         }
 
-        reply.text = JSON.stringify(members)
-        var card = [];
+        reply.text = JSON.stringify(members);
+        const cards = members.map(member => this.createInformationCard(member.givenName + member.surname, member.aadObjectId));
+        reply.attachments = cards;
 
-        if (members.length != 0) {
-            for (let i = 0; i < members.length; i++) {
-                card.push(this.getInformationCard(members[i].givenName + members[i].surname, members[i].aadObjectId));
-            }
-        }
-        reply.attachments = card
         await stepContext.context.sendActivity(reply);
         return await stepContext.endDialog();
     }
 
-    getInformationCard(name, aadId) {
-        var chatUrl = "https://teams.microsoft.com/l/chat/0/0?users=" + aadId;
+    /**
+     * Creates an information card for a member.
+     * @param {string} name - The member's name.
+     * @param {string} aadId - The member's Azure Active Directory ID.
+     * @returns {Object} - The information card.
+     */
+    createInformationCard(name, aadId) {
+        const chatUrl = `https://teams.microsoft.com/l/chat/0/0?users=${aadId}`;
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Chat', value: chatUrl },
         ];
-        const card = CardFactory.heroCard(name, undefined,
-            buttons);
-        return card;
+        return CardFactory.heroCard(name, undefined, buttons);
     }
 }
 
-exports.ListNamesDialog = ListNamesDialog;
+module.exports.ListNamesDialog = ListNamesDialog;

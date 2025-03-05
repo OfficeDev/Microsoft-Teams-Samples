@@ -1,10 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORECARD = 'O365ConnectorCard';
 
+/**
+ * O365ConnectorCardDialog class extends ComponentDialog to handle O365 connector card actions.
+ */
 class O365ConnectorCardDialog extends ComponentDialog {
+    /**
+     * Constructor for the O365ConnectorCardDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {StatePropertyAccessor} conversationDataAccessor - The state property accessor for conversation data.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
@@ -14,18 +23,23 @@ class O365ConnectorCardDialog extends ComponentDialog {
         ]));
     }
 
+    /**
+     * Begins the O365 connector card dialog.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Promise<DialogTurnResult>} The result of the dialog turn.
+     */
     async beginO365ConnectorCardDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "O365ConnectorCardDialog";
-        var text = stepContext.context._activity.text.trim();
-        var inputNumber = text.substr(text.length - 1, 1);
-        var reply = stepContext.context._activity;
+        const text = stepContext.context._activity.text.trim();
+        const inputNumber = text.substr(text.length - 1, 1);
+        const reply = stepContext.context._activity;
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
         }
         
-        var card;
+        let card;
         switch (inputNumber) {
             case "1":
                 card = this.O365ConnectorCardDefault();
@@ -36,6 +50,9 @@ class O365ConnectorCardDialog extends ComponentDialog {
             case "3":
                 card = this.O365ConnectorCardImageInSection();
                 break;
+            default:
+                card = this.O365ConnectorCardDefault();
+                break;
         }
 
         reply.attachments = [card];
@@ -43,9 +60,12 @@ class O365ConnectorCardDialog extends ComponentDialog {
         return await stepContext.endDialog();
     }
 
-    O365ConnectorCardDefault = () => {
-
-        var card = CardFactory.o365ConnectorCard({
+    /**
+     * Creates and returns the default O365 connector card.
+     * @returns {Attachment} The O365 connector card attachment.
+     */
+    O365ConnectorCardDefault() {
+        return CardFactory.o365ConnectorCard({
             "title": "Title",
             "sections": [
                 {
@@ -56,11 +76,13 @@ class O365ConnectorCardDialog extends ComponentDialog {
                 }
             ]
         });
-        return card;
     }
 
-    O365ConnectorCardFactsInSection = () => {
-
+    /**
+     * Creates and returns the O365 connector card with facts in section.
+     * @returns {Attachment} The O365 connector card attachment.
+     */
+    O365ConnectorCardFactsInSection() {
         return CardFactory.o365ConnectorCard({
             "themeColor": "#fe9a13",
             "sections": [
@@ -91,8 +113,11 @@ class O365ConnectorCardDialog extends ComponentDialog {
         });
     }
 
-    O365ConnectorCardImageInSection = () => {
-
+    /**
+     * Creates and returns the O365 connector card with image in section.
+     * @returns {Attachment} The O365 connector card attachment.
+     */
+    O365ConnectorCardImageInSection() {
         return CardFactory.o365ConnectorCard({
             "themeColor": "fe9a13",
             "title": "Issue opened: Push notifications not working",

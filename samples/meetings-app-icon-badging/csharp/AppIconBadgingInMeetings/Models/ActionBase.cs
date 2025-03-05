@@ -5,15 +5,18 @@
 
 namespace AppIconBadgingInMeetings.Models
 {
+    /// <summary>
+    /// Model entity for identifying action type of card and extracting user's choiceset.
+    /// </summary>
     public class ActionBase
     {
         /// <summary>
-        ///  Model entity for identifying action type of card.
+        /// Gets or sets the action type of the card.
         /// </summary>
         public string Type { get; set; }
 
         /// <summary>
-        ///  Model entity for extracting user's choiceset.
+        /// Gets or sets the user's choiceset.
         /// </summary>
         public string Choice { get; set; }
     }

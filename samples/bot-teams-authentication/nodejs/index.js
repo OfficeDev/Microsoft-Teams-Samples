@@ -3,14 +3,10 @@
 
 // index.js is used to setup and configure your bot
 
-// Import required pckages
+// Import required packages
 const path = require('path');
-
-// Read botFilePath and botFileSecret from .env file.
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-
 const restify = require('restify');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -32,12 +28,7 @@ const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(p
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
-    const errorMsg = error.message
-        ? error.message
-        : `Oops. Something went wrong!`;
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
+    const errorMsg = error.message || 'Oops. Something went wrong!';
     console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Clear out state
@@ -45,16 +36,12 @@ adapter.onTurnError = async (context, error) => {
     // Send a message to the user
     await context.sendActivity(errorMsg);
 
-    // Note: Since this Messaging Extension does not have the messageTeamMembers permission
-    // in the manifest, the bot will not be allowed to message users.
-
-    // Uncomment below commented line for local debugging.
+    // Uncomment below line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${errorMsg}`);
 };
 
 // Define the state store for your bot.
 // See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
-// A bot requires a state storage system to persist the dialog and user state between messages.
 const memoryStorage = new MemoryStorage();
 
 // Create conversation and user state with in-memory storage provider.
@@ -70,8 +57,8 @@ const bot = new TeamsBot(conversationState, userState, dialog);
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
-server.listen(process.env.port || process.env.PORT || 3978, function() {
-    console.log(`Server listening on ${ server.url }`);
+server.listen(process.env.port || process.env.PORT || 3978, () => {
+    console.log(`Server listening on ${server.url}`);
 });
 
 // Listen for incoming requests.

@@ -10,12 +10,18 @@ using Microsoft.Graph;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // This class is a wrapper for the Microsoft Graph API
-    // See: https://developer.microsoft.com/en-us/graph
+    /// <summary>
+    /// This class is a wrapper for the Microsoft Graph API.
+    /// See: https://developer.microsoft.com/en-us/graph
+    /// </summary>
     public class SimpleGraphClient
     {
         private readonly string _token;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleGraphClient"/> class.
+        /// </summary>
+        /// <param name="token">The OAuth token.</param>
         public SimpleGraphClient(string token)
         {
             if (string.IsNullOrWhiteSpace(token))
@@ -26,7 +32,13 @@ namespace Microsoft.BotBuilderSamples
             _token = token;
         }
 
-        // Sends an email on the users behalf using the Microsoft Graph API
+        /// <summary>
+        /// Sends an email on the user's behalf using the Microsoft Graph API.
+        /// </summary>
+        /// <param name="toAddress">The recipient's email address.</param>
+        /// <param name="subject">The email subject.</param>
+        /// <param name="content">The email content.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public async Task SendMailAsync(string toAddress, string subject, string content)
         {
             if (string.IsNullOrWhiteSpace(toAddress))
@@ -46,15 +58,15 @@ namespace Microsoft.BotBuilderSamples
 
             var graphClient = GetAuthenticatedClient();
             var recipients = new List<Recipient>
-            {
-                new Recipient
                 {
-                    EmailAddress = new EmailAddress
+                    new Recipient
                     {
-                        Address = toAddress,
+                        EmailAddress = new EmailAddress
+                        {
+                            Address = toAddress,
+                        },
                     },
-                },
-            };
+                };
 
             // Create the message.
             var email = new Message
@@ -72,7 +84,10 @@ namespace Microsoft.BotBuilderSamples
             await graphClient.Me.SendMail(email, true).Request().PostAsync();
         }
 
-        // Gets mail for the user using the Microsoft Graph API
+        /// <summary>
+        /// Gets recent mail for the user using the Microsoft Graph API.
+        /// </summary>
+        /// <returns>An array of recent messages.</returns>
         public async Task<Message[]> GetRecentMailAsync()
         {
             var graphClient = GetAuthenticatedClient();
@@ -80,7 +95,10 @@ namespace Microsoft.BotBuilderSamples
             return messages.Take(5).ToArray();
         }
 
-        // Get information about the user.
+        /// <summary>
+        /// Gets information about the user.
+        /// </summary>
+        /// <returns>The user information.</returns>
         public async Task<User> GetMeAsync()
         {
             var graphClient = GetAuthenticatedClient();
@@ -88,7 +106,10 @@ namespace Microsoft.BotBuilderSamples
             return me;
         }
 
-        // gets information about the user's manager.
+        /// <summary>
+        /// Gets information about the user's manager.
+        /// </summary>
+        /// <returns>The manager information.</returns>
         public async Task<User> GetManagerAsync()
         {
             var graphClient = GetAuthenticatedClient();
@@ -130,7 +151,10 @@ namespace Microsoft.BotBuilderSamples
         //     }
         // }
 
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        /// <summary>
+        /// Gets an authenticated Microsoft Graph client using the token issued to the user.
+        /// </summary>
+        /// <returns>The authenticated GraphServiceClient.</returns>
         private GraphServiceClient GetAuthenticatedClient()
         {
             var graphClient = new GraphServiceClient(

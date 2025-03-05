@@ -1,7 +1,7 @@
 ﻿@page
 @model TeamsMessagingExtensionsAction.Pages.IndexModel
 @{
-    ViewData["Title"] = "htmlpage";
+    ViewData["Title"] = "HTML Page";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -9,21 +9,21 @@
 <html>
 <head>
     <title>Login Form</title>
-   <style>
-      .login{
-          text-align:center;
-      }
-   </style>
-   
+    <style>
+        .login {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <script>
         microsoftTeams.initialize();
+
         function validateForm() {
             var empLogIn = {
-                UserName: document.forms["userLog"]["userName"].value,
-                UserPwd: document.forms["userLog"]["userPwd"].value,
-            }
+                userName: document.forms["userLog"]["userName"].value,
+                userPwd: document.forms["userLog"]["userPwd"].value,
+            };
             microsoftTeams.tasks.submitTask(empLogIn);
             return true;
         }
@@ -31,20 +31,15 @@
 
     <div class="login">
         <h2>Enter Details</h2><br>
-        <form method="POST" id="userLog" onSubmit="return validateForm()">
-            <label>
-                <b> User Name: </b>
-            </label>
-            <input type="text" placeholder="User Name" name="userName">
+        <form method="POST" id="userLog" onsubmit="return validateForm()">
+            <label for="userName"><b>User Name:</b></label>
+            <input type="text" placeholder="User Name" name="userName" id="userName" required>
             <br><br>
-            <label>
-                <b>Password: &nbsp; </b>
-            </label>
-            <input type="Password" placeholder="Password" name="userPwd">
+            <label for="userPwd"><b>Password:</b></label>
+            <input type="password" placeholder="Password" name="userPwd" id="userPwd" required>
             <br><br>
             <input type="submit" value="Submit">
         </form>
     </div>
-
 </body>
 </html>

@@ -6,22 +6,38 @@ using System.Web;
 
 namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
 {
-    public  class DeeplinkHelper
+    /// <summary>
+    /// Helper class for generating deep links.
+    /// </summary>
+    public class DeeplinkHelper
     {
-        public  string DeepLink { get; set; }
-        public  string DeepLinkToAdaptiveCard { get; set; }
-        public DeeplinkHelper(string MicrosoftAppId ,string BaseUrl)
+        /// <summary>
+        /// Gets the deep link.
+        /// </summary>
+        public string DeepLink { get; private set; }
+
+        /// <summary>
+        /// Gets the deep link to the adaptive card.
+        /// </summary>
+        public string DeepLinkToAdaptiveCard { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeeplinkHelper"/> class.
+        /// </summary>
+        /// <param name="microsoftAppId">The Microsoft application ID.</param>
+        /// <param name="baseUrl">The base URL.</param>
+        public DeeplinkHelper(string microsoftAppId, string baseUrl)
         {
-            MicrosoftAppId = MicrosoftAppId.Replace('"', ' ').Trim();
-            BaseUrl = BaseUrl.Replace('"', ' ').Trim();
+            microsoftAppId = microsoftAppId.Replace('"', ' ').Trim();
+            baseUrl = baseUrl.Replace('"', ' ').Trim();
 
             DeepLink = string.Format("https://teams.microsoft.com/l/task/{0}?url={1}&height={2}&width={3}&title={4}&completionBotId={5}",
-              MicrosoftAppId,
-              HttpUtility.UrlEncode(BaseUrl + "/customForm"),
+              microsoftAppId,
+              HttpUtility.UrlEncode(baseUrl + "/customForm"),
               TaskModuleUIConstants.CustomForm.Height,
               TaskModuleUIConstants.CustomForm.Width,
               HttpUtility.UrlEncode(TaskModuleUIConstants.CustomForm.Title),
-              MicrosoftAppId);
+              microsoftAppId);
         }
     }
 }

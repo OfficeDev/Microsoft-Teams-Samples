@@ -18,25 +18,44 @@ using Microsoft.BotBuilderSamples.Models;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
+    /// <summary>
+    /// A bot that handles Teams task modules.
+    /// </summary>
     public class TeamsTaskModuleBot : TeamsActivityHandler
     {
         private readonly string _baseUrl;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamsTaskModuleBot"/> class.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
         public TeamsTaskModuleBot(IConfiguration config)
         {
-            _baseUrl = config["BaseUrl"].EndsWith("/") ? config["BaseUrl"] : config["BaseUrl"] + "/";
+            _baseUrl = config["BaseUrl"].TrimEnd('/') + "/";
         }
 
+        /// <summary>
+        /// Handles incoming message activities.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Attachment(new[] { GetTaskModuleHeroCardOptions(), GetTaskModuleAdaptiveCardOptions() });
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        /// <summary>
+        /// Handles task module fetch requests.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="taskModuleRequest">The task module request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task module response.</returns>
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            var asJobject = JObject.FromObject(taskModuleRequest.Data);
-            var value = asJobject.ToObject<CardTaskFetchValue<string>>()?.Data;
+            var asJObject = JObject.FromObject(taskModuleRequest.Data);
+            var value = asJObject.ToObject<CardTaskFetchValue<string>>()?.Data;
 
             var taskInfo = new TaskModuleTaskInfo();
             switch (value)
@@ -53,13 +72,18 @@ namespace Microsoft.BotBuilderSamples.Bots
                     taskInfo.Card = CreateAdaptiveCardAttachment();
                     SetTaskInfo(taskInfo, TaskModuleUIConstants.AdaptiveCard);
                     break;
-                default:
-                    break;
             }
 
             return Task.FromResult(taskInfo.ToTaskModuleResponse());
         }
 
+        /// <summary>
+        /// Handles task module submit requests.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="taskModuleRequest">The task module request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task module response.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("OnTeamsTaskModuleSubmitAsync Value: " + JsonConvert.SerializeObject(taskModuleRequest));
@@ -68,16 +92,24 @@ namespace Microsoft.BotBuilderSamples.Bots
             return TaskModuleResponseFactory.CreateResponse("Thanks!");
         }
 
-        private static void SetTaskInfo(TaskModuleTaskInfo taskInfo, UISettings uIConstants)
+        /// <summary>
+        /// Sets the task module task info.
+        /// </summary>
+        /// <param name="taskInfo">The task info.</param>
+        /// <param name="uiConstants">The UI constants.</param>
+        private static void SetTaskInfo(TaskModuleTaskInfo taskInfo, UISettings uiConstants)
         {
-            taskInfo.Height = uIConstants.Height;
-            taskInfo.Width = uIConstants.Width;
-            taskInfo.Title = uIConstants.Title.ToString();
+            taskInfo.Height = uiConstants.Height;
+            taskInfo.Width = uiConstants.Width;
+            taskInfo.Title = uiConstants.Title;
         }
 
+        /// <summary>
+        /// Gets the task module hero card options.
+        /// </summary>
+        /// <returns>An attachment containing the hero card options.</returns>
         private static Attachment GetTaskModuleHeroCardOptions()
         {
-            // Create a Hero Card with TaskModuleActions for each Dialogs (referred as task modules in TeamsJS v1.x)
             return new HeroCard()
             {
                 Title = "Dialogs (referred as task modules in TeamsJS v1.x) Invocation from Hero Card",
@@ -87,15 +119,18 @@ namespace Microsoft.BotBuilderSamples.Bots
             }.ToAttachment();
         }
 
+        /// <summary>
+        /// Gets the task module adaptive card options.
+        /// </summary>
+        /// <returns>An attachment containing the adaptive card options.</returns>
         private static Attachment GetTaskModuleAdaptiveCardOptions()
         {
-            // Create an Adaptive Card with an AdaptiveSubmitAction for each Dialogs (referred as task modules in TeamsJS v1.x)
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 2))
             {
                 Body = new List<AdaptiveElement>()
-                    {
-                        new AdaptiveTextBlock(){ Text="Dialogs (referred as task modules in TeamsJS v1.x) Invocation from Adaptive Card", Weight=AdaptiveTextWeight.Bolder, Size=AdaptiveTextSize.Large}
-                    },
+                        {
+                            new AdaptiveTextBlock(){ Text="Dialogs (referred as task modules in TeamsJS v1.x) Invocation from Adaptive Card", Weight=AdaptiveTextWeight.Bolder, Size=AdaptiveTextSize.Large}
+                        },
                 Actions = new[] { TaskModuleUIConstants.AdaptiveCard, TaskModuleUIConstants.CustomForm, TaskModuleUIConstants.YouTube }
                             .Select(cardType => new AdaptiveSubmitAction() { Title = cardType.ButtonTitle, Data = new AdaptiveCardTaskFetchValue<string>() { Data = cardType.Id } })
                             .ToList<AdaptiveAction>(),
@@ -104,18 +139,20 @@ namespace Microsoft.BotBuilderSamples.Bots
             return new Attachment() { ContentType = AdaptiveCard.ContentType, Content = card };
         }
 
+        /// <summary>
+        /// Creates an adaptive card attachment.
+        /// </summary>
+        /// <returns>An attachment containing the adaptive card.</returns>
         private static Attachment CreateAdaptiveCardAttachment()
         {
-            // combine path for cross platform support
             string[] paths = { ".", "Resources", "adaptiveCard.json" };
             var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
 
-            var adaptiveCardAttachment = new Attachment()
+            return new Attachment()
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
-            return adaptiveCardAttachment;
         }
     }
 }

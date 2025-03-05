@@ -1,15 +1,21 @@
 ﻿namespace Microsoft.BotBuilderSamples.Models
 {
-    public class Rootobject
+    /// <summary>
+    /// Represents the root object containing region domains.
+    /// </summary>
+    public class RootObject
     {
-        public Regiondomain[] regionDomains { get; set; }
+        public RegionDomain[] RegionDomains { get; set; }
     }
 
-    public class Regiondomain
+    /// <summary>
+    /// Represents a region domain with its associated properties.
+    /// </summary>
+    public class RegionDomain
     {
-        public int id { get; set; }
-        public string region { get; set; }
-        public string country { get; set; }
-        public string domain { get; set; }
+        public int Id { get; set; }
+        public string Region { get; set; }
+        public string Country { get; set; }
+        public string Domain { get; set; }
     }
 }

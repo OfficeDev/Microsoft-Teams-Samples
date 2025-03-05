@@ -5,205 +5,107 @@ using System.Collections.Generic;
 
 namespace Microsoft.BotBuilderSamples.Helpers
 {
-    public class CardHelper
+    /// <summary>
+    /// Helper class for creating adaptive card attachments.
+    /// </summary>
+    public static class CardHelper
     {
+        /// <summary>
+        /// Creates an adaptive card attachment.
+        /// </summary>
+        /// <param name="action">The messaging extension action.</param>
+        /// <param name="createCardResponse">The card response data.</param>
+        /// <returns>A list of messaging extension attachments.</returns>
         public static List<MessagingExtensionAttachment> CreateAdaptiveCardAttachment(MessagingExtensionAction action, CardResponse createCardResponse)
         {
-            AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
-            adaptiveCard.Body = new List<AdaptiveElement>()
+            var adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0))
             {
-                new AdaptiveColumnSet()
-                {
-                    Columns = new List<AdaptiveColumn>()
+                Body = new List<AdaptiveElement>
                     {
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= "Name :",
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                    Weight=AdaptiveTextWeight.Bolder
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                         new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= createCardResponse.Title,
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
+                        CreateAdaptiveColumnSet("Name :", createCardResponse.Title),
+                        CreateAdaptiveColumnSet("Designation :", createCardResponse.Subtitle),
+                        CreateAdaptiveColumnSet("Description :", createCardResponse.Text)
                     }
-                },
-                new AdaptiveColumnSet()
-                {
-                    Columns = new List<AdaptiveColumn>()
-                    {
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= "Designation :",
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                    Weight=AdaptiveTextWeight.Bolder
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= createCardResponse.Subtitle,
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                    }
-                },
-                new AdaptiveColumnSet()
-                {
-                    Columns = new List<AdaptiveColumn>()
-                    {
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= "Description :",
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                    Weight=AdaptiveTextWeight.Bolder
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                         new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= createCardResponse.Text,
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                    }
-                },
             };
 
-            var attachments = new List<MessagingExtensionAttachment>();
-            attachments.Add(new MessagingExtensionAttachment
-            {
-                Content = adaptiveCard,
-                ContentType = AdaptiveCard.ContentType
-            });
-
-            return attachments;
+            return new List<MessagingExtensionAttachment>
+                {
+                    new MessagingExtensionAttachment
+                    {
+                        Content = adaptiveCard,
+                        ContentType = AdaptiveCard.ContentType
+                    }
+                };
         }
 
-        public static List<MessagingExtensionAttachment> CreateAdaptiveCardAttachmentForHTML(MessagingExtensionAction action, CardResponse createCardResponse)
+        /// <summary>
+        /// Creates an adaptive card attachment for HTML.
+        /// </summary>
+        /// <param name="action">The messaging extension action.</param>
+        /// <param name="createCardResponse">The card response data.</param>
+        /// <returns>A list of messaging extension attachments.</returns>
+        public static List<MessagingExtensionAttachment> CreateAdaptiveCardAttachmentForHtml(MessagingExtensionAction action, CardResponse createCardResponse)
         {
-            AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
-            adaptiveCard.Body = new List<AdaptiveElement>()
+            var adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0))
             {
-                new AdaptiveColumnSet()
-                {
-                    Columns = new List<AdaptiveColumn>()
+                Body = new List<AdaptiveElement>
                     {
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= "User Name :",
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                    Weight=AdaptiveTextWeight.Bolder
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                         new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= createCardResponse.UserName,
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
+                        CreateAdaptiveColumnSet("User Name :", createCardResponse.UserName),
+                        CreateAdaptiveColumnSet("Password is :", createCardResponse.UserPwd)
                     }
-                },
-                new AdaptiveColumnSet()
-                {
-                    Columns = new List<AdaptiveColumn>()
-                    {
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= "Password is :",
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                    Weight=AdaptiveTextWeight.Bolder
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                        new AdaptiveColumn()
-                        {
-                            Items=new List<AdaptiveElement>()
-                            {
-                                new AdaptiveTextBlock()
-                                {
-                                    Text= createCardResponse.UserPwd,
-                                    Wrap=true,
-                                    Size=AdaptiveTextSize.Medium,
-                                }
-                            },
-                            Width = AdaptiveColumnWidth.Auto
-                        },
-                    }
-                },
             };
 
-            var attachments = new List<MessagingExtensionAttachment>();
-            attachments.Add(new MessagingExtensionAttachment
-            {
-                Content = adaptiveCard,
-                ContentType = AdaptiveCard.ContentType
-            });
+            return new List<MessagingExtensionAttachment>
+                {
+                    new MessagingExtensionAttachment
+                    {
+                        Content = adaptiveCard,
+                        ContentType = AdaptiveCard.ContentType
+                    }
+                };
+        }
 
-            return attachments;
+        /// <summary>
+        /// Creates an adaptive column set.
+        /// </summary>
+        /// <param name="label">The label text.</param>
+        /// <param name="value">The value text.</param>
+        /// <returns>An adaptive column set.</returns>
+        private static AdaptiveColumnSet CreateAdaptiveColumnSet(string label, string value)
+        {
+            return new AdaptiveColumnSet
+            {
+                Columns = new List<AdaptiveColumn>
+                    {
+                        new AdaptiveColumn
+                        {
+                            Items = new List<AdaptiveElement>
+                            {
+                                new AdaptiveTextBlock
+                                {
+                                    Text = label,
+                                    Wrap = true,
+                                    Size = AdaptiveTextSize.Medium,
+                                    Weight = AdaptiveTextWeight.Bolder
+                                }
+                            },
+                            Width = AdaptiveColumnWidth.Auto
+                        },
+                        new AdaptiveColumn
+                        {
+                            Items = new List<AdaptiveElement>
+                            {
+                                new AdaptiveTextBlock
+                                {
+                                    Text = value,
+                                    Wrap = true,
+                                    Size = AdaptiveTextSize.Medium
+                                }
+                            },
+                            Width = AdaptiveColumnWidth.Auto
+                        }
+                    }
+            };
         }
     }
 }

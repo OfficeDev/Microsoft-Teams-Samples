@@ -14,6 +14,9 @@ using Microsoft.Bot.Connector.Authentication;
 
 namespace Microsoft.BotBuilderSamples
 {
+    /// <summary>
+    /// Configures services and the app's request pipeline.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,7 +26,10 @@ namespace Microsoft.BotBuilderSamples
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Adds services to the container.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -45,7 +51,11 @@ namespace Microsoft.BotBuilderSamples
             services.AddTransient<IBot, TeamsMessagingExtensionsActionBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -65,7 +75,6 @@ namespace Microsoft.BotBuilderSamples
                 // Mapping of endpoints goes here:
                 endpoints.MapControllers();
             });
-
         }
     }
 }

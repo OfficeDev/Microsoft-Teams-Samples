@@ -5,15 +5,18 @@
 
 namespace AppIconBadgingInMeetings.Models
 {
+    /// <summary>
+    /// Represents the details of a participant in a meeting.
+    /// </summary>
     public class ParticipantDetail
     {
         /// <summary>
-        ///  Recipient Id of the participant.
+        /// Gets or sets the recipient Id of the participant.
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        ///  Name of the participant.
+        /// Gets or sets the name of the participant.
         /// </summary>
         public string Name { get; set; }
     }
