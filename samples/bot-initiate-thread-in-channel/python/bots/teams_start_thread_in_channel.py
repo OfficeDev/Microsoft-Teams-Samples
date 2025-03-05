@@ -1,51 +1,37 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-from botbuilder.core import CardFactory, TurnContext, MessageFactory, BotFrameworkAdapter
+import os
+import logging
+from botbuilder.core import CardFactory, TurnContext, MessageFactory
 from botbuilder.core.teams import TeamsActivityHandler, TeamsInfo, teams_get_channel_id
 from botframework.connector.auth import MicrosoftAppCredentials
-from botbuilder.schema import CardAction, HeroCard, Mention, ConversationParameters
-from botbuilder.schema._connector_client_enums import ActionTypes
+from botbuilder.schema import ConversationParameters
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 class TeamsStartThreadInChannel(TeamsActivityHandler):
-    """
-    A bot handler class for creating and managing threaded conversations within a Microsoft Teams channel.
-
-    This class extends the `TeamsActivityHandler` to manage activities related to starting new threads
-    within Teams channels. It contains methods to handle message activities and initiate conversations
-    based on user interactions in the Teams channel.
-
-    """
-
     def __init__(self, app_id: str):
-        """
-        Initializes the TeamsStartThreadInChannel bot handler.
-        """
         self._app_id = app_id
 
     async def on_message_activity(self, turn_context: TurnContext):
-        """
-        Handles incoming message activities. This method is triggered when a user sends a message
-        in the channel where the bot is installed.
-        The bot will respond with a message and start a new thread in the current Teams channel.
-
-        """
-        # Retrieve the Teams channel ID from the incoming activity.
-        teams_channel_id = teams_get_channel_id(turn_context.activity)
-
-        # Create a new message that will be sent to the new thread.
-        message = MessageFactory.text("This will be the start of a new thread")
-
-        # Create a new conversation in the channel and send the message to start the thread.
-        new_conversation = await self.teams_create_conversation(turn_context, teams_channel_id, message)
-
-        # Continue the conversation and pass a callback function to handle the next step in the conversation.
-        await turn_context.adapter.continue_conversation(
-            new_conversation[0],  # Conversation reference
-            self.continue_conversation_callback,  # Callback function to continue the conversation
-            self._app_id  # App ID for authentication
-        )
+        text = turn_context.activity.text.strip().lower()
+        
+        if "listchannels" in text:
+            await self.list_team_channels(turn_context)
+        elif "threadchannel" in text:
+            # Retrieve the Teams channel ID from the incoming activity.
+            teams_channel_id = teams_get_channel_id(turn_context.activity)
+            # Create a new message that will be sent to the new thread.
+            message = MessageFactory.text("This will be the start of a new thread")
+            await self.teams_create_conversation(turn_context, teams_channel_id, message)
+        elif "getteammember" in text:
+            await self.get_team_member(turn_context)
+        elif "getpagedteammembers" in text:
+            await self.get_paged_team_members(turn_context)
+        else:
+            await turn_context.send_activity("I didn't understand that command. Please try again.")
 
     async def teams_create_conversation(self, turn_context: TurnContext, teams_channel_id: str, message):
         """
@@ -82,3 +68,62 @@ class TeamsStartThreadInChannel(TeamsActivityHandler):
         """
         # Send a reply to the new thread created, indicating the first reply in the conversation.
         await t.send_activity(MessageFactory.text("This will be the first reply to my new thread"))
+
+    async def list_team_channels(self, turn_context: TurnContext):
+        try:
+            team_id = turn_context.activity.channel_data.get("team").get("id")
+            channels = await TeamsInfo.get_team_channels(turn_context, team_id)
+            
+            if not channels:
+                await turn_context.send_activity("No channels found in this team.")
+                return
+            
+            message = "**List of Channels:**\n"
+            for channel in channels:
+                channel_name = channel.name if channel.name else "General"
+                message += f"- {channel_name}\n"
+            
+            await turn_context.send_activity(MessageFactory.text(message))
+        except Exception as e:
+            logging.error(f"Error listing channels: {e}")
+            await turn_context.send_activity(f"Error listing channels: {str(e)}")
+
+    async def get_team_member(self, turn_context: TurnContext):
+        try:
+            aad_object_id = turn_context.activity.from_property.aad_object_id
+            team_id = turn_context.activity.channel_data.get("team").get("id")
+            team_member = await TeamsInfo.get_team_member(turn_context, team_id, aad_object_id)
+            
+            if not team_member:
+                await turn_context.send_activity("Team member not found.")
+                return
+            
+            message = f"**User Information:**\n- Name: {team_member.name}\n- Email: {team_member.email or 'N/A'}"
+            await turn_context.send_activity(MessageFactory.text(message))
+        except Exception as e:
+            logging.error(f"Error getting team member: {e}")
+            await turn_context.send_activity(f"Error retrieving team member: {str(e)}")
+
+    async def get_paged_team_members(self, turn_context: TurnContext):
+        try:
+            team_id = turn_context.activity.channel_data.get("team").get("id")
+            members = []
+            continuation_token = None
+
+            while True:
+                current_page = await TeamsInfo.get_paged_team_members(turn_context, team_id, continuation_token)
+                members.extend(current_page.members)
+                continuation_token = current_page.continuation_token
+                
+                if not continuation_token:
+                    break
+
+            if not members:
+                await turn_context.send_activity("No team members found.")
+                return
+            
+            message = "**Team Members:**\n" + "\n".join(f"- {member.name} ({member.email or 'N/A'})" for member in members)
+            await turn_context.send_activity(MessageFactory.text(message))
+        except Exception as e:
+            logging.error(f"Error retrieving team members: {e}")
+            await turn_context.send_activity(f"Error retrieving team members: {str(e)}")
