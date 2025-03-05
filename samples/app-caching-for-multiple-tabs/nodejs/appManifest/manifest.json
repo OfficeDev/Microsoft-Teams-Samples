@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.19",
+  "id": "7ed94455-b382-458c-9b32-d354da5076bc",
+  "name": {
+    "short": "App Caching Example",
+    "full": "App Caching Example"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "description": {
+    "short": "Optimize app loading times in Teams meetings with caching.",
+    "full": "This sample demonstrates how to optimize the loading speed of an app in Microsoft Teams by utilizing caching for applications accessed during a meeting, with the app presented as a side panel for enhanced user experience."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://d87486f1b528.ngrok.app/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [ "groupChat", "team" ],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "privateChatTab"
+      ]
+    }
+  ],
+  "validDomains": [
+    "d87486f1b528.ngrok.app" 
+  ],
+  "showLoadingIndicator": true
+}
