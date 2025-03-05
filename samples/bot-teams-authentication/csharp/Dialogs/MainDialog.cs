@@ -11,14 +11,22 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
+    /// <summary>
+    /// Main dialog for handling user authentication and displaying token information.
+    /// </summary>
     public class MainDialog : LogoutDialog
     {
-        protected readonly ILogger Logger;
+        protected readonly ILogger _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainDialog"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="logger">The logger.</param>
         public MainDialog(IConfiguration configuration, ILogger<MainDialog> logger)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
-            Logger = logger;
+            _logger = logger;
 
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
@@ -35,43 +43,57 @@ namespace Microsoft.BotBuilderSamples
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                PromptStepAsync,
-                LoginStepAsync,
-                DisplayTokenPhase1Async,
-                DisplayTokenPhase2Async,
+                    PromptStepAsync,
+                    LoginStepAsync,
+                    DisplayTokenPhase1Async,
+                    DisplayTokenPhase2Async,
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+        /// <summary>
+        /// Prompts the user to sign in.
+        /// </summary>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
+        /// <summary>
+        /// Handles the login step and retrieves the user's token.
+        /// </summary>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            // Get the token from the previous step. Note that we could also have gotten the
-            // token directly from the prompt itself. There is an example of this in the next method.
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                // Pull in the data from the Microsoft Graph.
                 var client = new SimpleGraphClient(tokenResponse.Token);
                 var me = await client.GetMeAsync();
-                var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                            me.JobTitle : "Unknown";
+                var title = !string.IsNullOrEmpty(me.JobTitle) ? me.JobTitle : "Unknown";
 
-                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
+                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); your job title is: {title}");
 
                 return await stepContext.PromptAsync(nameof(ConfirmPrompt), new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") }, cancellationToken);
             }
 
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful, please try again."), cancellationToken);
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        /// <summary>
+        /// Displays a thank you message and prompts the user to view their token.
+        /// </summary>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> DisplayTokenPhase1Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thank you."), cancellationToken);
@@ -79,26 +101,24 @@ namespace Microsoft.BotBuilderSamples
             var result = (bool)stepContext.Result;
             if (result)
             {
-                // Call the prompt again because we need the token. The reasons for this are:
-                // 1. If the user is already logged in we do not need to store the token locally in the bot and worry
-                // about refreshing it. We can always just call the prompt again to get the token.
-                // 2. We never know how long it will take a user to respond. By the time the
-                // user responds the token may have expired. The user would then be prompted to login again.
-                //
-                // There is no reason to store the token locally in the bot because we can always just call
-                // the OAuth prompt to get the token or get a new token if needed.
                 return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), cancellationToken: cancellationToken);
             }
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        /// <summary>
+        /// Displays the user's token.
+        /// </summary>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> DisplayTokenPhase2Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse != null)
             {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Here is your token {tokenResponse.Token}"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Here is your token: {tokenResponse.Token}"), cancellationToken);
             }
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
