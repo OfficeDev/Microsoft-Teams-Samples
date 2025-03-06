@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-caching-for-multiple-tabs-nodejs",
     "source": "officeDev",
-    "title": "App Caching in Meetings",
-    "shortDescription": "This sample shows how to enhance app loading times during meetings with side panel caching, improving user experience in Microsoft Teams.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-cache-meetings/nodejs",
+    "title": "App Caching for Multiple Tabs",
+    "shortDescription": "This sample shows how to use app caching to enhance loading times across different tab instances, improving user experience in Microsoft Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-caching-for-multiple-tabs/nodejs",
     "longDescription": [
-      "This sample demonstrates how to optimize the loading speed of an app in Microsoft Teams by utilizing caching for applications accessed during a meeting, with the app presented as a side panel for enhanced user experience."
+      "This sample demonstrates how to optimize the loading time of an app in Microsoft Teams by utilizing caching for applications in various scopes, including channels and chats."
     ],
     "creationDateTime": "2022-11-11",
     "updateDateTime": "2024-10-10",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-cache-meetings/nodejs/Images/AppCacheSample.gif",
-        "alt": "Solution UX showing microsoft teams sample for App Caching in Meetings"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-caching-for-multiple-tabs/nodejs/Images/2.TabGreenInChannel.png",
+        "alt": "Solution UX showing microsoft teams sample for App Caching across multiple tab instances"
       }
     ],
     "authors": [

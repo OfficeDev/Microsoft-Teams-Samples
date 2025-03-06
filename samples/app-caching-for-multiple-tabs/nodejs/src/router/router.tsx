@@ -16,15 +16,26 @@ import Index from "../components/index";
 
 export const AppRoute = () => {
     const [entityId, setEntityId] = React.useState<string>("");
+    const [appInitialized, setAppInitialized] = React.useState(false);
+
+    React.useEffect(() => {
+        if (!entityId && window.location.pathname === "/appCacheTab") {
+            const params = new URLSearchParams(window.location.search);
+            const routeEntityId = params.get("entityId");
+            if (routeEntityId) {
+                setEntityId(routeEntityId);
+            }
+        }
+    }, [entityId]);
 
     React.useEffect(() => {
         // Initialize the Microsoft Teams SDK
         const app = microsoftTeams.app;
 
-        app.initialize().then(app.getContext).then((context: any) => {
+        app.initialize().then(() => {
 
             // Check if the framecontext is a cacheable one
-            if (context.page.frameContext === "sidePanel" || context.page.frameContext === "content") {
+            if (window.location.pathname === "/appCacheTab") {
 
                 microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload: any) => {
                     readyToUnload();
@@ -33,23 +44,18 @@ export const AppRoute = () => {
                 });
 
                 microsoftTeams.teamsCore.registerOnLoadHandler((data: any) => {
-                    if (data.entityId !== entityId) {
+                    if (data.entityId) {
                         console.log("Load handler sending new entityId to TEAMS " + data.entityId);
                         setEntityId(data.entityId);
                     }
                 });
             }
+
+            setAppInitialized(true);
         }).catch(function (error: any) {
             console.error(error, "Could not initialize TeamsJS SDK.");
         });
-        
-        if (!entityId) {
-            const params = new URLSearchParams(window.location.search);
-            const entityId = params.get("entityId");
-            if (entityId) {
-                setEntityId(entityId);
-            }
-        }
+
         return () => {
             console.log("useEffect cleanup - Tab");
         };
@@ -57,13 +63,15 @@ export const AppRoute = () => {
 
     return (
         <React.Fragment>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/configure" element={<Configure />}/>
-                    <Route path="/appCacheTab" element={<AppCacheTab entityId={entityId} />}/>
-                </Routes>
-            </BrowserRouter>
+            {appInitialized ? (
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/configure" element={<Configure />}/>
+                        <Route path="/appCacheTab" element={<AppCacheTab entityId={entityId} />}/>
+                    </Routes>
+                </BrowserRouter>) : null
+            }
         </React.Fragment>
     );
 };

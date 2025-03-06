@@ -9,25 +9,25 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import "../components/index.css";
 
 /// </summary>
-///  logitem to show the activity log
+///  appendLog to show the activity log
 /// </summary>
-function logItem(action: string, actionColor: string, message: string) {
+function appendLog(message: string, color: string, addNewLine: boolean = true): string {
     return ("<span style='font-weight:bold;color:" +
-        actionColor +
+        color +
         "'>" +
-        action +
-        "</span> " +
         message +
-        "</br>");
+        "</span> " +
+        "</br>" +
+        (addNewLine ? "<br/>" : ""));
 }
 
-const AppCacheTabInner = (props: {entityId: string, items: string[], appTheme: string}) => {
-    const {entityId, items, appTheme} = props;
+const AppCacheTabInner = (props: {entityId: string, displayLogs: string[], appTheme: string}) => {
+    const {entityId, displayLogs, appTheme} = props;
     return (
         <div className={appTheme} >
             <div className={`tab-entity-${entityId}`}>
                 <h3>{entityId}</h3>
-                {items.map((item) => {
+                {displayLogs.map((item) => {
                     return <div dangerouslySetInnerHTML={{ __html: item }} />;
                 })}
             </div>
@@ -38,13 +38,12 @@ const AppCacheTabInner = (props: {entityId: string, items: string[], appTheme: s
 const AppCacheTab = (props: {entityId: string}) => {
 
     const {entityId} = props;
-    const [items, setItems] = useState<string[]>([]);
+    const [displayLogs, setDisplayLogs] = useState<string[]>([]);
     const [appTheme, setAppTheme] = useState('theme-light');
 
     React.useEffect(() => {
         const app = microsoftTeams.app;
         if (entityId) {
-            setItems((Items) => [...Items, logItem("AppCacheTab mounting", "blue", `started for entity ${entityId}`)]);
             app.getContext().then((context: any) => {
                 // Get default theme from app context and set app-theme
                 let defaultTheme = context.app.theme;
@@ -74,16 +73,19 @@ const AppCacheTab = (props: {entityId: string}) => {
                 });
 
                 app.notifySuccess();
+                setDisplayLogs((displayLogs) => [...displayLogs, appendLog(`Tab ${entityId} mounted`, entityId)]);
             });
         }
 
         return () => {
             console.log("useEffect cleanup - AppCacheTab");
-            setItems((Items) => [...Items, logItem("AppCacheTab unmounting", "purple", `started for entity ${entityId}`)]);
+            if (entityId) {
+                setDisplayLogs((displayLogs) => [...displayLogs, appendLog(`Tab ${entityId} unmounted`, entityId, true)]);
+            }
         }
     }, [entityId]);
 
-    return appTheme && entityId ? <AppCacheTabInner entityId={entityId} items={items} appTheme={appTheme} /> : <div className="loading" />;
+    return appTheme && entityId ? <AppCacheTabInner entityId={entityId} displayLogs={displayLogs} appTheme={appTheme} /> : <div className="loading" />;
 };
 
 export default AppCacheTab;

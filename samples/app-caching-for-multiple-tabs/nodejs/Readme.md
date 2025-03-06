@@ -18,12 +18,6 @@ urlFragment: officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs
 
 This sample demonstrates how to enhance the loading speed of applications within Microsoft Teams. Specifically, it illustrates the caching mechanism for apps loaded in channels or chats, allowing users to quickly access the same app without delay.
 
-**Interaction with App**
-![App-Cache](Images/AppCacheSample.gif)  
-
-**Change of App theme when Teams theme changes to (light,dark and contrast)**.
-![App-Cache-ChangeTheme](Images/AppCacheThemeChange.gif) 
- 
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -68,7 +62,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
     - Launch Visual Studio code
     - File -> Open Folder
-    - Navigate to `samples/app-cache-meetings` folder
+    - Navigate to `samples/app-caching-for-multiple-tabs` folder
     - Select `nodejs` folder and open it
 
    Install node modules (Either open any local terminal inside your `nodejs` folder or open Visual Studio Code terminal by opening the project in Visual Studio Code)
@@ -95,30 +89,19 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample
 
-**Add the App in meeting**.
-![Set-Up-Tab](Images/1.Set_Up_Tab.png)
+**Adding tab (green) to a channel**
+![App-Cache](Images/1.ConfigureTab.png)
 
-**App Caching Sideloaded  :**
-![participant context](Images/2.TabOneInitilized.png)
+![App-Cache](Images/2.TabGreenInChannel.png)
 
-**AppCache in first tab with Unique Id Loaded :** 
-![Team Context](Images/2.TabOneInitilized.png)
+**Adding a second tab (blue) to a channel**
+![App-Cache](Images/1.ConfigureTab-2.png)
 
-**AppCache in second tab with Unique Id Loaded :** 
-![Team Context](Images/3.TabTwo.png)
-
-**Teams Theme Changes To Dark :** 
-![Team Context](Images/T1-dark-Theme.PNG)
-
-**Teams Theme Changes To Light :** 
-![Team Context](Images/T2.light-theme.PNG)
-
-**Teams Theme Changes To Contrast :** 
-![Team Context](Images/T1-contrast-theme.PNG)
+![App-Cache](Images/3.TabBlueInChannel.png)
+Click between the two tabs and observer the fast app load. The displayed log shows that the same app is cached and being reused for the two tabs. 
+ 
 
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
-
-**Note** In Teams T1, there is no `light theme`, only we get two themes in meetings (`dark` and `contrast`). By default Teams T1 default theme is `dark`. and where as in Teams T2 we get three themes. Default theme is light and remaining other two themes are `dark` and `contrast`.
 
 
 ## Further reading
