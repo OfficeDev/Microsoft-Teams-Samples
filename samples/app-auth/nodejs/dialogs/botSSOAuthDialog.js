@@ -62,8 +62,7 @@ class BotSSOAuthDialog extends LogoutDialog {
         const client = new SimpleGraphClient(token);
         const myDetails = await client.getMeAsync();
         var imageString = "";
-        var img2 = "";
-
+        
         if (myDetails != null) {
             let img2 = '';  // Initialize the variable to store the image
             try {
