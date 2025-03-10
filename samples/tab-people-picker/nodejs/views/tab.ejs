@@ -1,13 +1,12 @@
 <head>
-   <script
-      src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-      integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-      crossorigin="anonymous">
-    </script>
+    <!-- Microsoft Teams JavaScript API (via CDN) -->
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 
-        let aadId;        
+        let aadId;
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
                 $("#defaultSelected").hide();
@@ -15,18 +14,18 @@
                 $("#singleSelected").hide();
             });
             microsoftTeams.app.getContext().then(function (context) {
-                aadId = context.user.id; 
+                aadId = context.user.id;
             });
-        }); 
-            // People picker api call.
+        });
+        // People picker api call.
         function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
-            var id = $(e.currentTarget).attr('data-id'); 
+            var id = $(e.currentTarget).attr('data-id');
             if (setSelected == "default") {
                 setSelected = [aadId];
             }
 
             microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
-                    if (people) {
+                if (people) {
                     let peopleData = JSON.stringify(people);
 
                     if (id == "default") {
@@ -52,10 +51,10 @@
                         $("#defaultMemberSelected").append("Selected member: " + peopleData)
                         $("#defaultMemberSelected").show();
                     }
-                    }
-                });
+                }
+            });
         }
-    
+
     </script>
     <style>
         #mainDiv {
@@ -86,9 +85,9 @@
             margin-top: 0.5rem;
         }
 
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
 
         .card-container-div {
             padding-bottom: 2rem;
