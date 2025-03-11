@@ -142,14 +142,14 @@ namespace AppCompleteAuth.Bots
                             SuggestedActions = new MessagingExtensionSuggestedAction
                             {
                                 Actions = new List<CardAction>
+                                {
+                                    new CardAction
                                     {
-                                        new CardAction
-                                        {
-                                            Type = ActionTypes.OpenUrl,
-                                            Value = signInLink,
-                                            Title = "Bot Service OAuth",
-                                        },
+                                        Type = ActionTypes.OpenUrl,
+                                        Value = signInLink,
+                                        Title = "Bot Service OAuth",
                                     },
+                                },
                             },
                         },
                     };
@@ -183,13 +183,13 @@ namespace AppCompleteAuth.Bots
                     },
                 };
             }
-            else if ( state == "usercredentials" || state.Contains("userName") || isSignedIn)
+            else if (state == "usercredentials" || state.Contains("userName"))
             {
                 if (state.Contains("userName"))
                 {
                     JObject asJobject = JObject.Parse(state);
-                    var userName = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.UserName;
-                    var password = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Password;
+                    var userName = (string)asJobject["userName"];
+                    var password = (string)asJobject["password"];
 
                     if (userName == Constant.UserName && password == Constant.Password)
                     {
@@ -264,7 +264,8 @@ namespace AppCompleteAuth.Bots
                     };
                 }
             }
-            else {
+            else
+            {
                 var facebooktokenResponse = await GetTokenResponse(turnContext, _facebookConnectionName, state, cancellationToken);
 
                 if (facebooktokenResponse == null || string.IsNullOrEmpty(facebooktokenResponse.Token))
@@ -359,8 +360,8 @@ namespace AppCompleteAuth.Bots
                 if (action.State.Contains("userName"))
                 {
                     JObject asJobject = JObject.Parse(action.State);
-                    var userName = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.UserName;
-                    var password = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Password;
+                    var userName = (string)asJobject["userName"];
+                    var password = (string)asJobject["password"];
                     if (userName == Constant.UserName && password == Constant.Password)
                     {
                         previewCard = new ThumbnailCard
@@ -409,8 +410,8 @@ namespace AppCompleteAuth.Bots
                         };
                     }
                 }
-                else {
-
+                else
+                {
                     return new MessagingExtensionResponse
                     {
                         ComposeExtension = new MessagingExtensionResult
@@ -419,14 +420,14 @@ namespace AppCompleteAuth.Bots
                             SuggestedActions = new MessagingExtensionSuggestedAction
                             {
                                 Actions = new List<CardAction>
-                            {
-                                new CardAction
                                 {
-                                    Type = ActionTypes.OpenUrl,
-                                    Value = $"{_applicationBaseUrl}/popUpSignin?from=msgext",
-                                    Title = "Using username/password",
+                                    new CardAction
+                                    {
+                                        Type = ActionTypes.OpenUrl,
+                                        Value = $"{_applicationBaseUrl}/popUpSignin?from=msgext",
+                                        Title = "Using username/password",
+                                    },
                                 },
-                            },
                             },
                         },
                     };

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl
+description: This Microsoft Teams sample app demonstrates single sign-on (SSO) integration for Tabs, Bots, and Messaging Extensions, leveraging Azure AD and MSAL.js.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 ---
 # App SSO Node
 
-This app talks about the Teams Tab, Bot, Messaging Extension - search, action, linkunfurl SSO with Node JS
+TA Microsoft Teams sample app demonstrating single sign-on (SSO) integration across Tabs, Bots, and Messaging Extensions using Azure AD and MSAL.js. It supports capabilities like Adaptive Cards, OAuth flow with Azure Bot Service, and making Microsoft Graph calls for various scenarios such as profile retrieval and messaging extensions actions.
 
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will

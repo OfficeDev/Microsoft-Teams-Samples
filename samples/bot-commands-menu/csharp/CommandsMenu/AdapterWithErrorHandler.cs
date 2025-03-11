@@ -17,13 +17,19 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
         {
             OnTurnError = async (turnContext, exception) =>
             {
-                // Log any leaked exception from the application.
-                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
+                // Log the unhandled exception.
+                // Be mindful not to expose sensitive information in production environments.
+                logger.LogError(exception, $"[OnTurnError] unhandled error: {exception.Message}");
 
-                // Uncomment below commented line for local debugging.
-                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+                // Uncomment below for local debugging purposes.
+                // It’s recommended to only send error messages to the user in development environments.
+                // if (environment.IsDevelopment())
+                // {
+                //     await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+                // }
 
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
+                // Send a trace activity to the Bot Framework Emulator, useful for debugging.
+                // You can view this activity in the Emulator's Debug console.
                 await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
             };
         }

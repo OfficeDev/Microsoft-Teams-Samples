@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an tab app which shows the feature of people picker using teams js client sdk.
+description: This tab app showcases the People Picker functionality using the Teams JavaScript client SDK to allow users to select individuals from their organization.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 
 # Tab people picker Node.js
 
-This is an tab app which shows the feature of people picker using teams js client sdk.
+ This sample application demonstrates the People Picker feature within a Microsoft Teams tab, utilizing the Teams JavaScript client SDK to facilitate seamless user selection from an organization's member list. With capabilities for both scoped and organization-wide searches, along with intuitive single-select functionality, this app enhances collaboration by simplifying the process of connecting with colleagues in Teams.
 
  ## Included Features
 * Tabs

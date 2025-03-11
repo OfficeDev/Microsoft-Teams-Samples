@@ -10,28 +10,32 @@ using System.Threading.Tasks;
 
 namespace CommandsMenu.Controllers
 {
-    // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
-    // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
-    // achieved by specifying a more specific type for the bot constructor argument.
+    // BotController handles incoming HTTP POST requests and delegates them to the Bot Framework's adapter.
+    // It acts as an interface between incoming requests and the bot's processing logic.
     [Route("api/messages")]
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
-        private readonly IBot Bot;
+        private readonly IBotFrameworkHttpAdapter adapter;  // Renamed Adapter to adapter (camelCase)
+        private readonly IBot bot;  // Renamed Bot to bot (camelCase)
 
+        // Initializes a new instance of the BotController.
+        // adapter: The bot framework HTTP adapter used to process requests.
+        // bot: The bot implementation that processes the incoming messages.
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
-            Adapter = adapter;
-            Bot = bot;
+            this.adapter = adapter;
+            this.bot = bot;
         }
 
+        // Handles HTTP POST requests to process incoming bot messages.
+        // The method delegates the request processing to the bot framework's adapter.
         [HttpPost]
         public async Task PostAsync()
         {
             // Delegate the processing of the HTTP POST to the adapter.
-            // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            // The adapter will invoke the bot and handle the response.
+            await adapter.ProcessAsync(Request, Response, bot);
         }
     }
 }

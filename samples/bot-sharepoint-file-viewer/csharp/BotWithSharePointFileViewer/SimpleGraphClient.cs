@@ -87,12 +87,24 @@ namespace BotWithSharePointFileViewer
                 var drive = await graphClient.Sites[site.Id].Drives
                                     .Request()
                                     .GetAsync();
-                if (drive != null)
+
+                if (drive != null && drive.CurrentPage != null && drive.CurrentPage.Count > 0)
                 {
-                    await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath(fileName).Content
-                            .Request()
-                            .PutAsync<DriveItem>(stream);
+                    var driveId = drive.CurrentPage[0].Id; // Ensure CurrentPage has at least one item
+                    await graphClient.Sites[site.Id].Drives[driveId].Root.ItemWithPath(fileName).Content
+                        .Request()
+                        .PutAsync<DriveItem>(stream);
                 }
+                else
+                {
+                    // Handle the case where no drives are found
+                    // throw new Exception("No drives found for the specified site.");
+                     Console.WriteLine("No drives found for the specified site.");
+                }
+            }
+            else
+            {
+                throw new Exception("Site is null.");
             }
         }
 

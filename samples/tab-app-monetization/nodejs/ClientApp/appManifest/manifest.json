@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.appmonetization",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +18,8 @@
     "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
   },
   "description": {
-    "short": "App Monetization in tab.",
-    "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
+    "short": "Sample app demonstrating purchase flow using Teams JS SDK in a tab.",
+    "full": "This sample demonstrates a Teams tab application that opens a purchase dialog and triggers a monetization flow through the Teams JS SDK. Users can experience app monetization features seamlessly integrated within Microsoft Teams."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

@@ -16,7 +16,7 @@ provision:
 
   - uses: botAadApp/create # Creates a new AAD app for bot if BOT_ID environment variable is empty
     with:
-      name: ${{CONFIG__MANIFEST__APPNAME__SHORT}}-bot
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
     writeToEnvironmentFile:
       botId: BOT_ID
       botPassword: SECRET_BOT_PASSWORD
@@ -25,7 +25,7 @@ provision:
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: ${{CONFIG__MANIFEST__APPNAME__SHORT}}-bot
+      name: ${{CONFIG_APPNAME_SHORT}}-bot
       messagingEndpoint: ${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/api/messages
       description: ""
       channels:

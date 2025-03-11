@@ -24,7 +24,7 @@ provision:
         - path: ./templates/azure/main.bicep # Relative path to this file
           parameters: ./templates/azure/azure.parameters.${{TEAMSFX_ENV}}.json # Relative path to this file. Placeholders will be replaced with corresponding environment variable before ARM deployment.
           deploymentName: teams_toolkit_deployment # Required when deploy ARM template
-      bicepCliVersion: v0.4.613 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+      bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
   - uses: teamsApp/validateManifest # Validate using manifest schema
     with:
       manifestPath: ./appPackage/manifest.json # Path to manifest template
@@ -83,4 +83,3 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: ae7e0236-af43-44f3-a316-2af1b7cac1d6

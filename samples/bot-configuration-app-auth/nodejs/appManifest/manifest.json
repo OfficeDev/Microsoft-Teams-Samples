@@ -11,13 +11,13 @@
       "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     },
     "name": {
-      "short": "Bot Configuration auth Sample App",
+      "short": "Bot Configuration auth App",
       "full": "Bot Configuration auth Sample App"
     },
-    "description": {
-      "short": "Bot Configuration Sample App",
-      "full": "This sample shows the feature of bot configuration auth and reconfiguration for bots in team and group chat"
-    },
+  "description": {
+    "short": "Configurable Teams bot with dynamic type-ahead search and Adaptive Cards.",
+    "full": "This Teams bot enables configuration and reconfiguration with dynamic search capabilities on Adaptive Cards."
+  },
     "icons": {
       "outline": "outline.png",
       "color": "color.png"

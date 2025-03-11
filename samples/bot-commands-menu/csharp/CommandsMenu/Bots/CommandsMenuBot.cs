@@ -30,15 +30,16 @@ namespace CommandsMenu.Bots
             {
                 // Normalize the message text
                 var text = turnContext.Activity.Text.Trim().ToLower();
+
                 // Check if the message contains specific keywords and respond accordingly
                 if (text.Contains("search flights"))
-                    await SearchFlightsReaderCardAsync(turnContext, cancellationToken);
+                    await SendAdaptiveCardAsync(turnContext, _flightsDetailsCardTemplate, cancellationToken);
                 else if (text.Contains("search hotels"))
-                    await SearchHotelsReaderCardAsync(turnContext, cancellationToken);
+                    await SendAdaptiveCardAsync(turnContext, _searchHotelsCardTemplate, cancellationToken);
                 else if (text.Contains("help"))
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Displays this help message."));
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Displays this help message."), cancellationToken);
                 else if (text.Contains("best time to fly"))
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip is summer."));
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip is summer."), cancellationToken);
             }
             else if (turnContext.Activity.Value != null)
             {
@@ -48,35 +49,16 @@ namespace CommandsMenu.Bots
         }
 
         /// <summary>
-        /// Sends an adaptive card for searching flights.
+        /// Sends an adaptive card from the specified template file.
         /// </summary>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cardTemplatePath">The path to the adaptive card JSON template file.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task SearchFlightsReaderCardAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task SendAdaptiveCardAsync(ITurnContext<IMessageActivity> turnContext, string cardTemplatePath, CancellationToken cancellationToken)
         {
-            // Read the adaptive card JSON template for flight details
-            var cardJSON = File.ReadAllText(_flightsDetailsCardTemplate);
-            var adaptiveCardAttachment = new Attachment
-            {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJSON),
-            };
-
-            // Send the adaptive card as an attachment
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
-        }
-
-        /// <summary>
-        /// Sends an adaptive card for searching hotels.
-        /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task SearchHotelsReaderCardAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        {
-            // Read the adaptive card JSON template for hotel search
-            var cardJSON = File.ReadAllText(_searchHotelsCardTemplate);
+            // Read the adaptive card JSON template asynchronously to improve performance
+            var cardJSON = await File.ReadAllTextAsync(cardTemplatePath);
             var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
@@ -87,5 +69,4 @@ namespace CommandsMenu.Bots
             await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
     }
-
 }

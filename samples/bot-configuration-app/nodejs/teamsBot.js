@@ -4,6 +4,10 @@
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const fs = require('fs');
 const AdaptiveCard = require('adaptivecards');
+
+/**
+ * TeamsBot class handles Teams bot activities.
+ */
 class TeamsBot extends TeamsActivityHandler {
   constructor() {
     super();
@@ -40,19 +44,20 @@ class TeamsBot extends TeamsActivityHandler {
     });
 
     this.onMessage(async (context, next) => {
-
       // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
   }
 
-  /* Implementing sdk handler for bot configuration
-  configData object currently doesnt suport any data
-  */
+  /**
+   * Handles the Teams configuration fetch event.
+   * @param {Object} _context - The context object.
+   * @param {Object} _configData - The configuration data.
+   * @returns {Object} The response object.
+   */
   async handleTeamsConfigFetch(_context, _configData) {
-    let response = {};
     const adaptiveCard = CardFactory.adaptiveCard(this.adaptiveCardForContinue());
-    response = {
+    return {
       config: {
         value: {
           card: adaptiveCard,
@@ -63,23 +68,28 @@ class TeamsBot extends TeamsActivityHandler {
         type: 'continue',
       },
     };
-    return response;
   }
 
-
+  /**
+   * Handles the Teams configuration submit event.
+   * @param {Object} context - The context object.
+   * @param {Object} _configData - The configuration data.
+   * @returns {Object} The response object.
+   */
   async handleTeamsConfigSubmit(context, _configData) {
-    let response = {};
     const data = context._activity.value.data;
-    const dropdown01Value = data?.dropdown01;
-    const dropdown02Value = data?.dropdown02;
-    const dropdown1Value = data?.dropdown1;
-    const dropdown2Value = data?.dropdown2;
-    const dropdown3Value = data?.dropdown3;
-    const dropdown4Value = data?.dropdown4;
-    const togglestatus = data?.togglestatus;
-    const toggleAssign = data?.toggleAssign;
-    const toggleComment = data?.toggleComment;
-    const toggleTransition = data?.toggleTransition;
+    const {
+      dropdown01: dropdown01Value,
+      dropdown02: dropdown02Value,
+      dropdown1: dropdown1Value,
+      dropdown2: dropdown2Value,
+      dropdown3: dropdown3Value,
+      dropdown4: dropdown4Value,
+      togglestatus,
+      toggleAssign,
+      toggleComment,
+      toggleTransition
+    } = data;
 
     const card = {
       $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -186,15 +196,18 @@ class TeamsBot extends TeamsActivityHandler {
     const reply = { type: 'message', attachments: [attachment] };
     await context.sendActivity(reply);
 
-    response = {
+    return {
       config: {
         type: 'message',
         value: 'Your request has been submitted successfully!',
       },
-    }
-    return response;
+    };
   }
 
+  /**
+   * Generates an adaptive card for the continue action.
+   * @returns {Object} The adaptive card object.
+   */
   adaptiveCardForContinue = () => ({
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "version": "1.4",
@@ -516,6 +529,10 @@ class TeamsBot extends TeamsActivityHandler {
     ]
   });
 
+  /**
+   * Generates an adaptive card for the submit action.
+   * @returns {Object} The adaptive card object.
+   */
   adaptiveCardForSubmit = () => ({
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "version": "1.2",

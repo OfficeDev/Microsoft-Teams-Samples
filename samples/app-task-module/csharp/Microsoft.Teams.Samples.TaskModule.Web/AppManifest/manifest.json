@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.contoso.taskmodule",
   "developer": {
     "name": "Contoso",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Task Module Sample (C#/.NET version)"
   },
   "description": {
-    "short": "Task Module Demo - C#/.NET Edition",
-    "full": "This is a sample app for the Task Module feature written in C#."
+    "short": "Sample demonstrating task modules in Microsoft Teams using tabs and bots.",
+    "full": "This sample showcases how to launch task modules from tabs and bots in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",

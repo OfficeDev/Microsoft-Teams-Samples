@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4
+description: This sample app demonstrates how to implement link unfurling in a Teams messaging extension using the Bot Framework v4.
 products:
 - office-teams
 - office
@@ -15,7 +15,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-csharp
 
 # Teams Link Unfurl Bot C#
 
-Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.
+This sample demonstrates a Teams bot that utilizes [link unfurling](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) within messaging extensions, built with the Bot Framework v4. Users can experience seamless integration in Teams and Outlook, featuring capabilities like search commands and enhanced link previews.
+
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that performs link unfurling in Teams.
 

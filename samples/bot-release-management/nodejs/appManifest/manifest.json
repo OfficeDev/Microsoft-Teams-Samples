@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.releasemangement",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,15 +18,15 @@
     "full": "Release Management"
   },
   "description": {
-    "short": "Bot to create a group chat and send work item notification using Azure webhooks.",
-    "full": "This is a sample app with capability to send notification when user creates a work item in Azure DevOps via webhooks"
+    "short": "Bot for Teams notifications on Azure DevOps work items via service hooks.",
+    "full": "This bot app notifies Teams when Azure DevOps work items are created via service hooks."
   },
   "accentColor": "#235EA5",
   "bots": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
       "scopes": [
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": true
     }

@@ -1,9 +1,8 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.16",
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
-    "packageName": "com.microsoft.teams.extension",
     "developer": {
         "name": "Teams App, Inc.",
         "websiteUrl": "https://www.example.com",
@@ -15,13 +14,13 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "bot-ai-meeting-helper${{APP_NAME_SUFFIX}}",
+        "short": "bot-ai-meeting-helper",
         "full": "Bot AI Meeting Helper"
     },
-    "description": {
-        "short": "Bot AI Meeting Helper",
-        "full": "An AI meeting helper that extracts meeting summaries and action items from transcriptions and provides the responses."
-    },
+  "description": {
+    "short": "Generates and sends AI-based meeting summaries and tasks to Teams users.",
+    "full": "This sample uses Azure OpenAI to extract meeting action items and summaries, sending them directly to subscribed participants in Microsoft Teams."
+  },
     "accentColor": "#FFFFFF",
     "bots": [
         {

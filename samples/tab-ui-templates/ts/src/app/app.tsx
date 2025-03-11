@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
+ */
+
 import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import {
@@ -22,7 +27,7 @@ function App() {
     themeNames.Default
   );
 
-  useEffect(() => {
+  useEffect(() => {  
     /**
      * With the context properties in hand, your app has a solid understanding of what's happening around it in Teams.
      * https://docs.microsoft.com/en-us/javascript/api/@microsoft/teams-js/context?view=msteams-client-js-latest&preserve-view=true

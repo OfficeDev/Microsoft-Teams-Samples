@@ -1,0 +1,32 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "Input.Text",
+      "placeholder": "Placeholder text",
+      "label": "Required text input",
+      "isRequired": true,
+      "id": "text"
+    },
+    {
+      "type": "Input.Date",
+      "label": "Required date input",
+      "isRequired": true,
+      "id": "date"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Action.Submit",
+      "conditionallyEnabled": true
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Permanently disabled button",
+      "isEnabled": false
+    }
+  ]
+} 

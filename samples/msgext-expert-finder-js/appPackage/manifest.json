@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.17",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "localizationInfo": {
@@ -21,8 +21,8 @@
     "full": "Expert Finder"
   },
   "description": {
-    "short": "Search for candidates and share profiles matching a criteria.",
-    "full": "Get candidate profiles and share them in a conversation. Search for candidates by skills, location or availability."
+    "short": "Teams message extension for Copilot to find experts by skills and location.",
+    "full": "This sample implements a Teams message extension for Copilot, enabling users to query a database of candidates based on skills, location, and availability."
   },
   "accentColor": "#FFFFFF",
   "bots": [],
@@ -72,7 +72,7 @@
   "permissions": ["identity", "messageTeamMembers"],
   "validDomains": [
     "${{BOT_DOMAIN}}"
-  ]
+  ],
   "webApplicationInfo": {
     "id": "${{BOT_ID}}",
     "resource": "api://botid-${{BOT_ID}}"

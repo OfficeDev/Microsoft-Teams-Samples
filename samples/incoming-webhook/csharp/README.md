@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
+description: "This sample demonstrates a Teams tab to send message cards using Incoming Webhook, showcasing the HttpPOST action for interactive cards."
 products:
 - office-teams
 - office
@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-incoming-webhook-csharp
 
 # Incoming webhook
 
-This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card.
+This sample demonstrates a Teams tab where users can input Incoming Webhook URLs and send message cards to a specified Teams channel, illustrating the HttpPOST action for interactive message cards. It includes setup steps for running the sample, testing in multiple environments such as Outlook and Office, and provides insights into webhooks and connectors for extending Microsoft 365 apps.
 
 ## Included Features
 * Tabs

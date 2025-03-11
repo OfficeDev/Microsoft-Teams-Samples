@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-search-quickstart-js",
     "source": "officeDev",
     "title": "Search messaging extension",
-    "shortDescription": "Simple search messaging extension",
+    "shortDescription": "This sample demonstrates a simple JavaScript-based Messaging Extension that accepts search requests and returns results within Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-quickstart/js",
     "longDescription": [
-      "Hello world Messaging Extension that accepts search requests and returns results."
+      "This JavaScript quick start sample showcases how to create a Messaging Extension in Microsoft Teams that handles user search queries. It allows users to interact with your web service through the Teams client, providing seamless search functionality."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

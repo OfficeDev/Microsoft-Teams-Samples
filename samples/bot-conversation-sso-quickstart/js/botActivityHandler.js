@@ -8,7 +8,11 @@ const {
     CardFactory,
     ActionTypes
 } = require('botbuilder');
+const { XmlEntities } = require('html-entities');
 
+/**
+ * BotActivityHandler class extends TeamsActivityHandler to handle Teams-specific activities.
+ */
 class BotActivityHandler extends TeamsActivityHandler {
     constructor() {
         super();
@@ -22,9 +26,17 @@ class BotActivityHandler extends TeamsActivityHandler {
                     Learn more: https://aka.ms/teams-register-bot. 
         */
         // Registers an activity event handler for the message event, emitted for every incoming message activity.
-        this.onMessage(async (context, next) => {
-            TurnContext.removeRecipientMention(context.activity);
-            switch (context.activity.text.trim()) {
+        this.onMessage(this.handleMessage.bind(this));
+    }
+
+    /**
+     * Handles incoming message activities.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {Function} next - The next middleware function in the pipeline.
+     */
+    async handleMessage(context, next) {
+        TurnContext.removeRecipientMention(context.activity);
+        switch (context.activity.text.trim()) {
             case 'Hello':
                 await this.mentionActivityAsync(context);
                 break;
@@ -33,30 +45,29 @@ class BotActivityHandler extends TeamsActivityHandler {
                 // a card with the available actions.
                 const value = { count: 0 };
                 const card = CardFactory.heroCard(
-                    'Lets talk...',
+                    'Let\'s talk...',
                     null,
                     [{
                         type: ActionTypes.MessageBack,
                         title: 'Say Hello',
                         value: value,
                         text: 'Hello'
-                    }]);
+                    }]
+                );
                 await context.sendActivity({ attachments: [card] });
                 break;
-            }
-            await next();
-        });
+        }
+        await next();
     }
 
     /**
      * Say hello and @ mention the current user.
+     * @param {TurnContext} context - The context object for the turn.
      */
     async mentionActivityAsync(context) {
-        const TextEncoder = require('html-entities').XmlEntities;
-
         const mention = {
             mentioned: context.activity.from,
-            text: `<at>${ new TextEncoder().encode(context.activity.from.name) }</at>`,
+            text: `<at>${ new XmlEntities().encode(context.activity.from.name) }</at>`,
             type: 'mention'
         };
 
@@ -68,4 +79,3 @@ class BotActivityHandler extends TeamsActivityHandler {
 }
 
 module.exports.BotActivityHandler = BotActivityHandler;
-

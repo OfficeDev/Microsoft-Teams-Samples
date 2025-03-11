@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows anonymous users support in meeting apps.
+description: This sample app enables anonymous user support in Microsoft Teams meeting apps using Azure AD, Bot Framework, and tunneling setup, allowing guest users to interact seamlessly through features like meeting tabs and stage views.
 products:
 - office-teams
 - office
@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-app-anonymous-users-csharp
 
 ---
 
-## Anonymous User Support
+## Anonymous User Support in Microsoft Teams Apps
 
-This sample shows anonymous users support in meeting apps.
+This sample demonstrates how to enable anonymous user support in Microsoft Teams meeting apps. It provides guidance on configuring and integrating various Microsoft services, like Azure Active Directory (AAD) and the Microsoft Bot Framework, to allow guest users to interact with meeting apps seamlessly.
 
 **Interaction with app**
 ![appanonymoususersGif](Images/anonymoususersupport.gif)
@@ -31,6 +31,27 @@ This sample shows anonymous users support in meeting apps.
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+-[Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+##Run the app (Using Teams Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+
+1.Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
+2.Install Teams Toolkit for Visual Studio Teams Toolkit extension
+3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
+5.In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
+6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+7.To test facebook auth flow create a facebookapp and get client id and secret for facebook app. Now go to your bot channel registration -> configuration -> Add OAuth connection string
+
+Provide connection Name : for eg facebookconnection. You'll use this name in your bot in the appsettings.json file.
+Select service provider as Facebook.
+Update {{FacebookAppId}} and {{FacebookAppPassword}} in appsetting.json.
+8.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
+9.In the browser that launches, select the Add button to install the app to Teams.
+
+If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -95,7 +116,7 @@ This sample shows anonymous users support in meeting apps.
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
 16. To test facebook auth flow [create a facebookapp](FacebookAuth/README.md) and get client id and secret for facebook app.
-    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+    Now go to your bot channel registration -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
    - Select service provider ad `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
@@ -144,11 +165,11 @@ This sample shows anonymous users support in meeting apps.
    
  7. __*This step is specific to Teams.*__
 
-- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id `<<YOUR-MICROSOFT-APP-ID>>` (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-- **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+- **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 

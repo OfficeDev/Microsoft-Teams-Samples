@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.15",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://microsoft.com",
@@ -19,8 +18,8 @@
     "full": "Targeted Meeting Notification Demo"
   },
   "description": {
-    "short": "Targeted In-Meeting Notification demo",
-    "full": "This sample app shows how to send in meeting targeted notifications."
+    "short": "Sample app for targeted in-meeting notifications in Microsoft Teams meetings.",
+    "full": "This sample application demonstrates how to implement targeted in-meeting notifications in Microsoft Teams using adaptive cards and bot interactions."
   },
   "accentColor": "#FFFFFF",
   "bots": [
@@ -29,7 +28,7 @@
       "scopes": [
         "personal",
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "needsChannelSelector": false,
       "isNotificationOnly": false,
@@ -38,7 +37,7 @@
         {
           "scopes": [
             "personal",
-            "groupchat",
+            "groupChat",
             "team"
           ],
           "commands": [

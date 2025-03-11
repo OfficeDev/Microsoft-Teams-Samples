@@ -8,7 +8,7 @@ languages:
     - typescript
     - javascript
     - html
-description: 'This sample demonstrates authentication in Microsoft Teams using bot and tab.'
+description: 'This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab, supporting Teams SSO with MSAL.js 2.0.'
 urlFragment: microsoft-teams-auth
 extensions:
     contentType: samples
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 # Microsoft Teams Authentication Sample
 
-This sample demonstrates authentication in Microsoft Teams using bot and tab.
+This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab. It demonstrates Single Sign-On (SSO) functionality, allowing seamless user experiences across Microsoft services.
 
 ## Included Features
 * Teams SSO (Using bots and tabs)

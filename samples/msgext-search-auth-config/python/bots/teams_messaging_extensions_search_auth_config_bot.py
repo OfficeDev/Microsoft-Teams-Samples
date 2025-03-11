@@ -2,14 +2,16 @@
 # Licensed under the MIT License.
 
 import urllib.parse
-import xmlrpc.client
 from botbuilder.core import CardFactory, MessageFactory, TurnContext, UserState
 from botbuilder.schema import (
     ThumbnailCard,
     CardImage,
     HeroCard,
     CardAction,
+    ActionTypes,
+    InvokeResponse
 )
+from bs4 import BeautifulSoup
 from botbuilder.schema.teams import (
     MessagingExtensionAction,
     MessagingExtensionAttachment,
@@ -21,6 +23,8 @@ from botbuilder.schema.teams import (
     TaskModuleContinueResponse,
     TaskModuleTaskInfo,
 )
+import requests
+from http import HTTPStatus
 from botbuilder.core.teams import TeamsActivityHandler
 from simple_graph_client import SimpleGraphClient
 
@@ -77,6 +81,67 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
             )
         )
 
+    async def on_invoke_activity(self, turn_context: TurnContext):
+        if turn_context.activity.name == "composeExtension/anonymousQueryLink":
+            # Handle the anonymous query link
+            response = await self.handle_teams_app_based_anonymous_link_query(
+                turn_context, turn_context.activity.value
+            )
+            return InvokeResponse(status=HTTPStatus.OK, body=self.convert_to_dict(response))
+        else:
+            return await super().on_invoke_activity(turn_context)
+        
+    async def handle_teams_app_based_anonymous_link_query(self, turn_context: TurnContext, value):
+        # Create the Adaptive Card JSON directly
+        adaptive_card = {
+            "type": "AdaptiveCard",
+            "version": "1.5",
+            "body": [
+                {
+                    "type": "TextBlock",
+                    "text": "Zero Installation Link Unfurling Card",
+                    "size": "ExtraLarge",
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "Install the app or sign in to view full content of the card.",
+                    "size": "Medium",
+                },
+            ],
+        }
+        # Create a MessagingExtensionAttachment for the card
+        attachment = MessagingExtensionAttachment(
+            content_type="application/vnd.microsoft.card.adaptive",
+            content=adaptive_card,
+        )
+        # Create a MessagingExtensionResult
+        result = MessagingExtensionResult(
+            attachment_layout="list",
+            type="auth",
+            attachments=[attachment],
+        )
+        # Return the MessagingExtensionResponse
+        return MessagingExtensionResponse(compose_extension=result)
+    
+    def convert_to_dict(self, response: MessagingExtensionResponse) -> dict:
+        """Manually convert MessagingExtensionResponse and MessagingExtensionResult to a JSON-serializable dictionary."""
+        compose_extension = response.compose_extension
+        if compose_extension is None: return {}
+        # Manually serialize the MessagingExtensionResult
+        result_dict = {
+            "attachmentLayout": compose_extension.attachment_layout,
+            "type": compose_extension.type,
+            "attachments": [
+                {
+                    "contentType": attachment.content_type,
+                    "content": attachment.content,
+                }
+                for attachment in compose_extension.attachments
+            ],
+        }
+        # Return the dictionary in the expected format
+        return {"composeExtension": result_dict}
+
     async def on_teams_messaging_extension_configuration_setting(
         self, turn_context: TurnContext, settings
     ):
@@ -118,14 +183,14 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
                 content_type=CardFactory.content_types.hero_card,
                 content=HeroCard(title=obj["name"]),
                 preview=CardFactory.hero_card(hero_card),
-            )
+                )
             attachments.append(attachment)
         return MessagingExtensionResponse(
             compose_extension=MessagingExtensionResult(
                 type="result", attachment_layout="list", attachments=attachments
             )
         )
-
+    
     async def _get_auth_or_search_result(
         self,
         turn_context: TurnContext,
@@ -246,10 +311,10 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
                 card=card, height=200, title="Adaptive Card Example", width=400
             )
             continue_response = TaskModuleContinueResponse(
-                type="continue", value=task_info
+                value=task_info
             )
             return MessagingExtensionActionResponse(task=continue_response)
-
+        
         return None
 
     async def on_teams_messaging_extension_select_item(
@@ -275,6 +340,40 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
         )
 
     def _get_search_results(self, query: str):
-        client = xmlrpc.client.ServerProxy("https://pypi.org/pypi")
-        search_results = client.search({"name": query})
-        return search_results[:10] if len(search_results) > 10 else search_results
+        """
+        Fetch the top 10 search results from PyPI using HTML scraping.
+
+        :param query: The package name or search query
+        :return: List of search results
+        """
+        search_url = f"https://pypi.org/search/?q={query}&page=1"
+        search_results = []
+
+        try:
+            # Send GET request to the PyPI search page
+            response = requests.get(search_url, headers={"User-Agent": "TeamsBot/1.0"})
+            response.raise_for_status()  # Raise an exception for HTTP errors
+
+            # Parse the HTML response to extract package information
+            soup = BeautifulSoup(response.text, "html.parser")
+            for package in soup.find_all("a", class_="package-snippet", limit=10):  # Limit to 10 results
+                name_tag = package.find("span", class_="package-snippet__name")
+                version_tag = package.find("span", class_="package-snippet__version")
+                summary_tag = package.find("p", class_="package-snippet__description")
+
+                # Safely extract text from tags, ensuring no NoneType error
+                name = name_tag.text if name_tag else "Unknown"
+                version = version_tag.text if version_tag else "N/A"
+                summary = summary_tag.text if summary_tag else "No description provided."
+
+                search_results.append({
+                    "name": name,
+                    "version": version,
+                    "summary": summary
+                })
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching search results: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
+        return search_results

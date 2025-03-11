@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases how apps function within federated group chats.
+description: This app allows users to quickly view, add, and manage group members in federated Teams chat.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-feed-members-nodejs
 
 # Apps in federated
 
-This sample app allows users to easily view a list of group members. When a new member is added, their details are promptly displayed.
+This bot sample demonstrates real-time member management in federated Microsoft Teams group chats, enabling users to view, add, and organize group members seamlessly. Included features like Adaptive Cards enhance the interaction experience, with setup guides for Teams Toolkit and manual deployment options.
 
 ## Included Features
 * Bots

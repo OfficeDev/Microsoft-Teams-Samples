@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-all-cards-nodejs",
     "source": "officeDev",
     "title": "Types of Cards - NodeJS",
-    "shortDescription": "Sample which demonstrates sending different types cards supported in teams using bot.",
+    "shortDescription": "This sample showcases how to send various types of cards using a bot in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-all-cards/nodejs",
     "longDescription": [
-      "Sample which demonstrates sending different types cards supported in teams using bot."
+      "This sample demonstrates using a bot to send multiple card types in Microsoft Teams, including Adaptive, Hero, Thumbnail, and OAuth cards. It covers setup, deployment, and app installation instructions."
     ],
     "creationDateTime": "2023-01-13",
-    "updateDateTime": "2023-01-13",
+    "updateDateTime": "2023-10-10",
     "products": [
       "Teams"
     ],

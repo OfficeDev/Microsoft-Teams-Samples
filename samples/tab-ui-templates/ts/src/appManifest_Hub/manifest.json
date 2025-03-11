@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "id": "{{GUID_ID}}",
   "version": "1.0.0",
-  "packageName": "com.teams.tabuitemplates",
   "developer": {
     "name": "microsoft",
     "websiteUrl": "https://{{HOSTNAME}}",
@@ -40,12 +39,6 @@
       "entityId": "sample.app.list",
       "name": "List",
       "contentUrl": "https://{{HOSTNAME}}/list",
-      "scopes": [ "personal" ]
-    },
-    {
-      "entityId": "sample.app.boards",
-      "name": "Task boards",
-      "contentUrl": "https://{{HOSTNAME}}/board",
       "scopes": [ "personal" ]
     }
   ],

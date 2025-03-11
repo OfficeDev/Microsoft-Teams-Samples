@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample Outlook add-in and Teams tab app.
+description: This sample app integrates an Outlook add-in with a Teams tab to streamline the creation and management of discount offers. Users can insert discounts into emails and view consolidated data within Teams, enhancing collaboration and efficiency.
 products:
 - office-teams
 - office
@@ -20,7 +20,7 @@ This sample combines, into a single app with a single manifest, an Outlook Add-i
 
 The sample illustrates a prime use case for combining a Teams Tab and an Office Add-in: Users take discrete actions on an Office document and analyze data about these discrete actions in a Teams tab.
 
-**Note:** As of 6/20/2023, Teams apps that include an Office Add-in capability are in preview and can run only on a Windows computer. You should be working on a Windows computer to run this sample.
+**Note:** As of 1/13/2025, Teams apps that include an Office Add-in capability can run only on a Windows computer. You should be working on a Windows computer to run this sample.
 
 ## Included Features
 
@@ -47,7 +47,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [NodeJS](https://nodejs.org/en/), version 16.x.x or 18.x.x.
 - [npm](https://www.npmjs.com/) (installed with NodeJS)
 
-    **Note:** This sample was developed with NodeJS version 16.13.2 and npm version 8.1.2. It should work with most NodeJS versions in the 16.x.x or 18.x.x ranges, but there are some exceptions to this. It does not work on NodeJS 16.16.0.
+    **Note:** This sample was developed with NodeJS version 16.13.2 and npm version 8.1.2. It should work with most NodeJS versions in the 16.x.x, 18.x.x, 20.x.x, and 22.x.x ranges, but there are some exceptions to this. It does not work on NodeJS 16.16.0.
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account.
 - [Visual Studio Code](https://code.visualstudio.com/)
@@ -72,19 +72,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
    - In a terminal, navigate to `samples/tab-add-in-combined/nodejs`.
    - Install modules:
-
-    ```bash
-    npm install
-    ```
-   - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/add-in`.
-   - Install modules:
-
-    ```bash
-    npm install
-    ```
-
-    - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/tab`.
-    - Install modules:
 
     ```bash
     npm install
@@ -142,9 +129,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
      ![An email message with the text "We are delighted to offer you a discount of 15%".](Images/Inserted_text.JPG)
 
-14. To see the task pane match the current Office theme, [change the Office theme](https://support.microsoft.com/office/change-the-look-and-feel-of-microsoft-365-63e65e1c-08d4-4dea-820e-335f54672310) and then open a new message compose window and start the add-in. It will open in the new theme. The following shows the task pane in the Office dark gray theme.
-
-    **Note:** There isn't currently an API in the Office JavaScript Library to detect the theme changed event in Office, so the task pane cannot dynamically change to the new theme.
+14. To see the task pane match the current Office theme, [change the Office theme](https://support.microsoft.com/office/change-the-look-and-feel-of-microsoft-365-63e65e1c-08d4-4dea-820e-335f54672310). The following shows the task pane in the Office dark gray theme.
 
      ![A task pane styled to match the Office Dark Gray theme. The title bar is "Discounts". A text box labelled "Discount %" with default number 15 in it. A text box labelled "Offer text" with default text "We are delighted to offer you a discount of" in it. A button labelled "Insert Offer". A footer bar containing text "Blue Yonder Airlines".](Images/Discounts_task_pane_dark_gray_theme.JPG)
 

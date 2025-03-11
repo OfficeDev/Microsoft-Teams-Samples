@@ -14,52 +14,60 @@ using Microsoft.Extensions.Configuration;
 
 namespace AppCompleteAuth.Dialogs
 {
+    /// <summary>
+    /// MainDialog class to handle the main dialog flow.
+    /// </summary>
     public class MainDialog : ComponentDialog
     {
         private readonly string _applicationBaseUrl;
-        private readonly ConcurrentDictionary<string, Token> _Token;
+        private readonly ConcurrentDictionary<string, Token> _token;
+
         public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, Token> token)
             : base(nameof(MainDialog))
         {
-            _Token = token;
+            _token = token;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"], _Token));
-            AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _Token));
+            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"], _token));
+            AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _token));
             AddDialog(new UsernamePasswordAuthDialog(configuration["ApplicationBaseUrl"]));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                PromptStepAsync
+                    PromptStepAsync
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        // Method to invoke auth flow.
+        /// <summary>
+        /// Method to invoke auth flow.
+        /// </summary>
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            if(stepContext.Context.Activity.Text == null || stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
+            var text = stepContext.Context.Activity.Text?.ToLower().Trim();
+
+            if (text == null || text == "usingcredentials")
             {
                 return await stepContext.BeginDialogAsync(nameof(UsernamePasswordAuthDialog));
             }
-            if (stepContext.Context.Activity.Text.ToLower().Trim() == "sso" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutsso")
+            if (text == "sso" || text == "logoutsso")
             {
                 return await stepContext.BeginDialogAsync(nameof(BotSsoAuthDialog));
             }
-            else if (stepContext.Context.Activity.Text.ToLower().Trim() == "facebooklogin" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutfacebook")
+            if (text == "facebooklogin" || text == "logoutfacebook")
             {
                 return await stepContext.BeginDialogAsync(nameof(FacebookAuthDialog));
             }
-            else {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetLoginOptionCard()), cancellationToken);
 
-                return await stepContext.EndDialogAsync();
-            }
+            await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetLoginOptionCard()), cancellationToken);
+            return await stepContext.EndDialogAsync();
         }
 
-        // Get login option card.
+        /// <summary>
+        /// Get login option card.
+        /// </summary>
         private static Attachment GetLoginOptionCard()
         {
             var heroCard = new HeroCard
@@ -67,26 +75,28 @@ namespace AppCompleteAuth.Dialogs
                 Title = "Login options",
                 Text = "Select a login option",
                 Buttons = new List<CardAction>
-                {
-                    new CardAction(ActionTypes.MessageBack,title:"AAD SSO authentication", value: "sso", text:"sso", displayText:"AAD SSO authentication"),
-                    new CardAction(ActionTypes.MessageBack,title:"Facebook login (OAuth 2)", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login (OAuth 2)"),
-                    new CardAction(ActionTypes.MessageBack,title:"User Id/password login", value: "usingcredentials", text:"usingcredentials", displayText:"User Id/password login"),
-                }
+                    {
+                        new CardAction(ActionTypes.MessageBack, title: "AAD SSO authentication", value: "sso", text: "sso", displayText: "AAD SSO authentication"),
+                        new CardAction(ActionTypes.MessageBack, title: "Facebook login (OAuth 2)", value: "facebooklogin", text: "facebooklogin", displayText: "Facebook login (OAuth 2)"),
+                        new CardAction(ActionTypes.MessageBack, title: "User Id/password login", value: "usingcredentials", text: "usingcredentials", displayText: "User Id/password login"),
+                    }
             };
 
             return heroCard.ToAttachment();
         }
 
-        // Get sign in card.
+        /// <summary>
+        /// Get sign in card.
+        /// </summary>
         private Attachment GetPopUpSignInCard()
         {
             var heroCard = new HeroCard
             {
                 Title = "Sign in card",
                 Buttons = new List<CardAction>
-                {
-                    new CardAction(ActionTypes.Signin, "Sign in", value: _applicationBaseUrl + "/popUpSignin?from=bot&height=535&width=600"),
-                }
+                    {
+                        new CardAction(ActionTypes.Signin, "Sign in", value: $"{_applicationBaseUrl}/popUpSignin?from=bot&height=535&width=600"),
+                    }
             };
 
             return heroCard.ToAttachment();

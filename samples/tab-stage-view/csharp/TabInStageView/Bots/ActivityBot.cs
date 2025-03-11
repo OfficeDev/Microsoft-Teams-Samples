@@ -32,7 +32,7 @@ namespace TabInStageView.Bots
         /// <param name="configuration">configuration of application.</param>
         public ActivityBot(IConfiguration configuration)
         {
-            _appId = configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
+            _appId = configuration["TeamsAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
             _applicationBaseURL = configuration["ApplicationBaseURL"] ?? throw new NullReferenceException("ApplicationBaseURL");
         }
 
