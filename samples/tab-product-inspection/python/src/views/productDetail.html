@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+</head>
+<body id="mainDiv">
+    <div id="productDetails">
+        <h4>Product Detail</h4>
+        Product Name: <label id="productName"></label>
+        <br />
+        Product image
+        <br />
+        <img id="productImg" src="" height="100" width="100" />
+        <br />
+        <br />
+        Product Status: <label id="productStatus"></label>
+    </div>
+    <label id="noProductFound"></label>
+    <br/>
+    <button type="button" class="btn btn-outline-info" id="btnBack">Back</button>
+
+    <script>
+        var productDetails = {{ productDetails | safe }};
+
+        $(document).ready(function () {
+            microsoftTeams.app.initialize();
+
+            if (!productDetails.productId) {
+                $("#noProductFound").text("No product found for this Id");
+                $("#productDetails").hide();
+            } 
+            else if (!productDetails.image) {
+                $("#noProductFound").text("No product status found");
+                $("#productDetails").hide();
+            } 
+            else {
+                $("#noProductFound").show();
+                $("#productName").text(productDetails.productName);
+                $("#productStatus").text(productDetails.status);
+                document.getElementById("productImg").src = productDetails.image;
+            }
+        });
+
+        $("#btnBack").on('click', function () {
+            microsoftTeams.dialog.submit();
+        });
+    </script>
+</body>
+</html>

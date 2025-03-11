@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#noProductFound").hide();
+            $("#status").hide();
+            $("#wait").hide();
+        });
+
+        microsoftTeams.app.initialize().then(() => {
+            scanBarCode();
+        });
+
+        var productId;
+        var productName;
+        var image;
+
+        function scanBarCode() {
+            var config = { timeOutIntervalInSec: 30 };
+            
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                if (error) {
+                    alert("Error: " + error.errorCode + (error.message || ''));
+                } else if (decodedText) {
+                    productId = decodedText;
+
+                    if (decodedText === "01SD001") {
+                        productName = "Laptop";
+                        $("#captureImage").show();
+                    } else if (decodedText === "01DU890") {
+                        productName = "Desktop";
+                        $("#captureImage").show();
+                    } else if (decodedText === "01PM998") {
+                        productName = "Mobile";
+                        $("#captureImage").show();
+                    } else {
+                        $("#noProductFound").show();
+                    }
+                }
+            }, config);
+        }
+
+        function captureImage() {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.media.captureImage((error, files) => {
+                    if (error) {
+                        alert("Error: " + error.errorCode + (error.message || ''));
+                    } else if (files) {
+                        image = files[0].content;
+                        $("#productName").text("Product Name: " + productName);
+                        $("#productImage").attr("src", "data:image/png;base64," + image);
+                        $("#productStatus").show();
+                    }
+                });
+            });
+        }
+
+        function approveRejectProduct(status) {
+            microsoftTeams.app.initialize();
+
+            let formData = new FormData();
+            var productDetails = {
+                "productId": productId,
+                "image": "data:image/png;base64," + image,
+                "status": status ? "Approved" : "Rejected",
+                "productName": productName
+            }
+
+            var data = JSON.stringify(productDetails);
+            formData.append("data", data);
+
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#wait").show();
+
+            $.ajax({
+                url: '/save',
+                type: 'POST',
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function () {
+                    $("#wait").hide();
+                    $("#status").show();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <label id="noProductFound">This product is not available. Please scan the product from 'All product list'</label>
+
+            <div id="captureImage">
+                <input type="button" value="Capture Image" onclick="captureImage()">
+                <br />
+            </div>
+
+            <div id="productStatus">
+                <label id="productName"></label><br />
+                <img id="productImage" src="" height="100" width="100" />
+                <br /><br />
+                <button type="button" onclick="approveRejectProduct(true)">Approve</button>
+                <button type="button" onclick="approveRejectProduct(false)">Reject</button>
+            </div>
+
+            <div id="wait">Please wait...</div>
+            <div id="status">Product status updated successfully.</div>
+        </div>
+    </div>
+</body>
+</html>
