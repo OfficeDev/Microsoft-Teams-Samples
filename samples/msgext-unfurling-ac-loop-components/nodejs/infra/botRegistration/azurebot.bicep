@@ -6,9 +6,7 @@ param resourceBaseName string
 @maxLength(42)
 param botDisplayName string
 
-param botServiceName string = resourceBaseNameparam identityResourceId string
-param identityClientId string
-param identityTenantId string
+param botServiceName string = resourceBaseName
 param botServiceSku string = 'F0'
 param botAadAppClientId string
 param botAppDomain string
@@ -21,10 +19,7 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   properties: {
     displayName: botDisplayName
     endpoint: 'https://${botAppDomain}/api/messages'
-    msaAppId: identityClientId
-    msaAppMSIResourceId: identityResourceId
-    msaAppTenantId:identityTenantId
-    msaAppType:'UserAssignedMSI'
+    msaAppId: botAadAppClientId
   }
   sku: {
     name: botServiceSku
