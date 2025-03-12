@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='teamsapp.js') }}"></script>
+</head>
+<body>
+
+    <div class="font-semibold font-title">
+        <h3>Welcome to Region Selection App!</h3>
+    </div>
+
+    <p>
+        <div>
+            This will help you to choose your data center's Region.
+        </div>
+    </p>
+
+    <p>
+        <div>
+            <label for="domainChoice">Select the data center Region you would like to set: </label>
+
+            <select id="domainChoice" name="domainChoice">
+                <option value="" selected="selected">(Select a region)</option>
+                {% for item in regionDomains %}
+                    <option value="{{ item.region }}">{{ item.country }} - {{ item.region }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </p>
+
+</body>
+</html>
