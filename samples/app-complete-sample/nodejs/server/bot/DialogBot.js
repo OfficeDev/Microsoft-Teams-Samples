@@ -55,9 +55,9 @@ class DialogBot extends TeamsActivityHandler {
     async handleTeamsMessagingExtensionQuery(context, query) {
         const manifestInitialRun = "initialRun";
         const manifestParameterName = "query";
-        const initialRunParameter = this.getQueryParameterByName(query, manifestInitialRun);
-        const queryParameter = this.getQueryParameterByName(query, manifestParameterName);
-        const userData = await this.userStateAccessor.get(context, {});
+        let initialRunParameter = this.getQueryParameterByName(query, manifestInitialRun);
+        let queryParameter = this.getQueryParameterByName(query, manifestParameterName);
+        let userData = await this.userStateAccessor.get(context, {});
         userData.botId = context.activity.recipient.id;
         await this.userState.saveChanges(context, false);
 
