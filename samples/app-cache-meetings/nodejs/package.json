@@ -4,10 +4,11 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.9.1",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.34.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
@@ -41,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^19.0.10",
     "env-cmd": "^10.1.0"
   }
 }
