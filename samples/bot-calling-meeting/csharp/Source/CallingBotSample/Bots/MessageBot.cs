@@ -134,7 +134,12 @@ namespace CallingBotSample.Bots
             if (peoplePicker != null)
             {
                 // Adaptive Card people picker returns a comma separated list of aad IDs
+                //var peoplePickerAadIds = new[] { "d30034ff-f3da-4fd0-8e25-b227d5a40805" };
+
+                //var peoplePickerID = new[] { "3e96496e-e5bb-4507-a1ea-cafb38d735e7" };
+
                 var peoplePickerAadIds = peoplePicker.Split(',');
+
                 var action = moduleSubmitData?.Action?.ToLowerInvariant();
                 var callId = moduleSubmitData?.CallId;
 
@@ -164,7 +169,7 @@ namespace CallingBotSample.Bots
                                         callId,
                                 (nonNullCallId) => callService.InviteParticipant(
                                         nonNullCallId,
-                                        new[] { new IdentitySet { User = new Identity { Id = peoplePicker } } }),
+                                        new[] { new IdentitySet { User = new Identity { Id = "3e96496e-e5bb-4507-a1ea-cafb38d735e7" } } }),
                                 CreateTaskModuleMessageResponse);
                         case "createincident":
                             if (moduleSubmitData?.IncidentName != null)
