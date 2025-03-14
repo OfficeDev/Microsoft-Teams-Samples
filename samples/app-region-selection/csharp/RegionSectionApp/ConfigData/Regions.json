@@ -1,28 +1,28 @@
 {
-  "regionDomains": [
+  "RegionDomains": [
     {
       "id": 1,
-      "region": "North America",
-      "country": "United States of America (USA)",
-      "domain": ".us"
+      "Region": "North America",
+      "Country": "United States of America (USA)",
+      "Domain": ".us"
     },
     {
       "id": 2,
-      "region": "Europe",
-      "country": "United Kingdom (UK)",
-      "domain": ".uk"
+      "Region": "Europe",
+      "Country": "United Kingdom (UK)",
+      "Domain": ".uk"
     },
     {
       "id": 3,
-      "region": "Asia & Pacific",
-      "country": "India",
-      "domain": ".in"
+      "Region": "Asia & Pacific",
+      "Country": "India",
+      "Domain": ".in"
     },
     {
       "id": 4,
-      "region": "Asia & Pacific",
-      "country": "China",
-      "domain": ".cn"
+      "Region": "Asia & Pacific",
+      "Country": "China",
+      "Domain": ".cn"
     }
   ]
 }

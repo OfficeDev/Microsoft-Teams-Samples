@@ -19,52 +19,56 @@ using Microsoft.BotBuilderSamples.Models;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
+    /// <summary>
+    /// TeamsMessagingExtensionsActionBot handles messaging extension actions for Teams.
+    /// </summary>
     public class TeamsMessagingExtensionsActionBot : TeamsActivityHandler
     {
-        public readonly string baseUrl;
+        private readonly string baseUrl;
 
         public TeamsMessagingExtensionsActionBot(IConfiguration configuration) : base()
         {
             this.baseUrl = configuration["BaseUrl"];
         }
 
-        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        /// <summary>
+        /// Handles the submission of messaging extension actions.
+        /// </summary>
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
-            switch (action.CommandId)
+            return action.CommandId switch
             {
-                case "createCard":
-                    return CreateCardCommand(turnContext, action);
-                case "shareMessage":
-                    return ShareMessageCommand(turnContext, action);
-                case "webView":
-                    return WebViewResponse(turnContext, action);
-                case "createAdaptiveCard":
-                    return CreateAdaptiveCardResponse(turnContext, action);
-                case "razorView":
-                    return RazorViewResponse(turnContext, action);
-                case "HTML":
-                    return ShareHTMLCard(turnContext, action);
-            }
-            return await Task.FromResult(new MessagingExtensionActionResponse());
+                "createCard" => CreateCardCommand(turnContext, action),
+                "shareMessage" => ShareMessageCommand(turnContext, action),
+                "webView" => WebViewResponse(turnContext, action),
+                "createAdaptiveCard" => CreateAdaptiveCardResponse(turnContext, action),
+                "razorView" => RazorViewResponse(turnContext, action),
+                "HTML" => ShareHtmlCard(turnContext, action),
+                _ => await Task.FromResult(new MessagingExtensionActionResponse())
+            };
         }
 
         private MessagingExtensionActionResponse RazorViewResponse(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            // The user has chosen to create a card by choosing the 'Create Card' context menu command.
-            RazorViewResponse cardData = JsonConvert.DeserializeObject<RazorViewResponse>(action.Data.ToString());
+            var cardData = JsonConvert.DeserializeObject<RazorViewResponse>(action.Data.ToString());
             var card = new HeroCard
             {
                 Title = "Requested User: " + turnContext.Activity.From.Name,
                 Text = cardData.DisplayData,
             };
 
-            var attachments = new List<MessagingExtensionAttachment>();
-            attachments.Add(new MessagingExtensionAttachment
-            {
-                Content = card,
-                ContentType = HeroCard.ContentType,
-                Preview = card.ToAttachment(),
-            });
+            var attachments = new List<MessagingExtensionAttachment>
+                {
+                    new MessagingExtensionAttachment
+                    {
+                        Content = card,
+                        ContentType = HeroCard.ContentType,
+                        Preview = card.ToAttachment(),
+                    }
+                };
 
             return new MessagingExtensionActionResponse
             {
@@ -79,7 +83,6 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private MessagingExtensionActionResponse CreateCardCommand(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            // The user has chosen to create a card by choosing the 'Create Card' context menu command.
             var createCardData = ((JObject)action.Data).ToObject<CardResponse>();
 
             var card = new HeroCard
@@ -89,13 +92,15 @@ namespace Microsoft.BotBuilderSamples.Bots
                 Text = createCardData.Text,
             };
 
-            var attachments = new List<MessagingExtensionAttachment>();
-            attachments.Add(new MessagingExtensionAttachment
-            {
-                Content = card,
-                ContentType = HeroCard.ContentType,
-                Preview = card.ToAttachment(),
-            });
+            var attachments = new List<MessagingExtensionAttachment>
+                {
+                    new MessagingExtensionAttachment
+                    {
+                        Content = card,
+                        ContentType = HeroCard.ContentType,
+                        Preview = card.ToAttachment(),
+                    }
+                };
 
             return new MessagingExtensionActionResponse
             {
@@ -110,29 +115,24 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private MessagingExtensionActionResponse ShareMessageCommand(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            // The user has chosen to share a message by choosing the 'Share Message' context menu command.
             var heroCard = new HeroCard
             {
-                Title = $"{action.MessagePayload.From?.User?.DisplayName} orignally sent this message:",
+                Title = $"{action.MessagePayload.From?.User?.DisplayName} originally sent this message:",
                 Text = action.MessagePayload.Body.Content,
             };
 
             if (action.MessagePayload.Attachments != null && action.MessagePayload.Attachments.Count > 0)
             {
-                // This sample does not add the MessagePayload Attachments.  This is left as an
-                // exercise for the user.
                 heroCard.Subtitle = $"({action.MessagePayload.Attachments.Count} Attachments not included)";
             }
 
-            // This Messaging Extension example allows the user to check a box to include an image with the
-            // shared message.  This demonstrates sending custom parameters along with the message payload.
             var includeImage = ((JObject)action.Data)["includeImage"]?.ToString();
             if (string.Equals(includeImage, bool.TrueString, StringComparison.OrdinalIgnoreCase))
             {
                 heroCard.Images = new List<CardImage>
-                {
-                    new CardImage { Url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtB3AwMUeNoq4gUBGe6Ocj8kyh3bXa9ZbV7u1fVKQoyKFHdkqU" },
-                };
+                    {
+                        new CardImage { Url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtB3AwMUeNoq4gUBGe6Ocj8kyh3bXa9ZbV7u1fVKQoyKFHdkqU" },
+                    };
             }
 
             return new MessagingExtensionActionResponse
@@ -141,23 +141,22 @@ namespace Microsoft.BotBuilderSamples.Bots
                 {
                     Type = "result",
                     AttachmentLayout = "list",
-                    Attachments = new List<MessagingExtensionAttachment>()
-                    {
-                        new MessagingExtensionAttachment
+                    Attachments = new List<MessagingExtensionAttachment>
                         {
-                            Content = heroCard,
-                            ContentType = HeroCard.ContentType,
-                            Preview = heroCard.ToAttachment(),
+                            new MessagingExtensionAttachment
+                            {
+                                Content = heroCard,
+                                ContentType = HeroCard.ContentType,
+                                Preview = heroCard.ToAttachment(),
+                            },
                         },
-                    },
                 },
             };
         }
 
         private MessagingExtensionActionResponse WebViewResponse(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            // The user has chosen to create a card by choosing the 'Web View' context menu command.
-            CustomFormResponse cardData = JsonConvert.DeserializeObject<CustomFormResponse>(action.Data.ToString());
+            var cardData = JsonConvert.DeserializeObject<CustomFormResponse>(action.Data.ToString());
             var imgUrl = baseUrl + "/profile-image.png";
 
             var card = new ThumbnailCard
@@ -168,13 +167,15 @@ namespace Microsoft.BotBuilderSamples.Bots
                 Images = new List<CardImage> { new CardImage { Url = imgUrl } },
             };
 
-            var attachments = new List<MessagingExtensionAttachment>();
-            attachments.Add(new MessagingExtensionAttachment
-            {
-                Content = card,
-                ContentType = ThumbnailCard.ContentType,
-                Preview = card.ToAttachment(),
-            });
+            var attachments = new List<MessagingExtensionAttachment>
+                {
+                    new MessagingExtensionAttachment
+                    {
+                        Content = card,
+                        ContentType = ThumbnailCard.ContentType,
+                        Preview = card.ToAttachment(),
+                    }
+                };
 
             return new MessagingExtensionActionResponse
             {
@@ -203,12 +204,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             };
         }
 
-
-
-        private MessagingExtensionActionResponse ShareHTMLCard(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
+        private MessagingExtensionActionResponse ShareHtmlCard(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
             var createCardResponse = ((JObject)action.Data).ToObject<CardResponse>();
-            var attachments = CardHelper.CreateAdaptiveCardAttachmentForHTML(action, createCardResponse);
+            var attachments = CardHelper.CreateAdaptiveCardAttachmentForHtml(action, createCardResponse);
 
             return new MessagingExtensionActionResponse
             {
@@ -221,73 +220,74 @@ namespace Microsoft.BotBuilderSamples.Bots
             };
         }
 
+        /// <summary>
+        /// Handles the fetching of tasks for messaging extensions.
+        /// </summary>
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(
-            ITurnContext<IInvokeActivity> turnContext, 
-            MessagingExtensionAction action, 
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
             CancellationToken cancellationToken)
         {
-            switch (action.CommandId)
+            return action.CommandId switch
             {
-                case "webView":
-                    return EmpDetails(turnContext, action);
-                case "HTML":
-                    return TaskModuleHTMLPage(turnContext, action);
-                case "razorView":
-                    return DateDayInfo(turnContext, action);
-                default:
-                    // we are handling two cases within try/catch block 
-                    //if the bot is installed it will create adaptive card attachment and show card with input fields
-                    string memberName;
-                    try
-                    {
-                        // Check if your app is installed by fetching member information.
-                        var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                        memberName = member.Name;
-                    }
-                    catch (ErrorResponseException ex)
-                    {
-                        if (ex.Body.Error.Code == "BotNotInConversationRoster")
-                        {
-                            return new MessagingExtensionActionResponse
-                            {
-                                Task = new TaskModuleContinueResponse
-                                {
-                                    Value = new TaskModuleTaskInfo
-                                    {
-                                        Card = GetAdaptiveCardAttachmentFromFile("justintimeinstallation.json"),
-                                        Height = 200,
-                                        Width = 400,
-                                        Title = "Adaptive Card - App Installation",
-                                    },
-                                },
-                            };
-                        }
-                        throw; // It's a different error.
-                    }
+                "webView" => EmpDetails(turnContext, action),
+                "HTML" => TaskModuleHtmlPage(turnContext, action),
+                "razorView" => DateDayInfo(turnContext, action),
+                _ => await HandleDefaultFetchTaskAsync(turnContext, cancellationToken)
+            };
+        }
 
+        private async Task<MessagingExtensionActionResponse> HandleDefaultFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        {
+            string memberName;
+            try
+            {
+                var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
+                memberName = member.Name;
+            }
+            catch (ErrorResponseException ex)
+            {
+                if (ex.Body.Error.Code == "BotNotInConversationRoster")
+                {
                     return new MessagingExtensionActionResponse
                     {
                         Task = new TaskModuleContinueResponse
                         {
                             Value = new TaskModuleTaskInfo
                             {
-                                Card = GetAdaptiveCardAttachmentFromFile("adaptiveCard.json"),
+                                Card = GetAdaptiveCardAttachmentFromFile("justintimeinstallation.json"),
                                 Height = 200,
                                 Width = 400,
-                                Title = $"Welcome {memberName}",
+                                Title = "Adaptive Card - App Installation",
                             },
                         },
                     };
+                }
+                throw;
             }
+
+            return new MessagingExtensionActionResponse
+            {
+                Task = new TaskModuleContinueResponse
+                {
+                    Value = new TaskModuleTaskInfo
+                    {
+                        Card = GetAdaptiveCardAttachmentFromFile("adaptiveCard.json"),
+                        Height = 200,
+                        Width = 400,
+                        Title = $"Welcome {memberName}",
+                    },
+                },
+            };
         }
 
         private MessagingExtensionActionResponse DateDayInfo(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            var response = new MessagingExtensionActionResponse()
+            return new MessagingExtensionActionResponse
             {
-                Task = new TaskModuleContinueResponse()
+                Task = new TaskModuleContinueResponse
                 {
-                    Value = new TaskModuleTaskInfo()
+                    Value = new TaskModuleTaskInfo
                     {
                         Height = 175,
                         Width = 300,
@@ -296,16 +296,15 @@ namespace Microsoft.BotBuilderSamples.Bots
                     },
                 },
             };
-            return response;
         }
 
-        private MessagingExtensionActionResponse TaskModuleHTMLPage(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
+        private MessagingExtensionActionResponse TaskModuleHtmlPage(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            var response = new MessagingExtensionActionResponse()
+            return new MessagingExtensionActionResponse
             {
-                Task = new TaskModuleContinueResponse()
+                Task = new TaskModuleContinueResponse
                 {
-                    Value = new TaskModuleTaskInfo()
+                    Value = new TaskModuleTaskInfo
                     {
                         Height = 200,
                         Width = 400,
@@ -314,16 +313,15 @@ namespace Microsoft.BotBuilderSamples.Bots
                     },
                 },
             };
-            return response;
         }
 
         private MessagingExtensionActionResponse EmpDetails(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action)
         {
-            var response = new MessagingExtensionActionResponse()
+            return new MessagingExtensionActionResponse
             {
-                Task = new TaskModuleContinueResponse()
+                Task = new TaskModuleContinueResponse
                 {
-                    Value = new TaskModuleTaskInfo()
+                    Value = new TaskModuleTaskInfo
                     {
                         Height = 300,
                         Width = 450,
@@ -332,21 +330,17 @@ namespace Microsoft.BotBuilderSamples.Bots
                     },
                 },
             };
-            return response;
         }
 
         private static Attachment GetAdaptiveCardAttachmentFromFile(string fileName)
         {
-            //Read the card json and create attachment.
-            string[] paths = { ".", "Resources", fileName };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", fileName));
 
-            var adaptiveCardAttachment = new Attachment()
+            return new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
-            return adaptiveCardAttachment;
         }
     }
 }

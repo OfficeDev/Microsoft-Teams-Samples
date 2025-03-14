@@ -38,7 +38,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddSingleton<UserState>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, RegionSelectionTab>();
+            services.AddTransient<IBot, RegionSelectionBot>();
 
             services.AddMvcCore();
         }

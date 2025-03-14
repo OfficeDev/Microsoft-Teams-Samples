@@ -9,8 +9,10 @@ using Microsoft.Graph;
 
 namespace TagMentionBot
 {
-    // This class is a wrapper for the Microsoft Graph API
-    // See: https://developer.microsoft.com/en-us/graph
+    /// <summary>
+    /// This class is a wrapper for the Microsoft Graph API.
+    /// See: https://developer.microsoft.com/en-us/graph
+    /// </summary>
     public class SimpleGraphClient
     {
         private readonly string _token;
@@ -25,31 +27,35 @@ namespace TagMentionBot
             _token = token;
         }
 
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
-        public async Task<ITeamTagsCollectionPage> GetTag( string teamId)
+        /// <summary>
+        /// Gets an authenticated Microsoft Graph client using the token issued to the user.
+        /// </summary>
+        /// <param name="teamId">The ID of the team.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the team tags collection page.</returns>
+        public async Task<ITeamTagsCollectionPage> GetTag(string teamId)
         {
             var graphClient = GetAuthenticatedClient();
-            var tag = await graphClient.Teams[teamId].Tags.Request().GetAsync();
-            return tag;
+            return await graphClient.Teams[teamId].Tags.Request().GetAsync();
         }
 
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        /// <summary>
+        /// Gets an authenticated Microsoft Graph client using the token issued to the user.
+        /// </summary>
+        /// <returns>The authenticated Microsoft Graph client.</returns>
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
+            return new GraphServiceClient(
                 new DelegateAuthenticationProvider(
                     requestMessage =>
                     {
                         // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
                         // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+                        requestMessage.Headers.Add("Prefer", $"outlook.timezone=\"{TimeZoneInfo.Local.Id}\"");
 
                         return Task.CompletedTask;
                     }));
-
-            return graphClient;
         }
     }
 }

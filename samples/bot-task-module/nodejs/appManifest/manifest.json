@@ -49,7 +49,7 @@
       "scopes": [
         "personal",
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false,
       "supportsCalling": false,

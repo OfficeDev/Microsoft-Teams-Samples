@@ -13,7 +13,10 @@ using ReceiveMessagesWithRSC.Bots;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient().AddControllers().AddNewtonsoftJson();
+// Add services to the container.
+builder.Services.AddHttpClient()
+    .AddControllers()
+    .AddNewtonsoftJson();
 builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 builder.Services.AddTransient<IBot, ActivityBot>();
 
@@ -28,6 +31,7 @@ else
     app.UseDeveloperExceptionPage();
 }
 
+// Configure the HTTP request pipeline.
 app.UseDefaultFiles()
     .UseStaticFiles()
     .UseWebSockets()
@@ -37,4 +41,5 @@ app.UseDefaultFiles()
     {
         endpoints.MapControllers();
     });
+
 app.Run();

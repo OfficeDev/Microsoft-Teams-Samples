@@ -11,6 +11,9 @@ using Microsoft.Bot.Schema;
 
 namespace TagMentionBot
 {
+    /// <summary>
+    /// A dialog that handles user logout.
+    /// </summary>
     public class LogoutDialog : ComponentDialog
     {
         public LogoutDialog(string id, string connectionName)
@@ -34,7 +37,7 @@ namespace TagMentionBot
         protected override async Task<DialogTurnResult> OnBeginDialogAsync(
             DialogContext innerDc,
             object options,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -46,14 +49,14 @@ namespace TagMentionBot
         }
 
         /// <summary>
-        /// Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.
+        /// Called when the dialog is continued, where it is the active dialog and the user replies with a new activity.
         /// </summary>
         /// <param name="innerDc">The inner DialogContext for the current turn of conversation.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         protected override async Task<DialogTurnResult> OnContinueDialogAsync(
             DialogContext innerDc,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -69,24 +72,24 @@ namespace TagMentionBot
         /// </summary>
         /// <param name="innerDc">The inner DialogContext for the current turn of conversation.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns></returns>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task<DialogTurnResult> InterruptAsync(
             DialogContext innerDc,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             if (innerDc.Context.Activity.Type == ActivityTypes.Message)
             {
                 var text = innerDc.Context.Activity.Text.ToLowerInvariant();
 
                 // Allow logout anywhere in the command
-                if (text.IndexOf("logout") >= 0)
+                if (text.Contains("logout"))
                 {
                     // The UserTokenClient encapsulates the authentication processes.
                     var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
                     await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
 
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
-                    return await innerDc.CancelAllDialogsAsync(cancellationToken);                    
+                    return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }
 

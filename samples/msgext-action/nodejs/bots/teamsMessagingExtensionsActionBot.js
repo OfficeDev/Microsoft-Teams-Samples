@@ -3,73 +3,87 @@
 
 require('dotenv').config();
 const { TeamsActivityHandler, CardFactory, TeamsInfo, MessageFactory } = require('botbuilder');
-const baseurl = process.env.BaseUrl;
+const baseUrl = process.env.BaseUrl;
 
+/**
+ * TeamsMessagingExtensionsActionBot handles messaging extension actions in Microsoft Teams.
+ */
 class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
-	constructor() {
+    constructor() {
         super();
-	}
-	
-	    async handleTeamsMessagingExtensionSubmitAction(context, action) {
+    }
+
+    /**
+     * Handles the submit action from the messaging extension.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {MessagingExtensionAction} action - The action object.
+     */
+    async handleTeamsMessagingExtensionSubmitAction(context, action) {
         switch (action.commandId) {
-        case 'createCard':
-            return createCardCommand(context, action);
-        case 'shareMessage':
-            return shareMessageCommand(context, action);
-        case 'webView':
-            return await webViewResponse(action);
+            case 'createCard':
+                return createCardCommand(context, action);
+            case 'shareMessage':
+                return shareMessageCommand(context, action);
+            case 'webView':
+                return await webViewResponse(action);
         }
     }
 
+    /**
+     * Handles the fetch task action from the messaging extension.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {MessagingExtensionAction} action - The action object.
+     */
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         switch (action.commandId) {
-        case 'webView':
-            return empDetails();
-        case 'Static HTML':
-            return dateTimeInfo();
-        default:
-            try {
-                const member = await this.getSingleMember(context);
-                return {
-                    task: {
-                        type: 'continue',
-                        value: {
-                            card: GetAdaptiveCardAttachment(),
-                            height: 400,
-                            title: `Hello ${ member }`,
-                            width: 300
-                        }
-                    }
-                };
-            } catch (e) {
-                if (e.code === 'BotNotInConversationRoster') {
+            case 'webView':
+                return empDetails();
+            case 'Static HTML':
+                return dateTimeInfo();
+            default:
+                try {
+                    const member = await this.getSingleMember(context);
                     return {
                         task: {
                             type: 'continue',
                             value: {
-                                card: GetJustInTimeCardAttachment(),
+                                card: getAdaptiveCardAttachment(),
                                 height: 400,
-                                title: 'Adaptive Card - App Installation',
+                                title: `Hello ${member}`,
                                 width: 300
                             }
                         }
                     };
+                } catch (e) {
+                    if (e.code === 'BotNotInConversationRoster') {
+                        return {
+                            task: {
+                                type: 'continue',
+                                value: {
+                                    card: getJustInTimeCardAttachment(),
+                                    height: 400,
+                                    title: 'Adaptive Card - App Installation',
+                                    width: 300
+                                }
+                            }
+                        };
+                    }
+                    throw e;
                 }
-                throw e;
-            }
         }
     }
 
+    /**
+     * Gets a single member from the conversation.
+     * @param {TurnContext} context - The context object for the turn.
+     */
     async getSingleMember(context) {
         try {
-            const member = await TeamsInfo.getMember(
-                context,
-                context.activity.from.id
-            );
+            const member = await TeamsInfo.getMember(context, context.activity.from.id);
             return member.name;
         } catch (e) {
             if (e.code === 'MemberNotFoundInConversation') {
-                context.sendActivity(MessageFactory.text('Member not found.'));
+                await context.sendActivity(MessageFactory.text('Member not found.'));
                 return e.code;
             }
             throw e;
@@ -77,7 +91,10 @@ class TeamsMessagingExtensionsActionBot extends TeamsActivityHandler {
     }
 }
 
-function GetJustInTimeCardAttachment() {
+/**
+ * Creates a just-in-time card attachment.
+ */
+function getJustInTimeCardAttachment() {
     return CardFactory.adaptiveCard({
         actions: [
             {
@@ -98,7 +115,10 @@ function GetJustInTimeCardAttachment() {
     });
 }
 
-function GetAdaptiveCardAttachment() {
+/**
+ * Creates an adaptive card attachment.
+ */
+function getAdaptiveCardAttachment() {
     return CardFactory.adaptiveCard({
         actions: [{ type: 'Action.Submit', title: 'Close' }],
         body: [
@@ -114,8 +134,12 @@ function GetAdaptiveCardAttachment() {
     });
 }
 
+/**
+ * Handles the create card command.
+ * @param {TurnContext} context - The context object for the turn.
+ * @param {MessagingExtensionAction} action - The action object.
+ */
 function createCardCommand(context, action) {
-    // The user has chosen to create a card by choosing the 'Create Card' context menu command.
     const data = action.data;
     const heroCard = CardFactory.heroCard(data.title, data.text);
     heroCard.content.subtitle = data.subTitle;
@@ -125,37 +149,31 @@ function createCardCommand(context, action) {
         composeExtension: {
             type: 'result',
             attachmentLayout: 'list',
-            attachments: [
-                attachment
-            ]
+            attachments: [attachment]
         }
     };
 }
 
+/**
+ * Handles the share message command.
+ * @param {TurnContext} context - The context object for the turn.
+ * @param {MessagingExtensionAction} action - The action object.
+ */
 function shareMessageCommand(context, action) {
-    // The user has chosen to share a message by choosing the 'Share Message' context menu command.
     let userName = 'unknown';
-    if (action.messagePayload.from &&
-            action.messagePayload.from.user &&
-            action.messagePayload.from.user.displayName) {
+    if (action.messagePayload.from && action.messagePayload.from.user && action.messagePayload.from.user.displayName) {
         userName = action.messagePayload.from.user.displayName;
     }
 
-    // This Messaging Extension example allows the user to check a box to include an image with the
-    // shared message.  This demonstrates sending custom parameters along with the message payload.
     let images = [];
     const includeImage = action.data.includeImage;
     if (includeImage === 'true') {
         images = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtB3AwMUeNoq4gUBGe6Ocj8kyh3bXa9ZbV7u1fVKQoyKFHdkqU'];
     }
-    const heroCard = CardFactory.heroCard(`${ userName } originally sent this message:`,
-        action.messagePayload.body.content,
-        images);
+    const heroCard = CardFactory.heroCard(`${userName} originally sent this message:`, action.messagePayload.body.content, images);
 
     if (action.messagePayload.attachments && action.messagePayload.attachments.length > 0) {
-        // This sample does not add the MessagePayload Attachments.  This is left as an
-        // exercise for the user.
-        heroCard.content.subtitle = `(${ action.messagePayload.attachments.length } Attachments not included)`;
+        heroCard.content.subtitle = `(${action.messagePayload.attachments.length} Attachments not included)`;
     }
 
     const attachment = { contentType: heroCard.contentType, content: heroCard.content, preview: heroCard };
@@ -164,15 +182,15 @@ function shareMessageCommand(context, action) {
         composeExtension: {
             type: 'result',
             attachmentLayout: 'list',
-            attachments: [
-                attachment
-            ]
+            attachments: [attachment]
         }
     };
 }
 
+/**
+ * Returns employee details task module.
+ */
 function empDetails() {
-	console.log(baseurl);
     return {
         task: {
             type: 'continue',
@@ -180,12 +198,15 @@ function empDetails() {
                 width: 350,
                 height: 300,
                 title: 'Task module WebView',
-                url: `${ baseurl }/customForm`
+                url: `${baseUrl}/customForm`
             }
         }
     };
 }
 
+/**
+ * Returns date and time info task module.
+ */
 function dateTimeInfo() {
     return {
         task: {
@@ -194,25 +215,26 @@ function dateTimeInfo() {
                 width: 450,
                 height: 125,
                 title: 'Task module Static HTML',
-                url: `${ baseurl }/staticPage`
+                url: `${baseUrl}/staticPage`
             }
         }
     };
 }
 
+/**
+ * Handles the web view response.
+ * @param {MessagingExtensionAction} action - The action object.
+ */
 async function webViewResponse(action) {
-    // The user has chosen to create a card by choosing the 'Create Card' context menu command.
-    const data = await action.data;
-    const heroCard = CardFactory.heroCard(`ID: ${ data.EmpId }`, `E-Mail: ${ data.EmpEmail }`);
-    heroCard.content.subtitle = `Name: ${ data.EmpName }`;
+    const data = action.data;
+    const heroCard = CardFactory.heroCard(`ID: ${data.EmpId}`, `E-Mail: ${data.EmpEmail}`);
+    heroCard.content.subtitle = `Name: ${data.EmpName}`;
     const attachment = { contentType: heroCard.contentType, content: heroCard.content, preview: heroCard };
     return {
         composeExtension: {
             type: 'result',
             attachmentLayout: 'list',
-            attachments: [
-                attachment
-            ]
+            attachments: [attachment]
         }
     };
 }

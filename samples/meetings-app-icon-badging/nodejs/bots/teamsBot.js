@@ -2,64 +2,66 @@
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler, TeamsInfo, TurnContext, CardFactory } = require("botbuilder");
-var ACData = require("adaptivecards-templating");
+const ACData = require("adaptivecards-templating");
 const notificationCardJson = require('../resources/SendTargetNotificationCard.json');
 
+/**
+ * TeamsBot class handles Teams activity events and sends notifications.
+ */
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
         this.baseUrl = process.env.BaseUrl;
-        this.AppId = process.env.MicrosoftAppId;
+        this.appId = process.env.MicrosoftAppId;
 
         // This method is invoked whenever there is any message activity in bot's chat.
         this.onMessage(async (context, next) => {
-           
-            var members = new Array();
-            let meetingId = context._activity.channelData.meeting.id;
+            const members = [];
+            const meetingId = context._activity.channelData.meeting.id;
 
             if (context.activity.value == null) {
                 TurnContext.removeRecipientMention(context._activity);
 
-                if (context._activity.text.trim() == "SendNotification") {
-                    var meetingMembers = await TeamsInfo.getPagedMembers(context);
-                    let tenantId = context._activity.channelData.tenant.id;
+                if (context._activity.text.trim() === "SendNotification") {
+                    const meetingMembers = await TeamsInfo.getPagedMembers(context);
+                    const tenantId = context._activity.channelData.tenant.id;
 
-                    for (var member in meetingMembers) {
-                        let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
+                    for (const member of meetingMembers) {
+                        const participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
 
                         // Select only those members that are present when the meeting starts.
                         if (participantDetail.meeting.inMeeting) {
-                            members.push({ id: participantDetail.user.id, name: participantDetail.user.name })
+                            members.push({ id: participantDetail.user.id, name: participantDetail.user.name });
                         }
                     }
 
                     // Send an adaptive card to the user to select members for sending targeted notifications.
                     await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
-                }
-                else {
+                } else {
                     await context.sendActivity("Please type `SendNotification` to send In-meeting notifications.");
                 }
-            }
-            else if (context.activity.value.Type == "StageViewNotification") {
-                var adaptiveCardChoiceSet = context.activity.value.Choice;
-                var selectedMembers = adaptiveCardChoiceSet.split(",");
+            } else if (context.activity.value.Type === "StageViewNotification") {
+                const adaptiveCardChoiceSet = context.activity.value.Choice;
+                const selectedMembers = adaptiveCardChoiceSet.split(",");
                 this.stageView(context, meetingId, selectedMembers);
-            }
-            else if (context.activity.value.Type == "AppIconBadging") {
-                var adaptiveCardChoiceSet = context.activity.value.Choice;
-                var selectedMembers = adaptiveCardChoiceSet.split(",");
+            } else if (context.activity.value.Type === "AppIconBadging") {
+                const adaptiveCardChoiceSet = context.activity.value.Choice;
+                const selectedMembers = adaptiveCardChoiceSet.split(",");
                 this.visualIndicator(context, meetingId, selectedMembers);
             }
 
             await next();
         });
-    };
+    }
 
-    // Custom method for sending targeted meeting notifications in stage.
+    /**
+     * Sends a targeted meeting notification to the stage view.
+     * @param {TurnContext} context - The context object for the current turn.
+     * @param {string} meetingId - The ID of the meeting.
+     * @param {Array} selectedMembers - The list of selected members.
+     */
     async stageView(context, meetingId, selectedMembers) {
-
-        // Notification payload for meeting target notification API.
-        let notificationInformation = {
+        const notificationInformation = {
             type: "targetedMeetingNotification",
             value: {
                 recipients: selectedMembers,
@@ -72,13 +74,13 @@ class TeamsBot extends TeamsActivityHandler {
                                 height: "300",
                                 width: "400",
                                 title: "Targeted meeting Notification",
-                                url: `${this.baseUrl + "/hello.html"}`
+                                url: `${this.baseUrl}/hello.html`
                             }
                         }
                     }
                 ]
             }
-        }
+        };
 
         try {
             await TeamsInfo.sendMeetingNotification(context, notificationInformation, meetingId);
@@ -87,21 +89,24 @@ class TeamsBot extends TeamsActivityHandler {
         }
     }
 
-    // Custom method for sending App Icon Badging on tab.
+    /**
+     * Sends an app icon badging notification.
+     * @param {TurnContext} context - The context object for the current turn.
+     * @param {string} meetingId - The ID of the meeting.
+     * @param {Array} selectedMembers - The list of selected members.
+     */
     async visualIndicator(context, meetingId, selectedMembers) {
-
-        // Notification payload for meeting target notification API.
-        let notificationInformation = {
+        const notificationInformation = {
             type: "targetedMeetingNotification",
             value: {
                 recipients: selectedMembers,
                 surfaces: [
                     {
-                        surface: "meetingTabIcon",
+                        surface: "meetingTabIcon"
                     }
                 ]
             }
-        }
+        };
 
         try {
             await TeamsInfo.sendMeetingNotification(context, notificationInformation, meetingId);
@@ -110,12 +115,16 @@ class TeamsBot extends TeamsActivityHandler {
         }
     }
 
-    // Create an adaptive card to send a list of in-meeting participants
+    /**
+     * Creates an adaptive card with a list of in-meeting participants.
+     * @param {Array} members - The list of members.
+     * @returns {Attachment} - The adaptive card attachment.
+     */
     createMembersAdaptiveCard(members) {
-        var templatePayload = notificationCardJson;
-        var template = new ACData.Template(templatePayload);
+        const templatePayload = notificationCardJson;
+        const template = new ACData.Template(templatePayload);
 
-        var cardPayload = template.expand({
+        const cardPayload = template.expand({
             $root: {
                 members: members
             }

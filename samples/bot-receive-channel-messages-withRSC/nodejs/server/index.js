@@ -1,17 +1,28 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const path = require('path');
 const express = require('express');
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
 const ENV_FILE = path.join(__dirname, '../.env');
-require('dotenv').config({ path: ENV_FILE });
+dotenv.config({ path: ENV_FILE });
 
 const server = express();
+
+// Use the API routes
 server.use('/api', require('./api'));
 
+// Handle undefined routes
 server.get('*', (req, res) => {
-    res.json({ error: 'Route not found' });
+    res.status(404).json({ error: 'Route not found' });
 });
 
-const port = process.env.port || process.env.PORT || 3978;
+// Set the port from environment variables or default to 3978
+const port = process.env.PORT || 3978;
 
-server.listen(port, () => 
-    console.log(`\Bot/ME service listening at http://localhost:${port}`)
-);
+// Start the server
+server.listen(port, () => {
+    console.log(`Bot/ME service listening at http://localhost:${port}`);
+});
