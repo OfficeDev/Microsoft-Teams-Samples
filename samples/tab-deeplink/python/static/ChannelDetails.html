@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <div id="taskDiv" style="margin-top:10px;width:70px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;">
+    </div>
+    <div id="taskContent"
+        style="margin-top:-23px;margin-left:80px;color:Highlight;font-family:'Segoe UI';font-size:15px"></div>
+    <a href="ChannelTasklist.html">Back To List</a>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        var queryStringId = params.get('id');
+        microsoftTeams.app.initialize().then(() => {
+        window.onload = function () {
+            if (queryStringId == 2) {
+                document.getElementById("taskDiv").innerHTML = "Messaging Extension :<br/>";
+                document.getElementById("taskContent").innerHTML = "Messaging extensions allow the users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search or initiate actions in an external system from the compose message area, the command box, or directly from a message. You can send back the results of that interaction to the Microsoft Teams client in the form of a richly formatted card. This document gives an overview of the messaging extension, tasks performed under different scenarios, working of messaging extension, action and search commands, and link unfurling.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions' target='_blank'>Click here</a>";
+            }
+            else if (queryStringId == 3) {
+                document.getElementById("taskDiv").innerHTML = "Adaptive Card :<br/>";
+                document.getElementById("taskContent").innerHTML = "Adaptive cards are a new cross product specification for cards in Microsoft products including Bots, Cortana, Outlook, and Windows. They are the recommended card type for new Teams development. For general information from the Adaptive cards team see Adaptive Cards Overview. You can use adaptive cards anywhere you can use existing Hero cards, Office365 cards, and Thumbnail cards.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards' target='_blank'>Click here</a>";
+            }
+            else if (queryStringId == 1) {
+                document.getElementById("taskDiv").innerHTML = "Bots :<br/>";
+                document.getElementById("taskContent").innerHTML = "A bot also referred to as a chatbot or conversational bot is an app that runs simple and repetitive automated tasks performed by the users, such as customer service or support staff. Examples of bots in everyday use include, bots that provide information about the weather, make dinner reservations, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation that provides access to services. For more details.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards' target='_blank'>Click here</a>";
+            }
+        }
+    });
+    </script>
+    <div style="margin-top:1rem;">
+        <span class="container" style="font-size:20px;font-weight:700;">
+            Extended Deep link features
+        </span>
+    </div>
+    <div>
+        <object type="text/html" data="ExtendedDeepLink.html" width="1630rem" height="500">
+        </object>
+    </div>
+</body>
+
+</html>
