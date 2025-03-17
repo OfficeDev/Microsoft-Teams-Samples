@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "version": "1.0.0",
   "manifestVersion": "1.19",
-  "id": "7ed94455-b382-458c-9b32-d354da5076bc",
+  "id": "TEAMS_APP_ID",
   "name": {
     "short": "App Caching Example",
     "full": "App Caching Example"
@@ -24,7 +24,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://d87486f1b528.ngrok.app/configure",
+      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [ "groupChat", "team" ],
       "context": [
@@ -38,7 +38,7 @@
     }
   ],
   "validDomains": [
-    "d87486f1b528.ngrok.app" 
+    "${{TAB_DOMAIN}}" 
   ],
   "showLoadingIndicator": true
 }
