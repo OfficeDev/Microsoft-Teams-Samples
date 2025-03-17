@@ -13,6 +13,9 @@ using Microsoft.Bot.Connector.Authentication;
 
 namespace TagMentionBot
 {
+    /// <summary>
+    /// The startup class configures services and the app's request pipeline.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,13 +25,18 @@ namespace TagMentionBot
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The services collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient().AddControllers().AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
-            });
+            services.AddHttpClient()
+                    .AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
+                    });
 
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
@@ -52,7 +60,11 @@ namespace TagMentionBot
             services.AddTransient<IBot, TeamsConversationBot<MainDialog>>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -61,14 +73,15 @@ namespace TagMentionBot
             }
 
             app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+               .UseStaticFiles()
+               .UseRouting()
+               .UseAuthorization()
+               .UseEndpoints(endpoints =>
+               {
+                   endpoints.MapControllers();
+               });
 
+            // Uncomment the following line to enable HTTPS redirection.
             // app.UseHttpsRedirection();
         }
     }
