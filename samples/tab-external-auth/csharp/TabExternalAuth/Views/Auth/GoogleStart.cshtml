@@ -3,8 +3,8 @@
     Layout = "_Layout";
 }
 
-<script src="https://res.cdn.office.net/teams-js/2.4.2/js/MicrosoftTeams.min.js"
-        integrity="sha384-M1BiuUWGXFEu6jscBr/dyRZl4uojmiT5eMSu50lpG3eUyacKjwXE0eWRa2ZIdOmQ"
+<script src="https://res.cdn.office.net/teams-js/2.33.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-hCfPVLNt9JPTceReb/qZGZR7IbUaPeoExYnER2H//kiykKfhcVEMVQiCR0eAtCCs"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -14,28 +14,37 @@
         });
     
         // Get google client side token.
-        function getAuthToken() {
-        const params = new URLSearchParams(window.location.search);
-        const authId = params.get('authId');
-        const method = params.get('oauthRedirectMethod');
-        const redirectUrl = params.get('hostRedirectUrl');
-        const state = `{"authId":"${authId}","method":"${method}"}`;
+    function getAuthToken() {
+    const params = new URLSearchParams(window.location.search);
+    const authId = params.get('authId');
+    const method = params.get('oauthRedirectMethod');
+    
+    var redirectUrl = window.location.origin + "/Auth/GoogleEnd";
+    const hostRedirectUrl = params.get('hostRedirectUrl');
 
-        const getRedirectUri = () => {
-            const idx = window.location.href.lastIndexOf('/');
-            return `${window.location.href.slice(0, idx)}/Auth/GoogleEnd`;
-        };
+    const state = JSON.stringify({
+    authId: authId,
+    method: method,
+    hostRedirectUrl: hostRedirectUrl
+    });
 
-            const queryObj = {
-                state,
-                client_id: params.get('googleId'),
-                response_type: 'code',
-                access_type: 'offline',
-                scope: 'email%20profile'
-            };
+    const getRedirectUri = () => {
+        const idx = window.location.href.lastIndexOf('/');
+        return `${window.location.href.slice(0, idx)}/Auth/GoogleEnd`;
+    };
 
-            const query = Object.entries(queryObj).map(([k, v]) => `&${k}=${v}`).join('');
+    const queryObj = {
+    state: encodeURIComponent(state), // Ensure proper URL encoding
+    client_id: params.get('googleId'),
+    response_type: 'code',
+    access_type: 'offline',
+    scope: 'email%20profile'
+    };
 
-            window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${redirectUrl}${query}`;
-        }
-    </script>
+    const query = Object.entries(queryObj)
+        .map(([k, v]) => `${k}=${v}`) // Remove the extra `&` at the start
+        .join('&');
+
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${redirectUrl}&${query}`;
+    }
+</script>
