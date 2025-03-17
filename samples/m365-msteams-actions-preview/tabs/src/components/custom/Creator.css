@@ -1,0 +1,26 @@
+.creator {
+  display: flex;
+  align-items: center;
+}
+
+.creator img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.creator .name {
+  color: #252423;
+  font-size: 12px;
+  line-height: 32px;
+  margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 820px) {
+  .creator {
+    width: 100px;
+  }
+}
