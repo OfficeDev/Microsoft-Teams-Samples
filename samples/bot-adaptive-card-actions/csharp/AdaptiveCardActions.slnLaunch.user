@@ -10,7 +10,7 @@
       {
         "Path": "TeamsApp\\TeamsApp.ttkproj",
         "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft Teams (browser)"
+        "DebugTarget": "Microsoft Teams (Browser)"
       }
     ]
   }
