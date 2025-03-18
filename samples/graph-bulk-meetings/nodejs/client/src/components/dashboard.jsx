@@ -49,8 +49,8 @@ class Dashboard extends Component {
     }
 
     // when user click on create new meeting button.
-    onCreateMeeting = () => {
-        microsoftTeams.dialog.open({
+    onCreateMeeting = () => { 
+        microsoftTeams.dialog.url.open({
             title: "Create Meeting/Events",
             url: `${window.location.origin}/fileupload`,
             size: {
