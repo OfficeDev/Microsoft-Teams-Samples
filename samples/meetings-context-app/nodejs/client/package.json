@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "msteams-ui-components-react": "^0.8.4",
     "react": "^16.14.0",
+    "react-scripts": "^5.0.1",
     "react-dom": "^16.14.0",
     "react-json-view": "^1.21.3",
     "react-meta-tags": "^1.0.1",
@@ -49,7 +50,6 @@
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "ajv": "^8.17.1",
-    "react-scripts": "^5.0.1",
     "typescript": "^5.8.2"
   },
   "proxy": "http://localhost:3000"
