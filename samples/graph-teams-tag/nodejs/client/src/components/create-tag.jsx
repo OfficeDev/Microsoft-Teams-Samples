@@ -133,7 +133,7 @@ const CreateTag = props => {
         var response = await axios.post(`api/teamtag?ssoToken=${token}&teamId=${groupId}`, createNewTag)
 
         if (response.status === 201) {
-            microsoftTeams.dialog.submit("Created successfully!");
+            microsoftTeams.dialog.url.submit("Created successfully!");
         }
 
     }
