@@ -79,7 +79,7 @@ deploy:
   - uses: cli/runNpmCommand
     with:
       workingDirectory: ./client
-      args: install --no-audit
+      args: install --legacy-peer-deps --no-audit
 
   # Run npm command for server
   - uses: cli/runNpmCommand
