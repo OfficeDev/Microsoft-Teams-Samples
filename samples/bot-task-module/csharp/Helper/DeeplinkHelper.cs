@@ -10,18 +10,18 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
     {
         public  string DeepLink { get; set; }
         public  string DeepLinkToAdaptiveCard { get; set; }
-        public DeeplinkHelper(string MicrosoftAppId ,string BaseUrl)
+        public DeeplinkHelper(string TeamsAppId ,string BaseUrl)
         {
-            MicrosoftAppId = MicrosoftAppId.Replace('"', ' ').Trim();
+            TeamsAppId = TeamsAppId.Replace('"', ' ').Trim();
             BaseUrl = BaseUrl.Replace('"', ' ').Trim();
 
             DeepLink = string.Format("https://teams.microsoft.com/l/task/{0}?url={1}&height={2}&width={3}&title={4}&completionBotId={5}",
-              MicrosoftAppId,
+              TeamsAppId,
               HttpUtility.UrlEncode(BaseUrl + "/customForm"),
               TaskModuleUIConstants.CustomForm.Height,
               TaskModuleUIConstants.CustomForm.Width,
               HttpUtility.UrlEncode(TaskModuleUIConstants.CustomForm.Title),
-              MicrosoftAppId);
+              TeamsAppId);
         }
     }
 }

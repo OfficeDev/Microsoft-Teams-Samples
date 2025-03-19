@@ -43,7 +43,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 
 // Listen for incoming requests.
 server.post("/api/messages", async (req, res) => {
-  await adapter.processActivity(req, res, async (context) => {
+  await adapter.process(req, res, async (context) => {
     await bot.run(context);
   });
 });
