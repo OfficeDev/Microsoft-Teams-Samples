@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { JSX, Suspense } from 'react';
 import './App.css';
 import {
   BrowserRouter, Route, Routes
