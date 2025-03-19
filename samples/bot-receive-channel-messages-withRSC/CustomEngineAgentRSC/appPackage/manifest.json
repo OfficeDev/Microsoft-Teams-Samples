@@ -1,0 +1,90 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/vdevPreview/MicrosoftTeams.schema.json",
+    "manifestVersion": "devPreview",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "CustomEngineAgentRSC${{APP_NAME_SUFFIX}}",
+        "full": "full name for CustomEngineAgentRSC"
+    },
+    "description": {
+        "short": "short description for CustomEngineAgentRSC",
+        "full": "full description for CustomEngineAgentRSC"
+    },
+    "accentColor": "#FFFFFF",
+    "copilotAgents": {
+        "customEngineAgents": [
+            {
+                "type": "bot",
+                "id": "${{BOT_ID}}"
+            }
+        ]
+    },
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupChat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "How can you help me?",
+                            "description": "How can you help me?"
+                        },
+                        {
+                            "title": "How to develop TeamsToolkit app?",
+                            "description": "How can I develop apps with Teams Toolkit?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [],
+    "webApplicationInfo": {
+      "id": "${{BOT_ID}}",
+      "resource": "https://AnyString"
+    },
+    "authorization": {
+      "permissions": {
+        "resourceSpecific": [
+          {
+            "type": "Application",
+            "name": "ChannelMessage.Read.Group"
+          },
+          {
+            "type": "Application",
+            "name": "ChatMessage.Read.Chat"
+          }
+        ]
+      }
+    }
+}
