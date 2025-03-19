@@ -14,7 +14,6 @@
     "react-json-view": "^1.21.3",
     "react-meta-tags": "^1.0.1",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "^4.0.0",
     "typestyle": "^2.1.0",
     "web-vitals": "^1.1.2"
   },
@@ -49,6 +48,8 @@
     "@types/react-router-dom": "^5.3.0",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
+    "ajv": "^8.17.1",
+    "react-scripts": "^5.0.1",
     "typescript": "^5.8.2"
   },
   "proxy": "http://localhost:3000"
