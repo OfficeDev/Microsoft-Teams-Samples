@@ -95,6 +95,12 @@ deploy:
   # Run npm command
   - uses: cli/runNpmCommand
     with:
+      workingDirectory: ./api-server
+      args: install --no-audit
+
+  # Run npm command
+  - uses: cli/runNpmCommand
+    with:
       workingDirectory: .
       args: install --no-audit
 

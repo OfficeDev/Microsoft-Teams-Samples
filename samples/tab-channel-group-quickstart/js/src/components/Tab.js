@@ -20,6 +20,7 @@ class Tab extends React.Component {
   //React lifecycle method that gets called once a component has finished mounting
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
+    microsoftTeams.app.initialize();
     // Get the user context from Teams and set it in the state
     microsoftTeams.app.getContext().then((context) => {
       this.setState({

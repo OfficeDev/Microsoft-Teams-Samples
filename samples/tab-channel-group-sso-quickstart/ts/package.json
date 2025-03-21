@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@azure/msal-browser": "^2.11.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "ajv": "^8.0.0",
     "@types/jest": "^26.0.19",
     "@types/node": "^12.19.9",
     "@types/react": "^16.14.2",

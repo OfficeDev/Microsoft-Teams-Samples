@@ -3,6 +3,7 @@
 import React from 'react';
 import './App.css';
 import { app, authentication } from "@microsoft/teams-js";
+import * as microsoftTeams from "@microsoft/teams-js";
 import { Avatar, Spinner } from '@fluentui/react-components';
 /**
  * This tab component renders the main tab content
@@ -44,7 +45,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
-    app.initialize();
+    microsoftTeams.app.initialize();
     // Get the user context from Teams and set it in the state
     app.getContext().then((context: app.Context) => {
       this.setState({context:context});

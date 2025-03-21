@@ -24,7 +24,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://${{TAB_DOMAIN}}/configure",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -41,7 +41,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "${{TAB_DOMAIN}}"
+    "${{BOT_DOMAIN}}"
   ],
   "webApplicationInfo": {
     "id": "${{TEAMS_APP_ID}}",

@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.7.1",
+    "@microsoft/teams-js": "^2.35.0",
     "axios": "^0.21.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
