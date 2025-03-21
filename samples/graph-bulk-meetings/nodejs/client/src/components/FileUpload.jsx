@@ -6,7 +6,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 
-microsoftTeams.initialize();
+microsoftTeams.app.initialize();
 
 class App extends Component {
     constructor(props) {
@@ -114,7 +114,7 @@ class App extends Component {
             var response = await axios.post(`api/meeting?userId=${userId}`, excelrows);
 
             if (response.status === 201) {
-                microsoftTeams.dialog.submit("Created successfully!");
+                microsoftTeams.dialog.url.submit("Created successfully!");
                 return response.data;
             }
         });
