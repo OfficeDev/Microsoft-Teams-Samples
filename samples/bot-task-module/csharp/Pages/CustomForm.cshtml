@@ -5,8 +5,10 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<!DOCTYPE html>
 <html>
 <head>
+    <title>Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Tester - Custom Form</title>
     <style>
         body {
             margin: 0;
@@ -14,11 +16,13 @@
             padding-right: 4px;
         }
     </style>
-    <title>Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Tester - Custom Form</title>
 </head>
 <body>
     <script>
-        microsoftTeams.initialize(); 
+        // Initialize Microsoft Teams SDK
+        microsoftTeams.app.initialize();
+
+        // Function to validate the form and submit customer information
         function validateForm() {
             var customerInfo = {
                 name: document.forms["customerForm"]["name"].value,
@@ -32,13 +36,28 @@
     <div class="surface theme-light">
         <div class="panel" style="overflow:auto">
             <div class="font-semibold font-title">Enter new customer information:</div>
-            <form method="POST" id="customerForm" onSubmit="return validateForm()">
+            <form method="POST" id="customerForm" onsubmit="return validateForm()">
                 <div>
-                    <div class="form-group form-field-input" style="margin-bottom: 10px; margin-top: 10px;"></div><label for="name">Name: </label><input class="form-control input-field" id="name" type="text" placeholder="first and last" name="name" tabindex="1" autofocus>
-                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div><label for="email">Email: </label><input class="form-control input-field" id="email" type="email" placeholder="name@email.com" name="email" tabindex="2">
-                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div><label for="favoriteBook">Favorite book: </label><input class="form-control input-field" id="favoriteBook" type="text" placeholder="title of book" name="favoriteBook" tabindex="3">
-                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div><label for="pw">Password: </label><input class="form-control input-field" id="pw" type="password" name="password" tabindex="4">
-                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div><label for="pw2">Confirm password: </label><input class="form-control input-field" id="pw2" type="password" name="confirmPassword" style="margin-bottom: 10px;" tabindex="4">
+                    <div class="form-group form-field-input" style="margin-bottom: 10px; margin-top: 10px;"></div>
+                    <label for="name">Name: </label>
+                    <input class="form-control input-field" id="name" type="text" placeholder="first and last" name="name" tabindex="1" autofocus>
+                    
+                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div>
+                    <label for="email">Email: </label>
+                    <input class="form-control input-field" id="email" type="email" placeholder="name@email.com" name="email" tabindex="2">
+                    
+                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div>
+                    <label for="favoriteBook">Favorite book: </label>
+                    <input class="form-control input-field" id="favoriteBook" type="text" placeholder="title of book" name="favoriteBook" tabindex="3">
+                    
+                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div>
+                    <label for="pw">Password: </label>
+                    <input class="form-control input-field" id="pw" type="password" name="password" tabindex="4">
+                    
+                    <div class="form-group form-field-input" style="margin-bottom: 10px;"></div>
+                    <label for="pw2">Confirm password: </label>
+                    <input class="form-control input-field" id="pw2" type="password" name="confirmPassword" style="margin-bottom: 10px;" tabindex="4">
+                    
                     <button class="btn button-primary" type="submit" tabindex="5">Sign up</button>
                 </div>
             </form>

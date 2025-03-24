@@ -48,10 +48,8 @@ class BotSSOAuthDialog extends LogoutDialog {
             }
             else {
                 token = tokenResponse.token;
-                const messageText = 'What is your user name?';
-                const msg = MessageFactory.text(messageText, messageText, InputHints.ExpectingInput);
                 await stepContext.context.sendActivity('Login successful.');
-                return await stepContext.prompt(TEXT_PROMPT, { prompt: msg });
+                return await this.userInfoStep(stepContext);
             }
 
             await stepContext.context.sendActivity("Please type 'sso' to begin authentication");
@@ -60,29 +58,37 @@ class BotSSOAuthDialog extends LogoutDialog {
         }
     }
 
-    async userInfoStep(stepContext) {
-        const userName = stepContext.result
+    async userInfoStep(stepContext) { 
         const client = new SimpleGraphClient(token);
         const myDetails = await client.getMeAsync();
         var imageString = "";
-        var img2 = "";
-
+        
         if (myDetails != null) {
-            var userImage = await client.getUserPhoto();
-            await userImage.arrayBuffer().then(result => {
-                console.log(userImage.type);
-                imageString = Buffer.from(result).toString('base64');
-                img2 = "data:image/png;base64," + imageString;
-            }).catch(error => { console.log(error) });
+            let img2 = '';  // Initialize the variable to store the image
+            try {
 
-            const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(myDetails, img2,userName));
+                // Attempt to get the user profile image
+                var userImage = await client.getUserPhoto();
+                await userImage.arrayBuffer().then(result => {
+                    console.log(userImage.type);
+                    imageString = Buffer.from(result).toString('base64');
+                    img2 = "data:image/png;base64," + imageString;
+                });
+            } catch (error) {
+                
+                // If no image is found or an error occurs, log the error and set the default image
+                console.log(error);
+                img2 = "https://static2.sharepointonline.com/files/fabric/assets/1x/person.png";  // Default Microsoft image
+            }
+        
+            const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(myDetails, img2));
             await stepContext.context.sendActivity({ attachments: [userCard] });
         }
         
         return await stepContext.endDialog();
     }
 
-    getAdaptiveCardUserDetails = (myDetails, userImage,userName) => ({
+    getAdaptiveCardUserDetails = (myDetails, userImage) => ({
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         body: [
             {
@@ -114,12 +120,6 @@ class BotSSOAuthDialog extends LogoutDialog {
                 size: "Medium",
                 weight: "Bolder",
                 text: `Email: ${myDetails.userPrincipalName}`
-            },
-            {
-                type: "TextBlock",
-                size: "Medium",
-                weight: "Bolder",
-                text: `User name : ${userName}`
             }
         ],
         type: 'AdaptiveCard',

@@ -1,7 +1,7 @@
 <head>
   <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
-  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
-  crossorigin="anonymous"></script>
+          integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+          crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -9,42 +9,29 @@
   <form>
     <p>
       <label for="tabChoice">Select the tab you would like to see: </label>
-    <div>
-      <input type="radio" name="tabType" value="tasks" onclick="onClick()">Teams Dialogs<br>
-      <input type="radio" name="tabType" value="helloworld" onclick="onClick()"> Hello World
-    </div>
+      <div>
+        <input type="radio" name="tabType" value="tasks" onclick="onClick()"> Teams Dialogs<br>
+        <input type="radio" name="tabType" value="helloworld" onclick="onClick()"> Hello World
+      </div>
     </p>
   </form>
   <script>
     microsoftTeams.app.initialize().then(() => {
-      //get value of radio button
-        var tabType = document.getElementsByName("tabType");
+      const tabType = document.getElementsByName("tabType");
 
-        if (tabType[0].checked) {
-        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
-          microsoftTeams.pages.config.setConfig({
-            entityID: "Task",
-            contentUrl: `${window.location.origin}/hello.html`,
-            suggestedTabName: "Hello World",
-            websiteUrl: `${window.location.origin}/hello.html`,
-          });
-          saveEvent.notifySuccess();
-        });
-      }
-      else {
-        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
-          microsoftTeams.pages.config.setConfig({
-            entityID: "Task",
-            contentUrl: `${window.location.origin}/taskmodule.html`,
-            suggestedTabName: "TaskModule",
-            websiteUrl: `${window.location.origin}/taskmodule.html`,
-          });
-          saveEvent.notifySuccess();
-        });
-      }
+      microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+        const config = {
+          entityID: "Task",
+          contentUrl: tabType[0].checked ? `${window.location.origin}/hello.html` : `${window.location.origin}/taskmodule.html`,
+          suggestedTabName: tabType[0].checked ? "Hello World" : "TaskModule",
+          websiteUrl: tabType[0].checked ? `${window.location.origin}/hello.html` : `${window.location.origin}/taskmodule.html`,
+        };
+        microsoftTeams.pages.config.setConfig(config);
+        saveEvent.notifySuccess();
+      });
     });
 
-    //onclick event handler
+    // onclick event handler
     function onClick() {
       microsoftTeams.pages.config.setValidityState(true);
     }
