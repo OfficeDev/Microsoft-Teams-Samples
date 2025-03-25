@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
