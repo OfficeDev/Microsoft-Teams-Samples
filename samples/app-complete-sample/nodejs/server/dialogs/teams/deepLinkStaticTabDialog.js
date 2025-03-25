@@ -1,18 +1,27 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const DEEPLINKTAB = 'DeepLinkTab';
 const TabEntityID = "statictab";
 const TabConfigEntityID = "configTab";
-var isChannelUser;
-var channelId;
-var tabUrl;
-var buttonCaption;
-var deepLinkCardTitle;
-var botId;
+let isChannelUser;
+let channelId;
+let tabUrl;
+let buttonCaption;
+let deepLinkCardTitle;
+let botId;
 
+/**
+ * DeepLinkStaticTabDialog class extends ComponentDialog to handle deep link to static tab interactions.
+ */
 class DeepLinkStaticTabDialog extends ComponentDialog {
+    /**
+     * Constructor for the DeepLinkStaticTabDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {StatePropertyAccessor} conversationDataAccessor - The state property accessor for conversation data.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
@@ -22,37 +31,49 @@ class DeepLinkStaticTabDialog extends ComponentDialog {
         ]));
     }
 
+    /**
+     * Begins the deep link static tab dialog.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Promise<DialogTurnResult>} The result of the dialog turn.
+     */
     async beginDeepLinkStaticTabDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "DeeplinkDialog";
         botId = process.env.MicrosoftAppId;
         this.getChannelID(stepContext);
-        var message = this.createDeepLinkMessage(stepContext);
+        const message = this.createDeepLinkMessage(stepContext);
         await stepContext.context.sendActivity(message);
         return await stepContext.endDialog();
     }
 
+    /**
+     * Creates and returns a deep link message.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Partial<Activity>} The deep link message.
+     */
     createDeepLinkMessage(stepContext) {
-        var reply = stepContext.context._activity;
+        const reply = stepContext.context._activity;
 
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
         }
 
-        var card = this.createDeepLinkCard();
+        const card = this.createDeepLinkCard();
         reply.attachments = [card];
         return reply;
     }
 
+    /**
+     * Creates and returns a deep link card.
+     * @returns {Attachment} The deep link card attachment.
+     */
     createDeepLinkCard() {
-
         if (isChannelUser) {
             tabUrl = this.getConfigTabDeepLinkURL(channelId);
             buttonCaption = "Config Tab Deep Link";
             deepLinkCardTitle = "Please click below to navigate config tab";
-        }
-        else {
+        } else {
             tabUrl = this.getStaticTabDeepLinkURL();
             buttonCaption = "Static Tab Deep Link";
             deepLinkCardTitle = "Please click below to navigate static tab";
@@ -62,26 +83,31 @@ class DeepLinkStaticTabDialog extends ComponentDialog {
             { type: ActionTypes.OpenUrl, title: buttonCaption, value: tabUrl }
         ];
 
-        const card = CardFactory.heroCard(deepLinkCardTitle, undefined,
-            buttons);
-        return card;
+        return CardFactory.heroCard(deepLinkCardTitle, undefined, buttons);
     }
 
+    /**
+     * Returns the static tab deep link URL.
+     * @returns {string} The static tab deep link URL.
+     */
     getStaticTabDeepLinkURL() {
-        //Example -  BaseURL + 28:BotId + TabEntityId (set in the manifest) + ?conversationType=chat
-        return "https://teams.microsoft.com/l/entity/28:" + botId + "/" + TabEntityID + "?conversationType=chat";
+        return `https://teams.microsoft.com/l/entity/28:${botId}/${TabEntityID}?conversationType=chat`;
     }
 
+    /**
+     * Returns the config tab deep link URL.
+     * @param {string} channelId - The channel ID.
+     * @returns {string} The config tab deep link URL.
+     */
     getConfigTabDeepLinkURL(channelId) {
-        //Example -  BaseURL + BotId + TabConfigEntityId (e.g. entityId: "configTab" : it should be same which we have set at the time of Tab Creation like below) + ?context= + {"channelId":"19:47051e5643ed49b58665e1250b6db460@thread.skype"} (should be encoded)
-        //microsoftTeams.settings.setSettings({ suggestedDisplayName: "Bot Info", contentUrl: createTabUrl(), entityId: "configTab" });
-
-        channelId = channelId.replace("19:", "19%3a")
-            .replace("@thread.skype", "%40thread.skype");
-
-        return "https://teams.microsoft.com/l/entity/" + botId + "/" + TabConfigEntityID + "?context=%7B%22channelId%22%3A%22" + channelId + "%22%7D";
+        channelId = channelId.replace("19:", "19%3a").replace("@thread.skype", "%40thread.skype");
+        return `https://teams.microsoft.com/l/entity/${botId}/${TabConfigEntityID}?context=%7B%22channelId%22%3A%22${channelId}%22%7D`;
     }
 
+    /**
+     * Sets the channel ID and determines if the user is in a channel.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     */
     getChannelID(stepContext) {
         isChannelUser = false;
 
@@ -90,9 +116,6 @@ class DeepLinkStaticTabDialog extends ComponentDialog {
 
             if (channelId != null) {
                 isChannelUser = true;
-            }
-            else {
-                isChannelUser = false;
             }
         }
     }

@@ -10,9 +10,9 @@ namespace Microsoft.BotBuilderSamples.Pages
     {
         public CustomFormModel(IConfiguration config)
         {
-            MicrosoftAppId = config["MicrosoftAppId"];
+            TeamsAppId = config["TeamsAppId"];
         }
 
-        public string MicrosoftAppId { get; private set; }
+        public string TeamsAppId { get; private set; }
     }
 }

@@ -26,8 +26,8 @@
     {
       "entityId": "TabProductInspection",
       "name": "Capture image tab",
-      "contentUrl": "https://${{TAB_DOMAIN}}/index",
-      "websiteUrl": "https://${{TAB_DOMAIN}}/index",
+      "contentUrl": "https://${{BOT_DOMAIN}}/index",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/index",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,7 @@
   ],
   "validDomains": [
     "*.ngrok-free.app",
-    "${{TAB_DOMAIN}}"
+    "${{BOT_DOMAIN}}"
   ],
   "devicePermissions": [
     "media"

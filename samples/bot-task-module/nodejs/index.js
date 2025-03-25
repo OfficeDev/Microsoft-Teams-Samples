@@ -3,7 +3,7 @@
 
 // index.js is used to setup and configure your bot
 
-// Import required pckages
+// Import required packages
 const path = require('path');
 
 // Read botFilePath and botFileSecret from .env file.
@@ -43,7 +43,6 @@ adapter.onTurnError = async (context, error) => {
 
     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create the bot that will handle incoming messages.
@@ -68,9 +67,9 @@ server.get('/*', restify.plugins.serveStatic({
     directory: './pages'
 }));
 
-server.get('/getAppConfig', (req, res,next) => {
-    var responseMessageData = {
+server.get('/getAppConfig', (req, res, next) => {
+    const responseMessageData = {
         MicrosoftAppId: process.env.MicrosoftAppId
-    }
+    };
     res.send(responseMessageData);
-  });
+});

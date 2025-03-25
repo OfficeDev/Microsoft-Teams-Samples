@@ -3,12 +3,15 @@
 
 const { TeamsActivityHandler } = require('botbuilder');
 
+/**
+ * DialogBot class that extends TeamsActivityHandler to handle Teams activities.
+ */
 class DialogBot extends TeamsActivityHandler {
     /**
-     *
-     * @param {ConversationState} conversationState
-     * @param {UserState} userState
-     * @param {Dialog} dialog
+     * Creates an instance of DialogBot.
+     * @param {ConversationState} conversationState - The state management object for conversation state.
+     * @param {UserState} userState - The state management object for user state.
+     * @param {Dialog} dialog - The dialog to be run by the bot.
      */
     constructor(conversationState, userState, dialog) {
         super();
@@ -21,18 +24,26 @@ class DialogBot extends TeamsActivityHandler {
         this.dialog = dialog;
         this.dialogState = this.conversationState.createProperty('DialogState');
 
-        this.onMessage(async (context, next) => {
-            console.log('Running dialog with Message Activity.');
+        this.onMessage(this.handleMessage.bind(this));
+    }
 
-            // Run the Dialog with the new message Activity.
-            await this.dialog.run(context, this.dialogState);
+    /**
+     * Handles incoming message activities.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {function} next - The next middleware function in the pipeline.
+     */
+    async handleMessage(context, next) {
+        console.log('Running dialog with Message Activity.');
 
-            await next();
-        });
+        // Run the Dialog with the new message Activity.
+        await this.dialog.run(context, this.dialogState);
+
+        await next();
     }
 
     /**
      * Override the ActivityHandler.run() method to save state changes after the bot logic completes.
+     * @param {TurnContext} context - The context object for the turn.
      */
     async run(context) {
         await super.run(context);
