@@ -10,11 +10,11 @@
     "@testing-library/user-event": "^12.8.3",
     "msteams-ui-components-react": "^0.8.4",
     "react": "^16.14.0",
-    "react-scripts": "^5.0.1",
     "react-dom": "^16.14.0",
     "react-json-view": "^1.21.3",
     "react-meta-tags": "^1.0.1",
     "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.1",
     "typestyle": "^2.1.0",
     "web-vitals": "^1.1.2"
   },
@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^19.0.11",
+    "@types/react": "^18.3.20",
     "@types/react-dom": "^19.0.4",
     "@types/react-router-dom": "^5.3.0",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
