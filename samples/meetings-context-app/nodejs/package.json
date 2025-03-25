@@ -20,7 +20,7 @@
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
         "@types/react": "^16.14.63",
-        "axios": "^0.21.0",
+        "axios": "^1.8.4",
         "botbuilder": "^4.18.0",
         "botbuilder-dialogs": "^4.18.0",
         "cors": "^2.8.5",
@@ -33,7 +33,7 @@
         "msteams-ui-components-react": "^0.8.4"
     },
     "devDependencies": {
-        "esbuild": "^0.18.1",
+        "esbuild": "^0.25.1",
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
