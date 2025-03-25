@@ -13,14 +13,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
+    /// <summary>
+    /// A CloudAdapter with error handling capabilities.
+    /// </summary>
     public class AdapterWithErrorHandler : CloudAdapter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="httpClientFactory">The HTTP client factory.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="storage">The storage.</param>
+        /// <param name="conversationState">The conversation state.</param>
         public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage, ConversationState conversationState)
             : base(configuration, httpClientFactory, logger)
         {
             if (configuration.GetValue<bool>("UseSingleSignOn"))
             {
-                base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
+                Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
             }
 
             OnTurnError = async (turnContext, exception) =>
@@ -31,7 +42,7 @@ namespace Microsoft.BotBuilderSamples
                 // to add telemetry capture to your bot.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Uncomment below commented line for local debugging.
+                // Uncomment the line below for local debugging.
                 // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
 
                 if (conversationState != null)
@@ -39,13 +50,13 @@ namespace Microsoft.BotBuilderSamples
                     try
                     {
                         // Delete the conversationState for the current conversation to prevent the
-                        // bot from getting stuck in a error-loop caused by being in a bad state.
-                        // ConversationState should be thought of as similar to "cookie-state" in a Web pages.
+                        // bot from getting stuck in an error-loop caused by being in a bad state.
+                        // ConversationState should be thought of as similar to "cookie-state" in a Web page.
                         await conversationState.DeleteAsync(turnContext);
                     }
                     catch (Exception e)
                     {
-                        logger.LogError(e, $"Exception caught on attempting to Delete ConversationState : {e.Message}");
+                        logger.LogError(e, $"Exception caught on attempting to delete ConversationState : {e.Message}");
                     }
                 }
 

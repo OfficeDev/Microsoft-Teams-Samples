@@ -13,6 +13,9 @@ using System;
 
 namespace TagMentionBot
 {
+    /// <summary>
+    /// Adapter with error handling capabilities.
+    /// </summary>
     public class AdapterWithErrorHandler : CloudAdapter
     {
         public AdapterWithErrorHandler(
@@ -23,7 +26,7 @@ namespace TagMentionBot
             ConversationState conversationState)
             : base(configuration, httpClientFactory, logger)
         {
-            base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
+            Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
 
             OnTurnError = async (turnContext, exception) =>
             {
@@ -31,9 +34,9 @@ namespace TagMentionBot
                 // NOTE: In production environment, you should consider logging this to
                 // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
                 // to add telemetry capture to your bot.
-                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
+                logger.LogError(exception, $"[OnTurnError] unhandled error: {exception.Message}");
 
-                // Uncomment below commented line for local debugging..
+                // Uncomment the below line for local debugging.
                 // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
 
                 if (conversationState != null)
@@ -41,17 +44,17 @@ namespace TagMentionBot
                     try
                     {
                         // Delete the conversationState for the current conversation to prevent the
-                        // bot from getting stuck in a error-loop caused by being in a bad state.
-                        // ConversationState should be thought of as similar to "cookie-state" in a Web pages.
+                        // bot from getting stuck in an error-loop caused by being in a bad state.
+                        // ConversationState should be thought of as similar to "cookie-state" in a web page.
                         await conversationState.DeleteAsync(turnContext);
                     }
                     catch (Exception e)
                     {
-                        logger.LogError(e, $"Exception caught on attempting to Delete ConversationState : {e.Message}");
+                        logger.LogError(e, $"Exception caught on attempting to delete ConversationState: {e.Message}");
                     }
                 }
 
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
+                // Send a trace activity, which will be displayed in the Bot Framework Emulator.
                 await turnContext.TraceActivityAsync(
                     "OnTurnError Trace",
                     exception.Message,

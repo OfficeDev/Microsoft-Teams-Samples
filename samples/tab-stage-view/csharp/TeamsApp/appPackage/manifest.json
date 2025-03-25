@@ -43,7 +43,7 @@
       "scopes": [
         "team",
         "personal",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false
     }

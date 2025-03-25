@@ -57,7 +57,7 @@ const GetGeoLocation = () => {
             <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
             <Button onClick={getLocation} >Get Location</Button>
             {JSON.stringify(geoLocationValue) !== '{}' &&
-              <Text>{geoLocationValue}</Text>}               
+              <Text>{JSON.stringify(geoLocationValue)}</Text>}               
             <Button  onClick={showLocation}>Show Location</Button>
         </div>
         </CardBody>
