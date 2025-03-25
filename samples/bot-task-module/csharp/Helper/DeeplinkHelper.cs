@@ -26,18 +26,18 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
         /// </summary>
         /// <param name="microsoftAppId">The Microsoft application ID.</param>
         /// <param name="baseUrl">The base URL.</param>
-        public DeeplinkHelper(string microsoftAppId, string baseUrl)
+       public DeeplinkHelper(string TeamsAppId ,string BaseUrl)
         {
-            microsoftAppId = microsoftAppId.Replace('"', ' ').Trim();
-            baseUrl = baseUrl.Replace('"', ' ').Trim();
+            TeamsAppId = TeamsAppId.Replace('"', ' ').Trim();
+            BaseUrl = BaseUrl.Replace('"', ' ').Trim();
 
             DeepLink = string.Format("https://teams.microsoft.com/l/task/{0}?url={1}&height={2}&width={3}&title={4}&completionBotId={5}",
-              microsoftAppId,
-              HttpUtility.UrlEncode(baseUrl + "/customForm"),
+              TeamsAppId,
+              HttpUtility.UrlEncode(BaseUrl + "/customForm"),
               TaskModuleUIConstants.CustomForm.Height,
               TaskModuleUIConstants.CustomForm.Width,
               HttpUtility.UrlEncode(TaskModuleUIConstants.CustomForm.Title),
-              microsoftAppId);
+              TeamsAppId);
         }
     }
 }

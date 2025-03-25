@@ -20,7 +20,7 @@
 <body>
     <script>
         // Initialize Microsoft Teams SDK
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         // Function to validate the form and submit customer information
         function validateForm() {
@@ -28,8 +28,8 @@
                 name: document.forms["customerForm"]["name"].value,
                 email: document.forms["customerForm"]["email"].value,
                 favoriteBook: document.forms["customerForm"]["favoriteBook"].value
-            };
-            microsoftTeams.dialog.submit(customerInfo, "@Model.MicrosoftAppId");
+            }
+            microsoftTeams.dialog.url.submit(customerInfo, "@Model.TeamsAppId");
             return true;
         }
     </script>
