@@ -6,34 +6,30 @@
 import * as microsoftTeams from "@microsoft/teams-js";
 import { mergeClasses } from "@fluentui/react-components";
 import { IQuestionDetails } from '../types/question';
-import {
-  Card,
-  CardPreview,
-  CardFooter,
-} from "@fluentui/react-components/unstable";
+import { Card,CardPreview } from "@fluentui/react-components";
 import { Text, Button } from "@fluentui/react-components";
 import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../styles/layouts";
 
 const SidePanel = () => {
   const flexRowStyle = getFlexRowStyles();
 
-    const shareSpecificPart = (partName) => {
-        
-    var appContentUrl = "";
-        appContentUrl = `${window.location.origin}/question/${partName}`;
-        microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.meeting.shareAppContentToStage((error, result) => {
-                if (result) {
-                    // handle success
-                    console.log("success")
-                }
+  const shareSpecificPart = (partName) => {
 
-                if (error) {
-                    // handle error
-                    console.log(JSON.stringify(error))
-                }
-            }, appContentUrl);
-        });
+    var appContentUrl = "";
+    appContentUrl = `${window.location.origin}/question/${partName}`;
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.meeting.shareAppContentToStage((error, result) => {
+        if (result) {
+          // handle success
+          console.log("success")
+        }
+
+        if (error) {
+          // handle error
+          console.log(JSON.stringify(error))
+        }
+      }, appContentUrl);
+    });
 
   };
 
@@ -84,7 +80,7 @@ const SidePanel = () => {
                   {question.question}
                 </Text></div>
               </CardPreview>
-              <CardFooter
+              <div
                 styles={{ padding: "0px 4px", minHeight: "0px", minWidth: "0px" }}
               >
                 <div className={flexRowStyle.smallGap}>
@@ -98,7 +94,7 @@ const SidePanel = () => {
                     Share
                   </Button>
                 </div>
-              </CardFooter>
+              </div>
             </Card>
           </div>
         }) : <div> No content to show</div>}

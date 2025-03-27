@@ -9,7 +9,7 @@ const Detail = () => {
         }
         
         microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.dialog.submit(pollnfo);
+            microsoftTeams.dialog.url.submit(pollnfo);
         });
         return true;
     }
