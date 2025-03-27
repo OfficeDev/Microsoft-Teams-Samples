@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.7.1",
+    "@microsoft/teams-js": "^2.35.0",
     "axios": "^0.21.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "ajv": "^8.17.1",
     "env-cmd": "^10.1.0"
   }
 }

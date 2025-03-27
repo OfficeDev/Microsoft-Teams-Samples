@@ -8,10 +8,19 @@ using System.Web;
 
 namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
 {
-    public  class ApplicationSettings
+    /// <summary>
+    /// Represents the application settings.
+    /// </summary>
+    public class ApplicationSettings
     {
+        /// <summary>
+        /// Gets or sets the base URL.
+        /// </summary>
         public string BaseUrl { get; set; }
-        public string MicrosoftAppId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Microsoft application ID.
+        /// </summary>
+        public string MicrosoftAppId { get; set; }
     }
 }

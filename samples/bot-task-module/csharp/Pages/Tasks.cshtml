@@ -9,31 +9,31 @@
 }
 
 @{
-    // Passing BaseUrl and MicrosoftAppId to DeepLnkHelper as a parameter
+    // Passing BaseUrl and MicrosoftAppId to DeepLinkHelper as a parameter
     DeeplinkHelper deepLinkHelper = new DeeplinkHelper(
-        @Json.Serialize(Configuration["MicrosoftAppId"]).ToString(),
+        @Json.Serialize(Configuration["MicrosoftTeamsAppId"]).ToString(),
         @Json.Serialize(Configuration["BaseUrl"]).ToString()
     );
 }
 
 <div class="font-semibold font-title">Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Demo</div>
 <p>
-    A dialog (referred as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous, intermediate task completion information.
+    A dialog (referred to as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous, intermediate task completion information.
 </p>
 <p>
     Let's try it out!
     <div style="text-align: center; margin-left: auto; margin-right: auto;">
-        <button class="button-primary" onclick="Submit('youtube');">YouTube</button>
+        <button class="button-primary" onclick="submitTask('youtube');">YouTube</button>
         <p></p>
-        <button class="button-primary" onclick="Submit('powerapp');">PowerApp</button>
+        <button class="button-primary" onclick="submitTask('powerapp');">PowerApp</button>
         <p></p>
-        <button class="button-primary" onclick="Submit('customform');">Custom Form (results &rarr; tab)</button>
+        <button class="button-primary" onclick="submitTask('customform');">Custom Form (results &rarr; tab)</button>
         <p></p>
-        <button class="button-primary" onclick="Submit('customform bot');">Custom Form (results &rarr; bot)</button>
+        <button class="button-primary" onclick="submitTask('customform bot');">Custom Form (results &rarr; bot)</button>
         <p></p>
-        <button class="button-primary" onclick="Submit('adaptivecard');">Adaptive Card (results &rarr; tab)</button>
+        <button class="button-primary" onclick="submitTask('adaptivecard');">Adaptive Card (results &rarr; tab)</button>
         <p></p>
-        <button class="button-primary" onclick="Submit('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
+        <button class="button-primary" onclick="submitTask('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
         <p></p>
         <p></p>
         <a target="_blank" href="@(deepLinkHelper.DeepLink)">Deep link to Custom Form page</a>
@@ -77,7 +77,7 @@
         console.error("Error details:", err);
     };
 
-    function Submit(type) {
+    function submitTask(type) {
         let taskInfo = {
             title: null,
             size: null,
@@ -127,6 +127,7 @@
         if (type.includes('bot'))
             taskInfo.completionBotId = @Json.Serialize(Configuration["MicrosoftAppId"]);
 
+        // Adjust the size of the task module based on the content
         microsoftTeams.dialog.url.open(taskInfo, submitHandler);
     }
 </script>

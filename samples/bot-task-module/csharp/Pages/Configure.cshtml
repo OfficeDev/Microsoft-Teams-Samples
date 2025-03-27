@@ -1,5 +1,5 @@
 ﻿@page
-@using Microsoft.Teams.Samples.TaskModule.Web.Helper;
+@using Microsoft.Teams.Samples.TaskModule.Web.Helper
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 @{
@@ -12,38 +12,42 @@
     <p>
         <label for="tabChoice">Select the tab you would like to see: </label>
         <div>
-            <input type="radio" name="tabType" value="tasks" onclick="onClick()">Teams Dialogs<br>
-            <input type="radio" name="tabType" value="helloworld" onclick="onClick()"> Hello World
+            <input type="radio" name="tabType" value="tasks" onclick="setValidityState()"> Teams Dialogs<br>
+            <input type="radio" name="tabType" value="helloworld" onclick="setValidityState()"> Hello World
         </div>
     </p>
 </form>
+
 <script type="text/javascript">
+    // Initialize Microsoft Teams SDK
     microsoftTeams.initialize();
+
+    // Register the save handler for the settings
     microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-     
         var radios = document.getElementsByName("tabType");
+        var baseUrl = @Html.Raw(Json.Serialize(Configuration["BaseUrl"]));
 
         if (radios[0].checked) {
             microsoftTeams.settings.setSettings({
                 entityId: "tasks",
-                contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks",
+                contentUrl: baseUrl + "/tasks",
                 suggestedDisplayName: "Teams Dialogs CSharp",
-                websiteUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks"
+                websiteUrl: baseUrl + "/tasks"
             });
         } else {
             microsoftTeams.settings.setSettings({
                 entityId: "helloworld",
-                contentUrl: @Json.Serialize(Configuration["BaseUrl"]) +"/helloworld",
+                contentUrl: baseUrl + "/helloworld",
                 suggestedDisplayName: "Hello World",
-                websiteUrl: @Json.Serialize(Configuration["BaseUrl"]) +"/helloworld"
+                websiteUrl: baseUrl + "/helloworld"
             });
         }
 
         saveEvent.notifySuccess();
     });
 
-    function onClick() {
+    // Function to set the validity state of the settings
+    function setValidityState() {
         microsoftTeams.settings.setValidityState(true);
     }
-
 </script>

@@ -18,6 +18,7 @@ from botbuilder.schema import Activity, ActivityTypes
 from bots import TeamsTaskModuleBot
 from config import DefaultConfig
 
+# Load configuration
 CONFIG = DefaultConfig()
 
 # Create adapter.
@@ -25,10 +26,15 @@ CONFIG = DefaultConfig()
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
 
-
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
+    """
+    This function is called when an error occurs during a turn.
+    
+    :param context: The context object for the turn.
+    :param error: The exception that was thrown.
+    """
+    # This check writes out errors to console log vs. app insights.
     # NOTE: In production environment, you should consider logging this to Azure
     #       application insights.
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
@@ -53,16 +59,20 @@ async def on_error(context: TurnContext, error: Exception):
         # Send a trace activity, which will be displayed in Bot Framework Emulator
         await context.send_activity(trace_activity)
 
-
+# Set the error handler on the adapter
 ADAPTER.on_turn_error = on_error
 
 # Create the Bot
 BOT = TeamsTaskModuleBot(CONFIG)
 
-
 # Listen for incoming requests on /api/messages
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
+    """
+    Main bot message handler.
+    
+    :param req: The incoming request.
+    :return: The response to the request.
+    """
     if "application/json" in req.headers["Content-Type"]:
         body = await req.json()
     else:
@@ -76,7 +86,7 @@ async def messages(req: Request) -> Response:
         return json_response(data=invoke_response.body, status=invoke_response.status)
     return Response(status=HTTPStatus.OK)
 
-
+# Create the web application
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)
 APP.router.add_static("/", path="./pages/", name="pages")

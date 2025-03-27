@@ -12,27 +12,34 @@ namespace Microsoft.BotBuilderSamples.Controllers
     [Route("")]
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Displays the configuration page with the list of regions.
+        /// </summary>
         [Route("configure")]
         public ActionResult Index()
         {
-            //get the Json filepath  
+            // Get the JSON file path
             string file = Path.GetFullPath("ConfigData/Regions.json");
-            //deserialize JSON from file  
-            string Json = System.IO.File.ReadAllText(file);
-            var domainlist = JsonSerializer.Deserialize<Rootobject>(Json);
 
-            return View(domainlist);
+            // Deserialize JSON from file
+            string json = System.IO.File.ReadAllText(file);
+            var domainList = JsonSerializer.Deserialize<RootObject>(json);
+
+            return View(domainList);
         }
 
+        /// <summary>
+        /// Displays the welcome page with the selected domain.
+        /// </summary>
+        /// <param name="selectedDomain">The selected domain.</param>
         [Route("welcome")]
         public ActionResult Welcome(string selectedDomain)
         {
             if (string.IsNullOrEmpty(selectedDomain))
                 return RedirectToAction("Index");
 
-            ViewBag.selectedDomain = selectedDomain;
+            ViewBag.SelectedDomain = selectedDomain;
             return View();
         }
-
     }
 }
