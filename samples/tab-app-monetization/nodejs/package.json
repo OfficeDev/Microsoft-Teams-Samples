@@ -18,14 +18,13 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
     "scheduler": "^0.20.2",
-    "typescript": "^3.4.5",
     "typestyle": "^2.1.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
     "start": "set PORT=3978 && react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,6 +50,7 @@
     "@types/react": "^16.14.63",
     "@types/react-dom": "^18.3.5",
     "@types/react-router-dom": "^5.3.0",
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^10.1.0",
+    "typescript": "^5.8.2"
   }
 }
