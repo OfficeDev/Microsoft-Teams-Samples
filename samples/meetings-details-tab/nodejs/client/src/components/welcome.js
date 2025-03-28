@@ -61,7 +61,7 @@ function Welcome (){
 
             
         microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.dialog.open(taskInfo, submitHandler);
+            microsoftTeams.dialog.url.open(taskInfo, submitHandler);
         });
     }
     

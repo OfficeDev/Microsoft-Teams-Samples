@@ -103,7 +103,7 @@ class Dashboard extends Component {
 
     // Handler when user click on create new tag button.
     onCreateNewTagClick = () => {
-        microsoftTeams.dialog.open({
+        microsoftTeams.dialog.url.open({
             title: "Create new Tag",
             url: `${window.location.origin}/create-new-tag`,
             size: {
