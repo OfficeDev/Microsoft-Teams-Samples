@@ -4,18 +4,17 @@
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        let aadId;
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
                 $("#defaultSelected").hide();
                 $("#allMemberOfOrganisationSelected").hide();
                 $("#singleSelected").hide();
             });
+            microsoftTeams.app.getContext().then(function (context) {
+                aadId = context.user.id
+            });
         });
-
-        let aadId;
-        microsoftTeams.app.getContext().then(function (context) {
-            aadId = context.user.id
-        })
 
         // People picker api call.
         function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
