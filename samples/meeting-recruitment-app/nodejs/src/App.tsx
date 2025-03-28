@@ -31,6 +31,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidMount() {
+    microsoftTeams.app.initialize();
     microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
           let theme = context.app.theme || "";

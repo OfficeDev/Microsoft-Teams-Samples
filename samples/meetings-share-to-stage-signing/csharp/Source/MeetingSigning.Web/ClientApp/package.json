@@ -7,7 +7,7 @@
     "@fluentui/react-northstar": "^0.64.0",
     "@fluidframework/azure-client": "~1.0.2",
     "@microsoft/live-share": "1.0.0-preview.4",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

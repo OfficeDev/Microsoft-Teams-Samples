@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-northstar": "^0.58.0",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "msteams-ui-components-react": "^0.8.4",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-meta-tags": "^1.0.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
@@ -22,7 +22,7 @@
   "scripts": {
     "dev:teamsfx": "npm run dev",
     "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,8 +46,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^16.8.0",
-    "@types/react-router-dom": "^5.3.0",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.20",
+   "@types/react-router-dom": "^5.3.0",
     "nodemon": "^2.0.13"
   },
   "proxy": "http://localhost:3978"
