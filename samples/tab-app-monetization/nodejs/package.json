@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "ajv": "^8.17.1",
     "bootstrap": "^5.2.0",
     "msteams-ui-components-react": "^0.8.4",
     "react": "^16.14.0",
