@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Styles for App theme depending on 'Teams' theme change */
+.theme-dark{
+  background-color: #242424;
+  color: white;
+}
+
+.theme-light{
+  background-color: white;
+  color: #242424;
+}
+
+.theme-contrast{
+  background-color: black;
+  color: chartreuse;
+}
+
+.tab-entity-blue {
+  border: 5px solid blue;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.tab-entity-blue h3 {
+  color: blue;
+}
+
+.tab-entity-red {
+  border: 5px solid red;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.tab-entity-red h3 {
+  color: red;
+}
+
+.tab-entity-green {
+  border: 5px solid green;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.tab-entity-green h3 {
+  color: green;
+}
+
+.tab-entity-yellow {
+  border: 5px solid yellow;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.tab-entity-yellow h3 {
+  color: yellow;
+}
+

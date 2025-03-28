@@ -3,7 +3,9 @@
 <html lang="en">
    <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -29,10 +31,12 @@
             var token = localStorage.getItem("accessToken");
             var userId = "";
             var userName = "";
-         
+
+           microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
                 userId = context.user.id;
                 userName = context.user.userPrincipalName;
+           
 
                 if(context.page.subPageId !="" && context.page.subPageId != undefined)
                 {
@@ -45,9 +49,10 @@
                         url: window.location.origin + "/MessageDetails?taskId=" + context.page.subPageId,
                     };
 
-                    microsoftTeams.dialog.open(taskInfo);
+                    microsoftTeams.dialog.url.open(taskInfo);
                 };
-            });       
+            });
+           });
 
          // Send notification to organisation.
          function SendNotificationToOrganisation() {

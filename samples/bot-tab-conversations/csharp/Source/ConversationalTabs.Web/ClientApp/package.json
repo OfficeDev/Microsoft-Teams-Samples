@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-northstar": "^0.61.0",
-    "@microsoft/teams-js": "^1.11.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -24,7 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

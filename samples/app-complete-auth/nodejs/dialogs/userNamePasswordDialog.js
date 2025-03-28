@@ -115,6 +115,9 @@ class UserNamePasswordDialog extends ComponentDialog {
      * @returns {Object} - The adaptive card JSON.
      */
     getAdaptiveCardUserLogin() {
+        const signInUrl = `${this.baseUrl}/popUpSignin?from=bot&height=535&width=600`;
+        console.log(`Sign-in URL: ${signInUrl}`); // Add this line to log the URL
+
         return CardFactory.heroCard(
             'Signin card',
             undefined,
@@ -122,11 +125,11 @@ class UserNamePasswordDialog extends ComponentDialog {
                 {
                     type: 'signin',
                     title: 'Get started',
-                    value: `${this.baseUrl}/popUpSignin?from=bot&height=535&width=600`
+                    value: signInUrl
                 }
             ])
         );
-    }
+    } 
 }
 
 exports.UserNamePasswordDialog = UserNamePasswordDialog;

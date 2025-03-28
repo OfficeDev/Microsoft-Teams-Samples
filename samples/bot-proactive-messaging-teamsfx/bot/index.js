@@ -5,28 +5,21 @@ const restify = require("restify");
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {  BotFrameworkAdapter } = require("botbuilder");
+const { BotFrameworkAdapter } = require("botbuilder");
 const { TeamsBot } = require("./teamsBot");
 
-
-// // Create adapter.
-// // See https://aka.ms/about-bot-adapter to learn more about adapters.
+// Create adapter.
+// See https://aka.ms/about-bot-adapter to learn more about adapters.
 const adapter = new BotFrameworkAdapter({
   appId: process.env.BOT_ID,
   appPassword: process.env.BOT_PASSWORD,
 });
 
-
+// Handle errors encountered by the bot.
 adapter.onTurnError = async (context, error) => {
-  // This check writes out errors to console log .vs. app insights.
-  // NOTE: In production environment, you should consider logging this to Azure
-  //       application insights. See https://aka.ms/bottelemetry for telemetry
-  //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${error}`);
-
-  // Uncomment below commented line for local debugging..
+  console.error(`\n [onTurnError] unhandled error: ${error}`);
+  // Uncomment below line for local debugging.
   // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create the bot that will handle incoming messages.
@@ -37,7 +30,7 @@ const bot = new TeamsBot(conversationReferences);
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
-server.listen(process.env.port || process.env.PORT || 3978, function () {
+server.listen(process.env.port || process.env.PORT || 3978, () => {
   console.log(`\nBot started, ${server.name} listening to ${server.url}`);
 });
 
@@ -52,7 +45,6 @@ server.post("/api/messages", async (req, res) => {
 server.get('/api/notify', async (req, res) => {
   console.log(JSON.stringify(conversationReferences));
   for (const conversationReference of Object.values(conversationReferences)) {
-
     await adapter.continueConversation(conversationReference, async (context) => {
       await context.sendActivity('proactive hello');
     });

@@ -4,8 +4,8 @@
 }
 <head>
     <!-- Microsoft Teams SDK script -->
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
             crossorigin="anonymous"></script>
     
     <!-- jQuery library -->
@@ -23,7 +23,7 @@
 
     <script>
         // Initializes Microsoft Teams SDK
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         /**
          * Handles the form submission for scheduling a task.
@@ -76,7 +76,7 @@
             };
 
             // Submit the task information to Microsoft Teams task module
-            microsoftTeams.tasks.submitTask(taskInfo);
+            microsoftTeams.dialog.url.submit(taskInfo);
         }
     </script>
 </head>
