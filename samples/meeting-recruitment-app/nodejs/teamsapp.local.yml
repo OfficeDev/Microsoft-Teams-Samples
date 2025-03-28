@@ -27,7 +27,7 @@ provision:
       name: meeting-recruitment-app${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
-    writeToEnvironmentFile: 
+    writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
 
   - uses: script
@@ -75,16 +75,38 @@ provision:
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
 deploy:
+  # Install development tool(s)
+  - uses: devTool/install
+    with:
+      devCert:
+        trust: true
+    # Write the information of installed development tool(s) into environment
+    # file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      sslCertFile: SSL_CRT_FILE
+      sslKeyFile: SSL_KEY_FILE
+
   # Run npm command
   - uses: cli/runNpmCommand
     with:
       args: install --no-audit
-  
+
   # Run npm command
   - uses: cli/runNpmCommand
     with:
       workingDirectory: api
       args: install --no-audit
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        BROWSER: none
+        HTTPS: true
+        PORT: 3000
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}
 
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
