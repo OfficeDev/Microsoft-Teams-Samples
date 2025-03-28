@@ -910,7 +910,7 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs'
               name: 'tab-app-monetization'
-              version: '16.x'
+              version: '18.x'
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
