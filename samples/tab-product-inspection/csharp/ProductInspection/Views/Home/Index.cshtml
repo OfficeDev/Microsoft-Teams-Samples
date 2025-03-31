@@ -4,8 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inspection demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous">
-    </script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -61,7 +62,7 @@
                 console.log(`Submit handler - err: ${err}`);
             };
 
-            microsoftTeams.dialog.open(taskInfo, submitHandler);
+            microsoftTeams.dialog.url.open(taskInfo, submitHandler);
         }
 
         // Method to open taskmodule that wil redirect user to get product details based on scanned barcode.
@@ -85,7 +86,7 @@
                 console.log(`Submit handler - err: ${err}`);
             };
 
-            microsoftTeams.dialog.open(taskInfo, submitHandler);
+            microsoftTeams.dialog.url.open(taskInfo, submitHandler);
         }
 
     </script>

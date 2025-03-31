@@ -4,7 +4,9 @@
     <title>Configure</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" integrity="sha384-EKT9Wswdn78EAHAqcOh50wnaPfH3aPa7YZ1R89/TCN98AhkqZJ2g47u4k2I5eCk8" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
     <script type="text/javascript" src="/StaticViews/js/jwt-decode.js"></script>
@@ -166,7 +168,7 @@
             function closeAllDropdowns() { $("#positionsDropdownContent").hide(); }
 
             function checkValidityState() {
-                microsoftTeams.settings.setValidityState(nameSelector.val().length !== 0 && currentSelectedPositionId > 0);
+                microsoftTeams.pages.config.setValidityState(nameSelector.val().length !== 0 && currentSelectedPositionId > 0);
             }
             nameSelector.on('input', function () { checkValidityState(); });
             $(window).click(function (e) {
@@ -224,9 +226,9 @@
             }
 
             //Save handler when user clicked on Save button
-            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
 
-                microsoftTeams.getContext(function () {
+                microsoftTeams.getContext(function (context) {
                     var name = nameSelector.val();
                     var url = window.location.origin + '/StaticViews/TeamTab.html?positionId=' + currentSelectedPositionId;
                     var websiteUrl = url + '&web=1';
@@ -236,7 +238,7 @@
                     console.log(websiteUrl);
 
 
-                    microsoftTeams.settings.setSettings({
+                    microsoftTeams.pages.config.setSettings({
                         entityId: currentSelectedPositionId,
                         contentUrl: url,
                         suggestedDisplayName: name,

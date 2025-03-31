@@ -50,7 +50,7 @@
       "scopes": [
         "team",
         "personal",
-        "groupchat"
+        "groupChat"
       ],
       "commandLists": [
         {

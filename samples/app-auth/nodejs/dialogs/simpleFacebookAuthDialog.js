@@ -43,10 +43,8 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
             token = tokenResponse.token;
-            const messageText = 'What is your user name?';
-            const msg = MessageFactory.text(messageText, messageText, InputHints.ExpectingInput);
             await stepContext.context.sendActivity('Login successful.');
-            return await stepContext.prompt(TEXT_PROMPT, { prompt: msg });
+            return await this.userInfoStep(stepContext);
         }
         
         await stepContext.context.sendActivity('Login was not successful please try again.');
@@ -69,10 +67,6 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
                 {
                     type: 'TextBlock',
                     text: 'Hello: ' + facbookProfile.name,
-                },
-                {
-                    type: 'TextBlock',
-                    text: 'User name ' + userName,
                 },
             ],
         });
