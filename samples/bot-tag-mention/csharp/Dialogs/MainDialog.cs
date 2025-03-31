@@ -18,9 +18,12 @@ using Newtonsoft.Json;
 
 namespace TagMentionBot
 {
+    /// <summary>
+    /// Main dialog for handling tag mention functionality.
+    /// </summary>
     public class MainDialog : LogoutDialog
     {
-        protected readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         public MainDialog(IConfiguration configuration, ILogger<MainDialog> logger)
             : base(nameof(MainDialog), configuration["ConnectionName"])
@@ -42,44 +45,50 @@ namespace TagMentionBot
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                PromptStepAsync,
-                MentionTagAsync
+                    PromptStepAsync,
+                    MentionTagAsync
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        // Method to invoke auth flow.
+        /// <summary>
+        /// Method to invoke auth flow.
+        /// </summary>
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             _logger.LogInformation("PromptStepAsync() called.");
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
-        // Sends tag mention adaptive card.
-        private async Task<ResourceResponse> TagMentionAdaptivecard(WaterfallStepContext stepContext, CancellationToken cancellationToken, string tagName, string tagId)
+        /// <summary>
+        /// Sends tag mention adaptive card.
+        /// </summary>
+        private async Task<ResourceResponse> TagMentionAdaptiveCard(WaterfallStepContext stepContext, CancellationToken cancellationToken, string tagName, string tagId)
         {
             var adaptiveCardTemplate = Path.Combine(".", "Resources", "UserMentionCardTemplate.json");
-            var templateJSON = File.ReadAllText(adaptiveCardTemplate);
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(templateJSON);
+            var templateJson = await File.ReadAllTextAsync(adaptiveCardTemplate, cancellationToken);
+            var template = new AdaptiveCardTemplate(templateJson);
             var memberData = new
             {
-                tagId = tagId,
-                tagName = tagName
+                tagId,
+                tagName
             };
 
-            string cardJSON = template.Expand(memberData);
+            var cardJson = template.Expand(memberData);
             var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJSON),
+                Content = JsonConvert.DeserializeObject(cardJson),
             };
 
             return await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
 
-        // Method to invoke Tag mention functionality flow.
+        /// <summary>
+        /// Method to invoke Tag mention functionality flow.
+        /// </summary>
         private async Task<DialogTurnResult> MentionTagAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var tokenResponse = (TokenResponse)stepContext.Result;
@@ -89,9 +98,6 @@ namespace TagMentionBot
             }
             else
             {
-                // Get the token from the previous step. Note that we could also have gotten the
-                // token directly from the prompt itself. There is an example of this in the next method.
-                bool tagExists = false;
                 if (tokenResponse?.Token != null)
                 {
                     try
@@ -100,34 +106,26 @@ namespace TagMentionBot
                         if (stepContext.Context.Activity.Text.Trim().ToLower().Contains("<at>"))
                         {
                             var tagName = stepContext.Context.Activity.Text.Replace("<at>", string.Empty).Replace("</at>", string.Empty).Trim();
-                            var tagID = stepContext.Context.Activity.Entities[1].Properties["mentioned"]["id"].ToString();
-                            await TagMentionAdaptivecard(stepContext, cancellationToken, tagName, tagID);
-
+                            var tagId = stepContext.Context.Activity.Entities[1].Properties["mentioned"]["id"].ToString();
+                            await TagMentionAdaptiveCard(stepContext, cancellationToken, tagName, tagId);
                         }
-                        else if (stepContext.Context.Activity.Text.Trim().ToLower() != "")
+                        else if (!string.IsNullOrWhiteSpace(stepContext.Context.Activity.Text))
                         {
-                            SimpleGraphClient client = null;
-                            TeamDetails teamDetails = null;
-                            try
-                            {
-                                // Pull in the data from the Microsoft Graph.
-                                client = new SimpleGraphClient(tokenResponse.Token);
-                                teamDetails = await TeamsInfo.GetTeamDetailsAsync(stepContext.Context, stepContext.Context.Activity.TeamsGetTeamInfo().Id, cancellationToken);
-                            }
-                            catch (Exception ex)
-                            {
-                                await stepContext.Context.SendActivityAsync("You don't have Graph API permissions to fetch tag's information. Please use this command to mention a tag: \"`@<Bot-name>  @<your-tag>`\" to experience tag mention using bot.");
-                            }
+                            var client = new SimpleGraphClient(tokenResponse.Token);
+                            var teamDetails = await TeamsInfo.GetTeamDetailsAsync(stepContext.Context, stepContext.Context.Activity.TeamsGetTeamInfo().Id, cancellationToken);
                             var result = await client.GetTag(teamDetails.AadGroupId);
+                            var tagExists = false;
+
                             foreach (var tagDetails in result.CurrentPage)
                             {
-                                if (tagDetails.DisplayName.ToLower() == stepContext.Context.Activity.Text.Trim().ToLower())
+                                if (tagDetails.DisplayName.Equals(stepContext.Context.Activity.Text.Trim(), StringComparison.OrdinalIgnoreCase))
                                 {
                                     tagExists = true;
-                                    await TagMentionAdaptivecard(stepContext, cancellationToken, tagDetails.DisplayName, tagDetails.Id);
+                                    await TagMentionAdaptiveCard(stepContext, cancellationToken, tagDetails.DisplayName, tagDetails.Id);
                                     break;
                                 }
                             }
+
                             if (!tagExists)
                             {
                                 await stepContext.Context.SendActivityAsync("Provided tag name is not available in this team. Please try with another tag name or create a new tag.");
@@ -135,13 +133,12 @@ namespace TagMentionBot
                         }
                         else
                         {
-                            await stepContext.Context.SendActivityAsync("Please provide a tag name while mentioning the bot as \"`@<Bot-name> <your-tag-name>`\" or mention a tag as \"`@<Bot-name> @<your-tag>`\"");
+                            await stepContext.Context.SendActivityAsync("Please provide a tag name while mentioning the bot as \"`@<Bot-name> <your-tag-name>`\" or mention a tag as \"`@<Bot-name> @<your-tag>`\".");
                         }
-
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError("Error occurred while processing your request.", ex.Message);
+                        _logger.LogError("Error occurred while processing your request: {Message}", ex.Message);
                     }
                 }
                 else

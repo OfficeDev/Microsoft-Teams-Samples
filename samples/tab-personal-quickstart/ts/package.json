@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.34.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
@@ -13,6 +13,8 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "@types/react-router-dom": "^5.3.3",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",

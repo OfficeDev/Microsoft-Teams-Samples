@@ -22,7 +22,7 @@ server.get('/content', (req, res, next) => {
 });
 
 server.get('/tab', (req, res, next) => {
-    res.render('./views/sampleTab', { microsoftAppId: process.env.MicrosoftAppId, baseUrl: process.env.BaseUrl });
+    res.render('./views/sampleTab', { teamsAppId: process.env.TeamsAppId, baseUrl: process.env.BaseUrl });
 });
 
 server.get('*', (req, res) => {

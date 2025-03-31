@@ -34,7 +34,7 @@
     "@fluentui/react-northstar": "^0.51.3",
     "@fluentui/react-search-preview": "^0.1.34",
     "@fluentui/react-teams": "^0.1.0-alpha.10",
-    "@microsoft/teams-js": "^2.0.0",
+    "@microsoft/teams-js": "^2.34.0",
     "@uifabric/example-data": "^7.1.5",
     "faker": "^5.1.0",
     "react": "^16.8.0",
