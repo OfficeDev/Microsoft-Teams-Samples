@@ -79,19 +79,12 @@ const CaptureImage = () => {
         {capturedImage !== '' &&
           <div className="wrapper">
           
-          {/* <div className="box2"> renderMainArea={() => (
+          <div className="box2">
               <Image                
                 src={"data:image/png;base64," + capturedImage}
               />
-            )}</div>           */}
-          <div className="box2">
-            {(() => (
-              <Image
-                src={"data:image/png;base64," + capturedImage}
-              />
-            ))()} {/* Inline function to render JSX */}
-          </div>
-        </div>        
+          </div>          
+        </div>
         }
       </Card>
       {/* Card for showing multiple images */}

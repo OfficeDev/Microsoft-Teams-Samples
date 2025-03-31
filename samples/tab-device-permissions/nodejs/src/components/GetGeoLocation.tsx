@@ -55,10 +55,13 @@ const GetGeoLocation = () => {
             <Text>navigator, microsoftTeams</Text>
             <Text weight="semibold">Method</Text>
             <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
-            <Button onClick={getLocation} >Get Location</Button>
-            {JSON.stringify(geoLocationValue) !== '{}' &&
-              <Text>{JSON.stringify(geoLocationValue)}</Text>}               
-            <Button  onClick={showLocation}>Show Location</Button>
+            <Button onClick={getLocation}>Get Location</Button>
+{geoLocationValue && geoLocationValue.latitude && geoLocationValue.longitude && (
+  <Text>
+    Latitude: {geoLocationValue.latitude}, Longitude: {geoLocationValue.longitude}
+  </Text>
+)}
+<Button onClick={showLocation}>Show Location</Button>
         </div>
         </CardBody>
       </Card>
