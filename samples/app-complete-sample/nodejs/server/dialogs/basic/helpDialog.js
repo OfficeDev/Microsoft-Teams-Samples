@@ -1,10 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HELP = 'Help';
 
+/**
+ * HelpDialog class extends ComponentDialog to handle help interactions.
+ */
 class HelpDialog extends ComponentDialog {
+    /**
+     * Constructor for the HelpDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {StatePropertyAccessor} conversationDataAccessor - The state property accessor for conversation data.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
@@ -14,15 +23,20 @@ class HelpDialog extends ComponentDialog {
         ]));
     }
 
+    /**
+     * Begins the help dialog.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Promise<DialogTurnResult>} The result of the dialog turn.
+     */
     async beginHelpDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "HelpDialog";
-        var reply = stepContext.context._activity;
+        const reply = stepContext.context._activity;
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+
         const buttons = [
             { type: ActionTypes.ImBack, title: 'At Mention', value: 'at mention' },
             { type: ActionTypes.ImBack, title: 'RunQuiz', value: 'quiz' },
@@ -31,7 +45,7 @@ class HelpDialog extends ComponentDialog {
             { type: ActionTypes.ImBack, title: 'Fetch Roster Payload', value: 'roster' },
             { type: ActionTypes.ImBack, title: 'Dialog Flow', value: 'dialog flow' },
             { type: ActionTypes.ImBack, title: 'Hello Dialog', value: 'hi' },
-            { type: ActionTypes.ImBack, title: 'Begin Multi Dailog 1', value: 'multi dialog 1' },
+            { type: ActionTypes.ImBack, title: 'Begin Multi Dialog 1', value: 'multi dialog 1' },
             { type: ActionTypes.ImBack, title: 'Begin Multi Dialog 2', value: 'multi dialog 2' },
             { type: ActionTypes.ImBack, title: 'Fetch Last Dialog', value: 'last dialog' },
             { type: ActionTypes.ImBack, title: 'Setup Message', value: 'setup text message' },
@@ -46,9 +60,8 @@ class HelpDialog extends ComponentDialog {
             { type: ActionTypes.ImBack, title: 'Popup Sign-In', value: 'signin' },
             { type: ActionTypes.ImBack, title: 'Team Info', value: 'team info' },
         ];
-        
-        const card = CardFactory.heroCard('Template Options', undefined,
-            buttons);
+
+        const card = CardFactory.heroCard('Template Options', undefined, buttons);
 
         reply.attachments = [card];
         await stepContext.context.sendActivity(reply);

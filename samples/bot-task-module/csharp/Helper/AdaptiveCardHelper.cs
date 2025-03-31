@@ -7,18 +7,23 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
 {
     /// <summary>
-    ///  Helper class which posts to the saved channel every 20 seconds.
+    /// Helper class for creating adaptive card attachments.
     /// </summary>
     public static class AdaptiveCardHelper
     {
-        public static Attachment GetAdaptiveCard()
+        /// <summary>
+        /// Gets an adaptive card attachment.
+        /// </summary>
+        /// <returns>An attachment containing the adaptive card.</returns>
+        public static async Task<Attachment> GetAdaptiveCardAsync()
         {
-            // Parse the JSON 
-            AdaptiveCardParseResult result = AdaptiveCard.FromJson(GetAdaptiveCardJson());
+            // Parse the JSON
+            var result = AdaptiveCard.FromJson(await GetAdaptiveCardJsonAsync());
 
             return new Attachment()
             {
@@ -26,11 +31,15 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
                 Content = result.Card
             };
         }
-        public static String GetAdaptiveCardJson()
+
+        /// <summary>
+        /// Gets the adaptive card JSON.
+        /// </summary>
+        /// <returns>The adaptive card JSON as a string.</returns>
+        public static async Task<string> GetAdaptiveCardJsonAsync()
         {
             var path = Path.Combine(".", "Resources", "AdaptiveCard_TaskModule.json");
-            return File.ReadAllText(path);
+            return await File.ReadAllTextAsync(path);
         }
-
     }
 }

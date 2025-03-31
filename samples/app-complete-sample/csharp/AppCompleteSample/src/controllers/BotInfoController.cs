@@ -2,83 +2,92 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 namespace AppCompleteSample.Controllers
 {
+    /// <summary>
+    /// Controller to handle bot information requests.
+    /// </summary>
     public class BotInfoController : Controller
     {
-        private bool IsValidFilePath { get; set; }
+        private bool isValidFilePath;
 
+        /// <summary>
+        /// Gets the bot information.
+        /// </summary>
+        /// <returns>A view with the list of bot information details.</returns>
         [Route("BotInfo")]
         public ActionResult BotInfo()
         {
-            List<BotInfoDetails> listData = new List<BotInfoDetails>();
+            var listData = new List<BotInfoDetails>();
+            var directoryName = Path.GetFullPath("src/dialogs/");
 
-            string DirectoryName = System.IO.Path.GetFullPath("src/dialogs/");
-
-            string[] sourceCodeFiles;
-
-            if (Directory.Exists(DirectoryName))
+            if (Directory.Exists(directoryName))
             {
-                sourceCodeFiles = Directory.GetFiles(DirectoryName, "*.*", SearchOption.AllDirectories);
-                
-                foreach (var botfileName in sourceCodeFiles)
+                var sourceCodeFiles = Directory.GetFiles(directoryName, "*.*", SearchOption.AllDirectories);
+
+                foreach (var botFileName in sourceCodeFiles)
                 {
-                    var fileNameLink = botfileName.Substring(botfileName.LastIndexOf("\\") + 1);
-                    listData.Add(new BotInfoDetails() { Name = fileNameLink });
+                    var fileNameLink = Path.GetFileName(botFileName);
+                    listData.Add(new BotInfoDetails { Name = fileNameLink });
                 }
             }
+
             return View(listData);
         }
 
+        /// <summary>
+        /// Handles AJAX requests to get file details.
+        /// </summary>
+        /// <param name="fileName">The name of the file.</param>
+        /// <returns>A JSON result with the file details.</returns>
         [HttpPost]
-        public ActionResult JqAJAX(string fileName)
+        public async Task<ActionResult> JqAJAX(string fileName)
         {
-            StringBuilder fileCodeLines = new StringBuilder();
-            FileDetalisModel fileDetails = new FileDetalisModel();
-
-            string[] dirs = Directory.GetDirectories(System.IO.Path.GetFullPath("src/dialogs/"), "*", SearchOption.AllDirectories);
+            var fileCodeLines = new StringBuilder();
+            var fileDetails = new FileDetailsModel();
+            var dirs = Directory.GetDirectories(Path.GetFullPath("src/dialogs/"), "*", SearchOption.AllDirectories);
 
             if (dirs.Length > 0)
             {
-                foreach (string dirName in dirs)
+                foreach (var dirName in dirs)
                 {
-                    string dirPath = dirName.Substring(dirName.IndexOf("src"), (dirName.Length - dirName.IndexOf("src")));
-                    dirPath = dirPath.Replace("\\", "/") + "/";
+                    var dirPath = dirName.Substring(dirName.IndexOf("src")).Replace("\\", "/") + "/";
+                    fileCodeLines = await ReadFileContentFromPathAsync(Path.GetFullPath(dirPath) + fileName);
 
-                    fileCodeLines = ReadFileContentFromPath(System.IO.Path.GetFullPath(dirPath) + fileName);
-
-                    //No need to read the files once we got the content
                     if (fileCodeLines.Length != 0)
                     {
                         break;
                     }
                 }
 
-                if (!IsValidFilePath)
+                if (!isValidFilePath)
                 {
-                    fileCodeLines = ReadFileContentFromPath(System.IO.Path.GetFullPath("src/dialogs/") + fileName);
+                    fileCodeLines = await ReadFileContentFromPathAsync(Path.GetFullPath("src/dialogs/") + fileName);
                 }
 
                 fileDetails.FileName = fileName;
                 fileDetails.FileCodeLines = fileCodeLines.ToString();
             }
+
             return Json(fileDetails);
         }
 
         /// <summary>
-        /// Read the source file content
+        /// Reads the source file content.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        private StringBuilder ReadFileContentFromPath(string filePath)
+        /// <param name="filePath">The path of the file.</param>
+        /// <returns>A StringBuilder with the file content.</returns>
+        private async Task<StringBuilder> ReadFileContentFromPathAsync(string filePath)
         {
-            StringBuilder fileContent = new StringBuilder();
+            var fileContent = new StringBuilder();
+
             try
             {
-                string[] codeLines = System.IO.File.ReadAllLines(filePath);
-                IsValidFilePath = true;
+                var codeLines = await System.IO.File.ReadAllLinesAsync(filePath);
+                isValidFilePath = true;
 
-                foreach (string line in codeLines)
+                foreach (var line in codeLines)
                 {
                     fileContent.Append("<br/>");
                     fileContent.Append("\t" + line);
@@ -86,10 +95,10 @@ namespace AppCompleteSample.Controllers
             }
             catch
             {
-                // Ignore the File here
+                // Ignore the file here
             }
+
             return fileContent;
         }
-
     }
 }

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 const { ConfirmPrompt, DialogSet, DialogTurnStatus, OAuthPrompt, WaterfallDialog } = require('botbuilder-dialogs');
-
 const { LogoutDialog } = require('./logoutDialog');
 
 const CONFIRM_PROMPT = 'ConfirmPrompt';
@@ -10,7 +9,15 @@ const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 
+/**
+ * MainDialog class that extends LogoutDialog to handle the main dialog flow.
+ */
 class MainDialog extends LogoutDialog {
+    /**
+     * Creates an instance of MainDialog.
+     * @param {string} id - The dialog ID.
+     * @param {string} connectionName - The connection name for the OAuth provider.
+     */
     constructor() {
         super(MAIN_DIALOG, process.env.connectionName);
 
@@ -34,7 +41,8 @@ class MainDialog extends LogoutDialog {
     /**
      * The run method handles the incoming activity (in the form of a DialogContext) and passes it through the dialog system.
      * If no dialog is active, it will start the default dialog.
-     * @param {*} dialogContext
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {StatePropertyAccessor} accessor - The state property accessor for the dialog state.
      */
     async run(context, accessor) {
         const dialogSet = new DialogSet(accessor);
@@ -47,44 +55,50 @@ class MainDialog extends LogoutDialog {
         }
     }
 
+    /**
+     * Prompts the user to sign in.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     */
     async promptStep(stepContext) {
         return await stepContext.beginDialog(OAUTH_PROMPT);
     }
 
+    /**
+     * Handles the login step.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     */
     async loginStep(stepContext) {
-        // Get the token from the previous step. Note that we could also have gotten the
-        // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
             await stepContext.context.sendActivity('You are now logged in.');
             return await stepContext.prompt(CONFIRM_PROMPT, 'Would you like to view your token?');
         }
-        await stepContext.context.sendActivity('Login was not successful please try again.');
+        await stepContext.context.sendActivity('Login was not successful, please try again.');
         return await stepContext.endDialog();
     }
 
+    /**
+     * Displays the token if the user confirms.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     */
     async displayTokenPhase1(stepContext) {
         await stepContext.context.sendActivity('Thank you.');
 
         const result = stepContext.result;
         if (result) {
-            // Call the prompt again because we need the token. The reasons for this are:
-            // 1. If the user is already logged in we do not need to store the token locally in the bot and worry
-            // about refreshing it. We can always just call the prompt again to get the token.
-            // 2. We never know how long it will take a user to respond. By the time the
-            // user responds the token may have expired. The user would then be prompted to login again.
-            //
-            // There is no reason to store the token locally in the bot because we can always just call
-            // the OAuth prompt to get the token or get a new token if needed.
             return await stepContext.beginDialog(OAUTH_PROMPT);
         }
         return await stepContext.endDialog();
     }
 
+    /**
+     * Displays the token to the user.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     */
     async displayTokenPhase2(stepContext) {
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
-            await stepContext.context.sendActivity(`Here is your token ${ tokenResponse.token }`);
+            await stepContext.context.sendActivity(`Here is your token: ${tokenResponse.token}`);
         }
         return await stepContext.endDialog();
     }
