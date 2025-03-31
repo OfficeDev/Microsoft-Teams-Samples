@@ -8,16 +8,17 @@
     "@azure/msal-browser": "^2.33.0",
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/signalr": "6.0.3",
-    "@microsoft/teams-js": "^2.7.1",
+    "@microsoft/teams-js": "^2.35.0",
     "axios": "^0.21.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.3",
     "react-scripts": "^5.0.1",
-    "reactstrap": "9.1.6"
+    "reactstrap": "9.1.6",
+    "scheduler": "^0.25.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -45,6 +45,7 @@ const SidePanel = props => {
     useEffect(() => {
         onInitializeContianer();
 
+        microsoftTeams.app.initialize();
         // Applying default theme from app context property
         microsoftTeams.app.getContext().then((context) => {
             switch (context.app.theme) {

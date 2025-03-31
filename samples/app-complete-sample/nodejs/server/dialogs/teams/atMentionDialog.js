@@ -6,7 +6,15 @@ const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const TextEncoder = require('util').TextEncoder;
 const ATMENTION = 'AtMention';
 
+/**
+ * AtMentionDialog class extends ComponentDialog to handle @mention interactions.
+ */
 class AtMentionDialog extends ComponentDialog {
+    /**
+     * Constructor for the AtMentionDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {StatePropertyAccessor} conversationDataAccessor - The state property accessor for conversation data.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
@@ -16,8 +24,13 @@ class AtMentionDialog extends ComponentDialog {
         ]));
     }
 
+    /**
+     * Begins the @mention dialog.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Promise<DialogTurnResult>} The result of the dialog turn.
+     */
     async beginAtMentionDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "AtMentionDialog";
         const mention = {
             mentioned: stepContext.context._activity.from,

@@ -8,7 +8,8 @@
   "dependencies": {
     "@azure/msal-browser": "^2.11.0",
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.5.0",
+    "@microsoft/teams-js": "^2.34.0",
+    "ajv": "^8.17.1",
     "crypto": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

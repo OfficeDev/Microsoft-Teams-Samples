@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": { 
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@microsoft/teams-js": "^2.0.0",
+    "@microsoft/teams-js": "^2.34.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.1.2",
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
-    "start": "set PORT=3978 && react-scripts start",
+    "start": "set PORT=3978 && react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },

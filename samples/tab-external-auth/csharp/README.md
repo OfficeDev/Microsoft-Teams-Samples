@@ -57,7 +57,7 @@ This Microsoft Teams sample app illustrates the implementation of Google authent
   - For authorized javascript url, provide your app's base URL
   ![oauthapp3](Images/oauthapp3.png)
  
-  - For redirect url, give url in below format `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
+  - For redirect url, give the URL in the format below `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
   ![oauthapp4](Images/oauthapp4.png)
  
   - Once the app is created, copy the client id and client secret
@@ -118,13 +118,76 @@ This Microsoft Teams sample app illustrates the implementation of Google authent
     
 ## Running the sample
 
-### Google OAuth 2.0
+**Note:** Supported on Teams, Outlook, and Office for Desktop, as well as Outlook and Office for Mobile.
+Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
+
+## Google OAuth 2.0 -Teams desktop
 
 ![tab-page](Images/tab.png)
 
 ![redirect-page](Images/redirect-page.png)
 
 ![tab-auth-page](Images/tab1.png)
+
+## Outlook on the desktop
+
+- To view your app in Outlook on the desktop.
+
+![OutlookDesktop1](Images/OutlookDesktop1.png)
+
+![OutlookDesktop2](Images/OutlookDesktop2.png)
+
+![OutlookDesktop3](Images/OutlookDesktop3.png)
+
+![OutlookDesktop4](Images/OutlookDesktop4.png)
+
+## Office on the desktop
+
+- To preview your app running in Office on the desktop.
+
+![officeDesktop1](Images/officeDesktop1.png)
+
+![officeDesktop2](Images/officeDesktop2.png)
+
+![officeDesktop3](Images/officeDesktop3.png)
+
+![officeDesktop4](Images/officeDesktop4.png)
+
+![officeDesktop5](Images/officeDesktop5.png)
+
+![officeDesktop6](Images/officeDesktop6.png)
+
+## Outlook on the mobile
+
+- To view your app in Outlook on the mobile.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/outlook1.jpg)
+
+**Select your app icon to launch and preview your app running in Outlook on the mobile**
+
+![outlook2](Images/outlook2.jpg)
+
+**Click get Details**
+
+![outlook3](Images/outlook3.jpg)
+
+## Office on the mobile
+
+- To preview your app running in Office on the mobile.
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![Office1](Images/Office1.jpg)
+
+**Select your app icon to launch your app in Office on the mobile**
+
+![Office2](Images/Office2.jpg)
+
+**Click get Details**
+
+![Office3](Images/Office3.jpg)
 
 ## Further Reading.
 [External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
