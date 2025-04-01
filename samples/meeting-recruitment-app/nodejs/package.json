@@ -23,7 +23,7 @@
     "dev:teamsfx": "npm run dev",
     "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,9 +46,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.20",
-   "@types/react-router-dom": "^5.3.0",
+    "@types/react-router-dom": "^5.3.0",
     "nodemon": "^2.0.13"
   },
   "proxy": "http://localhost:3978"
