@@ -23,7 +23,7 @@
     "dev:teamsfx": "npm run dev",
     "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
