@@ -9,7 +9,7 @@
       "This sample application showcases how to access and present the meeting tab context object within a Teams meeting, utilizing the bot's APIs to fetch details about meeting participants and the meeting itself. Users can send commands to retrieve specific information about the meeting and participants, enhancing their experience in Teams."
     ],
     "creationDateTime": "2022-01-07",
-    "updateDateTime": "2024-10-14",
+    "updateDateTime": "2025-02-21",
     "products": [
       "Teams"
     ],
