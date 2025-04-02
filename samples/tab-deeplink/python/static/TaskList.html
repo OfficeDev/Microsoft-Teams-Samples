@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="DeepLinkModel.js"></script>
+        <link rel="stylesheet" href="/style.css" />
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                 integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                 crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                microsoftTeams.app.initialize().then(() => {
+                var s=DeepLinkModel;
+                var html ='';
+                s.forEach(x=> {
+                    var uri = "Details.html?id="+x.ID;
+                    
+                    let listContent = document.getElementById("list-content");
+                    let anchorTag = document.createElement("a");
+                    let lineBreakTag = document.createElement("br");
+                    anchorTag.href = uri;
+                    anchorTag.innerHTML = x.Desc;
+
+                    listContent.appendChild(anchorTag);
+                    listContent.appendChild(lineBreakTag);
+                });
+            });
+        });
+        </script>
+    </head>
+    <body>
+       <div id="list-content" style="margin-top:1rem;"></div>
+       <div style="margin-top:1rem;">
+            <span class="container" style="font-size:20px;font-weight:700;">
+                Extended Deep link features
+            </span>
+        </div>
+        <div>
+            <object type="text/html" data="ExtendedDeepLink.html" width="1630rem" height="500">
+            </object>
+        </div>
+    </body>
+</html>
