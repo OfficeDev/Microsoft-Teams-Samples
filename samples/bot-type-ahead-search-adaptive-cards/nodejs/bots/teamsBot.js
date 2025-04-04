@@ -55,32 +55,164 @@ class TeamsBot extends TeamsActivityHandler {
   }
 
   /**
-   * Handles invoke activities.
-   * @param {TurnContext} context - The context object for the turn.
-   * @returns {Promise<Object>} The response object.
-   */
+  * Handles invoke activities.
+  * @param {TurnContext} context - The context object for the turn.
+  * @returns {Promise<Object>} The response object.
+  */
   async onInvokeActivity(context) {
-    if (context._activity.name === 'application/search') {
-      const dropdownCard = context._activity.value.data.choiceselect;
-      const searchQuery = context._activity.value.queryText;
+    if (context.activity.name === 'application/search') {
+      try {
+        const dropdownCard = context._activity.value.data?.choiceselect;
+        const searchQuery = context._activity.value.queryText;
 
-      const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
-      const npmPackages = response.data.objects.map(obj => ({
-        title: obj.package.name,
-        value: `${obj.package.name} - ${obj.package.description}`
-      }));
+        // Validate the search query length
+        if (!searchQuery || searchQuery.length < 2) {
+          console.warn('Search query is too short.');
+          return this.getNoResultFound("Please enter at least 2 characters to perform a search.");
+        }
 
-      if (response.status === 200) {
+        // Make the API call
+        const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
+        const npmPackages = response.data.objects.map(obj => ({
+          title: obj.package.name,
+          value: `${obj.package.name} - ${obj.package.description}`
+        }));
+
+        // Handle the case where no packages are found
+        if (!npmPackages || npmPackages.length === 0) {
+          console.warn('No packages found for the search query.');
+          return this.getNoResultFound("No results found for your search query.");
+        }
+
+        // Return results
         if (dropdownCard) {
           return this.getCountrySpecificResults(dropdownCard.toLowerCase());
         } else {
           return this.getSuccessResult(npmPackages);
         }
-      } else if (response.status === 204) {
-        return this.getNoResultFound();
-      } else if (response.status === 500) {
+      } catch (error) {
+        console.error('Error during dynamic search:', error.message);
         return this.getErrorResult();
       }
+    } else if (context.activity.name === 'tab/fetch') {
+      return {
+        status: 200,
+        body: {
+          tab: {
+            type: "continue",
+            value: {
+              cards: [
+                {
+                  card: {
+                    type: "AdaptiveCard",
+                    $schema: "https://adaptivecards.io/schemas/adaptive-card.json",
+                    version: "1.5",
+                    body: [
+                      {
+                        type: "TextBlock",
+                        text: "Click the button below to invoke a task module.",
+                        wrap: true
+                      },
+                      {
+                        type: "ActionSet",
+                        actions: [
+                          {
+                            type: "Action.Submit",
+                            title: "Example Button",
+                            data: {
+                              actionid: "APP_HOME_FORMS",
+                              msteams: {
+                                type: "task/fetch"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      };
+    } else if (context.activity.name === 'task/fetch') {
+      return {
+        status: 200,
+        body: {
+          task: {
+            type: "continue",
+            value: {
+              card: {
+                contentType: "application/vnd.microsoft.card.adaptive",
+                content: {
+                  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                  "version": "1.2",
+                  "type": "AdaptiveCard",
+                  "body": [
+                    {
+                      "text": "Please search for npm packages using dynamic search control.",
+                      "wrap": true,
+                      "type": "TextBlock"
+                    },
+                    {
+                      "columns": [
+                        {
+                          "width": "auto",
+                          "items": [
+                            {
+                              "text": "NPM packages search: ",
+                              "wrap": true,
+                              "height": "stretch",
+                              "type": "TextBlock"
+                            }
+                          ],
+                          "type": "Column"
+                        }
+                      ],
+                      "type": "ColumnSet"
+                    },
+                    {
+                      "columns": [
+                        {
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "choices": [
+                                { "title": "Static Option 1", "value": "static_option_1" },
+                                { "title": "Static Option 2", "value": "static_option_2" },
+                                { "title": "Static Option 3", "value": "static_option_3" }
+                              ],
+                              "isMultiSelect": false,
+                              "style": "filtered",
+                              "choices.data": {
+                                "type": "Data.Query",
+                                "dataset": "npmpackages"
+                              },
+                              "id": "choiceselect",
+                              "type": "Input.ChoiceSet"
+                            }
+                          ],
+                          "type": "Column"
+                        }
+                      ],
+                      "type": "ColumnSet"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "id": "submitdynamic",
+                      "title": "Submit"
+                    }
+                  ]
+                }
+              },
+              width: "medium"
+            }
+          }
+        }
+      };
     }
     return null;
   }
