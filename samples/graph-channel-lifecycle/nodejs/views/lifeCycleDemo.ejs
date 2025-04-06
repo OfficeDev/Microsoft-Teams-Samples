@@ -7,7 +7,9 @@
     <title>Channel lifecycle demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -121,8 +123,8 @@
      var token=  <%-token%>;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
-    microsoftTeams.getContext(function(context) { 
+    microsoftTeams.app.initialize();
+    microsoftTeams.app.getContext(function(context) { 
     var tenantId=context.tid;
     var teamId=context.groupId;
     console.log("TenantId "+ tenantId);
@@ -167,7 +169,7 @@ function getMembersList(accessToken,teamId) {
 }
 
 $("#btnCreateChannel").on('click', function (e) {
-    microsoftTeams.getContext(function (context) {
+    microsoftTeams.app.getContext(function (context) {
     var tenantId = context.tid;
     var teamId = context.groupId;
     var cName = $("#txtchannelName").val();
@@ -203,7 +205,7 @@ $("#btnCreateChannel").on('click', function (e) {
     })
 
     $("#btnUpdateChannel").on('click', function (e) {
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext(function (context) {
             var tenantId = context.tid;
             var teamId = context.groupId;
             var channelId = context.channelId;
@@ -242,7 +244,7 @@ $("#btnCreateChannel").on('click', function (e) {
     })
 
     $("#btngetChannel").on('click', function (e) {
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext(function (context) {
                 var tenantId = context.tid;
                 var teamId = context.groupId;
                 var channelId = context.channelId;
@@ -269,8 +271,8 @@ $("#btnCreateChannel").on('click', function (e) {
 
     function DeleteChannel(e) {
         alert("This channel is deleting..")
-        microsoftTeams.initialize();
-        microsoftTeams.getContext(function (context) {
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext(function (context) {
             var tenantId = context.tid;
             var teamId = context.groupId;
             var channelId = context.channelId;
