@@ -40,9 +40,8 @@ provision:
       name: graph-change-notification-team-channel${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
-    writeToEnvironmentFile: 
+    writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
-
 
   # Apply the AAD manifest to an existing AAD app. Will use the object id in
   # manifest file to determine which AAD app to update.
@@ -79,7 +78,7 @@ provision:
     with:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-  
+
   # Extend your Teams app to Outlook and the Microsoft 365 app
   - uses: teamsApp/extendToM365
     with:
@@ -92,6 +91,16 @@ provision:
       appId: M365_APP_ID
 
 deploy:
+  # Install development tool(s)
+  - uses: devTool/install
+    with:
+      devCert:
+        trust: true
+    # Write the information of installed development tool(s) into environment
+    # file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      sslCertFile: SSL_CRT_FILE
+      sslKeyFile: SSL_KEY_FILE
   # Run npm command
   - uses: cli/runNpmCommand
     with:
@@ -103,6 +112,17 @@ deploy:
     with:
       workingDirectory: ./client
       args: install --no-audit
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./client/.env 
+      envs:
+        BROWSER: none
+        HTTPS: true
+        PORT: 3978
+        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
+        SSL_KEY_FILE: ${{SSL_KEY_FILE}}     
 
   # Generate runtime environment variables for tab
   - uses: file/createOrUpdateEnvironmentFile
