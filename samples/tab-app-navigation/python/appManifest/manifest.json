@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.19",
+  "id": "${{TEAMS_APP_ID}}",
+  "name": {
+    "short": "Tab App Navigation",
+    "full": "Tab App Navigation In Teams App"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "description": {
+    "short": "Sample showcasing tab navigation features within a Teams application.",
+    "full": "This sample illustrates the tab navigation feature in a Microsoft Teams application, enabling smooth transitions between different tabs. Designed for use with Node.js, it highlights how users can effectively navigate within the app for an enhanced experience."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "default_tab",
+      "name": "Default Tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}",
+      "websiteUrl": "https://${{BOT_DOMAIN}}",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_One",
+      "name": "Tab One",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab_one",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab_one",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_two",
+      "name": "Tab Two",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab_two",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab_two",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "tab_three",
+      "name": "Tab Three",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab_three",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab_three",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "*.teams.microsoft.com",
+    "*.office.com"
+  ]
+}

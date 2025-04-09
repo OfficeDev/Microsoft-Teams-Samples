@@ -1182,6 +1182,10 @@ jobs:
               name: 'msgext-thirdparty-storage'
               version: '3.10.x'
 
+            - project_path: 'samples/tab-app-navigation/python'
+              name: 'tab-app-navigation'
+              version: '3.10.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:
