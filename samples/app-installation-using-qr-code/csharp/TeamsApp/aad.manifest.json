@@ -25,14 +25,6 @@
           {
             "id": "User.Read",
             "type": "Scope"
-          },
-          {
-            "id": "TeamsAppInstallation.ReadWriteAndConsentForTeam",
-            "type": "Scope"
-          },
-          {
-            "id": "TeamsAppInstallation.ReadWriteAndConsentSelfForTeam",
-            "type": "Scope"
           }
         ]
       }
