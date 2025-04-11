@@ -75,18 +75,21 @@ namespace StaggeredPermission.Controllers
 
                 var mails = await client.GetMailsAsync();
 
-                foreach (var mail in mails.CurrentPage)
+                foreach (var mail in mails)
                 {
                     if (mail.Sender != null &&
-                        mail.ToRecipients.Any() &&
-                        mail.Subject.Any())
+                        mail.ToRecipients?.Any() == true &&
+                        !string.IsNullOrEmpty(mail.Subject))
                     {
-                        entity = new UserEmail();
-                        entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
-                        entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
-                        entity.Subject = mail.Subject.ToString();
-                        entity.Time = mail.SentDateTime.ToString();
-                        emails.Add(entity);
+                        var userEntity = new UserEmail
+                        {
+                            FromMail = mail.Sender.EmailAddress?.Address,
+                            ToMail = mail.ToRecipients.FirstOrDefault()?.EmailAddress?.Address,
+                            Subject = mail.Subject,
+                            Time = mail.SentDateTime?.ToString()
+                        };
+
+                        emails.Add(userEntity);
                     }
                 }
 
