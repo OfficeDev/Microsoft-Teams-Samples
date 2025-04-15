@@ -14,7 +14,6 @@ namespace MeetingAttendance.Helpers
     using System.Globalization;
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.Graph.SecurityNamespace;
 
     public class GraphHelper
     {
@@ -65,12 +64,11 @@ namespace MeetingAttendance.Helpers
                 var graphClient = this.graphClient.GetGraphClientforApp();
                 var attendanceReports = await graphClient.Users[this.azureSettings.Value.UserId].OnlineMeetings[meetingId]
                     .AttendanceReports
-                    .Request()
                     .GetAsync();
 
-                if (attendanceReports.CurrentPage.Count > 0)
+                if (attendanceReports.Value.Count > 0)
                 {
-                    var currentAttendanceReport = attendanceReports.CurrentPage[0];
+                    var currentAttendanceReport = attendanceReports.Value[0];
 
                     var meetingTimeSpan = (currentAttendanceReport.MeetingEndDateTime - currentAttendanceReport.MeetingStartDateTime)?.TotalSeconds;
 
@@ -86,12 +84,11 @@ namespace MeetingAttendance.Helpers
                     var attendanceRecords = await graphClient.Users[this.azureSettings.Value.UserId].OnlineMeetings[meetingId]
                     .AttendanceReports[currentAttendanceReport.Id]
                     .AttendanceRecords
-                    .Request()
                     .GetAsync();
 
                     do
                     {
-                        meetingAttendanceReport.ParticipantsInfo.AddRange(attendanceRecords.CurrentPage
+                        meetingAttendanceReport.ParticipantsInfo.AddRange(attendanceRecords.Value
                             .Select(attendanceRecord => new MeetingParticipantRecord
                             {
                                 Id = attendanceRecord.Id,
@@ -103,16 +100,22 @@ namespace MeetingAttendance.Helpers
                             }));
 
                         // If there are more result.
-                        if (attendanceRecords.NextPageRequest != null)
+                        if (attendanceRecords.OdataNextLink != null)
                         {
-                            attendanceRecords = await attendanceRecords.NextPageRequest.GetAsync();
+                            attendanceRecords = await graphClient
+                                .Users[this.azureSettings.Value.UserId]
+                                .OnlineMeetings[meetingId]
+                                .AttendanceReports[currentAttendanceReport.Id]
+                                .AttendanceRecords
+                                .WithUrl(attendanceRecords.OdataNextLink)
+                                .GetAsync();
                         }
                         else
                         {
                             break;
                         }
                     }
-                    while (attendanceRecords.CurrentPage != null);
+                    while (attendanceRecords.Value != null);
 
                     return meetingAttendanceReport;
                 }
