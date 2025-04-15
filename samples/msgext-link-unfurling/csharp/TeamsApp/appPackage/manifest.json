@@ -1,17 +1,17 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
-  "version": "1.0",
+  "version": "1.0.1",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
-    "name": "Link Unfurling",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://dev.botframework.com",
+    "termsOfUseUrl": "https://dev.botframework.com"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "Link Unfurling",
@@ -25,19 +25,24 @@
   "composeExtensions": [
     {
       "botId": "${{AAD_APP_CLIENT_ID}}",
+      "canUpdateConfiguration": true,
       "commands": [
         {
           "id": "searchQuery",
-          "context": [
-            "commandBox"
-          ],
-          "description": "Test command to run query",
-          "title": "Search Command",
           "type": "query",
+          "title": "Search",
+          "description": "Perform a search",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
           "parameters": [
             {
               "name": "searchQuery",
-              "title": "Search Query",
+              "title": "Search",
               "description": "Your search query",
               "inputType": "text"
             }
@@ -50,10 +55,19 @@
           "value": {
             "domains": [
               "teamstestdomain.com/teams/csharp"
-            ]
+            ],
+            "supportsAnonymizedPayloads": true
           }
         }
       ]
     }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": [
+    "*.githubusercontent.com",
+    "${{BOT_DOMAIN}}",
+    "*.botframework.com"
   ]
 }
