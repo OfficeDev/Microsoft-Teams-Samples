@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs-helper
 
 # Resource specific consent with Graph API
 
-This sample application showcases how to configure [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) permissions in a Microsoft Teams app manifest to facilitate calls to Microsoft Graph. It includes features for installation in team channels and group chats, allowing users to observe real API responses based on granted permissions, while leveraging the Teams Toolkit for easy setup and debugging.
+This sample application showcases how to configure [Resource Specific Consent](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/grant-resource-specific-consent) permissions in a Microsoft Teams app manifest to facilitate calls to Microsoft Graph. It includes features for installation in team channels and group chats, allowing users to observe real API responses based on granted permissions, while leveraging the Microsoft 365 Agents Toolkit for easy setup and debugging.
 
 ## Included Features
 * Tab
@@ -28,17 +28,17 @@ This sample application showcases how to configure [Resource Specific Consent](h
 - [NodeJS](https://nodejs.org/en/) version v16.14.2 or Higher Version
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 
 ## Interaction with app
 ![graph RSC helper](Images/graphrschelper.gif)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 
@@ -53,7 +53,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Click **continue** when popuping devtunnel dialog
 1. Click **Save** to finish the App configureation
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Note
 - Due to the length limit of the RSC permission in manifest, separate permission lists are used for team channel and group chat under the `setupManifest` folder.  Every time, debug launch will load the permissions in corresponding team/chat file and write them into the the section of `authorization.permissions.resourceSpecific` in `appManifest/manifest.json`
