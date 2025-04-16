@@ -10,7 +10,22 @@
       {
         "Path": "TeamsApp\\TeamsApp.ttkproj",
         "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft Teams (Browser)"
+        "DebugTarget": "Microsoft Teams (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update Teams App)",
+    "Projects": [
+      {
+        "Path": "AnonymousUsers.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update Teams App)"
       }
     ]
   }
