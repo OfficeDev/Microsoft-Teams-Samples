@@ -13,5 +13,20 @@
         "DebugTarget": "Microsoft Teams (Browser)"
       }
     ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "ChannelLifecycle\\ChannelLifecycle.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      }
+    ]
   }
 ]
