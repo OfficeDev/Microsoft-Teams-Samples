@@ -30,7 +30,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
   
 ## Set up and run the sample app in Github Codespaces
 1. Click Open in GitHub Codespaces badge above to create a codespace for the sample app. Wait for the codespace to be setup, it may take a couple of minutes.
-2. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
+2. Using the Microsoft 365 Agents Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
 3. [Set up your data source using Azure AI resources](#set-up-your-data-source).
 4. [Populate the environment files](#populate-the-environment-files).
 5. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Select ```Debug``` and press ```F5``` or click on the play button.
@@ -45,7 +45,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - [Visual Studio Code](https://code.visualstudio.com/download)
-- [Teams Toolkit Extension ](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit Extension ](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
   
 1. Clone the repository
@@ -55,7 +55,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
    ```poetry install```
 4. Run 
    ```poetry build```
-5. Using the Teams Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
+5. Using the Microsoft 365 Agents Toolkit extension, sign in to your Microsoft 365 account and Azure account under ```ACCOUNTS```.
 6. [Set up your data source using Azure AI resources](#set-up-your-data-source).
 7. [Populate the environment files](#populate-the-environment-files).
 8. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Press ```F5``` or click on the play button.
@@ -64,7 +64,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 >[!Note]
 > Check the status of all your local(Debug/F5 flow) bots on [Microsoft Bot Framework](https://dev.botframework.com/bots).
 > Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
-> Teams toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
+> Microsoft 365 Agents Toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
 
 ## Set up your data source
 1. Run```sh deploy.sh``` in the terminal. You can use Azure Cloud Shell (Bash) for a Windows device. You will be prompted to login to Azure and select a subscription.
@@ -88,7 +88,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 1. Go to your Teams app and click on the ```Apps``` icon. Select ```Manage your apps``` followed by ```Upload an app```.
 2. Select ```Upload a custom app``` and open the relevant zip file. Click on ```Add``` when prompted.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the sample app
 1. The bot sends a welcome message.
@@ -101,13 +101,13 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 ## Deploy/Host the app on Azure
 Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 1. [Populate the environment files](#populate-the-environment-files).
-2. Using the Teams Toolkit Extension tab, click on ```Provision``` followed by ```DEPLOY``` under ```LIFECYCLE```. You will be asked to select the subscription and resource group for provisioning.
+2. Using the Microsoft 365 Agents Toolkit Extension tab, click on ```Provision``` followed by ```DEPLOY``` under ```LIFECYCLE```. You will be asked to select the subscription and resource group for provisioning.
 3. Download the zip file ```appPackage/build/appPackage.dev.zip``` and [sideload the app to Teams](#sideload-the-app-to-teams).
 
 >[!Note]
 > Check the status of your dev(hosted on Azure) bots on [Azure Portal](https://portal.azure.com/#home) by navigating to the relevant resource group.
 > Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
-> Teams toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
+> Microsoft 365 Agents Toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
 
 ## Further Reading
 - [Azure OpenAI On Your Data](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data?tabs=ai-search%2Ccopilot)
