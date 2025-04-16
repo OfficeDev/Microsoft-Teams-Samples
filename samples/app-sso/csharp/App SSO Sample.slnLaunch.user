@@ -43,5 +43,20 @@
         "DebugTarget": "Outlook (browser)"
       }
     ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update Teams App)",
+    "Projects": [
+      {
+        "Path": "App SSO Sample\\App SSO Sample.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update Teams App)"
+      }
+    ]
   }
 ]
