@@ -7,8 +7,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
+using Microsoft.Graph.Me.SendMail;
 
 namespace BotSsoAdaptivecard.Helper
 {
@@ -54,7 +58,7 @@ namespace BotSsoAdaptivecard.Helper
             }
 
             var graphClient = GetAuthenticatedClient();
-            var recipients = new[]
+            var recipients = new List<Recipient>
             {
                 new Recipient
                 {
@@ -71,7 +75,7 @@ namespace BotSsoAdaptivecard.Helper
                 Body = new ItemBody
                 {
                     Content = content,
-                    ContentType = BodyType.Text,
+                    ContentType = BodyType.Text, 
                 },
                 Subject = subject,
                 ToRecipients = recipients,
@@ -80,7 +84,11 @@ namespace BotSsoAdaptivecard.Helper
             try
             {
                 // Send the message.
-                await graphClient.Me.SendMail(email, true).Request().PostAsync().ConfigureAwait(false);
+                await graphClient.Me.SendMail.PostAsync(new SendMailPostRequestBody
+                {
+                    Message = email,
+                    SaveToSentItems = true
+                });
             }
             catch (ServiceException ex)
             {
@@ -96,8 +104,8 @@ namespace BotSsoAdaptivecard.Helper
         public async Task<Message[]> GetRecentMailAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request().GetAsync().ConfigureAwait(false);
-            return messages.Take(5).ToArray();
+            var messages = await graphClient.Me.MailFolders["Inbox"].Messages.GetAsync().ConfigureAwait(false);
+            return messages.Value.Take(5).ToArray();
         }
 
         /// <summary>
@@ -107,7 +115,7 @@ namespace BotSsoAdaptivecard.Helper
         public async Task<User> GetMeAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync().ConfigureAwait(false);
+            var me = await graphClient.Me.GetAsync().ConfigureAwait(false);
             return me;
         }
 
@@ -120,7 +128,7 @@ namespace BotSsoAdaptivecard.Helper
             var graphClient = GetAuthenticatedClient();
             try
             {
-                var photo = await graphClient.Me.Photo.Content.Request().GetAsync();
+                var photo = await graphClient.Me.Photo.Content.GetAsync();
                 if (photo != null)
                 {
                     MemoryStream ms = new MemoryStream();
@@ -145,22 +153,29 @@ namespace BotSsoAdaptivecard.Helper
         /// Returns an authenticated Microsoft Graph client using the token issued to the user.
         /// </summary>
         /// <returns>An authenticated instance of GraphServiceClient.</returns>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    async requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        await Task.CompletedTask.ConfigureAwait(false);
-                    }));
-
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
     }
 }

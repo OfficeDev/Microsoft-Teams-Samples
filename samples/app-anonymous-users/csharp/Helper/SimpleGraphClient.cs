@@ -4,9 +4,13 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace AnonymousUsers.Helper
 {
@@ -30,27 +34,37 @@ namespace AnonymousUsers.Helper
         public async Task<User> GetMeAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync();
+            var me = await graphClient.Me.GetAsync();
             return me;
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new BaseBearerTokenAuthenticationProvider(
+                new SimpleAccessTokenProvider(_token)
+            );
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
+            var graphClient = new GraphServiceClient(tokenProvider);
 
             return graphClient;
+        }
+
+        private class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> additionalAuthenticationContext = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
         }
     }
 }

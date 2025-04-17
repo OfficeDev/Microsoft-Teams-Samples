@@ -16,6 +16,8 @@ using TeamsTalentMgmtApp.Models;
 using TeamsTalentMgmtApp.Services.Interfaces;
 using TeamsTalentMgmtApp.Models.DatabaseContext;
 using TeamsTalentMgmtApp.Services.Data;
+using Microsoft.Graph.Models;
+using Azure.Core;
 
 namespace TeamsTalentMgmtApp.Services
 {
@@ -55,22 +57,19 @@ namespace TeamsTalentMgmtApp.Services
                 return (null, null);
             }
 
-            var installedApps = await graphClient.Users[upn].Teamwork.InstalledApps
-                .Request()
-                .Filter($"teamsApp/externalId eq '{_configuration["TeamsAppId"]}'")
-                .Expand("teamsApp")
-                .GetAsync(cancellationToken);
+            var installedApps = await graphClient.Users[upn].Teamwork.InstalledApps.GetAsync(config =>
+            {
+                config.QueryParameters.Filter = $"teamsApp/externalId eq '{_configuration["TeamsAppId"]}'";
+                config.QueryParameters.Expand = new[] { "teamsApp" };
+            }, cancellationToken);
 
-            var app = installedApps.FirstOrDefault();
+            var app = installedApps?.Value?.FirstOrDefault();
             if (app == null)
             {
                 return (upn, null);
             }
 
-            var chat = await graphClient.Users[upn].Teamwork.InstalledApps[app.Id].Chat
-                .Request()
-                .GetAsync(cancellationToken);
-
+            var chat = await graphClient.Users[upn].Teamwork.InstalledApps[app.Id].Chat.GetAsync(cancellationToken: cancellationToken);
             return (upn, chat.Id);
         }
 
@@ -88,12 +87,12 @@ namespace TeamsTalentMgmtApp.Services
 
             var graphClient = GetGraphServiceClient(token);
 
-            var users = await graphClient.Users.
-                Request().
-                Filter($"startswith(userPrincipalName,'{aliasUpnOrOid}@')").
-                GetAsync(cancellationToken);
+            var users = await graphClient.Users.GetAsync(config =>
+            {
+                config.QueryParameters.Filter = $"startswith(userPrincipalName,'{aliasUpnOrOid}@')";
+            }, cancellationToken);
 
-            var user = users.FirstOrDefault();
+            var user = users?.Value?.FirstOrDefault();
 
             if (user == null)
             {
@@ -115,41 +114,50 @@ namespace TeamsTalentMgmtApp.Services
 
             var graphClient = GetGraphServiceClient(token);
 
-            var teamsApps = await graphClient.AppCatalogs.TeamsApps
-                .Request()
-                .Filter($"distributionMethod eq 'organization' and externalId eq '{_appSettings.TeamsAppId}'")
-                .GetAsync(cancellationToken);
+            var teamsApps = await graphClient.AppCatalogs.TeamsApps.GetAsync(config =>
+            {
+                config.QueryParameters.Filter = $"distributionMethod eq 'organization' and externalId eq '{_appSettings.TeamsAppId}'";
+            }, cancellationToken);
 
-            var teamApp = teamsApps.FirstOrDefault();
+            var teamApp = teamsApps?.Value?.FirstOrDefault();
             var success = false;
             if (!string.IsNullOrEmpty(teamApp?.Id))
             {
                 try
                 {
-                    var installBotRequest = new BaseRequest($"https://graph.microsoft.com/v1.0/users/{upn}/teamwork/installedApps", graphClient)
+
+                    var requestBody = new Microsoft.Graph.Models.UserScopeTeamsAppInstallation
                     {
-                        Method = HttpMethods.POST,
-                        ContentType = MediaTypeNames.Application.Json
+                        TeamsApp = new Microsoft.Graph.Models.TeamsApp
+                        {
+                            Id = _configuration["TeamsAppId"]
+                        }
                     };
 
-                    await installBotRequest.SendAsync(
-                        new TeamsAppInstallation
-                        {
-                            AdditionalData = new Dictionary<string, object>
-                            {
-                                { "teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{teamApp.Id}" }
-                            }
-                        }, cancellationToken);
+                    var installBotRequest = await graphClient.Users[upn].Teamwork.InstalledApps.PostAsync(requestBody);
 
+
+                    var Body = new UserScopeTeamsAppInstallation
+                    {
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            {
+                                "teamsApp@odata.bind",
+                                $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{_configuration["TeamsAppId"]}"
+                            }
+                        }
+                    };
+
+                    await graphClient.Users[upn].Teamwork.InstalledApps.PostAsync(Body,cancellationToken: cancellationToken);
 
                     // Getting the chat id will confirm the installation was successful and send the welcome message
                     await GetProactiveChatIdForUserInternal(token, aliasUpnOrOid, tenantId, cancellationToken);
 
                     success = true;
                 }
-                catch (ServiceException svcEx) when (svcEx.StatusCode == System.Net.HttpStatusCode.Conflict)
+                catch (ServiceException svcEx) when ((int?)svcEx.ResponseStatusCode == 409)
                 {
-                    // Do nothing, just say it was successful because the user already had the bot installed
+                    // 409 Conflict: Bot is already installed
                     success = true;
                 }
                 catch (Exception ex)
@@ -173,27 +181,28 @@ namespace TeamsTalentMgmtApp.Services
             // recognized by Microsoft Teams much more quickly. See
             // https://developer.microsoft.com/en-us/graph/docs/api-reference/beta/resources/teams_api_overview
             // for more about delays with adding members.
-            var requester = await graphClient.Me.Request().GetAsync(cancellationToken);
+            var requester = await graphClient.Me.GetAsync(cancellationToken: cancellationToken);
 
-            var createdGroup = await graphClient.Groups.Request().AddAsync(
+            var createdGroup = await graphClient.Groups.PostAsync(
                 new Group
                 {
                     DisplayName = $"Position {position.PositionExternalId}",
                     MailNickname = position.PositionExternalId,
                     Description = $"Everything about position {position.PositionExternalId}",
                     Visibility = "Private",
-                    GroupTypes = new[] { "Unified" }, // Office 365 (aka unified group)
-                    MailEnabled = true, // true if creating an Office 365 Group
-                    SecurityEnabled = false, // false if creating an Office 365 group,
+                    GroupTypes = new List<string> { "Unified" }, 
+                    MailEnabled = true,
+                    SecurityEnabled = false,
                     AdditionalData = new Dictionary<string, object>
                     {
                         { "members@odata.bind", await GetTeamMemberIds(graphClient, position, requester, cancellationToken) },
                         { "owners@odata.bind", await GetTeamOwnerIds(graphClient, position, requester, cancellationToken) }
                     }
                 },
-                cancellationToken);
+                cancellationToken: cancellationToken);
 
-            var team = await graphClient.Groups[createdGroup.Id].Team.Request().PutAsync(
+
+            var team = await graphClient.Groups[createdGroup.Id].Team.PutAsync(
                 new Team
                 {
                     GuestSettings = new TeamGuestSettings
@@ -215,45 +224,60 @@ namespace TeamsTalentMgmtApp.Services
                         AllowGiphy = true,
                         GiphyContentRating = GiphyRatingType.Strict
                     }
-                }, cancellationToken);
+                }, cancellationToken: cancellationToken);
 
-            var channel = await graphClient.Teams[team.Id].Channels.Request().AddAsync(
+            var channel = await graphClient.Teams[team.Id].Channels.PostAsync(
                 new Channel
                 {
                     DisplayName = "Candidates",
                     Description = "Discussion about interview, feedback, etc."
-                }, cancellationToken);
+                },  cancellationToken: cancellationToken);
 
-            var teamsApps = await graphClient.AppCatalogs.TeamsApps.Request().Filter($"distributionMethod eq 'organization' and externalId eq '{_appSettings.TeamsAppId}'").GetAsync(cancellationToken);
-            var teamApp = teamsApps.FirstOrDefault();
+
+            var teamsApps = await graphClient.AppCatalogs.TeamsApps.GetAsync(
+                    requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter =
+                            $"distributionMethod eq 'organization' and externalId eq '{_appSettings.TeamsAppId}'";
+                    },
+                    cancellationToken
+                  );
+
+
+            var teamApp = teamsApps.Value.FirstOrDefault();
             if (!string.IsNullOrEmpty(teamApp?.Id))
             {
                 var appId = $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{teamApp.Id}";
-                await graphClient.Teams[team.Id].InstalledApps.Request().AddAsync(
-                    new TeamsAppInstallation
-                {
-                    AdditionalData = new Dictionary<string, object>
-                    {
-                        { "teamsApp@odata.bind", appId }
-                    }
-                }, cancellationToken);
+                await graphClient.Teams[team.Id].InstalledApps.PostAsync(
+                        new TeamsAppInstallation
+                        {
+                            AdditionalData = new Dictionary<string, object>
+                            {
+                                { "teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{appId}" }
+                            }
+                        },
+                        cancellationToken: cancellationToken
+                );
 
                 var contentUrl = $"{_appSettings.BaseUrl}/StaticViews/TeamTab.html?positionId={position.PositionId}";
-                await graphClient.Teams[team.Id].Channels[channel.Id].Tabs.Request().AddAsync(
+                await graphClient.Teams[team.Id].Channels[channel.Id].Tabs.PostAsync(
                     new TeamsTab
-                {
-                    AdditionalData = new Dictionary<string, object>
                     {
-                        { "teamsApp@odata.bind", appId }
+                        DisplayName = position.PositionExternalId,
+                        AdditionalData = new Dictionary<string, object>
+                        {
+                            { "teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{appId}" }
+                        },
+                        Configuration = new TeamsTabConfiguration
+                        {
+                            EntityId = position.PositionId.ToString(),
+                            ContentUrl = contentUrl,
+                            WebsiteUrl = contentUrl + "&web=1"
+                        }
                     },
-                    DisplayName = position.PositionExternalId,
-                    Configuration = new TeamsTabConfiguration
-                    {
-                        EntityId = position.PositionId.ToString(),
-                        ContentUrl = contentUrl,
-                        WebsiteUrl = contentUrl + "&web=1"
-                    }
-                }, cancellationToken);
+                    cancellationToken: cancellationToken
+                );
+
             }
 
             return (team, createdGroup.DisplayName);
@@ -286,12 +310,18 @@ namespace TeamsTalentMgmtApp.Services
                 foreach (var member in members)
                 {
                     var upn = $"{member.Alias}@{domain}";
-                    var users = await graphClient.Users.Request().Filter($"userPrincipalName eq '{upn}'").GetAsync(cancellationToken);
-                    if (users != null && users.Count == 1)
+
+                    var usersPage = await graphClient.Users.GetAsync(config =>
                     {
-                        result.Add(users[0].Id);
+                        config.QueryParameters.Filter = $"userPrincipalName eq '{upn}'";
+                    }, cancellationToken);
+
+                    if (usersPage?.Value?.Count == 1)
+                    {
+                        result.Add(usersPage.Value[0].Id);
                     }
                 }
+
             }
 
             return result.Select(CovertIdToOdataResourceFormat).ToArray();
@@ -314,10 +344,15 @@ namespace TeamsTalentMgmtApp.Services
                 // because of demo, we don't know user upn and have to build on the flight
                 var domain = new MailAddress(requester.UserPrincipalName).Host;
                 var upn = $"{hiringManager.Alias}@{domain}";
-                var users = await graphClient.Users.Request().Filter($"userPrincipalName eq '{upn}'").GetAsync(cancellationToken);
-                if (users != null && users.Count == 1)
+                var users = await graphClient.Users.GetAsync(config =>
                 {
-                    owners.Add(users[0].Id);
+                    config.QueryParameters.Filter = $"userPrincipalName eq '{upn}'";
+                }, cancellationToken);
+
+                var user = users?.Value?.FirstOrDefault();
+                if (user != null)
+                {
+                    owners.Add(user.Id);
                 }
             }
 
@@ -326,13 +361,28 @@ namespace TeamsTalentMgmtApp.Services
 
         private static string CovertIdToOdataResourceFormat(string id) => $"https://graph.microsoft.com/v1.0/users/{id}";
 
-        private GraphServiceClient GetGraphServiceClient(string token) => new GraphServiceClient(
-               new DelegateAuthenticationProvider(
-           requestMessage =>
-           {
-               requestMessage.Headers.Authorization = new AuthenticationHeaderValue(CoreConstants.Headers.Bearer, token);
-               return Task.CompletedTask;
-           }));
+        public class SimpleTokenCredential : TokenCredential
+        {
+            private readonly string _token;
+
+            public SimpleTokenCredential(string token)
+            {
+                _token = token;
+            }
+
+            public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
+                => new AccessToken(_token, DateTimeOffset.Now.AddHours(1));
+
+            public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+                => new ValueTask<AccessToken>(new AccessToken(_token, DateTimeOffset.Now.AddHours(1)));
+        }
+
+        private GraphServiceClient GetGraphServiceClient(string token)
+        {
+            var credential = new SimpleTokenCredential(token);
+
+            return new GraphServiceClient(credential);
+        }
 
         private async Task<string> GetTokenForApp(string tenantId)
         {

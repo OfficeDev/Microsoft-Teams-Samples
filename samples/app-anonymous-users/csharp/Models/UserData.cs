@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
 
-using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace AnonymousUsers.Models
 {

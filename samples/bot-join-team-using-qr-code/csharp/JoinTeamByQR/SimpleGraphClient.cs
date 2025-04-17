@@ -5,9 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
+using Azure.Core;
 using JoinTeamByQR.Models;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace JoinTeamByQR
 {
@@ -33,12 +36,12 @@ namespace JoinTeamByQR
             var teamData = new List<TeamData>();
             var graphClient = GetAuthenticatedClient();
 
-           var site =await graphClient.Groups
-                             .Request()
-                             .Filter("resourceProvisioningOptions/Any(x:x eq 'Team')")
-                             .GetAsync();
+            var site = await graphClient.Groups.GetAsync(requestConfiguration =>
+            {
+                requestConfiguration.QueryParameters.Filter = "resourceProvisioningOptions/Any(x:x eq 'Team')";
+            });
 
-            foreach (var team in site.CurrentPage)
+            foreach (var team in site?.Value ?? new List<Group>())
             {
                 var teamDetails = new TeamData
                 {
@@ -68,28 +71,35 @@ namespace JoinTeamByQR
                 }
             };
 
-            var response = await graphClient.Teams[teamId].Members
-                             .Request()
-                             .AddAsync(conversationMember);
+            await graphClient.Teams[teamId].Members.PostAsync(conversationMember);
+
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenCredential = new MyAccessTokenProvider(_token);
+            return new GraphServiceClient(tokenCredential);
+        }
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+        public class MyAccessTokenProvider : TokenCredential
+        {
+            private readonly string _token;
 
-                        return Task.CompletedTask;
-                    }));
+            public MyAccessTokenProvider(string token)
+            {
+                _token = token;
+            }
 
-            return graphClient;
+            public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1));
+            }
+
+            public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new ValueTask<AccessToken>(new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1)));
+            }
         }
     }
 }
