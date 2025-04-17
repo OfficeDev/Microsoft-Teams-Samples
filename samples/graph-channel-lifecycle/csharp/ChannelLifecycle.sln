@@ -5,12 +5,12 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChannelLifecycle", "ChannelLifecycle\ChannelLifecycle.csproj", "{D6F2ABE6-C87F-4E80-B5A5-BB7173C96455}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{86AA1CAD-8C0B-4288-9330-2198D50029BD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A0AC7414-45AE-4C0F-996A-53E09A09684D}"
 	ProjectSection(SolutionItems) = preProject
 		ChannelLifecycle.slnLaunch.user = ChannelLifecycle.slnLaunch.user
 	EndProjectSection
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{86AA1CAD-8C0B-4288-9330-2198D50029BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
