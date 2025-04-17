@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 ---
 
-# Graph teams tag
+# Graph teams tag 
 
 This sample application illustrates how to implement CRUD operations for team tags using the Microsoft Graph API within a Microsoft Teams tab. Users can easily create, update, and manage tags, with full integration of Teams Single Sign-On (SSO) and Graph API functionalities, providing a complete solution for teamwork and collaboration.
 
