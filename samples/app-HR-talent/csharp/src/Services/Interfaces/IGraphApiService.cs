@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using TeamsTalentMgmtApp.Models.DatabaseContext;
 
 namespace TeamsTalentMgmtApp.Services.Interfaces
