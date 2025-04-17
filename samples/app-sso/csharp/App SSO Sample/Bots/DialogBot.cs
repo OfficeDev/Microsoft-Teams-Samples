@@ -17,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 using Newtonsoft.Json.Linq;
-
+using Microsoft.Graph.Models;
 namespace Microsoft.BotBuilderSamples
 {
     // This IBot implementation can run any type of Dialog. The use of type parameterization is to allows multiple different bots
@@ -264,7 +264,7 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Value = new TaskModuleTaskInfo
                         {
-                            Card = GetProfileCard(profile, imagelink),
+                            Card = GetProfileCard(profile,imagelink),
                             Height = 250,
                             Width = 400,
                             Title = "Adaptive Card: Inputs",
@@ -375,7 +375,7 @@ namespace Microsoft.BotBuilderSamples
             return true;
         }
 
-        private static Microsoft.Bot.Schema.Attachment GetProfileCard(Graph.User profile, string imagelink)
+        private static Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string imagelink)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 

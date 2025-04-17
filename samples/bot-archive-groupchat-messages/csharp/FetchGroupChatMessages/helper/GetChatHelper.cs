@@ -3,6 +3,7 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
         /// <param name="tokenResponse">The token response.</param>
         /// <param name="chatId">The chat ID.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the chat messages collection.</returns>
-        public static async Task<IChatMessagesCollectionPage> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
+        public static async Task<List<ChatMessage>> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
         {
             if (turnContext == null)
             {
