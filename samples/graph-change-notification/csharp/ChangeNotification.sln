@@ -5,12 +5,12 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeNotification", "ChangeNotification\ChangeNotification.csproj", "{22FC914C-9E44-4D7C-A8C6-45EE48960B6D}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{F9F76B0B-73F7-4752-BC87-3ABBD6C4DA19}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16DD3A2B-95C1-4FDA-BA24-2EFA12399411}"
 	ProjectSection(SolutionItems) = preProject
 		ChangeNotification.slnLaunch.user = ChangeNotification.slnLaunch.user
 	EndProjectSection
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{F9F76B0B-73F7-4752-BC87-3ABBD6C4DA19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
