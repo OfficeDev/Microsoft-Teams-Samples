@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeoplePicker", "PeoplePicker\PeoplePicker.csproj", "{BFDF6B3D-BB62-42DD-88EF-528FFE9FCBAD}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{02EB2B4D-5A7B-4CF9-97B9-0759F6B4CFC0}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{02EB2B4D-5A7B-4CF9-97B9-0759F6B4CFC0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21B9B891-6132-4C14-B7A6-7DCA1329703F}"
 	ProjectSection(SolutionItems) = preProject
