@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamingBot", "StreamingBot.csproj", "{76D60C04-94EB-4042-B141-C2C0FACBDE94}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{C7FD0E24-2254-4184-BF12-6C75D2752F28}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{C7FD0E24-2254-4184-BF12-6C75D2752F28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E58489E2-3CA8-4FC7-AC33-4C6575248639}"
 	ProjectSection(SolutionItems) = preProject
