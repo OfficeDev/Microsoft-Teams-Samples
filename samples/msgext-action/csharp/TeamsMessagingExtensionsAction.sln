@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamsMessagingExtensionsAction", "TeamsMessagingExtensionsAction.csproj", "{C184FC67-19AD-43DA-9553-6A2B10E820BE}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{95754B61-0437-49E0-A664-9564F36E58FB}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{95754B61-0437-49E0-A664-9564F36E58FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAEA9E49-DFC1-4705-8CE2-DE8A4E7ECFA3}"
 	ProjectSection(SolutionItems) = preProject
