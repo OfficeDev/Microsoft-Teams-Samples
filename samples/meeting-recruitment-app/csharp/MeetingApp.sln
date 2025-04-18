@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35309.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingApp", "MeetingApp\MeetingApp.csproj", "{8BB4E740-A247-4BA2-A535-5ABEBFB9EAAF}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{D815A77A-861B-468F-9B78-E9620B6AE43A}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{D815A77A-861B-468F-9B78-E9620B6AE43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
