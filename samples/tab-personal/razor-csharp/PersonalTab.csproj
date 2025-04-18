@@ -7,13 +7,13 @@
   
   <ItemGroup>
     <Compile Remove="appPackage\**" />
-    <Compile Remove="TeamsApp\**" />
+    <Compile Remove="M365Agent\**" />
     <Content Remove="appPackage\**" />
-    <Content Remove="TeamsApp\**" />
+    <Content Remove="M365Agent\**" />
     <EmbeddedResource Remove="appPackage\**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
     <None Remove="appPackage\**" />
-    <None Remove="TeamsApp\**" />
+    <None Remove="M365Agent\**" />
   </ItemGroup>
 	
 </Project>
