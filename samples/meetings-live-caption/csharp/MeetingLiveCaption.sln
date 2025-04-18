@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingLiveCaption", "MeetingLiveCaption\MeetingLiveCaption.csproj", "{3EDF2E79-29C1-4DAC-B76B-97A32A4F79C2}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{6C501DAF-CDF0-4BA9-8E81-55DEA64E525A}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{6C501DAF-CDF0-4BA9-8E81-55DEA64E525A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABB3DADB-B0A0-4540-A7BE-A8376B9274FF}"
 	ProjectSection(SolutionItems) = preProject
