@@ -63,7 +63,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 
 >[!Note]
 > Check the status of all your local(Debug/F5 flow) bots on [Microsoft Bot Framework](https://dev.botframework.com/bots).
-> Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
+> Check the status of all your Teams apps on [Developer Portal](https://dev.teams.microsoft.com/apps).
 > Microsoft 365 Agents Toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
 
 ## Set up your data source
@@ -106,7 +106,7 @@ Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 
 >[!Note]
 > Check the status of your dev(hosted on Azure) bots on [Azure Portal](https://portal.azure.com/#home) by navigating to the relevant resource group.
-> Check the status of all your Teams apps on [Teams Developer Portal](https://dev.teams.microsoft.com/apps).
+> Check the status of all your Teams apps on [Developer Portal](https://dev.teams.microsoft.com/apps).
 > Microsoft 365 Agents Toolkit will also generate an app registration along with a password which can be seen under **App Registrations** on the Azure portal.
 
 ## Further Reading

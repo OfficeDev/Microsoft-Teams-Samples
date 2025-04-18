@@ -89,7 +89,7 @@ provision:
       appPackagePath: ./appPackage/StaticTab_With_DialogURL/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
-  # Teams Developer Portal.
+  # Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:
@@ -97,7 +97,7 @@ provision:
       appPackagePath: ./appPackage/OneWay_ME_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
-  # Teams Developer Portal.
+  # Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:
@@ -105,7 +105,7 @@ provision:
       appPackagePath: ./appPackage/OneWay_Tab_DependsOn_Bot/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
-  # Teams Developer Portal.
+  # Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:

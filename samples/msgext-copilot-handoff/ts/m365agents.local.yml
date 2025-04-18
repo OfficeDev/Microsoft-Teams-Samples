@@ -63,7 +63,7 @@ provision:
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
-  # Teams Developer Portal.
+  # Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:
