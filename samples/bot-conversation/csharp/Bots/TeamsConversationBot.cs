@@ -124,7 +124,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 new Activity
                 {
                     Type = ActivityTypes.Message,
-                    Text = "This is an example for sensitivity label that help users identify the confidentiality of a message",
+                    Text = "This is an example for Feedback buttons that helps to provide feedback for a bot message",
                     ChannelData = new { feedbackLoopEnabled = true },
                 }
             );
