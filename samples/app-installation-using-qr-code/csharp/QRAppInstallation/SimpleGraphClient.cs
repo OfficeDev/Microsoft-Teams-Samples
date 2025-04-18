@@ -5,8 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace QRAppInstallation
 {
@@ -40,33 +43,38 @@ namespace QRAppInstallation
                     }
                 };
 
-                 await graphClient.Teams[teamId].InstalledApps
-                    .Request()
-                    .AddAsync(teamsAppInstallation);
+                await graphClient.Teams[teamId].InstalledApps.PostAsync(teamsAppInstallation);
             }
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
     }
 }
