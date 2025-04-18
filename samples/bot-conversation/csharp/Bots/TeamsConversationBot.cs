@@ -70,9 +70,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             else if (text.Contains("reset"))
                 await ResetReadUserCount(turnContext, cancellationToken);
             else if (text.Contains("label"))
-                await addAILabel(turnContext, cancellationToken);
+                await AddAILabel(turnContext, cancellationToken);
             else if (text.Contains("feedback"))
-                await addFeedbackButtons(turnContext, cancellationToken);
+                await AddFeedbackButtons(turnContext, cancellationToken);
             else if (text.Contains("sensitivity"))
                 await AddSensitivityLabel(turnContext, cancellationToken);
             else if (text.Contains("citation"))
@@ -94,7 +94,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
-        private async Task addAILabel(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task AddAILabel(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             await turnContext.SendActivityAsync(
             new Activity
@@ -118,7 +118,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         );
         }
 
-        private async Task addFeedbackButtons(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        private async Task AddFeedbackButtons(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             await turnContext.SendActivityAsync(
                 new Activity
