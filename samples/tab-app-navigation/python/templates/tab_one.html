@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' https://*.teams.microsoft.com https://*.office.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab One</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                 integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                 crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Tab One</h2>
+        <button id="navigateTabsBtn">Tab1 To Tab2</button>
+        <br><br>
+        <button id="defaultTabBtn">Default Tab</button>
+        <br><br>
+        <button id="backButton">Back Button Navigation</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/tab_one.js') }}"></script>
+</body>
+</html>
