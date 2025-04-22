@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalTab", "PersonalTab.csproj", "{A53AD4E6-A1E6-400F-8D01-681D37DF5AE2}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{BEE3315B-57BC-439A-B52C-5E9398FC875A}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{BEE3315B-57BC-439A-B52C-5E9398FC875A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FFB7F5B-7279-47B5-9473-B4E9703B3C99}"
 	ProjectSection(SolutionItems) = preProject
