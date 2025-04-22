@@ -5,7 +5,7 @@
 using MeetingTranscriptRecording.Helper;
 using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net;
@@ -314,13 +314,13 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                SubscriptionCollectionResponse existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
                     // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
                 }
                 catch (Exception ex)
                 {
@@ -330,7 +330,7 @@ namespace MeetingTranscriptRecording.Controllers
                 // Define the notification URL for the subscription, typically an endpoint for handling notifications.
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionMeEventsPost";
 
-                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "me/events");
+                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "me/events");
 
                 // Check if an existing subscription with the same resource already exists and has a different notification URL.
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
@@ -357,7 +357,7 @@ namespace MeetingTranscriptRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
@@ -382,13 +382,13 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                SubscriptionCollectionResponse existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
                     // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
                 }
                 catch (Exception ex)
                 {
@@ -398,7 +398,7 @@ namespace MeetingTranscriptRecording.Controllers
                 // Define the notification URL for the subscription, typically an endpoint for handling notifications.
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionTranscripts";
 
-                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/transcripts");
+                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/transcripts");
 
                 // Check if an existing subscription with the same resource already exists and has a different notification URL.
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
@@ -428,7 +428,7 @@ namespace MeetingTranscriptRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
@@ -454,12 +454,12 @@ namespace MeetingTranscriptRecording.Controllers
             try
             {
                 // Initialize a variable to hold existing subscriptions.
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                SubscriptionCollectionResponse existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
                 }
                 catch (Exception ex)
                 {
@@ -468,7 +468,7 @@ namespace MeetingTranscriptRecording.Controllers
 
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionRecordings";
 
-                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/recordings");
+                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/recordings");
 
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
                 {
@@ -496,7 +496,7 @@ namespace MeetingTranscriptRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
@@ -530,7 +530,6 @@ namespace MeetingTranscriptRecording.Controllers
                 // Attempt to delete the specified subscription using the Graph API.
                 await graphClient
                      .Subscriptions[subscription.Id]
-                     .Request()
                      .DeleteAsync();
             }
             catch (Exception ex)
