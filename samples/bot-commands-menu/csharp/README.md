@@ -23,6 +23,11 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ![Preview Image](Images/Botcommandsmenu.gif)
 
+ ## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Bot Commands Menu:** [Manifest](/samples/bot-commands-menu/csharp/demo-manifest/bot-commands-menu.zip")
+
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
