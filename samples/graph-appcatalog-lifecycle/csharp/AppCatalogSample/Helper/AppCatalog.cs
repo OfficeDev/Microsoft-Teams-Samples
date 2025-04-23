@@ -14,6 +14,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using AdaptiveCards;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Graph.Models;
 
 namespace AppCatalogSample.Helper
 {
@@ -39,22 +40,23 @@ namespace AppCatalogSample.Helper
         {
             try
             {
-
                 if (string.IsNullOrEmpty(this._token))
                     return null;
 
-                var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-                   .Request()
-                   .Filter("distributionMethod eq 'organization'")
-                   .GetAsync();
-                return teamsApps.CurrentPage;
+                var teamsAppsResponse = await graphServiceClient.AppCatalogs.TeamsApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter = "distributionMethod eq 'organization'";
+                    });
+
+                // Fix: Access the 'Value' property of TeamsAppCollectionResponse instead of 'CurrentPage'
+                return teamsAppsResponse?.Value;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
-
         }
 
         public async Task<IList<TeamsApp>> AppCatalogById()
@@ -63,13 +65,16 @@ namespace AppCatalogSample.Helper
             {
                 if (string.IsNullOrEmpty(_token))
                     return null;
-                var id = GetAppId();
-                var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-            .Request()
-            .Filter($"id eq '{id}'")
-            .GetAsync();
-                return teamsApps.CurrentPage;
 
+                var id = GetAppId();
+                var teamsAppsResponse = await graphServiceClient.AppCatalogs.TeamsApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter = $"id eq '{id}'";
+                    });
+
+                // Fix: Access the 'Value' property of TeamsAppCollectionResponse instead of 'CurrentPage'
+                return teamsAppsResponse?.Value;
             }
             catch (Exception ex)
             {
@@ -96,12 +101,16 @@ namespace AppCatalogSample.Helper
             {
                 if (string.IsNullOrEmpty(_token))
                     return null;
-                var ExternalId = GetExternalId();
-                var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-           .Request()
-           .Filter($"externalId eq '{ExternalId}'")
-           .GetAsync();
-                return teamsApps.CurrentPage;
+
+                var externalId = GetExternalId();
+                var teamsAppsResponse = await graphServiceClient.AppCatalogs.TeamsApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter = $"externalId eq '{externalId}'";
+                    });
+
+                // Fix: Access the 'Value' property of TeamsAppCollectionResponse instead of 'CurrentPage'
+                return teamsAppsResponse?.Value;
             }
             catch (Exception)
             {
@@ -115,13 +124,17 @@ namespace AppCatalogSample.Helper
             {
                 if (string.IsNullOrEmpty(_token))
                     return null;
+
                 var appId = GetAppId();
-                var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-        .Request()
-        .Filter($"id eq '{appId}'")
-        .Expand("appDefinitions")
-        .GetAsync();
-                return teamsApps.CurrentPage;
+                var teamsAppsResponse = await graphServiceClient.AppCatalogs.TeamsApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter = $"id eq '{appId}'";
+                        requestConfiguration.QueryParameters.Expand = new[] { "appDefinitions" };
+                    });
+
+                // Fix: Access the 'Value' property of TeamsAppCollectionResponse instead of 'CurrentPage'
+                return teamsAppsResponse?.Value;
             }
             catch (Exception)
             {
@@ -137,12 +150,16 @@ namespace AppCatalogSample.Helper
             {
                 if (string.IsNullOrEmpty(_token))
                     return null;
-                var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-        .Request()
-        .Filter("appDefinitions/any(a:a/bot ne null)")
-        .Expand("appDefinitions($expand=bot)")
-        .GetAsync();
-                return teamsApps.CurrentPage;
+
+                var teamsAppsResponse = await graphServiceClient.AppCatalogs.TeamsApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Filter = "appDefinitions/any(a:a/bot ne null)";
+                        requestConfiguration.QueryParameters.Expand = new[] { "appDefinitions($expand=bot)" };
+                    });
+
+                // Fix: Access the 'Value' property of TeamsAppCollectionResponse instead of 'CurrentPage'
+                return teamsAppsResponse?.Value;
             }
             catch (Exception)
             {
@@ -159,7 +176,7 @@ namespace AppCatalogSample.Helper
 
                 var appId = GetAppId(); ;
                 await graphServiceClient.AppCatalogs.TeamsApps[appId]
-                  .Request()
+                  
                   .DeleteAsync();
                 return "Deleted";
             }
@@ -302,7 +319,6 @@ namespace AppCatalogSample.Helper
 
         public List<CardData> ParseData(IList<TeamsApp> teamsApps)
         {
-
             List<CardData> InfoData = new List<CardData>();
             int DataCount = 0;
             foreach (var value in teamsApps)
@@ -312,11 +328,11 @@ namespace AppCatalogSample.Helper
                 instance.DistributionMethod = value.DistributionMethod.ToString();
                 instance.ExternalId = value.ExternalId;
                 instance.Id = value.Id;
-                instance.OdataType = value.ODataType;
-                if (value.AppDefinitions != null)
+                instance.OdataType = value.OdataType;
+                if (value.AppDefinitions != null && value.AppDefinitions.Count > 0)
                 {
                     instance.AppDefinitions = value.AppDefinitions;
-                    instance.Published = value.AppDefinitions.CurrentPage[0].PublishingState;
+                    instance.Published = value.AppDefinitions[0].PublishingState; // Fixed: Accessing the first element directly
                 }
                 InfoData.Add(instance);
                 DataCount++;
@@ -338,8 +354,7 @@ namespace AppCatalogSample.Helper
                 {
                     AdaptiveTextBlock textBlock = new AdaptiveTextBlock()
                     {
-                        Text = "- " + agendaPoint.DisplayName + " \r" +
-                        " - " + agendaPoint.Id + " \r" + " - " + agendaPoint.Published + " \r",
+                        Text = "- " + agendaPoint.DisplayName + " \r" + " - " + agendaPoint.Id + " \r" + " - " + agendaPoint.Published + " \r",
 
                     };
                     adaptiveCard.Body.Add(textBlock);
