@@ -15,6 +15,10 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Attachment = Microsoft.Bot.Schema.Attachment;
+
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -392,7 +396,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             return resource.SignInLink;
         }
 
-        private static Attachment GetProfileCard(Graph.User profile)
+        private static Attachment GetProfileCard(User profile)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
