@@ -1,4 +1,8 @@
-﻿using MeetingTranscriptRecording.Models;
+﻿// <copyright file="Notification.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyrightusing Microsoft.Graph;
+
+using MeetingTranscriptRecording.Models;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using System;

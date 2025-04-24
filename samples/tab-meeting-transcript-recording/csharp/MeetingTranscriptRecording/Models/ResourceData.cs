@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿// <copyright file="ResourceData.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyrightusing Microsoft.Graph;
+
+using Newtonsoft.Json;
 
 namespace MeetingTranscriptRecording.Models
 {
