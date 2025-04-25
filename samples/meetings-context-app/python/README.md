@@ -117,10 +117,10 @@ This app has a default landing capability that determines whether the opening sc
 - You can send one of these two commands: **Meeting Context** or **Participant Context**
 - It will send you the output of `TeamsInfo.getMeetingInfo` and `TeamsInfo.getMeetingParticipant`
 
-1. **Particpant Details :** User can see the details of current participant by the name id and other feilds respectively.
+1. **Participant Details :** User can see the details of current participant by the name id and other fields respectively.
 ![participant context](Images/3.Participant_Context.png)
 
-2. **Meeting Details :** In this user can track the detials of meeting start time, end time, joining url and other details respectively.
+2. **Meeting Details :** In this user can track the details of meeting start time, end time, joining url and other details respectively.
 ![meeting context](Images/2.Meeting_Context.png) 
 
 ## Deploy the bot to Azure
