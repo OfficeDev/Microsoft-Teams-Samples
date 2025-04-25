@@ -6,11 +6,11 @@ from botbuilder.schema import ConversationReference
 from botbuilder.core.teams import TeamsInfo, TeamsActivityHandler
 from typing import Dict
 import asyncio 
-from Models.Proactive_App_Intallation_Helper import ProactiveAppInstallationHelper 
+from Models.Proactive_App_Installation_Helper import ProactiveAppInstallationHelper 
 
 class ProactiveBot(TeamsActivityHandler):
     def __init__(self, conversation_references: Dict[str, ConversationReference]):
-        """
+        """Proactive_App_Installation_Helper
         Initializes the ProactiveBot class.
         
         :param conversation_references: Dictionary to store conversation references for users.
