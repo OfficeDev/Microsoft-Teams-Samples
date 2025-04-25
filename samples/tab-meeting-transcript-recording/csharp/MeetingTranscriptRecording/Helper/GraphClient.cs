@@ -6,7 +6,7 @@
 using Microsoft.Graph;
 using Microsoft.Kiota.Abstractions.Authentication;
 
-namespace MeetingAutoRecording.Helper
+namespace MeetingTranscriptRecording.Helper
 {
     public class GraphClient
     {

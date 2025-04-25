@@ -15,8 +15,6 @@ using System.Text.RegularExpressions;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Graph.Models;
-using MeetingAutoRecording.Helper;
-using Microsoft.AspNetCore.SignalR;
 
 namespace MeetingTranscriptRecording.Controllers
 {
