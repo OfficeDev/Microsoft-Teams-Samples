@@ -507,6 +507,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-link-unfurling#python]:samples/msgext-link-unfurling/python
 [msgext-search-auth-config#python]:samples/msgext-search-auth-config/python
 [msgext-search#python]:samples/msgext-search/python
+[meetings-context-app#python]:samples/meetings-context-app/python
+
 
 [bot-conversation#js]:samples/bot-conversation/nodejs
 [bot-file-upload#js]:samples/bot-file-upload/nodejs
