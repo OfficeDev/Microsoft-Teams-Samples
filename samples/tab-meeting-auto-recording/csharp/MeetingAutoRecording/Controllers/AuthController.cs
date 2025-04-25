@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
+
 using MeetingAutoRecording.Helper;
 using MeetingAutoRecording.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net;
@@ -13,13 +13,10 @@ using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.SignalR.Client;
-using Azure.Core;
 using Microsoft.AspNetCore.SignalR;
-using OnlineMeeting = Microsoft.Graph.OnlineMeeting;
-using static Microsoft.Graph.Constants;
-using Newtonsoft.Json.Serialization;
+using OnlineMeeting = Microsoft.Graph.Models.OnlineMeeting;
 using System.Text;
-using System.Xml.Linq;
+using Microsoft.Graph.Models;
 
 namespace MeetingAutoRecording.Controllers
 {
@@ -146,15 +143,20 @@ namespace MeetingAutoRecording.Controllers
             var graphClient = GraphClient.GetGraphClient(accessToken);
             try
             {
-                ChatMessage message = await graphClient.Chats[onlineMeeting.ChatInfo.ThreadId].Messages.Request().AddAsync(new ChatMessage
+                var chatMessage = new ChatMessage
                 {
                     Body = new ItemBody
                     {
-                        Content = "Hello, I am your virtual assistant.Setting up AI for this meeting."
+                        Content = "Hello, I am your virtual assistant. Setting up AI for this meeting.",
+                        ContentType = BodyType.Text
                     }
-                });
+                };
 
-                Console.WriteLine("Chat message sent." + message.Id);
+                var message = await graphClient.Chats[onlineMeeting.ChatInfo.ThreadId]
+        .Messages
+        .PostAsync(chatMessage);
+
+                Console.WriteLine("Chat message sent. ID: " + message?.Id);
             }
             catch (Exception ex)
             {
@@ -388,16 +390,22 @@ namespace MeetingAutoRecording.Controllers
         {
             try
             {
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                List<Subscription>? existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
-                    // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    // Retrieve existing subscriptions using the Graph API (v5 SDK style)
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    Console.Error.WriteLine($"Error retrieving subscriptions: {ex.Message}");
                     return null;
                 }
 
@@ -431,10 +439,11 @@ namespace MeetingAutoRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
+                        Console.Error.WriteLine($"Failed to create subscription: {ex.Message}");
                         return null;
                     }
                 }
@@ -456,16 +465,22 @@ namespace MeetingAutoRecording.Controllers
         {
             try
             {
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                List<Subscription>? existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
-                    // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    // Retrieve existing subscriptions using the Graph API (SDK v5)
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    Console.Error.WriteLine($"Error retrieving subscriptions: {ex.Message}");
                     return null;
                 }
 
@@ -502,7 +517,7 @@ namespace MeetingAutoRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
@@ -528,12 +543,19 @@ namespace MeetingAutoRecording.Controllers
             try
             {
                 // Initialize a variable to hold existing subscriptions.
-                IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+                // IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
+                List<Subscription>? existingSubscriptions = null;
+
                 try
                 {
-                    existingSubscriptions = await graphClient.Subscriptions.Request().GetAsync();
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -570,7 +592,7 @@ namespace MeetingAutoRecording.Controllers
                     };
                     try
                     {
-                        existingSubscription = await graphClient.Subscriptions.Request().AddAsync(sub);
+                        existingSubscription = await graphClient.Subscriptions.PostAsync(sub);
                     }
                     catch (Exception ex)
                     {
@@ -604,7 +626,6 @@ namespace MeetingAutoRecording.Controllers
                 // Attempt to delete the specified subscription using the Graph API.
                 await graphClient
                      .Subscriptions[subscription.Id]
-                     .Request()
                      .DeleteAsync();
             }
             catch (Exception ex)
