@@ -6,7 +6,6 @@
 using MeetingTranscriptRecording.Helper;
 using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net;

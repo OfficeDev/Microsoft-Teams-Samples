@@ -3,12 +3,7 @@
 // </copyrightusing Microsoft.Graph;
 
 using MeetingTranscriptRecording.Models;
-using Microsoft.Graph;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MeetingTranscriptRecording.Model
 {

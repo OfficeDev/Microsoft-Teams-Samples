@@ -2,8 +2,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
 
-using Microsoft.Graph;
-
 namespace MeetingTranscriptRecording.Models
 {
     /// <summary>
