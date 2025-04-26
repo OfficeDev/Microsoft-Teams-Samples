@@ -8,9 +8,24 @@
         "DebugTarget": "Start Project"
       },
       {
-        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Path": "M365Agent\\M365Agent.ttkproj",
         "Action": "StartWithoutDebugging",
         "DebugTarget": "Microsoft Teams (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "TeamsTaskModule.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
       }
     ]
   }

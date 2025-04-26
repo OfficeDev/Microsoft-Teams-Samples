@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TeamsApp\**" />
-    <Content Remove="TeamsApp\**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
-    <None Remove="TeamsApp\**" />
+    <Compile Remove="M365Agent\**" />
+    <Content Remove="M365Agent\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
+    <None Remove="M365Agent\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,10 +78,10 @@
     <None Update="Images\team-WelcomeCommand-Card.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TeamsAppManifest\icon-color.png">
+    <None Update="M365AgentManifest\icon-color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TeamsAppManifest\icon-outline.png">
+    <None Update="M365AgentManifest\icon-outline.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
