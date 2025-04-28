@@ -25,6 +25,11 @@ This sample application illustrates the integration of Azure Active Directory Si
 
 ![Config SSO](Images/tabssomodules.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
+
+**Tab SSO:** [Manifest](/samples/tab-sso/csharp/demo-manifest/tab-sso.zip)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
