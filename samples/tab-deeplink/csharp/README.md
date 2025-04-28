@@ -35,7 +35,7 @@ Discover this Microsoft Teams sample app designed to demonstrate deeplinks for s
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
 
-**Tab Deeplink:** [Manifest]("\samples\tab-deeplink\csharp\demo-manifest\tab-deeplink.zip")
+**Tab Deeplink:** [Manifest](/samples/tab-deeplink/csharp/demo-manifest/tab-deeplink.zip)
 
  ## Prerequisites
 
