@@ -1,6 +1,6 @@
 ﻿// <copyright file="ResourceData.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
-// </copyrightusing Microsoft.Graph;
+// </copyright>
 
 using Newtonsoft.Json;
 
