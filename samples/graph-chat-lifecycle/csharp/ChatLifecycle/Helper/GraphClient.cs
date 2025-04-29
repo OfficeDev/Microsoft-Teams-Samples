@@ -1,24 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace ChatLifecycle.Helper
 {
     public class GraphClient
     {
-        public static GraphServiceClient GetGraphClient(string accessToken)
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
             {
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+                _accessToken = accessToken;
+            }
 
-                requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
 
-                return Task.CompletedTask;
-            }));
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
 
-            return graphClient;
-        }    
+        public static GraphServiceClient GetGraphClient(string token)
+        {
+            var tokenProvider = new SimpleAccessTokenProvider(token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
+
+            return new GraphServiceClient(authProvider);
+        }
     }
 }
