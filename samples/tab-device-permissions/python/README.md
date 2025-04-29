@@ -93,7 +93,7 @@ the Teams service needs to call into the bot.
 7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 8)  - navigate to `Deeplink.html` page at line number `58` Update the `data-app-id` attribute with your application id.
-    - Navigate to `env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+    - Navigate to `env.js` file and update your AppId at placeholder `<<App-ID>>` (You can get it manually from [teams admin portal](https://admin.teams.microsoft.com/).
     - ![TeamsAdminPortal-AppID](Images/TeamsAdminPortal.png)
 
 
