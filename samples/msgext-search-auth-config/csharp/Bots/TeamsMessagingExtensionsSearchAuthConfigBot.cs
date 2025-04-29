@@ -15,7 +15,6 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using Microsoft.Graph;
 using Microsoft.Graph.Models;
 using Attachment = Microsoft.Bot.Schema.Attachment;
 
