@@ -142,7 +142,7 @@ the Teams service needs to call into the bot.
 
 ![allowPermission](Images/allowPermission.png)
 
-Similary, you can try out for other features.
+Similarly, you can try out for other features.
 > [!IMPORTANT]
   > Please take a look at [notes section in Device Permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/native-device-permissions?tabs=desktop) documentation as not all devices support these permissions.
 
