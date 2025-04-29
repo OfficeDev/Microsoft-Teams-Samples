@@ -1,7 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="HomeController.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
+using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Microsoft.Kiota.Abstractions.Authentication;
 using Newtonsoft.Json;
 using RSCWithGraphAPI.Models;
 using System;
@@ -10,14 +17,15 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static RSCDemo.Helper.GraphClient;
 
 namespace RSCWithGraphAPI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
-
         public string appId;
 
         public HomeController(IConfiguration configuration)
@@ -65,41 +73,53 @@ namespace RSCWithGraphAPI.Controllers
 
         private async Task<List<string>> GetChannelsList(GraphServiceClient graphClient, string tenantId, string groupId)
         {
-            var result = await graphClient.Teams[groupId].Channels.Request()
-                .GetAsync();
+            var result = await graphClient.Teams[groupId].Channels.GetAsync();
 
-            return result.Select(r => r.DisplayName).ToList();
+            return result.Value.Select(r => r.DisplayName).ToList();
         }
 
         private async Task<List<string>> GetPermissionGrants(GraphServiceClient graphClient, string tenantId, string groupId)
         {
-            var result = await graphClient.Groups[groupId].PermissionGrants.Request()
-                .GetAsync();
+            var result = await graphClient.Groups[groupId].PermissionGrants.GetAsync();
 
-            return result.Select(r => r.Permission).ToList();
+            return result.Value.Select(r => r.Permission).ToList();
         }
 
-
         /// <summary>
-        ///Get Authenticated Client
+        /// Get Authenticated Graph Client (fixed for Graph SDK 5+)
         /// </summary>
         private async Task<GraphServiceClient> GetAuthenticatedClient(string tenantId)
         {
             var accessToken = await GetToken();
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            var tokenCredential = new SimpleAccessTokenCredential(accessToken);
 
-                        return Task.CompletedTask;
-                    }));
+            var authProvider = new BaseBearerTokenAuthenticationProvider(new SimpleAccessTokenProvider(accessToken));
+
+            var graphClient = new GraphServiceClient(authProvider);
 
             return graphClient;
+        }
+
+        // New helper class to return AccessToken
+        private class SimpleAccessTokenCredential : TokenCredential
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenCredential(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1));
+            }
+
+            public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new ValueTask<AccessToken>(new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1)));
+            }
         }
 
         /// <summary>
@@ -135,19 +155,18 @@ namespace RSCWithGraphAPI.Controllers
                     {
                         // Read and display the response content
                         string responseBody = await response.Content.ReadAsStringAsync();
-
                         var responseData = JsonConvert.DeserializeObject<ResponseData>(responseBody);
                         var installedAppList = responseData.Value;
 
-                        foreach(AppData element in installedAppList)
+                        foreach (AppData element in installedAppList)
                         {
                             if (element.TeamsAppDefinition.DisplayName == "RSC-GraphAPI ")
                             {
                                 appId = element.Id;
                             }
-                        };
+                        }
 
-                        if(appId != null)
+                        if (appId != null)
                         {
                             await SendNotification(reciepientUserId, appId);
                             return Json("Message sent successfully");
@@ -160,13 +179,13 @@ namespace RSCWithGraphAPI.Controllers
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return Json("Error occured");
+                        return Json("Error occurred");
                     }
                 }
                 catch (Exception ex)
-                {          
+                {
                     Console.WriteLine($"Error: {ex.Message}");
-                    return Json("Error occured"+ ex.Message);
+                    return Json("Error occurred: " + ex.Message);
                 }
             }
         }
@@ -223,7 +242,7 @@ namespace RSCWithGraphAPI.Controllers
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return "Notification sent";
+                        return "Notification failed";
                     }
                 }
                 catch (Exception ex)
