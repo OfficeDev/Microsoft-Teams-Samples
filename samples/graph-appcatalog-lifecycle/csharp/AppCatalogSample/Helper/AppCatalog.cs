@@ -179,15 +179,16 @@ namespace AppCatalogSample.Helper
                 string token = _token;
                 var multiForm = new MultipartFormDataContent();
                 HttpContent con;
-                string path = System.IO.Directory.GetCurrentDirectory();
-                path = path + @"\Manifest\manifest.zip";
-                using (var str = new FileStream(path, FileMode.Open))
+                string relativePath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "..", "TeamsApp", "appPackage", "build", "appPackage.local.zip");
+                string fullPath = Path.GetFullPath(relativePath);
+
+                using (var str = new FileStream(fullPath, FileMode.Open))
                 {
                     con = new StreamContent(str);
                     con.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                     {
                         Name = "file_name",
-                        FileName = "manifest.zip"
+                        FileName = "appPackage.local.zip"
                     };
                     con.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
                     multiForm.Add(con);
@@ -230,14 +231,15 @@ namespace AppCatalogSample.Helper
                 string token = _token;
                 var multiForm = new MultipartFormDataContent();
                 HttpContent con;
-                string path = System.IO.Directory.GetCurrentDirectory() + @"\Manifest\manifest.zip";
-                using (var str = new FileStream(path, FileMode.Open))
+                string relativePath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "..", "TeamsApp", "appPackage", "build", "appPackage.local.zip");
+                string fullPath = Path.GetFullPath(relativePath);
+                using (var str = new FileStream(fullPath, FileMode.Open))
                 {
                     con = new StreamContent(str);
                     con.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                     {
                         Name = "file_name",
-                        FileName = "manifest.zip"
+                        FileName = "appPackage.local.zip"
                     };
                     con.Headers.ContentType = new MediaTypeHeaderValue("application/zip");
                     multiForm.Add(con);
