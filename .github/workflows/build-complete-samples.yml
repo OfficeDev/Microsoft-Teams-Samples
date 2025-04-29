@@ -276,9 +276,9 @@ jobs:
               name: 'bot-initiate-thread-in-channel'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-message-reaction/csharp/MessageReaction.csproj'
+            - project_path: 'samples/bot-message-reaction/csharp/MessageReaction/MessageReaction.csproj'
               name: 'bot-message-reaction'
-              version: '6.0.x'
+              version: '8.0.x'
 
             - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
               name: 'bot-suggested-actions'
@@ -1180,6 +1180,10 @@ jobs:
 
             - project_path: 'samples/msgext-thirdparty-storage/python'
               name: 'msgext-thirdparty-storage'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-deeplink/python'
+              name: 'tab-deeplink'
               version: '3.10.x'
 
       fail-fast: false

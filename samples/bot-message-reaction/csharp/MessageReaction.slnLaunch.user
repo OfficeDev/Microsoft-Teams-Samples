@@ -3,14 +3,33 @@
     "Name": "Microsoft Teams (browser)",
     "Projects": [
       {
-        "Path": "MessageReaction.csproj",
-        "Action": "Start",
-        "DebugTarget": "Start Project"
-      },
-      {
         "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Name": "TeamsApp\\TeamsApp.ttkproj",
         "Action": "StartWithoutDebugging",
         "DebugTarget": "Microsoft Teams (browser)"
+      },
+      {
+        "Path": "MessageReaction\\MessageReaction.csproj",
+        "Name": "MessageReaction\\MessageReaction.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  },
+  {
+    "Name": "Teams App Test Tool (browser)",
+    "Projects": [
+      {
+        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Name": "TeamsApp\\TeamsApp.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Teams App Test Tool (browser)"
+      },
+      {
+        "Path": "MessageReaction\\MessageReaction.csproj",
+        "Name": "MessageReaction\\MessageReaction.csproj",
+        "Action": "Start",
+        "DebugTarget": "Teams App Test Tool"
       }
     ]
   }

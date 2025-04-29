@@ -111,7 +111,7 @@ deploy:
   - uses: cli/runNpmCommand
     with:
       workingDirectory: .
-      args: install --no-audit
+      args: install --force
 
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
