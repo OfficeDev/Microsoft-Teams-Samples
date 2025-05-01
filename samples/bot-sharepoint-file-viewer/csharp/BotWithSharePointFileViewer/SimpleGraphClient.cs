@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace BotWithSharePointFileViewer
 {
@@ -34,22 +35,19 @@ namespace BotWithSharePointFileViewer
             try
             {
                 var site = await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
-                                  .Request()
                                   .GetAsync();
                 if (site != null)
                 {
                     var drive = await graphClient.Sites[site.Id].Drives
-                                        .Request()
                                         .GetAsync();
 
                     if (drive != null)
                     {
-                        var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.Children
-                                                .Request()
-                                                .GetAsync();
+                        var driveId = drive.Value[0].Id;
+                        var children = await graphClient.Drives[driveId].Items["root"].Children.GetAsync();
 
                         var fileName = new List<string>();
-                        foreach (var file in children.CurrentPage)
+                        foreach (var file in children.Value)
                         {
                             fileName.Add(file.Name);
                         }
@@ -66,7 +64,7 @@ namespace BotWithSharePointFileViewer
                     return null;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Exception is " + e);
                 return null;
@@ -79,27 +77,23 @@ namespace BotWithSharePointFileViewer
             var graphClient = GetAuthenticatedClient();
 
             var site = await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
-                             .Request()
                              .GetAsync();
 
             if (site != null)
             {
                 var drive = await graphClient.Sites[site.Id].Drives
-                                    .Request()
                                     .GetAsync();
 
-                if (drive != null && drive.CurrentPage != null && drive.CurrentPage.Count > 0)
+                if (drive != null && drive.Value != null && drive.Value.Count > 0)
                 {
-                    var driveId = drive.CurrentPage[0].Id; // Ensure CurrentPage has at least one item
-                    await graphClient.Sites[site.Id].Drives[driveId].Root.ItemWithPath(fileName).Content
-                        .Request()
-                        .PutAsync<DriveItem>(stream);
+                    var driveId = drive.Value[0].Id; // Ensure CurrentPage has at least one item
+                    await graphClient.Drives[driveId].Root.ItemWithPath(fileName).Content.PutAsync(stream);
                 }
                 else
                 {
                     // Handle the case where no drives are found
                     // throw new Exception("No drives found for the specified site.");
-                     Console.WriteLine("No drives found for the specified site.");
+                    Console.WriteLine("No drives found for the specified site.");
                 }
             }
             else
@@ -111,20 +105,26 @@ namespace BotWithSharePointFileViewer
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var accessTokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(accessTokenProvider);
+            return new GraphServiceClient(authProvider);
+        }
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _token;
 
-                        return Task.CompletedTask;
-                    }));
+            public SimpleAccessTokenProvider(string token)
+            {
+                _token = token;
+            }
 
-            return graphClient;
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> additionalAuthenticationContext = default, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_token);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
         }
     }
 }
