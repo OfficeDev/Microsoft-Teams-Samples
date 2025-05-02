@@ -172,6 +172,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ![team-custom-notification ](Images/feed-team-custom-notification.png)
 
 **Custom Activity Icons**
+
 The app demonstrates a feature allowing developers to configure custom activity icons for various activities displayed in the activity feed. To test this feature, install the app in personal scope and send a notification. You will observe the activity displayed with a custom icon.
 
 
