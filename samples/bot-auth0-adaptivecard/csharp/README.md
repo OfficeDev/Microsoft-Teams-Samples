@@ -102,7 +102,16 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 
-You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+You can interact with this bot in Teams by sending it a message. The bot will respond to the following strings.
+
+   **Show Login card:**
+  ![Login-card ](Images/Login-card.png)
+
+   **Show Profile card:**
+  ![profile-card](Images/profile-card.png)
+
+  **Show Logout card:**
+  ![logout-card](Images/logout-card.png)
 
 ## Deploy the bot to Azure
 
@@ -115,8 +124,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
-- [Receive a read receipt](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?branch=pr-en-us-9184&tabs=dotnet1%2Capp-manifest-v112-or-later%2Cdotnet2%2Cdotnet3%2Cdotnet4%2Cdotnet5%2Cdotnet#receive-a-read-receipt)
-- [Format AI bot messages](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/format-ai-bot-messages?branch=pr-en-us-10798&tabs=js)
-
+- [Auth0 Documentation](https://auth0.com/docs)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth0-adaptivecard-csharp" />
