@@ -27,13 +27,12 @@
     display: none;
 }
 
- .radioClass {
+.radioClass {
     padding: 15px;
     margin-top: 10px;
-    color: #fff;
-font-size: 16px;
+    font-size: 16px;
 }
+
 label {
-color: #fff;
-font-size: 16px;
+    font-size: 16px;
 }
