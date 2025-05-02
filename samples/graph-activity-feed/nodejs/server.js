@@ -341,7 +341,7 @@ app.post('/customTopicTeamNotification', (req, res) => {
 // Send notification to user.
 app.post('/sendNotificationToUser', (req, res) => {
   console.log("token" + delegatedToken);
-  var url = "https://graph.microsoft.com/v1.0/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition"
+  var url = "https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition"
  
   axios.get(url, {
     headers: {
@@ -354,7 +354,7 @@ app.post('/sendNotificationToUser', (req, res) => {
     const postData = {
       "topic": {
         "source": "entityUrl",
-        "value": "https://graph.microsoft.com/v1.0/users/" + req.body.userId + "/teamwork/installedApps/" + appId
+        "value": "https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/installedApps/" + appId
       },
       "activityType": "taskCreated",
       "previewText": {
