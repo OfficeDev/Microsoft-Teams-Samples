@@ -73,6 +73,26 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
+1) Setup Auth0 Application
+    __*Create an Auth0 Application:*__
+    - Go to [Auth0 Dashboard](https://manage.auth0.com/).
+    - Navigate to `Applications > Applications`, then click `Create Application`.
+    - Choose Regular Web Applications and give it a name (e.g., Teams Bot App)
+
+    __*Configure Application Settings:*__
+    - Under `Settings`, set the following:
+    
+    **Allowed Callback URLs:**
+
+    ```bash
+    Allowed Callback URLs:https://<your-domain>/api/auth/callback
+    ```
+    Replace <your-domain> with your bot's public URL (e.g., dev tunnel or Azure URL).
+    
+    **Get Your Auth0 Credentials:**
+    - Copy the Domain, Client ID, and Client Secret from the application settings.
+    - Add them to your project configuration (appsettings.json or IConfiguration).
+
 1) Clone the repository
 
     ```bash
@@ -87,6 +107,10 @@ the Teams service needs to call into the bot.
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+    - In addition, add your Auth0 configuration details:
+      ClientId: Found in your Auth0 application settings.
+      ClientSecret: Found in your Auth0 application settings.
+      Domain: Your Auth0 domain (e.g., your-tenant.auth0.com)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -98,7 +122,6 @@ the Teams service needs to call into the bot.
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-auth0-adaptivecard/csharp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
-
 
 ## Running the sample
 
