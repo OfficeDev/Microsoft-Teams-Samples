@@ -14,14 +14,10 @@ from botbuilder.schema._connector_client_enums import ActionTypes
 ADAPTIVECARDTEMPLATE = "resources/UserMentionCardTemplate.json"
 
 class TeamsConversationBot(TeamsActivityHandler):
-    def __init__(self, app_id: str, app_password: str):
-        self._app_id = app_id
-        self._app_password = app_password
-
     async def on_teams_members_added(  # pylint: disable=unused-argument
         self,
         teams_members_added: [TeamsChannelAccount],
-        team_info: TeamInfo,
+        teamsInfo: TeamsInfo,
         turn_context: TurnContext,
     ):
         for member in teams_members_added:
