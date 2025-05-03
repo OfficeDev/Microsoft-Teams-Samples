@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Graph" Version="4.47.0" />
+    <PackageReference Include="Microsoft.Graph" Version="5.77.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
