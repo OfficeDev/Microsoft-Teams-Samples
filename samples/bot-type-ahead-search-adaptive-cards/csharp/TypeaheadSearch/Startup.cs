@@ -40,6 +40,8 @@ namespace TypeaheadSearch
         /// <param name="services">The service collection to add services to.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
             services.AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 

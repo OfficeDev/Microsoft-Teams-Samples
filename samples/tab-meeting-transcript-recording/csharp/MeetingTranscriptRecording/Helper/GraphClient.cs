@@ -1,14 +1,16 @@
-﻿using System;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
+﻿// <copyright file="GraphClient.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
 using Microsoft.Graph;
 using Microsoft.Kiota.Abstractions.Authentication;
-using Newtonsoft.Json.Linq;
 
 namespace MeetingTranscriptRecording.Helper
 {
     public class GraphClient
     {
+
         public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
             private readonly string _accessToken;
@@ -33,5 +35,6 @@ namespace MeetingTranscriptRecording.Helper
 
             return new GraphServiceClient(authProvider);
         }
+
     }
 }

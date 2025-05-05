@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
+
 using MeetingTranscriptRecording.Helper;
 using MeetingTranscriptRecording.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net;
@@ -13,6 +13,7 @@ using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Graph.Models;
 
 namespace MeetingTranscriptRecording.Controllers
 {
@@ -314,16 +315,22 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
-                SubscriptionCollectionResponse existingSubscriptions = null;
+                List<Subscription>? existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
-                    // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
+                    // Retrieve existing subscriptions using the Graph API (v5 SDK style)
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    Console.Error.WriteLine($"Error retrieving subscriptions: {ex.Message}");
                     return null;
                 }
 
@@ -382,16 +389,22 @@ namespace MeetingTranscriptRecording.Controllers
         {
             try
             {
-                SubscriptionCollectionResponse existingSubscriptions = null;
+                List<Subscription>? existingSubscriptions = null;
 
                 var graphClient = GraphClient.GetGraphClient(accessToken);
                 try
                 {
-                    // Retrieve existing subscriptions using the Graph API.
-                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
+                    // Retrieve existing subscriptions using the Graph API (SDK v5)
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
+                    Console.Error.WriteLine($"Error retrieving subscriptions: {ex.Message}");
                     return null;
                 }
 
@@ -454,12 +467,17 @@ namespace MeetingTranscriptRecording.Controllers
             try
             {
                 // Initialize a variable to hold existing subscriptions.
-                SubscriptionCollectionResponse existingSubscriptions = null;
-
+                List<Subscription>? existingSubscriptions = null;
                 var graphClient = GraphClient.GetGraphClient(accessToken);
+
                 try
                 {
-                    existingSubscriptions = await graphClient.Subscriptions.GetAsync();
+                    var response = await graphClient.Subscriptions.GetAsync();
+
+                    if (response?.Value != null)
+                    {
+                        existingSubscriptions = response.Value;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -919,8 +937,6 @@ namespace MeetingTranscriptRecording.Controllers
             }
             return Ok();
         }
-
-
 
     }
 
