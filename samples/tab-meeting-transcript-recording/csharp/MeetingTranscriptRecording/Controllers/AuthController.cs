@@ -337,7 +337,7 @@ namespace MeetingTranscriptRecording.Controllers
                 // Define the notification URL for the subscription, typically an endpoint for handling notifications.
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionMeEventsPost";
 
-                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "me/events");
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "me/events");
 
                 // Check if an existing subscription with the same resource already exists and has a different notification URL.
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
@@ -411,7 +411,7 @@ namespace MeetingTranscriptRecording.Controllers
                 // Define the notification URL for the subscription, typically an endpoint for handling notifications.
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionTranscripts";
 
-                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/transcripts");
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/transcripts");
 
                 // Check if an existing subscription with the same resource already exists and has a different notification URL.
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
@@ -486,7 +486,7 @@ namespace MeetingTranscriptRecording.Controllers
 
                 var notificationUrl = _configuration["AzureAd:BaseUrlNgrok"] + "/CreateSubscriptionRecordings";
 
-                var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/recordings");
+                var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == "communications/onlineMeetings/" + onlineMeetingId + "/recordings");
 
                 if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
                 {
