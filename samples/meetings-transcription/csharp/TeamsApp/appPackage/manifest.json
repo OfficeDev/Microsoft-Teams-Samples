@@ -35,9 +35,16 @@
   "permissions": [ "messageTeamMembers" ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "https://RscPermission",
-    "applicationPermissions": [
-      "OnlineMeeting.ReadBasic.Chat"
-    ]
+    "resource": "https://RscPermission"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }

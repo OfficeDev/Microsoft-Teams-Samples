@@ -52,6 +52,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ### 1. Setup for Bot SSO
 Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
+> **Note:**  
+> Make sure to add the following **application permissions** in Azure AD App Registration:  
+> 1. `Sites.ReadWrite.All`  
+> 2. `Files.ReadWrite.All` 
 
 ### 2. Setup NGROK
 1) Run ngrok - point to port 3978

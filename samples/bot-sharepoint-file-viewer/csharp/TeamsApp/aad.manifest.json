@@ -21,33 +21,36 @@
     "requiredResourceAccess": [
         {
             "resourceAppId": "Microsoft Graph",
-            "resourceAccess": [
-              {
-                "id": "User.Read",
-                "type": "Scope"
-              },
-              {
-                "id": "Files.Read",
-                "type": "Scope"
-              },
-              {
-                "id": "Files.ReadWrite",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.Manage.All",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.Read.All",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.ReadWrite.All",
-                "type": "Scope"
-              }
-
-            ]
+          "resourceAccess": [
+            {
+              "id": "User.Read",
+              "type": "Scope"
+            },
+            {
+              "id": "Files.Read",
+              "type": "Scope"
+            },
+            {
+              "id": "Files.ReadWrite",
+              "type": "Scope"
+            },
+            {
+              "id": "Sites.Manage.All",
+              "type": "Scope"
+            },
+            {
+              "id": "Sites.Read.All",
+              "type": "Scope"
+            },
+            {
+              "id": "Sites.ReadWrite.All",
+              "type": "Role"
+            },
+            {
+              "id": "Files.ReadWrite.All",
+              "type": "Role"
+            }
+          ]
         }
     ],
     "oauth2Permissions": [
