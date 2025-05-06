@@ -34,7 +34,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 3. [Set up your data source using Azure AI resources](#set-up-your-data-source).
 4. [Populate the environment files](#populate-the-environment-files).
 5. Press **Ctrl+Shift+D** to open the ```Run and Debug``` menu. Select ```Debug``` and press ```F5``` or click on the play button.
-6. Download the zip file ```appPackage/build/appPackage.local.zip``` and [sideload the app to Teams](#sideload-the-app-to-teams).
+6. Download the zip file ```appPackage/build/appPackage.local.zip``` and [Upload the app to Teams](#Upload-the-app-to-teams).
 7. You can now [run the sample app](#run-the-sample-app).
 
 ## Set up and run the sample app locally
@@ -84,11 +84,11 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
    - Go to the ```teamsazureopenai-search``` resource. Select the ```Keys``` tab under ```Settings```.  Use ```Primary admin key```.
 6. Populate ```AZURE_SEARCH_INDEX``` based on the index name you chose while setting up the data source.
 
-## Sideload the app to Teams
+## Upload the app to Teams
 1. Go to your Teams app and click on the ```Apps``` icon. Select ```Manage your apps``` followed by ```Upload an app```.
 2. Select ```Upload a custom app``` and open the relevant zip file. Click on ```Add``` when prompted.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the sample app
 1. The bot sends a welcome message.
@@ -102,7 +102,7 @@ This sample showcases Chat With Your Data is a powerful Teams app template desig
 Instead of the ```Debug``` or ```F5``` flow, you can deploy the app on Azure:
 1. [Populate the environment files](#populate-the-environment-files).
 2. Using the Teams Toolkit Extension tab, click on ```Provision``` followed by ```DEPLOY``` under ```LIFECYCLE```. You will be asked to select the subscription and resource group for provisioning.
-3. Download the zip file ```appPackage/build/appPackage.dev.zip``` and [sideload the app to Teams](#sideload-the-app-to-teams).
+3. Download the zip file ```appPackage/build/appPackage.dev.zip``` and [Upload the app to Teams](#Upload-the-app-to-teams).
 
 >[!Note]
 > Check the status of your dev(hosted on Azure) bots on [Azure Portal](https://portal.azure.com/#home) by navigating to the relevant resource group.

@@ -44,7 +44,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup 
 > Note these instructions are for running the sample on your local machine.
@@ -99,7 +99,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Edit** the `manifest.json` for `<<TAB_DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. Replace it at all the places in your manifest.json.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Sideload the app in `Teams Scope` (Supported scopes: Teams)
+    - Upload the app in `Teams Scope` (Supported scopes: Teams)
      
 ## Running the sample
 

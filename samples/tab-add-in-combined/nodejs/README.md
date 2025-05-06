@@ -38,7 +38,7 @@ Interaction with the tab:
    ![Animated gif shows a discount offer being inserted into an email with the Discounts add-in](Images/interact-tab.animated.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Tab-add-in-combined:** [Manifest](/samples/tab-add-in-combined/nodejs/demo-manifest/tab-add-in-combined.zip)
 
@@ -138,7 +138,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 ### Run the Teams tab for the first time
 
 1. In Visual Studio Code, open the Teams Toolkit.
-2. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365 and that sideloading is enabled.
+2. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365 and that uploading is enabled.
 3. Select **View** | **Run** in Visual Studio Code.
 4. In the **RUN AND DEBUG** drop down menu, select the option, **Launch App Debug (Edge)**, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add the tab app.
 
@@ -164,7 +164,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 4. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365.
 5. Select **View** | **Run** in Visual Studio Code. In the **RUN AND DEBUG** drop down menu, select the option **Launch App and Add-in Outlook Desktop (Edge Chromium)** and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
 
-   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see [Upload your app in Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
+   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic uploading has failed. You can manually Upload it to see both the app and the add-in running at the same time. For uploading instructions, see [Upload your app in Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
    - Outlook desktop opens.
 
 6. In the Teams prompt, select **Add** and the tab will open.

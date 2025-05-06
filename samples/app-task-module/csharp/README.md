@@ -164,7 +164,7 @@ The sample app also contains a bot with cards allowing you to invoke these task 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Microsoft.Teams.Samples.TaskModule.Web/Images/InstallOutlook.png)
 
@@ -180,7 +180,7 @@ The sample app also contains a bot with cards allowing you to invoke these task 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Microsoft.Teams.Samples.TaskModule.Web/Images/InstallOffice.png)
 

@@ -27,7 +27,7 @@ This sample provides a comprehensive guide to building an Office 365 Connector t
 ## Prerequisites
 The minimum prerequisites to run this sample are:
 * The latest update of Visual Studio. You can download the community version [here](http://www.visualstudio.com) for free.
-* An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://msdn.microsoft.com/en-us/microsoft-teams/setup).
+* An Office 365 account with access to Microsoft Teams, with [uploading enabled](https://msdn.microsoft.com/en-us/microsoft-teams/setup).
 * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0.
 
   determine dotnet version
@@ -83,7 +83,7 @@ The minimum prerequisites to run this sample are:
    1. Click on Save. After the save completes, you will see your connector id.
    1. In the Web.config file, set the `configuration.appSettings.Base_Uri` variable to the ngrok https forwarding url from the above.
    1. In Visual Studio, click the play button.
-   1. Now you can sideload your app package and test your new connector.
+   1. Now you can Upload your app package and test your new connector.
    1. Once the connector is configured, you will get a notification in Team channel with link to the `Task Manager application`.
    1. Go to Task Manager portal and click on Create New and enter the task details and Save.
    1. You will see the MessageCard in the registered Teams channel.

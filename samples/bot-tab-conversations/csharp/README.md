@@ -120,13 +120,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
 8.In the browser that launches, select the Add button to install the app to Teams.
 
-If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 
 
 ### Channel Tab
 
-* [Set-up, deploy and sideload the app to a channel.](#steps)
+* [Set-up, deploy and Upload the app to a channel.](#steps)
     *Create new channel and 
     * When the app is installed to the team the bot will automatically gather the required info to create proactive conversations later.
 * First create your new channel then proceed.
@@ -207,7 +207,7 @@ There is also a personal tab that will list inquires from all the support depart
     * `<<aad-id>>` with your Microsoft Entra ID Application (Client) Id.
     * `<<aad-client-secret>>` with the client secret you created above.
     * `<<tenant-id>>` with the directory id received via creating Microsoft Entra ID app registration in your Azure Portal.
-    * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
+    * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are uploading the app you can use the appId from the manifest file, but please note that [deep linking may not work when uploading](#known-issues).
 
 * Setup Manifest for Teams
 
@@ -216,7 +216,7 @@ There is also a personal tab that will list inquires from all the support depart
 
 * Deploying
     * There are detailed instructions for deploying locally below.
-* Sideloading the App
+* Uploading the App
     * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\ConversationalTabs.Web\appPackage`.
     * [You can upload you app by following these instructions](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 

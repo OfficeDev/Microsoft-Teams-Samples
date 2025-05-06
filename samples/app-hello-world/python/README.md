@@ -5,7 +5,7 @@ products:
 languages:
 - python
 title: Microsoft Teams Python Hello World Sample
-description: The Microsoft Teams Python "Hello World" Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. It’s a great starting point for developing and deploying custom Teams apps.
+description: The Microsoft Teams Python "Hello World" Sample app demonstrates key features of Teams, including tabs, bots, and messaging extensions, built with Python. Itï¿½s a great starting point for developing and deploying custom Teams apps.
 extensions:
   contentType: samples
   createdDate: 10/19/2022 10:02:21 PM
@@ -31,7 +31,7 @@ With this sample, users can:
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams hello world sample app:** [Manifest](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
@@ -55,7 +55,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -186,7 +186,7 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/Outlook_SelectApp.png)
 
@@ -202,7 +202,7 @@ To set the **Tab as the default landing capability**, configure the 'staticTabs'
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/Office_M365.png)
 
