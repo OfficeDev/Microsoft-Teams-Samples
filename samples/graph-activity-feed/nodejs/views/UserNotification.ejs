@@ -114,7 +114,6 @@
         function signIn() {
             msalInstance.loginPopup(loginRequest)
                 .then(response => {
-                    console.log("Access Token:", response.accessToken);
                     accessToken = response.accessToken;
                     $("#login").hide();
                     $("#feed-container").show();

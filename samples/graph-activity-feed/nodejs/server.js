@@ -340,7 +340,6 @@ app.post('/customTopicTeamNotification', (req, res) => {
 
 // Send notification to user.
 app.post('/sendNotificationToUser', (req, res) => {
-  console.log("token" + req.body.accessToken);
   var url = "https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition"
 
   axios.get(url, {
