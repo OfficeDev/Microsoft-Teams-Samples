@@ -47,7 +47,7 @@ app.get('/UserNotification', function (req, res) {
   var tenantId = process.env.TenantId;
   auth.getAccessToken(tenantId).then(async function (token) {
     applicationToken = token;
-    res.render('./views/UserNotification');
+    res.render('./views/UserNotification',{ clientId: JSON.stringify(process.env.ClientId),tenantId: JSON.stringify(process.env.TenantId) });
   });
 });
 
@@ -58,7 +58,7 @@ app.get('/auth-start', function (req, res) {
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
 app.get('/auth-end', function (req, res) {
-  res.render('./views/auth-end',{ clientId: JSON.stringify(process.env.ClientId) });
+ res.render('./views/auth-end',{ clientId: JSON.stringify(process.env.ClientId) });
 });
 
 // On-behalf-of token exchange
@@ -340,42 +340,43 @@ app.post('/customTopicTeamNotification', (req, res) => {
 
 // Send notification to user.
 app.post('/sendNotificationToUser', (req, res) => {
-  console.log("token" + delegatedToken);
+  console.log("token" + req.body.accessToken);
   var url = "https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition"
- 
+
   axios.get(url, {
     headers: {
       "accept": "application/json",
       "contentType": 'application/json',
-      "authorization": "bearer " + delegatedToken
+      "authorization": "bearer " + req.body.accessToken
     }
   }).then(res => {
     var appId = getAppId(res.data);
     const postData = {
       "topic": {
-        "source": "entityUrl",
-        "value": "https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/installedApps/" + appId
+        "source": "text",
+        "value": "Loop thread",
+        "webUrl": "https://teams.microsoft.com/l/entity/c06f7212-e450-4880-a4d2-7f7fc06ac1e4"
       },
-      "activityType": "taskCreated",
+      "activityType": "approvalRequired",
       "previewText": {
-        "content": "New Task Created"
+        "content": "new announcement posted"
       },
       "templateParameters": [
         {
-          "name": "taskName",
+          "name": "approvalTaskId",
           "value": req.body.title
         }
       ],
-      "iconId": "taskCreatedId"
+      "iconId": "approvalRequiredId"
     };
-    
-    axios.post("https://graph.microsoft.com/beta/users/" + req.body.userId + "/teamwork/sendActivityNotification",
+
+    axios.post("https://graph.microsoft.com/beta/users/{userId}/teamwork/sendactivitynotification",
       postData,
       {
         headers: {
           "accept": "application/json",
           "contentType": 'application/json',
-          "authorization": "bearer " + applicationToken
+          "authorization": "bearer " + req.body.accessToken
         }
       }).then(response => {
         console.log(`statusCode: ${response.status}`)
@@ -385,6 +386,7 @@ app.post('/sendNotificationToUser', (req, res) => {
     console.log("error:" + error)
   })
 });
+
 
 // Send notification for custom topic to user.
 app.post('/customTopicNotificationToUser', (req, res) => {
