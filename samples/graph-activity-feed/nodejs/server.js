@@ -355,7 +355,7 @@ app.post('/sendNotificationToUser', (req, res) => {
       "topic": {
         "source": "text",
         "value": "Loop thread",
-        "webUrl": "https://teams.microsoft.com/l/entity/c06f7212-e450-4880-a4d2-7f7fc06ac1e4"
+        "webUrl": "https://teams.microsoft.com/l/entity/" + process.env.ClientId
       },
       "activityType": "approvalRequired",
       "previewText": {
