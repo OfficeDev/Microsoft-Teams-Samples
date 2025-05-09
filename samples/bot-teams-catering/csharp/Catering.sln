@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catering", "Catering\Cateri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bot.AdaptiveCards", "Microsoft.Bot.AdaptiveCards\Microsoft.Bot.AdaptiveCards.csproj", "{9266A125-1836-4736-BDF1-3A272DC27123}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{E198F1D5-2539-42D8-833A-CA2B18E8534B}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{E198F1D5-2539-42D8-833A-CA2B18E8534B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F0CE9C8-E87E-4F27-A621-9340207DB22B}"
 	ProjectSection(SolutionItems) = preProject
