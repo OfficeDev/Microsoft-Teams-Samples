@@ -150,11 +150,11 @@
     <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div id="feed-container" style="display: none;background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
+    <div id="feed-container" style="display: none;">
 
         <div class="radioClass">
-            <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat"> Send Notification To User Group Chat</label></br>
-            <label><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification with Custom Topic</label>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="sendNotificationGroupChat"> Send Notification To User Group Chat</label></br>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification with Custom Topic</label>
         </div></br>
         <div class="sendNotificationGroupChat desc">
             <div class="mb">
@@ -162,11 +162,11 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
-                    <label for="title" class="title">Task Title</label>
+                    <label for="title" class="title" style="color:black">Task Title</label>
                     @Html.TextBoxFor(model => model.title, htmlAttributes: new { @class = "form-control", @id = "title" })
                 </div>
                 <div class="form-group fg">
-                    <label for="title-desc" class="description">Task Description</label>
+                    <label for="title-desc" class="description" style="color:black">Task Description</label>
                     @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control title-desc", @id = "description" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>
@@ -181,11 +181,11 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
-                    <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
+                    <label for="DeployementTitle" class="DeployementTitle" style="color:black">Deployment Title</label>
                     @Html.TextBoxFor(model => model.DeployementTitle, htmlAttributes: new { @class = "form-control", @id = "DeployementTitle" })
                 </div>
                 <div class="form-group fg">
-                    <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label>
+                    <label for="deployment-desc" class="DeploymentDescription" style="color:black">Deployment Description</label>
                     @Html.TextAreaFor(model => model.DeploymentDescription, htmlAttributes: new { @class = "form-control deployment-desc", @id = "DeploymentDescription" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>

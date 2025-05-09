@@ -17,7 +17,7 @@
 		<PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.18.1" />
 		<PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
 		<PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.6" />
-		<PackageReference Include="Microsoft.Graph.Beta" Version="0.35.0-preview" />
+		<PackageReference Include="Microsoft.Graph.Beta" Version="5.107.0-preview" />
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
 	</ItemGroup>

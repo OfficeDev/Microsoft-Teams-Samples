@@ -1,44 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Graph;
+using Microsoft.Graph.Beta;
 using Microsoft.Identity.Client;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace TabActivityFeed
 {
     public class SimpleGraphClient
     {
-        public static GraphServiceClient GetGraphClient(string accessToken)
+
+        /// <summary>
+        ///Get Authenticated Client
+        /// </summary>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
             {
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+                _accessToken = accessToken;
+            }
 
-                requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
 
-                return Task.CompletedTask;
-            }));
-
-            return graphClient;
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
         }
 
-        public static GraphServiceClient GetGraphClientforApp(string appId, string appPassword, string tenantId)
+        public static GraphServiceClient GetAuthenticatedClient(string accessToken)
         {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
-            {
-                // get an access token for Graph
-                var accessToken = GetAccessToken(appId, appPassword, tenantId).Result;
+            var tokenProvider = new SimpleAccessTokenProvider(accessToken);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                requestMessage
-                    .Headers
-                    .Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+            return new GraphServiceClient(authProvider);
+        }
 
-                return Task.FromResult(0);
-            }));
+        public static GraphServiceClient GetAuthenticatedClientforApp(string appId, string appPassword, string tenantId)
+        {
+            var accessToken = GetAccessToken(appId, appPassword, tenantId).Result;
+            var tokenProvider = new SimpleAccessTokenProvider(accessToken);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
 
         private static async Task<string> GetAccessToken(string appId, string appPassword, string tenantId)

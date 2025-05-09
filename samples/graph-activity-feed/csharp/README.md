@@ -82,8 +82,10 @@ This sample application demonstrates how to utilize the Microsoft Graph API to s
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadForUser.All`
     - `TeamsTab.Read.All`
+	- `ChannelSettings.Read.All`
+	- `TeamsTab.ReadWriteForTeam`
 
-     **Note** Your need to add `TeamsActivity.Send` as Application level permissions
+     Also add `TeamsActivity.Send` as Application level permissions
 
     - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
     - Navigate to **Authentication**
@@ -196,6 +198,13 @@ Teams Activity feed notification API uses activity to which user want a notifica
 
 ![image](Images/ActivityFeedNotification.png)
 
+
+**Custom Activity Icons**
+
+The app demonstrates a feature that allows developers to configure custom activity icons in personal, groupChat, channel scopes for various activities displayed in the activity feed. To test this feature, install the app in personal scope, log in with the user from whom you want to send the notification, fill out the form, and send a notification. You will observe the activity displayed with a custom icon. Also, go to the following line of code in the server.js file:
+Please make sure to replace {userId} with the ID of the user to whom you want to send the notification in HomeController file. (Object Id of user from azure portal)
+
+![team-custom-notification ](Images/custom-activity-icon.png)
 
 ## Further reading
 

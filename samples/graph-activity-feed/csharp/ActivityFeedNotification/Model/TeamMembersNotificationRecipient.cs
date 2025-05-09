@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graph;
+using Microsoft.Graph.Beta.Models;
 using Newtonsoft.Json;
 
 namespace TabActivityFeed.Model
@@ -20,7 +21,7 @@ namespace TabActivityFeed.Model
         /// </summary>
         public TeamMembersNotificationRecipient()
         {
-            ODataType = "microsoft.graph.teamMembersNotificationRecipient";
+            OdataType = "microsoft.graph.teamMembersNotificationRecipient";
         }
     }
 }
