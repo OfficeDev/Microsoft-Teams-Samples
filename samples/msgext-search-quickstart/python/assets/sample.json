@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-quickstart/python/Images/msgext-search-quickstart.gif",
-        "alt": "Solution UX showing search messaging extension- teams toolkit"
+        "alt": "Solution UX showing search messaging extension- Microsoft 365 Agents Toolkit"
       }
     ],
     "authors": [

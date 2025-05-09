@@ -43,7 +43,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
-- [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 - [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) if on macOS (`brew install --cask powershell`)
 - [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal)
@@ -142,12 +142,12 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     
 Note: provide admin consent for the permissions once added by clicking on the "Grant admin consent for `<<tenant-name>>"` button.
     
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Clone the repository
 
     ```bash
@@ -158,9 +158,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-> When the application is running for the first time, the Teams toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
+> When the application is running for the first time, the Microsoft 365 Agents Toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
 
 ## Running the sample
 

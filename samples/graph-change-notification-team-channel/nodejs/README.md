@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 # Change Notifications For Team and Channel Using Microsoft Graph Node.js
 
-This sample application showcases how to utilize team and channel subscriptions in Microsoft Teams to send real-time notifications for various user actions, such as creating, editing, or deleting teams and channels. Built with Node.js and Microsoft Graph API, this application includes comprehensive setup instructions, covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Teams Toolkit for Visual Studio Code.
+This sample application showcases how to utilize team and channel subscriptions in Microsoft Teams to send real-time notifications for various user actions, such as creating, editing, or deleting teams and channels. Built with Node.js and Microsoft Graph API, this application includes comprehensive setup instructions, covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs
@@ -34,21 +34,21 @@ This sample application showcases how to utilize team and channel subscriptions 
 -  [NodeJS](https://nodejs.org/en/)
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Before running this sample using toolkit, we need to update the .env file values in your code for 'Base64EncodedCertificate' and 'PRIVATE_KEY_PATH'. Follow this documentation for the steps to get the values  - [Create and install Self-Signed certificate](CertificateDocumentation/README.md)
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 **Note:** Please create and install self-signed certificate before running this sample using toolkit or manually.
 
@@ -123,7 +123,7 @@ To include resource data of graph notifications, this Graph API require self-sig
     2. Provide the tunnel url as  "BaseUrl" in appsetting on which application is running on.
     3. You should be having Base64EncodedCertificate from *Create and install Self-Signed certificate* step.
     4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
-    **Note** : ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run application by teams toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
+    **Note** : ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run application by Microsoft 365 Agents Toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
 
   - Install node modules
 

@@ -61,8 +61,8 @@
                 "url": "https://aka.ms/extendcopilotm365"
             },
             {
-                "name": "Teams Toolkit for Visual Studio Code",
-                "description": "Learn more about the Teams Toolkit for Visual Studio Code.",
+                "name": "Microsoft 365 Agents Toolkit for Visual Studio Code",
+                "description": "Learn more about the Microsoft 365 Agents Toolkit for Visual Studio Code.",
                 "url": "https://learn.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals?pivots=visual-studio-code-v5"
             }
         ]
