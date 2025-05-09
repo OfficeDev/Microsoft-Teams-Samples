@@ -29,7 +29,7 @@ If you copy and paste a link from `https://github.com/OfficeDev/Microsoft-Teams-
 ![msgext-unfurling-ac-loop-components](Images/msgext-unfurling-ac-loop-components.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Msgext-Unfurling-Adaptive-Card-Loop-Components:** [Manifest](/samples/msgext-unfurling-ac-loop-components/csharp/demo-manifest/msgext-unfurling-ac-loop-components.zip)
 
@@ -51,7 +51,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
 1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 
 ## Run the sample locally
@@ -168,7 +168,7 @@ the Teams service needs to call into the bot.
 **After opening Outlook web, click the "New mail" button:**
 ![1.OutlookClickmail](Images/1.OutlookClickmail.png)
 
-**On the tool bar on top,select Apps icon. Your sideloaded app title appears among your installed apps:**
+**On the tool bar on top,select Apps icon. Your uploaded app title appears among your installed apps:**
 ![2.OutlookOpenApp](Images/2.OutlookOpenApp.png)
 
 **Select your app icon:**

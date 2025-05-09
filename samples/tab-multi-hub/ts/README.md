@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### 1. Register you app with Azure AD
 
@@ -165,7 +165,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![InstallApp](Images/1.png)
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps:**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps:**
 
 ![AppOutlook](Images/2.png)
 
@@ -215,7 +215,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps:**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps:**
 
 ![EnterEmail](Images/14.png)
 
@@ -231,7 +231,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ## Running the sample  - Mobile
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps:**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps:**
 
 ![InstallApp](Images/mobile/Mobile0.png)
 

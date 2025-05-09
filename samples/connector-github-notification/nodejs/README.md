@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-github-notification-nod
 
 # GitHub Connector for Microsoft Teams
 
-This sample illustrates how to develop a GitHub connector for Microsoft Teams using Node.js, allowing teams to receive GitHub notifications directly within their Teams channels. The setup guides you through creating an OAuth application on GitHub, configuring a tunnel for local testing, and sideloading the connector into Teams, making it convenient to monitor GitHub activities.
+This sample illustrates how to develop a GitHub connector for Microsoft Teams using Node.js, allowing teams to receive GitHub notifications directly within their Teams channels. The setup guides you through creating an OAuth application on GitHub, configuring a tunnel for local testing, and uploading the connector into Teams, making it convenient to monitor GitHub activities.
  
 #### Prerequisites
 1. Register a new OAuth application at GitHub. Note the GitHub client id and secret.
@@ -37,7 +37,7 @@ This sample illustrates how to develop a GitHub connector for Microsoft Teams us
 ### How to Run
  - install all the dependencies through npm install.
  - run node server.js.
- - Zip manifest.json file and sideload to any team. Alternative you can set your own connector at Microsoft connector portal (https://outlook.office.com/connectors/publish) and follow instructions here to get a new connector for microsoft teams ( https://msdn.microsoft.com/en-us/microsoft-teams/connectors).
+ - Zip manifest.json file and Upload to any team. Alternative you can set your own connector at Microsoft connector portal (https://outlook.office.com/connectors/publish) and follow instructions here to get a new connector for microsoft teams ( https://msdn.microsoft.com/en-us/microsoft-teams/connectors).
 
 ## Contributing
 
