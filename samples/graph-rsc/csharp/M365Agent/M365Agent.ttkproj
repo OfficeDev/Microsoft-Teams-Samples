@@ -4,8 +4,8 @@
     <ProjectGuid>49ddf71f-a20a-4a48-83dc-6651af16286f</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="m365agent.local.yml" />
-    <None Include="m365agent.yml" />
+    <None Include="m365agents.local.yml" />
+    <None Include="m365agents.yml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectCapability Include="ProjectConfigurationsDeclaredDimensions" />
