@@ -47,6 +47,10 @@
                 {
                     "id": "TeamsActivity.Send",
                     "type": "Scope"
+                },
+                {
+                    "id": "TeamsTab.Read.All",
+                    "type": "Scope"
                 }
             ]
         }
@@ -118,10 +122,6 @@
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{TAB_ENDPOINT}}/UserNotification.ejs",
-            "type": "Web"
-        },
-        {
             "url": "${{TAB_ENDPOINT}}/auth-end.html",
             "type": "Web"
         },
@@ -131,10 +131,6 @@
         },
         {
             "url": "${{TAB_ENDPOINT}}/auth-end",
-            "type": "Spa"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/UserNotification",
             "type": "Spa"
         }
     ]

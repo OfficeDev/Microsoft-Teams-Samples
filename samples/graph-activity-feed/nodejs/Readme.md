@@ -173,11 +173,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Custom Activity Icons**
 
-The app demonstrates a feature that allows developers to configure custom activity icons for various activities displayed in the activity feed. To test this feature, install the app in personal scope, log in with the user from whom you want to send the notification, fill out the form, and send a notification. You will observe the activity displayed with a custom icon. Also, go to the following line of code in the server.js file:
-```js
-axios.post("https://graph.microsoft.com/beta/users/{userId}/teamwork/sendactivitynotification")
-```
-Replace {userId} with the ID of the user to whom you want to send the notification. (Object Id of user from azure portal)
+The app demonstrates a feature that allows developers to configure custom activity icons for various activities displayed in the activity feed. To test this feature, Replace UserId with the ID of the user to whom you want to send the notification in the .env file (Object Id of user from azure portal) and then install the app in personal scope, groupChat or team log in with the user from whom you want to send the notification, fill out the form, and send a notification. You will observe the activity displayed with a custom icon.
+
 
 
 ![custom-activity-icon](Images/custom-activity-icon.png)
