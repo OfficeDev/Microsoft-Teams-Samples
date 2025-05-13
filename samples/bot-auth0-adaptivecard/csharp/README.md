@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "04/30/2019 13:38:25 PM"
+ createdDate: "05/13/2025 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-auth0-adaptivecard-csharp
 ---
 
@@ -29,6 +29,7 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [Auth0](https://auth0.com)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
