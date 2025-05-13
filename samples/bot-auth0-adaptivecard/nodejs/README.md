@@ -29,6 +29,7 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
+- [Auth0](https://auth0.com)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -72,6 +73,27 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
+## Setup Auth0 Application
+__*Create an Auth0 Application:*__
+    - Go to [Auth0 Dashboard](https://manage.auth0.com/).
+    - Navigate to `Applications > Applications`, then click `Create Application`.
+    - Choose Regular Web Applications and give it a name (e.g., Teams Bot App)
+
+__*Configure Application Settings:*__
+    - Under `Settings`, set the following:
+    
+    **Allowed Callback URLs:**
+
+    ```bash
+    Allowed Callback URLs:https://<your-domain>/api/auth/callback
+    ```
+    Replace <your-domain> with your bot's public URL (e.g., dev tunnel or Azure URL).
+    
+    **Get Your Auth0 Credentials:**
+    - Copy the Domain, Client ID, and Client Secret from the application settings.
+    - Add them to your project configuration (appsettings.json or IConfiguration).
+
+
 ## Setup for code
 1) Clone the repository
 
@@ -89,6 +111,10 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
  - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+ - In addition, add your Auth0 configuration details:
+   AUTH0_CLIENT_ID: Found in your Auth0 application settings.
+   AUTH0_CLIENT_SECRET: Found in your Auth0 application settings.
+   AUTH0_DOMAIN: Your Auth0 domain (e.g., your-tenant.auth0.com)
 
 1) Run your bot at the command line:
 
