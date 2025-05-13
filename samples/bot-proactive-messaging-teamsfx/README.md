@@ -21,9 +21,9 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
     PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN=sample-id-3978.devtunnels.ms
     PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT=https://sample-id-3978.devtunnels.ms
     ```
-  - Executing the command `teamsapp provision --env local` in your project directory.
-  - Executing the command `teamsapp deploy --env local` in your project directory.
-  - Executing the command `teamsapp preview --env local --run-command "cd bot; npm run dev:teamsapp"` in your project directory.
+  - Executing the command `atk provision --env local` in your project directory.
+  - Executing the command `atk deploy --env local` in your project directory.
+  - Executing the command `atk preview --env local --run-command "cd bot; npm run dev:atk"` in your project directory.
 
 **Note**: If deploying or provisioning the sample, please replace line 9 of file `bot/teamsBot.js` with .env.dev. (By default its set to `.env.local`)
 
@@ -46,7 +46,7 @@ Deploy your project to Azure by following these steps:
 
 | From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From Microsoft 365 Agents Toolkit CLI                                                                                                                                                                                                                    |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Open Microsoft 365 Agents Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Microsoft 365 Agents Toolkit and click `Provision in the cloud` from DEVELOPMENT section or open the command palette and select: `Teams: Provision in the cloud`.</li><li>Open the Microsoft 365 Agents Toolkit and click `Deploy to the cloud` or open the command palette and select: `Teams: Deploy to the cloud`.</li></ul> | <ul> <li>Run command `teamsapp account login azure`.</li> <li>Run command `teamsapp account set --subscription <your-subscription-id>`.</li> <li> Run command `teamsapp provision`.</li> <li>Run command: `teamsapp deploy`. </li></ul> |
+| <ul><li>Open Microsoft 365 Agents Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Microsoft 365 Agents Toolkit and click `Provision in the cloud` from DEVELOPMENT section or open the command palette and select: `Microsoft 365 Agents:Provision in the cloud`.</li><li>Open the Microsoft 365 Agents Toolkit and click `Deploy to the cloud` or open the command palette and select: `Microsoft 365 Agents:Deploy to the cloud`.</li></ul> | <ul> <li>Run command ` account login azure`.</li> <li>Run command ` account set --subscription <your-subscription-id>`.</li> <li> Run command ` provision`.</li> <li>Run command: ` deploy`. </li></ul> |
 
 > Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
@@ -60,26 +60,26 @@ Once the provisioning and deployment steps are finished, you can preview your ap
   1. Select `Launch Remote (Edge)` or `Launch Remote (Chrome)` from the launch configuration drop-down.
   1. Press the Play (green arrow) button to launch your app - now running remotely from Azure.
 
-- From Microsoft 365 Agents Toolkit CLI: execute `teamsapp preview --env dev` in your project directory to launch your application.
+- From Microsoft 365 Agents Toolkit CLI: execute ` preview --env dev` in your project directory to launch your application.
 
 ## Validate manifest file
 
 To check that your manifest file is valid:
 
-- From Visual Studio Code: open the command palette and select: `Teams: Validate manifest file`.
-- From Microsoft 365 Agents Toolkit CLI: run command `teamsapp validate` in your project directory.
+- From Visual Studio Code: open the command palette and select: `Microsoft 365 Agents:Validate manifest file`.
+- From Microsoft 365 Agents Toolkit CLI: run command ` validate` in your project directory.
 
 ## Package
 
-- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Zip Teams metadata package` or open the command palette and select `Teams: Zip Teams metadata package`.
-- Alternatively, from the command line run `teamsapp package` in the project directory.
+- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Zip Teams metadata package` or open the command palette and select `Microsoft 365 Agents:Zip Teams metadata package`.
+- Alternatively, from the command line run ` package` in the project directory.
 
 ## Publish to Teams
 
 Once deployed, you may want to distribute your application to your organization's internal app store in Teams. Your app will be submitted for admin approval.
 
-- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Publish to Teams` or open the command palette and select: `Teams: Publish to Teams`.
-- From Microsoft 365 Agents Toolkit CLI: run command `teamsapp publish` in your project directory.
+- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Publish to Teams` or open the command palette and select: `Microsoft 365 Agents:Publish to Teams`.
+- From Microsoft 365 Agents Toolkit CLI: run command ` publish` in your project directory.
 
 ## Play with the App
 
