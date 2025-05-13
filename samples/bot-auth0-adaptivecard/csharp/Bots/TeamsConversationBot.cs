@@ -34,8 +34,6 @@ namespace Microsoft.BotBuilderSamples.Bots
         private string _authClientId;
         private readonly TokenStore _authToken;
         private readonly IHttpClientFactory _clientFactory;
-        private static int _counter = 0;
-
         public TeamsConversationBot(IConfiguration config, IHttpClientFactory clientFactory, TokenStore tokenStore)
         {
             _authDomain = config["Auth0:Domain"];
