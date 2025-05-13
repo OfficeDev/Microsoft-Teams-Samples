@@ -79,6 +79,12 @@ deploy:
     with:
       workingDirectory: ./client
       args: install --no-audit
+      
+  # Run npm command for client
+  - uses: cli/runNpmCommand
+    with:
+      workingDirectory: ./client
+      args: run build
 
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
