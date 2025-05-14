@@ -1,0 +1,7 @@
+{
+	"name": "bot-formatting-cards-container-nodejs",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "nodejs",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/bot-formatting-cards/nodejs"
+}
