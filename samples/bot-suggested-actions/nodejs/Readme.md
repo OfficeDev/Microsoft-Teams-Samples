@@ -126,9 +126,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Red](Images/3.Red.png)
 
-![Yellow](Images/4.Yellow.png)
+![Blue](Images/4.Blue.png)
 
-![Blue](Images/5.Blue.png)
+## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
+![Action.Compose](Images/5.Action.Compose.png)
 
 ## Deploy the bot to Azure
 

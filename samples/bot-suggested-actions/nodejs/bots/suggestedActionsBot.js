@@ -59,8 +59,57 @@ class SuggestedActionsBot extends ActivityHandler {
     async sendSuggestedActions(turnContext) {
         const cardActions = [
             { type: ActionTypes.ImBack, title: 'Red', value: 'Red' },
-            { type: ActionTypes.ImBack, title: 'Yellow', value: 'Yellow' },
-            { type: ActionTypes.ImBack, title: 'Blue', value: 'Blue' }
+            { type: ActionTypes.ImBack, title: 'Blue', value: 'Blue' },
+            {
+                type: "Action.Compose",
+                title: "@Facilitator",
+                value: {
+                    type: "Teams.chatMessage",
+                    data: {
+                        body: {
+                            additionalData: {},
+                            backingStore: {
+                                returnOnlyChangedValues: false,
+                                initializationCompleted: true
+                            },
+                            content: "<at id=\"0\">Facilitator</at>"
+                        },
+                        mentions: [
+                            {
+                                additionalData: {},
+                                backingStore: {
+                                    "returnOnlyChangedValues": false,
+                                    "initializationCompleted": false
+                                },
+                                id: 0,
+                                mentioned: {
+                                    additionalData: {},
+                                    backingStore: {
+                                        returnOnlyChangedValues: false,
+                                        initializationCompleted: false
+                                    },
+                                    odataType: "#microsoft.graph.chatMessageMentionedIdentitySet",
+                                    user: {
+                                        additionalData: {},
+                                        backingStore: {
+                                            returnOnlyChangedValues: false,
+                                            initializationCompleted: false
+                                        },
+                                        displayName: "Facilitator",
+                                        id: "28:8e55a7b1-6766-4f0a-8610-ecacfe3d569a"
+                                    }
+                                },
+                                mentionText: "Facilitator"
+                            }
+                        ],
+                        additionalData: {},
+                        backingStore: {
+                            returnOnlyChangedValues: false,
+                            initializationCompleted: true
+                        }
+                    }
+                }
+            }
         ];
 
         const reply = MessageFactory.text('What is your favorite color?');

@@ -60,7 +60,56 @@ class SuggestedActionsBot(ActivityHandler):
             actions=[
                 CardAction(type=ActionTypes.im_back, title="Red", value="Red"),
                 CardAction(type=ActionTypes.im_back, title="Blue", value="Blue"),
-                CardAction(type=ActionTypes.im_back, title="Yellow", value="Yellow"),
+                CardAction(
+                    type="Action.Compose",
+                    title="@Facilitator",
+                    value={
+                        "type": "Teams.chatMessage",
+                        "data": {
+                            "body": {
+                                "additionalData": {},
+                                "backingStore": {
+                                    "returnOnlyChangedValues": False,
+                                    "initializationCompleted": True
+                                },
+                                "content": "<at id=\"0\">Facilitator</at>"
+                            },
+                            "mentions": [
+                                {
+                                    "additionalData": {},
+                                    "backingStore": {
+                                        "returnOnlyChangedValues": False,
+                                        "initializationCompleted": False
+                                    },
+                                    "id": 0,
+                                    "mentioned": {
+                                        "additionalData": {},
+                                        "backingStore": {
+                                            "returnOnlyChangedValues": False,
+                                            "initializationCompleted": False
+                                        },
+                                        "odataType": "#microsoft.graph.chatMessageMentionedIdentitySet",
+                                        "user": {
+                                            "additionalData": {},
+                                            "backingStore": {
+                                                "returnOnlyChangedValues": False,
+                                                "initializationCompleted": False
+                                            },
+                                            "displayName": "Facilitator",
+                                            "id": "28:8e55a7b1-6766-4f0a-8610-ecacfe3d569a"
+                                        }
+                                    },
+                                    "mentionText": "Facilitator"
+                                }
+                            ],
+                            "additionalData": {},
+                            "backingStore": {
+                                "returnOnlyChangedValues": False,
+                                "initializationCompleted": True
+                            }
+                        }
+                    }
+                )
             ]
         )
         reply = MessageFactory.text("What is your favorite color?")
