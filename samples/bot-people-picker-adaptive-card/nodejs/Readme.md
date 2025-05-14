@@ -116,19 +116,19 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Peoplepickercard command interaction:**
 
-![people picker card ](Images/adaptiveCard.png)
+![people picker card ](Images/people-picker-card.png)
 
 **Personal scope get all the users of organisation:**
 
-![people picker card ](Images/personalPeoplePickerCard.png)
+![people picker card ](Images/people-picker-info.png)
 
 **Team or groupchat scope get user list to current context:**
 
-![people picker card](Images/channelPeoplePickerCard.png)
+![people picker card](Images/people-picker-id.png)
 
 **On Assign button click the bot will return the member id that we have selected:**
 
-![Task Assign](Images/TaskAssign.png)
+![Task Assign](Images/people-picker-info.png)
 
 ## Deploy the bot to Azure
 
