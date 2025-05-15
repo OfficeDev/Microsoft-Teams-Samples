@@ -6,10 +6,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Remove="TeamsApp\**" />
-    <Content Remove="TeamsApp\**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
-    <None Remove="TeamsApp\**" />
+    <Compile Remove="M365Agent\**" />
+    <Content Remove="M365Agent\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
+    <None Remove="M365Agent\**" />
   </ItemGroup>
 
   <ItemGroup>
