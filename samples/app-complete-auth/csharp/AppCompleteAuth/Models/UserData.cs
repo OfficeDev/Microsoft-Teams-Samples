@@ -3,6 +3,7 @@
 // </copyrightusing Microsoft.Graph;
 
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace AppCompleteAuth.Models
 {

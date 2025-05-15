@@ -7,6 +7,7 @@ namespace ChatLifecycle.Controllers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
     using AdaptiveCards.Templating;
@@ -17,7 +18,7 @@ namespace ChatLifecycle.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Graph;
-
+    using Microsoft.Graph.Models;
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -72,36 +73,31 @@ namespace ChatLifecycle.Controllers
         
        
         [Route("GetAdaptiveCard")]
-        public string GetAdaptiveCard(string token)
+        public async Task<string> GetAdaptiveCard(string token)
         {
             var graphClient = GraphClient.GetGraphClient(token);
-            var users = graphClient.Users
-            .Request()
-            .GetAsync().Result;
+            var users = await graphClient.Users.GetAsync();
 
             string adaptiveCardJson = "{ \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\", \"type\": \"AdaptiveCard\", \"version\": \"1.0\", \"body\": [{ \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"Group Chat Title: \", \"wrap\": true }], \"width\": \"auto\" }, { \"type\": \"Column\", \"items\": [{ \"type\": \"Input.Text\", \"placeholder\": \"Please enter the title of GroupChat\", \"wrap\": true, \"id\": \"title\" }], \"width\": \"stretch\" }] }, { \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"Select Members: \", \"wrap\": true }], \"width\": \"auto\" }, { \"type\": \"Column\", \"items\": [{ \"type\": \"Input.ChoiceSet\", \"id\": \"users\", \"style\": \"compact\", \"isMultiSelect\": true, \"value\": \"\", \"choices\": [{ \"title\":  \"${user1Title}\", \"value\":  \"${user1Value}\" }, { \"title\": \"${user2Title}\", \"value\": \"${user2Value}\" }, { \"title\": \"${user3Title}\", \"value\": \"${user3Value}\" }, { \"title\": \"${user4Title}\", \"value\": \"${user4Value}\" }, { \"title\": \"${user5Title}\", \"value\": \"${user5Value}\" }, { \"title\": \"${user6Title}\", \"value\": \"${user6Value}\" }] }] }] }, { \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"\", \"wrap\": true, \"height\": \"stretch\" }], \"width\": \"stretch\" }] },{ \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"\", \"wrap\": true, \"height\": \"stretch\" }], \"width\": \"stretch\" }] },{ \"type\": \"ColumnSet\", \"columns\": [ { \"type\": \"Column\", \"items\": [ { \"type\": \"TextBlock\", \"text\": \"**Note**: Selected Members will be added into a group chat and based on the count selected, members will be added to the chat using different scenarios: with all chat history, no chat history, chat history with no. of days accordingly.\", \"height\": \"stretch\", \"wrap\": true } ], \"width\": \"stretch\" } ] } ], \"actions\": [{ \"type\": \"Action.Submit\", \"title\": \"Submit\", \"card\": { \"version\": 1.0, \"type\": \"AdaptiveCard\", \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\" } }] }";
 
-            // Create a Template instance from the template payload
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
 
-            // You can use any serializable object as your data
             var payloadData = new
             {
-                user1Title = users.CurrentPage[0].DisplayName,
-                user1Value = users.CurrentPage[0].Id,
-                user2Title = users.CurrentPage[1].DisplayName,
-                user2Value = users.CurrentPage[1].Id,
-                user3Title = users.CurrentPage[2].DisplayName,
-                user3Value = users.CurrentPage[2].Id,
-                user4Title = users.CurrentPage[3].DisplayName,
-                user4Value = users.CurrentPage[3].Id,
-                user5Title = users.CurrentPage[4].DisplayName,
-                user5Value = users.CurrentPage[4].Id,
-                user6Title = users.CurrentPage[5].DisplayName,
-                user6Value = users.CurrentPage[5].Id,
+                user1Title = users.Value[0].DisplayName,
+                user1Value = users.Value[0].Id,
+                user2Title = users.Value[1].DisplayName,
+                user2Value = users.Value[1].Id,
+                user3Title = users.Value[2].DisplayName,
+                user3Value = users.Value[2].Id,
+                user4Title = users.Value[3].DisplayName,
+                user4Value = users.Value[3].Id,
+                user5Title = users.Value[4].DisplayName,
+                user5Value = users.Value[4].Id,
+                user6Title = users.Value[5].DisplayName,
+                user6Value = users.Value[5].Id,
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
             string cardJson = template.Expand(payloadData);
             return cardJson;
         }
@@ -130,7 +126,7 @@ namespace ChatLifecycle.Controllers
             {
                 ChatType = ChatType.Group,
                 Topic = title,
-                Members = new ChatMembersCollectionPage()
+                Members = new List<ConversationMember>()
                 {
                       new AadUserConversationMember
                       {
@@ -158,8 +154,7 @@ namespace ChatLifecycle.Controllers
             };
 
             var response = await graphClient.Chats
-                 .Request()
-                 .AddAsync(chat);
+                 .PostAsync(chat);
 
             if (members.Length == 2)
             {
@@ -193,8 +188,7 @@ namespace ChatLifecycle.Controllers
             };
 
             await graphClient.Chats[response.Id].InstalledApps
-                .Request()
-                .AddAsync(teamsAppInstallation);
+                .PostAsync(teamsAppInstallation);
 
 
             //Adding Polly as tab to chat
@@ -215,8 +209,7 @@ namespace ChatLifecycle.Controllers
             };
 
             await graphClient.Chats[response.Id].Tabs
-                .Request()
-                .AddAsync(teamsTab);
+                .PostAsync(teamsTab);
         }
 
     
@@ -233,8 +226,7 @@ namespace ChatLifecycle.Controllers
             };
 
             await graphClient.Chats[response.Id].Members
-                .Request()
-                .AddAsync(conversationMember);
+                .PostAsync(conversationMember);
         }
 
         public async void AddMemberWithoutHistory(GraphServiceClient graphClient, Chat response, string[] members)
@@ -249,8 +241,7 @@ namespace ChatLifecycle.Controllers
             };
 
             await graphClient.Chats[response.Id].Members
-                .Request()
-                .AddAsync(conversationMember);
+                .PostAsync(conversationMember);
         }
 
         public async void AddMemberWithNoOfDays(GraphServiceClient graphClient, Chat response, string[] members)
@@ -268,8 +259,7 @@ namespace ChatLifecycle.Controllers
                 };
 
                 await graphClient.Chats[response.Id].Members
-                    .Request()
-                    .AddAsync(conversationMember);
+                    .PostAsync(conversationMember);
             }
             else
             {
@@ -286,8 +276,7 @@ namespace ChatLifecycle.Controllers
                     };
 
                     await graphClient.Chats[response.Id].Members
-                        .Request()
-                        .AddAsync(conversationMember);
+                        .PostAsync(conversationMember);
                 }
             }
         }
@@ -295,13 +284,13 @@ namespace ChatLifecycle.Controllers
         public async void DeleteMember(GraphServiceClient graphClient, Chat response)
         {
             var chat = await graphClient.Chats[response.Id]
-                .Request()
-                .Expand("members")
-                .GetAsync();
-            var convMemID = chat.Members.CurrentPage[0].Id;
+                .GetAsync(requestConfiguration =>
+                {
+                    requestConfiguration.QueryParameters.Expand = new[] { "members" };
+                });
+            var convMemID = chat.Members.FirstOrDefault()?.Id;
 
             await graphClient.Chats[response.Id].Members[convMemID]
-                .Request()
                 .DeleteAsync();
         }
 
