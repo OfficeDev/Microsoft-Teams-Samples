@@ -1,25 +1,20 @@
-﻿// <copyright file="GraphHelper.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
+﻿using Microsoft.Extensions.Options;
+using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Identity.Client;
+using Microsoft.Kiota.Abstractions.Authentication;
+using ReleaseManagement.Models.Configuration;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ReleaseManagement.Helpers
 {
-    using Microsoft.Extensions.Options;
-    using Microsoft.Graph;
-    using Microsoft.Identity.Client;
-    using ReleaseManagement.Models.Configuration;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Net.Http.Headers;
-    using System.Threading.Tasks;
-
     public class GraphHelper
     {
-        /// <summary>
-        /// Stores the Azure configuration values.
-        /// </summary>
         private readonly IOptions<AzureSettings> azureSettings;
 
         public GraphHelper(IOptions<AzureSettings> azureSettings)
@@ -28,202 +23,180 @@ namespace ReleaseManagement.Helpers
         }
 
         /// <summary>
-        /// Get client to call graph API.
+        /// Generates an authenticated GraphServiceClient using a token.
         /// </summary>
-        /// <param name="token">Application token.</param>
-        /// <returns>Graph client.</returns>
-        public GraphServiceClient GetAuthenticatedClient(string token)
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+            private readonly string _accessToken;
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
 
-                        return Task.CompletedTask;
-                    }
-                )
-            );
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
 
-            return graphClient;
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
+        private GraphServiceClient GetAuthenticatedClient(string token)
+        {
+            var tokenProvider = new SimpleAccessTokenProvider(token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
+
+            return new GraphServiceClient(authProvider);
         }
 
         /// <summary>
-        /// Gets application token.
+        /// Acquires an access token using client credentials.
         /// </summary>
-        /// <returns>Application token.</returns>
         public async Task<string> GetToken()
         {
-            IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(this.azureSettings.Value.MicrosoftAppId)
-                                                    .WithClientSecret(this.azureSettings.Value.MicrosoftAppPassword)
-                                                    .WithAuthority($"https://login.microsoftonline.com/{this.azureSettings.Value.MicrosoftAppTenantId}")
-                                                    .WithRedirectUri("https://daemon")
-                                                    .Build();
+            var app = ConfidentialClientApplicationBuilder
+                .Create(azureSettings.Value.MicrosoftAppId)
+                .WithClientSecret(azureSettings.Value.MicrosoftAppPassword)
+                .WithAuthority($"https://login.microsoftonline.com/{azureSettings.Value.MicrosoftAppTenantId}")
+                .Build();
 
-            // TeamsAppInstallation.ReadWriteForChat.All Chat.Create User.Read.All TeamsAppInstallation.ReadWriteForChat.All
-            string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
+            var scopes = new[] { "https://graph.microsoft.com/.default" };
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
 
             return result.AccessToken;
         }
 
         /// <summary>
-        /// Install application in user Group chat
+        /// Installs a Teams app in a group chat.
         /// </summary>
-        /// <param name="GroupId">Id of group.</param>
-        public async Task AppinstallationforGroupAsync(string GroupId)
+        public async Task AppinstallationforGroupAsync(string groupId)
         {
-            string access_Token = await GetToken();
-            GraphServiceClient graphClient = GetAuthenticatedClient(access_Token);
+            var token = await GetToken();
+            var graphClient = GetAuthenticatedClient(token);
 
             try
             {
                 var appInternalId = await GetApplicationInternalId(graphClient);
-                var userScopeTeamsAppInstallation = new UserScopeTeamsAppInstallation
+
+                var installation = new TeamsAppInstallation
                 {
-                    AdditionalData = new Dictionary<string, object>()
+                    AdditionalData = new Dictionary<string, object>
                     {
-                        {"teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{appInternalId}"}
+                        ["teamsApp@odata.bind"] = $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{appInternalId}"
                     }
                 };
 
-                await graphClient.Chats[GroupId].InstalledApps
-                    .Request()
-                    .AddAsync(userScopeTeamsAppInstallation);
+                await graphClient.Chats[groupId].InstalledApps.PostAsync(installation);
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (Exception ex)
             {
-               throw ex;
+                Console.WriteLine($"[AppinstallationforGroupAsync] {ex.Message}");
+                throw;
             }
         }
 
         /// <summary>
-        /// Creates group chat.
+        /// Creates a new group chat and returns the chat ID.
         /// </summary>
-        /// <param name="userMails">Members mail to be added in group chat.</param>
-        /// <param name="groupTitle">Title of group chat.</param>
-        /// <returns>Created chat details.</returns>
         public async Task<string> CreateGroupChatAsync(IEnumerable<string> userMails, string groupTitle)
         {
-            string accessToken = await GetToken();
-            GraphServiceClient graphClient = GetAuthenticatedClient(accessToken);
-            var retry = 1;
-            do
+            var token = await GetToken();
+            var graphClient = GetAuthenticatedClient(token);
+
+            int retry = 0;
+            const int maxRetries = 5;
+
+            while (retry < maxRetries)
             {
                 try
                 {
-                    var chatMembersCollectionPage = new ChatMembersCollectionPage();
-                    foreach (var mail in userMails.Distinct())
-                    {
-                        chatMembersCollectionPage.Add((ConversationMember)new AadUserConversationMember
+                    var members = userMails
+                        .Distinct()
+                        .Select(mail => new AadUserConversationMember
                         {
-                            Roles = new List<String>()
-                        {
-                            "owner"
-                        },
-                            AdditionalData = new Dictionary<string, object>()
-                        {
-                            {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users/{mail}"}
-                        }
-                        });
-                    }
+                            Roles = new List<string> { "owner" },
+                            AdditionalData = new Dictionary<string, object>
+                            {
+                                ["user@odata.bind"] = $"https://graph.microsoft.com/v1.0/users/{mail}"
+                            }
+                        }).Cast<ConversationMember>().ToList();
 
                     var chat = new Chat
                     {
                         ChatType = ChatType.Group,
                         Topic = groupTitle,
-                        Members = chatMembersCollectionPage
+                        Members = members
                     };
 
-                    return (await graphClient.Chats
-                        .Request()
-                        .AddAsync(chat)).Id;
+                    var createdChat = await graphClient.Chats.PostAsync(chat);
+                    return createdChat?.Id;
                 }
-                catch (Microsoft.Graph.ServiceException ex)
+                catch (Exception ex)
                 {
                     retry++;
-                    Console.WriteLine(ex.Message);
-                    continue;
+                    Console.WriteLine($"[CreateGroupChatAsync] Retry {retry}: {ex.Message}");
                 }
             }
-            while (retry < 6);
-            return "";
+
+            return string.Empty;
         }
 
         /// <summary>
-        /// Gets the user profile by user principal name.
+        /// Gets a user's profile picture in base64 format.
         /// </summary>
-        /// <param name="userPrincipalName">User principal name</param>
-        /// <returns>User profile pictrue in base64 format.</returns>
-        public async Task<string> GetProfilePictureByUserPrincipalNameAsync (string userPrincipalName)
+        public async Task<string> GetProfilePictureByUserPrincipalNameAsync(string userPrincipalName)
         {
-            string accessToken = await GetToken();
-            GraphServiceClient graphClient = GetAuthenticatedClient(accessToken);
+            var token = await GetToken();
+            var graphClient = GetAuthenticatedClient(token);
+
             try
             {
-                var userInfo = await graphClient.Users[userPrincipalName]
-                .Request()
-                .GetAsync();
+                var user = await graphClient.Users[userPrincipalName].GetAsync();
+                if (user == null) return string.Empty;
 
-                var stream = await graphClient.Users[userInfo.Id].Photo.Content
-                .Request()
-                .GetAsync();
+                var stream = await graphClient.Users[user.Id].Photo.Content.GetAsync();
+                if (stream == null) return string.Empty;
 
-                var picture = this.ReadFully(stream);
-                var base64String = Convert.ToBase64String(picture);
-                var imageUrl = "data:image/png;base64," + base64String;
-
-                return imageUrl;
+                var bytes = ReadFully(stream);
+                return $"data:image/png;base64,{Convert.ToBase64String(bytes)}";
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return "";
+                Console.WriteLine($"[GetProfilePictureByUserPrincipalNameAsync] {ex.Message}");
+                return string.Empty;
             }
         }
 
         /// <summary>
-        /// Converts binary stream to byte array.
+        /// Gets the internal Teams app ID by its external (client) ID.
         /// </summary>
-        /// <param name="input">input stream.</param>
-        /// <returns>byte array.</returns>
-        private byte[] ReadFully(Stream input)
-        {
-            byte[] buffer = new byte[input.Length];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-
-                return ms.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Get application internal Id with external Id
-        /// </summary>
-        /// <param name="graphClient">Graph client to make graph API calls.</param>
-        /// <returns>Internal app Id.</returns>
         private async Task<string> GetApplicationInternalId(GraphServiceClient graphClient)
         {
             try
             {
-                return (await graphClient.AppCatalogs.TeamsApps
-                    .Request()
-                    .Filter($"externalId eq '{this.azureSettings.Value.MicrosoftAppId}'")
-                    .GetAsync()).FirstOrDefault().Id;
+                var result = await graphClient.AppCatalogs.TeamsApps.GetAsync(config =>
+                {
+                    config.QueryParameters.Filter = $"externalId eq '{azureSettings.Value.MicrosoftAppId}'";
+                });
+
+                return result?.Value?.FirstOrDefault()?.Id;
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine($"[GetApplicationInternalId] {ex.Message}");
+                throw;
             }
+        }
+
+        /// <summary>
+        /// Converts a stream to byte array.
+        /// </summary>
+        private byte[] ReadFully(Stream input)
+        {
+            using var ms = new MemoryStream();
+            input.CopyTo(ms);
+            return ms.ToArray();
         }
     }
 }

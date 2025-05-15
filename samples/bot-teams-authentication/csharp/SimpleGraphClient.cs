@@ -5,8 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
+using Microsoft.Graph.Me.SendMail;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -81,7 +85,11 @@ namespace Microsoft.BotBuilderSamples
             };
 
             // Send the message.
-            await graphClient.Me.SendMail(email, true).Request().PostAsync();
+            await graphClient.Me.SendMail.PostAsync(new SendMailPostRequestBody
+            {
+                Message = email,
+                SaveToSentItems = true
+            });
         }
 
         /// <summary>
@@ -91,8 +99,8 @@ namespace Microsoft.BotBuilderSamples
         public async Task<Message[]> GetRecentMailAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request().GetAsync();
-            return messages.Take(5).ToArray();
+            var messages = await graphClient.Me.MailFolders["Inbox"].Messages.GetAsync();
+            return messages.Value.Take(5).ToArray();
         }
 
         /// <summary>
@@ -102,7 +110,7 @@ namespace Microsoft.BotBuilderSamples
         public async Task<User> GetMeAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync();
+            var me = await graphClient.Me.GetAsync();
             return me;
         }
 
@@ -113,7 +121,7 @@ namespace Microsoft.BotBuilderSamples
         public async Task<User> GetManagerAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var manager = await graphClient.Me.Manager.Request().GetAsync() as User;
+            var manager = await graphClient.Me.Manager.GetAsync() as User;
             return manager;
         }
 
@@ -155,21 +163,29 @@ namespace Microsoft.BotBuilderSamples
         /// Gets an authenticated Microsoft Graph client using the token issued to the user.
         /// </summary>
         /// <returns>The authenticated GraphServiceClient.</returns>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
     }
 }

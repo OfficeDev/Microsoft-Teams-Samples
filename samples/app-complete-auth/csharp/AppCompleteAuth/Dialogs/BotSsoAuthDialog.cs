@@ -4,6 +4,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
