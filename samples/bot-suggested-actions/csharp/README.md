@@ -23,7 +23,7 @@ This sample shows the feature where user can [send suggested actions](https://le
 
 ## Interaction with app
 
-![Module](SuggestedActions/Images/botSuggestedActionModule.gif)
+![Module](SuggestedActions/Images/BotSuggestedActionsGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -127,9 +127,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![Red](SuggestedActions/Images/3.Red.png)
 
-![Yellow](SuggestedActions/Images/4.Yellow.png)
+![Blue](SuggestedActions/Images/4.Blue.png)
 
-![Blue](SuggestedActions/Images/5.Blue.png)
+## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
+![Action.Compose](Images/5.Action.Compose.png)
 
 ## Deploy the bot to Azure
 

@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Newtonsoft.Json;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -89,14 +91,74 @@ namespace Microsoft.BotBuilderSamples
         private static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("What is your favorite color?");
+
+            var payload = new
+            {
+                    type = "Teams.chatMessage",
+                    data = new
+                    {
+                        body = new
+                        {
+                            additionalData = new { },
+                            backingStore = new
+                            {
+                                returnOnlyChangedValues = false,
+                                initializationCompleted = true
+                            },
+                            content = "<at id=\"0\">Facilitator</at>"
+                        },
+                        mentions = new[]
+                        {
+                            new
+                            {
+                                additionalData = new { },
+                                backingStore = new
+                                {
+                                    returnOnlyChangedValues = false,
+                                    initializationCompleted = false
+                                },
+                                id = 0,
+                                mentioned = new
+                                {
+                                    additionalData = new { },
+                                    backingStore = new
+                                    {
+                                        returnOnlyChangedValues = false,
+                                        initializationCompleted = false
+                                    },
+                                    odataType = "#microsoft.graph.chatMessageMentionedIdentitySet",
+                                    user = new
+                                    {
+                                        additionalData = new { },
+                                        backingStore = new
+                                        {
+                                            returnOnlyChangedValues = false,
+                                            initializationCompleted = false
+                                        },
+                                        displayName = "Facilitator",
+                                        id = "28:8e55a7b1-6766-4f0a-8610-ecacfe3d569a"
+                                    }
+                                },
+                                mentionText = "Facilitator"
+                            }
+                        },
+                        additionalData = new { },
+                        backingStore = new
+                        {
+                            returnOnlyChangedValues = false,
+                            initializationCompleted = true
+                        }
+                    }
+            };
+
             reply.SuggestedActions = new SuggestedActions()
             {
                 Actions = new List<CardAction>()
-                    {
-                        new CardAction() { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
-                        new CardAction() { Title = "Yellow", Type = ActionTypes.ImBack, Value = "Yellow" },
-                        new CardAction() { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" },
-                    }
+                {
+                    new CardAction() { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
+                    new CardAction() { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" },
+                    new CardAction() { Title = "@Facilitator", Type = "Action.Compose", Value = payload }
+                }
             };
 
             await turnContext.SendActivityAsync(reply, cancellationToken);
