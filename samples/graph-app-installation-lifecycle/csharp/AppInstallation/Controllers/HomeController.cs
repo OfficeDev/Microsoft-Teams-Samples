@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,10 @@ namespace AppInstallation.Controllers
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
             var teamsAppInstallation = await graphClient.Teams[TeamId]
                 .InstalledApps[appId]
-                .Request()
-                .Expand("teamsAppDefinition")
-                .GetAsync();
+                .GetAsync(requestConfiguration =>
+                {
+                    requestConfiguration.QueryParameters.Expand = new[] { "teamsAppDefinition" };
+                });
             return new List<string>
             {
                 teamsAppInstallation.TeamsAppDefinition.DisplayName,
@@ -67,12 +69,13 @@ namespace AppInstallation.Controllers
         {
             AppViewModel viewModel = new AppViewModel();
             List<AppModel> list = new List<AppModel>();
-            
+
             var installedApps = await graphClient.Teams[teamId].InstalledApps
-                .Request()
-                .Expand("teamsAppDefinition, teamsApp")
-                .GetAsync();
-            foreach (var res in installedApps.ToList())
+                .GetAsync(requestConfiguration =>
+                {
+                    requestConfiguration.QueryParameters.Expand = new[] { "teamsAppDefinition", "teamsApp" };
+                });
+            foreach (var res in installedApps.Value)
             {
                 var channelModel = new AppModel();
                 channelModel.AppId = res.Id;
@@ -92,7 +95,6 @@ namespace AppInstallation.Controllers
             string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
             await graphClient.Teams[TeamId].InstalledApps[appId]
-                .Request()
                 .DeleteAsync();
             return "Deleted Successfully";
         }
@@ -103,10 +105,11 @@ namespace AppInstallation.Controllers
         {
             string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
+
+            var appToUpgrade = new TeamsAppInstallation();
             await graphClient.Teams[TeamId].InstalledApps[appId]
-                .Upgrade()
-                .Request()
-                .PostAsync();
+                .PatchAsync(appToUpgrade);
+
             return "Updated Successfully";
         }
 
@@ -127,8 +130,7 @@ namespace AppInstallation.Controllers
             };
             // Adding Polly App
             await graphClient.Teams[TeamId].InstalledApps
-                .Request()
-                .AddAsync(teamsAppInstallation);
+                .PostAsync(teamsAppInstallation);
             return "Added Successfully";
         }
 
@@ -140,11 +142,12 @@ namespace AppInstallation.Controllers
             string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
             var installedApps = await graphClient.Users[UserId].Teamwork.InstalledApps
-                            .Request()
-                            .Expand("teamsAppDefinition, teamsApp")
-                            .GetAsync();
+                .GetAsync(requestConfiguration =>
+                {
+                    requestConfiguration.QueryParameters.Expand = new[] { "teamsAppDefinition", "teamsApp" };
+                });
             List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
-            foreach (var res in installedApps.ToList())
+            foreach (var res in installedApps.Value)
             {
                 Dictionary<string, string> model = new Dictionary<string, string> {
                     { "Name", res.TeamsAppDefinition.DisplayName},
@@ -164,9 +167,10 @@ namespace AppInstallation.Controllers
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
             var teamsAppInstallation = await graphClient.Users[UserId].Teamwork
                 .InstalledApps[appId]
-                .Request()
-                .Expand("teamsAppDefinition")
-                .GetAsync();
+                .GetAsync(requestConfiguration =>
+                {
+                    requestConfiguration.QueryParameters.Expand = new[] { "teamsAppDefinition" };
+                });
             return new List<string>
             {
                 teamsAppInstallation.TeamsAppDefinition.DisplayName,
@@ -180,7 +184,6 @@ namespace AppInstallation.Controllers
             string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
             await graphClient.Users[UserId].Teamwork.InstalledApps[appId]
-                .Request()
                 .DeleteAsync();
             return "Deleted Successfully";
         }
@@ -191,10 +194,10 @@ namespace AppInstallation.Controllers
         {
             string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
+            var appToUpgrade = new UserScopeTeamsAppInstallation();
             await graphClient.Users[UserId].Teamwork.InstalledApps[appId]
-                .Upgrade()
-                .Request()
-                .PostAsync();
+                .PatchAsync(appToUpgrade);
+
             return "Updated Successfully";
         }
     }
