@@ -3,12 +3,6 @@
 // Licensed under the MIT license.
 // </copyright>
 
-using System;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.Graph;
-using Microsoft.Identity.Client;
-
 namespace MeetingAutoRecording.Helper
 {
     // This class is a wrapper for the Microsoft Graph API

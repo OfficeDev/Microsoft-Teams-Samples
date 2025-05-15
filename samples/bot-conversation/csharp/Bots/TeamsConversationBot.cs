@@ -20,6 +20,8 @@ using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using System.Collections.Concurrent;
 using System.Collections;
+using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -67,6 +69,16 @@ namespace Microsoft.BotBuilderSamples.Bots
                 await CheckReadUserCount(turnContext, cancellationToken);
             else if (text.Contains("reset"))
                 await ResetReadUserCount(turnContext, cancellationToken);
+            else if (text.Contains("label"))
+                await AddAILabel(turnContext, cancellationToken);
+            else if (text.Contains("feedback"))
+                await AddFeedbackButtons(turnContext, cancellationToken);
+            else if (text.Contains("sensitivity"))
+                await AddSensitivityLabel(turnContext, cancellationToken);
+            else if (text.Contains("citation"))
+                await AddCitations(turnContext, cancellationToken);
+            else if (text.Contains("aitext"))
+                await SendAIMessage(turnContext, cancellationToken);
             else
                 await CardActivityAsync(turnContext, false, cancellationToken);
         }
@@ -80,6 +92,186 @@ namespace Microsoft.BotBuilderSamples.Bots
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
                 }
             }
+        }
+
+        private async Task AddAILabel(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+            new Activity
+            {
+                Type = ActivityTypes.Message,
+                Text = "Hey I'm a friendly AI bot. This message is generated via AI",
+                Entities = new List<Entity>
+               {
+                   new Entity
+                   {
+                       Type = "https://schema.org/Message",
+                       Properties = JObject.FromObject(new Dictionary<string, object>
+                       {
+                           { "@type", "Message" },
+                           { "@context", "https://schema.org" },
+                           { "additionalType", new List<string> { "AIGeneratedContent" } }
+                       })
+                   }
+               }
+            }
+        );
+        }
+
+        private async Task AddFeedbackButtons(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+                new Activity
+                {
+                    Type = ActivityTypes.Message,
+                    Text = "This is an example for Feedback buttons that helps to provide feedback for a bot message",
+                    ChannelData = new { feedbackLoopEnabled = true },
+                }
+            );
+        }
+
+        private async Task AddSensitivityLabel(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+            new Activity
+            {
+                Type = ActivityTypes.Message,
+                Text = "This is an example for sensitivity label that helps users identify the confidentiality of a message",
+                Entities = new List<Entity>
+               {
+                   new Entity
+                   {
+                       Type = "https://schema.org/Message",
+                       Properties = JObject.FromObject(new Dictionary<string, object>
+                       {
+                           { "@type", "Message" },
+                           { "@context", "https://schema.org" }, // AI Generated label
+                           { "usageInfo", new Dictionary<string, object>
+                               {
+                                   { "@type", "CreativeWork" },
+                                   { "description", "Please be mindful of sharing outside of your team" }, // Sensitivity description
+                                   { "name", "Confidential \\ Contoso FTE" } // Sensitivity title
+                               }
+                           }
+                       })
+                   }
+               }
+            }, cancellationToken);
+        }
+
+        private async Task SendAIMessage(ITurnContext<IMessageActivity> context, CancellationToken cancellationToken)
+        {
+            await context.SendActivityAsync(
+            new Activity
+            {
+                Type = ActivityTypes.Message,
+                Text = "Hey I'm a friendly AI bot. This message is generated via AI [1]",
+                ChannelData = JObject.FromObject(new Dictionary<string, object>
+                {
+                    { "feedbackLoopEnabled", true }
+                }),
+                Entities = new List<Entity>
+               {
+                   new Entity
+                   {
+                       Type = "https://schema.org/Message",
+                       Properties = JObject.FromObject(new Dictionary<string, object>
+                       {
+                           { "@type", "Message" },
+                           { "@context", "https://schema.org" },
+                           { "usageInfo", new Dictionary<string, object>
+                               {
+                                   { "@type", "CreativeWork" },
+                                   { "@id", "sensitivity1" }
+                               }
+                           },
+                           { "additionalType", new List<string> { "AIGeneratedContent" } },
+                           { "citation", new List<object>
+                               {
+                                   new Dictionary<string, object>
+                                   {
+                                       { "@type", "Claim" },
+                                       { "position", 1 },
+                                       { "appearance", new Dictionary<string, object>
+                                           {
+                                               { "@type", "DigitalDocument" },
+                                               { "name", "Some secret citation" },
+                                               { "url", "https://example.com/claim-1" },
+                                               { "abstract", "Excerpt" },
+                                               { "encodingFormat", "docx" },
+                                               { "keywords", new List<string> { "Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3" } },
+                                               { "usageInfo", new Dictionary<string, object>
+                                                   {
+                                                       { "@type", "CreativeWork" },
+                                                       { "@id", "sensitivity1" },
+                                                       { "name", "Sensitivity title" },
+                                                       { "description", "Sensitivity description" }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       })
+                   }
+               }
+            }, cancellationToken);
+        }
+
+        private async Task AddCitations(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await turnContext.SendActivityAsync(
+            new Activity
+            {
+                Type = ActivityTypes.Message,
+                Text = "Hey I'm a friendly AI bot. This message is generated through AI [1]", // cite with [1]
+                Entities = new List<Entity>
+               {
+                   new Entity
+                   {
+                       Type = "https://schema.org/Message",
+                       Properties = JObject.FromObject(new Dictionary<string, object>
+                       {
+                           { "@type", "Message" },
+                           { "@context", "https://schema.org" },
+                           { "citation", new List<object>
+                               {
+                                   new Dictionary<string, object>
+                                   {
+                                       { "@type", "Claim" },
+                                       { "position", 1 }, // Required. Must match the [1] in the text
+                                       { "appearance", new Dictionary<string, object>
+                                           {
+                                               { "@type", "DigitalDocument" },
+                                               { "name", "AI bot" }, // Title
+                                               { "url", "https://example.com/claim-1" }, // Hyperlink on the title
+                                               { "abstract", "Excerpt description" }, // Appears in the citation pop-up window
+                                               { "text", "{\"type\":\"AdaptiveCard\",\"$schema\":\"http://adaptivecards.io/schemas/adaptive-card.json\",\"version\":\"1.6\",\"body\":[{\"type\":\"TextBlock\",\"text\":\"Adaptive Card text\"}]}" }, // Stringified Adaptive Card
+                                               { "keywords", new List<string> { "keyword 1", "keyword 2", "keyword 3" } }, // Appears in the citation pop-up window
+                                               { "encodingFormat", "application/vnd.microsoft.card.adaptive" },
+                                               { "usageInfo", new Dictionary<string, object>
+                                                   {
+                                                       { "@type", "CreativeWork" },
+                                                       { "name", "Confidential \\ Contoso FTE" }, // Sensitivity title
+                                                       { "description", "Only accessible to Contoso FTE" } // Sensitivity description
+                                                   }
+                                               },
+                                               { "image", new Dictionary<string, object>
+                                                   {
+                                                       { "@type", "ImageObject" },
+                                                       { "name", "Microsoft Word" }
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                       })
+                   }
+               }
+            }, cancellationToken);
         }
 
         /// <summary>
@@ -199,6 +391,36 @@ namespace Microsoft.BotBuilderSamples.Bots
                                 Type = ActionTypes.MessageBack,
                                 Title = "Reset read count",
                                 Text = "reset"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "AI label",
+                                Text = "label"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Feedback buttons",
+                                Text = "feedback"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Sensitivity label",
+                                Text = "sensitivity"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Citations",
+                                Text = "citation"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
+                                Title = "Send AI message",
+                                Text = "aitext"
                             }
                         }
             };

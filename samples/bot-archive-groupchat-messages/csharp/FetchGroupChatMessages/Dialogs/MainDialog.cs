@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 
 namespace FetchGroupChatMessagesWithRSC.Dialogs
 {
@@ -102,7 +104,7 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
         /// Creates a chat file with the provided chat messages.
         /// </summary>
         /// <param name="activity">The chat messages collection.</param>
-        private void CreateChatFile(IChatMessagesCollectionPage activity)
+        private void CreateChatFile(List<ChatMessage> activity)
         {
             var fileName = Path.Combine(_env.ContentRootPath, "wwwroot", "chat.txt");
             FileInfo fi = new FileInfo(fileName);

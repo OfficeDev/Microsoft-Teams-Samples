@@ -103,11 +103,6 @@ class TeamsStreamingBot extends ActivityHandler {
             id: channelData.streamId
         };
 
-        // If there is text content, add it to the activity
-        if (text) {
-            streamingActivity.text = text;
-        }
-
         // Add the streaming information as an entity
         streamingActivity.entities = [{
             type: 'streaminfo',
@@ -134,12 +129,15 @@ class TeamsStreamingBot extends ActivityHandler {
 
                 // Add the AdaptiveCard to the activity
                 streamingActivity.attachments = [CardFactory.adaptiveCard(cardJson)];
-                streamingActivity.text = "This is what I've got:"; // Message before the card
             } catch (error) {
                 console.error("Error creating adaptive card:", error);
                 // If card creation fails, inform the user
                 await turnContext.sendActivity("Error while generating the adaptive card.");
             }
+        }
+        else if (text) {
+            // Set text only for non-final (intermediate) messages if needed
+            streamingActivity.text = text;
         }
 
         // Send the streaming activity (either ongoing or final)
