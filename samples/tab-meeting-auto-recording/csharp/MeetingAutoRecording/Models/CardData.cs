@@ -1,8 +1,6 @@
-﻿// <copyright file="UserData.cs" company="Microsoft">
+﻿// <copyright file="CardData.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
-
-using Microsoft.Graph;
 
 namespace MeetingAutoRecording.Models
 {

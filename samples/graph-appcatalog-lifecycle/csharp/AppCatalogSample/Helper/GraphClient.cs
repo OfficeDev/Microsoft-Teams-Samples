@@ -1,8 +1,6 @@
 ﻿using Microsoft.Graph;
+using Azure.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace AppCatalogSample.Helper
@@ -23,19 +21,30 @@ namespace AppCatalogSample.Helper
 
         public GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenCredential = new StaticTokenCredential(_token);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            return new GraphServiceClient(tokenCredential, new[] { "https://graph.microsoft.com/.default" });
+        }
+    }
 
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+    // Custom TokenCredential implementation for static tokens
+    public class StaticTokenCredential : TokenCredential
+    {
+        private readonly string _token;
+
+        public StaticTokenCredential(string token)
+        {
+            _token = token;
+        }
+
+        public override AccessToken GetToken(TokenRequestContext requestContext, System.Threading.CancellationToken cancellationToken)
+        {
+            return new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1));
+        }
+
+        public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, System.Threading.CancellationToken cancellationToken)
+        {
+            return new ValueTask<AccessToken>(new AccessToken(_token, DateTimeOffset.UtcNow.AddHours(1)));
         }
     }
 }

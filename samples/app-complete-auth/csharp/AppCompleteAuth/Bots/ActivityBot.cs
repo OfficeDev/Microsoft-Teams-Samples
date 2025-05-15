@@ -13,6 +13,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
