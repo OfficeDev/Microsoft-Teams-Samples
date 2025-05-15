@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Schema;
 using TeamsTalentMgmtApp.Services.Interfaces;
+using Microsoft.Kiota.Abstractions;
 
 namespace TeamsTalentMgmtApp.Controllers
 {
@@ -52,9 +53,9 @@ namespace TeamsTalentMgmtApp.Controllers
                 }
 
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (ApiException ex)
             {
-                return StatusCode((int)ex.StatusCode);
+                return StatusCode((int)ex.ResponseStatusCode);
             }
 
             return Ok();
@@ -105,9 +106,9 @@ namespace TeamsTalentMgmtApp.Controllers
                         $"The bot has not been installed for '{request.Id}' in the tenant '{request.TenantId}'");
                 }
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (ApiException ex)
             {
-                return StatusCode((int)ex.StatusCode);
+                return StatusCode((int)ex.ResponseStatusCode);
             }
 
             return Accepted();

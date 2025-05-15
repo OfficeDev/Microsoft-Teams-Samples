@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
+using Microsoft.Kiota.Abstractions.Authentication;
 using Newtonsoft.Json;
 using RSCWithGraphAPI.Models;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RSCWithGraphAPI.Controllers
@@ -31,7 +33,7 @@ namespace RSCWithGraphAPI.Controllers
         [Route("Demo")]
         public async Task<ActionResult> Demo(string tenantId, string groupId)
         {
-            GraphServiceClient graphClient = await GetAuthenticatedClient(tenantId);
+            GraphServiceClient graphClient = await GetAuthenticatedClient();
             var viewModel = new DemoViewModel()
             {
                 Channels = await GetChannelsList(graphClient, tenantId, groupId),
@@ -65,41 +67,46 @@ namespace RSCWithGraphAPI.Controllers
 
         private async Task<List<string>> GetChannelsList(GraphServiceClient graphClient, string tenantId, string groupId)
         {
-            var result = await graphClient.Teams[groupId].Channels.Request()
-                .GetAsync();
+            var result = await graphClient.Teams[groupId].Channels.GetAsync();
 
-            return result.Select(r => r.DisplayName).ToList();
+            return result.Value.Select(r => r.DisplayName).ToList();
         }
 
         private async Task<List<string>> GetPermissionGrants(GraphServiceClient graphClient, string tenantId, string groupId)
         {
-            var result = await graphClient.Groups[groupId].PermissionGrants.Request()
-                .GetAsync();
+            var result = await graphClient.Groups[groupId].PermissionGrants.GetAsync();
 
-            return result.Select(r => r.Permission).ToList();
+            return result.Value.Select(r => r.Permission).ToList();
         }
 
 
         /// <summary>
         ///Get Authenticated Client
         /// </summary>
-        private async Task<GraphServiceClient> GetAuthenticatedClient(string tenantId)
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
+        private async Task<GraphServiceClient> GetAuthenticatedClient()
         {
             var accessToken = await GetToken();
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+            var tokenProvider = new SimpleAccessTokenProvider(accessToken);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
 
         /// <summary>
