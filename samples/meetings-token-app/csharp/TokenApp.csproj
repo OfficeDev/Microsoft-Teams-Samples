@@ -27,7 +27,7 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(ClientAppRoot)**" />
-    <Content Remove="TeamsApp\**" />
+    <Content Remove="M365Agent\**" />
     <None Remove="$(ClientAppRoot)**" />
     <None Include="$(ClientAppRoot)**" Exclude="$(ClientAppRoot)node_modules\**" />
   </ItemGroup>
@@ -53,11 +53,11 @@
   
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="TeamsApp\**" />
+    <Compile Remove="M365Agent\**" />
     <Content Remove="$(SpaRoot)**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
     <None Remove="$(SpaRoot)**" />
-    <None Remove="TeamsApp\**" />
+    <None Remove="M365Agent\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
