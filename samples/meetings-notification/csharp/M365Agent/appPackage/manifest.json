@@ -37,7 +37,7 @@
         {
           "scopes": [
             "personal",
-            "groupchat",
+            "groupChat",
             "team"
           ],
           "commands": [
