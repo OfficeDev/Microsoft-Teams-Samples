@@ -3,7 +3,7 @@
     "Name": "Microsoft Teams (browser)",
     "Projects": [
       {
-        "Path": "TabInStageView\\TabInStageView.csproj",
+        "Path": "Catering\\Catering.csproj",
         "Action": "Start",
         "DebugTarget": "Start Project"
       },
@@ -18,7 +18,7 @@
     "Name": "Microsoft Teams (browser) (skip update app)",
     "Projects": [
       {
-        "Path": "TabInStageView\\TabInStageView.csproj",
+        "Path": "Catering\\Catering.csproj",
         "Action": "Start",
         "DebugTarget": "Start Project"
       },

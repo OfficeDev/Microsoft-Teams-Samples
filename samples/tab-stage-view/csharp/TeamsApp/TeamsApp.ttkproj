@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" Sdk="Microsoft.TeamsFx.Sdk">
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>0d2b7f18-ecc2-4e73-844a-a4b28d4446c9</ProjectGuid>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectCapability Include="ProjectConfigurationsDeclaredDimensions" />
-  </ItemGroup>
-</Project>
