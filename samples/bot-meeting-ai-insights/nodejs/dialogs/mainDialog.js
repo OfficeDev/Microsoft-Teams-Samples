@@ -78,10 +78,14 @@ class MainDialog extends LogoutDialog {
                 const aiInsightId = await this.getAiInsightId(ssoToken, userId, onlineMeetingId);
 
                 if (aiInsightId) {
-                    const aiInsight = await this.getAiInsightDetails(ssoToken, userId, onlineMeetingId, aiInsightId);
-
-                    if (aiInsight) {
-                        await stepContext.context.sendActivity(`AI Insight retrieved: ${JSON.stringify(aiInsight)}`);
+                    const aiInsight = await this.getAiInsightDetails(ssoToken, userId, onlineMeetingId, aiInsightId);                    if (aiInsight) {
+                        let formattedMessage = '';
+                        if (Array.isArray(aiInsight)) {
+                            formattedMessage = aiInsight.map(insight => {
+                                return `## ${insight.title}\n${insight.text}\n`;
+                            }).join('\n');
+                        }
+                        await stepContext.context.sendActivity(formattedMessage || 'No insights found in the expected format.');
                     } else {
                         await stepContext.context.sendActivity('Failed to retrieve AI Insight details.');
                     }
@@ -129,7 +133,7 @@ class MainDialog extends LogoutDialog {
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-            return response.data.id;
+            return response.data.value[0].id;
         } catch (error) {
             console.error('Error retrieving AI Insight ID:', error);
             return null;
@@ -153,7 +157,7 @@ class MainDialog extends LogoutDialog {
                 }
             });
 
-            return response.data;
+            return response.data.meetingNotes;
         } catch (error) {
             console.error('Error retrieving AI Insight details:', error);
             return null;

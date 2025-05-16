@@ -51,7 +51,7 @@ resource botServiceConnection 'Microsoft.BotService/botServices/connections@2021
   properties: {
     serviceProviderDisplayName: 'Azure Active Directory v2'
     serviceProviderId: '30dd229c-58e3-4a48-bdfd-91ec48eb906c'
-    scopes: 'User.Read, offline_access, openid, profile, email, OnlineMeetings.ReadWrite, OnlineMeetings.Read, OnlineMeetingAiInsight.Read.All'
+    scopes: 'User.Read, offline_access, openid, profile, email, OnlineMeetings.ReadWrite, OnlineMeetings.Read, OnlineMeetingAiInsight.Read.All, OnlineMeetingTranscript.Read.All'
     parameters: [
       {
         key: 'clientId'

@@ -119,23 +119,20 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 **Install app:**
 
-![add-App ](Images/1.Install.png)
+![add-App ](Images/1.InstallApp.png)
 
 **Welcome to teamsbot:**
 
-![added-App ](Images/2.Welcome.png)
+![added-App ](Images/2.WelcomeMessage.png)
 
-**Login UI: Authentication success:**
+**Consent Popup:**
 
-![auth-login ](Images/3.AuthLogin.png)
+![auth-login ](Images/3.ConsentPopup.png)
 
-**Authentication token:**
+**AI Insights**
 
-![auth-Token ](Images/3.AuthToken.png)
+![auth-Token ](Images/4.AiInsights.png)
 
-**Logout UI:**
-
-![logout ](Images/4.Signout.png)
 
 ## Deploy the bot to Azure
 
