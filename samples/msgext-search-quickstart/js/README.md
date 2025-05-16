@@ -133,9 +133,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Select your app icon to launch your app in Office on the web**
 
-![Search in Extension](Images/SearchInExtension.PNG)
+![Search in Extension](Images/SearchInExtension.png)
 
-![Output in Outlook](Images/OutputInOutlook.PNG)
+![Output in Outlook](Images/OutputInOutlook.png)
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
