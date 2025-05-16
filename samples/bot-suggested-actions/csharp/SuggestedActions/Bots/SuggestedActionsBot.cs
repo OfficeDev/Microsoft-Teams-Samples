@@ -1,11 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -16,6 +19,13 @@ namespace Microsoft.BotBuilderSamples
     /// </summary>
     public class SuggestedActionsBot : ActivityHandler
     {
+        private readonly IConfiguration _configuration;
+
+        public SuggestedActionsBot(IConfiguration config)
+        {
+            _configuration = config;
+        }
+
         /// <summary>
         /// Invoked when members are added to the conversation.
         /// Sends a welcome message to the user and tells them what actions they may perform to use this bot.
@@ -48,7 +58,7 @@ namespace Microsoft.BotBuilderSamples
         /// </summary>
         /// <param name="turnContext">Context object containing information for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        private async Task SendWelcomeMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in turnContext.Activity.MembersAdded)
             {
@@ -69,13 +79,12 @@ namespace Microsoft.BotBuilderSamples
         /// <returns>The response text based on the user's input.</returns>
         private static string ProcessInput(string text)
         {
-            const string colorText = "is the best color, I agree.";
+            const string colorText = "How can I assist you today?";
             return text switch
             {
-                "red" => $"Red {colorText}",
-                "yellow" => $"Yellow {colorText}",
-                "blue" => $"Blue {colorText}",
-                _ => "Please select a color from the suggested action choices",
+                "hello" => $"Hello, {colorText}",
+                "welcome" => $"Welcome, {colorText}",
+                _ => "Please select one action",
             };
         }
 
@@ -86,17 +95,77 @@ namespace Microsoft.BotBuilderSamples
         /// </summary>
         /// <param name="turnContext">Context object containing information for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        private static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        private async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var reply = MessageFactory.Text("What is your favorite color?");
+            var reply = MessageFactory.Text("Choose one of the action from the suggested action?");
+
+            var payload = new
+            {
+                    type = "Teams.chatMessage",
+                    data = new
+                    {
+                        body = new
+                        {
+                            additionalData = new { },
+                            backingStore = new
+                            {
+                                returnOnlyChangedValues = false,
+                                initializationCompleted = true
+                            },
+                            content = "<at id=\"0\">SuggestedActionsBot</at>"
+                        },
+                        mentions = new[]
+                        {
+                            new
+                            {
+                                additionalData = new { },
+                                backingStore = new
+                                {
+                                    returnOnlyChangedValues = false,
+                                    initializationCompleted = false
+                                },
+                                id = 0,
+                                mentioned = new
+                                {
+                                    additionalData = new { },
+                                    backingStore = new
+                                    {
+                                        returnOnlyChangedValues = false,
+                                        initializationCompleted = false
+                                    },
+                                    odataType = "#microsoft.graph.chatMessageMentionedIdentitySet",
+                                    user = new
+                                    {
+                                        additionalData = new { },
+                                        backingStore = new
+                                        {
+                                            returnOnlyChangedValues = false,
+                                            initializationCompleted = false
+                                        },
+                                        displayName = "Suggested Actions Bot",
+                                        id = "28:" + _configuration["MicrosoftAppId"],
+                                    }
+                                },
+                                mentionText = "Suggested Actions Bot"
+                            }
+                        },
+                        additionalData = new { },
+                        backingStore = new
+                        {
+                            returnOnlyChangedValues = false,
+                            initializationCompleted = true
+                        }
+                    }
+            };
+
             reply.SuggestedActions = new SuggestedActions()
             {
                 Actions = new List<CardAction>()
-                    {
-                        new CardAction() { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
-                        new CardAction() { Title = "Yellow", Type = ActionTypes.ImBack, Value = "Yellow" },
-                        new CardAction() { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" },
-                    }
+                {
+                    new CardAction() { Title = "Hello", Type = ActionTypes.ImBack, Value = "Hello" },
+                    new CardAction() { Title = "Welcome", Type = ActionTypes.ImBack, Value = "Welcome" },
+                    new CardAction() { Title = "@SuggestedActionsBot", Type = "Action.Compose", Value = payload }
+                }
             };
 
             await turnContext.SendActivityAsync(reply, cancellationToken);

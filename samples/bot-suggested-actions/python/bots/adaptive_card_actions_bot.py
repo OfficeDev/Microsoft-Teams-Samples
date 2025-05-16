@@ -1,6 +1,7 @@
 from botbuilder.core import ActivityHandler, TurnContext, MessageFactory
 from botbuilder.schema import SuggestedActions, CardAction, ActionTypes
-
+from config import DefaultConfig
+CONFIG = DefaultConfig()
 
 class SuggestedActionsBot(ActivityHandler):
     def __init__(self):
@@ -40,14 +41,13 @@ class SuggestedActionsBot(ActivityHandler):
         """
         user_message = turn_context.activity.text
 
-        # Define valid options
-        valid_colors = ["Red", "Blue", "Yellow"]
-
-        if user_message in valid_colors:
-            await turn_context.send_activity(f"I agree, {user_message} is a great color!")
+        if user_message == "Hello":
+            await turn_context.send_activity("Hello! How can I assist you today?")
+        elif user_message == "Welcome":
+            await turn_context.send_activity("Welcome! How can I assist you today?")
         else:
-            await turn_context.send_activity("Please choose a valid color.")
-
+            await turn_context.send_activity("I didn't understand that. Please choose one of the suggested actions.")
+        
         # Send suggested actions for the next turn
         await self.send_suggested_actions(turn_context)
 
@@ -58,11 +58,60 @@ class SuggestedActionsBot(ActivityHandler):
         """
         actions = SuggestedActions(
             actions=[
-                CardAction(type=ActionTypes.im_back, title="Red", value="Red"),
-                CardAction(type=ActionTypes.im_back, title="Blue", value="Blue"),
-                CardAction(type=ActionTypes.im_back, title="Yellow", value="Yellow"),
+                CardAction(type=ActionTypes.im_back, title="Hello", value="Hello"),
+                CardAction(type=ActionTypes.im_back, title="Welcome", value="Welcome"),
+                CardAction(
+                    type="Action.Compose",
+                    title="@SuggestedActionsBot",
+                    value={
+                        "type": "Teams.chatMessage",
+                        "data": {
+                            "body": {
+                                "additionalData": {},
+                                "backingStore": {
+                                    "returnOnlyChangedValues": False,
+                                    "initializationCompleted": True
+                                },
+                                "content": "<at id=\"0\">SuggestedActionsBot</at>"
+                            },
+                            "mentions": [
+                                {
+                                    "additionalData": {},
+                                    "backingStore": {
+                                        "returnOnlyChangedValues": False,
+                                        "initializationCompleted": False
+                                    },
+                                    "id": 0,
+                                    "mentioned": {
+                                        "additionalData": {},
+                                        "backingStore": {
+                                            "returnOnlyChangedValues": False,
+                                            "initializationCompleted": False
+                                        },
+                                        "odataType": "#microsoft.graph.chatMessageMentionedIdentitySet",
+                                        "user": {
+                                            "additionalData": {},
+                                            "backingStore": {
+                                                "returnOnlyChangedValues": False,
+                                                "initializationCompleted": False
+                                            },
+                                            "displayName": "Suggested Actions Bot",
+                                            "id": "28:" + CONFIG.APP_ID,
+                                        }
+                                    },
+                                    "mentionText": "Suggested Actions Bot"
+                                }
+                            ],
+                            "additionalData": {},
+                            "backingStore": {
+                                "returnOnlyChangedValues": False,
+                                "initializationCompleted": True
+                            }
+                        }
+                    }
+                )
             ]
         )
-        reply = MessageFactory.text("What is your favorite color?")
+        reply = MessageFactory.text("Choose one of the action from the suggested actions")
         reply.suggested_actions = actions
         await turn_context.send_activity(reply)
