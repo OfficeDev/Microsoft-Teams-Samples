@@ -84,7 +84,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - In a terminal, navigate to `samples\bot-teams-authentication\nodejs` folder
+  - In a terminal, navigate to `samples\bot-meeting-ai-insights\nodejs` folder
 
   - Install modules
     
@@ -113,7 +113,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-meeting-ai-insights/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 

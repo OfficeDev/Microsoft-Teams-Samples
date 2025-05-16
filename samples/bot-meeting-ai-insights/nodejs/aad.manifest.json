@@ -1,7 +1,7 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "bot-teams-authentication-aad",
+    "name": "bot-meeting-ai-insights-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,

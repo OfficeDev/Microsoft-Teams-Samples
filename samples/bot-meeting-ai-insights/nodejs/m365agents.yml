@@ -4,7 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-teams-authentication-nodejs
+  sampleTag: Microsoft-Teams-Samples:bot-meeting-ai-insights-nodejs
 
 environmentFolderPath: ./env
-projectId: 2e1dc1cd-8724-44ae-ab69-28087845f952
