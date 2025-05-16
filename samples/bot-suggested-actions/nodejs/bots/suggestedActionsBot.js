@@ -19,14 +19,16 @@ class SuggestedActionsBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const text = context.activity.text.trim();
 
-            // Valid color options
-            const validColors = ['Red', 'Blue', 'Yellow'];
 
-            // Check if the text is a valid color
-            if (validColors.includes(text)) {
-                await context.sendActivity(`I agree, ${text} is the best color.`);
-            } else {
-                await context.sendActivity('Please select a color.');
+            switch(text){
+                case 'Hello':
+                    await context.sendActivity('Hello! How can I assist you today?');
+                    break;
+                case 'Welcome':
+                    await context.sendActivity('Welcome! How can I assist you today?');
+                    break;
+                default:
+                    await context.sendActivity(`Please select one action.`);
             }
 
             // Send suggested actions after responding
@@ -58,11 +60,11 @@ class SuggestedActionsBot extends ActivityHandler {
      */
     async sendSuggestedActions(turnContext) {
         const cardActions = [
-            { type: ActionTypes.ImBack, title: 'Red', value: 'Red' },
-            { type: ActionTypes.ImBack, title: 'Blue', value: 'Blue' },
+            { type: ActionTypes.ImBack, title: 'Hello', value: 'Hello' },
+            { type: ActionTypes.ImBack, title: 'Welcome', value: 'Welcome' },
             {
                 type: "Action.Compose",
-                title: "@Facilitator",
+                title: "@SuggestedActionsBot",
                 value: {
                     type: "Teams.chatMessage",
                     data: {
@@ -72,7 +74,7 @@ class SuggestedActionsBot extends ActivityHandler {
                                 returnOnlyChangedValues: false,
                                 initializationCompleted: true
                             },
-                            content: "<at id=\"0\">Facilitator</at>"
+                            content: "<at id=\"0\">SuggestedActionsBot</at>"
                         },
                         mentions: [
                             {
@@ -95,11 +97,11 @@ class SuggestedActionsBot extends ActivityHandler {
                                             returnOnlyChangedValues: false,
                                             initializationCompleted: false
                                         },
-                                        displayName: "Facilitator",
-                                        id: "28:8e55a7b1-6766-4f0a-8610-ecacfe3d569a"
+                                        displayName: "Suggested Actions Bot",
+                                        id: "28:" + process.env.MICROSOFT_APP_ID,
                                     }
                                 },
-                                mentionText: "Facilitator"
+                                mentionText: "Suggested Actions Bot"
                             }
                         ],
                         additionalData: {},
@@ -112,7 +114,7 @@ class SuggestedActionsBot extends ActivityHandler {
             }
         ];
 
-        const reply = MessageFactory.text('What is your favorite color?');
+        const reply = MessageFactory.text('Choose one of the action from the suggested action');
         reply.suggestedActions = { actions: cardActions, to: [turnContext.activity.from.id] };
         await turnContext.sendActivity(reply);
     }

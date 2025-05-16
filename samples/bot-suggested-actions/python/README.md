@@ -105,9 +105,9 @@ the Teams service needs to call into the bot.
 
 ![Initial message](Images/2.Welcome.png)
 
-![Red](Images/3.Red.png)
+![Red](Images/3.Hello.png)
 
-![Blue](Images/4.Blue.png)
+![Blue](Images/4.Welcome.png)
 
 ## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
 ![Action.Compose](Images/5.Action.Compose.png)
