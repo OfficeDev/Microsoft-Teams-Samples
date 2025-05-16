@@ -28,7 +28,7 @@ Once authenticated, the bot will retrieve the AI insights for your specified mee
 > IMPORTANT: The manifest file includes "token.botframework.com" in the `validDomains` list, which is required for any bot using the Bot Framework OAuth flow.
 
 - **Interaction with the bot**
-![ai-insights-bot](Images/bot-teams-auth.gif)
+![ai-insights-bot](Images/bot-meeting-ai-insights.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
