@@ -13,37 +13,38 @@ class TeamsBot extends TeamsActivityHandler {
     this.onMembersAdded(async (context, next) => {
       const membersAdded = context.activity.membersAdded;
 
-      membersAdded.forEach(async (member) => {
+     for (const member of membersAdded) {
         if (member.id !== context.activity.recipient.id) {
           await context.sendActivity(
             "Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card"
           );
         }
-      });
+      }
 
       await next();
     });
 
     // Handling messages in the conversation
     this.onMessage(async (context, next) => {
-      const activity = this.removeMentionText(context.activity);
+        context.responded = true; // Set responded before proceeding
 
-      if (activity.text) {
-        const userCard =
-          activity.conversation.conversationType === "personal"
-            ? CardFactory.adaptiveCard(this.adaptiveCardForPersonalScope())
-            : CardFactory.adaptiveCard(this.adaptiveCardForChannelScope());
+        const activity = this.removeMentionText(context.activity);
 
-        await context.sendActivity({ attachments: [userCard] });
-      } else if (context.activity.value) {
-        await context.sendActivity(
-          `Task title: ${context.activity.value.taskTitle}, \n Task description: ${context.activity.value.taskDescription},\n Task assigned to: ${context.activity.value.userId}`
-        );
-      }
+        if (activity.text) {
+          const userCard =
+            activity.conversation.conversationType === "personal"
+              ? CardFactory.adaptiveCard(this.adaptiveCardForPersonalScope())
+              : CardFactory.adaptiveCard(this.adaptiveCardForChannelScope());
 
-      // Proceed to next handler
-      await next();
-    });
+          await context.sendActivity({ attachments: [userCard] });
+        } else if (context.activity.value) {
+          await context.sendActivity(
+            `Task title: ${context.activity.value.taskTitle}, \n Task description: ${context.activity.value.taskDescription},\n Task assigned to: ${context.activity.value.userId}`
+          );
+        }
+
+        await next(); // Proceed after setting responded
+      });
   }
 
   /**

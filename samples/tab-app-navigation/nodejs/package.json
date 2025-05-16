@@ -42,7 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^19.0.12",
+    "@types/react": "^18.3.12",
     "env-cmd": "^10.1.0"
   }
 }

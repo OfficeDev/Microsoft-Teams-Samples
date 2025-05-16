@@ -10,7 +10,7 @@
         "termsOfUseUrl": "https://www.example.com/privacy"
     },
     "icons": {
-        "color": "Northwind-Logo3-192${{APP_NAME_SUFFIX}}.png",
+        "color": "Northwind-Logo3-192-${{APP_NAME_SUFFIX}}.png",
         "outline": "Northwind-Logo3-32.png"
     },
     "name": {
