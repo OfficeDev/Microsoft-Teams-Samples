@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-ai-meeting-insights/nodejs/Images/bot-ai-meeting-insights.gif",
-        "alt": "Solution UX showing Teams authentication for bot using Bot Framework v4"
+        "alt": "Solution UX showing bot meeting ai insights sample using graph API"
       }
     ],
     "authors": [
