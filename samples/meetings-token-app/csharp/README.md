@@ -40,7 +40,7 @@ The Meeting Token Generator is a sample application designed to extend Microsoft
 
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meetings Token App:** [Manifest](/samples/meetings-token-app/csharp/demo-manifest/meetings-token-app.zip)
 
@@ -84,7 +84,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
 8.In the browser that launches, select the Add button to install the app to Teams.
 
-If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 
 ## Setup
@@ -170,7 +170,7 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/csharp/AdapterWithErrorHandler.cs#L32) line and put your debugger for local debug.
   
--- Sideload the app in a Teams desktop client
+-- Upload the app in a Teams desktop client
     1. Create a meeting with few test participants, ideally with a mix of Presenters and Attendees.
     1. Once meeting is created, go to the meeting details page and click on the "Add tab" (+) button.
     1. In the pop-up that opens, click on "Manage apps".
