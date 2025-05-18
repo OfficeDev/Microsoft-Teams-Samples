@@ -3,7 +3,6 @@
   "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.botmeetingevents",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -44,16 +43,26 @@
       "isNotificationOnly": false
     }
   ],
-  "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
     "${{BOT_DOMAIN}}",
     "token.botframework.com"
   ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "https://${{BOT_DOMAIN}}",
-    "applicationPermissions": [
-      "OnlineMeeting.ReadBasic.Chat"
-    ]
+    "resource": "https://${{BOT_DOMAIN}}"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }
