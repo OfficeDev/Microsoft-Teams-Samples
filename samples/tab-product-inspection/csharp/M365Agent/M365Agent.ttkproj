@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" Sdk="Microsoft.TeamsFx.Sdk">
   <PropertyGroup Label="Globals">
-    <ProjectGuid>42a0237c-30e0-42ae-b6ed-50f318517e77</ProjectGuid>
+    <ProjectGuid>b3621053-c201-45c6-a673-4c3fad059e51</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <None Include="m365agents.local.yml" />
