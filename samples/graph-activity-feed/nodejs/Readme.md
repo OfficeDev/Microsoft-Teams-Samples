@@ -171,6 +171,14 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![team-custom-event ](Images/feed-team-custom-event.png)
 ![team-custom-notification ](Images/feed-team-custom-notification.png)
 
+**Custom Activity Icons**
+
+The app demonstrates a feature that allows developers to configure custom activity icons for various activities displayed in the activity feed. To test this feature, Replace UserId with the ID of the user to whom you want to send the notification in the .env file (Object Id of user from azure portal) and then install the app in personal scope, groupChat or team log in with the user from whom you want to send the notification, fill out the form, and send a notification. You will observe the activity displayed with a custom icon.
+
+
+
+![custom-activity-icon](Images/custom-activity-icon.png)
+
 ## Further reading
 
 - [Activity Feed](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-1.0&tabs=http)

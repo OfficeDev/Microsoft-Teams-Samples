@@ -1,0 +1,6 @@
+{
+    "debug.onTaskErrors": "abort",
+    "python.analysis.extraPaths": [
+        "./Models"
+    ]
+}

@@ -124,11 +124,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Initial message](Images/2.Welcome.png)
 
-![Red](Images/3.Red.png)
+![Red](Images/3.Hello.png)
 
-![Yellow](Images/4.Yellow.png)
+![Blue](Images/4.Welcome.png)
 
-![Blue](Images/5.Blue.png)
+## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
+![Action.Compose](Images/5.Action.Compose.png)
 
 ## Deploy the bot to Azure
 
