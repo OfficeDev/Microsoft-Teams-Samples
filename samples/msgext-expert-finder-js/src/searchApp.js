@@ -56,7 +56,7 @@ class SearchApp extends TeamsActivityHandler {
     var candidateData = [];
 
     // Define the name of the table you want to store data in
-    const tableName = config.tableName;
+    const tableName = config.storageTableName;
 
     // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
     const magicCode =
