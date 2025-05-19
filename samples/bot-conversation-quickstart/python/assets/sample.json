@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-conversation-quickstart-python",
     "source": "officeDev",
-    "title": "Starter solution: Sample bot - Teams Toolkit",
+    "title": "Starter solution: Sample bot - Microsoft 365 Agents Toolkit",
     "shortDescription": "This sample demonstrates how to build a bot for Microsoft Teams using the Bot Framework in Python.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/python",
     "longDescription": [
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/python/Images/bot-conversation-quickstart.gif",
-        "alt": "Solution UX showing starter solution: sample bot - teams toolkit"
+        "alt": "Solution UX showing starter solution: sample bot - Microsoft 365 Agents Toolkit"
       }
     ],
     "authors": [
