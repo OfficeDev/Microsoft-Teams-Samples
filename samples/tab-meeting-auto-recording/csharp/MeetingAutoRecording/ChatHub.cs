@@ -6,7 +6,6 @@
 using MeetingAutoRecording.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
-using System.Threading.Tasks;
 
 namespace MeetingAutoRecording
 {

@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,13 +88,11 @@ namespace ChangeNotification.Helper
             if (Subscriptions.Any(s => s.Value.Resource == resource && s.Value.ExpirationDateTime < DateTime.UtcNow))
                 return null;
 
-            IGraphServiceSubscriptionsCollectionPage existingSubscriptions = null;
+            SubscriptionCollectionResponse existingSubscriptions = null;
             try
             {
                 existingSubscriptions = await graphServiceClient
-                          .Subscriptions
-                          .Request().
-                          GetAsync();
+                          .Subscriptions.GetAsync();
             }
             catch (Exception ex)
             {
@@ -102,7 +102,7 @@ namespace ChangeNotification.Helper
 
             var notificationUrl = _config["BaseUrl"] + "/api/notifications";
 
-            var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == resource);
+            var existingSubscription = existingSubscriptions.Value.FirstOrDefault(s => s.Resource == resource);
             if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
             {
                 _logger.LogWarning($"CreateNewSubscription-ExistingSubscriptionFound: {resource}");
@@ -124,9 +124,7 @@ namespace ChangeNotification.Helper
                 try
                 {
                     existingSubscription = await graphServiceClient
-                              .Subscriptions
-                              .Request()
-                              .AddAsync(sub);
+                              .Subscriptions.PostAsync(sub);
                 }
                 catch (Exception ex)
                 {
@@ -175,18 +173,15 @@ namespace ChangeNotification.Helper
             {
                 await graphServiceClient
                      .Subscriptions[subscription.Id]
-                     .Request()
-                     .UpdateAsync(newSubscription);
+                     .PatchAsync(newSubscription);
                 subscription.ExpirationDateTime = newSubscription.ExpirationDateTime;
                 _logger.LogWarning($"Renewed subscription: {subscription.Id}, New Expiration: {subscription.ExpirationDateTime}");
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (Microsoft.Kiota.Abstractions.ApiException ex)
             {
-                if (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (ex.ResponseStatusCode == (int)System.Net.HttpStatusCode.NotFound)
                 {
-                    //Subscriptions.Remove(subscription.Id);
                     _logger.LogError(ex, $"HttpStatusCode.NotFound : Creating new subscription : {subscription.Id}");
-                    // Try and create new resource.
 
                     await CreateSubscriptionWithResource(subscription.Resource);
                 }
@@ -207,7 +202,6 @@ namespace ChangeNotification.Helper
             {
                 await graphServiceClient
                      .Subscriptions[subscription.Id]
-                     .Request()
                      .DeleteAsync();
 
                 _logger.LogWarning($"Deleted subscription: {subscription.Id}");
@@ -218,21 +212,28 @@ namespace ChangeNotification.Helper
             }
         }
 
-        private GraphServiceClient GetGraphClient()
+        public GraphServiceClient GetGraphClient()
         {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
-            {
-                // get an access token for Graph
-                var accessToken = this._token;
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                requestMessage
-                    .Headers
-                    .Authorization = new AuthenticationHeaderValue("bearer", accessToken);
-
-                return Task.FromResult(0);
-            }));
-
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
+    }
+    public class SimpleAccessTokenProvider : IAccessTokenProvider
+    {
+        private readonly string _accessToken;
+
+        public SimpleAccessTokenProvider(string accessToken)
+        {
+            _accessToken = accessToken;
+        }
+
+        public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(_accessToken);
+        }
+
+        public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
     }
 }
