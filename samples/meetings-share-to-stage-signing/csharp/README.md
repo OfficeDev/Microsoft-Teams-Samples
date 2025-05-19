@@ -82,7 +82,7 @@ sequenceDiagram
 
 The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
 
-1.Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
+1.Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 2.Install Teams Toolkit for Visual Studio Teams Toolkit extension
 3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
 4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
