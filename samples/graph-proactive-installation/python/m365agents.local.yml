@@ -37,19 +37,7 @@ provision:
         # echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
         # echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
         echo "::set-teamsfx-env MICROSOFT_APP_TYPE=MultiTenant";
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
-        echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
-
-  # Generate runtime appsettings to JSON file
-  - uses: file/createOrUpdateJsonFile
-    with:
-      target: ../Bot configuration/appsettings.json
-      content:
-        MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
-        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-========
         echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=common";  
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -59,49 +47,31 @@ provision:
         - path: ./infra/azure.bicep
           parameters: ./infra/azure.parameters.json
           deploymentName: Create-resources-for-bot
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
       bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
-========
-      bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
   
   - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
     with:
       manifestPath: ./aad.manifest.json # Relative path to teamsfx folder. Environment variables in manifest will be replaced before apply to AAD app
       outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml
 
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
-      manifestPath: ./appPackage/manifest.json
-========
       manifestPath: ./appManifest/manifest.json
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
-      manifestPath: ./appPackage/manifest.json
-      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
-========
       manifestPath: ./appManifest/manifest.json
       outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-========
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml
 
   # Apply the Teams app manifest to an existing Teams app in
   # Developer Portal.
@@ -109,9 +79,6 @@ provision:
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-<<<<<<<< HEAD:samples/bot-configuration-app/csharp/M365Agent/m365agents.local.yml
-      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-========
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
 deploy:
@@ -122,4 +89,3 @@ deploy:
       envs:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
->>>>>>>> origin/main:samples/graph-proactive-installation/python/teamsapp.local.yml

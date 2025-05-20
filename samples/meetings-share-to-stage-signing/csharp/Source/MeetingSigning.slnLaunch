@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Microsoft Teams (browser)",
+    "Name": "Microsoft Teams (browser) (skip update app)",
     "Projects": [
       {
         "Path": "MeetingSigning.Web\\Microsoft.Teams.Samples.MeetingSigning.Web.csproj",
@@ -12,15 +12,15 @@
         "Action": "Start"
       },
       {
+        "Path": "MeetingSigning.Domain\\Microsoft.Teams.Samples.MeetingSigning.Domain.csproj",
+        "Action": "Start"
+      },
+      {
         "Path": "MeetingSigning.Domain.Tests\\Microsoft.Teams.Samples.MeetingSigning.Domain.Tests.csproj",
         "Action": "Start"
       },
       {
         "Path": "MeetingSigning.Infrastructure\\Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj",
-        "Action": "Start"
-      },
-      {
-        "Path": "MeetingSigning.Domain\\Microsoft.Teams.Samples.MeetingSigning.Domain.csproj",
         "Action": "Start"
       },
       {
@@ -30,7 +30,7 @@
       {
         "Path": "M365Agent\\M365Agent.ttkproj",
         "Action": "StartWithoutDebugging",
-        "DebugTarget": "Microsoft Teams (browser)"
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
       }
     ]
   }
