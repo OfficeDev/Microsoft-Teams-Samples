@@ -39,7 +39,7 @@ provision:
         - path: ./infra/azure.bicep
           parameters: ./infra/azure.parameters.json
           deploymentName: Create-resources-for-bot
-      bicepCliVersion: v0.9.1 # Teams Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+      bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
 
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
@@ -61,7 +61,7 @@ provision:
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
-  # Teams Developer Portal.
+  # Developer Portal.
   # Will use the app id in manifest file to determine which Teams app to update.
   - uses: teamsApp/update
     with:

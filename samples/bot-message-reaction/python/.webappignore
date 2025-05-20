@@ -3,8 +3,8 @@
 .env
 env/
 README.md
-teamsapp.yml
-teamsapp.local.yml
+m365agents.yml
+m365agents.local.yml
 __pycache__
 .mypy_cache
 /appManifest/

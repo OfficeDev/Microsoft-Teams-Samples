@@ -4,6 +4,6 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-personal-razor-csharp
+  sampleTag: Microsoft-Teams-Samples:graph-proactive-installation-python
 
 environmentFolderPath: ./env
