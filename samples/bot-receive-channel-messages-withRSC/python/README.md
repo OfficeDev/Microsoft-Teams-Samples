@@ -126,7 +126,7 @@ the Teams service needs to call into the bot.
 
 **Adding bot UI:**
 
-![App installation](images/1.Install_PersonalScope.png)
+![App installation](Images/1.Install_PersonalScope.png)
 
 **Hey command interaction:**
 
