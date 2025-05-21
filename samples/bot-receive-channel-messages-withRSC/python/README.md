@@ -23,7 +23,7 @@ This sample app illustrates how a bot can capture all channel messages in Micros
 
 ## Interaction with app
 
-![Bot Receive Channel MessagesWithRSCGif](images/Bot_Channel_Messenging-RSC-python.gif)
+![Bot Receive Channel MessagesWithRSCGif](Images/Bot_Channel_Messenging-RSC-python.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -130,29 +130,29 @@ the Teams service needs to call into the bot.
 
 **Hey command interaction:**
 
-![Bot Interaction](images/2.Welcome_Message.png)
+![Bot Interaction](Images/2.Welcome_Message.png)
 
-![Bot Interaction](images/3.Bot_Responds.png)
+![Bot Interaction](Images/3.Bot_Responds.png)
 
 **1 or 2 command interaction:**
 
-![Bot Interaction](images/4.Bot_Responds_1.png)
+![Bot Interaction](Images/4.Bot_Responds_1.png)
 
-![Bot Interaction](images/5.Bot_Responds_2.png)
+![Bot Interaction](Images/5.Bot_Responds_2.png)
 
 **Group Chat interaction:**
 
-![Bot Interaction](images/6.Install_Group_Scope.png)
+![Bot Interaction](Images/6.Install_Group_Scope.png)
 
-![Bot Interaction](images/7.Welcome_GC_Scope.png) 
+![Bot Interaction](Images/7.Welcome_GC_Scope.png) 
 
 **Group chat interaction with bot without being @mentioned:**
 
-![Bot Interaction](images/8.Bot_Responds_GC.png) 
+![Bot Interaction](Images/8.Bot_Responds_GC.png) 
 
-![Bot Interaction](images/9.Bot_Responds_GC_1.png) 
+![Bot Interaction](Images/9.Bot_Responds_GC_1.png) 
 
-![Bot Interaction](images/10.Bot_Responds_GC_2.png) 
+![Bot Interaction](Images/10.Bot_Responds_GC_2.png) 
 
 **Interacting with the bot in Teams**
 
@@ -160,9 +160,9 @@ Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
 
-![Bot Interaction](images/11.Install_Teams.png) 
+![Bot Interaction](Images/11.Install_Teams.png) 
 
-![Bot Interaction](images/12.Teams_Bot_Responds.png) 
+![Bot Interaction](Images/12.Teams_Bot_Responds.png) 
 
 ## Deploy the bot to Azure
 

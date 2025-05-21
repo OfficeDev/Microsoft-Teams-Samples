@@ -26,7 +26,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Interaction with app
 
-![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
+![RSC Module](ReceiveMessagesWithRSC/Images/Bot_Channel_Messenging-RSC.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -128,23 +128,27 @@ The bot receives the message without being @mentioned.
 
 ## Running the sample
 
-![App Installation](ReceiveMessagesWithRSC/Images/1.RSC_Install_Scopes.png)
+![App Installation](ReceiveMessagesWithRSC/Images/1.Install.png)
 
 - Showing Welcome message 
 
-![Channel messages](ReceiveMessagesWithRSC/Images/3.Notification.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/2.Installed.png)
+
+![Channel messages](ReceiveMessagesWithRSC/Images/3.Interaction.png)
 
 - Showing messages based on option selected
 
-![Channel messages](ReceiveMessagesWithRSC/Images/2.botWithRSCFlow.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/4.1_and_2_Command_Interaction.png)
 
 - Adding to group chat
 
-![Add To Group Chat ](ReceiveMessagesWithRSC/Images/4.RSC_Groupchat.png)
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/5.Install_to_GC.png)
+
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/6.Installed.png)
 
 - Receives messages in group chat without being @mentioned.
 
-![Channel messages](ReceiveMessagesWithRSC/Images/5.RSC_GroupConversation.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/7.1_and_2_Command_Interaction.png)
 
 ## Deploy the bot to Azure
 
