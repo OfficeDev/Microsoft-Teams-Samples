@@ -60,7 +60,7 @@ Once the provisioning and deployment steps are finished, you can preview your ap
   1. Select `Launch Remote (Edge)` or `Launch Remote (Chrome)` from the launch configuration drop-down.
   1. Press the Play (green arrow) button to launch your app - now running remotely from Azure.
 
-- From Microsoft 365 Agents Toolkit CLI: execute ` preview --env dev` in your project directory to launch your application.
+- From Microsoft 365 Agents Toolkit CLI: execute `atk preview --env dev` in your project directory to launch your application.
 
 ## Validate manifest file
 

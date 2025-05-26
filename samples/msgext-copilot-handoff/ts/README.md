@@ -20,7 +20,7 @@ This sample demonstrates a Teams message extension that integrates with Microsof
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 
 ## Setup and use the sample
