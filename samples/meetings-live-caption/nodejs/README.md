@@ -23,9 +23,9 @@ This sample application illustrates how to implement live captioning in Microsof
 Once the meeting is scheduled. Follow this doc to enable [CART Captions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
 
-![Enable CART-1](Images/8.SettingToEnableCart-1.png)
+![Enable CART-1](Images/8.SettingsToEnableCart-2.png)
 
-![Enable CART-2](Images/7.SettingsToEnableCart-2.png)
+![Enable CART-2](Images/7.SettingToEnableCart-1.png)
 
 ## Included Features
 * Meeting Chat 
@@ -117,7 +117,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 3. Once the live caption has started, you can use the app to send live caption.
 ![Send live caption](Images/6.LiveCaption.png)
 4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](Images/LiveCaption.png)
+![Caption in meeting](Images/6.LiveCaption.png)
 
+## Further reading
+
+- [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-nodejs" />
