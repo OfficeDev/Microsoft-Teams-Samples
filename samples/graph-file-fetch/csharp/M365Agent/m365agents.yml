@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: v1.2
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:graph-file-fetch-csharp
+
+environmentFolderPath: ./env
+projectId: 52d5c799-36d6-46e6-96ce-b05668d6c63c
