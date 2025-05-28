@@ -1055,6 +1055,10 @@ jobs:
               name: 'bot-streaming'
               version: '18.x'
 
+            - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
+              name: 'bot-auth0-adaptivecard'
+              version: '16.x'  
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
