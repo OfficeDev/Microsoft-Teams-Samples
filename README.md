@@ -117,6 +117,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 31 | Streaming Bot | This sample showcases the conversational streaming token scenario for teams bot in personal scope. | Advanced | [View][botstreaming#csharp] |[View][botstreaming#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |
 | 32 | bot-auth0-adaptivecard | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | |
 
+
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
 |-----|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:--------------------------------------|:-------------------------------------|  
