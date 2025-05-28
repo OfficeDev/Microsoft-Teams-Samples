@@ -492,6 +492,10 @@ jobs:
               name: 'msgext-thirdparty-storage'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-auth0-adaptivecard/csharp/TeamsAuth0Bot.csproj'
+              name: 'bot-auth0-adaptivecard'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -1050,6 +1054,10 @@ jobs:
             - project_path: 'samples/bot-streaming/nodejs'
               name: 'bot-streaming'
               version: '18.x'
+
+            - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
+              name: 'bot-auth0-adaptivecard'
+              version: '16.x'  
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
