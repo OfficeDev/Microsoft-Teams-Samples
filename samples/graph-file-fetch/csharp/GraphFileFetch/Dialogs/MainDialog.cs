@@ -74,7 +74,7 @@ namespace GraphFileFetch.Dialogs
                         var messageId = stepContext.Context.Activity.Id;
                         var graphClient = GetAuthenticatedClient(token.AccessToken);
                         var conversationType = stepContext.Context.Activity.Conversation.ConversationType;
-                        var imageUrl = "";
+                        var attachmentUrl = "";
 
                         if (conversationType == "groupChat")
                         {
@@ -85,7 +85,7 @@ namespace GraphFileFetch.Dialogs
                             
                             if (messageContext != null)
                             {
-                                imageUrl = await GetRecentGroupChatAttachmentMessage(messageContext, graphClient, chatId, messageId, cancellationToken);
+                                attachmentUrl = await GetGroupChatAttachment(messageContext, graphClient, chatId, messageId, cancellationToken);
                             }
                         }
                         else if (conversationType == "channel")
@@ -100,11 +100,11 @@ namespace GraphFileFetch.Dialogs
                             
                             if (messageContext != null)
                             {
-                                imageUrl = await GetRecentTeamsAttachmentMessage(messageContext, graphClient, teamId, channelId, messageId, cancellationToken);
+                                attachmentUrl = await GetTeamsChannelAttachment(messageContext, graphClient, teamId, channelId, messageId, cancellationToken);
                             }
                         }
 
-                        if (!string.IsNullOrEmpty(imageUrl))
+                        if (!string.IsNullOrEmpty(attachmentUrl))
                         {
                             try
                             {
@@ -117,7 +117,7 @@ namespace GraphFileFetch.Dialogs
                                         {
                                             Title = "Download",
                                             Type = ActionTypes.OpenUrl,
-                                            Value = imageUrl
+                                            Value = attachmentUrl
                                         }
                                     }
                                 }.ToAttachment();
@@ -153,7 +153,7 @@ namespace GraphFileFetch.Dialogs
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
-        protected async Task<string> GetRecentGroupChatAttachmentMessage(ITurnContext<IMessageActivity> turnContext, GraphServiceClient graphClient, string chatId, string messageID, CancellationToken cancellationToken)
+        protected async Task<string> GetGroupChatAttachment(ITurnContext<IMessageActivity> turnContext, GraphServiceClient graphClient, string chatId, string messageID, CancellationToken cancellationToken)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace GraphFileFetch.Dialogs
             }
         }
 
-        protected async Task<string> GetRecentTeamsAttachmentMessage(ITurnContext<IMessageActivity> turnContext, GraphServiceClient graphClient, string teamId, string channelId, string messageID, CancellationToken cancellationToken)
+        protected async Task<string> GetTeamsChannelAttachment(ITurnContext<IMessageActivity> turnContext, GraphServiceClient graphClient, string teamId, string channelId, string messageID, CancellationToken cancellationToken)
         {
             try
             {
