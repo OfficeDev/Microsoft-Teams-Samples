@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "10/11/2021 23:35:25 PM"
+ createdDate: "28/05/2025 23:35:25 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-file-fetch-csharp
 ---
 
