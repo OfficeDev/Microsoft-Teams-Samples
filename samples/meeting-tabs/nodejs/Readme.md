@@ -30,7 +30,7 @@ This sample provides an interactive demonstration of a Teams meeting side panel 
 ![TeamsTheme](Images/TeamsThemes.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meeting-Tabs:** [Manifest](/samples/meeting-tabs/nodejs/demo-manifest/meeting-tabs.zip)
 
@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 

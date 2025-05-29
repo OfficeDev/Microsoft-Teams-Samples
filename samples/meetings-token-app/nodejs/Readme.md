@@ -51,7 +51,7 @@ The Meeting Token Generator is a sample application designed to extend Microsoft
  ![Preview Image](Images/app-theme-tokenapp.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meetings Token App:** [Manifest](/samples/meetings-token-app/csharp/demo-manifest/meetings-token-app.zip)
 
@@ -80,7 +80,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Technologies
 
@@ -158,7 +158,7 @@ Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will sen
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
-### Step 6: Sideload the app in a Teams desktop client
+### Step 6: Upload the app in a Teams desktop client
 1. Create a .zip using the below files, which are in the `appManifest` folder.
   - manifest.json
   - icon-outline.png
