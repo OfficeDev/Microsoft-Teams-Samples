@@ -1,8 +1,6 @@
 ﻿// <copyright file="UserData.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
-// </copyrightusing Microsoft.Graph;
-
-using Microsoft.Graph;
+// </copyright>
 
 namespace MeetingTranscriptRecording.Models
 {

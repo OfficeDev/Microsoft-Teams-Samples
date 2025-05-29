@@ -43,6 +43,14 @@
                 {
                     "id": "Directory.Read.All",
                     "type": "Scope"
+                },
+                {
+                    "id": "TeamsActivity.Send",
+                    "type": "Scope"
+                },
+                {
+                    "id": "TeamsTab.Read.All",
+                    "type": "Scope"
                 }
             ]
         }

@@ -18,19 +18,21 @@
             align-items: center;
         }
     </style>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js"
-        asp-append-version="true"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous">
+</script>
 </head>
 
 <body>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         function validateForm() {
             var contentInfo = {
                 myValue: document.forms["contentForm"]["option"].value,
                 title: "<%= question %>"
             }
-            microsoftTeams.tasks.submitTask(contentInfo, "<<APP_ID>>");
+            microsoftTeams.dialog.url.submit(contentInfo, "<<APP_ID>>");
             return true;
         }
     </script>

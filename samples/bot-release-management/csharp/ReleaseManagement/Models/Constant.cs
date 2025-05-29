@@ -10,7 +10,7 @@ namespace ReleaseManagement.Models
     public static class Constant
     {
         // Key to get stakeholder team from incoming workitem payload.
-        public static string StakeHolderTeamKey = "Custom.StakeholderTeam";
+        public static string StakeHolderTeamKey = "Custom.StakeholderTeams";
 
         // Key to get task title from incoming workitem payload.
         public static string TaskTitleKey = "System.Title";
