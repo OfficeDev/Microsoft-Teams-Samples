@@ -874,11 +874,11 @@ jobs:
 
             - project_path: 'samples/meetings-context-app/nodejs/client'
               name: 'meetings-context-app-client'
-              version: '18.x'
+              version: '16.x'
 
             - project_path: 'samples/meetings-context-app/nodejs'
               name: 'meetings-context-app-server'
-              version: '18.x'
+              version: '16.x'
 
             - project_path: 'samples/meetings-details-tab/nodejs'
               name: 'meetings-details-tab'
