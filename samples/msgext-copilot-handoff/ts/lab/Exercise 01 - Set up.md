@@ -93,9 +93,9 @@ Under "Accounts" click "Sign in to Microsoft 365"2️⃣ and log in with your ow
 
 A browser window will pop up and offer to log into Microsoft 365. When it says "You are signed in now and close this page", please do so.
 
-Now verify that the "Sideloading enabled" checker has a green checkmark. If it doesn't, that means that your user account doesn't have permission to upload Teams applications. This permission is "off" by default; here are [instructions for enabling users to upload custom apps](https://learn.microsoft.com/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps)
+Now verify that the "Uploading enabled" checker has a green checkmark. If it doesn't, that means that your user account doesn't have permission to upload Teams applications. This permission is "off" by default; here are [instructions for enabling users to upload custom apps](https://learn.microsoft.com/microsoftteams/teams-custom-app-policies-and-settings#allow-users-to-upload-custom-apps)
 
-![Checking that sideloading is enabled](./images/01-04-Setup-TTK-03.png)
+![Checking that uploading is enabled](./images/01-04-Setup-TTK-03.png)
 
 ## Congratulations
 

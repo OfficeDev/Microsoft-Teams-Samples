@@ -91,7 +91,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
 8.In the browser that launches, select the Add button to install the app to Teams.
 
-If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 
 ## Setup
@@ -268,7 +268,7 @@ If you do not have permission to upload custom apps (sideloading), Microsoft 365
 ![Meeting stage with a 'Default Agreement' document and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
 
 ## Usage
-* Sideload the app to a meeting.
+* Upload the app to a meeting.
 * In the meeting group chat, add the *Meeting Signing* app as a new Tab.
 * In the pre-meeting tab, create a test document so you can test the meeting share to stage APIs.
 * Provide one-time consent to the app for Graph permissions while creating the document.
