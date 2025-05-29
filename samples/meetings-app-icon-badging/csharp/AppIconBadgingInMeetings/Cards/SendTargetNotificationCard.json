@@ -37,7 +37,7 @@
       "id": "submit2",
       "title": "Stage View",
       "data": {
-        "Type": "SatgeViewNotification"
+        "Type": "StageViewNotification"
       }
     }
   ]
