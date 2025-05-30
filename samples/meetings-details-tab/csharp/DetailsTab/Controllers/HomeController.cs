@@ -58,7 +58,6 @@ namespace DetailsTab.Controllers
         {
             taskInfo.id = Guid.NewGuid().ToString();
             TaskList.taskInfoList.Add(taskInfo);
-            //taskInfoDataList.Add(taskInfo);
             return Json(TaskList);
         }
         [HttpPost]
@@ -72,7 +71,6 @@ namespace DetailsTab.Controllers
             TaskList.taskInfoList.Find(x => x.id == taskInfo.id).IsSent = true;
 
             using var connector = new ConnectorClient(new Uri(serviceUrl), appId, appSecret);
-            MicrosoftAppCredentials.TrustServiceUrl(serviceUrl, DateTime.MaxValue);
 
             var replyActivity = new Activity();
             replyActivity.Type = "message";

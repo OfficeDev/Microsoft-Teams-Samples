@@ -57,7 +57,7 @@
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
-        "groupchat",
+        "groupChat",
         "personal",
         "team"
       ]

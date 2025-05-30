@@ -20,5 +20,10 @@ namespace ReleaseManagement.Models.Configuration
         /// Gets or sets Microsoft tenant Id.
         /// </summary>
         public string MicrosoftAppTenantId { get; set; }
+
+        /// <summary>
+        /// Gets or sets Microsoft Teams App Id.
+        /// </summary>
+        public string MicrosoftTeamsAppId { get; set; }
     }
 }
