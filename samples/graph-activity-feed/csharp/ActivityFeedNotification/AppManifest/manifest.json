@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vdevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
   "version": "1.0.0",
-  "id": "<<MicrosoftAppId>>",
+  "id": "${{TeamsAppId}}",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.teams.com",
@@ -24,7 +24,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{Base_Url}/configure",
+      "configurationUrl": "https://{base_url}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -36,19 +36,33 @@
       ]
     }
   ],
+  "staticTabs": [
+    {
+      "entityId": "personal",
+      "name": "UserNotification",
+      "contentUrl": "https://{base_url}/hello",
+      "websiteUrl": "https://{base_url}/hello",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<domain-name>>"
+    "{base_url}"
   ],
   "activities": {
     "activityTypes": [
       {
         "type": "taskCreated",
         "description": "Task created activity",
-        "templateText": "New created task {taskName} for you"
+        "templateText": "New created task {taskName} for you",
+        "allowedIconIds": [
+          "taskCreatedId"
+        ]
       },
       {
         "type": "deploymentApprovalRequired",
@@ -58,22 +72,67 @@
       {
         "type": "approvalRequired",
         "description": "Deployment requires your approval",
-        "templateText": "A Deployment approval Task created with {approvalTaskId}"
+        "templateText": "A Deployment approval Task created with {approvalTaskId}",
+        "allowedIconIds": [
+          "approvalRequiredId"
+        ]
       },
       {
         "type": "pendingFinanceApprovalRequests",
         "description": "Internal spending team has a pending finance approval requests",
-        "templateText": "These are count of pending request {pendingRequestCount}"
+        "templateText": "These are count of pending request {pendingRequestCount}",
+        "allowedIconIds": [
+          "pendingFinanceApprovalRequestsId"
+        ]
       },
       {
         "type": "reservationUpdated",
         "description": "You have moved up the queue",
-        "templateText": "Here is the {reservationId} with {currentSlot}"
+        "templateText": "Here is the {reservationId} with {currentSlot}",
+        "allowedIconIds": [
+          "reservationUpdatedId"
+        ]
+      }
+    ],
+    "activityIcons": [
+      {
+        "id": "taskCreatedId",
+        "iconFile": "exclaim.png"
+      },
+      {
+        "id": "approvalRequiredId",
+        "iconFile": "approvalRequired.png"
+      },
+      {
+        "id": "pendingFinanceApprovalRequestsId",
+        "iconFile": "pendingFinanceApprovalRequests.png"
+      },
+      {
+        "id": "reservationUpdatedId",
+        "iconFile": "reservationUpdated.png"
       }
     ]
   },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.User"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Group"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Chat"
+        }
+      ]
+    }
+  },
   "webApplicationInfo": {
-    "id": "<<MicrosoftAppId>>",
-    "resource": "api://{Base_Url}/<<MicrosoftAppId>>"
+    "id": "${{AAD_APP_ID}}",
+    "resource": "api://{base_url}/${{AAD_APP_ID}}"
   }
 }

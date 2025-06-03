@@ -1,52 +1,37 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.Graph;
+using Microsoft.Graph.Me.SendMail;
+using Microsoft.Graph.Models;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // This class is a wrapper for the Microsoft Graph API
-    // See: https://developer.microsoft.com/en-us/graph
     public class SimpleGraphClient
     {
         private readonly string _token;
+        private readonly GraphServiceClient _graphClient;
 
         public SimpleGraphClient(string token)
         {
             if (string.IsNullOrWhiteSpace(token))
-            {
                 throw new ArgumentNullException(nameof(token));
-            }
 
             _token = token;
+            _graphClient = GetAuthenticatedClient();
         }
 
-        // Sends an email on the users behalf using the Microsoft Graph API
+        // Sends an email on the user's behalf using Microsoft Graph API
         public async Task SendMailAsync(string toAddress, string subject, string content)
         {
-            if (string.IsNullOrWhiteSpace(toAddress))
-            {
-                throw new ArgumentNullException(nameof(toAddress));
-            }
+            if (string.IsNullOrWhiteSpace(toAddress)) throw new ArgumentNullException(nameof(toAddress));
+            if (string.IsNullOrWhiteSpace(subject)) throw new ArgumentNullException(nameof(subject));
+            if (string.IsNullOrWhiteSpace(content)) throw new ArgumentNullException(nameof(content));
 
-            if (string.IsNullOrWhiteSpace(subject))
-            {
-                throw new ArgumentNullException(nameof(subject));
-            }
-
-            if (string.IsNullOrWhiteSpace(content))
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            var graphClient = GetAuthenticatedClient();
             var recipients = new List<Recipient>
             {
                 new Recipient
@@ -58,7 +43,6 @@ namespace Microsoft.BotBuilderSamples
                 },
             };
 
-            // Create the message.
             var email = new Message
             {
                 Body = new ItemBody
@@ -70,93 +54,102 @@ namespace Microsoft.BotBuilderSamples
                 ToRecipients = recipients,
             };
 
-            // Send the message.
-            await graphClient.Me.SendMail(email, true).Request().PostAsync();
+            await _graphClient.Me.SendMail.PostAsync(new SendMailPostRequestBody
+            {
+                Message = email,
+                SaveToSentItems = true
+            });
         }
 
-        // Gets mail for the user using the Microsoft Graph API
+        // Gets recent mail for the user
         public async Task<Message[]> GetRecentMailAsync()
         {
-            var graphClient = GetAuthenticatedClient();
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request().GetAsync();
-            return messages.Take(5).ToArray();
+            var response = await _graphClient.Me.MailFolders["Inbox"].Messages.GetAsync(config =>
+            {
+                config.QueryParameters.Top = 5;
+                config.Headers.Add("Prefer", $"outlook.timezone=\"{TimeZoneInfo.Local.Id}\"");
+            });
+
+            return response.Value.ToArray();
         }
 
+        // Gets the user's profile photo as a Base64 string
         public async Task<string> GetPhotoAsync()
         {
-            var graphClient = GetAuthenticatedClient();
             try
             {
-                var stream = await graphClient.Me.Photo.Content
-                            .Request()
-                            .GetAsync();
-
-                MemoryStream ms = new MemoryStream();
-                stream.CopyTo(ms);
-                byte[] buffer = ms.ToArray();
-                string result = Convert.ToBase64String(buffer);
-                string imgDataURL = string.Format("data:image/png;base64,{0}", result);
-                return imgDataURL;
+                var stream = await _graphClient.Me.Photo.Content.GetAsync();
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                var buffer = ms.ToArray();
+                return $"data:image/png;base64,{Convert.ToBase64String(buffer)}";
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
+                Console.WriteLine(ex);
                 return "http://adaptivecards.io/content/cats/1.png";
             }
         }
 
+        // Saves the user's profile photo to a public URL
         public async Task<string> GetPublicURLForProfilePhoto(string id)
         {
-            var graphClient = GetAuthenticatedClient();
             try
             {
-                var stream = await graphClient.Me.Photo.Content
-                            .Request()
-                            .GetAsync();
+                var stream = await _graphClient.Me.Photo.Content.GetAsync();
+                var fileName = $"{id}-ProfilePhoto.png";
+                var imagePath = Path.Combine(".", "wwwroot", "photos");
 
-                var fileName = id + "-ProflePhoto.png";
-                string imagePath = Path.Combine(".", "wwwroot", "photos");
+                if (!Directory.Exists(imagePath))
+                    Directory.CreateDirectory(imagePath);
 
-                if (!System.IO.Directory.Exists(imagePath))
-                    System.IO.Directory.CreateDirectory(imagePath);
+                var fullPath = Path.Combine(imagePath, fileName);
 
-                imagePath = Path.Combine(imagePath, fileName);
+                using var fileStream = File.Create(fullPath);
+                stream.Seek(0, SeekOrigin.Begin);
+                await stream.CopyToAsync(fileStream);
 
-                using (var fileStream = System.IO.File.Create(imagePath))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    stream.CopyTo(fileStream);
-                }
-                return  "/photos/" + fileName;
+                return $"/photos/{fileName}";
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
+                Console.WriteLine(ex);
                 return "http://adaptivecards.io/content/cats/1.png";
             }
         }
 
-        private GraphServiceClient GetAuthenticatedClient()
-        {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
-
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
-        }
-
+        // Gets the authenticated user's profile
         public async Task<User> GetMyProfile()
         {
-            var graphClient = GetAuthenticatedClient();
-            return await graphClient.Me.Request().GetAsync();
+            return await _graphClient.Me.GetAsync();
+        }
+
+        // Creates a GraphServiceClient using a custom TokenCredential
+        private GraphServiceClient GetAuthenticatedClient()
+        {
+            var tokenCredential = new RawTokenCredential(_token);
+            return new GraphServiceClient(tokenCredential, new[] { "https://graph.microsoft.com/.default" });
+        }
+
+        // Custom TokenCredential to wrap a raw token
+        private class RawTokenCredential : TokenCredential
+        {
+            private readonly string _accessToken;
+
+            public RawTokenCredential(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1));
+            }
+
+            public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new ValueTask<AccessToken>(new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1)));
+            }
         }
     }
 }
