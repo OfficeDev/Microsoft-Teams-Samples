@@ -29,7 +29,7 @@ function RecordingTranscript() {
     const [loadingRecording, setLoadingRecording] = useState(false);
 
     // A ref to store a reference to a video element, allowing direct manipulation in the DOM.
-    const videoRef = useRef(null);
+    const [videoUrl, setVideoUrl] = useState(null);
 
     // Initialize the component and extract query parameters when it mounts
     useEffect(() => {
@@ -190,9 +190,9 @@ function RecordingTranscript() {
                     .then(response => response.blob())
                     .then(blob => {
                         setLoadingRecording(false);
-                        // Create a URL for the video blob and set it as the source of 'videoRef'
+                        // Create a URL for the video blob and set it as the source of 'videoUrl'
                         const videoUrl = URL.createObjectURL(blob);
-                        videoRef.current.src = videoUrl;
+                        setVideoUrl(videoUrl);
                     })
             });
         }
@@ -215,18 +215,18 @@ function RecordingTranscript() {
                     <div class="mainRecordTrans">
                         {loadingRecording ? (
                             <div className="loadingIconRecordings">
-                                    <Spinner label="Loading Recordings..." size="small" />
+                                <Spinner label="Loading Recordings..." size="small" />
                             </div>
                         ) : (
                             <div className="divRecording">
-                                <video ref={videoRef} className="videoPlay" controls />
+                                <video className="videoPlay" controls src={videoUrl} />
                             </div>
                         )}
                         <div className="divTranscripts">
                             <h4>Transcripts</h4>
                             {loadingTranscripts ? (
                                 <div>
-                                        <Spinner label="Loading Transcript..." size="small" />
+                                    <Spinner label="Loading Transcript..." size="small" />
                                 </div>
                             ) : (
                                 <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />

@@ -147,7 +147,7 @@ const CreateTag = props => {
 
             <Flex>
                 <FlexItem push>
-                    <Button primary content="Create" onClick={onCreateTagButtonClick }/>
+                    <Button primary content="Create" onClick={onCreateTagButtonClick}/>
                 </FlexItem>
             </Flex>
         </Flex>
