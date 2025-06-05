@@ -53,7 +53,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Click **continue** when popuping devtunnel dialog
 1. Click **Save** to finish the App configureation
 
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Note
 - Due to the length limit of the RSC permission in manifest, separate permission lists are used for team channel and group chat under the `setupManifest` folder.  Every time, debug launch will load the permissions in corresponding team/chat file and write them into the the section of `authorization.permissions.resourceSpecific` in `appManifest/manifest.json`
