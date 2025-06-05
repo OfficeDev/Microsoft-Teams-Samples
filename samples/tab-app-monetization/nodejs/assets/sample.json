@@ -9,7 +9,7 @@
       "This sample demonstrates a Teams tab application that opens a purchase dialog and triggers a monetization flow through the Teams JS SDK. Users can experience app monetization features seamlessly integrated within Microsoft Teams."
     ],
     "creationDateTime": "2022-07-20",
-    "updateDateTime": "2024-10-15",
+    "updateDateTime": "2025-03-20",
     "products": [
       "Teams"
     ],
