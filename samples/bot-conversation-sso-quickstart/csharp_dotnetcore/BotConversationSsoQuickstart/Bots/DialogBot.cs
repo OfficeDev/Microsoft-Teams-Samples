@@ -12,11 +12,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // This IBot implementation can run any type of Dialog. The use of type parameterization is to allows multiple different bots
-    // to be run at different endpoints within the same project. This can be achieved by defining distinct Controller types
-    // each with dependency on distinct IBot types, this way ASP Dependency Injection can glue everything together without ambiguity.
-    // The ConversationState is used by the Dialog system. The UserState isn't, however, it might have been used in a Dialog implementation,
-    // and the requirement is that all BotState objects are saved at the end of a turn.
+    /// <summary>
+    /// This IBot implementation can run any type of Dialog. The use of type parameterization allows multiple different bots
+    /// to be run at different endpoints within the same project. This can be achieved by defining distinct Controller types
+    /// each with dependency on distinct IBot types, this way ASP Dependency Injection can glue everything together without ambiguity.
+    /// The ConversationState is used by the Dialog system. The UserState isn't, however, it might have been used in a Dialog implementation,
+    /// and the requirement is that all BotState objects are saved at the end of a turn.
+    /// </summary>
+    /// <typeparam name="T">The type of the dialog.</typeparam>
     public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
         protected readonly BotState _conversationState;
@@ -24,6 +27,13 @@ namespace Microsoft.BotBuilderSamples
         protected readonly ILogger _logger;
         protected readonly BotState _userState;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DialogBot{T}"/> class.
+        /// </summary>
+        /// <param name="conversationState">The conversation state.</param>
+        /// <param name="userState">The user state.</param>
+        /// <param name="dialog">The dialog.</param>
+        /// <param name="logger">The logger.</param>
         public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
         {
             _conversationState = conversationState;
@@ -53,14 +63,14 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Handle when a message is addressed to the bot.
+        /// Handles when a message is addressed to the bot.
         /// </summary>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A Task resolving to either a login card or the adaptive card of the Reddit post.</returns>
         /// <remarks>
         /// For more information on bot messaging in Teams, see the documentation
-        /// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-basics?tabs=dotnet#receive-a-message .
+        /// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-basics?tabs=dotnet#receive-a-message.
         /// </remarks>
         protected override async Task OnMessageActivityAsync(
             ITurnContext<IMessageActivity> turnContext,

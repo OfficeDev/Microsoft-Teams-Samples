@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler, CardFactory, TurnContext } = require("botbuilder");
@@ -7,6 +7,9 @@ const schedule = require('node-schedule');
 const conversationReferences = {};
 let adapter;
 
+/**
+ * TeamsBot class handles Teams activities and task modules.
+ */
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
@@ -15,34 +18,37 @@ class TeamsBot extends TeamsActivityHandler {
         // Handle when a new member is added to the conversation.
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
-            for (let member of membersAdded) {
+            for (const member of membersAdded) {
                 if (member.id !== context.activity.recipient.id) {
                     await context.sendActivity("Hello and welcome! With this sample, you can schedule a recurring task and receive reminders at the scheduled time. Use the command 'create-reminder' to start.");
                 }
             }
-
             await next();
         });
 
         // Handle incoming messages.
         this.onMessage(async (context, next) => {
-            if (context.activity.text.toLowerCase().trim() == "create-reminder") {
+            if (context.activity.text.toLowerCase().trim() === "create-reminder") {
                 const userCard = CardFactory.adaptiveCard(this.adaptiveCardForTaskModule());
                 await context.sendActivity({ attachments: [userCard] });
             }
-
             await next();
         });
     }
 
-    // Handle task module fetch.
+    /**
+     * Handle task module fetch.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {Object} taskModuleRequest - The task module request object.
+     * @returns {Object} - The task module response.
+     */
     handleTeamsTaskModuleFetch(context, taskModuleRequest) {
         const cardTaskFetchId = taskModuleRequest.data.id;
 
-        if (cardTaskFetchId == "schedule") {
+        if (cardTaskFetchId === "schedule") {
             return TaskModuleResponseFactory.toTaskModuleResponse({
-                url: this.baseUrl + "/scheduleTask",
-                fallbackUrl: this.baseUrl + "/scheduleTask",
+                url: `${this.baseUrl}/scheduleTask`,
+                fallbackUrl: `${this.baseUrl}/scheduleTask`,
                 height: 350,
                 width: 350,
                 title: "Schedule a task"
@@ -51,9 +57,12 @@ class TeamsBot extends TeamsActivityHandler {
         return null;
     }
 
-    // Handle task module submit action.
+    /**
+     * Handle task module submit action.
+     * @param {TurnContext} context - The context object for the turn.
+     * @param {Object} taskModuleRequest - The task module request object.
+     */
     async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
-        // Save task details locally.
         const taskDetails = {
             title: taskModuleRequest.data.title,
             dateTime: taskModuleRequest.data.dateTime,
@@ -68,18 +77,9 @@ class TeamsBot extends TeamsActivityHandler {
         conversationReferences[currentUser] = TurnContext.getConversationReference(context.activity);
         adapter = context.adapter;
 
-        // Parse the task datetime and create a cron expression for scheduling.
         const date = new Date(taskModuleRequest.data.dateTime);
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1; // Months are 0-indexed
-        const day = date.getDate();
-        const hour = date.getHours();
-        const min = date.getMinutes();
-        const days = taskModuleRequest.data.selectedDays.toString();
+        const cronExpression = `${date.getMinutes()} ${date.getHours()} * * ${taskModuleRequest.data.selectedDays.toString()}`;
 
-        const cronExpression = `${min} ${hour} * * ${days}`;
-
-        // Schedule the recurring task reminder using node-schedule.
         schedule.scheduleJob(cronExpression, async function () {
             await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
                 const userCard = CardFactory.adaptiveCard({
@@ -117,13 +117,18 @@ class TeamsBot extends TeamsActivityHandler {
         return null;
     }
 
-    // This method is used to save task details.
+    /**
+     * Save task details.
+     * @param {Object} taskDetails - The task details object.
+     */
     saveTaskDetails(taskDetails) {
-        // Store task details (no need for additional nesting here)
         this.taskDetails = taskDetails;
     }
 
-    // This method is used to create the adaptive card for the task module.
+    /**
+     * Create the adaptive card for the task module.
+     * @returns {Object} - The adaptive card object.
+     */
     adaptiveCardForTaskModule = () => ({
         $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
         body: [

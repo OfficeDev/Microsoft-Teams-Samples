@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace AppCompleteAuth.helper
 {
+    /// <summary>
+    /// AuthHelper class to provide authentication-related helper methods.
+    /// </summary>
     public class AuthHelper
     {
         /// <summary>
@@ -25,6 +28,7 @@ namespace AppCompleteAuth.helper
             var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
             return validAudiences;
         }
+
         /// <summary>
         /// Retrieve Valid Issuers.
         /// </summary>
@@ -50,31 +54,23 @@ namespace AppCompleteAuth.helper
             SecurityToken securityToken,
             TokenValidationParameters validationParameters)
         {
-            if (tokenAudiences == null || tokenAudiences.Count() == 0)
+            if (tokenAudiences == null || !tokenAudiences.Any())
             {
                 throw new ApplicationException("No audience defined in token!");
             }
 
             var validAudiences = validationParameters.ValidAudiences;
 
-            if (validAudiences == null || validAudiences.Count() == 0)
+            if (validAudiences == null || !validAudiences.Any())
             {
                 throw new ApplicationException("No valid audiences defined in validationParameters!");
             }
 
-            foreach (var tokenAudience in tokenAudiences)
-            {
-                if (validAudiences.Any(validAudience => validAudience.Equals(tokenAudience, StringComparison.OrdinalIgnoreCase)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return tokenAudiences.Any(tokenAudience => validAudiences.Any(validAudience => validAudience.Equals(tokenAudience, StringComparison.OrdinalIgnoreCase)));
         }
 
         /// <summary>
-        /// Get token using client credentials flow
+        /// Get token using client credentials flow.
         /// </summary>
         /// <param name="configuration">IConfiguration instance.</param>
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
@@ -94,14 +90,11 @@ namespace AppCompleteAuth.helper
                 httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
                 var idToken = assertion.ToString().Split(" ")[1];
                 UserAssertion assert = new UserAssertion(idToken);
-                List<string> scopes = new List<string>
-                {
-                    "User.Read"
-                };
+                List<string> scopes = new List<string> { "User.Read" };
 
                 var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
 
-                return responseToken.AccessToken.ToString();
+                return responseToken.AccessToken;
             }
             catch (Exception ex)
             {
@@ -124,7 +117,7 @@ namespace AppCompleteAuth.helper
 
             if (settings == null)
             {
-                throw new ApplicationException($"AzureAd:ValidIssuers does not contain a valid value in the configuration file.");
+                throw new ApplicationException("AzureAd:ValidIssuers does not contain a valid value in the configuration file.");
             }
 
             return settings;

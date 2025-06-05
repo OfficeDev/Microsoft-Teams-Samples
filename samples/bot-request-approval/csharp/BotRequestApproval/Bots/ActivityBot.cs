@@ -22,7 +22,7 @@ namespace BotRequestApproval.Bots
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
-        private List<string> memberDetails = new List<string> { };
+        private readonly List<string> _memberDetails = new List<string>();
 
         /// <summary>
         /// Handle when a message is addressed to the bot.
@@ -46,20 +46,19 @@ namespace BotRequestApproval.Bots
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var member in turnContext.Activity.MembersAdded)
+            foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can send task request to your manager and your manager can approve/reject the request."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can send task requests to your manager and your manager can approve/reject the request."), cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        ///  Invoked when an invoke activity is received from the connector.
+        /// Invoked when an invoke activity is received from the connector.
         /// </summary>
         /// <param name="turnContext">The turn context.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
@@ -79,11 +78,9 @@ namespace BotRequestApproval.Bots
                     case "initialRefresh":
                         string[] initialCard = { ".", "Cards", "RequestCard.json" };
                         adaptiveCardResponse = GetNextActionCard(initialCard, data);
-
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "requestCard":
-                        
                         string[] firstCard = { ".", "Cards", "RequestDetailsCardForUser.json" };
                         var assigneeInfo = await TeamsInfo.GetMemberAsync(turnContext, data.action.data.AssignedTo, cancellationToken);
                         data.action.data.UserMRI = assigneeInfo.Id;
@@ -104,22 +101,23 @@ namespace BotRequestApproval.Bots
                         {
                             if (member.AadObjectId != turnContext.Activity.From.AadObjectId)
                             {
-                                var newMemberInfo = member.Id;
-                                memberDetails.Add(newMemberInfo);
+                                _memberDetails.Add(member.Id);
                             }
                         }
 
-                        data.action.data.UserId = memberDetails;
+                        data.action.data.UserId = _memberDetails;
                         var responseAttachment = GetResponseAttachment(firstCard, data, out cardJson);
-                        Activity pendingActivity = new Activity();
-                        pendingActivity.Type = "message";
-                        pendingActivity.Id = turnContext.Activity.ReplyToId;
-                        pendingActivity.Attachments = new List<Attachment> { responseAttachment };
+                        var pendingActivity = new Activity
+                        {
+                            Type = "message",
+                            Id = turnContext.Activity.ReplyToId,
+                            Attachments = new List<Attachment> { responseAttachment }
+                        };
 
                         await turnContext.UpdateActivityAsync(pendingActivity);
 
                         response = JObject.Parse(cardJson);
-                        adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+                        adaptiveCardResponse = new AdaptiveCardInvokeResponse
                         {
                             StatusCode = 200,
                             Type = "application/vnd.microsoft.card.adaptive",
@@ -129,32 +127,26 @@ namespace BotRequestApproval.Bots
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "refresh":
+                        string[] cardPath = turnContext.Activity.From.Id == data.action.data.UserMRI
+                            ? new[] { ".", "Cards", "AssignedToCard.json" }
+                            : new[] { ".", "Cards", "OtherMembersCard.json" };
 
-                        if (turnContext.Activity.From.Id == data.action.data.UserMRI)
-                        {
-                            string[] assignedToCard = { ".", "Cards", "AssignedToCard.json" };
-                            adaptiveCardResponse = GetNextActionCard(assignedToCard, data);
-
-                            return CreateInvokeResponse(adaptiveCardResponse);
-                        }
-                        else
-                        {
-                            string[] othersCard = { ".", "Cards", "OtherMembersCard.json" };
-                            adaptiveCardResponse = GetNextActionCard(othersCard, data);
-
-                            return CreateInvokeResponse(adaptiveCardResponse);
-                        }
+                        adaptiveCardResponse = GetNextActionCard(cardPath, data);
+                        return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "cancelCard":
                         string[] cancelCard = { ".", "Cards", "CancelCard.json" };
                         var cancelCardResponse = GetResponseAttachment(cancelCard, data, out cardJson);
-                        Activity canceledActivity = new Activity();
-                        canceledActivity.Type = "message";
-                        canceledActivity.Id = turnContext.Activity.ReplyToId;
-                        canceledActivity.Attachments = new List<Attachment> { cancelCardResponse };
+                        var canceledActivity = new Activity
+                        {
+                            Type = "message",
+                            Id = turnContext.Activity.ReplyToId,
+                            Attachments = new List<Attachment> { cancelCardResponse }
+                        };
+
                         await turnContext.UpdateActivityAsync(canceledActivity);
                         response = JObject.Parse(cardJson);
-                        adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+                        adaptiveCardResponse = new AdaptiveCardInvokeResponse
                         {
                             StatusCode = 200,
                             Type = "application/vnd.microsoft.card.adaptive",
@@ -166,15 +158,17 @@ namespace BotRequestApproval.Bots
                     case "approved":
                         string[] approvedCard = { ".", "Cards", "ApprovedCard.json" };
                         var approvedAttachment = GetResponseAttachment(approvedCard, data, out cardJson);
-                        Activity approvedActivity = new Activity();
-                        approvedActivity.Type = "message";
-                        approvedActivity.Id = turnContext.Activity.ReplyToId;
-                        approvedActivity.Attachments = new List<Attachment> { approvedAttachment };
+                        var approvedActivity = new Activity
+                        {
+                            Type = "message",
+                            Id = turnContext.Activity.ReplyToId,
+                            Attachments = new List<Attachment> { approvedAttachment }
+                        };
 
                         await turnContext.UpdateActivityAsync(approvedActivity);
 
                         response = JObject.Parse(cardJson);
-                        adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+                        adaptiveCardResponse = new AdaptiveCardInvokeResponse
                         {
                             StatusCode = 200,
                             Type = "application/vnd.microsoft.card.adaptive",
@@ -186,15 +180,17 @@ namespace BotRequestApproval.Bots
                     case "rejected":
                         string[] rejectedCard = { ".", "Cards", "RejectedCard.json" };
                         var rejectedAttachment = GetResponseAttachment(rejectedCard, data, out cardJson);
-                        Activity rejectedActivity = new Activity();
-                        rejectedActivity.Type = "message";
-                        rejectedActivity.Id = turnContext.Activity.ReplyToId;
-                        rejectedActivity.Attachments = new List<Attachment> { rejectedAttachment };
+                        var rejectedActivity = new Activity
+                        {
+                            Type = "message",
+                            Id = turnContext.Activity.ReplyToId,
+                            Attachments = new List<Attachment> { rejectedAttachment }
+                        };
 
                         await turnContext.UpdateActivityAsync(rejectedActivity);
 
                         response = JObject.Parse(cardJson);
-                        adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+                        adaptiveCardResponse = new AdaptiveCardInvokeResponse
                         {
                             StatusCode = 200,
                             Type = "application/vnd.microsoft.card.adaptive",
@@ -208,50 +204,59 @@ namespace BotRequestApproval.Bots
             return null;
         }
 
-        // Get intial card.
+        /// <summary>
+        /// Get initial card.
+        /// </summary>
+        /// <param name="filepath">The file path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="userMRI">The user MRI.</param>
+        /// <returns>The attachment.</returns>
         private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var template = new AdaptiveCardTemplate(adaptiveCardJson);
             var payloadData = new
             {
                 createdById = userMRI,
                 createdBy = name
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
-            var cardJsonstring = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
+            var cardJsonString = template.Expand(payloadData);
+            var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJsonstring),
+                Content = JsonConvert.DeserializeObject(cardJsonString)
             };
 
             return adaptiveCardAttachment;
         }
 
-        // Get next card.
+        /// <summary>
+        /// Get next card.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="data">The data.</param>
+        /// <returns>The adaptive card invoke response.</returns>
         private AdaptiveCardInvokeResponse GetNextActionCard(string[] path, InitialSequentialCard data)
         {
             var cardJson = File.ReadAllText(Path.Combine(path));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(cardJson);
+            var template = new AdaptiveCardTemplate(cardJson);
 
             var payloadData = new
             {
-                requestTitle = data.action.data.RequestTitle,
-                requestDescription = data.action.data.RequestDescription,
-                assignedTo = data.action.data.AssignedTo,
-                createdBy = data.action.data.CreatedBy,
-                createdById = data.action.data.CreatedById,
-                assignedToName = data.action.data.AssignedToName,
-                userMRI = data.action.data.UserMRI
+                data.action.data.RequestTitle,
+                data.action.data.RequestDescription,
+                data.action.data.AssignedTo,
+                data.action.data.CreatedBy,
+                data.action.data.CreatedById,
+                data.action.data.AssignedToName,
+                data.action.data.UserMRI
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
-            var cardJsonstring = template.Expand(payloadData);
-            var card = JObject.Parse(cardJsonstring);
+            var cardJsonString = template.Expand(payloadData);
+            var card = JObject.Parse(cardJsonString);
 
-            var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+            var adaptiveCardResponse = new AdaptiveCardInvokeResponse
             {
                 StatusCode = 200,
                 Type = "application/vnd.microsoft.card.adaptive",
@@ -261,30 +266,35 @@ namespace BotRequestApproval.Bots
             return adaptiveCardResponse;
         }
 
-        // Get response attachment
+        /// <summary>
+        /// Get response attachment.
+        /// </summary>
+        /// <param name="filepath">The file path.</param>
+        /// <param name="data">The data.</param>
+        /// <param name="cardJsonString">The card JSON string.</param>
+        /// <returns>The attachment.</returns>
         private Attachment GetResponseAttachment(string[] filepath, InitialSequentialCard data, out string cardJsonString)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var template = new AdaptiveCardTemplate(adaptiveCardJson);
 
             var payloadData = new
             {
-                requestTitle = data.action.data.RequestTitle,
-                requestDescription = data.action.data.RequestDescription,
-                assignedTo = data.action.data.AssignedTo,
-                createdBy = data.action.data.CreatedBy,
-                assignedToName = data.action.data.AssignedToName,
-                userMRI = data.action.data.UserMRI,
-                userId = data.action.data.UserId,
-                createdById = data.action.data.CreatedById,
+                data.action.data.RequestTitle,
+                data.action.data.RequestDescription,
+                data.action.data.AssignedTo,
+                data.action.data.CreatedBy,
+                data.action.data.AssignedToName,
+                data.action.data.UserMRI,
+                data.action.data.UserId,
+                data.action.data.CreatedById
             };
 
-            //"Expand" the template -this generates the final Adaptive Card payload
             cardJsonString = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
+            var adaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJsonString),
+                Content = JsonConvert.DeserializeObject(cardJsonString)
             };
 
             return adaptiveCardAttachment;

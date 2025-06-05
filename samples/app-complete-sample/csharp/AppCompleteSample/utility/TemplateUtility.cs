@@ -50,7 +50,7 @@ namespace AppCompleteSample.Utility
             currentState.UserId = turnContext.Activity.From.Id;
             currentState.ComposeExtensionCardType = query.State != null ? query.State : currentState.ComposeExtensionCardType;
             await userState.SetAsync(turnContext, currentState);
-            
+
             return currentState;
         }
 
@@ -77,26 +77,26 @@ namespace AppCompleteSample.Utility
 
             var images = new List<CardImage>
             {
-                new CardImage(wikiResult.imageUrl)
+                new CardImage(wikiResult.ImageUrl)
             };
 
             if (Enum.TryParse(selectedType, out cardType))
             {
                 switch (cardType)
                 {
-                    case CardType.hero:
+                    case CardType.Hero:
                         cardAttachment = new HeroCard()
                         {
-                            Title = wikiResult.highlightedTitle,
-                            Text = wikiResult.text,
+                            Title = wikiResult.HighlightedTitle,
+                            Text = wikiResult.Text,
                             Images = images
                         }.ToAttachment();
                         break;
-                    case CardType.thumbnail:
+                    case CardType.Thumbnail:
                         cardAttachment = new ThumbnailCard()
                         {
-                            Title = wikiResult.highlightedTitle,
-                            Text = wikiResult.text,
+                            Title = wikiResult.HighlightedTitle,
+                            Text = wikiResult.Text,
                             Images = images
                         }.ToAttachment();
                         break;
@@ -116,25 +116,25 @@ namespace AppCompleteSample.Utility
 
             var images = new List<CardImage>
             {
-                new CardImage(wikiResult.imageUrl)
+                new CardImage(wikiResult.ImageUrl)
             };
 
             if (Enum.TryParse(selectedType, out cardType))
             {
                 switch (cardType)
                 {
-                    case CardType.hero:
+                    case CardType.Hero:
                         cardAttachment = new HeroCard()
                         {
-                            Title = wikiResult.highlightedTitle,
+                            Title = wikiResult.HighlightedTitle,
                             Tap = tapAction,
                             Images = images
                         }.ToAttachment();
                         break;
-                    case CardType.thumbnail:
+                    case CardType.Thumbnail:
                         cardAttachment = new ThumbnailCard()
                         {
-                            Title = wikiResult.highlightedTitle,
+                            Title = wikiResult.HighlightedTitle,
                             Tap = tapAction,
                             Images = images
                         }.ToAttachment();
@@ -147,7 +147,7 @@ namespace AppCompleteSample.Utility
 
         private static string GetCardActionInvokeValue(WikiHelperSearchResult wikiResult)
         {
-            InvokeValue invokeValue = new InvokeValue(wikiResult.imageUrl, wikiResult.text, wikiResult.highlightedTitle);
+            InvokeValue invokeValue = new InvokeValue(wikiResult.ImageUrl, wikiResult.Text, wikiResult.HighlightedTitle);
             return JsonConvert.SerializeObject(invokeValue);
         }
 

@@ -181,11 +181,6 @@ namespace Microsoft.BotBuilderSamples.Bots
                 }
             };
 
-            if (!string.IsNullOrEmpty(text))
-            {
-                streamingActivity.Text = text;
-            }
-
             /*
              * We are sending the final streamed message as an Adaptive Card Attachment built 
              * using a template.
@@ -205,9 +200,10 @@ namespace Microsoft.BotBuilderSamples.Bots
                 };
                 
                 streamingActivity.Attachments = new List<Attachment>() { attachment };
-
-                //Add text to the activity
-                streamingActivity.Text = "This is what I've got:";
+            }
+            else if (!string.IsNullOrEmpty(text))
+            {
+                streamingActivity.Text = text;
             }
 
             return await sendStreamingActivityAsync(turnContext, cancellationToken, streamingActivity).ConfigureAwait(false);

@@ -28,46 +28,45 @@ class BotTypeOfCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn','OAuth', 'ThumbnailCard'];
+            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn', 'OAuth', 'ThumbnailCard'];
 
             // If the `text` is in the Array, a valid card was selected and send agreement.
             if (suggestedCards.includes(text)) {
-
                 switch (text) {
-                    case "AdaptiveCard":
+                    case 'AdaptiveCard':
                         await context.sendActivity({ attachments: [this.sendAdaptiveCard()] });
                         break;
 
-                    case "HeroCard":
+                    case 'HeroCard':
                         await context.sendActivity({ attachments: [this.sendHeroCard()] });
                         break;
 
-                    case "Office365":
-                        await context.sendActivity({ attachments: [this.sendOffice356Card()] });
+                    case 'Office365':
+                        await context.sendActivity({ attachments: [this.sendOffice365Card()] });
                         break;
 
-                    case "ThumbnailCard":
+                    case 'ThumbnailCard':
                         await context.sendActivity({ attachments: [ThumbnailCard] });
                         break;
 
-                    case "SignIn":
+                    case 'SignIn':
                         await context.sendActivity({ attachments: [this.sendSignInCard()] });
                         break;
 
-                    case "OAuth":
+                    case 'OAuth':
                         await context.sendActivity({ attachments: [this.sendOAuthCard()] });
                         break;
 
-                    case "ListCard":
+                    case 'ListCard':
                         await context.sendActivity({ attachments: [ListCard] });
                         break;
 
-                    case "CollectionCard":
+                    case 'CollectionCard':
                         await context.sendActivity({ attachments: [this.sendCollectionCard()] });
                         break;
                 }
 
-                await context.sendActivity(`You have Selected <b>${text}</b>`);
+                await context.sendActivity(`You have selected <b>${text}</b>`);
             }
 
             // After the bot has responded send the suggested Cards.
@@ -88,34 +87,33 @@ class BotTypeOfCards extends ActivityHandler {
         // Iterate over all new members added to the conversation.
         for (const idx in activity.membersAdded) {
             if (activity.membersAdded[idx].id !== activity.recipient.id) {
-                const welcomeMessage = `Welcome to Cards. This bot will introduce you to different types of cards. Please select the cards from given options` +
-                    'Please select an option:';
+                const welcomeMessage = `Welcome to Cards. This bot will introduce you to different types of cards. Please select the cards from given options.`;
 
                 await turnContext.sendActivity(welcomeMessage);
 
-                // send the suggested Cards.
+                // Send the suggested Cards.
                 await this.sendSuggestedCards(turnContext);
             }
         }
     }
 
     /**
-    * Sends a Adaptive Card 
-    */
+     * Sends an Adaptive Card.
+     */
     sendAdaptiveCard() {
         return CardFactory.adaptiveCard(AdaptiveCard);
     }
 
     /**
-    * Sends a Office356 Connector Card  
-    */
-    sendOffice356Card() {
+     * Sends an Office365 Connector Card.
+     */
+    sendOffice365Card() {
         return CardFactory.o365ConnectorCard(Office365ConnectorCard);
     }
 
     /**
-    * Sends a OAuthCard  
-    */
+     * Sends an OAuth Card.
+     */
     sendOAuthCard() {
         return CardFactory.oauthCard(
             process.env.ConnectionName,  // Your Azure bot connection name
@@ -125,8 +123,8 @@ class BotTypeOfCards extends ActivityHandler {
     }
 
     /**
-    * Sends a SignInCard  
-    */
+     * Sends a SignIn Card.
+     */
     sendSignInCard() {
         return CardFactory.signinCard(
             'Sign In',
@@ -136,8 +134,8 @@ class BotTypeOfCards extends ActivityHandler {
     }
 
     /**
-    * Sends a HeroCard  
-    */
+     * Sends a Hero Card.
+     */
     sendHeroCard() {
         return CardFactory.heroCard(
             'BotFramework Hero Card',
@@ -153,16 +151,23 @@ class BotTypeOfCards extends ActivityHandler {
     }
 
     /**
-    * Sends a CollectionCard  
-    */
+     * Sends a Collection Card.
+     */
     sendCollectionCard() {
         return CardFactory.adaptiveCard(CollectionCard);
     }
 
     /**
-   * Send suggested Cards to the user.
-   * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
-   */
+     * Sends a Thumbnail Card.
+     */
+    sendThumbnailCard() {
+        return CardFactory.thumbnailCard(ThumbnailCard);
+    }
+
+    /**
+     * Send suggested Cards to the user.
+     * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
+     */
     async sendSuggestedCards(turnContext) {
         const cardActions = [
             {
@@ -202,11 +207,20 @@ class BotTypeOfCards extends ActivityHandler {
             }
         ];
 
-        // Returns a simple text message.
-        var reply = MessageFactory.text("Please select a card from given options. ");
-        reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
+        await this.sendWelcomeCard(turnContext, cardActions);
+    }
 
-        await turnContext.sendActivity(reply);
+    async sendWelcomeCard(context, cardActions) {
+        const initialValue = {
+            count: 0
+        };
+        const card = CardFactory.heroCard(
+            'Please select a card from given options. ',
+            '',
+            null,
+            cardActions
+        );
+        await context.sendActivity(MessageFactory.attachment(card));
     }
 }
 

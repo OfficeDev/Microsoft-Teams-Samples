@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32901.215
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageReaction", "MessageReaction.csproj", "{974209C8-26DD-407B-9EF2-910B12FF236E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageReaction", "MessageReaction\MessageReaction.csproj", "{ABC85E03-2420-115A-7FC4-16638E84561F}"
 EndProject
-Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "TeamsApp", "TeamsApp\TeamsApp.ttkproj", "{12D71071-264C-48D4-9833-12C2FB6F524D}"
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C9FACF6-AC49-4DF1-8CA7-1A18E6507CBB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		MessageReaction.slnLaunch.user = MessageReaction.slnLaunch.user
 	EndProjectSection
@@ -18,19 +18,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{974209C8-26DD-407B-9EF2-910B12FF236E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{974209C8-26DD-407B-9EF2-910B12FF236E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{974209C8-26DD-407B-9EF2-910B12FF236E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{974209C8-26DD-407B-9EF2-910B12FF236E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12D71071-264C-48D4-9833-12C2FB6F524D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12D71071-264C-48D4-9833-12C2FB6F524D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12D71071-264C-48D4-9833-12C2FB6F524D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12D71071-264C-48D4-9833-12C2FB6F524D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC85E03-2420-115A-7FC4-16638E84561F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC85E03-2420-115A-7FC4-16638E84561F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC85E03-2420-115A-7FC4-16638E84561F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC85E03-2420-115A-7FC4-16638E84561F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF7DBBF-6757-C96E-D6EC-3928332DA9E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6B1FD13F-040C-45C8-BE53-13DB38005AAE}
+		SolutionGuid = {6883B0E0-F90A-405D-B6E5-A12F868A7E20}
 	EndGlobalSection
 EndGlobal

@@ -6,13 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="Manifest\**" />
-    <Compile Remove="TeamsApp\**" />
+    <Compile Remove="M365Agent\**" />
     <Content Remove="Manifest\**" />
-    <Content Remove="TeamsApp\**" />
+    <Content Remove="M365Agent\**" />
     <EmbeddedResource Remove="Manifest\**" />
-    <EmbeddedResource Remove="TeamsApp\**" />
+    <EmbeddedResource Remove="M365Agent\**" />
     <None Remove="Manifest\**" />
-    <None Remove="TeamsApp\**" />
+    <None Remove="M365Agent\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,9 +23,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
   <PropertyGroup>
     <LibraryRestore>false</LibraryRestore>
   </PropertyGroup>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { TeamsFxContext } from "./Context";
 import React from "react";
-import { Agenda, Person, applyTheme,People,PeoplePicker,Tasks,Todo, PersonCard, ViewType } from "@microsoft/mgt-react";
+import { Agenda, Person, applyTheme, People, PeoplePicker, Planner,Todo, PersonCard, ViewType } from "@microsoft/mgt-react";
 import { Button } from "@fluentui/react-components";
 import { Providers, ProviderState } from "@microsoft/mgt-react";
 import { TeamsFxProvider } from "@microsoft/mgt-teamsfx-provider";
@@ -81,7 +81,7 @@ export default function Tab() {
       {!consentNeeded && (
         <>
         <div className="mgtDetails">
-            <Person personQuery="me" view={ViewType.oneline} />
+        <Person personQuery="me" view="oneline"></Person>
             <div>
                 <h3 className="cursorPointer" onClick={() => toggleVisibility('Agenda')}><i className="arrow right"></i>Agenda</h3>
                 <div style={{ display: activeDiv === 'Agenda' ? 'block' : 'none' }}>
@@ -106,7 +106,7 @@ export default function Tab() {
             <div>
                 <h3 className="cursorPointer" onClick={() => toggleVisibility('Person')}><i className="arrow right"></i>Person Card</h3>
                 <div style={{ display: activeDiv === 'Person' ? 'block' : 'none' }}>
-                    <Person personQuery="me" view={ViewType.fourlines} />
+                <Person personQuery="me" view="fourlines"></Person>
                 </div>
             </div>
 
@@ -120,7 +120,7 @@ export default function Tab() {
             <div>
                 <h3 className="cursorPointer" onClick={() => toggleVisibility('Tasks')}><i className="arrow right"></i>Tasks</h3>
                 <div style={{ display: activeDiv === 'Tasks' ? 'block' : 'none' }}>
-                    <Tasks></Tasks>
+                <Planner></Planner>
                 </div>
             </div>
         </div>

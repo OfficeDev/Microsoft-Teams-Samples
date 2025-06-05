@@ -9,20 +9,27 @@ using System.Threading.Tasks;
 
 namespace BotDailyTaskReminder
 {
+    /// <summary>
+    /// Class to handle scheduled task reminders.
+    /// </summary>
     public class ScheduleTaskReminder : IJob
     {
-        static HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        // Method to execute scheduled job.
+        /// <summary>
+        /// Executes the scheduled job.
+        /// </summary>
+        /// <param name="context">The job execution context.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public async Task Execute(IJobExecutionContext context)
         {
-            JobDataMap dataMap = context.JobDetail.JobDataMap;
-            string baseUrl = dataMap.GetString("baseUrl");
+            var dataMap = context.JobDetail.JobDataMap;
+            var baseUrl = dataMap.GetString("baseUrl");
 
             // Validate baseUrl
             if (string.IsNullOrEmpty(baseUrl))
             {
-                throw new ArgumentNullException("baseUrl", "Base URL must be provided in JobDataMap.");
+                throw new ArgumentNullException(nameof(baseUrl), "Base URL must be provided in JobDataMap.");
             }
 
             try
