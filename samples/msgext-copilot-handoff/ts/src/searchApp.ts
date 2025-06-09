@@ -75,67 +75,8 @@ export class SearchApp extends TeamsActivityHandler {
     } 
   }
 
-  // Handle invoke activities
   
-  public async onInvokeActivity(context: TurnContext): Promise<InvokeResponse> {
-
-    try {
-
-      switch (context.activity.name) {
-
-        case "handoff/action": {
-
-          this.addOrUpdateContinuationParameters(context);
-          setTimeout(async () => await this.notifyContinuationActivity(), 10);
-
-          return { status: 200 }; // return just the http status 
-
-        }
-
-        case "composeExtension/query":
-
-          return {
-
-            status: 200,
-
-            body: await this.handleTeamsMessagingExtensionQuery(
-
-              context,
-
-              context.activity.value
-
-            ),
-
-          };
-
-        default:
-
-          return {
-
-            status: 200,
-
-            body: `Unknown invoke activity handled as default- ${context.activity.name}`,
-
-          };
-
-      }
-
-    } catch (err) {
-
-      console.log(`Error in onInvokeActivity: ${err}`);
-
-      return {
-
-        status: 500,
-
-        body: `Invoke activity received- ${context.activity.name}`,
-
-      };
-
-    }
-
-  }
-
+  
   private addOrUpdateContinuationParameters(context): void {
     console.log(
       `Adding continuation parameters for context: ${JSON.stringify(context)}`
@@ -154,4 +95,3 @@ export class SearchApp extends TeamsActivityHandler {
     };
   }
 }
-
