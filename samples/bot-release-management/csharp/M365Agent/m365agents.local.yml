@@ -55,6 +55,7 @@ provision:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        MicrosoftTeamsAppId: ${{TEAMS_APP_ID}}
 
   - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
     with:
