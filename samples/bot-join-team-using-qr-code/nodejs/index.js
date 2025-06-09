@@ -92,8 +92,8 @@ server.post('/api/messages', async (req, res) => {
         const connectorClient = context.turnState.get(adapter.ConnectorClientKey);
         const userTokenClient = context.turnState.get(adapter.UserTokenClientKey);
 
-        context.turnState.set('UserTokenClient', userTokenClient);
-        context.turnState.set('ConnectorClient', connectorClient);
+        context.turnState.set(adapter.UserTokenClientKey, userTokenClient);
+        context.turnState.set(adapter.ConnectorClientKey, connectorClient);
 
         await bot.run(context);
     });
