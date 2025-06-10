@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.8/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.2
+version: v1.8
 
 additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:msgext-search-sso-config-csharp
@@ -12,7 +12,8 @@ provision:
       name: msgext-search-sso-config-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
       signInAudience: "AzureADMultipleOrgs" # Multitenant
-    writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
       clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
       objectId: AAD_APP_OBJECT_ID
@@ -27,15 +28,15 @@ provision:
       name: msgext-search-sso-config-${{TEAMSFX_ENV}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
-    writeToEnvironmentFile: 
+    writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
 
   - uses: script
     with:
       run:
         # echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
-        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=MultiTenant";
-        echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
+        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=MultiTenant"; echo
+        "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -76,7 +77,7 @@ provision:
       # Path to manifest template
       manifestPath: ./appPackage/manifest.json
       outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
+      outputFolder: ./appPackage/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
@@ -91,7 +92,6 @@ provision:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
-
   - uses: teamsApp/extendToM365
     with:
       # Relative path to the build app package.
@@ -101,5 +101,3 @@ provision:
     writeToEnvironmentFile:
       titleId: M365_TITLE_ID
       appId: M365_APP_ID
-
-

@@ -22,6 +22,11 @@ Explore this sample application that demonstrates Microsoft Entra SSO authentica
 
 ![setupteams](Images/TabChannelGroupSSOModule.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
+
+**Channel and group tab with SSO quick-start:** [Manifest](/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/demo-manifest/tab-channel-group-sso-quickstart.zip)
+
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
