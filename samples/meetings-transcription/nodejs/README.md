@@ -28,6 +28,12 @@ The Meeting Transcript Bot utilizes Microsoft Graph API to fetch meeting transcr
 
 ![MeetingTranscript Module](Images/MeetingTranscript.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meeting Transcript Bot uses Microsoft Graph API:** [Manifest](/samples/meetings-transcription/csharp/demo-manifest/meetings-transcription.zip)
+
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
