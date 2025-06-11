@@ -185,6 +185,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 12 | graph-teams-tag                                      | This sample application demonstrates how to perform CRUD operations on team tags using Microsoft Graph API within a Microsoft Teams tab. | Intermediate | [View][graph-teams-tag#cs]| [View][graph-teams-tag#js] ![toolkit-icon](assets/toolkit-icon.png) |                                                                   |
 | 13 | Resource Specific Consent (RSC)                      | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. | Advanced     | [View][graph#rsc#cs]              | [View][graph#rsc#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)     |
 | 14 | Graph API Teams App Catalog Life Cycle               | This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot. | Advanced     | [View][graph#appctaloglifecycle#cs] | [View][graph#appcataloglifecycle#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip) |
+| 15 | Graph File Fetch| This sample demonstrates how to fetch shared files in teams group chat and team channel using graph API. | Advanced | [View][graph-file-fetch#cs] | [View][graph-file-fetch#js] | [View](samples/graph-file-fetch/csharp/demo-manifest/graph-file-fetch.zip) |
+
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
 
@@ -474,6 +476,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-pinned-message#js]:samples/graph-pinned-messages/nodejs
 [graph-bulk-meetings#cs]:samples/graph-bulk-meetings/csharp
 [graph-bulk-meetings#js]:samples/graph-bulk-meetings/nodejs
+[graph-file-fetch#cs]:samples/graph-file-fetch/csharp
+[graph-file-fetch#js]:samples/graph-file-fetch/nodejs
 [change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel/nodejs
 [graph-teams-tag#cs]:samples/graph-teams-tag/csharp

@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
+      },
+      {
+        "Path": "GraphFileFetch\\GraphFileFetch.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      },
+      {
+        "Path": "GraphFileFetch\\GraphFileFetch.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  }
+]
