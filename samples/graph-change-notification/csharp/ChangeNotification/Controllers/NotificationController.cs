@@ -6,6 +6,8 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Graph;
+using Microsoft.Kiota.Abstractions.Authentication;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -69,31 +71,63 @@ namespace ChangeNotification.Controllers
 
         public async Task<ActionResult<string>> Post([FromQuery] string validationToken = null)
         {
-            // handle validation
             if (!string.IsNullOrEmpty(validationToken))
             {
                 _logger.LogInformation($"Received Token: '{validationToken}'");
-
                 return Ok(validationToken);
             }
 
-            // handle notifications
             using (StreamReader reader = new StreamReader(Request.Body))
             {
                 string content = await reader.ReadToEndAsync();
-
                 var notifications = JsonConvert.DeserializeObject<Notifications>(content);
 
-                Console.WriteLine(content);
-                resourceData = new ResourceData();
+                _logger.LogInformation("Notification content: " + content);
+
                 foreach (var notification in notifications.Items)
                 {
                     resourceData = notification.ResourceData;
+                    var userId = resourceData?.Id;
+
+                    if (!string.IsNullOrEmpty(userId))
+                    {
+                        if (TokenStore.Token!=null)
+                        {
+                            try
+                            {
+                                var tokenProvider = new SimpleAccessTokenProvider(TokenStore.Token);
+                                var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
+
+                                var graphClient = new GraphServiceClient(authProvider);
+
+                                var presence = await graphClient.Users[userId].Presence.GetAsync();
+                                resourceData.Activity = presence?.Activity;
+                                resourceData.Availability = presence?.Availability;
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger.LogError(ex, $"Failed to get presence for user: {userId}");
+                            }
+                        }
+                        else
+                        {
+                            _logger.LogWarning($"Token not found for user: {userId}");
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogWarning("User ID not found in notification resource data.");
+                    }
                 }
 
                 foreach (var conversationReference in _conversationReferences.Values)
                 {
-                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default);
+                    await ((BotAdapter)_adapter).ContinueConversationAsync(
+                        _appId,
+                        conversationReference,
+                        BotCallback,
+                        default
+                    );
                 }
 
                 return Ok();
