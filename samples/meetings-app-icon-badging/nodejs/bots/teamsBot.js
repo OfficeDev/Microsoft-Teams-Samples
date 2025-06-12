@@ -17,26 +17,52 @@ class TeamsBot extends TeamsActivityHandler {
         // This method is invoked whenever there is any message activity in bot's chat.
         this.onMessage(async (context, next) => {
             const members = [];
-            const meetingId = context._activity.channelData.meeting.id;
+            const meetingId = context._activity.channelData?.meeting?.id;
+
+            if (!meetingId) {
+                await context.sendActivity("Meeting ID not found in the context.");
+                return;
+            }
 
             if (context.activity.value == null) {
                 TurnContext.removeRecipientMention(context._activity);
 
-                if (context._activity.text.trim() === "SendNotification") {
-                    const meetingMembers = await TeamsInfo.getPagedMembers(context);
-                    const tenantId = context._activity.channelData.tenant.id;
+                const userText = context._activity.text?.trim();
 
-                    for (const member of meetingMembers) {
-                        const participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
+                if (userText === "SendNotification") {
+                    try {
+                        const pagedMembersResult = await TeamsInfo.getPagedMembers(context);
+                        const meetingMembers = pagedMembersResult.members || [];
+                        const tenantId = context._activity.channelData?.tenant?.id;
 
-                        // Select only those members that are present when the meeting starts.
-                        if (participantDetail.meeting.inMeeting) {
-                            members.push({ id: participantDetail.user.id, name: participantDetail.user.name });
+                        if (!tenantId) {
+                            await context.sendActivity("Tenant ID not found in the context.");
+                            return;
                         }
-                    }
 
-                    // Send an adaptive card to the user to select members for sending targeted notifications.
-                    await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
+                        for (const member of meetingMembers) {
+                            try {
+                                const participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, member.aadObjectId, tenantId);
+
+                                // Select only those members that are present when the meeting starts.
+                                if (participantDetail?.meeting?.inMeeting) {
+                                    members.push({ id: participantDetail.user.id, name: participantDetail.user.name });
+                                }
+                            } catch (error) {
+                                console.error(`Failed to get meeting participant for member ${member.name}:`, error);
+                                // Optionally continue without throwing
+                            }
+                        }
+
+                        if (members.length > 0) {
+                            await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
+                        } else {
+                            await context.sendActivity("No members are currently in the meeting.");
+                        }
+                    } catch (err) {
+                        console.error("[SendNotification Error]:", err);
+                        await context.sendActivity("An error occurred while sending notifications.");
+                    }
                 } else {
                     await context.sendActivity("Please type `SendNotification` to send In-meeting notifications.");
                 }
