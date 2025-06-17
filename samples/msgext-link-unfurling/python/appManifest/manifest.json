@@ -1,61 +1,73 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
-  "version": "1.0",
-  "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.sample.linkunfurling",
-  "developer": {
-    "name": "Link Unfurling",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuser"
-  },
-  "icons": {
-    "color": "color.png",
-    "outline": "outline.png"
-  },
-  "name": {
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Link Unfurling",
+         "websiteUrl": "https://www.microsoft.com",
+         "privacyUrl": "https://www.teams.com/privacy",
+         "termsOfUseUrl": "https://www.teams.com/termsofuser"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
     "short": "Link Unfurling",
     "full": "Link Unfurling Sample"
-  },
-  "description": {
-    "short": "Python bot sample demonstrating link unfurling in Teams messaging extensions",
-    "full": "This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions"
-  },
-  "accentColor": "#FFFFFF",
-  "composeExtensions": [
-    {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
-      "commands": [
+    },
+    "description": {
+      "short": "Python bot sample demonstrating link unfurling in Teams messaging extensions",
+      "full": "This sample showcases a Python bot that implements link unfurling within Microsoft Teams messaging extensions"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [],
+    "composeExtensions": [
         {
-          "id": "searchQuery",
-          "context": [
-            "commandBox"
-          ],
-          "description": "Test command to run query",
-          "title": "Search Command",
-          "type": "query",
-          "parameters": [
-            {
-              "name": "searchQuery",
-              "title": "Search Query",
-              "description": "Your search query",
-              "inputType": "text"
-            }
-          ]
-        }
-      ],
-      "messageHandlers": [
-        {
-          "type": "link",
-          "value": {
-            "domains": [
-              "${{BOT_DOMAIN}}",
-              "*.botframework.com"
+            "botId": "${{AAD_APP_CLIENT_ID}}",
+            "commands": [
+                {
+                    "id": "searchQuery",
+                    "context": [
+                        "compose",
+                        "commandBox"
+                    ],
+                    "description": "Test command to run query, need to implement in the code",
+                    "title": "Search",
+                    "type": "query",
+                    "parameters": [
+                        {
+                            "name": "searchQuery",
+                            "title": "Search Query",
+                            "description": "Your search query",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ],
+            "messageHandlers": [
+                {
+                    "type": "link",
+                    "value": {
+                      "domains": [
+                        "${{BOT_DOMAIN}}",
+                        "*.botframework.com"
+
+                      ],
+                        "supportsAnonymizedPayloads": true
+                    }
+                }
             ]
-          }
         }
-      ]
-    }
-  ]
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+      "${{BOT_DOMAIN}}"
+    ]
 }

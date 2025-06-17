@@ -14,8 +14,8 @@ local.settings.json
 test
 tsconfig.json
 .DS_Store
-teamsapp.yml
-teamsapp.*.yml
+m365agents.yml
+m365agents.*.yml
 /env/
 /node_modules/.bin
 /node_modules/ts-node
