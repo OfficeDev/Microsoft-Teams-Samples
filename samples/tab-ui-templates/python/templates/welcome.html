@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        .ui-grid {
+            display: inline-flex;
+            margin-top: 30px;
+        }
+        .grid {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 0 1rem 1.25rem;
+            margin: 1.5rem -1rem;
+        }
+        .card {
+            max-width: 23vw;
+            margin: 5px;
+        }
+        .card img {
+            border-radius: 4px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 5px rgba(0, 0, 0, 0.06);
+            max-width: 23vw;
+        }
+        .card h3 {
+            margin: 2rem 0 0.5rem;
+        }
+        .card p {
+            margin: 0.5rem 0 2rem;
+            opacity: 0.65;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin: 1.6rem 1.25rem;">
+        <h1>Welcome to our Teams Sample App</h1>
+        <div>
+            <p style="margin-bottom: 3vh; opacity: 0.65; max-width: 50rem;">
+                The Teams Sample App can help you better understand how your app should
+                look and behave in Teams depending on the scenario. Select a UI template
+                above (for example, Forms) to get started. To learn more, see the
+                following resources.
+            </p>
+        </div>
+        <br /><br />
+        <h2>Resources</h2>
+        <div class="grid">
+            {% for resource in resources %}
+            <div class="card">
+                <img src="{{ resource.image_url }}" alt="{{ resource.title }}">
+                <h3>{{ resource.title }}</h3>
+                <p>{{ resource.desc }}</p>
+                <div>
+                    {% for link in resource.links %}
+                    <a href="{{ link.href }}" target="_blank">{{ link.label }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
