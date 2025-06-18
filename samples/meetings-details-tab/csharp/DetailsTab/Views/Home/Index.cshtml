@@ -76,7 +76,7 @@
         integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
         crossorigin="anonymous"></script>
         
-
+<script>
         submitHandler = (dialogResponse) => {
             DisplayAgenda(dialogResponse.result);
         };
@@ -96,7 +96,7 @@
 
             taskInfo.fallbackUrl = taskInfo.url
             microsoftTeams.app.initialize().then(() => {
-                microsoftTeams.dialog.open(taskInfo, submitHandler);
+                microsoftTeams.dialog.url.open(taskInfo, submitHandler);
             });
         });
 
