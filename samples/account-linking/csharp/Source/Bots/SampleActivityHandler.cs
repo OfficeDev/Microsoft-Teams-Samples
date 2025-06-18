@@ -8,6 +8,9 @@ using Microsoft.Teams.Samples.AccountLinking.GitHub;
 using Microsoft.AspNetCore.DataProtection;
 using System.Web;
 using System.Text.Json;
+using Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail;
+using Microsoft.Teams.Samples.AccountLinking.Sample.Services.OAuth;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Teams.Samples.AccountLinking.Bots;
 
@@ -30,26 +33,34 @@ public sealed class SampleActivityHandler<TDialog> : TeamsActivityHandler where 
 
     private readonly GitHubServiceClient _gitHubServiceClient;
 
+    private readonly GmailServiceClient _gmailServiceClient;
+
     private readonly OAuthTokenProvider _oAuthTokenProvider;
 
     private readonly IDataProtector _dataProtector;
+
+    private readonly ExternalAuthParameters _externalAuthParameters;
 
     public SampleActivityHandler(
         ILogger<SampleActivityHandler<TDialog>> logger,
         TDialog dialog,
         OAuthTokenProvider oAuthTokenProvider,
         GitHubServiceClient gitHubServiceClient,
+        GmailServiceClient gmailServiceClient,
         ConversationState botState,
         UserState userState,
-        IDataProtectionProvider dataProtectionProvider) : base()
+        IDataProtectionProvider dataProtectionProvider,
+        IOptions<ExternalAuthParameters> externalAuthParameters ) : base()
     {
         _logger = logger;
         _gitHubServiceClient = gitHubServiceClient;
+        _gmailServiceClient = gmailServiceClient;
         _oAuthTokenProvider = oAuthTokenProvider;
         _dialog = dialog;
         _botState = botState;
         _userState = userState;
         _dataProtector = dataProtectionProvider.CreateProtector(nameof(SampleActivityHandler<TDialog>));
+        _externalAuthParameters = externalAuthParameters.Value;
     }
 
     protected override async Task OnMessageActivityAsync(
@@ -130,23 +141,47 @@ public sealed class SampleActivityHandler<TDialog> : TeamsActivityHandler where 
         }
         else if (tokenResult is AccessTokenResult accessTokenResult)
         {
-            var repos = await _gitHubServiceClient.GetRepositoriesAsync(accessTokenResult.AccessToken);
-
-            return new MessagingExtensionResponse
+            if (_externalAuthParameters.Service == ExternalServiceConstants.GMAIL)
             {
-                ComposeExtension = new MessagingExtensionResult
+                var gmailProfiles = await _gmailServiceClient.GetUserProfile(accessTokenResult.AccessToken);
+                var gmailAttachments = new List<GmailUserProfile> { gmailProfiles };
+
+                return new MessagingExtensionResponse
                 {
-                    Type = "result",
-                    AttachmentLayout = "list",
-                    Attachments = repos.Select(r =>
-                        new MessagingExtensionAttachment
-                        {
-                            ContentType = HeroCard.ContentType,
-                            Content = new HeroCard { Title = $"{r.Name} ({r.Stars})" },
-                            Preview = new HeroCard { Title = $"{r.Name} ({r.Stars})" }.ToAttachment(),
-                        }).ToList(),
-                },
-            };
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "result",
+                        AttachmentLayout = AttachmentLayoutTypes.List,
+                        Attachments = gmailAttachments.Select(r =>
+                           new MessagingExtensionAttachment
+                           {
+                               ContentType = HeroCard.ContentType,
+                               Content = new HeroCard { Title = $"Profile details for email: {r.emailAddress}" },
+                               Preview = new HeroCard { Title = $"User has messages #{r.totalMessages} and threads #({r.totalThreads}) in total" }.ToAttachment(),
+                           }).ToList(),
+                    },
+                };
+            }
+            else //default fallback is github
+            {
+                var repos = await _gitHubServiceClient.GetRepositoriesAsync(accessTokenResult.AccessToken);
+
+                return new MessagingExtensionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "result",
+                        AttachmentLayout = "list",
+                        Attachments = repos.Select(r =>
+                            new MessagingExtensionAttachment
+                            {
+                                ContentType = HeroCard.ContentType,
+                                Content = new HeroCard { Title = $"{r.Name} ({r.Stars})" },
+                                Preview = new HeroCard { Title = $"{r.Name} ({r.Stars})" }.ToAttachment(),
+                            }).ToList(),
+                    },
+                };
+            }
         }
         // There was an error
         return new MessagingExtensionResponse
