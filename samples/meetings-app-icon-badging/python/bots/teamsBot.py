@@ -10,13 +10,6 @@ from botbuilder.schema.teams._models_py3 import TargetedMeetingNotification
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import MicrosoftAppCredentials
 
-# # Custom serializable wrapper for meeting notifications
-# class CustomMeetingNotification(Serializable):
-#     def __init__(self, type: str, value: dict):
-#         super().__init__()
-#         self.type = type
-#         self.value = value
-
 
 class TeamsBot(TeamsActivityHandler):
     def __init__(self):
