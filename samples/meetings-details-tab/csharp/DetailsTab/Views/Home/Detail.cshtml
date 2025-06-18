@@ -10,7 +10,7 @@
                 Option2: document.getElementById("option2").value
             }
             microsoftTeams.app.initialize().then(() => {
-                microsoftTeams.dialog.submit(pollnfo);
+                microsoftTeams.dialog.url.submit(pollnfo);
                 return true;
             });
             return false;
