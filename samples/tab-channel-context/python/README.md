@@ -31,7 +31,7 @@ You can try this sample by uploading the app package (.zip file) to your Teams c
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) min version 3.8
-- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -49,7 +49,7 @@ You can try this sample by uploading the app package (.zip file) to your Teams c
 
 ## Run the app (Manually Uploading to Teams)
 
-> Note: These instructions are for running the sample on your local machine. The tunnelling solution is required because Teams needs to call into your tab.
+> Note: These instructions are for running the sample on your local machine. The tunneling solution is required because Teams needs to call into your tab.
 
 1. Clone the repository
 

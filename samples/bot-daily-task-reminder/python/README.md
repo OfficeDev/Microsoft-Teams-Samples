@@ -57,7 +57,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-> Note: These instructions are for running the sample on your local machine. The tunnelling solution is required because Teams needs to call into your bot.
+> Note: These instructions are for running the sample on your local machine. The tunneling solution is required because Teams needs to call into your bot.
 
 1) **Setup for Bot**
 - In Azure portal, create Microsoft Entra ID app registration and it will generate MicrosoftAppId and MicrosoftAppPassword for you.

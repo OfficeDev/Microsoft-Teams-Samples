@@ -32,7 +32,7 @@ For reference, see [Tabs link unfurling and Stage View](https://docs.microsoft.c
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
-- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Run the app (Manually Uploading to Teams)
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
+> Note these instructions are for running the sample on your local machine, the tunneling solution is required because the Teams service needs to call into the bot.
 
 1) Clone the repository
 
