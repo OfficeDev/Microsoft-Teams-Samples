@@ -8,8 +8,8 @@
     "longDescription": [
       "The Stage View sample app illustrates the functionality of Microsoft Teams tabs in stage view with a python implementation, highlighting features like multi-window support and collaborative interactions. Users can engage through adaptive cards and deep links, enhancing their experience within Teams."
     ],
-    "creationDateTime": "2021-06-10",
-    "updateDateTime": "2024-10-15",
+    "creationDateTime": "2025-06-12",
+    "updateDateTime": "2025-06-12",
     "products": [
       "Teams"
     ],

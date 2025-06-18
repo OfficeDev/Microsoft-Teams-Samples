@@ -9,7 +9,7 @@ languages:
 - python
 extensions:
   contentType: samples
-  createdDate: "03/06/2024 12:00:00 AM"
+  createdDate: "02/06/2025"
 urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-python
 ---
 

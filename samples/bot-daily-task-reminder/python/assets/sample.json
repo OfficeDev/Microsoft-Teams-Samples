@@ -8,8 +8,8 @@
     "longDescription": [
       "This Teams bot helps users schedule recurring tasks and receive reminders at specified times. It supports adaptive cards and task modules, utilizing the Quartz Scheduler to manage reminders."
     ],
-    "creationDateTime": "2021-11-24",
-    "updateDateTime": "2024-10-10",
+    "creationDateTime": "2025-06-02",
+    "updateDateTime": "2025-06-02",
     "products": [
       "Teams"
     ],
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "python"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "python"
       },
       {
         "key": "TEAMS-FEATURES",

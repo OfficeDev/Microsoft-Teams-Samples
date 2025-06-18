@@ -9,7 +9,7 @@ languages:
 - python
 extensions:
  contentType: samples
- createdDate: "06/10/2025"
+ createdDate: "12/06/2025"
 urlFragment: officedev-microsoft-teams-samples-tab-stage-view-python
 ---
 
@@ -106,8 +106,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **Click view via deeplink:**  
 ![Tab View](Images/ViewViaDeepLink.png)
 
-**Tab with execute deep link action to open stage view:**  
-![Tab View](Images/TabStageView.png)
+**Tab with execute deeplink action to open stage view:**  
+![Tab View](Images/StageViewTab.png)
 
 **Click execute deep-link:**  
 ![Tab View](Images/TabDeepLink.png)

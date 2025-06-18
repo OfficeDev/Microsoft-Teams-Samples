@@ -8,7 +8,7 @@ title: Microsoft Teams Tab Channel Context Sample (Python)
 description: Demonstrates how to build a Teams tab that reads channel context using Python and Flask.
 extensions:
   contentType: samples
-  createdDate: 06/03/2025
+  createdDate: 05/06/2025
 urlFragment: officedev-microsoft-teams-samples-tab-channel-context-python
 ---
 
@@ -99,7 +99,7 @@ You can try this sample by uploading the app package (.zip file) to your Teams c
 
 **Add Tab in Channel or Groupchat:**
 
-![Tab Channel Context](Images/SelectConfig.png)
+![Tab Channel Context](Images/SelectContext.png)
 
 **Tab in Channel:**
 
