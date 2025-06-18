@@ -6,7 +6,6 @@ appManifest/build/
 .venv/
 
 # misc
-.env
 .deployment/
 
 # tmp files
