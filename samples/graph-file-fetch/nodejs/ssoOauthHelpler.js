@@ -15,9 +15,9 @@ class SsoOAuthHelpler {
     /// <returns>True if the bot should continue processing this TokenExchange request.</returns>
     async shouldProcessTokenExchange(turnContext) {
         if (turnContext.activity.name !== tokenExchangeOperationName) {
-            throw new Error("Only 'signin/tokenExchange' invoke activities can be procssed by TokenExchangeHelper.");
+            throw new Error("Only 'signin/tokenExchange' invoke activities can be processed by TokenExchangeHelper.");
         }
-
+        
         if (!await this.exchangedToken(turnContext)) {
             // If the TokenExchange is NOT successful, the response will have already been sent by ExchangedToken
             return false;
@@ -25,7 +25,7 @@ class SsoOAuthHelpler {
 
         // If a user is signed into multiple Teams clients, the Bot might receive a "signin/tokenExchange" from each client.
         // Each token exchange request for a specific user login will have an identical activity.value.Id.
-        // Only one of these token exchange requests should be processe by the bot.  For a distributed bot in production,
+        // Only one of these token exchange requests should be processed by the bot.  For a distributed bot in production,
         // this requires a distributed storage to ensure only one token exchange is processed.
 
         // This example utilizes Bot Framework IStorage's ETag implementation for token exchange activity deduplication.

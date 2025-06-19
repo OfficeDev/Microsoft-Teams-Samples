@@ -61,7 +61,7 @@ class MainDialog extends LogoutDialog {
             await stepContext.context.sendActivity('Login was not successful please try again.');
         } 
         else {
-            if(stepContext.context._activity.conversation.conversationType != "personal") {
+            if(stepContext.context._activity.conversation.conversationType !== "personal") {
                 var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
                 currentState.token = tokenResponse.token;
 
