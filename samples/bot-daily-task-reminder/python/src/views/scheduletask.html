@@ -2,17 +2,13 @@
 <html lang="en">
 
 <head>
-    <!-- Microsoft Teams SDK for communication with Microsoft Teams -->
     <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
             integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
             crossorigin="anonymous"></script>
-    <!-- jQuery library for DOM manipulation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Bootstrap 4 for UI components like buttons, forms, and layout -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        /* Container style to provide margin and alignment for task form */
         .container {
             margin-top: 1rem;
             margin-left: 1.5rem;
@@ -20,28 +16,20 @@
     </style>
 
     <script>
-        // Initialize Microsoft Teams SDK
         microsoftTeams.app.initialize();
 
-        /**
-         * Function to validate and submit the task details.
-         * Validates the form inputs (task title, description, and date/time).
-         * If validation passes, it collects selected days and submits the task.
-         */
+        //Function to validate and submit the task details.
         function submit() {
             let isValid = true;
             const checkboxArray = [];
 
-            // Validate input fields for task title, description, and date/time
             $('#taskTitle, #taskdatetime, #taskdescription').each(function () {
                 if ($.trim($(this).val()) === '') {
                     isValid = false;
-                    // Highlight invalid fields with red border
                     $(this).css({
                         "border": "1px solid red"
                     });
                 } else {
-                    // Reset field styles if valid
                     $(this).css({
                         "border": "",
                         "background": ""
@@ -49,19 +37,16 @@
                 }
             });
 
-            // If validation fails, prevent form submission
             if (!isValid) {
                 return false;
             }
 
-            // Collect selected days (checkboxes)
             $('input[type=checkbox]').each(function () {
                 if (this.checked) {
                     checkboxArray.push($(this).val());
                 }
             });
 
-            // Create task information object
             const taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: $('#taskdatetime').val(),
@@ -69,36 +54,27 @@
                 selectedDays: checkboxArray,
             };
 
-            // Submit task information to Microsoft Teams task module
             microsoftTeams.dialog.url.submit(taskInfo);
         }
     </script>
 </head>
 
 <body class="theme-light">
-    <!-- Main surface container -->
     <div class="surface">
         <div class="panel">
             <div class="container">
-                <!-- Task title input -->
                 <label for="taskTitle" class="title">Task title</label>
                 <br>
                 <input type="text" id="taskTitle" name="taskTitle">
                 <br /><br />
-
-                <!-- Task description input -->
                 <label for="taskdescription" class="description">Task description</label>
                 <br>
                 <input type="text" id="taskdescription" name="taskdescription">
                 <br /><br />
-
-                <!-- Date and time input -->
                 <label for="taskdatetime">Date and time</label>
                 <br />
                 <input type="datetime-local" id="taskdatetime" name="taskdatetime">
                 <br /><br />
-
-                <!-- Days selection for recurring task -->
                 <span>Please select days to be repeated</span>
                 <br /><br />
                 <input type="checkbox" id="monday" name="monday" value="MON">
@@ -115,8 +91,6 @@
                 <label for="saturday">Saturday</label><br>
                 <input type="checkbox" id="sunday" name="sunday" value="SUN">
                 <label for="sunday">Sunday</label><br>
-
-                <!-- Submit button -->
                 <button type="button" class="btn-send save" onclick="submit()">Submit</button>
             </div>
         </div>

@@ -1,5 +1,3 @@
-# bots/bot_activity_handler.py
-
 import os
 from botbuilder.core import TurnContext, MessageFactory
 from botbuilder.schema import Activity, ActivityTypes
@@ -16,7 +14,6 @@ class BotActivityHandler(TeamsActivityHandler):
 
     async def on_message_activity(self, turn_context: TurnContext):
         base_url = os.getenv("BaseUrl", "")
-        # Remove protocol
         base_url = base_url.split("://")[-1] if "://" in base_url else base_url
 
         card = adaptive_card.adaptive_card_for_tab_stage_view(base_url)

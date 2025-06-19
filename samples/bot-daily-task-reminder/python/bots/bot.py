@@ -74,16 +74,11 @@ class DailyReminderBot(TeamsActivityHandler):
         selected_days = task_details["selectedDays"]
 
         async def reminder_job():
-            print("Reminder job triggered")
-            try:
-                await adapter.continue_conversation(
-                    conversation_references[user_id],
-                    lambda ctx: ctx.send_activity(Activity(attachments=[CardFactory.adaptive_card(self.reminder_card(task_details))])),
-                    os.environ.get("MicrosoftAppId")
-                )
-                print("Reminder sent")
-            except Exception as e:
-                print(f"Error sending reminder: {e}")
+            await adapter.continue_conversation(
+                conversation_references[user_id],
+                lambda ctx: ctx.send_activity(Activity(attachments=[CardFactory.adaptive_card(self.reminder_card(task_details))])),
+                os.environ.get("MicrosoftAppId")
+            )
 
         def run_async_job(coro):
             import asyncio
@@ -92,14 +87,10 @@ class DailyReminderBot(TeamsActivityHandler):
             loop.run_until_complete(coro)
             loop.close()
 
-        # Always schedule the one-time date reminder
-        print(f"Scheduling one-time reminder for {dt}")
         scheduler.add_job(lambda: run_async_job(reminder_job()), trigger="date", run_date=dt)
 
-        # If days are selected, schedule recurring reminders
         if selected_days:
             cron_days = ','.join(str(self.convert_day(d)) for d in selected_days)
-            print(f"Scheduling recurring reminder on days: {cron_days}")
             scheduler.add_job(lambda: run_async_job(reminder_job()), trigger="cron", day_of_week=cron_days, hour=dt.hour, minute=dt.minute)
 
         return TaskModuleResponse(task=TaskModuleMessageResponse(value="Task scheduled!"))

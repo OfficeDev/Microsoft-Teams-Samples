@@ -1,4 +1,2 @@
 requests==2.31.0
 botbuilder-integration-aiohttp>=4.16.2
-flask
-python-dotenv

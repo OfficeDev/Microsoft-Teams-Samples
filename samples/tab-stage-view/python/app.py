@@ -4,9 +4,8 @@ import traceback
 from pathlib import Path
 from aiohttp import web
 from dotenv import load_dotenv
-from api.routes import api_routes  # This file will be created when you send api/index.js
+from api.routes import api_routes  
 
-# Load environment variables from .env
 ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
@@ -16,35 +15,27 @@ VIEWS_DIR = BASE_DIR / "views"
 
 app = web.Application()
 
-# ----- ROUTES -----
-
-# Serve /content -> static HTML
 async def content_handler(request):
     return web.FileResponse(VIEWS_DIR / "content-tab.html")
 
-# Serve /tab -> static HTML
 async def tab_handler(request):
     return web.FileResponse(VIEWS_DIR / "sampleTab.html")
 
-# Serve /api/config -> returns env values to client
 async def config_api(request):
     return web.json_response({
         "BaseUrl": os.getenv("BaseUrl"),
         "teamsAppId": os.getenv("TeamsAppId")
     })
 
-# 404 fallback for unhandled routes
 async def handle_404(request):
     return web.json_response({"error": "Route not found"}, status=404)
 
-# Register routes
 app.router.add_get("/content", content_handler)
 app.router.add_get("/tab", tab_handler)
 app.router.add_get("/api/config", config_api)
-app.add_routes(api_routes)  # From api/routes.py (yet to be converted)
+app.add_routes(api_routes)
 app.router.add_route("*", "/{tail:.*}", handle_404)
 
-# ----- START SERVER -----
 if __name__ == "__main__":
     try:
         web.run_app(app, port=PORT)

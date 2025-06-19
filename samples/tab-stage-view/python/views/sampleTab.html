@@ -13,7 +13,6 @@
         let appId, BaseUrl;
 
         microsoftTeams.app.initialize().then(() => {
-            // Fetch config values from the API
             fetch("/api/config")
                 .then(response => response.json())
                 .then(config => {
