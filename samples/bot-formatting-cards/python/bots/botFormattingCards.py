@@ -138,7 +138,7 @@ class BotFormattingCards(TeamsActivityHandler):
             if member.id != activity.recipient.id:
                 welcome_message = (
                     "Welcome to Adaptive Card Format. This bot will introduce you to different types of formats. "
-                    "Please select the cards from the given options."
+                    "Please select a card from the options provided."
                 )
 
             await turn_context.send_activity(welcome_message)

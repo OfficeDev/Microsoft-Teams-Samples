@@ -5,7 +5,7 @@ products:
 - office-teams
 - office
 - office-365
-lanGauges:
+langauges:
 - python
 extensions:
  contentType: samples
@@ -101,7 +101,7 @@ the Teams service needs to call into the bot.
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
   - Navigate to samples\bot-formatting-cards\python\adaptive_cards\cards.py
-  - Go to methond `def mentionSupport()` at line number `1203`
+  - Go to method `def mentionSupport()` at line number `1203`
       1) On line 1218, replace {{new-Ids}}  
       2) On line 1226, replace {{Email-Id}}
       3) On line 1232, replace {{Microsoft-App-Id}}
