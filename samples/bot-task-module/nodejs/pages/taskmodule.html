@@ -2,16 +2,20 @@
 //- All rights reserved. -->
 
 <head>
-    <script
-    src="https://res.cdn.office.net/teams-js/2.33.0/js/MicrosoftTeams.min.js"
-    integrity="sha384-hCfPVLNt9JPTceReb/qZGZR7IbUaPeoExYnER2H//kiykKfhcVEMVQiCR0eAtCCs"
-    crossorigin="anonymous"
-  ></script>
-
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <style>
         .dialog-height {
             width: auto !important;
             height: auto !important;
+        }
+        .button-container {
+            text-align: center;
+            margin: 0 auto;
+        }
+        .button-container button {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -19,26 +23,18 @@
 <body>
     <div class="font-semibold font-title">Microsoft Teams Dialogs (referred as task modules in TeamsJS v1.x) Demo</div>
     <p>
-        A dialog (referred as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code or <a src="https://adaptivecards.io">Adaptive cards</a> for their users, particularly useful for initiating and/or
+        A dialog (referred as task modules in TeamsJS v1.x) allows Teams app developers to create one or more custom, modal experiences with custom code or <a href="https://adaptivecards.io">Adaptive cards</a> for their users, particularly useful for initiating and/or
         completing tasks using a GUI that does not litter a Teams conversation with superfluous, intermediate task
-        completion
-        information.
+        completion information.
     </p>
-    <p>
-        Let's try it out!
-        <div id="buttons" style="text-align: center; margin-left: auto; margin-right: auto">
-            <button class="taskModuleButton button-primary" id="YouTube">YouTube</button>
-            <p></p>
-            <button class="taskModuleButton button-primary" id="PowerApp">PowerApp</button>
-            <p></p>
-            <button class="taskModuleButton button-primary" id="customform">Custom Form</button>
-            <p></p>
-            <button class="taskModuleButton button-primary" id="adaptivecard1">Adaptive Card (results &rarr; tab)</button>
-            <p></p>
-            <p></p>
-            <div><a id="deeplink" target="_blank" >Deep Link</a></div>
-        </div>
-    </p>
+    <p>Let's try it out!</p>
+    <div id="buttons" class="button-container">
+        <button class="taskModuleButton button-primary" id="YouTube">YouTube</button>
+        <button class="taskModuleButton button-primary" id="PowerApp">PowerApp</button>
+        <button class="taskModuleButton button-primary" id="customform">Custom Form</button>
+        <button class="taskModuleButton button-primary" id="adaptivecard1">Adaptive Card (results &rarr; tab)</button>
+        <div><a id="deeplink" target="_blank">Deep Link</a></div>
+    </div>
 
     <!-- Register TaskModuleTab.js file -->
     <script type="module" src="TaskModuleTab.js"></script>

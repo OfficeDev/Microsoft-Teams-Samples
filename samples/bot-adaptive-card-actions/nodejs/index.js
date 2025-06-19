@@ -25,22 +25,20 @@ const adapter = new BotFrameworkAdapter({
     appPassword: process.env.MicrosoftAppPassword
 });
 
+// Handle errors that occur during bot processing
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
-        `${ error }`,
+        `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
 
-     // Uncomment below commented line for local debugging.
-     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
+    // Uncomment below line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
 // Create bot handlers
@@ -48,18 +46,20 @@ const botActivityHandler = new AdaptiveCardActionsBot();
 
 // Create HTTP server.
 const server = express();
-
 const port = process.env.port || process.env.PORT || 3978;
 
 server.listen(port, () => 
     console.log(`\Bot/ME service listening at http://localhost:${port}`)
 );
 
+// Serve static files from the Images directory
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
+// Handle undefined routes
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
+
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {

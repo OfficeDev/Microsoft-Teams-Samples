@@ -11,69 +11,63 @@ namespace BotAllCards.Cards
     public static class AllCards
     {
         /// <summary>
-        /// ContentType:mimetype/Contenttype for the file.
+        /// ContentType: mimetype/Contenttype for the file.
         /// </summary>
-        public const string contentType = "application/vnd.microsoft.card.adaptive";
+        public const string ContentType = "application/vnd.microsoft.card.adaptive";
 
         /// <summary>
-        /// Sends Mention Support Card 
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Sends Mention Support Card.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendMentionSupportCardAsync(string name)
+        /// <param name="name">The name of the user to mention.</param>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendMentionSupportCardAsync(string name)
         {
-            var paths = new[] { ".", "Resources", "mentionSupport.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "mentionSupport.json"));
 
-            var templateJSON = adaptiveCardJson;
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(templateJSON);
-            var memberData = new
-            {
-                userName = name
-            };
+            var template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var memberData = new { userName = name };
 
-            string cardJSON = template.Expand(memberData);
-            var mentionSupportAdaptiveCardAttachment = new Attachment()
+            string cardJson = template.Expand(memberData);
+            var mentionSupportAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(cardJSON),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(cardJson),
             };
 
             return mentionSupportAdaptiveCardAttachment;
         }
 
         /// <summary>
-        /// Sends Information masking in Adaptive Cards
+        /// Sends Information Masking in Adaptive Cards.
         /// Use the information masking property to mask specific information, such as password or sensitive information from users within the Adaptive Card Input.Text input element.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendInfoMasking()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendInfoMasking()
         {
-            var paths = new[] { ".", "Resources", "informationMasking.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "informationMasking.json"));
 
-            var sendsInfoMaskingAdaptiveCardAttachment = new Attachment()
+            var infoMaskingAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
+                ContentType = ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return sendsInfoMaskingAdaptiveCardAttachment;
+            return infoMaskingAdaptiveCardAttachment;
         }
 
         /// <summary>
-        /// Sends Sample Adaptive Card With Full Width
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Sends Sample Adaptive Card With Full Width.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendFullWidthCardAdaptiveCard()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendFullWidthCardAdaptiveCard()
         {
-            var paths = new[] { ".", "Resources", "sampleAdaptiveWithFullWidth.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "sampleAdaptiveWithFullWidth.json"));
 
-            var fullWidthAdaptiveCardAttachment = new Attachment()
+            var fullWidthAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
+                ContentType = ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -81,54 +75,51 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Stage view for images in Adaptive Cards
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Stage view for images in Adaptive Cards.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendStageViewImagesCard()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendStageViewImagesCard()
         {
-            var paths = new[] { ".", "Resources", "stageViewForImages.json" };
-            var stageViewImagesAdaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "stageViewForImages.json"));
 
-            var adaptiveCardAttachment = new Attachment()
+            var stageViewImagesAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(stageViewImagesAdaptiveCardJson),
-            };
-
-            return adaptiveCardAttachment;
-        }
-
-        /// <summary>
-        /// Sends OverFlow Menu Card
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
-        /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendOverFlowMenuCard()
-        {
-            var paths = new[] { ".", "Resources", "overflowMenu.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-
-            var sendsOverFlowMenuAdaptiveCardAttachment = new Attachment()
-            {
-                ContentType = contentType,
+                ContentType = ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return sendsOverFlowMenuAdaptiveCardAttachment;
+            return stageViewImagesAdaptiveCardAttachment;
         }
 
         /// <summary>
-        /// Format sample for HTML connector cards
+        /// Sends Overflow Menu Card.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
+        /// </summary>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendOverflowMenuCard()
+        {
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "overflowMenu.json"));
+
+            var overflowMenuAdaptiveCardAttachment = new Attachment
+            {
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+            };
+
+            return overflowMenuAdaptiveCardAttachment;
+        }
+
+        /// <summary>
+        /// Format sample for HTML connector cards.
         /// The following code shows an example of formatting for HTML connector cards.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendHTMLConnectorCard()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendHTMLConnectorCard()
         {
-            var paths = new[] { ".", "Resources", "formatHTMLConnectorCard.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "formatHTMLConnectorCard.json"));
 
-            var htmlConnectorAdaptiveCardAttachment = new Attachment()
+            var htmlConnectorAdaptiveCardAttachment = new Attachment
             {
                 ContentType = "application/vnd.microsoft.teams.card.o365connector",
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
@@ -138,18 +129,17 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Sends Card With Emoji
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Sends Card With Emoji.
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendCardWithEmoji()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendCardWithEmoji()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardWithEmoji.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardWithEmoji.json"));
 
-            var emojiAdaptiveCardAttachment = new Attachment()
+            var emojiAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
+                ContentType = ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
@@ -157,381 +147,360 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Persona card Icon in an Adaptive Card
+        /// Persona card Icon in an Adaptive Card.
         /// If you want to show a single user in an Adaptive Card, the Adaptive Card displays the people icon and the name of the user.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendPersonaCardIcons()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendPersonaCardIcons()
         {
-            var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardIcon.json" };
-            var adaptiveCardPersonaCardIconJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptivePeoplePersonaCardIcon.json"));
 
-            var PersonaCardIconAdaptiveCardAttachment = new Attachment()
+            var personaCardIconAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardIconJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return PersonaCardIconAdaptiveCardAttachment;
+            return personaCardIconAdaptiveCardAttachment;
         }
 
         /// <summary>
-        /// Persona Card Set Icon in an Adaptive Card
+        /// Persona Card Set Icon in an Adaptive Card.
         /// If you want to show multiple users in an Adaptive Card, the Adaptive Card displays only the people icon of the users.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendPersonaCardSetIcons()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendPersonaCardSetIcons()
         {
-            var paths = new[] { ".", "Resources", "adaptivePeoplePersonaCardSetIcon.json" };
-            var adaptiveCardPersonaCardSetIconJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptivePeoplePersonaCardSetIcon.json"));
 
-            var PersonaCardSetIconAdaptiveCardAttachment = new Attachment()
+            var personaCardSetIconAdaptiveCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardPersonaCardSetIconJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return PersonaCardSetIconAdaptiveCardAttachment;
+            return personaCardSetIconAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Adaptive Card updated to be responsive using targetWidth.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
-        public static Attachment sendResponsiveLayoutCard()
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
+        public static Attachment SendResponsiveLayoutCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardResponsiveLayout.json" };
-            var adaptiveCardlayoutJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardResponsiveLayout.json"));
 
-            var LayoutCardAdaptiveCardAttachment = new Attachment()
+            var responsiveLayoutCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardlayoutJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return LayoutCardAdaptiveCardAttachment;
+            return responsiveLayoutCardAttachment;
         }
 
         /// <summary>
         /// Adaptive Card showcasing the border feature.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendBorderCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardBorders.json" };
-            var adaptiveCardBorderJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardBorders.json"));
 
-            var BorderAdaptiveCardAttachment = new Attachment()
+            var borderCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardBorderJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return BorderAdaptiveCardAttachment;
+            return borderCardAttachment;
         }
 
         /// <summary>
         /// Adaptive Card showcasing the rounded corner for different elements of adaptive card.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendRoundedCornerCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardRoundedCorners.json" };
-            var adaptiveCardRoundedCornersJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardRoundedCorners.json"));
 
-            var RoundedCornersCardAttachment = new Attachment()
+            var roundedCornersCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardRoundedCornersJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return RoundedCornersCardAttachment;
+            return roundedCornersCardAttachment;
         }
 
         /// <summary>
-        /// Generates an Adaptive Card attachment that includes Fluent icons. 
-        /// This method reads the adaptive card JSON from a resource file and 
+        /// Generates an Adaptive Card attachment that includes Fluent icons.
+        /// This method reads the adaptive card JSON from a resource file and
         /// deserializes it to be included as an attachment with Fluent icons in the card.
         /// Fluent icons provide a modern and visually appealing way to enhance the UI within Adaptive Cards.
         /// </summary>
-        /// <returns>
-        /// Returns an Attachment object that contains the Adaptive Card with Fluent icons.
-        /// </returns>
+        /// <returns>Returns an Attachment object that contains the Adaptive Card with Fluent icons.</returns>
         public static Attachment SendFluentIconsCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardFluentIcon.json" };
-            var adaptiveCardFluentIconsJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardFluentIcon.json"));
 
-            var FluentIconsCardAttachment = new Attachment()
+            var fluentIconsCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardFluentIconsJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return FluentIconsCardAttachment;
+            return fluentIconsCardAttachment;
         }
 
         /// <summary>
         /// Creates and returns an Attachment containing an adaptive card with media elements.
         /// </summary>
-        /// <returns>An Attachment object with a media elements adaptive card.</returns>
+        /// <returns>Returns an Attachment object with a media elements adaptive card.</returns>
         public static Attachment SendMediaElementsCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardMediaElements.json" };
-            var adaptiveCardMediaElementsJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardMediaElements.json"));
 
-            var MediaElementsCardAttachment = new Attachment()
+            var mediaElementsCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardMediaElementsJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return MediaElementsCardAttachment;
+            return mediaElementsCardAttachment;
         }
 
         /// <summary>
         /// Sends a star ratings card as an attachment for displaying or collecting user feedback.
         /// </summary>
-        /// <returns>An Attachment object containing the star ratings card, which can display read-only ratings or collect ratings from users.</returns>
+        /// <returns>Returns an Attachment object containing the star ratings card, which can display read-only ratings or collect ratings from users.</returns>
         public static Attachment SendStarRatingsCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardStarRatings.json" };
-            var adaptiveCardStarRatingsJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardStarRatings.json"));
 
-            var StarRatingsCardAttachment = new Attachment()
+            var starRatingsCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardStarRatingsJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return StarRatingsCardAttachment;
+            return starRatingsCardAttachment;
         }
 
         /// <summary>
-        /// Conditional enablement of action button
+        /// Conditional enablement of action button.
         /// To enable your Action.Submit button only when the user fills out at least one input field and disables the button again if the user clears the input.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendConditionalCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardConditional.json" };
-            var adaptiveCardConditionalJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardConditional.json"));
 
-            var ConditionalCardAttachment = new Attachment()
+            var conditionalCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardConditionalJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return ConditionalCardAttachment;
+            return conditionalCardAttachment;
         }
 
         /// <summary>
-        /// Scrollable container for adaptive Card
+        /// Scrollable container for adaptive Card.
         /// If you have a long list of items in a container within an adaptive card, it can make the card quite tall. To address this, you can use a scrollable container to limit the card's height.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendScrollableCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardScrollable.json" };
-            var adaptiveCardScrollableJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardScrollable.json"));
 
-            var ScrollableCardAttachment = new Attachment()
+            var scrollableCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardScrollableJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return ScrollableCardAttachment;
+            return scrollableCardAttachment;
         }
 
         /// <summary>
-        /// Compound Button adaptive Card
-        /// Sends adaptive card showing compound button
+        /// Compound Button adaptive Card.
+        /// Sends adaptive card showing compound button.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendCompoundButtonCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardCompoundButton.json" };
-            var adaptiveCardCompoundButtonJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardCompoundButton.json"));
 
-            var CompoundButtonCardAttachment = new Attachment()
+            var compoundButtonCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardCompoundButtonJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return CompoundButtonCardAttachment;
+            return compoundButtonCardAttachment;
         }
 
         /// <summary>
-        /// Container Layout adaptive Card
-        /// Sends adaptive card showing Container Layout
+        /// Container Layout adaptive Card.
+        /// Sends adaptive card showing Container Layout.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendContainerLayoutCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardContainerLayouts.json" };
-            var adaptiveCardContainerLayoutJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardContainerLayouts.json"));
 
-            var ContainerLayoutCardAttachment = new Attachment()
+            var containerLayoutCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardContainerLayoutJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return ContainerLayoutCardAttachment;
+            return containerLayoutCardAttachment;
         }
 
         /// <summary>
-        /// Donut Chart adaptive Card
-        /// Sends adaptive card showing Donut Chart
+        /// Donut Chart adaptive Card.
+        /// Sends adaptive card showing Donut Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendDonutChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardDonutChart.json" };
-            var adaptiveCardDonutChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardDonutChart.json"));
 
-            var DonutChartCardAttachment = new Attachment()
+            var donutChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardDonutChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return DonutChartCardAttachment;
+            return donutChartCardAttachment;
         }
 
         /// <summary>
-        /// Gauge Chart adaptive Card
-        /// Sends adaptive card showing Gauge Chart
+        /// Gauge Chart adaptive Card.
+        /// Sends adaptive card showing Gauge Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendGaugeChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardGaugeChart.json" };
-            var adaptiveCardGaugeChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardGaugeChart.json"));
 
-            var GaugeChartCardAttachment = new Attachment()
+            var gaugeChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardGaugeChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return GaugeChartCardAttachment;
+            return gaugeChartCardAttachment;
         }
 
         /// <summary>
-        /// Horizontal Bar Chart adaptive Card
-        /// Sends adaptive card showing Horizontal Bar Chart
+        /// Horizontal Bar Chart adaptive Card.
+        /// Sends adaptive card showing Horizontal Bar Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendHorizontalBarChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardHorizontalBarChart.json" };
-            var adaptiveCardHorizontalBarChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardHorizontalBarChart.json"));
 
-            var HorizontalBarChartCardAttachment = new Attachment()
+            var horizontalBarChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardHorizontalBarChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return HorizontalBarChartCardAttachment;
+            return horizontalBarChartCardAttachment;
         }
 
         /// <summary>
-        /// Horizontal Bar Chart adaptive Card
-        /// Sends adaptive card showing Horizontal Bar Stacked Chart
+        /// Horizontal Bar Stacked Chart adaptive Card.
+        /// Sends adaptive card showing Horizontal Bar Stacked Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendHorizontalBarStackedChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardHorizontalBarStacked.json" };
-            var adaptiveCardHorizontalBarStackedChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardHorizontalBarStacked.json"));
 
-            var HorizontalBarStackedChartCardAttachment = new Attachment()
+            var horizontalBarStackedChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardHorizontalBarStackedChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return HorizontalBarStackedChartCardAttachment;
+            return horizontalBarStackedChartCardAttachment;
         }
 
         /// <summary>
-        /// Line Chart adaptive Card
-        /// Sends adaptive card showing Line Chart
+        /// Line Chart adaptive Card.
+        /// Sends adaptive card showing Line Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendLineChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardLineChart.json" };
-            var adaptiveCardLineChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardLineChart.json"));
 
-            var LineChartCardAttachment = new Attachment()
+            var lineChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardLineChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return LineChartCardAttachment;
+            return lineChartCardAttachment;
         }
 
         /// <summary>
-        /// Pie Chart adaptive Card
-        /// Sends adaptive card showing Pie Chart
+        /// Pie Chart adaptive Card.
+        /// Sends adaptive card showing Pie Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendPieChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardPieChart.json" };
-            var adaptiveCardPieChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardPieChart.json"));
 
-            var PieChartCardAttachment = new Attachment()
+            var pieChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardPieChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return PieChartCardAttachment;
+            return pieChartCardAttachment;
         }
 
         /// <summary>
-        /// Vertical Bar Chart adaptive Card
-        /// Sends adaptive card showing Vertical Bar Chart
+        /// Vertical Bar Chart adaptive Card.
+        /// Sends adaptive card showing Vertical Bar Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendVerticalBarChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardVerticalBarChart.json" };
-            var adaptiveCardVerticalBarChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardVerticalBarChart.json"));
 
-            var VerticalBarChartCardAttachment = new Attachment()
+            var verticalBarChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardVerticalBarChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return VerticalBarChartCardAttachment;
+            return verticalBarChartCardAttachment;
         }
 
         /// <summary>
-        /// Vertical Bar Grouped Chart adaptive Card
-        /// Sends adaptive card showing Vertical Bar Grouped Chart
+        /// Vertical Bar Grouped Chart adaptive Card.
+        /// Sends adaptive card showing Vertical Bar Grouped Chart.
         /// </summary>
-        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
+        /// <returns>Returns Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment SendVerticalBarGroupedChartCard()
         {
-            var paths = new[] { ".", "Resources", "adaptiveCardVerticalBarGroupedChart.json" };
-            var adaptiveCardVerticalBarGroupedChartJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(".", "Resources", "adaptiveCardVerticalBarGroupedChart.json"));
 
-            var VerticalBarGroupedChartCardAttachment = new Attachment()
+            var verticalBarGroupedChartCardAttachment = new Attachment
             {
-                ContentType = contentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardVerticalBarGroupedChartJson),
+                ContentType = ContentType,
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
 
-            return VerticalBarGroupedChartCardAttachment;
+            return verticalBarGroupedChartCardAttachment;
         }
     }
 }

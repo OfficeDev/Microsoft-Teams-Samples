@@ -79,11 +79,11 @@ const CaptureImage = () => {
         {capturedImage !== '' &&
           <div className="wrapper">
           
-          <div className="box2"> renderMainArea={() => (
+          <div className="box2">
               <Image                
                 src={"data:image/png;base64," + capturedImage}
               />
-            )}</div>          
+          </div>          
         </div>
         }
       </Card>

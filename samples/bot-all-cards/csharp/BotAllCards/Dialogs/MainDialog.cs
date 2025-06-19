@@ -16,12 +16,19 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.BotBuilderSamples
 {
+    /// <summary>
+    /// Main dialog for handling card selection and display.
+    /// </summary>
     public class MainDialog : ComponentDialog
     {
         protected string ConnectionName { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainDialog"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration instance.</param>
         public MainDialog(IConfiguration configuration)
-             : base(configuration["ConnectionName"])
+            : base(configuration["ConnectionName"])
         {
             ConnectionName = configuration["ConnectionName"];
 
@@ -29,25 +36,29 @@ namespace Microsoft.BotBuilderSamples
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                ShowAllCardAsync,
-                SelectCardAsync,
+                    ShowAllCardAsync,
+                    SelectCardAsync,
             }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        // 1. Prompts the user if the user is not in the middle of a dialog.
-        // 2. Re-prompts the user when an invalid input is received.
+        /// <summary>
+        /// Prompts the user to select a card.
+        /// </summary>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> ShowAllCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             // Create the PromptOptions which contain the prompt and re-prompt messages.
             // PromptOptions also contains the list of choices available to the user.
-            var options = new PromptOptions()
+            var options = new PromptOptions
             {
                 Prompt = MessageFactory.Text("What card would you like to see? You can click or type the card name"),
                 RetryPrompt = MessageFactory.Text("That was not a valid choice, please select a card or number from 1 to 9."),
-                Choices = lodingAllCards(),
+                Choices = LoadAllCards(),
             };
 
             // Prompt the user with the configured PromptOptions.
@@ -55,12 +66,11 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Send a Rich Card response to the user based on their choice.
+        /// Sends a Rich Card response to the user based on their choice.
         /// This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
         /// </summary>
-        /// <param name="stepContext"> Initializes a new instance of the <see cref="WaterfallStepContext"/> class.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects
-        /// or threads to receive notice of cancellation.</param>
+        /// <param name="stepContext">The waterfall step context.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> SelectCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
@@ -130,31 +140,22 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Load All Cards
+        /// Loads all card choices.
         /// </summary>
-        /// <returns></returns>
-        private IList<Choice> lodingAllCards()
+        /// <returns>A list of choices representing the available cards.</returns>
+        private IList<Choice> LoadAllCards()
         {
-            try
-            {
-                var returncardOptions = new List<Choice>()
+            return new List<Choice>
                 {
-                    new Choice() { Value = "Adaptive Card", Synonyms = new List<string>() { "adaptive" } },
-                    new Choice() { Value = "Hero Card", Synonyms = new List<string>() { "hero" } },
-                    new Choice() { Value = "OAuth Card", Synonyms = new List<string>() { "oauth" } },
-                    new Choice() { Value = "Signin Card", Synonyms = new List<string>() { "signin" } },
-                    new Choice() { Value = "Thumbnail Card", Synonyms = new List<string>() { "thumbnail", "thumb" } },
-                    new Choice() { Value = "List Cards", Synonyms = new List<string>() { "list" } },
-                    new Choice() { Value = "Collections Cards", Synonyms = new List<string>() { "collections" } },
-                    new Choice() { Value = "Connector Cards", Synonyms = new List<string>() { "office" } },
+                    new Choice { Value = "Adaptive Card", Synonyms = new List<string> { "adaptive" } },
+                    new Choice { Value = "Hero Card", Synonyms = new List<string> { "hero" } },
+                    new Choice { Value = "OAuth Card", Synonyms = new List<string> { "oauth" } },
+                    new Choice { Value = "Signin Card", Synonyms = new List<string> { "signin" } },
+                    new Choice { Value = "Thumbnail Card", Synonyms = new List<string> { "thumbnail", "thumb" } },
+                    new Choice { Value = "List Cards", Synonyms = new List<string> { "list" } },
+                    new Choice { Value = "Collections Cards", Synonyms = new List<string> { "collections" } },
+                    new Choice { Value = "Connector Cards", Synonyms = new List<string> { "office" } },
                 };
-
-                return returncardOptions;
-            }
-            catch (Exception Exc)
-            {
-                return null;
-            }
         }
     }
 }

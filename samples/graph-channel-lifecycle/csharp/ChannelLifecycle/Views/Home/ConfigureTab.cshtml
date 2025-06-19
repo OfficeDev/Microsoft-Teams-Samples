@@ -1,38 +1,38 @@
-﻿
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"></script>
+﻿<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 
     function onClick() {
-        microsoftTeams.settings.setValidityState(true);
-    }
+            microsoftTeams.settings.setValidityState(true);
+        }
 
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize().then(() => {
 
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-        var radios = document.getElementsByName('notificationType');
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName('notificationType');
 
-        microsoftTeams.settings.setSettings({
-            entityId: 'ChannelLifecycleDemo',
-            contentUrl: window.location.origin + "/Index?tenantId={tid}&groupId={groupId}&channelId={channelId}",
-            configName: 'ChannelLifecycleDemo'
+            microsoftTeams.settings.setSettings({
+                entityId: 'ChannelLifecycleDemo',
+                contentUrl: window.location.origin + "/Index?tenantId={tid}&groupId={groupId}&channelId={channelId}",
+                configName: 'ChannelLifecycleDemo'
+            });
+            saveEvent.notifySuccess();
         });
-        saveEvent.notifySuccess();
+    }).catch(error => {
+        console.error("Error initializing Microsoft Teams SDK:", error);
     });
 </script>
 <div class="col-md-8">
     <section id="configSection">
-
-
         <div id="divConfig">           
             <br />
             <form id="configForm">
                 <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Add Channel lifecycle tab
             </form>
         </div>
-
-
         <div id="divError" style="display: none"></div>
     </section>
 </div>

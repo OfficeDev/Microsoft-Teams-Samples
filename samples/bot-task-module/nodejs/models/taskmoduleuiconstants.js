@@ -4,6 +4,9 @@
 const { UISettings } = require('./uisettings');
 const { TaskModuleIds } = require('./taskmoduleids');
 
+/**
+ * TaskModuleUIConstants defines UI settings for different task modules in Microsoft Teams.
+ */
 const TaskModuleUIConstants = {
     YouTube: new UISettings(1000, 700, 'YouTube Video', TaskModuleIds.YouTube, 'YouTube'),
     CustomForm: new UISettings(510, 450, 'Custom Form', TaskModuleIds.CustomForm, 'Custom Form'),

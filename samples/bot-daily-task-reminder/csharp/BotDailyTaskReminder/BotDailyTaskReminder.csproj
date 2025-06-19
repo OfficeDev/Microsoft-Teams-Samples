@@ -10,7 +10,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.18.1" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
-    <PackageReference Include="Microsoft.Graph" Version="4.46.0" />
     <PackageReference Include="Quartz" Version="3.5.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
   </ItemGroup>

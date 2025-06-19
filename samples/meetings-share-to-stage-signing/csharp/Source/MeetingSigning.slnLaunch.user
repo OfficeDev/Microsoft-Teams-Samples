@@ -28,7 +28,7 @@
         "Action": "Start"
       },
       {
-        "Path": "TeamsApp\\TeamsApp.ttkproj",
+        "Path": "M365Agent\\M365Agent.ttkproj",
         "Action": "StartWithoutDebugging",
         "DebugTarget": "Microsoft Teams (browser)"
       }

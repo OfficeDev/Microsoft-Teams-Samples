@@ -36,7 +36,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - <a href="https://git-scm.com/" target="_blank">Install Git</a>
 - [Node.js and npm](https://nodejs.org). Run the command `node --version` to verify that Node.js is installed.
 - Set up a [Microsoft 365 developer account](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account), which allows app sideloading in Teams.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 ## Set up your app project
 
@@ -57,18 +57,18 @@ You can find the app source code in `./src`:
 - `assets`: Includes the app assets.
 
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -141,16 +141,13 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 ## Running the sample
 
 - Welcome Page
-![welcome-page ](Images/tabui-welcome.png)
+![welcome-page ](Images/1.Teams_Welcome.png)
 
 - Dashboard Page
-![dashboard-page ](Images/tabui-dashboard.png)
+![dashboard-page ](Images/2.Teams_Dashboard.png)
 
 - List Page
-![list-page ](Images/tabui-list.png)
-
-- Board Page
-![board-page ](Images/tabui-board.png)
+![list-page ](Images/3.Teams_List.png)
 
 ## Outlook on the web
 
@@ -160,11 +157,15 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 
 **On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](Images/4.Outlook_App.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![Outlook-Welcome](Images/5.Outlook_Welcome.png)
+
+![Outlook-Dashboard](Images/6.Outlook_Dashboard.png)
+
+![Outlook-List](Images/7.Outlook_List.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -176,12 +177,16 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 
 **Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](Images/8.Office_365_SelectApp.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![Office 365](Images/9.Office_365_Welcome.png) 
 
+![Office 365](Images/10.Office_365_Dashboard.png) 
+
+![Office 365](Images/11.Office_365_List.png)
+ 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Next steps

@@ -52,11 +52,11 @@ server.listen(port, () => {
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
 server.get('/customForm', (req, res, next) => {
-    res.render('./views/CustomForm')
+    res.render('./views/CustomForm');
 });
 
 server.get('/staticPage', (req, res, next) => {
-    res.render('./views/StaticPage')
+    res.render('./views/StaticPage');
 });
 
 server.get('*', (req, res) => {

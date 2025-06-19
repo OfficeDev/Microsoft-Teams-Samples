@@ -9,11 +9,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using Microsoft.Identity.Client;
 using ChannelLifecycle;
+using Microsoft.Kiota.Abstractions.Authentication;
+using System.Threading;
 
 namespace ChannelLifecycle.Controllers
 {
@@ -61,8 +64,16 @@ namespace ChannelLifecycle.Controllers
             string token = await GetToken(tenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
-            var appsInstalled = await graphClient.Teams[teamId].InstalledApps.Request().Expand("teamsAppDefinition").GetAsync();
-            var teamsAppId = appsInstalled.Where(o => o.TeamsAppDefinition.DisplayName == "Channel Lifecycle").Select(o => o.TeamsAppDefinition.TeamsAppId).FirstOrDefault();
+            var appsInstalled = await graphClient.Teams[teamId].InstalledApps
+                    .GetAsync(requestConfiguration =>
+                    {
+                        requestConfiguration.QueryParameters.Expand = new[] { "teamsAppDefinition" };
+                    });
+
+            var teamsAppId = appsInstalled.Value
+                .Where(o => o.TeamsAppDefinition.DisplayName == "Channel Lifecycle")
+                .Select(o => o.TeamsAppDefinition.TeamsAppId)
+                .FirstOrDefault();
 
             var teamsTab = new TeamsTab
             {
@@ -80,8 +91,7 @@ namespace ChannelLifecycle.Controllers
             };
 
             var result = await graphClient.Teams[teamId].Channels[channelId].Tabs
-                  .Request()
-                  .AddAsync(teamsTab);
+                  .PostAsync(teamsTab);
 
         }
 
@@ -98,10 +108,10 @@ namespace ChannelLifecycle.Controllers
             string token = await GetToken(tenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
-            var result = await graphClient.Teams[teamId].Channels.Request()
+            var result = await graphClient.Teams[teamId].Channels
                 .GetAsync();
 
-            return result.ToList();
+            return result.Value;
         }
 
         [HttpGet]
@@ -112,11 +122,10 @@ namespace ChannelLifecycle.Controllers
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
             var members = await graphClient.Teams[teamId].Members
-                 .Request()
                  .GetAsync();
 
             List<string> membersList = new List<string>();
-            foreach (var member in members)
+            foreach (var member in members.Value)
             {
                 membersList.Add(member.DisplayName);
             }
@@ -132,7 +141,6 @@ namespace ChannelLifecycle.Controllers
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
             var channel = await graphClient.Teams[teamId].Channels[channelId]
-                .Request()
                 .GetAsync();
 
             List<string> channelData = new List<string>();
@@ -157,8 +165,7 @@ namespace ChannelLifecycle.Controllers
             };
 
             var result = await graphClient.Teams[teamId].Channels
-                  .Request()
-                  .AddAsync(channel);
+                  .PostAsync(channel);
 
             return "Channel created";
         }
@@ -177,8 +184,7 @@ namespace ChannelLifecycle.Controllers
             };
 
             await graphClient.Teams[teamId].Channels[channelId]
-                    .Request()
-                    .UpdateAsync(channel);
+                    .PatchAsync(channel);
 
             return "Channel updated";
         }
@@ -191,7 +197,6 @@ namespace ChannelLifecycle.Controllers
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
             await graphClient.Teams[teamId].Channels[channelId]
-                .Request()
                 .DeleteAsync();
 
             return "Successfully deleted";
@@ -224,21 +229,29 @@ namespace ChannelLifecycle.Controllers
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         public GraphServiceClient GetAuthenticatedClient(string token)
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+            var tokenProvider = new SimpleAccessTokenProvider(token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
 
         /// <summary>

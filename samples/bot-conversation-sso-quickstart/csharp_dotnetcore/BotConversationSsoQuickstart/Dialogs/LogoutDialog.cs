@@ -12,8 +12,16 @@ using Microsoft.Bot.Schema;
 
 namespace Microsoft.BotBuilderSamples
 {
+    /// <summary>
+    /// A dialog that handles user logout.
+    /// </summary>
     public class LogoutDialog : ComponentDialog
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogoutDialog"/> class.
+        /// </summary>
+        /// <param name="id">The dialog ID.</param>
+        /// <param name="connectionName">The connection name configured in Azure Bot service.</param>
         public LogoutDialog(string id, string connectionName)
             : base(id)
         {
@@ -21,7 +29,7 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Configured connection name in Azure Bot service.
+        /// Gets the configured connection name in Azure Bot service.
         /// </summary>
         protected string ConnectionName { get; }
 
@@ -47,7 +55,7 @@ namespace Microsoft.BotBuilderSamples
         }
 
         /// <summary>
-        /// Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.
+        /// Called when the dialog is continued, where it is the active dialog and the user replies with a new activity.
         /// </summary>
         /// <param name="innerDc">The inner DialogContext for the current turn of conversation.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
@@ -70,7 +78,7 @@ namespace Microsoft.BotBuilderSamples
         /// </summary>
         /// <param name="innerDc">The inner DialogContext for the current turn of conversation.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns></returns>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task<DialogTurnResult> InterruptAsync(
             DialogContext innerDc,
             CancellationToken cancellationToken = default(CancellationToken))
@@ -80,14 +88,14 @@ namespace Microsoft.BotBuilderSamples
                 var text = innerDc.Context.Activity.Text.ToLowerInvariant();
 
                 // Allow logout anywhere in the command
-                if (text.IndexOf("logout") >= 0)
+                if (text.Contains("logout"))
                 {
                     // The UserTokenClient encapsulates the authentication processes.
                     var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
                     await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
 
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
-                    return await innerDc.CancelAllDialogsAsync(cancellationToken);                    
+                    return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }
 
