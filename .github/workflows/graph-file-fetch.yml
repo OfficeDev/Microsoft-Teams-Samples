@@ -16,7 +16,7 @@ on:
 env:
     #AZURE_WEBAPP_PATH is the project path
     #Web app name is your azure app service name.
-    AZURE_WEBAPP_PATH: 'samples/graph-file-fetch/js'
+    AZURE_WEBAPP_PATH: 'samples/graph-file-fetch/nodejs'
     AZURE_WEBAPP_NAME: 'graph-file-fetch'
 
 jobs:
