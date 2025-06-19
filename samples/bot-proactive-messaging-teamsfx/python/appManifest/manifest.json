@@ -10,8 +10,8 @@
         "termsOfUseUrl": "https://www.example.com/termsofuse"
     },
     "icons": {
-        "color": "resources/color.png",
-        "outline": "resources/outline.png"
+        "color": "color.png",
+        "outline": "outline.png"
     },
     "name": {
         "short": "${{CONFIG_APPNAME_SHORT}}",
@@ -61,6 +61,6 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-        "${{PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN}}"
+        "${{BOT_DOMAIN}}"
     ]
 }
