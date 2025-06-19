@@ -120,7 +120,7 @@ Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
 
 - To view your app in Outlook on the mobile.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/outlook1.jpg)
 
@@ -136,7 +136,7 @@ Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
 
 - To preview your app running in Office on the mobile.
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![Office1](Images/Office1.jpg)
 
