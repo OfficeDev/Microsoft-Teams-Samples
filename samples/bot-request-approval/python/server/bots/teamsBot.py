@@ -37,7 +37,6 @@ class TeamsBot(TeamsActivityHandler):
 
         # Handle Adaptive Card submit actions
         if activity.name == "adaptiveCard/action":
-            action = activity.value.get("action")  # Extract submitted action
             all_members = await TeamsInfo.get_members(turn_context)  # Get team members
             card = await adaptive_card.select_response_card(
                 turn_context, user, all_members  # Build response card based on user
