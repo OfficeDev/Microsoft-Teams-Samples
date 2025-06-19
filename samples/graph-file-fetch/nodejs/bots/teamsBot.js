@@ -3,7 +3,7 @@
 
 const { DialogBot } = require('./dialogBot');
 const { tokenExchangeOperationName } = require('botbuilder');
-const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
+const { SsoOAuthHelper } = require('../ssoOauthHelper');
 
 class TeamsBot extends DialogBot {
     /**
@@ -14,7 +14,7 @@ class TeamsBot extends DialogBot {
     */
     constructor(conversationState, userState, dialog) {
         super(conversationState, userState, dialog);
-        this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.connectionName, conversationState);
+        this._ssoOAuthHelper = new SsoOAuthHelper(process.env.connectionName, conversationState);
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;

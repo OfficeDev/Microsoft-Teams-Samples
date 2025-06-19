@@ -1,6 +1,6 @@
 const { StatusCodes, ActivityTypes, tokenExchangeOperationName } = require('botbuilder');
 
-class SsoOAuthHelpler {
+class SsoOAuthHelper {
     constructor(oAuthConnectName, storage) {
         this.oAuthConnectName = oAuthConnectName;
         this.storage = storage;
@@ -122,4 +122,4 @@ class SsoOAuthHelpler {
     }
 }
 
-exports.SsoOAuthHelpler = SsoOAuthHelpler;
+exports.SsoOAuthHelper = SsoOAuthHelper;
