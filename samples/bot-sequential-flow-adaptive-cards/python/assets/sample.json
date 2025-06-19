@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-python",
     "source": "officeDev",
     "title": "Sequential workflow adaptive cards",
-    "shortDescription": "Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.",
+    "shortDescription": "Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-sequential-flow-adaptive-cards/python",
     "longDescription": [
-      "Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot."
+      "Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot."
     ],
     "creationDateTime": "2025-05-06",
     "updateDateTime": "2025-05-06",

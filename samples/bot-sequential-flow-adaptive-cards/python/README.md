@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
+description: Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-card
 
 # Bot Sequential Flow Adaptive Cards
 
-Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
+Demonstrating on how to implement sequential flow, user specific view and up-to-date adaptive cards in bot.
 
 ## Key features
 
@@ -127,7 +127,7 @@ sequenceDiagram
     Teams User A->>+Teams Client: Enters create incident bot commands
     Sample App->>+Teams Client: loads card with option 
     Teams User A->>+Teams Client: Enters required details and assigns to user B
-    Sample App-->>Teams Client: Posts the incidet card with auto-refresh for user A and user B
+    Sample App-->>Teams Client: Posts the incidnet card with auto-refresh for user A and user B
     Teams Client->>Teams User A: loads incident card with loading indicator 
     Teams Client->>Sample App: Automatically invokes refresh action
     Sample App-->>Teams User A: Responds with Updated AC for the user A
@@ -223,11 +223,11 @@ You can also interact with this app using messaging extension action which allow
 
    ![just in time installation card](Images/10.ComposeExtensions_1.png)
 
-2. After successful installation, list of all incident will be available in messaging extension.
+2. After successful installation, list of all incidents will be available in messaging extension.
 
    ![incident list card](Images/10.ComposeExtensions_2.png).
    
-3. User can select any incident from the list and can share to that chat/team.
+3. Users can select any incident from the list and share it to that chat or team.
 
    ![image](Images/14.Approve_Reject.png)
 
