@@ -1,0 +1,19 @@
+.header-container {
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+
+.tab-container {
+  padding: 1rem;
+}
+
+.link-text {
+  margin-left: 0.3rem;
+}
+
+#contextJson {
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
