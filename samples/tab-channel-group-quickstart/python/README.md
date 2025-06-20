@@ -95,6 +95,37 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
+## SSL Certificate Setup (HTTPS)
+
+Teams integration requires HTTPS. The app automatically detects SSL certificates and runs in HTTPS mode if available.
+
+### Quick Setup Options:
+
+1. **Environment Variables:**
+   ```bash
+   SSL_CRT_FILE=/path/to/certificate.crt
+   SSL_KEY_FILE=/path/to/private.key
+   ```
+
+2. **Default Location:** Place certificates in `./certs/` directory:
+   ```
+   ./certs/localhost.crt
+   ./certs/localhost.key
+   ```
+
+3. **Generate Self-Signed (Development):**
+   ```bash
+   mkdir certs
+   openssl req -x509 -newkey rsa:2048 -keyout ./certs/localhost.key -out ./certs/localhost.crt -days 365 -nodes -subj "/CN=localhost"
+   ```
+
+4. **Teams Toolkit:** Copy existing certificates:
+   ```bash
+   cp ~/.fx/certificate/localhost.* ./certs/
+   ```
+
+**Note:** App falls back to HTTP mode if certificates not found.
+
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
 
@@ -117,7 +148,7 @@ Ensure you have the Python extension installed for Visual Studio Code from the m
 
 ![setuptab](Images/2.png)
 
-![Helloworld](Images/3.png)
+!(Images/3.png)
 
 
 ## Further Reading

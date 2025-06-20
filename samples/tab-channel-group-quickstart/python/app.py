@@ -50,9 +50,10 @@ def api_config():
         return jsonify({"success": True})
 
 if __name__ == "__main__":
-    # Get SSL configuration from environment
-    ssl_crt = os.getenv('SSL_CRT_FILE', 'C:/Users/v-yadavyash/.fx/certificate/localhost.crt')
-    ssl_key = os.getenv('SSL_KEY_FILE', 'C:/Users/v-yadavyash/.fx/certificate/localhost.key')
+    # Get SSL configuration from environment variables
+    # Default paths are relative to project root and work across different environments
+    ssl_crt = os.getenv('SSL_CRT_FILE', './certs/localhost.crt')
+    ssl_key = os.getenv('SSL_KEY_FILE', './certs/localhost.key')
     
     # Check if SSL certificates exist
     if os.path.exists(ssl_crt) and os.path.exists(ssl_key):
@@ -64,6 +65,8 @@ if __name__ == "__main__":
         app.run(host='0.0.0.0', port=3978, debug=True, ssl_context=(ssl_crt, ssl_key))
     else:
         print("SSL certificates not found, running with HTTP")
+        print(f"SSL certificates should be placed in './certs/' directory")
+        print(f"Expected files: {ssl_crt}, {ssl_key}")
         print(f"Access the app at: http://localhost:3978")
         # Run on port 3978 for Teams integration
         app.run(host='0.0.0.0', port=3978, debug=True)

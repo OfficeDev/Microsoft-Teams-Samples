@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:tab-device-permissions-python
+  sampleTag: Microsoft-Teams-Samples:tab-channel-group-quickstart-python
 
 environmentFolderPath: ./env
 
