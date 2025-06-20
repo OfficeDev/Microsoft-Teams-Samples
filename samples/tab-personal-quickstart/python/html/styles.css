@@ -1,0 +1,77 @@
+/* Combined CSS styles from App.css and index.css */
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App styles */
+.App {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Typography */
+h1 {
+  color: gray;
+}
+
+h2 {
+  font-size: .8em;
+}
+
+.PropName {
+  font-weight: bold;
+  color: #6264A7;
+}
+
+.Logo {
+  font-size: 45pt;
+  color: #6264A7;
+}
+
+.Error {
+  color: red;
+}
+
+/* Tab specific styles */
+#userName {
+  color: #6264A7;
+  font-weight: bold;
+}
