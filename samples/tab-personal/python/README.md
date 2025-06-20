@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-python
 
 ---
 
-# Personal Tab with ASP. NET Core MVC
+# Personal Tab with Python
 
 This sample application illustrates the process of building a custom personal tab in Microsoft Teams using Python. It provides a comprehensive guide on setting up the environment, configuring the app manifest, and deploying the app across Teams and Office platforms, enabling seamless integration and enhanced user experience.
 
