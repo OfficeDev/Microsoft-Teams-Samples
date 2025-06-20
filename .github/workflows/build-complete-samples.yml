@@ -1198,6 +1198,10 @@ jobs:
               name: 'tab-deeplink'
               version: '3.10.x'
 
+            - project_path: 'samples/bot-adaptivecards-user-specific-views/python'
+              name: 'bot-adaptivecards-user-specific-views'
+              version: '3.10.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:
