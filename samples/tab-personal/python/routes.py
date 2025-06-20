@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-import random
 from faker import Faker
 
 app = Flask(__name__)
