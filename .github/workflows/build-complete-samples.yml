@@ -564,10 +564,6 @@ jobs:
               name: 'bot-join-team-using-qr-code'
               version: '14.x'
 
-            - project_path: 'samples/bot-people-picker-adaptive-card/nodejs'
-              name: 'bot-people-picker-adaptive-card'
-              version: '14.x'
-
             - project_path: 'samples/bot-receive-channel-messages-withRSC/nodejs'
               name: 'bot-receive-channel-messages-withRSC'
               version: '14.x'
@@ -1200,6 +1196,118 @@ jobs:
 
             - project_path: 'samples/bot-adaptivecards-user-specific-views/python'
               name: 'bot-adaptivecards-user-specific-views'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-daily-task-reminder/python'
+              name: 'bot-daily-task-reminder'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-formatting-cards/python'
+              name: 'bot-formatting-cards'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-request-approval/python'
+              name: 'bot-request-approval'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/python'
+              name: 'bot-sequential-flow-adaptive-cards'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-channel-context/python'
+              name: 'tab-channel-context'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-channel-group-quickstart/python'
+              name: 'tab-channel-group-quickstart'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-people-picker/python'
+              name: 'tab-people-picker'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-personal-quickstart/python'
+              name: 'tab-personal-quickstart'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-product-inspection/python'
+              name: 'tab-product-inspection'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-stage-view/python'
+              name: 'tab-stage-view'
+              version: '3.10.x'
+
+            - project_path: 'samples/app-hello-world/python'
+              name: 'app-hello-world'
+              version: '3.10.x'
+
+            - project_path: 'samples/app-localization/python'
+              name: 'app-localization'
+              version: '3.10.x'
+
+            - project_path: 'samples/app-region-selection/python'
+              name: 'app-region-selection'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-adaptive-card-actions/python'
+              name: 'bot-adaptive-card-actions'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-auth0-adaptivecard/python'
+              name: 'bot-auth0-adaptivecard'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-commands-menu/python'
+              name: 'bot-commands-menu'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-configuration-app-auth/python'
+              name: 'bot-configuration-app-auth'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-conversation-quickstart/python'
+              name: 'bot-conversation-quickstart'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-feed-members/python'
+              name: 'bot-feed-members'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/python'
+              name: 'bot-people-picker-adaptive-card'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/python'
+              name: 'bot-receive-channel-messages-withRSC'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-suggested-actions/python'
+              name: 'bot-suggested-actions'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/python'
+              name: 'bot-type-ahead-search-adaptive-cards'
+              version: '3.10.x'
+
+            - project_path: 'samples/graph-proactive-installation/python'
+              name: 'graph-proactive-installation'
+              version: '3.10.x'
+
+            - project_path: 'samples/meetings-context-app/python'
+              name: 'meetings-context-app'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-action-quickstart/python'
+              name: 'msgext-action-quickstart'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-search-quickstart/python'
+              name: 'msgext-search-quickstart'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-device-permissions/python'
+              name: 'tab-device-permissions'
               version: '3.10.x'
 
       fail-fast: false
