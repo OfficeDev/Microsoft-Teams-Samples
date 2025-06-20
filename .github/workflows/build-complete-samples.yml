@@ -1325,3 +1325,11 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Mark Success
+        if: ${{ success() }}
+        run: ${{ matrix.name }} build succeeded."
+
+      - name: Mark Failure
+        if: ${{ failure() }}
+        run: ${{ matrix.name }} build failed."
