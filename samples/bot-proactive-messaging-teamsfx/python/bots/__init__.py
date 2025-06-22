@@ -1,3 +1,3 @@
-from .teams_Bot import TeamsBot
+from .bot_Procative_Message import BotProactiveMessageTeamsFx
 
-__all__ = ["TeamsBot"]
+__all__ = ["BotProactiveMessageTeamsFx"]

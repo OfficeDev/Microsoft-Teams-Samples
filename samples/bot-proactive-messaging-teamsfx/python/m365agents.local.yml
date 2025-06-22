@@ -75,7 +75,4 @@ deploy:
         MicrosoftAppId: ${{BOT_ID}}
         MicrosoftAppPassword: ${{SECRET_BOT_PASSWORD}}
         MicrosoftAppType: "Multitenant"
-        INITIATE_LOGIN_ENDPOINT: ${{BOT_ENDPOINT}}/auth-start.html
-        M365_APPLICATION_ID_URI: api://botid-${{BOT_ID}}
-        BOT_ID: ${{BOT_ID}}
-        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        BaseUrl: ${{BOT_ENDPOINT}}

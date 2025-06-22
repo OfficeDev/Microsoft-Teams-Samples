@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-message-reaction-python
+  sampleTag: Microsoft-Teams-Samples:bot-proactive-messaging-teamsfx
 
 environmentFolderPath: ./env
 
@@ -12,7 +12,7 @@ environmentFolderPath: ./env
 provision:
   - uses: teamsApp/create # Creates a Teams app
     with:
-      name: bot-message-reaction-python${{APP_NAME_SUFFIX}} # Teams app name
+      name: bot-proactive-messaging-teamsfx${{APP_NAME_SUFFIX}} # Teams app name
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       teamsAppId: TEAMS_APP_ID
@@ -79,4 +79,3 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 9bf193d2-73ae-4475-9045-240b8a0ebec7

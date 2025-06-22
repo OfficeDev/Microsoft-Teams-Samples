@@ -4,12 +4,12 @@
     "source": "officeDev",
     "title": "Proactive Messaging",
     "shortDescription": "This bot sends proactive reminders by saving conversation references in Teams.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging-teamsfx",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging-teamsfx/python",
     "longDescription": [
       "This bot sample demonstrates proactive messaging in Microsoft Teams by storing conversation references for sending reminder notifications. It includes guidance for local debugging, deployment to Azure, and integration with Microsoft 365 Agents Toolkit."
     ],
-    "creationDateTime": "2022-03-06",
-    "updateDateTime": "2024-10-10",
+    "creationDateTime": "2025-21-06",
+    "updateDateTime": "2025-21-06",
     "products": [
       "Teams",
       "Microsoft 365 Agents Toolkit"
@@ -21,7 +21,7 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "python"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -32,7 +32,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main//samples/bot-proactive-messaging-teamsfx/images/thumbnail.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main//samples/bot-proactive-messaging-teamsfx/python/images/Proactive_Messaging_TeamsFx.gif",
         "alt": "Proactive Messaging"
       }
     ],

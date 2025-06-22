@@ -1,33 +1,6 @@
----
-page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- Python
-extensions:
- contentType: samples
- createdDate: "2024-12-12"
-urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-Python
----
+# How to use this Proactive message bots app
 
-# Teams Message Reactions Bot Python Sample
-
-This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes.
-
-## Included Features
-* Bots
-* Message Reactions
-
-## Interaction with bot
- ![Message Reaction](Images/MessageReactions.gif)
-
- ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your Teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Teams Message Reactions Bot:** [Manifest](/samples/bot-message-reaction/csharp/demo-manifest/bot-message-reaction.zip)
+This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Microsoft 365 Agents Toolkit for streamlined setup and testing.
 
 ## Prerequisites
 
@@ -84,7 +57,7 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, navigate to `samples/bot-message-reaction/Python`
+3) In a terminal, navigate to `samples/bot-proactive-messaging-teamsfx/python`
 
 4) Activate your desired virtual environment
 
@@ -93,7 +66,7 @@ the Teams service needs to call into the bot.
 6) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
@@ -101,33 +74,25 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
+This sample provides following functionality:
 
-- **App Installation:**
-![App Installation ](Images/1.InstallApp.png)
+- You can send any command to bot to get the same message echoed back.
 
-- **Personal Scope Interactions:**
-![personalScope-AddApp ](Images/2.PersonalScope_Echo_Bot.png)
+- You can navigate to http://localhost:3978/api/notify to proactively message everyone who has previously messaged this bot.
 
-![personalScope-AddApp ](Images/3.PersonalScope_AddedLikeToHelloMsg.png)
+  ![App Installation](Images/1.Install_App.png)
 
-![personalScope-Interaction ](Images/4.PersonalScope_AddedSurpriseToWelcomeMsg.png)
+  ![Open_In_Personal_Scope](Images/2.Open_In_Personal_Scope.png)
 
-- **Group Chat Scope Interactions:**
-![groupChat-Interaction ](Images/5.GroupChat-EchoBot.png)
+  ![Welcome_Page](Images/3.Welcome_Page.png)
 
-![groupChat-Interaction ](Images/6.GroupChat_LikeReaction.png)
+  ![Welcome_Message](Images/4.Welcome_Message.png)
 
-![groupChat-Interaction ](Images/7.GroupChat_Like_Angry_Reaction.png)
+  ![Proactive_API_Notify](Images/5.Proactive_API_Notify.png)
 
-![groupChat-Interaction ](Images/8.Remove_Reaction_Notification.png)
+  ![Proactive_Notify](Images/6.Proactive_Notify_2.png)
 
-- **Team Scope Interactions:**
-![Team-Interaction ](Images/9.Install_To_Teams.png)
-
-![Team-Interaction ](Images/10.Teams_EchoBot.png)
-
-![Team-Interaction ](Images/11.Teams_AddedHeartToMsg.png)
+  ![Practive_Hello_Message](Images/7.Practive_Hello_Message.png)
 
 ## Deploy the bot to Azure
 
@@ -135,11 +100,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
+- [Bots in Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots)
+- [Proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages?tabs=dotnet)
+- [Step by step guide to send proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/sbs-send-proactive)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-message-reaction-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-teamsfx-Python" />
