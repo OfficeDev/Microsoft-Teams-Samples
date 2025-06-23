@@ -1,0 +1,17 @@
+{
+    "servers": {
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ]
+        },
+        "local-tools": {
+            "command": "node",
+            "args": [
+                "tools/mcp-server.js"
+            ]
+        }
+    }
+}
