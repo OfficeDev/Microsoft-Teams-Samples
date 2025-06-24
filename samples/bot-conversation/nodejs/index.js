@@ -8,7 +8,7 @@
 // @tech-stack: nodejs, teams, bot-framework
 // @analysis-type: code-quality, test-coverage
 
-// Import required pckages
+// Import required packages
 const path = require('path');
 
 // Read botFilePath and botFileSecret from .env file.
