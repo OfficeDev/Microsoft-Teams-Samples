@@ -20,6 +20,18 @@ Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversatio
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
+## 🤖 GitHub Copilot Agent Mode
+
+This sample is optimized for use with GitHub Copilot Agents and supports vibe coding workflows.
+
+- Follow the coding style and guidelines described in `.github/copilot-instructions.md`.
+- Use the stepwise development plan in `sample-plan.md` for modular feature delivery.
+- Run the bot locally with `npm start`.
+- Lint and test with `npm run lint` and `npm test`.
+- Use provided issue templates to create scoped tasks for Copilot Agents.
+
+Agents can use CLI scripts and config files to help automate testing, linting, and deployment.
+
 ## Included Features
 * Bots
 * Adaptive Cards
