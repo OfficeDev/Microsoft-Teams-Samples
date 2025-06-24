@@ -1,19 +1,7 @@
 {
     "name": "teams-bot",
     "version": "1.0.0",
-    "description": "Microsoft Teams bot built with Node.js that uses Adaptive Cards to interact in personal and channel scopes.Bot Builder v4 Bot Teams sample",
-    "keywords": [
-        "microsoft-teams",
-        "adaptive-cards",
-        "nodejs",
-        "botframework",
-        "teams-bot",
-        "chatbot",
-        "workflow",
-        "automation",
-        "office365",
-        "copilot-ready"
-    ],
+    "description": "Bot Builder v4 Bot Teams sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
