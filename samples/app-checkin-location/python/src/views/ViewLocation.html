@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Location</title>
+
+    <script src="https://res.cdn.office.net/teams-js/2.18.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-g8DoRkiR0ECQ9rwKIgY8GjQ5h0d2jp1347CmU/IRlyUHPjJZiFWEOYc+hFtT9MGL"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .submitClick {
+            margin: 5rem;
+            margin-left: 0rem;
+        }
+    </style>
+
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            viewLocation();
+        });
+
+        function viewLocation() {
+            const params = new URLSearchParams(window.location.search);
+            const latitude = params.get('latitude');
+            const longitude = params.get('longitude');
+
+            if (!latitude || !longitude) {
+                alert("Please ensure that all necessary access has been granted.");
+                return;
+            }
+
+            const location = {
+                latitude: parseFloat(latitude),
+                longitude: parseFloat(longitude)
+            };
+
+            if (microsoftTeams.location && microsoftTeams.location.isSupported()) {
+                microsoftTeams.location.showLocation(location, (error, result) => {
+                    if (error) {
+                        let errorMessage = "Error";
+                        if (error.message) {
+                            errorMessage = `Error Code: ${error.errorCode}, Message: ${error.message}`;
+                        } else {
+                            errorMessage = `Error Code: ${error.errorCode}`;
+                        }
+                        alert(errorMessage);
+                        return;
+                    }
+                });
+            } else {
+                showMap(latitude, longitude);
+            }
+        }
+
+        function showMap(latitude, longitude) {
+            const latlong = latitude + "," + longitude;
+            const mapLink = "https://maps.google.com?q=" + latlong;
+
+            document.getElementById("map").innerHTML =
+                "Latitude: " + latitude + ", Longitude: " + longitude +
+                "<br /><a target='_blank' href='" + mapLink + "'>Click here to view location</a>";
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel" id="map">
+        </div>
+    </div>
+</body>
+
+</html>
