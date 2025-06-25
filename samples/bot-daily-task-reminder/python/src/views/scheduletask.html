@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .container {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+    </style>
+
+    <script>
+        microsoftTeams.app.initialize();
+
+        //Function to validate and submit the task details.
+        function submit() {
+            let isValid = true;
+            const checkboxArray = [];
+
+            $('#taskTitle, #taskdatetime, #taskdescription').each(function () {
+                if ($.trim($(this).val()) === '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                } else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
+
+            if (!isValid) {
+                return false;
+            }
+
+            $('input[type=checkbox]').each(function () {
+                if (this.checked) {
+                    checkboxArray.push($(this).val());
+                }
+            });
+
+            const taskInfo = {
+                title: $('#taskTitle').val(),
+                dateTime: $('#taskdatetime').val(),
+                description: $('#taskdescription').val(),
+                selectedDays: checkboxArray,
+            };
+
+            microsoftTeams.dialog.url.submit(taskInfo);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="container">
+                <label for="taskTitle" class="title">Task title</label>
+                <br>
+                <input type="text" id="taskTitle" name="taskTitle">
+                <br /><br />
+                <label for="taskdescription" class="description">Task description</label>
+                <br>
+                <input type="text" id="taskdescription" name="taskdescription">
+                <br /><br />
+                <label for="taskdatetime">Date and time</label>
+                <br />
+                <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br /><br />
+                <span>Please select days to be repeated</span>
+                <br /><br />
+                <input type="checkbox" id="monday" name="monday" value="MON">
+                <label for="monday">Monday</label><br>
+                <input type="checkbox" id="tuesday" name="tuesday" value="TUE">
+                <label for="tuesday">Tuesday</label><br>
+                <input type="checkbox" id="wednesday" name="wednesday" value="WED">
+                <label for="wednesday">Wednesday</label><br>
+                <input type="checkbox" id="thursday" name="thursday" value="THU">
+                <label for="thursday">Thursday</label><br>
+                <input type="checkbox" id="friday" name="friday" value="FRI">
+                <label for="friday">Friday</label><br>
+                <input type="checkbox" id="saturday" name="saturday" value="SAT">
+                <label for="saturday">Saturday</label><br>
+                <input type="checkbox" id="sunday" name="sunday" value="SUN">
+                <label for="sunday">Sunday</label><br>
+                <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

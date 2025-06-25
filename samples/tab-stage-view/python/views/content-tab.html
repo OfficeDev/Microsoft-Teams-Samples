@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+          crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="text-center">
+      <h1 class="display-4">Tab in Stage View</h1>
+      <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+      <button id="closeStageViewButton" class="btn btn-primary" onclick="closeStageView()">Close Stage View</button>
+  </div>
+
+  <script>
+      microsoftTeams.app.initialize();
+      function closeStageView() {
+          microsoftTeams.stageView.self.close().then(() => {
+              console.log("Stage view closed successfully.");
+          }).catch((error) => {
+              console.error("Error closing stage view:", error);
+          });
+      }
+  </script>
+</body>
+</html>

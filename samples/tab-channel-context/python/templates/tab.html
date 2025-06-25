@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teams Tab</title>
+  <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+  <script type="module" src="{{ url_for('static', filename='js/tab.js') }}"></script>
+</head>
+
+<body>
+  <div class="tab-container">
+    <div class="header-container">
+      <h2 id="tabHeader">Loading...</h2>
+    </div>
+
+    <p>
+      Click on the URL to know more details about the context object.
+    </p>
+
+    <a id="tabLink" href="#" target="_blank" rel="noopener noreferrer">
+      Microsoft Teams Context Object
+    </a>
+
+    <div id="contextJson" style="margin-top: 1rem;"></div>
+  </div>
+</body>
+</html>
