@@ -27,6 +27,18 @@ This sample demonstrates the concept of Retrieval Augmented Generation (RAG).
 
 > **Note:** This is a Custom API application, you can consume/call this API from any other applications.
 
+## GitHub Copilot Agent Mode
+
+This sample is optimized for use with GitHub Copilot Agents and supports AI-assisted development workflows.
+
+- Follow the coding style and guidelines described in `.github/copilot-instructions.md`.
+- Use the comprehensive documentation and examples for vector search implementation.
+- Run the application locally with `npm start`.
+- Test the semantic search functionality through the web interface.
+- Use provided configuration templates to set up Azure services.
+
+Agents can leverage the vector search patterns, embedding generation code, and Azure integration examples to build similar semantic search solutions.
+
 ## Included Features
 * **Blob-based Event Subscription:** Enables event-driven actions based on changes or updates to Azure Blob Storage.
 * **Azure Open AI Embeddings:** Utilizes OpenAI embeddings for enhanced understanding and representation of textual content.

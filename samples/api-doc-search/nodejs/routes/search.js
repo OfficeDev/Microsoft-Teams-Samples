@@ -4,6 +4,11 @@
 // search.js is used to perform vector search on the documents stored in Cosmos DB.
 // </copyright>
 
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, azure-openai, cosmosdb, vector-search
+// @analysis-type: semantic-search, embeddings, document-retrieval
+
 var express = require('express');
 var router = express.Router();
 

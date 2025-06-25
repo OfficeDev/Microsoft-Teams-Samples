@@ -18,6 +18,19 @@ This sample app demonstrates user search functionality powered by Azure Open AI 
 
 This bot has been created using [Bot Builder](https://www.npmjs.com/package/botbuilder) and [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-v4?view=msteams-client-js-latest&pivots=visual-studio-code). 
 
+## GitHub Copilot Agent Mode
+
+This sample is optimized for use with GitHub Copilot Agents and supports AI-assisted development workflows.
+
+- Follow the coding style and guidelines described in `.github/copilot-instructions.md`.
+- Use the comprehensive Bot Framework and AI integration patterns.
+- Run the bot locally with `npm start` after configuring Azure services.
+- Test AI-powered search functionality through Teams conversations.
+- Use provided Azure deployment templates and configuration examples.
+- Lint and test with standard Node.js tools.
+
+Agents can leverage the enterprise search patterns, vector database integration, and conversational AI examples to build similar intelligent bot solutions. 
+
 ## Included Features
 * Bots
 * Adaptive Cards

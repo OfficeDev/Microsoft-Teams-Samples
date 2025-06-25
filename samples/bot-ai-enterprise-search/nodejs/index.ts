@@ -1,3 +1,8 @@
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: typescript, bot-framework, azure-openai, redis, vector-search
+// @analysis-type: enterprise-search, semantic-retrieval, ai-integration
+
 // Import required packages
 import * as restify from "restify";
 

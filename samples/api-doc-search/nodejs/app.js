@@ -1,3 +1,8 @@
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, express, azure-openai, cosmosdb
+// @analysis-type: document-search, vector-similarity, semantic-search
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
