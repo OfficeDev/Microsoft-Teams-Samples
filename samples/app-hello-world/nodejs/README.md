@@ -38,7 +38,7 @@ copilot:
     - error-handling-best-practices
 ---
 
-# Microsoft Teams Hello World Bot - GitHub Copilot Agent Optimized
+# Microsoft Teams hello world sample app.
 
 A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams platform features including **tabs**, **bots**, and **messaging extensions**. This sample has been **optimized for GitHub Copilot Agent development** with enhanced code structure, comprehensive documentation, and modern development patterns.
 
