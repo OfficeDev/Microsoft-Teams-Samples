@@ -24,6 +24,7 @@ from bots import AuthBot
 # Create the loop and Flask app
 from config import DefaultConfig
 from dialogs import MainDialog
+from botbuilder.schema import InvokeResponse
 
 CONFIG = DefaultConfig()
 
@@ -77,19 +78,25 @@ BOT = AuthBot(CONVERSATION_STATE, USER_STATE, DIALOG)
 
 
 # Listen for incoming requests on /api/messages.
+
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
+    if "application/json" not in req.headers.get("Content-Type", ""):
         return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
 
+    body = await req.json()
     activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
+    auth_header = req.headers.get("Authorization", "")
 
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if response:
-        return json_response(data=response.body, status=response.status)
+    invoke_response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+
+    # Safe return for InvokeResponse (Teams auth/tokenExchange/etc.)
+    if isinstance(invoke_response, InvokeResponse):
+        if isinstance(invoke_response.body, dict):
+            return web.json_response(status=invoke_response.status, data=invoke_response.body)
+        else:
+            # Avoid trying to serialize non-JSONable bodies like TokenExchangeInvokeResponse
+            return Response(status=invoke_response.status)
+
     return Response(status=HTTPStatus.OK)
 
 

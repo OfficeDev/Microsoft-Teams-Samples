@@ -87,6 +87,7 @@ class MainDialog(LogoutDialog):
         self, step_context: WaterfallStepContext
     ) -> DialogTurnResult:
         if step_context.result:
+            print("🔐 Token received:", step_context.result.token)
             await step_context.context.send_activity(
                 f"Here is your token {step_context.result.token}"
             )

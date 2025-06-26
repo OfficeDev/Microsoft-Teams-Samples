@@ -2,13 +2,10 @@
 # Licensed under the MIT License.
 
 from typing import List
-from botbuilder.core import (
-    ConversationState,
-    UserState,
-    TurnContext,
-)
+from http import HTTPStatus
+from botbuilder.core import TurnContext, ConversationState, UserState
 from botbuilder.dialogs import Dialog
-from botbuilder.schema import ChannelAccount
+from botbuilder.schema import ChannelAccount, InvokeResponse
 
 from helpers.dialog_helper import DialogHelper
 from .dialog_bot import DialogBot
@@ -23,22 +20,34 @@ class AuthBot(DialogBot):
     ):
         super(AuthBot, self).__init__(conversation_state, user_state, dialog)
 
+    # Welcome new members (equivalent to handleMembersAdded)
     async def on_members_added_activity(
         self, members_added: List[ChannelAccount], turn_context: TurnContext
     ):
         for member in members_added:
-            # Greet anyone that was not the target (recipient) of this message.
-            # To learn more about Adaptive Cards, see https://aka.ms/msbot-adaptivecards for more details.
             if member.id != turn_context.activity.recipient.id:
                 await turn_context.send_activity(
                     "Welcome to AuthenticationBot. Type anything to get logged in. Type "
                     "'logout' to sign-out."
                 )
 
+    # Handle 'signin/verifyState' (equivalent to handleTeamsSigninVerifyState)
     async def on_token_response_event(self, turn_context: TurnContext):
-        # Run the Dialog with the new Token Response Event Activity.
+        print("🔑 Handling signin/verifyState")
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
-            self.conversation_state.create_property("DialogState"),
+            self.dialog_state  # ✅ Use stored dialog state
+            #self.conversation_state.create_property("DialogState"),
         )
+
+    # Handle 'signin/tokenExchange' (equivalent to handleTeamsSigninTokenExchange)
+    async def on_teams_signin_token_exchange(self, turn_context: TurnContext):
+        print("🔄 Handling signin/tokenExchange")
+        await DialogHelper.run_dialog(
+            self.dialog,
+            turn_context,
+            self.dialog_state  # ✅ Use stored dialog state
+            #self.conversation_state.create_property("DialogState"),
+        )
+        return InvokeResponse(status=HTTPStatus.OK)
