@@ -5,7 +5,7 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.
 -->
 
-## 🎯 Project Overview
+## Project Overview
 This Microsoft Teams Hello World Bot sample is optimized for GitHub Copilot Agent development, providing comprehensive examples of:
 - Teams bot development patterns
 - Messaging extension implementation
@@ -13,7 +13,7 @@ This Microsoft Teams Hello World Bot sample is optimized for GitHub Copilot Agen
 - Error handling and state management
 - Modern JavaScript/Node.js best practices
 
-## 🤖 Copilot Integration Points
+## Copilot Integration Points
 
 ### Code Generation Assistance
 - **Bot Message Handlers**: Use existing patterns in `src/bot/teams-echo-bot.js`
@@ -34,13 +34,13 @@ This Microsoft Teams Hello World Bot sample is optimized for GitHub Copilot Agen
 - Modular file organization with clear separation of concerns
 - Environment-based configuration management
 
-## 📚 Documentation Standards
+## Documentation Standards
 - All classes must extend appropriate base classes (TeamsActivityHandler)
 - All public methods require JSDoc with @param, @returns, and @example
 - Error handling must include logging and user feedback
 - Configuration should be externalized and validated
 
-## 🔧 Development Commands
+## Development Commands
 ```bash
 npm run dev          # Start development server with hot reload
 npm run start:prod   # Start production server
@@ -49,7 +49,7 @@ npm run test:unit    # Run unit tests
 npm run validate     # Run full validation suite
 ```
 
-## 🎪 Common Use Cases
+## Common Use Cases
 - Creating new bot command handlers
 - Adding messaging extension commands
 - Implementing custom tab functionality
