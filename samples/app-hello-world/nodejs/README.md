@@ -2,19 +2,45 @@
 page_type: sample
 products:
 - office-365
+- microsoft-teams
 languages:
 - javascript
-title: Microsoft Teams NodeJS Helloworld Sample
-description: Explore a comprehensive Microsoft Teams hello world sample app built with Node.js, demonstrating key features such as tabs, bots, and messaging extensions.
+- nodejs
+technologies:
+- botframework
+- teams-platform
+- messaging-extensions
+- teams-tabs
+title: Microsoft Teams Hello World Bot - Copilot Agent Optimized
+description: A comprehensive Microsoft Teams hello world bot sample optimized for GitHub Copilot Agent development, featuring advanced bot functionality, tabs, and messaging extensions with modern JavaScript patterns.
 extensions:
   contentType: samples
+  technologies:
+    - Microsoft Teams Platform
+    - Bot Framework v4
+    - Node.js
+    - Restify
+    - GitHub Copilot Agent
   createdDate: 10/19/2022 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
+  updatedDate: 06/26/2025 12:00:00 PM
+urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs-copilot-optimized
+copilot:
+  optimized: true
+  agent_patterns:
+    - teams-bot-development
+    - conversational-ai
+    - messaging-extensions
+    - teams-tabs
+  useCases:
+    - echo-bot-implementation
+    - teams-integration-patterns
+    - bot-state-management
+    - error-handling-best-practices
 ---
 
 # Microsoft Teams hello world sample app.
 
-- This Hello World sample app showcases the fundamental features of Microsoft Teams, including tabs, bots, and messaging extensions, all built with Node.js.
+A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams platform features including **tabs**, **bots**, and **messaging extensions**. This sample has been **optimized for GitHub Copilot Agent development** with enhanced code structure, comprehensive documentation, and modern development patterns.
 
 ## Included Features
 * Tabs
@@ -54,6 +80,74 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## GitHub Copilot Agent Mode
+
+This sample is optimized for GitHub Copilot Agent development with:
+
+- **Teams-first development patterns** prioritized over generic Bot Framework
+- **Enhanced discoverability** through project structure and documentation
+- **Copilot-specific guidance** in `.github/copilot-instructions.md`
+- **Development patterns** and examples in `.copilot/` directory
+
+### Quick Start with Copilot
+1. Use Copilot prompts for Teams bot development
+2. Reference `.copilot/prompts/hello-world.md` for common patterns
+3. Follow Teams-specific coding standards in development guidelines
+
+## Features & Capabilities
+
+### Core Microsoft Teams Integration
+- **Echo Bot Functionality** - Intelligent message processing with context awareness
+- **Teams Tabs** - Static and configurable tab experiences  
+- **Messaging Extensions** - Search-based extensions with dynamic card generation
+- **State Management** - Conversation state with proper error handling
+- **Teams Activity Handler** - Full Teams platform integration
+
+### GitHub Copilot Agent Optimizations
+- **Enhanced Code Discoverability** - Semantic naming and modular architecture
+- **Comprehensive JSDoc** - Detailed inline documentation for better AI understanding
+- **Modular File Structure** - Clean separation of concerns for easy code navigation
+- **Agent-Friendly Patterns** - Code patterns optimized for AI assistance and generation
+- **Copilot Prompts** - Pre-configured prompts and instructions in `.copilot/` directory
+
+## Architecture & Code Structure
+
+```
+src/
+├── app.js                         # Main application entry point
+├── bot.js                         # Bot functionality and handlers
+├── tabs.js                        # Teams tab management and routing
+├── message-extension.js           # Messaging extension components
+├── static/                        # Static assets and content
+└── views/                         # HTML templates for tabs
+
+.copilot/                          # Copilot Agent optimization
+├── prompts/                       # Copilot-specific prompts
+│   └── hello-world.md            # Development guidance and patterns
+└── instructions/                  # Development guidelines
+    ├── development-guidelines.md  # Coding standards and best practices
+    └── agent-patterns.md         # Advanced agent development patterns
+
+.github/                           # GitHub integration
+└── copilot-instructions.md       # Teams-first development guidance
+```
+
+## Development Environment & Prerequisites
+
+### Prerequisites
+- **Microsoft Teams** account (not guest account)
+- **Node.js 16.14.2+** for development
+- **Dev tunnel** or **ngrok** for local testing
+- **M365 developer account** or Teams account with app upload permissions
+- **Microsoft 365 Agents Toolkit for VS Code** (recommended)
+
+### GitHub Copilot Integration
+This sample is **optimized for GitHub Copilot Agent Mode** with:
+- **`.github/copilot-instructions.md`** - Teams-first development guidance
+- **`.copilot/` directory** - Agent-specific prompts and patterns
+- **Comprehensive JSDoc** - Rich context for AI assistance
+- **Teams-specific patterns** - Prioritized over generic Bot Framework
 
 ## Run the app (Manually Uploading to Teams)
 
