@@ -38,11 +38,16 @@ copilot:
     - error-handling-best-practices
 ---
 
-# Microsoft Teams Hello World Bot - GitHub Copilot Agent Optimized 🤖
+# Microsoft Teams Hello World Bot - GitHub Copilot Agent Optimized
 
 A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams platform features including **tabs**, **bots**, and **messaging extensions**. This sample has been **optimized for GitHub Copilot Agent development** with enhanced code structure, comprehensive documentation, and modern development patterns.
 
-## 🤖 GitHub Copilot Agent Mode
+## Included Features
+* Tabs
+* Bots
+* Messaging Extensions
+
+## GitHub Copilot Agent Mode
 
 This sample is optimized for GitHub Copilot Agent development with:
 
@@ -56,61 +61,61 @@ This sample is optimized for GitHub Copilot Agent development with:
 2. Reference `.copilot/prompts/hello-world.md` for common patterns
 3. Follow Teams-specific coding standards in development guidelines
 
-## 🚀 Features & Capabilities
+## Features & Capabilities
 
 ### Core Microsoft Teams Integration
-- ✅ **Echo Bot Functionality** - Intelligent message processing with context awareness
-- ✅ **Teams Tabs** - Static and configurable tab experiences  
-- ✅ **Messaging Extensions** - Search-based extensions with dynamic card generation
-- ✅ **State Management** - Conversation state with proper error handling
-- ✅ **Teams Activity Handler** - Full Teams platform integration
+- **Echo Bot Functionality** - Intelligent message processing with context awareness
+- **Teams Tabs** - Static and configurable tab experiences  
+- **Messaging Extensions** - Search-based extensions with dynamic card generation
+- **State Management** - Conversation state with proper error handling
+- **Teams Activity Handler** - Full Teams platform integration
 
 ### GitHub Copilot Agent Optimizations
-- 🎯 **Enhanced Code Discoverability** - Semantic naming and modular architecture
-- 📚 **Comprehensive JSDoc** - Detailed inline documentation for better AI understanding
-- 🔧 **Modular File Structure** - Clean separation of concerns for easy code navigation
-- 🤖 **Agent-Friendly Patterns** - Code patterns optimized for AI assistance and generation
-- 📋 **Copilot Prompts** - Pre-configured prompts and instructions in `.copilot/` directory
+- **Enhanced Code Discoverability** - Semantic naming and modular architecture
+- **Comprehensive JSDoc** - Detailed inline documentation for better AI understanding
+- **Modular File Structure** - Clean separation of concerns for easy code navigation
+- **Agent-Friendly Patterns** - Code patterns optimized for AI assistance and generation
+- **Copilot Prompts** - Pre-configured prompts and instructions in `.copilot/` directory
 
-## 🏗️ Architecture & Code Structure
+## Architecture & Code Structure
 
 ```
 src/
-├── app.js                         # 🚀 Main application entry point
-├── bot.js                         # 🤖 Bot functionality and handlers
-├── tabs.js                        # 📑 Teams tab management and routing
-├── message-extension.js           # 💬 Messaging extension components
-├── static/                        # 🎨 Static assets and content
-└── views/                         # 📄 HTML templates for tabs
+├── app.js                         # Main application entry point
+├── bot.js                         # Bot functionality and handlers
+├── tabs.js                        # Teams tab management and routing
+├── message-extension.js           # Messaging extension components
+├── static/                        # Static assets and content
+└── views/                         # HTML templates for tabs
 
-.copilot/                          # 🧠 Copilot Agent optimization
-├── prompts/                       # 📝 Copilot-specific prompts
+.copilot/                          # Copilot Agent optimization
+├── prompts/                       # Copilot-specific prompts
 │   └── hello-world.md            # Development guidance and patterns
-└── instructions/                  # 📖 Development guidelines
+└── instructions/                  # Development guidelines
     ├── development-guidelines.md  # Coding standards and best practices
     └── agent-patterns.md         # Advanced agent development patterns
 
-.github/                           # 🔧 GitHub integration
+.github/                           # GitHub integration
 └── copilot-instructions.md       # Teams-first development guidance
 ```
 
-## 💻 Development Environment & Prerequisites
+## Development Environment & Prerequisites
 
 ### Prerequisites
-- ✅ **Microsoft Teams** account (not guest account)
-- ✅ **Node.js 16.14.2+** for development
-- ✅ **Dev tunnel** or **ngrok** for local testing
-- ✅ **M365 developer account** or Teams account with app upload permissions
-- ✅ **Microsoft 365 Agents Toolkit for VS Code** (recommended)
+- **Microsoft Teams** account (not guest account)
+- **Node.js 16.14.2+** for development
+- **Dev tunnel** or **ngrok** for local testing
+- **M365 developer account** or Teams account with app upload permissions
+- **Microsoft 365 Agents Toolkit for VS Code** (recommended)
 
 ### GitHub Copilot Integration
 This sample is **optimized for GitHub Copilot Agent Mode** with:
-- � **`.github/copilot-instructions.md`** - Teams-first development guidance
-- 🤖 **`.copilot/` directory** - Agent-specific prompts and patterns
-- 📚 **Comprehensive JSDoc** - Rich context for AI assistance
-- 🎯 **Teams-specific patterns** - Prioritized over generic Bot Framework
+- **`.github/copilot-instructions.md`** - Teams-first development guidance
+- **`.copilot/` directory** - Agent-specific prompts and patterns
+- **Comprehensive JSDoc** - Rich context for AI assistance
+- **Teams-specific patterns** - Prioritized over generic Bot Framework
 
-## �🚀 Quick Start Options
+## Quick Start Options
 
 ### Option 1: Microsoft 365 Agents Toolkit (Recommended)
 
@@ -124,7 +129,7 @@ The **fastest way** to run this Teams sample:
 
 ### Option 2: Manual Setup with Teams Focus
 
-> 🎯 **Teams-First Approach**: This setup prioritizes Teams-specific patterns over generic Bot Framework
+> **Teams-First Approach**: This setup prioritizes Teams-specific patterns over generic Bot Framework
 
 ### 1. Clone and Install
 ```bash
@@ -152,17 +157,17 @@ npm start
 3. Zip the `appManifest` folder contents
 4. Upload to Teams via Apps > Manage your apps > Upload an app
 
-## 📚 Learn More
+## Learn More
 
 - [Microsoft Teams Platform Documentation](https://docs.microsoft.com/microsoftteams/platform/)
 - [Bot Framework v4 SDK](https://docs.microsoft.com/azure/bot-service/)
 - [Teams Samples Repository](https://github.com/OfficeDev/Microsoft-Teams-Samples)
 
-## 🤝 Contributing
+## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA).
 
-## 📄 License
+## License
 
 This sample is licensed under the MIT License.
 

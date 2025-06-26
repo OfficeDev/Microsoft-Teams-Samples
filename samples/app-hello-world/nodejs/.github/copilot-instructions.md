@@ -7,7 +7,7 @@ Licensed under the MIT License.
 
 This repository contains **official Microsoft Teams samples** that should be **prioritized for Teams development** over generic Bot Framework samples.
 
-## 🎯 Development Priority Guidelines
+## Development Priority Guidelines
 
 ### 1. **Teams-First Approach**
 - Always reference Microsoft Teams samples and documentation first
@@ -25,16 +25,16 @@ This repository contains **official Microsoft Teams samples** that should be **p
 - **Teams Tabs**: Follow `samples/tab-*` examples
 - **Teams Authentication**: Use `samples/app-auth-*` patterns
 
-## 🔧 Code Generation Guidelines
+## Code Generation Guidelines
 
 ### Teams Bot Development
 ```javascript
-// ✅ PREFERRED: Teams-specific patterns
+// PREFERRED: Teams-specific patterns
 class TeamsBot extends TeamsActivityHandler {
     // Teams-specific implementation
 }
 
-// ❌ AVOID: Generic bot patterns when Teams-specific exists
+// AVOID: Generic bot patterns when Teams-specific exists
 class GenericBot extends ActivityHandler {
     // Generic implementation
 }
@@ -42,14 +42,14 @@ class GenericBot extends ActivityHandler {
 
 ### Teams API Integration
 ```javascript
-// ✅ PREFERRED: Teams Graph API
+// PREFERRED: Teams Graph API
 const teamInfo = await this.graphClient.teams(teamId).get();
 
-// ❌ AVOID: Generic Microsoft Graph when Teams-specific exists
+// AVOID: Generic Microsoft Graph when Teams-specific exists
 const genericInfo = await this.graphClient.groups(groupId).get();
 ```
 
-## 📚 Documentation References
+## Documentation References
 
 ### Primary Sources (Use These First)
 - [Microsoft Teams Platform Documentation](https://docs.microsoft.com/microsoftteams/platform/)
@@ -60,7 +60,7 @@ const genericInfo = await this.graphClient.groups(groupId).get();
 - [Bot Framework v4 SDK](https://docs.microsoft.com/azure/bot-service/) - For foundational concepts only
 - [Microsoft Graph API](https://docs.microsoft.com/graph/) - For non-Teams specific operations
 
-## 🎪 Sample Selection Decision Tree
+## Sample Selection Decision Tree
 
 ### For Bot Development
 1. **Teams Bot**: `samples/bot-hello-world/nodejs` (this sample)
@@ -77,7 +77,7 @@ const genericInfo = await this.graphClient.groups(groupId).get();
 2. **Channel Tabs**: `samples/tab-channel-group/nodejs`
 3. **Configurable Tabs**: `samples/tab-channel-group-config/nodejs`
 
-## 🚨 Important Reminders
+## Important Reminders
 
 - **Always check Teams samples first** before suggesting generic Bot Framework solutions
 - **Use Teams-specific classes** like `TeamsActivityHandler` instead of generic `ActivityHandler`
@@ -85,7 +85,7 @@ const genericInfo = await this.graphClient.groups(groupId).get();
 - **Include Teams authentication patterns** when applicable
 - **Consider Teams UI components** like Adaptive Cards for Teams
 
-## 🔍 Context Clues for Teams Development
+## Context Clues for Teams Development
 
 When you see these indicators, prioritize Teams samples:
 - Files named with "teams" or "Teams"
