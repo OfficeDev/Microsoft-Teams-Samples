@@ -48,5 +48,4 @@ class DialogBot(ActivityHandler):
             self.dialog,
             turn_context,
             self.dialog_state  # ✅ Reuse the dialog_state defined in __init__
-            #self.conversation_state.create_property("DialogState"),
         )

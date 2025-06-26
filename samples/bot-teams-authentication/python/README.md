@@ -32,7 +32,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Interaction with app
 
-![bot-teams-auth ](Images/TeamAuth.gif)
+![bot-teams-auth ](Images/Bot_Teams_Authentication.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -122,13 +122,15 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Add-App ](Images/1.Install.png)
 
-![Add-to-teams ](Images/2.Bot_Response.png)
+![Open Application ](Images/2.Open_App.png)
 
-![Auth-login ](Images/3.Logged_In.png)
+![Welcome Message ](Images/3.Welcome_Message.png)
 
-![Token ](Images/4.User_Token.png)
+![Login Message](Images/4.Login_Successfull.png)
 
-![Auth-logout ](Images/5.Logged_Out.png)
+![Auth Token](Images/5.Token.png)
+
+![Auth-logout ](Images/6.SignOut.png)
 
 ## Deploy the bot to Azure
 
