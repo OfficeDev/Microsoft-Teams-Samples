@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
@@ -14,7 +14,7 @@
     "full": "Sentiment analysis using message extension."
   },
   "description": {
-    "short": "Analyze sentiment in Teams chats using Azure Open AI and messaging extension.",
+    "short": "Analyze sentiment of Teams chat messages using Open AI and messaging.",
     "full": "This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions."
   },
   "icons": {
@@ -22,28 +22,33 @@
     "color": "color.png"
   },
   "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "isNotificationOnly": false
+    }
+  ],
   "composeExtensions": [
     {
-      "botId": "${{BOT_ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
           "id": "me-sentiment-ai",
           "description": "send sentiment for any text messages posted in Microsoft Teams chat",
-          "title": "Sentiment analysis",
+          "title": "Sentiment Analysis",
           "type": "action",
           "fetchTask": true,
-          "context": [
-            "message"
-          ]
+          "context": [ "message" ]
         }
       ]
     }
   ],
-  "permissions": [
-    "identity",
-    "messageTeamMembers"
-  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
     "${{BOT_DOMAIN}}"
   ]
