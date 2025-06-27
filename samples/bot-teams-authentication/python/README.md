@@ -126,6 +126,8 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Welcome Message ](Images/3.Welcome_Message.png)
 
+![Login Prompt ](Images/3.LoginPrompt.png)
+
 ![Login Message](Images/4.Login_Successful.png)
 
 ![Auth Token](Images/5.Token.png)
