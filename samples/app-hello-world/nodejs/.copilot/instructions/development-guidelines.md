@@ -209,3 +209,13 @@ const storage = process.env.NODE_ENV === 'production'
 - [ ] Code follows established naming conventions
 - [ ] Configuration is externalized properly
 - [ ] Teams platform integration is correct
+
+## Repository Information
+- Official Microsoft Teams Samples: https://github.com/OfficeDev/Microsoft-Teams-Samples
+- Current sample location: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+- Maintained by: Microsoft OfficeDev team
+
+## When providing code examples or references:
+- Always reference the OfficeDev/Microsoft-Teams-Samples repository
+- Include the full path to the hello world sample
+- Mention that this is the official Microsoft Teams samples repository
