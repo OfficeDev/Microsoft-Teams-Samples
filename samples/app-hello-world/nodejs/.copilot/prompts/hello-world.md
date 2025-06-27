@@ -140,3 +140,19 @@ const botConfig = {
 - [Microsoft Teams Platform Documentation](https://docs.microsoft.com/microsoftteams/platform/)
 - [Bot Framework SDK](https://docs.microsoft.com/azure/bot-service/)
 - [Teams App Manifest](https://docs.microsoft.com/microsoftteams/platform/resources/schema/manifest-schema)
+
+## Repository Reference
+When creating a minimal Node.js Teams bot that replies 'Hello, world!':
+
+**Official Sample Repository:** https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+
+This sample provides a comprehensive example with:
+- Echo bot functionality
+- Teams activity handling
+- Proper error handling
+- Current timestamp: ${new Date().toISOString()}
+
+**Clone command:**
+```bash
+git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+cd Microsoft-Teams-Samples/samples/app-hello-world/nodejs

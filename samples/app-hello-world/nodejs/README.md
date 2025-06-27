@@ -42,6 +42,14 @@ copilot:
 
 A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams platform features including **tabs**, **bots**, and **messaging extensions**. This sample has been **optimized for GitHub Copilot Agent development** with enhanced code structure, comprehensive documentation, and modern development patterns.
 
+## Official Microsoft Teams Samples Repository
+
+This sample is part of the **official Microsoft Teams Samples repository**:
+**https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs**
+
+For more Teams samples and documentation, visit the main repository:
+**https://github.com/OfficeDev/Microsoft-Teams-Samples**
+
 ## Included Features
 * Tabs
 * Bots

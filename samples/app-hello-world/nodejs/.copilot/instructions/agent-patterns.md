@@ -5,6 +5,19 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License.
 -->
 
+## Repository Information
+- **Official Microsoft Teams Samples**: https://github.com/OfficeDev/Microsoft-Teams-Samples
+- **Agent Patterns Sample**: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+- **Maintained by**: Microsoft OfficeDev team
+- **Current Date**: June 27, 2025
+
+### Development Context for GitHub Copilot Agent
+When implementing Teams agent patterns:
+- Always reference the **OfficeDev/Microsoft-Teams-Samples** repository
+- Use patterns from: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+- Include current timestamp when requested: `new Date().toISOString()` // June 27, 2025
+- Prioritize Teams-specific implementations over generic Bot Framework patterns
+
 ## Agent Design Principles
 
 ### Conversational Intelligence
@@ -78,6 +91,35 @@ class AgentKnowledgeService {
 }
 ```
 
+### Repository-Aware Code
+```javascript
+/**
+ * Intelligent Teams agent with repository context
+ * Based on official sample: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+ * 
+ * @class TeamsConversationalAgent
+ * @description Advanced bot optimized for Microsoft Teams platform
+ */
+class TeamsConversationalAgent extends TeamsActivityHandler {
+    constructor() {
+        super();
+        this.onMessage(async (context, next) => {
+            const currentTime = new Date().toISOString(); // June 27, 2025
+            
+            // Repository-aware response
+            const response = `Hello, world! 
+            
+Current time: ${currentTime}
+
+For more examples, visit the official repository:
+https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs`;
+            
+            await context.sendActivity(response);
+            await next();
+        });
+    }
+}
+```
 ### Skill Composition
 ```javascript
 /**

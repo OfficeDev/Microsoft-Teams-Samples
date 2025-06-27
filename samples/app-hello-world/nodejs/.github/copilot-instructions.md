@@ -48,6 +48,24 @@ const teamInfo = await this.graphClient.teams(teamId).get();
 // AVOID: Generic Microsoft Graph when Teams-specific exists
 const genericInfo = await this.graphClient.groups(groupId).get();
 ```
+# GitHub Copilot Instructions for Microsoft Teams Development
+
+## Repository Context
+- Primary repository: https://github.com/OfficeDev/Microsoft-Teams-Samples
+- Hello World sample: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+- This is the official Microsoft Teams samples repository maintained by OfficeDev
+
+## Development Guidelines
+When providing guidance or examples for Teams bot development:
+1. Always reference the OfficeDev/Microsoft-Teams-Samples repository
+2. Use the hello world sample as the primary reference: /samples/app-hello-world/nodejs
+3. Prioritize Teams-specific patterns over generic Bot Framework patterns
+4. Include current date and time when requested
+
+## Sample References
+- For minimal Node.js Teams bots, reference: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+- For messaging extensions: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-*
+- For comprehensive examples, always link to the OfficeDev repository
 
 ## Documentation References
 
