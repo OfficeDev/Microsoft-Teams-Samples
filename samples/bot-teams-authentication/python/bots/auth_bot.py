@@ -37,7 +37,7 @@ class AuthBot(DialogBot):
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
-            self.dialog_state  # ✅ Use stored dialog state
+            self.dialog_state  # Use stored dialog state
         )
 
     # Handle 'signin/tokenExchange' (equivalent to handleTeamsSigninTokenExchange)
@@ -46,6 +46,6 @@ class AuthBot(DialogBot):
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
-            self.dialog_state  # ✅ Use stored dialog state
+            self.dialog_state  # Use stored dialog state
         )
         return InvokeResponse(status=HTTPStatus.OK)
