@@ -26,13 +26,13 @@ class DialogBot(ActivityHandler):
         self.user_state = user_state
         self.dialog = dialog
         
-        # ✅ Create and store dialog state once here
+        # Create and store dialog state once here
         self.dialog_state = self.conversation_state.create_property("DialogState")
 
     async def on_turn(self, turn_context: TurnContext):
         await super().on_turn(turn_context)
 
-        # 🛡️ Defensive check before saving state
+        # Defensive check before saving state
         if (
             turn_context.activity is not None
             and turn_context.activity.conversation is not None
@@ -41,11 +41,11 @@ class DialogBot(ActivityHandler):
             await self.conversation_state.save_changes(turn_context, False)
             await self.user_state.save_changes(turn_context, False)
         else:
-            print("⚠️ Skipping state save due to missing conversation or channel_id.")
+            print("Skipping state save due to missing conversation or channel_id.")
 
     async def on_message_activity(self, turn_context: TurnContext):
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
-            self.dialog_state  # ✅ Reuse the dialog_state defined in __init__
+            self.dialog_state  # Reuse the dialog_state defined in __init__
         )

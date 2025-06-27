@@ -33,7 +33,7 @@ class AuthBot(DialogBot):
 
     # Handle 'signin/verifyState' (equivalent to handleTeamsSigninVerifyState)
     async def on_token_response_event(self, turn_context: TurnContext):
-        print("🔑 Handling signin/verifyState")
+        print("Handling signin/verifyState")
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
@@ -42,7 +42,7 @@ class AuthBot(DialogBot):
 
     # Handle 'signin/tokenExchange' (equivalent to handleTeamsSigninTokenExchange)
     async def on_teams_signin_token_exchange(self, turn_context: TurnContext):
-        print("🔄 Handling signin/tokenExchange")
+        print("Handling signin/tokenExchange")
         await DialogHelper.run_dialog(
             self.dialog,
             turn_context,
