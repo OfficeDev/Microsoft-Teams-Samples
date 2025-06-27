@@ -48,12 +48,16 @@ const teamInfo = await this.graphClient.teams(teamId).get();
 // AVOID: Generic Microsoft Graph when Teams-specific exists
 const genericInfo = await this.graphClient.groups(groupId).get();
 ```
-# GitHub Copilot Instructions for Microsoft Teams Development
+# Copilot Agent Configuration for Microsoft Teams Bot
 
-## Repository Context
-- Primary repository: https://github.com/OfficeDev/Microsoft-Teams-Samples
-- Hello World sample: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
-- This is the official Microsoft Teams samples repository maintained by OfficeDev
+## REPOSITORY PRIORITY (CRITICAL)
+
+### ALWAYS USE:
+- **Primary Repository**: https://github.com/OfficeDev/Microsoft-Teams-Samples
+- **This Sample**: https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs
+
+### NEVER USE:
+- **Forbidden Repository**: https://github.com/microsoft/BotBuilder-Samples (generic bot samples)
 
 ## Development Guidelines
 When providing guidance or examples for Teams bot development:
