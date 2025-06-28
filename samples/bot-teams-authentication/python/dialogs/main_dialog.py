@@ -9,10 +9,9 @@ from botbuilder.dialogs import (
     PromptOptions,
 )
 from botbuilder.dialogs.prompts import OAuthPrompt, OAuthPromptSettings, ConfirmPrompt
-
 from dialogs import LogoutDialog
 
-
+#Defines a dialog that handles user sign-in, token retrieval, and optional token display using OAuth in a multi-step waterfall flow.
 class MainDialog(LogoutDialog):
     def __init__(self, connection_name: str):
         super(MainDialog, self).__init__(MainDialog.__name__, connection_name)
@@ -45,9 +44,11 @@ class MainDialog(LogoutDialog):
 
         self.initial_dialog_id = "WFDialog"
 
+    # Starts the OAuth login process by invoking the OAuth prompt.
     async def prompt_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         return await step_context.begin_dialog(OAuthPrompt.__name__)
-
+    
+    # Handles the result of the login attempt and asks if the user wants to see their token.
     async def login_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         # Get the token from the previous step. Note that we could also have gotten the
         # token directly from the prompt itself. There is an example of this in the next method.
@@ -65,6 +66,7 @@ class MainDialog(LogoutDialog):
         )
         return await step_context.end_dialog()
 
+    # Thanks the user and re-prompts for the token if they want to view it, to ensure it's fresh and valid.
     async def display_token_phase1(
         self, step_context: WaterfallStepContext
     ) -> DialogTurnResult:
@@ -83,10 +85,12 @@ class MainDialog(LogoutDialog):
 
         return await step_context.end_dialog()
 
+    # Displays the retrieved token to the user and ends the dialog.
     async def display_token_phase2(
         self, step_context: WaterfallStepContext
     ) -> DialogTurnResult:
         if step_context.result:
+            print(f"Token received: %s", step_context.result.token)
             await step_context.context.send_activity(
                 f"Here is your token {step_context.result.token}"
             )
