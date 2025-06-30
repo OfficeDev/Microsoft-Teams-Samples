@@ -5,7 +5,7 @@ import sys
 import traceback
 from datetime import datetime
 from http import HTTPStatus
-
+from botbuilder.schema import InvokeResponse
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
@@ -18,8 +18,11 @@ from botbuilder.core import (
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
+from botbuilder.core import ConversationState
 
 from bots import AuthBot
+import logging
+import traceback
 
 # Create the loop and Flask app
 from config import DefaultConfig
@@ -78,7 +81,6 @@ BOT = AuthBot(CONVERSATION_STATE, USER_STATE, DIALOG)
 
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
     if "application/json" in req.headers["Content-Type"]:
         body = await req.json()
     else:
@@ -87,11 +89,29 @@ async def messages(req: Request) -> Response:
     activity = Activity().deserialize(body)
     auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
 
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if response:
-        return json_response(data=response.body, status=response.status)
-    return Response(status=HTTPStatus.OK)
+    # Add these log statements here
+    logging.info(f"Incoming activity type: {activity.type}")
+    logging.info(f"Activity name: {getattr(activity, 'name', None)}")
 
+    try:
+        response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+
+        if isinstance(response, InvokeResponse):
+            if isinstance(response.body, dict):
+                return json_response(status=response.status, data=response.body)
+            else:
+                return Response(status=response.status)
+
+        return Response(status=HTTPStatus.OK)
+
+    except Exception as e:
+        logging.error(f"Exception in processing activity: {e}")
+        traceback.print_exc()
+        return Response(
+            status=HTTPStatus.INTERNAL_SERVER_ERROR,
+            text="Internal server error while processing the activity."
+        )
+    
 
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)

@@ -1,5 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+
 
 from botbuilder.core import MessageFactory
 from botbuilder.dialogs import (
@@ -11,7 +10,9 @@ from botbuilder.dialogs import (
 from botbuilder.dialogs.prompts import OAuthPrompt, OAuthPromptSettings, ConfirmPrompt
 
 from dialogs import LogoutDialog
-
+import logging
+# Set the logging level to INFO
+logging.basicConfig(level=logging.INFO)
 
 class MainDialog(LogoutDialog):
     def __init__(self, connection_name: str):
@@ -24,8 +25,8 @@ class MainDialog(LogoutDialog):
                     connection_name=connection_name,
                     text="Please Sign In",
                     title="Sign In",
-                    timeout=300000,
-                ),
+                    timeout=300000
+                )
             )
         )
 
@@ -46,12 +47,11 @@ class MainDialog(LogoutDialog):
         self.initial_dialog_id = "WFDialog"
 
     async def prompt_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
+        logging.info("Reached OAuthPrompt step — prompting for login.")
         return await step_context.begin_dialog(OAuthPrompt.__name__)
 
     async def login_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
-        # Get the token from the previous step. Note that we could also have gotten the
-        # token directly from the prompt itself. There is an example of this in the next method.
-        if step_context.result:
+        if step_context.result and step_context.result.token:
             await step_context.context.send_activity("You are now logged in.")
             return await step_context.prompt(
                 ConfirmPrompt.__name__,
@@ -60,10 +60,12 @@ class MainDialog(LogoutDialog):
                 ),
             )
 
+        # Handles invalid actions or cancelled login
         await step_context.context.send_activity(
-            "Login was not successful please try again."
+            "Login was not successful or was cancelled. Let's try again."
         )
-        return await step_context.end_dialog()
+        return await step_context.replace_dialog(self.initial_dialog_id)
+
 
     async def display_token_phase1(
         self, step_context: WaterfallStepContext
