@@ -1,0 +1,64 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Membership Change Notification",
+    "full": "Membership Change Notifications"
+  },
+  "description": {
+    "short": "Get real-time notifications for team/channel changes in Microsoft Teams.",
+    "full": "This sample application demonstrates how to send notifications for team and channel events, such as creation, editing, or deletion, in Microsoft Teams using Node.js and the Microsoft Graph API."
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "${{TAB_ENDPOINT}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupChat"
+      ]
+    }
+  ],
+  "supportedChannelTypes": [
+    "sharedChannels",
+    "privateChannels"
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": ""
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "ChannelSettings.Read.Group"
+        },
+        {
+          "type": "Application",
+          "name": "TeamSettings.Read.Group"
+        }
+      ]
+    }
+  }
+}
