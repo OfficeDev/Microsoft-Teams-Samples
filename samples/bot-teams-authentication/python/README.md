@@ -126,13 +126,17 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Welcome Message ](Images/3.Welcome_Message.png)
 
-![Login Prompt ](Images/3.LoginPrompt.png)
+![Login Prompt ](Images/4.Oauth_Login_Prompt.png)
 
-![Login Message](Images/4.Login_Successful.png)
+![Select_Account_For_Permissions ](Images/5.Select_Account_For_Permissions.png)
 
-![Auth Token](Images/5.Token.png)
+![Accept_Consent_Permissions](Images/6.Accept_Consent_Permissions.png)
 
-![Auth-logout ](Images/6.SignOut.png)
+![Successful_Login ](Images/7.Successful_Login.png)
+
+![Token_Block_By_Organisation ](Images/8.Token_Block_By_Organisation.png)
+
+![Auth-logout ](Images/9.SignOut.png)
 
 ## Deploy the bot to Azure
 
@@ -142,7 +146,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [AzuMessagere Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 
