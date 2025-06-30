@@ -3,7 +3,6 @@
   "manifestVersion": "1.19",
   "version": "1.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.auth",
   "developer": {
     "name": "Microsoft Corp",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -39,5 +38,9 @@
     "*.azurewebsites.net",
     "*.botframework.com",
     "${{BOT_DOMAIN}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+  }
 }
