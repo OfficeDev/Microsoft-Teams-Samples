@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-v
 # Teams Adaptive Card Views
 
 - **Interaction with bot**
-  ![UserSpecificView](docs/UserSpecificView_all.gif)
+  ![UserSpecificView](Images/UserSpecificView_all.gif)
 
 This sample demonstrates how to create user-specific views in Adaptive Cards within Microsoft Teams, using features like Action.Execute and auto-refresh for dynamic updates. The app enables personalized content, allowing seamless interaction across personal, group, and team contexts.
 
@@ -35,7 +35,7 @@ For more details, refer to our [documentation](https://docs.microsoft.com/en-us/
 
 Apps can define `refresh` property with details about the refresh event and optionally add a list of users for whom the card should automatically refresh. (Refer to the image below).
 
-![AdaptiveCardRefreshSchema](docs/AdaptiveCardRefreshSchema.png)
+![AdaptiveCardRefreshSchema](Images/AdaptiveCardRefreshSchema.png)
 
 For more details on Adaptive card schema, refer to our [documentation](https://adaptivecards.io/explorer/).
 ____
@@ -60,7 +60,7 @@ You can extend the `Me` card to automatically refresh for a list of users by add
 
 The following GIF captures `Automatic refresh`, `Manual refresh`, and `Update Base Card` actions in `Me` card.
 
-![bot-conversations ](docs/UserSpecificView_Me.png)
+![bot-conversations ](Images/UserSpecificView_Me.png)
 
 The diagram above captures the sequence of events for `Me` card.
 
@@ -84,10 +84,10 @@ how to incorporate basic conversational flow into a Teams application. It also i
 ## Interaction with bot
 
 #### Me Action
-![bot-conversations ](docs/UserSpecificView_Me.gif)
+![bot-conversations ](Images/UserSpecificView_Me.gif)
 
 #### AllUser Action
-![bot-conversations ](docs/UserSpecificView_all.gif)
+![bot-conversations ](Images/UserSpecificView_all.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
