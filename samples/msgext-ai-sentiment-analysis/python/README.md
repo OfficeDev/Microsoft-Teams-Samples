@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature where user can send suggested actions using bot.
+description: This sample allows users to assess the sentiment of messages in Teams chats by utilizing a messaging extension integrated with Open AI. The analysis categorizes messages as positive, negative, or neutral, enhancing understanding of team interactions.
 products:
 - office-teams
 - office
@@ -9,27 +9,23 @@ languages:
 - python
 extensions:
  contentType: samples
- createdDate: "12-12-2024 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-python
+ createdDate: "07-01-2025 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-python
 
 ---
 
-# Send Suggested Actions
+# Sentiment Analysis for Teams chat messages using Azure Open AI and messaging extension.
 
-This sample shows the feature where user can [send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions) using bot.
+Explore this sample application that integrates Azure Open AI with a Teams messaging extension, enabling real-time sentiment analysis of chat messages. It categorizes sentiments as positive, negative, or neutral, providing valuable insights into team interactions and enhancing overall communication effectiveness.
 
 ## Included Features
-* Bots
-* Adaptive Cards
+* Bot
+* ME
+* Azure Open AI For Sentiment Analysis
 
 ## Interaction with app
 
-![Bot Suggested ActionsGif](Images/BotSuggestedActionsGif.gif)
-
-## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
-
-**Send Suggested Actions:** [Manifest](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
+![Sentiment Analysis](Images/Sentiment_Analysis.gif)
 
 ## Prerequisites
 
@@ -51,6 +47,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+`SECRET_OPENAI_API_KEY=<<SECRET_OPENAI_API_KEY>>`
+
+Note: To obtain your OpenAI API key, please log in or sign up at https://platform.openai.com/api-keys.
+
+`CHAT_COMPLETION_MODEL_NAME=gpt-3.5-turbo`
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -80,7 +82,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-4) In a terminal, go to `samples\bot-suggested-actions`
+4) In a terminal, go to `samples/msgext-ai-sentiment-analysis/python`
 
 5) Activate your desired virtual environment
 
@@ -99,25 +101,26 @@ the Teams service needs to call into the bot.
 
 **Install App:**
 
-![InstallApp](Images/1.Install.png)
+Install Sample to Teams
+![Add Sample ](Images/1.Install.png)
 
-**Welcome UI:**
+Welcome Message then click on 3 dots navigate to ME sentiment analysis
+![Welcome](Images/2.WelcomeMessage.png)
 
-![Initial message](Images/2.Welcome.png)
+Showing Sentiment Analysis `Positive` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/3.Sentiment_Positive.png)
 
-![Red](Images/3.Hello.png)
+Showing Sentiment Analysis `Neutral` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/4.Sentiment_Neutral.png)
 
-![Blue](Images/4.Welcome.png)
+Showing Sentiment Analysis `Negative` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/5.Sentiment_Negative.png)
 
-## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
-![Action.Compose](Images/5.Action.Compose.png)
+Showing Sentiment Analysis `On Terminal`
+![Sentiment Analysis Reuslt](Images/6.On_Terminal.png)
 
 ## Further reading
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
+- [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
 
-- [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-ai-sentiment-analysis-python" />
