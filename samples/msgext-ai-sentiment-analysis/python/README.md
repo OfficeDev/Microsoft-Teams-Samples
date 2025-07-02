@@ -108,16 +108,16 @@ Welcome Message then click on 3 dots navigate to ME sentiment analysis
 ![Welcome](Images/2.WelcomeMessage.png)
 
 Showing Sentiment Analysis `Positive` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/3.Sentiment_Positive.png)
+![Sentiment Analysis Result](Images/3.Sentiment_Positive.png)
 
 Showing Sentiment Analysis `Neutral` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/4.Sentiment_Neutral.png)
+![Sentiment Analysis Result](Images/4.Sentiment_Neutral.png)
 
 Showing Sentiment Analysis `Negative` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/5.Sentiment_Negative.png)
+![Sentiment Analysis Result](Images/5.Sentiment_Negative.png)
 
 Showing Sentiment Analysis `On Terminal`
-![Sentiment Analysis Reuslt](Images/6.On_Terminal.png)
+![Sentiment Analysis Result](Images/6.On_Terminal.png)
 
 ## Further reading
 - [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
