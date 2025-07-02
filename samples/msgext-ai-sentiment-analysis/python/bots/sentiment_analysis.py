@@ -36,7 +36,7 @@ class SentimentAnalysis(TeamsActivityHandler):
         # Extract and clean the selected message content
         message_body = action.message_payload.body.content
         text_to_analyze = re.sub(r"<[^>]+>", "", message_body)
-        print("📝 Text to analyze:", text_to_analyze)
+        print("Text to analyze:", text_to_analyze)
 
         sentiment_response = "Not available"
 
@@ -60,7 +60,7 @@ class SentimentAnalysis(TeamsActivityHandler):
             # Extract sentiment from OpenAI response
             sentiment_response = response.choices[0].message.content.strip()
             # sentiment_response = "Positive Negative"
-            print("📊 Sentiment result:", sentiment_response)
+            print("Sentiment result:", sentiment_response)
 
         except Exception as e:
             # Print error if OpenAI call fails

@@ -26,7 +26,7 @@ class SentimentAnalysis extends TeamsActivityHandler {
 
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         let textToAnalyze = action.messagePayload.body.content.replace(/(<([^>]+)>)/ig, '');
-        console.log("📝 Text to analyze:", textToAnalyze);
+        console.log("Text to analyze:", textToAnalyze);
 
         const openai = new OpenAI({
             apiKey: process.env.SECRET_OPENAI_API_KEY
@@ -51,7 +51,7 @@ class SentimentAnalysis extends TeamsActivityHandler {
             });
 
             sentimentResponse = response.choices[0].message.content.trim();
-           console.log("📊 Sentiment result:", sentimentResponse);
+           console.log("Sentiment result:", sentimentResponse);
 
         } catch (error) {
             console.error("OpenAI error:", error.message);
