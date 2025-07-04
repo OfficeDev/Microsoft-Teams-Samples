@@ -118,6 +118,21 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Install App](Images/install.png)
 
+**Grant Permissions for Sample**
+- *Enable Microphone, Camera, and Location for Tab Sample*
+
+- You can enable the permissions in either of the following ways:
+    1.By clicking the lock icon in the browser address bar 
+    2.From the tab's site settings.
+
+- After updating the settings, please reload the page and test the sample.
+
+![Tab View Settings](Images/1.Select_AppPermissions.png)
+
+![Tab View Settings](Images/2.Enable_Permissions.png)
+
+![Browser Settings](Images/3.BrowserSettings.png)
+
 **Device permission tab: (Web View)** 
 
 ![desktopHome](Images/tab-web.png)
