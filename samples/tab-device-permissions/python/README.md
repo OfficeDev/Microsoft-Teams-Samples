@@ -117,15 +117,9 @@ the Teams service needs to call into the bot.
 
 ![Install App](Images/install.png)
 
-**Device permission tab: (Web View)** 
+**Grant Permissions for Sample**
+- *Enable Microphone, Camera, and Location for Tab Sample*
 
-![desktopHome](Images/tab-web.png)
-
-**Device permission tab: (Desktop View)** 
-
-![desktopHome](Images/tab-desktop.png)
-
-**Enable Permissions on Desktop**
 - You can enable the permissions in either of the following ways:
     1.By clicking the lock icon in the browser address bar 
     2.From the tab's site settings.
@@ -137,6 +131,14 @@ the Teams service needs to call into the bot.
 ![Tab View Settings](Images/2.Enable_Permissions.png)
 
 ![Browser Settings](Images/3.BrowserSettings.png)
+
+**Device permission tab: (Web View)** 
+
+![desktopHome](Images/tab-web.png)
+
+**Device permission tab: (Desktop View)** 
+
+![desktopHome](Images/tab-desktop.png)
 
 **Tab device permission:** 
 
