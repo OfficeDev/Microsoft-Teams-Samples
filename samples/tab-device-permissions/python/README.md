@@ -35,12 +35,17 @@ Currently only capture image is supported in Teams Desktop client.
 
 ![Tab Device PermissionsGif Mobile](Images/TabDevicePermissionsGifMobile.gif)
 
+**Deployed App Manifest (Tab Device Permission):** [Manifest](/samples/tab-device-permissions/nodejs/demo-manifest/tab-device-permissions.zip)  
+
+Download and upload this manifest to Microsoft Teams for testing.  
+The app is already deployed and hosted on Azure App Service, ready for immediate use.
+
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-
 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
@@ -120,6 +125,19 @@ the Teams service needs to call into the bot.
 
 ![desktopHome](Images/tab-desktop.png)
 
+**Enable Permissions on Desktop**
+- You can enable the permissions in either of the following ways:
+    1.By clicking the lock icon in the browser address bar 
+    2.From the tab's site settings.
+
+- After updating the settings, please reload the page and test the sample.
+
+![Tab View Settings](Images/1.Select_AppPermissions.png)
+
+![Tab View Settings](Images/2.Enable_Permissions.png)
+
+![Browser Settings](Images/3.BrowserSettings.png)
+
 **Tab device permission:** 
 
 ![deviceBrowser](Images/deviceBrowser.PNG)
@@ -128,19 +146,11 @@ the Teams service needs to call into the bot.
 
 **Tab device permission(Capture Image and Media):** 
 
-![mainTab1](Images/mainTab1.png)
-
-**Tab device permission(Scan Barcode):** 
-
-![mainTab2](Images/mainTab2.png)
-
-**Tab device permission(People Picker and Get Location):** 
-
-![mainTab3](Images/mainTab3.png)
+![mainTab1](Images/mainTab1.jpg)
 
 **Device permission popup:** 
 
-![allowPermission](Images/allowPermission.png)
+![allowPermission](Images/allowPermission.jpg)
 
 Similarly, you can try out for other features.
 > [!IMPORTANT]
