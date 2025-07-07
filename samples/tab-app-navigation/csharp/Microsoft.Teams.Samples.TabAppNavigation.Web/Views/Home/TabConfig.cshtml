@@ -1,0 +1,45 @@
+@* Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT Lic *@
+
+@{
+    ViewData["Title"] = "Tab Config";
+}
+<h1>Tab Configuration</h1>
+<div>
+    <h2>Navigate within a tab app</h2>
+    <h3>This sample shows the tab navigation feature such as navigation between tabs within the app.</h3>
+    <p>Please click save button to proceed.</p>
+ </div>   
+
+@section Scripts {
+    <script>
+        // Initializes the Microsoft Teams SDK and sets up the tab configuration
+        // This function is called when the tab configuration page is loaded in Teams.
+        function handleTeamsConfig() {
+            // Check if the Microsoft Teams SDK is available
+            if (window.microsoftTeams) {
+                // Initialize the Microsoft Teams SDK
+                microsoftTeams.app.initialize().then(() => {
+                    // Register save handler for Teams tab configuration
+                    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                        const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
+                        const entityId = "AppInstance_" + Math.floor(Math.random() * 100 + 1);
+                        microsoftTeams.pages.config.setConfig({
+                            suggestedDisplayName: "Default-Tab",
+                            entityId: entityId,
+                            contentUrl: baseUrl + "/default_tab",
+                            websiteUrl: baseUrl + "/default_tab"
+                        });
+                        saveEvent.notifySuccess();
+                    });
+                    // Enable the save button in the configuration dialog
+                    microsoftTeams.pages.config.setValidityState(true);
+                });
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+            }
+        }
+        // Call the function on page load
+        window.onload = handleTeamsConfig;
+    </script>
+}
