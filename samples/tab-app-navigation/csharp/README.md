@@ -137,19 +137,19 @@ Ensure you have the appropriate debugging tools configured in Visual Studio for 
 ## Running the sample
 
 **Add Application To Teams**
-![Configure Tab](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/install.PNG)
+![Configure Tab](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/install.png)
 
 **Tab Default To Navigate**
-![Tab Menu](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/1.Default_Tab.PNG)
+![Tab Menu](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/1.Default_Tab.png)
 
 **Navigated With-in Apps** 
-![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/2.Tab_One.PNG)
+![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/2.Tab_One.png)
 
 **Navigated With-in Apps** 
-![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/3.Tab_Two.PNG)
+![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/3.Tab_Two.png)
 
 **Navigated With-in Apps** 
-![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/4.Tab_Three.PNG)
+![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/4.Tab_Three.png)
 
 
 ## Deploy the app to Azure
