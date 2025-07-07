@@ -1,0 +1,58 @@
+﻿@* Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT Lic *@
+
+@* This is a Razor view for a Microsoft Teams application that demonstrates navigation between tabs and pages within the app. 
+It includes buttons to navigate to different pages and uses the Microsoft Teams SDK for navigation functionality. *@
+<div class="row">
+    <div class="main-content-area">
+        <h2>Tab App Navigation - Navigate Between Tabs </h2>
+        <br></br>
+    </div>
+</div>
+<!-- Navigation Buttons -->
+<div>
+    <button class="primary" id="page1Btn">Go to Page 1</button>
+    <button class="primary" id="page2Btn">Go to Page 2</button>
+    <button class="primary" id="page3Btn">Go to Page 3</button>
+</div>
+
+@section Scripts {
+    <script>
+        function handleLoadMicrosoftTeamsSDK() {
+            if (window.microsoftTeams) {
+                microsoftTeams.app.initialize().then(() => {
+                    // Notify that the app has been initialized successfully
+                }).catch(function(error) {
+                    console.error("Error initializing Teams SDK:", error);
+                });
+
+                document.getElementById("page1Btn").onclick = function() {
+                    if (microsoftTeams.pages && microsoftTeams.pages.currentApp && microsoftTeams.pages.currentApp.isSupported()) {
+                        microsoftTeams.pages.currentApp.navigateTo({ pageId: "page1" })
+                            .then(function(result) { console.log("Navigated to Page 1"); })
+                            .catch(function(error) { console.log("error", error); });
+                    }
+                };
+                document.getElementById("page2Btn").onclick = function() {
+                    if (microsoftTeams.pages && microsoftTeams.pages.currentApp && microsoftTeams.pages.currentApp.isSupported()) {
+                        microsoftTeams.pages.currentApp.navigateTo({ pageId: "page2" })
+                            .then(function(result) { console.log("Navigated to Page 2"); })
+                            .catch(function(error) { console.log("error", error); });
+                    }
+                };
+                document.getElementById("page3Btn").onclick = function() {
+                    if (microsoftTeams.pages && microsoftTeams.pages.currentApp && microsoftTeams.pages.currentApp.isSupported()) {
+                        microsoftTeams.pages.currentApp.navigateTo({ pageId: "page3" })
+                            .then(function(result) { console.log("Navigated to Page 3"); })
+                            .catch(function(error) { console.log("error", error); });
+                    }
+                };
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+                document.getElementById("congrats").innerText = "Microsoft Teams SDK not loaded or not running inside Teams ";
+            }
+        }
+        // Call the function on page load
+        window.onload = handleLoadMicrosoftTeamsSDK;
+    </script>
+}
