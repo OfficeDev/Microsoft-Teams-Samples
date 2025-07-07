@@ -142,13 +142,13 @@ Ensure you have the appropriate debugging tools configured in Visual Studio for 
 **Tab Default To Navigate**
 ![Tab Menu](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/1.Default_Tab.png)
 
-**Navigated With-in Apps** 
+**Navigated Within Apps** 
 ![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/2.Tab_One.png)
 
-**Navigated With-in Apps** 
+**Navigated Within Apps** 
 ![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/3.Tab_Two.png)
 
-**Navigated With-in Apps** 
+**Navigated Within Apps** 
 ![Tab Navigation](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/4.Tab_Three.png)
 
 
