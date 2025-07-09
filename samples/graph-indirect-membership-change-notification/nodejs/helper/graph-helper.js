@@ -34,7 +34,7 @@ class GraphHelper {
         let notificationUrl = process.env.notificationUrl;
 
         if (pageId === "1") {
-            resource = `/teams/${teamsId}/channels/getAllMembers`;
+            resource = `/teams/${teamsId}/channels/getAllMembers?notifyOnIndirectMembershipUpdate=true&suppressNotificationWhenSharedUnsharedWithTeam=true`;
             changeType = "created,deleted,updated";
         }
         else {

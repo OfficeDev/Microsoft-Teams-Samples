@@ -14,7 +14,6 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-var notificationResponse = [];
 var notificationList = [];
 
 const ENV_FILE = path.join(__dirname, '.env');
@@ -39,7 +38,7 @@ app.post('/api/notifications', async (req, res) => {
         var notification = req.body;
         debugger;
         if (JSON.stringify(notification) === '{}') {
-            console.log("please create/update/delete channel/team to get response data hiiii");
+            console.log("please Add/remove users from team or channel to get response data");
             res.send(notificationList);
         }
         else {

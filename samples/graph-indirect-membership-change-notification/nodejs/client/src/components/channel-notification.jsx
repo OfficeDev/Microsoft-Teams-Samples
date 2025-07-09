@@ -63,7 +63,6 @@ class ChangeNotificationChannel extends Component {
         responseData.forEach(item => {
             elements.push(
                 <div key={item.createdDate}>
-                    <p><b>Channel Name:</b> {item.displayName}</p>
                     {(() => {
                         if (item.changeType === 'updated') {
                             return (
