@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Team and Channel Subscription</h2>
+<p>Please select an option for subscription:</p>
+<form id="configForm">
+  <label><input type="radio" name="subscription" value="1"> Channel Subscription</label><br/>
+</form>
+
+<script
+  src="https://res.cdn.office.net/teams-js/2.39.1/js/MicrosoftTeams.min.js"
+  integrity="sha384-DCaADE5ucxq02uymDGfLHqBklxuM03ZONTCmqdwEFNouwR1kHsPHVT1UYOyb3X72"
+  crossorigin="anonymous"
+></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    microsoftTeams.app.initialize().then(() => {
+      console.log("Teams SDK v2.39.1 initialized");
+
+      microsoftTeams.pages.config.setValidityState(false);
+
+      let selectedValue = null;
+
+      // Enable save on option selection
+      document.querySelectorAll('input[name="subscription"]').forEach(radio => {
+        radio.addEventListener('change', e => {
+          selectedValue = e.target.value;
+          console.log("Subscription selected:", selectedValue);
+          microsoftTeams.pages.config.setValidityState(true);
+        });
+      });
+
+      // Register save handler
+      microsoftTeams.pages.config.registerOnSaveHandler(saveEvent => {
+        const isChannel = selectedValue === '1';
+
+        microsoftTeams.pages.config.setConfig({
+          entityId: isChannel ? 'ChannelNotification' : 'TeamNotification',
+          contentUrl: `${window.location.origin}/` + (isChannel ? 'channel-notification' : 'team-notification'),
+          websiteUrl: `${window.location.origin}/` + (isChannel ? 'channel-notification' : 'team-notification'),
+          suggestedTabName: isChannel ? 'Channel Notification' : 'Team Notification',
+        }).then(() => {
+          console.log("Configuration saved");
+          saveEvent.notifySuccess();
+        }).catch(error => {
+          console.error("Failed to save configuration", error);
+          saveEvent.notifyFailure('Failed to save configuration');
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}
