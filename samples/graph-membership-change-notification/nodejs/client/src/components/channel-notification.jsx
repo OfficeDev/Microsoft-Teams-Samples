@@ -114,9 +114,9 @@ class ChangeNotificationChannel extends Component {
     welcomeMessage = () => {
         return (
             <div>
-                <h3 className="headcolor">Channel Notifications</h3>
-                <h4>Welcome to Channel Notification Tab</h4>
-                <p>This Tab has successfully configured, you will get notifications of channel delete/edit/create in this tab.</p>
+                <h3 className="headcolor">Membership Change Notifications</h3>
+                <h4>Welcome to Membership Change Notification Tab</h4>
+                <p>This Tab has successfully configured, you will get notifications of direct/indirect membership change (add/update/remove) in this tab.</p>
             </div>
         );
     }

@@ -7,5 +7,4 @@ const router = express.Router();
 
 // Routes for the API calls.
 router.post('/', changeNotification.createChannelAsync);
-router.get('/team', changeNotification.createTeamAsync);
 module.exports = router;

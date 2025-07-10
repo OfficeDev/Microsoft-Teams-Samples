@@ -48,8 +48,8 @@ const Configure = props => {
     };
     return (
         <div>
-            <Text size="larger" weight="semibold" content="Team and Channel Subscription" /><br />
-            <Text size="small" content="Please select options for subscription to get notifications" weight="semibold" />
+            <Text size="larger" weight="semibold" content="Channel Subscription" /><br />
+            <Text size="small" content="Please select option for subscription to get notifications" weight="semibold" />
             <RadioGroup
                 onCheckedValueChange={handleChange}
                 items={[
@@ -57,12 +57,7 @@ const Configure = props => {
                         key: '1',
                         label: 'Channel Subscription',
                         value: '1',
-                    },
-                    {
-                        key: '2',
-                        label: 'Team Subscription',
-                        value: '2',
-                    },
+                    }
                 ]}
             /> 
             <Text size="small" content="Please click save button to proceed." weight="semibold" />

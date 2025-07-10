@@ -12,7 +12,6 @@ const createChannelAsync = async (req, res) => {
     try {
         debugger;
         await GraphHelper.createSubscription(teamId, pageId);
-        // await GraphHelper.createSharedWithTeamsSubscription(teamId, channelId);
         res.status(202).send();
     }
     catch (ex) {
@@ -20,24 +19,8 @@ const createChannelAsync = async (req, res) => {
         console.error(ex);
         res.status(500).send();
     }
-}
-
-/** Creates Subscription for Team */
-const createTeamAsync = async (req, res) => {
-    var teamId = req.query.teamId;
-    var pageId = "2";
-
-    try {
-        var result = await GraphHelper.createSubscription(teamId, pageId);
-        res.status(202).send(result);
-    }
-    catch (ex) {
-        console.error(ex);
-        res.status(500).send();
-    }
-}
+};
 
 module.exports = {
-    createChannelAsync,
-    createTeamAsync
+    createChannelAsync
 };

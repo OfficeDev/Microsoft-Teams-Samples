@@ -100,65 +100,6 @@ class GraphHelper {
 
         return existingSubscription;
     }
-
-    /**
-    * Create a subscription for sharedWithTeams on a specific channel.
-    * @param {string} teamsId Team ID
-    * @param {string} channelId Channel ID
-    */
-    static async createSharedWithTeamsSubscription(teamsId, channelId) {
-        let applicationToken = await auth.getAccessToken();
-        let resource = `/teams/${teamsId}/channels/${channelId}/sharedWithTeams`;
-        let changeType = "created,deleted,updated";
-        let notificationUrl = process.env.notificationUrl;
-        let existingSubscriptions = null;
-
-        try {
-            var apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
-                headers: {
-                    "accept": "application/json",
-                    "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
-                }
-            });
-            existingSubscriptions = apiResponse.data.value;
-        } catch (ex) {
-            return null;
-        }
-
-        var existingSubscription = existingSubscriptions.find(subscription => subscription.resource === resource);
-
-        if (existingSubscription != null && existingSubscription.notificationUrl != notificationUrl) {
-            await this.deleteSubscription(existingSubscription.id);
-            existingSubscription = null;
-        }
-
-        try {            if (existingSubscription == null) {
-                let subscriptionCreationInformation = {
-                    changeType: changeType,
-                    notificationUrl: notificationUrl,
-                    lifecycleNotificationUrl: notificationUrl, // Adding lifecycle notification URL
-                    resource: resource,
-                    includeResourceData: true,
-                    encryptionCertificate: process.env.Base64EncodedCertificate,
-                    encryptionCertificateId: "meeting-notification",
-                    expirationDateTime: new Date(Date.now() + 4320000000).toISOString(), // Set to 50 days
-                    clientState: "clientState"
-                };
-                var response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`,subscriptionCreationInformation, {
-                    headers: {
-                        "accept": "application/json",
-                        "contentType": 'application/json',
-                        "authorization": "bearer " + applicationToken
-                    }
-                });
-                existingSubscription = response.data;
-            }
-        } catch (e) {
-            console.log("Error--" + e);
-        }
-        return existingSubscription;
-    }    
     
     /**
      * Check if a user has access to a specific channel

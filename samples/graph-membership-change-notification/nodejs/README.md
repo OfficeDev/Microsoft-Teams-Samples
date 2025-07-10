@@ -156,27 +156,34 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 You can interact with Teams Tab by subscribing the teams/channel for notifications.
 
-1. **Show Welcome - Channel**
-Welcome Message when Channel selected for subscription.
-![Channel-Welcome](Images/Channel-Welcome.png)
+1. **App Install**
+- App Install
+![AppInstall](Images/1.App_install.png)
 
-2. **Channel Notifications**
-Channel Created Update Delete Message
-![CreatedDeletedUpdated-Channel](Images/CreatedDeletedUpdated-Channel.png)
+2. **Select Shared Channel**
+- Select Shared Channel
+![SelectSharedChannel](Images/2.Select_channel.png)
 
-3. **Show Welcome - Team**
-Welcome Message when Team selected for subscription.
-![Team-Welcome](Images/Team-Welcome.PNG)
+3. **Configure Page**
+- Configure Page
+![Configure Page](Images/3.Configure.png)
 
-4. **Team Notifications**
-- Team Update Edit Message
-![TeamEditUpdate](Images/TeamEditUpdate.png)
+4. **Welcome Page**
+- Welcome Page
+![welcomePage](Images/4.StartUp_page.png)
 
+5. **User Added**
+- User Added to the channel
+![UserAdded](Images/5.User_added.png)
+
+6. **User Removed**
+- User Removed from the channel
+![UserRemoved](Images/6.User_removed.png)
+
+7. **User Membership Updated**
+- User Membership Updated
+![Membership Updated](Images/7.User_membership_updated.png)
  
 ## Further reading
 - [Change notifications for Microsoft Teams channel](https://docs.microsoft.com/en-us/graph/teams-changenotifications-team-and-channel)
 - [Create subscription permissions for supported resource](https://docs.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http#team-channel-and-chat)
-
-
-
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-change-notification-team-channel-nodejs" />

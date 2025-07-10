@@ -66,8 +66,6 @@ build/
 #############
 
 # TeamsFx files
-env/.env.*.user
-env/.env.local
 .localConfigs
 appManifest/build
 /build
@@ -76,7 +74,6 @@ appManifest/build
 node_modules/
 
 # misc
-.env
 .deployment
 .DS_Store
 
