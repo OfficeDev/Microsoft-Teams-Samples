@@ -21,12 +21,32 @@
     "requiredResourceAccess": [
         {
             "resourceAppId": "Microsoft Graph",
-            "resourceAccess": [
-                {
-                    "id": "User.Read",
-                    "type": "Scope"
-                }
-            ]
+          "resourceAccess": [
+            {
+              "id": "User.Read",
+              "type": "Scope"
+            },
+            {
+              "id": "email",
+              "type": "Scope"
+            },
+            {
+              "id": "offline_access",
+              "type": "Scope"
+            },
+            {
+              "id": "openid",
+              "type": "Scope"
+            },
+            {
+              "id": "profile",
+              "type": "Scope"
+            },
+            {
+              "id": "Team.ReadBasic.All",
+              "type": "Scope"
+            }
+          ]
         }
     ],
     "oauth2Permissions": [
@@ -91,12 +111,12 @@
             ]
         }
     ],
-    "identifierUris":[
-        "api://botid-${{AAD_APP_CLIENT_ID}}"
-    ],
+  "identifierUris": [
+    "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  ],
     "replyUrlsWithType":[
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+          "url": "https://${{BOT_DOMAIN}}/auth-end",
           "type": "Web"
         },
         {

@@ -3,7 +3,12 @@
 
 // index.js is used to setup and configure your bot
 
-// Import required pckages
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, teams, bot-framework
+// @analysis-type: code-quality, test-coverage
+
+// Import required packages
 const path = require('path');
 
 // Read botFilePath and botFileSecret from .env file.

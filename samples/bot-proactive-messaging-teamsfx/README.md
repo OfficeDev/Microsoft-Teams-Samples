@@ -8,6 +8,11 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Microsoft 365 Agents Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teams-toolkit-cli)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/demo-manifest/bot-proactive-messaging-teamsfx.zip)
+
 ## Debug
 
 - From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code. 
@@ -29,8 +34,8 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 
 ## Edit the manifest
 
-You can find the Teams app manifest in `templates/appPackage` folder. The folder contains a manifest template file:
-* `manifest.template.json`
+You can find the Teams app manifest in `appPackage` folder. The folder contains a manifest template file:
+* `manifest.json`
 
 Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
 
@@ -46,7 +51,7 @@ Deploy your project to Azure by following these steps:
 
 | From Visual Studio Code                                                                                                                                                                                                                                                                                                                                                  | From Microsoft 365 Agents Toolkit CLI                                                                                                                                                                                                                    |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Open Microsoft 365 Agents Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Microsoft 365 Agents Toolkit and click `Provision in the cloud` from DEVELOPMENT section or open the command palette and select: `Microsoft 365 Agents:Provision in the cloud`.</li><li>Open the Microsoft 365 Agents Toolkit and click `Deploy to the cloud` or open the command palette and select: `Microsoft 365 Agents:Deploy to the cloud`.</li></ul> | <ul> <li>Run command ` account login azure`.</li> <li>Run command ` account set --subscription <your-subscription-id>`.</li> <li> Run command ` provision`.</li> <li>Run command: ` deploy`. </li></ul> |
+| <ul><li>Open Microsoft 365 Agents Toolkit, and sign into Azure by clicking the `Sign in to Azure` under the `ACCOUNTS` section from sidebar.</li> <li>After you signed in, select a subscription under your account.</li><li>Open the Microsoft 365 Agents Toolkit and click `Provision` from LIFECYCLE section or open the command palette and select: `Microsoft 365 Agents:Provision`.</li><li>Open the Microsoft 365 Agents Toolkit and click `Deploy` or open the command palette and select: `Microsoft 365 Agents:Deploy`.</li></ul> | <ul> <li>Run command `atk auth login azure`.</li> <li>Run command ` auth set --subscription <your-subscription-id>`.</li> <li> Run command `atk provision`.</li> <li>Run command: `atk deploy`. </li></ul> |
 
 > Note: Provisioning and deployment may incur charges to your Azure Subscription.
 
@@ -66,12 +71,12 @@ Once the provisioning and deployment steps are finished, you can preview your ap
 
 To check that your manifest file is valid:
 
-- From Visual Studio Code: open the command palette and select: `Microsoft 365 Agents:Validate manifest file`.
+- From Visual Studio Code: open the command palette and select: `Microsoft 365 Agents:Validate Application`, then select `validate app manifest schema` option.
 - From Microsoft 365 Agents Toolkit CLI: run command ` validate` in your project directory.
 
 ## Package
 
-- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Zip Teams metadata package` or open the command palette and select `Microsoft 365 Agents:Zip Teams metadata package`.
+- From Visual Studio Code: open the Microsoft 365 Agents Toolkit and click `Zip App Package` or open the command palette and select `Microsoft 365 Agents:Zip App Package`.
 - Alternatively, from the command line run ` package` in the project directory.
 
 ## Publish to Teams

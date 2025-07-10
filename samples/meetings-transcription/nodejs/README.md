@@ -28,6 +28,12 @@ The Meeting Transcript Bot utilizes Microsoft Graph API to fetch meeting transcr
 
 ![MeetingTranscript Module](Images/MeetingTranscript.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meeting Transcript Bot uses Microsoft Graph API:** [Manifest](/samples/meetings-transcription/csharp/demo-manifest/meetings-transcription.zip)
+
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -49,7 +55,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.

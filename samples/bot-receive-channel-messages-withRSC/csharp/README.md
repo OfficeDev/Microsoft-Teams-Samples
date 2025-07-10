@@ -26,10 +26,10 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Interaction with app
 
-![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
+![RSC Module](ReceiveMessagesWithRSC/Images/Bot_Channel_Messenging-RSC.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Receive Channel messages with RSC permissions:** [Manifest](/samples/bot-receive-channel-messages-withRSC/csharp/demo-manifest/Bot-RSC.zip)
 
@@ -57,7 +57,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -111,7 +111,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with MicrosoftAppId. E.g. `"api://botid-{{MicrosoftAppId}}"`.
     
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Sideload** in a team to test
+    - **Upload** in a team to test
          - Select or create a team
          - Select the ellipses **...** from the left pane. The drop-down menu appears.
          - Select **Manage Team**, then select **Apps** 
@@ -128,23 +128,27 @@ The bot receives the message without being @mentioned.
 
 ## Running the sample
 
-![App Installation](ReceiveMessagesWithRSC/Images/1.RSC_Install_Scopes.png)
+![App Installation](ReceiveMessagesWithRSC/Images/1.Install.png)
 
 - Showing Welcome message 
 
-![Channel messages](ReceiveMessagesWithRSC/Images/3.Notification.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/2.Installed.png)
+
+![Channel messages](ReceiveMessagesWithRSC/Images/3.Interaction.png)
 
 - Showing messages based on option selected
 
-![Channel messages](ReceiveMessagesWithRSC/Images/2.botWithRSCFlow.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/4.1_and_2_Command_Interaction.png)
 
 - Adding to group chat
 
-![Add To Group Chat ](ReceiveMessagesWithRSC/Images/4.RSC_Groupchat.png)
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/5.Install_to_GC.png)
+
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/6.Installed.png)
 
 - Receives messages in group chat without being @mentioned.
 
-![Channel messages](ReceiveMessagesWithRSC/Images/5.RSC_GroupConversation.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/7.1_and_2_Command_Interaction.png)
 
 ## Deploy the bot to Azure
 

@@ -177,7 +177,7 @@ namespace ReleaseManagement.Helpers
             {
                 var result = await graphClient.AppCatalogs.TeamsApps.GetAsync(config =>
                 {
-                    config.QueryParameters.Filter = $"externalId eq '{azureSettings.Value.MicrosoftAppId}'";
+                    config.QueryParameters.Filter = $"externalId eq '{azureSettings.Value.MicrosoftTeamsAppId}'";
                 });
 
                 return result?.Value?.FirstOrDefault()?.Id;

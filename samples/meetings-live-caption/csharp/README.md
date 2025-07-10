@@ -21,9 +21,9 @@ Once the meeting is scheduled, follow this doc to enable [Provide Cart Catptions
 Copy the CART link it will used while configuring tab for meeting.
 
 ## Enable CART Captions From Settings
-![Enable CART-1](Images/8.SettingToEnableCart-1.png)
+![Enable CART-1](MeetingLiveCaption/Images/8.SettingsToEnableCart-2.png)
 
-![Enable CART-2](Images/7.SettingsToEnableCart-2.png)
+![Enable CART-2](MeetingLiveCaption/Images/7.SettingToEnableCart-1.png)
 
 ## Included Features
 * Meeting Chat 
@@ -34,6 +34,11 @@ Copy the CART link it will used while configuring tab for meeting.
 ## Interaction with app
 
 ![bot-conversations ](MeetingLiveCaption/Images/MeetingCaption.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meetings Live Caption:** [Manifest](/samples/meetings-live-caption/csharp/demo-manifest/meetings-live-caption.zip)
 
 ## Prerequisites
 
@@ -59,7 +64,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
     </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
-> If you do not have permission to upload custom apps (sideloading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup.
 
@@ -107,25 +112,25 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Running the sample
 
-![Install App](Images/1.Install.png)
+![Install App](MeetingLiveCaption/Images/1.Install.png)
 
-![Add TO Meeting](Images/2.AddToMeeting.png)
+![Add TO Meeting](MeetingLiveCaption/Images/2.AddToMeeting.png)
 
-![Configurable Tab ](Images/3.ConfigWithoutCartURL.png)
+![Configurable Tab ](MeetingLiveCaption/Images/3.ConfigWithoutCartURL.png)
 
-![Configurable Tab](Images/4.ConfigWithCartURL.png)
+![Configurable Tab](MeetingLiveCaption/Images/4.ConfigWithCartURL.png)
 
 1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
-![Add Tab](Images/9.ScheduleMeeting.png)
+![Add Tab](MeetingLiveCaption/Images/9.ScheduleMeeting.png)
 
 2. Once meeting started, turn on live caption.
-![Enable Live Caption](Images/5.SettingsToEnableLiveCaption.png)
+![Enable Live Caption](MeetingLiveCaption/Images/5.SettingsToEnableLiveCaption.png)
 
 3. Once the live caption has started, you can use the app to send live caption.
-![Send live caption](Images/6.LiveCaption.png)
+![Send live caption](MeetingLiveCaption/Images/6.LiveCaption.png)
 
 4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](Images/LiveCaption.png)
+![Caption in meeting](MeetingLiveCaption/Images/6.LiveCaption.png)
 
 
 ## Further reading

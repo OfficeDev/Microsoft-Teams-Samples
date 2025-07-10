@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. **Note**: Copy the User Id you used to granting the policy. You need while configuring the .env file.
 
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
