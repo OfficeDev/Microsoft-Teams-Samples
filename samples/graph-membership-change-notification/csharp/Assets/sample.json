@@ -4,12 +4,11 @@
     "source": "officeDev",
     "title": "Graph Membership Change Notification",
     "shortDescription": "This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, using C# and the Microsoft Graph API.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-membership-change-notification/csharp",
     "longDescription": [
       "This application demonstrates how to implement real-time notifications for shared channel membership changes in Microsoft Teams. Using C# and the Microsoft Graph API, it showcases how to handle user addition, removal, and membership updates in shared channels. The sample includes comprehensive setup for Azure AD registration, bot configuration, self-signed certificate management, and can be deployed using the Microsoft 365 Agents Toolkit for Visual Studio Code. It supports RSC permissions and provides a seamless interaction through a Teams tab interface."
     ],
-    "creationDateTime": "2022-08-25",
-    "updateDateTime": "2024-10-14",
+    "creationDateTime": "2025-07-02",
     "products": [
       "Teams"
     ],
