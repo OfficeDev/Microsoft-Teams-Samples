@@ -7,7 +7,6 @@
     "longDescription": [
       "This application demonstrates how to implement real-time notifications for shared channel membership changes in Microsoft Teams. Using Node.js and the Microsoft Graph API, it showcases how to handle user addition, removal, and membership updates in shared channels. The sample includes comprehensive setup for Azure AD registration, bot configuration, self-signed certificate management, and can be deployed using the Microsoft 365 Agents Toolkit for Visual Studio Code. It supports RSC permissions and provides a seamless interaction through a Teams tab interface."
     ],    "creationDateTime": "2025-06-17",
-    "updateDateTime": "2025-06-17",
     "products": [
       "Teams"
     ],
