@@ -1,8 +1,0 @@
-# TeamsFx files
-build
-appPackage/build
-appsettings.Development.json
-.deployment
-
-# User-specific files
-*.user
