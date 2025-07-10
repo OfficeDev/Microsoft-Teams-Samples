@@ -157,31 +157,24 @@ To include resource data of graph notifications, this Graph API require self-sig
 You can interact with Teams Tab by subscribing the teams/channel for notifications.
 
 1. **App Install**
-- App Install
 ![AppInstall](Images/1.App_install.png)
 
 2. **Select Shared Channel**
-- Select Shared Channel
 ![SelectSharedChannel](Images/2.Select_channel.png)
 
 3. **Configure Page**
-- Configure Page
 ![Configure Page](Images/3.Configure.png)
 
 4. **Welcome Page**
-- Welcome Page
 ![welcomePage](Images/4.StartUp_page.png)
 
 5. **User Added**
-- User Added to the channel
 ![UserAdded](Images/5.User_added.png)
 
 6. **User Removed**
-- User Removed from the channel
 ![UserRemoved](Images/6.User_removed.png)
 
 7. **User Membership Updated**
-- User Membership Updated
 ![Membership Updated](Images/7.User_membership_updated.png)
  
 ## Further reading
