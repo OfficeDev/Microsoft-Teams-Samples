@@ -136,7 +136,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Token_Block_By_Organisation ](Images/8.Token_Block_By_Organisation.png)
 
-![Auth-logout ](Images/9.SignOut.png)
+![Auth-logout ](Images/9.Signout.png)
 
 ## Deploy the bot to Azure
 
