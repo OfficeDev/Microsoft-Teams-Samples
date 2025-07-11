@@ -1,0 +1,236 @@
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script>
+    let button;
+    microsoftTeams.app.initialize().then(() => {
+    });
+
+    getClientSideToken()
+        .then((clientSideToken) => {
+            return getServerSideToken(clientSideToken);
+        })
+        .then((serverSideToken) => {
+            return useServerSideToken(serverSideToken);
+        })
+        .catch((error) => {
+            if (error === "invalid_grant") {
+                display(`Error: ${error} - user or admin consent required`);
+                // Display in-line button so user can consent
+                button = display("Consent", "button");
+                button.onclick = (() => {
+                    requestConsent()
+                        .then((result) => {
+                            // Consent succeeded - use the token we got back
+                            getClientSideToken()
+                                .then((clientSideToken) => {
+                                    return getServerSideToken(clientSideToken);
+                                })
+                                .then((serverSideToken) => {
+                                    return useServerSideToken(serverSideToken);
+                                })
+                        })
+                        .catch((error) => {
+                            display(`ERROR ${error}`);
+                            // Consent failed - offer to refresh the page
+                            button.disabled = true;
+                            let refreshButton = display("Refresh page", "button");
+                            refreshButton.onclick = (() => { window.location.reload(); });
+                        });
+                });
+            } else {
+                // Something else went wrong
+                display(`Error from web service: ${error}`);
+            }
+        });
+
+    function getClientSideToken() {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                resolve(result);
+            }).catch((error) => {
+                reject("Error getting token: " + error);
+            });
+        });
+    }
+
+    // 2. Exchange that token for a token with the required permissions
+    //    using the web service (see /auth/token handler in app.js)
+    function getServerSideToken(clientSideToken) {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.app.getContext().then((context) => {
+                fetch('/auth/token', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        'tid': context.user.tenant.id,
+                        'token': clientSideToken
+                    }),
+                    mode: 'cors',
+                    cache: 'default'
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            // Get the response text to understand the error
+                            return response.text().then(text => {
+                                reject(`HTTP ${response.status}: ${text}`);
+                            });
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } else {
+                            serverSideToken = responseJson;
+                            localStorage.setItem("accessToken", serverSideToken);
+                            $("#createGroupChat").show();
+                            if (button)
+                                button.disabled = true;
+                            resolve(serverSideToken);
+                        }
+                    });
+            });
+        });
+    }
+
+    // 3. Get the server side token and use it to call the Graph API
+    function useServerSideToken(data) {
+        return fetch("https://graph.microsoft.com/v1.0/me/", {
+            method: 'GET',
+            headers: {
+                "accept": "application/json",
+                "authorization": "bearer " + data
+            },
+            mode: 'cors',
+            cache: 'default'
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw (`Error ${response.status}: ${response.statusText}`);
+                }
+            })
+    }
+
+    // Show the consent pop-up
+    function requestConsent() {
+        return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/auth/auth-start",
+                width: 600,
+                height: 535
+            }).then((result) => {
+                let data = localStorage.getItem(result);
+                localStorage.removeItem(result);
+                resolve(data);
+            }).catch((reason) => {
+                reject(JSON.stringify(reason));
+            });
+        });
+    }
+
+    // Add text to the display in a <p> or other HTML element
+    function display(text, elementTag) {
+        var logDiv = document.getElementById('logs');
+        var p = document.createElement(elementTag ? elementTag : "p");
+        p.innerText = text;
+        logDiv.append(p);
+        return p;
+    }
+
+</script>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+<style>
+    #createGroupChat {
+        width: 150px;
+        background-color: #50B8CD;
+        font-size: 16px;
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        margin-left: 15px;
+        cursor: pointer;
+        padding: 5px;
+    }
+</style>
+
+<body class="theme-light"></body>
+<div class="surface"></div>
+<div class="panel"></div>
+<h3 id="welcomeMsg">Welcome to Chat LifeCycle Application!!</h3>
+<div id="logs" style="overflow-x: hidden; overflow-y: scroll;"></div>
+<p id="html"></p>
+<h4 id="successMsg"></h4>
+<button id="createGroupChat" style="display: none;">Create Group Chat</button>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        microsoftTeams.app.initialize().then(() => {
+            $("#createGroupChat").on('click', function (e) {
+                e.preventDefault();
+                let baseURL = window.location.origin;
+                $.ajax({
+                    url: baseURL + "/api/getAdaptiveCard",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ token: localStorage.getItem("accessToken") })
+                }).done(function (data) {
+                    let taskInfo = {
+                        title: null,
+                        height: null,
+                        width: null,
+                        url: null,
+                        card: null,
+                        fallbackUrl: null,
+                        completionBotId: null,
+                    };
+
+                    taskInfo.card = data.content;
+                    taskInfo.title = "Create Groupchat";
+
+                    // Set fallback URL
+                    taskInfo.fallbackUrl = taskInfo.url;
+                    microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                });
+
+                submitHandler = (err, result) => {
+                    if (result) {
+                        microsoftTeams.app.initialize().then(() => {
+                            microsoftTeams.app.getContext().then((context) => {
+                                var userId = context.user.id;
+                                var resultObject = JSON.parse(result);
+                                $.ajax({
+                                    url: baseURL + "/api/createGroupChat",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    data: JSON.stringify({ 
+                                        token: localStorage.getItem("accessToken"), 
+                                        users: resultObject.users, 
+                                        userId: userId, 
+                                        title: resultObject.title 
+                                    })
+                                }).done(function (data) {
+                                    $("#createGroupChat").hide();
+                                    $("#welcomeMsg").hide();
+                                    showSuccessMessage();
+                                });
+                            });
+                        });
+                    }
+                };
+
+                function showSuccessMessage() {
+                    document.getElementById("successMsg").innerHTML = "Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
+                }
+            });
+        });
+    });
+</script>

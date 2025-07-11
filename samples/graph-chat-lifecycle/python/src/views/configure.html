@@ -1,0 +1,30 @@
+<div class="font-semibold font-title">
+    <label for="tabChoice"> Chat LifeCycle Application</label>
+</div>
+<div>
+    <label for="tabChoice">
+        | Click Save below to set up the tab
+    </label>
+</div>
+
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
+<script>
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.notifySuccess();
+
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.pages.config.setConfig({
+                entityID: "Chat Lifecycle App",
+                contentUrl: `${window.location.origin}/tab`,
+                suggestedTabName: "Chat Lifecycle App",
+                websiteUrl: `${window.location.origin}/tab`,
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.pages.config.setValidityState(true);
+    });
+</script>
