@@ -32,7 +32,11 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Interaction with app
 
-![bot-teams-auth ](Images/Bot_Teams_Authentication.gif)
+- **Bot Teams Authentication Teams Client/Web**
+![bot-teams-auth](Images/Bot_Teams_Auth_Web.gif)
+
+- **Bot Teams Authentication Teams Desktop**
+![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -126,7 +130,15 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Welcome Message ](Images/3.Welcome_Message.png)
 
-![Login Prompt ](Images/4.Oauth_Login_Prompt.png)
+**Login UI: OAuth Prompt**
+- The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
+- Below are sample UI captures demonstrating how the login experience appears on each:
+
+- **Teams Desktop:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/4.Oauth_Login_Prompt.png)
+
+- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
+![auth-card ](Images/11.TeamsWeb_Oauth_AdaptiveCard.png)
 
 ![Select_Account_For_Permissions ](Images/5.Select_Account_For_Permissions.png)
 

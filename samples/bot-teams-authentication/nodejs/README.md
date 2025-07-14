@@ -25,7 +25,12 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
 - **Interaction with the bot**
-![bot-teams-auth ](Images/bot-teams-auth.gif)
+
+- **Bot Teams Authentication Teams Client/Web**
+![bot-teams-auth](Images/Bot_Teams_Auth_Web.gif)
+
+- **Bot Teams Authentication Teams Desktop**
+![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -115,23 +120,29 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 **Install app:**
 
-![add-App ](Images/1.Install.png)
+![add-App ](Images/9.Desktop_OpenApp.png)
 
 **Welcome to teamsbot:**
 
-![added-App ](Images/2.Welcome.png)
+![added-App ](Images/10.Desktop_WelcomeMsg.png)
 
-**Login UI: Authentication success:**
+**Login UI: OAuth Prompt**
+- The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
+- Below are sample UI captures demonstrating how the login experience appears on each:
 
-![auth-login ](Images/3.AuthLogin.png)
+- **Teams Desktop:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/11.Desktop_OAuth_Prompt.png)
 
-**Authentication token:**
+- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
+![auth-card ](Images/3.Web_Teams_SignIn_Card.png)
 
-![auth-Token ](Images/3.AuthToken.png)
+**Authentication Success And Token:**
+
+![auth-Token ](Images/13.Desktop_Login_Success_And_Token.png)
 
 **Logout UI:**
 
-![logout ](Images/4.Signout.png)
+![logout ](Images/14.Desktop_Logout.png)
 
 ## Deploy the bot to Azure
 
