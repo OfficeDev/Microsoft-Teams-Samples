@@ -44,7 +44,7 @@ namespace ChangeNotification.Helper
         
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await InitializeAllSubscription("", "");
+            await InitializeAllSubscription("", "", "");
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -56,7 +56,7 @@ namespace ChangeNotification.Helper
 
         public override async Task StartAsync(CancellationToken stoppingToken)
         {
-            await InitializeAllSubscription("", "");
+            await InitializeAllSubscription("", "", "");
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -66,7 +66,7 @@ namespace ChangeNotification.Helper
             }
         }
 
-        public async Task InitializeAllSubscription(string teamId, string pageId)
+        public async Task InitializeAllSubscription(string teamId, string pageId, string channelId)
         {
             this.pageId = pageId;
             _logger.LogWarning("InitializeAllSubscription-started");
@@ -74,12 +74,8 @@ namespace ChangeNotification.Helper
             if (pageId == "1")
             {
                 await CreateNewSubscription(teamId);
+                await CreateSharedWithTeamsSubscription(teamId, channelId);
                 await this.CheckSubscriptions().ConfigureAwait(false);
-            }
-            else
-            {
-                await CreateNewSubscriptionForTeam(teamId);
-                await this.CheckSubscriptionsForTeams().ConfigureAwait(false);
             }
             
             _logger.LogWarning("InitializeAllSubscription-completed");
@@ -96,20 +92,6 @@ namespace ChangeNotification.Helper
             foreach (var subscription in Subscriptions)
             {
                 await RenewSubscription(subscription.Value);
-            }
-        }
-
-        /// <summary>
-        /// Checking Subsciption for Teams
-        /// </summary>
-        /// <returns></returns>
-        public async Task CheckSubscriptionsForTeams()
-        {
-            _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
-
-            foreach (var subscription in Subscriptions)
-            {
-                await RenewSubscriptionForTeams(subscription.Value);
             }
         }
 
@@ -135,14 +117,14 @@ namespace ChangeNotification.Helper
         /// </summary>
         /// <param name="teamId"></param>
         /// <returns></returns>
-        private async Task<Subscription> CreateNewSubscriptionForTeam(string teamId)
+        private async Task<Subscription> CreateSharedWithTeamsSubscription(string teamId, string channelId)
         {
             _logger.LogWarning($"CreateNewSubscription-start: {teamId}");
 
             if (string.IsNullOrEmpty(teamId))
                 return null;
 
-            var resource = $"/teams/{teamId}";
+            var resource = $"/teams/{teamId}/channels/{channelId}/sharedWithTeams";
 
             return await CreateSubscriptionWithResourceForTeams(resource);
         }
@@ -232,11 +214,12 @@ namespace ChangeNotification.Helper
 
             if (Subscriptions.Any(s => s.Value.Resource == resource && s.Value.ExpirationDateTime < DateTime.UtcNow))
                 return null;
-           
-            IGraphServiceSubscriptionsCollectionPage teamexistingSubscriptions = null;
+
+            IGraphServiceSubscriptionsCollectionPage channelexistingSubscriptions = null;
+
             try
             {
-                teamexistingSubscriptions = await graphServiceClient
+                channelexistingSubscriptions = await graphServiceClient
                           .Subscriptions
                           .Request().
                           GetAsync();
@@ -246,37 +229,35 @@ namespace ChangeNotification.Helper
                 _logger.LogError(ex, $"CreateNewSubscription-ExistingSubscriptions-Failed: {resource}");
                 return null;
             }
-           
-            var notificationUrlteams = this.botSettings.Value.BaseUrl + "/api/team";
-            var existingSubscriptionForTeam = teamexistingSubscriptions.FirstOrDefault(s => s.Resource == resource);
 
-            if (existingSubscriptionForTeam != null && existingSubscriptionForTeam.NotificationUrl != notificationUrlteams)
+            var notificationUrl = this.botSettings.Value.BaseUrl + "/api/notifications";
+            var existingSubscriptionForChannel = channelexistingSubscriptions.FirstOrDefault(s => s.Resource == resource);
+            if (existingSubscriptionForChannel != null && existingSubscriptionForChannel.NotificationUrl != notificationUrl)
             {
                 _logger.LogWarning($"CreateNewSubscription-ExistingSubscriptionFound: {resource}");
-                await DeleteSubscription(existingSubscriptionForTeam);
-                existingSubscriptionForTeam = null;
+                await DeleteSubscription(existingSubscriptionForChannel);
+                existingSubscriptionForChannel = null;
             }
 
-            if (existingSubscriptionForTeam == null)
+            if (existingSubscriptionForChannel == null)
             {
-                var sub = new Subscription
+                var channelsub = new Subscription
                 {
-
                     Resource = resource,
                     EncryptionCertificate = this.botSettings.Value.Base64EncodedCertificate,
                     EncryptionCertificateId = this.botSettings.Value.EncryptionCertificateId,
                     IncludeResourceData = true,
-                    ChangeType = "updated",
-                    NotificationUrl = notificationUrlteams,
+                    ChangeType = "created,deleted",
+                    NotificationUrl = notificationUrl,
                     ClientState = "ClientState",
                     ExpirationDateTime = DateTime.UtcNow + new TimeSpan(days: 0, hours: 0, minutes: SubscriptionExpirationTimeInMinutes, seconds: 0)
                 };
                 try
                 {
-                    existingSubscriptionForTeam = await graphServiceClient
+                    existingSubscriptionForChannel = await graphServiceClient
                               .Subscriptions
                               .Request()
-                              .AddAsync(sub);
+                              .AddAsync(channelsub);
                 }
                 catch (Exception ex)
                 {
@@ -285,9 +266,9 @@ namespace ChangeNotification.Helper
                 }
             }
 
-            Subscriptions[existingSubscriptionForTeam.Id] = existingSubscriptionForTeam;
+            Subscriptions[existingSubscriptionForChannel.Id] = existingSubscriptionForChannel;
             _logger.LogWarning($"Subscription Created for TeamId: {resource}");
-            return existingSubscriptionForTeam;
+            return existingSubscriptionForChannel;
         }
 
         /// <summary>
@@ -438,9 +419,9 @@ namespace ChangeNotification.Helper
             {
                 // Create confidential client application
                 var app = ConfidentialClientApplicationBuilder
-                    .Create(botSettings.Value.MicrosoftAppId) // Correctly access 'MicrosoftAppId' from 'botSettings.Value'
-                    .WithClientSecret(botSettings.Value.MicrosoftAppPassword) // Correctly access 'MicrosoftAppPassword' from 'botSettings.Value'
-                    .WithAuthority(AzureCloudInstance.AzurePublic, botSettings.Value.MicrosoftAppTenantId) // Correctly access 'MicrosoftAppTenantId' from 'botSettings.Value'
+                    .Create(botSettings.Value.MicrosoftAppId) 
+                    .WithClientSecret(botSettings.Value.MicrosoftAppPassword) 
+                    .WithAuthority(AzureCloudInstance.AzurePublic, botSettings.Value.MicrosoftAppTenantId) 
                     .Build();
 
                 // Define the resource scope

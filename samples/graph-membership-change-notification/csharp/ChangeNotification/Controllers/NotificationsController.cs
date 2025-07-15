@@ -69,13 +69,13 @@ namespace ChangeNotification.Controllers
         /// </summary>
         /// <param name="teamId" name="pageId></param>
         /// <returns>ResourceList</returns>
-        [Route("{teamId}/{pageId}")]
+        [Route("{teamId}/{pageId}/{channelId}")]
         [HttpPost]
-        public async Task<IActionResult> channelAsync([FromRoute] string teamId, string pageId)
+        public async Task<IActionResult> channelAsync([FromRoute] string teamId, string pageId, string channelId)
         {
             try
             {
-                await this._subscriptionManager.InitializeAllSubscription(teamId, pageId);
+                await this._subscriptionManager.InitializeAllSubscription(teamId, pageId, channelId);
                 return this.Ok(GlobalVariable.channelResourceList);
 
             }
@@ -134,8 +134,7 @@ namespace ChangeNotification.Controllers
                         var userId = channelResource.UserId;     // Adjust property name as per your ChannelResource model
                         var tenantId = channelResource.TenantId; // Adjust property name as per your ChannelResource model
 
-                        if (!string.IsNullOrEmpty(teamId) && !string.IsNullOrEmpty(channelId) &&
-                            !string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(tenantId))
+                        if (!string.IsNullOrEmpty(teamId) && !string.IsNullOrEmpty(channelId) && !string.IsNullOrEmpty(tenantId))
                         {
 
 

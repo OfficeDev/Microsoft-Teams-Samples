@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, using Microsoft Graph and C#.
+description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using Microsoft Graph and C#.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-membership-change-notificat
 
 # Change Notifications For Team and Channel Using Microsoft Graph C#
 
-This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated. The application leverages C# and the Microsoft Graph API to deliver real-time notifications. Built using C# and the Microsoft Graph API, it provides detailed setup instructions, including Azure AD registration, bot configuration, and certificate management, making it easy for developers to create interactive and responsive applications.
+This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages C# and the Microsoft Graph API to deliver real-time notifications. Built using C# and the Microsoft Graph API, it provides detailed setup instructions, including Azure AD registration, bot configuration, and certificate management, making it easy for developers to create interactive and responsive applications.
 
 ## Included Features
 * Tabs
