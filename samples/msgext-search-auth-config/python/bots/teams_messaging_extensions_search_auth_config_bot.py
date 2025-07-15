@@ -341,39 +341,77 @@ class TeamsMessagingExtensionsSearchAuthConfigBot(TeamsActivityHandler):
 
     def _get_search_results(self, query: str):
         """
-        Fetch the top 10 search results from PyPI using HTML scraping.
+        Fetch the top 10 search results from PyPI using the JSON API.
 
         :param query: The package name or search query
         :return: List of search results
         """
-        search_url = f"https://pypi.org/search/?q={query}&page=1"
+        # Using PyPI's JSON API endpoint
+        search_url = f"https://pypi.org/pypi/{urllib.parse.quote(query)}/json"
         search_results = []
 
         try:
-            # Send GET request to the PyPI search page
-            response = requests.get(search_url, headers={"User-Agent": "TeamsBot/1.0"})
-            response.raise_for_status()  # Raise an exception for HTTP errors
-
-            # Parse the HTML response to extract package information
-            soup = BeautifulSoup(response.text, "html.parser")
-            for package in soup.find_all("a", class_="package-snippet", limit=10):  # Limit to 10 results
-                name_tag = package.find("span", class_="package-snippet__name")
-                version_tag = package.find("span", class_="package-snippet__version")
-                summary_tag = package.find("p", class_="package-snippet__description")
-
-                # Safely extract text from tags, ensuring no NoneType error
-                name = name_tag.text if name_tag else "Unknown"
-                version = version_tag.text if version_tag else "N/A"
-                summary = summary_tag.text if summary_tag else "No description provided."
-
+            # First try exact match
+            response = requests.get(
+                search_url,
+                headers={
+                    "Accept": "application/json",
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                },
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                # Found exact match
+                data = response.json()
+                info = data.get("info", {})
                 search_results.append({
-                    "name": name,
-                    "version": version,
-                    "summary": summary
+                    "name": info.get("name", "Unknown"),
+                    "version": info.get("version", "N/A"),
+                    "summary": info.get("summary", "No description provided.")
                 })
+            else:
+                # If no exact match, use the search endpoint
+                search_url = "https://pypi.org/search/"
+                params = {
+                    "q": query,
+                    "o": "",  # ordering
+                }
+                response = requests.get(
+                    search_url,
+                    params=params,
+                    headers={
+                        "Accept": "text/html",
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                    },
+                    timeout=10
+                )
+                response.raise_for_status()
+
+                # Parse the HTML response to extract package information
+                soup = BeautifulSoup(response.text, "html.parser")
+                results = soup.select("a.package-snippet")
+
+                for package in results[:10]:  # Limit to 10 results
+                    name = package.select_one(".package-snippet__name")
+                    version = package.select_one(".package-snippet__version")
+                    description = package.select_one(".package-snippet__description")
+
+                    search_results.append({
+                        "name": name.text.strip() if name else "Unknown",
+                        "version": version.text.strip() if version else "N/A",
+                        "summary": description.text.strip() if description else "No description provided."
+                    })
+
+            print(f"Found {len(search_results)} results")
+            for result in search_results:
+                print(f"Package: {result['name']} ({result['version']})")
+
+        except requests.exceptions.Timeout:
+            print("Request timed out")
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching search results: {e}")
+            print(f"Error making request: {e}")
         except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            print(f"Unexpected error: {e}")
 
         return search_results
