@@ -15,6 +15,7 @@ class ChangeNotificationChannel extends Component {
 
         this.state = {
             teamId: "",
+            channelId: "",
             changeNotifications: [],
             teamsContext: {}
         }
@@ -26,23 +27,24 @@ class ChangeNotificationChannel extends Component {
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             console.log("Teams SDK initialized");
+            debugger;
             microsoftTeams.app.getContext().then((context) => {
                 this.setState({ teamId: context.channel.ownerGroupId});
-                this.initializeData(context.channel.ownerGroupId);
+                this.setState({ channelId: context.channel.id });
+                this.initializeData(context.channel.ownerGroupId, context.channel.id);
             }).catch(err => {
                 console.error("Failed to get context:", err);
             });
         }).catch(err => {
             console.error("Teams SDK failed to initialize:", err);
         });
-
     }
 
     /// </summary>
     /// <param name="teamId"></param>
     /// </summary>
     initializeData = async (teamId) => {
-        await axios.post(`/api/changeNotification?teamId=${teamId}`);
+        await axios.post(`/api/changeNotification?teamId=${teamId}&channelId=${this.state.channelId}`);
         await this.fetchNotifications();
     }
 
@@ -64,6 +66,26 @@ class ChangeNotificationChannel extends Component {
             elements.push(
                 <div key={item.createdDate}>
                     {(() => {
+                        if (item.changeType ==='created' && item.displayName !== '') {
+                            return (
+                                <div>
+                                    <p><b>Description:</b> Channel is shared with a Team</p>
+                                    <p><b>Event Type:</b> <span className="statusColor"><b>{item.changeType}</b></span></p>
+                                    <p><b>Team Name:</b> {item.displayName}</p>
+                                </div>
+                            );
+                        }
+
+                        if (item.changeType ==='deleted' && item.displayName !== '') {
+                            return (
+                                <div>
+                                    <p><b>Description:</b> Channel is unshared from a Team</p>
+                                    <p><b>Event Type:</b> <span className="deleteStatus"><b>{item.changeType}</b></span></p>
+                                    <p><b>Team Name:</b> {item.displayName}</p>
+                                </div>
+                            );
+                        }
+
                         if (item.changeType === 'updated') {
                             return (
                                 <div>
@@ -93,6 +115,8 @@ class ChangeNotificationChannel extends Component {
                                 </div>
                             );
                         }
+
+                        
                     })()}
                     <p>
                         <b>Date:</b> {moment(item.createdDate).format('LLL')} 
@@ -116,7 +140,7 @@ class ChangeNotificationChannel extends Component {
             <div>
                 <h3 className="headcolor">Membership Change Notifications</h3>
                 <h4>Welcome to Membership Change Notification Tab</h4>
-                <p>This Tab has successfully configured, you will get notifications of direct/indirect membership change (add/update/remove) in this tab.</p>
+                <p>This Tab has successfully configured, you will get notifications of direct/indirect membership change (add/update/remove) in this tab and when the channel is shared/unshared with a team.</p>
             </div>
         );
     }

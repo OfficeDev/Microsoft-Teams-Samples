@@ -12,9 +12,9 @@ const createChannelAsync = async (req, res) => {
     try {
         debugger;
         await GraphHelper.createSubscription(teamId, pageId);
+        await GraphHelper.createSharedWithTeamSubscription(teamId, channelId, pageId);
         res.status(202).send();
-    }
-    catch (ex) {
+    } catch (ex) {
         debugger;
         console.error(ex);
         res.status(500).send();

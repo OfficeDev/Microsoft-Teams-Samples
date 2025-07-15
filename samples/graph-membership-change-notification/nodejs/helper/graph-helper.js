@@ -37,10 +37,6 @@ class GraphHelper {
             resource = `/teams/${teamsId}/channels/getAllMembers?notifyOnIndirectMembershipUpdate=true&suppressNotificationWhenSharedUnsharedWithTeam=true`;
             changeType = "created,deleted,updated";
         }
-        else {
-            resource = `/teams/${teamsId}`;
-            changeType = "deleted,updated"
-        }
 
         let existingSubscriptions = null;
 
@@ -74,7 +70,7 @@ class GraphHelper {
                 let subscriptionCreationInformation = {
                     changeType: changeType,
                     notificationUrl: notificationUrl,
-                    lifecycleNotificationUrl: notificationUrl, // Adding lifecycle notification URL
+                    lifecycleNotificationUrl: notificationUrl, 
                     resource: resource,
                     includeResourceData: true,
                     encryptionCertificate: process.env.Base64EncodedCertificate,
@@ -99,6 +95,95 @@ class GraphHelper {
         }
 
         return existingSubscription;
+    }
+
+    /**
+    * PageId =1 for Channel Subscription
+    * PageId =2 for Team Subscription.
+    * @param {pageId}. Team and channel subscription.
+    */
+    static async createSharedWithTeamSubscription(teamsId, channelId, pageId) {
+        debugger;
+        
+        // Parameter validation
+        if (!teamsId || !channelId) {
+            console.error("teamsId and channelId are required parameters");
+            return null;
+        }
+        
+        // Default pageId to "1" if undefined
+        if (!pageId) {
+            console.log("pageId is undefined, defaulting to '1' for Channel Subscription");
+            pageId = "1";
+        }
+        
+        let applicationToken = await auth.getAccessToken();
+        let resource = "";
+        let changeType = "";
+        let notificationUrl = process.env.notificationUrl;
+
+        if (pageId === "1") {
+            resource = `/teams/${teamsId}/channels/${channelId}/sharedWithTeams`;
+            changeType = "created,deleted";
+        }
+
+        let existingSharedWithTeamSubscriptions = null;
+
+        try {
+            var apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
+                headers: {
+                    "accept": "application/json",
+                    "contentType": 'application/json',
+                    "authorization": "bearer " + applicationToken
+                }
+            });
+
+            existingSharedWithTeamSubscriptions = apiResponse.data.value;
+        }
+        catch (ex) {
+            return null;
+        }
+
+        var existingSharedWithTeamSubscription = existingSharedWithTeamSubscriptions.find(subscription => subscription.resource === resource);
+
+        if (existingSharedWithTeamSubscription != null && existingSharedWithTeamSubscription.notificationUrl != notificationUrl) {
+            console.log(`CreateNewSubscription-ExistingSubscriptionFound: ${resource}`);
+            await this.deleteSubscription(existingSharedWithTeamSubscription.id);
+            existingSharedWithTeamSubscription = null;
+        }
+
+        try {
+
+            if (existingSharedWithTeamSubscription == null) {
+
+                let subscriptionCreationInformation = {
+                    changeType: changeType,
+                    notificationUrl: notificationUrl,
+                    lifecycleNotificationUrl: notificationUrl, 
+                    resource: resource,
+                    includeResourceData: true,
+                    encryptionCertificate: process.env.Base64EncodedCertificate,
+                    encryptionCertificateId: "meeting-notification",
+                    expirationDateTime: new Date(Date.now() + 36000000).toISOString(),
+                    clientState: "clientState"
+                };
+
+                var response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`,subscriptionCreationInformation, {
+                    headers: {
+                        "accept": "application/json",
+                        "contentType": 'application/json',
+                        "authorization": "bearer " + applicationToken
+                    }
+                });
+
+                existingSharedWithTeamSubscription = response.data;
+            }
+        }
+        catch (e) {
+            console.log("Error--" + e);
+        }
+
+        return existingSharedWithTeamSubscription;
     }
     
     /**
