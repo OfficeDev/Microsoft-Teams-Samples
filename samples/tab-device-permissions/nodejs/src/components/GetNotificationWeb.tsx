@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import {Text, Button, Card } from '@fluentui/react-components'
