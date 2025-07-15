@@ -18,7 +18,6 @@ from botbuilder.core import (
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
-from botbuilder.core import ConversationState
 
 from bots import AuthBot
 import logging
