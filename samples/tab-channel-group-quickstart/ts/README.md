@@ -11,18 +11,19 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07/07/2021 01:38:27 PM"
+ updatedDate: "07/08/2025 3:41:25 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-ts
 ---
 
 # Tabs quick start
 
-Explore this simple hello world app that showcases channel and group tabs in Microsoft Teams, designed to enhance collaboration around web-based content. This sample includes comprehensive setup steps, requirements, and deployment instructions, allowing you to easily integrate and run the app in your Teams environment.
+Explore this simple app that showcases channel and group tabs in Microsoft Teams, designed to enhance collaboration around web-based content. This sample includes comprehensive setup steps, requirements, and deployment instructions, allowing you to easily integrate and run the app in your Teams environment.
 
 ## Included Features
 * Tabs
 
 ## Interaction with app.
-![tabconfigure](Images/TabChannelGroupModule.gif)
+![tabconfigure](Images/tab_channel_group_module.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -114,12 +115,13 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 `npm run build`
 
 ## Running the sample.
+![install](Images/install.png)
 
-![tabconfigure](Images/tabconfigure.png)
+![tabconfigure](Images/tab_configure.png)
 
-![setuptab](Images/setuptab.png)
+![setuptab](Images/setup_tab.png)
 
-![Helloworld](Images/Helloworld.png)
+![Helloworld](Images/hello_world.png)
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -132,7 +134,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Further Reading
 
 [Create a group tab](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
-
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-quickstart-ts" />
