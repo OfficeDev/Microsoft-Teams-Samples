@@ -1,0 +1,42 @@
+﻿@* Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT Lic *@
+
+<header class="header">
+    <div class="header-inner-container">
+        <div class="header-icon"></div>
+        <div class="header-text">Tab App Navigation</div>
+    </div>
+</header>
+<div class="row">
+    <div class="main-content-area">
+        <div class="content-title">Your App is ready!</div>
+        <div class="main-text main-text-p1">
+            You can test your app<br />
+            by installing the manifest in Teams.
+        </div>
+    </div>
+</div>
+
+<div id="congrats" class="text-green-500 font-semibold">
+    
+</div>
+
+@section Scripts {
+    <script>
+        function handleLoadMicrosoftTeamsSDK() {
+            if (window.microsoftTeams) {
+                microsoftTeams.app.initialize().then(() => {                  
+                    document.getElementById("congrats").innerText = "Microsoft Teams SDK loaded successfully!";
+                }).catch(function(error) {
+                    console.error("Error initializing Teams SDK:", error);
+                });
+                
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+                document.getElementById("congrats").innerText = "Microsoft Teams SDK not loaded or not running inside Teams ";
+            }
+        }
+        // Call the function on page load
+        window.onload = handleLoadMicrosoftTeamsSDK;
+    </script>
+}
