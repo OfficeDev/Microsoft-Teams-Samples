@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph Installation App Demo - Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <label>
+                <input type="radio" name="notificationType" value="Create" onclick="onClick()">
+                Add App List tab
+            </label>
+        </div>
+    </div>
+
+    <!-- Microsoft Teams SDK -->
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        function onClick() {
+            microsoftTeams.pages.config.setValidityState(true);
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    try {
+                        const radios = document.getElementsByName('notificationType');
+                        const selectedRadio = Array.from(radios).find(radio => radio.checked);
+                        
+                        if (!selectedRadio) {
+                            saveEvent.notifyFailure("Please select an option");
+                            return;
+                        }
+
+                        // Get the current origin
+                        const origin = window.location.origin;
+
+                        microsoftTeams.pages.config.setConfig({
+                            entityID: "App Installation Demo",
+                            contentUrl: `${origin}/installedAppsList?tenantId={tid}`,
+                            suggestedTabName: "App Installation",
+                            websiteUrl: `${origin}/installedAppsList?tenantId={tid}`
+                        });
+
+                        saveEvent.notifySuccess();
+                    } catch (error) {
+                        saveEvent.notifyFailure(error.message);
+                    }
+                });
+            }).catch(error => {
+                console.error('Teams initialization error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
