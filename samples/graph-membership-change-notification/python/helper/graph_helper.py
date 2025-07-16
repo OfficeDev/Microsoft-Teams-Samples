@@ -56,23 +56,85 @@ class GraphHelper:
                 "resource": resource,
                 "includeResourceData": True,
                 "encryptionCertificate": os.getenv("Base64EncodedCertificate"),
-                "encryptionCertificateId": "meeting-notification",
+                "encryptionCertificateId": "change-notification",
                 "expirationDateTime": GraphHelper.get_expiration_time(hours=10),
                 "clientState": "clientState"
             }
 
             try:
                 resp = requests.post(
-                    "https://graph.microsoft.com/v1.0/subscriptions",
+                    "https://graph.microsoft.com/beta/subscriptions",
                     headers=headers,
                     json=subscription_payload
                 )
+                resp.raise_for_status()  # This will raise an exception for HTTP error status codes
                 existing_subscription = resp.json()
             except requests.RequestException as e:
-                print(f"Error--{e}")
+                print(f"Error creating subscription: {e}")
+                if hasattr(e, 'response') and e.response is not None:
+                    print(f"Response status: {e.response.status_code}")
+                    print(f"Response body: {e.response.text}")
                 return None
 
         return existing_subscription
+
+    @staticmethod
+    def create_shared_with_team_subscription(teams_id, page_id, channel_id):
+        token = AuthHelper.get_access_token()
+        notification_url = os.getenv("notificationUrl")
+        resource = ""
+        change_type = ""
+
+        if page_id == "1":
+            resource = f"teams/{teams_id}/channels/{channel_id}/sharedWithTeams"
+            change_type = "created,deleted"
+
+        headers = GraphHelper.get_headers(token)
+
+        try:
+            resp = requests.get("https://graph.microsoft.com/beta/subscriptions", headers=headers)
+            existing_team_subscriptions = resp.json().get("value", [])
+        except requests.RequestException:
+            return None
+
+        existing_subscription = next(
+            (sub for sub in existing_team_subscriptions if sub["resource"] == resource), None
+        )
+
+        if existing_team_subscription and existing_team_subscription["notificationUrl"] != notification_url:
+            print(f"CreateNewSubscription-ExistingSubscriptionFound: {resource}")
+            GraphHelper.delete_subscription(existing_team_subscription["id"])
+            existing_team_subscription = None
+
+        if not existing_team_subscription:
+            subscription_payload = {
+                "changeType": change_type,
+                "notificationUrl": notification_url,
+                "lifecycleNotificationUrl": notification_url,
+                "resource": resource,
+                "includeResourceData": True,
+                "encryptionCertificate": os.getenv("Base64EncodedCertificate"),
+                "encryptionCertificateId": "change-notification",
+                "expirationDateTime": GraphHelper.get_expiration_time(hours=10),
+                "clientState": "clientState"
+            }
+
+            try:
+                resp = requests.post(
+                    "https://graph.microsoft.com/beta/subscriptions",
+                    headers=headers,
+                    json=subscription_payload
+                )
+                resp.raise_for_status()  # This will raise an exception for HTTP error status codes
+                existing_team_subscription = resp.json()
+            except requests.RequestException as e:
+                print(f"Error creating shared team subscription: {e}")
+                if hasattr(e, 'response') and e.response is not None:
+                    print(f"Response status: {e.response.status_code}")
+                    print(f"Response body: {e.response.text}")
+                return None
+
+        return existing_team_subscription
 
     @staticmethod
     def check_user_channel_access(team_id, channel_id, user_id, tenant_id):

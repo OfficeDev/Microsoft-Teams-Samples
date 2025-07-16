@@ -97,13 +97,6 @@ def notifications():
         
         tenant_id = notification.get('tenantId')
         
-        print(f"Notification details:")
-        print(f"Encoded ID: {encoded_id} (from resourceData.id)")
-        print(f"Decoded User ID: {user_id}")
-        print(f"Tenant ID: {tenant_id} (from notification)")
-        print(f"Team ID: {team_id}")
-        print(f"Channel ID: {channel_id}")
-        
         if team_id and channel_id and user_id and tenant_id:
             has_access = GraphHelper.check_user_channel_access(
                 team_id, channel_id, user_id, tenant_id

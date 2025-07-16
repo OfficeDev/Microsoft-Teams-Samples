@@ -5,7 +5,7 @@ products:
 languages:
 - python
 title: Microsoft Teams Python Membership change notification Sample
-description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, using python and the Microsoft Graph API.
+description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using python and the Microsoft Graph API.
 extensions:
   contentType: samples
   createdDate: 30/06/2025 10:02:21 PM
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-membership-change-notificat
 
 # Change Notifications For Indirect Membership Updates Using Microsoft Graph Node.js
 
-This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated. The application leverages Python and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
+This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages Python and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs
@@ -126,6 +126,12 @@ the Teams service needs to call into the bot.
 
 7. **User Membership Updated**
 ![Membership Updated](Images/7.User_membership_updated.png)
+
+8. **Shared with a Team**
+![Shared with a team](Images/8.Shared_with_team.png)
+
+9. **Unshared with a Team**
+![Unshared with a team](Images/9.Unshared_with_team.png)
 
 ## Further reading
 - [Change notifications for Microsoft Teams channel](https://docs.microsoft.com/en-us/graph/teams-changenotifications-team-and-channel)

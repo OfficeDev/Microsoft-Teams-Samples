@@ -20,14 +20,9 @@ def create_channel_async():
     channel_id = request.args.get('channelId')
     page_id = '1'
     
-    print(f"\n=== Channel Subscription Request ===")
-    print(f"Team ID: {team_id}")
-    print(f"Channel ID: {channel_id}")
-    print(f"Request Headers: {dict(request.headers)}")
-    print(f"Request Args: {dict(request.args)}")
-    
     try:
         GraphHelper.create_subscription(team_id, page_id)
+        GraphHelper.create_shared_with_team_subscription(team_id, page_id, channel_id)
         return ('', 202)
     except Exception as ex:
         logging.exception(f"Error creating channel subscription for team {team_id}")
@@ -39,30 +34,3 @@ def create_channel_async():
         }
         return jsonify(error_response), 500
 
-@change_notification_bp.route('/team', methods=['GET'])
-def create_team_async():
-    # Handle validation request from Microsoft Graph
-    validation_token = request.args.get('validationToken')
-    if validation_token:
-        print(f"Received validation token: {validation_token}")
-        return validation_token, 200, {'Content-Type': 'text/plain'}
-        
-    team_id = request.args.get('teamId')
-    page_id = '2'
-    
-    print(f"\n=== Team Subscription Request ===")
-    print(f"Team ID: {team_id}")
-    print(f"Request Headers: {dict(request.headers)}")
-    print(f"Request Args: {dict(request.args)}")
-    
-    try:
-        result = GraphHelper.create_subscription(team_id, page_id)
-        return (result, 202)
-    except Exception as ex:
-        logging.exception(f"Error creating team subscription for team {team_id}")
-        error_response = {
-            'error': str(ex),
-            'trace': traceback.format_exc(),
-            'team_id': team_id
-        }
-        return jsonify(error_response), 500
