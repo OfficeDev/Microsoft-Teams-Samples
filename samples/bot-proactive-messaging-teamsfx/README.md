@@ -88,7 +88,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-message-reaction/nodejs`
+1) In a terminal, navigate to `samples/bot-proactive-messaging-teamsfx/nodejs`
 
 1) Install modules
 
@@ -96,14 +96,12 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
-- Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-
 1) Run your bot at the command line:
 
     ```bash
     npm start
     ```
+    It will start at port 3978.
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -120,11 +118,11 @@ Message the bot and it will respond with a proactive hello.  Add a message react
 
 - **App Installation:**
 
-![App Installation ](Images/1.Install.png)
+![App Installation ](images/1.Install.png)
 
 - **Personal Scope Interactions:**
 
-![personalScope-AddApp ](Images/2.PersonalChat.png)
+![personalScope-AddApp ](images/2.PersonalChat.png)
 
 
 ## Deploy the bot to Azure
