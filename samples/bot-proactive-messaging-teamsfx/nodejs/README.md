@@ -8,6 +8,11 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Microsoft 365 Agents Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teams-toolkit-cli)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/demo-manifest/bot-proactive-messaging-teamsfx.zip)
+
 ## Debug
 
 - From Visual Studio Code: Start debugging the project by hitting the `F5` key in Visual Studio Code. 

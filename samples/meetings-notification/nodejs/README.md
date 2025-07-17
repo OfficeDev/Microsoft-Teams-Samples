@@ -29,9 +29,9 @@ This sample application illustrates how to implement [Targeted In-Meeting Notifi
 ![Targeted In-Meeting Notification](Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Meetings Content Bubble:** [Manifest](/samples/meetings-content-bubble/csharp/demo-manifest/meetings-content-bubble.zip)
+**Meetings Notification:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-notification.zip)
 
 ## Prerequisites
 

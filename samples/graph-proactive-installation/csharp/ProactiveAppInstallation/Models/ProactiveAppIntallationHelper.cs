@@ -1,9 +1,12 @@
 ﻿using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Microsoft.Identity.Client;
+using Microsoft.Kiota.Abstractions.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProactiveBot.Bots
@@ -12,19 +15,10 @@ namespace ProactiveBot.Bots
     {
         public GraphServiceClient GetAuthenticatedClient(string token)
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+            var tokenProvider = new SimpleAccessTokenProvider(token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
 
         public async Task<string> GetToken(string tenantId, string MicrosoftAppId, string MicrosoftAppPassword)
@@ -54,17 +48,18 @@ namespace ProactiveBot.Bots
                         }
                 };
                 await graphClient.Users[Userid].Teamwork.InstalledApps
-                    .Request()
-                    .AddAsync(userScopeTeamsAppInstallation);
+                    .PostAsync(userScopeTeamsAppInstallation);
             }
-            catch (Microsoft.Graph.ServiceException ex)
+            catch (Microsoft.Graph.Models.ODataErrors.ODataError odataError)
             {
-                // This is where app is already installed but we don't have conversation reference.
-                if (ex.Error.Code == "Conflict")
+                if (odataError?.Error?.Code == "Conflict")
                 {
                     await TriggerConversationUpdate(Userid, MicrosoftTenantId, MicrosoftAppId, MicrosoftAppPassword, MicrosoftTeamAppid);
                 }
-                else throw ex;
+                else
+                {
+                    throw;
+                }
             }
         }
 
@@ -76,17 +71,16 @@ namespace ProactiveBot.Bots
             try
             {
                 // Docs here: https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages#-retrieve-the-conversation-chatid
-                var installedApps = await graphClient.Users[Userid].Teamwork.InstalledApps
-                    .Request()
-                    .Filter($"teamsApp/externalId eq '{MicrosoftAppId}'")
-                    .Expand("teamsAppDefinition")
-                    .GetAsync();
+                var installedApps = await graphClient.Users[Userid].Teamwork.InstalledApps.GetAsync(config =>
+                {
+                    config.QueryParameters.Filter = $"teamsApp/externalId eq '{MicrosoftAppId}'";
+                    config.QueryParameters.Expand = new[] { "teamsAppDefinition" };
+                });
 
-                var installedApp = installedApps.FirstOrDefault();
+                var installedApp = installedApps.Value.FirstOrDefault();
 
                 if (installedApp != null)
                     await graphClient.Users[Userid].Teamwork.InstalledApps[installedApp.Id].Chat
-                        .Request()
                         .GetAsync();
             }
             catch (Microsoft.Graph.ServiceException ex)
@@ -96,5 +90,22 @@ namespace ProactiveBot.Bots
         }
 
         
+    }
+
+    public class SimpleAccessTokenProvider : IAccessTokenProvider
+    {
+        private readonly string _accessToken;
+
+        public SimpleAccessTokenProvider(string accessToken)
+        {
+            _accessToken = accessToken;
+        }
+
+        public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(_accessToken);
+        }
+
+        public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
     }
 }

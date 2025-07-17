@@ -32,7 +32,11 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Interaction with app
 
-![bot-teams-auth ](Images/TeamAuth.gif)
+- **Bot Teams Authentication Teams Client/Web**
+![bot-teams-auth](Images/Bot_Teams_Auth_Web.gif)
+
+- **Bot Teams Authentication Teams Desktop**
+![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -122,13 +126,29 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Add-App ](Images/1.Install.png)
 
-![Add-to-teams ](Images/2.Bot_Response.png)
+![Open Application ](Images/2.Open_App.png)
 
-![Auth-login ](Images/3.Logged_In.png)
+![Welcome Message ](Images/3.Welcome_Message.png)
 
-![Token ](Images/4.User_Token.png)
+**Login UI: OAuth Prompt**
+- The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
+- Below are sample UI captures demonstrating how the login experience appears on each:
 
-![Auth-logout ](Images/5.Logged_Out.png)
+- **Teams Desktop:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/4.Oauth_Login_Prompt.png)
+
+- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
+![auth-card ](Images/11.TeamsWeb_Oauth_AdaptiveCard.png)
+
+![Select_Account_For_Permissions ](Images/5.Select_Account_For_Permissions.png)
+
+![Accept_Consent_Permissions](Images/6.Accept_Consent_Permissions.png)
+
+![Successful_Login ](Images/7.Successful_Login.png)
+
+![Token_Block_By_Organisation ](Images/8.Token_Block_By_Organisation.png)
+
+![Auth-logout ](Images/9.Signout.png)
 
 ## Deploy the bot to Azure
 
@@ -138,7 +158,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [AzuMessagere Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 

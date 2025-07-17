@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-formatting-cards-python",
+    "source": "officeDev",
+    "title": "Different Formatting On Cards",
+    "shortDescription": "Demonstrates bot-driven adaptive card formatting capabilities in Microsoft Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-formatting-cards/python",
+    "longDescription": [
+      "This sample bot demonstrates how to use various formatting styles on adaptive cards within Microsoft Teams. It includes capabilities like mentions, persona icons, and responsive layouts."
+    ],
+    "creationDateTime": "2025-02-18",
+    "updateDateTime": "2025-02-18",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-formatting-cards/python/Images/Bot_Formatting_Cards.gif",
+        "alt": "Solution UX showing different formatting on Cards"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
