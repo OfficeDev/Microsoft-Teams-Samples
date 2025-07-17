@@ -8,8 +8,8 @@
     "longDescription": [
       "This bot sample demonstrates proactive messaging in Microsoft Teams by storing conversation references for sending reminder notifications. It includes guidance for local debugging, deployment to Azure, and integration with Microsoft 365 Agents Toolkit."
     ],
-    "creationDateTime": "2025-21-06",
-    "updateDateTime": "2025-21-06",
+    "creationDateTime": "2025-06-21",
+    "updateDateTime": "2025-06-21",
     "products": [
       "Teams",
       "Microsoft 365 Agents Toolkit"

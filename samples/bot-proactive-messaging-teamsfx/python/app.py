@@ -65,7 +65,7 @@ async def messages(req: Request) -> Response:
 
 # GET /api/notify — sends proactive messages
 async def notify(req: web.Request) -> web.Response:
-    print(f"🔔 Sending proactive messages to: {conversation_references}")
+    print(f"Sending proactive messages to: {conversation_references}")
     for reference in conversation_references.values():
         await ADAPTER.continue_conversation(
             reference, lambda ctx: ctx.send_activity("Proactive Hello"), CONFIG.BOT_ID
