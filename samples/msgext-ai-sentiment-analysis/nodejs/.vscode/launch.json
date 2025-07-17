@@ -2,28 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Remote (Edge)",
-            "type": "msedge",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "presentation": {
-                "group": "remote",
-                "order": 1
-            },
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "name": "Launch Remote (Chrome)",
-            "type": "chrome",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "presentation": {
-                "group": "remote",
-                "order": 2
-            },
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
             "name": "Launch App (Edge)",
             "type": "msedge",
             "request": "launch",

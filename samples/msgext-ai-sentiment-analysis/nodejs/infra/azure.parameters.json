@@ -6,16 +6,19 @@
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
     "botAadAppClientId": {
-      "value": "${{BOT_ID}}"
+      "value": "${{AAD_APP_CLIENT_ID}}"
     },
-    "botAadAppClientSecret": {
-      "value": "${{SECRET_BOT_PASSWORD}}"
-    },
-    "webAppSKU": {
-      "value": "B1"
+    "botAppDomain": {
+      "value": "${{BOT_DOMAIN}}"
     },
     "botDisplayName": {
-      "value": "Msgext-ai-sentiment-analysis"
+      "value": "msgext-ai-sentiment-analysis"
+    },
+    "microsoftAppType": {
+      "value": "${{MICROSOFT_APP_TYPE}}"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{MICROSOFT_APP_TENANT_ID}}"
     }
   }
 }
