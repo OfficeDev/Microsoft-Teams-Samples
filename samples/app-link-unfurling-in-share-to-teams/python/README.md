@@ -23,7 +23,7 @@ This sample demonstrates the Share to Teams feature, allowing users to seamlessl
 
 ## Interaction with app
 
-![App linkunfurling in share to teams](Images/app-link-unfurling-stt.gif)
+![App linkunfurling in share to teams](Images/AppLinkUnfurling.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 

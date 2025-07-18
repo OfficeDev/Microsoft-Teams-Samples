@@ -27,7 +27,7 @@ The App Check-In Location sample demonstrates a feature that allows users to che
 
 ## Interaction with app
 
-![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
+![App checkin LocationGif](Images/AppCheckInLocation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 

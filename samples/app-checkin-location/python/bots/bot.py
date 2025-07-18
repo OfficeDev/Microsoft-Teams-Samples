@@ -1,3 +1,6 @@
+#Copyright (c) Microsoft Corporation. All rights reserved.
+#Licensed under the MIT License.
+
 import os
 from botbuilder.core import TurnContext, CardFactory
 from botbuilder.core.teams import TeamsActivityHandler
