@@ -1,208 +1,242 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toggle Audio Call</title>
-    <script src="https://unpkg.com/@microsoft/teams-js@2.0.0/dist/MicrosoftTeams.min.js"></script>
+    <script src="https://unpkg.com/@microsoft/teams-js@2.4.0/dist/MicrosoftTeams.min.js"></script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            margin: 20px;
-            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Default Light Theme */
+        body.theme-light {
+            background-color: #f3f2f1;
+            color: #323130;
+        }
+        
+        body.theme-light .container {
+            background: white;
+            color: #323130;
+        }
+        
+        body.theme-light button {
+            background: #6264a7;
+            color: white;
+        }
+        
+        body.theme-light button:hover {
+            background: #464775;
+        }
+        
+        /* Dark Theme */
+        body.theme-dark {
+            background-color: #2d2c2c;
+            color: #ffffff;
+        }
+        
+        body.theme-dark .container {
+            background: #3b3a39;
+            color: #ffffff;
+            border: 1px solid #484644;
+        }
+        
+        body.theme-dark button {
+            background: #6264a7;
+            color: white;
+        }
+        
+        body.theme-dark button:hover {
+            background: #7b83d3;
+        }
+        
+        body.theme-dark button:disabled {
+            background: #484644;
+            color: #a19f9d;
+        }
+        
+        /* High Contrast Theme */
+        body.theme-contrast {
+            background-color: #000000;
+            color: #00ff00; /* Neon green text */
+        }
+        
+        body.theme-contrast .container {
+            background: #000000;
+            color: #00ff00; /* Neon green text */
+        }
+        
+        body.theme-contrast h1 {
+            color: #00ff00; /* Neon green title */
+        }
+        
+        body.theme-contrast button {
+            background: #6264a7; /* Keep Teams purple */
+            color: white; /* White text on button */
+        }
+        
+        body.theme-contrast button:hover {
+            background: #7b83d3; /* Lighter Teams purple on hover */
+            color: white;
+        }
+        
+        body.theme-contrast button:disabled {
+            background: #464775; /* Darker Teams purple when disabled */
+            color: #a19f9d;
+        }
+        
+        body.theme-contrast .mute-state {
+            color: #00ff00; /* Neon green text */
         }
         
         .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 8px;
+            max-width: 300px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
         
-        h3 {
-            margin-top: 0;
-            margin-bottom: 20px;
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
         }
         
         button {
-            background-color: #6264a7;
-            color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 2px;
             cursor: pointer;
             font-size: 14px;
-            margin-bottom: 15px;
             font-weight: 600;
-            transition: background-color 0.2s ease;
-        }
-        
-        button:hover {
-            background-color: #5a5fc7;
-        }
-        
-        button:active {
-            background-color: #4c4f9b;
+            margin: 10px 0;
+            transition: all 0.2s ease;
         }
         
         button:disabled {
-            background-color: #a19f9d;
             cursor: not-allowed;
         }
         
-        .status {
-            margin-top: 15px;
-            font-weight: bold;
+        .mute-state {
+            margin: 15px 0;
+            font-size: 14px;
         }
         
-        .error {
-            color: red;
-            margin-top: 15px;
+        .mute-state strong {
+            font-weight: 600;
         }
         
-        .warning {
-            color: orange;
-            margin-top: 15px;
-        }
-        
-        /* Teams theme support */
-        .theme-dark {
-            background-color: #242424;
-            color: white;
-        }
-        
-        .theme-light {
-            background-color: white;
-            color: #242424;
-        }
-        
-        .theme-contrast {
-            background-color: black;
-            color: chartreuse;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="app-container">
-        <h3>Mute/Unmute Audio Call</h3>
-        <div id="loading">Loading Teams SDK...</div>
-        <div id="content" style="display: none;">
-            <button id="toggleButton" onclick="toggleAudio()">Toggle Mute/Unmute</button>
-            <div id="status" class="status"></div>
-            <div id="error" class="error"></div>
-        </div>
+    <div class="container">
+        <h1>Mute/Unmute Audio Call</h1>
+        <button id="toggleBtn" disabled onclick="toggleAudio()">Toggle Mute/Unmute</button>
+        <div id="muteStatus" class="mute-state">Audio State: false</div>
+        <div id="debug" class="hidden"></div>
     </div>
 
     <script>
-        let teamsInitialized = false;
         let inMeeting = false;
         
-        // Initialize Teams SDK
-        microsoftTeams.app.initialize()
-            .then(() => {
-                console.log("Teams SDK initialized successfully");
-                teamsInitialized = true;
-                
-                return microsoftTeams.app.getContext();
-            })
-            .then((context) => {
-                console.log("Teams context:", context);
-                
-                // Hide loading and show content
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-                
-                // Check if we're in a meeting
-                if (context.meeting) {
-                    inMeeting = true;
-                    showStatus("Ready - You're in a meeting");
-                } else {
-                    showWarning("⚠️ This app works best when used inside a Teams meeting");
-                    // Still allow testing outside meeting for development
-                }
-                
-                // Apply theme with switch statement
-                let appTheme;
-                switch (context.app.theme) {
-                    case "dark":
-                        appTheme = "theme-dark";
-                        break;
-                    case "contrast":
-                        appTheme = "theme-contrast";
-                        break;
-                    default:
-                        appTheme = "theme-light";
-                }
-                applyTheme(appTheme.replace('theme-', ''));
-                
-                // Register theme change handler with switch statement
-                microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
-                    console.log("Theme changed to:", theme);
-                    let newAppTheme;
-                    switch (theme) {
-                        case "dark":
-                            newAppTheme = "theme-dark";
-                            break;
-                        case "contrast":
-                            newAppTheme = "theme-contrast";
-                            break;
-                        default:
-                            newAppTheme = "theme-light";
-                    }
-                    applyTheme(newAppTheme.replace('theme-', ''));
-                });
-            })
-            .catch((err) => {
-                console.error("Teams SDK initialization failed:", err);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-                showError("Failed to initialize Teams SDK: " + err.message);
-            });
-        
-        function applyTheme(theme) {
-            const container = document.getElementById('app-container');
-            container.className = 'container theme-' + theme;
+        function updateMuteStatus(status) {
+            document.getElementById('muteStatus').textContent = `Audio State: ${status}`;
         }
         
-        function showStatus(message) {
-            document.getElementById('status').textContent = message;
-            document.getElementById('error').textContent = '';
+        function enableButton() {
+            document.getElementById('toggleBtn').disabled = false;
         }
         
-        function showError(message) {
-            document.getElementById('error').textContent = message;
-            document.getElementById('status').textContent = '';
-        }
-        
-        function showWarning(message) {
-            document.getElementById('error').innerHTML = '<span class="warning">' + message + '</span>';
-        }
-        
-        function audioCallback(err, result) {
-            console.log("Audio callback:", { err, result });
+        function setTheme(theme) {
+            const body = document.body;
+            // Remove existing theme classes
+            body.classList.remove('theme-light', 'theme-dark', 'theme-contrast');
             
-            if (err) {
-                showError("Error: " + JSON.stringify(err));
+            // Add new theme class
+            switch (theme) {
+                case 'dark':
+                    body.classList.add('theme-dark');
+                    break;
+                case 'contrast':
+                    body.classList.add('theme-contrast');
+                    break;
+                default:
+                    body.classList.add('theme-light');
+            }
+            
+            console.log(`Theme changed to: ${theme}`);
+        }
+        
+        function audioCallback(error, result) {
+            if (error) {
+                console.error('Audio callback error:', error);
             } else {
-                const state = result === true ? "True" : "False";
-                showStatus("Audio State: " + state);
+                const status = result === true ? "true" : "false";
+                updateMuteStatus(status);
             }
         }
         
         function toggleAudio() {
-            if (!teamsInitialized) {
-                showError("Teams SDK not initialized");
+            if (!inMeeting) {
                 return;
             }
             
             try {
-                showStatus("Toggling audio state...");
                 microsoftTeams.meeting.toggleIncomingClientAudio(audioCallback);
             } catch (err) {
-                console.error("Toggle audio failed:", err);
-                showError("Failed to toggle audio: " + err.message);
+                console.error('Error toggling audio:', err);
             }
         }
+        
+        // Initialize
+        microsoftTeams.app.initialize()
+            .then(() => {
+                return microsoftTeams.app.getContext();
+            })
+            .then((context) => {
+                console.log('Teams context received:', context);
+                
+                if (context && context.meeting) {
+                    inMeeting = true;
+                    enableButton();
+                    // Get initial state
+                    microsoftTeams.meeting.getIncomingClientAudioState(audioCallback);
+                } else {
+                    // Enable for testing outside Teams
+                    enableButton();
+                    updateMuteStatus("false");
+                }
+                
+                // Set initial theme
+                if (context && context.app && context.app.theme) {
+                    setTheme(context.app.theme);
+                } else {
+                    setTheme('light'); // Default theme
+                }
+                
+                // Register theme change handler
+                microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
+                    setTheme(theme);
+                });
+            })
+            .catch((error) => {
+                console.error('Teams SDK initialization failed:', error);
+                enableButton();
+                updateMuteStatus("false");
+                setTheme('light'); // Default to light theme on error
+            });
     </script>
 </body>
 </html>

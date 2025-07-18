@@ -1,6 +1,11 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
 from flask import Flask, render_template, jsonify
-import ssl
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__, template_folder='components')
 
@@ -45,31 +50,6 @@ def api_config():
     return jsonify({'config': {}})
 
 if __name__ == '__main__':
-    import os
-    import ssl
-    
-    # Check if we should use devtunnel (HTTP) or localhost HTTPS
-    use_devtunnel = os.environ.get('USE_DEVTUNNEL', 'false').lower() == 'true'
-    
-    if use_devtunnel:
-        print("Starting HTTP Flask server on localhost:3978 (for devtunnel)")
-        app.run(host='127.0.0.1', port=3978, debug=True)
-    else:
-        print("Starting HTTPS Flask server on localhost:3978")
-        
-        # Create SSL context for localhost
-        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        
-        # Check if SSL certificates exist from environment
-        ssl_cert = os.environ.get('SSL_CRT_FILE')
-        ssl_key = os.environ.get('SSL_KEY_FILE')
-        
-        if ssl_cert and ssl_key and os.path.exists(ssl_cert) and os.path.exists(ssl_key):
-            context.load_cert_chain(ssl_cert, ssl_key)
-            print(f"Using SSL certificates: {ssl_cert}, {ssl_key}")
-        else:
-            # Create adhoc SSL context for development
-            context = 'adhoc'
-            print("Using adhoc SSL certificates for development")
-        
-        app.run(host='127.0.0.1', port=3978, debug=True, ssl_context=context)
+    # Always run in HTTP mode for devtunnel
+    print("Starting HTTP Flask server on localhost:3978 (for devtunnel)")
+    app.run(host='127.0.0.1', port=3978, debug=True)
