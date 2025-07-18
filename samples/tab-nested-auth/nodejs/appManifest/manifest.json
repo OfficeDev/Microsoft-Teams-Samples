@@ -46,7 +46,7 @@
         {
             "redirectUri": "brk-multihub://${{TAB_DOMAIN}}",
             "scopes": ["openid", "profile", "offline_access"],
-            "claims": "{}"
+             "claims": "{\"access_token\":{\"xms_cc\":{\"values\":[\"CP1\"]}}}"
         }
     ]
   }
