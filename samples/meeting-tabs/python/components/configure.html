@@ -1,0 +1,162 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure App in Meeting</title>
+    <script src="https://unpkg.com/@microsoft/teams-js@2.4.0/dist/MicrosoftTeams.min.js"></script> <!-- Teams SDK -->
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .header-inner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #divConfig {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5558AF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #464775;
+        }
+
+        /* Timer Count Styles for Different Themes */
+        /* Dark Theme Timer */
+        .timerCount-dark {
+            padding: 10rem;
+            text-align: center;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme Timer */
+        .timerCount-light {
+            padding: 10rem;
+            text-align: center;
+            background-color: white;
+            color: #242424;
+        }
+
+        /* High Contrast Theme Timer */
+        .timerCount-contrast {
+            padding: 10rem;
+            text-align: center;
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Dark Theme */
+        .theme-dark {
+            margin: 0.5rem;
+            margin-right: 0px;
+            border-radius: 2px;
+            padding: 0.3rem;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: white;
+            color: #242424;
+            display: contents;
+        }
+
+        /* High Contrast Theme */
+        .theme-contrast {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: black;
+            color: yellow;
+            display: contents;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner-container">
+            <div id="divConfig">
+                <br />
+                <input type="radio" name="notificationType" value="Create" id="addAppRadio" /> Add App in a meeting tab
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Microsoft Teams SDK
+            microsoftTeams.app.initialize().then(() => {
+                // Notify success once the app is initialized
+                microsoftTeams.app.notifySuccess();
+
+                // Register onSaveHandler for the configuration page
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    // Set configuration details
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "App in Meeting Tab Demo",
+                        contentUrl: `${window.location.origin}/app-in-meeting`,
+                        suggestedTabName: "App in meeting tab",
+                        websiteUrl: `${window.location.origin}/app-in-meeting`
+                    });
+
+                    // Notify the Teams platform that the save operation was successful
+                    saveEvent.notifySuccess();
+                });
+            }).catch((error) => {
+                console.error("Error initializing Microsoft Teams app:", error);
+            });
+
+            // Add event listener for the radio button click
+            const radioButton = document.getElementById("addAppRadio");
+            radioButton.addEventListener('click', function () {
+                microsoftTeams.pages.config.setValidityState(true); // Set validity to true when the radio button is clicked
+            });
+        });
+    </script>
+</body>
+</html>

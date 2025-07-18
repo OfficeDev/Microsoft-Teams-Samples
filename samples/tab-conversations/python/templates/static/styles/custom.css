@@ -1,0 +1,72 @@
+html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+}
+
+div.panel {
+    padding: 15px;
+}
+
+.font-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #323130;
+}
+
+.font-title p {
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 12px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+th {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+th:first-child {
+  width: 35%;
+}
+
+th:nth-child(2) {
+  width: 50%;
+}
+
+th:last-child {
+  width: 15%;
+}
+
+img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+}
+
+td:last-child {
+  text-align: center;
+  width: 15%;
+  padding: 8px;
+}
+
+td:first-child {
+  font-weight: 600;
+  color: #323130;
+}

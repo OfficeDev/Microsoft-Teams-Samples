@@ -1,0 +1,97 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teams Meeting Tabs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav-list { list-style-type: none; padding: 0; }
+        .nav-item { margin: 10px 0; }
+        .nav-link { 
+            display: inline-block; 
+            padding: 10px 15px; 
+            text-decoration: none; 
+            background-color: #6264A7; 
+            color: white; 
+            border-radius: 4px; 
+        }
+        .nav-link:hover { background-color: #464775; }
+        
+        /* Timer Count Styles for Different Themes */
+        /* Dark Theme Timer */
+        .timerCount-dark {
+            padding: 10rem;
+            text-align: center;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme Timer */
+        .timerCount-light {
+            padding: 10rem;
+            text-align: center;
+            background-color: white;
+            color: #242424;
+        }
+
+        /* High Contrast Theme Timer */
+        .timerCount-contrast {
+            padding: 10rem;
+            text-align: center;
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Dark Theme */
+        .theme-dark {
+            margin: 0.5rem;
+            margin-right: 0px;
+            border-radius: 2px;
+            padding: 0.3rem;
+            background-color: #242424;
+            color: white;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: white;
+            color: #242424;
+            display: contents;
+        }
+
+        /* High Contrast Theme */
+        .theme-contrast {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: black;
+            color: yellow;
+            display: contents;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teams Meeting Tabs</h1>
+    <p>Navigate to different components of the meeting tab application:</p>
+    <ul class="nav-list">
+        <li class="nav-item"><a href="/configure" class="nav-link">Configure Meeting Tab</a></li>
+        <li class="nav-item"><a href="/app-in-meeting" class="nav-link">App In Meeting</a></li>
+        <li class="nav-item"><a href="/share-to-meeting" class="nav-link">Share to Meeting</a></li>
+        <li class="nav-item"><a href="/shareview" class="nav-link">Share View</a></li>
+    </ul>
+    
+    <h2>API Endpoints</h2>
+    <ul class="nav-list">
+        <li class="nav-item"><a href="/api/participants" class="nav-link">Participants API</a></li>
+        <li class="nav-item"><a href="/api/mute" class="nav-link">Mute API</a></li>
+        <li class="nav-item"><a href="/api/unmute" class="nav-link">Unmute API</a></li>
+        <li class="nav-item"><a href="/api/config" class="nav-link">Config API</a></li>
+    </ul>
+</body>
+</html>

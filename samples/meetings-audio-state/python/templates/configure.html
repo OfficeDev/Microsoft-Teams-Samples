@@ -1,0 +1,48 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Configure Tab</title>
+
+  <!-- Load Microsoft Teams SDK -->
+  <script src="https://res.cdn.office.net/teams-js/2.4.0/js/MicrosoftTeams.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
+
+    .info-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="info-text">Please click on save to proceed.</div>
+
+  <script>
+    // Initialize Microsoft Teams SDK
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.app.notifySuccess();
+
+      // Register onSave handler
+      microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+        microsoftTeams.pages.config.setConfig({
+          entityID: "MeetingCallAudioToggleTab",
+          contentUrl: window.location.origin + "/ToggleAudioCall",
+          suggestedTabName: "MeetingCallAudioToggleTab",
+          websiteUrl: window.location.origin + "/ToggleAudioCall"
+        });
+        saveEvent.notifySuccess();
+      });
+
+      // Set validity state
+      microsoftTeams.pages.config.setValidityState(true);
+    });
+  </script>
+</body>
+</html>
