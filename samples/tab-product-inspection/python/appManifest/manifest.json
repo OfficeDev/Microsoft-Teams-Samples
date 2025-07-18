@@ -1,0 +1,47 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Product Inspection",
+    "full": "Product Inspection sample"
+  },
+  "description": {
+    "short": "Scan products in Teams to approve or reject them with image capture.",
+    "full": "This application demonstrates how to scan products directly within Microsoft Teams, capturing images and allowing users to approve or reject items. It includes features like device permissions for media access and interactive app integration, enhancing the product inspection process."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "entityId": "tabproductinspection",
+      "name": "Product Inspection",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "devicePermissions": [
+    "media"
+  ],
+  "validDomains": [
+    "{{domain-name}}",
+    "${{BOT_DOMAIN}}"
+  ]
+}
