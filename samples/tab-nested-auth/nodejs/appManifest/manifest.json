@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "devPreview",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.tabnestedauth",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "https://www.microsoft.com",
@@ -39,5 +38,16 @@
   ],
   "validDomains": [
     "${{TAB_DOMAIN}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}",
+    "nestedAppAuthInfo": [
+        {
+            "redirectUri": "brk-multihub://${{TAB_DOMAIN}}",
+            "scopes": ["openid", "profile", "offline_access"],
+            "claims": "{}"
+        }
+    ]
+  }
 }
