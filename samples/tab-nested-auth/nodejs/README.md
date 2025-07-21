@@ -116,9 +116,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - **Edit** the manifest.json to replace `{{AAD_APP_CLIENT_ID}}` with your Microsoft Entra application ID for the app registered in Azure Active Directory.
 
 - **Edit**  the manifest.json to replace `{{TAB_DOMAIN}}` with your app's base domain.
-For example., if you're using ngrok, and the URL is `https://1234.ngrok-free.app`, then the domain is `1234.ngrok-free.app`.
+For example, if you're using ngrok, and the URL is `https://1234.ngrok-free.app`, then the domain is `1234.ngrok-free.app`.
 
-- **Edit** the webApplicationInfo.nestedAppAuthInfo section of the manifest, make sure the following structure is present to enable **Nested App Authentication (NAA).** Set the claims field to specify client capabilities (for example., CAE support). Do not use an empty string (""). If no capabilities are required, use an empty object ({}).
+- **Edit** the webApplicationInfo.nestedAppAuthInfo section of the manifest, make sure the following structure is present to enable **Nested App Authentication (NAA).** Set the claims field to specify client capabilities (for example, CAE support). Do not use an empty string (""). If no capabilities are required, use an empty object ({}).
    ```bash
     "nestedAppAuthInfo": [
     {
