@@ -33,7 +33,7 @@ const Agenda = ({title, option1, option2, Id, IsSend, taskList}) => {
         taskInfo.fallbackUrl = taskInfo.url
 
         microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.dialog.open(taskInfo, submitHandler);
+            microsoftTeams.dialog.url.open(taskInfo, submitHandler);
         });
     }
     if(!IsSend){

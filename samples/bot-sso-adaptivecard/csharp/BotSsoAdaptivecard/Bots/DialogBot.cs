@@ -28,12 +28,13 @@ namespace Microsoft.BotBuilderSamples
     // and the requirement is that all BotState objects are saved at the end of a turn.
     public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
-        protected readonly BotState _conversationState;
-        protected readonly Dialog _dialog;
-        protected readonly ILogger _logger;
-        protected readonly BotState _userState;
-        protected string _connectionName { get; }
+        protected readonly BotState _conversationState;  // Represents the conversation state
+        protected readonly Dialog _dialog;               // The dialog logic to run
+        protected readonly ILogger _logger;              // Logger for debugging and tracing
+        protected readonly BotState _userState;          // Represents the user state
+        protected string _connectionName { get; }        // Connection name for OAuth
 
+        // Constructor to initialize the bot with necessary dependencies
         public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, string connectionName)
         {
             _conversationState = conversationState;
@@ -49,6 +50,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
+        // Get the sign-in link for OAuth
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
@@ -62,13 +64,16 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
+        // OnTurnAsync: Handles parallel saving of conversation and user state changes
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
 
-            // Save any state changes that might have occurred during the turn.
-            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
-            await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
+            // Save any state changes in parallel to improve performance
+            await Task.WhenAll(
+                _conversationState.SaveChangesAsync(turnContext, false, cancellationToken),
+                _userState.SaveChangesAsync(turnContext, false, cancellationToken)
+            );
         }
 
         /// <summary>
@@ -77,22 +82,28 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
+        // Simplified message activity handling to trigger appropriate adaptive card based on the message command
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
-            if (turnContext.Activity.Text.Contains("login"))
+            await HandleCommandAsync(turnContext.Activity.Text, turnContext, signInLink, cancellationToken);
+        }
+
+        // Helper function to handle commands and send the appropriate adaptive card
+        private async Task HandleCommandAsync(string command, ITurnContext<IMessageActivity> turnContext, string signInLink, CancellationToken cancellationToken)
+        {
+            var commandToFileMap = new Dictionary<string, string>
             {
-                string[] path = { ".", "Resources", "options.json" };
-                var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var initialAdaptiveCard = GetAdaptiveCardFromFileName(path, signInLink, turnContext.Activity.From.Name, member.Id);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
-            }
-            else if (turnContext.Activity.Text.Contains("PerformSSO"))
+                { "login", "options.json" },
+                { "PerformSSO", "AdaptiveCardWithSSOInRefresh.json" }
+            };
+
+            if (commandToFileMap.ContainsKey(command))
             {
-                string[] path = { ".", "Resources", "AdaptiveCardWithSSOInRefresh.json" };
+                string[] path = { ".", "Resources", commandToFileMap[command] };
                 var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var initialAdaptiveCard = GetAdaptiveCardFromFileName(path, signInLink, turnContext.Activity.From.Name, member.Id);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
+                var adaptiveCard = GetAdaptiveCardFromFileName(path, signInLink, turnContext.Activity.From.Name, member.Id);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCard), cancellationToken);
             }
             else
             {
@@ -106,6 +117,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
+        // Override to handle invoke activities, such as OAuth and adaptive card actions
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Name == "adaptiveCard/action")
@@ -118,40 +130,38 @@ namespace Microsoft.BotBuilderSamples
                 if (value["action"] == null)
                     return null;
 
-                JObject actiondata = JsonConvert.DeserializeObject<JObject>(value["action"].ToString());
+                JObject actionData = JsonConvert.DeserializeObject<JObject>(value["action"].ToString());
 
-                if (actiondata["verb"] == null)
+                if (actionData["verb"] == null)
                     return null;
-                                
-                string verb = actiondata["verb"].ToString();
+
+                string verb = actionData["verb"].ToString();
 
                 JObject authentication = null;
+                string state = null;
 
-                // When adaptiveCard/action invoke activity from teams contains token in response to sso flow from earlier invoke.
+                // Check for authentication token or state
                 if (value["authentication"] != null)
                 {
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
                 }
 
-                // When adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot.
-                string state = null;
                 if (value["state"] != null)
                 {
                     state = value["state"].ToString();
                 }
 
-                // authToken and state are absent, handle verb
+                // Token and state are absent, initiate SSO
                 if (authentication == null && state == null)
                 {
-                    switch (verb)
-                    {   // when token is absent in the invoke. We can initiate SSO in response to the invoke
-                        case "initiateSSO":
-                            return await initiateSSOAsync(turnContext, cancellationToken);
+                    if (verb == "initiateSSO")
+                    {
+                        return await InitiateSSOAsync(turnContext, cancellationToken);
                     }
                 }
                 else
                 {
-                    return createAdaptiveCardInvokeResponseAsync(authentication, state);
+                    return CreateAdaptiveCardInvokeResponseAsync(authentication, state);
                 }
             }
 
@@ -169,36 +179,26 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="isBasicRefresh">Refresh type</param>
         /// <param name="fileName">AdaptiveCardResponse.json</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
+        private InvokeResponse CreateAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "AdaptiveCardResponse.json")
         {
-            // Verify token is present or not.
+            string authResultData = (authentication != null) ? "SSO success" : (state != null && state != "") ? "OAuth success" : "SSO/OAuth failed";
 
-            bool isTokenPresent = authentication != null ? true : false;
-            bool isStatePresent = state != null && state != "" ? true : false;
-
-            string[] filepath = { ".", "Resources", fileName };
-
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var authResultData = isTokenPresent ? "SSO success" : isStatePresent ? "OAuth success" : "SSO/OAuth failed";
-            
             if (isBasicRefresh)
             {
                 authResultData = "Refresh done";
             }
-            
-            var payloadData = new
-            {
-                authResult = authResultData,
-            };
 
-            var cardJsonstring = template.Expand(payloadData);
+            string[] filePath = { ".", "Resources", fileName };
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(filePath));
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var payloadData = new { authResult = authResultData };
+            var cardJsonString = template.Expand(payloadData);
 
             var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
             {
                 StatusCode = 200,
                 Type = AdaptiveCard.ContentType,
-                Value = JsonConvert.DeserializeObject(cardJsonstring)
+                Value = JsonConvert.DeserializeObject(cardJsonString)
             };
 
             return CreateInvokeResponse(adaptiveCardResponse);
@@ -210,12 +210,12 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="turnContext">The context for the current turn.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task<InvokeResponse> initiateSSOAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        private async Task<InvokeResponse> InitiateSSOAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
             var oAuthCard = new OAuthCard
             {
-                Text = "Signin Text",
+                Text = "Please sign in",
                 ConnectionName = _connectionName,
                 TokenExchangeResource = new TokenExchangeResource
                 {
@@ -227,7 +227,7 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Type = ActionTypes.Signin,
                         Value = signInLink,
-                        Title = "Please sign in",
+                        Title = "Sign In",
                     },
                 }
             };
@@ -250,6 +250,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="name">createdBy</param>
         /// <param name="userMRI">createdById</param>
         /// <returns></returns>
+        // Method to retrieve adaptive card from a file and expand with dynamic data
         private Attachment GetAdaptiveCardFromFileName(string[] filepath, string signInLink, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
@@ -259,9 +260,9 @@ namespace Microsoft.BotBuilderSamples
                 createdById = userMRI,
                 createdBy = name
             };
-            
-            var cardJsonstring = template.Expand(payloadData);
-            var card = JsonConvert.DeserializeObject<JObject>(cardJsonstring);
+
+            var cardJsonString = template.Expand(payloadData);
+            var card = JsonConvert.DeserializeObject<JObject>(cardJsonString);
             var adaptiveCardAttachment = new Attachment()
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",

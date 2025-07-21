@@ -10,8 +10,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
+    /// <summary>
+    /// AdapterWithErrorHandler handles errors during bot execution.
+    /// </summary>
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="logger">The logger.</param>
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
             : base(configuration, logger)
         {
@@ -20,7 +28,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
                 // Log any leaked exception from the application.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Uncomment below commented line for local debugging.
+                // Uncomment the line below for local debugging.
                 // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
 
                 // Send a trace activity, which will be displayed in the Bot Framework Emulator

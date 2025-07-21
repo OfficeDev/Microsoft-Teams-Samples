@@ -1,0 +1,48 @@
+[
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "ConversationalTabs.Web\\Microsoft.Teams.Samples.ConversationalTabs.Web.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "ConversationalTabs.Domain\\Microsoft.Teams.Samples.ConversationalTabs.Domain.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ConversationalTabs.Infrastructure\\Microsoft.Teams.Samples.ConversationalTabs.Infrastructure.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "ConversationalTabs.Web\\Microsoft.Teams.Samples.ConversationalTabs.Web.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "ConversationalTabs.Domain\\Microsoft.Teams.Samples.ConversationalTabs.Domain.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ConversationalTabs.Infrastructure\\Microsoft.Teams.Samples.ConversationalTabs.Infrastructure.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      }
+    ]
+  }
+]

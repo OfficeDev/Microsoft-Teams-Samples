@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end
+description: This Teams bot collects user input via adaptive cards and saves it to a SharePoint list.
 products:
 - office-teams
 - office
@@ -17,7 +17,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
 
 Bot Framework v4 SPListBot sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and save it into sharepoint's List.
+This bot has been created using [Bot Framework](https://dev.botframework.com), This Microsoft Teams bot sample demonstrates how to capture user input through adaptive cards and store it in a SharePoint list. Built on the Bot Framework, it offers a seamless way to manage data directly from the Teams interface. The setup includes SharePoint registration, permissions configuration, and deployment in Teams, allowing easy integration and data handling within your Teams environment.
+
+## Interaction with app
+
+![SPListBot](SPListBot/Images/Preview.gif)
+
 
 ## Prerequisites
 
@@ -27,6 +32,22 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   # determine dotnet version
   dotnet --version
   ```
+
+  [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+  
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## To try this sample
 
@@ -98,7 +119,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ### This steps is specific to Microsoft Teams
 
-- Navigate to `AppManifest` folder
+- Navigate to `appPackage` folder
 - Select the `Manifest.json` and update it with your `Your Bot Id`
 - Now zip the manifest.json along with icons
 - Go to teams and do `Upload a Custom App` 
@@ -116,15 +137,15 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 ### Screenshots
 **Upload the custom app in Teams**
 
-![image](https://user-images.githubusercontent.com/50989436/109759882-c36f3480-7c13-11eb-9a38-e69d2c7139e7.png)
+![image](SPListBot/Images/1.Install.png)
 
 **Interaction with the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109759972-eb5e9800-7c13-11eb-9246-e8fa02fbef64.png)
+![image](SPListBot/Images/2.Installed.png)
 
 **Ping the Bot**
 
-![image](https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png)
+![image](SPListBot/Images/3.Interaction_with_bot.png)
 
 
 ## Further reading

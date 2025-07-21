@@ -12,8 +12,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE85701F-AF92-4458-8B1A-A2B14D5A9355}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		ConversationalTabs.slnLaunch.user = ConversationalTabs.slnLaunch.user
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{53623418-612F-43DA-9082-67F9A9B89629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +36,11 @@ Global
 		{2C4FD100-E33C-4E64-BB16-0F8826E50AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C4FD100-E33C-4E64-BB16-0F8826E50AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C4FD100-E33C-4E64-BB16-0F8826E50AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53623418-612F-43DA-9082-67F9A9B89629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53623418-612F-43DA-9082-67F9A9B89629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53623418-612F-43DA-9082-67F9A9B89629}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{53623418-612F-43DA-9082-67F9A9B89629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53623418-612F-43DA-9082-67F9A9B89629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

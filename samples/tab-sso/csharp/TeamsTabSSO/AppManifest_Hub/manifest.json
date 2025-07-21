@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{new GUID for this Teams app - not the Azure AD App ID}",
-  "packageName": "com.contoso.teamsauthsso",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Teams Auth SSO"
   },
   "description": {
-    "short": "Teams Auth SSO app",
-    "full": "The Teams Auth SSO app"
+    "short": "Microsoft Teams sample app demonstrating Azure AD SSO in a Teams tab using C#.",
+    "full": "This sample app showcases Azure Active Directory Single Sign-On (SSO) within a Microsoft Teams tab, utilizing the On-Behalf-Of flow to call Microsoft Graph APIs with C#."
   },
   "icons": {
     "outline": "outline.png",

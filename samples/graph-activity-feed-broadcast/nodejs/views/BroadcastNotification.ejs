@@ -5,8 +5,9 @@
 
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js"
-            crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
@@ -77,7 +78,7 @@
                     url: window.location.origin + "/BroadcastDetails?taskId=" + context.page.subPageId
                 };
 
-                microsoftTeams.dialog.open(taskInfo);
+                microsoftTeams.dialog.url.open(taskInfo);
             };
         });
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.
+description: This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework.
 urlFragment: teams-graph-change-notification-nodejs
 products:
 - office-teams
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-nodejs
 
 Bot Framework v4 ChangeNotification sample.
 
-This sample app demonstrates sending notifications to users when presence status is changed.
+This sample application provides a comprehensive guide for sending real-time notifications about user presence changes in Microsoft Teams using Node.js and the Bot Framework. It covers the entire setup process, including Azure AD registration, bot configuration, and integration with Teams, allowing developers to create interactive experiences that respond to user presence
 
 ## Included Features
 * Bots
@@ -27,7 +27,12 @@ This sample app demonstrates sending notifications to users when presence status
 
 ## Interaction with app
 
-![PreviewImage](Images/Preview.gif)
+![Preview Image](Images/Preview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Change Notification:** [Manifest](/samples/graph-change-notification/csharp/demo-manifest/graph-change-notification.zip)
 
 ## Prerequisites
 
@@ -35,22 +40,22 @@ This sample app demonstrates sending notifications to users when presence status
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 **Note:** Please create and install self-signed certificate before running this sample using toolkit or manually.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 ### Register you app with Azure AD.
@@ -86,6 +91,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
       - `Presence.Read`
       - `Presence.Read.All`
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+  ![ApiPermission](Images/ApiPermission.png)
   13. Navigate to **Authentication**
       If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
   - Set a redirect URI:
@@ -174,19 +180,26 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ## Running with sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 
-![image](Images/Login.png)
+![image0](Images/image0.png)
 
-![image](Images/BeRightBack_validate.png)
+![image1](Images/image1.png)
+
+![image2](Images/image2.png)
 
 - After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
 
-![image](Images/Busy.png)
+![image3](Images/image3.png)
 
-- Change user status from busy to busy offline
+![image4](Images/image4.png)
 
-![image](Images/Offline.png)
+![image5](Images/image5.png)
 
+![image6](Images/image6.png)
+
+![image7](Images/image7.png)
+
+![image8](Images/image8.png)
 
 ## Further reading
 - [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)

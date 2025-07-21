@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-file-upload-csharp",
     "source": "officeDev",
     "title": "File upload with bot using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate the file upload with bot using Bot Framework v4",
+    "shortDescription": "This bot sample for Teams demonstrates file upload capabilities using Bot Framework v4, enabling users to upload files and view inline images within chats.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-file-upload/csharp",
     "longDescription": [
-      "This sample app demonstrate the file upload with bot using Bot Framework v4"
+      "This bot allows users to upload files and send inline images directly in Microsoft Teams, utilizing Bot Framework v4 for seamless file handling. It also shows how to manage and process file attachments within chat conversations."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

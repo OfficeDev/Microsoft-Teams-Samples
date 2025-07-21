@@ -99,7 +99,7 @@
     ],
     "replyUrlsWithType":[
         {
-          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+          "url": "https://${{BOT_DOMAIN}}/auth-end",
           "type": "Web"
         },
         {

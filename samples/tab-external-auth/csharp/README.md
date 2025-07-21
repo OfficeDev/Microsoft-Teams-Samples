@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app which showcases Google authentication using external auth providers.
+description: This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-external-auth-csharp
 ---
 # Tab external auth - C#
 
-This sample illustrates how to implement Google auth using external auth providers.
+This Microsoft Teams sample app illustrates the implementation of Google authentication using OAuth2, enabling seamless user sign-in via external providers. It includes a tab interface for easy interaction, showcasing best practices for integrating authentication within Teams applications.
 
 ## Included Features
 * External Auth (Google Oauth2)
@@ -38,26 +38,38 @@ This sample illustrates how to implement Google auth using external auth provide
 
 ## Setup
 
-1. Create Google Ouath app [Google API Console](https://console.developers.google.com/)
- - Select Oauth client Id for app creation
- ![oauthapp1](Images/oauthapp1.png)
-
- - Select application type as `Web application` and give a suitable app name
- ![oauthapp3](Images/oauthapp3.png)
-
- - For authorized javascript url, give your app's base url
- ![oauthapp3](Images/oauthapp3.png)
-
- - For redirect url, give url in below format `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
- ![oauthapp4](Images/oauthapp4.png)
-
- - Once the app is created, copy the client id and client seret
- ![oauthapp2](Images/oauthapp2.png)
-
- - Enable access to the [Google People API](https://developers.google.com/people/).
- ![people-api](Images/peopleapi1.png)
-
-  ![people-api2](Images/peopleapi2.png)
+1. Create Google OAuth app [Google API Console](https://console.developers.google.com/)
+ - Create project
+  ![oauthapp5](Images/oauthapp5.png)
+ 
+  - Enter project name
+  ![oauthapp6](Images/oauthapp6.png)
+ 
+  - Click configure consent screen
+  ![oauthapp7](Images/oauthapp7.png)
+ 
+  - Select Oauth client Id for app creation
+  ![oauthapp8](Images/oauthapp8.png) 
+ 
+  - Select application type as `Web application` and give a suitable app name
+  ![oauthapp3](Images/oauthapp3.png)
+ 
+  - For authorized javascript url, provide your app's base URL
+  ![oauthapp3](Images/oauthapp3.png)
+ 
+  - For redirect url, give the URL in the format below `https://<<base-url>>/Auth/GoogleEnd` where `base-url` is your application's base url. For eg,
+  ![oauthapp4](Images/oauthapp4.png)
+ 
+  - Once the app is created, copy the client id and client secret
+  ![oauthapp2](Images/oauthapp2.png)
+ 
+   - OAuth Created
+  ![oauthapp9](Images/oauthapp9.png) 
+ 
+  - Enable access to the [Google People API](https://developers.google.com/people/).
+  ![people-api](Images/peopleapi1.png)
+ 
+   ![people-api2](Images/peopleapi2.png)
 
 2. Setup NGROK
 - Run ngrok - point to port 3978
@@ -106,13 +118,76 @@ This sample illustrates how to implement Google auth using external auth provide
     
 ## Running the sample
 
-### Google OAuth 2.0
+**Note:** Supported on Teams, Outlook, and Office for Desktop, as well as Outlook and Office for Mobile.
+Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
+
+## Google OAuth 2.0 -Teams desktop
 
 ![tab-page](Images/tab.png)
 
 ![redirect-page](Images/redirect-page.png)
 
 ![tab-auth-page](Images/tab1.png)
+
+## Outlook on the desktop
+
+- To view your app in Outlook on the desktop.
+
+![OutlookDesktop1](Images/OutlookDesktop1.png)
+
+![OutlookDesktop2](Images/OutlookDesktop2.png)
+
+![OutlookDesktop3](Images/OutlookDesktop3.png)
+
+![OutlookDesktop4](Images/OutlookDesktop4.png)
+
+## Office on the desktop
+
+- To preview your app running in Office on the desktop.
+
+![officeDesktop1](Images/officeDesktop1.png)
+
+![officeDesktop2](Images/officeDesktop2.png)
+
+![officeDesktop3](Images/officeDesktop3.png)
+
+![officeDesktop4](Images/officeDesktop4.png)
+
+![officeDesktop5](Images/officeDesktop5.png)
+
+![officeDesktop6](Images/officeDesktop6.png)
+
+## Outlook on the mobile
+
+- To view your app in Outlook on the mobile.
+
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
+
+![InstallOutlook](Images/outlook1.jpg)
+
+**Select your app icon to launch and preview your app running in Outlook on the mobile**
+
+![outlook2](Images/outlook2.jpg)
+
+**Click get Details**
+
+![outlook3](Images/outlook3.jpg)
+
+## Office on the mobile
+
+- To preview your app running in Office on the mobile.
+
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
+
+![Office1](Images/Office1.jpg)
+
+**Select your app icon to launch your app in Office on the mobile**
+
+![Office2](Images/Office2.jpg)
+
+**Click get Details**
+
+![Office3](Images/Office3.jpg)
 
 ## Further Reading.
 [External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)

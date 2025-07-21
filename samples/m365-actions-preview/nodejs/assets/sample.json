@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-m365-actions-preview-nodejs",
     "source": "officeDev",
     "title": "Actions across Microsoft 365",
-    "shortDescription": "This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com),",
+    "shortDescription": "This sample demonstrates how to build Teams apps using Actions in the Microsoft 365 app to streamline task management and enhance productivity by minimizing context switching.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/m365-actions-preview/nodejs",
     "longDescription": [
-      "This sample contains preview documentation for (Microsoft 365 extended Teams apps) Actions in Microsoft 365 app(microsoft365.com)."
+      "This sample illustrates how developers can integrate Actions in the Microsoft 365 app to simplify task completion and enhance user productivity. It enables seamless interaction with content, expanding app functionality while reducing the need for switching between applications."
     ],
     "creationDateTime": "2023-12-22",
-    "updateDateTime": "2023-12-22",
+    "updateDateTime": "2024-10-11",
     "products": [
       "Microsoft 365"
     ],

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meeting-audio-state-nodejs",
     "source": "officeDev",
     "title": "Meeting Audio Mute/Unmute",
-    "shortDescription": "This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.",
+    "shortDescription": "This sample tab application demonstrates how to control meeting audio in Microsoft Teams by muting and unmuting using the Incoming Client Audio API.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs",
     "longDescription": [
-      "This is an sample tab (side panel) application which shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API."
+      "This sample tab application allows users to mute and unmute audio during Teams meetings by leveraging the Incoming Client Audio API. It features RSC permissions, supports Teams themes, and offers a user-friendly interface for toggling audio states seamlessly within the meeting side panel."
     ],
     "creationDateTime": "2022-08-08",
-    "updateDateTime": "2022-10-13",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

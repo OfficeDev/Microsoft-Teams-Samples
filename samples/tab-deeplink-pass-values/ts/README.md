@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample which displays deeplinks based on the values passed dynamically to the context.
+description: This sample app for Microsoft Teams illustrates the creation and usage of dynamic deep links to pass contextual values to tab and standalone web applications. It highlights the differences in link formatting and consumption based on the user’s access environment, enhancing navigation and data display capabilities.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-pass-values-ts
 
 # Passing Values with Deep Links for Tab Apps and Standalone Web Apps
 
-Deep links load applications with additional information that can be used to carry out app logic (e.g., querying a DB, displaying certain data, navigating the user to deeper pages, etc.). This Microsoft Teams tab app sample shows how you can create and use deep links to pass values to tab apps, and how the link's formatting and consumption methods may vary based on the user's access environment (i.e., if they are using Microsoft Teams vs. the app's public URL).
+Explore this Microsoft Teams sample app that demonstrates how to utilize dynamic deep links for passing values to both tab and standalone web applications. With comprehensive setup instructions and features like deep link generation, this app enables developers to enhance user interactions by providing context-specific information directly through deep links.
 
  ## Included Features
 * Tabs
@@ -89,7 +89,7 @@ All required source code are located in the `./src` folder:
     - Start the app
 
         ```
-        gulp serve
+        npm start
         ```
 
 3. Upload tab app to Teams
@@ -123,47 +123,6 @@ To access the app, you can either open the tab in Microsoft Teams, or you can ac
 - [Tab Context - Microsoft Teams JavaScript library](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#getting-context-by-using-the-microsoft-teams-javascript-library)
 - [React Hook - useEffect](https://react.dev/reference/react/useEffect)
 - [JS String match](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
-
-## Useful Guidance from Yo Teams
-
-### Building the app
-
-The application is built using the `build` Gulp task.
-
-``` bash
-npm i -g gulp-cli
-gulp build
-```
-
-### Building the manifest
-
-To create the Microsoft Teams Apps manifest, run the `manifest` Gulp task. This will generate and validate the package and finally create the package (a zip file) in the `package` folder. The manifest will be validated against the schema and dynamically populated with values from the `.env` file.
-
-``` bash
-gulp manifest
-```
-
-### Deploying the manifest
-
-Using the `yoteams-deploy` plugin, automatically added to the project, deployment of the manifest to the Teams App store can be done manually using `gulp tenant:deploy` or by passing the `--publish` flag to any of the `serve` tasks.
-
-### Configuration
-
-Configuration will be stored in the `.env` file. Please create one based on the .env_sample file included in the `samples/tab-deeplink-pass-values/ts` folder.
-
-### Debug and test locally
-
-To debug and test the solution locally you use the `serve` Gulp task. This will first build the app and then start a local web server on port 3007, where you can test your Tabs, Bots or other extensions. Also this command will rebuild the App if you change any file in the `/src` directory.
-
-``` bash
-gulp serve
-```
-
-To debug the code you can append the argument `debug` to the `serve` command as follows. This allows you to step through your code using your preferred code editor.
-
-``` bash
-gulp serve --debug
-```
 
 ### Useful links
 

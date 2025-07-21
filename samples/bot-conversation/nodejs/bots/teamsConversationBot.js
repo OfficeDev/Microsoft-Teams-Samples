@@ -1,13 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, teams, bot-framework
+// @analysis-type: code-quality, test-coverage
+
 const {
     ActionTypes,
     CardFactory,
     MessageFactory,
     TeamsActivityHandler,
     TeamsInfo,
-    TurnContext
+    TurnContext,
+    ActivityTypes
 } = require('botbuilder');
 const TextEncoder = require('util').TextEncoder;
 const ACData = require('adaptivecards-templating');
@@ -45,6 +51,16 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.checkReadUserCount(context);
             } else if (text.includes('reset')) {
                 await this.resetReadUserCount(context);
+            } else if (text.includes('label')) {
+                await this.addAILabel(context);
+            } else if (text.includes('sensitivity')) {
+                await this.addSensitivityLabel(context);
+            } else if (text.includes('feedback')) {
+                await this.addFeedbackButtons(context);
+            } else if (text.includes('citation')) {
+                await this.addCitations(context);
+            } else if (text.includes('aitext')) {
+                await this.sendAIMessage(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -87,7 +103,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 users.push(memberDetails.name);
                 counter++;
                 teamMemberDetails = teamMemberDetails.filter(member => member.aadObjectId !== turnContext._activity.from.aadObjectId);
-              }
+            }
         });
 
         // This method registers the lambda function, which will be invoked when message sent by user is updated in chat.
@@ -111,6 +127,130 @@ class TeamsConversationBot extends TeamsActivityHandler {
         });
     }
 
+    async sendAIMessage(context) {
+        await context.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI [1]`,
+            channelData: {
+                feedbackLoopEnabled: true,
+            },
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org",
+                    usageInfo: {
+                        "@type": "CreativeWork",
+                        "@id": "sensitivity1"
+                    },
+                    additionalType: ["AIGeneratedContent"],
+                    citation: [
+                        {
+                            "@type": "Claim",
+                            position: 1,
+                            appearance: {
+                                "@type": "DigitalDocument",
+                                name: "Some secret citation",
+                                url: "https://example.com/claim-1",
+                                abstract: "Excerpt",
+                                encodingFormat: "docx",
+                                keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // These appear below the citation title
+                                usageInfo: {
+                                    "@type": "CreativeWork",
+                                    "@id": "sensitivity1",
+                                    name: "Sensitivity title",
+                                    description: "Sensitivity description",
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
+        });
+    }
+
+    async addAILabel(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated via AI`,
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org",
+                    additionalType: ["AIGeneratedContent"], // AI Generated label
+                }
+            ]
+        });
+    }
+
+    async addSensitivityLabel(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `This is an example for sensitivity label that help users identify the confidentiality of a message`,
+            entities: [
+                {
+                    type: "https://schema.org/Message",
+                    "@type": "Message",
+                    "@context": "https://schema.org", // AI Generated label
+                    usageInfo: {
+                        "@type": "CreativeWork",
+                        description: "Please be mindful of sharing outside of your team", // Sensitivity description
+                        name: "Confidential \\ Contoso FTE", // Sensitivity title
+                    }
+                }
+            ]
+        });
+    }
+
+    async addFeedbackButtons(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `This is an example for Feedback buttons that helps to provide feedback for a bot message`,
+            channelData: {
+                feedbackLoopEnabled: true // Enable feedback buttons
+            },
+        });
+    }
+
+    async addCitations(turnContext) {
+        await turnContext.sendActivity({
+            type: ActivityTypes.Message,
+            text: `Hey I'm a friendly AI bot. This message is generated through AI [1]`, // cite with [1],
+            entities: [
+            {
+              type: "https://schema.org/Message",
+              "@type": "Message",
+              "@context": "https://schema.org",
+              citation: [
+              {
+                "@type": "Claim",
+                position: 1, // Required. Must match the [1] in the text above
+                appearance: {
+                  "@type": "DigitalDocument",
+                  name: "AI bot", // Title
+                  url: "https://example.com/claim-1", // Hyperlink on the title
+                  abstract: "Excerpt description", // Appears in the citation pop-up window
+                  text: "{\"type\":\"AdaptiveCard\",\"$schema\":\"http://adaptivecards.io/schemas/adaptive-card.json\",\"version\":\"1.6\",\"body\":[{\"type\":\"TextBlock\",\"text\":\"Adaptive Card text\"}]}", // Appears as a stringified Adaptive Card
+                  keywords: ["keyword 1", "keyword 2", "keyword 3"], // Appears in the citation pop-up window
+                  encodingFormat: "application/vnd.microsoft.card.adaptive",
+                  usageInfo: {
+                    "@type": "CreativeWork",
+                    name: "Confidential \\ Contoso FTE", // Sensitivity title
+                    description: "Only accessible to Contoso FTE", // Sensitivity description
+                  },
+                  image: {
+                    "@type": "ImageObject",
+                    name: "Microsoft Word"
+                  },
+                 },
+                },
+              ],
+            },
+          ],
+        })
+    }
+
     // Checks the count of members who have read the message sent by MessageAllMembers command.
     async checkReadUserCount(turnContext) {
         if (users.length !== 0 && users.length !== undefined) {
@@ -121,6 +261,26 @@ class TeamsConversationBot extends TeamsActivityHandler {
         }
     }
 
+    async onInvokeActivity(context) {
+        try {
+            switch (context.activity.name) {
+                case "message/submitAction":
+                    return await context.sendActivity("Provided reaction : " + context.activity.value.actionValue.reaction + "<br> Feedback : " + JSON.parse(context.activity.value.actionValue.feedback).feedbackText);
+                default:
+                    return {
+                        status: 200,
+                        body: `Unknown invoke activity handled as default- ${context.activity.name}`,
+                    };
+            }
+        } catch (err) {
+            console.log(`Error in onInvokeActivity: ${err}`);
+            return {
+                status: 500,
+                body: `Invoke activity received- ${context.activity.name}`,
+            };
+        }
+    }
+
     // Resets the check count of members who have read the message sent by MessageAllMembers command.
     async resetReadUserCount(turnContext) {
         teamMemberDetails = [];
@@ -128,13 +288,15 @@ class TeamsConversationBot extends TeamsActivityHandler {
         users = [];
     }
 
+    // We already have prompt starters so we don't need to do anything here.
+    /*
     async onInstallationUpdateActivity(context) {
-        if (context.activity.conversation.conversationType === 'channel') {
-            await context.sendActivity(MessageFactory.text(`Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in ${context.activity.conversation.name}`));
-        } else {
-            await context.sendActivity(MessageFactory.text('Welcome to Microsoft Teams conversationUpdate events demo bot.'));
-        }
-    }
+         if (context.activity.conversation.conversationType === 'channel') {
+             await context.sendActivity(MessageFactory.text(`Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in ${context.activity.conversation.name}`));
+         } else {
+             await context.sendActivity(MessageFactory.text('Welcome to Microsoft Teams conversationUpdate events demo bot.'));
+         }
+    } */
 
     async cardActivityAsync(context, isUpdate) {
         const cardActions = [
@@ -185,6 +347,36 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 Title: "Reset read count",
                 value: null,
                 Text: "reset"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "AI label",
+                value: null,
+                Text: "label"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Sensitivity label",
+                value: null,
+                Text: "sensitivity"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Feedback buttons",
+                value: null,
+                Text: "feedback"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Citations",
+                value: null,
+                Text: "citation"
+            },
+            {
+                Type: ActionTypes.MessageBack,
+                Title: "Send AI message",
+                value: null,
+                Text: "sendAItext"
             }
         ];
 
@@ -298,7 +490,7 @@ class TeamsConversationBot extends TeamsActivityHandler {
     }
 
     async getImmersivereaderCard(context) {
-        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(ImmersiveReaderCardTemplate)]});
+        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(ImmersiveReaderCardTemplate)] });
     }
 
     async deleteCardActivityAsync(context) {
@@ -334,9 +526,9 @@ class TeamsConversationBot extends TeamsActivityHandler {
                         process.env.MicrosoftAppId,
                         ref,
                         async (context) => {
-                           var messageId = await context.sendActivity(message);
-                           member.messageId = messageId.id;
-                           teamMemberDetails.push(member);
+                            var messageId = await context.sendActivity(message);
+                            member.messageId = messageId.id;
+                            teamMemberDetails.push(member);
                         });
                 });
         }));

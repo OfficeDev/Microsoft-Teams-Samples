@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.sample",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -15,17 +14,17 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Config Auth Search",
-    "full": "Config Auth Search"
+    "short": "Messaging Extension Auth",
+    "full": "ME Auth for Search, Action and link unfurling"
   },
   "description": {
-    "short": "Config Auth Search",
-    "full": "Config Auth Search"
+    "short": "Python Messaging Extension with authentication and configuration page.",
+    "full": "This sample demonstrates how to create a Python-based search Messaging Extension in Microsoft Teams that includes a configuration page and supports user authentication."
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -37,7 +36,8 @@
           "fetchTask": false,
           "context": [
             "commandBox",
-            "compose"
+            "compose",
+            "message"
           ],
           "parameters": [
             {
@@ -67,6 +67,18 @@
             }
           ]
         }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com",
+              "${{BOT_DOMAIN}}"
+            ],
+            "supportsAnonymizedPayloads": true
+          }
+        }
       ]
     }
   ],
@@ -75,7 +87,7 @@
   ],
   "validDomains": [
     "*.botframeworksamples.blob.core.windows.net",
-    "{{domain-name}}",
+    "${{BOT_DOMAIN}}",
     "*.botframework.com"
   ]
 }

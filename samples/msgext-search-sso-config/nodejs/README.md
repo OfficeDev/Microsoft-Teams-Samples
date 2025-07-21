@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.
+description: This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that includes a configuration page and supports single sign-on (SSO) authentication for enhanced user experience.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config-
 
 # Messaging Extension SSO Config Bot
 
-Bot Framework v4 sample for Teams to include a configuration page and Bot Service SSO authentication.
+This comprehensive Node.js sample illustrates the development of a Messaging Extension for Microsoft Teams, integrating a configuration page and single sign-on (SSO) capabilities using the Bot Framework v4. Designed for seamless user interaction, this extension allows users to perform searches and retrieve profile information while ensuring secure authentication through SSO.
 
 ## Included Features
 * Bots
@@ -27,6 +27,11 @@ Bot Framework v4 sample for Teams to include a configuration page and Bot Servic
 
  ![](Images/MsgextSSO.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Teams Messaging Extensions Search:** [Manifest](/samples/msgext-search-sso-config/csharp/demo-manifest/msgext-search-sso-config.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -35,18 +40,18 @@ Bot Framework v4 sample for Teams to include a configuration page and Bot Servic
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension.
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 

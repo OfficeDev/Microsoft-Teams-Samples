@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Context App",
+    "full": "Meeting Context App"
+  },
+  "description": {
+    "short": "Explore meeting context and participant details in Teams using bot APIs.",
+    "full": "This sample demonstrates how to retrieve and display meeting context and participant details in Microsoft Teams using bot APIs."
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupChat"
+      ],
+      "context": [
+        "meetingChatTab",
+        "meetingDetailsTab"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [ "groupChat" ],
+      "commandLists": [
+        {
+          "commands": [
+            {
+              "title": "Meeting Context",
+              "description": "Using TeamsInfo.GetMeetingInfoAsync gets the current meeting details."
+            },
+            {
+              "title": "Participant Context",
+              "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
+            }
+          ],
+          "scopes": [ "groupChat" ]
+        }
+      ]
+
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-samples-msgext-search-sso-config-nodejs",
     "source": "officeDev",
     "title": "Messaging Extension SSO Config Bot",
-    "shortDescription": "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.",
+    "shortDescription": "This sample demonstrates a Node.js Messaging Extension for Microsoft Teams that includes a configuration page and supports single sign-on (SSO) authentication for enhanced user experience.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-sso-config/nodejs",
     "longDescription": [
-      "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO."
+      "This Node.js sample showcases a Messaging Extension in Microsoft Teams, featuring a configuration page that allows users to authenticate via SSO. It enables users to perform searches and interact with external services directly within Teams, enhancing productivity and integration."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

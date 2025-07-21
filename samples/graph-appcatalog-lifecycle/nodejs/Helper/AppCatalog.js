@@ -73,7 +73,7 @@ class AppCatalogHelper {
         return new Promise(async (resolve) => {
             
             // read a zip file
-            let response = fs.readFile("Manifest/manifest.zip", async (err, data) => {
+            let response = fs.readFile("appManifest/build/appManifest.local.zip", async (err, data) => {
                 if (err) throw err;
                 await JSZip.loadAsync(data).then(async (zip) => {
                     if (headerType == 'publish') {

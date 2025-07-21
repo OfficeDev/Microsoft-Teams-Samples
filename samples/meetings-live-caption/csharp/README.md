@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CART link to send live captions in the meeting tab.
+description: This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings.
 products:
 - office-teams
 - office
@@ -15,10 +15,15 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-csharp
 
 # Meeting side panel application uses CART link to send caption in live meeting.
 
-This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting. Meeting side panel application uses CART link to send caption in live meeting.
+This sample application showcases how to implement live captioning in Microsoft Teams using CART links. With features like a meeting side panel, chat integration, and configurable settings, this app enables real-time captioning to enhance accessibility during meetings.
 
 Once the meeting is scheduled, follow this doc to enable [Provide Cart Catptions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
+
+## Enable CART Captions From Settings
+![Enable CART-1](MeetingLiveCaption/Images/8.SettingsToEnableCart-2.png)
+
+![Enable CART-2](MeetingLiveCaption/Images/7.SettingToEnableCart-1.png)
 
 ## Included Features
 * Meeting Chat 
@@ -30,6 +35,11 @@ Copy the CART link it will used while configuring tab for meeting.
 
 ![bot-conversations ](MeetingLiveCaption/Images/MeetingCaption.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meetings Live Caption:** [Manifest](/samples/meetings-live-caption/csharp/demo-manifest/meetings-live-caption.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -40,6 +50,21 @@ Copy the CART link it will used while configuring tab for meeting.
     ```
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup.
 
@@ -71,33 +96,42 @@ Copy the CART link it will used while configuring tab for meeting.
 1) Run the bot from Visual Studio:
    - Press `F5` to run the project
 
-1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1) Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `<<AppId>>` with any GUID id value.
    - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-1) Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
+1) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
 
 1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Manage your apps -> Upload an app -> Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **NOTE: If you are not able to send caption, try configuring tab again.**
 
 ## Running the sample
 
+![Install App](MeetingLiveCaption/Images/1.Install.png)
+
+![Add TO Meeting](MeetingLiveCaption/Images/2.AddToMeeting.png)
+
+![Configurable Tab ](MeetingLiveCaption/Images/3.ConfigWithoutCartURL.png)
+
+![Configurable Tab](MeetingLiveCaption/Images/4.ConfigWithCartURL.png)
+
 1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
-![Add Tab](MeetingLiveCaption/Images/AddMeetingCaption.png)
+![Add Tab](MeetingLiveCaption/Images/9.ScheduleMeeting.png)
 
 2. Once meeting started, turn on live caption.
-![Start live caption](MeetingLiveCaption/Images/TurnOnLiveCaption.png)
+![Enable Live Caption](MeetingLiveCaption/Images/5.SettingsToEnableLiveCaption.png)
 
 3. Once the live caption has started, you can use the app to send live caption.
-![Send live caption](MeetingLiveCaption/Images/MeetingCaptionSidePanel.png)
+![Send live caption](MeetingLiveCaption/Images/6.LiveCaption.png)
 
 4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](MeetingLiveCaption/Images/LiveCaption.png)
+![Caption in meeting](MeetingLiveCaption/Images/6.LiveCaption.png)
+
 
 ## Further reading
 

@@ -3,12 +3,12 @@
     "name": "officedev-microsoft-teams-samples-tab-people-picker-nodejs",
     "source": "officeDev",
     "title": "Tab people picker",
-    "shortDescription": "This is an tab app which shows the feature of people picker using teams js client sdk.",
+    "shortDescription": "This tab app showcases the People Picker functionality using the Teams JavaScript client SDK to allow users to select individuals from their organization.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-people-picker/nodejs",
     "longDescription": [
-      "This is an tab app which shows the feature of people picker using teams js client sdk."
+      "This Microsoft Teams tab app highlights the People Picker feature, enabling users to search and select individuals from their organization using the Teams JavaScript client SDK. It includes functionalities such as organization-wide searches, scoped searches, and a single-select option for enhanced user interaction."
     ],
-    "updateDateTime": "2022-10-21",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

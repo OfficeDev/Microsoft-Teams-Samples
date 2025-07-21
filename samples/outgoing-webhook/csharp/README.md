@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams.
+description: This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
 products:
 - office-teams
 - office
@@ -13,7 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-csharp
 ---
 
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
+
 # Outgoing Webhook Sample C#
+
+The Outgoing Webhook Sample C# project illustrates how to create a basic Outgoing Webhook for Microsoft Teams, enabling seamless integration with external applications. This solution allows users to send messages to a specified callback URL and receive structured responses, streamlining interactions and enhancing functionality within Teams without the overhead of a complete bot framework.
 
 ## Summary
 
@@ -24,7 +30,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 ## Interaction with app
 
-![Basic response](WebhookSampleBot/Images/OutgoingWebhook.gif)
+![Basic response](Images/OutgoingWebhook.gif)
 
 ## Pre-requisites
 
@@ -91,11 +97,15 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 Example screenshot to reply to any message:
  
-![Basic response](Images/response.png)
+![Configuration](Images/1.scenario1.png)
+
+![Configuration](Images/2.scenario2.png)
 
 Example screenshot to show Hero card (using type of card in message):
  
-![Hero card](Images/hero_card.png)
+![Basic response](Images/3.reply.png)
+
+![Hero card](Images/4.herocard.png)
 
 ## Further Reading
 

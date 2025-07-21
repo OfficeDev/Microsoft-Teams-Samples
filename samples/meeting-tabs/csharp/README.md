@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+description: This app allows muting/unmuting Teams meeting audio and displays stage view in the meeting side panel.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-csharp
 
 ## Meeting Tabs Sample
 
-This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+This sample showcases muting/unmuting Teams meeting audio directly from the side panel tab with stage view integration. It also features Teams theme handling and RSC permissions support, making it ideal for enhancing your meeting experience.
 
 ## Included Features
 * Meeting Stage
@@ -31,7 +31,7 @@ This sample shows app stage view, Mute/Unmute Teams meeting audio call in meetin
 ![TeamsTheme](Images/TeamsThemes.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meeting-Tabs:** [Manifest](/samples/meeting-tabs/csharp/demo-manifest/meeting-tabs.zip)
 
@@ -45,6 +45,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -109,11 +124,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```
  6. __*This step is specific to Teams.*__
 
-- **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
 - **Edit** the `manifest.json` for `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-- **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+- **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
@@ -124,51 +139,48 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 You can interact with Teams Tab meeting sidepanel.
 
 1. **Install app**
-![InstallApp](Images/InstallApp.png)
+![InstallApp](Images/1.Install.png)
 
 2. **Type a meeting name**
-![AddMeetingTabs](Images/AddMeetingTabs.png)
+![AddMeetingTabs](Images/2.Select_meeting.png)
 
 3. **Select meeting name**
-![selectMeetingName](Images/selectMeetingName.png)
+![selectMeetingName](Images/3.Configure_Page.png)
 
 4. **Add meeting tab**
-![AddMeeting](Images/AddMeeting.png)
+![AddMeeting](Images/4.App_Added.png)
 
-5. **Join meeting**
-![JoinMeeting](Images/JoinMeeting.png)
+5. **App In Meeting**
+![JoinMeeting](Images/5.Selecting_App_In_Metting.png)
 
 6. **Select your app**
-![appAddMeeting](Images/appAddMeeting.png)
+![appAddMeeting](Images/6.Configure_Tab_In_Meeting.png)
 
 7. **Add meeting tab**
-![appAddMeetingTabs](Images/appAddMeetingTabs.png)
+![appAddMeetingTabs](Images/7.Tab_Added.png)
 
-8. **Home page**
-![HomePage](Images/HomePage.png)
+8. **Click share To stage view**
+![HomePage](Images/8.Click_Share_To_Stage_View.png)
 
 9. **Click share To stage view**
-![clickShareStageView](Images/clickShareStageView.png)
+![clickShareStageView](Images/9.Share_To_Stage_View.png)
 
-10. **Share To stage view**
-![NextTenant](Images/NextTenant.png)
+10. **Toggle To Mute**
+![NextTenant](Images/10.Toggle_To_Mute.png)
 
-11. **Toggle To Mute**
+11. **Toggle To UnMute**
 Toggle button to mute state its looks like below.
-![audioCall](Images/audioCall.png)
+![audioCall](Images/11.Toggle_To_Unmute.png)
 
-12. **Toggle To Unmute**
+12. **App theme when Dark**
 Toggle button to Unmute state it will unmute client audio.
-![audioCallTrue](Images/audioCallTrue.png)
+![audioCallTrue](Images/12.App_Theme_Dark.png)
 
-13. **App theme when dark**
-![Dark](Images/dark-with-timer.PNG)
+13. **App theme when Light**
+![Light](Images/13.App_Theme_Light.png)
 
-14. **App theme when light**
-![Light](Images/light-with-timer.PNG)
-
-15. **App theme when contrast**
-![Contrast](Images/contrast-with-timer.PNG)
+14. **App theme when Contrast**
+![Contrast](Images/14.App_Theme_High_Contrast.png)
 
 ## Further reading
 

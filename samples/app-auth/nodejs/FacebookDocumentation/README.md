@@ -8,22 +8,25 @@
 3. Once the developer page opens, click on `Create App`.
 ![Create App](create-app-page.png)
 
-4. It will redirect to `Select app type` page. From the options select app type as `None`.
-![App Type](app-type-creation.png)
+4. Enter `App name`
+![App Name](app-name.png)
 
-5. On the basic information page `Display name` will be the name of your app and `App contact email` will be your email linked with facebook.
+5. Choose the `Use case` if it aligns with your specific requirement; otherwise, select `Other` and click next.
+![Use Case](app-use-case.png)
+
+6. Choose the `app type` if it aligns with your specific requirement; otherwise, select `Consumer` and click next.
+![Use Case](app-type-creation.png)
+
+7. On the basic information page `App name` will be the name of your app and `App contact email` will be your email linked with facebook, click on Create app.
 ![Basic Information](app-registration.png)
 
-6. Once the app is created navigate to basic details section of the app. You will be able to see App ID `FacebookAppId` and App Secret `FacebookAppPassword` which needs to be fill inside appsettings.json file.
+8. Once the app is created navigate to basic details in App settings section of the app. You will be able to see App ID `FacebookAppId` and App Secret `FacebookAppPassword` which needs to be fill inside appsettings.json file.
 ![App Information](app-details.png)
 
-7. Now on you app dashboard page, go to products sections.
+9. Now on your app dashboard page, click on `Customize adding a Facebook Login button` and left hand menu click on `Settings`.
 ![Add Product](dashboard-page.png)
 
-8. From the products section select `Facebook login` and click setup.
-![Facebook Service](products-page.png)
-
-9. In the prodcuts section, `Facebook Login` will be added. Go to its settings section and add the below valid domains inside the valid domain area. (Note here base-url refers to your app's base url. For eg when using ngrok if our url is `https://1234.ngrok-free.app` then base-url will be `1234.ngrok-free.app`).
-`https://<base-url>/`, `https://<base-url>/fb-auth`, `https://token.botframework.com/.auth/web/redirect`.
+10. Scroll in the bottom and find the `Valid OAuth Redirect URIs` add the below valid domains inside the valid domain area. (Note here base-url refers to your app's base url. For eg when using ngrok if our url is `https://1234.ngrok-free.app` then base-url will be `1234.ngrok-free.app`).
+`https://<base-url>/`, `https://<base-url>/fb-auth`, `https://token.botframework.com/.auth/web/redirect` and click on save changes.
 
 ![Valid Domains](valid-domains.png)

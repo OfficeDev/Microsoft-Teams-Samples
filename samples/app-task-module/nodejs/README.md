@@ -7,14 +7,13 @@ products:
 languages:
 - typescript
 - nodejs
-description: "Sample which demonstrates launching of task module from tab and bot."
+description: "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML."
 urlFragment: teams-module-node
 extensions:
   contentType: samples
   createdDate: "09/17/2018 06:53:22 PM"
 urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
-
 
 # Microsoft Teams task module
 
@@ -148,7 +147,7 @@ You can invoke them from an Adaptive card (using the _tasks_ command) or from a 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -166,7 +165,7 @@ You can invoke them from an Adaptive card (using the _tasks_ command) or from a 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

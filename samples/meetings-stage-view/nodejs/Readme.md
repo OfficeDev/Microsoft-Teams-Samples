@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Enable and configure your apps for Teams meetings to use in stage view
+description: This sample app demonstrates how to enable and configure applications for Microsoft Teams meetings, utilizing the Live Share SDK to facilitate a shared meeting stage experience.
 products:
 - office-teams
 - office
@@ -15,8 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-nodejs
 
 # Meetings Stage View
 
-This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
-For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
+
+This sample application [Enables the configuration](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings) of shared meeting stages within Microsoft Teams, leveraging the [Live Share SDK](https://aka.ms/livesharedocs) for real-time collaboration. It includes features like a meeting side panel and customizable themes, providing users with a dynamic experience during meetings. The demo manifest is available for testing in your Microsoft Teams client.
+
+
+
 
 ## Included Features
 * Meeting Stage
@@ -37,7 +40,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 ![Preview Image](Images/app-theme.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Realtime meeting stage view:** [Manifest](/samples/meetings-stage-view/csharp/demo-manifest/Meeting-stage-view.zip)
 
@@ -45,14 +48,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -155,11 +158,11 @@ You can use this app by following the below steps:
 
 - App in stage view.
 
-![Stage View Screen](Images/stage_view.png)
+![Stage View Screen](Images/10.StageView2.png)
 
 - Sharing specific part of your app to the meeting stage.
 
-![Share Specific part screen](Images/share_specific_part.png)
+![Share Specific part screen](Images/9.ShareSpecificPart.png)
 
 **NOTE: Currently Live Share SDK is not supported in mobiles.**
 
@@ -179,39 +182,37 @@ You can use this app by following the below steps:
 
     - Search for your app `App in meeting` and add it.
 
-![Select App](Images/select_app.png)
+![Select App](Images/1.Install.png)
 
     - Join the meeting and click on the app icon at the top
     - This will open a sidepanel with `Share` icon at top to share the app for collaboration in stage view.
 
-![App icon](Images/app_icon.png)
-
-![Share Icon](Images/share_icon.png)
+![Stage View](Images/2.StageView.png)
 
     - You can now interact with the app.
 
 
 - Add Details for collaboration.
 
-![Add Button](Images/add_button.png)
+![Add Doing](Images/3.AddDoing.png)
 
-![Add Details](Images/add_details.png)
+![Add Todo](Images/4.AddToDo.png)
 
 - App in sidepanel.
 
-![App in sidepanel](Images/side_panel.png)
+![App in sidepanel](Images/1.AppInMeetings.png)
 
 - Sharing specific parts of app.
 
-![Share specific part](Images/share_specific_part_sidepanel.png)
+![Share specific part](Images/9.ShareSpecificPart.png)
 
 ## Interaction with App theme when Teams Theme changes.
 
-![light](Images/light.PNG)
+![light](Images/10.StageView2.png)
 
-![dark](Images/dark.PNG)
+![dark](Images/7.DarkTheme.png)
 
-![contrast](Images/contrast.PNG)
+![contrast](Images/8.ContrastTheme.png)
 
 ## Further reading
 

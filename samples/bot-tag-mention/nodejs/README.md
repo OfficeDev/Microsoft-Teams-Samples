@@ -31,16 +31,16 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - Create tags within the team channel prior to utilizing the bot.
-- - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 - If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
     Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -159,41 +159,50 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 >Note : Before using the Tag Mention sample in a team channel scope, please install this app in your Personal scope to enable Single Sign-On (SSO) login.
 
 **Personal Scope**
+    ![PersonalScope-interactions ](Images/1.AddPersonalScope.png)
 
 1. **SSO Login**
-   ![groupChat-BotCommands-interactions ](Images/personal-sso-interaction.png)
+   ![PersonalScope-interactions ](Images/2.LoginWithPersonalScope.png)
 
 **Team channel Scope**
+
+**Create tags within the team channel**
+To create tags in Microsoft Teams, follow these steps:
+
+1. Select Teams on the left side of the app and choose the team you want to create tags for.
+2. Click the "More options" button (three dots) next to the team name and select "Manage tags".
+3. Click "Create tag" and provide a name, description, and assign team members to the tag.
 
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with necessary commands
   - **Valid Scopes:** team chat
 
    **Show Welcome command interaction:**
-  ![groupChat-BotCommands-interactions ](Images/team-BotCommands-interaction.png)
+  ![groupChat-BotCommands-interactions ](Images/4.WelcomeMessage_Teams.png)
 
 2. **MentionTag**
   - **Result:** The bot will respond to the message and mention a tag
   - **Valid Scopes:** team chat
 
   - **Team Scope Interactions:**
+    ![Add To Teams Scope ](Images/3.AddToTeamsScope.png)
 
    **MentionTag command interaction:**
    **Command 1:** `@<Bot-name> <your-tag-name>` - It will work only if you have Graph API permissions to fetch the tags and bot will mention the tag accordingly in team's channel scope.
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
+  ![team-MentionCommand-Interaction ](Images/5.MetionedTag.png)
 
    **Command 2:** `@<Bot-name> @<your-tag>` - It will work without Graph API permissions but you need to provide the tag as command to experience tag mention using bot.
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction1.png)
+  ![team-MentionCommand-Interaction ](Images/5.MetionedTag-2.png)
 
    **Hover on the tag to view the details card:**
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-2.png)
+  ![team-MentionCommand-Interaction ](Images/6.TagMentionDetails.png)
 
   **Message interaction:**
   When you mention the bot in Teams without providing any commands, you will receive the following message.
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-3.png)
+  ![team-MentionCommand-Interaction ](Images/8.WithOutCommand.png)
 
   If you attempt to use the bot before creating a tag or if you provide an incorrect tag name, you will receive the following message.
-  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction-4.png)
+  ![team-MentionCommand-Interaction ](Images/7.MessageWhenNoTagFound.png)
 
 ## Deploy the bot to Azure
 

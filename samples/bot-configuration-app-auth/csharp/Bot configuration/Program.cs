@@ -5,18 +5,34 @@
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
+    /// <summary>
+    /// The Program class is the entry point of the application.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The main entry point of the application.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        /// <summary>
+        /// Creates the host builder.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
+        /// <returns>The configured host builder.</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

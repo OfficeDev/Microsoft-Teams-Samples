@@ -145,7 +145,7 @@ const SidePanel = (props) => {
     // This method is called to publish the agenda in meeting chat.
     function publishAgenda() {
         const agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
-        postAgenda();
+        postAgenda(agendaValue);
     }
 
     // This method is called whenever the shared state is updated.

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This is an sample tab application which shows the contents of tab context object in a private and shared channel."
+description: "This sample illustrates the capabilities of a tab application that shows the tab context object specifically for private and shared channels in Microsoft Teams. Users can expand and copy JSON slices from the context object, providing valuable insights based on the channel type."
 products:
 - office-teams
 - office
@@ -19,30 +19,31 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 - [Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525) Priave/Shared channel in team
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 # Tab context in channel
-This sample shows the contents of tab context object in a private and shared channel.
+
+Explore a sample Microsoft Teams tab application that reveals the contents of the tab context object in both private and shared channels. Designed with Node.js, this application allows users to interact with and manipulate the context object, offering features like JSON expansion and copying for enhanced usability in collaborative environments.
 
 ## Included Features
 * Tabs
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif)
+![PreviewImage](Images/Preview.gif)
 
 ## Setup
 
@@ -95,13 +96,25 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
 
 # Running the sample
-1) Configure in Private channel
+1) Configure in Regular channel
 
-![tab context in private channel](Images/privateChannel.png)
+![image1](Images/image1.png)
 
-2) Configure in Public channel
+![image2](Images/image2.png)
 
-![tab context in private channel](Images/regularChannel.png)
+![image3](Images/image3.png)
+
+![image4](Images/image4.png)
+
+2) Configure in Private channel
+
+![image5](Images/image5.png)
+
+![image6](Images/image6.png)
+
+![image7](Images/image7.png)
+
+![image8](Images/image8.png)
 
 **Features of the sample**
 

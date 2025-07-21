@@ -1,0 +1,43 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.teams.tabnestedauth",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Nested App Authentication",
+    "full": "Nested App Authentication"
+  },
+  "description": {
+    "short": "Sample app demonstrating Azure AD SSO in Teams using OBO flow with C#.",
+    "full": "This Microsoft Teams sample app demonstrates the implementation of Azure AD single sign-on (SSO) using the On-Behalf-Of (OBO) flow to access Graph APIs in a Teams tab. It features nested app authentication, streamlining user authentication across Microsoft 365 applications for a seamless experience."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "com.teams.tabnestedauth",
+      "name": "Nested App Auth",
+      "contentUrl": "https://${{TAB_DOMAIN}}/Home/Index",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ]
+}

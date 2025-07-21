@@ -1,6 +1,6 @@
 ---
 page_type: ssample
-description: "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
+description: "This sample demonstrates sending message cards through Incoming Webhooks in Microsoft Teams and includes an HttpPOST action in the card."
 products:
 - office-teams
 - office
@@ -13,10 +13,13 @@ extensions:
   createdDate: "07/01/2022 02:36:57 PM"
 urlFragment: officedev-microsoft-teams-samples-incoming-webhook-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 # Incoming webhook
 
-This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card.
+This sample demonstrates how to use Incoming Webhooks in Microsoft Teams to send message cards. The UI allows users to input the Incoming Webhook URL and message card payload, which are sent to a team, showcasing the card's HttpPOST action for dynamic interaction. It includes setup instructions for tunneling solutions, API, and client app configuration, as well as integration across Microsoft 365 hubs like Outlook and Office.com.
 
 ## Included Features
 * Tabs
@@ -107,7 +110,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -123,7 +126,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

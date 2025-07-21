@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
+		MeetingSigning.slnLaunch.user = MeetingSigning.slnLaunch.user
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Web.Tests", "MeetingSigning.Web.Tests\Microsoft.Teams.Samples.MeetingSigning.Web.Tests.csproj", "{D539C1C9-2054-4441-A0C3-BAEC15E38EC1}"
@@ -20,6 +21,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.MeetingSigning.Infrastructure", "MeetingSigning.Infrastructure\Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj", "{5C7A78C5-280D-4F7B-BC10-782C758E2828}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Tests", "MeetingSigning.Infrastructure.Tests\Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Tests.csproj", "{63C3C49E-306C-45AE-A924-6F02F98D3E07}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +54,11 @@ Global
 		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63C3C49E-306C-45AE-A924-6F02F98D3E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041A5F2A-44F8-485F-B433-48CFC2FDB1CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

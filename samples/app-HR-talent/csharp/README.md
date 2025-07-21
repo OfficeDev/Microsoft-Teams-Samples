@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app simulates connection to a recruiting and talent management system using Bot Framework
+description: This sample app simulates a recruiting and talent management system using Microsoft Teams Bot.
 products:
 - office-teams
 - office
@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
 
 ---
-# HR talent app
+# HR Talent Management App
 
-This app simulates connection to a recruiting and talent management system and allows users and teams to create, manage and search positions and candidates. The content is randomly generated to simulate what you can do with Teams. The full source code is provided, along with the app package and manifest that you can use to side load and test in your Teams environment.
+The HR Talent Management App is designed to simulate a comprehensive recruitment system within Microsoft Teams. It enables users and teams to efficiently handle hiring processes by creating, managing, and searching for job positions and candidates. This sample includes everything you need to test the app, including source code, deployment guides, and a pre-configured app package to upload directly into Teams.
 
 ## Included Features
 * Bots
@@ -26,7 +26,7 @@ This app simulates connection to a recruiting and talent management system and a
 ![app-HR-talent ](src/Images/HR-talent-app.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **App HR Talent:** [Manifest](/samples/app-HR-talent/csharp/\src\demo-manifest\bot-task-module.zip)
 

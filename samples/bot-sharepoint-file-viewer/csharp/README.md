@@ -33,7 +33,21 @@ Using this C# sample, a bot with capability to upload files to SharePoint site a
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -108,14 +122,17 @@ Refer to [Bot SSO Setup document](BotWithSharePointFileViewer/BotSSOSetup.md).
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
 
 1) The `viewfile` command will list all the files that are uploaded to sharepoint site.
-![View files](BotWithSharePointFileViewer/Images/viewfile.png)
+![View files](BotWithSharePointFileViewer/Images/5.ViewFiles.png)
 
 1) The `uploadfile` command will return a card, which will open a task module from where new files can be uploaded to sharepoint.
-![Upload file](BotWithSharePointFileViewer/Images/uploadFile.png)
-![Upload file page](BotWithSharePointFileViewer/Images/uploadfile-taskmodule.png)
+![Upload file](BotWithSharePointFileViewer/Images/3.UploadFilePrompt.png)
+![Upload file page](BotWithSharePointFileViewer/Images/4.UploadFilePopUp.png)
+![Upload file page](BotWithSharePointFileViewer/Images/5.SuccessfullyUploaded.png)
+![View files](BotWithSharePointFileViewer/Images/5.ViewFiles.png)
+![Files Open In Browser](BotWithSharePointFileViewer/Images/FilesOpensOnBrowser.png)
 
 1) The files will be uploaded to sharepoint.
-![File details](BotWithSharePointFileViewer/Images/sharepoint-files.png)
+![File details](BotWithSharePointFileViewer/Images/SharePointFilesView.png)
 
 ## Deploy the bot to Azure
 

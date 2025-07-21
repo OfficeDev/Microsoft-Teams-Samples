@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app shows how to send app icon badging in Teams meetings using targeted notifications API.
+description: This sample demonstrates how to utilize the targeted notifications API for app icon badging during Teams meetings.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-app-icon-badging-nodejs
 
 ## App Icon Badging In Teams Meeting Notification
 
-This sample illustrates how to send app icon badging notification on tab icon in Teams meetings.
+This sample application illustrates how to implement app icon badging notifications in Teams meetings using the targeted notifications API. It supports features like bots, in-meeting notifications, and RSC permissions, enabling developers to enhance user interaction within their Teams applications.
 
 ## Included Features
 * Bots
@@ -25,7 +25,12 @@ This sample illustrates how to send app icon badging notification on tab icon in
 
 ## Interaction with app
 
-![App Icon Badging](Images/app_icon_badging.gif)
+![App Icon Badging](Images/AppIconBadgingNodejs.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App Icon Badging:** [Manifest](/samples/meetings-app-icon-badging/csharp/demo-manifest/meetings-app-icon-badging.zip)
 
 ## Prerequisites
 
@@ -54,7 +59,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -128,19 +133,22 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Setup Configurable Tab:**
 
-![Setup Tab](Images/1.set_up_config_tab.png)
+![Setup Tab](Images/1.Install.png)
 
 **Interacting with the app in Teams Meeting**
 
+![App Icon Badging](Images/2.AddToMeeting.png)
+
+![App Icon Badging](Images/4.Sidepanel.png)
+
 Type `SendNotification` in bot chat to send In-Meeting notifications.
 
+![App Icon Badging](Images/5.SendCommand.png)
+
 **Notification On Tab Icon as 'Icon Badging':**
+![App Icon Badging](Images/6.SelectOptionAppIconBadging.png)
 
-![App Icon Badging](Images/2.app_icon_badging.png)
-
-**Stage View and App Icon Badging Notification:**
-
-![Stage View and AppIconBadging](Images/3.StageView_and_AppIconBadging.png)
+![App Icon Badging](Images/7.AppIconBadgingNotification.png)
 
 
 ## Further reading

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-proactive-installation-csharp",
     "source": "officeDev",
     "title": "Proactive Installation Sample App",
-    "shortDescription": "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot",
+    "shortDescription": "This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-proactive-installation/csharp",
     "longDescription": [
-      "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot."
+      "This sample app illustrates proactive installation of a Microsoft Teams application and the ability to send proactive notifications to users within a Group Chat or Channel through the Microsoft Graph API. It features a bot integration, ensuring seamless interaction and enhanced user experience."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

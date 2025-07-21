@@ -68,16 +68,11 @@
     <None Update="Images\team-WelcomeCommand-Card.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TeamsAppManifest\icon-color.png">
+    <None Update="M365AgentManifest\icon-color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TeamsAppManifest\icon-outline.png">
+    <None Update="M365AgentManifest\icon-outline.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
-
 </Project>

@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-conversation-quickstart-js",
     "source": "officeDev",
-    "title": "Starter solution: Sample bot - Teams Toolkit",
-    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
+    "title": "Starter solution: Sample bot - Microsoft 365 Agents Toolkit",
+    "shortDescription": "This sample app demonstrates how to implement various bot conversation events and messaging extensions within Microsoft Teams using the Bot Framework v4. It supports adaptive cards, task modules, and actions from the compose box and message area.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/js",
     "longDescription": [
-      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
+      "his sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Bot Framework v4. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-05",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/js/Images/bot-conversation.gif",
-        "alt": "Solution UX showing starter solution: sample bot - teams toolkit"
+        "alt": "Solution UX showing starter solution: sample bot - Microsoft 365 Agents Toolkit"
       }
     ],
     "authors": [

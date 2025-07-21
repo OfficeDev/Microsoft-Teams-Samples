@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.tabmultihub",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +18,8 @@
     "full": "Tab Multi Hub"
   },
   "description": {
-    "short": "Interact with calendar, mail, profile, geolocation from personal tabs app.",
-    "full": "Interact with the user's calendar, mail, profile, geolocation from personal tabs app."
+    "short": "Access Calendar, Mail, Profile, and geolocation features in personal tabs.",
+    "full": "This sample application allows users to seamlessly interact with their Calendar, Mail, Profile, and geolocation from personal tabs within Microsoft Teams. With easy setup and integration using TypeScript, it enhances user productivity by centralizing essential tools in one place."
   },
   "accentColor": "#5558AF",
   "staticTabs": [

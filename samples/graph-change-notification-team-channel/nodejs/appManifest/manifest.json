@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.teams.change.notification",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +18,8 @@
     "full": "Change Notifications"
   },
   "description": {
-    "short": "Get change notifications for teams and channels using Microsoft Graph.",
-    "full": "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel."
+    "short": "Get real-time notifications for team/channel changes in Microsoft Teams.",
+    "full": "This sample application demonstrates how to send notifications for team and channel events, such as creation, editing, or deletion, in Microsoft Teams using Node.js and the Microsoft Graph API."
   },
   "accentColor": "#FFFFFF",
   "configurableTabs": [
@@ -29,7 +28,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ]
     }
   ],

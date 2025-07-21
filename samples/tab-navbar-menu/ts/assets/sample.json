@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-navbar-menu-ts",
     "source": "officeDev",
     "title": "Teams Personal Tab Navbar-Menu Sample TS",
-    "shortDescription": "Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app.",
+    "shortDescription": "This sample demonstrates how to implement a navbar menu in a personal tab app for Microsoft Teams, allowing for multiple actions and an overflow menu.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-navbar-menu/",
     "longDescription": [
-      "Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app."
+      "This sample application illustrates the use of a navbar menu in personal tabs within Microsoft Teams, enabling users to access multiple actions seamlessly. Designed for mobile clients, it includes features like an overflow menu for additional actions, enhancing user navigation and experience."
     ],
-    "creationDateTime": "2022-29-12",
-    "updateDateTime": "2022-29-12",
+    "creationDateTime": "2022-12-29",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

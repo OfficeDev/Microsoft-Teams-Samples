@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-msgext-link-unfurling-java",
     "source": "officeDev",
     "title": "Link Unfurling in Messaging Extension using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4",
+    "shortDescription": "This sample app illustrates a Teams bot that performs link unfurling using Java and the Bot Framework v4.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-link-unfurling/java",
     "longDescription": [
-      "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4"
+      "This application showcases a Teams bot developed in Java that enables link unfurling within messaging extensions. Built with Spring Boot, it includes features such as search commands and integration with Microsoft Teams."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-09-22",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

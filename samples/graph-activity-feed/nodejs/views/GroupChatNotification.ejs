@@ -4,9 +4,12 @@
 <head>
 
     <head>
-        <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
+        <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy"
             content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -22,7 +25,7 @@
 <body id=mainDiv>
     <div id="login">
         <h4>Click on login button to continue</h4>
-        <button onclick="login()">Login</button>
+        <button onclick="signIn()">Login</button>
     </div>
     <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="feed-container" style="display: none">
@@ -70,6 +73,22 @@
         </div>
     </div>
     <script>
+
+
+
+
+        const msalConfig = {
+            auth: {
+            clientId: <%-clientId%>,
+            authority: "https://login.microsoftonline.com/" + <%- tenantId %>
+           }
+        };
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        const loginRequest = {
+            scopes: ["user.read"]
+        };
+
         $(document).ready(function () {
             $(".customTopicNotificationChat").hide();
             $('input[type="radio"]').click(function () {
@@ -80,8 +99,21 @@
             });
         });
 
+        function signIn() {
+            msalInstance.loginPopup(loginRequest)
+                .then(response => {
+                    accessToken = response.accessToken;
+                    $("#login").hide();
+                    $("#feed-container").show();
+                })
+                .catch(error => {
+                    console.error("Login error:", error);
+                });
+        }
+
         var userId;
         var groupchatId;
+        var accessToken = null;
 
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
@@ -120,19 +152,20 @@
                 e.preventDefault();
                 return false;
             }
-
-            let taskDetails  = {
+            let taskDetails = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 groupchatId: groupchatId,
                 userId: userId,
+                accessToken: accessToken,
+
             };
 
             $.ajax({
                 url: "/sendNotificationToGroupChat",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskDetails ),
+                data: JSON.stringify(taskDetails),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -166,17 +199,18 @@
                 return false;
             }
 
-            let taskDetails  = {
+            let taskDetails = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 groupchatId: groupchatId,
-                userId: userId
+                userId: userId,
+                accessToken: accessToken
             };
 
             $.ajax({
                 url: "/sendCustomTopicNotificationGroupChat",
                 type: "POST",
-                data: JSON.stringify(taskDetails ),
+                data: JSON.stringify(taskDetails),
                 contentType: 'application/json',
                 success: function (profile) {
                     console.log(profile);

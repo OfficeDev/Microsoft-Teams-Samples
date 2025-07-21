@@ -6,7 +6,9 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/styles/msteams-16.css"/>
     <link rel="stylesheet" type="text/css" href="/static/styles/custom.css"/>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script>
         microsoftTeams.app.initialize().then(() => {
         }); 
@@ -14,10 +16,9 @@
         // Method to start a new conversation.
         function startConversation() {
             microsoftTeams.app.getContext().then((context) => {
-                console.log(context);
                 microsoftTeams.conversations.openConversation(
                     {
-                        "subEntityId": Date.now(),
+                        "subEntityId": Date.now().toString(),
                         "entityId": context.page.id,
                         "channelId": context.channel.id,
                         "title": "Task Title",
@@ -40,6 +41,7 @@
         }
 
         // Method to continue an existing conversation.
+        
         function continueConversation() {
             microsoftTeams.app.getContext().then((context) => {
                 microsoftTeams.conversations.openConversation(
@@ -51,8 +53,11 @@
                         "conversationId": localStorage.conversationId
                     }
                 );
-            });
+            })
         }
+        
+        
+
 
         // Method to execute deeplink to redirect to the subentity/conversation in the channel.
             function deeplinkConversation() {

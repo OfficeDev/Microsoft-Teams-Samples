@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,13 +14,13 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Task Module",
-    "full": "Simple Task Module"
-  },
-  "description": {
-    "short": "Test Task Module Scenario",
-    "full": "Simple Task Module Scenario Test"
-  },
+  "short": "Teams Dialogs",
+  "full": "Teams Dialog (referred as task modules in TeamsJS v1.x)"
+},
+"description": {
+  "short": "Teams Dialog (referred as task modules in TeamsJS v1.x)",
+  "full": "This is an sample application which showcases how to invoke dialog (referred as task modules in TeamsJS v1.x) from adaptive and hero cards."
+},
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
@@ -29,7 +28,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ]
     }
   ],
@@ -50,7 +49,7 @@
       "scopes": [
         "personal",
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false,
       "supportsCalling": false,

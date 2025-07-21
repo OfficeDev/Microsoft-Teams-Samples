@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs",
     "source": "officeDev",
     "title": "Receive Channel messages with RSC permissions",
-    "shortDescription": "Demonstrating on how a bot can receive all channel messages with RSC without @mention.",
+    "shortDescription": "This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-receive-channel-messages-withRSC/nodejs",
     "longDescription": [
-      "Demonstrating on how a bot can receive all channel messages with RSC without @mention."
+      "This sample bot demonstrates how to receive all Teams channel messages via RSC permissions, without requiring @mentions. It features adaptive cards and can be tested locally or deployed to Azure for seamless integration."
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2022-11-28",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

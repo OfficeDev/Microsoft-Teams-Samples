@@ -72,25 +72,36 @@ namespace BotWithSharePointFileViewer.Dialogs
                     {
                         var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharePointSiteName"], _configuration["SharePointTenantName"] + ":");
 
-                        if (fileNameList.Count == 0)
+                        // Handle the case where fileNameList is null
+                        if (fileNameList == null || fileNameList.Count == 0)
                         {
-                            await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"), cancellationToken);
+                            await stepContext.Context.SendActivityAsync(
+                                MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"),
+                                cancellationToken
+                            );
                         }
                         else
                         {
                             var sharePointTenantName = _configuration["SharePointTenantName"];
                             var sharePointSiteName = _configuration["SharePointSiteName"];
-                            var fileUrl = "";
+                            var sharePointFileUrl = "";
                             var actions = new List<AdaptiveAction>();
 
                             foreach (var file in fileNameList)
                             {
                                 var extension = file.Split('.')[1];
-                                fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharePointSiteName}~2FShared%20Documents~2F{file}";
+
+                                // Note:
+                                // The previously used 'fileUrl' format is now commented and explained below.
+                                // fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharePointSiteName}~2FShared%20Documents~2F{file}";
+                                // does not work as expected in Teams. Users are unable to view files properly (shows a blank screen).
+                                // Hence, we are now using the direct SharePoint file URL format below:
+                                
+                                sharePointFileUrl = $"https://{sharePointTenantName}/sites/{sharePointSiteName}/Shared%20Documents/{file}";
                                 actions.Add(new AdaptiveOpenUrlAction
                                 {
                                     Title = file.Split('.')[0],
-                                    Url = new Uri(fileUrl),
+                                    Url = new Uri(sharePointFileUrl),
 
                                 });
                             }

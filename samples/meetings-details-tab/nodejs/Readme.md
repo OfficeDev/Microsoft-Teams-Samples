@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with In-meeting tabs and bots.
+description: This sample app demonstrates how to implement a Details Tab in Microsoft Teams meetings, allowing users to create polls and gather participant feedback through interactive chats.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-nodejs
 
 # Meeting Details Tab Sample Node.js 
 
-This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
+This sample demonstrates how to extend Microsoft Teams meetings by implementing a Details Tab that allows users to create and manage polls. Participants can submit their feedback through adaptive cards, and the results are easily viewable in both the meeting chat and the tab itself. To try the app, upload the provided manifest to your Teams environment and enhance your meeting experience with interactive features.
 
 ## Included Features
 * Tabs
@@ -24,10 +24,10 @@ This sample app illustrates the implementation of Details Tab in Meeting. User c
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif)
+![PreviewImage](Images/Preview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meetings Details Tab Sample:** [Manifest](/samples/meetings-details-tab/csharp/demo-manifest/meetings-details-tab.zip)
 
@@ -43,14 +43,14 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -132,19 +132,29 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 Interact with Details Tab in Meeting.
 
-1. Install the Details Tab manifest in meeting chat.
-2. Add the Details Tab in Meeting
-3. Click on Add Agenda
-![Image](Images/SetAgenda.png)
-4. Newly added agenda will be added to Tab.
-![Image](Images/AgendasuccessfullySet.png)
-5. Click on Send button in Agenda from Tab.
-6. An Adaptive Card will be posted in meeting chat for feedback.
-![Image](Images/SelectPleasant.png)
-7. Participants in meeting can submit their response in adaptive card
-8. Response will be recorded and Bot will send an new adaptive card with response.
-![Image](Images/Response.png)
-9. Participants in meeting can view the results from meeting chat or Tab itself.
+**Add Chat:**
+![InstallApp](Images/1.InstallApp.png)
+
+**Select Group:**
+![GroupChat](Images/2.GroupChat.png)
+
+**Newly added agenda will be added to Tab:**
+![DetailsTab](Images/3.DetailsTab.png)
+
+**Click on Add Agenda:**
+![AddAgenta](Images/4.AddAgenta.png)
+
+**Add a Poll:**
+![CreatePoll](Images/5.CreatePoll.png)
+
+**Participants in meeting can submit their response in adaptive card:**
+![HomeAddPoll](Images/6.HomeAddPoll.png)
+
+**Response will be recorded and Bot will send an new adaptive card with response:**
+![SelectHot](Images/7.SelectHot.png)
+
+**Participants in meeting can view the results from meeting chat or Tab itself:**
+![8.Results](Images/8.Results.png)
 
 ## Further reading
 

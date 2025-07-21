@@ -7,7 +7,7 @@ products:
 languages:
 - csharp
 title: Microsoft Teams C# Helloworld Sample
-description: Microsoft Teams "Hello world" application for .NET/C# which showcases tab, bot and messaging extension.
+description: A Microsoft Teams Hello World sample app built with .NET/C# that demonstrates essential features like tabs, bots, and messaging extensions for seamless interaction within the Teams environment.
 extensions:
   contentType: samples
   platforms:
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 # Microsoft Teams hello world sample app.
 
-- Microsoft Teams hello world sample app.
+- The Microsoft Teams Hello World application, built with .NET/C#, serves as an introductory sample showcasing fundamental Microsoft Teams capabilities, including tabs, bots, and messaging extensions. This application provides a hands-on experience for developers looking to explore the Teams platform and its integration options.
 
 ## Included Features
 * Tabs
@@ -30,7 +30,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 ![HelloTabGif](Microsoft.Teams.Samples.HelloWorld.Web/Images/AppHelloWorldGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams hello world sample app:** [Manifest](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
@@ -43,6 +43,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -100,7 +114,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/AppManifest_Hub` folder with the required values.
 
-2) Zip the contents of `AppManifest` or `AppManifest_Hub` folder into a `manifest.zip`.
+2) Zip the contents of `appPackage` or `AppManifest_Hub` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -110,8 +124,50 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab. Without configuring this, Microsoft Teams defaults to landing on the bot in desktop clients and tab in mobile clients.
+
+To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
+```bash
+"staticTabs": [
+  {
+    "entityId": "conversations",
+    "scopes": [
+      "personal"
+    ]
+  },
+  {
+    "entityId": "com.contoso.helloworld.hellotab",
+    "name": "Hello Tab",
+    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+    "scopes": [
+      "personal"
+    ]
+  }
+],
+```
+
+To set the **Tab as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
+```bash
+"staticTabs": [
+  {
+    "entityId": "com.contoso.helloworld.hellotab",
+    "name": "Hello Tab",
+    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+    "scopes": [
+      "personal"
+    ]
+  },
+  {
+    "entityId": "conversations",
+    "scopes": [
+      "personal"
+    ]
+  }
+],
+```
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
@@ -121,9 +177,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ![InstallApp](Microsoft.Teams.Samples.HelloWorld.Web/Images/Install.png)
 
+**Welcome Bot:**
+
+![Hello Bot](Microsoft.Teams.Samples.HelloWorld.Web/Images/Bot.png)
+
 **Welcome UI:**
 
-![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
+![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/Tab.png)
 
 ## Outlook on the web
 
@@ -131,7 +191,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Microsoft.Teams.Samples.HelloWorld.Web/Images/InstallOutlook.png)
 
@@ -147,7 +207,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Microsoft.Teams.Samples.HelloWorld.Web/Images/InstallOffice.png)
 

@@ -24,6 +24,9 @@ using AppCompleteAuth.Models;
 
 namespace AppCompleteAuth
 {
+    /// <summary>
+    /// Startup class to configure services and the app's request pipeline.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -31,18 +34,21 @@ namespace AppCompleteAuth
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
                 options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromMinutes(60); // You can set Time
             });
-            services.AddControllers().AddNewtonsoftJson(options => {
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             services.Configure<CookiePolicyOptions>(options =>
@@ -65,25 +71,24 @@ namespace AppCompleteAuth
             {
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer(options =>
+            .AddJwtBearer(options =>
+            {
+                var azureAdOptions = new AzureADOptions();
+                Configuration.Bind("AzureAd", azureAdOptions);
+                options.Authority = $"{azureAdOptions.Instance}{azureAdOptions.TenantId}/v2.0";
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    var azureAdOptions = new AzureADOptions();
-                    Configuration.Bind("AzureAd", azureAdOptions);
-                    options.Authority = $"{azureAdOptions.Instance}{azureAdOptions.TenantId}/v2.0";
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidAudiences = AuthHelper.GetValidAudiences(Configuration),
-                        ValidIssuers = AuthHelper.GetValidIssuers(Configuration),
-                        AudienceValidator = AuthHelper.AudienceValidator
-                    };
-                });
+                    ValidAudiences = AuthHelper.GetValidAudiences(Configuration),
+                    ValidIssuers = AuthHelper.GetValidIssuers(Configuration),
+                    AudienceValidator = AuthHelper.AudienceValidator
+                };
+            });
 
             // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
             services.AddSingleton<IStorage, MemoryStorage>();
 
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
-
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
@@ -98,7 +103,9 @@ namespace AppCompleteAuth
             services.AddTransient<IBot, AuthBot<MainDialog>>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

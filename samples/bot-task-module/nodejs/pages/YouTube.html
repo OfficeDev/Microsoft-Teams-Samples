@@ -3,9 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>YouTube</title>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
-</head>
-<body>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <style>
         body {
             margin: 0;
@@ -17,23 +17,24 @@
             left: 0;
             width: 95%;
             height: 95%;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-style: none;
+            padding: 10px 20px;
+            border: none;
         }
     </style>
+</head>
+<body>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
-        //- Handle the Esc key
+        // Handle the Esc key
         document.onkeyup = function (event) {
             if ((event.key === 27) || (event.key === "Escape")) {
-                microsoftTeams.tasks.submitTask(null); //- this will return an err object to the completionHandler()
+                microsoftTeams.dialog.submit(null); // This will return an err object to the completionHandler()
             }
-        }</script>
+        }
+    </script>
     <div id="embed-container">
-<iframe width="1000" height="700" src="https://www.youtube.com/embed/r9WQPSaLnaU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe></div>
+        <iframe width="1000" height="700" src="https://www.youtube.com/embed/r9WQPSaLnaU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
 </body>
 </html>

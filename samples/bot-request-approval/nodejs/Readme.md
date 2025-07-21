@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat through bot.
+description: This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
 ---
 
 # Bot request approval
-This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
+This sample demonstrates a Teams bot that facilitates task approval requests within group chats. Users can submit requests via Adaptive Cards, which managers can then approve or reject directly in the chat. Other group members can view request details, while only requesters and managers have access to actionable options. The sample supports Azure and includes comprehensive setup guidance, leveraging .NET Core and the Microsoft 365 Agents Toolkit for Visual Studio.
 
 ## Included Features
 * Bots
@@ -25,7 +25,7 @@ This sample shows a feature where user can send task request to his manager and 
 ![Preview Image](Images/Preview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Bot request approval:** [Manifest](/samples/bot-request-approval/csharp/demo-manifest/Bot-Request-Approval.zip)
 
@@ -41,20 +41,20 @@ This sample shows a feature where:
 
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
     
@@ -89,7 +89,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     ```
     - Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `ClientId` and `ClientSecret`, `BaseURL` with your app's base url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
     
-  - In the folder where repository is cloned navigate to `samples/bot-task-approval/nodejs`
+  - In the folder where repository is cloned navigate to `samples/bot-request-approval/nodejs`
 
   - Install node modules
 
@@ -120,19 +120,23 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
  
  ## Running the sample.
  
+  ![Initial Card](Images/1.Install.png)
+
+  ![Add TO Chat](Images/2.AddToChat.png)
+
 - Initiated request using bot command `request` in group chat.
 
-  ![Initial Card](Images/InitialCard.png)
+  ![Mention Bot](Images/2.MentionBot.png)
 
 - Card will refresh for requester to fill details.
 
-  ![Request Card](Images/CreateTask.png)
+  ![Task Management](Images/3.TaskManagement.png)
   
 - After submitting the request, requester can edit or cancel the request.
 
     **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
 
-  ![Edit/Cancel Card](Images/UserCard.png)
+  ![Edit/Cancel Card](Images/4.ResponseSent.png)
 
 **Manager:**
 
@@ -140,11 +144,11 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
     **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
 
-  ![Approve/Reject Card](Images/ManagerCard.png)
+  ![Approve/Reject Card](Images/5.RecievedApproveRequest.png)
 
 - If manager approves or rejects the request, card will be refreshed for all the members in group chat.
 
-  ![Status Card](Images/ApprovedRequest.png)
+  ![Status Card](Images/6.Approved.png)
   
 
 ## Further reading

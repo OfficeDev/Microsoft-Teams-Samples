@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot.
+description: This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.
 products:
 - office-teams
 - office
@@ -15,16 +15,16 @@ urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-node
 
 # Proactive Installation Sample App
 
-This sample app illustrates the proactive installation of app using Graph API and sending proactive notification to users from GroupChat or Channel.
+This sample application illustrates how to implement proactive installation of a Microsoft Teams app and send notifications using Microsoft Graph APIs. Featuring bot integration, this app allows for user interaction within Group Chats and Channels, enhancing communication and app management in Teams.
 
 ## Included Features
 * Bots
 
 ## Interaction with bot
-![graph-proactive-installation ](Images/graph-proactive-installation.gif)
+![graph-proactive-installation ](Images/ProActInstalltin.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Proactive Installation Sample App:** [Manifest](/samples/graph-proactive-installation/csharp/demo-manifest/graph-proactive-installation.zip)
 
@@ -36,20 +36,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     # determine node version
     node --version
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Register Azure AD application
 Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
@@ -153,13 +153,17 @@ the Teams service needs to call into the bot.
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/nodejs/index.js#L47) line and put your debugger for local debug.
 
 ## Running the sample
+![Install ](Images/1.Install.png)
+
 - Install the Proactive App Installation demo app in a Team or GroupChat.
-    ![AddToTeamGroup ](Images/AddToTeamGroup.PNG)
+![AddToTeamGroup ](Images/4.AddToTeams.png)
 
 - **Team Scope**: Run 'Check and Install' to pro-actively install the App for all the users in team. After installation send 'Send message' command to send proactive message.
-    ![TeamScope ](Images/TeamScope.PNG)
+![TeamScope ](Images/5.TeamsCheck_Install.png)
+![TeamScope ](Images/6.Teams_MessageSent.png)
 - **Group Chat**:  Run 'Check and Install' to pro-actively install the App for all the users in team. After installation send 'Send message' command to send proactive message.
-   ![GroupScope ](Images/GroupScope.PNG)
+![GroupScope ](Images/2.CheckAndInstall.png)
+![GroupScope ](Images/3.MessageSentHello.png)
 
 ## Deploy the bot to Azure
 

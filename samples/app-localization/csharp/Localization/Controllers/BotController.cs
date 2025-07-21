@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace Localization.Controllers
 {
-    // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
-    // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
-    // achieved by specifying a more specific type for the bot constructor argument.
+    // This controller handles incoming HTTP requests, delegating message processing to the Bot Adapter.
     [Route("api/messages")]
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
-        private readonly IBot Bot;
+        // Read-only fields for the adapter and bot instance injected through the constructor
+        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly IBot _bot;
 
+        // Constructor receives instances of adapter and bot, injected via Dependency Injection (DI).
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
-            Adapter = adapter;
-            Bot = bot;
+            _adapter = adapter;
+            _bot = bot;
         }
 
+        // POST method to process incoming requests and delegate message processing to the bot via the adapter.
         [HttpPost]
         public async Task PostAsync()
         {
-            // Delegate the processing of the HTTP POST to the adapter.
-            // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            // Delegate HTTP POST processing to the adapter, which will invoke the bot.
+            await _adapter.ProcessAsync(Request, Response, _bot);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace BotDailyTaskReminder
 {
@@ -12,13 +13,23 @@ namespace BotDailyTaskReminder
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                // Create and run the host
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                // Log the error if the application fails to start
+                Console.WriteLine($"Application failed to start: {ex.Message}");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // Specify the Startup class to configure the application
                     webBuilder.UseStartup<Startup>();
                 });
     }

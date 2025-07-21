@@ -1,0 +1,14 @@
+{
+  "name": "tab-app-cookie",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "serve-static": "^1.14.1"
+  }
+}

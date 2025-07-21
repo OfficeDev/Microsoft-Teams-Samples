@@ -21,7 +21,7 @@ This sample shows the feature where user can send adaptive card with different a
 ![Bot Adaptive ActionsGif](Images/AdaptiveCardActions.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams bot adaptivecard actions sample app:** [Manifest](/samples/bot-adaptive-card-actions/csharp/demo-manifest/bot-adaptivecard-actions.zip)
 
@@ -36,20 +36,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -117,31 +117,30 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 **Install App:**
 
-![InstallApp](Images/1.AddApp.png)
+![InstallApp](Images/1.Install.png)
 
 **Welcome UI:**
 
-![Initial message](Images/2.Welcome.png)
+![Initial message](Images/2.WelcomeMessage.png)
 
-![Running Sample](Images/3.AdaptiveCard_Actions.png)
+![Running Sample](Images/9.SuggestedActions.png)
 
-![Running Sample](Images/4.ActionSubmit.png)
+![Running Sample](Images/3.Red.png)
 
-![Running Sample](Images/5.ActionShowCard.png)
+![Running Sample](Images/4.Yellow.png)
 
-![Running Sample](Images/5.ActionSubmitted.png)
+![Running Sample](Images/5.Blue.png)
 
-![Running Sample](Images/6.Togglevisible.png)
+![Running Sample](Images/6.CardActions.png)
 
-![Running Sample](Images/7.ToggleVisibleOnClick.png)
+![Running Sample](Images/7.ActionSubmit.png)
 
-![Running Sample](Images/8.SuggestedActions.png)
+![Running Sample](Images/8.ActionShowCard.png)
 
-![Running Sample](Images/9.RedColor.png)
+![Running Sample](Images/10.ToggleVisibiliyCard.png)
 
-![Running Sample](Images/10.BlueColor.png)
+![Running Sample](Images/11.VisibleOnClick.png)
 
-![Running Sample](Images/11.YellowColor.png)
 
 ## Deploy the bot to Azure
 
