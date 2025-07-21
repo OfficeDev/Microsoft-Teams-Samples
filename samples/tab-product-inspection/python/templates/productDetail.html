@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Inspection Demo</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QXdQxWIYy1PLsb9pdWIm5k6mjLxVKAF4ISp0BVCZZCiZNyaKXinYNAQVT8+8hEIf"
+        crossorigin="anonymous"></script>
+  <style>
+    #mainDiv {
+      padding-left: 10%;
+      padding-top: 2%;
+    }
+  </style>
+</head>
+<body id="mainDiv">
+  <div id="productDetails">
+    <h4>Product Detail</h4>
+    Product Name: <label id="productName"></label><br />
+    Product image<br />
+    <img id="productImg" src="" height="100" width="100" /><br /><br />
+    Product Status: <label id="productStatus"></label>
+  </div>
+  <label id="noProductFound"></label><br/>
+  <button type="button" class="btn btn-outline-info" id="btnBack">Back</button>
+  
+  <script src="/static/js/productDetail.js"></script>
+</body>
+</html>
