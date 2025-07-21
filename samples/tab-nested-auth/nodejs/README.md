@@ -130,7 +130,7 @@ E.g., if you're using ngrok, and the URL is `https://1234.ngrok-free.app`, then 
 
 - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-- Add the app to personal static tabs.x
+- Add the app to personal static tabs.
 
 ## Running the sample
 
