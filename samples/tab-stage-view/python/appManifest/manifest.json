@@ -1,0 +1,90 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab Stage View",
+    "full": "Tab in stage view"
+  },
+  "description": {
+    "short": "Microsoft Teams tab sample app showcasing stage view functionality.",
+    "full": "This sample app demonstrates the use of Teams tab in stage view using python, featuring collaborative elements and interactive capabilities."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "staticTabs": [
+    {
+      "entityId": "stageViewTask",
+      "scopes": [
+        "personal"
+      ],
+      "context": [
+        "personalTab",
+        "channelTab"
+      ],
+      "name": "Stage View",
+      "contentUrl": "https://${{BOT_DOMAIN}}/tab",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
+      "searchUrl":  "https://${{BOT_DOMAIN}}/tab"
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "team",
+        "personal",
+        "groupChat"
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "accentColor": "#60A18E",
+  "composeExtensions": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [ "commandBox" ],
+          "description": "Test command to run query",
+          "title": "Search Command",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "tabstageview.com/card",
+              "${{BOT_DOMAIN}}"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "token.botframework.com"
+  ]
+}
