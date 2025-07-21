@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microsoft Teams Tab App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='App.css') }}">
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -48,9 +48,11 @@
         
         // Initialize the Microsoft Teams SDK
         microsoftTeams.app.initialize().then(() => {
+            console.log('Teams SDK initialized successfully');
+            
             // Get the user context from Teams
             microsoftTeams.app.getContext().then((context) => {
-                const userName = context?.user?.userPrincipalName || 'User';
+                console.log('Teams context:', context);
                 
                 // Display context information
                 const contextInfo = document.getElementById('contextInfo');
@@ -61,14 +63,27 @@
                     <p><strong>Channel:</strong> ${context?.channel?.displayName || 'N/A'}</p>
                     <p><strong>Theme:</strong> ${context?.app?.theme || 'N/A'}</p>
                     <p><strong>Locale:</strong> ${context?.app?.locale || 'N/A'}</p>
+                    <p><strong>SDK Version:</strong> 2.40.0</p>
                 `;
+                
+                // Register handlers for theme changes
+                microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
+                    console.log('Theme changed to:', theme);
+                    document.body.className = theme || '';
+                });
+                
             }).catch((error) => {
                 console.error('Error getting context:', error);
-                document.getElementById('contextInfo').innerHTML = '<p>Error loading user context</p>';
+                document.getElementById('contextInfo').innerHTML = '<p>Ready for Teams integration</p>';
             });
+            
         }).catch((error) => {
             console.error('Error initializing Teams SDK:', error);
-            document.getElementById('contextInfo').innerHTML = '<p>Teams SDK not available - running in standalone mode</p>';
+            // Hide the user context section when not in Teams
+            const userInfoSection = document.querySelector('.user-info');
+            if (userInfoSection) {
+                userInfoSection.style.display = 'none';
+            }
         });
     </script>    <style>
         /* Copyright (c) Microsoft Corporation. All rights reserved. */

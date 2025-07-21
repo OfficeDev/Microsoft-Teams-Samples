@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -13,7 +15,8 @@ CORS(app, origins=["https://teams.microsoft.com", "https://*.teams.microsoft.com
 
 @app.route("/")
 def home():
-    return render_template("App.html")  # Renders the main UI
+    # Redirect to tab page instead of showing home page
+    return redirect(url_for('tab'))
 
 @app.route("/tab")
 def tab():
@@ -50,8 +53,7 @@ def api_config():
         return jsonify({"success": True})
 
 if __name__ == "__main__":
-    # Get SSL configuration from environment variables
-    # Default paths are relative to project root and work across different environments
+    # Get SSL configuration from environment variables with generic fallback paths
     ssl_crt = os.getenv('SSL_CRT_FILE', './certs/localhost.crt')
     ssl_key = os.getenv('SSL_KEY_FILE', './certs/localhost.key')
     

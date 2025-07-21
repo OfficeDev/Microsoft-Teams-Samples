@@ -10,3 +10,4 @@ appManifest/build/
 
 # tmp files
 __pycache__/
+/build/
