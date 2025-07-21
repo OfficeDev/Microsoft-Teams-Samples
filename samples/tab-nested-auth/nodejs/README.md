@@ -113,7 +113,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - **Edit** the `manifest.json` file in the `appManifest` folder to replace the `{{TEAMS_APP_ID}}` placeholder. 
   Use a GUID, such as the Microsoft Entra application ID for the app registered in Azure Active Directory.
 
-- **Edit** the manifest.json to replace `{{AAD_APP_CLIENT_ID}}` with your Microsoft Entra application id for the app registered in Azure Active Directory.
+- **Edit** the manifest.json to replace `{{AAD_APP_CLIENT_ID}}` with your Microsoft Entra application ID for the app registered in Azure Active Directory.
 
 - **Edit**  the manifest.json to replace `{{TAB_DOMAIN}}` with your app's base domain.
 For example., if you're using ngrok, and the URL is `https://1234.ngrok-free.app`, then the domain is `1234.ngrok-free.app`.
