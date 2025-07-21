@@ -9,6 +9,7 @@
     "@fluentui/react-text": "^9.1.8",
     "@microsoft/teams-js": "^2.35.0",
     "@mui/material": "^5.11.0",
+    "@segment/analytics-next": "^1.81.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -24,6 +25,7 @@
     "react-segment-analytics": "^2.0.0",
     "reactstrap": "9.1.6",
     "rsuite": "^5.23.2",
+    "scheduler": "^0.26.0",
     "swiper": "^8.4.5",
     "typescript": "^4.9.3",
     "web-vitals": "^1.1.2"
