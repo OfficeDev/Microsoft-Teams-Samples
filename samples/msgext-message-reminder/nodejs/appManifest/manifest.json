@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.messagingextensionmessagereminder",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Message reminder setup through messaging extension action command."
   },
   "description": {
-    "short": "Message reminder setup through messaging extension action command.",
-    "full": "This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled date and time."
+    "short": "Node.js Messaging Extension for scheduling tasks and sending reminder cards.",
+    "full": "This sample demonstrates a Node.js Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",

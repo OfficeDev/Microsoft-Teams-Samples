@@ -1,6 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+// @copilot-mode: agent
+// @model: gpt-4o
+// @tech-stack: nodejs, teams, bot-framework
+// @analysis-type: code-quality, test-coverage
+
 const {
     ActionTypes,
     CardFactory,
@@ -211,35 +216,39 @@ class TeamsConversationBot extends TeamsActivityHandler {
     async addCitations(turnContext) {
         await turnContext.sendActivity({
             type: ActivityTypes.Message,
-            text: `Hey I'm a friendly AI bot. This message is an example for Citaion - [1]`, // cite with [1]
+            text: `Hey I'm a friendly AI bot. This message is generated through AI [1]`, // cite with [1],
             entities: [
-                {
-                    type: "https://schema.org/Message",
-                    "@type": "Message",
-                    "@context": "https://schema.org",
-                    "@id": "",
-                    citation: [
-                        {
-                            "@type": "Claim",
-                            position: 1, // Required. Should match the [1] in the text above
-                            appearance: {
-                                "@type": "DigitalDocument",
-                                name: "Some secret citation", // Title
-                                url: "https://example.com/claim-1", // Hyperlink on the title
-                                abstract: "Excerpt", // Excerpt (abstract)
-                                encodingFormat: "docx",
-                                keywords: ["Keyword1 - 1", "Keyword1 - 2", "Keyword1 - 3"], // Keywords
-                                usageInfo: {
-                                    "@type": "CreativeWork",
-                                    name: "Confidential \\ Contoso FTE", // Sensitivity title
-                                    description: "Only accessible to Contoso FTE", // Sensitivity description
-                                },
-                            },
-                        },
-                    ],
+            {
+              type: "https://schema.org/Message",
+              "@type": "Message",
+              "@context": "https://schema.org",
+              citation: [
+              {
+                "@type": "Claim",
+                position: 1, // Required. Must match the [1] in the text above
+                appearance: {
+                  "@type": "DigitalDocument",
+                  name: "AI bot", // Title
+                  url: "https://example.com/claim-1", // Hyperlink on the title
+                  abstract: "Excerpt description", // Appears in the citation pop-up window
+                  text: "{\"type\":\"AdaptiveCard\",\"$schema\":\"http://adaptivecards.io/schemas/adaptive-card.json\",\"version\":\"1.6\",\"body\":[{\"type\":\"TextBlock\",\"text\":\"Adaptive Card text\"}]}", // Appears as a stringified Adaptive Card
+                  keywords: ["keyword 1", "keyword 2", "keyword 3"], // Appears in the citation pop-up window
+                  encodingFormat: "application/vnd.microsoft.card.adaptive",
+                  usageInfo: {
+                    "@type": "CreativeWork",
+                    name: "Confidential \\ Contoso FTE", // Sensitivity title
+                    description: "Only accessible to Contoso FTE", // Sensitivity description
+                  },
+                  image: {
+                    "@type": "ImageObject",
+                    name: "Microsoft Word"
+                  },
+                 },
                 },
-            ],
-        });
+              ],
+            },
+          ],
+        })
     }
 
     // Checks the count of members who have read the message sent by MessageAllMembers command.

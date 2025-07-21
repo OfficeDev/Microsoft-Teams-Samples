@@ -5,17 +5,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
+using Microsoft.Graph.Me.SendMail;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // This class is a wrapper for the Microsoft Graph API
-    // See: https://developer.microsoft.com/en-us/graph
+    /// <summary>
+    /// This class is a wrapper for the Microsoft Graph API.
+    /// See: https://developer.microsoft.com/en-us/graph
+    /// </summary>
     public class SimpleGraphClient
     {
         private readonly string _token;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleGraphClient"/> class.
+        /// </summary>
+        /// <param name="token">The OAuth token.</param>
         public SimpleGraphClient(string token)
         {
             if (string.IsNullOrWhiteSpace(token))
@@ -26,7 +36,13 @@ namespace Microsoft.BotBuilderSamples
             _token = token;
         }
 
-        // Sends an email on the users behalf using the Microsoft Graph API
+        /// <summary>
+        /// Sends an email on the user's behalf using the Microsoft Graph API.
+        /// </summary>
+        /// <param name="toAddress">The recipient's email address.</param>
+        /// <param name="subject">The email subject.</param>
+        /// <param name="content">The email content.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public async Task SendMailAsync(string toAddress, string subject, string content)
         {
             if (string.IsNullOrWhiteSpace(toAddress))
@@ -46,15 +62,15 @@ namespace Microsoft.BotBuilderSamples
 
             var graphClient = GetAuthenticatedClient();
             var recipients = new List<Recipient>
-            {
-                new Recipient
                 {
-                    EmailAddress = new EmailAddress
+                    new Recipient
                     {
-                        Address = toAddress,
+                        EmailAddress = new EmailAddress
+                        {
+                            Address = toAddress,
+                        },
                     },
-                },
-            };
+                };
 
             // Create the message.
             var email = new Message
@@ -69,30 +85,43 @@ namespace Microsoft.BotBuilderSamples
             };
 
             // Send the message.
-            await graphClient.Me.SendMail(email, true).Request().PostAsync();
+            await graphClient.Me.SendMail.PostAsync(new SendMailPostRequestBody
+            {
+                Message = email,
+                SaveToSentItems = true
+            });
         }
 
-        // Gets mail for the user using the Microsoft Graph API
+        /// <summary>
+        /// Gets recent mail for the user using the Microsoft Graph API.
+        /// </summary>
+        /// <returns>An array of recent messages.</returns>
         public async Task<Message[]> GetRecentMailAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request().GetAsync();
-            return messages.Take(5).ToArray();
+            var messages = await graphClient.Me.MailFolders["Inbox"].Messages.GetAsync();
+            return messages.Value.Take(5).ToArray();
         }
 
-        // Get information about the user.
+        /// <summary>
+        /// Gets information about the user.
+        /// </summary>
+        /// <returns>The user information.</returns>
         public async Task<User> GetMeAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var me = await graphClient.Me.Request().GetAsync();
+            var me = await graphClient.Me.GetAsync();
             return me;
         }
 
-        // gets information about the user's manager.
+        /// <summary>
+        /// Gets information about the user's manager.
+        /// </summary>
+        /// <returns>The manager information.</returns>
         public async Task<User> GetManagerAsync()
         {
             var graphClient = GetAuthenticatedClient();
-            var manager = await graphClient.Me.Manager.Request().GetAsync() as User;
+            var manager = await graphClient.Me.Manager.GetAsync() as User;
             return manager;
         }
 
@@ -130,22 +159,33 @@ namespace Microsoft.BotBuilderSamples
         //     }
         // }
 
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        /// <summary>
+        /// Gets an authenticated Microsoft Graph client using the token issued to the user.
+        /// </summary>
+        /// <returns>The authenticated GraphServiceClient.</returns>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
     }
 }

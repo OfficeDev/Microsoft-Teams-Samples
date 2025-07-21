@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-request-approval-csharp",
     "source": "officeDev",
     "title": "Send task request using Universal Adaptive Cards in a group chat",
-    "shortDescription": "This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat through bot.",
+    "shortDescription": "This bot allows users to request task approval from managers in Teams group chats.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-request-approval/csharp",
     "longDescription": [
-      "This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat through bot."
+      "This Teams bot enables users to request task approval from managers within group chats. Managers can quickly approve or reject requests, while other members view request details only."
     ],
     "creationDateTime": "2021-12-13",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

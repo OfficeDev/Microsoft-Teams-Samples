@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating graph toolkit component
+description: This demo app illustrates how to implement a Microsoft Teams tab using the Microsoft Graph Toolkit, enabling seamless interaction with user data. It includes features like tabs and easy integration with Microsoft Graph for enhanced functionality.
 products:
 - office-teams
 - office
@@ -14,6 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-csharp
 ---
 
 # Teams tab with microsoft graph toolkit
+
+This sample app demonstrates the integration of the Microsoft Graph Toolkit within a Microsoft Teams tab, allowing developers to easily access and display user data. With features such as tabs and API interactions, it serves as a practical guide for leveraging the Microsoft Graph API to enhance your Teams applications.
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 
@@ -37,19 +39,22 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
-## Run the app (Using Teams Toolkit for Visual Studio)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.10 Preview 4  or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
-1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
-1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
-1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -205,7 +210,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](TabGraphToolkit/Images/InstallOutlook.png)
 
@@ -225,7 +230,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](TabGraphToolkit/Images/InstallOffice.png)
 

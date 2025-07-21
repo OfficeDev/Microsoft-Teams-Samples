@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: In-Meeting Document Signing
+description: This Microsoft Teams sample app enables users to review and sign documents in real time during meetings, facilitating seamless collaboration.
 products:
 - office-teams
 - office
@@ -14,7 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-c
 ---
 
 # In-Meeting Document Signing
-Meeting Signing is a Teams sample app that demonstrates the scenario of enabling users to [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings, making it possible to review and sign documents in a single session. This sample lets users electronically sign documents with their current tenant identity. Some example documents that can be signed during meetings are Purchase Agreements and Purchase Orders. This template is also applicable, and could be adapted for other scenarios like reviewing and approving code reviews or collaborative reviewing of documents.
+
+This sample application demonstrates the in-meeting document signing functionality within Microsoft Teams, enabling users to review and [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings. With features like Teams SSO, adaptive cards, and programmatic content sharing, this app supports multiple personas including document creators, signers, and readers, making it suitable for various collaborative scenarios.
 
 The sample app could be customized to incorporate other kind of signatures like handwritten signatures or certificate based signatures. 
 
@@ -74,23 +75,23 @@ sequenceDiagram
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 - [Teams](https://teams.microsoft.com/v2/?clientexperience=t2) Microsoft Teams is installed and you have an account
-- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
 
-##Run the app (Using Teams Toolkit for Visual Studio)
+##Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
 
-1.Install Visual Studio 2022 Version 17.10 Preview 4 or higher Visual Studio
-2.Install Teams Toolkit for Visual Studio Teams Toolkit extension
+1.Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+2.Install Microsoft 365 Agents Toolkit for Visual Studio Microsoft 365 Agents Toolkit extension
 3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
 4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
-5.In Visual Studio, right-click your TeamsApp project and Select Teams Toolkit > Prepare Teams App Dependencies
+5.In Visual Studio, right-click your TeamsApp project and Select Microsoft 365 Agents Toolkit > Prepare Teams App Dependencies
 6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
 7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
 8.In the browser that launches, select the Add button to install the app to Teams.
 
-If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 
 ## Setup
@@ -267,7 +268,7 @@ If you do not have permission to upload custom apps (sideloading), Teams Toolkit
 ![Meeting stage with a 'Default Agreement' document and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
 
 ## Usage
-* Sideload the app to a meeting.
+* Upload the app to a meeting.
 * In the meeting group chat, add the *Meeting Signing* app as a new Tab.
 * In the pre-meeting tab, create a test document so you can test the meeting share to stage APIs.
 * Provide one-time consent to the app for Graph permissions while creating the document.

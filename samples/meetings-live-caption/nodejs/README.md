@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CART link to send live captions in the meeting tabs.
+description: This sample application demonstrates how to use CART links to send live captions in Microsoft Teams meeting tabs.
 products:
 - office-teams
 - office
@@ -16,15 +16,16 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-nodejs
 
 # Meeting side panel application uses CART link to send caption in live meeting.
 
-This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting. Meeting side panel application uses CART link to send caption in live meeting.
+This sample application illustrates how to implement live captioning in Microsoft Teams meetings using CART links. With functionalities including a meeting side panel, chat integration, and the ability to configure captions during meetings, this app significantly improves accessibility for participants.
+
 
 ## Enable CART Captions
 Once the meeting is scheduled. Follow this doc to enable [CART Captions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
 
-![Enable CART-1](Images/8.SettingToEnableCart-1.png)
+![Enable CART-1](Images/8.SettingsToEnableCart-2.png)
 
-![Enable CART-2](Images/7.SettingsToEnableCart-2.png)
+![Enable CART-2](Images/7.SettingToEnableCart-1.png)
 
 ## Included Features
 * Meeting Chat 
@@ -36,20 +37,25 @@ Copy the CART link it will used while configuring tab for meeting.
 
 ![Key Features](Images/MeetingCaption.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meetings Live Caption:** [Manifest](/samples/meetings-live-caption/csharp/demo-manifest/meetings-live-caption.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -116,7 +122,10 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 3. Once the live caption has started, you can use the app to send live caption.
 ![Send live caption](Images/6.LiveCaption.png)
 4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](Images/LiveCaption.png)
+![Caption in meeting](Images/6.LiveCaption.png)
 
+## Further reading
+
+- [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-caption-nodejs" />

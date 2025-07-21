@@ -103,7 +103,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
                 channelDeeplinks.Add(task2ChannelLink);
                 channelDeeplinks.Add(task3ChannelLink);
             }
-            ViewBag.AppId = _configuration["MicrosoftAppId"];
+            ViewBag.AppId = _configuration["TeamsAppId"];
             return View(channelDeeplinks);
         }
 

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-teams-csharp",
     "source": "officeDev",
     "title": "App link unfurling in share to teams",
-    "shortDescription": "Demonstrating the feature of link unfurling in share to teams.",
+    "shortDescription": "This sample app showcases the link unfurling feature for sharing content in Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-link-unfurling-in-share-to-teams/csharp",
     "longDescription": [
-      "This sample app shows the feature of link unfurling in share to teams."
+      "This sample app demonstrates the link unfurling feature, allowing users to seamlessly share site content with individuals or groups on Microsoft Teams. It provides a practical example of how to integrate and utilize this feature within the Teams environment."
     ],
     "creationDateTime": "2022-12-14",
-    "updateDateTime": "2023-02-08",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

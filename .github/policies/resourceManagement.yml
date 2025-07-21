@@ -1,4 +1,4 @@
-id: 
+id: bot-issue-management
 name: GitOps.PullRequestIssueManagement
 description: GitOps.PullRequestIssueManagement primitive
 owner: 
@@ -109,7 +109,7 @@ configuration:
           label: 'needs-triage :mag:'
       - addReply:
           reply: >-
-            Hi @${issueAuthor}! Thank you for bringing this issue to our attention. We will investigate and if we require further information we will reach out in one business day. Please use [this link](https://aka.ms/DevCommunityEscalationForm) to escalate if you don't get replies. 
+            Hi @${issueAuthor}! We will investigate and if we require further information we will reach out to you. Please use [this link](https://aka.ms/DevCommunityEscalationForm) to escalate if you don't get replies in two working days. 
 
 
             Best regards, Teams Platform

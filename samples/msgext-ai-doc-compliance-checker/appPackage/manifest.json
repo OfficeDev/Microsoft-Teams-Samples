@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "https://www.example.com",
@@ -19,8 +18,8 @@
     "full": "AI Compliance Checker"
   },
   "description": {
-    "short": "Use AI to compare a documents for compliance against a guideline.",
-    "full": "Use Azure OpenAI to compare proposal documents against a guideline document and return whether the proposal complies and why/why not."
+    "short": "Integrate Open AI in Teams to check contract compliance with guidelines.",
+    "full": "This sample showcases a Teams message extension that utilizes Open AI to assess the compliance of contract proposals against uploaded policy guidelines stored in Azure Blob Storage. It formats the compliance results as adaptive cards for easy viewing and can also function as a Copilot plug-in within Microsoft 365."
   },
   "accentColor": "#FFFFFF",
   "bots": [],

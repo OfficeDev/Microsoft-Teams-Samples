@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-meetings-events-csharp",
     "source": "officeDev",
     "title": "Realtime meeting events and meeting participant events",
-    "shortDescription": "This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4",
+    "shortDescription": "This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-events/csharp",
     "longDescription": [
-      "This sample demonstrates use of various meeting events and meeting participant events which are available in bot framework v4"
+      "This sample application showcases how to utilize a bot in Microsoft Teams to capture real-time meeting and participant events, enhancing the interactivity of your meetings. It features capabilities such as adaptive cards, interaction with the app, and requires Microsoft 365 account permissions for setup."
     ],
     "creationDateTime": "2021-11-10",
-    "updateDateTime": "2023-08-02",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

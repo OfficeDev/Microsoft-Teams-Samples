@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases feature on how to start new message thread inside teams channel.
+description: This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-no
 
 # Teams - Start new thread in a channel (proactive messaging)
 
-You can interact with this bot by sending it a message. The bot will respond by sending a reply to the channel, and then responding to that reply.
+This sample application illustrates how to initiate a conversation thread within a specific channel in Microsoft Teams using Bot Framework v4. It includes key features such as adaptive cards, bot-driven interactions, and setup instructions for Microsoft 365 Agents Toolkit in Visual Studio, enabling easy uploading and debugging. Ideal for developers looking to integrate bots in Teams channels and create engaging, context-specific conversations.
 
 ## Included Features
 * Bots
@@ -26,7 +26,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
  ![Teams Thread](Images/TeamsThread.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Start Thread In A Specific Channel of a Team:** [Manifest](/samples/bot-initiate-thread-in-channel/csharp/demo-manifest/bot-initiate-thread-in-channel.zip)
 
@@ -40,20 +40,20 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.m
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.m
 
 ## Setup
 
@@ -121,15 +121,21 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
 
 **Adding the bot to a team's channel :**
-![Add-App ](Images/1.Install.png)
+![Add-App](Images/1.Install.png)
 
-![Add-App-To-Teams-Channel ](Images/2.SelectTeams.png)
+![Add-App-To-Teams-Channel](Images/2.SelectTeams.png)
 
-![Mention Bot In Teams ](Images/3.MentionInTeams.png)
+**Mention the bot in a team's channel using "@" like: '@yourbotname listchannels' :**
+![ListChannels](Images/3.ListChannels.png)
 
-**Mention the bot in a team's channel using "@" with any message like: '@yourbotname Hello' :**
-![First Response To New Thread ](Images/4.FirstResponseInThread.png)
+**Mention the bot in a team's channel using "@" like: '@yourbotname threadchannel' :**
+![ThreadChannel](Images/4.ThreadChannel.png)
 
+**Mention the bot in a team's channel using "@" like: '@yourbotname getteammember' :**
+![GetteamMember](Images/5.GetteamMember.png)
+
+**Mention the bot in a team's channel using "@" like: '@yourbotname getpagedteammembers' :**
+![6.GetpagedteamMembers](Images/6.GetpagedteamMembers.png)
 
 ## Deploy the bot to Azure
 

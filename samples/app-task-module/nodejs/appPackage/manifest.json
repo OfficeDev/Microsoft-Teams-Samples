@@ -1,9 +1,8 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.16",
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
     "version": "1.0.0",
     "id": "{{Microsoft-App-Id}}",
-    "packageName": "com.microsoft.teams.taskmoduletester",
     "developer": {
         "name": "Bill Bliss",
         "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +18,8 @@
         "full": "Task Module Test App"
     },
     "description": {
-        "short": "Demo/test app for the Task Module feature",
-        "full": "This app is used to test the Task Module feature."
+        "short": "Teams task modules from tabs and bots using Adaptive Cards and custom HTML.",
+        "full": "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML."
     },
     "accentColor": "#020081",
     "configurableTabs": [
@@ -29,7 +28,7 @@
             "canUpdateConfiguration": true,
             "scopes": [
                 "team",
-                "groupchat"
+                "groupChat"
             ]
         }
     ],
@@ -50,7 +49,7 @@
             "scopes": [
                 "team",
                 "personal",
-                "groupchat"
+                "groupChat"
             ],
             "commandLists": [
                 {

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample code for a generic connector that's easy to customize for any system which supports webhooks.
+description: This sample provides a customizable Node.js connector for systems with webhook support, ideal for integration with Microsoft Teams.
 products:
 - office-teams
 - office
@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
 
 # Generic Connector 
 
-This contains the source for a generic connector that's easy to customize for any system which supports webhooks.
+This generic connector, built with Node.js, is customizable for any system that supports webhooks, enabling quick and efficient integration with Microsoft Teams. By following the provided setup, users can configure this connector to send notifications from various sources directly into Teams channels, enhancing workflow and communication.
 
 ## Included Features
 * Connectors
@@ -34,7 +34,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
 * [Git](https://git-scm.com/downloads) 
 * [Node.js and NPM](https://nodejs.org/)
 * Get any text editor or IDE. You can install and use [Visual Studio Code](https://code.visualstudio.com/download) for free.
-* An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).
+* An Office 365 account with access to Microsoft Teams, with [uploading enabled](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).
 * If you want to run this code locally, use a tunnelling service like [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version. These instructions assume you are using [ngrok](https://ngrok.com/). 
 
 ### Setup 

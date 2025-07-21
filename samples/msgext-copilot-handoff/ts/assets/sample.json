@@ -3,14 +3,14 @@
         "name": "officedev-copilot-for-m365-plugins-samples-msgext-northwind-inventory-ts",
         "source": "officedev",
         "title": "Northwind Inventory plugin for Copilot for Microsoft 365",
-        "shortDescription": "This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365.",
+        "shortDescription": "This sample showcases a Teams message extension that serves as a plugin for Microsoft Copilot, enabling users to query the Northwind Database.",
         "url": "https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts",
         "downloadUrl": "https://pnp.github.io/download-partial/?url=https://github.com/OfficeDev/Copilot-for-M365-Plugins-Samples/tree/main/samples/msgext-northwind-inventory-ts",
         "longDescription": [
-            "This sample implements a Teams message extension that can be used as a plugin for Microsoft Copilot for Microsoft 365. The message extension allows users to query the Northwind Database"
+            "This application implements a Teams message extension designed for Microsoft Copilot, allowing users to seamlessly query the Northwind Database. It features copilot handoff capabilities for transitioning to custom bot interactions within Teams."
         ],
         "creationDateTime": "2023-11-15",
-        "updateDateTime": "2023-11-15",
+        "updateDateTime": "2024-10-15",
         "products": [
             "Microsoft Teams",
             "Microsoft 365 Copilot"
@@ -61,8 +61,8 @@
                 "url": "https://aka.ms/extendcopilotm365"
             },
             {
-                "name": "Teams Toolkit for Visual Studio Code",
-                "description": "Learn more about the Teams Toolkit for Visual Studio Code.",
+                "name": "Microsoft 365 Agents Toolkit for Visual Studio Code",
+                "description": "Learn more about the Microsoft 365 Agents Toolkit for Visual Studio Code.",
                 "url": "https://learn.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals?pivots=visual-studio-code-v5"
             }
         ]

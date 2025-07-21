@@ -31,16 +31,16 @@ This sample app demonstrates the use of tag mention funtionality in teams scope 
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - Create tags within the team channel prior to utilizing the bot.
-- - [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 - If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
     Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -165,6 +165,13 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    ![PersonalScope-interactions ](Images/2.LoginWithPersonalScope.png)
 
 **Team channel Scope**
+
+**Create tags within the team channel**
+To create tags in Microsoft Teams, follow these steps:
+
+1. Select Teams on the left side of the app and choose the team you want to create tags for.
+2. Click the "More options" button (three dots) next to the team name and select "Manage tags".
+3. Click "Create tag" and provide a name, description, and assign team members to the tag.
 
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with necessary commands

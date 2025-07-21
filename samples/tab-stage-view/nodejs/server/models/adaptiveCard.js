@@ -32,7 +32,7 @@ const adaptiveCardForTabStageView = (baseUrlForOpenUrl) => ({
                 {
                    type: "Action.OpenUrl",
                    title: "View via Deep Link",
-                   url: "https://teams.microsoft.com/l/stage/"+process.env.MicrosoftAppId+"/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F"+baseUrlForOpenUrl+"%2Fcontent%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F"+baseUrlForOpenUrl+"%2Fcontent%22%2C%22name%22%3A%22DemoStageView%22%7D"
+                   url: "https://teams.microsoft.com/l/stage/"+process.env.TeamsAppId+"/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F"+baseUrlForOpenUrl+"%2Fcontent%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F"+baseUrlForOpenUrl+"%2Fcontent%22%2C%22name%22%3A%22DemoStageView%22%7D"
                 }
             ]
         }

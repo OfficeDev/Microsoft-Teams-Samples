@@ -8,7 +8,7 @@ languages:
     - typescript
     - javascript
     - html
-description: 'This sample demonstrates authentication in Microsoft Teams using bot and tab.'
+description: 'This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab, supporting Teams SSO with MSAL.js 2.0.'
 urlFragment: microsoft-teams-auth
 extensions:
     contentType: samples
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 # Microsoft Teams Authentication Sample
 
-This sample demonstrates authentication in Microsoft Teams using bot and tab.
+This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab. It demonstrates Single Sign-On (SSO) functionality, allowing seamless user experiences across Microsoft services.
 
 ## Included Features
 * Teams SSO (Using bots and tabs)
@@ -227,7 +227,7 @@ Bot authentication
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -251,7 +251,7 @@ Bot authentication
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating tab in stage view
+description: This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities.
 products:
 - office-teams
 - office
@@ -15,7 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 
 # Stage View
 
+This sample app showcases the capabilities of Microsoft Teams tabs in stage view using Node.js. It demonstrates collaborative features such as multi-window support and interactive elements, allowing users to engage dynamically through adaptive cards and deep linking for a richer experience in Teams.
 This App talks about the Teams tab in stage view with Nodejs.
+
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling)
 
 ## Included Features
@@ -30,7 +32,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ![Tab Stage ViewGif](Images/TabStageView.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Stage View:** [Manifest](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
 
@@ -49,20 +51,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    If you using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -196,7 +198,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -212,7 +214,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 
@@ -224,7 +226,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 ![Open New Mail](Images/OpenNewMail.png)
 
-**On the tool bar on top, select Apps icon. Your sideloaded app title appears among your installed apps**
+**On the tool bar on top, select Apps icon. Your uploaded app title appears among your installed apps**
 
 ![OpenAppIcon](Images/OpenAppIcon.png)
 

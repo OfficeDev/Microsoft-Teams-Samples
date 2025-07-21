@@ -50,7 +50,6 @@ server.get('/auth/auth-end', function (req, res) {
   res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
-
 server.get('/UserRequest', function (req, res) {
   var requestId = req.url.split('=')[1];
   let requestData = {};

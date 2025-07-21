@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "id": "{{APPLICATION_ID}}",
   "version": "{{VERSION}}",
-  "packageName": "{{PACKAGE_NAME}}",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://{{PUBLIC_HOSTNAME}}",
@@ -15,8 +14,8 @@
     "full": "Deep Links Sample"
   },
   "description": {
-    "short": "TODO: add short description here",
-    "full": "TODO: add full description here"
+    "short": "Teams sample demonstrating dynamic deep links for tabs and web apps.",
+    "full": "This sample app for Microsoft Teams illustrates the creation and usage of dynamic deep links to pass contextual values to tab and standalone web applications. It highlights the differences in link formatting and consumption based on the user’s access environment, enhancing navigation and data display capabilities."
   },
   "icons": {
     "outline": "icon-outline.png",

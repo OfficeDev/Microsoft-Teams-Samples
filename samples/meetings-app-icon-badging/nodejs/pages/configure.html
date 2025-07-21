@@ -1,19 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.11.0/js/MicrosoftTeams.min.js"
-            integrity="sha384yBjE++eHeBPzIg+IKl9OHFqMbSdrzY2S/LW3qeitc5vqXewEYRWegByWzBN/chRh" crossorigin="anonymous">
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure App</title>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="font-semibold font-title" style="color:gray">Configure your app here.</div>
-    <h2 style="color:dodgerblue;font-family:sans-serif">
+    <h2 class="title">
         Show app icon badging in Teams Meetings app
     </h2>
     <p>Please click on save to proceed.</p>
 
     <script>
+        // Initialize the Microsoft Teams app
         microsoftTeams.app.initialize().then(() => {
+            // Register the onSave handler
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                // Set the configuration for the app
                 microsoftTeams.pages.config.setConfig({
                     entityID: "app-icon-badging-tab",
                     contentUrl: `${window.location.origin}/hello.html`,
@@ -21,10 +29,13 @@
                     websiteUrl: `${window.location.origin}/hello.html`,
                 });
 
+                // Notify success
                 saveEvent.notifySuccess();
             });
 
+            // Set the validity state to true
             microsoftTeams.pages.config.setValidityState(true);
         });
     </script>
 </body>
+</html>

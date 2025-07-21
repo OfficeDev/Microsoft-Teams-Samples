@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate is how to upload files to Teams from a bot.
+description: This bot sample for Teams demonstrates file upload capabilities using Bot Framework v4, enabling users to upload files and view inline images within chats.
 products:
 - office-teams
 - office
@@ -15,10 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-file-upload-java
 
 # Teams File Upload Bot
 
-Bot Framework v4 file upload bot sample for Teams.
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to
-upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
+This sample demonstrates how to upload files in Microsoft Teams using a bot built with Bot Framework v4. Users can send files as attachments or inline images directly within a chat, and the bot can handle, retrieve, and process these files effectively. The bot also illustrates interaction with adaptive cards and supports file uploads through various methods, making it versatile for file management in Teams.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
@@ -30,7 +27,7 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ![Bot-file-upload](Images/botfileupload.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams File Upload Bot:** [Manifest](/samples/bot-file-upload/csharp/demo-manifest/bot-file-upload.zip)
 

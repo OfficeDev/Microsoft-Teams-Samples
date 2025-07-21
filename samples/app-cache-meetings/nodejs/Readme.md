@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting. The tab is loaded as an sidepanel in meeting.
+description: This sample shows how to enhance app loading times during meetings with side panel caching, improving user experience in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs
 
 ---
 
-## App Caching In Meetings
+## App Caching in Meetings
 
-This sample feature shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting).
+This sample demonstrates how to enhance the loading speed of applications within Microsoft Teams during ongoing meetings. Specifically, it illustrates the caching mechanism for apps loaded in the side panel, allowing users to quickly access previously visited apps without delay.
 
 **Interaction with App**
 ![App-Cache](Images/AppCacheSample.gif)  
@@ -28,20 +28,20 @@ This sample feature shows how to improve the subsequent loading time of an App t
 
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ### Setup 
 > Note these instructions are for running the sample on your local machine.
@@ -90,7 +90,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Edit** the `manifest.json` for `<<Valid_Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`. Replace it at all the places in your manifest.json.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Sideload the app In meetings (Supported scopes)
+    - Upload a custom app In meetings (Supported scopes)
      
 
 ## Running the sample
@@ -98,7 +98,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 **Add the App in meeting**.
 ![Set-Up-Tab](Images/1.Set_Up_Tab.png)
 
-**App Caching Sideloaded  :**
+**App Caching Uploaded  :**
 ![participant context](Images/2.TabOneInitilized.png)
 
 **AppCache in first tab with Unique Id Loaded :** 
@@ -124,7 +124,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 ## Further reading
 [Upload your app in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
-[Manage custom and sideloaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
+[Manage custom and uploaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
 
 [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
 

@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "97c66967-8416-4660-a22d-168a02fa5633",
-  "packageName": "com.microsoft.teams.apptemplates.qbot",
   "developer": {
     "name": "{{Company_Name}}",
     "websiteUrl": "{{Website_Url}}",
@@ -19,8 +18,8 @@
     "full": "QBot"
   },
   "description": {
-    "short": "A Short description of the app",
-    "full": "A Longer description of the app"
+    "short": "QBot for Microsoft Teams enables intelligent Q&A in classroom settings.",
+    "full": "QBot is an innovative solution for Microsoft Teams designed to facilitate intelligent question-and-answer interactions among educators, tutors, and students within classroom settings."
   },
   "accentColor": "#6BB700",
   "configurableTabs": [

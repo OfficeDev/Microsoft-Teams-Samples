@@ -1,6 +1,6 @@
 ---
 page_type: ssample
-description: "This sample demos teams tab to type in Incoming Webhook URL and message card payload, which send the card in the team and also demonstrates the HttpPOST action in the card."
+description: "This sample demonstrates sending message cards through Incoming Webhooks in Microsoft Teams and includes an HttpPOST action in the card."
 products:
 - office-teams
 - office
@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-incoming-webhook-nodejs
 
 # Incoming webhook
 
-This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card.
+This sample demonstrates how to use Incoming Webhooks in Microsoft Teams to send message cards. The UI allows users to input the Incoming Webhook URL and message card payload, which are sent to a team, showcasing the card's HttpPOST action for dynamic interaction. It includes setup instructions for tunneling solutions, API, and client app configuration, as well as integration across Microsoft 365 hubs like Outlook and Office.com.
 
 ## Included Features
 * Tabs
@@ -110,7 +110,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -126,7 +126,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

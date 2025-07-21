@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-checkin-location-nodejs",
     "source": "officeDev",
     "title": "Get Checkin info of user",
-    "shortDescription": "Demonstrating feature where user can checkin with current location and view all previous checkins using bot.",
+    "shortDescription": "This sample showcases a Microsoft Teams bot that allows users to check in their current location and view all previous check-ins seamlessly.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-checkin-location/nodejs",
     "longDescription": [
-      "Demonstrating feature where user can checkin with current location and view all previous checkins using bot."
+      "This sample app allows users to check in with their current location and view a history of previous check-ins via a bot in Microsoft Teams. It showcases features such as bot interaction, adaptive cards, task modules, and the Device Permission API for location access, providing a seamless experience across supported platforms."
     ],
     "creationDateTime": "2021-11-11",
-    "updateDateTime": "2022-04-20",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

@@ -1,9 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.appcompleteauth",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -19,8 +18,8 @@
     "full": "Authentication sample for Microsoft Teams"
   },
   "description": {
-    "short": "Authentication sample for Microsoft Teams",
-    "full": "Authentication sample for Microsoft Teams"
+    "short": "Sample demonstrating Azure AD and Facebook authentication for Teams apps.",
+    "full": "This sample showcases Azure AD and Facebook authentication across bots, tabs, and messaging extensions in Microsoft Teams."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

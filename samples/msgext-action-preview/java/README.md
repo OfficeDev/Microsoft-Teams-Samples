@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrate the bot that performs simple card based on parameters entered by the user from a Task Module
+description: This sample app illustrates how to utilize action previews in Teams Messaging Extensions, allowing users to create cards from input in a Task Module. It showcases bot interactions that enhance user engagement by attributing messages to users.
 products:
 - office-teams
 - office
@@ -18,8 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-preview-java
 Bot Framework v4 Teams Messaging Extension Action Preview sample.
 
 This Messaging Extension has been created using [Bot Framework](https://dev.botframework.com).
-- It shows how to create a simple card based on parameters entered by the user from a Task Module.
-- It also displays the scenario where a Bot sends messages on behalf of a User. Attributing the message to that user can help with engagement and showcase a more natural interaction flow.
+- Explore this sample app that highlights card creation within Teams Messaging Extensions, utilizing user input from a Task Module. 
+- Developed with Spring Boot, it features seamless bot interactions that send messages on behalf of users, fostering a natural and engaging experience in Microsoft Teams.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
@@ -32,7 +32,7 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ![MsgExtAction](Images/MsgExtPreview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Messaging Extensions Action Preview:** [Manifest](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
 

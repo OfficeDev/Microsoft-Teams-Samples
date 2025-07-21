@@ -1,32 +1,39 @@
 import { TeamsActivityHandler, CardFactory } from 'botbuilder';
 import faker from 'faker';
 
-
-
 export default class MessageExtension extends TeamsActivityHandler {
+
+    /**
+     * Handles messaging extension queries such as retrieving random text and images.
+     * 
+     * @param {TurnContext} context - The context for the current request.
+     * @param {object} query - The query data from the messaging extension.
+     * @returns {object} A response containing the attachments (cards).
+     */
     async handleTeamsMessagingExtensionQuery(context, query) {
+        // Default title from user input or fallback to a randomly generated title.
+        const title = query.parameters?.[0]?.name === 'cardTitle' ? query.parameters[0].value : faker.lorem.sentence();
 
-        // If the user supplied a title via the cardTitle parameter then use it or use a fake title
-        let title = query.parameters && query.parameters[0].name === 'cardTitle'
-            ? query.parameters[0].value
-            : faker.lorem.sentence();
-
-        let randomImageUrl = "https://loremflickr.com/200/200"; // Faker's random images uses lorempixel.com, which has been down a lot
+        const randomImageUrl = "https://loremflickr.com/200/200"; // Using random image generator (fallback URL)
 
         switch (query.commandId) {
             case 'getRandomText':
-                let attachments = [];
+                const attachments = [];
 
-                // Generate 5 results to send with fake text and fake images
+                // Generate 5 results, each with a fake paragraph and image.
                 for (let i = 0; i < 5; i++) {
-                    let text = faker.lorem.paragraph();
-                    let images =  [`${randomImageUrl}?random=${i}`]
-                    let thumbnailCard = CardFactory.thumbnailCard(title, text, images)
-                    let preview = CardFactory.thumbnailCard(title, text, images)
-                    preview.content.tap = { type: 'invoke', value: { title, text, images } };
-                    var attachment = { ...thumbnailCard, preview }
-                    attachments.push(attachment);
+                    const text = faker.lorem.paragraph(); // Generate random text.
+                    const images = [`${randomImageUrl}?random=${i}`]; // Ensure unique images per result.
 
+                    // Create a thumbnail card with the generated content.
+                    const thumbnailCard = CardFactory.thumbnailCard(title, text, images);
+                    const preview = CardFactory.thumbnailCard(title, text, images);
+
+                    // Set up tap action for the preview card.
+                    preview.content.tap = { type: 'invoke', value: { title, text, images } };
+
+                    // Push the thumbnail card with preview to the attachments array.
+                    attachments.push({ ...thumbnailCard, preview });
                 }
 
                 return {
@@ -38,13 +45,20 @@ export default class MessageExtension extends TeamsActivityHandler {
                 };
 
             default:
-                break;
+                // Return null if no matching commandId is found.
+                return null;
         }
-        return null;
     }
 
+    /**
+     * Handles item selection in the messaging extension.
+     * 
+     * @param {TurnContext} context - The context for the current request.
+     * @param {object} obj - The selected item from the messaging extension.
+     * @returns {object} A response containing the selected item (card).
+     */
     async handleTeamsMessagingExtensionSelectItem(context, obj) {
-        const { title, text, images } = obj
+        const { title, text, images } = obj;
 
         return {
             composeExtension: {

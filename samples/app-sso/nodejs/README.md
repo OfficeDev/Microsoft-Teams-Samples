@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl
+description: This Microsoft Teams sample app demonstrates single sign-on (SSO) integration for Tabs, Bots, and Messaging Extensions, leveraging Azure AD and MSAL.js.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 ---
 # App SSO Node
 
-This app talks about the Teams Tab, Bot, Messaging Extension - search, action, linkunfurl SSO with Node JS
+TA Microsoft Teams sample app demonstrating single sign-on (SSO) integration across Tabs, Bots, and Messaging Extensions using Azure AD and MSAL.js. It supports capabilities like Adaptive Cards, OAuth flow with Azure Bot Service, and making Microsoft Graph calls for various scenarios such as profile retrieval and messaging extensions actions.
 
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
@@ -44,7 +44,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 ![Preview Image](Images/preview_APP_SSO_Node.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **App SSO:** [Manifest](/samples/app-sso/csharp/demo-manifest/App-SSO.zip)
 
@@ -271,7 +271,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -287,7 +287,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

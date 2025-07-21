@@ -14,7 +14,7 @@ from botbuilder.core import (
     TurnContext,
     BotFrameworkAdapter,
     MemoryStorage,
-    UserState,
+    UserState
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 

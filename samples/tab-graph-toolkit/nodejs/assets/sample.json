@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-graph-toolkit-nodejs",
     "source": "officeDev",
     "title": "Teams tab with microsoft graph toolkit",
-    "shortDescription": "Microsoft Teams tab sample app for demonstrating graph toolkit component",
+    "shortDescription": "This sample app demonstrates a Microsoft Teams tab using the Microsoft Graph Toolkit to create interactive and collaborative web experiences.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-graph-toolkit/nodejs",
     "longDescription": [
-      "Microsoft Teams tab sample app for demonstrating graph toolkit component"
+      "This demo showcases a Microsoft Teams tab built with the Microsoft Graph Toolkit, featuring components like a sign-in card and various interactive elements. It allows users to easily integrate and display Microsoft 365 data, enhancing collaboration within Teams."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-05",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

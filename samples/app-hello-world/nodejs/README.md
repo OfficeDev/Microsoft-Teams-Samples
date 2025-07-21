@@ -2,19 +2,53 @@
 page_type: sample
 products:
 - office-365
+- microsoft-teams
 languages:
 - javascript
-title: Microsoft Teams NodeJS Helloworld Sample
-description: Microsoft Teams hello world sample app in Node.js which showcase tab, bot and messaging extension.
+- nodejs
+technologies:
+- botframework
+- teams-platform
+- messaging-extensions
+- teams-tabs
+title: Microsoft Teams Hello World Bot - Copilot Agent Optimized
+description: A comprehensive Microsoft Teams hello world bot sample optimized for GitHub Copilot Agent development, featuring advanced bot functionality, tabs, and messaging extensions with modern JavaScript patterns.
 extensions:
   contentType: samples
+  technologies:
+    - Microsoft Teams Platform
+    - Bot Framework v4
+    - Node.js
+    - Restify
+    - GitHub Copilot Agent
   createdDate: 10/19/2022 10:02:21 PM
-urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
+  updatedDate: 06/26/2025 12:00:00 PM
+urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs-copilot-optimized
+copilot:
+  optimized: true
+  agent_patterns:
+    - teams-bot-development
+    - conversational-ai
+    - messaging-extensions
+    - teams-tabs
+  useCases:
+    - echo-bot-implementation
+    - teams-integration-patterns
+    - bot-state-management
+    - error-handling-best-practices
 ---
 
 # Microsoft Teams hello world sample app.
 
-- Microsoft Teams hello world sample app.
+A **comprehensive Microsoft Teams bot sample** that showcases fundamental Teams platform features including **tabs**, **bots**, and **messaging extensions**. This sample has been **optimized for GitHub Copilot Agent development** with enhanced code structure, comprehensive documentation, and modern development patterns.
+
+## Official Microsoft Teams Samples Repository
+
+This sample is part of the **official Microsoft Teams Samples repository**:
+**https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs**
+
+For more Teams samples and documentation, visit the main repository:
+**https://github.com/OfficeDev/Microsoft-Teams-Samples**
 
 ## Included Features
 * Tabs
@@ -26,7 +60,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 ![HelloWorldGif](Images/AppHelloWorldGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams hello world sample app:** [Manifest](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
@@ -40,20 +74,88 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 -  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## GitHub Copilot Agent Mode
+
+This sample is optimized for GitHub Copilot Agent development with:
+
+- **Teams-first development patterns** prioritized over generic Bot Framework
+- **Enhanced discoverability** through project structure and documentation
+- **Copilot-specific guidance** in `.github/copilot-instructions.md`
+- **Development patterns** and examples in `.copilot/` directory
+
+### Quick Start with Copilot
+1. Use Copilot prompts for Teams bot development
+2. Reference `.copilot/prompts/hello-world.md` for common patterns
+3. Follow Teams-specific coding standards in development guidelines
+
+## Features & Capabilities
+
+### Core Microsoft Teams Integration
+- **Echo Bot Functionality** - Intelligent message processing with context awareness
+- **Teams Tabs** - Static and configurable tab experiences  
+- **Messaging Extensions** - Search-based extensions with dynamic card generation
+- **State Management** - Conversation state with proper error handling
+- **Teams Activity Handler** - Full Teams platform integration
+
+### GitHub Copilot Agent Optimizations
+- **Enhanced Code Discoverability** - Semantic naming and modular architecture
+- **Comprehensive JSDoc** - Detailed inline documentation for better AI understanding
+- **Modular File Structure** - Clean separation of concerns for easy code navigation
+- **Agent-Friendly Patterns** - Code patterns optimized for AI assistance and generation
+- **Copilot Prompts** - Pre-configured prompts and instructions in `.copilot/` directory
+
+## Architecture & Code Structure
+
+```
+src/
+├── app.js                         # Main application entry point
+├── bot.js                         # Bot functionality and handlers
+├── tabs.js                        # Teams tab management and routing
+├── message-extension.js           # Messaging extension components
+├── static/                        # Static assets and content
+└── views/                         # HTML templates for tabs
+
+.copilot/                          # Copilot Agent optimization
+├── prompts/                       # Copilot-specific prompts
+│   └── hello-world.md            # Development guidance and patterns
+└── instructions/                  # Development guidelines
+    ├── development-guidelines.md  # Coding standards and best practices
+    └── agent-patterns.md         # Advanced agent development patterns
+
+.github/                           # GitHub integration
+└── copilot-instructions.md       # Teams-first development guidance
+```
+
+## Development Environment & Prerequisites
+
+### Prerequisites
+- **Microsoft Teams** account (not guest account)
+- **Node.js 16.14.2+** for development
+- **Dev tunnel** or **ngrok** for local testing
+- **M365 developer account** or Teams account with app upload permissions
+- **Microsoft 365 Agents Toolkit for VS Code** (recommended)
+
+### GitHub Copilot Integration
+This sample is **optimized for GitHub Copilot Agent Mode** with:
+- **`.github/copilot-instructions.md`** - Teams-first development guidance
+- **`.copilot/` directory** - Agent-specific prompts and patterns
+- **Comprehensive JSDoc** - Rich context for AI assistance
+- **Teams-specific patterns** - Prioritized over generic Bot Framework
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -116,13 +218,55 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
+This app has a default landing capability that determines whether the opening scope is set to the Bot or a static tab. Without configuring this, Microsoft Teams defaults to landing on the bot in desktop clients and tab in mobile clients.
+
+To set the **Bot as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
+```bash
+"staticTabs": [
+  {
+    "entityId": "conversations",
+    "scopes": [
+      "personal"
+    ]
+  },
+  {
+    "entityId": "com.contoso.helloworld.hellotab",
+    "name": "Hello Tab",
+    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+    "scopes": [
+      "personal"
+    ]
+  }
+],
+```
+
+To set the **Tab as the default landing capability**, configure the 'staticTabs' section in the manifest as follows:
+```bash
+"staticTabs": [
+  {
+    "entityId": "com.contoso.helloworld.hellotab",
+    "name": "Hello Tab",
+    "contentUrl": "https://${{BOT_DOMAIN}}/hello",
+    "scopes": [
+      "personal"
+    ]
+  },
+  {
+    "entityId": "conversations",
+    "scopes": [
+      "personal"
+    ]
+  }
+],
+```
+
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-hello-world/nodejs/src/bot.js#L38) line and put your debugger for local debug.
 
 ## Running the sample
 
 **Install App:**
 
-![InstallApp](Images/Install.png.png)
+![InstallApp](Images/Install.png)
 
 **Hello World Bot:**
 
@@ -138,7 +282,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -154,7 +298,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

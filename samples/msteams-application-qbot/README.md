@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
+description: "QBot is an innovative solution for Microsoft Teams designed to facilitate intelligent question-and-answer interactions among educators, tutors, and students within classroom settings."
 products:
 - office-teams
 - office
@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-samples-msteams-application-qbot
 | [Documentation](#contents) | [Deployment guide](Deployment/README.md) | [Solution Overview](Documentation/SolutionOverview.md) |
 | ---- | ---- | ---- |
 
-QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. It leverages the power of Azure Cognitive Service - QnA Maker to achieve this.
+QBot is a dynamic solution tailored for educational scenarios within Microsoft Teams, empowering teachers, tutors, and students to engage in intelligent Q&A exchanges. Utilizing Azure Cognitive Services, it enables efficient question management, knowledge base integration, and user role management, ensuring that all participants can contribute to and benefit from shared knowledge while enhancing the overall learning experience.
 
 ## Contents
 - [QBot](#app-title)

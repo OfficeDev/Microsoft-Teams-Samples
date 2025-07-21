@@ -74,7 +74,7 @@ jobs:
 
             - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
               name: 'bot-receive-channel-messages-withRSC'
-              version: '6.0.x'
+              version: '8.0.x'
 
             - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval/BotRequestApproval.csproj'
               name: 'bot-request-approval'
@@ -268,17 +268,17 @@ jobs:
               name: 'bot-conversation'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload.csproj'
+            - project_path: 'samples/bot-file-upload/csharp/TeamsFileUpload/TeamsFileUpload.csproj'
               name: 'bot-file-upload'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam.csproj'
+            - project_path: 'samples/bot-initiate-thread-in-channel/csharp/TeamsStartNewThreadInTeam/TeamsStartNewThreadInTeam.csproj'
               name: 'bot-initiate-thread-in-channel'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-message-reaction/csharp/MessageReaction.csproj'
+            - project_path: 'samples/bot-message-reaction/csharp/MessageReaction/MessageReaction.csproj'
               name: 'bot-message-reaction'
-              version: '6.0.x'
+              version: '8.0.x'
 
             - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
               name: 'bot-suggested-actions'
@@ -480,6 +480,22 @@ jobs:
               name: 'tab-nested-auth'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-commands-menu/csharp/CommandsMenu/CommandsMenu.csproj'
+              name: 'bot-commands-menu'
+              version: '6.0.x'
+            
+            - project_path: 'samples/bot-streaming/csharp/StreamingBot.csproj'
+              name: 'bot-streaming'
+              version: '8.0.x'
+            
+            - project_path: 'samples/msgext-thirdparty-storage/csharp/TeamsMsgextThirdpartyStorage.csproj'
+              name: 'msgext-thirdparty-storage'
+              version: '6.0.x'
+
+            - project_path: 'samples/bot-auth0-adaptivecard/csharp/TeamsAuth0Bot.csproj'
+              name: 'bot-auth0-adaptivecard'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -526,7 +542,7 @@ jobs:
 
             - project_path: 'samples/app-sso/nodejs'
               name: 'app-sso'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/app-sso/nodejs/client'
               name: 'app-sso-client'
@@ -864,7 +880,7 @@ jobs:
               name: 'meetings-context-app-client'
               version: '16.x'
 
-            - project_path: 'samples/meetings-context-app/nodejs/server'
+            - project_path: 'samples/meetings-context-app/nodejs'
               name: 'meetings-context-app-server'
               version: '16.x'
 
@@ -896,7 +912,7 @@ jobs:
               name: 'msgext-search'
               version: '16.x'
 
-            - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
+            - project_path: 'samples/tab-app-monetization/nodejs'
               name: 'tab-app-monetization'
               version: '16.x'
 
@@ -1015,6 +1031,10 @@ jobs:
               name: 'm365-actions-preview-api'
               version: '18.x'
 
+            - project_path: 'samples/bot-commands-menu/nodejs'
+              name: 'bot-commands-menu'
+              version: '18.x'
+
             - project_path: 'samples/bot-feed-members/nodejs'
               name: 'bot-feed-members'
               version: '18.x'
@@ -1026,6 +1046,18 @@ jobs:
             - project_path: 'samples/tab-nested-auth/nodejs'
               name: 'tab-nested-auth'
               version: '18.x'
+            
+            - project_path: 'samples/msgext-thirdparty-storage/nodejs'
+              name: 'msgext-thirdparty-storage'
+              version: '18.x'
+
+            - project_path: 'samples/bot-streaming/nodejs'
+              name: 'bot-streaming'
+              version: '18.x'
+
+            - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
+              name: 'bot-auth0-adaptivecard'
+              version: '16.x'  
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
@@ -1152,6 +1184,18 @@ jobs:
               
             - project_path: 'samples/msgext-search-auth-config/python'
               name: 'msgext-search-auth-config'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-thirdparty-storage/python'
+              name: 'msgext-thirdparty-storage'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-app-navigation/python'
+              name: 'tab-app-navigation'
+              version: '3.10.x'
+
+            - project_path: 'samples/tab-deeplink/python'
+              name: 'tab-deeplink'
               version: '3.10.x'
 
       fail-fast: false

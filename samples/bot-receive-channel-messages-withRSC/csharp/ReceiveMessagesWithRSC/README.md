@@ -11,7 +11,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 8.0
 
   ```bash
   # determine dotnet version
@@ -30,7 +30,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
 1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -53,7 +53,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL`
     
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
-    - **Sideload** in a team to test
+    - **Upload** in a team to test
          - Select or create a team
          - Select the ellipses **...** from the left pane. The drop-down menu appears.
          - Select **Manage Team**, then select **Apps** 

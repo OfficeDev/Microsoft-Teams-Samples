@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "{{Your Teams App Id Here}}",
-  "packageName": "com.example.reddit-link-unfurler",
   "developer": {
     "name": "{{Company Name}}",
     "websiteUrl": "{{Company Website}}",
@@ -19,8 +18,8 @@
     "full": "Reddit Link Unfurler"
   },
   "description": {
-    "short": "Adds Reddit link unfurling & card posts",
-    "full": "Make pasted Reddit links better!"
+    "short": "C# Messaging Extension for Reddit links with link unfurling support.",
+    "full": "This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams."
   },
   "accentColor": "#FC4518",
   "bots": [

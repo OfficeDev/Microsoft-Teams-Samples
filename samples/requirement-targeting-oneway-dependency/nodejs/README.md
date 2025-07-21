@@ -5,7 +5,7 @@ products:
 languages:
 - javascript
 title: Specify relationships between app capabilities
-description: Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+description: This sample app illustrates how to specify one-way dependency relationships between app capabilities in Microsoft Teams using the "elementRelationshipSet" property and functionality requirements with "hostMustSupportFunctionalities".
 extensions:
   contentType: samples
   createdDate: 08/21/2024 10:02:21 PM
@@ -14,7 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 # Microsoft 365 RT Sample App Feature.
 
-- Microsoft 365 RT sample app in Node.js which specify one-way-dependency relationships between app capabilities (using "elementRelationshipSet") and functionality requirements of a particular app capability (using "hostMustSupportFunctionalities").
+The Microsoft 365 RT Sample App Feature is a Node.js application designed to showcase one-way dependency relationships between various capabilities within Microsoft Teams, including bots, tabs, and message extensions. By utilizing the 'elementRelationshipSet' property and the 'hostMustSupportFunctionalities' feature, this sample enables developers to define dependencies that ensure proper functionality, enhancing the integration and usability of Teams apps across the Microsoft 365 ecosystem.
+
 
 ## Included Features
 * Tabs
@@ -38,20 +39,20 @@ urlFragment: officedev-microsoft-teams-samples-requirement-targeting-oneway-depe
 
 -  [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 

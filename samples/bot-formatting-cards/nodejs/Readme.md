@@ -26,7 +26,7 @@ This sample shows the feature where user can use different formatting on adaptiv
 ![Types Of Cards](Images/Bot_Formatting_Cards_nodejs_gif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Send different formatting on cards:** [Manifest](/samples/bot-formatting-cards/nodejs/demo-manifest/bot-formatting-cards.zip)
 
@@ -35,20 +35,20 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Microsoft Teams is installed and you have an account (not a guest account).
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 18x  or higher).
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -197,59 +197,145 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 ![WelcomeMessage](Images/2.Welcome_Message.png)
 
-**Mention Card:**
+**Option Page 2:**
 
-![MentionCard](Images/3.Mention_support_card.png)
+![OptionsPage2](Images/3.OptionsPage2.png)
 
-**Information Mask Card:**
+**Option Page 3:**
 
-![InformationMaskCard](Images/4.Info_Mask_card.png)
+![OptionsPage3](Images/4.OptionsPage3.png)
 
-**FullWidth Adaptive Card:**
+**Option Page 4:**
 
-![FullWidthCard](Images/5.Full_Width_Card.png)
+![OptionsPage4](Images/5.OptionsPage4.png)
 
-**Stage View Card:**
+**Option Page 5:**
 
-![StageViewCard](Images/6.Stage_View_Card.png)
+![OptionsPage5](Images/6.OptionsPage5.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](Images/7.Over_Flow_Menu_Card.png)
+![OverflowMenuCard](Images/7.Mention_support_card.png)
 
-**HTML Connector Card:**
+**Full Width Card:**
 
-![HTMLFormatCard](Images/8.HTTP_Connector_Card.png)
+![FullWidthCard](Images/9.Full_Width_Card.png)
 
-**AdaptiveCard With Emoji:**
+**Stage View Card:**
 
-![CardWithEmoji](Images/9.Adaptive_card_with_Emoji.png)
+![StageViewCard](Images/10.Stage_View_Card.png)
 
-**Persona Card Icon:**
+**Over Flow Menu Card:**
 
-![Persona](Images/10.Persona_Card_Icon.png)
+![OverFlowMenuCard](Images/11.Over_Flow_Menu_Card.png)
 
-**Persona Set Icon:**
+**HTTP Connector Card:**
 
-![PersonaSet](Images/11.Persona_Set_Icon.png)
+![HTTPConnectorCard](Images/12.HTTP_Connector_Card.png)
 
-**Code Block in Adaptive Card:**
+**Adaptive card with Emoji:**
 
-![CodeBlock](Images/12.Code_Block_Adaptive_Card.png)
+![AdaptivecardwithEmoji](Images/13.Adaptive_card_with_Emoji.png)
 
-**Adaptive Card updated to be responsive using targetWidth:**
+**Persona Card Icon**
+![PersonaCardIcon](Images/14.Persona_Card_Icon.png)
 
-![Layout](Images/14.Layout.png)
+**Persona Set Icon**
+![PersonaSetIcon](Images/15.Persona_Set_Icon.png)
 
-**Border Adaptive Card**
-![Border](Images/16.Border.png)
+**Rounded Corners:**
+![RoundedCorners](Images/19.RoundedCorners.png)
 
-**Rounded Corners Adaptive Card**
-![Border](Images/17.RoundedCorners.png)
+**Fluent Icon Adaptive Card:**
+![FluentIconAdaptiveCard](Images/21.FluentIconAdaptiveCard.png)
+
+**Media Elements Adaptive Card:**
+
+![MediaElementsAdaptiveCard](Images/22.MediaElementsAdaptiveCard.png)
+
+**Media Elements Adaptive Card1:**
+
+![MediaElementsAdaptiveCard1](Images/23.MediaElementsAdaptiveCard1.png)
+
+**Play video media elements in an Adaptive Card:**
+
+![MediaElementsAdaptiveCard2](Images/24.MediaElementsAdaptiveCard2.png)
+
+**Star Ratings Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/25.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Adaptive Cards Validation:**
+
+![StarRatingsAdaptiveCardsValidation](Images/26.StarRatingsAdaptiveCardsValidation.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/27.StarRatingsFeedback.png)
+
+**Conditional Card Before Input:**
+
+![ConditionalCardBeforeInput](Images/30.ConditionalCardBeforeInput.png)
+
+**Conditional Card After Input:**
+
+![ConditionalCardAfterInput](Images/31.ConditionalCardAfterInput.png)
+
+**Scrollable Container Card:**
+
+![ScrollableContainerCard](Images/32.ScrollableContainerCard.png)
+
+**Compound Button Adaptive Card:**
+
+![CompoundButtonAdaptiveCard](Images/33.CompoundButtonAdaptiveCard.png)
+
+**Container Layout:**
+
+![ContainerLayout](Images/34.ContainerLayout.png)
+
+**Donut Chart:**
+
+![DonutChart](Images/35.DonutChart.png)
+
+**Gauge Chart:**
+
+![Gauge Chart](Images/36.GaugeChart.png)
+
+**Horizontal Bar chart:**
+
+![HorizontalBarchart](Images/37.HorizontalBarchart.png)
+
+**Horizontal Bar Stacked Chart:**
+
+![HorizontalBarStackedChart](Images/38.HorizontalBarStackedChart.png)
+
+**Line Chart:**
+
+![LineChart](Images/39.LineChart.png)
+
+**Donut Chart Card:**
+
+![Pie Chart](Images/40.PieChart.png)
+
+**Vertical Bar Chart:**
+
+![VerticalBarChart](Images/41.VerticalBarChart.png)
+
+**Vertical Bar Grouped Chart:**
+
+![VerticalBarGroupedChart](Images/42.VerticalBarGroupedChart.png)
 
 **Mobile:**
 
-![LayoutMobile](Images/18.LayoutMobile.png)
+![LayoutMobile](Images/20.LayoutMobile.png)
+
+**Star Ratings in Adaptive Cards:**
+
+![StarRatingsAdaptiveCards](Images/28.StarRatingsAdaptiveCards.png)
+
+**Star Ratings Feedback:**
+
+![StarRatingsFeedback](Images/29.StarRatingsFeedback.png)
 
 ## Deploy the bot to Azure
 
@@ -259,6 +345,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Format cards in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html)
 - [Format cards with HTML](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#format-cards-with-html)
 - [People icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cdesktop%2Cconnector-html#people-icon-in-an-adaptive-card)
+- [Fluent icon in an Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?branch=pr-en-us-11655&tabs=adaptive-md%2Cdesktop%2Cconnector-html)
+- [Media elements in Adaptive Card](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-11492&tabs=desktop%2Cdeveloper-portal-for-teams)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-formatting-cards-nodejs" />

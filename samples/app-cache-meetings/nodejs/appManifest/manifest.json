@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "version": "1.0.0",
-  "manifestVersion": "1.13",
+  "manifestVersion": "1.19",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.appcache",
   "name": {
     "short": "App Caching In Meeting",
     "full": "App Caching In Meeting"
@@ -15,8 +14,8 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "description": {
-    "short": "App Caching In Meeting",
-    "full": "This sample shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting)."
+    "short": "Optimize app loading times in Teams meetings with caching.",
+    "full": "This sample demonstrates how to optimize the loading speed of an app in Microsoft Teams by utilizing caching for applications accessed during a meeting, with the app presented as a side panel for enhanced user experience."
   },
   "icons": {
     "outline": "outline.png",
@@ -27,7 +26,7 @@
     {
       "configurationUrl": "${{TAB_ENDPOINT}}/configure",
       "canUpdateConfiguration": true,
-      "scopes": [ "groupchat", "team" ],
+      "scopes": [ "groupChat", "team" ],
       "context": [
         "channelTab",
         "meetingChatTab",

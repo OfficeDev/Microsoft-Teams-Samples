@@ -2,36 +2,45 @@
 // Licensed under the MIT License.
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.6.2
-
-using System.Threading.Tasks;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using System.Threading.Tasks;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
 {
-    // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
-    // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
-    // achieved by specifying a more specific type for the bot constructor argument.
+    /// <summary>
+    /// This controller handles incoming requests and delegates them to the Bot Framework adapter.
+    /// Dependency Injection is used to inject the Bot Framework HTTP adapter and the bot implementation.
+    /// </summary>
     [Route("api/messages")]
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
-        private readonly IBot Bot;
+        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly IBot _bot;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BotController"/> class.
+        /// </summary>
+        /// <param name="adapter">The Bot Framework HTTP adapter that processes incoming requests.</param>
+        /// <param name="bot">The bot implementation that processes activities.</param>
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
-            Adapter = adapter;
-            Bot = bot;
+            _adapter = adapter;
+            _bot = bot;
         }
 
+        /// <summary>
+        /// Handles incoming POST requests and delegates processing to the adapter.
+        /// </summary>
+        /// <returns>A Task representing the asynchronous operation.</returns>
         [HttpPost]
         public async Task PostAsync()
         {
-            // Delegate the processing of the HTTP POST to the adapter.
-            // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            // Delegate the processing of the incoming request to the adapter.
+            // The adapter will invoke the appropriate bot implementation.
+            await _adapter.ProcessAsync(Request, Response, _bot);
         }
     }
 }

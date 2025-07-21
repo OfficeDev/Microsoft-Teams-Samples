@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This example demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.
+description: This sample uses Azure OpenAI to extract meeting action items and summaries, sending them directly to subscribed participants in Microsoft Teams..
 products:
 - office-teams
 languages:
@@ -13,7 +13,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-ai-meeting-helper-nodejs
 
 # Meeting Helper with Azure Open AI
 
-This sample demonstrates generating action items and a meeting summary based on the attendees and transcription, then sending them to all participants.
+This sample leverages Azure OpenAI to automatically extract action items and generate summaries from meeting transcriptions, delivering them to subscribed users in Microsoft Teams. It utilizes Graph API, Azure Table Storage, and self-signed certificates for a seamless and secure experience.
 
 - To achieve this process, the user will schedule a meeting, which can be either a one-time or recurring event. Attendees interested in receiving the meeting summary and action items must individually subscribe to the meeting. For recurring meetings, multiple instances will be displayed, allowing users to subscribe to each instance separately.
  
@@ -32,7 +32,7 @@ This sample demonstrates generating action items and a meeting summary based on 
  ![bot-ai-meeting-helperGif](Images/bot-ai-meeting-helperGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Microsoft Teams Meeting Helper sample app:** [Manifest](/samples/bot-ai-meeting-helper/demo-manifest/bot-ai-meeting-helper.zip)
 
@@ -43,7 +43,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)
-- [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line&pivots=programming-language-studio)
 - [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos) if on macOS (`brew install --cask powershell`)
 - [Self-Signed Certificate](https://learn.microsoft.com/en-us/azure/key-vault/certificates/quick-create-portal)
@@ -142,12 +142,12 @@ In Azure portal, create an [Application Insights](https://learn.microsoft.com/en
     
 Note: provide admin consent for the permissions once added by clicking on the "Grant admin consent for `<<tenant-name>>"` button.
     
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Clone the repository
 
     ```bash
@@ -158,9 +158,9 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-> When the application is running for the first time, the Teams toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
+> When the application is running for the first time, the Microsoft 365 Agents Toolkit will generate an app registration along with a password and other necessary credentials which is specified in "teamsapp.local.yml".
 
 ## Running the sample
 
