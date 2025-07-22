@@ -1,0 +1,153 @@
+{
+    "id": "a34e8e1e-2b57-4f93-80a5-fe0ed520792c",
+    "appId": "43a5f619-b3fb-4518-9510-0b2e4132f20b",
+    "name": "graph-chat-lifecycle-aad",
+    "accessTokenAcceptedVersion": 2,
+    "signInAudience": "AzureADMyOrg",
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                },
+                {
+                    "id": "64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0",
+                    "type": "Scope"
+                },
+                {
+                    "id": "7427e0e9-2fba-42fe-b0c0-848c9e6a8182",
+                    "type": "Scope"
+                },
+                {
+                    "id": "37f7f235-527c-4136-accd-4a02d197296e",
+                    "type": "Scope"
+                },
+                {
+                    "id": "14dad69e-099b-42c9-810b-d002981feec1",
+                    "type": "Scope"
+                },
+                {
+                    "id": "38826093-1258-4dea-98f0-00003be2b8d0",
+                    "type": "Scope"
+                },
+                {
+                    "id": "9ff7295e-131b-4d94-90e1-69fde507ac11",
+                    "type": "Scope"
+                },
+                {
+                    "id": "dea13482-7ea6-488f-8b98-eb5bbecf033d",
+                    "type": "Scope"
+                },
+                {
+                    "id": "aa85bf13-d771-4d5d-a9e6-bca04ce44edf",
+                    "type": "Scope"
+                },
+                {
+                    "id": "0ce33576-30e8-43b7-99e5-62f8569a4002",
+                    "type": "Scope"
+                },
+                {
+                    "id": "a9ff19c2-f369-4a95-9a25-ba9d460efc8e",
+                    "type": "Scope"
+                },
+                {
+                    "id": "ee928332-e9c2-4747-b4a0-f8c164b68de6",
+                    "type": "Scope"
+                },
+                {
+                    "id": "b98bfd41-87c6-45cc-b104-e2de4f0dafb9",
+                    "type": "Scope"
+                },
+                {
+                    "id": "a154be20-db9c-4678-8ab7-66f6cc099a59",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "oauth2Permissions": [
+        {
+            "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
+            "adminConsentDisplayName": "Teams can access app's web APIs",
+            "id": "d652e8cd-d719-4927-ba8c-254ef1c987bd",
+            "isEnabled": true,
+            "type": "User",
+            "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
+            "userConsentDisplayName": "Teams can access app's web APIs and make requests on your behalf",
+            "value": "access_as_user"
+        }
+    ],
+    "preAuthorizedApplications": [
+        {
+            "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "00000002-0000-0ff1-ce00-000000000000",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        },
+        {
+            "appId": "4345a7b9-9a63-4910-a426-35363201d503",
+            "permissionIds": [
+                "d652e8cd-d719-4927-ba8c-254ef1c987bd"
+            ]
+        }
+    ],
+    "identifierUris": [
+        "api://tz3zfz1b-3978.inc1.devtunnels.ms/43a5f619-b3fb-4518-9510-0b2e4132f20b"
+    ],
+    "replyUrlsWithType": [
+        {
+            "url": "https://tz3zfz1b-3978.inc1.devtunnels.ms/auth/auth-end",
+            "type": "Spa"
+        }
+    ]
+}
