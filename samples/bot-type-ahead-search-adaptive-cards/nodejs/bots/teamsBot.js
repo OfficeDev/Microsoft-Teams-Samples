@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const axios = require('axios');
 const querystring = require('querystring');
@@ -61,29 +64,57 @@ class TeamsBot extends TeamsActivityHandler {
    */
   async onInvokeActivity(context) {
     if (context._activity.name === 'application/search') {
-      const dropdownCard = context._activity.value.data.choiceselect;
+      const dropdownCard = context._activity.value.data?.choiceselect;
       const searchQuery = context._activity.value.queryText;
 
-      const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
-      const npmPackages = response.data.objects.map(obj => ({
-        title: obj.package.name,
-        value: `${obj.package.name} - ${obj.package.description}`
-      }));
+      try {
+        const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
 
-      if (response.status === 200) {
-        if (dropdownCard) {
-          return this.getCountrySpecificResults(dropdownCard.toLowerCase());
+        if (response.status === 200 && response.data.objects.length > 0) {
+          const npmPackages = response.data.objects.map(obj => ({
+            title: obj.package.name,
+            value: `${obj.package.name} - ${obj.package.description || "No description available"}`
+          }));
+
+          if (dropdownCard) {
+            return this.getCountrySpecificResults(dropdownCard.toLowerCase());
+          } else {
+            return this.getSuccessResult(npmPackages);
+          }
         } else {
-          return this.getSuccessResult(npmPackages);
+          // No results found
+          await context.sendActivity("Packages not found for your search.");
+          return this.getNoResultFound();
         }
-      } else if (response.status === 204) {
-        return this.getNoResultFound();
-      } else if (response.status === 500) {
-        return this.getErrorResult();
+      } catch (error) {
+        // Send message in Terminal when no packages are found
+        console.error("We couldn’t find any packages matching your search. Try searching again with different keywords:");
+
+
+       // Send message in Teams when no packages are found
+        await context.sendActivity("We couldn’t find any packages matching your search. This might be due to an incorrect query. Try refining your search.");
+
+        // Safe invoke response (still required even on failure)
+        return {
+          status: 200,
+          body: {
+            type: "application/vnd.microsoft.error",
+            value: {
+              code: "fetch_error",
+              message: "Handled gracefully: fetch failed"
+            }
+          }
+        };
       }
     }
-    return null;
+
+    return {
+      status: 200,
+      body: {}
+    };
   }
+
+
 
   /**
    * Returns the adaptive card for static search.

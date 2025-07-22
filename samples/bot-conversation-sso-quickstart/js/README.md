@@ -130,17 +130,23 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Install](sso_media/1.Install.png)
 
+![Install](sso_media/2.Open_App.png)
+
 **Welcome to teamsBot:**
 
-![Install](sso_media/2.Installed.png)
+![Install](sso_media/3.Welcome_Message.png)
 
 **Login command interaction:**
 
-![BotSigninCard](sso_media/3.Logged_In.png)
+![BotSigninCard](sso_media/4.Logged_In.png)
 
 **View your token:**
 
-![UserDetailsCard](sso_media/4.Your_Token.png)
+![Token](sso_media/5.Token.png)
+
+**Logout Dialog:**
+
+![Logout](sso_media/6.Logout.png)
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 
