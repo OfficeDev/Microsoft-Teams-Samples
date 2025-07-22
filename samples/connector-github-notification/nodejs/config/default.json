@@ -1,8 +1,8 @@
 {
     //TO DO: Update the client id, secret and callbackUrl with the Microsoft GitHub Account and Azure Endpoint
     "github": {
-        "clientId": "a27e147b786aaa7c6403",
-        "clientSecret": "b44f73535fdd4b92f45774c6c6ea11fa26f852bf",
+        "clientId": "",
+        "clientSecret": "",
         "callbackUrl": "https://githubconnector.azurewebsites.net/auth/github/callback",
         "serviceUrl": "https://githubconnector.azurewebsites.net"
     },
