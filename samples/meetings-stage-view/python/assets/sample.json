@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-meetings-stage-view-python",
+    "source": "officeDev",
+    "title": "Meetings Stage View",
+    "shortDescription": "This sample app demonstrates how to enable and configure applications for Microsoft Teams meetings, utilizing the Live Share SDK to facilitate a shared meeting stage experience.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-stage-view/python",
+    "longDescription": [
+      "This sample application showcases how to integrate shared meeting stages within Microsoft Teams, allowing real-time interaction through the Live Share SDK. Users can share specific app content during meetings, enhancing collaboration and engagement."
+    ],
+    "creationDateTime": "2025-07-07",
+    "updateDateTime": "2025-07-07",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,meeting"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-stage-view/python/Images/preview_web.gif",
+        "alt": "Solution UX showing meetings stage view"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
