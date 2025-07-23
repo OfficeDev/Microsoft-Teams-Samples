@@ -47,7 +47,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Get the external app id from teams admin portal.(https://admin.teams.microsoft.com/policies/manage-apps)
     - Navigate to the appropriate C# file in your project where the external app id is referenced and replace placeholder `<<External-App-Id>>` with your actual external app id which you can get from teams admin portal.
 
-    ![External App Id](Images/ExternalAppId.PNG)
+    ![External App Id](Microsoft.Teams.Samples.TabAppNavigation.Web/Images/ExternalAppId.PNG)
 
 1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
 1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
@@ -58,7 +58,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the opened web browser, select Add button to install the app in Teams
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-### Setup
 ### Setup
 > Note these instructions are for running the sample on your local machine.
 

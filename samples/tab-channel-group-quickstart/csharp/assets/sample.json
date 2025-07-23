@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-quickstart/csharp/Microsoft.Teams.Samples.TabChannelGroupQuickstart.Web/Images/tab_channel_group_module.gif",
-        "alt": "Solution UX showing starter solution: channel/group tab in typescript"
+        "alt": "Solution UX showing starter solution: channel/group tab in C#"
       }
     ],
     "authors": [
