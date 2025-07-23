@@ -11,7 +11,7 @@ This sample bot showcases proactive messaging capabilities in Microsoft Teams by
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/demo-manifest/bot-proactive-messaging-teamsfx.zip)
+**Proactive message bots app:** [Manifest](/samples/bot-proactive-messaging-teamsfx/nodejs/demo-manifest/bot-proactive-messaging-teamsfx.zip)
 
 ## Debug
 
