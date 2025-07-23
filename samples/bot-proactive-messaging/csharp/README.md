@@ -68,16 +68,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
-1. Configure public url to point to http port 5000
+1. Configure public url to point to http port 3978
 
    ```bash
-   ngrok http 5000 --host-header="localhost:5000"
+   ngrok http 3978 --host-header="localhost:3978"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 5000 --allow-anonymous
+   devtunnel host -p 3978 --allow-anonymous
    ```
 
 2. Create a Microsoft Entra ID app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
@@ -105,7 +105,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
     Hosting environment: Development
     Content root path: C:\msteams-samples-proactive-messaging\coordinate-logger
-    Now listening on: https://localhost:5001
+    Now listening on: https://localhost:3978
     Now listening on: http://localhost:5000
     Application started. Press Ctrl+C to shut down.
     ```
@@ -127,6 +127,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     for each new thread to the console window.(refer above image)
 
 **Proactive CMD**
+
+After running the sample, open Command Prompt, navigate to the `proactive-cmd` folder, and send proactive messages using the commands below.
 
 1. Send a message to a user
     Using the values from the Coordinate Logger for a User's conversation coordinates & Bot registration fill in the parameters to the following command.
@@ -154,15 +156,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **Channel Conversation log info**
 ![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
 
-**Proactive message**
+**Proactive message in Channel Conversation**
 ![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
 
-**Team name in which message will post**
-![Proactive message](coordinate-logger/Images/TeamInfo.png)
-
-**Meesages in other Team**
-![Proactive message](coordinate-logger/Images/Teammessage.png)
-
+**Proactive message in User Conversation**
+![Proactive message](coordinate-logger/Images/SendUserMessage.png)
 
 ## Key concepts
 

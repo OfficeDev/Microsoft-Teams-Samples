@@ -1,0 +1,46 @@
+<!--Copyright (c) Microsoft Corporation. All rights reserved.--> 
+<!--# Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tab People Picker Demo -Python</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <!-- Microsoft Teams SDK -->
+  <script src="https://res.cdn.office.net/teams-js/2.4.0/js/MicrosoftTeams.min.js"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="textConfiguration" class="font-semibold font-title"></div>
+
+  <div>
+    <p>Please select save to add the tab.</p>
+  </div>
+
+  <script>
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.app.notifySuccess();
+
+      microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+        microsoftTeams.pages.config.setConfig({
+          entityID: "Tab",
+          contentUrl: `${window.location.origin}/tab`,
+          suggestedTabName: "Tab",
+          websiteUrl: `${window.location.origin}/tab`,
+        }).then(() => {
+          saveEvent.notifySuccess();
+        });
+      });
+
+      microsoftTeams.pages.config.setValidityState(true);
+    });
+  </script>
+</body>
+
+</html>

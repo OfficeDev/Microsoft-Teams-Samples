@@ -89,7 +89,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
     - Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `ClientId` and `ClientSecret`, `BaseURL` with your app's base url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
     
-  - In the folder where repository is cloned navigate to `samples/bot-task-approval/nodejs`
+  - In the folder where repository is cloned navigate to `samples/bot-request-approval/nodejs`
 
   - Install node modules
 

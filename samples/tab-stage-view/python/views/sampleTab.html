@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css" />
+    <script 
+        src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        let appId, BaseUrl;
+
+        microsoftTeams.app.initialize().then(() => {
+            fetch("/api/config")
+                .then(response => response.json())
+                .then(config => {
+                    appId = config.teamsAppId;
+                    BaseUrl = config.BaseUrl;
+                })
+                .catch(error => {
+                    console.error("Error loading config:", error);
+                });
+        });
+
+        function createLink() {
+            if (!appId || !BaseUrl) {
+                alert("Config not loaded yet. Try again in a moment.");
+                return;
+            }
+
+            const url = `https://teams.microsoft.com/l/stage/${appId}/0?context=${encodeURIComponent(JSON.stringify({
+                contentUrl: `${BaseUrl}/content`,
+                websiteUrl: `${BaseUrl}/content`,
+                name: "DemoStageView"
+            }))}`;
+
+            microsoftTeams.app.openLink(url);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label for="tabChoice"></label>
+                Click on the button to view the stage view from deeplink:
+                <button onClick="createLink()">Execute deeplink</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
