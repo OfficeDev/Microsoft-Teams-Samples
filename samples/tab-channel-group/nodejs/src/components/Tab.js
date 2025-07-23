@@ -64,7 +64,7 @@ class ChannelGroupTabConfig extends React.Component {
             id="icon"
             src={
               selectedColor === "gray"
-                ? "/images/IconGray.png"
+                ? "/Images/IconGray.png"
                 : selectedColor === "red"
                   ? "/Images/IconRed.png"
                   : "/Images/TeamsIcon.png"

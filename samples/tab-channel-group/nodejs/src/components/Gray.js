@@ -9,7 +9,7 @@ class Gray extends React.Component {
     return (
       <div>
         <h1>Success!</h1>
-        <img id="icon" src="/images/IconGray.png" alt="Red Image" style={{ width: "100px" }} />
+        <img id="icon" src="/images/IconGray.png" alt="Gray Icon" style={{ width: "100px" }} />
         <br />
         <br />
         <p>This is your channel/group tab!</p>

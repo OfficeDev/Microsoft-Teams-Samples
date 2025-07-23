@@ -83,10 +83,10 @@ class TabConfig extends React.Component {
             id="icon"
             src={
               selectedColor === "gray"
-                ? "/images/iconGray.png"
+                ? "/Images/IconGray.png"
                 : selectedColor === "red"
-                  ? "/images/iconRed.png"
-                  : "/images/teamsIcon.png"
+                  ? "/Images/IconRed.png"
+                  : "/Images/TeamsIcon.png"
             }
             alt="icon"
             style={{ width: "100px" }}

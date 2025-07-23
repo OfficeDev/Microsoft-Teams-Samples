@@ -4,8 +4,8 @@
 import TabConfig from "./TabConfig";
 
 const TabWrapper = () => {
-  const gray = "Tab.js says: 'You chose Gray!";
-  const red = "Tab.js says: 'You chose Red!";
+  const gray = "Tab.js says: 'You chose Gray!'";
+  const red = "Tab.js says: 'You chose Red!'";
 
   return <TabConfig gray={gray} red={red} />;
 };
