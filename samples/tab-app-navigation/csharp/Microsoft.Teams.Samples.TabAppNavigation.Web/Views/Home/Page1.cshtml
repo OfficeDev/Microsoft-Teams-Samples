@@ -1,21 +1,23 @@
 @* Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT Lic *@
+Licensed under the MIT License. *@
 
 @* This Razor view is part of a Microsoft Teams application that demonstrates navigation between tabs and pages within the app. *@
 @* Imports the configuration namespace to access app settings and configuration values in the Razor view. *@
 @using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration 
+@inject IConfiguration Configuration
 
-@{  
-    ViewData["Title"] = "Page1";  
+@{
+    ViewData["Title"] = "Page1";
     var externalAppId = Configuration["ExternalAppId"] ?? "ExternalAppId Not Configured Add in appsettings.json";
-}  
+}
 <h2>Tab One</h2>
 <!-- Navigation Buttons -->
-<div>    <button class="primary" id="defaultTabBtn">Default Tab</button>
+<div>
+    <button class="primary" id="defaultTabBtn">Default Tab</button>
     <br /><br />
     <button class="primary" id="page2Btn">
-        Go to Page 2</button>
+        Go to Page 2
+    </button>
     <br /><br />
     <button class="primary" id="backBtn">Back Button Navigation</button>
 </div>

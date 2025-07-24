@@ -1,64 +1,65 @@
 @* Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT Lic *@
+Licensed under the MIT License. *@
 
 @* Imports the configuration namespace to access app settings and configuration values in the Razor view. *@
 @using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration  
+@inject IConfiguration Configuration
 
-@{  
-    ViewData["Title"] = "Page3";  
+@{
+    ViewData["Title"] = "Page3";
     var externalAppId = Configuration["ExternalAppId"] ?? "ExternalAppId Not Configured Add in appsettings.json";
-}  
-<h2>Tab Three</h2>  
-<!-- Navigation Buttons -->  
-<div>  
-    <button class="primary" id="defaultTabBtn">Default Tab</button>  
-    <br /><br />  
+}
+<h2>Tab Three</h2>
+<!-- Navigation Buttons -->
+<div>
+    <button class="primary" id="defaultTabBtn">Default Tab</button>
+    <br /><br />
     <button class="primary" id="backBtn">Back Button Navigation</button>
-</div>  
+</div>
 
 <div>
     @* Uncomment the line below to see the external app ID in action. *@
     @* ExternalAppId: @externalAppId *@
 </div>
 
-@section Scripts {  
-    <script>  
-        // Teams SDK navigation logic for Tab Three  
-        let externalAppId = "@externalAppId";  
-        function initializeTeamsTabThree() {  
-            if (window.microsoftTeams) {  
-                const app = microsoftTeams.app;  
-                app.initialize().then(app.getContext).then(function(context) {  
-                    app.notifySuccess();  
-                });  
+@section Scripts {
+    <script>
 
-                document.getElementById("defaultTabBtn").onclick = function() {  
-                    app.initialize().then(app.getContext).then(function(context) {  
-                        if (microsoftTeams.pages.currentApp.isSupported()) {  
-                            microsoftTeams.pages.currentApp.navigateToDefaultPage()  
-                                .then(function(result) { console.log("This is Default Page"); })  
-                                .catch(function(error) { console.log("error", error); });  
-                        } else {  
-                            console.log("Capability is not supported");  
-                            microsoftTeams.pages.navigateToApp({ appId: externalAppId, pageId: "default_tab", subPageId: "" })  
-                                .then(function(result) { console.log("Navigation Successful", result); })  
-                                .catch(function(error) { console.log("error", error); });  
-                        }  
-                    });  
-                };  
+        // Teams SDK navigation logic for Tab Three
+        let externalAppId = "@externalAppId";
+        function initializeTeamsTabThree() {
+            if (window.microsoftTeams) {
+                const app = microsoftTeams.app;
+                app.initialize().then(app.getContext).then(function(context) {
+                    app.notifySuccess();
+                });
 
-                document.getElementById("backBtn").onclick = function() {  
-                    if (microsoftTeams.pages.backStack.isSupported()) {  
-                        microsoftTeams.pages.backStack.navigateBack();  
-                    } else {  
-                        console.log("Capability is not supported");  
-                    }  
-                };  
-            } else {  
-                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");  
-            }  
-        }  
-        window.onload = initializeTeamsTabThree;  
-    </script>  
+                document.getElementById("defaultTabBtn").onclick = function() {
+                    app.initialize().then(app.getContext).then(function(context) {
+                        if (microsoftTeams.pages.currentApp.isSupported()) {
+                            microsoftTeams.pages.currentApp.navigateToDefaultPage()
+                                .then(function(result) { console.log("This is Default Page"); })
+                                .catch(function(error) { console.log("error", error); });
+                        } else {
+                            console.log("Capability is not supported");
+                            microsoftTeams.pages.navigateToApp({ appId: externalAppId, pageId: "default_tab", subPageId: "" })
+                                .then(function(result) { console.log("Navigation Successful", result); })
+                                .catch(function(error) { console.log("error", error); });
+                        }
+                    });
+                };
+
+                document.getElementById("backBtn").onclick = function() {
+                    if (microsoftTeams.pages.backStack.isSupported()) {
+                        microsoftTeams.pages.backStack.navigateBack();
+                    } else {
+                        console.log("Capability is not supported");
+                    }
+                };
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+            }
+        }
+        window.onload = initializeTeamsTabThree;
+    </script>
 }

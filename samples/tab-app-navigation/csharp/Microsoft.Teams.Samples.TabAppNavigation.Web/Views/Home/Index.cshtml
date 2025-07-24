@@ -1,5 +1,5 @@
 ﻿@* Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT Lic *@
+Licensed under the MIT License. *@
 
 <header class="header">
     <div class="header-inner-container">
@@ -18,19 +18,19 @@ Licensed under the MIT Lic *@
 </div>
 
 <div id="congrats" class="text-green-500 font-semibold">
-    
+
 </div>
 
 @section Scripts {
     <script>
         function handleLoadMicrosoftTeamsSDK() {
             if (window.microsoftTeams) {
-                microsoftTeams.app.initialize().then(() => {                  
+                microsoftTeams.app.initialize().then(() => {
                     document.getElementById("congrats").innerText = "Microsoft Teams SDK loaded successfully!";
-                }).catch(function(error) {
+                }).catch(function (error) {
                     console.error("Error initializing Teams SDK:", error);
                 });
-                
+
             } else {
                 console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
                 document.getElementById("congrats").innerText = "Microsoft Teams SDK not loaded or not running inside Teams ";

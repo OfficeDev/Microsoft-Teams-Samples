@@ -1,14 +1,14 @@
 @* Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT Lic *@
+Licensed under the MIT License. *@
 
 @* Imports the configuration namespace to access app settings and configuration values in the Razor view. *@
 @using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration  
+@inject IConfiguration Configuration
 
-@{  
-    ViewData["Title"] = "Page2";  
+@{
+    ViewData["Title"] = "Page2";
     var externalAppId = Configuration["ExternalAppId"] ?? "ExternalAppId Not Configured Add in appsettings.json";
-}  
+}
 <h2>Tab Two</h2>
 <!-- Navigation Buttons -->
 <div>
