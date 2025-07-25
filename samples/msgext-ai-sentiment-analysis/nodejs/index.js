@@ -8,69 +8,66 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+// Import required bot services and classes
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder');
 
 // Import bot definitions
-const { TeamsBot } = require('./teamsBot');
+const { SentimentAnalysis } = require('./bots/sentimentAnalysis');
 
-// Read botFilePath and botFileSecret from .env file.
+// Load environment variables
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-// Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+// Create bot authentication
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
+// Create the Cloud Adapter
+const adapter = new CloudAdapter(botFrameworkAuthentication);
+
+// Error handling middleware
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
-        `${ error }`,
+        `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
 
-     // Uncomment below commented line for local debugging.
-     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
+    // You can send user-facing messages if needed
+    // await context.sendActivity(`Oops! Something went wrong: ${error}`);
 };
 
-// Create bot handlers
-const bot = new TeamsBot();
+// Create the bot instance
+const botActivityHandler = new SentimentAnalysis();
 
-// Create HTTP server.
+// Setup Express server
 const server = express();
 server.use(cors());
 server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
+server.use(express.urlencoded({ extended: true }));
 
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
 
 const port = process.env.port || process.env.PORT || 3978;
-server.listen(port, () => 
-    console.log(`\Bot/ME service listening at http://localhost:${port}`)
-);
-
-server.get('/sentimentModule', (req, res, next) => {
-    res.render('./views/sentimentModule')
+server.listen(port, () => {
+    console.log(`\nBot/ME service listening at http://localhost:${port}`);
 });
 
-// Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
-        await bot.run(context);
+// Route for sentiment task module view
+server.get('/sentimentModule', (req, res, next) => {
+    res.render('./views/sentimentModule');
+});
+
+// Listen for incoming bot messages
+server.post('/api/messages', async (req, res) => {
+    await adapter.process(req, res, async (context) => {
+        await botActivityHandler.run(context);
     });
 });
