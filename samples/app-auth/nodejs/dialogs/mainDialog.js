@@ -44,6 +44,7 @@ class MainDialog extends ComponentDialog {
 
     async promptStep(stepContext) {
         try { 
+            console.log("mainDialog reads trim", stepContext);
             if (stepContext.context._activity.text.trim() == "sso") {
                 return await stepContext.beginDialog(SSOAUTH);
             }

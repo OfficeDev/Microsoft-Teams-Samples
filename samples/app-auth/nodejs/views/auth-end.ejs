@@ -21,6 +21,7 @@
             msalInstance.handleRedirectPromise()
                 .then((tokenResponse) => {
                     if (tokenResponse !== null) {
+                        console.log("auth-end notifySuccess");
                         microsoftTeams.authentication.notifySuccess("Authentication succedded");
                     } else {
                         microsoftTeams.authentication.notifyFailure("Get empty response.");

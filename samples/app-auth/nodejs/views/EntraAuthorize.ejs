@@ -1,0 +1,79 @@
+<html>
+    <head>
+        Header
+    </head>
+    <body>
+        <!-- <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script> -->
+ <script src="../public/entra-bundle.js"></script>       
+ <!--<script>
+
+         
+  
+  let pca;
+  
+   function initializePublicClient(context) {
+    const msalConfig = {
+    auth: {
+      clientId: "b70a6f76-2210-4e61-8727-313cbc26fe98",
+      authority: `https://login.microsoftonline.com/common`,
+      supportsNestedAppAuth: true
+    },
+  };
+    console.log("Starting initializePublicClient");
+    pca= new msal.PublicClientApplication(msalConfig);
+        console.log("Client app created", pca);
+        
+  }
+
+  function makeNAARequest(context) {
+    
+    
+
+ 
+    const account = pca.getActiveAccount();
+
+const accessTokenRequest = {
+scopes: ["user.read"],
+account: account,
+};
+console.log({account });
+
+
+pca
+  .acquireTokenSilent(accessTokenRequest)
+  .then(function (accessTokenResponse) {
+    // Acquire token silent success
+    let accessToken = accessTokenResponse.accessToken;
+    // Call your API with token
+    callApi(accessToken);
+  })
+  .catch(function (error) {
+    console.log({error});
+    //Acquire token silent failure, and send an interactive request
+    if (error instanceof InteractionRequiredAuthError) {
+      pca
+        .acquireTokenPopup(accessTokenRequest)
+        .then(function (accessTokenResponse) {
+          // Acquire token interactive success
+          let accessToken = accessTokenResponse.accessToken;
+          // Call your API with token
+          callApi(accessToken);
+        })
+        .catch(function (error) {
+          // Acquire token interactive failure
+          console.log(error);
+        });
+    }
+    console.log(error);
+  });
+  }
+  microsoftTeams.app.initialize().then(() => {
+    microsoftTeams.getContext((context) => {
+    initializePublicClient(context);
+    makeNAARequest(context);
+  });
+  }) 
+  
+       </script> -->
+    </body>
+</html>

@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
+  "id": "5794d87e-3cd5-4d20-bfa4-9a8c4d28852e",
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{Base_URL_Domain}/botid-{{Microsoft-App-Id}}"
+    "id": "5794d87e-3cd5-4d20-bfa4-9a8c4d28852e",
+    "resource": "api://teams-auth.ngrok.io/botid-5794d87e-3cd5-4d20-bfa4-9a8c4d28852e"
   },
   "developer": {
     "name": "Microsoft",
@@ -27,7 +27,7 @@
   },
   "staticTabs": [
     {
-      "contentUrl": "https://{Base_URL_Domain}/AuthTab",
+      "contentUrl": "https://teams-auth.ngrok.io/AuthTab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "contentUrl": "https://{Base_URL_Domain}/silent-tab?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+      "contentUrl": "https://teams-auth.ngrok.io/silent-tab?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
       "entityId": "silentAuth",
       "name": "Silent Auth",
       "scopes": [
@@ -45,7 +45,7 @@
   ],
   "bots": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "5794d87e-3cd5-4d20-bfa4-9a8c4d28852e",
       "scopes": [
         "personal"
       ],
@@ -73,6 +73,8 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
+    "teams-auth.ngrok.io",
+    "dev-zvtwcdg4lg5a82cq.us.auth0.com",
     "{Base_URL_Domain}",
     "token.botframework.com"
   ]

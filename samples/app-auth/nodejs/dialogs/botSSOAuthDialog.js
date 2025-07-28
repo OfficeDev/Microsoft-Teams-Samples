@@ -40,6 +40,8 @@ class BotSSOAuthDialog extends LogoutDialog {
     async loginStep(stepContext) {
         // Get the token from the previous step. Note that we could also have gotten the
         // token directly from the prompt itself. There is an example of this in the next method.
+        console.log("loginStep reads trim", stepContext);
+        try {
         if (stepContext.context._activity.text.trim() == "sso") {
             const tokenResponse = stepContext.result;
 
@@ -55,6 +57,19 @@ class BotSSOAuthDialog extends LogoutDialog {
             await stepContext.context.sendActivity("Please type 'sso' to begin authentication");
 
             return await stepContext.endDialog();
+        }
+    }
+        catch(e) {
+            const tokenResponse = stepContext.result;
+
+            if (!tokenResponse || !tokenResponse.token) {
+                await stepContext.context.sendActivity('Login was not successful please try again.');
+            }
+            else {
+                token = tokenResponse.token;
+                await stepContext.context.sendActivity('Login successful.');
+                return await this.userInfoStep(stepContext);
+            }
         }
     }
 

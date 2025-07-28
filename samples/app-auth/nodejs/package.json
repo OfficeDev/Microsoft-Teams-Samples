@@ -17,6 +17,7 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
+        "@azure/msal-browser": "^4.13.2",
         "@azure/msal-node": "^1.6.0",
         "@microsoft/microsoft-graph-client": "^3.0.4",
         "axios": "^0.21.4",
@@ -41,6 +42,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.3.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "^2.0.15"
+        "nodemon": "^2.0.15",
+        "webpack-cli": "^6.0.1"
     }
 }

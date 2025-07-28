@@ -25,6 +25,7 @@
             microsoftTeams.authentication.notifyFailure("Unable to login");
             return;
         } else {
+            console.log("silent-end notifySuccess");
             microsoftTeams.authentication.notifySuccess();
         }
     })

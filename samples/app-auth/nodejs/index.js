@@ -4,6 +4,7 @@
 // index.js is used to setup and configure your bot
 
 // Import required packages
+
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -36,6 +37,7 @@ const { CloudAdapter,
   createBotFrameworkAuthenticationFromConfiguration, BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
+const { stat } = require('fs');
 
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
   MicrosoftAppId: process.env.MicrosoftAppId,
@@ -90,11 +92,61 @@ const bot = new TeamsBot(conversationState, userState, dialog);
 server.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
+const globalMap = {};
+let code;
+server.get('/api/setAuthToken', (req, res) => {
+  console.log(req.query);
+   code = Date.now()
+  globalMap[`${code}`] = req.query.accessToken;
+  res.cookie('authToken', req.query.accessToken, {maxAge: 900000, sameSite: 'None', secure: true});
+  res.send(200);
+  //res.redirect(`/Auth0Success?code=${code}`);
+});
+
+server.get('/api/authorize', (req, res) => {
+  console.log(req.query);
+
+  res.redirect(`${req.query.redirect_uri}?code=${code}&state=${req.query.state}&scope=${req.query.scope}`);
+  // globalMap[`${code}`] = null; // Clear the token after redirect
+  // code = null; // Reset the code
+});
+
+server.post('/api/token', (req, res) => {
+  console.log(req.body);
+  res.json({
+    access_token: globalMap[`${req.body.code}`]
+  });
+  globalMap[`${code}`] = null; // Clear the token after redirect
+  code = null; // Reset the code
+});
+
+server.get('/api/testAuthToken', (req, res) => {
+  console.log(req.cookies);
+  res.send(200);
+});
 
 // Endpoint to fetch Auth tab page.
 server.get('/AuthTab', (req, res, next) => {
   var clientId = process.env.FaceBookAppId;
-  res.render('./views/AuthTab', { clientId: clientId })
+
+  res.render('./views/AuthTab', { clientId: clientId, })
+});
+
+server.get('/public/entra-bundle.js', (req, res, next) => {
+  const jsPath = path.join(__dirname, '/public/entra-bundle.js');
+  console.log({jsPath})
+
+  res.sendFile(jsPath, {headers: {'Content-Type' : 'text/javascript'}})
+});
+
+server.get('/Auth0Success', (req, res, next) => {
+  var clientId = process.env.FaceBookAppId;
+  res.render('./views/Auth0Success', { clientId: clientId })
+});
+
+server.get('/entraAuthorize', (req, res, next) => {
+  //var clientId = process.env.FaceBookAppId;
+  res.render('./views/EntraAuthorize', { clientId: 'entra' })
 });
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
@@ -130,7 +182,9 @@ server.get('/silent-end', function (req, res) {
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {
   // Route received a request to adapter for processing
-  await adapter.process(req, res, (context) => bot.run(context));
+  await adapter.process(req, res, (context) => {
+    return bot.run(context);
+});
 });
 
 // On-behalf-of token exchange

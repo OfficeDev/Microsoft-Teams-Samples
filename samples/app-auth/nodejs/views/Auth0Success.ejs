@@ -1,0 +1,153 @@
+<html>
+    <head>Auth 0 Login Success</head>
+    <body>
+        <p>Another login success</p>
+
+        <div id="profile"></div>
+       
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+<script src="https://cdn.auth0.com/js/auth0/9.18/auth0.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+
+<script>
+  microsoftTeams.app.initialize()
+    //var axios = require("axios").default;
+    console.log(window.location);
+    const params = new URL(location.href).searchParams;
+const code = params.get('code');
+const hash = window.location.hash.substring(1); // Get the URL fragment
+const hashParams = new URLSearchParams(hash);
+
+  const accessToken = hashParams.get('access_token');
+
+var options = {
+  method: 'POST',
+  url: 'https://dev-zvtwcdg4lg5a82cq.us.auth0.com/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  data: new URLSearchParams({
+    grant_type: 'authorization_code',
+    //scope: "update:users",
+    client_id: '4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB',
+    client_secret: 'OcvgdDsuz6Azq_p2syzc_6f807uOCxl2Q--kITw_Mdau2y05xOx_dWvOTAz-1hGI',
+    code: code,
+    redirect_uri: 'https://teams-auth.ngrok.io/Auth0Success',
+    //audience: 'https://dev-zvtwcdg4lg5a82cq.us.auth0.com/api/v2'
+  })
+};
+let googleToken;
+if (code) {
+axios.request(options).then(function (response) {
+  console.log(response);
+  var userOptions = {
+  method: 'GET',
+  url: 'https://dev-zvtwcdg4lg5a82cq.us.auth0.com/userinfo',
+  headers: {authorization: `Bearer ${response.data.access_token}`}
+};
+     googleToken = response.data.access_token;
+     //microsoftTeams.authentication.notifySuccess(JSON.stringify({ response}));
+
+axios.request(userOptions).then(function (userResponse) {
+  console.log(userResponse);
+  microsoftTeams.authentication.notifySuccess(JSON.stringify({userResponse, response}));
+}).catch(function (err) {
+  console.error(err);
+});
+}).catch(function (error) {
+  console.error(error);
+});
+}
+else  if(accessToken){
+ 
+  console.log('accessToken ', accessToken, window.location);
+  var userOptions = {
+  method: 'GET',
+  url: 'https://dev-zvtwcdg4lg5a82cq.us.auth0.com/userinfo',
+  headers: {authorization: `Bearer ${accessToken}`}
+};
+     googleToken = accessToken;
+     //microsoftTeams.authentication.notifySuccess(JSON.stringify({ response}));
+
+axios.request(userOptions).then(function (userResponse) {
+  console.log(userResponse);
+  microsoftTeams.authentication.notifySuccess(JSON.stringify({userResponse, response:accessToken, location: window.location.href}));
+}).catch(function (err) {
+  console.error(err);
+});
+
+}
+
+// function auth0logout() {
+//   const logoutUrl = `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/v2/logout?client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&returnTo=https://teams-auth.ngrok.io/Auth0Success`;
+
+// window.location.href = logoutUrl;
+
+// }
+
+// function linkFacebokAuth0() {
+//             microsoftTeams.authentication.authenticate({
+//             url: `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/authorize?connection=facebook&response_type=code&scope=openid%20profile%20email&client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&redirect_uri=https://teams-auth.ngrok.io/Auth0Success&state=${(new Date()).getTime()%1000}`,
+//             width: 600,
+//             height: 535,
+//             successCallback: (result) => {
+//                 this.consentSuccess(result);
+//             },
+//             failureCallback: (reason) => {
+//                 this.consentFailure(reason);
+//             },
+//             });
+//         }
+</script>
+
+
+
+        <!-- <script>
+auth0.createAuth0Client({
+  domain: "dev-zvtwcdg4lg5a82cq.us.auth0.com",
+  clientId: "4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB",
+  authorizationParams: {
+    redirect_uri: window.location.origin
+  }
+}).then(async (auth0Client) => {
+  // Assumes a button with id "login" in the DOM
+//   const loginButton = document.getElementById("login");
+
+//   loginButton.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     auth0Client.loginWithRedirect();
+//   });
+
+//   if (location.search.includes("state=") && 
+//       (location.search.includes("code=") || 
+//       location.search.includes("error="))) {
+//     await auth0Client.handleRedirectCallback();
+//     window.history.replaceState({}, document.title, "/");
+//   }
+
+  // Assumes a button with id "logout" in the DOM
+//   const logoutButton = document.getElementById("logout");
+
+//   logoutButton.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     auth0Client.logout();
+//   });
+
+  const isAuthenticated = await auth0Client.isAuthenticated();
+  const userProfile = await auth0Client.getUser();
+
+  // Assumes an element with id "profile" in the DOM
+  const profileElement = document.getElementById("profile");
+
+  if (isAuthenticated) {
+    profileElement.style.display = "block";
+    profileElement.innerHTML = `
+            <p>${userProfile.name}</p>
+            <img src="${userProfile.picture}" />
+          `;
+  } else {
+    profileElement.style.display = "none";
+  }
+});        </script> -->
+    </body>
+</html>
