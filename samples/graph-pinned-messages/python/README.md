@@ -1,8 +1,6 @@
 ---
 page_type: sample
-description: This sample applica  - On the overview page, copy and sa-  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select "Never" for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the config.py file.
-
-### 2. Setup NGROKthe **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the config.py.ion demonstrates how to pin and display messages in Microsoft Teams chat using the Graph API.
+description: This sample application demonstrates how to pin and display messages in Microsoft Teams chat using the Graph API.
 products:
 - office-teams
 - office
@@ -11,7 +9,7 @@ languages:
 - python
 extensions:
  contentType: samples
- createdDate: "04/08/2022 01:02:15 PM"
+ createdDate: "29/07/2025 01:02:15 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-python
 ---
 
@@ -49,6 +47,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 7. In the browser that launches, select the **Add** button to install the app to Teams.
 
 ## Setup
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Select **New Registration** and on the *register an application page*, set following values:
@@ -136,7 +137,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    ```
 
 ### 4. Setup Manifest for Teams
-1) **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{BASE-URL-DOMAIN}}` with your app's base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your base url domain will be `1234.ngrok-free.app`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
