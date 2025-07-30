@@ -39,9 +39,6 @@ adapter.onTurnError = async (context, error) => {
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
-
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
 // Create the bot that will handle incoming messages.
@@ -77,6 +74,16 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 server.post('/api/sendAgenda', Controller.getAgenda);
 server.post('/api/setContext', Controller.setContext);
+server.post('/api/addAgendaPoint', (req, res, next) => {
+    const { title } = req.body;
+    if (title) {
+        addNewPoint(title);
+        res.send(200, { success: true, message: 'Agenda item added successfully' });
+    } else {
+        res.send(400, { success: false, message: 'Title is required' });
+    }
+    return next();
+});
 
 addNewPoint = (point) => {
     point ? agendaPoints.push(point) : null;
