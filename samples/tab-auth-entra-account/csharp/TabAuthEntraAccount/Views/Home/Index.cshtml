@@ -1,0 +1,457 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<head>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: #323130;
+        }
+
+        .welcome-header {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .welcome-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .welcome-header p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .user-info-section {
+            padding: 20px;
+            background: #faf9f8;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        .user-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-group {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #0078d4;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-group h4 {
+            margin: 0 0 15px 0;
+            color: #323130;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            align-items: flex-start;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #605e5c;
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #323130;
+            word-break: break-word;
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: transparent;
+            margin: 0;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #106ebe;
+        }
+
+        .btn-secondary {
+            background-color: #edebe9;
+            color: #323130;
+            border: 1px solid #d2d0ce;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e1dfdd;
+        }
+
+        .signin-header {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            color: #323130;
+        }
+
+        .card-container-div {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #divError {
+            background-color: #fde7e9;
+            color: #a4262c;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0 0 0;
+            border-left: 4px solid #d13438;
+            display: none;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .loading-button {
+            padding: 12px 24px;
+            border: 1px solid #d2d0ce;
+            border-radius: 4px;
+            background-color: #f3f2f1;
+            color: #323130;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin: 0;
+        }
+
+        .loading-button:hover {
+            background-color: #e1dfdd;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .empty-value {
+            color: #a19f9d;
+            font-style: italic;
+        }
+
+        .signin-card {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        .signin-card:hover {
+            box-shadow: none;
+        }
+
+      
+    </style>
+        
+    <script>
+        // Fetch id token
+        function getGoogleIdToken() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.authentication.authenticate({
+                        url: `${window.location.origin}/Auth/GoogleStart?oauthRedirectMethod={oauthRedirectMethod}&authId={authId}&hostRedirectUrl={hostRedirectUrl}`,
+                        isExternal: true
+                    }).then((result) => {
+                        resolve(result);
+                    }).catch((reason) => {
+                        console.log("Authentication failed: " + reason);
+                        reject(reason);
+                    })
+                })
+            })
+        }
+
+        // Main authentication function
+        function googleAuth() {
+            showLoading(true);
+            hideError();
+            
+            getGoogleIdToken()
+                .then((result) => {
+                    return getGoogleServerSideToken(result);
+                })
+                .catch((error) => {
+                    console.log("Authentication error:", error);
+                    showError("Authentication failed: " + error);
+                    showLoading(false);
+                });
+        }
+
+        // Exchange token and get comprehensive profile data
+        function getGoogleServerSideToken(clientSideToken) {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.app.getContext().then((context) => {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/getGoogleAccessToken',
+                        dataType: 'json',
+                        data: {
+                            'idToken': clientSideToken,
+                        },
+                        success: function (responseJson) {
+                            try {
+                                var profile = JSON.parse(responseJson);
+                                console.log("Received comprehensive profile data:", profile);
+                                populateAllProfileData(profile);
+                                showProfileCard();
+                                resolve(profile);
+                            } catch (e) {
+                                console.error("Error parsing profile data:", e);
+                                showError("Error parsing profile data: " + e.message);
+                            }
+                            showLoading(false);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Request failed - textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                            showError("Failed to fetch profile data. Please try again.");
+                            showLoading(false);
+                            reject(new Error(textStatus));
+                        }
+                    });
+                }).catch((error) => {
+                    console.error("Failed to get Teams context:", error);
+                    showError("Failed to get Teams context: " + error.message);
+                    showLoading(false);
+                    reject(error);
+                });
+            });
+        }
+
+        // Populate ONLY personal information in the UI
+        function populateAllProfileData(profile) {
+            console.log("Populating only personal information:", profile);
+            
+            // Helper function to safely set text content
+            function setTextContent(elementId, value, emptyText = "Not specified") {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    const displayValue = value && value.trim() !== "" ? value : emptyText;
+                    element.textContent = displayValue;
+                    if (displayValue === emptyText) {
+                        element.classList.add('empty-value');
+                    } else {
+                        element.classList.remove('empty-value');
+                    }
+                }
+            }
+
+            // Main header information
+            $("#welcomeMessage").text(`Welcome, ${profile.displayName || profile.name || "User"}!`);
+            setTextContent("mainDisplayName", profile.displayName || profile.name);
+            setTextContent("mainEmail", profile.email || "Not specified");
+            setTextContent("mainJobTitle", "Microsoft Entra ID User");
+
+            // Personal Information ONLY
+            setTextContent("displayName", profile.displayName);
+            setTextContent("givenName", profile.givenName);
+            setTextContent("surname", profile.surname);
+            setTextContent("userId", profile.id);
+            setTextContent("userPrincipalName", profile.userPrincipalName);
+        }
+
+        // Utility functions
+        function showProfileCard() {
+            document.getElementById("signInCard").classList.add("hidden");
+            document.getElementById("profileCard").classList.remove("hidden");
+        }
+
+        function showSignInCard() {
+            document.getElementById("profileCard").classList.add("hidden");
+            document.getElementById("signInCard").classList.remove("hidden");
+        }
+
+        function showLoading(show) {
+            const loadingElement = document.getElementById("loadingIndicator");
+            if (loadingElement) {
+                if (show) {
+                    loadingElement.classList.remove("hidden");
+                } else {
+                    loadingElement.classList.add("hidden");
+                }
+            }
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById("divError");
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = "block";
+            }
+        }
+
+        function hideError() {
+            const errorElement = document.getElementById("divError");
+            if (errorElement) {
+                errorElement.style.display = "none";
+            }
+        }
+
+        function refreshProfile() {
+            showSignInCard();
+            hideError();
+        }
+
+        function cancelLoading() {
+            showLoading(false);
+            showSignInCard();
+            hideError();
+            console.log("Loading cancelled by user");
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="card-container-div">
+            <!-- Sign-in card (shown initially) -->
+            <div class="signin-card" id="signInCard">
+                <div class="btn-container">
+                    <button type="button" class="btn-primary" onclick="googleAuth()" id="googlelogin">
+                        Login
+                    </button>
+                    <!-- Loading indicator -->
+                    <div class="loading hidden" id="loadingIndicator">
+                        <button type="button" class="loading-button" onclick="cancelLoading()">Loading user profile data...</button>
+                    </div>
+                </div>
+                
+                <!-- Error display - positioned within sign-in card for better context -->
+                <div id="divError"></div>
+            </div>
+
+            <!-- Profile data card (shown after successful authentication) -->
+            <div class="card hidden" id="profileCard">
+                <div class="welcome-header">
+                    <h2 id="welcomeMessage">Welcome!</h2>
+                    <p id="userRole">Microsoft Entra ID User</p>
+                </div>
+
+                <div class="user-info-section">
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <h2 style="margin: 0; color: #323130;" id="mainDisplayName">Loading...</h2>
+                            <p style="margin: 5px 0; color: #605e5c;" id="mainEmail">Loading...</p>
+                            <p style="margin: 5px 0; color: #605e5c;" id="mainJobTitle">Loading...</p>
+                        </div>
+                    </div>
+
+                    <div class="user-info-grid">
+                        <!-- Personal Information -->
+                        <div class="info-group">
+                            <h4>Personal Information</h4>
+                            <div class="info-row">
+                                <span class="info-label">Display Name:</span>
+                                <span class="info-value" id="displayName">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Given Name:</span>
+                                <span class="info-value" id="givenName">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Surname:</span>
+                                <span class="info-value" id="surname">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">User ID:</span>
+                                <span class="info-value" id="userId">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Principal Name:</span>
+                                <span class="info-value" id="userPrincipalName">-</span>
+                            </div>
+                            
+                            <!-- Additional Refresh Profile button at the bottom of Personal Information -->
+                            <div style="margin-top: 20px; text-align: center;">
+                                <button type="button" class="btn-primary" onclick="refreshProfile()" style="padding: 8px 16px; font-size: 0.9rem;">
+                                    Refresh Profile
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

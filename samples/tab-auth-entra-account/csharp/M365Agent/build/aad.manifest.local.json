@@ -1,0 +1,46 @@
+{
+    "id": "e453ef6d-43aa-41b0-9d8a-68bddfe5ff63",
+    "appId": "f5e62aef-46c3-4409-803a-e89116a15f05",
+    "displayName": "tab-auth-entra-account-aad",
+    "signInAudience": "AzureADMultipleOrgs",
+    "api": {
+        "requestedAccessTokenVersion": 2
+    },
+    "info": {},
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "publicClient": {
+        "redirectUris": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "web": {
+        "redirectUris": [
+            "https://9ps7kjr7-44302.inc1.devtunnels.ms/Auth/GoogleStart",
+            "https://9ps7kjr7-44302.inc1.devtunnels.ms/Auth/GoogleEnd"
+        ],
+        "implicitGrantSettings": {}
+    },
+    "spa": {
+        "redirectUris": []
+    }
+}

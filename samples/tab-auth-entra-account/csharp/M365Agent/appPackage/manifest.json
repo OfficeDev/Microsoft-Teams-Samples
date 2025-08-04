@@ -1,0 +1,38 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab Auth Entra Account",
+    "full": "Tab External Auth with Entra ID"
+  },
+  "description": {
+    "short": "Microsoft Teams sample app demonstrating authentication using Microsoft EntraID.",
+    "full": "This sample app demonstrates how to integrate Microsoft Entra ID (Azure AD) authentication into a Microsoft Teams tab. It allows users to sign in using their Entra account and supports switching between different Entra accounts for secure, flexible access."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://${{BOT_DOMAIN}}/Home/Index",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ]
+}
