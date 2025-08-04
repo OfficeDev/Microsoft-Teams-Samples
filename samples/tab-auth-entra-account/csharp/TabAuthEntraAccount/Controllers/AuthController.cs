@@ -9,7 +9,7 @@ namespace TabAuthEntraAccount.Controllers
         private readonly IConfiguration _configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// Initializes a new instance of the <see cref="AuthController"/> class.
         /// </summary>
         /// <param name="configuration">IConfiguration instance.</param>
         public AuthController(
@@ -19,20 +19,20 @@ namespace TabAuthEntraAccount.Controllers
         }
 
         /// <summary>
-        /// Authentication Start page for Google
+        /// Authentication Start page for Microsoft Entra ID
         /// </summary>
         /// <returns>current View</returns>
-        public IActionResult GoogleStart()
+        public IActionResult AuthStart()
         {
             ViewBag.AzureClientId = _configuration["AzureAd:ClientId"];
             return View();
         }
 
         /// <summary>
-        /// Authentication End page for Google
+        /// Authentication End page for Microsoft Entra ID
         /// </summary>
         /// <returns>current View</returns>
-        public IActionResult GoogleEnd()
+        public IActionResult AuthEnd()
         {
             return View();
         }

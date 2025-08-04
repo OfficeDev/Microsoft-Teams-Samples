@@ -35,8 +35,8 @@
   ],
   "web": {
     "redirectUris": [
-      "${{BOT_ENDPOINT}}/Auth/GoogleStart",
-      "${{BOT_ENDPOINT}}/Auth/GoogleEnd"
+      "${{BOT_ENDPOINT}}/Auth/AuthStart",
+      "${{BOT_ENDPOINT}}/Auth/AuthEnd"
     ],
     "implicitGrantSettings": {}
   },

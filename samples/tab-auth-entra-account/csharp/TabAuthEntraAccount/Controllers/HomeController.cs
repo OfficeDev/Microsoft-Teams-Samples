@@ -52,8 +52,8 @@ namespace TabAuthEntraAccount.Controllers
         /// </summary>
         /// <returns>Returns user profile details</returns>
         [HttpPost]
-        [Route("getGoogleAccessToken")]
-        public async Task<JsonResult> GetGoogleAccessToken(string idToken)
+        [Route("getAuthAccessToken")]
+        public async Task<JsonResult> GetAuthAccessToken(string idToken)
         {
             try
             {
@@ -107,9 +107,9 @@ namespace TabAuthEntraAccount.Controllers
                             graphDoc.RootElement.TryGetProperty("userPrincipalName", out var emailFallbackProp) ? emailFallbackProp.GetString() : null
                 };
 
-                var googleUserDetailString = JsonConvert.SerializeObject(result);
+                var UserDetailString = JsonConvert.SerializeObject(result);
 
-                return Json(googleUserDetailString);
+                return Json(UserDetailString);
             }
             catch (Exception ex)
             {

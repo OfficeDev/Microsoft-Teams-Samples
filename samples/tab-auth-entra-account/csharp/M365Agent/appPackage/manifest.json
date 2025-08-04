@@ -11,7 +11,7 @@
   },
   "name": {
     "short": "Tab Auth Entra Account",
-    "full": "Tab External Auth with Entra ID"
+    "full": "Tab Auth with Entra ID"
   },
   "description": {
     "short": "Microsoft Teams sample app demonstrating authentication using Microsoft EntraID.",
