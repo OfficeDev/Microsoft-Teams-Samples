@@ -22,12 +22,9 @@ class GraphHelper {
     }
 
     /**
-    * PageId =1 for Channel Subscription
-    * PageId =2 for Team Subscription.
     * @param {pageId}. Team and channel subscription.
     */
     static async createSubscription(teamsId, pageId) {
-        debugger;
         let applicationToken = await auth.getAccessToken();
         let resource = "";
         let changeType = "";
@@ -52,6 +49,7 @@ class GraphHelper {
             existingSubscriptions = apiResponse.data.value;
         }
         catch (ex) {
+            console.log("Error getting existing subscriptions:", ex);
             return null;
         }
 
@@ -88,10 +86,20 @@ class GraphHelper {
                 });
 
                 existingSubscription = response.data;
+                console.log(`Successfully created subscription for ${resource}`);
             }
         }
         catch (e) {
-            console.log("Error--" + e);
+            console.log("Error creating subscription:", e.response?.data || e.message);
+            
+            // Check if error is due to app not being enabled in shared channel
+            if (e.response?.data?.error?.code === 'Forbidden' || 
+                e.response?.data?.error?.code === 'BadRequest') {
+                console.log("Subscription creation failed - possibly due to app not being enabled in shared channel");
+                throw new Error(`Subscription creation failed for ${resource}. The app may not be enabled in the shared channel.`);
+            }
+            
+            throw new Error(`Failed to create subscription: ${e.response?.data?.error?.message || e.message}`);
         }
 
         return existingSubscription;
@@ -103,20 +111,11 @@ class GraphHelper {
     * @param {pageId}. Team and channel subscription.
     */
     static async createSharedWithTeamSubscription(teamsId, channelId, pageId) {
-        debugger;
-        
         // Parameter validation
         if (!teamsId || !channelId) {
             console.error("teamsId and channelId are required parameters");
             return null;
         }
-        
-        // Default pageId to "1" if undefined
-        if (!pageId) {
-            console.log("pageId is undefined, defaulting to '1' for Channel Subscription");
-            pageId = "1";
-        }
-        
         let applicationToken = await auth.getAccessToken();
         let resource = "";
         let changeType = "";
@@ -177,10 +176,20 @@ class GraphHelper {
                 });
 
                 existingSharedWithTeamSubscription = response.data;
+                console.log(`Successfully created shared channel subscription for ${resource}`);
             }
         }
         catch (e) {
-            console.log("Error--" + e);
+            console.log("Error creating shared channel subscription:", e.response?.data || e.message);
+            
+            // Check if error is due to app not being enabled in shared channel
+            if (e.response?.data?.error?.code === 'Forbidden' || 
+                e.response?.data?.error?.code === 'BadRequest') {
+                console.log("Shared channel subscription creation failed - app may not be enabled in shared channel");
+                throw new Error(`Shared channel subscription creation failed for ${resource}. The app may not be enabled in the shared channel.`);
+            }
+            
+            throw new Error(`Failed to create shared channel subscription: ${e.response?.data?.error?.message || e.message}`);
         }
 
         return existingSharedWithTeamSubscription;
@@ -210,6 +219,31 @@ class GraphHelper {
         } catch (error) {
             console.log("Error checking user channel access:", error);
             return false;
+        }
+    }
+
+    /**
+     * Get all members of a channel
+     * @param {string} teamId Team ID
+     * @param {string} channelId Channel ID
+     * @returns {Promise<Array>} Array of channel members
+     */
+    static async getChannelMembers(teamId, channelId) {
+        try {
+            const applicationToken = await auth.getAccessToken();
+            const response = await axios.get(
+                `https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/allMembers`,
+                {
+                    headers: {
+                        "accept": "application/json",
+                        "authorization": "bearer " + applicationToken
+                    }
+                }
+            );
+            return response.data.value || [];
+        } catch (error) {
+            console.log("Error getting channel members:", error);
+            return [];
         }
     }
 }

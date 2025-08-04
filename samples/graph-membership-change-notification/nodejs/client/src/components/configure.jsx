@@ -11,7 +11,6 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const Configure = props => {
 
     const handleChange = (e, props) => {
-        debugger;
         if(props.value==='1'){
             microsoftTeams.app.initialize().then(() => {
                 microsoftTeams.app.notifySuccess();

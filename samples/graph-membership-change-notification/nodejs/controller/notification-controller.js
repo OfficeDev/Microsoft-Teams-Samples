@@ -10,14 +10,34 @@ const createChannelAsync = async (req, res) => {
     var pageId = "1";
 
     try {
-        debugger;
+        // Create both subscriptions
         await GraphHelper.createSubscription(teamId, pageId);
         await GraphHelper.createSharedWithTeamSubscription(teamId, channelId, pageId);
-        res.status(202).send();
+
+        res.status(202).json({
+            message: "Subscriptions created successfully",
+            teamId: teamId,
+            channelId: channelId
+        });
     } catch (ex) {
-        debugger;
-        console.error(ex);
-        res.status(500).send();
+        console.error("Error in createChannelAsync:", ex);
+        
+        // Return specific error messages based on the error type
+        if (ex.message.includes("app may not be enabled")) {
+            return res.status(400).json({
+                error: "App enablement issue",
+                message: ex.message,
+                teamId: teamId,
+                channelId: channelId
+            });
+        }
+        
+        res.status(500).json({
+            error: "Subscription creation failed",
+            message: ex.message || "An unexpected error occurred while creating subscriptions",
+            teamId: teamId,
+            channelId: channelId
+        });
     }
 };
 
