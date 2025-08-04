@@ -2,16 +2,24 @@
 // Uses Teams JS SDK, axios, and moment (loaded globally)
 
 document.addEventListener('DOMContentLoaded', function () {
+    let currentTeamId = null;
+    let currentChannelId = null;
+    
     // Initialize Teams SDK
     microsoftTeams.app.initialize().then(() => {
         console.log('Teams SDK initialized');
         // Get context
         microsoftTeams.app.getContext().then(context => {
-            const teamId = context.channel.ownerGroupId;
-            const channelId = context.channel.id;
+            currentTeamId = context.channel.ownerGroupId;
+            currentChannelId = context.channel.id;
+            
             // Create/change channel subscription
-            axios.post(`/api/changeNotification?teamId=${teamId}&channelId=${channelId}`)
-                .then(() => fetchNotifications())
+            axios.post(`/api/changeNotification?teamId=${currentTeamId}&channelId=${currentChannelId}`)
+                .then(() => {
+                    fetchNotifications();
+                    // Automatically fetch member list on startup
+                    fetchMemberListInternal();
+                })
                 .catch(err => {
                     // Log Graph API error details for debugging
                     if (err.response) {
@@ -19,11 +27,84 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         console.error('Error creating subscription:', err.message);
                     }
-                    // Still fetch existing notifications
+                    // Still fetch existing notifications and member list
                     fetchNotifications();
+                    fetchMemberListInternal();
                 });
         }).catch(err => console.error('Failed to get context:', err));
     }).catch(err => console.error('Teams SDK failed to initialize:', err));
+
+    // Internal function to fetch member list (used on startup)
+    function fetchMemberListInternal() {
+        if (!currentTeamId || !currentChannelId) {
+            console.error('Team/Channel context not available for member list fetch');
+            return;
+        }
+        
+        const memberContainer = document.getElementById('member-list');
+        memberContainer.innerHTML = '<p>Loading member list...</p>';
+        
+        axios.get(`/api/members/${currentTeamId}/${currentChannelId}`)
+            .then(response => {
+                const data = response.data;
+                let html = `<h4>Channel Members (${data.members.length})</h4>`;
+                html += `<p><small>Last updated: ${moment(data.timestamp).format('LLL')}</small></p>`;
+                
+                if (data.members.length === 0) {
+                    html += '<p>No members found.</p>';
+                } else {
+                    html += '<ul>';
+                    data.members.forEach(member => {
+                        html += `<li>${member.displayName || member.email || member.id}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                
+                memberContainer.innerHTML = html;
+            })
+            .catch(err => {
+                console.error('Error fetching member list:', err);
+                memberContainer.innerHTML = '<p class="error">Error loading member list. Please try again.</p>';
+            });
+    }
+
+    // Add member list functionality
+    window.fetchMemberList = function() {
+        fetchMemberListInternal();
+    };
+
+    window.fetchCachedMemberList = function() {
+        if (!currentTeamId || !currentChannelId) {
+            alert('Team/Channel context not available');
+            return;
+        }
+        
+        const memberContainer = document.getElementById('member-list');
+        memberContainer.innerHTML = '<p>Loading cached member list...</p>';
+        
+        axios.get(`/api/members/cached/${currentTeamId}/${currentChannelId}`)
+            .then(response => {
+                const data = response.data;
+                let html = `<h4>Cached Channel Members (${data.members.length})</h4>`;
+                html += `<p><small>Cached data - Last checked: ${moment(data.timestamp).format('LLL')}</small></p>`;
+                
+                if (data.members.length === 0) {
+                    html += '<p>No cached members found.</p>';
+                } else {
+                    html += '<ul>';
+                    data.members.forEach(member => {
+                        html += `<li>${member.displayName || member.email || member.id}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                
+                memberContainer.innerHTML = html;
+            })
+            .catch(err => {
+                console.error('Error fetching cached member list:', err);
+                memberContainer.innerHTML = '<p class="error">Error loading cached member list. Please try again.</p>';
+            });
+    };
 
     // Fetch notifications and render
     function fetchNotifications() {
@@ -66,6 +147,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 html += `<p><b>Description:</b> User has been removed</p>` +
                     `<p><b>Event Type:</b> <span class="deleteStatus"><b>${item.changeType}</b></span></p>` +
                     `<p><b>User Access Status:</b> <span class="userAccess"><b>${item.hasUserAccess}</b></span></p>`;
+            }
+            
+            // Add member list update information
+            if (item.memberListUpdated !== undefined) {
+                html += `<p><b>Member List Updated:</b> <span class="${item.memberListUpdated ? 'statusColor' : 'deleteStatus'}"><b>${item.memberListUpdated}</b></span></p>`;
+                
+                if (item.memberListUpdated && item.currentMemberCount !== undefined) {
+                    html += `<p><b>Current Member Count:</b> ${item.currentMemberCount}</p>`;
+                }
+                
+                if (!item.memberListUpdated && item.memberListSkipReason) {
+                    html += `<p><b>Skip Reason:</b> ${item.memberListSkipReason}</p>`;
+                }
+                
+                if (item.memberListUpdateError) {
+                    html += `<p><b>Update Error:</b> <span class="deleteStatus">${item.memberListUpdateError}</span></p>`;
+                }
             }
               
             html += `<p><b>Date:</b> ${moment(item.createdDate).format('LLL')} ` +

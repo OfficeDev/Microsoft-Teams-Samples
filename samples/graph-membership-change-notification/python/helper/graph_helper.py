@@ -97,7 +97,7 @@ class GraphHelper:
         except requests.RequestException:
             return None
 
-        existing_subscription = next(
+        existing_team_subscription = next(
             (sub for sub in existing_team_subscriptions if sub["resource"] == resource), None
         )
 
@@ -150,6 +150,30 @@ class GraphHelper:
         except requests.RequestException as e:
             print(f"Error checking user channel access: {e}")
             return False
+
+    @staticmethod
+    def get_channel_members(team_id, channel_id):
+        """
+        Get all members of a channel
+        
+        Args:
+            team_id (str): Team ID
+            channel_id (str): Channel ID
+            
+        Returns:
+            list: Array of channel members
+        """
+        try:
+            token = AuthHelper.get_access_token()
+            url = f"https://graph.microsoft.com/v1.0/teams/{team_id}/channels/{channel_id}/allMembers"
+            
+            response = requests.get(url, headers=GraphHelper.get_headers(token))
+            response.raise_for_status()
+            
+            return response.json().get("value", [])
+        except requests.RequestException as e:
+            print(f"Error getting channel members: {e}")
+            return []
 
     @staticmethod
     def get_expiration_time(hours=0, days=0):

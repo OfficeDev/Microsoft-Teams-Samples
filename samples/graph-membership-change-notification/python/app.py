@@ -21,9 +21,50 @@ load_dotenv(dotenv_path=env_path)
 
 notification_list = []
 notification_ids = set() 
+channel_members_list = {}  # Store member lists by teamId-channelId key 
 
 # Mount changeNotification controller (to be implemented)
 app.register_blueprint(change_notification_bp, url_prefix='/api/changeNotification')
+
+@app.route('/api/members/<team_id>/<channel_id>', methods=['GET'])
+def get_channel_members(team_id, channel_id):
+    """Get channel members list"""
+    try:
+        member_key = f"{team_id}-{channel_id}"
+        
+        # Get fresh member list from Graph API
+        members = GraphHelper.get_channel_members(team_id, channel_id)
+        
+        # Update local cache
+        channel_members_list[member_key] = members
+        
+        return jsonify({
+            'teamId': team_id,
+            'channelId': channel_id,
+            'members': members,
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as error:
+        print(f'Error getting channel members: {error}')
+        return jsonify({
+            'error': 'Failed to get channel members',
+            'message': str(error)
+        }), 500
+
+@app.route('/api/members/cached/<team_id>/<channel_id>', methods=['GET'])
+def get_cached_channel_members(team_id, channel_id):
+    """Get cached member list"""
+    member_key = f"{team_id}-{channel_id}"
+    
+    cached_members = channel_members_list.get(member_key, [])
+    
+    return jsonify({
+        'teamId': team_id,
+        'channelId': channel_id,
+        'members': cached_members,
+        'cached': True,
+        'timestamp': datetime.now().isoformat()
+    })
 
 @app.route('/api/notifications', methods=['GET', 'POST'])
 def notifications():
@@ -54,15 +95,16 @@ def notifications():
 
     team_id = None
     channel_id = None
-    if decrypted_data.get('changeType') == 'deleted':
-        resource = body['value'][0].get('resourceData', {})
-        odata_id = resource.get('@odata.id', '')
+    should_update_member_list = True
+    
+    # Extract team and channel IDs from the notification
+    if body.get('value') and body['value'][0].get('resourceData', {}).get('@odata.id'):
+        odata_id = body['value'][0]['resourceData']['@odata.id']
         team_match = re.search(r"teams\('([^']+)'\)", odata_id)
         channel_match = re.search(r"channels\('([^']+)'\)", odata_id)
-        if team_match:
-            team_id = team_match.group(1)
-        if channel_match:
-            channel_id = channel_match.group(1)
+        
+        team_id = team_match.group(1) if team_match else None
+        channel_id = channel_match.group(1) if channel_match else None
 
     # Extract notification for getting additional data
     notification = body['value'][0] if body.get('value') else {}
@@ -72,14 +114,15 @@ def notifications():
     notification_data = {
         'createdDate': current_time,
         'displayName': decrypted_data.get('displayName'),
-        'changeType': decrypted_data.get('changeType') 
+        'changeType': decrypted_data.get('changeType'),
+        'teamId': team_id,
+        'channelId': channel_id
     }
 
+    # Handle different change types with conditional member list updates
     if decrypted_data.get('changeType') == 'deleted':
         # Extract notification details from the body
-        notification = body['value'][0] if body.get('value') else {}
         resource_data = notification.get('resourceData', {})
-        
         
         encoded_id = resource_data.get('id')
         user_id = None
@@ -102,6 +145,47 @@ def notifications():
                 team_id, channel_id, user_id, tenant_id
             )
             notification_data['hasUserAccess'] = has_access
+
+            # Skip member list update if user still has access
+            should_update_member_list = has_access
+
+            if has_access:
+                print(f"Skipping member list update for user {user_id} - user still has access")
+            else:
+                print(f"User {user_id} no longer has access - updating member list")
+    
+    # Handle shared/unshared events
+    if decrypted_data.get('changeType') == 'created' and decrypted_data.get('displayName'):
+        # Shared event - update member list
+        should_update_member_list = True
+        print(f"Channel shared with team {decrypted_data.get('displayName')} - updating member list")
+    
+    if (decrypted_data.get('changeType') == 'deleted' and 
+        decrypted_data.get('displayName') and 
+        has_access is not True):
+        # Unshared event - update member list
+        should_update_member_list = True
+        print(f"Channel unshared from team {decrypted_data.get('displayName')} - updating member list")
+    
+    # Update member list conditionally
+    if should_update_member_list and team_id and channel_id:
+        try:
+            member_key = f"{team_id}-{channel_id}"
+            updated_members = GraphHelper.get_channel_members(team_id, channel_id)
+            channel_members_list[member_key] = updated_members
+            
+            notification_data['memberListUpdated'] = True
+            notification_data['currentMemberCount'] = len(updated_members)
+            
+            print(f"Member list updated for {member_key}. Current count: {len(updated_members)}")
+        except Exception as error:
+            print(f'Error updating member list: {error}')
+            notification_data['memberListUpdateError'] = str(error)
+    else:
+        notification_data['memberListUpdated'] = False
+        if (decrypted_data.get('changeType') == 'deleted' and 
+            notification_data.get('hasUserAccess')):
+            notification_data['memberListSkipReason'] = "User still has access"
 
     notification_list.append(notification_data)
     print("Graph API Notifications For Team and Channel")

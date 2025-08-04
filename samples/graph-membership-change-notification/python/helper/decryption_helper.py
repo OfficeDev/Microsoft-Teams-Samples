@@ -43,7 +43,6 @@ class DecryptionHelper:
             private_key_path = os.getenv('PRIVATE_KEY_PATH', 'helper/key.pem')
             print(f"Using private key path: {private_key_path}")
             
-            # Make sure path is absolute
             if not os.path.isabs(private_key_path):
                 private_key_path = os.path.join(os.path.dirname(__file__), '..', private_key_path)
             
@@ -97,14 +96,4 @@ class DecryptionHelper:
             
             print(f"Extracted fallback data: {fallback_data}")
             return fallback_data
-        
-        # If decryption failed or signature invalid, fallback
-        item = notification[0]
-        resource_data = item.get('resourceData', {})
-        return {
-            'createdDateTime': resource_data.get('createdDateTime'),
-            'displayName': resource_data.get('displayName'),
-            'changeType': item.get('changeType'),
-            'userId': resource_data.get('userId'),
-            'tenantId': resource_data.get('tenantId')
-        }
+
