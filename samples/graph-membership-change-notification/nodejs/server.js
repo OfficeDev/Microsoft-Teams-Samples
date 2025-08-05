@@ -90,6 +90,7 @@ app.post('/api/notifications', async (req, res) => {
             
             let teamId, channelId;
             let shouldUpdateMemberList = true;
+            let hasAccess = null;
             
             // Extract team and channel IDs from the notification
             if (notification[0]?.resourceData && notification[0].resourceData['@odata.id']) {
@@ -113,7 +114,7 @@ app.post('/api/notifications', async (req, res) => {
             if (decryptedData.changeType === "deleted") {
                 const { userId, tenantId } = decryptedData;
                 if (teamId && channelId && userId && tenantId) {
-                    const hasAccess = await GraphHelper.checkUserChannelAccess(
+                    hasAccess = await GraphHelper.checkUserChannelAccess(
                         teamId,
                         channelId,
                         userId,
@@ -122,7 +123,7 @@ app.post('/api/notifications', async (req, res) => {
                     
                     notificationData.hasUserAccess = hasAccess;
 
-                    shouldUpdateMemberList = hasAccess;
+                    shouldUpdateMemberList = !hasAccess;
 
                     if (hasAccess) {
                         console.log(`Skipping member list update for user ${userId} - user still has access`);
@@ -139,7 +140,7 @@ app.post('/api/notifications', async (req, res) => {
                 console.log(`Channel shared with team ${decryptedData.displayName} - updating member list`);
             }
             
-            if (decryptedData.changeType === "deleted" && decryptedData.displayName && hasAccess !== true) {
+            if (decryptedData.changeType === "deleted" && decryptedData.displayName && hasAccess) {
                 // Unshared event - update member list
                 shouldUpdateMemberList = true;
                 console.log(`Channel unshared from team ${decryptedData.displayName} - updating member list`);
