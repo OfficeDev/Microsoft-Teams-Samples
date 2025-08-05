@@ -25,7 +25,7 @@ This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID 
 
 ## Interaction with app
 
-![tab-auth-entra-account](Images/tab-auth-entra-account.gif)
+![tab-auth-entra-accountGIF](Images/tab-auth-entra-accountGIF.gif)
 
 ## Authentication Flow Diagram
 
@@ -154,14 +154,11 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - `{{AzureAd:ClientSecret}}` - Generated from Step 1, also referred to as Client secret
   - `{{AzureAd:RedirectUri}}` - Your Redirect URI. ex: `https://%ngrokDomain%.ngrok-free.app/Auth/AuthEnd`
 
-  >  **Security Note**: Never commit actual client secrets to source control. Use environment variables or secure configuration for production deployments.
-
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `/samples/tab-auth-entra-account/csharp/TabAuthEntraAccount` folder
   - Select `TabAuthEntraAccount.csproj` file
-
 
 4. Setup Manifest for Teams App
     - **Edit** the `M365Agent/appPackage/manifest.json` contained in the ./M365Agent/appPackage folder to replace placeholder `{{BOT_DOMAIN}}` with your tunnel domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnel, your domain will be `12345.devtunnels.ms`.
@@ -187,63 +184,63 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Microsoft Teams
 
-### Step 1: Installing the tab authentication app in Microsoft Teams desktop client
+#### Step 1: Installing the tab authentication app in Microsoft Teams desktop client
 ![DesktopInstallApp](Images/1.DesktopInstallApp.png)
 
-### Step 2: The initial authentication page displayed when accessing the app in Teams
+#### Step 2: The initial authentication page displayed when accessing the app in Teams
 ![DesktopLoginPage](Images/2.DesktopLoginPage.png)
 
-### Step 3: User clicking the login button to initiate Microsoft Entra ID authentication
+#### Step 3: User clicking the login button to initiate Microsoft Entra ID authentication
 ![DesktopClickLogin](Images/3.DesktopClickLogin.png)
 
-### Step 4: Microsoft Entra ID login screen where user enters their account credentials
+#### Step 4: Microsoft Entra ID login screen where user enters their account credentials
 ![DesktopEnterAccount](Images/4.DesktopEnterAccount.png)
 
-### Step 5: Successfully authenticated user's profile information displayed in the Teams tab
+#### Step 5: Successfully authenticated user's profile information displayed in the Teams tab
 ![DesktopLoginUserDetails](Images/5.DesktopLoginUserDetails.png)
 
 ## Microsoft Outlook
 
 - To view your app in Outlook on the desktop.
 
-### Step 1: Selecting the tab authentication app from the Outlook desktop client app gallery
+#### Step 1: Selecting the tab authentication app from the Outlook desktop client app gallery
 ![OutlookSelectApp](Images/6.OutlookSelectApp.png)
 
-### Step 2: The authentication interface displayed when accessing the app within Outlook
+#### Step 2: The authentication interface displayed when accessing the app within Outlook
 ![OutlookLoginPage](Images/7.OutlookLoginPage.png)
 
-### Step 3: Successfully authenticated user's profile information displayed in the Outlook tab
+#### Step 3: Successfully authenticated user's profile information displayed in the Outlook tab
 ![OutlookLoginUserDetails](Images/8.OutlookLoginUserDetails.png)
 
 ## Microsoft Office
 
 - To preview your app running in Office on the desktop.
 
-### Step 1: Selecting the tab authentication app from the Microsoft Office desktop client
+#### Step 1: Selecting the tab authentication app from the Microsoft Office desktop client
 ![OfficeSelectApp](Images/9.OfficeSelectApp.png)
 
-### Step 2: Installing the tab authentication app in Microsoft Office desktop client
+#### Step 2: Installing the tab authentication app in Microsoft Office desktop client
 ![OfficeInstallApp](Images/10.OfficeInstallApp.png)
 
-### Step 3: The authentication interface displayed when accessing the app within Microsoft Office
+#### Step 3: The authentication interface displayed when accessing the app within Microsoft Office
 ![OfficeLoginPage](Images/11.OfficeLoginPage.png)
 
-### Successfully authenticated user's profile information displayed in the Microsoft Office tab
+#### Successfully authenticated user's profile information displayed in the Microsoft Office tab
 ![OfficeLoginUserDetails](Images/12.OfficeLoginUserDetails.png)
 
 ## Further Reading
 
-### Authentication and Microsoft Entra ID
+#### Authentication and Microsoft Entra ID
 - [External authentication in Microsoft Teams](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
 - [Microsoft Entra ID authentication in Teams apps](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
 - [OAuth 2.0 authorization code flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)
 
-### Microsoft Teams Development
+#### Microsoft Teams Development
 - [Teams app manifest schema](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema)
 - [Teams JavaScript SDK](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/using-teams-client-sdk)
 - [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs)
 
-### ASP.NET Core and Azure
+#### ASP.NET Core and Azure
 - [ASP.NET Core authentication](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/)
 - [Deploy ASP.NET Core to Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore)
 - [Azure Key Vault configuration provider](https://learn.microsoft.com/en-us/aspnet/core/security/key-vault-configuration)
