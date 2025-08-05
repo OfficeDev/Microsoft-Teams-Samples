@@ -247,11 +247,10 @@ class ChangeNotificationChannel extends Component {
                             <div style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid #ccc', padding: '10px' }}>
                                 {membersList.map((member, index) => (
                                     <div key={member.id || index} style={{ marginBottom: '8px', paddingBottom: '8px', borderBottom: '1px solid #eee' }}>
-                                        <div><strong>{member.displayName || member.email || 'Unknown'}</strong></div>
+                                        <div><strong>{member.displayName || 'Unknown'}</strong></div>
                                         <div style={{ fontSize: '0.9em', color: '#666' }}>
-                                            {member.email && <span>Email: {member.email}</span>}
                                             {member.roles && member.roles.length > 0 && (
-                                                <span> | Roles: {member.roles.join(', ')}</span>
+                                                <span>Roles: {member.roles.join(', ')}</span>
                                             )}
                                         </div>
                                     </div>
