@@ -12,12 +12,12 @@ extensions:
  createdDate: "25/07/2025 11:20:17 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-auth-entra-account-csharp
 ---
-# Tab external auth - C#
+# Sign in using a different Microsoft Entra account - C#
 
 This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID (Azure AD) authentication in a Teams tab. It enables users to sign in and switch between different Entra accounts, providing secure and flexible access. The sample showcases best practices for implementing authentication and account switching in Teams tab applications.
 
 ## Included Features
-* External Auth (Sign in using a different Microsoft Entra account)
+* External Auth
 * Tabs
 
 ## Interaction with app
@@ -65,8 +65,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: 
-      https://<your_tunnel_domain>/Auth/AuthEnd, 
-      https://<your_tunnel_domain>/Auth/AuthStart. 
+         * https://<your_tunnel_domain>/Auth/AuthEnd, 
+         * https://<your_tunnel_domain>/Auth/AuthStart. 
       This will be the page where a successful implicit grant flow will redirect the user.
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -120,79 +120,45 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Running the sample
 
 **Note:** 
-Supported Platforms:
+* Supported Platforms:
 Microsoft Teams, Outlook, and Office – Desktop and Web
 
-Not Supported:
+* Not Supported:
 Microsoft Teams, Outlook, and Office – Mobile
 
-## Google OAuth 2.0 -Teams desktop
+## Microsoft Teams
 
-![tab-page](Images/tab.png)
+![1.DesktopInstallApp](Images/1.DesktopInstallApp.png)
 
-![redirect-page](Images/redirect-page.png)
+![2.DesktopLoginPage](Images/2.DesktopLoginPage.png)
 
-![tab-auth-page](Images/tab1.png)
+![3.DesktopClickLogin](Images/3.DesktopClickLogin.png)
 
-## Outlook on the desktop
+![4.DesktopEnterAccount](Images/4.DesktopEnterAccount.png)
+
+![5.DesktopLoginUserDetails](Images/5.DesktopLoginUserDetails.png)
+
+## Microsoft Outlook
 
 - To view your app in Outlook on the desktop.
 
-![OutlookDesktop1](Images/OutlookDesktop1.png)
+![6.OutlookSelectApp](Images/6.OutlookSelectApp.png)
 
-![OutlookDesktop2](Images/OutlookDesktop2.png)
+![7.OutlookLoginPage](Images/7.OutlookLoginPage.png)
 
-![OutlookDesktop3](Images/OutlookDesktop3.png)
+![8.OutlookLoginUserDetails](Images/8.OutlookLoginUserDetails.png)
 
-![OutlookDesktop4](Images/OutlookDesktop4.png)
-
-## Office on the desktop
+## Microsoft Office
 
 - To preview your app running in Office on the desktop.
 
-![officeDesktop1](Images/officeDesktop1.png)
+![9.OfficeSelectApp](Images/9.OfficeSelectApp.png)
 
-![officeDesktop2](Images/officeDesktop2.png)
+![10.OfficeInstallApp](Images/10.OfficeInstallApp.png)
 
-![officeDesktop3](Images/officeDesktop3.png)
+![11.OfficeLoginPage](Images/11.OfficeLoginPage.png)
 
-![officeDesktop4](Images/officeDesktop4.png)
-
-![officeDesktop5](Images/officeDesktop5.png)
-
-![officeDesktop6](Images/officeDesktop6.png)
-
-## Outlook on the mobile
-
-- To view your app in Outlook on the mobile.
-
-**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
-
-![InstallOutlook](Images/outlook1.jpg)
-
-**Select your app icon to launch and preview your app running in Outlook on the mobile**
-
-![outlook2](Images/outlook2.jpg)
-
-**Click get Details**
-
-![outlook3](Images/outlook3.jpg)
-
-## Office on the mobile
-
-- To preview your app running in Office on the mobile.
-
-**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
-
-![Office1](Images/Office1.jpg)
-
-**Select your app icon to launch your app in Office on the mobile**
-
-![Office2](Images/Office2.jpg)
-
-**Click get Details**
-
-![Office3](Images/Office3.jpg)
+![12.OfficeLoginUserDetails](Images/12.OfficeLoginUserDetails.png)
 
 ## Further Reading.
 [External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
