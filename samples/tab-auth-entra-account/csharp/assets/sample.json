@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-external-auth-csharp",
+    "name": "officedev-microsoft-teams-samples-tab-auth-entra-account-csharp",
     "source": "officeDev",
-    "title": "Tab External Auth (C#)",
-    "shortDescription": "This Microsoft Teams sample app showcases how to implement Google authentication using OAuth2 with external auth providers.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-external-auth/csharp",
+    "title": "Tab Auth with Different Entra ID Accounts",
+    "shortDescription": "Microsoft Teams sample app demonstrating authentication and account switching using different Microsoft Entra ID accounts.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-auth-entra-account/csharp",
     "longDescription": [
-      "This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly."
+      "This sample app demonstrates how to integrate Microsoft Entra ID (Azure AD) authentication into a Microsoft Teams tab. It allows users to sign in using their Entra account and supports switching between different Entra accounts for secure, flexible access."
     ],
-    "creationDateTime": "2023-08-24",
-    "updateDateTime": "2024-10-15",
+    "creationDateTime": "2025-07-25",
+    "updateDateTime": "2025-08-05",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-external-auth/csharp/Images/tab-external-auth-app.gif",
-        "alt": "Solution UX showing Google Oauth2 authentication (c#)"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-auth-entra-account/csharp/Images/tab-auth-entra-account.gif",
+        "alt": "Solution UX demonstrating authentication and account switching using different Microsoft Entra ID accounts"
       }
     ],
     "authors": [
