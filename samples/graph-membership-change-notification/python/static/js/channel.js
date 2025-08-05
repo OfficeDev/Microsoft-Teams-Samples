@@ -73,39 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchMemberListInternal();
     };
 
-    window.fetchCachedMemberList = function() {
-        if (!currentTeamId || !currentChannelId) {
-            alert('Team/Channel context not available');
-            return;
-        }
-        
-        const memberContainer = document.getElementById('member-list');
-        memberContainer.innerHTML = '<p>Loading cached member list...</p>';
-        
-        axios.get(`/api/members/cached/${currentTeamId}/${currentChannelId}`)
-            .then(response => {
-                const data = response.data;
-                let html = `<h4>Cached Channel Members (${data.members.length})</h4>`;
-                html += `<p><small>Cached data - Last checked: ${moment(data.timestamp).format('LLL')}</small></p>`;
-                
-                if (data.members.length === 0) {
-                    html += '<p>No cached members found.</p>';
-                } else {
-                    html += '<ul>';
-                    data.members.forEach(member => {
-                        html += `<li>${member.displayName || member.email || member.id}</li>`;
-                    });
-                    html += '</ul>';
-                }
-                
-                memberContainer.innerHTML = html;
-            })
-            .catch(err => {
-                console.error('Error fetching cached member list:', err);
-                memberContainer.innerHTML = '<p class="error">Error loading cached member list. Please try again.</p>';
-            });
-    };
-
     // Fetch notifications and render
     function fetchNotifications() {
         axios.get('/api/notifications')
