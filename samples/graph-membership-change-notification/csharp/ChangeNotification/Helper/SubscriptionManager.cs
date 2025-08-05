@@ -33,6 +33,7 @@ namespace ChangeNotification.Helper
         private readonly ILogger _logger;
         private readonly GraphClient graphBetaClientProvider;
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
+        public static readonly Dictionary<string, List<object>> ChannelMembersList = new Dictionary<string, List<object>>();
         private string pageId;
 
         public SubscriptionManager(IOptions<ApplicationConfiguration> botSettings, ILogger<SubscriptionManager> logger, GraphClient graphBetaClientProvider)
@@ -380,6 +381,39 @@ namespace ChangeNotification.Helper
         }
 
 
+        public async Task<List<object>> GetChannelMembers(string teamId, string channelId)
+        {
+            using var httpClient = new HttpClient();
+            try
+            {
+                // Get access token using app credentials
+                var accessToken = await GetAccessTokenAsync();
+
+                // Configure request headers
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                // Make the API call to get all channel members
+                var url = $"https://graph.microsoft.com/v1.0/teams/{teamId}/channels/{channelId}/allMembers";
+                var response = await httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<ChannelMembersResponse>(content);
+                    return result.Value ?? new List<object>();
+                }
+
+                _logger.LogWarning($"Failed to get channel members for team {teamId}, channel {channelId}. Status: {response.StatusCode}");
+                return new List<object>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error getting channel members for team {teamId}, channel {channelId}");
+                return new List<object>();
+            }
+        }
+
         public async Task<bool> CheckUserChannelAccess(string teamId, string channelId, string userId, string tenantId)
         {
             using var httpClient = new HttpClient();
@@ -442,6 +476,12 @@ namespace ChangeNotification.Helper
         {
             [JsonProperty("value")]
             public bool Value { get; set; }
+        }
+
+        private class ChannelMembersResponse
+        {
+            [JsonProperty("value")]
+            public List<object> Value { get; set; }
         }
     }
 }

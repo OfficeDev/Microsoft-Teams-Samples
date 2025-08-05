@@ -47,6 +47,44 @@ namespace ChangeNotification.Controllers
             }));
         }
 
+        /// <summary>
+        /// Get channel members list
+        /// </summary>
+        /// <param name="teamId">Team ID</param>
+        /// <param name="channelId">Channel ID</param>
+        /// <returns>Channel members</returns>
+        [HttpGet("members/{teamId}/{channelId}")]
+        public async Task<ActionResult> GetChannelMembers(string teamId, string channelId)
+        {
+            try
+            {
+                var memberKey = $"{teamId}-{channelId}";
+                
+                // Get fresh member list from Graph API
+                var members = await _subscriptionManager.GetChannelMembers(teamId, channelId);
+                
+                // Update local cache
+                SubscriptionManager.ChannelMembersList[memberKey] = members;
+                
+                return Json(new
+                {
+                    teamId,
+                    channelId,
+                    members,
+                    timestamp = DateTime.UtcNow.ToString("o")
+                });
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error getting channel members");
+                return StatusCode(500, new
+                {
+                    error = "Failed to get channel members",
+                    message = error.Message
+                });
+            }
+        }
+
         // Callback
         [Route("/api/webhookLifecyle")]
         [HttpPost]
@@ -117,51 +155,103 @@ namespace ChangeNotification.Controllers
                     var channelResource = JsonConvert.DeserializeObject<ChannelResource>(data);
                     var var_changeType = notifications.Items[0].ChangeType;
                     var channelName = channelResource.DisplayName;
-                        // Extract teamId and channelId from @odata.id
-                        var odataId = notification.ResourceData.ODataId;
-                        string teamId = null, channelId = null;
-                        if (!string.IsNullOrEmpty(odataId))
+                    
+                    // Extract teamId and channelId from @odata.id
+                    var odataId = notification.ResourceData.ODataId;
+                    string teamId = null, channelId = null;
+                    if (!string.IsNullOrEmpty(odataId))
+                    {
+                        var teamMatch = Regex.Match(odataId, @"teams\('([^']+)'\)");
+                        var channelMatch = Regex.Match(odataId, @"channels\('([^']+)'\)");
+                        teamId = teamMatch.Success ? teamMatch.Groups[1].Value : null;
+                        channelId = channelMatch.Success ? channelMatch.Groups[1].Value : null;
+                    }
+
+                    // Get userId and tenantId from decrypted data
+                    var userId = channelResource.UserId;
+                    var tenantId = channelResource.TenantId;
+
+                    bool shouldUpdateMemberList = true;
+                    bool hasAccess = false;
+
+                    if (!string.IsNullOrEmpty(teamId) && !string.IsNullOrEmpty(channelId))
+                    {
+                        var channelResourceItem = new ChannelResource()
                         {
-                            var teamMatch = Regex.Match(odataId, @"teams\('([^']+)'\)");
-                            var channelMatch = Regex.Match(odataId, @"channels\('([^']+)'\)");
-                            teamId = teamMatch.Success ? teamMatch.Groups[1].Value : null;
-                            channelId = channelMatch.Success ? channelMatch.Groups[1].Value : null;
-                        }
+                            ChangeType = var_changeType,
+                            DisplayName = channelName,
+                            CreatedDate = DateTime.Now,
+                            TeamId = teamId,
+                            ChannelId = channelId
+                        };
 
-
-
-                        // Get userId and tenantId from decrypted data
-                        var userId = channelResource.UserId;     // Adjust property name as per your ChannelResource model
-                        var tenantId = channelResource.TenantId; // Adjust property name as per your ChannelResource model
-
-                        if (!string.IsNullOrEmpty(teamId) && !string.IsNullOrEmpty(channelId) && !string.IsNullOrEmpty(tenantId))
+                        // Handle different change types with conditional member list updates
+                        if (var_changeType == "deleted" && !string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(tenantId))
                         {
+                            // Call the access check method
+                            hasAccess = await _subscriptionManager.CheckUserChannelAccess(teamId, channelId, userId, tenantId);
+                            channelResourceItem.UserHaveAccess = hasAccess;
 
+                            // Skip member list update if user still has access
+                            shouldUpdateMemberList = !hasAccess;
 
-                            if (var_changeType == "deleted")
+                            if (hasAccess)
                             {
-                                // Call the access check method
-                                var DoesUserhaveAccess = await _subscriptionManager.CheckUserChannelAccess(teamId, channelId, userId, tenantId);
-
-                                GlobalVariable.channelResourceList.Add(new ChannelResource()
-                                {
-                                    ChangeType = var_changeType,
-                                    DisplayName = channelName,
-                                    CreatedDate = DateTime.Now,
-                                    UserHaveAccess = DoesUserhaveAccess,
-                                });
+                                _logger.LogInformation($"Skipping member list update for user {userId} - user still has access");
                             }
                             else
                             {
-                                GlobalVariable.channelResourceList.Add(new ChannelResource()
-                                {
-                                    ChangeType = var_changeType,
-                                    DisplayName = channelName,
-                                    CreatedDate = DateTime.Now,
-                                });
+                                _logger.LogInformation($"User {userId} no longer has access - updating member list");
                             }
                         }
+
+                        // Handle shared/unshared events
+                        if (var_changeType == "created" && !string.IsNullOrEmpty(channelName))
+                        {
+                            // Shared event - update member list
+                            shouldUpdateMemberList = true;
+                            _logger.LogInformation($"Channel shared with team {channelName} - updating member list");
+                        }
+
+                        if (var_changeType == "deleted" && !string.IsNullOrEmpty(channelName) && !hasAccess)
+                        {
+                            // Unshared event - update member list
+                            shouldUpdateMemberList = true;
+                            _logger.LogInformation($"Channel unshared from team {channelName} - updating member list");
+                        }
+
+                        // Update member list conditionally
+                        if (shouldUpdateMemberList)
+                        {
+                            try
+                            {
+                                var memberKey = $"{teamId}-{channelId}";
+                                var updatedMembers = await _subscriptionManager.GetChannelMembers(teamId, channelId);
+                                SubscriptionManager.ChannelMembersList[memberKey] = updatedMembers;
+
+                                channelResourceItem.MemberListUpdated = true;
+                                channelResourceItem.CurrentMemberCount = updatedMembers.Count;
+
+                                _logger.LogInformation($"Member list updated for {memberKey}. Current count: {updatedMembers.Count}");
+                            }
+                            catch (Exception error)
+                            {
+                                _logger.LogError(error, "Error updating member list");
+                                channelResourceItem.MemberListUpdateError = error.Message;
+                            }
+                        }
+                        else
+                        {
+                            channelResourceItem.MemberListUpdated = false;
+                            if (var_changeType == "deleted" && hasAccess)
+                            {
+                                channelResourceItem.MemberListSkipReason = "User still has access";
+                            }
+                        }
+
+                        GlobalVariable.channelResourceList.Add(channelResourceItem);
                     }
+                }
             }
             return Ok(GlobalVariable.channelResourceList);
         }

@@ -64,8 +64,38 @@
         public string TenantId { get; set; }
 
         /// <summary>
-        /// The 
+        /// The UserHaveAccess status
         /// </summary>
         public bool UserHaveAccess { get; set; }
+
+        /// <summary>
+        /// The TeamId
+        /// </summary>
+        public string TeamId { get; set; }
+
+        /// <summary>
+        /// The ChannelId
+        /// </summary>
+        public string ChannelId { get; set; }
+
+        /// <summary>
+        /// Whether member list was updated
+        /// </summary>
+        public bool MemberListUpdated { get; set; }
+
+        /// <summary>
+        /// Current member count after update
+        /// </summary>
+        public int? CurrentMemberCount { get; set; }
+
+        /// <summary>
+        /// Reason why member list update was skipped
+        /// </summary>
+        public string MemberListSkipReason { get; set; }
+
+        /// <summary>
+        /// Error message if member list update failed
+        /// </summary>
+        public string MemberListUpdateError { get; set; }
     }
 }
