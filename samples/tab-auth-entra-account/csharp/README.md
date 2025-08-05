@@ -19,14 +19,62 @@ This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID 
 ## Included Features
 * External Auth
 * Tabs
+* Microsoft Entra ID Integration
+* Account Switching
+* Cross-platform Support (Teams, Outlook, Office)
 
 ## Interaction with app
 
 ![tab-auth-entra-account](Images/tab-auth-entra-account.gif)
 
+## Authentication Flow Diagram
+
+The following diagram illustrates the Microsoft Entra ID authentication flow in this Teams tab application:
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant T as Teams Tab
+    participant A as ASP.NET Core App
+    participant E as Microsoft Entra ID
+    participant API as Microsoft Graph API
+
+    Note over U,API: Authentication Flow for Teams Tab with Entra ID
+
+    U->>T: Opens Teams Tab
+    T->>A: GET /Home/Index
+    A->>T: Returns main page with login option
+    T->>U: Displays authentication page
+    
+    U->>T: Clicks "Sign In" button
+    T->>A: GET /Auth/AuthStart
+    A->>T: Returns auth start page with client config
+    T->>E: Redirect to Entra ID authorization endpoint
+    Note right of E: OAuth 2.0 Implicit Grant Flow
+    
+    E->>U: Display Entra ID login page
+    U->>E: Enter credentials & consent
+    E->>T: Redirect with access token (fragment)
+    T->>A: POST /Auth/AuthEnd with token
+    A->>T: Process token and return success page
+    
+    Note over T,API: Authenticated User Session
+    T->>API: API calls with access token
+    API->>T: Return user data/resources
+    T->>U: Display authenticated content
+    
+    Note over U,T: Account Switching
+    U->>T: Click "Switch Account"
+    T->>E: Re-initiate auth flow with different account
+    E->>U: Account selection/login page
+    U->>E: Select different account
+    E->>T: New access token for different account
+```
+## Prerequisites
+
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
-  determine dotnet version
+  To determine your dotnet version:
   ```bash
   dotnet --version
   ```
@@ -39,6 +87,7 @@ This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+
 1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
@@ -48,6 +97,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
 1. In the opened web browser, select Add button to install the app in Teams
+
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
@@ -73,7 +123,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ✔ Access Token  
   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-2. Setup NGROK
+2. Setup Development Tunnel (NGROK or Dev Tunnel)
 - Run ngrok - point to port 3978
 
 ```bash
@@ -94,37 +144,46 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- Modify the `/appsettings.json` and fill in the following details:
-  - `{{AzureAd: ClientId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
-  - `{{AzureAd: ClientSecret}}` - Generated from Step 1, also referred to as Client secret
-  - `{{AzureAd: RedirectUri }}` - Your Redirect URI.  ex: `https://%ngrokDomain%.ngrok-free.app/Auth/AuthEnd`
+- Navigate to the sample directory
+    ```bash
+    cd samples/tab-auth-entra-account/csharp
+    ```
 
- - If you are using Visual Studio
+- Modify the `TabAuthEntraAccount/appsettings.json` and fill in the following details:
+  - `{{AzureAd:ClientId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  - `{{AzureAd:ClientSecret}}` - Generated from Step 1, also referred to as Client secret
+  - `{{AzureAd:RedirectUri}}` - Your Redirect URI. ex: `https://%ngrokDomain%.ngrok-free.app/Auth/AuthEnd`
+
+  >  **Security Note**: Never commit actual client secrets to source control. Use environment variables or secure configuration for production deployments.
+
+- If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `/samples/tab-auth-entra-account/csharp/TabAuthEntraAccount` folder
   - Select `TabAuthEntraAccount.csproj` file
 
 
-4. Setup Manifest for App
-    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace placeholder `{{GUID-ID}}` with any guid id.
+4. Setup Manifest for Teams App
+    - **Edit** the `M365Agent/appPackage/manifest.json` contained in the ./M365Agent/appPackage folder to replace placeholder `{{BOT_DOMAIN}}` with your tunnel domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnel, your domain will be `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. And if you are using dev tunnel, your URL will be https://12345.devtunnels.ms.
-    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip`  (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `M365Agent/appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./M365Agent/appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
     
 ## Running the sample
 
 **Note:** 
-* Supported Platforms:
-Microsoft Teams, Outlook, and Office – Desktop and Web
+* **Supported Platforms:**
+  - Microsoft Teams – Desktop and Web
+  - Microsoft Outlook – Desktop and Web  
+  - Microsoft Office – Desktop and Web
 
-* Not Supported:
-Microsoft Teams, Outlook, and Office – Mobile
+* **Not Supported:**
+  - Microsoft Teams, Outlook, and Office – Mobile applications
 
 ## Microsoft Teams
 
@@ -172,9 +231,21 @@ Microsoft Teams, Outlook, and Office – Mobile
 ### Successfully authenticated user's profile information displayed in the Microsoft Office tab
 ![OfficeLoginUserDetails](Images/12.OfficeLoginUserDetails.png)
 
-## Further Reading.
-[External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
+## Further Reading
 
+### Authentication and Microsoft Entra ID
+- [External authentication in Microsoft Teams](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
+- [Microsoft Entra ID authentication in Teams apps](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
+- [OAuth 2.0 authorization code flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow)
 
+### Microsoft Teams Development
+- [Teams app manifest schema](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema)
+- [Teams JavaScript SDK](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/using-teams-client-sdk)
+- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs)
+
+### ASP.NET Core and Azure
+- [ASP.NET Core authentication](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/)
+- [Deploy ASP.NET Core to Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore)
+- [Azure Key Vault configuration provider](https://learn.microsoft.com/en-us/aspnet/core/security/key-vault-configuration)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-auth-entra-account-csharp" />
