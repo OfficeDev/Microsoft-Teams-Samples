@@ -128,37 +128,49 @@ Microsoft Teams, Outlook, and Office – Mobile
 
 ## Microsoft Teams
 
-![1.DesktopInstallApp](Images/1.DesktopInstallApp.png)
+### Step 1: Installing the tab authentication app in Microsoft Teams desktop client
+![DesktopInstallApp](Images/1.DesktopInstallApp.png)
 
-![2.DesktopLoginPage](Images/2.DesktopLoginPage.png)
+### Step 2: The initial authentication page displayed when accessing the app in Teams
+![DesktopLoginPage](Images/2.DesktopLoginPage.png)
 
-![3.DesktopClickLogin](Images/3.DesktopClickLogin.png)
+### Step 3: User clicking the login button to initiate Microsoft Entra ID authentication
+![DesktopClickLogin](Images/3.DesktopClickLogin.png)
 
-![4.DesktopEnterAccount](Images/4.DesktopEnterAccount.png)
+### Step 4: Microsoft Entra ID login screen where user enters their account credentials
+![DesktopEnterAccount](Images/4.DesktopEnterAccount.png)
 
-![5.DesktopLoginUserDetails](Images/5.DesktopLoginUserDetails.png)
+### Step 5: Successfully authenticated user's profile information displayed in the Teams tab
+![DesktopLoginUserDetails](Images/5.DesktopLoginUserDetails.png)
 
 ## Microsoft Outlook
 
 - To view your app in Outlook on the desktop.
 
-![6.OutlookSelectApp](Images/6.OutlookSelectApp.png)
+### Step 1: Selecting the tab authentication app from the Outlook desktop client app gallery
+![OutlookSelectApp](Images/6.OutlookSelectApp.png)
 
-![7.OutlookLoginPage](Images/7.OutlookLoginPage.png)
+### Step 2: The authentication interface displayed when accessing the app within Outlook
+![OutlookLoginPage](Images/7.OutlookLoginPage.png)
 
-![8.OutlookLoginUserDetails](Images/8.OutlookLoginUserDetails.png)
+### Step 3: Successfully authenticated user's profile information displayed in the Outlook tab
+![OutlookLoginUserDetails](Images/8.OutlookLoginUserDetails.png)
 
 ## Microsoft Office
 
 - To preview your app running in Office on the desktop.
 
-![9.OfficeSelectApp](Images/9.OfficeSelectApp.png)
+### Step 1: Selecting the tab authentication app from the Microsoft Office desktop client
+![OfficeSelectApp](Images/9.OfficeSelectApp.png)
 
-![10.OfficeInstallApp](Images/10.OfficeInstallApp.png)
+### Step 2: Installing the tab authentication app in Microsoft Office desktop client
+![OfficeInstallApp](Images/10.OfficeInstallApp.png)
 
-![11.OfficeLoginPage](Images/11.OfficeLoginPage.png)
+### Step 3: The authentication interface displayed when accessing the app within Microsoft Office
+![OfficeLoginPage](Images/11.OfficeLoginPage.png)
 
-![12.OfficeLoginUserDetails](Images/12.OfficeLoginUserDetails.png)
+### Successfully authenticated user's profile information displayed in the Microsoft Office tab
+![OfficeLoginUserDetails](Images/12.OfficeLoginUserDetails.png)
 
 ## Further Reading.
 [External-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider#add-authentication-to-external-browsers)
