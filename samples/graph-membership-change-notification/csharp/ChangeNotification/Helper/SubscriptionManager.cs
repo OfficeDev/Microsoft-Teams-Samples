@@ -108,7 +108,7 @@ namespace ChangeNotification.Helper
             if (string.IsNullOrEmpty(teamId))
             return null;
 
-            var resource = $"/teams/{teamId}/channels/getAllMembers";
+            var resource = $"/teams/{teamId}/channels/getAllMembers?notifyOnIndirectMembershipUpdate=true&suppressNotificationWhenSharedUnsharedWithTeam=true";
           
             return await CreateSubscriptionWithResource(resource);
         }
