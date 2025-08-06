@@ -2,19 +2,19 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-id}}",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://{{domain-name}}",
-    "privacyUrl": "https://{{domain-name}}/privacy",
-    "termsOfUseUrl": "https://{{domain-name}}/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Transcripts Recordings",
+    "short": "Meeting TransRec-Nodejs",
     "full": "Meeting Transcripts Recordings"
   },
   "description": {
@@ -26,8 +26,8 @@
     {
       "entityId": "index",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://{{domain-name}}/tab",
-      "websiteUrl": "https://{{domain-name}}/tab",
+      "contentUrl": "${{TAB_ENDPOINT}}/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/tab",
       "scopes": [
         "personal"
       ]
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{TAB_DOMAIN}}"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }

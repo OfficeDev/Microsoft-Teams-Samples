@@ -1,8 +1,3 @@
-// <copyright file="MeetingTranscriptRecording.jsx" company="Microsoft Corporation">
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT license.
-// </copyright>
-
 import React, { useState, useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Button, Text, Card, Spinner } from '@fluentui/react-components';
@@ -10,216 +5,228 @@ import { CardBody } from 'reactstrap';
 import io from "socket.io-client";
 
 const MeetingTranscriptRecording = () => {
-
-    // Define an array state variable with an initial value
-    const [cardData, setCardData] = useState([]);
-
-   // Define a state variable to manage the visibility of the consent button
+    // ONLINE MEETINGS STATE
+    const [meetingData, setMeetingData] = useState([]);
+    // ADHOC CALLS STATE
+    const [adhocData, setAdhocData] = useState([]);
+    // Common UI states
     const [IsConsentButtonVisible, setIsConsentButtonVisible] = useState(false);
-
-    // Define a state variable to manage the visibility of the login button
     const [IsLoginVisible, setIsLoginVisible] = useState(true);
-
-    // Define a state variable to manage the visibility of the card visible
     const [IsCardVisible, setIsCardVisible] = useState(false);
-
     const [loading, setLoading] = useState(false);
-
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
-
-    // Declare new state variables that are required to get and set the connection.
     const [socket, setSocket] = useState(io());
-
     const [eventUpdated, setEventUpdated] = useState(false);
 
+    // Interval to get updated data
     useEffect(() => {
-        // Set up an interval to call refreshData every 1000 milliseconds (1 second)
         const intervalId = setInterval(getUpdatedData, 60000);
-        // Clear the interval when the component unmounts
-        return () => {
-          clearInterval(intervalId);
-        };
-      }, []);
-
-    // Builds the socket connection, mapping it to /io
-    useEffect(() => {
-        setSocket(io());     
+        return () => clearInterval(intervalId);
     }, []);
 
-    // subscribe to the socket event
+    // Build/rebuild socket connection on mount
+    useEffect(() => setSocket(io()), []);
+
+    // Socket subscription — both meeting and adhoc updates
     useEffect(() => {
         if (!socket) return;
-        socket.on('connection', () => {
-            socket.connect();
-        });
-
-       // receive a message from the server
+        socket.on('connection', () => socket.connect());
         socket.on("message", data => {
-            debugger;
-            setCardData(data);
+            // Data could be either meeting or adhoc: detect and set separately
+            if (Array.isArray(data) && data.length > 0 && data[0]?.onlineMeetingId) {
+                setMeetingData(data);
+            } else {
+                setAdhocData(data);
+            }
         });
-    
     }, [socket]);
 
+    // Online Meetings: fetch updates
     const getUpdatedData = () => {
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/getUpdatedEvents', {
                     method: 'get',
-                    headers: {
-                        "Content-Type": "application/text"
-                    },
+                    headers: { "Content-Type": "application/text" },
                     cache: 'default'
                 })
-                .then(response => response.json())
-                .then(data => {
-                        if (data.eventDetails.length !== 0) {
-                          setCardData(data.eventDetails);
-                        } if(data.eventUpdated){
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.eventDetails?.length) setMeetingData(data.eventDetails);
+                        if (data.eventUpdated) {
                             setEventUpdated(true);
                             ssoAuthentication();
                         }
-                    })
+                    });
             });
         });
-    }
+    };
 
-    // Tab sso authentication.
+    // Authentication and set up both types
     const ssoAuthentication = () => {
-        if(!eventUpdated)
-        setLoading(true);
+        if (!eventUpdated) setLoading(true);
         setIsLoginVisible(false);
         getClientSideToken()
-            .then((clientSideToken) => {
-                getServerSideToken(clientSideToken);
-                createSubscription(clientSideToken);
+            .then(clientSideToken => {
+                // Fetch both meetings and adhoc data after authentication
+                getMeetingServerSide(clientSideToken);
+                getAdhocServerSide(clientSideToken);
+                createMeetingSubscription(clientSideToken);
+                createAdhocSubscription(clientSideToken);
             })
-            .catch((error) => {
-                if (error === "invalid_grant") {
-                    // Display an in-line button so the user can consent
-                    setIsConsentButtonVisible(true);
-                }
+            .catch(error => {
+                if (error === "invalid_grant") setIsConsentButtonVisible(true);
             });
-    }
+    };
 
-    // Get client side token.
     const getClientSideToken = () => {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken()
-                .then((result) => {
-                    resolve(result);
-                })
-                .catch((error) => {
-                    reject("Error getting token: " + error);
+                .then(result => resolve(result))
+                .catch(error => reject("Error getting token: " + error));
+        });
+    };
+
+    // Fetch ONLINE MEETING data (sets Meeting cards)
+    const getMeetingServerSide = (clientSideToken) => {
+        microsoftTeams.app.getContext().then(() => {
+            fetch('/GetLoginUserInformation?ssoToken=' + clientSideToken, {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/text",
+                    "Authorization": "Bearer " + clientSideToken
+                },
+                cache: 'default'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error === "consent_required") {
+                        setIsConsentButtonVisible(true);
+                        setIsLoginVisible(false);
+                        setLoading(false);
+                    } else {
+                        setMeetingData(data);
+                        setIsLoginVisible(false);
+                        setLoading(false);
+                        setIsCardVisible(true);
+                        setEventUpdated(false);
+                        data.forEach(event => getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl));
+                    }
                 });
         });
-    }
+    };
 
-    // Get server side token and user profile.
-    const getServerSideToken = (clientSideToken) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
-                fetch('/GetLoginUserInformation?ssoToken=' + clientSideToken, {
-                    method: 'get',
-                    headers: {
-                        "Content-Type": "application/text",
-                        "Authorization": "Bearer " + clientSideToken
-                    },
-                    cache: 'default'
-                })
+    // Fetch ADHOC CALL data (sets Adhoc cards)
+    const getAdhocServerSide = (clientSideToken) => {
+        microsoftTeams.app.getContext().then(() => {
+            fetch('/getAdhocCalls?ssoToken=' + clientSideToken, {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/text",
+                    "Authorization": "Bearer " + clientSideToken
+                },
+                cache: 'default'
+            })
                 .then(response => response.json())
                 .then(data => {
-                        if (data.error == "consent_required") {
-                            setIsConsentButtonVisible(true);
-                            setIsLoginVisible(false);
-                            setLoading(false);
-                        }
-                        if (data) {
-                          setCardData(data);
-                          setIsLoginVisible(false);
-                          setLoading(false);
-                          setIsCardVisible(true);
-                          setEventUpdated(false);
-                          data.map((event, index) => (
-                            getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl)
-                          ))
-                        } else {
-                            setLoading(false);
-                            reject(response.error);
-                            setIsConsentButtonVisible(true);
-                            setIsLoginVisible(false);
-                            setEventUpdated(false);
-                        }
-                    })
-            });
+                    if (data.error === "consent_required") {
+                        setIsConsentButtonVisible(true);
+                        setIsLoginVisible(false);
+                        setLoading(false);
+                    } else {
+                        setAdhocData(data);
+                        setIsCardVisible(true);
+                        setLoading(false);
+                        setEventUpdated(false);
+                        data.forEach(call => getAdhocTranscriptsIdRecordingId(clientSideToken, call.callId));
+                    }
+                });
         });
-    }
+    };
 
-    // Get server side token and user profile.
+    // Populate Online Meeting transcript/recording IDs
     const getMeetingTranscriptsIdRecordingId = (clientSideToken, joinUrl) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
-                fetch(`/getMeetingTranscriptsIdRecordingId?joinUrl=${joinUrl}&ssoToken=${clientSideToken}`, {
-                    method: 'get',
-                    headers: {
-                        "Content-Type": "application/text",
-                        "Authorization": "Bearer " + clientSideToken
-                    },
-                    cache: 'default'
-                })
-                .then(response => response.json())
-                .then(data => {                    
-                        if(data.error=="consent_required"){
-                            setIsConsentButtonVisible(true);
-                        }
-                        if (data) {
-                            setCardData(data);
-                        } else {
-                            reject(response.error);
-                        }
-                    })
-            });
-        });
-    }
+        fetch(`/getMeetingTranscriptsIdRecordingId?joinUrl=${encodeURIComponent(joinUrl)}&ssoToken=${clientSideToken}`, {
+            method: 'get',
+            headers: {
+                "Content-Type": "application/text",
+                "Authorization": "Bearer " + clientSideToken
+            },
+            cache: 'default'
+        })
+            .then(response => response.json())
+            .then(data => { if (Array.isArray(data)) setMeetingData(data); });
+    };
 
-    const createSubscription = (clientSideToken) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
-                fetch('/createsubscription?ssoToken=' + clientSideToken, {
-                    method: 'post',
-                    headers: {
-                        "Content-Type": "application/text",
-                        "Authorization": "Bearer " + clientSideToken
-                    },
-                    cache: 'default'
-                })
-                .then(response => response.json())
+    // Populate Adhoc Call transcript/recording IDs
+    const getAdhocTranscriptsIdRecordingId = (clientSideToken, callId) => {
+        fetch(`/getAdhocCallTranscriptsIdRecordingId?callId=${encodeURIComponent(callId)}&ssoToken=${clientSideToken}`, {
+            method: 'get',
+            headers: {
+                "Content-Type": "application/text",
+                "Authorization": "Bearer " + clientSideToken
+            },
+            cache: 'default'
+        })
+            .then(response => response.json())
+            .then(data => { if (Array.isArray(data)) setAdhocData(data); });
+    };
+
+    // Create subscriptions for new Online Meetings
+    const createMeetingSubscription = (clientSideToken) => {
+        fetch('/createsubscription?ssoToken=' + clientSideToken, {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/text",
+                "Authorization": "Bearer " + clientSideToken
+            },
+            cache: 'default'
+        }).then(response => response.json())
+            .then(data => {
+                if (data.error === "consent_required") {
+                    setIsConsentButtonVisible(true);
+                    setIsLoginVisible(false);
+                    setLoading(false);
+                }
+            });
+    };
+
+    // Create subscriptions for new Adhoc Calls
+    const createAdhocSubscription = (clientSideToken) => {
+        // For each adhoc call, create a subscription
+        adhocData.forEach(call => {
+            fetch(`/createAdhocSubscription?callId=${call.callId}&ssoToken=${clientSideToken}`, {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/text",
+                    "Authorization": "Bearer " + clientSideToken
+                },
+                cache: 'default'
+            }).then(response => response.json())
                 .then(data => {
-                        if (data.error == "consent_required") {
-                            setIsConsentButtonVisible(true);
-                            setIsLoginVisible(false);
-                            setLoading(false);
-                        } else {
-                            return;
-                        }
-                    })
-            });
+                    if (data.error === "consent_required") {
+                        setIsConsentButtonVisible(true);
+                        setIsLoginVisible(false);
+                        setLoading(false);
+                    }
+                });
         });
-    }
+    };
 
-    // Request consent on implicit grant error.
+    // Consent flow
     const requestConsent = () => {
         getToken()
-            .then(data => {
+            .then(() => {
                 setIsConsentButtonVisible(false);
                 getClientSideToken()
-                    .then((clientSideToken) => {
-                        return getServerSideToken(clientSideToken);
+                    .then(clientSideToken => {
+                        // Replicate full data flow after consent
+                        getMeetingServerSide(clientSideToken);
+                        getAdhocServerSide(clientSideToken);
                     });
             });
-    }
-    
-    // Get token for multi tenant.
+    };
+
     const getToken = () => {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
@@ -227,11 +234,8 @@ const MeetingTranscriptRecording = () => {
                 width: 600,
                 height: 535
             })
-                .then((result) => {
-                    resolve(result);
-                    setLoading(true);
-                })
-                .catch((reason) => {
+                .then(result => { resolve(result); setLoading(true); })
+                .catch(reason => {
                     reject(reason);
                     setloginAdminAccount(true);
                     setIsConsentButtonVisible(false);
@@ -239,37 +243,35 @@ const MeetingTranscriptRecording = () => {
                     setLoading(false);
                 });
         });
-    }
+    };
 
-    // Open stage view
-    const fetchRecordingTranscript = (subject, onlineMeetingId, transcriptsId, recordingId) => () => {
-        var submitHandler = function (err, result) { console.log("Err: ".concat(err, "; Result:  + ").concat(result)); };
+    // StageView launchers (each type fetches its own IDs)
+    const fetchRecordingTranscriptMeeting = (subject, meetingId, transcriptsId, recordingId) => () => {
+        openTaskModule("Recording and Transcript", `${window.location.origin}/RecordingTranscript?subject=${subject}&onlineMeetingId=${meetingId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}`);
+    };
+    const fetchRecordingTranscriptAdhoc = (subject, callId, transcriptsId, recordingId) => () => {
+        openTaskModule("Recording and Transcript", `${window.location.origin}/RecordingTranscript?subject=${subject}&callId=${callId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}`);
+    };
+    function openTaskModule(title, url) {
+        const maxWidth = 1200;
+        const maxHeight = 1000;
         let taskInfo = {
-            title: null,
-            height: null,
-            width: null,
-            url: null,
-            card: null,
-            fallbackUrl: null,
+            title,
+            height: Math.min(window.innerHeight - 500, maxHeight),
+            width: Math.min(window.innerWidth - 1000, maxWidth),
+            url,
             completionBotId: null,
         };
-        taskInfo.url = `${window.location.origin}/RecordingTranscript?subject=${subject}&onlineMeetingId=${onlineMeetingId}&transcriptsId=${transcriptsId}&recordingId=${recordingId}`;
-        taskInfo.title = "Recording and Transcript Form";
-        taskInfo.height = 510;
-        taskInfo.width = 1300;
-        submitHandler = (err, result) => {
-            console.log(`Submit handler - err: ${err}`);
-        };
-        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        microsoftTeams.dialog.url.open(taskInfo, (err, result) => {
+            if (err) console.log(`Submit handler - err: ${err}`);
+        });
     }
 
     return (
         <div className="">
             <div className="btnLogin">
                 {IsLoginVisible &&
-                    <>
-                        <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
-                    </>
+                    <Button appearance="primary" onClick={ssoAuthentication}>Sign-In</Button>
                 }
                 {IsConsentButtonVisible &&
                     <>
@@ -277,54 +279,75 @@ const MeetingTranscriptRecording = () => {
                         <Button appearance="primary" onClick={requestConsent}>Consent</Button>
                     </>
                 }
-                {loginAdminAccount &&
-                    <>
-                    <h3>Please login with admin account.</h3>
-                    </>
-                }
+                {loginAdminAccount && <h3>Please login with admin account.</h3>}
             </div>
-            <div className="mainCard">
-                {loading &&
-                    <>
-                        <div className="loadingIcon">
-                            <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
-                        </div>
-                    </>
-                }
-                {IsCardVisible &&
-                    <>
-                        {cardData.length > 0 && cardData.map((element, index) => {
-                            return (
-                                <div key={index} className="divMainCard">
-                                    <Card>
-                                        <CardBody className="main1Card">
-                                            <div style={{  display: 'flex',justifyContent: 'space-between', alignItems: 'center'}}>
-                                                <div>
-                                                <svg className="calendarSVG" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M7 4V2.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17 4V2.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M21.5 9H16.625H10.75M2 9H5.875" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M18 17C18 17.5523 17.5523 18 17 18C16.4477 18 16 17.5523 16 17C16 16.4477 16.4477 16 17 16C17.5523 16 18 16.4477 18 17Z" fill="#1C274C"></path> <path d="M18 13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13C16 12.4477 16.4477 12 17 12C17.5523 12 18 12.4477 18 13Z" fill="#1C274C"></path> <path d="M13 17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17C11 16.4477 11.4477 16 12 16C12.5523 16 13 16.4477 13 17Z" fill="#1C274C"></path> <path d="M13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.5523 12 13 12.4477 13 13Z" fill="#1C274C"></path> <path d="M8 17C8 17.5523 7.55228 18 7 18C6.44772 18 6 17.5523 6 17C6 16.4477 6.44772 16 7 16C7.55228 16 8 16.4477 8 17Z" fill="#1C274C"></path> <path d="M8 13C8 13.5523 7.55228 14 7 14C6.44772 14 6 13.5523 6 13C6 12.4477 6.44772 12 7 12C7.55228 12 8 12.4477 8 13Z" fill="#1C274C"></path> </g></svg>
+            <div className="cardColumns">
+                {/* ONLINE MEETINGS */}
+                <div className="column">
+                    <div className="mainCard">
+                        <h3>Online Meetings</h3>
+                        {loading && <div className="loadingIcon"><Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" /></div>}
+                        {IsCardVisible && meetingData.length > 0 && meetingData.map((element, index) => (
+                            <div key={index} className="divMainCard">
+                                <Card>
+                                    <CardBody className="main1Card">
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <div>
                                                 <Text className="txtMeetingTitle" weight='bold' as="h1">{element.subject}</Text>
-                                                </div>
-                                                {element.notify?
-                                                <svg className="calendarSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M207.8,112a79.7,79.7,0,0,0-79.2-80H128a79.9,79.9,0,0,0-79.8,80c0,34.3-7.1,53.7-13,63.9a16.2,16.2,0,0,0-.1,16.1A15.9,15.9,0,0,0,49,200H88a40,40,0,0,0,80,0h39a15.9,15.9,0,0,0,13.9-8,16.2,16.2,0,0,0-.1-16.1C214.9,165.7,207.8,146.3,207.8,112ZM128,224a24.1,24.1,0,0,1-24-24h48A24.1,24.1,0,0,1,128,224ZM224.9,73.3a9.3,9.3,0,0,1-3.5.8,7.9,7.9,0,0,1-7.2-4.5,97,97,0,0,0-35-38.8,8,8,0,0,1,8.5-13.6,111.7,111.7,0,0,1,40.8,45.4A8,8,0,0,1,224.9,73.3Zm-190.3.8a9.3,9.3,0,0,1-3.5-.8,8,8,0,0,1-3.6-10.7A111.7,111.7,0,0,1,68.3,17.2a8,8,0,0,1,8.5,13.6,97,97,0,0,0-35,38.8A7.9,7.9,0,0,1,34.6,74.1Z" fill="#5b5fc7"></path></svg>
-                                                :
-                                                <div></div>
-                                                }
                                             </div>
+                                            {element.notify ?
+                                                <svg className="calendarSVG">{/* icon here */}</svg>
+                                                : <div></div>
+                                            }
+                                        </div>
+                                        <div>
+                                            <Text className="meetingDate">{element.start} - {element.end} </Text>
+                                        </div>
+                                        <div>
+                                            <Text className="organizerName">{element.organizer}</Text>
+                                        </div>
+                                        <div className="btnCard">
+                                            <Button appearance="primary" disabled={!element.condition} onClick={fetchRecordingTranscriptMeeting(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* ADHOC CALLS */}
+                <div className="column">
+                    <div className="mainCard">
+                        <h3>Adhoc Calls</h3>
+                        {loading && <div className="loadingIcon"><Spinner label="Loading adhoc calls, fetching Transcript and Recordings..." size="large" /></div>}
+                        {IsCardVisible && adhocData.length > 0 && adhocData.map((element, index) => (
+                            <div key={index} className="divMainCard">
+                                <Card>
+                                    <CardBody className="main1Card">
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <div>
-                                                <Text className="meetingDate">{element.start} - {element.end} </Text>
+                                                <Text className="txtMeetingTitle" weight='bold' as="h1">{element.subject}</Text>
                                             </div>
-                                            <div>
-                                                <Text className="organizerName">{element.organizer}</Text>
-                                            </div>
-                                            <div className="btnCard">
-                                                <Button appearance="primary" disabled={!element.condition} onClick={fetchRecordingTranscript(element.subject, element.onlineMeetingId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
-                                            </div>
-                                        </CardBody>
-                                    </Card>
-                                </div>
-                            );
-                        })}
-                    </>
-                }
+                                            {element.notify ?
+                                                <svg className="calendarSVG">{/* icon here */}</svg>
+                                                : <div></div>
+                                            }
+                                        </div>
+                                        <div>
+                                            <Text className="meetingDate">{element.start} - {element.end} </Text>
+                                        </div>
+                                        <div>
+                                            <Text className="organizerName">{element.organizer}</Text>
+                                        </div>
+                                        <div className="btnCard">
+                                            <Button appearance="primary" disabled={!element.condition} onClick={fetchRecordingTranscriptAdhoc(element.subject, element.callId, element.transcriptsId, element.recordingId)}>Fetch Recording & Transcript</Button>
+                                        </div>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

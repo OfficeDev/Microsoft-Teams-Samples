@@ -107,3 +107,25 @@ code {
     align-items: center;
     height: 100%;
 }
+
+.cardColumns {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.column {
+    flex: 1;
+    min-width: 320px; /* Ensures responsiveness */
+}
+
+.divMainCard {
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    background: white;
+}
+
