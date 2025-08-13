@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
+    <script src="https://res.cdn.office.net/teams-js/2.36.0/js/MicrosoftTeams.min.js"
+        integrity="sha384‑Vg2zJuta2CG1wHGm8f5belcapTREs0cxiGzaMgVWI/apjFxwHqOgYOon/OqPXP7"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        microsoftTeams.app.initialize();
         function generateQR() {
-            debugger
+            debugger;
             var appId = $("#appIdOptions").val();
-            $("#qrImg").attr("src", `${window.location.origin}/Images/${appId}.png`);
+            $("#qrImg").attr("src", `${window.location.origin}/images/${appId}.png`);
             $("#qrImg").removeAttr("hidden");
         };
     </script>
 </head>
-
+ 
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
@@ -31,5 +35,5 @@
         </div>
     </div>
 </body>
-
+ 
 </html>
