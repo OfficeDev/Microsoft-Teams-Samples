@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos a feature where user can join a team using QR code containing the team's id.
+description: This bot allows users to join Microsoft Teams by scanning a team-specific QR code.
 products:
 - office-teams
 - office
@@ -8,93 +8,115 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-12-2021 23:35:25"
+ contentType: samples
+ createdDate: "12/24/2021 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp
 ---
 
 # Join a team using QR code sample
 
-This sample demos a feature where user can join a team using QR code containing the team's id.
-
-User can generate a new QR code (contains team id information) and then scan the QR code to join the team.
+This Microsoft Teams sample bot helps users join a team by scanning a QR code that contains the team ID. It allows users to generate QR codes, leverages the Graph API, and supports both bot and Adaptive Cards functionality. Ideal for mobile clients, this feature enhances team onboarding with ease.
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-- Type a message to get a card to generate the QR code.
+## Included Features
+* Bots
+* Adaptive Cards
+* Graph API
 
- ![Card](JoinTeamByQR/Images/CardWithButtons.png)
+## Interaction with app
 
-- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
+ ![Card](JoinTeamByQR/Images/JoinTeamByQrCode.gif)
 
- ![QR Code](JoinTeamByQR/Images/QRCode.png)
+ ## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-- Scan the generated QR code to join the team.
-
- ![Join Team](JoinTeamByQR/Images/TeamQR.png)
+**Join a team using QR code:** [Manifest](/samples/bot-join-team-using-qr-code/csharp/demo-manifest/Bot-Join-Team-By-QR.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
-
-1. Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2. In a terminal, navigate to `samples/bot-join-team-using-qr-code/csharp`
-
-3. Run ngrok - point to port 3978
-
-   ```bash
-   # ngrok http -host-header=rewrite 3978
-   ```
-
-4. Create a Azure Bot resource
-
-  a) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?   view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp).
-
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-  b) Navigate to **API Permissions**, and make sure to add the follow permissions:
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.  
+    
+  - Navigate to **API Permissions**, and make sure to add the follow permissions:
    - Select Add a permission
    - Select Microsoft Graph -\> Delegated permissions.
        * User.Read (enabled by default)
        * Directory.AccessAsUser.All
        * TeamMember.ReadWrite.All
-
-   - Click on Add permissions.
+       * Click on Add permissions.
 
    ![Permissions](JoinTeamByQR/Images/Permission.png)
 
-5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
+2. Setup for Bot
+	
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+    
+  -In the Azure Portal, navigate back to the Azure Bot resource created (https://learn.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
+  -Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
+  - Enter a name for your new Connection setting.  
+    - In the Service Provider dropdown, select Azure Active Directory V2
+    - Enter in the client id and client secret obtained in step 1 and 1
+    - For the Token Exchange URL use the Application ID URL obtained in step 1
+    - Specify "common" as the Tenant ID
+    - Add all the scopes configured when specifying permissions to downstream APIs in step 1
+    - Click "Save"
 
-7. Modify the `/appsettings.json` and fill in the following details:
-   - `{{ MicrosoftAppId }}` - Generated from Step 4.a is the application app id
-   - `{{ MicrosoftAppPassword }}` - Generated from Step 4.a, also referred to as Client secret
-   - `{{ ConnectionName }}` - Generated from Step 4.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
-    Please follow [Add authentication to bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
-   - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+3. Run ngrok - point to port 3978
 
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
-## To try this sample
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-- In a terminal, navigate to `JoinTeamByQR`
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+4. Setup for code
+
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  - Modify the `/appsettings.json` and fill in the following details:
+   - `{{ MicrosoftAppId }}` - Generated from Step 1 is the application app id
+   - `{{ MicrosoftAppPassword }}` - Generated from Step 1, also referred to as Client secret
+   - `{{ ConnectionName }}` - Generated from Step 2, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
+    Please follow [Add authentication to bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
+   - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+   
+   - In a terminal, navigate to `JoinTeamByQR`
 
     ```bash
     # change into project folder
@@ -103,21 +125,67 @@ User can generate a new QR code (contains team id information) and then scan the
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal
+ - From a terminal
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
+   ```bash
+   # run the bot
+   dotnet run
+   ```
 
-  B) Or from Visual Studio
+ - Or from Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `samples/bot-join-team-using-qr-code/csharp` folder
   - Select `JoinTeamByQR.csproj` file
   - Press `F5` to run the project
+   
+
+5) Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `"api://botid-{{MicrosoftAppId}}"`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+ 
+## Running the sample
+
+- Type a message to get a card to generate the QR code.
+
+ ![Card](JoinTeamByQR/Images/WelcomeMessage.png)
+
+- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
+
+ ![QR Code](JoinTeamByQR/Images/TeamSelectionToGenerateQRCode.png)
+
+- Scan the generated QR code to join the team.
+
+ ![Join Team](JoinTeamByQR/Images/GenerateQrCode.png)
+
+- After Scan the Qr Code Added user in team successfully.
+
+ ![Join Team](JoinTeamByQR/Images/SuccessfullyAddedUser.png)
+
 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
+- [QR Scanner Capability](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/qr-barcode-scanner-capability)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-join-team-using-qr-code-csharp" />

@@ -10,11 +10,8 @@
     </style>
     <script src="/node_modules/qrcode/build/qrcode.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-		  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-		  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-		  crossorigin="anonymous"
-	></script>
+    <script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js"
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -68,13 +65,13 @@
                     for (const val of teamDetails) {
                         if (val.id == decodedText) {
                             
-                            microsoftTeams.getContext(function (context) {
+                            microsoftTeams.app.getContext().then((context) => {
                                 var teamData = {
                                     teamId: decodedText,
-                                    userId: context.userObjectId
+                                    userId: context.user.id
                                 }
 
-                                microsoftTeams.dialog.submit(teamData);
+                                microsoftTeams.tasks.submitTask(teamData);
                             });
                         }
                     }

@@ -1,44 +1,38 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
+const QRCode = require('qrcode');
+
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+
+const { CloudAdapter, ConfigurationBotFrameworkAuthentication, MemoryStorage, ConversationState, UserState } = require('botbuilder');
+
+const { TeamsBot } = require('./bots/teamsBot');
+const { MainDialog } = require('./dialogs/mainDialog');
+const { teamData } = require('./bots/dialogBot');
+
 const PORT = process.env.PORT || 3978;
 const server = express();
 
 server.use(cors());
 server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
+server.use(express.urlencoded({ extended: true }));
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
 
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
+// ------------------ Adapter Setup (CloudAdapter) ------------------
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
-const { TeamsBot } = require('./bots/teamsBot');
-const { MainDialog } = require('./dialogs/mainDialog');
-const { teamData } = require('./bots/dialogBot');
-const QRCode = require('qrcode')
-
-// Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+// ------------------ Error Handling ------------------
+const memoryStorage = new MemoryStorage();
+const conversationState = new ConversationState(memoryStorage);
+const userState = new UserState(memoryStorage);
 
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights. See https://aka.ms/bottelemetry for telemetry 
-    //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${error}`);
+    console.error(`[onTurnError] unhandled error: ${error}`);
 
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
         `${error}`,
@@ -46,54 +40,41 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
     await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
-    // Clear out state
     await conversationState.delete(context);
 };
 
-// Define the state store for your bot.
-// See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
-// A bot requires a state storage system to persist the dialog and user state between messages.
-const memoryStorage = new MemoryStorage();
-
-// Create conversation and user state with in-memory storage provider.
-const conversationState = new ConversationState(memoryStorage);
-const userState = new UserState(memoryStorage);
-
-// Create the main dialog.
+// ------------------ Bot Setup ------------------
 const dialog = new MainDialog(conversationState);
-// Create the bot that will handle incoming messages.
 const bot = new TeamsBot(conversationState, userState, dialog);
 
+// ------------------ Start Server ------------------
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
 
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
-server.get('/generate', (req, res, next) => {
-    res.render('./views/generate')
+// ------------------ Web Routes ------------------
+server.get('/generate', (req, res) => {
+    res.render('./views/generate');
 });
 
-server.get('/qrcode', (req, res, next) => {
-    var teamId = req.url.split('=')[1];
-    const generateQR = async () => {
-        try {
-            var qrData = await QRCode.toDataURL(teamId);
-            console.log(qrData);
-            res.render('./views/qrcode', { qrData: JSON.stringify(qrData) });
-        } catch (err) {
-            console.error(err)
-        }
+server.get('/qrcode', async (req, res) => {
+    const teamId = req.query.teamId;
+    if (!teamId) return res.status(400).send('Missing teamId query parameter');
+
+    try {
+        const qrData = await QRCode.toDataURL(teamId);
+        res.render('./views/qrcode', { qrData: JSON.stringify(qrData) });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error generating QR code');
     }
-
-    generateQR();
 });
 
-server.get('/teamDetails', function (req, res) {
-    var teamDetails = teamData["data"];
+server.get('/teamDetails', (req, res) => {
+    const teamDetails = teamData["data"];
     res.render('./views/generate', { teamDetails: JSON.stringify(teamDetails) });
 });
 
@@ -101,8 +82,19 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
+const { ConnectorClient } = require('botframework-connector');
+
+// ------------------ Bot Message Endpoint ------------------
+// Inside your adapter.process call:
+server.post('/api/messages', async (req, res) => {
+    await adapter.process(req, res, async (context) => {
+        // ✅ Get the ConnectorClient and UserTokenClient from the adapter's turnState
+        const connectorClient = context.turnState.get(adapter.ConnectorClientKey);
+        const userTokenClient = context.turnState.get(adapter.UserTokenClientKey);
+
+        context.turnState.set(adapter.UserTokenClientKey, userTokenClient);
+        context.turnState.set(adapter.ConnectorClientKey, connectorClient);
+
         await bot.run(context);
     });
 });
