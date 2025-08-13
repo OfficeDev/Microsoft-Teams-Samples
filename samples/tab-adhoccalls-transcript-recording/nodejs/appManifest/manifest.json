@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "developer": {
+    "name": "AdhocCalls.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "adhocCalls Transcripts & Recs",
+    "full": "adhocCalls Transcripts and Recordings"
+  },
+  "description": {
+  "short": "Retrieve and manage adhocCalls transcripts and recordings in Microsoft Teams.",
+  "full": "This sample application for Microsoft Teams demonstrates how to use Microsoft Graph to retrieve and manage transcripts and recordings for adhocCalls, such as PSTN and other ad-hoc calls that are not part of an online meeting instance. It provides a consistent approach similar to meeting-based APIs, helping teams archive important call details for compliance, analytics, and post-call review."
+ },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "AdhocCalls Transcripts and Recordings",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "groupChat"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}
