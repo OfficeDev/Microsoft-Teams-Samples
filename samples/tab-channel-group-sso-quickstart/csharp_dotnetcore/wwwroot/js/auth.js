@@ -1,37 +1,34 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-   
-    getClientSideToken()
-        .then((clientSideToken) => {
-            console.log("clientSideToken: " + clientSideToken);
-            return getServerSideToken(clientSideToken);
-        })
-        .catch((error) => {
-            console.log(error);
-            if (error === "invalid_grant") {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-            } else {
-                // Something else went wrong
-            }
-        });
+    microsoftTeams.app.initialize().then(() => {
+        getClientSideToken()
+            .then((clientSideToken) => {
+                return getServerSideToken(clientSideToken);
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error === "invalid_grant") {
+                    // Display in-line button so user can consent
+                    $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                    $("#divError").show();
+                    $("#consent").show();
+                } else {
+                    console.log("authentication failed. something went wrong");
+                }
+            });
+    });
 });
 
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.app.getContext().then((context) => {
-            getUserInfo(context.user.userPrincipalName);
-            getPhotoAsync(accessToken);
+
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
-    });
 }
 
 function getToken() {
@@ -42,8 +39,19 @@ function getToken() {
             height: 535
         }).then((result) => {
             resolve(result);
+            $("#consent").hide();
+            $("#divError").hide();
         }).catch((reason) => {
             reject(reason);
+            if (reason == "invalid_grant") {
+                $("#divError").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+                $("#divError").show();
+                $("#consent").show();
+            }
+            else {
+                $("#divError").hide();
+                $("#consent").hide();
+            }
         });
     });
 }
@@ -73,7 +81,7 @@ function getServerSideToken(clientSideToken) {
                 cache: 'default'
             })
                 .then((response) => {
-                    if (response.ok) {                        
+                    if (response.ok) {
                         return response.text();
                     } else {
                         reject(response.error);
@@ -84,10 +92,19 @@ function getServerSideToken(clientSideToken) {
                         if (JSON.parse(responseJson).error)
                             reject(JSON.parse(responseJson).error);
                     } else if (responseJson) {
-                        accessToken = responseJson;
-                        console.log("Exchanged token: " + accessToken);
-                        getUserInfo(context.user.userPrincipalName);
-                        getPhotoAsync(accessToken);
+                        if (responseJson == "invalid_grant") {
+                            console.log("error" + responseJson);
+                            $("#divError").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+                            $("#divError").show();
+                            $("#consent").show();
+                        }
+                        else {
+                            $("#divError").hide();
+                            $("#consent").hide();
+                            accessToken = responseJson;
+                            getUserInfo(context.user.userPrincipalName);
+                            getPhotoAsync(accessToken);
+                        }
                     }
                 });
         });

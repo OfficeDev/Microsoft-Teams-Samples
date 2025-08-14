@@ -34,11 +34,11 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/questions`,
         };
 
-        dialog.open(taskInfo, (questionsJson: any) => {
-            //if (err) {
-            //    console.log("Some error occurred in the task module")
-            //    return
-            //}
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, questionsJson: any) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
 
             const questionsObject = JSON.parse(questionsJson);
             app.getContext().then((context) => {
@@ -77,12 +77,12 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/edit?editText=` + editText,
         };
 
-        dialog.open(taskInfo, (question: any) => {
-            //if (err) {
-            //    console.log("Some error occurred in the task module")
-            //    return
-            //}
-            app.getContext().then((context) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, question: any) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
+            microsoftTeams.getContext((context) => {
                 const questDetails: IQuestionSet = {
                     meetingId: context.meeting!.id!,
                     question: question,

@@ -1,0 +1,37 @@
+
+.break {
+    margin-top: 10px;
+}
+
+.a {
+    display: contents;
+}
+
+/* Theme styles */
+.theme-dark {
+    margin: 0.5rem;
+    margin-right: 0px;
+    margin-right: 0px;
+    border-radius: 2px;
+    padding: 0.3rem;
+    background-color: #242424;
+    color: white;
+}
+
+.theme-light {
+    margin: 0.5rem;
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 0.9rem;
+    background-color: white;
+    color: #242424;
+}
+
+.theme-contrast {
+    margin: 0.5rem;
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 0.9rem;
+    background-color: black;
+    color: chartreuse;
+}

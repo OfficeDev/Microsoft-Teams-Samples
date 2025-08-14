@@ -12,6 +12,6 @@ namespace MeetingLiveCoding.Models
         public string QuestionId { get; set; }
         public string MeetingId { get; set; }
 
-        public string Description { get; set; }
+        public string EditorData { get; set; }
     }
 }

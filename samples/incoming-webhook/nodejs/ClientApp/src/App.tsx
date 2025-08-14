@@ -100,7 +100,7 @@ class App extends React.Component<{}, IAppState> {
         <Suspense fallback={<div></div>}>
           <div className="appContainer">
             <Router>
-                <Route exact path='/configure-message' component={ConfigureMessage}></Route>
+              <Route exact path='/configure-message' component={ConfigureMessage}></Route>
             </Router>
           </div>
         </Suspense>

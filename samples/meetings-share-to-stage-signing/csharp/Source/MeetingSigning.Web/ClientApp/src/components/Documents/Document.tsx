@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Flex, Header } from '@fluentui/react-northstar';
 import classnames from 'classnames';
 import { SignatureList } from 'components/Signatures';
-import { Signature } from 'models';
+import { Signature, User } from 'models';
 import { useTheme } from 'hooks';
 import styles from './Document.module.css';
 
@@ -11,7 +11,7 @@ export type DocumentProps = {
   title: string;
   content: ReactNode;
   clickable: boolean;
-  loggedInAadId: string;
+  loggedInUser: User;
   signatures: Signature[];
   className?: string;
 };
@@ -21,7 +21,7 @@ export function Document({
   title,
   content,
   clickable,
-  loggedInAadId,
+  loggedInUser,
   signatures,
   className,
 }: DocumentProps) {
@@ -38,13 +38,13 @@ export function Document({
   const documentClasses = classnames(styles.document, className);
 
   return (
-    <Flex column fill styles={documentInlineStyles} className={documentClasses}>
+    <Flex column styles={documentInlineStyles} className={documentClasses}>
       <Header as="h1" content={title} styles={headerInlineStyles} />
       <div>{content}</div>
       <Flex.Item align="start">
         <SignatureList
           documentId={id}
-          loggedInAadId={loggedInAadId}
+          loggedInUser={loggedInUser}
           signatures={signatures}
           clickable={clickable}
         />

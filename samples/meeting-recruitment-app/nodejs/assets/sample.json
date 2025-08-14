@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-meeting-recruitment-app-nodejs",
+    "source": "officeDev",
+    "title": "Recruitment App Sample using Apps in Meetings",
+    "shortDescription": "This sample demonstrates a recruitment meeting app with integrated bots for notifications, meeting details, and in-meeting features to assist the interview process.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-recruitment-app/nodejs",
+    "longDescription": [
+      "This recruitment app sample enhances meeting experiences by integrating features like bots for notifications, meeting details, and in-meeting assistance such as adding questions, notes, and side panel views. It helps streamline the interview process with features for adding, editing, and sharing candidate information."
+    ],
+    "creationDateTime": "2021-10-01",
+    "updateDateTime": "2024-10-11",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,bot,meeting"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/nodejs/Images/meetingrecruitment.gif",
+        "alt": "Solution UX showing recruitment app sample using apps in meetings"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

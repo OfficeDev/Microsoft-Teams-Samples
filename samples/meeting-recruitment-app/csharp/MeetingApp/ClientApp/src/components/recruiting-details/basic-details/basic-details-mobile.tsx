@@ -27,11 +27,11 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             url: `${window.location.origin}/shareAssets`,
         };
 
-        dialog.open(taskInfo, (note: any) => {
-            //if (err) {
-            //    console.log("Some error occurred in the task module")
-            //    return
-            //}
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, note: any) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
             var details = JSON.parse(note);
             let files = new Array();
             details.checkedValues.map((item: any) => {

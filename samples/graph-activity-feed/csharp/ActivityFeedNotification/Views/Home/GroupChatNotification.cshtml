@@ -1,5 +1,4 @@
-﻿
-@model TabActivityFeed.Model.TaskInfo
+@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/chatnotification.css">
+    <link rel="stylesheet" type="text/css" href="~/css/chatnotification.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -21,25 +20,32 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
+          microsoftTeams.app.initialize().then(() => {
             $('input[type="radio"]').click(function () {
                 var inputValue = $(this).attr("value");
                 var targetBox = $("." + inputValue);
                 $(".desc").not(targetBox).hide();
                 $(targetBox).show();
             });
+          });
         });
-        microsoftTeams.initialize();
+
+        microsoftTeams.app.initialize();
+
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
         var groupchatId = "";
-        microsoftTeams.getContext(function (context) {
-            groupchatId = context.chatId;
-            username = context.upn;
-            userId = context.userObjectId;
+
+        microsoftTeams.app.getContext().then((context) => {
+            groupchatId = context.chat.id;
+            username = context.user.userPrincipalName;
+            userId = context.user.id;
 
         });
+
         var empty = true;
+
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
                 empty = false;
@@ -49,6 +55,7 @@
 
         function SendNotificationToGroupChat() {
             var isValid = true;
+
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
@@ -63,28 +70,32 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
             var action = "EntityTopic";
-            let taskInfo = {
+            let taskDetails = {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
                 taskInfoAction: action,
                 access_token: token,
-                chatId:groupchatId,
+                chatId: groupchatId,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
-            microsoftTeams.tasks.submitTask(taskInfo);
+
             return true;
         };
+
         function customTopicNotification() {
             var isValid = true;
 
@@ -102,12 +113,14 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
             var action = "customTopic";
-            let taskInfo = {
+            let taskDetails = {
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
@@ -115,13 +128,14 @@
                 access_token: token,
                 chatId: groupchatId,
             };
+
             $.ajax({
                 type: 'POST',
                 url: '/SendNotificationToGroupChat',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
-            microsoftTeams.tasks.submitTask(taskInfo);
+
             return true;
         };
 
@@ -129,14 +143,18 @@
 </head>
 
 <body>
-    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
+    <div id="feed-container" style="display: none;">
 
         <div class="radioClass">
-            <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat"> Send Notification To User Group Chat</label></br>
-            <label><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification with Custom Topic</label>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="sendNotificationGroupChat"> Send Notification To User Group Chat</label></br>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification with Custom Topic</label>
         </div></br>
         <div class="sendNotificationGroupChat desc">
             <div class="mb">
@@ -144,11 +162,11 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
-                    <label for="title" class="title">Task Title</label>
+                    <label for="title" class="title" style="color:black">Task Title</label>
                     @Html.TextBoxFor(model => model.title, htmlAttributes: new { @class = "form-control", @id = "title" })
                 </div>
                 <div class="form-group fg">
-                    <label for="title-desc" class="description">Task Description</label>
+                    <label for="title-desc" class="description" style="color:black">Task Description</label>
                     @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control title-desc", @id = "description" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>
@@ -163,11 +181,11 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
-                    <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
+                    <label for="DeployementTitle" class="DeployementTitle" style="color:black">Deployment Title</label>
                     @Html.TextBoxFor(model => model.DeployementTitle, htmlAttributes: new { @class = "form-control", @id = "DeployementTitle" })
                 </div>
                 <div class="form-group fg">
-                    <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label>
+                    <label for="deployment-desc" class="DeploymentDescription" style="color:black">Deployment Description</label>
                     @Html.TextAreaFor(model => model.DeploymentDescription, htmlAttributes: new { @class = "form-control deployment-desc", @id = "DeploymentDescription" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>
@@ -178,7 +196,7 @@
         </div>
     </div>
 
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 
 </body>
 

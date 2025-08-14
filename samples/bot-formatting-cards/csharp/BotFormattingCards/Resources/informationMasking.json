@@ -1,0 +1,32 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "size": "large",
+      "text": "Information Masking Card"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Enter Password"
+    },
+    {
+      "type": "Input.Text",
+      "id": "secretThing",
+      "style": "password"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Re-type Password",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "secretThing",
+      "style": "password"
+    }
+  ]
+}

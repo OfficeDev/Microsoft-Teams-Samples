@@ -1,0 +1,53 @@
+{
+    "name": "aimeetinghelper",
+    "version": "1.0.0",
+    "msteams": {
+        "teamsAppId": null
+    },
+    "description": "This example demonstrates how Azure Open AI extracts action items from meeting transcriptions for all participants who subscribed to the meeting, and subsequently sends these action items to each individual user in a 1:1 chat after the meeting concludes.",
+    "engines": {
+        "node": "16 || 18"
+    },
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "./src/index.js",
+    "scripts": {
+        "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+        "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.testTool npm run dev",
+        "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.testtool teamsapptester start",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
+        "start": "node ./src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "nodemon --exec \"npm run start\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com"
+    },
+    "dependencies": {
+        "@azure/data-tables": "^13.2.2",
+        "@azure/openai": "^1.0.0-beta.12",
+        "@microsoft/microsoft-graph-client": "^3.0.7",
+        "@microsoft/teams-ai": "^1.1.0",
+        "adaptivecards": "^3.0.4",
+        "applicationinsights": "^3.2.1",
+        "azure-storage": "^2.10.7",
+        "botbuilder": "^4.22.2",
+        "botframework-connector": "^4.22.2",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "langchain": "^0.2.7",
+        "luxon": "^3.6.1",
+        "memorystorage": "^0.12.0",
+        "pem": "^1.14.8",
+        "q": "^1.5.1",
+        "request": "^2.88.2",
+        "restify": "^10.0.0",
+        "url": "^0.11.3",
+        "uuid": "^10.0.0"
+    },
+    "devDependencies": {
+        "env-cmd": "^10.1.0",
+        "nodemon": "^2.0.7"
+    }
+}

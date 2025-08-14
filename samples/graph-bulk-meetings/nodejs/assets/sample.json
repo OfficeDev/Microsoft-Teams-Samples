@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs",
+    "source": "officeDev",
+    "title": "This sample application demonstrates bulk creation of Teams meetings using file uploads.",
+    "shortDescription": "This is a sample application which demonstrates how to create meetings in bulk using file upload method through teams tab",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-bulk-meetings/nodejs",
+    "longDescription": [
+      "This sample application allows users to bulk create meetings in Microsoft Teams using file uploads, leveraging the Graph API for seamless integration. It features an intuitive tab interface, interactive elements, and detailed setup instructions for smooth deployment."
+    ],
+    "creationDateTime": "2022-09-09",
+    "updateDateTime": "2024-10-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "nodejs"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-bulk-meetings/nodejs/Images/BulkMeeting.gif",
+        "alt": "This is an sample application which shows how to create teams meetings in bulk."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

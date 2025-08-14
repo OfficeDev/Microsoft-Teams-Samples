@@ -13,6 +13,9 @@ using System.Net.Http;
 
 namespace BotDailyTaskReminder
 {
+    /// <summary>
+    /// Custom adapter that adds error handling to the bot's turn logic.
+    /// </summary>
     public class AdapterWithErrorHandler : CloudAdapter
     {
         public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
@@ -21,20 +24,22 @@ namespace BotDailyTaskReminder
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
-                // NOTE: In production environment, you should consider logging this to
-                // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
-                // to add telemetry capture to your bot.
+                // NOTE: In production environment, consider logging this to
+                // Azure Application Insights.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Send a message to the user
-                await turnContext.SendActivityAsync("The bot encountered an error or bug.");
-                await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+                // Uncomment below commented line for local debugging.
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
 
                 // Send a trace activity, which will be displayed in the Bot Framework Emulator
                 await SendTraceActivityAsync(turnContext, exception);
             };
         }
 
+        /// <summary>
+        /// Sends a trace activity to the Bot Framework Emulator in case of an error.
+        /// Only sends if the bot is running in the Emulator.
+        /// </summary>
         private static async Task SendTraceActivityAsync(ITurnContext turnContext, Exception exception)
         {
             // Only send a trace activity if we're talking to the Bot Framework Emulator

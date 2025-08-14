@@ -38,9 +38,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
     // Clear out state
     await conversationState.delete(context);
 };
@@ -73,9 +73,7 @@ server.use(express.urlencoded({
 }));
 
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${process.env.port}`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
+    console.log(`Service listening at:${process.env.port}`);
 });
 
 // Listen for incoming requests.
@@ -95,9 +93,9 @@ const notification = async (req, res, next) => {
         console.log("In Response");
         clientStatesValid = false;
         console.log(req.body.value[0].resourceData);
-        let userstatus = req.body.value[0].resourceData;
-        console.log(userstatus.activity);
-        console.log(userstatus.availability);
+        
+        // Call the API
+        const userstatus = await dialog.getUserState("communications/presences/" + req.body.value[0].resourceData.id);
         status = 202;
         //for storing step context
         const dbot = new DialogBot(conversationState, userState, dialog, conversationReferences);
@@ -112,8 +110,5 @@ const notification = async (req, res, next) => {
     }
 }
 
-
 // Listen for incoming requests.
 server.post('/api/notifications', notification);
-
-

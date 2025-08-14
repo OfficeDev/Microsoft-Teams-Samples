@@ -22,12 +22,12 @@ server.get('/content', (req, res, next) => {
 });
 
 server.get('/tab', (req, res, next) => {
-    res.render('./views/sampleTab', { microsoftAppId: process.env.MicrosoftAppId, baseUrl: process.env.BaseUrl });
+    res.render('./views/sampleTab', { teamsAppId: process.env.TeamsAppId, baseUrl: process.env.BaseUrl });
 });
 
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
+     console.log('Server listening on port: ' + PORT);
 });

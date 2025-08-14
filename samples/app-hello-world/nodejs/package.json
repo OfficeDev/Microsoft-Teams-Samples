@@ -1,32 +1,63 @@
 {
-  "name": "msteams-nodejs-hello-world",
-  "version": "1.0.0",
-  "description": "Microsoft Teams Hello World sample app written in ES6 with Bot Framework v4 SDK",
-  "scripts": {
-    "start": "nodemon --exec babel-node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "teams-hello-world-copilot-optimized",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git",
+    "directory": "samples/app-hello-world/nodejs"
   },
-  "author": "Microsoft Corp.",
+  "version": "1.0.0",
+  "description": "Microsoft Teams Hello World Bot sample optimized for GitHub Copilot Agent development",
+  "homepage": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-hello-world/nodejs",
+  "keywords": [
+    "microsoft-teams",
+    "copilot-agent",
+    "bot-framework",
+    "teams-samples",
+    "officedev"
+  ],
+  "main": "src/app.js",
+  "engines": {
+    "node": ">=16.14.2"
+  },
+  "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --exec babel-node --inspect=9239 --signal SIGINT src/app.js",
+    "start": "nodemon --exec babel-node src/app.js",
+    "start:prod": "babel-node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "author": {
+    "name": "Microsoft Corporation",
+    "email": "teams-dev@microsoft.com",
+    "url": "https://developer.microsoft.com/microsoft-teams"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/OfficeDev/msteams-samples-hello-world-nodejs/issues"
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/issues"
   },
-  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "copilot": {
+    "agent": {
+      "priority": "teams-first",
+      "optimized": true,
+      "patterns": [
+        "teams-bot",
+        "messaging-extensions",
+        "teams-tabs"
+      ]
+    }
+  },
   "dependencies": {
-    "@babel/polyfill": "^7.8.7",
-    "botbuilder": "^4.8.0",
+    "@babel/polyfill": "^7.12.1",
+    "botbuilder": "^4.18.0",
     "config": "^1.28.1",
     "core-js": "^2.6.11",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "path": "^0.12.7",
-    "restify": "^8.5.1",
-    "send": "^0.17.1"
+    "restify": "^10.0.0",
+    "send": "^0.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -35,8 +66,9 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.9.0",
     "del": "^5.1.0",
-    "gulp": "^4.0.2",
+    "gulp": "^3.9.1",
     "gulp-zip": "^5.0.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "esbuild": "^0.18.1"
   }
 }

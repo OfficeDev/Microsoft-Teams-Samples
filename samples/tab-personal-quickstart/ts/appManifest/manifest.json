@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Personal App",
+    "full": ""
+  },
+  "description": {
+    "short": "Quick-start app for building personal tabs in Microsoft Teams using TypeScript.",
+    "full": "This quick-start sample provides detailed instructions for developing a personal tab in Microsoft Teams with TypeScript, featuring essential setup and deployment guidance. It covers prerequisites, coding requirements, and steps to run the app, ensuring seamless integration with Teams and other Microsoft applications."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ]
+}

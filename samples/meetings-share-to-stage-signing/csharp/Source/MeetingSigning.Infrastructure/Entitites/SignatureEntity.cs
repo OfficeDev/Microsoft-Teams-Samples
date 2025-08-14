@@ -11,11 +11,11 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entities
         /// The ID of the Signature
         /// </summary>
         /// <remarks>This will be created automatically by Entity Framework if not provided</remarks>
-        
+
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Signer entity that contains information like AAD User UserId of the Signer
+        /// Signer entity that contains information like AzureAD Object ID of the Signer
         /// </summary>
         public UserEntity Signer { get; set; }
 

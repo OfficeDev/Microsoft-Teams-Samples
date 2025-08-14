@@ -1,110 +1,126 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Graph.Authentication;
+using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace BotWithSharePointFileViewer
 {
-    // This class is a wrapper for the Microsoft Graph API
-    // See: https://developer.microsoft.com/en-us/graph
     public class SimpleGraphClient
     {
         private readonly string _token;
 
         public SimpleGraphClient(string token)
         {
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                throw new ArgumentNullException(nameof(token));
-            }
-
-            _token = token;
+            _token = string.IsNullOrWhiteSpace(token) ? throw new ArgumentNullException(nameof(token)) : token;
         }
 
-        // Get SharePoint file list.
+        // Updated method to fix the CS1061 error by replacing the incorrect 'Children' property access
+        // with the correct approach to retrieve children items from the root of the drive.
+
         public async Task<List<string>> GetSharePointFile(string sharepointSiteName, string sharepointTenantName)
         {
             var graphClient = GetAuthenticatedClient();
 
-           var site =await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
-                             .Request()
-                             .GetAsync();
-            if (site != null)
+            try
             {
-                var drive = await graphClient.Sites[site.Id].Drives
-                                    .Request()
-                                    .GetAsync();
+                // Format: domain:/sites/site-name
+                var sitePath = $"{sharepointTenantName}.sharepoint.com:/sites/{sharepointSiteName}";
+                var site = await graphClient.Sites[sitePath].GetAsync();
 
-                if(drive != null)
+                if (site == null) return null;
+
+                var drive = await graphClient.Sites[site.Id].Drive.GetAsync();
+                if (drive == null) return null;
+
+                // Corrected code: Use the 'Children' property of the DriveItemRequestBuilder for the root item.
+                var rootItem = await graphClient.Drives[drive.Id].Root.GetAsync();
+                if (rootItem == null) return null;
+
+                var children = await graphClient.Drives[drive.Id].Items[rootItem.Id].Children.GetAsync();
+
+                var fileNames = new List<string>();
+                foreach (var file in children.Value)
                 {
-                    var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.Children
-                                            .Request()
-                                            .GetAsync();
-
-                    var fileName = new List<string>();
-                    foreach (var file in children.CurrentPage)
-                    {
-                        fileName.Add(file.Name);
-                    }
-
-                    return fileName;
+                    fileNames.Add(file.Name);
                 }
-                else
-                {
-                    return null;
-                }
+
+                return fileNames;
             }
-            else
+            catch (Exception e)
             {
+                Console.WriteLine("Exception is " + e.Message);
                 return null;
             }
         }
 
         // Upload file to SharePoint site.
-        public async void UploadFileInSharePointSite(string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
+        public async Task UploadFileInSharePointSite(string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
         {
             var graphClient = GetAuthenticatedClient();
 
-            var site = await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
-                             .Request()
-                             .GetAsync();
-
-            if (site != null)
+            try
             {
-                var drive = await graphClient.Sites[site.Id].Drives
-                                    .Request()
-                                    .GetAsync();
-                if (drive != null)
+                var sitePath = $"{sharepointTenantName}.sharepoint.com:/sites/{sharepointSiteName}";
+                var site = await graphClient.Sites[sitePath].GetAsync();
+                if (site == null)
                 {
-                    await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath(fileName).Content
-                            .Request()
-                            .PutAsync<DriveItem>(stream);
+                    Console.WriteLine("Site not found.");
+                    return;
                 }
+
+                var drive = await graphClient.Sites[site.Id].Drive.GetAsync();
+                if (drive == null)
+                {
+                    Console.WriteLine("Drive not found.");
+                    return;
+                }
+
+                await graphClient
+                    .Drives[drive.Id]
+                    .Root
+                    .ItemWithPath(fileName)
+                    .Content
+                    .PutAsync(stream);
+
+                Console.WriteLine("File uploaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Upload failed: " + ex.Message);
             }
         }
 
-        // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        // Custom Token Provider for SDK v5
+        private class TokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+            public AllowedHostsValidator AllowedHostsValidator { get; } = new AllowedHostsValidator();
+
+            public TokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri,
+                Dictionary<string, object> additionalAuthenticationContext = null,
+                CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+        }
+
+        // Get Graph client authenticated with v5 pattern
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
-
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-
-            return graphClient;
+            var tokenProvider = new TokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
+            return new GraphServiceClient(authProvider);
         }
     }
 }

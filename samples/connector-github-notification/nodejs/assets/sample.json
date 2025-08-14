@@ -1,0 +1,61 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-connector-github-notification-nodejs",
+    "source": "officeDev",
+    "title": "Github connector for Microsoft Teams",
+    "shortDescription": "This sample demonstrates how to build a GitHub connector for Microsoft Teams, enabling integration with GitHub's APIs for streamlined notifications.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-github-notification/nodejs",
+    "longDescription": [
+      "This sample shows how to create a GitHub connector for Microsoft Teams using GitHub's APIs. It allows users to receive real-time notifications within Teams, making it easier to track updates and collaborate."
+    ],
+    "creationDateTime": "2017-08-21",
+    "updateDateTime": "2024-10-10",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "connector"
+      }
+    ],
+    "thumbnails": [],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

@@ -1,7 +1,9 @@
 <html>
 
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
@@ -10,10 +12,11 @@
     <script>
         var requestFrom;
         $(document).ready(function () {
-            const params = window.location.search;
-            requestFrom = params.substring(params.search("=") + 1);
+            microsoftTeams.app.initialize().then(() => {
+                const params = window.location.search;
+                requestFrom = params.substring(params.search("=") + 1);
+            });
         });
-        microsoftTeams.app.initialize();
         function submit() {
             var isValid = true;
             $('#userName,#password').each(function () {

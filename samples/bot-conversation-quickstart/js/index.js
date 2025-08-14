@@ -21,8 +21,8 @@ require('dotenv').config({ path: ENV_FILE });
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
 const adapter = new BotFrameworkAdapter({
-    appId: process.env.BotId,
-    appPassword: process.env.BotPassword
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
 });
 
 adapter.onTurnError = async (context, error) => {
@@ -39,9 +39,8 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+     // Uncomment below commented line for local debugging.
+     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
 };
 
 // Create bot handlers

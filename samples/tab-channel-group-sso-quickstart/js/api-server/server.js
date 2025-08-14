@@ -1,4 +1,3 @@
-
 const fetch = require('node-fetch');
 const express = require('express');
 const jwt_decode = require('jwt-decode');
@@ -7,10 +6,10 @@ const app = express();
 const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
+
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const graphScopes = ['https://graph.microsoft.com/' + process.env.GRAPH_SCOPE];
-
+const graphScopes = ['https://graph.microsoft.com/' + process.env.GRAPH_SCOPES];
 let handleQueryError = function (err) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
@@ -26,8 +25,9 @@ app.get('/getGraphAccessToken', async (req,res) => {
             clientSecret: clientSecret
         }
     });
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
 
+    let tenantId = jwt_decode(req.query.ssoToken)['tid']; // Get the tenant ID from the decoded token.
+    
     msalClient.acquireTokenOnBehalfOf({
         authority: `https://login.microsoftonline.com/${tenantId}`,
         oboAssertion: req.query.ssoToken,

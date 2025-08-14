@@ -33,7 +33,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 3 Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+# ngrok http 3978 --host-header="localhost:3978"
 ```
 
 4. Create a Bot Registration
@@ -43,9 +43,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![Permissions](Images/permissions.png)
 
-5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<YOUR-MICROSOFT-APP-ID>>` with the id from step 2.
+5. Modify the `manifest.json` in the `/appPackage` folder and replace the `<<YOUR-MICROSOFT-APP-ID>>` with the id from step 2.
 
-6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 6.
+6. Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 6.
 
 7. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
 

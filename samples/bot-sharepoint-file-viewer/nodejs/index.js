@@ -6,25 +6,11 @@
 // Import required packages
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
+
 const { SimpleGraphClient } = require('./simpleGraphClient');
 
-// Read botFilePath and botFileSecret from .env file.
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-const PORT = process.env.PORT || 3978;
-const server = express();
 let multer = require('multer');
 let upload = multer({ storage: multer.memoryStorage() });
-
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -33,6 +19,10 @@ const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
 const { tokenData } = require('./dialogs/mainDialog');
+
+// Read botFilePath and botFileSecret from .env file.
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -56,9 +46,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+    
     // Clear out state
     await conversationState.delete(context);
 };
@@ -78,9 +68,16 @@ const dialog = new MainDialog();
 const bot = new TeamsBot(conversationState, userState, dialog);
 
 // Create HTTP server.
-server.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
-});
+const server = express();
+
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+
+const port = process.env.port || process.env.PORT || 3978;
+server.listen(port, () => 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);
 
 // Endpoint to fetch upload page for uploading files.
 server.get('/Upload', (req, res, next) => {

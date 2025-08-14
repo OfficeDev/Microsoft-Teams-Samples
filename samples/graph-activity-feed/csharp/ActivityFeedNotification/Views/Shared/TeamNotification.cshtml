@@ -1,5 +1,4 @@
-﻿
-@model TabActivityFeed.Model.TaskInfo
+@model TabActivityFeed.Model.TaskDetails
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -47,46 +46,53 @@
             display: none;
         }
 
-         .radioClass {
+        .radioClass {
             padding: 15px;
             margin-top: 10px;
             color: #fff;
-    font-size: 16px;
+            font-size: 16px;
         }
+
         label {
-    color: #fff;
-    font-size: 16px;
-}
+            color: #fff;
+            font-size: 16px;
+        }
     </style>
 
     <title>Screen</title>
     <script>
         $(document).ready(function () {
-            $('input[type="radio"]').click(function () {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".desc").not(targetBox).hide();
-                $(targetBox).show();
+            microsoftTeams.app.initialize().then(() => {  
+                $('input[type="radio"]').click(function () {
+                    var inputValue = $(this).attr("value");
+                    var targetBox = $("." + inputValue);
+                    $(".desc").not(targetBox).hide();
+                    $(targetBox).show();
+                });
             });
         });
-        microsoftTeams.initialize();
+
+
         var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
         var teamchannelID = "";
         var teamId = "";
-        microsoftTeams.getContext(function (context) {
-            teamchannelID = context.channelId;
-            username = context.upn;
-            userId = context.userObjectId;
-            teamId = context.groupId;
 
-            console.log(context);
-        });
-        var encodedWebUrl = encodeURI('https://6687952db3e0.ngrok.io/123/456&label=Task 456');
+         microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                teamchannelID = context.channel.id;
+                username = context.user.userPrincipalName;
+                userId = context.user.id;
+                teamId = context.team.groupId;
+            });
+         });
+
+        var encodedWebUrl = encodeURI(window.location.origin);
         var encodedContext = encodeURI('{"subEntityId": "task456"}');
-        var taskItemUrl = 'https://teams.microsoft.com/l/entity/bb56234b-a5f2-4d26-acff-edecce8bf42f/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
+        var taskItemUrl = 'https://teams.microsoft.com/l/entity/<appid>/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
         var empty = true;
+
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
                 empty = false;
@@ -96,51 +102,83 @@
 
         function SendNotificationToChannel() {
             var action = "EntityTopic";
-            let taskInfo = {
-                title: $('#title').val(),
-                description: $('#description').val(),
-                userName: username,
-                taskInfoAction: action,
-                channelId: teamchannelID,
-                access_token: token,
-                taskItemLink: taskItemUrl,
-                teamId: teamId
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/sendNotificationToTeam',
-                dataType: 'json',
-                data: taskInfo
+            var id = "";
+            microsoftTeams.app.getContext().then((context) => {
+                id = context.team.groupId;
+                let taskDetails = {
+                    title: $('#title').val(),
+                    description: $('#description').val(),
+                    userName: username,
+                    taskInfoAction: action,
+                    channelId: teamchannelID,
+                    access_token: token,
+                    taskItemLink: taskItemUrl,
+                    teamId: id
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
             });
             return true;
         };
 
         function customTopicTeamNotification() {
-         
             var action = "customTopic";
-            let taskInfo = {
-                DeployementTitle: $('#DeployementTitle').val(),
-                DeploymentDescription: $('#DeploymentDescription').val(),
-                taskInfoAction: action,
+            var id = "";
+            microsoftTeams.app.getContext().then((context) => {
+                id = context.team.groupId;
+                let taskDetails = {
+                    DeployementTitle: $('#DeployementTitle').val(),
+                    DeploymentDescription: $('#DeploymentDescription').val(),
+                    taskInfoAction: action,
+                    userName: username,
+                    channelId: teamchannelID,
+                    access_token: token,
+                    taskItemLink: taskItemUrl,
+                    teamId: id
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
+            });
+            return true;
+        };
+
+        function SendDefaultNotification() {
+            let taskDetails = {
                 userName: username,
                 channelId: teamchannelID,
                 access_token: token,
                 taskItemLink: taskItemUrl,
                 teamId: teamId
             };
+
             $.ajax({
                 type: 'POST',
-                url: '/sendNotificationToTeam',
+                url: '/sendDefaultNotifications',
                 dataType: 'json',
-                data: taskInfo
+                data: taskDetails
             });
+
             return true;
         };
 
-         function channelTabTeamNotification() {
-      
+        function channelTabTeamNotification() {
             var action = "channelTab";
-             let taskInfo = {
+            var id = "";
+
+            microsoftTeams.app.getContext().then((context) => {
+                id = context.team.groupId;
+
+                let taskDetails = {
                 reservationId: $("#reservationId").val(),
                 DeployementTitle: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
@@ -148,32 +186,36 @@
                 userName: username,
                 channelId: teamchannelID,
                 access_token: token,
-                 taskItemLink: taskItemUrl,
-                 teamId: teamId
+                taskItemLink: taskItemUrl,
+                teamId: id
+                };
 
-            };
-            $.ajax({
-                type: 'POST',
-                url: '/sendNotificationToTeam',
-                dataType: 'json',
-                data: taskInfo
+                $.ajax({
+                    type: 'POST',
+                    url: '/sendNotificationToTeam',
+                    dataType: 'json',
+                    data: taskDetails
+                });
             });
             return true;
         };
-
     </script>
 </head>
 
 <body>
-    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="login()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
-    <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
-
+    <div id="feed-container" style="display: none;background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
         <div class="radioClass">
-            <label><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To User in Channel</label></br>
-            <label><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send Notification with Custom Topic in Channel</label></br>
-            <label><input type="radio" name="notificationRadio" value="notificationChannelTab"> Notify User about a channel Tab</label>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To User in Channel</label></br>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send Notification with Custom Topic in Channel</label></br>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="notificationChannelTab"> Notify User about a channel Tab</label></br>
+            <label style="color:black"><input type="radio" name="notificationRadio" value="sendDefaultNotification"> Send default notification to user</label>
         </div></br>
         <div class="sendNotificationChannel desc">
             <div class="mb">
@@ -183,13 +225,13 @@
                     @*    <input type="text" class="alias" id="taskAssignedTo" required />*@
                 </div>
                 <div class="form-group fg">
-                    <label for="title" class="title">Task Title</label>
+                    <label for="title" class="title" style="color:black">Task Title</label>
                     <div>
                         @Html.TextBoxFor(model => model.title, htmlAttributes: new { @class = "form-control", @id = "title" })
                     </div>
                 </div>
                 <div class="form-group fg">
-                    <label for="title-desc" class="description">Task Description</label>
+                    <label for="title-desc" class="description" style="color:black">Task Description</label>
                     @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control title-desc", @id = "description" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>
@@ -206,11 +248,11 @@
                     @*    <input type="text" class="alias" id="taskAssignedTo" required />*@
                 </div>
                 <div class="form-group fg">
-                    <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
+                    <label for="DeployementTitle" class="DeployementTitle" style="color:black">Deployment Title</label>
                     @Html.TextBoxFor(model => model.DeployementTitle, htmlAttributes: new { @class = "form-control", @id = "DeployementTitle" })
                 </div>
                 <div class="form-group fg">
-                    <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label>
+                    <label for="deployment-desc" class="DeploymentDescription" style="color:black">Deployment Description</label>
                     @Html.TextAreaFor(model => model.DeploymentDescription, htmlAttributes: new { @class = "form-control deployment-desc", @id = "DeploymentDescription" })
                     @Html.ValidationMessageFor(model => model.title)
                 </div>
@@ -225,17 +267,17 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
-                    <label for="reservationId" class="reservationId">ID</label>
+                    <label for="reservationId" class="reservationId" style="color:black">ID</label>
                     <div>
                         @Html.TextBoxFor(model => model.reservationId, htmlAttributes: new { @class = "form-control", @id = "reservationId" })
                     </div>
                 </div>
                 <div class="form-group fg">
-                    <label for="reservationTitle" class="reservationTitle">Reservation Title</label>
+                    <label for="reservationTitle" class="reservationTitle" style="color:black">Reservation Title</label>
                     @Html.TextBoxFor(model => model.reservationTitle, htmlAttributes: new { @class = "form-control", @id = "reservationTitle" })
                 </div>
                 <div class="form-group fg">
-                    <label for="currentSlot-desc" class="currentSlot">Current Slot</label>
+                    <label for="currentSlot-desc" class="currentSlot" style="color:black">Current Slot</label>
                     <div>
                         @Html.TextAreaFor(model => model.currentSlot, htmlAttributes: new { @class = "form-control currentSlot-desc", @id = "currentSlot" })
                         @Html.ValidationMessageFor(model => model.title)
@@ -246,8 +288,12 @@
                 <button type="button" class="btn-send save" onclick="return channelTabTeamNotification()">Notify User for channel Tab</button>
             </div>
         </div>
+        <div class="sendDefaultNotification desc">
+            <div class="modal-footer mf">
+                <button type="button" class="btn-send save" onclick="return SendDefaultNotification()">Send default notification to Channel</button>
+            </div>
+        </div>
     </div>
-    @Html.Partial("Details");
+    @Html.Partial("Details")
 </body>
-
 </html>

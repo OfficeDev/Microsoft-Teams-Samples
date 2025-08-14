@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29911.84
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34814.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Localization", "Localization\Localization.csproj", "{783D6E6F-7339-4D74-89D4-B240496CC7A3}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD9B72D6-6BFF-4137-8AFE-3CE6F61BCE98}"
+	ProjectSection(SolutionItems) = preProject
+		Localization.slnLaunch.user = Localization.slnLaunch.user
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,11 @@ Global
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783D6E6F-7339-4D74-89D4-B240496CC7A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5A8E10-6377-4A7E-9A1B-8E64C1449F5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

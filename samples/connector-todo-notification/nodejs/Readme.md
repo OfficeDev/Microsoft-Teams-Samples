@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app which shows connector authentication and sends notification on task creation.
+description: This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector.
 products:
 - office-teams
 - office
@@ -8,103 +8,161 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-11-2021 23:30:17"
+ contentType: samples
+ createdDate: "11/11/2021 11:30:17 PM"
+urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
-# Microsoft Teams Sample Connector
+# Microsoft Teams Sample Connector Todo
 
-This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
+This sample provides a comprehensive guide to building an Office 365 Connector that sends task notifications to a Microsoft Teams channel. The app simulates a task management system where users can create, view, and update tasks, showcasing how to send notifications through connectors to enhance productivity in Teams.
 
-**For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/microsoftteams/platform/overview).**
+## Included Features
+* Connectors
 
-![Login](Images/Signin.PNG)
-
-![Welcome-card](Images/WelcomeCard.PNG)
-
-![Task-details](Images/TaskDetails.PNG)
-
-![Create-task](Images/CreateTask.PNG)
-
-![Task-created](Images/TaskCreated.PNG)
+## Interaction with bot
+![Connector_Todo](Images/Connector_Todo_Nodejs.gif) 
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-### How to see the connector working in Microsoft Teams
-1) [Upload your custom app in Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/concepts/apps/apps-upload) using [this manifest file](TeamsToDoAppConnector/TeamsAppPackages/manifest.json).
-2) Configure the [Connector](https://docs.microsoft.com/microsoftteams/platform/concepts/connectors#accessing-office-365-connectors-from-microsoft-teams).
-3) Select either Create or Update on the registration page and click Save. 
-4) Once the connector is configured, you will get a notification in channel for the configured connector.
+### Setup 
+> Note these instructions are for running the sample on your local machine.
 
->**Note**: With the above instructions, you can use sample connector which is deployed on Azure. Please follow the instructions below to create your own connector.
+1. Run ngrok - point to port 3978
 
-### [Configure your own connector](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-creating)
-The sample shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered connector via a process triggered "externally."
-
-1. Clone the repository
    ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
    ```
-1. In a terminal, navigate to `samples/connector-auth-nodejs/nodejs`
-1. Install node modules using command npm install.
-1. Run your app using command npm start.
-1. Begin your tunnelling service to get an https endpoint. 
-   1. Open a new command prompt window. 
-   1. Change to the directory that contains the ngrok.exe application. 
-   1. In the command prompt, run the command `ngrok http 3978 --host-header=localhost`.
-   1. Ngrok will fill the entire prompt window. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] referenced below. 
-   1. Minimize the ngrok Command Prompt window. It is no longer referenced in these instructions, but it must remain running.
-1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
+
+2. Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+    
+3. Install node modules
+
+   Navigate to `samples/connector-todo-notification/nodejs`
+   
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+
+    ```bash
+    npm install
+    ```
+   
+4. Configure your own connector : 
+  >**Note**:The below gif file shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered       connector via a process triggered "externally". 
+  ![Connector_Configuration](Images/Connector_Setup/Connecter_Todo_Setup.gif)
+   1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
-   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
-   1. Click on Save. After the save completes, download the zip file for your connector which will contain the connector id.
-1. Now you can sideload your app package and test your new connector.
+   1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok-free.app.
+   1. Click on Save. After the save completes, you will see your connector id.
 
-### [Using Azure AD](#using-azure-ad)
+5. [Using Azure AD](#using-azure-ad)
 
-1. Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
-1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
+   - Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
+   - Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<your_ngrok_url>/SimpleEnd`
+    - `https://<your_tunnel_domain>/SimpleEnd`
 
-1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
+   - Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
-1. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_url>/{AppID}
+   - Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_domain>/{AppID}
 
-1. Navigate to **API Permissions**, and make sure to add the following delegated permissions:
-    - User.Read
-    - email
-    - offline_access
-    - openid
-    - profile
-1. Scroll to the bottom of the page and click on "Add Permissions".
+   - Navigate to **API Permissions**, and make sure to add the following delegated permissions:
+     - User.Read
+     - email
+     - offline_access
+     - openid
+     - profile
+   - Scroll to the bottom of the page and click on "Add Permissions".
 
-## Setting up Authentication for Configuration page 
+6. Setting up .env configuration 
+   - Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
+   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` if you are using ngrok it would be `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
-1. Update the `.env` configuration with the `ClientId` and `BaseUrl`
+7. Run your app for server and client
 
-1.  Update your Microsoft Teams application manifest
-
-1. Add your ngrok URL to validDomains. Teams will only show the sign-in popup if its from a whitelisted domain.
-
-   ```json
-    "validDomains": [
-        "<<base-url>>"
-    ]
+    ```bash
+    npm start
     ```
 
+8. __*This step is specific to Teams.*__
+ - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your `ConnectorId` field in `~/appManifest/manifest.json` file with      your ConnectorId in `connectors` section.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
+ 
+        Example :
 
-## More Information
-For more information about getting started with Teams, please review the following resources:
+        ```json
+          "connectors": [
+          {
+            "connectorId": "<<CONNECTOR_ID>>",
+            "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup"
+          }
+        ]
+        ```
+    
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
+
+## Running the sample
+
+**Setup your App in Teams**
+![setup](Images/1.Setup.png)
+
+**Click to `Setup a Connector` as given in the below image**. 
+![Setup_connector](Images/2.Setup_connector.png)
+
+**Sign In.**
+![Connector_App_SigIn](Images/3.Connector_App_SigIn.png)
+
+**Welcome message after successfull SignIn**
+![Welcome_Save](Images/4.Welcome_Save.png)
+
+**Now connector todo is configured.**
+![Added_to_channel](Images/5.Added_to_channel.png)
+
+**Task Details will displayed.**
+![Task_details](Images/6.Task_details.png)
+
+**Click Create button to create a new task.** 
+![Task_Creation](Images/7.Task_Creation.png)
+
+**Task add successfull message.**
+![Task_Added_Successfully](Images/8.Task_Added_Successfully.png)
+
+**Created task list will displayed as below image shows.** 
+![Task_List](Images/9.Task_List.png)
+
+**This is notify you in the channel group.**
+![Task_Notification](Images/10.Task_Notification.png)
+
+
+## Further Information
+- For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/microsoftteams/platform/overview).**
+- For more information about getting started with Teams, please review the following resources:
 - Review [Getting Started with Authentications for Tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad)
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
 
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/connector-todo-notification-nodejs" />

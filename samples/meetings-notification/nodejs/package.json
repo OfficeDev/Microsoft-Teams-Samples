@@ -1,0 +1,51 @@
+{
+  "name": "teams-bot",
+  "version": "1.0.0",
+  "description": "Bot Builder v4 Bot Teams sample",
+  "author": "Microsoft",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+    "start": "node ./index.js",
+    "watch": "nodemon ./index.js",
+    "build": "node build.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+  },
+  "dependencies": {
+    "adaptive-expressions": "^4.18.0",
+    "axios": "^0.21.2",
+    "adaptivecards-templating": "^2.3.1",
+    "body-parser": "^1.19.0",
+    "botbuilder": "^4.19.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-sessions": "^1.0.6",
+    "express-validator": "^6.10.0",
+    "mongoose": "^5.11.18",
+    "pug": "^3.0.2",
+    "restify": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "~2.0.4",
+    "esbuild": "^0.18.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Microsoft/BotBuilder-Samples/issues"
+  },
+  "homepage": "https://github.com/Microsoft/BotBuilder-Samples#readme"
+}

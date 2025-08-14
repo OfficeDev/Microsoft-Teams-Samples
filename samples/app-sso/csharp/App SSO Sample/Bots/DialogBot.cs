@@ -10,13 +10,14 @@ using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 using Newtonsoft.Json.Linq;
-
+using Microsoft.Graph.Models;
 namespace Microsoft.BotBuilderSamples
 {
     // This IBot implementation can run any type of Dialog. The use of type parameterization is to allows multiple different bots
@@ -29,7 +30,8 @@ namespace Microsoft.BotBuilderSamples
     {
         protected readonly ILogger _logger;
         protected readonly BotState _userState;
-        protected readonly DialogManager _dialogManager;
+        protected readonly BotState _conversationState;
+        protected readonly Dialog _dialog;
         private readonly string _connectionName;
         private readonly string _siteUrl;
         private readonly IStatePropertyAccessor<string> _userConfigProperty;
@@ -38,8 +40,9 @@ namespace Microsoft.BotBuilderSamples
         {
             _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
             _userState = userState ?? throw new NullReferenceException(nameof(userState));
+            _conversationState = conversationState ?? throw new NullReferenceException(nameof(conversationState));
             _logger = logger;
-            _dialogManager = new DialogManager(dialog) { ConversationState = conversationState, UserState = userState };
+            _dialog = dialog;
             _siteUrl = configuration["SiteUrl"] ?? throw new NullReferenceException("SiteUrl");
             _userConfigProperty = userState.CreateProperty<string>("UserConfiguration");
         }
@@ -49,8 +52,11 @@ namespace Microsoft.BotBuilderSamples
             try
             {
                 await base.OnTurnAsync(turnContext, cancellationToken);
+
                 // After the turn is complete, persist any UserState changes.
-                await _userState.SaveChangesAsync(turnContext);
+                // Save any state changes that might have occurred during the turn.
+                await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
+                await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -61,8 +67,7 @@ namespace Microsoft.BotBuilderSamples
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Running dialog with Message Activity.");
-
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken);
+            await _dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
         protected async override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
@@ -72,7 +77,8 @@ namespace Microsoft.BotBuilderSamples
             {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                var signInLink = await (turnContext.Adapter as IUserTokenProvider).GetOauthSignInLinkAsync(turnContext, _connectionName, cancellationToken);
+                var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
+
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
@@ -81,14 +87,14 @@ namespace Microsoft.BotBuilderSamples
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
-                                {
-                                    new CardAction
                                     {
-                                        Type = ActionTypes.OpenUrl,
-                                        Value = signInLink,
-                                        Title = "Bot Service OAuth",
+                                        new CardAction
+                                        {
+                                            Type = ActionTypes.OpenUrl,
+                                            Value = signInLink,
+                                            Title = "Bot Service OAuth",
+                                        },
                                     },
-                                },
                         },
                     },
                 };
@@ -147,6 +153,13 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
+        private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken).ConfigureAwait(false);
+            return resource.SignInLink;
+        }
+
         protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery action, CancellationToken cancellationToken)
         {
             var tokenResponse = await GetTokenResponse(turnContext, action.State, cancellationToken);
@@ -154,12 +167,13 @@ namespace Microsoft.BotBuilderSamples
             {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                var signInLink = await (turnContext.Adapter as IUserTokenProvider).GetOauthSignInLinkAsync(turnContext, _connectionName, cancellationToken);
+                var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
+
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
                     {
-                        Type = "auth",
+                        Type = "silentAuth",
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
@@ -218,13 +232,14 @@ namespace Microsoft.BotBuilderSamples
                     // There is no token, so the user has not signed in yet.
 
                     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                    var signInLink = await (turnContext.Adapter as IUserTokenProvider).GetOauthSignInLinkAsync(turnContext, _connectionName, cancellationToken);
+                    var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                    var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
 
                     return new MessagingExtensionActionResponse
                     {
                         ComposeExtension = new MessagingExtensionResult
                         {
-                            Type = "auth",
+                            Type = "silentAuth",
                             SuggestedActions = new MessagingExtensionSuggestedAction
                             {
                                 Actions = new List<CardAction>
@@ -232,7 +247,7 @@ namespace Microsoft.BotBuilderSamples
                                     new CardAction
                                     {
                                         Type = ActionTypes.OpenUrl,
-                                        Value = signInLink,
+                                        Value = resource.SignInLink,
                                         Title = "Bot Service OAuth",
                                     },
                                 },
@@ -249,7 +264,7 @@ namespace Microsoft.BotBuilderSamples
                     {
                         Value = new TaskModuleTaskInfo
                         {
-                            Card = GetProfileCard(profile, imagelink),
+                            Card = GetProfileCard(profile,imagelink),
                             Height = 250,
                             Width = 400,
                             Title = "Adaptive Card: Inputs",
@@ -259,7 +274,8 @@ namespace Microsoft.BotBuilderSamples
             }
             if (action.CommandId.ToUpper() == "SIGNOUTCOMMAND")
             {
-                await (turnContext.Adapter as IUserTokenProvider).SignOutUserAsync(turnContext, _connectionName, turnContext.Activity.From.Id, cancellationToken);
+                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, cancellationToken);
 
                 return new MessagingExtensionActionResponse
                 {
@@ -297,7 +313,10 @@ namespace Microsoft.BotBuilderSamples
                     magicCode = parsed.ToString();
                 }
             }
-            var tokenResponse = await (turnContext.Adapter as IUserTokenProvider).GetUserTokenAsync(turnContext, _connectionName, magicCode, cancellationToken: cancellationToken);
+
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
+
             return tokenResponse;
         }
 
@@ -333,15 +352,13 @@ namespace Microsoft.BotBuilderSamples
                 JObject valueObject = JObject.FromObject(turnContext.Activity.Value);
                 var tokenExchangeRequest =
                 ((JObject)valueObject["authentication"])?.ToObject<TokenExchangeInvokeRequest>();
-                tokenExchangeResponse = await (turnContext.Adapter as IExtendedUserTokenProvider).ExchangeTokenAsync(
-                 turnContext,
-                 _connectionName,
-                 turnContext.Activity.From.Id,
-                 new TokenExchangeRequest
-                 {
-                     Token = tokenExchangeRequest.Token,
-                 },
-                 cancellationToken).ConfigureAwait(false);
+
+                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+
+                tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(turnContext.Activity.From.Id,
+                    _connectionName, turnContext.Activity.ChannelId,
+                    new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
+                    cancellationToken);
             }
 #pragma warning disable CA1031 //Do not catch general exception types (ignoring, see comment below)
             catch
@@ -358,7 +375,7 @@ namespace Microsoft.BotBuilderSamples
             return true;
         }
 
-        private static Microsoft.Bot.Schema.Attachment GetProfileCard(Graph.User profile, string imagelink)
+        private static Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string imagelink)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 

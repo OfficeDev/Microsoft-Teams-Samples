@@ -1,8 +1,7 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-   
+    microsoftTeams.app.initialize().then(() => {
     getClientSideToken()
         .then((clientSideToken) => {    
             return getServerSideToken(clientSideToken);
@@ -15,9 +14,10 @@ $(document).ready(function () {
                 $("#divError").show();
                 $("#consent").show();
             } else {
-                // Something else went wrong
+                console.log("Authentication failed.")
             }
         });
+    });
 });
 
 function requestConsent() {
@@ -25,11 +25,10 @@ function requestConsent() {
         .then(data => {
         $("#consent").hide();
         $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
-            getUserInfo(context.user.userPrincipalName);
-            getUserPhoto(context.user.userPrincipalName);
-        });
+        getClientSideToken()
+           .then((clientSideToken) => {
+              return getServerSideToken(clientSideToken);
+        })
     });
 }
 

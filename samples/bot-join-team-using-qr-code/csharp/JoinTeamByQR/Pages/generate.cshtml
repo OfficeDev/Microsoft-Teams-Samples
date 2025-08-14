@@ -11,8 +11,8 @@
         }
     </style>
     <script src="~/js/qrcode.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://res.cdn.office.net/teams-js/2.36.0/js/MicrosoftTeams.min.js"
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -21,7 +21,7 @@
         var QR_CODE;
 
         microsoftTeams.app.initialize().then(() => {
-            getTeams();
+             getTeams();
         })
 
         // This method wil fetch team data that will be used for creating QR code.
@@ -93,33 +93,17 @@
                     }
                 }
                 else if (decodedText) {
-                    console.log("Scanned QR code: " + decodedText);
-                    
-                    // Check if the scanned team ID exists in our team list
-                    var foundTeam = teamDetails.find(team => team.teamId === decodedText);
-                    
-                    if (foundTeam) {
-                        console.log("Found team: " + foundTeam.teamName);
-                        
-                        // Use the updated Teams SDK API to get context
-                        microsoftTeams.app.getContext().then((context) => {
-                            console.log("User context: " + JSON.stringify(context));
-                            
-                            var teamData = {
-                                teamId: decodedText,
-                                userId: context.user.id
-                            };
-                            
-                            console.log("Submitting team data: " + JSON.stringify(teamData));
-                            
-                            // Use task module submission instead of dialog.submit for Teams SDK 2.36.0
-                            microsoftTeams.tasks.submitTask(teamData);
-                        }).catch((error) => {
-                            console.error("Error getting context: " + error);
-                            alert("Error getting user context: " + error);
-                        });
-                    } else {
-                        alert("Team not found. Please make sure you scanned a valid team QR code.");
+                    for (const val of teamDetails) {
+                        if (val.teamId == decodedText) {
+
+                            microsoftTeams.getContext(function (context) {
+                                var teamData = {
+                                    teamId: decodedText,
+                                    userId: context.userObjectId
+                                }
+                                microsoftTeams.dialog.url.submit(teamData);
+                            });
+                        }
                     }
                 }
             }, config);

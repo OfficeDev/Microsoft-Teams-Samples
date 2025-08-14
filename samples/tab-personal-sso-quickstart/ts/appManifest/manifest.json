@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Personal Tab with SSO",
+    "full": ""
+  },
+  "description": {
+    "short": "Sample Teams tab app demonstrating Azure Entra SSO using Node.js and TypeScript.",
+    "full": "This comprehensive sample illustrates the setup of Single Sign-On (SSO) authentication for personal tabs in Microsoft Teams, utilizing Azure Microsoft Entra and TypeScript. It includes features like MSAL.js 2.0 support, Graph API integration enhance user interaction within Teams."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "${{TAB_ENDPOINT}}/tab",
+      "websiteUrl": "${{TAB_ENDPOINT}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

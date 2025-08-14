@@ -1,7 +1,7 @@
 import { Button, Card, Flex } from '@fluentui/react-northstar';
 import { meeting, SdkError } from '@microsoft/teams-js';
-import { useState } from 'react';
-import { DocumentType, Signature } from 'models';
+import { useCallback, useState } from 'react';
+import { DocumentType, Signature, User } from 'models';
 import { DocumentChooser } from 'components/Documents';
 import { Badge } from 'components/Badge';
 import { useTheme } from 'hooks';
@@ -12,8 +12,9 @@ export type SidepanelDocumentCardProps = {
   id: string;
   documentType: DocumentType;
   documentState: DocumentState;
-  loggedInAadId: string;
+  loggedInUser: User;
   signatures: Signature[];
+  takeControl: () => void;
 };
 
 /**
@@ -21,16 +22,18 @@ export type SidepanelDocumentCardProps = {
  *
  * @param documentType This is specific to our proof-of-concept, and is used to return the document e.g. PurchaseAgreement
  * @param documentState The state of the document signing process, can be `active`, `stage`, `complete`
- * @param loggedInAadId The AAD Id of the logged in user
+ * @param loggedInUser The details of the logged in user
  * @param signatures The Signatures details of this document
+ * @param takeControl A function that allows the user to take control of the shared document
  * @returns A document styled as a card
  */
 export function SidepanelDocumentCard({
   id,
   documentType,
   documentState,
-  loggedInAadId,
+  loggedInUser,
   signatures,
+  takeControl,
 }: SidepanelDocumentCardProps) {
   const theme = useTheme();
   const [shareButtonText, setShareButtonText] =
@@ -42,21 +45,30 @@ export function SidepanelDocumentCard({
       : theme.siteVariables.naturalColors.grey['500'];
   const cardInlineStyles = { borderTopColor: stateColor };
 
-  const shareToStageCallback = (
-    error: SdkError | null,
-    result: boolean | null,
-  ) => {
-    if (error !== null) {
-      console.log(
-        `Error when sharing to stage. ${error.errorCode}: ${error.message}`,
-      );
-      setShareButtonText('Error while sharing');
-    }
+  const shareToStageCallback = useCallback(
+    (error: SdkError | null, result: boolean | null) => {
+      if (error !== null) {
+        console.log(
+          `Error when sharing to stage. ${error.errorCode}: ${error.message}`,
+        );
+        setShareButtonText('Error while sharing');
+        return;
+      }
 
-    if (result) {
-      setShareButtonText('Shared');
-    }
-  };
+      if (result) {
+        setShareButtonText('Shared');
+      }
+    },
+    [],
+  );
+
+  const shareDocumentAndTakeControlCallback = useCallback(() => {
+    takeControl();
+    meeting.shareAppContentToStage(
+      shareToStageCallback,
+      `${window.location.protocol}//${window.location.host}/stage/${id}`,
+    );
+  }, [takeControl, shareToStageCallback]);
 
   return (
     <>
@@ -93,7 +105,7 @@ export function SidepanelDocumentCard({
           <DocumentChooser
             documentId={id}
             documentType={documentType}
-            loggedInAadId={loggedInAadId}
+            loggedInUser={loggedInUser}
             signatures={signatures}
             clickable={false}
             className={styles.sidepanelDocumentCardDocument}
@@ -105,12 +117,7 @@ export function SidepanelDocumentCard({
               <Button
                 content={shareButtonText}
                 iconPosition="before"
-                onClick={() =>
-                  meeting.shareAppContentToStage(
-                    shareToStageCallback,
-                    `${window.location.protocol}//${window.location.host}/stage/${id}`,
-                  )
-                }
+                onClick={shareDocumentAndTakeControlCallback}
               />
             </Flex.Item>
           </Flex>

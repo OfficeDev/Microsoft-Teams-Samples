@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.1",
+  "id": "{{Manifest-id}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Incoming webhook",
+    "full": "Sample to show incoming webhook card"
+  },
+  "description": {
+    "short": "Demo for sending message cards via Incoming Webhooks in Microsoft Teams.",
+    "full": "This sample demonstrates sending message cards through Incoming Webhooks in Microsoft Teams and includes an HttpPOST action in the card."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "entityId": "incomingwebhook",
+      "name": "Incoming webhook",
+      "contentUrl": "https://{{Domain-name}}/configure-message",
+      "websiteUrl": "https://{{Domain-name}}/configure-message",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<Domain-name>>"
+  ]
+}

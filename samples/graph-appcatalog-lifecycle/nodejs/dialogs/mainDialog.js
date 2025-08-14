@@ -47,13 +47,18 @@ class MainDialog extends LogoutDialog {
     }
 
     async promptStep(stepContext) {
-        return await stepContext.beginDialog(OAUTH_PROMPT);
+        try {
+            return await stepContext.beginDialog(OAUTH_PROMPT);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     async loginStep(stepContext) {
         // Get the token from the previous step. Note that we could also have gotten the
         // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
+        console.log("tokenResponse"+tokenResponse);
         if (tokenResponse) {
             AppCatalogHelper.SetToken(tokenResponse.token);
             await stepContext.context.sendActivity('You are now logged in.');

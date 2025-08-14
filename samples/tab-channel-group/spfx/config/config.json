@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "teams-tab-web-part": {
+    "hello-world-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/teamsTab/TeamsTabWebPart.js",
-          "manifest": "./src/webparts/teamsTab/TeamsTabWebPart.manifest.json"
+          "entrypoint": "./lib/webparts/helloWorld/HelloWorldWebPart.js",
+          "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "TeamsTabWebPartStrings": "lib/webparts/teamsTab/loc/{locale}.js"
+    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js"
   }
 }

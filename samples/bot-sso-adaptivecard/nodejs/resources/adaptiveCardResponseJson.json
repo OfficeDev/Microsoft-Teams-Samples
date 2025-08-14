@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "verb": "basicRefresh",
+      "title": "RefreshTitle"
+    }
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "You are successfully logged-in !!",
+      "size": "Medium",
+      "weight": "Bolder"
+    }
+  ],
+  "appid": "<<YOUR-MICROSOFT-APP-ID>>"
+}

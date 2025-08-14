@@ -1,4 +1,4 @@
-export enum ErrorCode {
+export enum ApiErrorCode {
   Unknown = 'Unknown',
   Unauthorized = 'Unauthorized',
   Forbidden = 'Forbidden',
@@ -13,6 +13,6 @@ export enum ErrorCode {
 
 export type ApiErrorResponse = {
   Message: string | undefined;
-  ErrorCode: ErrorCode;
+  ErrorCode: ApiErrorCode;
   Time: string;
 };

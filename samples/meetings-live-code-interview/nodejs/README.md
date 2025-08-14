@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample demos a live coding in a teams meeting stage."
+description: "This sample application demonstrates live coding interviews in Microsoft Teams using the Live Share SDK, enabling participants to collaboratively solve coding questions in real time."
 products:
 - office-teams
 - office
@@ -10,17 +10,51 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "24/3/2022 2:36:57 PM"
+  createdDate: "03/24/2022 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-nodejs
 ---
 
 # Live coding interview using Shared meeting stage 
 
-This sample demos a live coding in a teams meeting stage. In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
-Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.  
+This sample application facilitates live coding interviews in Microsoft Teams using the Live Share SDK. Featuring a side panel that lists coding questions, it allows participants to engage in real-time coding challenges, ensuring an interactive and collaborative experience during technical interviews.
 
-![side panel ](Images/sidePanelView.png)
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* Live Share SDK
+* RSC Permissions
 
-![shared content](Images/stageView.png)
+## Interaction with app
+
+![side panel ](Images/MeetinLiveCodeInterview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Live coding interview using Shared meeting stage:** [Manifest](/samples/meetings-live-code-interview/csharp/demo-manifest/meetings-live-code-interview.zip)
+
+## Prerequisites
+
+ - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Workflow
 
@@ -50,63 +84,87 @@ sequenceDiagram
 
 ```
 
-## Prerequisites
+## Setup
 
-- [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+ 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ 
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2).
+    - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
+![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png) 
+
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 
-## To try this sample
+2. Setup NGROK
+ - Run ngrok - point to port 3978
 
-1) Clone the repository
    ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
    ```
-2) Install node modules
+
+3. Setup for code
+
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  
+  Install node modules
 
    Inside node js folder,  navigate to `samples/meetings-live-code-interview/nodejs/api` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
-   - Repeat the same step in folder `samples/meetings-live-code-interview/nodejs/ClientApp`
+   - Repeat the same step in folder `samples/meetings-live-code-interview/nodejs`
 
     ```bash
     npm install
     ```
-3) We have two different solutions to run so follow below steps:
- 
-   A) In a terminal, navigate to `samples/meetings-live-code-interview/nodejs/api`
+  - We have two different solutions to run so follow below steps:
 
-   B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs/ClientApp`
+     A) In a terminal, navigate to `samples/meetings-live-code-interview/nodejs/api`
 
-4) Run ngrok - point to port 3000 (pointing to ClientApp)
+     B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs`
 
-    ```bash
-    # ngrok http -host-header=rewrite 3000
-    ```
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
-
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-
-7) Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
+ - Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs`
     ```
     npm start
-    ```
-8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+    ``` 
+
+4. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Testing the bot using Bot Framework Emulator
+**Note** Run the app on Teams with developer preview on.   
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+## Running the sample
 
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+**Side panel view:**
+![side panel ](Images/sidePanelView.png)
+
+**Question view on click of share:**
+![shared content](Images/stageView.png)
+
+**Question view for other participant in meeting:**
+![shared content second user](Images/stageViewseconduser.png)
 
 ## Further reading
 
 - [Share-app-content-to-stage-api ](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
 - [Enable-and-configure-your-app-for-teams-meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-live-code-interview-nodejs" />

@@ -13,8 +13,18 @@ using System.Net.Http;
 
 namespace TypeaheadSearch
 {
+    /// <summary>
+    /// Adapter with error handling capabilities.
+    /// </summary>
     public class AdapterWithErrorHandler : CloudAdapter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="httpClientFactory">The HTTP client factory.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="conversationState">The conversation state.</param>
         public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
             : base(configuration, httpClientFactory, logger)
         {
@@ -26,21 +36,26 @@ namespace TypeaheadSearch
                 // to add telemetry capture to your bot.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Send a message to the user
-                await turnContext.SendActivityAsync("The bot encountered an error or bug.");
-                await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+                // Uncomment the below line for local debugging.
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
 
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
+                // Send a trace activity, which will be displayed in the Bot Framework Emulator.
                 await SendTraceActivityAsync(turnContext, exception);
             };
         }
 
+        /// <summary>
+        /// Sends a trace activity if the bot is running in the Bot Framework Emulator.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="exception">The exception.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private static async Task SendTraceActivityAsync(ITurnContext turnContext, Exception exception)
         {
-            // Only send a trace activity if we're talking to the Bot Framework Emulator
+            // Only send a trace activity if we're talking to the Bot Framework Emulator.
             if (turnContext.Activity.ChannelId == Channels.Emulator)
             {
-                Activity traceActivity = new Activity(ActivityTypes.Trace)
+                var traceActivity = new Activity(ActivityTypes.Trace)
                 {
                     Label = "TurnError",
                     Name = "OnTurnError Trace",
@@ -48,7 +63,7 @@ namespace TypeaheadSearch
                     ValueType = "https://www.botframework.com/schemas/error",
                 };
 
-                // Send a trace activity
+                // Send a trace activity.
                 await turnContext.SendActivityAsync(traceActivity);
             }
         }

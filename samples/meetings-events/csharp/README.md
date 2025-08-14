@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Get real time meeting events
+description: This C# sample demonstrates how a bot can receive real-time updates for meeting events and participant activities within Microsoft Teams.
 products:
 - office-teams
 - office
@@ -8,67 +8,95 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "11-10-2021 17:35:46"
+ contentType: samples
+ createdDate: "11/10/2021 23:35:25 PM"
+urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
 ---
 
 # Realtime meeting events
 
-Using this C# sample, a bot can receive real-time meeting events.
-For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+ Experience real-time meeting and participant events with this C# bot sample for Microsoft Teams. Currently available in public developer preview, it supports Adaptive Cards, bot interactions, and RSC permissions, allowing seamless integration for enhanced meeting management. To try it out, simply upload the provided manifest in your Teams client.
+Using this C# sample, a bot can receive real-time meeting events and meeting participant events.
+For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+and [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-8455&tabs=dotnet%2Cparticipant-join-event#get-participant-events)
 
 The feature shown in this sample is currently available in public developer preview only.
 
-![Meeting start event](MeetingEvents/Images/meeting-start.png)
-![Meeting end event](MeetingEvents/Images/meeting-end.png)
+## Included Features
+* Bots
+* Adaptive Cards
+* RSC Permissions
+
+## Interaction with app
+
+![Meetings Events](MeetingEvents/Images/MeetingsEvents.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Realtime meeting and participant events:** [Manifest](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Setup
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+1) Setup for Bot
+   - Register Azure AD application resource in Azure portal
+   - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-1. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
-
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
   **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-2. Clone the repository
+2) Setup NGROK  
+   Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+3) Setup for code   
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
-3. In a terminal, navigate to `samples/meetings-events/csharp`
+- Navigate to `samples/meetings-events/csharp` 
+    - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing Microsoft Entra ID app registration in step 1.
 
-    ```bash
-    # change into project folder
-    cd # MeetingEvents
-    ```
-4. Run ngrok - point to port 3978
-
-```bash
-# ngrok http -host-header=rewrite 3978
-```
-5. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<App-ID>>` with your app id   
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
-
-6. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 9.
-
-7. Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 2.
-
-8. 5. Run the app from a terminal or from Visual Studio, choose option A or B.
+- Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -85,15 +113,43 @@ The feature shown in this sample is currently available in public developer prev
   - Select `MeetingEvents.csproj` file
   - Press `F5` to run the project
 
-9. **Add** in a meeting to test
+4) Setup Manifest for Teams
+
+Modify the `manifest.json` in the `/appPackage` folder and replace the following details
+
+   - `<<App-ID>>` with your Microsoft Entra ID app registration id   
+   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
+   - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`. 
-         - After installation, add the bot to a meeting.
+         - Then select the `manifest.zip` file from `appPackage`.
+         - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-## Interacting with the bot in Teams
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-events/csharp/MeetingEvents/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
+## Running the sample
 Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
+
+**MeetingEvents command interaction:**   
+
+![Meeting start event](MeetingEvents/Images/meeting-start.png)
+
+**End meeting events details:**   
+
+![Meeting end event](MeetingEvents/Images/meeting-end.png)
+
+**MeetingParticipantEvents command interaction:**   
+
+To utilize this feature, please enable Meeting event subscriptions for `Participant Join` and `Participant Leave` in your bot, following the guidance outlined in the [meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events) documentation
+
+![extra-setup](MeetingEvents/Images/extra-setup.png)
+
+![Meeting participant added event](MeetingEvents/Images/meeting-participant-added.png)
+
+**End meeting events details:**   
+
+![Meeting participant left event](MeetingEvents/Images/meeting-participant-left.png)
 
 ## Deploy the bot to Azure
 
@@ -101,14 +157,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Real-time Teams meeting events](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+- [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Real-time Teams meeting participant events](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-8455&tabs=channel-meeting%2Cguest-user%2Cone-on-one-call%2Cdotnet%2Cparticipant-join-event#receive-meeting-participant-events)
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-events-csharp" />

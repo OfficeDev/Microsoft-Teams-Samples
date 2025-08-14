@@ -2,10 +2,9 @@ import {
   Grid,
   Box,
   Flex,
-  Text,
-  Image,
   SiteVariablesPrepared,
 } from "@fluentui/react-northstar";
+import { Text, Image } from "@fluentui/react-components";
 import platformUiImage from "../../assets/images/platform-ui.jpg";
 import teamsTemplatesImage from "../../assets/images/teams-templates.jpg";
 import teamsAppsImage from "../../assets/images/teams-apps.jpg";
@@ -18,48 +17,46 @@ export function WelcomeTab() {
         margin: "1.6rem 1.25rem",
       }}
     >
-      <Text size="large" weight="bold" as="h1">
+      <Text size={500} weight="bold" as="h1">
         Welcome to our Teams Sample App
       </Text>
-      <Text
-        as="p"
-        variables={({ colorScheme }: SiteVariablesPrepared) => {
-          console.log(colorScheme.default.foreground2);
-          return {
-            border: "1px solid red",
-            backgroundColor: "red",
-          };
-        }}
-        styles={{ marginBottom: "3rem", opacity: ".65", maxWidth: "50rem" }}
-      >
-        The Teams Sample App can help you better understand how your app should
-        look and behave in Teams depending on the scenario. Select a UI template
-        above (for example, Forms) to get started. To learn more, see the
-        following resources.
-      </Text>
-      <Text size="medium" weight="bold" as="h2">
+      <div>
+        <Text
+          style={{ marginBottom: "3vh", opacity: ".65", maxWidth: "50rem" }}
+        >
+          The Teams Sample App can help you better understand how your app should
+          look and behave in Teams depending on the scenario. Select a UI template
+          above (for example, Forms) to get started. To learn more, see the
+          following resources.
+        </Text>
+      </div>
+      <br /><br />
+      <Text size={500} weight="bold" as="h2">
         Resources
       </Text>
+      <style>
+        {`
+          .ui-grid {
+            display: inline-flex;
+            margin-top: 30px;
+          }
+        `}
+      </style>
       <Grid
         styles={{
-          gridGap: "2rem",
-          gridTemplate:
-            "repeat(auto-fill, 20rem) / repeat(auto-fill, minmax(16rem, 1fr))",
-          gridAutoFlow: "dense",
-          gridAutoRows: "26rem",
+          display: "inline-flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          gap: "2rem",
           padding: "0 1rem 1.25rem",
           margin: "1.5rem -1rem",
-          minWidth: "20rem",
-          "@media (max-width: 986px)": {
-            gridTemplate:
-              "repeat(auto-fill, 25rem) / repeat(auto-fill, minmax(15.75rem, 1fr))",
-          },
         }}
       >
         {resources.map((resource: IResourceCard, key: number) => (
           <ResourceCard key={key} {...resource} />
         ))}
       </Grid>
+
     </Box>
   );
 }
@@ -75,48 +72,39 @@ interface IResourceCard {
   desc: string;
   links: IResourceCardLink[];
 }
+
 const ResourceCard = ({ imageUrl, title, desc, links }: IResourceCard) => {
   return (
-    <Flex column>
+    <div style={{ maxWidth: "23vw", marginLeft: "5px", marginRight: "5px" }}>
       <Image
         src={imageUrl}
         alt={title}
-        styles={{
+        style={{
           borderRadius: "4px",
           boxShadow:
             "0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 5px rgba(0, 0, 0, 0.06)",
+          maxWidth: "23vw"
         }}
-        fluid
       />
       <Text
-        size="medium"
+        size={500}
         weight="semibold"
         as="h3"
-        styles={{ margin: "2rem 0 .5rem" }}
+        style={{ margin: "2rem 0 .5rem" }}
       >
         {title}
       </Text>
+      <br />
       <Text
         as="p"
-        styles={{ margin: ".5rem 0 2rem", flexGrow: 1, opacity: ".65" }}
+        style={{ margin: ".5rem 0 2rem", flexGrow: 1, opacity: ".65" }}
       >
         {desc}
       </Text>
-      {links.map((link: IResourceCardLink, key: number) => (
-        <Text
-          key={key}
-          as="a"
-          href={link.href}
-          target="_blank"
-          content={link.label}
-          size="small"
-          color="brand"
-          styles={{ textDecoration: "none", marginBottom: ".5rem" }}
-        />
-      ))}
-    </Flex>
+    </div>
   );
 };
+
 
 const resources: IResourceCard[] = [
   {

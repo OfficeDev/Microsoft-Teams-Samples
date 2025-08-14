@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const { BotFrameworkAdapter } = require('botbuilder');
 const { BotActivityHandler } = require('../bot/botActivityHandler');
 
@@ -6,22 +9,20 @@ const adapter = new BotFrameworkAdapter({
     appPassword: process.env.MicrosoftAppPassword
 });
 
+// Handle errors during bot turn processing
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. server insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       serverlication insights.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
-        `${ error }`,
+        `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug, please fix the bot source code.');
+    // Uncomment the line below for local debugging
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
 // Create bot handlers

@@ -5,11 +5,9 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
-    </script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -74,18 +72,19 @@
         }
     </style>
     <script>
-        let accessToken;
+        let idToken;
         $(document).ready(function () {
+         microsoftTeams.app.initialize().then(() => {
             $("#mails").hide();
             getClientSideToken();
+         });
         });
-
-        microsoftTeams.app.initialize();
 
         // Get the id token.
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.getAuthToken().then((result) => {
+                    idToken = result;
                     resolve(result);
                     decodingJWT(result)
                 }).catch((error) => {
@@ -100,7 +99,6 @@
             getToken(scope)
                 .then(data => {
                     $("#divError").hide();
-                    accessToken = data.accessToken;
                     microsoftTeams.app.getContext().then((context) => {
                         if (scope == "User.Read") {
                             getUserPhoto();
@@ -134,7 +132,7 @@
                 url: '/GetUserPhoto',
                 dataType: 'json',
                 data: {
-                    'accessToken': accessToken,
+                    'idToken': idToken,
                 },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
@@ -154,7 +152,7 @@
                     url: '/GetUserMails',
                     dataType: 'json',
                     data: {
-                        'accessToken': accessToken,
+                    'idToken': idToken,
                     },
                     success: function (responseJson) {
                         userDetails = JSON.parse(responseJson);

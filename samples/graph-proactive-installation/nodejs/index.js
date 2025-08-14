@@ -43,9 +43,8 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
 };
 
 // Create the main dialog.
@@ -55,16 +54,15 @@ const bot = new ProactiveBot(conversationReferences);
 // Create HTTP server.
 const server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-    console.log(`\n${server.name} listening to ${server.url}`);
-    console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
-    console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
+    console.log(`Service listening at:${server.url}`);
 });
 
 // Listen for incoming activities and route them to your bot main dialog.
-server.post('/api/messages', (req, res) => {
+server.post('/api/messages', (req, res, next) => {
     adapter.processActivity(req, res, async (turnContext) => {
         // route to main dialog.
         await bot.run(turnContext);
+        return next();
     });
 });
 

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Input.Text",
+      "id": "incidentName",
+      "label": "Incident Name"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "label": "Choose incident attendees",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "peoplePicker",
+      "isMultiSelect": "true"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Create incident",
+      "data": {
+        "action": "createincident",
+        "msteams": {
+          "type": "task/submit"
+        }
+      }
+    }
+  ]
+}

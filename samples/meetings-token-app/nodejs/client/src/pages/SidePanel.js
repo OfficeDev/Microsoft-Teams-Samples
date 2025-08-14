@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 import "regenerator-runtime/runtime.js";   //to enable the use of async
 
 import TokenActionButtons from '../components/TokenActionButtons';
@@ -7,119 +7,211 @@ import UserList from '../components/UserList';
 import ErrorMessageBar from '../components/ErrorMessageBar';
 
 import { withMeetingTokenService } from '../context/MeetingServiceProvider';
-import StatusRefresher from '../components/StatusRefresher';
+import { TeamsFluidClient } from "@microsoft/live-share";
+import { SharedMap } from "fluid-framework";
 import Constants from '../constants';
+import * as microsoftTeams from "@microsoft/teams-js";
 
+let containerValue;
+const SidePanel = props => {
+    const editorValueKey = "meeting-meta-data";
+    const [appTheme, setAppTheme] = useState("");
+    const [customStyle] = useState("app-container");
+    const [currentToken, setCurrentToken] = useState(0);
+    const [userToken, setUserToken] = useState({
+        number: null,
+        status: Constants.MeetingTokenStatus.NotUsed
+    });
+    const [user, setUser] = useState({
+        oid: "",
+        name: "",
+        isOrganizer: false,
+    });
+    const [teamsContext, setTeamsContext] = useState({});
+    const [participants, setParticipants] = useState([]);
+    const [customError, setCustomError] = useState({
+        status: false,
+        msg: "",
+    });
 
-class SidePanel extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentToken: null,
-            userToken: {
-                number: null,
-                status: Constants.MeetingTokenStatus.NotUsed
-            },
-            user: {
-                oid: "",
-                name: "",
-                isOrganizer: false,
-            },
-            participants: [],
-            error: {
-                status: false,
-                msg: "",
+    const setErrorFactory = (msg) => ({ status: true, msg });
+
+    const clearErrorFactory = () => ({ status: false, msg: "" });
+
+    const setError = (msg) => {
+        setCustomError(setErrorFactory(msg))
+    }
+
+    useEffect(() => {
+        onInitializeContianer();
+
+        microsoftTeams.app.initialize();
+        // Applying default theme from app context property
+        microsoftTeams.app.getContext().then((context) => {
+            switch (context.app.theme) {
+                case 'dark':
+                    setAppTheme('theme-dark');
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+                case 'contrast':
+                    setAppTheme('theme-contrast');
+                    break;
+                default:
+                    return setAppTheme('theme-light');
             }
-        };
+        });
 
-        this.setErrorFactory = (msg) => ({ status: true, msg });
-        this.clearErrorFactory = () => ({ status: false, msg: "" });
+        // Handle app theme when 'Teams' theme changes
+        microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+            switch (theme) {
+                case 'dark':
+                    setAppTheme('theme-dark');
+                    break;
+                case 'default':
+                    setAppTheme('theme-light');
+                    break;
+                case 'contrast':
+                    setAppTheme('theme-contrast');
+                    break;
+                default:
+                    return setAppTheme('theme-light');
+            }
+        });
+    }, [])
 
-        this.setError = (msg) => this.setState({ error: this.setErrorFactory(msg) });
+    const onInitializeContianer = () => {
+        (async function () {
+            window.localStorage.debug = "fluid:*";
+
+            // Define Fluid document schema and create container
+            const client = new TeamsFluidClient();
+
+            try {
+
+                const containerSchema = {
+                    initialObjects: { tokenMap: SharedMap }
+                };
+
+                let token = await updateCurrentToken(false);
+
+                // Joining the container with default schema defined.
+                const { container } = await client.joinContainer(containerSchema, (cont) => cont.initialObjects.tokenMap.set(editorValueKey, token));
+                containerValue = container;
+                containerValue.initialObjects.tokenMap.on("valueChanged", updateEditorState);
+            }
+            catch (err) {
+                console.log(err)
+            };
+        })();
     }
 
-    onGetToken = ({ success, msg }) => {
+    // This method is called whenever the shared state is updated.
+    const updateEditorState = async () => {
+        const currentToken = containerValue.initialObjects.tokenMap.get(editorValueKey);
+
+        if (typeof (currentToken) === "number") {
+            let res = await props.meetingTokenService.getMeetingStatusAsync()
+            _updateDashboard(res.success, res.msg, false);
+        }
+    };
+
+    // Handler called when user types on the editor.
+    const updateState = (currentToken) => {
+        var tokenMap = containerValue.initialObjects.tokenMap;
+        tokenMap.set(editorValueKey, currentToken);
+    }
+
+    const onGetToken = ({ success, msg }) => {
         if (!success) {
-            this.setError(msg);
+            setError(msg);
             return;
         }
 
-        const { AadObjectId, Name, Role: { MeetingRole }} = msg.UserInfo;
-        this.setState({
-            user: { oid: AadObjectId, name: Name, isOrganizer: MeetingRole === Constants.MeetingRoles.Organizer },
-            userToken: { number: msg.TokenNumber, status: msg.Status || Constants.MeetingTokenStatus.NotUsed },
-            error: this.clearErrorFactory()
-        });
+        const { AadObjectId, Name, Role: { MeetingRole } } = msg.UserInfo;
+
+        setUser({ oid: AadObjectId, name: Name, isOrganizer: MeetingRole === Constants.MeetingRoles.Organizer });
+        setUserToken({ number: msg.TokenNumber, status: msg.Status || Constants.MeetingTokenStatus.NotUsed });
+        setCustomError(clearErrorFactory());
+
+        updateCurrentToken(true);
     }
 
-    onAckToken = ({ success, msg }) => {
-        this._updateDashboard(success, msg);
+    const updateCurrentToken = async (shouldUpdate) => {
+        let res = await props.meetingTokenService.getMeetingStatusAsync();
+
+        _updateDashboard(res.success, res.msg, shouldUpdate);
+        const { MeetingMetadata: { CurrentToken } } = res.msg;
+
+        return CurrentToken;
     }
 
-    onSkipToken = ({ success, msg }) => {
-        this._updateDashboard(success, msg);
+    const onAckToken = ({ success, msg }) => {
+        _updateDashboard(success, msg, true);
     }
 
-    onStatusRefresh = ({ success, msg }) => {
-        this._updateDashboard(success, msg);
+    const onSkipToken = ({ success, msg }) => {
+        _updateDashboard(success, msg, true);
     }
 
-    onUserInfoFetched = ({ success, msg }) => {
+    const onUserInfoFetched = ({ success, msg }) => {
         if (!success) {
-            this.setError(msg);
+            setError(msg);
             return;
         }
-        const { AadObjectId, Name, Role: { MeetingRole }} = msg;
-        this.setState({
-            user: { oid: AadObjectId, name: Name, isOrganizer: MeetingRole === Constants.MeetingRoles.Organizer },
-            error: this.clearErrorFactory()
-        });
+
+        const { AadObjectId, Name, Role: { MeetingRole } } = msg;
+        setUser({ oid: AadObjectId, name: Name, isOrganizer: MeetingRole === Constants.MeetingRoles.Organizer });
+        setCustomError(clearErrorFactory());
     }
 
-    render() {
-        return (
-            <Fragment>
-                <StatusRefresher onStatusRefresh={this.onStatusRefresh} />
-                <div className="app-container">
-                    <ErrorMessageBar msg={this.state.error.msg} show={this.state.error.status} />
-                    <TokenIndicator show={true} value={this.state.participants.length && this.state.currentToken} title={"Current Token"} />
-                    <TokenActionButtons isOrganizer={this.state.user.isOrganizer}
-                        onGetToken={this.onGetToken}
-                        onAckToken={this.onAckToken}
-                        onSkipToken={this.onSkipToken}
-                        onUserInfoFetched={this.onUserInfoFetched}
-                        showTokenButton={!this.state.userToken.number}
-                        showDoneButton={!!this.state.userToken.number}
-                        showSkipButton={!!this.state.participants.length}
-                    />
-                    <TokenIndicator
-                        value={this.state.userToken.number}
-                        show={!!this.state.userToken.number}
-                        title={`Your Token: ${this.state.userToken.status}`}
-                    />
-                </div>
-                <UserList items={this.state.participants} />
-            </Fragment>
-        );
-    }
-
-    _updateDashboard(success, data) {
+    const _updateDashboard = (success, data, shouldUpdateState) => {
         if (!success) {
-            this.setError(data);
+            setError(data);
             return;
         }
         const { MeetingMetadata: { CurrentToken }, UserTokens: participants } = data;
-        const currentUser = participants.find(participant => participant.UserInfo.AadObjectId === this.state.user.oid) || {};
-        this.setState({
-            currentToken: CurrentToken,
-            participants,
-            userToken: {
+        microsoftTeams.app.getContext().then((context) => {
+            const currentUser = participants.find(participant => participant.UserInfo.AadObjectId === context.user.id) || {};
+            setCurrentToken(CurrentToken);
+            setParticipants(participants);
+            setUserToken({
                 number: currentUser.TokenNumber,
                 status: currentUser.Status || Constants.MeetingTokenStatus.NotUsed
-            },
-            error: this.clearErrorFactory(),
+            });
+            setCustomError(clearErrorFactory());
+            if (shouldUpdateState) {
+                updateState(CurrentToken);
+            }
         });
     }
+
+    return (
+        <Fragment>
+            <div className={customStyle + ' ' + appTheme}>
+                <ErrorMessageBar msg={customError.msg} show={customError.status} />
+                <TokenIndicator show={true} value={participants.length && currentToken} title={"Current Token"} />
+                <TokenActionButtons isOrganizer={user.isOrganizer}
+                    onGetToken={onGetToken}
+                    onAckToken={onAckToken}
+                    onSkipToken={onSkipToken}
+                    onUserInfoFetched={onUserInfoFetched}
+                    showTokenButton={!userToken.number}
+                    showDoneButton={!!userToken.number}
+                    showSkipButton={!!participants.length}
+                />
+                <TokenIndicator
+                    value={userToken.number}
+                    show={!!userToken.number}
+                    title={`Your Token: ${userToken.status}`}
+                />
+            </div>
+            <div className={appTheme}>
+                <UserList items={participants} />
+            </div>
+        </Fragment>
+    );
 }
 
 export default withMeetingTokenService(SidePanel);

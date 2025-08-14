@@ -1,14 +1,16 @@
 import * as microsoftTeams from '@microsoft/teams-js';
+import { MsalAuth } from 'utils/MsalAuth';
 
 /**
  * Component rendered when returning from a auth prompt.
  * It checks the response from AAD, and notifies Teams
  */
-export default function AuthEnd() {
-  (function () {
-    microsoftTeams.app.initialize();
+export function AuthEndAad() {
+  (async function () {
+    await microsoftTeams.app.initialize();
 
     const hashParams = getHashParameters();
+
     if (hashParams['error']) {
       microsoftTeams.authentication.notifyFailure(hashParams['error']);
     } else if (hashParams['access_token']) {
@@ -40,6 +42,21 @@ export default function AuthEnd() {
       });
     return hashParams;
   }
+
+  return (
+    <>
+      <h1>Completing authentication...</h1>
+    </>
+  );
+}
+
+export function AuthEndMsa() {
+  (async function () {
+    await microsoftTeams.app.initialize();
+
+    const msalAuth = new MsalAuth();
+    msalAuth.loadAuthModule();
+  })();
 
   return (
     <>

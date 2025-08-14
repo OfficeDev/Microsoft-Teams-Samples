@@ -1,0 +1,126 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.teams.samples.AppSSO",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://<<DOMAIN-NAME>>",
+    "privacyUrl": "https://<<DOMAIN-NAME>>/privacy",
+    "termsOfUseUrl": "https://<<DOMAIN-NAME>>/termsofuse"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "App SSO in csharp",
+    "full": "Teams Single Sign On Sample"
+  },
+  "description": {
+    "short": "App SSO in csharp",
+    "full": "This sample app demonstrates SSO for Tab Bot and ME (Link Unfurl, Action and Search Config"
+  },
+  "accentColor": "#FFFFFF",
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search",
+          "description": "Perform a search",
+          "initialRun": true,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        },
+        {
+          "id": "SHOWPROFILE",
+          "type": "action",
+          "title": "Profile",
+          "description": "User Profile",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
+          "parameters": [
+            {
+              "name": "param",
+              "title": "param",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "id": "SignOutCommand",
+          "type": "action",
+          "title": "Sign Out",
+          "description": "Sign out from authenticated services.",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "param",
+              "title": "param",
+              "description": ""
+            }
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "SSO Tab",
+      "contentUrl": "https://<<DOMAIN-NAME>>/Home/Index",
+      "websiteUrl": "https://<<DOMAIN-NAME>>/Index",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://<<DOMAIN-NAME>>/botid-<<YOUR-MICROSOFT-APP-ID>>"
+  },
+
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.githubusercontent.com",
+    "<<DOMAIN-NAME>>",
+    "*.botframework.com"
+  ]
+}

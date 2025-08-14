@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
-    </script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -56,67 +55,80 @@
                         productName = "Mobile";
                         $("#captureImage").show();
                     }
-                    else{
+                    else {
                         $("#noProductFound").show();
-                    }  
+                    }
                 }
             }, config);
         }
 
-        // Method to capture product image 
-        function captureImage() {
-            microsoftTeams.app.initialize().then(()=>{
-                // Method to ask for image capture permission and then capture image
-                microsoftTeams.media.captureImage((error, files) => {
-                // If there's any error, an alert shows the error message/code
-                if (error) {
-                    if (error.message) {
-                        alert(" ErrorCode: " + error.errorCode + error.message);
-                    } else {
-                        alert(" ErrorCode: " + error.errorCode);
-                    }
-                } else if (files) {
-                    image = files[0].content;
-                    $("#productName").text("Product Name :" + productName);
-                    document.getElementById("productImage").src = "data:image/png;base64," + image;
-                    $("#productStatus").show();
-                }
+        //Method to capture product image  
+        function selectMedia() {
+            microsoftTeams.app.initialize().then(() => {
+                
+                var imageProp = {
+                    sources: [microsoftTeams.media.Source.Camera, microsoftTeams.media.Source.Gallery],
+                    startMode: microsoftTeams.media.CameraStartMode.Photo,
+                    ink: false,
+                    cameraSwitcher: false,
+                    textSticker: false,
+                    enableFilter: true
+                };
+
+                var mediaInput = {
+                    mediaType: microsoftTeams.media.MediaType.Image,
+                    maxMediaCount: 1,
+                    imageProps: imageProp
+                };
+
+                microsoftTeams.media.selectMedia(mediaInput, function (error, attachments) {
+                    if (error) {
+                        if (error.message) {
+                            alert(" ErrorCode: " + error.errorCode + error.message);
+                        } else {
+                            alert(" ErrorCode: " + error.errorCode);
+                        }
+                    } else if (attachments) {
+                         image = attachments[0];
+                            $("#productImg").attr("src", "data:image/png;base64," + image.preview);
+                            $("#productStatus").show();
+                        }
+                });
             });
-            });     
-        };
+        }
 
         // Method invoked on approve/reject click.
-        function approveRejectProduct(status) {
-            let formData = new FormData();
-
-            var productDetails= {
-                "productId":productId,
-                "image":"data:image/png;base64," + image,
-                "status": status?"Approved":"Rejected",
-                "productName": productName
-            }
-
-            var data = JSON.stringify(productDetails)
-            formData.append("data", data);
+        function saveProduct(status) {
+            var productStatus = status ? "Approved" : "Rejected";
+            const formData = new FormData();
+            formData.append('productId', productId);
+            formData.append('image', "data:image/png;base64," + image.preview);
+            formData.append('status', productStatus);
             $("#productStatus").hide();
             $("#captureImage").hide();
             $("#wait").show();
-            $.ajax({
-                url: '/save',
-                type: 'POST',
-                data: formData,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $("#wait").hide();
-                    $("#status").show();
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log('error', errorThrown);
-                }
-                });           
+
+            setTimeout(function () {
+                $.ajax({
+                    url: '@Url.Action("Save", "Home")',
+                    type: "POST",
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (response) {
+                        $("#wait").hide();
+                        $("#status").show();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        console.log("Response Text: " + xhr.responseText);
+                        $("#wait").hide();
+                        alert("An error occurred while saving the product. Please try again.");
+                    },
+                });
+            }, 700);
         }
     </script>
 </head>
@@ -124,22 +136,24 @@
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
-            <label id="noProductFound">This product is not available. Please scan the product from 'All product list'</label>
+            <label id="noProductFound">This product is not available. Please scan the product from 'All product
+                list'</label>
             <div id="captureImage">
-                <input type="button" value="Capture Image" onclick="captureImage()">
-                <br/>
+                <input type="button" value="Capture Image" onclick="selectMedia()">
+                <br />
             </div>
             <div id="productStatus">
-                <label id="productName"></label><br/>
-                <img id="productImage" src height="100" width="100"/>
-                <br/>
-                <br/>
-                <button type="button" onclick="approveRejectProduct(true)">Approve</button>
-                <button type="button" onclick="approveRejectProduct(false)">Reject</button>
+                <label id="productName"></label><br />
+                <img id="productImg" src height="100" width="100" />
+                <br />
+                <br />
+                <button type="button" onclick="saveProduct(true)">Approve</button>
+                <button type="button" onclick="saveProduct(false)">Reject</button>
             </div>
             <div id="wait">Please wait...</div>
             <div id="status">Product status updated successfully.</div>
         </div>
     </div>
 </body>
+
 </html>

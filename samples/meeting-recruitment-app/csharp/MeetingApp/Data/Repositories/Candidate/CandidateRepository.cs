@@ -84,9 +84,9 @@ namespace MeetingApp.Data.Repositories
             {
                 if (entity != null)
                 {
-                    entity.PartitionKey = "CandidateDetails";
+                    entity.PartitionKey = entity.Email;
                     entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
-                    await this.EnsureInitializedAsync().ConfigureAwait(false);
+                    // await this.EnsureInitializedAsync().ConfigureAwait(false);
                     TableOperation addOperation = TableOperation.InsertOrReplace(entity);
                     await this.candidateCloudTable.ExecuteAsync(addOperation).ConfigureAwait(false);
                 }

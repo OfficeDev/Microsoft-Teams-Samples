@@ -5,9 +5,9 @@
 
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
@@ -19,9 +19,10 @@
             padding-left: 10%;
             padding-top: 2%;
         }
+
         input {
-                 width: 58rem;
-             }
+            width: 58rem;
+        }
     </style>
 </head>
 
@@ -36,14 +37,15 @@
                 </div>
                 <br />
                 <div class="form-group fg">
-                    <label for="title-desc" class="description">Message description</label><br/>
+                    <label for="title-desc" class="description">Message description</label><br />
                     <textarea id="description" name="taskDescription" rows="5" cols="80"></textarea>
                     <br />
                 </div>
             </div>
             <div class="modal-footer mf">
                 <br />
-                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send
+                    message</button>
             </div>
             <div id="task-submitted">
                 Message broadcasted successfully.
@@ -51,65 +53,65 @@
         </div>
     </div>
     <script>
-        var data =  <%-data%>
+        var data =  <% -data %>
 
-        $(document).ready(function () {
-            $('#task-submitted').hide();
+            $(document).ready(function () {
+                $('#task-submitted').hide();
+            });
+
+        microsoftTeams.app.initialize().then(() => {
         });
-
-        microsoftTeams.initialize();
         var userId;
-        var userName ;
+        var userName;
 
-        microsoftTeams.getContext(function (context) {
-            userId = context.userObjectId;
-            userName  = context.upn;
+        microsoftTeams.app.getContext().then((context) => {
+            userId = context.user.id;
+            userName = context.user.userPrincipalName;
 
-            if(context.subEntityId!="" && context.subEntityId!= undefined)
-            {
+            if (context.page.subPageId != "" && context.page.subPageId != undefined) {
                 let taskInfo = {
                     title: "Broadcast details",
-                    height: 400,
-                    width: 400,
-                    url: window.location.origin + "/BroadcastDetails?taskId=" + context.subEntityId,
-                    card: null,
-                    fallbackUrl:null,
-                    completionBotId: null,
-                    };
-                microsoftTeams.tasks.startTask(taskInfo);
+                    size: {
+                        height: 400,
+                        width: 400
+                    },
+                    url: window.location.origin + "/BroadcastDetails?taskId=" + context.page.subPageId
+                };
+
+                microsoftTeams.dialog.url.open(taskInfo);
             };
         });
 
         // Send notification to group chat for task creation.
         function SendNotificationToOrganisation() {
             var isValid = true;
-             $('#title,#description').each(function () {
-                 if ($.trim($(this).val()) == '') {
-                     isValid = false;
-                     $(this).css({
-                         "border": "1px solid red"
-                     });
-                 }
-                 else {
-                     $(this).css({
-                         "border": "",
-                         "background": ""
-                     });
-                 }
-             });
+            $('#title,#description').each(function () {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
 
-             if (isValid == false) {
-                 e.preventDefault();
-                 return false;
-             }
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
 
             let taskInfo = {
-                 id: data.length + 1,
-                 title: $('#title').val(),
-                 description: $('#description').val(),
-                 userId: userId,
-                 userName: userName
-             };
+                id: data.length + 1,
+                title: $('#title').val(),
+                description: $('#description').val(),
+                userId: userId,
+                userName: userName
+            };
 
             $.ajax({
                 url: "/SendNotificationToOrganisation",

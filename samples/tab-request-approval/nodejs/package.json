@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev:teamsfx": "npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/teams-js": "^1.10.0",
+    "@microsoft/microsoft-graph-client": "^3.0.4",
+    "@microsoft/teams-js": "^2.35.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -20,6 +22,7 @@
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7",
     "q": "^1.5.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "esbuild": "^0.18.1"
   }
 }

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-csharp_dotnetcore",
+    "source": "officeDev",
+    "title": "Starter solution: Personal tab with SSO  in C#",
+    "shortDescription": "This sample application demonstrates how to implement SSO authentication in a personal Teams tab using Azure Microsoft Entra and C#.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/csharp_dotnetcore",
+    "longDescription": [
+      "This comprehensive sample illustrates how to implement SSO authentication for personal tabs in Microsoft Teams using Azure Microsoft Entra and C#. It includes setup instructions, integration with MSAL.js 2.0, Graph API usage, and guidance for running the app in local and production environments."
+    ],
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2024-10-15",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-sso-quickstart/csharp_dotnetcore/Images/TabPersonalSSOQuickstartGif.gif",
+        "alt": "Solution UX showing personal tab with sso  in c#"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

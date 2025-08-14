@@ -1,7 +1,17 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
+ */
+
 import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Switch, Route } from "react-router-dom";
-import { Provider } from "@fluentui/react-teams";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
+
 import { themeNames } from "@fluentui/react-teams";
 import { About } from "./about";
 import { Privacy } from "./privacy";
@@ -17,7 +27,7 @@ function App() {
     themeNames.Default
   );
 
-  useEffect(() => {
+  useEffect(() => {  
     /**
      * With the context properties in hand, your app has a solid understanding of what's happening around it in Teams.
      * https://docs.microsoft.com/en-us/javascript/api/@microsoft/teams-js/context?view=msteams-client-js-latest&preserve-view=true
@@ -44,12 +54,11 @@ function App() {
   }, []);
 
   return (
-    <Provider themeName={appAppearance} lang="en-US">
-      <Switch>
+    <FluentProvider theme={teamsLightTheme}>
+      <Router>
         {/* 
           Default app pages     
         */}
-        <Route exact path="/" component={About} />
         <Route exact path="/privacy" component={Privacy} />
         <Route exact path="/termsofuse" component={TermsOfUse} />
 
@@ -61,8 +70,9 @@ function App() {
         <Route path="/dashboard" component={DashboardTab} />
         <Route path="/list" component={ListTab} />
         <Route path="/board" component={BoardsTab} />
-      </Switch>
-    </Provider>
+        <Route path="/" component={About} />
+      </Router>
+    </FluentProvider>
   );
 }
 

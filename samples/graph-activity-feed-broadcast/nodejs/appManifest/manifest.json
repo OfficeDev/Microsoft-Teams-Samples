@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Activity feed broadcast",
+    "full": "Activity feed notification to notify any message to all members of the organisation"
+  },
+  "description": {
+    "short": "Broadcast messages to all members using Teams activity feed notifications.",
+    "full": "This sample allows users to broadcast messages to all organization members via Teams activity feed notifications using Graph APIs."
+  },
+  "accentColor": "#235EA5",
+  "staticTabs": [
+    {
+      "entityId": "broadcast",
+      "name": "BroadcastTab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/broadcast",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/broadcast",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "approvalRequired",
+        "description": "Required approval",
+        "templateText": "A task created with title {approvalTaskId}"
+      }
+    ]
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.User"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Group"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Chat"
+        }
+      ]
+    }
+  },
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

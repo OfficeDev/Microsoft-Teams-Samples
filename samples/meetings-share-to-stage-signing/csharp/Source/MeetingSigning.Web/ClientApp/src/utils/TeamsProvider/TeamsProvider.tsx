@@ -7,13 +7,13 @@ import {
   Provider as FluentUiProvider,
   ThemeInput,
 } from '@fluentui/react-northstar';
-import { Story } from '@storybook/react';
 
 export interface TeamsProviderContext {
   context: microsoftTeams.app.Context;
   microsoftTeams: typeof microsoftTeams;
-  initializePromise: Promise<void>;
-  setContext: (ctx: microsoftTeams.app.Context) => void;
+  initializePromise: Promise<unknown>;
+  anonymousUserAccessToken?: string;
+  setAnonymousUserAccessToken: (accessToken: string) => void;
 }
 
 // promise that doesn't resolve.
@@ -23,14 +23,29 @@ const never = new Promise<void>((resolve) => {});
 export const TeamsContext = React.createContext<TeamsProviderContext>({
   microsoftTeams,
   initializePromise: never,
-  context: {} as microsoftTeams.app.Context,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setContext: () => {},
+  context: {
+    app: {
+      theme: 'default',
+      locale: '',
+      sessionId: '',
+      host: {
+        name: microsoftTeams.HostName.teams,
+        clientType: microsoftTeams.HostClientType.desktop,
+        sessionId: '',
+      },
+    },
+    page: {
+      id: '',
+      frameContext: microsoftTeams.FrameContexts.content,
+    },
+  },
+  setAnonymousUserAccessToken: (accessToken: string) => {
+    console.log(accessToken);
+  },
 });
 
 export interface TeamsProviderProps {
   microsoftTeams: typeof microsoftTeams;
-  initialContext?: Partial<microsoftTeams.app.Context>;
   children?: JSX.Element | JSX.Element[];
 }
 
@@ -47,59 +62,76 @@ export function getTheme(theme?: string): ThemeInput {
 
 export function TeamsProvider({
   microsoftTeams,
-  initialContext,
   children,
 }: TeamsProviderProps): JSX.Element {
-  const contextInit: any = {
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const [context, setContext] = useState<microsoftTeams.app.Context>({
     app: {
-      locale: "en-us",
+      theme: 'default',
+      locale: '',
+      sessionId: '',
+      host: {
+        name: microsoftTeams.HostName.teams,
+        clientType: microsoftTeams.HostClientType.desktop,
+        sessionId: '',
+      },
     },
     page: {
-      id: ''
+      id: '',
+      // This is a bad default as it's a possible frameContext value, but in this app we do not use it
+      frameContext: microsoftTeams.FrameContexts.remove,
     },
-    ...initialContext,
-  };
-  const [context, setContext] = useState<microsoftTeams.app.Context>(contextInit);
+  });
   const initializePromise = useMemo(
-    () => new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
+    () =>
+      Promise.race([
+        microsoftTeams.app.initialize(),
+        new Promise((_, reject) =>
+          setTimeout(
+            () =>
+              reject('Failed to initialize connection with Microsoft Teams'),
+            5000,
+          ),
+        ),
+      ]),
     [microsoftTeams],
   );
+  const [anonymousUserAccessToken, setAnonymousUserAccessToken] = useState<
+    string | undefined
+  >();
 
   useEffect(() => {
-    async function registerHandlers() {
-      await initializePromise;
-      microsoftTeams.app.getContext().then((context) => setContext(context));
-      microsoftTeams.registerOnThemeChangeHandler((nextTheme) => {
+    initializePromise.then(() => {
+      setInitialized(true);
+      microsoftTeams.app.getContext().then((context) => {
+        setContext(context);
+      });
+      microsoftTeams.app.registerOnThemeChangeHandler((nextTheme) => {
         setContext((current) => ({
           ...current,
           theme: nextTheme,
         }));
       });
-    }
-    registerHandlers();
-  }, [initializePromise, microsoftTeams, setContext]);
+    });
+  }, [microsoftTeams, setContext, initializePromise]);
 
   const theme = getTheme(context.app.theme);
 
+  if (!initialized) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <TeamsContext.Provider
-      value={{ microsoftTeams, context, setContext, initializePromise }}
+      value={{
+        microsoftTeams,
+        context,
+        initializePromise,
+        anonymousUserAccessToken,
+        setAnonymousUserAccessToken,
+      }}
     >
       <FluentUiProvider theme={theme}>{children}</FluentUiProvider>
     </TeamsContext.Provider>
   );
 }
-
-export type TeamsThemeProviderProps = {
-  story: Story;
-};
-
-export const withTeamsThemeProvider = (
-  props: TeamsThemeProviderProps,
-): React.ReactElement => {
-  return (
-    <TeamsProvider microsoftTeams={microsoftTeams}>
-      {<props.story />}
-    </TeamsProvider>
-  );
-};

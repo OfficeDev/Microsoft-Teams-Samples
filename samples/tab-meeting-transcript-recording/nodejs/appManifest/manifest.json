@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://{{domain-name}}",
+    "privacyUrl": "https://{{domain-name}}/privacy",
+    "termsOfUseUrl": "https://{{domain-name}}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Transcripts Recordings",
+    "full": "Meeting Transcripts Recordings"
+  },
+  "description": {
+    "short": "Capture and manage meeting transcripts and recordings in Microsoft Teams.",
+    "full": "This sample application for Microsoft Teams allows users to capture meeting transcripts and recordings, providing an efficient way to document discussions and decisions. With easy setup and integration using Node.js, it enhances team collaboration and ensures that important meeting details are never lost."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Meeting T&R Graph API Demo",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
+  }
+}

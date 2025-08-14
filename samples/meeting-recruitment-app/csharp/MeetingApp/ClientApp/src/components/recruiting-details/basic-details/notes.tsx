@@ -25,11 +25,11 @@ const Notes = (props: INotesProps) => {
             url: `${window.location.origin}/addNote`,
         };
 
-        dialog.open(taskInfo, (note: any) => {
-            //if (err) {
-            //    console.log("Some error occurred in the task module")
-            //    return
-            //}
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, note: any) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
 
             app.getContext().then((context) => {
                 // The note details to save.

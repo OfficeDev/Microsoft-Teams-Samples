@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RSCDemo", "RSCDemo\RSCDemo.csproj", "{7A5232FE-4962-4BCA-B82C-38180046DDC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{667E9BB8-BAE6-4F77-A011-7D7C2F30BAC5}"
+	ProjectSection(SolutionItems) = preProject
+		RSCDemo.slnLaunch.user = RSCDemo.slnLaunch.user
+	EndProjectSection
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{49DDF71F-A20A-4A48-83DC-6651AF16286F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,11 @@ Global
 		{7A5232FE-4962-4BCA-B82C-38180046DDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A5232FE-4962-4BCA-B82C-38180046DDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A5232FE-4962-4BCA-B82C-38180046DDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DDF71F-A20A-4A48-83DC-6651AF16286F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DDF71F-A20A-4A48-83DC-6651AF16286F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DDF71F-A20A-4A48-83DC-6651AF16286F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{49DDF71F-A20A-4A48-83DC-6651AF16286F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DDF71F-A20A-4A48-83DC-6651AF16286F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

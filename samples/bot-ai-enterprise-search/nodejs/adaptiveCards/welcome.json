@@ -1,0 +1,35 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Welcome to Teams AI Enterprise Search App"
+    },
+    {
+      "type": "TextBlock",
+      "text": "This Azure Open AI sample app demonstrates the user search functionality based on Azure Open AI embeddings, Redis DB search and completion APIs for user queries, and it is based on files uploaded by an admin using a bot.",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Azure OpenAI Service Docs",
+      "url": "https://learn.microsoft.com/azure/ai-services/openai/overview"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Redis Search Docs",
+      "url": "https://redis.io/docs/interact/search-and-query/query/"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Bot File Upload Docs",
+      "url": "https://learn.microsoft.com/microsoftteams/platform/bots/how-to/bots-filesv4#use-the-teams-bot-apis"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

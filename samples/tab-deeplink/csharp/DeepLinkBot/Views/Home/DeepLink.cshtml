@@ -2,17 +2,15 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
         crossorigin="anonymous"></script>
 <script>
      microsoftTeams.app.initialize()
      microsoftTeams.app.getContext().then((context) => {
-        console.log(context);
-
         if (context.page.subPageId === "topic1")
         {
-            document.getElementById("taskDiv") = "Bots in Teams:";
+            document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
             document.getElementById("taskContent").innerHTML = "Conversational bots allow users to interact with your web service through text, interactive cards, and task modules. They're incredibly flexible — conversational bots can be scoped to handling a few simple commands or complex, artificial-intelligence-powered and natural-language-processing virtual assistants. They can be one aspect of a larger application, or completely stand-alone."
             var element = document.getElementById('tableList');
             element.style.display = "none";
@@ -55,11 +53,20 @@
     @foreach (var item in Model)
     {
         <tr style="font-family:'Segoe UI';font-size:20px">
-            <td>
-                @Html.ActionLink(item.linkTitle, "Detail", new { id = item.ID })
-            </td>
+        <td>
+            @Html.ActionLink(item.linkTitle, "Detail", new { id = item.ID })
+        </td>
         </tr>
         <tr></tr>
         <tr></tr>
     }
 </table>
+
+<div style="margin-top:1rem;">
+    <span class="container" style="font-size:20px;font-weight:700;">
+        Extended Deep link features
+    </span>
+    @{
+        Html.RenderPartial("ExtendedDeepLinks");
+    }
+</div>

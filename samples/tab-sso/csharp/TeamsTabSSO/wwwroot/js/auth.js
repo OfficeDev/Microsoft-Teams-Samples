@@ -1,35 +1,40 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-   
-    getClientSideToken()
-        .then((clientSideToken) => {           
-            return getServerSideToken(clientSideToken);
-        })
-        .catch((error) => {
-            console.log(error);
-            if (error === "invalid_grant") {
-                // Display in-line button so user can consent
-                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-                $("#divError").show();
-                $("#consent").show();
-            } else {
-                // Something else went wrong
-            }
-        });
+    microsoftTeams.app.initialize().then(() => {
+        // Display in-line button so user can consent
+        $("#browser-signin-text").show();
+        $("#browser-signin-container").hide();
+        getClientSideToken()
+            .then((clientSideToken) => {
+                return getServerSideToken(clientSideToken);
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error === "invalid_grant") {
+                    // Display in-line button so user can consent
+                    $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                    $("#divError").show();
+                    $("#consent").show();
+                }
+            });
+    }).catch((error) => {
+        console.log(error)
+        $("#browser-signin-text").hide();
+        $("#browser-signin-container").show();
+    });
 });
 
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.app.getContext().then((context) => {
-            getUserInfo(context.user.userPrincipalName);
+            $("#consent").hide();
+            $("#divError").hide();
+            accessToken = data.accessToken;
+            microsoftTeams.app.getContext().then((context) => {
+                getUserInfo(context.user.userPrincipalName);
+            });
         });
-    });
 }
 
 function getToken() {

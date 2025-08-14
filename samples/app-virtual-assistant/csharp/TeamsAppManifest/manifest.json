@@ -1,9 +1,8 @@
 {
-	"$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-	"manifestVersion": "1.12",
+	"$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+	"manifestVersion": "1.19",
 	"version": "1.0.0",
 	"id": "<App_Id>",
-	"packageName": "Microsoft.Teams.Apps.VirtualAssistant",
 	"developer": {
 		"name": "Microsoft",
 		"websiteUrl": "https://github.com/nebhagat/1",
@@ -19,8 +18,8 @@
 		"full": "Customized Virtual Assistant"
 	},
 	"description": {
-		"short": "Virtual Assistant",
-		"full": "Customized Virtual Assistant"
+		"short": "Virtual assistant template designed for enhanced Teams capabilities.",
+		"full": "This sample showcases a customizable virtual assistant template that integrates seamlessly with Microsoft Teams."
 	},
 	"bots": [
 		{
@@ -28,7 +27,7 @@
 			"scopes": [
 				"personal",
 				"team",
-				"groupchat"
+				"groupChat"
 			],
 			"supportsFiles": true,
 			"isNotificationOnly": false
@@ -162,7 +161,7 @@
 					"type": "link",
 					"value": {
 						"domains": [
-							"*.ngrok.io"
+							"*.ngrok-free.app"
 						]
 					}
 				}
@@ -175,7 +174,7 @@
 	],
 	"validDomains": [
 		"*.botframework.com",
-		"*.ngrok.io",
+		"<<DOMAIN-NAME>>",
 		"*.githubusercontent.com"
 	]
 }

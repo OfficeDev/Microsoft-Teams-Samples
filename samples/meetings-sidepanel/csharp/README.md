@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting
+description: This Microsoft Teams sample app demonstrates how to use the Live Share SDK to implement a side panel that allows for real-time data sharing during meetings.
 products:
 - office-teams
 - office
@@ -8,65 +8,161 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:27 PM"
+urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-csharp
 ---
 
 # Meetings SidePanel
 
-This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
-  
-### User interactions(Meeting Organizer)
-- **Add New Agenda Item** - Gives provision to add new Agenda point.
-- **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
-- **Publish Agenda** - Sends the agenda list to the meeting chat.
+This sample application demonstrates the implementation of a [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) in Microsoft Teams meetings, leveraging the Live Share SDK for real-time data sharing. Users can add agenda items, publish them to the meeting chat, and interact with the app through adaptive cards and customizable themes, enhancing the overall meeting experience.
+
+## Included Features
+* Meeting Stage
+* Meeting SidePanel
+* Live Share SDK
+* Adaptive Cards
+* RSC Permissions
+* App Theme
+
+## Interaction with app
+
+![Customform](SidePanel/Images/SidePanelModule.gif)
+
+## Interaction with app theme
+
+![Preview Image](SidePanel/Images/app-theme-sidepanel.gif)
 
 ## Prerequisites
 
-### Tools
-
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
   ```bash
   # determine dotnet version
   dotnet --version
   ```
-
-- [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http -host-header=localhost 3978
-  ```
-- [SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/overview/getting-started/tutorial-getting-started-with-signalr-and-mvc) To update agenda in Real-Time
+- [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
-1. Clone the repository
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Manually Setup and use the sample locally.
+
+1) Run ngrok - point to port 5130
+
+   ```bash
+   ngrok http 5130 --host-header="localhost:5130"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 5130 --allow-anonymous
+   ```
+
+2. Create Microsoft Entra ID app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+        > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+3. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-2. If you are using Visual Studio
+
+4. If you are using Visual Studio
 - Launch Visual Studio
 - File -> Open -> Project/Solution
 - Navigate to ```samples\meetings-sidepanel\csharp``` folder
-- Select ```SidePanel.sln``` file
-3. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978```
-4. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
-5. Go to appsettings.json and add ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```BaseUrl``` information.
-6. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
+- Select ```SidePanel.sln``` file and open the solution
+
+**Note** : In the debug dropdown menu of Visual Studio, select default startup project > **SidePanel**
+
+5. Setup and run the bot from Visual Studio: 
+   Modify the `appsettings.json` and fill in the following details:
+   - `<<MicrosoftAppId>>` - Generated from Step 2 (Application (client) ID) is the application app id
+   - `<<MicrosoftAppPassword>>` - Generated from Step 2, also referred to as Client secret
+   - `<<BaseUrl>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+
+6. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
+   - <<Manifest-id>> with any random GUID or your MicrosoftAppId from Microsoft Entra ID app registration.
+   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
+   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
-8. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-## Interacting with the app in Teams Meeting
-Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
-1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
-![](https://user-images.githubusercontent.com/50989436/111726512-1f31f280-888f-11eb-8e96-cce2f8a8d456.png)
-2. On click of "Add" button, agenda point will be added to the agenda list.
-![](https://user-images.githubusercontent.com/50989436/111726569-3bce2a80-888f-11eb-8ba6-1c662b2939da.png)
-3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
-![](https://user-images.githubusercontent.com/50989436/111726656-5accbc80-888f-11eb-94e3-af1bc18bd500.png)
+8. Navigate to ```samples\meetings-sidepanel\csharp\ClientApp``` folder and execute the below command.
 
+    ```bash
+    npm install
+    npm start
+    ```
+9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/csharp/SidePanel/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
+
+## Running the sample
+User interactions(Meeting Organizer)
+- **Add New Agenda Item** - Gives provision to add new Agenda point.
+- **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
+- **Publish Agenda** - Sends the agenda list to the meeting chat.
+
+## Installation and setup meetings sidepanel.
+![Install](SidePanel/Images/1.Install.png)
+
+![Install](SidePanel/Images/2.AddToMeeting.png)
+
+![Install](SidePanel/Images/3.ConfigureTab.png)
+
+1. Welcome image to added side panel.
+![Customform](SidePanel/Images/4.Sidepanel.png)
+
+2. Screen ready to added the agenda.
+![AddNewAgenda](SidePanel/Images/5.PushedAgenda.png)
+
+3. On click of "Add" button, agenda point will be added to the agenda list.
+![AgendaSubmit](SidePanel/Images/6.PublishAgenda.png)
+
+4. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
+![AgendaCard](SidePanel/Images/7.PublishAgendaChat.png)
+
+## Interaction with app theme when Teams theme changes.
+
+![Preview Image](SidePanel/Images/8.DarkTheme.png)
+
+![Preview Image](SidePanel/Images/4.Sidepanel.png)
+
+![Preview Image](SidePanel/Images/9.ContrastTheme.png)
+
+## Deploy the bot to Azure
+
+-  To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [Meeting apps APIs](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Meeting Side Panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+- [Handle theme change](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context?tabs=Json-v2%2Cteamsjs-v2%2Cdefault#handle-theme-change)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/meetings-sidepanel-csharp" />

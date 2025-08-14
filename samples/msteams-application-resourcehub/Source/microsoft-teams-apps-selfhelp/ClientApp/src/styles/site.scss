@@ -1,0 +1,176 @@
+﻿/*
+    <copyright file="style.scss" company="Microsoft">
+    Copyright (c) Microsoft. All rights reserved.
+    </copyright>
+*/
+
+.container-div
+{
+	padding: 0 3.5rem 0 3.2rem;
+	width: 100vw;
+    position: fixed;
+    .mobile &
+    {
+        padding: 0 1.33rem;
+    }
+}
+
+.default-container
+{
+    .container-div &
+    {
+        width: 100%;
+    }
+}
+
+.dark-container
+{
+    .container-div &
+    {
+        width: 100%;
+        background: #292929;
+    }
+}
+
+.high-contrast-container
+{
+    .container-div &
+    {
+        width: 100%;
+        background: black;
+    }
+}
+
+.task-module-container {
+    height: 94vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container-subdiv {
+    width: auto;
+}
+
+.container-subdiv-main {
+    max-height: 70vh;
+    width: auto;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.error-message {
+    text-align: center;
+    width: 80%;
+    height: 10rem;
+    position: absolute;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1.5rem;
+}
+
+.default-container .gridHeaderClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 12px;
+    color: #484644;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.default-container .firstRowGridClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 14px;
+    color: #252424;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.default-container .secondRowGridClass {
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    color: #484644;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.dark-container .gridHeaderClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.dark-container .firstRowGridClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.dark-container .secondRowGridClass {
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.high-contrast-container .gridHeaderClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.high-contrast-container .firstRowGridClass {
+    font-family: 'Segoe UI semibold';
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.high-contrast-container .secondRowGridClass {
+    font-family: 'Segoe UI';
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+
+.searchTextClass
+{
+font-family: 'Segoe UI';
+font-size: 14px;
+letter-spacing: 0;
+line-height: 20px;
+}
+
+.mandatoryStar
+{
+    color: red;
+    line-height: 2;
+    margin-top: 2px;
+}
+
+.high-contrast-container .ck:hover .ui-list__item__contentMedia{
+    display: block;
+}
+
+.dark-container .ck:hover .ui-list__item__contentMedia {
+    display: block;
+}
+
+.default-container .ck:hover .ui-list__item__contentMedia {
+    display: block;
+}
+
+.high-contrast-container input:disabled {
+    color:black;
+}
+
+.high-contrast-container mgt-person .person-root {
+    color: #fff;
+}

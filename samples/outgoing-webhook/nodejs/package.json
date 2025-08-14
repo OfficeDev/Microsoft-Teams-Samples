@@ -1,0 +1,16 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "---\r page_type: sample\r description: Samples to create \"Custom Bots\" to be used in Microsoft Teams.\r products:\r - office-teams\r - office\r - office-365\r languages:\r - javascript\r extensions:\r   contentType: samples\r   createdDate: \"12/05/2017 06:03:13 PM\"\r urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs\r ---",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "start": "node app.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.18.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

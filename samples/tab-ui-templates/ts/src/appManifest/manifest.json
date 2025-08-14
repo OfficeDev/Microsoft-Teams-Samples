@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.0.0",
+  "developer": {
+    "name": "microsoft",
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy.html",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/tou.html"
+  },
+  "name": {
+    "short": "Tab UI Templates",
+    "full": "Tab UI Templates"
+  },
+  "description": {
+    "short": "Sample app showcasing high-quality UI templates for Microsoft Teams.",
+    "full": "This sample app provides tested, high-quality UI templates to help developers understand how to create effective applications for Microsoft Teams, covering common use cases like dashboards and forms."
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "staticTabs": [
+    {
+      "entityId": "sample.app.welcome",
+      "name": "Welcome",
+      "contentUrl": "https://${{TAB_DOMAIN}}/welcome",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "sample.app.dashboard",
+      "name": "Dashboard",
+      "contentUrl": "https://${{TAB_DOMAIN}}/dashboard",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "sample.app.list",
+      "name": "List",
+      "contentUrl": "https://${{TAB_DOMAIN}}/list",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "validDomains": [ "${{TAB_DOMAIN}}" ]
+}

@@ -99,7 +99,7 @@ namespace MeetingLiveCoding.Controllers
         /// <returns></returns>
         [Route("update")]
         [HttpPost]
-        public void UpdateMeetingList(PostMeetingData meetingData)
+        public void UpdateMeetingList([FromBody] PostMeetingData meetingData)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace MeetingLiveCoding.Controllers
                 if (data != null)
                 {
                     var questionData = data.Questions.FirstOrDefault(item => item.QuestionId == meetingData.QuestionId);
-                    questionData.Value = meetingData.Description;
+                    questionData.Value = meetingData.EditorData;
                 }
             }
             catch (Exception ex)

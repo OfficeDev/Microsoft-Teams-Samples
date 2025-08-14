@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating device permissions
+description: This sample app for Microsoft Teams demonstrates how to handle device permissions, including audio, video, and geolocation, within a tab interface. It provides insights into device permission usage across desktop and mobile views, allowing developers to enhance user interactions effectively.
 products:
 - office-teams
 - office
@@ -8,91 +8,150 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "27-07-2021 16:32:33"
+ contentType: samples
+ createdDate: "27-07-2021 16:32:33"
+urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 
-# Tab Device Permission Demo
+# Tab Device Permission
 
-This sample shows [tab device permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/device-capabilities-overview).
+Discover this Microsoft Teams tab sample app that illustrates the management of device permissions for audio, video, and geolocation. With comprehensive setup instructions and support for both desktop and mobile views, this app empowers developers to create interactive experiences by leveraging device capabilities. [tab device permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/device-capabilities-overview).
 
-It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
-
-**Mobile View**
-
-![Mobile Demo](Images/mainTab1.png)
-
-**Desktop View**
-![Desktop View](Images/desktopHome.png)
+It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
 ```
-The latest update on how device permissions are handled in the browser is currently available in public developer preview
-only.
-
-This update will be generally available (GA) by February 01, 2022
+Currently only capture image is supported in Teams Desktop client.
 ```
+
+ ## Included Features
+* Tabs
+* Device Permissions (geolocation, media)
+
+## Interaction with app - Desktop View
+
+![Tab Device PermissionsGif](Images/TabDevicePermissionsGif.gif) 
+
+## Interaction with app - Mobile View
+
+![Tab Device PermissionsGif Mobile](Images/TabDevicePermissionsGifMobile.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Tab Device Permission:** [Manifest](/samples/tab-device-permissions/nodejs/demo-manifest/tab-device-permissions.zip)
+
 ## Prerequisites
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
+ To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+
+    ```bash
+    # determine node version
+    node --version
+    ```
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) or equivalent tunneling solution
+   If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
     
-## To try this sample
-1) Clone the repository
+## Setup
+ NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+
+2. Setup NGROK
+1) Run ngrok - point to port 3000
+
+   ```bash
+   ngrok http 3000 --host-header="localhost:3000"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3000 --allow-anonymous
+   ```
+
+3. Setup for code   
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+ - In a terminal, navigate to `samples/tab-device-permissions/nodejs`
 
-2) In the folder where repository is cloned navigate to `samples/tab-device-permissions/nodejs`.
-
-3) Install modules
-
-   Inside node js folder, open your local terminal and run the below command to install node modules. 
-   You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+- Install modules
 
     ```bash
     npm install
     ```
- 4) Run the application in your local terminal (or Visual Studio Code terminal) using following command 
-    
-     ```bash
+- Start the bot
+
+    ```bash
     npm start
     ```
- 5) Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint     to update the manifest file):<br>
-    ```bash
-    ngrok http 3000 --host-header=localhost
-    ```
- 6) Create an app manifest. Navigate to the file, appPackage/manifest.json and change the following:
-    1. <<BASE_URI_DOMAIN>> to your https endpoint from ngrok excluding the "https://" part
-    2. Save the file and zip this file along with both the png icons (located next to it) together to create a manifest.zip file.
- 
- 6) Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app") ans start using the app.
+ 4. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
-Local Running App:
+## Running the sample - Desktop View
 
-1. [Upload an app package](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) (Zip file created in step 3 above) to Microsoft Teams
+- [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+
+**Install app:** 
+
 ![Install App](Images/install.png)
-1. Go to Device permission tab.
-1. Click on respective button to test the scenario. You will get prompt to accept permission request.
-![Accept Permissions](Images/allowPermission.png)
-1. Try this on Mobile. Screenshot of available features: <br/> 
-![Mobile Demo](Images/mainTab1.png)
 
-1. Device permissions on browser
+**Device permission tab: (Web View)** 
 
-![Desktop View](Images/desktopHome.png)
+![desktopHome](Images/tab-web.png)
 
-![Error View](Images/errorView.png)
+**Device permission tab: (Desktop View)** 
 
-![Permission View](Images/deviceBrowser.PNG)
+![desktopHome](Images/tab-desktop.png)
 
-![Final View](Images/devicePermBrowser.PNG)
+**Tab device permission:** 
+
+![deviceBrowser](Images/deviceBrowser.PNG)
+
+## Running the sample - Mobile View
+
+**Tab device permission(Capture Image and Media):** 
+
+![mainTab1](Images/mainTab1.png)
+
+**Tab device permission(Scan Barcode):** 
+
+![mainTab2](Images/mainTab2.png)
+
+**Tab device permission(People Picker and Get Location):** 
+
+![mainTab3](Images/mainTab3.png)
+
+**Device permission popup:** 
+
+![allowPermission](Images/allowPermission.png)
 
 Similary, you can try out for other features.
 > [!IMPORTANT]
   > Please take a look at [notes section in Device Permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/native-device-permissions?tabs=desktop) documentation as not all devices support these permissions.
+
 # Contributing
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -103,3 +162,10 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+# Further reading
+
+- [Teams tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
+- [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-device-permissions-nodejs" />

@@ -3,7 +3,9 @@
 <html lang="en">
    <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -21,33 +23,36 @@
 
       <script>
          $(document).ready(function () {
-             $('#task-submitted').hide();
+            microsoftTeams.app.initialize().then(() => {
+                $('#task-submitted').hide();
+            });
          }); 
 
-          microsoftTeams.initialize();
             var token = localStorage.getItem("accessToken");
             var userId = "";
             var userName = "";
-         
-            microsoftTeams.getContext(function (context) {
-                userId = context.userObjectId;
-                userName = context.upn;
 
-                if(context.subEntityId!="" && context.subEntityId!= undefined)
+           microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                userId = context.user.id;
+                userName = context.user.userPrincipalName;
+           
+
+                if(context.page.subPageId !="" && context.page.subPageId != undefined)
                 {
                     let taskInfo = {
                         title: "Message details",
-                        height: 400,
-                        width: 400,
-                        url: window.location.origin + "/MessageDetails?taskId=" + context.subEntityId,
-                        card: null,
-                        fallbackUrl:null,
-                        completionBotId: null,
-                        };
+                        size: {
+                            height: 400,
+                            width: 400,
+                        },
+                        url: window.location.origin + "/MessageDetails?taskId=" + context.page.subPageId,
+                    };
 
-                    microsoftTeams.tasks.startTask(taskInfo);
+                    microsoftTeams.dialog.url.open(taskInfo);
                 };
-            });       
+            });
+           });
 
          // Send notification to organisation.
          function SendNotificationToOrganisation() {
@@ -78,7 +83,7 @@
                  description: $('#description').val(),
                  userId: userId,
                  userName: userName,
-                 access_token: token,
+                 access_token: localStorage.getItem("accessToken"),
              };
 
              $.ajax({
@@ -112,10 +117,15 @@
             </div>
             <div class="modal-footer mf">
                 <br />
-                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+                <button type="button" class="btn-send save" id="send-notification" onclick="return SendNotificationToOrganisation()">Send message</button>
+                <br />
+                <button type="button" class="btn-send" onclick="return grantConsent()" id="consent" style="display:none;">Grant consent</button>
             </div>
-            <div id="task-submitted">
+            <div id="task-submitted" style="display:none;">
                 Message broadcasted successfully.
+            </div>
+            <div id="grant-consent" style="display:none;">
+                Error occured, Please click on grant consent button to grant consent.
             </div>
         </div>
         </div>

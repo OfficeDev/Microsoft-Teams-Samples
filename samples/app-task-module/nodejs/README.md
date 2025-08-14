@@ -7,11 +7,12 @@ products:
 languages:
 - typescript
 - nodejs
-description: "A task module allows you to create modal popup experiences in your Teams application."
+description: "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML."
 urlFragment: teams-module-node
 extensions:
   contentType: samples
-  createdDate: 9/17/2018 6:53:22 PM
+  createdDate: "09/17/2018 06:53:22 PM"
+urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
 
 # Microsoft Teams task module
@@ -20,11 +21,89 @@ A task module allows you to create modal popup experiences in your Teams applica
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
-## Try it yourself
+## Included Features
+* Bots
+* Tabs
+* Task Modules
+* Adaptive Cards
 
-This sample is deployed on Microsoft Azure and you can try it yourself by uploading [TaskModule.zip](./TaskModule.zip) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; see [step 6 here](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-tenant#turn-on-microsoft-teams-for-your-organization).) The app is running on the free Azure tier, so it may take a while to load if you haven't used it recently and it goes back to sleep quickly if it's not being used, but once it's loaded it's pretty snappy.
+## Interaction with app
 
-## Overview of this sample
+![adaptivecard](Images/AppTaskModule.gif)
+
+## Prerequisites
+
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  [NodeJS](https://nodejs.org/en/)
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+   appropriate permissions to install an app.
+   
+ ## Setup
+ 
+ 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+   
+ 2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+
+ - Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+4. Setup for code
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  - In a terminal, navigate to `samples/app-task-module/nodejs`
+  
+  - Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+
+
+  - Install modules
+
+    ```bash
+    npm install
+    ```
+  - Build application:
+
+    ```bash
+    npm run build
+    ```
+
+  - Run your app.
+  
+    ```bash
+    npm start
+    ```
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    -  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-task-module\nodejs\Manifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the `appPackage` folder, copy that file and paste someother folder then zip, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
+   
+ ## Overview of this sample
 
 This sample app was developed in conjunction with the task module feature itself to exercise as much of it as possible. Here's what's included:
 
@@ -34,7 +113,7 @@ This sample app was developed in conjunction with the task module feature itself
 
 The tab shows how to invoke the task module using the Teams SDK. Source code for the tab is found in [TaskModuleTab.ts](src/TaskModuleTab.ts); the view definition is in [taskmodule.pug](src/views/taskmodule.pug). This sample app uses [Pug](https://pugjs.org) (formerly Jade) for HTML rendering.
 
-The following task modules are supported:
+## Running the sample
 
 * YouTube, which is comprised of a [generic template for embedded `<iframe>` experiences](src/views/embed.pug) (also used for the PowerApp task module below) plus a [four-line stub containing the YouTube embed URL](src/views/youtube.pug)
 
@@ -62,48 +141,41 @@ You can invoke them from an Adaptive card (using the _tasks_ command) or from a 
 * _Adaptive Card - Single_ returns the results to the conversation as a message.
 * _Adaptive Card - Sequence_ shows how adaptive cards can be chained together: instead of returning the result to the chat, the result is shown in another Adaptive card.
 
-## Run this sample locally.
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
+## Outlook on the web
 
-### 1. Setup for Bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
+- To view your app in Outlook on the web.
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-### 2. Run your bot sample
-1) Clone the repository
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+![InstallOutlook](Images/InstallOutlook.png)
 
-2) In a terminal, navigate to `samples/app-task-module/nodejs`
+**Select your app icon to launch and preview your app running in Outlook on the web**
 
-3) Install modules
+![AppOutlook](Images/AppOutlook.png)
 
-    ```bash
-    npm install
-    ```
-6) Build application:
+![ClickDeepLink](Images/ClickDeepLink.png)
 
-    ```bash
-    npm run build
-    ```
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
-4) Run ngrok - point to port 3978
+## Office on the web
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-    This will be used as baseURI.
-5) Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, you get by running ngrok it should look something like `https://abc21-hun-12ef.ngrok.io`
+- To preview your app running in Office on the web.
 
-6) Run your bot at the command line:
+- Log into office.com with test tenant credentials
 
-    ```bash
-    npm start
-    ```
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png)  
+
+![InstallOutlookCustome](Images/InstallOutlookCustome.png)  
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Implementation notes
 
@@ -123,6 +195,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 There's also an _actester_ bot command. It's a handy way of seeing what an Adaptive card looks like in Teams - simply copy/paste the JSON of Adaptive cards, e.g. the [Samples page on the Adaptive card site](http://adaptivecards.io/samples/), and the bot will render it as a reply.
 
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
@@ -136,3 +209,9 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further reading
+
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/app-task-module-nodejs" />

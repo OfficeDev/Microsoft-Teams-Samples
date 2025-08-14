@@ -15,7 +15,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Authorization
         ///
         /// Injects authorization logic.
         /// </summary>
-        /// <param name="services">Servie collection.</param>
+        /// <param name="services">Service collection.</param>
         /// <returns>Service collection.</returns>
         public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
         {

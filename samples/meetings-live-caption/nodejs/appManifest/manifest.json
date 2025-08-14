@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Live Caption",
+    "full": "Meeting Live Caption"
+  },
+  "description": {
+    "short": "Sample app using CART links to send live captions in Teams meeting tabs.",
+    "full": "This sample application demonstrates how to use CART links to send live captions in Microsoft Teams meeting tabs."
+  },
+  "accentColor": "#235EA5",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{TAB_DOMAIN}}/Home/Configure",
+      "scopes": [ "groupChat" ],
+      "canUpdateConfiguration": true,
+      "context": [
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "validDomains": [
+    "<<domain-name>>",
+    "${{TAB_DOMAIN}}"
+  ],
+  "permissions": [ "messageTeamMembers" ]
+}

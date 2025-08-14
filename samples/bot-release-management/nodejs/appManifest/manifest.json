@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Release Management",
+    "full": "Release Management"
+  },
+  "description": {
+    "short": "Bot for Teams notifications on Azure DevOps work items via service hooks.",
+    "full": "This bot app notifies Teams when Azure DevOps work items are created via service hooks."
+  },
+  "accentColor": "#235EA5",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "groupChat"
+      ],
+      "isNotificationOnly": true
+    }
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+  "permissions": [
+    "messageTeamMembers"
+  ]
+}

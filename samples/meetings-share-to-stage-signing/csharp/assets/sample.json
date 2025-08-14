@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-meetings-share-to-stage-signing-csharp",
+    "source": "officeDev",
+    "title": "In-Meeting Document Signing",
+    "shortDescription": "This Microsoft Teams sample app enables users to review and sign documents in real time during meetings, facilitating seamless collaboration.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-share-to-stage-signing/csharp",
+    "longDescription": [
+      "This sample application allows users to sign documents electronically during Microsoft Teams meetings, enhancing the efficiency of document management. It supports multiple roles, including document creators, signers, and readers, and is adaptable for various scenarios such as code reviews and collaborative document assessments."
+    ],
+    "creationDateTime": "2022-04-19",
+    "updateDateTime": "2024-10-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,meeting"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-share-to-stage-signing/csharp/Docs/MeetingsShareStageSigningGif.gif",
+        "alt": "Solution UX showing in-meeting document signing"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab Multi Hub",
+    "full": "Tab Multi Hub"
+  },
+  "description": {
+    "short": "Access Calendar, Mail, Profile, and geolocation features in personal tabs.",
+    "full": "This sample application allows users to seamlessly interact with their Calendar, Mail, Profile, and geolocation from personal tabs within Microsoft Teams. With easy setup and integration using TypeScript, it enhances user productivity by centralizing essential tools in one place."
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "contentUrl": "https://${{TAB_DOMAIN}}/CalendarTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/CalendarTab",
+      "entityId": "com.contoso.Calendar.help",
+      "name": "Calendar",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://${{TAB_DOMAIN}}/MailTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/MailTab",
+      "entityId": "com.contoso.Mail.help",
+      "name": "Mail",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://${{TAB_DOMAIN}}/ProfileTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/ProfileTab",
+      "entityId": "com.contoso.Profile.help",
+      "name": "Profile",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://${{TAB_DOMAIN}}/GeolocationTab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/GeolocationTab",
+      "entityId": "com.contoso.geolocation.help",
+      "name": "geo location",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "devicePermissions": [
+    "geolocation"
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

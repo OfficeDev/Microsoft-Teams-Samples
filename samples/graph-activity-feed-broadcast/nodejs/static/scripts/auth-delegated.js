@@ -1,18 +1,14 @@
-(function () {
+(async function () {
     'use strict';
-
+    await microsoftTeams.app.initialize();
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
-        microsoftTeams.initialize();
         return new Promise((resolve, reject) => {
-            microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    resolve(result);
-                },
-                failureCallback: function (error) {
-                    reject("Error getting token: " + error);
-                }
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                resolve(result);
+            }).catch((error) => {
+                reject("Error getting token: " + error);
             });
         });
     }
@@ -21,7 +17,7 @@
     // using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
-            microsoftTeams.getContext((context) => {
+            microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
                     method: 'POST',
                     headers: {
@@ -29,25 +25,24 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        tid: context.tid,
+                        tid: context.user.tenant.id,
                         token: clientSideToken
                     }),
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson.error) {
-                        reject(responseJson.error);
-                    }
-                    else {
-                        resolve();
-                    }
-                });
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } else {
+                            resolve();
+                        }
+                    });
             });
         });
     }
@@ -58,20 +53,16 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/auth-start",
                 width: 600,
-                height: 535,
-                successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
-                    resolve(data);
-                },
-                failureCallback: (reason) => {
-                    reject(JSON.stringify(reason));
-                }
+                height: 535
+            }).then(result => {
+                resolve(result);
+            }).catch(reason => {
+                reject(JSON.stringify(reason));
             });
         });
     }
 
-    // method invoked on sso authentication.
+    // Method invoked on sso authentication.
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
@@ -82,15 +73,15 @@
                 // Display in-line button so user can consent
                 requestConsent()
                     .then((result) => {
-                        // Consent succeeded - use the token we got back
-                        let accessToken = JSON.parse(result).accessToken;
-                        console.log(`Received access token ${accessToken}`);
+                        getClientSideToken()
+                            .then((clientSideToken) => {
+                                return getServerSideToken(clientSideToken);
+                            })
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
                     });
-            } 
-            else {
+            } else {
                 // Something else went wrong
                 console.log(`Error from web service: ${error}`);
             }

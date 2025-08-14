@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{Bot Id}",
+  "developer": {
+    "name": "{{Company_Name}}",
+    "websiteUrl": "{websiteUrl}",
+    "privacyUrl": "{websiteUrl}",
+    "termsOfUseUrl": "{websiteUrl}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Resources Hub",
+    "full": "Microsoft Teams Help and Learning"
+  },
+  "description": {
+    "short": "GResource Hub: Your all-in-one solution for mastering Microsoft Teams.",
+    "full": "Resource Hub is a comprehensive solution designed to provide users with all the essential help and resources they need to effectively utilize Microsoft Teams."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index1",
+      "name": "Home",
+      "contentUrl": "{App base URL}/user-dashboard",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{Bot ID}",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": true
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{app domain}",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "{Bot Id}",
+    "resource": "api://{app domain}/{Bot Id}"
+  }
+}

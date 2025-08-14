@@ -1,4 +1,5 @@
 ﻿using AdaptiveCards;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace ChangeNotification.Helper
@@ -26,5 +27,9 @@ namespace ChangeNotification.Helper
                 Content = adaptiveCard
             };
         }
+    }
+    public static class TokenStore
+    {
+        public static string Token = null;
     }
 }

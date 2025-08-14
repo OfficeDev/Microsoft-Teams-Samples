@@ -1,0 +1,51 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Calling Bot"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Sample Calling Bot",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Create Call",
+      "id": "createcall",
+      "data": {
+        "action": "createcall",
+        "msteams": {
+          "type": "task/fetch"
+        }
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Create Incident",
+      "id": "openincidenttask",
+      "data": {
+        "action": "openincidenttask",
+        "msteams": {
+          "type": "task/fetch"
+        }
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Join scheduled meeting",
+      "id": "joinscheduledmeeting",
+      "data": {
+        "type": "joinscheduledmeeting"
+      },
+      "$when": "${showJoinMeetingButton}"
+    }
+  ]
+}

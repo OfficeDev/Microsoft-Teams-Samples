@@ -2,11 +2,10 @@
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -77,13 +76,6 @@ namespace TabRequestApproval.Controllers
             return View("Request");
         }
 
-        // Redirect to auth page.
-        [Route("TabAuth")]
-        public ActionResult Auth()
-        {
-            return View("TabAuth");
-        }
-
         // Send notification to manager about request.
         [HttpPost]
         [Route("SendNotificationToManager")]
@@ -91,71 +83,88 @@ namespace TabRequestApproval.Controllers
         {
             try
             {
-                var currentTaskList = new List<RequestInfo>();
-                List<RequestInfo> taskList = new List<RequestInfo>();
-                _taskList.TryGetValue("taskList", out currentTaskList);
-
-                taskInfo.taskId = Guid.NewGuid();
-                taskInfo.status = "Pending";
-
-                if (currentTaskList == null)
+                // Check if the access token is not null
+                if (taskInfo.access_token != null)
                 {
-                    taskList.Add(taskInfo);
-                    _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
-                    ViewBag.TaskList = taskList;
-                }
-                else
-                {
-                    currentTaskList.Add(taskInfo);
-                    _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
-                    ViewBag.TaskList = currentTaskList;
-                }
+                    // Create lists to store task information
+                    var currentTaskList = new List<RequestInfo>();
+                    List<RequestInfo> taskList = new List<RequestInfo>();
 
-                var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-                var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-                var user = await graphClient.Users[taskInfo.managerName]
-                          .Request()
-                          .GetAsync();
+                    // Try to get the current task list from the dictionary
+                    _taskList.TryGetValue("taskList", out currentTaskList);
 
-                var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
-                                   .Request()
-                                   .Expand("teamsApp")
-                                   .GetAsync();
+                    // Generate a new task ID and set the initial status to "Pending"
+                    taskInfo.taskId = Guid.NewGuid();
+                    taskInfo.status = "Pending";
 
-                var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Request Approval").Select(x => x.TeamsApp.Id);
-                var userName = user.UserPrincipalName;
-   
-                var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ taskInfo.taskId+"\"}";
-                var topic = new TeamworkActivityTopic
-                {
-                    Source = TeamworkActivityTopicSource.Text,
-                    Value = $"{taskInfo.title}",
-                    WebUrl = url
-                };
-
-                var previewText = new ItemBody
-                {
-                    Content = $"Request By: {taskInfo.userName}"
-                };
-
-                var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-                {
-                    new Microsoft.Graph.KeyValuePair
+                    // Check if the currentTaskList is null
+                    if (currentTaskList == null)
                     {
-                        Name = "approvalTaskId",
-                        Value = taskInfo.title
+                        // If it is null, create a new task list and add the taskInfo to it
+                        taskList.Add(taskInfo);
+                        _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
+                        ViewBag.TaskList = taskList;
                     }
-                };
-            
-                await graphClientApp.Users[user.Id].Teamwork
-                    .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
-                    .Request()
-                    .PostAsync();
+                    else
+                    {
+                        // If it is not null, add the taskInfo to the existing currentTaskList
+                        currentTaskList.Add(taskInfo);
+                        _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
+                        ViewBag.TaskList = currentTaskList;
+                    }
+
+                    // Get a Microsoft Graph API client using the provided access token
+                    var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+
+                    // Retrieve user information from Microsoft Graph API
+                    var user = await graphClient.Users[taskInfo.personaName].GetAsync();
+
+                    // Retrieve installed apps for the user from Microsoft Graph API
+                    var installedApps = await graphClient.Users[user.UserPrincipalName].Teamwork.InstalledApps
+                                       .GetAsync((requestConfiguration) =>
+                                       {
+                                           requestConfiguration.QueryParameters.Expand = new string[] { "teamsAppDefinition" };
+                                       });
+
+                    // Filter installed apps to find the one with DisplayName "Tab Request Approval"
+                    var installationId = installedApps.Value.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Request Approval").Select(x => x.TeamsAppDefinition.TeamsAppId);
+
+                    // Check if there is at least one matching installationId
+                    if (installationId.Any())
+                    {
+                        var requestBody = new Microsoft.Graph.Users.Item.Teamwork.SendActivityNotification.SendActivityNotificationPostRequestBody
+                        {
+                            Topic = new TeamworkActivityTopic
+                            {
+                                Source = TeamworkActivityTopicSource.Text,
+                                Value = $"{taskInfo.title}",
+                                WebUrl = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/request?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}"
+                            },
+                            ActivityType = "approvalRequired",
+                            PreviewText = new ItemBody
+                            {
+                                Content = $"Request By: {taskInfo.userName}"
+                            },
+                            TemplateParameters = new List<Microsoft.Graph.Models.KeyValuePair>
+                            {
+                                new Microsoft.Graph.Models.KeyValuePair
+                                {
+                                    Name = "approvalTaskId",
+                                    Value = taskInfo.title
+                                },
+                            },
+                        };
+
+                        await graphClient.Users[user.Id].Teamwork.SendActivityNotification.PostAsync(requestBody);
+                    }
+                }
             }
             catch (Exception ex)
             {
+                // Handle exceptions by logging to the console
                 Console.WriteLine(ex);
             }
+
 
             return View("Index");
         }
@@ -177,14 +186,13 @@ namespace TabRequestApproval.Controllers
         }
 
         // Get user access token.
-        [Authorize]
         [HttpGet("/GetUserAccessToken")]
         public async Task<ActionResult<string>> GetUserAccessToken()
         {
             try
             {
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
-                
+
                 return accessToken;
             }
             catch (Exception)

@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "{{GUID-ID}}",
+  "packageName": "com.microsoft.teams.tabexternalauth",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab External Auth App",
+    "full": "Tab External Auth App"
+  },
+  "description": {
+    "short": "API server for exchanging Teams tokens to access user profile data.",
+    "full": "This sample API server is designed to exchange access tokens provided by Microsoft Teams for Graph API access, specifically to read user profile data. It enables developers to display the logged-in user's profile picture by integrating Google OAuth for authentication."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

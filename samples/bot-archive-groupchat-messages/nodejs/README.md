@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating on how a bot can archive groupchat messages and send it to user as a file.
+description: This sample bot archives Teams group chat messages and sends them as files to users.
 products:
 - office-teams
 - office
@@ -8,52 +8,73 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-10-2021 23:35:25"
+ contentType: samples
+ createdDate: "10/11/2021 23:35:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-nodejs
 ---
  
 # Archive groupchat messages
 
-Using this nodejs sample, a bot can archive chat messages of groupchat and send it to user.
+This sample demonstrates a bot that archives group chat messages in Microsoft Teams and sends them to users as downloadable files. It supports Teams SSO, Adaptive Cards, and Graph API integration for enhanced functionality.
 
-This feature shown in this sample is currently available in Public Developer Preview only.
+## Included Features
+* Teams SSO (bots)
+* Adaptive Cards
+* Graph API
 
-## Key features
+## Interaction with app
 
-- Sending archive chat messages text file of a groupchat to user
+![Bot Archive Group ChatMessagesGif](Images/botArchiveGroupchatMessages.gif)
 
-![Bot command](Images/botCommandToGetChatMessages.png)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-![Bot reply](Images/replyFromBot.png)
+**Archive groupchat messages:** [Manifest](/samples/bot-archive-groupchat-messages/csharp/demo-manifest/bot-archive-groupchat-messages.zip)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+-  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## To try this sample
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot SSO
-In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+1) Setup for Bot
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-## Instruction on setting connection string for bot authentication on the behalf of user
+**Instruction on setting connection string for bot authentication on the behalf of user**
 
 1. In the Azure portal, select your resource group from the dashboard.
-2. Select your bot channel registration link.
+2. Select your Azure bot registration link.
 3. Open the resource page and select Configuration under Settings.
 4. Select Add OAuth Connection Settings.
 5. Complete the form as follows:
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-    b. **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
+    b. **Service Provider:** Select Azure Active Directory V2. Once you select this, the Azure AD-specific fields will be displayed.
 
     c. **Client id:** Enter the Application (client) ID .
 
@@ -66,7 +87,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     a. Add this permission to app registration
     - Chat.ReadWrite
     - ChatMessage.Read
-    ![Permissions](Images/permissions.png)
+![Permissions](Images/permissions.png)
 
     b.  Under left menu, select  **Authentication**  under  **Manage**  section.
     - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
@@ -74,44 +95,102 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
     -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
 
-### 2. Run your bot sample
-1) Clone the repository
+2) Setup NGROK  
+ - Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+3) Setup for code  
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-archive-groupchat-messages/nodejs`
+- In a terminal, navigate to `samples/bot-archive-groupchat-messages/nodejs`
 
-3) Install modules
+- Install modules
 
     ```bash
     npm install
     ```
 
-4) Run ngrok - point to port 3978
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `ConnectionName` from the Microsoft Entra ID app registration or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
+    Also, update `connectionName` as the name of your Azure Bot connection created in previous steps.
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `ConnectionName` from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
-
-6) Run your bot at the command line:
+- Run your bot at the command line:
 
     ```bash
     npm start
     ```
-- **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-    - In the valid domains section of the manifest update your ngrok url `{<<ngrokid>>.ngrok.io}`. 
-    - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
+
+4) Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the  `/appManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+        Update valid domains for `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - Zip up the contents of the `/appManifest` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Interacting with the bot in GroupChat
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-archive-groupchat-messages/nodejs/index.js#L45) line and put your debugger for local debug.
+
+
+## Running the sample
+
+**Login command interaction:**
+
+![Bot Welcome](Images/welcome.png)
+
+**Login successful:**
+
+![Bot LoginSuccessful](Images/loginsuccessful.png)
+
+**Set up a bot:**
+
+![Bot Setupbot](Images/setupbot.png)
+
+**Getchat command interaction:**
+
+![Bot BotCommandToGetChatMessages](Images/botCommandToGetChatMessages.png)
+
+**Bot is added to fetch messages:**
+
+![Bot Getchat](Images/getchat.png)
+
+**Ready to download:**
+
+![Bot ReplyFromBot](Images/replyFromBot.png)
+
+**Interacting with the bot in GroupChat**
 
 Select a groupchat and add the bot to chat.
 
 Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
 
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-archive-groupchat-messages-nodejs" />

@@ -3,19 +3,17 @@
     <title> Auth End Page</title>
 </head>
 <body>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js" ,
         integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI" ,
         crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.app.initialize();
-        localStorage.removeItem("auth.error");
+        microsoftTeams.app.initialize().then(() => {
+        });   
         let code = getHashParameters();
-        let key = "auth.result";
-                localStorage.setItem(key, JSON.stringify({
-                    idToken: code,
-                }));
-        microsoftTeams.authentication.notifySuccess(key);
+        microsoftTeams.authentication.notifySuccess(code);
 
         function getHashParameters() {
             let hashParams = {};

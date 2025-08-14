@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Attendance Bot",
+    "full": "Meeting Attendance Bot"
+  },
+  "description": {
+    "short": "Fetch and send meeting attendance reports via Graph API in Teams chat.",
+    "full": "This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in Microsoft Teams chat."
+  },
+  "accentColor": "#235EA5",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [ "groupChat" ],
+      "isNotificationOnly": true
+    }
+  ],
+  "validDomains": [
+    "<<domain-name>>",
+    "${{BOT_DOMAIN}}"
+  ],
+  "permissions": [ 
+    "messageTeamMembers"
+   ],
+   "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "https://RscPermission"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
+}

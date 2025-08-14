@@ -1,0 +1,67 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-sharepoint-tab-request-approval-csharp",
+    "source": "officeDev",
+    "title": "Send task approvals using activity feed notifications (Graph API) and store them using SharePoint Embedded",
+    "shortDescription": "This sample app demonstrates the integration of SharePoint Embedded for storage management within the Teams Tab Request Approval application, featuring Teams SSO, activity feed notifications, and Graph API support.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/sharepoint-tab-request-approval/csharp",
+    "longDescription": [
+      "The Tab Request Approval app has been enhanced to utilize the SharePoint Embedded API for effective storage management in Microsoft Teams. It maintains the original app's functionality while adding features such as Teams Single Sign-On, activity feed notifications, and change notification subscriptions, showcasing how to programmatically manage storage requirements."    ],
+    "creationDateTime": "2023-12-19",
+    "updateDateTime": "2024-10-15",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/sharepoint-tab-request-approval/csharp/TabRequestApproval/Images/TabRequestApproval.gif",
+        "alt": "Solution UX showing send task approvals using activity feed notification (graph apis) and SharePoint respository service for storage."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

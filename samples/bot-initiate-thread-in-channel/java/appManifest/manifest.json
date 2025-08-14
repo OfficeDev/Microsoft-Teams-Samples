@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "developer": {
+    "name": "teamsStartThreadInChannel",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "name": {
+    "short": "TeamsStartThreadInChannel",
+    "full": "TeamsStartThreadInChannel"
+  },
+  "description": {
+    "short": "Start a thread in a Microsoft Teams channel using Bot Framework v4.",
+    "full": "This app demonstrates how to start a conversation thread in a specific Teams channel using Bot Framework v4."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "scopes": [
+        "team"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

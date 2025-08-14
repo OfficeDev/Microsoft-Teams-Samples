@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample app for demonstrating tab in stage view
+description: This sample app demonstrates the use of Teams tab in stage view using C#, showcasing collaborative features and interactive elements.
 products:
 - office-teams
 - office
@@ -8,59 +8,99 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
+ contentType: samples
+ createdDate: "06/10/2021 01:48:56 AM"
+urlFragment: officedev-microsoft-teams-samples-tab-stage-view-csharp
 ---
 
 # Stage View
 
+This sample app illustrates the capabilities of Microsoft Teams tabs in stage view using C#. It demonstrates collaborative features, such as multi-window support and deep linking, allowing users to engage interactively through adaptive cards and links that enhance the overall user experience in Teams.
 This App talks about the Teams tab in stage view with CSharp.
-For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
+For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling)
 
+## Included Features
+* Bots
+* Stage View (tabs)
+* Collaborative Stageview
+* Stageview Multi-window (PopOut)
+* Stageview Modal
+
+## Interaction with app
+
+![TabStageView Modules](TabInStageView/Images/TabStageView.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Stage View:** [Manifest](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
-1. Run ngrok - point to port 3978
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
+2. Setup for Bot
+ - Register a Microsoft Entra ID aap registration in Azure portal.
+ - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+ - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+ - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-2. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+3. Setup NGROK
+ - Run ngrok - point to port 3978
 
-3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<MANIFEST-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `{{BOT-ID}}` with the id from step 2.
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
-4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
-6. Add `{{ Application Base URL }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
+4. Setup for code
 
-7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
-    
-## To try this sample
+- Clone the repository
 
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Modify the `/appsettings.json` and fill in the following details:
+  - `{{Bot Id}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  - `{{ Bot Password}}` - Generated from Step 1, also referred to as Client secret
+  - `{{ Application Base URL }}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+ 
 - In a terminal, navigate to `TabInStageView`
 
     ```bash
@@ -84,32 +124,106 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
   - Navigate to `TabInStageView` folder
   - Select `TabInStageView.csproj` file
   - Press `F5` to run the project
+  
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id or Bot-id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `TabInStageView\AppManifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `AppManifest_Hub` folder to create a `AppManifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/csharp/TabInStageView/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ## Interacting with the bot in Teams
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-## Features of this sample
+## Running the sample
+- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-- Welcome message with feature explanation.
+**Install App:**
 
-![Welcome Message](TabInStageView/Images/welcomeAction.png)
+![InstallApp](TabInStageView/Images/1.Install.png)
 
-- Opening stage view in tab with Adaptive card action.
+**Welcome message with feature explanation and Adaptive Card with actions:**
 
-![Card Actions](TabInStageView/Images/cardActions.png)
+![Welcome Message](TabInStageView/Images/2.WelcomeCard.png)
 
-- Opening stage view from Adaptive Card Action.
+**Open the URL in tab stage view:**
 
-![Stage View](TabInStageView/Images/viaCardAction.png)
+![InstallApp](TabInStageView/Images/3.Bot-ViewViaCardAction.png)
 
-- Opening stage view from Adaptive card via deep link.
+**Opening Collaborative Stage View**. Please refer [Collaborative Stage view](https://review.learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling?branch=pr-en-us-7891#collaborative-stage-view) for more details
 
-![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
+![Stage View in tab](TabInStageView/Images/7.Tab-PopOutWithChat.png)
 
-- Tab with execute deep link action to open stage view.
+**Opening stage view from Adaptive card via deep link:**
 
-![Tab View](TabInStageView/Images/viaTabDeeplink.png)
+![Stage View Deep Link](TabInStageView/Images/4.Bot-OpenViaDeeplinkLinkButton.png)
+
+![LinkUnfurlingStageView](TabInStageView/Images/LinkUnfurlingStageView.png)
+
+**Opening stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
+
+![LinkUnfurlingText](TabInStageView/Images/LinkUnfurlingText.png)
+
+**Tab with execute deep link action to open stage view:**
+
+![OpenMode Model](TabInStageView/Images/5.Tab-Model.png) 
+
+![OpenMode PopOut](TabInStageView/Images/6.Tab-PopOut.png)
+ 
+
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
+
+![InstallOutlook](TabInStageView/Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](TabInStageView/Images/AppOutlook.png)
+
+**After opening Outlook web, click the "New mail" button.**
+
+![Open New Mail](TabInStageView/Images/OpenNewMail.png)
+
+**On the tool bar on top, select Apps icon. Your uploaded app title appears among your installed apps**
+
+![OpenAppIcon](TabInStageView/Images/OpenAppIcon.png)
+
+**Opening the stage view from unfurling link. If you copy and paste a link from https://tabstageview.com/card into the compose message area the link will unfurl.**
+
+![Outlook Unfurling](TabInStageView/Images/OutlookUnfurling.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
+
+![InstallOffice](TabInStageView/Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](TabInStageView/Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Deploy the bot to Azure
 
@@ -117,14 +231,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
+- [Stage view](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling#stage-view)
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-stage-view-csharp" />

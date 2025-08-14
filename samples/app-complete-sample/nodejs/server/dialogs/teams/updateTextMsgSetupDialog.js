@@ -4,7 +4,15 @@
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const SETUPTEXTMESSAGE = 'SetupTextMessage';
 
+/**
+ * UpdateTextMsgSetupDialog class extends ComponentDialog to handle setting up text messages for updates.
+ */
 class UpdateTextMsgSetupDialog extends ComponentDialog {
+    /**
+     * Constructor for the UpdateTextMsgSetupDialog class.
+     * @param {string} id - The dialog ID.
+     * @param {StatePropertyAccessor} conversationDataAccessor - The state property accessor for conversation data.
+     */
     constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
@@ -14,18 +22,23 @@ class UpdateTextMsgSetupDialog extends ComponentDialog {
         ]));
     }
 
+    /**
+     * Begins the update text message setup dialog.
+     * @param {WaterfallStepContext} stepContext - The waterfall step context.
+     * @returns {Promise<DialogTurnResult>} The result of the dialog turn.
+     */
     async beginUpdateTextMsgSetupDialog(stepContext) {
-        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        const currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "UpdateTextMsgSetupDialog";
-        var reply = stepContext.context._activity;
-        reply.text = "Message set to be updated"
+        const reply = stepContext.context._activity;
+        reply.text = "Message set to be updated";
 
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
         }
 
-        var result = await stepContext.context.sendActivity(reply);
+        const result = await stepContext.context.sendActivity(reply.text);
         currentState.activityId = result.id;
         return await stepContext.endDialog();
     }

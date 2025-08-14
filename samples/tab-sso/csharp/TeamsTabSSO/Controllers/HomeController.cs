@@ -39,6 +39,8 @@ namespace TeamsAuthSSO.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.clientId = _configuration["AzureAd:ClientId"].ToString();
+            ViewBag.applicationIdURI = _configuration["AzureAd:ApplicationIdURI"].ToString();
             return View();
         }
 
@@ -48,7 +50,12 @@ namespace TeamsAuthSSO.Controllers
             return View();
         }
 
-       
+        public IActionResult BrowserRedirect()
+        {
+            ViewBag.clientId = _configuration["AzureAd:ClientId"].ToString();
+            ViewBag.applicationIdURI = _configuration["AzureAd:ApplicationIdURI"].ToString();
+            return View();
+        }
 
         /// <summary>
         /// Retrieve team members along with profile pictures

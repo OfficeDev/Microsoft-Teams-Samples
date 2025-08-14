@@ -4,8 +4,8 @@
 
 .sidepanelDocumentCardDocument {
   overflow: hidden;
-  max-height: 20rem;
-  white-space: nowrap;
-  font-size: 0.65rem;
+  width: 100%;
+  max-height: 10rem;
+  font-size: 0.357rem;
   box-shadow: 0 -2rem 2rem -2rem rgba(0,0,0,0.6) inset;
 }

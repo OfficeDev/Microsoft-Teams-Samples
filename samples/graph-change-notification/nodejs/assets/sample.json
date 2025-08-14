@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-change-notification-nodejs",
+    "source": "officeDev",
+    "title": "Change Notification sample using nodejs",
+    "shortDescription": "This sample application demonstrates how to send notifications for changes in user presence status in Microsoft Teams using Node.js and the Bot Framework.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/nodejs",
+    "longDescription": [
+      "This sample app allows developers to send real-time notifications to users in Microsoft Teams when their presence status changes, leveraging Node.js and the Graph API. It includes setup instructions for Azure AD, bot configuration, and installation steps, ensuring a smooth integration experience."
+    ],
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-10-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/nodejs/Images/Preview.gif",
+        "alt": "Solution UX showing change notification sample using nodejs"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

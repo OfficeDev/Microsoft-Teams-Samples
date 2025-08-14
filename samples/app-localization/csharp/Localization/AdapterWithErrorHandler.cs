@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
@@ -17,15 +18,23 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
         {
             OnTurnError = async (turnContext, exception) =>
             {
-                // Log any leaked exception from the application.
+                // Log the error with additional context for better traceability.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Send a message to the user
-                await turnContext.SendActivityAsync("The bot encountered an error or bug.");
-                await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
+                // Optionally, send a user-friendly message to the user.
+                // Uncomment the line below for local debugging.
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception: {exception.Message}");
 
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
-                await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+                // Attempt to send a trace activity that will be displayed in the Bot Framework Emulator.
+                try
+                {
+                    await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+                }
+                catch (System.Exception traceEx)
+                {
+                    // Log any error that might occur during the trace activity (e.g., failed to send trace).
+                    logger.LogError(traceEx, "Error occurred while sending trace activity.");
+                }
             };
         }
     }

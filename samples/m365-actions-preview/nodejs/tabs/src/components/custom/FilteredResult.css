@@ -1,0 +1,40 @@
+.filteredResult {
+    display: flex;
+    padding: 20px;
+    background: #fff;
+    margin: 20px;
+    flex-direction: column;
+    box-shadow: 0px 1.2px 3.6px rgba(0, 0, 0, 0.11), 0px 6.4px 14.4px rgba(0, 0, 0, 0.13);
+    border-radius: 4px;
+}
+
+.filteredHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.filteredHeaderBtn {
+    height: fit-content;
+}
+
+.filteredBody {
+    display: flex;
+}
+
+.filteredList {
+    width: 50%;
+}
+
+.filteredListItems {
+    overflow-y: scroll;
+    height: 80px;
+}
+
+.filteredAttachment {
+    display: flex;
+    flex-direction: column;
+}
+
+.filteredText {}

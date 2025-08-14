@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating on how a bot can receive all channel messages with RSC without @mention.
+description: This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions.
 products:
 - office-teams
 - office
@@ -8,86 +8,95 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
+ contentType: samples
+ createdDate: "06/10/2021 01:48:56 AM"
+urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-csharp
 ---
 
 # Receive Channel messages with RSC permissions
 
-Using this C# sample, a bot can receive all channel messages with RSC without @mention.
-For reference please check [Receive Channel messages with RSC](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
+This sample app illustrates how a bot can capture all channel messages in Microsoft Teams by utilizing RSC (resource-specific consent) permissions, eliminating the need for @mentions. The bot supports adaptive card responses, easy local testing with tools like ngrok or dev tunnels, and deployment to Azure, allowing it to function effectively across different channels and group chats in Teams.
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
+## Included Features
+* Bots
+* Adaptive Cards
+* RSC Permissions
 
-- Showing messages based on option selected
+## Interaction with app
 
-![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
+![RSC Module](ReceiveMessagesWithRSC/Images/Bot_Channel_Messenging-RSC.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Receive Channel messages with RSC permissions:** [Manifest](/samples/bot-receive-channel-messages-withRSC/csharp/demo-manifest/Bot-RSC.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
-1. Run ngrok - point to port 3978
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
+2. Setup for Bot
+- Register a Microsoft Entra ID aap registration in Azure portal.
+- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
-2. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
+3. Setup Ngrok
+-  Run ngrok - point to port 3978
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
 
-3. Modify the `manifest.json` in the `/AppManifest` folder and replace the `{{BOT-ID}}` with the id from step 2.
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
-4. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` with the id from step 2.
+4. Setup for code
 
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL`
-    
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Sideload** in a team to test
-         - Select or create a team
-         - Select the ellipses **...** from the left pane. The drop-down menu appears.
-         - Select **Manage Team**, then select **Apps** 
-         - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
-
-![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
-
-![Permissions](ReceiveMessagesWithRSC/Images/permissions1.png)
-    
-## To try this sample
-
-- In a terminal, navigate to `ReceiveMessagesWithRSC`
+- Clone the repository
 
     ```bash
-    # change into project folder
-    cd # ReceiveMessagesWithRSC
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+- Modify the `/appsettings.json` and fill in the following details:
+  - `{{BOT-ID}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
+  - `{{BOT-PASSWORD}}` -Generated from Step 1, also referred to as Client secret 
 
-  A) From a terminal
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
 
-  B) Or from Visual Studio
+- Run in Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
@@ -95,11 +104,51 @@ This feature shown in this sample is currently available in Public Developer Pre
   - Select `ReceiveMessagesWithRSC.csproj` file
   - Press `F5` to run the project
 
+
+5. This step is specific to Teams.
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the tunnel URL`
+    - **Edit** the `manifest.json` for `<<MANIFEST-ID>>` replace it with any `GUID` using guid generator.
+    - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with MicrosoftAppId. E.g. `"api://botid-{{MicrosoftAppId}}"`.
+    
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
+    - **Upload** in a team to test
+         - Select or create a team
+         - Select the ellipses **...** from the left pane. The drop-down menu appears.
+         - Select **Manage Team**, then select **Apps** 
+         - Then select **Upload a custom app** from the lower right corner.
+         - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+
 ## Interacting with the bot in Teams
 
 Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
+
+## Running the sample
+
+![App Installation](ReceiveMessagesWithRSC/Images/1.Install.png)
+
+- Showing Welcome message 
+
+![Channel messages](ReceiveMessagesWithRSC/Images/2.Installed.png)
+
+![Channel messages](ReceiveMessagesWithRSC/Images/3.Interaction.png)
+
+- Showing messages based on option selected
+
+![Channel messages](ReceiveMessagesWithRSC/Images/4.1_and_2_Command_Interaction.png)
+
+- Adding to group chat
+
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/5.Install_to_GC.png)
+
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/6.Installed.png)
+
+- Receives messages in group chat without being @mentioned.
+
+![Channel messages](ReceiveMessagesWithRSC/Images/7.1_and_2_Command_Interaction.png)
 
 ## Deploy the bot to Azure
 
@@ -109,12 +158,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-csharp" />

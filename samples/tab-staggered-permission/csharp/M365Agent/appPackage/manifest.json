@@ -1,0 +1,48 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.1",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Staggered permission",
+    "full": "App to get staggered permissions"
+  },
+  "description": {
+    "short": "Demo app to request staggered Graph API permissions in Teams tabs.",
+    "full": "This sample demonstrates how to obtain staggered Graph API permissions in a Microsoft Teams tab, prompting users for permissions only when specific features are accessed."
+  },
+  "accentColor": "#235EA5",
+  "staticTabs": [
+    {
+      "entityId": "Staggered permission",
+      "name": "tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok-free.app",
+    "${{TAB_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}

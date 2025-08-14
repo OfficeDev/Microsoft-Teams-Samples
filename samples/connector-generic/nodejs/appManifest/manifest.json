@@ -1,0 +1,34 @@
+{
+	"$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+	"manifestVersion": "1.19",
+	"id": "3ea203f0-07f0-46d2-8da3-4639b616cf37",
+	"version": "1.0",
+	"developer": {
+		"name": "Developer",
+		"websiteUrl": "https://www.microsoft.com",
+		"privacyUrl": "https://www.microsoft.com",
+		"termsOfUseUrl": "https://www.microsoft.com"
+	},
+	"name": {
+		"full": "NotifyMe",
+		"short": "NotifyMe"
+	},
+	"accentColor": "#FFFFFF",
+	"description": {
+		"full": "This sample provides a customizable connector for integrating webhook-supported systems with Microsoft Teams",
+		"short": "Customizable connector sample for webhook-enabled systems integration."
+	},
+	"icons": {
+		"outline": "outline.png",
+		"color": "color.png"
+	},
+	"connectors": [
+		{
+			"connectorId": "<<CONNECTOR_ID>>",
+			"configurationUrl": "https://<<AppDomain>>/connectorconfig",
+			"scopes": [
+				"team"
+			]
+		}
+	]	
+}

@@ -3,7 +3,8 @@
 import React from 'react';
 import './App.css';
 import { app, authentication } from "@microsoft/teams-js";
-import { Avatar, Loader } from '@fluentui/react-northstar'
+import * as microsoftTeams from "@microsoft/teams-js";
+import { Avatar, Spinner } from '@fluentui/react-components';
 /**
  * This tab component renders the main tab content
  * of your app.
@@ -44,7 +45,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
-    app.initialize();
+    microsoftTeams.app.initialize();
     // Get the user context from Teams and set it in the state
     app.getContext().then((context: app.Context) => {
       this.setState({context:context});
@@ -141,7 +142,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
         console.error("ERROR: ", response);
         this.setState({error:true});
       }
-      let imageBlog = await response.blob().catch(this.unhandledFetchError); //Get image data as raw binary data
+      let imageBlog = await response.blob(); //Get image data as raw binary data
+      
       this.setState({
         photo: URL.createObjectURL(imageBlog) //Convert binary data to an image URL and set the url in state
       })
@@ -154,16 +156,14 @@ class Tab extends React.Component<ITabProps, ITabState> {
   }
   render() {
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Spinner/>;
       let ssoMessage = this.state.ssoToken === "" ?
-        <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
+        <Spinner label='Performing Azure AD single sign-on authentication...'/>: null;
       let serverExchangeMessage = (this.state.ssoToken !== "") && (!this.state.consentRequired) && (this.state.photo==="") ?
-        <Loader label='Exchanging SSO access token for Graph access token...'/> : null;
+        <Spinner label='Exchanging SSO access token for Graph access token...'/> : null;
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
-        <Loader label='Consent required.'/> : null;
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null;
-      let content;
+        <Spinner label='Consent required.'/> : null;
+          let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
       } else {
@@ -173,7 +173,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       return (

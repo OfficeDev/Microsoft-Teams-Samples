@@ -4,9 +4,10 @@
 }
 
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-            
-            crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous">
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
@@ -14,75 +15,76 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         var requestFrom;
-         $(document).ready(function () {
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(() => {
             const params = window.location.search;
             requestFrom = params.substring(params.search("=")+1);
-        });
+            });
+         });
 
-        microsoftTeams.app.initialize();
+       
+            // Submit user name and password.
+            function submit()
+            {
+                var isValid = true;
+                $('#userName,#password').each(function () {
 
-        // Submit user name and password.
-        function submit()
-        {
-             var isValid = true;
-             $('#userName,#password').each(function () {
-
-                 if ($.trim($(this).val()) == '') {
-                     isValid = false;
-                     $(this).css({
-                         "border": "1px solid red"
-                     });
-                 }
-                 else {
-                     $(this).css({
-                         "border": "",
-                         "background": ""
-                     });
-                 }
-             });
-
-             if (isValid == false) {
-                 e.preventDefault();
-                 return false;
-             }
-
-             let credentials = {
-                 userName: $('#userName').val(),
-                 password: $('#password').val(),
-             };
-
-             if(requestFrom == "tab"){
-                 $.ajax({
-                 type: 'POST',
-                 url: '/tabCredentialsAuth',
-                 dataType: 'json',
-                 data: credentials,
-                 success: function (response) {
-                        microsoftTeams.authentication.notifySuccess(response);
-                    },
-                 error: function (xhr, textStatus, errorThrown) {
-                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red"
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
                 });
-             }
-             else if(requestFrom == "msgext"){
-                microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
-             }
-             else{
-                 microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
-             }
-        } 
 
-        // Close auth window.
-        function closeWindow() {
-             microsoftTeams.authentication.notifyFailure({state:"CancelledByUser"});
-        }
+                if (isValid == false) {
+                    e.preventDefault();
+                    return false;
+                }
 
-        function showHint() {
-            var x = document.getElementById("snackbar");
-            x.className = "show";
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-        }
+                let credentials = {
+                    userName: $('#userName').val(),
+                    password: $('#password').val(),
+                };
+
+                if(requestFrom == "tab"){
+                    $.ajax({
+                    type: 'POST',
+                    url: '/tabCredentialsAuth',
+                    dataType: 'json',
+                    data: credentials,
+                    success: function (response) {
+                            microsoftTeams.authentication.notifySuccess(response);
+                        },
+                    error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        },
+                    });
+                }
+                else if(requestFrom == "msgext"){
+                    microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+                }
+                else{
+                    microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+                }
+            } 
+
+            // Close auth window.
+            function closeWindow() {
+                microsoftTeams.authentication.notifyFailure({state:"CancelledByUser"});
+            }
+
+            function showHint() {
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            }
     </script>
   
     <style>

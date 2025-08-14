@@ -1,5 +1,4 @@
 import * as microsoftTeams from '@microsoft/teams-js';
-import { Context } from '@microsoft/teams-js';
 import { Story } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { TeamsProvider } from './TeamsProvider';
@@ -12,22 +11,38 @@ export type TeamsThemeProviderProps = {
 export const withTeamsThemeProvider = (
   props: TeamsThemeProviderProps,
 ): React.ReactElement => {
-  let mockedMicrosoftTeams: typeof microsoftTeams = {
+  const mockedMicrosoftTeams: typeof microsoftTeams = {
     ...microsoftTeams,
-    initialize: (callback?: ((value: unknown) => void) | undefined) => {
-      if (callback) {
-        return callback('Done');
-      }
-    },
-    getContext: (callback: (context: Context) => void) => {
-      callback({
-        entityId: '',
-        locale: '',
-        theme: 'default',
-      });
-    },
-    registerOnThemeChangeHandler: (handler: (theme: string) => void) => {
-      handler(props.context.globals.theme);
+    app: {
+      ...microsoftTeams.app,
+      initialize: () => {
+        return new Promise<void>((resolve) => {
+          resolve();
+        });
+      },
+      getContext: () => {
+        return new Promise<microsoftTeams.app.Context>((resolve) =>
+          resolve({
+            app: {
+              theme: props.context.globals.theme,
+              locale: '',
+              sessionId: '',
+              host: {
+                name: microsoftTeams.HostName.teams,
+                clientType: microsoftTeams.HostClientType.desktop,
+                sessionId: '',
+              },
+            },
+            page: {
+              id: '',
+              frameContext: microsoftTeams.FrameContexts.content,
+            },
+          }),
+        );
+      },
+      registerOnThemeChangeHandler: (handler: (theme: string) => void) => {
+        handler(props.context.globals.theme);
+      },
     },
   };
 

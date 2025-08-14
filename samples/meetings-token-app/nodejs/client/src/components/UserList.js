@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { List } from '@fluentui/react/lib/List';
 import Constants from '../constants';
 
 class TokenActionButtons extends Component {
@@ -8,15 +7,17 @@ class TokenActionButtons extends Component {
         if(item.UserInfo.Role.MeetingRole === Constants.MeetingRoles.Organizer) {
             return `${item.UserInfo.Name} (${item.UserInfo.Role.MeetingRole})`
         }
+        
         return `${item.UserInfo.Name}`
     }
 
     render() {
+        const listItems = this.props.items.map((myList)=>{   
+            return <li>{`${myList.TokenNumber}. ${this.markIfOrganizer(myList)}`}</li>;   
+        });  
         return (
             <div className="flex-center">
-                <List className="list-center" title="Get your token"
-                    items={this.props.items.map(item => ({ name: `${item.TokenNumber}. ${this.markIfOrganizer(item)}`}))}
-                />
+                <ul className="list list-center"> {listItems} </ul>
             </div>
         );
     }

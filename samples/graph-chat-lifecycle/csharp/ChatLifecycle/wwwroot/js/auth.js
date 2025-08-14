@@ -1,10 +1,9 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.app.initialize();
-   
+    microsoftTeams.app.initialize().then(() => {
     getClientSideToken()
-        .then((clientSideToken) => {           
+        .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
@@ -25,18 +24,19 @@ $(document).ready(function () {
                 // Something else went wrong
             }
         });
+    });
 });
 
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.app.getContext().then((context) => {
-            getUserInfo(context.user.userPrincipalName);
+            $("#consent").hide();
+            $("#divError").hide();
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
-    });
 }
 
 function getToken() {
@@ -48,7 +48,7 @@ function getToken() {
         }).then((result) => {
             resolve(result);
         }).catch((reason) => {
-            reject(reason);
+;          reject(reason);
         })
     });
 }

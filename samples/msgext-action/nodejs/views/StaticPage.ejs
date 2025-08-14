@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Microsoft Teams ME Action StaticPage</title>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous">
+    </script>
+    <script>
+        microsoftTeams.app.initialize();
+        /**
+         * Displays a message and the current date and time on page load.
+         */
+        window.onload = function() {
+            const displayMessage = "Hi user, this is a Static HTML page. You can customize this as per your requirement.";
+            const dateTime = new Date();
+            const currentDate = dateTime.toDateString();
+            const currentTime = `${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
+            const displayTime = `Today is ${currentDate} and time is ${currentTime}`;
+            document.getElementById("display_message").innerHTML = displayMessage;
+            document.getElementById("display_time").innerHTML = displayTime;
+        }
+    </script>
+    <style>
+        #display_time {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-family: 'Segoe UI'">
+        <p id="display_message"></p>
+        <p id="display_time"></p>
+    </div>
+</body>
+</html>

@@ -4,12 +4,12 @@
 <head>
 
     <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
-        </script>
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
+        <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy"
             content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -23,7 +23,12 @@
 </head>
 
 <body id=mainDiv>
-    <div>
+    <div id="login">
+        <h4>Click on login button to continue</h4>
+        <button onclick="signIn()">Login</button>
+    </div>
+    <button onclick="requestConsent()" id="consent" style="display: none">Consent</button>
+    <div id="feed-container" style="display: none">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel" checked> Send
                 Notification To
@@ -102,7 +107,22 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+
+
+            
+       
+const msalConfig = {
+            auth: {
+            clientId: <%-clientId%>,
+            authority: "https://login.microsoftonline.com/" + <%- tenantId %>
+           }
+        };
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        const loginRequest = {
+            scopes: ["user.read"]
+        };
+
             $(".customTopicNotificationChannel").hide();
             $(".notificationChannelTab").hide();
             $('input[type="radio"]').click(function () {
@@ -111,18 +131,45 @@
                 $(".desc").not(targetBox).hide();
                 $(targetBox).show();
             });
+
+            $(document).ready(function () {
+            $(".customTopicNotificationChat").hide();
+            $('input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".desc").not(targetBox).hide();
+                $(targetBox).show();
+            });
         });
 
-        microsoftTeams.initialize();
+        function signIn() {
+            msalInstance.loginPopup(loginRequest)
+           
+                .then(response => {
+                    accessToken = response.accessToken;
+                    $("#login").hide();
+                    $("#feed-container").show();
+                })
+                .catch(error => {
+                console.error("Login error:", error);
+                });
+        }
         var userId;
         var teamId;
         var channelId;
+        var accessToken=null;
 
-        microsoftTeams.getContext(function (context) {
-            userId = context.userObjectId;
-            teamId = context.groupId;
-            channelId = context.channelId;
+
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                userId = context.user.id;
+                teamId = context.team.groupId;
+                channelId = context.channel.id;
+                
+            });
         });
+
+
 
         var empty = true;
         $('input[type="text"]').each(function () {
@@ -154,19 +201,20 @@
                 e.preventDefault();
                 return false;
             }
-
-            let taskInfo = {
+            let taskDetails  = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
                 userId: userId,
-                teamId: teamId
+                teamId: teamId,
+                accessToken :accessToken
+                
             };
 
             $.ajax({
                 url: "/sendNotificationToChannel",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -200,20 +248,21 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskDetails  = {
                 id: $('#reservationId').val(),
                 title: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
                 userId: userId,
                 teamId: teamId,
                 channelId: channelId,
+                accessToken :accessToken
             };
 
             $.ajax({
                 url: "/channelTabTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },
@@ -247,19 +296,20 @@
                 return false;
             }
 
-            let taskInfo = {
+            let taskDetails  = {
                 title: $('#DeployementTitle').val(),
                 description: $('#DeployementDescription').val(),
                 userId: userId,
                 teamId: teamId,
-                channelId: channelId
+                channelId: channelId,
+                accessToken: accessToken
             };
 
             $.ajax({
                 url: "/customTopicTeamNotification",
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify(taskInfo),
+                data: JSON.stringify(taskDetails ),
                 success: function (profile) {
                     console.log(profile);
                 },

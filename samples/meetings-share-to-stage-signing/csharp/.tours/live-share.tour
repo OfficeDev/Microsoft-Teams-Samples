@@ -1,0 +1,111 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Live Share",
+  "steps": [
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "In this demo Live Share for Teams is used on our meeting stage. \r\n\r\nIn this file we call hooks to setup both the DOM event handlers and the Live Share event handlers we need to get the document scrolling, cursor location and taking of control set up.\r\n\r\nIn this code tour we will run through how we are handle the syncing of scroll location, our other Live Share features follow a similar structure. Scroll Location syncing is where as a presenter scrolls a document, others in the meeting will scroll to the same point, similar to how a presenter navigating slides in PowerPoint Live. We control who is the presenter by the `takeControl` event.",
+      "line": 30
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "To keep the code easier to understand we have sepearated the code that concerns interations with the DOM, like reading the current scroll location and setting the document scroll position.",
+      "line": 37
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetDom.ts",
+      "description": "Here we listen for scroll events, and call a callback which sets a the scroll position in React state",
+      "line": 44
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetDom.ts",
+      "description": "When setting the scroll location it's important to know the size of the element you are scrolling. If your element (document in our case) is able to change size on different screen sizes the percentage scrolled might not line up correctly, especially if word wraps to different lines on screen size changes.\r\n\r\nThis is even more important if you are trying to highlight a specific word using an exact pixel placement like with cursors.",
+      "line": 36
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetDom.ts",
+      "description": "This hooks also provides a function that can be called to set the scroll location. This is called when a relevant Live Share event is recieved",
+      "line": 49
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "The `useLiveShare` hook creates or joins our Live Share container and passes back it's objects so they can be used in feature specific hooks.",
+      "line": 41
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useLiveShare.ts",
+      "description": "Here we [call the Live Share SDK](https://learn.microsoft.com/en-gb/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-capabilities?tabs=typescript#join-a-meeting-session) to join the container. We pass in the schema of the data structures we want our container to have, and if we are able to join the container, it is returned.\r\n\r\nThe next user who joins the meeting will be given the same container.\r\n\r\nOne cavet, is that this container can last for longer than the length of the meeting (but less than 24 hours), so if you want to change the schema will developing you will have to create a new meeting or you will see failures.",
+      "line": 48
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "`useTakeControl`, `useScrollOffsetLiveShare` and `useCursorLocationsLiveShare` is where we set up the Live Share portion of our features. ",
+      "line": 49,
+      "selection": {
+        "start": {
+          "line": 71,
+          "character": 5
+        },
+        "end": {
+          "line": 71,
+          "character": 32
+        }
+      }
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "We have a simple spinner page that waits for the Live Share container, and events to be started.",
+      "line": 119
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "We start the scrollOffsetEvent here, allowing only organisers and presenters to send these events",
+      "line": 127
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/components/DocumentStage/DocumentStage.tsx",
+      "description": "Here is how we connect the DOM concerns with the Live Share concerns. Calling `sendScrollOffset` when the DOM `position` changes.",
+      "line": 109
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "`sendScrollOffset` is called when the document is scrolled, we use optimistic concurrency to save latest scroll position before calling `throttledSendLatestScrollOffset`.",
+      "line": 81
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "Here we throttle the sending of events to Live Share to once every 50ms. This helps to prevent overloading the Azure Fluid Relay with unnecessary events, and also fellow meeting attendees have to handle less events.",
+      "line": 77
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "We only want to send event if the user who scrolled is actually in control (that is handled by `useTakeControl`). Here we check that and then send the latest scroll position to other participants.",
+      "line": 46
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "Irrespective of who is presenting, when the document is scrolled this function will be called. If a viewer's document scrolls because they received a Live Share event of the presenter's scroll, they will end up in this function.\r\n\r\nHere we check to see if the user has scrolled more than a small percentage away from the presenter. If so, we suspended following the presenter to allow this user to scroll the document at their own pace.",
+      "line": 60
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "If a suspended follower decides to end their suspension they can follow again by calling this function",
+      "line": 90
+    },
+    {
+      "file": "Source/MeetingSigning.Web/ClientApp/src/hooks/useScrollOffsetLiveShare.ts",
+      "description": "When a new scroll offset event comes in we handle it here. Where we check that the event is from the person who we have marked as in control, and then if following we call `setPosition` which is a function from `useScrollOffsetDom` that will actually scroll the document",
+      "line": 104,
+      "selection": {
+        "start": {
+          "line": 117,
+          "character": 11
+        },
+        "end": {
+          "line": 117,
+          "character": 22
+        }
+      }
+    }
+  ]
+}

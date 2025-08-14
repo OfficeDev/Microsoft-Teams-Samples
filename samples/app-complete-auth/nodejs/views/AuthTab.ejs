@@ -1,7 +1,8 @@
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -9,8 +10,9 @@
         let showSSOToggle = false;
         let showFbToggle = false;
         let showUserToggle = false;
+        let redirectUri = window.location.origin + "/fb-auth";
         let clientId =  <%-clientId%>
-            let redirectUri = window.location.origin + "/fb-auth";
+        
 
         $(document).ready(function () {
             microsoftTeams.app.initialize().then(() => {
@@ -23,8 +25,7 @@
             });
         });
 
-        microsoftTeams.app.initialize();
-        function ssoAuthentication() {
+         ssoAuthentication = () => {
             getClientSideToken()
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);
@@ -109,10 +110,10 @@
                 .then(data => {
                     $("#consent").hide();
                     $("#divError").hide();
-                    accessToken = data.accessToken;
-                    microsoftTeams.app.getContext().then((context) => {
-                        getUserInfo(context.user.userPrincipalName);
-                    });
+                    getClientSideToken()
+                        .then((clientSideToken) => {
+                            return getServerSideToken(clientSideToken);
+                        })
                 });
         }
 
@@ -289,10 +290,7 @@
                     width: 600,
                     height: 535})
                 .then((result) => {
-                    let data = localStorage.getItem(result);
-                    let tokenDetails = JSON.parse(data);
-                    localStorage.removeItem(result);
-                    resolve(tokenDetails);
+                    resolve(result);
                 })
                 .catch((reason) => {
                     reject(reason);
@@ -303,7 +301,7 @@
         function fbAuth() {
             fbAuthentication()
                 .then((result) => {
-                    return getServerSideTokenFb(result.idToken);
+                    return getServerSideTokenFb(result);
                 })
                 .catch((error) => {
                     console.log(error);

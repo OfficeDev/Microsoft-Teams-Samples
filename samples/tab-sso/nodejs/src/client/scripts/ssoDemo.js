@@ -1,4 +1,4 @@
-(function () {
+function ssoAuth() {
     'use strict';
 
     // 1. Get auth token
@@ -7,8 +7,10 @@
 
         return new Promise((resolve, reject) => {
             display("1. Get auth token from Microsoft Teams");
+            
             microsoftTeams.authentication.getAuthToken().then((result) => {
-                display(result)
+                display(result);
+
                 resolve(result);
             }).catch((error) => {
                 reject("Error getting token: " + error);
@@ -45,6 +47,7 @@
                         reject(responseJson.error);
                     } else {
                         const profile = responseJson;
+
                         resolve(profile);
                     }
                 });
@@ -66,11 +69,11 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/auth-start",
                 width: 600,
-                height: 535})
+                height: 535
+            })
             .then((result) => {
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-                resolve(data);
+                let tokenData = result;
+                resolve(tokenData);
             }).catch((reason) => {
                 reject(JSON.stringify(reason));
             });
@@ -88,41 +91,48 @@
     }
 
     // In-line code
-    getClientSideToken()
-        .then((clientSideToken) => {
-            return getServerSideToken(clientSideToken);
-        })
-        .then((profile) => {
-            return useServerSideToken(profile);
-        })
-        .catch((error) => {
-            if (error === "invalid_grant") {
-                display(`Error: ${error} - user or admin consent required`);
-                // Display in-line button so user can consent
-                let button = display("Consent", "button");
-                button.onclick = (() => {
-                    requestConsent()
-                        .then((result) => {
-                             // Consent succeeded
-                             display(`Consent succeeded`);
-                            
-                             // offer to refresh the page
-                             button.disabled = true;
-                             let refreshButton = display("Refresh page", "button");
-                             refreshButton.onclick = (() => { window.location.reload(); });
-                        })
-                        .catch((error) => {
-                            display(`ERROR ${error}`);
-                            // Consent failed - offer to refresh the page
-                            button.disabled = true;
-                            let refreshButton = display("Refresh page", "button");
-                            refreshButton.onclick = (() => { window.location.reload(); });
-                        });
-                });
-            } else {
-                // Something else went wrong
-                display(`Error from web service: ${error}`);
-            }
-        });
+    $(document).ready(function () {
+        microsoftTeams.app.initialize().then(() => {
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
+                .then((profile) => {
+                    return useServerSideToken(profile);
+                })
+                .catch((error) => {
+                    if (error === "invalid_grant") {
+                        display(`Error: ${error} - user or admin consent required`);
 
-})();
+                        // Display in-line button so user can consent
+                        let button = display("Consent", "button");
+                        button.onclick = (() => {
+                            requestConsent()
+                                .then((result) => {
+                                    // Consent succeeded
+                                    display(`Consent succeeded`);
+
+                                    // offer to refresh the page
+                                    button.disabled = true;
+                                    let refreshButton = display("Refresh page", "button");
+                                    refreshButton.onclick = (() => { window.location.reload(); });
+                                })
+                                .catch((error) => {
+                                    display(`ERROR ${error}`);
+
+                                    // Consent failed - offer to refresh the page
+                                    button.disabled = true;
+                                    let refreshButton = display("Refresh page", "button");
+                                    refreshButton.onclick = (() => { window.location.reload(); });
+                                });
+                        });
+                    } else {
+                        // Something else went wrong
+                        display(`Error from web service: ${error}`);
+                    }
+                });
+        }).catch((error) => {
+            console.error(error);
+        });
+    });
+}

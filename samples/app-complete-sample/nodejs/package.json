@@ -4,25 +4,28 @@
   "description": "Sequential Workflows in adaptive card",
   "main": "server/index.js",
   "scripts": {
+    "dev:teamsfx": "npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
     "watch": "nodemon server/index.js",
+    "build": "node build.js",
     "lint": "eslint .",
     "server": "npm install && node server/index.js",
-    "manifest": "del \"appPackage\\appPackage.zip\" 2> nul && powershell Compress-Archive appPackage/* appPackage/appPackage.zip"
+    "manifest": "del \"appManifest\\appManifest.zip\" 2> nul && powershell Compress-Archive appManifest/* appManifest/appManifest.zip"
   },
   "keywords": [],
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/teams-js": "^2.0.0",
+    "@microsoft/microsoft-graph-client": "^3.0.4",
+    "@microsoft/teams-js": "^2.35.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
-    "botbuilder": "~4.14.0",
-    "botbuilder-dialogs": "^4.14.1",
-    "botframework-connector": "^4.13.6",
-    "botframework-schema": "^4.13.6",
+    "botbuilder": "^4.18.0",
+    "botbuilder-dialogs": "^4.18.0",
+    "botframework-connector": "^4.18.0",
+    "botframework-schema": "^4.18.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "ejs": "^3.1.6",
@@ -31,7 +34,8 @@
     "memorystorage": "^0.12.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "nodemon": "^2.0.19"
   },
   "devDependencies": {
     "eslint": "^7.0.0",
@@ -39,6 +43,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "esbuild": "^0.18.1"
   }
 }

@@ -6,22 +6,6 @@ const Configuration = () => {
     const [tabId, setTabId] = React.useState('');
 
     React.useEffect(() => {
-        app.initialize().then(() => {
-            app.notifySuccess();
-            app.getContext().then((context: app.Context) => {
-                setTabId(context.page.id)
-                pages.config.registerOnSaveHandler(function (saveEvent) {
-                    pages.config.setConfig({
-                        entityId: tabId,
-                        contentUrl: `${window.location.origin}/details`,
-                        suggestedDisplayName: 'Recruiting',
-                    }).then(() => {
-                        saveEvent.notifySuccess();
-                    });
-                });
-                pages.config.setValidityState(true);
-            });
-        });
         //microsoftTeams.initialize();
 
         //microsoftTeams.getContext(async (context: microsoftTeams.Context) => {
@@ -37,6 +21,23 @@ const Configuration = () => {
         //    saveEvent.notifySuccess();
         //});
         //microsoftTeams.settings.setValidityState(true);
+
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.getContext((context: any) => {
+                setTabId(context.entityId)
+            })
+
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                microsoftTeams.pages.config.setConfig({
+                    entityId: tabId,
+                    suggestedDisplayName: "Recruiting",
+                    contentUrl: `${window.location.origin}/details`,
+                });
+                saveEvent.notifySuccess();
+            });
+            microsoftTeams.pages.config.setValidityState(true);
+        });
+
     }, []);
 
     return (

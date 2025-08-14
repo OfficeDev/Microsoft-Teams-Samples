@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSC Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
+
+    <style>
+        #mainDeiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+
+    <script>
+
+        var appId;
+        var tenantId;
+
+        // Initialize teams js sdk
+        $(document).ready(function () {
+            microsoftTeams.app.initialize().then(function(){
+                microsoftTeams.app.getContext().then((context) => {
+                    tenantId = context.user.tenant.id;
+                });
+            })
+        });
+
+        // People picker api call for selecting reciepient.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+
+            microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                if (people) {
+                    let reciepientUserId = people[0].objectId;
+                    sendNotification(reciepientUserId)
+                }
+            });
+        }
+
+        function sendNotification(recipientUserId) {
+            $.ajax({
+            type: 'POST',
+            url: '/sendFeedNotification',
+            dataType: 'json',
+            data: {
+                'recipientUserId': recipientUserId,
+                'tenantId': tenantId,
+            },
+            success: function (responseJson) {
+                console.log("Message send successfully");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+            }
+        });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="mainDeiv">
+        <h4>Select reciepient to send activity feed notification.</h4>
+        <p id="rsclist"></p>
+        <br />
+        <Button data-id="singleSelect" onclick="selectPeople(event,[],false,true)"> Select </Button>
+    </div>
+</body>
+
+</html>

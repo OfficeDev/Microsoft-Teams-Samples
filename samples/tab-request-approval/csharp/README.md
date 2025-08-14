@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
+description: This sample app enables users to request task approvals through activity feed notifications, allowing managers to easily approve or reject requests.
 products:
 - office-teams
 - office
@@ -8,57 +8,63 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "29-11-2021 17:00:25"
+ contentType: samples
+ createdDate: "11/29/2021 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-tab-request-approval-csharp
 ---
 
 # Send task approvals using activity feed notification (Graph APIs)
 
-This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
-2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
+This sample application streamlines the task approval process in Microsoft Teams, enabling users to send approval requests directly to their managers via activity feed notifications. Managers can quickly view and manage pending requests, making use of Teams SSO and Graph API to enhance productivity and collaboration in task management.
 
-User Persona:
+## Included Features
+* Teams SSO (tabs)
+* Activity Feed Notifications
+* Graph API
 
-- Send request to the manger for task approval.
+## Interaction with app
 
-  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
+![Broadcast from user](TabRequestApproval/Images/TabRequestApproval.gif)
 
-- Request status
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-  ![Request status](TabRequestApproval/Images/RequestStatus.png)
-
-Manager Persona:
-
-- Activity feed notification of approval request.
-
-  ![Notification](TabRequestApproval/Images/RequestNotification.png)
-
-- Pending task approval request.
-
-  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+**Send task approvals using activity feed notification:** [Manifest](/samples/tab-request-approval/csharp/demo-manifest/Tab-Request-Approval.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
+
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
+
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
     * Choose the **supported account types** (any account type will work)
@@ -67,7 +73,7 @@ Manager Persona:
 3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 4. Under **Manage**, select **Expose an API**. 
 5. Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+    * ex: `api://%ngrokDomain%.ngrok-free.app/00000000-0000-0000-0000-000000000000`.
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -76,12 +82,15 @@ Manager Persona:
     * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
     * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
 9. Ensure that **State** is set to **Enabled**
+
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
-        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+        * `api://[ngrokDomain].ngrok-free.app/00000000-0000-0000-0000-000000000000/access_as_user.
+
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -91,66 +100,125 @@ Manager Persona:
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
-    - `TeamsAppInstallation.ReadForUser.All`.
+    - `TeamsAppInstallation.ReadWriteForUser`
+    - `TeamsAppInstallation.ReadWriteSelfForUser`
+    - `TeamsAppInstallation.ReadForUser`.
 
-**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
+-   Select Microsoft Graph -\> Application permissions.
+    - `TeamsActivity.Send`
+    - `Directory.Read.All`
+    - `TeamsAppInstallation.ReadWriteForUser.All`
+    - `TeamsAppInstallation.ReadWriteSelfForUser.All`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-	Again
-	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
+    * Select **Single page application**.
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`
     Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+    ✔ ID Token
+    ✔ Access Token
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-15. Clone the repository
+16. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-
-16. Open the code in Visual Studio
+17. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`
     
-17. Run ngrok - point to port 3978
+18. Run ngrok - point to port 3978
 
-    ```bash
-    # ngrok http -host-header=rewrite 3978
-    ```
- 
-18. Setup and run the bot from Visual Studio: 
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+19. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
-   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
-   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{MicrosoftAppId}` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `{TenantId}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `{MicrosoftAppPassword}` - Generated from Step 14, also referred to as Client secret
+   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok.
    - Press `F5` to run the project
 	 
-19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   - `${{AAD_APP_CLIENT_ID}}` with Application id generated from Step 3
+   - `${{TAB_DOMAIN}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
+21. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
-21. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+22. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
-Note: App should be installed for user's manager also to get task approval notification.
+**Note:** App should be installed for user's manager also to get task approval notification.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+
+## Running the sample
+
+- Install App User-1
+
+![InstallAppUser1](TabRequestApproval/Images/1.Install_User1.png)
+
+- Create Task
+
+![CreateTask](TabRequestApproval/Images/2.Create_Task.png)
+
+- Task Details
+
+![TaskDetails](TabRequestApproval/Images/3.Task_Details.png)
+
+- All Person
+
+![TaskDetails](TabRequestApproval/Images/5.Select_a_Person.png)
+
+- Select a Person
+
+![TaskDetails](TabRequestApproval/Images/6.Install_User2.png)
+
+- Create task Details
+
+![CreateTaskDetails](TabRequestApproval/Images/7.Create_Task_User2.png)
+
+- Install App User-2
+
+![InstallAppUser2](TabRequestApproval/Images/8.Send_Request.png)
+
+- Send Request
+
+![SendRequest](TabRequestApproval/Images/9.Request_Popup_User2.png)
+
+- On click of notification a dialog (referred as task modules in TeamsJS v1.x) will open, redirecting the user to the request.
+
+![SendRequest](TabRequestApproval/Images/10.Requests_User1.png)
+
+- User-1 My Request 
+
+![SendRequest](TabRequestApproval/Images/11.Pending_Approvals_User2.png)
+
+- User-2 My Pending Approvals 
+
+![SendRequest](TabRequestApproval/Images/12.Approved_Status_User1.png)
+
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
-- [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
-- [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Create Personal Tabs](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
+- [Send Notification to User in Chat](https://docs.microsoft.com/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
+- [Send Notification to User in Team](https://docs.microsoft.com/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Send Notification to User](https://docs.microsoft.com/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-request-approval-csharp" />

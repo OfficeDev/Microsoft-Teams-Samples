@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+                getAuthToken();
+        });
+
+        // Get  id token.
+    function getAuthToken() {
+         const params = new URLSearchParams(window.location.search);
+         const result = params.get('code');
+         const { authId, method, hostRedirectUrl } = JSON.parse(params.get('state'));
+         const baseUrl = hostRedirectUrl.split('authId')[0];
+         
+         if (method === 'deeplink') {
+         window.location.href = `${baseUrl}authId=${authId}&result=${result}`
+         } else {
+             alert("failed");
+         }
+     }
+</script>

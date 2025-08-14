@@ -1,88 +1,63 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+var cors = require('cors');
 const path = require('path');
 const app = express();
 
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, { cors: { origin: "*" } });
 const todoData = {};
 const doneData = {};
 const doingData = {};
 
-
-app.use(express.static(__dirname + '/static'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.set('views', __dirname);
-
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-app.get('/configure', function (req, res) {
-  res.render('./views/configure');
-});
+// parse application/json
+app.use(cors());
+app.use(express.json());
 
-app.get('/index', function (req, res) {
-  res.render('./views/index');
-});
 
-app.get('/appInMeeting', function (req, res) {
-  res.render('./views/appInMeeting');
-});
-
-app.get('/todoView', function (req, res) {
-  res.render('./views/todo');
-});
-
-app.get('/doingView', function (req, res) {
-  res.render('./views/doing');
-});
-
-app.get('/doneView', function (req, res) {
-  res.render('./views/done');
-});
-
-app.get('/getMeetingData', function(req, res) {
-  if(req.query.status === "todo")
-  {
-    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId]: "" });;
+// Gets the meeting data based on status.
+app.get('/getMeetingData', function (req, res) {
+  if (req.query.status === "todo") {
+    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId] : undefined });;
   }
-  if(req.query.status === "doing")
-  {
-    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId]: "" });;
+  if (req.query.status === "doing") {
+    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId] : undefined });;
   }
-  if(req.query.status === "done")
-  {
-    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId]: "" });;
+  if (req.query.status === "done") {
+    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId] : undefined });;
   }
 });
 
-app.use("/Images", express.static(path.resolve(__dirname, './Images')));
+// Saves the meeting data based on status.
+app.post('/saveMeetingData', function (req, res) {
+  let meetingDetails = req.body;
 
-io.on("connection", (socket) => {
-  socket.on("message", (message, status, meetingId) => {
-    io.emit("message", message, status);
-    if (status === "todo") {
-      if (!todoData.hasOwnProperty(meetingId)) {
-        todoData[meetingId] = new Array();
-      }
-      todoData[meetingId].push({ taskDescription: message.taskDescription, userName: message.userName });
+  if (meetingDetails.status === "todo") {
+    if (!todoData.hasOwnProperty(meetingDetails.meetingId)) {
+      todoData[meetingDetails.meetingId] = new Array();
     }
-    if (status === "doing") {
-      if (!doingData.hasOwnProperty(meetingId)) {
-        doingData[meetingId] = new Array();
-      }
-      doingData[meetingId].push({ taskDescription: message.taskDescription, userName: message.userName });
+    todoData[meetingDetails.meetingId].push(meetingDetails);
+  }
+
+  if (meetingDetails.status === "doing") {
+    if (!doingData.hasOwnProperty(meetingDetails.meetingId)) {
+      doingData[meetingDetails.meetingId] = new Array();
     }
-    if (status === "done") {
-      if (!doneData.hasOwnProperty(meetingId)) {
-        doneData[meetingId] = new Array();
-      }
-      doneData[meetingId].push({ taskDescription: message.taskDescription, userName: message.userName });
+    doingData[meetingDetails.meetingId].push(meetingDetails);
+  }
+
+  if (meetingDetails.status === "done") {
+    if (!doneData.hasOwnProperty(meetingDetails.meetingId)) {
+      doneData[meetingDetails.meetingId] = new Array();
     }
-  })
+    doneData[meetingDetails.meetingId].push(meetingDetails);
+  }
+
+  res.status(200).send();
 });
 
-server.listen(3978, function () {
-  console.log('app listening on port 3978!');
+server.listen(3000, function () {
+  console.log('app listening on port 3000!');
 });

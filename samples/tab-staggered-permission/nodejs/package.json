@@ -6,14 +6,16 @@
     "license": "MIT",
     "main": "index.js",
     "scripts": {
+        "dev:teamsfx": "npm run start",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
+        "build": "node build.js",
         "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
         "@azure/msal-node": "^1.6.0",
@@ -33,6 +35,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.3.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "^2.0.15"
+        "nodemon": "^2.0.15",
+        "esbuild": "^0.18.1"
     }
 }

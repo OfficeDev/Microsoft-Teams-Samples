@@ -1,0 +1,50 @@
+{
+    "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+    "manifestVersion": "devPreview",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.microsoft.teams.botconfiguration",
+    "developer": {
+      "name": "Microsoft",
+      "websiteUrl": "https://www.microsoft.com",
+      "privacyUrl": "https://www.microsoft.com/privacy",
+      "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "name": {
+      "short": "Bot Configuration Sample App",
+      "full": "Bot Configuration Sample App"
+    },
+  "description": {
+    "short": "Bot Configuration Sample App",
+    "full": "This bot enables configuration and reconfiguration within Teams and group chats, featuring adaptive cards with static and dynamic controls."
+  },
+    "icons": {
+      "outline": "outline.png",
+      "color": "color.png"
+    },
+    "accentColor": "#60A18E",
+    "bots": [
+      {
+        "botId": "${{BOT_ID}}",
+          "needsChannelSelector": false,
+        "scopes": [
+          "personal",
+          "team",
+          "groupChat"
+        ],
+        "configuration":{
+          "groupChat":{
+            "fetchTask": true
+          },
+          "team":{
+            "fetchTask": true
+          }
+        },
+        "isNotificationOnly": false
+      }
+    ],
+    "permissions": [ "identity", "messageTeamMembers" ],
+    "validDomains": [
+      "${{BOT_DOMAIN}}"
+    ]
+  }

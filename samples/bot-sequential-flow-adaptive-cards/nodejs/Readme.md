@@ -9,20 +9,28 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-nodejs
 ---
 
-# Sequential workflow adaptive cards
+# Sequential workflow adaptive cards Node.js
+
+![Preview Image](Images/Preview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Sequential workflow adaptive cards:** [Manifest](/samples/bot-sequential-flow-adaptive-cards/csharp/demo-manifest/bot-sequential-flow-adaptive-cards.zip)
 
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
 This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V1.4
 
 This is a sample app that provides an experience of managing incidents. This sample makes use of Teams platform capabilities like Universal Bots with below mentioned capabilities.
-[User Specific Views](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views)
-[Sequential Workflows](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
-[Up to date cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
+[User Specific Views](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views)
+[Sequential Workflows](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
+[Up to date cards](https://docs.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
 
 ## Key features
 
@@ -35,46 +43,76 @@ This is a sample app that provides an experience of managing incidents. This sam
 
 ## Prerequisites
 
-1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+ - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
+ - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
 
     ```bash
     # determine node version
     node --version
     ```
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 
-3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+- If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-- Register Azure AD applications
-    -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-- Clone the repository
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Setup
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+2. Setup for Bot
+	- Register a Microsoft Entra ID aap registration in Azure portal.
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+ - Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+4. Setup for code
+
+  - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a console, navigate to `samples/bot-sequential-flow-adaptive-cards/nodejs`
+    
 
-    ```bash
-    cd samples/bot-sequential-flow-adaptive-cards/nodejs
-    ```
+  - In a console, navigate to `samples/bot-sequential-flow-adaptive-cards/nodejs`
 
-- Run ngrok - point to port `3978`
+      ```bash
+      cd samples/bot-sequential-flow-adaptive-cards/nodejs
+      ```
+  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
 
-    ```bash
-    ngrok http -host-header=localhost 3978
-    ```
-
-
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
 - Install modules & Run the `NodeJS` Server 
@@ -88,10 +126,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     > **This command is equivalent to:**
     _npm install  > npm start_
 
+5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sequential-flow-adaptive-cards/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Workflows
 ### Workflow for bot interaction
@@ -139,14 +186,14 @@ sequenceDiagram
     Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
 ```
 
-## Interacting with the bot in Teams
+## Running the sample.
 
 You can interact with this bot by `@Sequential Workflows` (BotName). The bot will respond with adaptive card requesting you the details.
 
 - Install App
 
 Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) > Upload `manifest.zip` > `Add`
-![image](https://user-images.githubusercontent.com/85108465/123583709-b6e39d00-d7fd-11eb-83bc-737a17fbbadd.png)
+![image](Images/ManageApp.png)
 
 ![image](https://user-images.githubusercontent.com/85108465/123583855-f3af9400-d7fd-11eb-87df-a69d880680aa.png)
 
@@ -154,35 +201,35 @@ Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) >
 
 Type in Chat: `@Sequential Workflows` (BotName) and Enter
 
-![image](https://user-images.githubusercontent.com/85108465/123767041-d0abdf80-d8e4-11eb-8cb3-3fa3eb0680ce.png)
+![image](Images/AddAppIntoGroup.png)
 
 Create New Incident
 
-![image](https://user-images.githubusercontent.com/85108465/123586591-936f2100-d802-11eb-9d38-a43fc13672ee.png)
-![image](https://user-images.githubusercontent.com/85108465/123586786-e34de800-d802-11eb-9355-ea12ebc67388.png)
-![image](https://user-images.githubusercontent.com/85108465/123586874-06789780-d803-11eb-843b-76e69b9afad6.png)
-![image](https://user-images.githubusercontent.com/85108465/123591452-9d485280-d809-11eb-83cd-412f4e6aaf5a.png)
+![image](Images/CreateIncident.png)
+![image](Images/chooseSoftware.png)
+![image](Images/ChooseEmail.png)
+![image](Images/EnterIncidentDetails.png)
 
 > Only the `Created By` person have the option to `Edit`
 
-![image](https://user-images.githubusercontent.com/85108465/123591565-c668e300-d809-11eb-829c-23a6396e0cfe.png)
+![image](Images/SavedIncident.png)
 
 Edit Incident
 
-![image](https://user-images.githubusercontent.com/85108465/123591600-d385d200-d809-11eb-9edd-23f76a8687d8.png)
+![image](Images/EditIncident.png)
 
 `Approve` or `Reject` Incidents
 
 > Only the `Assigned To` person have the option to `Approve` or `Reject`
 
-![image](https://user-images.githubusercontent.com/85108465/123768720-351b6e80-d8e6-11eb-9f6e-7525c761d034.png)
-![image](https://user-images.githubusercontent.com/85108465/123768103-a9a1dd80-d8e5-11eb-8ec5-154eb36a8d62.png)
-![image](https://user-images.githubusercontent.com/85108465/123768181-baeaea00-d8e5-11eb-9f79-4854c409edd3.png)
+![image](Images/ApprovedOrReject.png)
+![image](Images/ApprovedIncident.png)
+![image](Images/RejectedIncident.png)
 
 List Incidents
 
-![image](https://user-images.githubusercontent.com/85108465/123595684-d0d9ab80-d80e-11eb-9798-82f535ba6486.png)
-![image](https://user-images.githubusercontent.com/85108465/123769386-e28e8200-d8e6-11eb-96e0-3d1f8365c7ef.png)
+![image](Images/listIncidentoption.png)
+![image](Images/listIncident.png)
 
 
 ## Interaction from messaging extension.
@@ -199,7 +246,7 @@ You can also interact with this app using messaging extension action which allow
    
 3. User can select any incident from the list and can share to that chat/team.
 
-   ![image](https://user-images.githubusercontent.com/85108465/123768720-351b6e80-d8e6-11eb-9f6e-7525c761d034.png)
+   ![image](Images/ApprovedOrReject.png)
 
 ## Deploy the bot to Azure
 
@@ -209,18 +256,9 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [User Specific Views](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views)
-- [Sequential Workflows](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
-- [Up to date cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
-- [Universal Bot Action Model](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/universal-action-model#actionexecute)
-- [Azure Portal](https://portal.azure.com)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [User Specific views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
+- [Bot-Sequential-flow-adaptive-card](https://learn.microsoft.com/power-automate/create-adaptive-cards)
 
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sequential-flow-adaptive-cards-nodejs" />

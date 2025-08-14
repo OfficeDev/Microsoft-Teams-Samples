@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "developer": {
+    "name": "MessageReactionBot",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "MessageReactionBot",
+    "full": "MessageReactionBot"
+  },
+  "description": {
+    "short": "Sample app demonstrating bot reactions to Teams messages using Bot Framework.",
+    "full": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "scopes": [
+        "groupChat",
+        "team",
+        "personal"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

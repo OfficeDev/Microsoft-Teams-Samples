@@ -1,0 +1,34 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "id": "<<APP-ID>>",
+  "version": "1.5",
+  "developer": {
+    "name": "Developer",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com"
+  },
+  "description": {
+    "full": "This sample demonstrates building a GitHub connector for Microsoft Teams using GitHub’s APIs for real-time notifications.",
+    "short": "GitHub connector for Microsoft Teams using GitHub API integration sample"
+  },
+  "icons": {
+    "outline": "https://outlook.office.com/connectors/Content/Images/IncomingWebhook.jpg",
+    "color": "https://outlook.office.com/connectors/Content/Images/IncomingWebhook.jpg"
+  },
+  "connectors": [
+    {
+      "connectorId": "<<CONNECTOR-ID>>",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "name": {
+    "full": "GitHubConnector",
+    "short": "GitHubConnector"
+  },
+  "accentColor": "#FFFFFF",
+  "needsIdentity": "true"
+}

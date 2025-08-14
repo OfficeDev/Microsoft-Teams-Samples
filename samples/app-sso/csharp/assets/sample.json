@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-app-sso-csharp",
+    "source": "officeDev",
+    "title": "App SSO C#",
+    "shortDescription": "This sample app demonstrates Teams SSO integration for Tab, Bot, and Messaging Extension, using C# and Azure AD for secure authentication.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/csharp",
+    "longDescription": [
+      "This C# sample app provides single sign-on (SSO) functionality for Microsoft Teams. It includes authentication support for Teams Tab, Bot, and Messaging Extension with features like user profile retrieval and secure API access using Azure AD."
+    ],
+    "creationDateTime": "2021-02-09",
+    "updateDateTime": "2024-10-10",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,bot,msgext"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/csharp/Images/PreviewAppSSOCsharp.gif",
+        "alt": "Solution UX showing app sso c#"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

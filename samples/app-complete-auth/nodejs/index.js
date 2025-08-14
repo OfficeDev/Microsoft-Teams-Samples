@@ -14,19 +14,9 @@ const axios = require('axios')
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
-const PORT = process.env.PORT || 3978;
-const server = express();
+
 let multer = require('multer');
 let upload = multer({ storage: multer.memoryStorage() });
-
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({
-  extended: true
-}));
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -50,22 +40,21 @@ const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfigura
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
-  // This check writes out errors to console log .vs. app insights.
-  // NOTE: In production environment, you should consider logging this to Azure
-  //       application insights. See https://aka.ms/bottelemetry for telemetry
-  //       configuration instructions.
-  console.error(`\n [onTurnError] unhandled error: ${error}`);
+    // This check writes out errors to console log .vs. app insights.
+    // NOTE: In production environment, you should consider logging this to Azure
+    //       application insights.
+    console.error(`\n [onTurnError] unhandled error: ${ error }`);
 
-  // Send a trace activity, which will be displayed in Bot Framework Emulator
-  await context.sendTraceActivity(
-    'OnTurnError Trace',
-    `${error}`,
-    'https://www.botframework.com/schemas/error',
-    'TurnError'
-  );
+    // Send a trace activity, which will be displayed in Bot Framework Emulator
+    await context.sendTraceActivity(
+        'OnTurnError Trace',
+        `${ error }`,
+        'https://www.botframework.com/schemas/error',
+        'TurnError'
+    );
 
-  // Note: Since this Messaging Extension does not have the messageTeamMembers permission
-  // in the manifest, the bot will not be allowed to message users.
+     // Uncomment below commented line for local debugging.
+     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
 };
 
 // Define the state store for your bot.
@@ -83,9 +72,22 @@ const dialog = new MainDialog();
 const bot = new TeamsBot(conversationState, userState, dialog);
 
 // Create HTTP server.
-server.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+const server = express();
+
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({
+  extended: true
+}));
+
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+
+const port = process.env.port || process.env.PORT || 3978;
+server.listen(port, () => 
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
+);
 
 // Endpoint to fetch Auth tab page.
 server.get('/AuthTab', (req, res, next) => {
@@ -111,7 +113,7 @@ server.get('/auth-start', function (req, res) {
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth-end', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
 // Endpoint to facebook auth redirect page.
@@ -164,7 +166,7 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
       catch (error) {
         console.log(error);
       }
-      
+
     }).catch(error => {
       reject({ "error": error.errorCode });
     });
@@ -228,7 +230,7 @@ server.post('/tabCredentialsAuth', function (req, res) {
 server.post('/getFbAccessToken', function (req, res) {
   var token = req.body.token;
   var accessToken;
-  var scopes = ['name','picture'].join(',');
+  var scopes = ['name', 'picture'].join(',');
 
   var fbPromise = new Promise((resolve, reject) => {
     axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {

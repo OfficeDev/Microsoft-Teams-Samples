@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample channel and group tab hello world app.
+description: This sample application illustrates how to create channel and group tabs in Microsoft Teams, providing collaborative spaces for web content. It includes detailed setup instructions, prerequisites, and guidance for deploying the app within your Teams environment.
 products:
 - office-teams
 - office
@@ -9,32 +9,92 @@ languages:
 - typescript
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:27 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-ts
 ---
 
 # Tabs quick start
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+Explore this simple hello world app that showcases channel and group tabs in Microsoft Teams, designed to enhance collaboration around web-based content. This sample includes comprehensive setup steps, requirements, and deployment instructions, allowing you to easily integrate and run the app in your Teams environment.
 
-![tabconfigure](Images/tabconfigure.png)
+## Included Features
+* Tabs
 
-![setuptab](Images/setuptab.png)
+## Interaction with app.
+![tabconfigure](Images/TabChannelGroupModule.gif)
 
-![Helloworld](Images/Helloworld.png)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Tab Channel quick start:** [Manifest](/samples/tab-channel-group-quickstart/js/demo-manifest/tab-channel-group-quickstart.zip)
 
 ## Prerequisites
--  [NodeJS](https://nodejs.org/en/)
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-## Build and Run
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
-In the project directory, execute:
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-`npm install`
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
-`npm start`
+## Setup
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+2. Setup NGROK
+ - Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
+
+3. Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- In a terminal, navigate to `samples/tab-channel-group-quickstart/ts`
+
+- Install modules
+
+    ```bash
+    npm install
+    ```
+
+- Run your app
+
+    ```bash
+    npm start
+
+4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")```
+    
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
@@ -53,6 +113,14 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ### Build for production
 `npm run build`
 
+## Running the sample.
+
+![tabconfigure](Images/tabconfigure.png)
+
+![setuptab](Images/setuptab.png)
+
+![Helloworld](Images/Helloworld.png)
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -61,3 +129,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Further Reading
+
+[Create a group tab](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-channel-group-quickstart-ts" />

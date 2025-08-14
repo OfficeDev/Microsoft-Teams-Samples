@@ -1,0 +1,38 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{GUID-ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab External Auth App",
+    "full": "Tab External Auth App"
+  },
+  "description": {
+    "short": "Microsoft Teams sample app demonstrating Google authentication with OAuth2.",
+    "full": "This sample app demonstrates the integration of Google OAuth2 for user authentication within Microsoft Teams. It features a tab-based interface that allows users to log in using their Google accounts and interact with the application seamlessly."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://{{domain-name}}/Home/Index",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

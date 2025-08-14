@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamsToDoAppConnector", "TeamsToDoAppConnector\TeamsToDoAppConnector.csproj", "{DB064390-84D7-40E9-9389-F098ECC16AA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamsToDoAppConnector", "TeamsToDoAppConnector.csproj", "{FB9D6E83-74CD-4AC9-A070-888B9A980D05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DB064390-84D7-40E9-9389-F098ECC16AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB064390-84D7-40E9-9389-F098ECC16AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB064390-84D7-40E9-9389-F098ECC16AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB064390-84D7-40E9-9389-F098ECC16AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9D6E83-74CD-4AC9-A070-888B9A980D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9D6E83-74CD-4AC9-A070-888B9A980D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9D6E83-74CD-4AC9-A070-888B9A980D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9D6E83-74CD-4AC9-A070-888B9A980D05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {87849E6D-2D54-4222-AC91-19357ABCD8F9}
+		SolutionGuid = {8C6CD16A-A326-4AFA-81F6-8E2358DF4518}
 	EndGlobalSection
 EndGlobal

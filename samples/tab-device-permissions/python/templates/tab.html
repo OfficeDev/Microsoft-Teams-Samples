@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Device Permission</title>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .nav-tabs .nav-link {
+            color: #0078D4;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mobileFeatures" style="display: none;">
+        <div class="tab-content mt-3">
+            <div id="device-permission" class="tab-pane fade show active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Capture Image</h5>
+                                <p>Checks for permission before capturing an image.</p>
+                                <button class="btn btn-light w-100 mt-2" onclick="captureMultipleImages(1)">Capture Image</button>
+                                <h5 class="mt-2">Capture Multiple Images (Mobile Only)</h5>
+                                <button class="btn btn-light w-100 mt-2" onclick="captureMultipleImages(2)">Capture Multiple Images</button>
+                            </div>
+                            <div id="imageContainer"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>People Picker (Mobile Only)</h5>
+                                <p>Checks for permission to use media input.</p>
+                                <strong>SDK used:</strong>microsoftTeams<br>
+                                <strong>Method:</strong> teams.people<br>
+                                <button class="btn btn-light w-100 mt-2" id="peoplePickerBtn" onclick="selectPeople()">Select People</button>
+                                <div id="selectedPeople" class="selected"></div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="webFeatures" style="display: none;">
+        <div class="tab-content mt-3">
+            <div id="device-permission" class="tab-pane fade show active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Capture Image</h5>
+                                <p>Checks for permission before capturing image.</p>
+                                <strong>SDK used:</strong> navigator, microsoftTeams<br>
+                                <strong>Method:</strong> navigator.mediaDevices.getUserMedia, teams.getMedia<br>
+                                <button class="btn btn-light w-100 mt-2" onclick="captureMedia()">Capture Image</button>
+                            </div>
+                            <img id="capturedImage" alt="Captured Image" style="display:none; width: auto;">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Capture Audio</h5>
+                                <p>Checks for permission to use media input.</p>
+                                <strong>SDK used:</strong> navigator, microsoftTeams<br>
+                                <strong>Method:</strong> navigator.mediaDevices.getUserMedia, teams.getMedia<br>
+                                <button class="btn btn-light w-100 mt-2" onclick="captureAudio()">Capture Audio</button>
+                                <audio class="w-100 mt-2" id="audioPlayer" controls></audio>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Capture Video</h5>
+                                <p>Checks for permission to use media input.</p>
+                                <strong>SDK used:</strong> navigator<br>
+                                <strong>Method:</strong> navigator.mediaDevices.getUserMedia<br>
+                                <button class="btn btn-light w-100 mt-2" onclick="captureVideo()">Capture Video</button>
+                                <video id="videoElement" controls autoplay class="w-100 mt-2"></video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Get Location</h5>
+                                <p>Enables location permissions via App permissions.</p>
+                                <strong>SDK used:</strong> navigator, microsoftTeams<br>
+                                <strong>Method:</strong> navigator.geolocation.getCurrentPosition, teams.location<br>
+                                <button id="getLocationBtn" class="btn btn-light w-100 mt-2" onclick="getCurrentLocation()">Get Location</button>
+                                <p id="locationText" class="mt-2">Location will appear here.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Notifications</h5>
+                                <p>Checks for permission before sending notifications.</p>
+                                <strong>SDK used:</strong> Navigator<br>
+                                <strong>Method:</strong> Notifications API<br>
+                                <button id="notifyBtn" onclick="sendNotification()" class="btn btn-light w-100 mt-2">Notify</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/capture.js') }}"></script>
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                if (context.app.host.clientType === "web") {
+                    document.getElementById("webFeatures").style.display = "block";
+                } else {
+                    document.getElementById("mobileFeatures").style.display = "block";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@page
+@model TeamsMessagingExtensionsAction.Pages.IndexModel
+@{
+    ViewData["Title"] = "HTML Page";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <style>
+        .login {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        microsoftTeams.initialize();
+
+        function validateForm() {
+            var empLogIn = {
+                userName: document.forms["userLog"]["userName"].value,
+                userPwd: document.forms["userLog"]["userPwd"].value,
+            };
+            microsoftTeams.tasks.submitTask(empLogIn);
+            return true;
+        }
+    </script>
+
+    <div class="login">
+        <h2>Enter Details</h2><br>
+        <form method="POST" id="userLog" onsubmit="return validateForm()">
+            <label for="userName"><b>User Name:</b></label>
+            <input type="text" placeholder="User Name" name="userName" id="userName" required>
+            <br><br>
+            <label for="userPwd"><b>Password:</b></label>
+            <input type="password" placeholder="Password" name="userPwd" id="userPwd" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

@@ -19,14 +19,16 @@
   </div>
 </p>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
 <script>
-  microsoftTeams.initialize();
-    var conextchatId = "";
+  microsoftTeams.app.initialize().then(() => {
+    var conextChatId = "";
     // Check the initial theme user chose and respect it
-    microsoftTeams.getContext(function (context) {
-        conextchatId = context.chatId;
-        if (conextchatId != "") {
+    microsoftTeams.app.getContext().then((context) => {
+        conextChatId = context.chat.id;
+        if (conextChatId != "") {
             document.getElementById("textConfiguration").innerHTML = "Configure your Group Chat Tab to Send Activity Feed Notification: ";
              $("#teamsTab").hide();
              $("#groupChatTab").show();
@@ -41,10 +43,10 @@
     });
 
     // Save configuration changes
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+    microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
         // Let the Microsoft Teams platform know what you want to load based on
         // what the user configured on this page
-        microsoftTeams.settings.setSettings({
+        microsoftTeams.pages.config.setConfig({
             contentUrl: createTabUrl()+`?tenantId={tid}`, // Mandatory parameter
             entityId: createTabUrl()+`?tenantId={tid}`// Mandatory parameter
         });
@@ -54,6 +56,8 @@
         // see an error indicating that the configuration settings could not be saved.
         saveEvent.notifySuccess();
     });
+  });
+
 
     // Logic to let the user configure what they want to see in the tab being loaded
     document.addEventListener('DOMContentLoaded', function () {
@@ -64,7 +68,7 @@
 
                 // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
                 // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification'|| selectedTab==='UserNotification');
+                microsoftTeams.pages.config.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification'|| selectedTab==='UserNotification');
             };
         }
     });

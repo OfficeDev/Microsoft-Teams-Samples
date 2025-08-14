@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{Base_URL_Domain}/botid-{{Microsoft-App-Id}}"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "App auth",
+    "full": "App auth"
+  },
+  "description": {
+    "short": "Sample app for Microsoft Teams authentication using bot and tab methods.",
+    "full": "This sample showcases how to implement authentication in Microsoft Teams using both a bot and a tab, supporting Teams SSO with MSAL.js 2.0."
+  },
+  "staticTabs": [
+    {
+      "contentUrl": "https://{Base_URL_Domain}/AuthTab",
+      "entityId": "Auth",
+      "name": "Auth",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://{Base_URL_Domain}/silent-tab?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+      "entityId": "silentAuth",
+      "name": "Silent Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": true
+    }
+  ],
+  "accentColor": "#60A18E",
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "{Base_URL_Domain}",
+    "token.botframework.com"
+  ]
+}

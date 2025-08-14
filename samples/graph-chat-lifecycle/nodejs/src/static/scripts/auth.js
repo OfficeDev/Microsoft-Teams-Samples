@@ -1,4 +1,6 @@
-microsoftTeams.app.initialize();
+let button;
+microsoftTeams.app.initialize().then(() => {
+});
 
 getClientSideToken()
     .then((clientSideToken) => {
@@ -11,13 +13,18 @@ getClientSideToken()
         if (error === "invalid_grant") {
             display(`Error: ${error} - user or admin consent required`);
             // Display in-line button so user can consent
-            let button = display("Consent", "button");
+            button = display("Consent", "button");
             button.onclick = (() => {
                 requestConsent()
                     .then((result) => {
                         // Consent succeeded - use the token we got back
-                        let accessToken = JSON.parse(result).accessToken;
-                        useServerSideToken(accessToken);
+                        getClientSideToken()
+                        .then((clientSideToken) => {
+                            return getServerSideToken(clientSideToken);
+                        })
+                        .then((serverSideToken) => {
+                            return useServerSideToken(serverSideToken);
+                        })
                     })
                     .catch((error) => {
                         display(`ERROR ${error}`);
@@ -80,6 +87,8 @@ function getServerSideToken(clientSideToken) {
                         serverSideToken = responseJson;
                         localStorage.setItem("accessToken", serverSideToken);
                         $("#createGroupChat").show();
+                        if (button)
+                        button.disabled = true;
                         resolve(serverSideToken);
                     }
                 });
@@ -107,10 +116,6 @@ function useServerSideToken(data) {
                 throw (`Error ${response.status}: ${response.statusText}`);
             }
         })
-        .then((profile) => {
-            // display(JSON.stringify(profile, undefined, 4), 'pre');
-        });
-
 }
 
 // Show the consent pop-up

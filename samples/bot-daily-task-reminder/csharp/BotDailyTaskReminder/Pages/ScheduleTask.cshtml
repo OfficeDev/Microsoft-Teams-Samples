@@ -3,10 +3,15 @@
 @{
 }
 <head>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+    <!-- Microsoft Teams SDK script -->
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
             crossorigin="anonymous"></script>
+    
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS library -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
@@ -17,42 +22,52 @@
     </style>
 
     <script>
+        // Initializes Microsoft Teams SDK
         microsoftTeams.app.initialize();
 
-        // Submit task details.
+        /**
+         * Handles the form submission for scheduling a task.
+         * Validates the form and sends task details to the Microsoft Teams task module.
+         */
         function submit() {
             var isValid = true;
             let checkboxArray = [];
 
-            $('#taskTitle,#taskdatetime,#taskdescription').each(function (e) {
+            // Validate required fields (task title, description, and date/time)
+            $('#taskTitle, #taskdatetime, #taskdescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
                     $(this).css({
-                        "border": "1px solid red"
+                        "border": "1px solid red"  // Highlight invalid fields with red border
                     });
                 }
                 else {
                     $(this).css({
-                        "border": "",
+                        "border": "",  // Reset border if input is valid
                         "background": ""
                     });
                 }
             });
 
+            // Prevent form submission if validation fails
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
 
+            // Gather selected days for the task recurrence
             $('input[type=checkbox]').each(function () {
                 if (this.checked) {
                     checkboxArray.push($(this).val())
                 }
             });
+
+            // Convert datetime to UTC format
             var datetimeLocal = $('#taskdatetime').val()
             var datetimeUTC = new Date(datetimeLocal).toUTCString();
             var date = new Date(datetimeUTC);
 
+            // Prepare task data
             let taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: date,
@@ -60,7 +75,8 @@
                 selectedDays: checkboxArray,
             };
 
-            microsoftTeams.dialog.submit(taskInfo);
+            // Submit the task information to Microsoft Teams task module
+            microsoftTeams.dialog.url.submit(taskInfo);
         }
     </script>
 </head>
@@ -68,21 +84,28 @@
     <div class="surface">
         <div class="panel">
             <div class="container">
+                <!-- Input field for task title -->
                 <label for="title" class="title">Task title</label>
                 <br>
                 <input type="text" id="taskTitle" name="taskTitle">
                 <br />
                 <br />
+
+                <!-- Input field for task description -->
                 <label for="description" class="description">Task description</label>
                 <br>
                 <input type="text" id="taskdescription" name="taskdescription">
                 <br />
                 <br />
+
+                <!-- Input field for task date and time -->
                 <label for="taskdatetime">Date and time</label>
                 <br />
                 <input type="datetime-local" id="taskdatetime" name="taskdatetime">
                 <br/>
                 <br/>
+
+                <!-- Checkbox options for selecting days of the week to repeat the task -->
                 <span>Please select days to be repeated</span>
                 <br/>
                 <br/>
@@ -102,6 +125,8 @@
                 <label for="sunday">Sunday</label>
                 <br/>
                 <br/>
+
+                <!-- Submit button to trigger the task scheduling -->
                 <button type="button" class="btn-send save" onclick="submit()">Submit</button>
             </div>
         </div>

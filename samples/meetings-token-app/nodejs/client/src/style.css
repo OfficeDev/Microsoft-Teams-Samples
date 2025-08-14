@@ -1,12 +1,49 @@
 body {
     background-color: black;
     color: white;
+    font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
+    display: contents
 }
+
 .app-container {
     display: grid;
     justify-content: center;
     align-content: center;
     margin-top: 15%;
+    color: black;
+}
+
+.submit-button {
+    font-weight: 600;
+    background-color: #5B58C7;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #7A80EB;
+}
+
+.done-button {
+    background-color: green !important;
+    border: green !important; 
+}
+.primary-button {
+    background-color: #5B58C7 !important;
+    padding: 0.5rem 1.5rem !important;
+    color: white !important;
+    border-radius: 7px !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+
+.skip-button {
+    background-color: #CC4A31 !important;
+    border: #CC4A31 !important
 }
 
 .error-bar {
@@ -28,10 +65,6 @@ body {
     align-content: center;
 }
 
-.primary-button {
-    margin: 10;
-}
-
 .token-indicator-container {
     display:grid;
     align-content: center;
@@ -47,7 +80,7 @@ body {
 }
 
 .token-indicator-value {
-    display: inline-flex;
+    display: inline-flex !important;
     grid-row: 2;
     align-content: center;
     justify-content: center;
@@ -56,7 +89,7 @@ body {
 }
 
 .list-center {
-    display: grid;
+    display: grid !important;
     align-content: center;
     justify-content: center;
     margin: 10;
@@ -64,4 +97,26 @@ body {
     grid-row: 4;
     grid-column: 1;
     padding-top: 2em;
+}
+.list{
+    list-style: none !important;
+    padding-top: 0em !important;
+    margin-right: 2em !important;
+}
+
+/* Theme styles */
+
+.theme-dark {
+    background-color: #242424;
+    color: white;
+}
+
+.theme-light {
+    background-color: white;
+    color: #242424;
+}
+
+.theme-contrast {
+    background-color: black;
+    color: chartreuse;
 }

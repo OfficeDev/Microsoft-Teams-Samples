@@ -4,7 +4,7 @@
 import React from 'react';
 import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter,  Route, Routes } from "react-router-dom";
 
 import Privacy from "./Privacy";
 import TermsOfUse from "./TermsOfUse";
@@ -19,17 +19,19 @@ import ClosePopup from "./ClosePopup";
 function App() {
 
   // Initialize the Microsoft Teams SDK
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Display the app home page hosted in Teams
   return (
-    <Router>
-      <Route exact path="/privacy" component={Privacy} />
-      <Route exact path="/termsofuse" component={TermsOfUse} />
-      <Route exact path="/tab" component={Tab} />
-      <Route exact path="/auth-start" component={ConsentPopup} />
-      <Route exact path="/auth-end" component={ClosePopup} />
-    </Router>
+    <BrowserRouter>
+    <Routes>
+      <Route  path="/privacy" element={<Privacy/>} />
+      <Route  path="/termsofuse" element={<TermsOfUse/>} />
+      <Route  path="/tab" element={<Tab/>} />
+      <Route  path="/auth-start" element={<ConsentPopup/>} />
+      <Route  path="/auth-end" element={<ClosePopup/>} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 

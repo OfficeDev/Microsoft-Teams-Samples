@@ -14,12 +14,28 @@ namespace TokenApp.Models
         /// <summary>
         /// Gets or sets the meeting role of a user.
         /// </summary>
-        [JsonProperty("MeetingRole")]
-        public string MeetingRole { get; set; }
+        [JsonProperty("Meeting")]
+        public MeetingRole Meeting { get; set; }
 
         /// <summary>
         /// Gets or sets the conversation Id.
         /// </summary>
         public Conversation Conversation { get; set; }
+    }
+
+    /// <summary>
+    /// Meeting represents a activity conversation for bot and the chat.
+    /// </summary>
+    public class MeetingRole
+    {
+        /// <summary>
+        /// Gets or sets the user role for a particular meeting.
+        /// </summary>
+        public string Role { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether user is in a particular meeting.
+        /// </summary>
+        public bool InMeeting { get; set; }
     }
 }

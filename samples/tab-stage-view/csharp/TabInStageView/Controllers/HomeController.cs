@@ -14,7 +14,7 @@
         /// <param name="configuration">configuration of application.</param>
         public HomeController(IConfiguration configuration)
         {
-            _appId = configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
+            _appId = configuration["TeamsAppId"] ?? throw new NullReferenceException("TeamsAppId");
         }
 
         [Route("")]

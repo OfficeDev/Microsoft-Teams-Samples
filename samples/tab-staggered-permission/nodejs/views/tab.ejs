@@ -1,10 +1,8 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
-    </script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -69,7 +67,7 @@
         }
     </style>
     <script>
-        let accessToken;
+        let idToken;
 
         $(document).ready(function () {
             $("#mails").hide();
@@ -81,6 +79,7 @@
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.getAuthToken().then((result) => {
+                    idToken = result;
                     resolve(result);
                     decodingJWT(result)
                 }).catch((error) => {
@@ -95,7 +94,6 @@
             getToken(scope)
                 .then(data => {
                     $("#divError").hide();
-                    accessToken = data.accessToken;
                     microsoftTeams.app.getContext().then((context) => {
                         if (scope == "User.Read") {
                             getUserPhoto();
@@ -129,7 +127,7 @@
                 url: '/GetUserPhoto',
                 dataType: 'json',
                 data: {
-                    'accessToken': accessToken,
+                    'idToken': idToken,
                 },
                 success: function (responseJson) {
                     const userDetails = responseJson;
@@ -148,19 +146,24 @@
                 url: '/GetUserMails',
                 dataType: 'json',
                 data: {
-                    'accessToken': accessToken,
+                    'idToken': idToken,
                 },
                 success: function (responseJson) {
                     const userMails = responseJson;
-                    for (let i = 0; i < userMails.length; i++) {
-                        $('#mail-list-table').append(`<tr style="padding:1px" >
-                        <td><label id=${i + 1}>${i + 1}</label></td>
-                        <td>${userMails[i].from.emailAddress.address}</td>
-                        <td>${userMails[i].toRecipients[0].emailAddress.address}</td>
-                        <td>${userMails[i].subject}</td>
-                        <td>${userMails[i].receivedDateTime}</td>
-                        </tr>`);
-                    };
+                     let j=1;
+                     for (let i = 0; i < userMails.length; i++) {
+                        if (userMails[i].subject !="")
+                        {
+                            $('#mail-list-table').append(`<tr style="padding:1px" >
+                            <td><label id=${j}>${j}</label></td>
+                            <td>${userMails[i].from.emailAddress.address}</td>
+                            <td>${userMails[i].toRecipients[0].emailAddress.address}</td>
+                            <td>${userMails[i].subject}</td>
+                            <td>${userMails[i].receivedDateTime}</td>
+                            </tr>`);
+                            j++;
+                        };
+                    }
                     $("#mails").show();
                     $("#getmails").hide();
                 },
@@ -176,12 +179,12 @@
                 url: '/decodeToken',
                 dataType: 'json',
                 data: {
-                    'accessToken': token,
+                    'idToken': token,
                 },
                 success: function (responseJson) {
                     const userDetails = responseJson;
                     $("#name").append(userDetails.name);
-                    $("#email").append(userDetails.upn);
+                    $("#email").append(userDetails.preferred_username);
                     $("#consent").show();
                     $("#getmails").show();
                 },

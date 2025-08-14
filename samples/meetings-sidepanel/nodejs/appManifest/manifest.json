@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Side Panel",
+    "full": "Side Panel for Meeting"
+  },
+  "description": {
+    "short": "Sample app demonstrating Microsoft Teams side panel interaction during meetings.",
+    "full": "This sample app for Microsoft Teams showcases how to implement a side panel for real-time interaction during meetings, allowing organizers to manage agendas."
+  },
+  "accentColor": "#5558AF",
+  "bots": [
+    {
+      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "scopes": [
+        "groupChat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupChat"
+      ],
+      "context": [
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+    "authorization": {
+        "permissions": {
+            "resourceSpecific": [
+                {
+                    "name": "MeetingStage.Write.Chat",
+                    "type": "Delegated"
+                },
+                {
+                    "name": "ChannelMeetingStage.Write.Group",
+                    "type": "Delegated"
+                },
+                {
+                    "name": "LiveShareSession.ReadWrite.Chat",
+                    "type": "Delegated"
+                },
+                {
+                    "name": "LiveShareSession.ReadWrite.Group",
+                    "type": "Delegated"
+                }
+            ]
+        }
+    }
+}

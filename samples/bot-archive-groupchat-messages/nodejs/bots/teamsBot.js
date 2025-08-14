@@ -45,6 +45,7 @@ class TeamsBot extends DialogBot {
                 return;
             }
         }
+        
         await this.dialog.run(context, this.dialogState);
     }
 

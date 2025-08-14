@@ -2,44 +2,50 @@
 // Licensed under the MIT License.
 
 import React from 'react';
-import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
+import * as msal from "@azure/msal-browser";
 
 /**
- * This component is loaded when the Azure implicit grant flow has completed.
+ * This component is used to redirect the user to the Azure authorization endpoint from a popup.
  */
 class ClosePopup extends React.Component {
 
-    componentDidMount(){
-
-      microsoftTeams.app.initialize();
-
-      //The Azure implicit grant flow injects the result into the window.location.hash object. Parse it to find the results.
-      let hashParams = this.getHashParameters();
-
-      //If consent has been successfully granted, the Graph access token should be present as a field in the dictionary.
-      if (hashParams["access_token"]){
-        //Notifify the showConsentDialogue function in Tab.js that authorization succeeded. The success callback should fire. 
-        microsoftTeams.authentication.notifySuccess(hashParams["access_token"]);
-      } else {
-        microsoftTeams.authentication.notifyFailure("Consent failed");
-      }
-    }
-
-    //Helper function that converts window.location.hash into a dictionary
-    getHashParameters() {
-      let hashParams = {};
-      window.location.hash.substr(1).split("&").forEach(function(item) {
-        let [key,value] = item.split('=');
-        hashParams[key] = decodeURIComponent(value);
-      });
-      return hashParams;
-  }    
+    componentDidMount() {
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then(async (context) => {
+                
+                const msalConfig = {
+                    auth: {
+                        clientId: process.env.REACT_APP_AZURE_APP_REGISTRATION_ID,
+                        authority: `https://login.microsoftonline.com/${context.tid}`,
+                        navigateToLoginRequestUrl: false
+                    },
+                    cache: {
+                        cacheLocation: "sessionStorage",
+                    },
+                }
+				
+                const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
+                msalInstance.handleRedirectPromise()
+                    .then((tokenResponse) => {
+                        if (tokenResponse !== null) {
+                            microsoftTeams.authentication.notifySuccess("Authentication succeeded");
+                        } else {
+                            microsoftTeams.authentication.notifyFailure("Get empty response.");
+                        }
+                    })
+                    .catch((error) => {
+                        microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+                    });
+            });
+        });
+    }     
 
     render() {
       return (
         <div>
-          <h1>Consent flow complete.</h1>
+            <h1>Consent flow complete.</h1>
         </div>
       );
     }

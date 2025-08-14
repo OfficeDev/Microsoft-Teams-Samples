@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp",
+    "source": "officeDev",
+    "title": "Chat LifeCycle Application",
+    "shortDescription": "This sample demonstrates how to manage the chat lifecycle in Microsoft Teams, including creating chats, adding members, and deleting members using Microsoft Graph APIs with C#.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-chat-lifecycle/csharp",
+    "longDescription": [
+      "This sample application showcases the complete lifecycle management of chats in Microsoft Teams, allowing users to create, add members, and delete members while utilizing Microsoft Graph APIs. Built with C#, it features tab integration, adaptive cards, and a welcome card for a seamless user experience."
+    ],
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2024-10-14",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://user-images.githubusercontent.com/ChatLifeCycleModule.gif",
+        "alt": "Solution UX showing chat lifecycle application"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Messaging Extension with Link Unfurling Samples for Reddit Links
+description: This sample demonstrates a C# Messaging Extension that implements link unfurling for Reddit links in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -8,15 +8,16 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:27 PM"
+urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-reddit-csharp
 ---
 
 # Link Unfurling for Reddit Links
 
 ![Preview Image](doc/images/Preview.gif)
+This comprehensive C# sample illustrates how to implement a Messaging Extension for [Reddit](https://reddit.com) links in Microsoft Teams, featuring robust  [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) capabilities. With built-in user authentication and configurable settings, the extension streamlines the process of sharing and interacting with Reddit content seamlessly in Teams.
 
-This repository is a full implementation of [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) for [Reddit](https://reddit.com) links in dotnet.
 
 This sample demonstrates the following concepts: 
 - Link Unfurling
@@ -31,7 +32,7 @@ You will need to complete the following before running the code
 Follow the directions for [creating a messaging extension](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/create-messaging-extension).
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 1. You __must__ use the 'Bot Channel Registration' so Bot Framework token service can be registered to manage tokens. 
@@ -79,3 +80,6 @@ At the bottom of the blade press `Add Setting`, this will open the `New Connecti
 - [Link Unfurling BotBuilder Sample](https://github.com/microsoft/BotBuilder-Samples/tree/master/samples/csharp_dotnetcore/55.teams-link-unfurling)
 
 
+
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/msgext-link-unfurling-reddit-csharp" />

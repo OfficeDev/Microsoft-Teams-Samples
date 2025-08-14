@@ -82,9 +82,6 @@ namespace StaggeredPermission
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
 
-            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
-            services.AddSingleton<DialogManager>();
-
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
         }

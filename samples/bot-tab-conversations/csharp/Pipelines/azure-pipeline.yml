@@ -1,0 +1,27 @@
+resources:
+  repositories:
+    - repository: dotnet-meta-templates
+      name: 'xGrowth App Templates/dotnet-meta-templates'
+      type: git
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  projectName: 'conversationaltabs'
+  webAppName: 'conversationaltabspoc'
+  namespace: 'teamsproofofconcepts.azurecr.io'
+  repository: '$(projectName)'
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
+stages:
+- template: Pipelines/stages/build-and-test.yml@dotnet-meta-templates
+
+- template: Pipelines/stages/deploy.yml@dotnet-meta-templates
+  parameters:
+    projectName: ${{ variables.projectName }}
+    webAppName: ${{ variables.webAppName }}
+    namespace: ${{ variables.namespace }}
+    repository: ${{ variables.repository }}
+    serviceConnectionName: 'Teams Proof of Concepts Docker Registry 2'
+    dockerBuildArguments: '--build-arg REACT_APP_AAD_CLIENT_ID'

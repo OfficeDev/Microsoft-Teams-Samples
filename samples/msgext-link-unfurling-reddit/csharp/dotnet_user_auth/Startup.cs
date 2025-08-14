@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// <copyright file="Startup.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
 namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
 {
@@ -65,6 +66,11 @@ namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
             ICredentialProvider credentialProvider = new SimpleCredentialProvider(
                 appId: appId,
                 password: appPassword);
+
+            services.AddControllersWithViews(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
 
             services.Configure<RedditOptions>(options =>
             {

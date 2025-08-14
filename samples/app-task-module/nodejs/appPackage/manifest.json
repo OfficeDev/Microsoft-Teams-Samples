@@ -1,0 +1,126 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.19",
+    "version": "1.0.0",
+    "id": "{{Microsoft-App-Id}}",
+    "developer": {
+        "name": "Bill Bliss",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Task Module",
+        "full": "Task Module Test App"
+    },
+    "description": {
+        "short": "Teams task modules from tabs and bots using Adaptive Cards and custom HTML.",
+        "full": "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML."
+    },
+    "accentColor": "#020081",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://{{domain-name}}/configure",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupChat"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "com.microsoft.teams.taskmoduletester",
+            "name": "Tasks!",
+            "contentUrl": "https://{{domain-name}}/taskmodule",
+            "websiteUrl": "https://{{domain-name}}/taskmodule",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "{{Microsoft-App-Id}}",
+            "scopes": [
+                "team",
+                "personal",
+                "groupChat"
+            ],
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal"
+                    ],
+                    "commands": [
+                        {
+                            "title": "tasks",
+                            "description": "Test the task module with an Adaptive card"
+                        },
+                        {
+                            "title": "bfcard",
+                            "description": "Test task module with a Thumbnail card"
+                        },
+                        {
+                            "title": "actester",
+                            "description": "See what any Adaptive card looks like in Teams"
+                        }
+                    ]
+                },
+                {
+                    "scopes": [
+                        "team"
+                    ],
+                    "commands": [
+                        {
+                            "title": "tasks",
+                            "description": "Test the task module with an Adaptive card"
+                        },
+                        {
+                            "title": "bfcard",
+                            "description": "Test task module with a Thumbnail card"
+                        },
+                        {
+                            "title": "actester",
+                            "description": "See what any Adaptive card looks like in Teams"
+                        }
+                    ]
+                }
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "{{Microsoft-App-Id}}",
+            "canUpdateConfiguration": false,
+            "commands": [
+                {
+                    "id": "getRandomText",
+                    "title": "Get some random text for fun",
+                    "description": "Gets some random text and images that you can insert in messages for fun.",
+                    "initialRun": true,
+                    "parameters": [
+                        {
+                            "name": "cardTitle",
+                            "title": "Card title",
+                            "description": "Card title to use"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "{{domain-name}}"
+    ]
+}

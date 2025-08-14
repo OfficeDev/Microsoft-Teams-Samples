@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Nav-bar menu in personal tab",
+    "full": "Nav-bar menu in personal tab"
+  },
+  "description": {
+    "short": "Sample app showcasing a navbar menu for personal tabs in Microsoft Teams.",
+    "full": "This sample application illustrates the use of a navbar menu in personal tabs within Microsoft Teams, enabling users to access multiple actions seamlessly. Designed for mobile clients, it includes features like an overflow menu for additional actions, enhancing user navigation and experience."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tab",
+      "websiteUrl": "https://${{TAB_DOMAIN}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "${{TAB_DOMAIN}}"
+  ]
+}

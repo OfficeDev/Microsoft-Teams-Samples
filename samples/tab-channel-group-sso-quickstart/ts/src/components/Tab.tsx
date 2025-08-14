@@ -4,7 +4,7 @@
 import React from 'react';
 import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Avatar, Loader } from '@fluentui/react-northstar'
+import { Avatar, Spinner } from '@fluentui/react-components';
 
 /**
  * This tab component renders the main tab content
@@ -50,6 +50,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //React lifecycle method that gets called once a component has finished mounting
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
+     microsoftTeams.app.initialize();
     // Initialize the Microsoft Teams SDK
     microsoftTeams.app.initialize().then(() => {
       // Get the user context from Teams and set it in the state
@@ -78,13 +79,10 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Exchange the SSO access token for a Graph access token
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
-
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
-    console.log('here ' + serverURL);
-    let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
+     let response = await fetch(serverURL).catch(this.unhandledFetchError);; //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
-
       if(!response.ok && data.error==='consent_required'){
         //A consent_required error means it's the first time a user is logging into to the app, so they must consent to sharing their Graph data with the app.
         //They may also see this error if MFA is required.
@@ -176,24 +174,18 @@ class Tab extends React.Component<ITabProps, ITabState> {
     console.error("Unhandled fetch error: ",err);
     this.setState({error:true});
   }
-
   render() {
-
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Loader/>;
-
+        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Spinner/>;
       let ssoMessage = this.state.ssoToken === "" ?
-        <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
+        <Spinner label='Performing Azure AD single sign-on authentication...'/>: null;
       
       let serverExchangeMessage = (this.state.ssoToken !== "") && (!this.state.consentRequired) && (this.state.photo==="") ?
-        <Loader label='Exchanging SSO access token for Graph access token...'/> : null;
+        <Spinner label='Exchanging SSO access token for Graph access token...'/> : null;
 
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
-        <Loader label='Consent required.'/> : null;
-
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null;
-
+        <Spinner label='Consent required.'/> : null;
+             
       let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
@@ -204,7 +196,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       

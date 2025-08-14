@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "<<Manifest-Id>>",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "TODO Connector App",
+    "full": "TODO Connector App"
+  },
+  "description": {
+    "short": "Office 365 Connector to generate task notifications in Microsoft Teams.",
+    "full": "This sample demonstrates how to send task notifications to a Teams channel using an Office 365 Connector."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#3F487F",
+  "connectors": [
+    {
+      "connectorId": "<<connector-Id>>",
+      "configurationUrl": "https://<<App-Domain>>/SetupAuth",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<App-Domain>>"
+  ]
+}

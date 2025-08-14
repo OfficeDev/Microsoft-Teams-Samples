@@ -1,0 +1,60 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Sample Adaptive Card with full width",
+                    "size": "Large",
+                    "weight": "Bolder"
+                }
+            ]
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "label": "Select a user",
+            "id": "fullwidthcard",
+            "isMultiSelect": false,
+            "choices": [
+                {
+                    "title": "User 1",
+                    "value": "User1"
+                },
+                {
+                    "title": "User 2",
+                    "value": "User2"
+                }
+            ],
+            "style": "filtered"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "id": "myColor2",
+            "style": "expanded",
+            "label": "What color do you want? (isMultiSelect:false, style:expanded)",
+            "isMultiSelect": false,
+            "value": "1",
+            "choices": [
+                {
+                    "title": "Red",
+                    "value": "1"
+                },
+                {
+                    "title": "Green",
+                    "value": "2"
+                },
+                {
+                    "title": "Blue",
+                    "value": "3"
+                }
+            ]
+        }
+    ],
+    "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "msteams": {
+        "width": "Full"
+    }
+}

@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-//
-// Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
 using BotDailyTaskReminder.Bots;
 using BotDailyTaskReminder.Models;
@@ -35,6 +33,9 @@ namespace BotDailyTaskReminder
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 
+            // Add logging services for better error tracing in production
+            services.AddLogging();
+
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
@@ -50,7 +51,7 @@ namespace BotDailyTaskReminder
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+            // Create the bot as a transient. In this case, the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, ActivityBot>();
         }
 
@@ -65,10 +66,10 @@ namespace BotDailyTaskReminder
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseWebSockets().UseRouting().UseAuthorization().UseEndpoints(endpoints =>
-               {
-                   endpoints.MapControllers();
-                   endpoints.MapRazorPages();
-               });
+            {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

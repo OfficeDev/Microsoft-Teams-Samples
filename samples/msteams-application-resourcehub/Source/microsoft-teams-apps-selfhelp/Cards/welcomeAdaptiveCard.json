@@ -1,0 +1,32 @@
+﻿{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "All the help you need to use Teams, all in one place. Get up and running with just the basics, dive into popular topics, master features designed for your work style or industry, get answers to frequently asked questions, and see what’s new.",
+          "weight": "bolder",
+          "size": "medium",
+          "wrap": true
+        },
+        {
+          "type": "Image",
+          "url": "${imageLink}",
+          "height": "200px",
+          "width": "420px"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Know more",
+      "url": "${KnowMoreLink}"
+    }
+  ]
+}
