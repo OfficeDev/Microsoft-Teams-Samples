@@ -18,9 +18,9 @@
     "full": "adhocCalls Transcripts and Recordings"
   },
   "description": {
-  "short": "Retrieve and manage adhocCalls transcripts and recordings in Microsoft Teams.",
-  "full": "This sample application for Microsoft Teams demonstrates how to use Microsoft Graph to retrieve and manage transcripts and recordings for adhocCalls, such as PSTN and other ad-hoc calls that are not part of an online meeting instance. It provides a consistent approach similar to meeting-based APIs, helping teams archive important call details for compliance, analytics, and post-call review."
- },
+    "short": "AdhocCalls for meeting recording, transcription, and displaying results in UI.",
+    "full": "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat meeting, it starts the recording or transcription. When the meeting ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
+  },
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {

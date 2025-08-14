@@ -107,3 +107,21 @@ code {
     align-items: center;
     height: 100%;
 }
+
+.welcome-message {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.6;
+    border: none;
+    font-weight: bold;
+}
+
+.welcome-message::before {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 10px;
+}

@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recording-nodejs",
     "source": "officeDev",
-    "title": "This sample shows meeting transcripts and recordings.",
-    "shortDescription": "This sample demonstrates how to capture and manage meeting transcripts and recordings in Microsoft Teams.",
+    "title": "AdhocCalls for meeting recording, transcription, and displaying results in UI.",
+    "shortDescription": "Use adhocCalls to record and transcribe meetings, trigger notifications, and show results in the UI.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-adhoccalls-transcript-recording/nodejs",
     "longDescription": [
-      "This sample application for Microsoft Teams allows users to capture meeting transcripts and recordings, providing an efficient way to document discussions and decisions. With easy setup and integration using Node.js, it enhances team collaboration and ensures that important meeting details are never lost."
+      "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat meeting, it starts the recording or transcription. When the meeting ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
     ],
-    "creationDateTime": "2023-11-22",
-    "updateDateTime": "2023-11-22",
+    "creationDateTime": "2025-08-14",
+    "updateDateTime": "2025-08-14",
     "products": [
       "Teams"
     ],
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adhoccalls-transcript-recording/nodejs/Images/MeetingTranscriptRecordingGif.gif",
-        "alt": "Solution UX showing gif meeting transcripts and recordings."
+        "alt": "Solution UX showing gif AdhocCalls record and transcript."
       }
     ],
     "authors": [

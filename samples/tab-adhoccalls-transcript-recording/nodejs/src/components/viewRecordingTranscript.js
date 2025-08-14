@@ -9,6 +9,8 @@ function RecordingTranscript() {
     const [loadingTranscripts, setLoadingTranscripts] = useState(false);
     const [loadingRecording, setLoadingRecording] = useState(false);
     const [subscriptionMessage, setSubscriptionMessage] = useState(""); // 🔹 Store subscription status
+    const [hasData, setHasData] = useState(false); // Track if any data (transcript or recording) has been received
+    const [hasRecordingData, setHasRecordingData] = useState(false); // Track if recording data has been received
     const videoRef = useRef(null);
 
     // Declare new state variables that are required to get and set the connection.
@@ -42,6 +44,7 @@ function RecordingTranscript() {
             }
             const formattedOutput = formattedLines.join('<br/>')
             setLoadTranscriptsData(formattedOutput);
+            setHasData(true); // Mark that we have received data
             setLoadingTranscripts(false); // stop spinner
         });
 
@@ -71,6 +74,8 @@ function RecordingTranscript() {
                     videoRef.current.src = videoUrl;
                     videoRef.current.load();
                 }
+                setHasData(true); // Mark that we have received data
+                setHasRecordingData(true); // Mark that we have recording data
                 setLoadingRecording(false);
                 
             } catch (error) {
@@ -132,28 +137,52 @@ function RecordingTranscript() {
                     {subscriptionMessage}
                 </div>
             )}
+            
+            {/* Show welcome message only when no data has been received */}
+            {!hasData && (
+                <div>
+                     <p className="welcome-message">Welcome to Adhoc Calls Transcript Recording Join the meeting, then click "Start Recording" or "Start Transcript" to capture video and text. 
+                     After the meeting ends, wait a few seconds for the recording and transcript to be ready.
+                        </p>
+                </div>
+            )}
 
-            <div className="mainRecordTrans">
-            <div className="divRecording">
-                {loadingRecording ? (
-                        <div style={{ paddingTop: '20%' }}>
-                            <Spinner label="Loading Recordings..." size="small" />
-                        </div>
-                    ) :
-                <video ref={videoRef} className="videoPlay" controls />}
-            </div>
+            {/* Show video and transcript sections only when data has been received */}
+            {hasData && (
+                <div className="mainRecordTrans">
+                    <div className="divRecording">
+                        {!hasRecordingData ? (
+                                <div style={{ paddingTop: '20%' }}>
+                                    <Spinner label="Waiting for Recording..." size="small" />
+                                </div>
+                            ) : (
+                                loadingRecording ? (
+                                    <div style={{ paddingTop: '20%' }}>
+                                        <Spinner label="Loading Recordings..." size="small" />
+                                    </div>
+                                ) :
+                                <video ref={videoRef} className="videoPlay" controls />
+                            )}
+                    </div>
 
-            <div className="divTranscripts">
-                <h4>Transcripts</h4>
-                {loadingTranscripts ? (
-                            <div className='container'>
-                                <Spinner label="Loading Transcript..." size="small" />
-                            </div>
-                        ) :
-                <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />}
-            </div>
+                    <div className="divTranscripts">
+                        <h4>Transcripts</h4>
+                        {!loadTranscriptsData ? (
+                                    <div className='container'>
+                                        <Spinner label="Waiting for Transcript..." size="small" />
+                                    </div>
+                                ) : (
+                                    loadingTranscripts ? (
+                                        <div className='container'>
+                                            <Spinner label="Loading Transcript..." size="small" />
+                                        </div>
+                                    ) :
+                                    <p style={{ whiteSpace: 'pre-wrap' }} dangerouslySetInnerHTML={{ __html: loadTranscriptsData }} />
+                                )}
+                    </div>
+                </div>
+            )}
         </div>
-    </div>
     );
 }
 
