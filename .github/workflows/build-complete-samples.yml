@@ -1059,6 +1059,14 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '16.x'  
 
+            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
+              name: 'tab-adhoccalls-transcript-recording'
+              version: '18.x'
+
+            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
+              name: 'tab-adhoccalls-transcript-recording-api-server'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
