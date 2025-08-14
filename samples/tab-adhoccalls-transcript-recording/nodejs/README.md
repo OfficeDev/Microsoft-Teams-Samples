@@ -95,8 +95,8 @@ This sample uses adhocCalls in Microsoft Teams to create subscriptions for meeti
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
-   - `TENANT_ID` -
-   - `USER_ID` - 
+   - `TENANT_ID` - Generated from Step 1 (Directory (tenant) ID). This is your Azure AD tenant identifier where the app is registered.
+   - `USER_ID` - The Object ID of the user who will be using the application. You can find this in Azure AD under Users section.
 
 5. Open .env file from this path folders `samples/tab-adhoccalls-transcript-recording/nodejs` and `samples/tab-adhoccalls-transcript-recording/nodejs/api-server` update:
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
