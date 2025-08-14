@@ -15,7 +15,17 @@ let eventDetails = [];
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
-  //uses Axios to make an HTTP GET request to the specified URL with the provided access token
+/**
+ * Generic API Data Fetcher
+ * 
+ * Makes HTTP GET requests to Microsoft Graph API endpoints with proper authentication.
+ * Supports both JSON and binary data retrieval based on the response type needed.
+ * 
+ * @param {string} url - The Microsoft Graph API endpoint URL
+ * @param {string} accessToken - Bearer token for API authentication
+ * @param {boolean} isBinary - Whether to expect binary data (for recordings) or JSON data
+ * @returns {Promise<string|ArrayBuffer>} - JSON string for text data, ArrayBuffer for binary data
+ */
   async function getApiData(url, accessToken, isBinary = false) {
     try {
       const response = await axios.get(url, {
@@ -34,7 +44,25 @@ const io = require('socket.io')(server, { cors: { origin: "*" } });
       console.error('Error fetching API data:', error);
     }
   }
-  
+
+/**
+ * Webhook Endpoint: Handle Adhoc Call Transcript Notifications
+ * 
+ * This endpoint receives webhook notifications from Microsoft Graph when new transcripts
+ * become available for adhoc calls. It processes the notifications, fetches the actual
+ * transcript content, and broadcasts it to connected clients via WebSocket.
+ * 
+ * Workflow:
+ * 1. Validate webhook subscription (responds to validation token requests)
+ * 2. Extract call and transcript IDs from notification payload
+ * 3. Fetch transcript content from Microsoft Graph API
+ * 4. Emit transcript data to connected clients via Socket.IO
+ * 5. Store transcript data for deduplication
+ * 
+ * @route POST /handleAdhocCallTranscriptNotification
+ * @param {Object} req - Express request object containing webhook payload
+ * @param {Object} res - Express response object
+ */
 app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
     if (req.query && req.query.validationToken) {
         return res.send(req.query.validationToken); // For Graph subscription validation
@@ -76,6 +104,26 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
     res.sendStatus(202);
 });
 
+/**
+ * Webhook Endpoint: Handle Adhoc Call Recording Notifications
+ * 
+ * This endpoint receives webhook notifications from Microsoft Graph when new recordings
+ * become available for adhoc calls. It processes the notifications, fetches the binary
+ * recording data, converts it to Base64 for safe transmission, and broadcasts it to
+ * connected clients via WebSocket.
+ * 
+ * Workflow:
+ * 1. Validate webhook subscription (responds to validation token requests)
+ * 2. Extract call and recording IDs from notification payload
+ * 3. Fetch binary recording data from Microsoft Graph API
+ * 4. Convert binary data to Base64 for JSON-safe transmission
+ * 5. Emit recording data to connected clients via Socket.IO
+ * 6. Store recording data for deduplication
+ * 
+ * @route POST /handleAdhocCallRecordingNotification
+ * @param {Object} req - Express request object containing webhook payload
+ * @param {Object} res - Express response object
+ */
 app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
     if (req.query && req.query.validationToken) {
         return res.send(req.query.validationToken); // For Graph subscription validation
@@ -122,6 +170,24 @@ app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
     res.sendStatus(202); // Acknowledge receipt
 });
 
+/**
+ * API Endpoint: Create Adhoc Call Recording Subscription
+ * 
+ * Creates a Microsoft Graph webhook subscription to receive notifications when new
+ * recordings become available for adhoc calls. This endpoint handles subscription
+ * management including checking for existing subscriptions and creating new ones.
+ * 
+ * Subscription Management Logic:
+ * 1. Check for existing subscriptions with the same resource
+ * 2. Delete outdated subscriptions (wrong notification URL)
+ * 3. Return existing valid subscriptions without creating duplicates
+ * 4. Create new subscription if none exists
+ * 
+ * @route POST /createAdhocCallRecordingSubscription
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with subscription status and details
+ */
 app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
   try {
     const accessToken = await auth.getAccessToken(tenantIds);
@@ -186,6 +252,21 @@ app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
   }
 });
 
+/**
+ * API Endpoint: Create Adhoc Call Transcript Subscription
+ * 
+ * Creates a Microsoft Graph webhook subscription to receive notifications when new
+ * transcripts become available for adhoc calls. This endpoint handles subscription
+ * management including checking for existing subscriptions and creating new ones.
+ * 
+ * The logic is identical to the recording subscription endpoint but targets
+ * transcript resources instead of recording resources.
+ * 
+ * @route POST /createAdhocCallTranscriptSubscription
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with subscription status and details
+ */
 app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
   try {
     const accessToken = await auth.getAccessToken(tenantIds);
@@ -250,23 +331,37 @@ app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
   }
 });
 
+/**
+ * Utility Function: Delete Microsoft Graph Subscription
+ * 
+ * Deletes a Microsoft Graph webhook subscription by its ID. This is used for
+ * cleanup when subscriptions become outdated or need to be replaced.
+ * 
+ * @param {string} subscriptionId - The unique ID of the subscription to delete
+ * @param {string} accessToken - Bearer token for Microsoft Graph API authentication
+ * @returns {Promise<void>} - Resolves when deletion is complete or fails silently
+ */
 
-  async function deleteSubscription(subscriptionId, accessToken) {
-    try {
-      await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
-    headers: {
-        "accept": "application/json",
-        "contentType": 'application/json',
-        "authorization": "bearer " + accessToken
-    }
-    });
-    } catch (error) {
-      console.error('Error Deleting Subscription:', error);
-      //throw error;
-    }
+async function deleteSubscription(subscriptionId, accessToken) {
+  try {
+    await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
+  headers: {
+      "accept": "application/json",
+      "contentType": 'application/json',
+      "authorization": "bearer " + accessToken
   }
+  });
+  } catch (error) {
+    console.error('Error Deleting Subscription:', error);
+  }
+}
 
-// Handles any requests that don't match the ones above
+/**
+ * Server Startup Configuration
+ * 
+ * Starts the HTTP server with Socket.IO support on the configured port.
+ * Uses environment variable PORT or defaults to 5000 for local development.
+ */
 app.get('*', (req, res) => {
     console.log("Unhandled request: ", req);
     res.status(404).send("Path not defined");

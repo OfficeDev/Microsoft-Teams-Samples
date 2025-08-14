@@ -3,6 +3,20 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Button, Spinner } from '@fluentui/react-components';
 import io from "socket.io-client";
 
+/**
+ * RecordingTranscript Component
+ * 
+ * This React component provides a user interface for viewing Microsoft Teams call recordings
+ * and transcripts. It establishes a WebSocket connection to receive real-time updates about
+ * call recordings and transcripts, and displays them to the user.
+ * 
+ * Features:
+ * - Real-time transcript display with speaker identification
+ * - Video recording playback
+ * - Automatic subscription to recording and transcript notifications
+ * - Loading states and error handling
+ * - Responsive UI with status messages
+ */
 function RecordingTranscript() {
 
     const [loadTranscriptsData, setLoadTranscriptsData] = useState(null);
@@ -16,12 +30,26 @@ function RecordingTranscript() {
     // Declare new state variables that are required to get and set the connection.
     const [socket, setSocket] = useState(io());
 
-    // Builds the socket connection, mapping it to /io
+    /**
+     * Effect Hook: Initialize WebSocket Connection
+     * 
+     * Creates a new Socket.IO connection when the component mounts.
+     * This connection is used to receive real-time transcript and recording data.
+     */
     useEffect(() => {
         setSocket(io());     
     }, []);
 
-    // subscribe to the socket event
+
+
+    /**
+     * Effect Hook: WebSocket Event Listeners
+     * 
+     * Sets up event listeners for WebSocket communication to handle:
+     * 1. Connection events
+     * 2. Transcript data reception and formatting
+     * 3. Recording data reception and video blob creation
+     */
     useEffect(() => {
         if (!socket) return;
             socket.on('connection', () => {
@@ -86,7 +114,17 @@ function RecordingTranscript() {
     
     }, [socket]);
 
-    // Automatically create BOTH subscriptions when component mounts
+    /**
+     * Effect Hook: Automatic Subscription Creation
+     * 
+     * When the component mounts and Teams context is available, this effect:
+     * 1. Creates subscriptions for both transcript and recording notifications
+     * 2. Handles the responses from both subscription requests
+     * 3. Updates the UI with subscription status messages
+     * 
+     * The subscriptions enable the server to receive webhook notifications
+     * when new recordings or transcripts become available.
+     */
     useEffect(() => {
         microsoftTeams.app.getContext().then(() => {
             Promise.all([
@@ -119,6 +157,16 @@ function RecordingTranscript() {
         });
     }, []);
 
+    /**
+     * Component Render Method
+     * 
+     * Renders the user interface with the following sections:
+     * 1. Subscription status message (success/error notification)
+     * 2. Welcome message (shown when no data has been received)
+     * 3. Recording and transcript display areas (shown when data is available)
+     * 
+     * The UI adapts based on the current state of data availability and loading status.
+     */
     return (
         <div>
             {subscriptionMessage && (
@@ -138,7 +186,6 @@ function RecordingTranscript() {
                 </div>
             )}
             
-            {/* Show welcome message only when no data has been received */}
             {!hasData && (
                 <div>
                      <p className="welcome-message">Welcome to Adhoc Calls Transcript Recording Join the meeting, then click "Start Recording" or "Start Transcript" to capture video and text. 
@@ -146,8 +193,7 @@ function RecordingTranscript() {
                         </p>
                 </div>
             )}
-
-            {/* Show video and transcript sections only when data has been received */}
+            
             {hasData && (
                 <div className="mainRecordTrans">
                     <div className="divRecording">
