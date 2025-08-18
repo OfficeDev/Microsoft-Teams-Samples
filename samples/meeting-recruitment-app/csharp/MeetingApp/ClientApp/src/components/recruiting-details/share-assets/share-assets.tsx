@@ -2,7 +2,6 @@ import React from "react";
 import { Flex, Button, Header, TextArea, Checkbox } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import { app, dialog } from "@microsoft/teams-js";
-
 const ShareAssets = (): React.ReactElement => {
     const [checkboxValues, setCheckboxValues] = React.useState(
         {
@@ -40,8 +39,7 @@ const ShareAssets = (): React.ReactElement => {
         })
 
         setCheckboxValues({ ...checkboxValues, checkedValues: temp });
-        dialog.submit(JSON.stringify(checkboxValues));
-        return true;
+        dialog.url.submit(JSON.stringify(checkboxValues)); return true;
     }
 
     const onCheckboxChange = (event: any, data: any, index: number) => {
@@ -78,7 +76,7 @@ const ShareAssets = (): React.ReactElement => {
                         className="shareAssetsText" />
                 </Flex>
                 <Flex gap="gap.smaller" hAlign="end">
-                    <Button content="Cancel" secondary onClick={() => dialog.submit(undefined)} />
+                    <Button content="Cancel" secondary onClick={() => dialog.url.submit(undefined)} />
                     <Button content="Share" primary onClick={saveNote} />
                 </Flex>
             </Flex>

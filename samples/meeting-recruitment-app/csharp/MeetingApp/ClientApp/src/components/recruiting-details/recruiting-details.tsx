@@ -1,6 +1,5 @@
 import React from 'react';
-import { app } from "@microsoft/teams-js";
-import { Flex, Menu, Button, Text } from '@fluentui/react-northstar'
+import { app } from "@microsoft/teams-js"; import { Flex, Menu, Button, Text } from '@fluentui/react-northstar'
 import "../recruiting-details/recruiting-details.css"
 import BasicDetails from "./basic-details/basic-details"
 import Timeline from "./basic-details/timeline"
@@ -144,7 +143,7 @@ const RecruitingDetails = () => {
         <>
             {/* Content for stage view */}
             <Flex hidden={frameContext != "content"} gap="gap.small" padding="padding.medium" className="container">
-                <Flex column gap="gap.small" padding="padding.medium" className={hostClientType == "web" || hostClientType == "desktop"? "detailsContainer" :"detailsContainerMobile"}>
+                <Flex column gap="gap.small" padding="padding.medium" className={hostClientType == "web" || hostClientType == "desktop" ? "detailsContainer" : "detailsContainerMobile"}>
                     <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile} />
                     <Timeline />
                     <Notes currentCandidateEmail={currentCandidateEmail} />
@@ -158,7 +157,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel":"container-mobile"} column>
+            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel" : "container-mobile"} column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
@@ -171,7 +170,7 @@ const RecruitingDetails = () => {
                         {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} downloadFile={downloadFile} />}
                         {feedbackSubmitted && activeMobileMenu == 1 && <Text>Feedback submitted!</Text>}
                         {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
-                            <Flex column gap="gap.smaller"> 
+                            <Flex column gap="gap.smaller">
                                 <Flex column gap="gap.smaller" className="questionCardsMobile">
                                     <QuestionsMobile
                                         questionsSet={questionDetails}

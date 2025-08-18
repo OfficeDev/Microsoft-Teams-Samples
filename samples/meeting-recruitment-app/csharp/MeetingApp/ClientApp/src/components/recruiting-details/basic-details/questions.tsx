@@ -1,4 +1,5 @@
 import React from "react";
+//import * as microsoftTeams from "@microsoft/teams-js";
 import {
     Flex,
     Card,
@@ -13,8 +14,7 @@ import {
     Loader
 } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import { app, dialog } from "@microsoft/teams-js";
-import { IQuestionSet } from "./basic-details.types";
+import { app, tasks, dialog } from "@microsoft/teams-js"; import { IQuestionSet } from "./basic-details.types";
 import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails, editQuestion } from "../services/recruiting-detail.service";
 
 const Questions = (): React.ReactElement => {
@@ -34,7 +34,7 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/questions`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err: any, questionsJson: any) => {
+        tasks.startTask(taskInfo, (err: any, questionsJson: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
@@ -77,12 +77,12 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/edit?editText=` + editText,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err: any, question: any) => {
+        tasks.startTask(taskInfo, (err: any, question: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
             }
-            microsoftTeams.getContext((context) => {
+            app.getContext().then((context) => {
                 const questDetails: IQuestionSet = {
                     meetingId: context.meeting!.id!,
                     question: question,
