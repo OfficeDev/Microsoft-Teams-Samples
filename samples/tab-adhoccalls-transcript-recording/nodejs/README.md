@@ -116,8 +116,6 @@ This sample uses adhocCalls in Microsoft Teams to create subscriptions for meeti
 
 ## Running the sample
 
-You can interact with Teams Tab meeting sidepanel.
-
 **Step 1 - Install the Application:**
 This shows how to install the adhoc calls transcript recording app in Microsoft Teams.
 ![1.InstallApp ](Images/1.InstallApp.png)
