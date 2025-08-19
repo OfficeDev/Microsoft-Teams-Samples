@@ -10,6 +10,7 @@ require('dotenv').config({ path: ENV_FILE });
 const tenantIds = process.env.TENANT_ID;
 const userId = process.env.USER_ID;
 const auth = require('./auth'); 
+const { validateToken } = require('./tokenValidator');
 const baseUrl = process.env.BASE_URL;
 let eventDetails = [];
 const server = require('http').createServer(app);
@@ -64,39 +65,52 @@ const io = require('socket.io')(server, { cors: { origin: "*" } });
  * @param {Object} res - Express response object
  */
 app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
-    if (req.query && req.query.validationToken) {
-        return res.send(req.query.validationToken); // For Graph subscription validation
-    }
+  if (req.query && req.query.validationToken) {
+    return res.send(req.query.validationToken); // For Graph subscription validation
+  }
+  const notifications = req.body?.value || [];
+  // Validate authenticity using MS-Notification-Token header or body
+  const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
+  if (!notificationToken) {
+    console.warn('Missing MS-Notification-Token header or body.');
+    return res.status(400).send('Missing notification token');
+  }
 
-    const notifications = req.body?.value || [];
-    const accessTokenNew = await auth.getAccessToken(tenantIds);
-    let transcriptContent;
-    for (const note of notifications) {
-        if (note.resource) {
-            const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
-            if (match) {
-                const callId = match[1];
-                const transcriptId = match[2];
-                console.log(`CallId: ${callId}, TranscriptId: ${transcriptId}`);
+  try {
+    const tokenPayload = await validateToken(notificationToken);
+    console.log('Notification token validated:', tokenPayload);
+  } catch (err) {
+    console.warn('Invalid notification token:', err.message);
+    return res.status(401).send('Invalid notification token');
+  }
+  const accessTokenNew = await auth.getAccessToken(tenantIds);
+  let transcriptContent;
+  for (const note of notifications) {
+    if (note.resource) {
+      const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
+      if (match) {
+        const callId = match[1];
+        const transcriptId = match[2];
+        console.log(`CallId: ${callId}, TranscriptId: ${transcriptId}`);
 
-                if (accessTokenNew) {
-                    try {
-                      const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
-                      const transcriptData = await getApiData(endpoint, accessTokenNew);
-                      transcriptContent = transcriptData; // fallback to raw
-                      io.emit('transcript', transcriptContent);
-                      // Deduplicate storage
-                      if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
-                          eventDetails.push({ callId, transcriptId, content: transcriptContent });
-                      }
-                    } catch (err) {
-                        console.error("Error fetching transcript:", err.message);
-                    }
-                }
+        if (accessTokenNew) {
+          try {
+            const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
+            const transcriptData = await getApiData(endpoint, accessTokenNew);
+            transcriptContent = transcriptData; // fallback to raw
+            io.emit('transcript', transcriptContent);
+            // Deduplicate storage
+            if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
+              eventDetails.push({ callId, transcriptId, content: transcriptContent });
             }
+          } catch (err) {
+            console.error("Error fetching transcript:", err.message);
+          }
         }
+      }
     }
-    res.sendStatus(202);
+  }
+  res.sendStatus(202);
 });
 
 /**
@@ -125,6 +139,20 @@ app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
     }
 
     const notifications = req.body?.value || [];
+    // Validate authenticity using MS-Notification-Token header or body
+    const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
+    if (!notificationToken) {
+      console.warn('Missing MS-Notification-Token header or body.');
+      return res.status(400).send('Missing notification token');
+    }
+
+    try {
+      const tokenPayload = await validateToken(notificationToken);
+      console.log('Notification token validated:', tokenPayload);
+    } catch (err) {
+      console.warn('Invalid notification token:', err.message);
+      return res.status(401).send('Invalid notification token');
+    }
     const accessTokenNew = await auth.getAccessToken(tenantIds);
 
     for (const note of notifications) {
@@ -223,7 +251,10 @@ app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
       notificationUrl,
       resource,
       lifecycleNotificationUrl: notificationUrl,
-      expirationDateTime: new Date(Date.now() + 3600000).toISOString() // 1 hour
+      expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
+      includeResourceData: true,
+      encryptionCertificate: process.env.ENCRYPTION_CERTIFICATE,
+      encryptionCertificateId: process.env.ENCRYPTION_CERTIFICATE_ID
     };
 
     const response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`, subscription, {
@@ -302,7 +333,11 @@ app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
       notificationUrl,
       resource,
       lifecycleNotificationUrl: notificationUrl,
-      expirationDateTime: new Date(Date.now() + 3600000).toISOString() // 1 hour
+      expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
+      includeResourceData: true,
+      encryptionCertificate: process.env.ENCRYPTION_CERTIFICATE,
+      encryptionCertificateId: process.env.ENCRYPTION_CERTIFICATE_ID
+
     };
 
     const response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`, subscription, {
