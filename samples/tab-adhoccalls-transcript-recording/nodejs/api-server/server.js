@@ -70,6 +70,7 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
 
     const notifications = req.body?.value || [];
     const accessTokenNew = await auth.getAccessToken(tenantIds);
+    let transcriptContent;
     for (const note of notifications) {
         if (note.resource) {
             const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
@@ -82,14 +83,7 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
                     try {
                       const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
                       const transcriptData = await getApiData(endpoint, accessTokenNew);
-                      // API returns WebVTT text directly
-                     // If endpoint returns JSON
-                      let transcriptContent;
-                      try {
-                          transcriptContent = JSON.parse(transcriptData);
-                      } catch {
-                          transcriptContent = transcriptData; // fallback to raw
-                      }
+                      transcriptContent = transcriptData; // fallback to raw
                       io.emit('transcript', transcriptContent);
                       // Deduplicate storage
                       if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {

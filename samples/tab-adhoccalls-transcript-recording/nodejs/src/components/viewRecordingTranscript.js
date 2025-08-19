@@ -59,21 +59,30 @@ function RecordingTranscript() {
             // receive a message from the server
         socket.on("transcript", data => {
             console.log("Transcript received:", data);
-            const lines = data.split('\n');
+
+            const regex = /<v\s+([^>]+)>(.*?)<\/v>/g;
+            let match;
             const formattedLines = [];
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                const match = line.match(/<v\s([^>]*)>(.*?)<\/v>/);
-                if (match) {
-                    const speaker = match[1];
-                    const text = match[2];
-                    formattedLines.push(`<b>${speaker}</b> : ${text}`);
-                }
+
+            while ((match = regex.exec(data)) !== null) {
+                const speaker = match[1].trim();
+                const text = match[2].trim();
+                formattedLines.push(`<b>${speaker}</b> : ${text}`);
             }
-            const formattedOutput = formattedLines.join('<br/>')
-            setLoadTranscriptsData(formattedOutput);
-            setHasData(true); // Mark that we have received data
-            setLoadingTranscripts(false); // stop spinner
+
+            // Deduplicate with Set
+            setLoadTranscriptsData(prev => {
+                const existingLines = prev
+                    ? prev.split("<br/>").map(line => line.trim()).filter(l => l.length > 0)
+                    : [];
+
+                const newUniqueLines = [...new Set([...existingLines, ...formattedLines])];
+
+                return newUniqueLines.join("<br/>");
+            });
+
+            setHasData(true);
+            setLoadingTranscripts(false);
         });
 
         socket.on('recordingAvailable', async ({ callId, recordingId, url, token }) => {
