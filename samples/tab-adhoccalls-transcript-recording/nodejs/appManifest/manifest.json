@@ -18,8 +18,8 @@
     "full": "adhocCalls Transcripts and Recordings"
   },
   "description": {
-    "short": "AdhocCalls for meeting recording, transcription, and displaying results in UI.",
-    "full": "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat meeting, it starts the recording or transcription. When the meeting ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
+    "short": "AdhocCalls for group call recording, transcription, and UI display.",
+    "full": "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat group call, it starts the recording or transcription. When the group call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

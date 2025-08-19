@@ -8,7 +8,7 @@ const axios = require('axios');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const tenantIds = process.env.TENANT_ID;
-const userIds = process.env.USER_ID;
+const userId = process.env.USER_ID;
 const auth = require('./auth'); 
 const baseUrl = process.env.BASE_URL;
 let eventDetails = [];
@@ -80,15 +80,10 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
 
                 if (accessTokenNew) {
                     try {
-                      const endpoint = `https://graph.microsoft.com/beta/users/${userIds}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`; 
+                      const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
                       const transcriptData = await getApiData(endpoint, accessTokenNew);
-                      // If endpoint returns JSON
-                      let transcriptContent;
-                      try {
-                          transcriptContent = JSON.parse(transcriptData);
-                      } catch {
-                          transcriptContent = transcriptData; // fallback to raw
-                      }
+                      // API returns WebVTT text directly
+                      const transcriptContent = transcriptData;
                       io.emit('transcript', transcriptContent);
                       // Deduplicate storage
                       if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
@@ -142,7 +137,7 @@ app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
 
                 if (accessTokenNew) {
                     // Directly call recording endpoint
-                    const endpoint_1 = `https://graph.microsoft.com/beta/users/${userIds}/adhocCalls/${callId}/recordings/${recordingId}/content`;
+                    const endpoint_1 = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
                     try {
                         const binaryData = await getApiData(endpoint_1, accessTokenNew, true);
                         // Convert to Base64 for safe Socket.IO transfer

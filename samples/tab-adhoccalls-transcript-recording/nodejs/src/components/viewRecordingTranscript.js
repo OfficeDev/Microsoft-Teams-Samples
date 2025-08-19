@@ -188,8 +188,8 @@ function RecordingTranscript() {
             
             {!hasData && (
                 <div>
-                     <p className="welcome-message">Welcome to Adhoc Calls Transcript Recording Join the meeting, then click "Start Recording" or "Start Transcript" to capture video and text. 
-                     After the meeting ends, wait a few seconds for the recording and transcript to be ready.
+                     <p className="welcome-message">
+                        Welcome to Adhoc Calls Transcript Recording  Join the group call, then click "Start Recording" or "Start Transcript" to capture video and text. After the call ends, wait a few seconds for the recording and transcript to be ready.
                         </p>
                 </div>
             )}

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat meeting, it starts the recording or transcription. When the meeting ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI.
+description: This sample uses adhocCalls to create a subscription for recording and transcription. After joining a group call, it starts the recording or transcription. When the call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recordi
 
 ## adhoccalls Transcripts Recordings
 
-This sample uses adhocCalls in Microsoft Teams to create subscriptions for meeting recording and transcription. It initiates recording or transcription after joining a group chat meeting, monitors meeting state, triggers notifications on meeting end, retrieves and processes recording/transcription details, and displays them in the UI. It also handles subscription lifecycle events, errors, and integrates with Microsoft Graph APIs to fetch content links.
+This sample uses adhocCalls in Microsoft Teams to create subscriptions for recording and transcription. It initiates recording or transcription after joining a group call in a group chat, monitors call state, triggers notifications on call end, retrieves and processes recording/transcription details, and displays them in the UI.
 
 **Interaction with app**
 ![adhoccalls-transcript-recording](Images/adhoccalls-transcript-recording.gif)
@@ -129,7 +129,7 @@ The app displays a welcome message after successful installation and configurati
 ![3.WelcomeMessage ](Images/3.WelcomeMessage.png)
 
 **Step 4 - Recording and Transcript Features:**
-View the recording and transcription interface showing available features and controls for managing meeting recordings and transcripts.
+View the recording and transcription interface showing available features and controls for managing group call recordings and transcripts.
 ![4.RecordingandTranscript ](Images/4.RecordingandTranscript.png)
 
 ## Further reading
