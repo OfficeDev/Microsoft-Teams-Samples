@@ -83,7 +83,13 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
                       const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
                       const transcriptData = await getApiData(endpoint, accessTokenNew);
                       // API returns WebVTT text directly
-                      const transcriptContent = transcriptData;
+                     // If endpoint returns JSON
+                      let transcriptContent;
+                      try {
+                          transcriptContent = JSON.parse(transcriptData);
+                      } catch {
+                          transcriptContent = transcriptData; // fallback to raw
+                      }
                       io.emit('transcript', transcriptContent);
                       // Deduplicate storage
                       if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
@@ -136,24 +142,21 @@ app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
                 console.log(`CallId: ${callId}, RecordingId: ${recordingId}`);
 
                 if (accessTokenNew) {
-                    // Directly call recording endpoint
-                    const endpoint_1 = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
                     try {
-                        const binaryData = await getApiData(endpoint_1, accessTokenNew, true);
-                        // Convert to Base64 for safe Socket.IO transfer
-                        const base64Video = Buffer.from(binaryData).toString('base64');
-                        // Emit to clients
-                        io.emit('recording', {
-                            callId,
-                            recordingId,
-                            videoData: base64Video
-                        });
+                        // Direct recording URL
+                    const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
 
-                        // Deduplicate storage
-                        if (!eventDetails.some(e => e.callId === callId && e.recordingId === recordingId)) {
-                            eventDetails.push({ callId, recordingId, videoData: base64Video });
-                        }
-
+                    // Instead of fetching binary data, just send URL + token to client
+                    io.emit('recordingAvailable', {
+                        callId,
+                        recordingId,
+                        url: recordingUrl,
+                        token: accessTokenNew
+                    });
+                    // Store event info if you need deduplication
+                    if (!eventDetails.some(e => e.callId === callId && e.recordingId === recordingId)) {
+                        eventDetails.push({ callId, recordingId });
+                    }
                     } catch (err) {
                         console.error("Error fetching recordings:", err.message);
                     }

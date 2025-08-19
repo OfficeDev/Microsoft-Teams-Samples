@@ -76,41 +76,35 @@ function RecordingTranscript() {
             setLoadingTranscripts(false); // stop spinner
         });
 
-        socket.on('recording', ({ callId, recordingId, videoData }) => {
-            console.log(`Received recording: CallId=${callId}, RecordingId=${recordingId}`);
-            console.log(`Video data length: ${videoData ? videoData.length : 'undefined'}`);
+        socket.on('recordingAvailable', async ({ callId, recordingId, url, token }) => {
+            console.log(`Recording available: CallId=${callId}, RecordingId=${recordingId}`);
 
-            if (!videoData) {
-                console.error('No video data received');
-                return;
-            }
+        try {
+            const response = await fetch(url, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
 
-            try {
-                // Convert Base64 to byte array
-                const byteCharacters = atob(videoData);
-                const byteNumbers = new Array(byteCharacters.length);
-                for (let i = 0; i < byteCharacters.length; i++) {
-                    byteNumbers[i] = byteCharacters.charCodeAt(i);
-                }
-                const byteArray = new Uint8Array(byteNumbers);
-                const blob = new Blob([byteArray], { type: 'video/mp4' });
-                const videoUrl = URL.createObjectURL(blob);
-                if (videoRef.current) {
-                    if (videoRef.current.src && videoRef.current.src.startsWith('blob:')) {
-                        URL.revokeObjectURL(videoRef.current.src);
-                    }
-                    videoRef.current.src = videoUrl;
-                    videoRef.current.load();
-                }
-                setHasData(true); // Mark that we have received data
-                setHasRecordingData(true); // Mark that we have recording data
-                setLoadingRecording(false);
-                
-            } catch (error) {
-                console.error('Error processing video data:', error);
-                setLoadingRecording(false);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch recording: ${response.statusText}`);
             }
-    });
+            const blob = await response.blob();
+            const videoUrl = URL.createObjectURL(blob);
+            if (videoRef.current) {
+                if (videoRef.current.src?.startsWith('blob:')) {
+                    URL.revokeObjectURL(videoRef.current.src);
+                }
+                videoRef.current.src = videoUrl;
+                videoRef.current.load();
+            }
+            setHasData(true);
+            setHasRecordingData(true);
+            setLoadingRecording(false);
+
+        } catch (err) {
+            console.error('Error fetching video:', err);
+            setLoadingRecording(false);
+        }
+     });
     
     }, [socket]);
 
