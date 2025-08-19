@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
@@ -18,7 +21,7 @@ async function validateToken(token) {
         const fullToken = jwt.verify(token, key, verifyOptions);
         return fullToken;
     } catch (error) {
-        console.log(error);
+        console.error('Token validation error:', error);
         throw new Error('Invalid token: ' + error.message);
     }
 }

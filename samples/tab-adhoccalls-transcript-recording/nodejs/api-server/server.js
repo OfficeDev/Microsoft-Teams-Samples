@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -65,52 +68,58 @@ const io = require('socket.io')(server, { cors: { origin: "*" } });
  * @param {Object} res - Express response object
  */
 app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
-  if (req.query && req.query.validationToken) {
-    return res.send(req.query.validationToken); // For Graph subscription validation
-  }
-  const notifications = req.body?.value || [];
-  // Validate authenticity using MS-Notification-Token header or body
-  const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
-  if (!notificationToken) {
-    console.warn('Missing MS-Notification-Token header or body.');
-    return res.status(400).send('Missing notification token');
-  }
 
   try {
-    const tokenPayload = await validateToken(notificationToken);
-    console.log('Notification token validated:', tokenPayload);
-  } catch (err) {
-    console.warn('Invalid notification token:', err.message);
-    return res.status(401).send('Invalid notification token');
-  }
-  const accessTokenNew = await auth.getAccessToken(tenantIds);
-  let transcriptContent;
-  for (const note of notifications) {
-    if (note.resource) {
-      const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
-      if (match) {
-        const callId = match[1];
-        const transcriptId = match[2];
-        console.log(`CallId: ${callId}, TranscriptId: ${transcriptId}`);
+    if (req.query && req.query.validationToken) {
+      return res.send(req.query.validationToken); // For Graph subscription validation
+    }
+    const notifications = req.body?.value || [];
+    // Validate authenticity using MS-Notification-Token header or body
+    const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
+    if (!notificationToken) {
+      console.warn('Missing MS-Notification-Token header or body.');
+      return res.status(400).send('Missing notification token');
+    }
 
-        if (accessTokenNew) {
-          try {
-            const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
-            const transcriptData = await getApiData(endpoint, accessTokenNew);
-            transcriptContent = transcriptData; // fallback to raw
-            io.emit('transcript', transcriptContent);
-            // Deduplicate storage
-            if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
-              eventDetails.push({ callId, transcriptId, content: transcriptContent });
+    try {
+      const tokenPayload = await validateToken(notificationToken);
+      console.log('Notification token validated:', tokenPayload);
+    } catch (err) {
+      console.warn('Invalid notification token:', err.message);
+      return res.status(401).send('Invalid notification token');
+    }
+    const accessTokenNew = await auth.getAccessToken(tenantIds);
+    let transcriptContent;
+    for (const note of notifications) {
+      if (note.resource) {
+        const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
+        if (match) {
+          const callId = match[1];
+          const transcriptId = match[2];
+          console.log(`CallId: ${callId}, TranscriptId: ${transcriptId}`);
+
+          if (accessTokenNew) {
+            try {
+              const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
+              const transcriptData = await getApiData(endpoint, accessTokenNew);
+              transcriptContent = transcriptData; // fallback to raw
+              io.emit('transcript', transcriptContent);
+              // Deduplicate storage
+              if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
+                eventDetails.push({ callId, transcriptId, content: transcriptContent });
+              }
+            } catch (err) {
+              console.error("Error fetching transcript:", err.message);
             }
-          } catch (err) {
-            console.error("Error fetching transcript:", err.message);
           }
         }
       }
     }
+    res.sendStatus(202);
+  } catch (err) {
+    console.error('Error in /handleAdhocCallTranscriptNotification:', err);
+    res.status(500).send('Internal server error');
   }
-  res.sendStatus(202);
 });
 
 /**

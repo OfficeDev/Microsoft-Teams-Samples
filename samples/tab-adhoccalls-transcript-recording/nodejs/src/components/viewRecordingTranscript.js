@@ -86,33 +86,31 @@ function RecordingTranscript() {
         });
 
         socket.on('recordingAvailable', async ({ callId, recordingId, url, token }) => {
-            console.log(`Recording available: CallId=${callId}, RecordingId=${recordingId}`);
+                console.log(`Recording available: CallId=${callId}, RecordingId=${recordingId}`);
+                try {
+                    const response = await fetch(url, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
 
-        try {
-            const response = await fetch(url, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to fetch recording: ${response.statusText}`);
-            }
-            const blob = await response.blob();
-            const videoUrl = URL.createObjectURL(blob);
-            if (videoRef.current) {
-                if (videoRef.current.src?.startsWith('blob:')) {
-                    URL.revokeObjectURL(videoRef.current.src);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch recording: ${response.statusText}`);
+                    }
+                    const blob = await response.blob();
+                    const videoUrl = URL.createObjectURL(blob);
+                    if (videoRef.current) {
+                        if (videoRef.current.src?.startsWith('blob:')) {
+                            URL.revokeObjectURL(videoRef.current.src);
+                        }
+                        videoRef.current.src = videoUrl;
+                        videoRef.current.load();
+                    }
+                    setHasData(true);
+                    setHasRecordingData(true);
+                    setLoadingRecording(false);
+                } catch (err) {
+                    console.error('Error fetching video:', err);
+                    setLoadingRecording(false);
                 }
-                videoRef.current.src = videoUrl;
-                videoRef.current.load();
-            }
-            setHasData(true);
-            setHasRecordingData(true);
-            setLoadingRecording(false);
-
-        } catch (err) {
-            console.error('Error fetching video:', err);
-            setLoadingRecording(false);
-        }
      });
     
     }, [socket]);
