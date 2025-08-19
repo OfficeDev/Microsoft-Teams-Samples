@@ -45,6 +45,23 @@ This sample uses adhocCalls in Microsoft Teams to create subscriptions for recor
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
   5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
+### Create and install Self-Signed certificate
+
+To include resource data of graph notifications, this Graph API require self-signed certificate. Follow the below steps to create and manage certificate.
+
+1. You can self-sign the certificate, since Microsoft Graph does not verify the certificate issuer, and uses the public key for only encryption.
+
+2. Use [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-whatis) as the solution to create, rotate, and securely manage certificates. Make sure the keys satisfy the following criteria:
+
+    - The key must be of type `RSA`
+    - The key size must be between 2048 and 4096 bits
+
+3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](CertificateDocumentation/README.md)
+
+After you create and install the self-signed certificate, update your .env files as follows:
+
+- `ENCRYPTION_CERTIFICATE and ENCRYPTION_CERTIFICATE_ID` - The base64-encoded public certificate value. Export your self-signed public certificate (usually as .cer or .pem), then encode it in base64 and paste the value here.
+
 ## Setup 
 
 > Note these instructions are for running the sample on your local machine.
@@ -91,14 +108,15 @@ This sample uses adhocCalls in Microsoft Teams to create subscriptions for recor
     ```
 - The client will start running on 3978 port
 
-4. Open .env file from this path folders `samples/tab-adhoccalls-transcript-recording/nodejs` and `samples/tab-adhoccalls-transcript-recording/nodejs/api-server` update:
+4. Open .env file from this path folders `samples/tab-adhoccalls-transcript-recording/nodejs/api-server` update:
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `CLIENT_SECRET` - Generated from Step 1.14, also referred to as Client secret
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
    - `TENANT_ID` - Generated from Step 1 (Directory (tenant) ID). This is your Azure AD tenant identifier where the app is registered.
    - `USER_ID` - The Object ID of the user who will be using the application. You can find this in Azure AD under Users section.
+    - `ENCRYPTION_CERTIFICATE and ENCRYPTION_CERTIFICATE_ID` - The base64-encoded public certificate value. After creating your self-signed certificate, export the public certificate (usually as .cer or .pem), then encode it in base64 and paste the value here.
 
-5. Open .env file from this path folders `samples/tab-adhoccalls-transcript-recording/nodejs` and `samples/tab-adhoccalls-transcript-recording/nodejs/api-server` update:
+5. Open .env file from this path folders `samples/tab-adhoccalls-transcript-recording/nodejs` update:
    - `APP_REGISTRATION_ID` - Generated from Step 1 (Application (client) ID)is the application app ids
    - `BASE_URL` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
    
