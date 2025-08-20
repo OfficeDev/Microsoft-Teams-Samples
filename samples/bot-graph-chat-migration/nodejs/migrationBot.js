@@ -148,14 +148,12 @@ class MigrationBot extends ActivityHandler {
           // Use chats API for group chats
           graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/messages`;
         } else if (conversationInfo.type === 'channel') {
-
-          let teamsDetails = await TeamsInfo.getTeamDetails(context);
-
           // Use teams/channels API for Teams channels
           if (!conversationInfo.teamId) {
             await context.sendActivity('Unable to retrieve team information for this channel.');
             return;
           }
+          const teamsDetails = await TeamsInfo.getTeamDetails(context);
           graphEndpoint = `https://graph.microsoft.com/beta/teams/${teamsDetails.aadGroupId}/channels/${conversationInfo.teamId}/messages`;
         }
 
@@ -225,8 +223,6 @@ class MigrationBot extends ActivityHandler {
 
       let graphEndpoint;
 
-      
-
       if (conversationInfo.type === 'groupchat') {
         // Use chats API for group chats
         graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/startMigration`;
@@ -236,6 +232,7 @@ class MigrationBot extends ActivityHandler {
           await context.sendActivity(`Unable to retrieve team information for this channel.`);
           return;
         }
+        const teamsDetails = await TeamsInfo.getTeamDetails(context);
         graphEndpoint = `https://graph.microsoft.com/beta/teams/${teamsDetails.aadGroupId}/channels/${conversationInfo.teamId}/startMigration`;
       }
       const result = await this.callGraphAPI(graphEndpoint);
@@ -345,13 +342,12 @@ class MigrationBot extends ActivityHandler {
         // Use chats API for group chats
         graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/completeMigration`;
       } else if (conversationInfo.type === 'channel') {
-
-        let teamsDetails = await TeamsInfo.getTeamDetails(context);
         // Use teams/channels API for Teams channels
         if (!conversationInfo.teamId) {
           await context.sendActivity(`Unable to retrieve team information for this channel.`);
           return;
         }
+        const teamsDetails = await TeamsInfo.getTeamDetails(context);
         graphEndpoint = `https://graph.microsoft.com/beta/teams/${teamsDetails.aadGroupId}/channels/${conversationInfo.teamId}/completeMigration`;
       }
 
@@ -401,7 +397,8 @@ I can help you start the chat migration process. Type "startMigration" to begin,
               // Use chats API for group chats
               graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}`;
             } else if (conversationInfo.type === 'channel') {
-              graphEndpoint = `https://graph.microsoft.com/beta/teams/${conversationInfo.teamId}/channels/${conversationInfo.channelId}`;
+              const teamsDetails = await TeamsInfo.getTeamDetails(context);
+              graphEndpoint = `https://graph.microsoft.com/beta/teams/${teamsDetails.aadGroupId}/channels/${conversationInfo.teamId}`;
               return;
             }
 
