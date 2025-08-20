@@ -35,6 +35,10 @@
                 {
                   "scopes": ["team", "groupChat"],
                   "commands": [
+                    {
+                          "title": "help",
+                          "description": "Show help information"
+                      },
                       {
                           "title": "startMigration",
                           "description": "Start Chat Migration"
@@ -44,8 +48,8 @@
                           "description": "Post a message to the chat."
                       },
                       {
-                          "title": "completeMigration",
-                          "description": "Complete the chat migration."
+                          "title": "complete",
+                          "description": "Post a message to the chat."
                       }
                   ]
                 }
