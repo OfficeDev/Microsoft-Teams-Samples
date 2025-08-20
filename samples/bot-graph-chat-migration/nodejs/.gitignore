@@ -1,8 +1,8 @@
 # TeamsFx files
-# env/.env.*.user
-# env/.env.local
-# .localConfigs.playground
-# .localConfigs
+env/.env.*.user
+env/.env.local
+.localConfigs.playground
+.localConfigs
 .notification.localstore.json
 .notification.playgroundstore.json
 appPackage/build
@@ -11,7 +11,7 @@ appPackage/build
 node_modules/
 
 # misc
-# .env
+.env
 .deployment
 .DS_Store
 
