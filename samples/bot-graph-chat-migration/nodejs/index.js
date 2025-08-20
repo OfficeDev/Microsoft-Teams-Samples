@@ -7,7 +7,6 @@ const express = require("express");
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const {
   CloudAdapter,
-  ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
 } = require("botbuilder");
 const { MigrationBot } = require("./migrationBot");
