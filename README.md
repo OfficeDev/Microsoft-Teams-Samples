@@ -116,6 +116,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 30 | Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specifies mutual-dependency relationships between app capabilities using elementRelationshipSet. | Advanced | | [View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 31 | Streaming Bot | This sample showcases the conversational streaming token scenario for teams bot in personal scope. | Advanced | [View][botstreaming#csharp] |[View][botstreaming#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
+| 33 | Graph chat migration bot | This sample demonstrates how to migrate external chats to teams using microsoft graph API's. | Intermediate |  | [View][bot-graph-chat-migration#js] ![toolkit-icon](assets/toolkit-icon.png) | | | |
 
 
 #### Additional samples
@@ -530,7 +531,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-ai-sentiment-analysis#js]:samples/msgext-ai-sentiment-analysis/nodejs
 [msgext-ai-sentiment-analysis#cs]:samples/msgext-ai-sentiment-analysis/csharp
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
-[bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
+[bot-graph-chat-migration#js]:samples\bot-graph-chat-migration\nodejs
+
+
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java

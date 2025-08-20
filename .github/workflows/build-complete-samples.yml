@@ -1057,7 +1057,11 @@ jobs:
 
             - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
               name: 'bot-auth0-adaptivecard'
-              version: '16.x'  
+              version: '16.x'
+
+            - project_path: 'samples/bot-graph-chat-migration/nodejs'
+              name: 'bot-graph-chat-migration'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
