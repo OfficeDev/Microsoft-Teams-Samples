@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-auth-entra-account-python",
+    "source": "officeDev",
+    "title": "Tab Auth with Different Entra ID Accounts",
+    "shortDescription": "Microsoft Teams sample app demonstrating authentication and account switching using different Microsoft Entra ID accounts.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-auth-entra-account/python",
+    "longDescription": [
+      "This sample app demonstrates how to integrate Microsoft Entra ID (Azure AD) authentication into a Microsoft Teams tab using Python and Flask. It allows users to sign in using their Entra account and supports switching between different Entra accounts for secure, flexible access."
+    ],
+    "creationDateTime": "2025-08-21",
+    "updateDateTime": "2025-08-21",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-auth-entra-account/python/Images/tab-auth-entra-account.gif",
+        "alt": "Solution UX demonstrating authentication and account switching using different Microsoft Entra ID accounts"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

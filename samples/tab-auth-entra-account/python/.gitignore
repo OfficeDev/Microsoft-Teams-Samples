@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+
+# Virtual environments
+.venv
+
+# Flask
+instance/
+*.log
+
+# TeamsFx files
+env/.env.*.user
+.localConfigs
+appManifest/build
+build/
+
+# Distribution / packaging
+dist/
+*.egg-info/
