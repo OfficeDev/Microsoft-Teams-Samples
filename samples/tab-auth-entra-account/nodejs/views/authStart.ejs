@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentication Start</title>
+</head>
+<body>
+    <h2>Authentication is starting...</h2>
+    <script>
+        (function() {
+            var state = JSON.stringify({
+                authId: '<%= authId %>',
+                method: '<%= oauthRedirectMethod %>',
+                hostRedirectUrl: '<%= hostRedirectUrl %>'
+            });
+            var queryParams = new URLSearchParams({
+                client_id: '<%= clientId %>',
+                response_type: 'code',
+                redirect_uri: '<%= redirectUri %>',
+                scope: 'openid profile email User.Read offline_access',
+                prompt: 'select_account',
+                state: encodeURIComponent(state)
+            });
+            var authUrl = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?' + queryParams.toString();
+            window.location.href = authUrl;
+        })();
+    </script>
+</body>
+</html>

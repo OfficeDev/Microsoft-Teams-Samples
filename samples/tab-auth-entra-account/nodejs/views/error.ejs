@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error - TabAuthEntraAccount</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+            background-color: #f8f9fa;
+        }
+        .error-card {
+            max-width: 500px;
+            margin: 100px auto;
+        }
+        .error-icon {
+            font-size: 4rem;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <div class="error-card card">
+            <div class="card-body">
+                <div class="error-icon mb-3">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </div>
+                <h5 class="card-title text-danger">Authentication Error</h5>
+                <p class="card-text">
+                    <% if (typeof message !== 'undefined') { %>
+                        <%= message %>
+                    <% } else { %>
+                        An error occurred during the authentication process.
+                    <% } %>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
