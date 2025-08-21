@@ -155,6 +155,8 @@ View the recording and transcription interface showing available features and co
 - [Azure AD application using Microsoft Graph](https://learn.microsoft.com/en-us/graph/tutorial-applications-basics?tabs=http)
 - [Receive change notifications through webhooks](https://learn.microsoft.com/en-us/graph/change-notifications-delivery-webhooks?tabs=http)
 - [Designing your Microsoft Teams app with basic Fluent UI components](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/design-teams-app-basic-ui-components)
+- [Validate the authenticity of notifications](https://learn.microsoft.com/en-gb/graph/change-notifications-with-resource-data?utm_source=chatgpt.com&tabs=csharp#validate-the-authenticity-of-notifications)
+
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-adhoccalls-transcript-recording-nodejs" />

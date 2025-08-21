@@ -11,6 +11,7 @@ const axios = require('axios');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const tenantIds = process.env.TENANT_ID;
+const appRegistrationId = process.env.APP_REGISTRATION_ID;
 const userId = process.env.USER_ID;
 const auth = require('./auth'); 
 const { validateToken } = require('./tokenValidator');
@@ -82,7 +83,7 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
     }
 
     try {
-      const tokenPayload = await validateToken(notificationToken);
+      const tokenPayload = await validateToken(notificationToken, appRegistrationId);
       console.log('Notification token validated:', tokenPayload);
     } catch (err) {
       console.warn('Invalid notification token:', err.message);
@@ -156,7 +157,7 @@ app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
     }
 
     try {
-      const tokenPayload = await validateToken(notificationToken);
+      const tokenPayload = await validateToken(notificationToken , appRegistrationId);
       console.log('Notification token validated:', tokenPayload);
     } catch (err) {
       console.warn('Invalid notification token:', err.message);
