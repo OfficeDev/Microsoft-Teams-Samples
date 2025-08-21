@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -9,11 +11,9 @@ require('dotenv').config({ path: ENV_FILE });
 const app = express();
 const PORT = process.env.PORT || 3978;
 
-// View engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -24,17 +24,14 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Environment vars (from .env)
 const CLIENT_ID = process.env.ClientId;
 const CLIENT_SECRET = process.env.ClientSecret;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-// Route: Home
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Route: Auth Start now renders authStart.ejs and passes variables for client-side redirect
 app.get('/authstart', (req, res) => {
     const { authId, oauthRedirectMethod, hostRedirectUrl } = req.query;
     res.render('authStart', {
@@ -46,7 +43,6 @@ app.get('/authstart', (req, res) => {
     });
 });
 
-// Route: Auth End (alternative path for case-sensitive URLs)
 app.get('/Auth/AuthEnd', async (req, res) => {
     const code = req.query.code;
     const state = JSON.parse(decodeURIComponent(req.query.state || '{}'));
@@ -80,7 +76,6 @@ app.get('/Auth/AuthEnd', async (req, res) => {
     }
 });
 
-// Route: Handle token request from frontend
 app.post('/getAuthAccessToken', async (req, res) => {
     const idToken = req.body.idToken;
     
@@ -107,12 +102,10 @@ app.post('/getAuthAccessToken', async (req, res) => {
     }
 });
 
-// Error handler route
 app.get('/error', (req, res) => {
     res.render('error', { message: "An error occurred" });
 });
 
-// Start server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
