@@ -1,0 +1,47 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Result"
+    },
+    {
+      "type": "TextBlock", 
+      "text": "${title}?"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${option1}",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${percentoption1}% has answered",
+      "color": "Accent"
+    },
+    {
+      "type": "TextBlock", 
+      "text": "${option2}",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${percentoption2}% has answered",
+      "color": "Accent"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "result",
+      "title": "Results",
+      "data": {
+        "Id": "${Id}",
+        "msteams": {
+          "type": "task/fetch"
+        }
+      }
+    }
+  ]
+}
