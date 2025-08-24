@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "",
+  "packageName": "com.teams.sample.appAnonymousUsers",
+  "developer": {
+    "name": "appAnonymousUsers",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "name": {
+    "short": "Anonymous User Support",
+    "full": "Anonymous User Support"
+  },
+  "description": {
+    "short": "This sample shows anonymous users support in Teams meeting apps.",
+    "full": "This sample shows anonymous users support in Teams meeting apps."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "tab1",
+      "name": "Color Tab",
+      "contentUrl": "https:///appmeeting",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "",
+      "scopes": [
+        "personal"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    ""
+  ],
+  "webApplicationInfo": {
+    "id": "",
+    "resource": ""
+  }
+}
