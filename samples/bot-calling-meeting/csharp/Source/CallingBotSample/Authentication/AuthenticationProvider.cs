@@ -64,8 +64,8 @@ namespace CallingBotSample.Authentication
         {
             const string schema = "Bearer";
             const string replaceString = "{tenant}";
-            const string oauthV2TokenLink = "https://login.microsoftonline.com/{tenant}";
-            const string resource = "https://graph.microsoft.com";
+            const string oauthV2TokenLink = "https://login.microsoftonline.us/{tenant}";
+            const string resource = "https://graph.microsoft.us";
 
             // If no tenant was specified, we craft the token link using the common tenant.
             // https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints
@@ -112,7 +112,7 @@ namespace CallingBotSample.Authentication
             // Currently the service does not sign outbound request using AAD, instead it is signed
             // with a private certificate.  In order for us to be able to ensure the certificate is
             // valid we need to download the corresponding public keys from a trusted source.
-            const string authDomain = "https://api.aps.skype.com/v1/.well-known/OpenIdConfiguration";
+            const string authDomain = "https://api.aps.skype.us/v1/.well-known/OpenIdConfiguration";
             if (this.openIdConfiguration == null || DateTime.Now > this.prevOpenIdConfigUpdateTimestamp.Add(this.openIdConfigRefreshInterval))
             {
                 this.GraphLogger.Info("Updating OpenID configuration");
@@ -130,8 +130,8 @@ namespace CallingBotSample.Authentication
             // The incoming token should be issued by graph.
             var authIssuers = new[]
             {
-                "https://graph.microsoft.com",
-                "https://api.botframework.com",
+                "https://graph.microsoft.us",
+                "https://api.botframework.us",
             };
 
             // Configure the TokenValidationParameters.
