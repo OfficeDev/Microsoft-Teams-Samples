@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-conversation-quickstart-csharp",
+    "source": "officeDev",
+    "title": "Starter solution: Sample bot - Microsoft 365 Agents Toolkit",
+    "shortDescription": "This sample app demonstrates how to implement various bot conversation events and messaging extensions within Microsoft Teams using the Bot Framework v4. It supports adaptive cards, task modules, and actions from the compose box and message area.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/csharp",
+    "longDescription": [
+      "This sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Bot Framework v4. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions."
+    ],
+    "creationDateTime": "2025-07-02",
+    "updateDateTime": "2025-07-02",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/csharp/BotConversationQuickStart/Images/bot-conversation.gif",
+        "alt": "Solution UX showing starter solution: sample bot - Microsoft 365 Agents Toolkit"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
