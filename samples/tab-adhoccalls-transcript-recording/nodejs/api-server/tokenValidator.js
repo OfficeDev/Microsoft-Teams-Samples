@@ -5,8 +5,9 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 
-async function validateToken(token, appRegistrationId) {
+async function validateToken(token) {
     try {
+        const ExpectedMicrosoftApps = '0bf30f3b-4a52-48df-9a82-234910c4a086'; // Microsoft Graph Change Tracking
         const { header, payload } = jwt.decode(token, { complete: true });
         // use a new client to fetch pubkey from MS
         const client = jwksClient({ jwksUri: 'https://login.microsoftonline.com/common/discovery/keys' });
@@ -18,13 +19,16 @@ async function validateToken(token, appRegistrationId) {
         }
 
         const verifyOptions = { algorithms: ['RS256'], header: header };
-            const fullToken = jwt.verify(token, key, verifyOptions);
-            // Validate azp (Authorized Party) or appid claim
-            const azpOrAppid = fullToken.azp || fullToken.aud;
-            if (!azpOrAppid || azpOrAppid !== appRegistrationId) {
-                throw new Error(`Invalid azp/appid claim: expected '${appRegistrationId}', got '${azpOrAppid}'`);
-            }
-            return fullToken;
+        const fullToken = jwt.verify(token, key, verifyOptions);
+        
+         // For v2.0 tokens you'll get "azp"
+         // For v1.0 tokens you'll get "appid"
+        const azpOrAppid = fullToken.azp || fullToken.appid;
+        if (azpOrAppid !== ExpectedMicrosoftApps) {
+            throw new Error('Not Expected Microsoft Apps.');
+        }
+        
+        return fullToken;
     } catch (error) {
         console.error('Token validation error:', error);
         throw new Error('Invalid token: ' + error.message);
