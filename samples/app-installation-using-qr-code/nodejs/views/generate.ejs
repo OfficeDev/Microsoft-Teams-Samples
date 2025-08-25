@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+    <script src="https://res.cdn.office.net/teams-js/2.36.0/js/MicrosoftTeams.min.js"
+        integrity="sha384‑Vg2zJuta2CG1wHGm8f5belcapTREs0cxiGzaMgVWI/apjFxwHqOgYOon/OqPXP7"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         function generateQR() {
             debugger;
             var appId = $("#appIdOptions").val();
@@ -17,7 +17,7 @@
         };
     </script>
 </head>
-
+ 
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
@@ -35,5 +35,5 @@
         </div>
     </div>
 </body>
-
+ 
 </html>

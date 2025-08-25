@@ -3,13 +3,15 @@
 @{
 }
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script
+          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+          crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        microsoftTeams.initialize(()=>{
+        microsoftTeams.app.initialize().then(()=>{
             viewLocation(); 
         })
 
@@ -21,23 +23,7 @@
             let location = {"latitude":latitude,"longitude":longitude};
 
             // Methos to ask for permission and then show current user location
-            microsoftTeams.location.showLocation(location, (error, result) => {
-
-                // If there's any error, an alert shows the error message/code
-                if (error)
-                {
-                    if (error.message)
-                    {
-                        alert(" ErrorCode: " + error.errorCode + error.message);
-                    }
-                    else 
-                    {
-                        alert(" ErrorCode: " + error.errorCode);
-                    }
-
-                    return;
-                }
-            });
+            microsoftTeams.location.showLocationHelper(location);
         } 
     </script>
     <style>

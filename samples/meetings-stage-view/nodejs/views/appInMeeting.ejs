@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App in meeting - Stage View</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+</head>
+
+<body id=mainDiv>
+  <div id="chatSection" className="chatSection">
+    <div class="label">
+      Sprint Status
+    </div>
+    <div id="boardDiv" class="chat-window">
+      <div class="part-container">
+        <%- include('todo') %>
+      </div>
+      <div class="part-container">
+        <%- include('doing') %>
+      </div>
+      <div class="part-container">
+        <%- include('done') %>
+      </div>
+    </div>
+  </div>
+  <script>
+    microsoftTeams.app.initialize();
+    microsoftTeams.app.getContext().then((context) => {
+      $(document).ready(function () {
+        if (context.page.frameContext === "sidePanel") {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+          $("#todo, #doing, #done").removeClass("grid-item");
+          $("#boardDiv").addClass("chat-window-sidepanel");
+          $("#boardDiv").removeClass("chat-window");
+        }
+        else {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item");
+          $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+          $("#boardDiv").addClass("chat-window");
+          $("#boardDiv").removeClass("chat-window-sidepanel");
+        }
+      });
+    });
+
+    // shareToStage.
+    const shareSpecificPart = (partName) => {
+      var appContentUrl = "";
+      microsoftTeams.app.getContext().then((context) => {
+        appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=`+context.meetingId : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=`+context.meetingId : `${window.location.origin}/doneView?meetingId=`+context.meetingId;
+        microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+          if (result) {
+            // handle success
+            console.log(result);
+          }
+          if (err) {
+            // handle error
+            alert(JSON.stringify(err))
+          }
+        }, appContentUrl);
+      });
+    };
+  </script>
+</body>
+</html>

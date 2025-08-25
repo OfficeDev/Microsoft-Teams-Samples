@@ -43,16 +43,40 @@ class SsoOAuthHelpler {
         const tokenExchangeRequest = turnContext.activity.value;
 
         try {
-            // turnContext.adapter IExtendedUserTokenProvider
-            tokenExchangeResponse = await turnContext.adapter.exchangeToken(
-                turnContext,
-                tokenExchangeRequest.connectionName,
-                turnContext.activity.from.id,
-                { token: tokenExchangeRequest.token });
+            // For CloudAdapter, try different approaches to get the UserTokenClient
+            let userTokenClient = null;
+            
+            // Method 1: Try getting from turnState using the adapter's key
+            if (turnContext.adapter.UserTokenClientKey) {
+                userTokenClient = turnContext.turnState.get(turnContext.adapter.UserTokenClientKey);
+            }
+            
+            // Method 2: Try getting from turnState using standard key
+            if (!userTokenClient) {
+                userTokenClient = turnContext.turnState.get('UserTokenClient');
+            }
+            
+            // Method 3: Try getting BotFrameworkAuthentication and create UserTokenClient
+            if (!userTokenClient && turnContext.adapter.botFrameworkAuthentication) {
+                userTokenClient = await turnContext.adapter.botFrameworkAuthentication.createUserTokenClient(turnContext.activity.serviceUrl);
+            }
+            
+            if (userTokenClient) {
+                tokenExchangeResponse = await userTokenClient.exchangeToken(
+                    turnContext.activity.from.id,
+                    tokenExchangeRequest.connectionName,
+                    turnContext.activity.channelId,
+                    { token: tokenExchangeRequest.token });
+            } else {
+                // Fallback to adapter method if available
+                tokenExchangeResponse = await turnContext.adapter.exchangeToken(
+                    turnContext,
+                    tokenExchangeRequest.connectionName,
+                    turnContext.activity.from.id,
+                    { token: tokenExchangeRequest.token });
+            }
                 
-            console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
         } catch (err) {
-            console.log(err);
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }

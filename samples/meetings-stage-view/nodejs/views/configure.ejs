@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App in meeting - Stage View - Configuration</title>
+    <style>
+        .header{
+            background-color: #fff;
+            height: 10rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <header class="header">
+            <div class="header-inner-container">
+                <div id="divConfig">
+                    <br />
+                    <form id="configForm">
+                        <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Add App in a meeting
+                    </form>
+                </div>
+            </div>
+        </header>
+        <script
+        src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+        crossorigin="anonymous">
+        </script>
+        <script>
+            function onClick() {
+                microsoftTeams.pages.config.setValidityState(true);
+            }
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "App in Meeting Demo",
+                        contentUrl: `${window.location.origin}/appInMeeting`,
+                        suggestedTabName: "App in meeting",
+                        websiteUrl: `${window.location.origin}/appInMeeting`,
+                    }).then(() => {
+                        saveEvent.notifySuccess();
+                    });
+                });
+            });
+        </script>
+</body>
+</html>

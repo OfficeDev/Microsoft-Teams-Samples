@@ -1,17 +1,17 @@
 import React from "react";
 import { Flex, Button, Text, TextArea } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, dialog } from "@microsoft/teams-js";
 
 const AddNotes = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        app.initialize();
     }, [])
 
     const saveNote = () => {
-        microsoftTeams.tasks.submitTask(note);
+        dialog.submit(note);
         return true;
     }
 

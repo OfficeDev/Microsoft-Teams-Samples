@@ -25,6 +25,18 @@
                 {
                     "id": "User.Read",
                     "type": "Scope"
+                },
+                {
+                    "id": "Sites.Read.All",
+                    "type": "Scope"
+                },
+                {
+                    "id": "Sites.ReadWrite.All",
+                    "type": "Scope"
+                },
+                {
+                    "id": "Files.ReadWrite.All",
+                    "type": "Scope"
                 }
             ]
         }

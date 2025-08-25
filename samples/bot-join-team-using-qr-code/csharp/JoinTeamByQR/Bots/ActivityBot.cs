@@ -114,15 +114,44 @@ namespace JoinTeamByQR.Bots
         /// <returns>A Task Module Response for the request.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            var teamInfo = JObject.FromObject(taskModuleRequest.Data);
-            var teamId = (string)teamInfo.ToObject<ResponseData<string>>()?.TeamId;
-            var userId = (string)teamInfo.ToObject<ResponseData<string>>()?.UserId;
-            var token = string.Empty;
-            _Token.TryGetValue("Token", out token);
+            try
+            {
+                var teamInfo = JObject.FromObject(taskModuleRequest.Data);
+                
+                // Handle both direct properties and ResponseData structure
+                var teamId = teamInfo["teamId"]?.ToString() ?? 
+                            (string)teamInfo.ToObject<ResponseData<string>>()?.TeamId;
+                var userId = teamInfo["userId"]?.ToString() ?? 
+                            (string)teamInfo.ToObject<ResponseData<string>>()?.UserId;
+                
+                Console.WriteLine($"Received task module data: {teamInfo}");
+                Console.WriteLine($"TeamId: {teamId}, UserId: {userId}");
+                
+                if (string.IsNullOrEmpty(teamId) || string.IsNullOrEmpty(userId))
+                {
+                    await turnContext.SendActivityAsync("Invalid team or user data received.");
+                    return null;
+                }
+                
+                var token = string.Empty;
+                _Token.TryGetValue("Token", out token);
+                
+                if (string.IsNullOrEmpty(token))
+                {
+                    await turnContext.SendActivityAsync("Authentication token not found. Please login again.");
+                    return null;
+                }
 
-            JoinTeamHelper.AddUserToTeam(token, teamId, userId);
-            await turnContext.SendActivityAsync("User added to team successfully");
-            return null;
+                JoinTeamHelper.AddUserToTeam(token, teamId, userId);
+                await turnContext.SendActivityAsync("User added to team successfully");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in OnTeamsTaskModuleSubmitAsync: {ex.Message}");
+                await turnContext.SendActivityAsync($"Error adding user to team: {ex.Message}");
+                return null;
+            }
         }
     }
 }

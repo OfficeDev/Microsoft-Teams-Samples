@@ -14,7 +14,7 @@ let upload = multer({ storage: multer.memoryStorage() });
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
+const { CloudAdapter, ConversationState, MemoryStorage, UserState, ConfigurationBotFrameworkAuthentication } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
@@ -26,10 +26,12 @@ require('dotenv').config({ path: ENV_FILE });
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication({
+    MicrosoftAppId: process.env.MicrosoftAppId,
+    MicrosoftAppPassword: process.env.MicrosoftAppPassword
 });
+
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -70,6 +72,10 @@ const bot = new TeamsBot(conversationState, userState, dialog);
 // Create HTTP server.
 const server = express();
 
+// Add body parser middleware for CloudAdapter
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
@@ -86,30 +92,53 @@ server.get('/Upload', (req, res, next) => {
 
 // Endpoint to listen to multiport/form-data requests.
 server.post('/Save', upload.single('file'), async(req, res) => {
-    if(req.file == null) {
-        return;
-    }
-
-    var token = tokenData["token"];
-    var buffer = req.file.buffer;
-    const client = new SimpleGraphClient(token);
-    const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
-
-    if (site != null) {
-        var drive = await client.getDriveDetails(site.id);
-
-        if (drive != null) {
-            if (buffer != null) {
-                var children = await client.uploadFile(site.id, drive.value[0].id, buffer, req.file.originalname);
-            }
-            res.send();
+    try {
+        if(req.file == null) {
+            return res.status(400).json({ error: 'No file uploaded' });
         }
+
+        var token = tokenData["token"];
+        if (!token) {
+            return res.status(401).json({ error: 'No authentication token available' });
+        }
+
+        var buffer = req.file.buffer;
+        console.log('Creating GraphClient...');
+        const client = new SimpleGraphClient(token);
+        
+        console.log('Getting site details...');
+        const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
+
+        if (site != null) {
+            var drive = await client.getDriveDetails(site.id);
+
+            if (drive != null && drive.value && drive.value.length > 0) {
+                if (buffer != null) {
+                    var uploadResult = await client.uploadFile(site.id, drive.value[0].id, buffer, req.file.originalname);
+                    
+                    if (uploadResult) {
+                        res.json({ success: true, message: 'File uploaded successfully' });
+                    } else {
+                        res.status(500).json({ error: 'Failed to upload file' });
+                    }
+                } else {
+                    res.status(400).json({ error: 'File buffer is empty' });
+                }
+            } else {
+                res.status(404).json({ error: 'SharePoint drive not found' });
+            }
+        } else {
+            res.status(404).json({ error: 'SharePoint site not found' });
+        }
+    } catch (error) {
+        console.error('Upload error:', error);
+        res.status(500).json({ error: 'Internal server error during upload' });
     }
 });
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
+server.post('/api/messages', async (req, res) => {
+    await adapter.process(req, res, async (context) => {
         await bot.run(context);
     });
 });

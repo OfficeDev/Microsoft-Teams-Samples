@@ -5,7 +5,7 @@ import LinkedInLogo from '../../../images/linkedin.svg';
 import TwitterLogo from '../../../images/twitter.svg';
 import { getCandidateDetails, shareAssets } from "../services/recruiting-detail.service"
 import { IAssetDetails, ICandidateDetails } from './basic-details.types';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, dialog } from "@microsoft/teams-js";
 
 export interface IBasicDetailsMobileProps {
     selectedIndex: number,
@@ -20,8 +20,10 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const openShareTaskModule = () => {
         let taskInfo = {
             title: "Share policy assets",
-            height: 400,
-            width: 400,
+            size: {
+                height: 400,
+                width: 400
+            },
             url: `${window.location.origin}/shareAssets`,
         };
 
@@ -38,11 +40,11 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 }
             })
             if (note !== undefined) {
-                microsoftTeams.getContext((context) => {
+                app.getContext().then((context) => {
                     const assetDetail: IAssetDetails = {
                         message: details.note,
-                        sharedBy: context.userPrincipalName!,
-                        meetingId: context.meetingId!,
+                        sharedBy: context.user!.userPrincipalName!,
+                        meetingId: context.meeting!.id!,
                         files: files,
                     }
                     shareAssets(assetDetail)

@@ -1,5 +1,6 @@
 import React from 'react';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, pages } from "@microsoft/teams-js";
+// import * as microsoftTeams from "@microsoft/teams-js";
 
 const Configuration = () => {
     const [tabId, setTabId] = React.useState('');

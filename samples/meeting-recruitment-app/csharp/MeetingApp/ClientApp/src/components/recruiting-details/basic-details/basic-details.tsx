@@ -16,7 +16,7 @@ import {
 import "../../recruiting-details/recruiting-details.css"
 import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 
 export interface IBasicDetailsProps {
     setSelectedCandidateIndex: (index: number, email: string) => void,
@@ -35,17 +35,17 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     }
 
     const startCall = () => {
-        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users="+candidateDetails[selectedIndex]?.email);
+        app.openLink("https://teams.microsoft.com/l/call/0/0?users=" + candidateDetails[selectedIndex]?.email);
     }
 
     const startChat = () => {
-        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/chat/0/0?users="+candidateDetails[selectedIndex]?.email);
+        app.openLink("https://teams.microsoft.com/l/chat/0/0?users=" + candidateDetails[selectedIndex]?.email);
     }
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            sethostClientType(context.hostClientType);
+        app.initialize();
+        app.getContext().then((context) => {
+            sethostClientType(context.app.host.clientType);
         });
 
         getCandidateDetails()

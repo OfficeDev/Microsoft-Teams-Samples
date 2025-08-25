@@ -56,53 +56,67 @@ class MainDialog extends LogoutDialog {
     }
 
     async loginStep(stepContext) {
-        // Get the token from the previous step. Note that we could also have gotten the
-        // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
 
         if (!tokenResponse || !tokenResponse.token) {
             await stepContext.context.sendActivity('Login was not successful please try again.');
         }
         else {
+            // Store token for use in other endpoints
+            tokenData["token"] = tokenResponse.token;
 
             if (stepContext.context._activity.text == "viewfile") {
-                const client = new SimpleGraphClient(tokenResponse.token);
-                const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
+                try {
+                    const client = new SimpleGraphClient(tokenResponse.token);
+                    const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
 
-                if (site != null) {
-                    var drive = await client.getDriveDetails(site.id);
+                    if (site != null) {
+                        var drive = await client.getDriveDetails(site.id);
 
-                    if (drive != null) {
-                        var children = await client.getContentList(site.id, drive.value[0].id);
-                        if (children != null) {
-                            var fileList = new Array();
-                            children.value.map((file) => {
-                                if (file.name != "General")
-                                    fileList.push(file.name);
-                            })
+                        if (drive != null && drive.value && drive.value.length > 0) {
+                            var children = await client.getContentList(site.id, drive.value[0].id);
+                            if (children != null && children.value) {
+                                var fileList = new Array();
+                                children.value.map((file) => {
+                                    if (file.name != "General")
+                                        fileList.push(file.name);
+                                })
 
-                            var fileUrl = "";
-                            var actions = new Array();
-                            fileList.map((file) => {
-                                var extension = file.split(".")[1];
-                                fileUrl = "https://teams.microsoft.com/_#/" + extension + "/viewer/teams/https:~2F~2F" + process.env.SharepointTenantName + "~2Fsites~2F" + process.env.SharepointSiteName + "~2FShared%20Documents~2F" + file
-                                actions.push({
-                                    type: "Action.OpenUrl",
-                                    title: file.split(".")[0],
-                                    url: fileUrl
-                                });
-                            })
+                                if (fileList.length > 0) {
+                                    var fileUrl = "";
+                                    var actions = new Array();
+                                    fileList.map((file) => {
+                                        var extension = file.split(".")[1];
+                                        fileUrl = "https://teams.microsoft.com/_#/" + extension + "/viewer/teams/https:~2F~2F" + process.env.SharepointTenantName + "~2Fsites~2F" + process.env.SharepointSiteName + "~2FShared%20Documents~2F" + file
+                                        actions.push({
+                                            type: "Action.OpenUrl",
+                                            title: file.split(".")[0],
+                                            url: fileUrl
+                                        });
+                                    })
 
-                            const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(actions));
-                            await stepContext.context.sendActivity({ attachments: [userCard] });
+                                    const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(actions));
+                                    await stepContext.context.sendActivity({ attachments: [userCard] });
+                                } else {
+                                    await stepContext.context.sendActivity('No files found in the SharePoint site.');
+                                }
+                            } else {
+                                await stepContext.context.sendActivity('Unable to retrieve file list from SharePoint.');
+                            }
+                        } else {
+                            await stepContext.context.sendActivity('SharePoint drive not found or inaccessible.');
                         }
+                    } else {
+                        await stepContext.context.sendActivity('SharePoint site not found. Please check the site configuration.');
                     }
+                } catch (error) {
+                    console.error('Error accessing SharePoint:', error);
+                    await stepContext.context.sendActivity('Error accessing SharePoint. Please try again later.');
                 }
                 return await stepContext.endDialog();
             }
 
             if (stepContext.context._activity.text == "uploadfile") {
-                tokenData["token"] = tokenResponse.token;
                 const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardForFileUpload());
                 await stepContext.context.sendActivity({ attachments: [userCard] });
 

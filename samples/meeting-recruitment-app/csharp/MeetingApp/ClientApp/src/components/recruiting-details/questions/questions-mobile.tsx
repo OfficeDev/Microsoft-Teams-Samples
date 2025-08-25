@@ -1,8 +1,6 @@
 import React from "react";
 import { Flex, Card, Button, Text, AddIcon, TextArea } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import { getQuestions } from "../services/recruiting-detail.service";
-import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionDetails } from "../../../types/recruitment.types";
 
 export interface IQuestionProps {

@@ -17,10 +17,10 @@ namespace JoinTeamByQR.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
+        private readonly CloudAdapter Adapter;
         private readonly IBot Bot;
 
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public BotController(CloudAdapter adapter, IBot bot)
         {
             Adapter = adapter;
             Bot = bot;
