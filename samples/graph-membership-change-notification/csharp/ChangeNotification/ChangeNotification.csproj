@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Resources\Certificate Documentation\**" />
+    <Content Remove="Resources\Certificate Documentation\**" />
+    <EmbeddedResource Remove="Resources\Certificate Documentation\**" />
+    <None Remove="Resources\Certificate Documentation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdaptiveCards" Version="2.7.3" />
+    <PackageReference Include="AdaptiveCards.Templating" Version="1.3.1" />
+    <PackageReference Include="Azure.Identity" Version="1.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.31" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.11" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
+    <PackageReference Include="Microsoft.Graph.Beta" Version="4.52.0-preview" />
+  </ItemGroup>
+
+</Project>
