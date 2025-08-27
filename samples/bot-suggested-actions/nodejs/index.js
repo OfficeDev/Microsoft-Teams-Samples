@@ -24,12 +24,6 @@ require('dotenv').config({ path: ENV_FILE });
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
 // Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
-// const adapter = new BotFrameworkAdapter({
-//     appId: process.env.MicrosoftAppId,
-//     appPassword: process.env.MicrosoftAppPassword
-// });
-
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
