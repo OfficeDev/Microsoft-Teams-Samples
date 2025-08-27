@@ -13,10 +13,14 @@ const msal = require('@azure/msal-node');
 const axios = require('axios')
 const jwt = require('jsonwebtoken');
 
+const spark =  require('@microsoft/teams.apps');
+
+
+
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
-const PORT = process.env.PORT || 3978;
+const PORT = 3977;
 const server = express();
 let multer = require('multer');
 let upload = multer({ storage: multer.memoryStorage() });
@@ -87,10 +91,15 @@ const userState = new UserState(memoryStorage);
 const dialog = new MainDialog();
 // Create the bot that will handle incoming messages.
 const bot = new TeamsBot(conversationState, userState, dialog);
-
+var app;
 // Create HTTP server.
 server.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
+   app = new spark.App({
+    clientId: process.env.MicrosoftAppId,
+    clientSecret: process.env.MicrosoftAppPassword,
+});
+app.start();
 });
 const globalMap = {};
 let code;
@@ -118,6 +127,48 @@ server.post('/api/token', (req, res) => {
   });
   globalMap[`${code}`] = null; // Clear the token after redirect
   code = null; // Reset the code
+});
+
+server.post('/api/linkAccounts', async (req, res) => {
+  console.log(req.body);
+  const naaBasedToken = req.body.naaAuth0Payload.access_token;
+  const naaTokenDecoded = jwt.decode(naaBasedToken, { complete: true });
+  console.log('NAA BASED TOKEN', naaBasedToken, naaTokenDecoded);
+  try {
+  const responseBot = await app.api.users.token.get({
+   userId: '29:1QCvxM3V0UEmyvan41zkATQ4F8PgnH1s1A_Hvl7ISyui7k0OF3ukIGGpSI8FCn0xbMp-WQQt5ai0bx8VxvFL8zA',
+   connectionName: "Auth0",
+});
+const primaryTokenDecoded = jwt.decode(responseBot.token, { complete: true });
+console.log('Primary account token', responseBot, primaryTokenDecoded);
+          var linkOptions = {
+            method: 'POST',
+            url: `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/api/v2/users/${primaryTokenDecoded.payload.sub}/identities`,
+            headers: {authorization: `Bearer ${responseBot.token}`},
+            data:  {
+                                        
+                // "provider": "oauth2",
+                // "user_id": "Microsoftentracustom|af53eca6-db6f-4085-8436-b9d2cb446ea3"
+
+                "link_with": req.body.naaAuth0Payload.id_token
+            }
+            
+            };
+            axios.request(linkOptions).then(function (response) {
+                console.log('linked ', {response});
+                  res.send(200);
+
+            }).catch((err) => {
+                console.log('link error', err);
+                  res.send(400);
+
+            });
+  } catch (error) {
+    console.error("Error linking accounts:", error);
+                      res.send(400);
+
+  }
+
 });
 
 server.get('/api/testAuthToken', (req, res) => {

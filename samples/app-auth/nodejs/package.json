@@ -17,6 +17,12 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
+         "@microsoft/teams.api": "preview",
+    "@microsoft/teams.apps": "preview",
+    "@microsoft/teams.cards": "preview",
+    "@microsoft/teams.common": "preview",
+    "@microsoft/teams.graph": "preview",
+    "@microsoft/teams.dev": "preview",
         "@azure/msal-browser": "^4.13.2",
         "@azure/msal-node": "^1.6.0",
         "@microsoft/microsoft-graph-client": "^3.0.4",

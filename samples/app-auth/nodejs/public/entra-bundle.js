@@ -859,6 +859,34 @@ class i extends _validatedSafeString_js__WEBPACK_IMPORTED_MODULE_0__.ValidatedSa
 
 /***/ }),
 
+/***/ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/authentication.js":
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/authentication.js ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DataResidency: () => (/* binding */ v),
+/* harmony export */   authenticate: () => (/* binding */ k),
+/* harmony export */   getAuthToken: () => (/* binding */ p),
+/* harmony export */   getUser: () => (/* binding */ C),
+/* harmony export */   notifyFailure: () => (/* binding */ g),
+/* harmony export */   notifySuccess: () => (/* binding */ w),
+/* harmony export */   registerAuthenticationHandlers: () => (/* binding */ b)
+/* harmony export */ });
+/* harmony import */ var _node_modules_pnpm_rollup_plugin_typescript_11_1_6_rollup_4_24_4_tslib_2_6_3_typescript_4_9_5_node_modules_tslib_tslib_es6_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/.pnpm/@rollup_plugin-typescript@11.1.6_rollup@4.24.4_tslib@2.6.3_typescript@4.9.5/node_modules/tslib/tslib.es6.js */ "./node_modules/@microsoft/teams-js/dist/esm/node_modules/.pnpm/@rollup_plugin-typescript@11.1.6_rollup@4.24.4_tslib@2.6.3_typescript@4.9.5/node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _internal_communication_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../internal/communication.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/internal/communication.js");
+/* harmony import */ var _internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../internal/internalAPIs.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/internal/internalAPIs.js");
+/* harmony import */ var _internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../internal/telemetry.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/internal/telemetry.js");
+/* harmony import */ var _internal_utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../internal/utils.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/internal/utils.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/constants.js");
+/* harmony import */ var _runtime_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./runtime.js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/runtime.js");
+const f="v1",m="v2";let d;function b(t){d=t}function k(n){const i=void 0!==n,r=i?n:d;if(!r)throw new Error("No parameters are provided for authentication");(0,_internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__.ensureInitialized)(_runtime_js__WEBPACK_IMPORTED_MODULE_1__.runtime,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.content,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.sidePanel,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.settings,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.remove,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.task,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.stage,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.meetingStage);return function(n,i){return (0,_node_modules_pnpm_rollup_plugin_typescript_11_1_6_rollup_4_24_4_tslib_2_6_3_typescript_4_9_5_node_modules_tslib_tslib_es6_js__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this,void 0,void 0,(function*(){const t=(0,_internal_utils_js__WEBPACK_IMPORTED_MODULE_4__.fullyQualifyUrlString)(i.url);return (0,_internal_utils_js__WEBPACK_IMPORTED_MODULE_4__.validateUrl)(t),(0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.sendMessageToParentAsync)(n,"authentication.authenticate",[t.href,i.width,i.height,i.isExternal]).then((([t,e])=>{if(t)return e;throw new Error(e)}))}))}(r.successCallback||r.failureCallback?(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(f,"authentication.authenticate"):(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(m,"authentication.authenticate"),r).then((t=>{try{return r&&r.successCallback?(r.successCallback(t),""):t}finally{i||(d=void 0)}})).catch((t=>{try{if(r&&r.failureCallback)return r.failureCallback(t.message),"";throw t}finally{i||(d=void 0)}}))}function p(t){(0,_internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__.ensureInitializeCalled)();return function(t,n){return new Promise((i=>{i((0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.sendMessageToParentAsync)(t,"authentication.getAuthToken",[null==n?void 0:n.resources,null==n?void 0:n.claims,null==n?void 0:n.silent,null==n?void 0:n.tenantId]))})).then((([t,e])=>{if(t)return e;throw new Error(e)}))}(t&&(t.successCallback||t.failureCallback)?(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(f,"authentication.getAuthToken"):(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(m,"authentication.getAuthToken"),t).then((e=>t&&t.successCallback?(t.successCallback(e),""):e)).catch((e=>{if(t&&t.failureCallback)return t.failureCallback(e.message),"";throw e}))}function C(t){(0,_internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__.ensureInitializeCalled)();return function(t){return new Promise((n=>{n((0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.sendMessageToParentAsync)(t,"authentication.getUser"))})).then((([t,e])=>{if(t)return e;throw e}))}(t&&(t.successCallback||t.failureCallback)?(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(f,"authentication.getUser"):(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(m,"authentication.getUser")).then((e=>t&&t.successCallback?(t.successCallback(e),null):e)).catch((e=>{const n=`Error returned, code = ${e.errorCode}, message = ${e.message}`;if(t&&t.failureCallback)return t.failureCallback(n),null;throw new Error(n)}))}function w(t,e){(0,_internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__.ensureInitialized)(_runtime_js__WEBPACK_IMPORTED_MODULE_1__.runtime,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.authentication);const o=(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(e?f:m,"authentication.notifySuccess");(0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.sendMessageToParent)(o,"authentication.authenticate.success",[t]),(0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.waitForMessageQueue)(_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.Communication.parentWindow,(()=>setTimeout((()=>_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.Communication.currentWindow.close()),200)))}function g(t,e){(0,_internal_internalAPIs_js__WEBPACK_IMPORTED_MODULE_0__.ensureInitialized)(_runtime_js__WEBPACK_IMPORTED_MODULE_1__.runtime,_constants_js__WEBPACK_IMPORTED_MODULE_2__.FrameContexts.authentication);const o=(0,_internal_telemetry_js__WEBPACK_IMPORTED_MODULE_6__.getApiVersionTag)(e?f:m,"authentication.notifyFailure");(0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.sendMessageToParent)(o,"authentication.authenticate.failure",[t]),(0,_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.waitForMessageQueue)(_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.Communication.parentWindow,(()=>setTimeout((()=>_internal_communication_js__WEBPACK_IMPORTED_MODULE_5__.Communication.currentWindow.close()),200)))}var v;!function(t){t.Public="public",t.EUDB="eudb",t.Other="other"}(v||(v={}));
+
+
+/***/ }),
+
 /***/ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/constants.js":
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/constants.js ***!
@@ -23503,80 +23531,114 @@ function mapToQueryString(parameters, encodeExtraParams = true, extraQueryParame
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _azure_msal_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @azure/msal-browser */ "./samples/app-auth/nodejs/node_modules/@azure/msal-browser/dist/app/PublicClientApplication.mjs");
-/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/app/app.js");
-/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/publicAPIs.js");
+/* harmony import */ var _azure_msal_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @azure/msal-browser */ "./samples/app-auth/nodejs/node_modules/@azure/msal-browser/dist/app/PublicClientApplication.mjs");
+/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/app/app.js");
+/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/authentication.js");
+/* harmony import */ var _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @microsoft/teams-js */ "./node_modules/@microsoft/teams-js/dist/esm/packages/teams-js/src/public/publicAPIs.js");
 
 // Import the Microsoft Teams JavaScript client SDK for use in the browser bundle
 
-var pca;
-function initializePublicClient(context) {
-  var msalConfig = {
-    auth: {
-      clientId: "b70a6f76-2210-4e61-8727-313cbc26fe98",
-      authority: "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47",
-      supportsNestedAppAuth: true,
-      redirectUri: "brk-multihub://teams-auth.ngrok.io/AuthSuccess"
-    }
-  };
-  console.log("Starting initializePublicClient");
-  return (0,_azure_msal_browser__WEBPACK_IMPORTED_MODULE_0__.createNestablePublicClientApplication)(msalConfig).then(function (result) {
-    console.log("Client app created");
-    pca = result;
-    return pca;
-  });
-}
-_microsoft_teams_js__WEBPACK_IMPORTED_MODULE_1__.initialize().then(function () {
-  _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_2__.getContext(function (context) {
-    console.log("Microsoft Teams SDK initialized");
-    initializePublicClient(context).then(function (pca) {
-      console.log("Public client initialized", pca);
-      // MSAL.js exposes several account APIs, logic to determine which account to use is the responsibility of the developer
-      var account = pca.getActiveAccount();
-      var accessTokenRequest = {
-        scopes: ["user.read"],
-        account: account
-      };
-      pca.acquireTokenSilent(accessTokenRequest).then(function (accessTokenResponse) {
-        // Acquire token silent success
-        var accessToken = accessTokenResponse.accessToken;
-        console.log("Access Token acquired silently:", accessToken);
-        fetch("https://teams-auth.ngrok.io/api/setAuthToken?accessToken=".concat(accessToken), {
-          method: "GET"
+var naaLogin = function naaLogin(result) {
+  _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_0__.initialize().then(function () {
+    _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_1__.authenticate({
+      url: "https://dev-zvtwcdg4lg5a82cq.us.auth0.com/authorize?connection=Microsoftentracustom&audience=https://dev-zvtwcdg4lg5a82cq.us.auth0.com/api/v2/&response_type=code&scope=update:current_user_identities%20openid%20profile%20email&client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&redirect_uri=https://teams-auth.ngrok.io/Auth0Success&state=".concat(new Date().getTime() % 1000),
+      width: 600,
+      height: 535,
+      successCallback: function successCallback(result) {
+        var parsedResult = JSON.parse(result);
+        console.log("notify success ", parsedResult);
+        fetch("https://teams-auth.ngrok.io/api/linkAccounts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+            //"Authorization": `Bearer ${accessToken}`
+          },
+          body: JSON.stringify({
+            naaAuth0Payload: parsedResult.response.data
+          })
         }).then(function (response) {
-          console.log("Token set successfully", response);
-
-          //window.location.href = "https://teams-auth.ngrok.io/api/authorize?redirectUri=https://teams-auth.ngrok.io/Auth0Success";
-          // fetch(`https://teams-auth.ngrok.io/api/testAuthToken`, {
-          // method: "GET",
-          // });
-          // Call your API with token
-          //callApi(accessToken);
-        })["catch"](function (error) {
-          console.error("Error setting token:", error);
+          console.log("Accounts linked successfully", response);
         });
-      })["catch"](function (error) {
-        console.error("Error acquiring token silently:", error);
-        //Acquire token silent failure, and send an interactive request
-        if (error.errorCode === 'InteractionRequired') {
-          pca.acquireTokenPopup(accessTokenRequest).then(function (accessTokenResponse) {
-            // Acquire token interactive success
-            var accessToken = accessTokenResponse.accessToken;
-            // Call your API with token
-            console.log("Access Token acquired interactively:", accessToken);
-            //callApi(accessToken);
-          })["catch"](function (error) {
-            // Acquire token interactive failure
-            console.log(error);
-          });
-        }
-        console.log(error);
-      });
-    })["catch"](function (error) {
-      console.error("Error initializing public client:", error);
+      }
     });
   });
-});
+};
+var naaSuccessCallback = function naaSuccessCallback(accessTokenResponse) {
+  var accessToken = accessTokenResponse.accessToken;
+  console.log("Access Token acquired silently:", accessToken);
+  fetch("https://teams-auth.ngrok.io/api/setAuthToken?accessToken=".concat(accessToken), {
+    method: "GET"
+  }).then(function (response) {
+    console.log("Token set successfully", response);
+    // Acquire token interactive success
+    var accessToken = accessTokenResponse.accessToken;
+    // Call your API with token
+    console.log("Access Token acquired interactively:", accessToken);
+    naaLogin();
+
+    //window.location.href = "https://teams-auth.ngrok.io/api/authorize?redirectUri=https://teams-auth.ngrok.io/Auth0Success";
+    // fetch(`https://teams-auth.ngrok.io/api/testAuthToken`, {
+    // method: "GET",
+    // });
+    // Call your API with token
+    //callApi(accessToken);
+  })["catch"](function (error) {
+    console.error("Error setting token:", error);
+  });
+};
+var linkEntraAccount = function linkEntraAccount() {
+  var pca;
+  function initializePublicClient(context) {
+    var msalConfig = {
+      auth: {
+        clientId: "b70a6f76-2210-4e61-8727-313cbc26fe98",
+        authority: "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47",
+        supportsNestedAppAuth: true,
+        redirectUri: "brk-multihub://teams-auth.ngrok.io/AuthSuccess"
+      }
+    };
+    console.log("Starting initializePublicClient");
+    return (0,_azure_msal_browser__WEBPACK_IMPORTED_MODULE_2__.createNestablePublicClientApplication)(msalConfig).then(function (result) {
+      console.log("Client app created");
+      pca = result;
+      return pca;
+    });
+  }
+  _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_0__.initialize().then(function () {
+    _microsoft_teams_js__WEBPACK_IMPORTED_MODULE_3__.getContext(function (context) {
+      console.log("Microsoft Teams SDK initialized");
+      initializePublicClient(context).then(function (pca) {
+        console.log("Public client initialized", pca);
+        // MSAL.js exposes several account APIs, logic to determine which account to use is the responsibility of the developer
+        var account = pca.getActiveAccount();
+        var accessTokenRequest = {
+          scopes: ["user.read"],
+          account: account
+        };
+        pca.acquireTokenSilent(accessTokenRequest).then(function (accessTokenResponse) {
+          // Acquire token silent success
+          naaSuccessCallback(accessTokenResponse);
+        })["catch"](function (error) {
+          console.error("Error acquiring token silently:", error);
+          //Acquire token silent failure, and send an interactive request
+          if (error.errorCode === 'InteractionRequired') {
+            pca.acquireTokenPopup(accessTokenRequest).then(function (accessTokenResponse) {
+              naaSuccessCallback(accessTokenResponse);
+            })["catch"](function (error) {
+              // Acquire token interactive failure
+              console.log(error);
+            });
+          }
+          console.log(error);
+        });
+      })["catch"](function (error) {
+        console.error("Error initializing public client:", error);
+      });
+    });
+  });
+};
+document.getElementById("linkEntraAccount").addEventListener("click", linkEntraAccount);
+document.getElementById("naaLogin").addEventListener("click", naaLogin);
 console.log('entra script');
 
 /***/ })
@@ -23654,7 +23716,7 @@ console.log('entra script');
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("b4d186460c185695f111")
+/******/ 		__webpack_require__.h = () => ("5d8fed0cb2f37d3ac8f0")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

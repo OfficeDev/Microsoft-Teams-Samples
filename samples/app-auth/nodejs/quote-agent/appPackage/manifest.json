@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.20/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.20",
+  "id": "${{TEAMS_APP_ID}}",
+  "name": {
+    "short": "quote-agent-${{APP_NAME_SUFFIX}}",
+    "full": "Quote Agent"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "mpnId": "",
+    "websiteUrl": "https://microsoft.com",
+    "privacyUrl": "https://privacy.microsoft.com/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/legal/terms-of-use"
+  },
+  "description": {
+    "short": "Sample bot that repeats back what you say",
+    "full": "Sample bot that repeats back what you say"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": ["personal"]
+    },
+    {
+      "entityId": "about",
+      "scopes": ["personal"]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": ["personal", "team", "groupChat"],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}",
+    "*.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
+  }
+}

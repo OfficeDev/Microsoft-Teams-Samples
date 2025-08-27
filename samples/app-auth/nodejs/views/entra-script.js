@@ -6,9 +6,57 @@ import {
 // Import the Microsoft Teams JavaScript client SDK for use in the browser bundle
 import * as microsoftTeams from '@microsoft/teams-js';
 
-  
+const naaLogin = (result) => {
+  microsoftTeams.app.initialize().then(() => {
+             microsoftTeams.authentication.authenticate({
+            url: `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/authorize?connection=Microsoftentracustom&audience=https://dev-zvtwcdg4lg5a82cq.us.auth0.com/api/v2/&response_type=code&scope=update:current_user_identities%20openid%20profile%20email&client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&redirect_uri=https://teams-auth.ngrok.io/Auth0Success&state=${(new Date()).getTime()%1000}`,
+            width: 600,
+            height: 535,
+            successCallback: (result) => {
+const parsedResult = JSON.parse(result);
+console.log("notify success ", parsedResult);
 
-  
+              fetch(`https://teams-auth.ngrok.io/api/linkAccounts`, {
+              method:"POST",
+              headers: {
+                "Content-Type": "application/json",
+                //"Authorization": `Bearer ${accessToken}`
+              },
+              body: JSON.stringify({
+                naaAuth0Payload: parsedResult.response.data,
+              })
+            }).then((response) => {
+              console.log("Accounts linked successfully", response);
+              microsoftTeams.tasks.submitTask();            
+        });
+      
+}
+  })
+});
+}  
+        
+
+const naaSuccessCallback = (accessTokenResponse) => {
+  let accessToken = accessTokenResponse.accessToken;
+      console.log("Access Token acquired silently:", accessToken);
+    fetch(`https://teams-auth.ngrok.io/api/setAuthToken?accessToken=${accessToken}`, {
+      method: "GET"
+    })
+    .then((response) => {
+      console.log("Token set successfully", response);
+       // Acquire token interactive success
+            let accessToken = accessTokenResponse.accessToken;
+            // Call your API with token
+            console.log("Access Token acquired interactively:", accessToken);
+             naaLogin();
+    }).catch((error) => {
+      console.error("Error setting token:", error); 
+    });
+};
+
+ 
+ const linkEntraAccount = () => {
+ 
   let pca;
   
    function initializePublicClient(context) {
@@ -17,7 +65,7 @@ import * as microsoftTeams from '@microsoft/teams-js';
       clientId: "b70a6f76-2210-4e61-8727-313cbc26fe98",
       authority: `https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47`,
       supportsNestedAppAuth: true,
-      redirectUri: "brk-multihub://dummy.com/AuthSuccess"
+      redirectUri: "brk-multihub://teams-auth.ngrok.io/AuthSuccess"
     },
   };
     console.log("Starting initializePublicClient");
@@ -49,23 +97,8 @@ import * as microsoftTeams from '@microsoft/teams-js';
     .acquireTokenSilent(accessTokenRequest)
     .then(function (accessTokenResponse) {
       // Acquire token silent success
-      let accessToken = accessTokenResponse.accessToken;
-      console.log("Access Token acquired silently:", accessToken);
-    fetch(`https://teams-auth.ngrok.io/api/setAuthToken?accessToken=${accessToken}`, {
-      method: "GET"
-    })
-    .then((response) => {
-      console.log("Token set successfully", response);
-    
-      //window.location.href = "https://teams-auth.ngrok.io/api/authorize?redirectUri=https://teams-auth.ngrok.io/Auth0Success";
-      // fetch(`https://teams-auth.ngrok.io/api/testAuthToken`, {
-      // method: "GET",
-      // });
-      // Call your API with token
-      //callApi(accessToken);
-    }).catch((error) => {
-      console.error("Error setting token:", error); 
-    });
+      naaSuccessCallback(accessTokenResponse);
+      
     })
     .catch(function (error) {
       console.error("Error acquiring token silently:", error);
@@ -74,11 +107,8 @@ import * as microsoftTeams from '@microsoft/teams-js';
         pca
           .acquireTokenPopup(accessTokenRequest)
           .then(function (accessTokenResponse) {
-            // Acquire token interactive success
-            let accessToken = accessTokenResponse.accessToken;
-            // Call your API with token
-            console.log("Access Token acquired interactively:", accessToken);
-            //callApi(accessToken);
+
+            naaSuccessCallback(accessTokenResponse);
           })
           .catch(function (error) {
             // Acquire token interactive failure
@@ -93,7 +123,9 @@ import * as microsoftTeams from '@microsoft/teams-js';
 })
 });
 
+}
 
-  
+document.getElementById("linkEntraAccount").addEventListener("click", linkEntraAccount);
+document.getElementById("naaLogin").addEventListener("click", naaLogin);
 
 console.log('entra script');

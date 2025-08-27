@@ -1,37 +1,11 @@
 <html>
 
 <head>
-    <title>SSO Authentication Sample</title>
 </head>
 
 <body>
-    <p>
-        This sample shows the basics of an single sign-on authentication flow in a Microsoft Teams tab.
-    </p>
-    <p>
-        The "Grant access to Microsoft Graph" button will appear only if additional consent is required.
-    </p>
+   
 
-    <!-- Login button -->
-    <button id="btnSSO" style="display: none" onclick="showUserInformationUsingSSO()">Single Sign-On</button>
-    <p id="divError" style="display: none" class="auth-data"></p>
-    <button onclick="loginWithFB()">Login with FB</button>
-    <button onclick="testAPI()">Test FB Api</button>
-    <buton onclick="loginAuth0()">Login Auth0</buton>
-    <button id="logout" onclick="auth0logout()"> Logout</button>
-    <button onclick="naaLogin()">Entra NAA Login</button>
-
-
-    <!-- Result -->
-
-    <h2>Claims from SSO access_token</h2>
-    <div id="divAccessTokenError" style="display: none" class="auth-data"></div>
-    <div id="divIdTokenClaims" style="display: none" class="auth-data"></div>
-    <p id="divRawAccessToken" style="display: none" class="auth-data"></p>
-
-    <h2>Profile from Microsoft Graph (via On-Behalf-Of flow)</h2>
-    <div id="divGraphProfileError" style="display: none" class="auth-data"></div>
-    <div id="divGraphProfile" style="display: none" class="auth-data"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.js"
@@ -42,78 +16,15 @@
         integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn"
         crossorigin="anonymous"></script>
 
-         <script src="../public/entra-bundle.js"></script>       
 
-    
-        <body>
-            <script>
-                
-            
-              function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-                console.log('statusChangeCallback');
-                console.log(response);                   // The current login status of the person.
-                if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-                  testAPI();  
-                } else {                                 // Not logged into your webpage or we are unable to tell.
-                  document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this webpage.';
-                }
-              }
-            
-            
-              function checkLoginState() {               // Called when a person is finished with the Login Button.
-                FB.getLoginStatus(function(response) {   // See the onlogin handler
-                  statusChangeCallback(response);
-                });
-              }
-            
-            
-              window.fbAsyncInit = function() {
-                FB.init({
-                  appId      : '4049678731911073',
-                  cookie     : true,                     // Enable cookies to allow the server to access the session.
-                  xfbml      : true,                     // Parse social plugins on this webpage.
-                  version    : 'v22.0'           // Use this Graph API version for this call.
-                });
-            
-            
-                FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-                  statusChangeCallback(response);        // Returns the login status.
-                });
-              };
-             
-              function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-                console.log('Welcome!  Fetching your information.... ');
-                FB.api('/me', function(response) {
-                  console.log('Successful login for: ' + response.name);
-                  document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
-                });
-              }
-              function loginWithFB() {
-                FB.login();
-              }
-              function logoutFromFB() {
-                console.log("logout");
-                FB.logout();
-              }
-            
-            </script>
-            
-            
-            <!-- The JS SDK Login Button -->
-            <fb:login-button scope="public_profile,email" auto_logout_link="false" onlogin="checkLoginState();">
-            </fb:login-button>
-            <fb:login-button scope="public_profile,email" auto_logout_link="true" onlogin="checkLoginState();">
-            </fb:login-button>
-            <button onclick="logoutFromFB()">Logout from FB</button>
-            
-            <div id="status">
-            </div>
-            
-            <!-- Load the JS SDK asynchronously -->
-            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-            </body>
+      <!-- Login button -->
+    <p>Link your account with Microsoft to stay logged in always!</p>
+    <button id="linkEntraAccount">Link Entra Account</button>
+    <button onclick="closeTaskModule()">Skip</button>
+
+             <script src="../public/entra-bundle.js"></script>       
+
+      
 
     <script type="text/javascript">
                 let primaryAccResult, secondaryAccResult;
@@ -121,16 +32,9 @@
         microsoftTeams.app.initialize().then(() => {
         });
 
-        const naaLogin = () => {
-             microsoftTeams.authentication.authenticate({
-            url: `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/authorize?connection=Microsoftentracustom&audience=https://dev-zvtwcdg4lg5a82cq.us.auth0.com/api/v2/&response_type=code&scope=update:current_user_identities%20openid%20profile%20email&client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&redirect_uri=https://teams-auth.ngrok.io/Auth0Success&state=${(new Date()).getTime()%1000}`,
-            width: 600,
-            height: 535,
-            successCallback: (result) => {
-                console.log("notify success ", JSON.parse(result));
-            }
-        });
-  
+        
+        function closeTaskModule() {
+            microsoftTeams.tasks.submitTask();
         }
 
         function loginAuth0() {
@@ -193,130 +97,12 @@
                 }
 
                 function auth0logout() {
-  const logoutUrl = `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/v2/logout?client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&returnTo=https://teams-auth.ngrok.io/Auth0Success`;
+                    const logoutUrl = `https://dev-zvtwcdg4lg5a82cq.us.auth0.com/v2/logout?client_id=4Ccf0XImjVVt96wKX3mUllgWaVUh2qxB&returnTo=https://teams-auth.ngrok.io/Auth0Success`;
 
-window.location.href = logoutUrl;
+                    window.location.href = logoutUrl;
 
-}
-
-        
-
-        // Trying to silently login using SSO
-       // showUserInformationUsingSSO();
-        function loginWithFB() {
-            FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-
-            // microsoftTeams.authentication.authenticate({
-            // url: window.location.origin + "/auth-start",
-            // width: 600,
-            // height: 535,
-            // successCallback: (result) => {
-            //     this.consentSuccess(result);
-            // },
-            // failureCallback: (reason) => {
-            //     this.consentFailure(reason);
-            // },
-            // });
-        }
-
-        function showUserInformationUsingSSO() {
-            microsoftTeams.authentication.getAuthToken().then((token) => {
-                $('#btnSSO').hide();
-                $("#btnGraphAccess").hide();
-                showUserInformationInToken(token);
-                showUserProfileFromGraph(token);
-            })
-                .catch((error) => {
-                    console.log('SSO failureCallback error: ', error);
-                    $('#btnSSO').show();
-                    showAuthError(error, "divError");
-                });
-        }
-
-        // Show the token and the user information that it has in its claims
-        function showUserInformationInToken(idToken) {
-            $("#divRawAccessToken").text(idToken).show();
-
-            microsoftTeams.app.getContext().then((context) => {
-                $.ajax({
-                    type: 'POST',
-                    url: '/decodedToken',
-                    dataType: 'json',
-                    data: {
-                        'idToken': idToken,
-                    },
-                    success: function (token) {
-                        let claimsDiv = $("#divIdTokenClaims");
-                        claimsDiv.empty();
-
-                        for (let claimId in token) {
-                            $("<div>")
-                                .append($("<b>").text(claimId + ": "))
-                                .append($("<span>").text(token[claimId]))
-                                .appendTo(claimsDiv);
-                        }
-
-                        // The id token for a guest (external) user will not have a "upn" claim.
-                        // Instead it has a "unique_name" claim, which is the username in the home organization/identity provider.
-
-                        $("#divIdTokenClaims").show();
-                        $("#divIdTokenError").hide();
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
-                });
-            });
-        }
-
-        // Get the user's profile information
-        function showUserProfileFromGraph(idToken) {
-            // The current implementation for SSO only grants consent for OpenID Connect scopes (email, profile, openid)
-            // and offline_access, but not for other APIs. If your app needs further scopes, there are some workarounds to enable this.
-            // This code prompts for user consent to additional scopes.
-
-            // Through the Azure AD On-Behalf-Of flow, the app can exchange it for an access token for
-            // other APIs that the user has consented to. In this example, the app gets a Graph token and
-            // returns the user's full Azure AD profile.
-
-
-            microsoftTeams.app.getContext().then((context) => {
-                $.ajax({
-                    type: 'POST',
-                    url: '/getProfileOnBehalfOf',
-                    dataType: 'json',
-                    data: {
-                        'idToken': idToken,
-                    },
-                    success: function (responseJson) {
-                        let profileDiv = $("#divGraphProfile");
-                        profileDiv.empty();
-
-                        for (let key in responseJson) {
-                            if ((key[0] !== "@") && responseJson[key]) {
-                                $("<div>")
-                                    .append($("<b>").text(key + ": "))
-                                    .append($("<span>").text(JSON.stringify(responseJson[key])))
-                                    .appendTo(profileDiv);
-                            }
-                        }
-
-                        $("#divGraphProfile").show();
-                        $("#divGraphProfileError").hide();
-
-                        console.log(JSON.stringify(responseJson));
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    }
-                });
-            });
-        }
-
-        // Show error information
-        function showAuthError(reason, errorDivId) {
+       
             $("#" + errorDivId).text(reason).show();
             $("#divProfile").hide();
         }
