@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 // index.js is used to setup and configure your bot
 // Import required pckages
+
 const path = require('path');
 const restify = require('restify');
 var bodyParser = require('body-parser');
@@ -12,19 +14,22 @@ Controller = require('./Controllers/HomeController')
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder')
+
 const { SidePanelBot } = require('./bots/SidePanelBot');
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '..', '.env');
 require('dotenv').config({ path: ENV_FILE });
 
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -48,8 +53,7 @@ adapter.onTurnError = async (context, error) => {
 const bot = new SidePanelBot();
 
 // Create HTTP server.
-const server = restify.createServer(
-);
+const server = restify.createServer();
 
 var agendaPointsInitial = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
 var agendaPoints = agendaPointsInitial;
@@ -64,12 +68,18 @@ server.listen(port || process.env.PORT || 3000, function () {
     console.log(`\n${server.name} listening to ${port}`);
 });
 
-// Listen for incoming requests.
+// // Listen for incoming requests.
+// server.post('/api/messages', (req, res, next) => {
+//     adapter.processActivity(req, res, async (context) => {
+//         await bot.run(context);
+//         return next();
+//     });
+// });
+
 server.post('/api/messages', (req, res, next) => {
-    adapter.processActivity(req, res, async (context) => {
-            await bot.run(context);
-        return next();
-    });
+    // Route received a request to adapter for processing
+    adapter.process(req, res, async (context) => await bot.run(context));
+    return next();
 });
 
 server.use(bodyParser.json()); // for parsing application/json
