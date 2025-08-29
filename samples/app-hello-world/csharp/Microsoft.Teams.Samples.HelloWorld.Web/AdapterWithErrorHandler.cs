@@ -4,26 +4,26 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.6.2
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
     /// <summary>
-    /// Custom adapter that extends the BotFrameworkHttpAdapter with error handling capabilities.
+    /// Custom adapter that extends the CloudAdapter with error handling capabilities.
     /// This class overrides the OnTurnError property to log errors, trace the error for debugging,
     /// and optionally notify the user.
     /// </summary>
-    public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
+    public class AdapterWithErrorHandler : CloudAdapter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
         /// Configures the error handling behavior for the adapter.
         /// </summary>
-        /// <param name="configuration">The application's configuration.</param>
+        /// <param name="botFrameworkAuthentication">The Bot Framework Authentication.</param>
         /// <param name="logger">The logger instance for logging errors.</param>
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
-            : base(configuration, logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication botFrameworkAuthentication, ILogger<CloudAdapter> logger)
+            : base(botFrameworkAuthentication, logger)
         {
             // Configuring the OnTurnError handler to capture unhandled errors.
             OnTurnError = async (turnContext, exception) =>
@@ -36,7 +36,6 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
 
                 // Trace the error in the Bot Framework Emulator to aid debugging.
                 await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
-
             };
         }
     }
