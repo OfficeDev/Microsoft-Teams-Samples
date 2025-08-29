@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="/static/scripts/auth-delegated.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    </head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container-fluid {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card-body {
+            padding: 0.75rem 1.25rem;
+            min-height: auto !important;
+            height: auto !important;
+        }
+
+        .card-header {
+            padding: 1rem 1.25rem;
+            margin-bottom: 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .tab-content {
+            min-height: auto !important;
+            height: auto !important;
+        }
+
+        .tab-pane {
+            display: none !important;
+            min-height: auto !important;
+            height: auto !important;
+        }
+
+        .tab-pane.active {
+            display: block !important;
+        }
+
+        #createtask.active {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .form-group {
+            display: block !important;
+        }
+
+        .form-control, .btn {
+            display: block !important;
+        }
+
+        .input-group {
+            display: flex !important;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        .table-sm td, .table-sm th {
+            padding: 0.375rem 0.5rem;
+        }
+
+        .col-md-8 {
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .col-md-8 {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3>Tab Request Approval</h3>
+                <p class="text-muted">Manage your approval requests efficiently</p>
+            </div>
+            
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="create-tab" data-toggle="tab" href="#createtask" role="tab">Create Task</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="requests-tab" data-toggle="tab" href="#mylist" role="tab">My Requests</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="approvals-tab" data-toggle="tab" href="#managerList" role="tab">My Pending Approvals</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div class="tab-pane show active" id="createtask" role="tabpanel">
+                    <div class="card-body" style="padding: 1rem 1.25rem;">
+                        <h5 class="mb-2">Create New Approval Request</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-2">
+                                    <label for="taskTitle" class="form-label">Task Title</label>
+                                    <input type="text" class="form-control" id="taskTitle" name="taskTitle" placeholder="Enter task title">
+                                </div>
+                                
+                                <div class="form-group mb-2">
+                                    <label for="taskDescription" class="form-label">Task Description</label>
+                                    <input type="text" class="form-control" id="taskDescription" name="taskDescription" placeholder="Enter task description">
+                                </div>
+                                
+                                <div class="form-group mb-2">
+                                    <label for="defaultSelected" class="form-label">Request to</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="defaultSelected" name="defaultSelected" readonly placeholder="Select a person">
+                                        <input type="hidden" id="objectId" name="objectId">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button" data-id="default" onclick="selectPeople(event,[],false,true)">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-2">
+                                    <button type="button" class="btn btn-primary" onclick="return sendNotificationToUser()">Send Notification</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="mylist" role="tabpanel">
+                    <div class="card-body" style="padding-top: 0.5rem;">
+                        <div id="notask" class="alert alert-info text-center d-none">
+                            <h6>No requests found</h6>
+                            <p class="mb-0">You haven't created any approval requests yet.</p>
+                        </div>
+                        <div id="mytask">
+                            <h5 class="mb-2">My Requests</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-sm" id="task-list-table-user">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Task Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Assigned To</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="managerList" role="tabpanel">
+                    <div class="card-body" style="padding-top: 0.5rem;">
+                        <div id="norequest" class="alert alert-info text-center d-none">
+                            <h6>No pending approvals</h6>
+                            <p class="mb-0">You don't have any requests waiting for your approval.</p>
+                        </div>
+                        <div id="approverequest">
+                            <h5 class="mb-2">Pending Approvals</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-sm" id="task-list-table-manager">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Task Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = {{ data|safe }};
+        var token = data.token;
+        var upn = "";
+        let aadId;
+        var userName = "";
+        var createdBy = "";
+        var empty = true;
+        var isInitialized = false;
+
+        // Single initialization function
+        $(document).ready(function () {
+            console.log("Document ready, initializing...");
+            
+            // Show the form immediately
+            $('#createtask').addClass('active');
+            $('#create-tab').addClass('active');
+            
+            // Initialize custom tab switching
+            $('.nav-tabs a').on('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs and panes
+                $('.nav-tabs a').removeClass('active');
+                $('.tab-pane').removeClass('active');
+                
+                // Add active class to clicked tab
+                $(this).addClass('active');
+                
+                // Show corresponding tab pane
+                var target = $(this).attr('href');
+                $(target).addClass('active');
+                
+                console.log("Switched to tab:", target);
+            });
+
+            // Hide alerts initially
+            $('#notask').hide();
+            $('#norequest').hide();
+            
+            // Initialize Teams SDK
+            microsoftTeams.app.initialize().then(() => {
+                console.log("Teams SDK initialized");
+                initializeApp();
+            }).catch(error => {
+                console.error("Teams SDK initialization failed:", error);
+                // Fallback for testing outside Teams
+                initializeApp();
+            });
+        });
+
+        function initializeApp() {
+            if (isInitialized) return;
+            
+            console.log("Initializing app...");
+            
+            // Get Teams context
+            microsoftTeams.app.getContext().then(function (context) {
+                console.log("Got context:", context);
+                
+                aadId = context.user.id;
+                upn = context.upn;
+                createdBy = context.user.userPrincipalName;
+                userName = context.user.userPrincipalName;
+                
+                // Handle subEntityId for deep linking
+                if(context.subEntityId != "" && context.subEntityId != undefined ) {
+                    let taskInfo = {
+                        title: "View request",
+                        size: { height: 400, width: 400 },
+                        url: window.location.origin +"/UserRequest?id="+context.subEntityId
+                    };
+
+                    submitHandler = (err, result) => {
+                        console.log(`Submit handler - err: ${err}`);
+                    };
+                    
+                    microsoftTeams.dialog.open(taskInfo, submitHandler);
+                }
+                
+                // Load data after context is ready
+                loadTaskData();
+                isInitialized = true;
+                
+            }).catch(error => {
+                console.error("Failed to get Teams context:", error);
+                // Fallback values for testing
+                aadId = "test-user";
+                createdBy = "test@example.com";
+                userName = "test@example.com";
+                loadTaskData();
+                isInitialized = true;
+            });
+        }
+
+        function loadTaskData() {
+            console.log("Loading task data...");
+            try {
+                taskDetailsForUser(data, createdBy);
+                taskDetailsForManager(data, createdBy);
+                console.log("Task data loaded successfully");
+            } catch (error) {
+                console.error("Error loading task data:", error);
+            }
+        }
+
+        // People picker api call.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+            if (!isInitialized) {
+                console.log("App not initialized yet, please wait...");
+                return;
+            }
+
+            $("#defaultSelected").val("");
+            var id = $(e.currentTarget).attr('data-id');
+   
+            if (setSelected == "default") {
+                setSelected = [aadId];
+            }
+            
+            microsoftTeams.people.selectPeople({ 
+                setSelected: setSelected, 
+                openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, 
+                singleSelect: singleSelect 
+            }).then((people) => {
+                if (people && people.length > 0) {
+                    for (var i = 0; i < people.length; i++) {
+                        if (id == "default") {
+                            $("#defaultSelected").val(people[i].email);
+                            $("#objectId").val(people[i].objectId);
+                            $("#defaultSelected").show();
+                        }
+                    }
+                }
+            }).catch(error => {
+                console.error("People picker error:", error);
+            });
+        }
+
+        // show the list of requests for current user
+        function taskDetailsForUser(data, createdBy) {
+            console.log("Loading user tasks for:", createdBy);
+            
+            if (!data || !data.requestDetails) {
+                console.log("No data or requestDetails found");
+                $('#notask').show();
+                $('#mytask').hide();
+                return;
+            }
+
+            var list = data.requestDetails;
+            var userList = [];
+            
+            if(list.length > 0) {
+                list.forEach(item => {
+                    if(item.createdBy == createdBy){
+                        userList.push(item);
+                    }
+                });
+            }
+            
+            if (userList.length == 0) {
+                $('#notask').show();
+                $('#mytask').hide();
+            }
+            else {
+                $('#notask').hide();
+                $('#mytask').show();
+                var tbody = $('#task-list-table-user tbody');
+                tbody.empty();
+                
+                for (var i = 0; i < userList.length; i++) {
+                    var status = userList[i].status;
+                    var badgeClass = 'badge-secondary';
+                    if (status === 'Pending') badgeClass = 'badge-warning';
+                    else if (status === 'Approved') badgeClass = 'badge-success';
+                    else if (status === 'Rejected') badgeClass = 'badge-danger';
+                    
+                    tbody.append(`
+                        <tr>
+                            <th scope="row">${userList[i].id}</th>
+                            <td>${userList[i].title}</td>
+                            <td>${userList[i].description}</td>
+                            <td>${userList[i].assignedTo}</td>
+                            <td><span class="badge ${badgeClass}">${userList[i].status}</span></td>
+                        </tr>
+                    `);
+                }
+            }
+        }
+
+        function taskDetailsForManager(data, createdBy) {
+            console.log("Loading manager tasks for:", createdBy);
+            
+            if (!data || !data.requestDetails) {
+                console.log("No data or requestDetails found for manager");
+                $('#norequest').show();
+                $('#approverequest').hide();
+                return;
+            }
+
+            var list = data.requestDetails;
+            var managerList = [];
+
+            if (list.length > 0) {
+                list.forEach(item => {
+                    if (item.status == "Pending" && item.assignedTo == createdBy) {
+                        managerList.push(item);
+                    }
+                });
+            }
+
+            if (managerList.length == 0) {
+                $('#norequest').show();
+                $('#approverequest').hide();
+            }
+            else {
+                $('#norequest').hide();
+                $('#approverequest').show();
+                var tbody = $('#task-list-table-manager tbody');
+                tbody.empty();
+                
+                for (var i = 0; i < managerList.length; i++) {
+                    tbody.append(`
+                        <tr>
+                            <th scope="row">${managerList[i].id}</th>
+                            <td>${managerList[i].title}</td>
+                            <td>${managerList[i].description}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-success btn-sm" data-app-itemid="${managerList[i].id}" onclick="ApproveRequest(event)">
+                                        Approve
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-app-itemid="${managerList[i].id}" onclick="RejectRequest(event)">
+                                        Reject
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                }
+            }
+        }
+
+        function ApproveRequest(e) {
+            var taskId = $(e.currentTarget).attr('data-app-itemid');
+            var button = $(e.currentTarget);
+            
+            button.prop('disabled', true).text('Approving...');
+            
+            let taskInfo = {
+                taskId: taskId,
+                status: "Approved"
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequest',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    button.removeClass('btn-success').addClass('btn-secondary').text('Approved');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                    button.removeClass('btn-success').addClass('btn-danger').text('Error');
+                    setTimeout(() => {
+                        button.removeClass('btn-danger').addClass('btn-success').text('Approve').prop('disabled', false);
+                    }, 2000);
+                }
+            });
+        };
+
+        function RejectRequest(e) {
+            var taskId = $(e.currentTarget).attr('data-app-itemid');
+            var button = $(e.currentTarget);
+            
+            button.prop('disabled', true).text('Rejecting...');
+            
+            let taskInfo = {
+                taskId: taskId,
+                status: "Rejected"
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequest',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    button.removeClass('btn-danger').addClass('btn-secondary').text('Rejected');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                    button.text('Error');
+                    setTimeout(() => {
+                        button.text('Reject').prop('disabled', false);
+                    }, 2000);
+                }
+            });
+        };
+
+        function saveRequestDetails(taskInfo) {
+            location.reload();
+
+            $.ajax({
+                type: 'POST',
+                url: '/SaveRequest',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    console.log('success save');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+        };
+
+        // Send notification to user.
+        function sendNotificationToUser() {
+            if (!isInitialized) {
+                console.log("App not initialized yet, please wait...");
+                return false;
+            }
+
+            var isValid = true;
+            var button = $('.btn-primary');
+            
+            // Reset validation styles
+            $('.form-control').removeClass('is-invalid');
+            
+            $('#taskTitle,#taskDescription,#defaultSelected').each(function () {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).addClass('is-invalid');
+                }
+                else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+            
+            if (isValid == false) {
+                return false;
+            }
+
+            button.prop('disabled', true).text('Sending...');
+
+            var PersonUerName = $("#defaultSelected").val().trim();
+            var userId = $("#objectId").val().trim();
+
+            if (!userId) {
+                button.removeClass('btn-primary').addClass('btn-danger').text('Please select a person').prop('disabled', false);
+                setTimeout(() => {
+                    button.removeClass('btn-danger').addClass('btn-primary').text('Send Notification');
+                }, 3000);
+                return false;
+            }
+
+            let taskInfo = {
+                id: data.requestDetails.length + 1,
+                title: $('#taskTitle').val(),
+                description: $('#taskDescription').val(),
+                assignedTo: PersonUerName,
+                createdBy: createdBy
+            };
+
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/installedApps/?$expand=teamsApp",
+                type: "GET",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: function (profile) {
+                    appId = getAppId(profile);
+                    sendNotification(userId, taskInfo, token, appId);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    button.removeClass('btn-primary').addClass('btn-danger').text('Error - Try Again').prop('disabled', false);
+                    setTimeout(() => {
+                        button.removeClass('btn-danger').addClass('btn-primary').text('Send Notification');
+                    }, 3000);
+                },
+            });
+        };
+
+        // get app id.
+        function getAppId(appList) {
+            var list = appList.value;
+            var i;
+            for (i = 0; i < list.length; i++) {
+                if (list[i].teamsApp['displayName'] == "Tab Request Approval") {
+                    return list[i].teamsApp['id'];
+                }
+            }
+        }
+
+        // Send notification to user.
+        function sendNotification(userId, taskInfo, token, appId) {
+            var taskID = taskInfo.id;
+            var encodedContext = encodeURI('{"subEntityId": '+taskID+'}');
+            var url = 'https://teams.microsoft.com/l/entity/'+appId+'/request?context=' + encodedContext;
+            
+            const postData = {
+                "topic": {
+                    "source": "text",
+                    "value": "Required approval",
+                    "webUrl": url
+                },
+                "activityType": "approvalRequired",
+                "previewText": {
+                    "content": "New request requires your approval"
+                },
+                "templateParameters": [
+                    {
+                        "name": "approvalTaskId",
+                        "value": taskInfo.title
+                    }
+                ]
+            };
+            
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/sendActivityNotification",
+                type: "POST",
+                data: JSON.stringify(postData),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: function (profile) {
+                    saveRequestDetails(taskInfo);
+                    
+                    var button = $('.btn-primary');
+                    button.removeClass('btn-primary').addClass('btn-success').text('Sent Successfully!');
+                    
+                    // Clear form
+                    $('#taskTitle, #taskDescription, #defaultSelected').val('').removeClass('is-invalid');
+                    $('#objectId').val('');
+                    
+                    setTimeout(() => {
+                        button.removeClass('btn-success').addClass('btn-primary').text('Send Notification').prop('disabled', false);
+                        location.reload();
+                    }, 2000);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    console.log("error" + JSON.stringify(xhr));
+                    
+                    var button = $('.btn-primary');
+                    button.removeClass('btn-primary').addClass('btn-danger').text('Failed - Try Again').prop('disabled', false);
+                    setTimeout(() => {
+                        button.removeClass('btn-danger').addClass('btn-primary').text('Send Notification');
+                    }, 3000);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
