@@ -15,7 +15,7 @@
       "value": ""
     },
     "appType": {
-      "value": "MultiTenant"
+      "value": "SingleTenant"
     },
     "appId": {
       "value": ""
