@@ -3,16 +3,17 @@
 
 import sys
 import traceback
-import uuid
 from datetime import datetime
 from http import HTTPStatus
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+    TurnContext
+)
+from botbuilder.integration.aiohttp import (
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
@@ -22,9 +23,9 @@ from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create bot adapter settings and bot adapter.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+# Create adapter.
+# See https://aka.ms/about-bot-adapter to learn more about how bots work.
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 async def on_error(context: TurnContext, error: Exception):
     """Handles errors encountered during bot operation."""
@@ -51,9 +52,6 @@ async def on_error(context: TurnContext, error: Exception):
 
 # Set up error handling for the adapter.
 ADAPTER.on_turn_error = on_error
-
-# Handle App ID logic for Emulator or other channels.
-APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
 # Initialize the Bot.
 teams_commands_menu_bot = TeamsCommandsMenuBot()
