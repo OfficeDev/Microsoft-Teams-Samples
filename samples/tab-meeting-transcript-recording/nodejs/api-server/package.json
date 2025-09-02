@@ -13,7 +13,7 @@
     "@azure/msal-node": "^1.4.0",
     "axios": "^1.5.1",
     "dotenv": "^8.2.0",
-    "esbuild": "^0.18.1",
+    "esbuild": "^0.25.9",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",

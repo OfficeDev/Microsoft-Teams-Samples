@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-id}}",
+  "id": "5b1c0d81-94fc-4753-9e49-594a11d7f0b2",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://{{domain-name}}",
-    "privacyUrl": "https://{{domain-name}}/privacy",
-    "termsOfUseUrl": "https://{{domain-name}}/termsofuse"
+    "websiteUrl": "https://trout-oriented-mastodon.ngrok-free.app",
+    "privacyUrl": "https://trout-oriented-mastodon.ngrok-free.app/privacy",
+    "termsOfUseUrl": "https://trout-oriented-mastodon.ngrok-free.app/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -26,8 +26,8 @@
     {
       "entityId": "index",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://{{domain-name}}/tab",
-      "websiteUrl": "https://{{domain-name}}/tab",
+      "contentUrl": "https://trout-oriented-mastodon.ngrok-free.app/tab",
+      "websiteUrl": "https://trout-oriented-mastodon.ngrok-free.app/tab",
       "scopes": [
         "personal"
       ]
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "https://trout-oriented-mastodon.ngrok-free.app"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsoft-App-id}}",
-    "resource": "api://{{domain-name}}/{{Microsoft-App-id}}"
+    "id": "5b1c0d81-94fc-4753-9e49-594a11d7f0b2",
+    "resource": "api://trout-oriented-mastodon.ngrok-free.app/5b1c0d81-94fc-4753-9e49-594a11d7f0b2"
   }
 }
