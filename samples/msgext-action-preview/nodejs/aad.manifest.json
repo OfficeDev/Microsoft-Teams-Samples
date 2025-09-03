@@ -1,10 +1,7 @@
 {
   "id": "${{AAD_APP_OBJECT_ID}}",
   "appId": "${{AAD_APP_CLIENT_ID}}",
-  "displayName": "app-sso-aad",
-  "identifierUris": [
-    "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
-  ],
+  "displayName": "msgext-action-preview-aad",
   "signInAudience": "AzureADMultipleOrgs",
   "api": {
     "requestedAccessTokenVersion": 2,
@@ -84,9 +81,7 @@
     ],
     "saml2Token": []
   },
-  "publicClient": {
-    "redirectUris": []
-  },
+  "publicClient": {},
   "requiredResourceAccess": [
     {
       "resourceAppId": "Microsoft Graph",
@@ -94,38 +89,12 @@
         {
           "id": "User.Read",
           "type": "Scope"
-        },
-        {
-          "id": "email",
-          "type": "Scope"
-        },
-        {
-          "id": "offline_access",
-          "type": "Scope"
-        },
-        {
-          "id": "openid",
-          "type": "Scope"
-        },
-        {
-          "id": "profile",
-          "type": "Scope"
         }
       ]
     }
   ],
   "web": {
-    "redirectUris": [
-      "https://token.botframework.com/.auth/web/redirect"
-    ],
-    "implicitGrantSettings": {
-      "enableIdTokenIssuance": true,
-      "enableAccessTokenIssuance": true
-    }
+    "implicitGrantSettings": {}
   },
-  "spa": {
-    "redirectUris": [
-      "https://${{BOT_DOMAIN}}/Auth/End"
-    ]
-  }
+  "spa": {}
 }

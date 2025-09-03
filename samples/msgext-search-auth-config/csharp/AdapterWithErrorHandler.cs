@@ -16,7 +16,7 @@ namespace Microsoft.BotBuilderSamples
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, IStorage storage, BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
+        public AdapterWithErrorHandler(IConfiguration configuration, IStorage storage, BotFrameworkAuthentication auth, ILogger<CloudAdapter> logger, ConversationState conversationState = default)
             : base(auth, logger)
         {
             base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));

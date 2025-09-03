@@ -36,7 +36,7 @@ namespace MessagingExtensionReminder
             services.AddRazorPages();
 
             // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             // Create a global hashset for our ConversationReferences
             services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();

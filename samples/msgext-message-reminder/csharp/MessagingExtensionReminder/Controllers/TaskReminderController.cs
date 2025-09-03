@@ -23,12 +23,12 @@ namespace MessagingExtensionReminder.Controllers
     [ApiController]
     public class TaskReminderController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly CloudAdapter _adapter;
         private readonly string _appId;
         private readonly ConcurrentDictionary<string, List<SaveTaskDetail>> _taskDetails;
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
 
-        public TaskReminderController(IBotFrameworkHttpAdapter adapter,
+        public TaskReminderController(CloudAdapter adapter,
           IConfiguration configuration,
           ConcurrentDictionary<string, ConversationReference> conversationReferences,
           ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails)
