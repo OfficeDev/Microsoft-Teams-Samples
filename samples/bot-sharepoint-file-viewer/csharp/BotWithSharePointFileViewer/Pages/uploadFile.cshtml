@@ -19,27 +19,64 @@
         function submit() {
             const input = document.querySelector('input[type="file"]');
             const file = input.files[0];
+            
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+            
             const formData = new FormData();
             formData.append('file', file);
 
-            setTimeout(function(){
-                $.ajax({
-                    url: '/upload',
-                    type: "POST",
-                    data: formData,
-                    mimeType: "multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function (response) {
-                        console.log(response);
-                        microsoftTeams.dialog.url.submit(true);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
-            }, 700);
+            // Show loading state
+            const button = document.querySelector('button');
+            const originalText = button.innerText;
+            button.innerText = 'Uploading...';
+            button.disabled = true;
+
+            $.ajax({
+                url: '/upload',
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response) {
+                    console.log('Upload successful:', response);
+                    microsoftTeams.dialog.url.submit(true);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Upload failed - Status:", xhr.status);
+                    console.log("Response:", xhr.responseText);
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    
+                    let errorMessage = 'Upload failed';
+                    if (xhr.responseText) {
+                        try {
+                            const errorResponse = JSON.parse(xhr.responseText);
+                            errorMessage = errorResponse.message || errorResponse.title || xhr.responseText;
+                        } catch (e) {
+                            errorMessage = xhr.responseText;
+                        }
+                    }
+                    
+                    // Show specific error messages for common issues
+                    if (xhr.status === 401) {
+                        errorMessage = 'Authentication failed. Please try logging in again.';
+                    } else if (xhr.status === 403) {
+                        errorMessage = 'Access denied. Please check SharePoint permissions.';
+                    } else if (xhr.status === 404) {
+                        errorMessage = 'SharePoint site not found. Please check site configuration.';
+                    }
+                    
+                    alert('Upload failed: ' + errorMessage);
+                },
+                complete: function() {
+                    // Reset button state
+                    button.innerText = originalText;
+                    button.disabled = false;
+                }
+            });
         }
     </script>
 </head>

@@ -1,6 +1,5 @@
 import React from 'react';
-import * as microsoftTeams from "@microsoft/teams-js";
-import { Flex, Menu, Button, Text } from '@fluentui/react-northstar'
+import { app } from "@microsoft/teams-js"; import { Flex, Menu, Button, Text } from '@fluentui/react-northstar'
 import "../recruiting-details/recruiting-details.css"
 import BasicDetails from "./basic-details/basic-details"
 import Timeline from "./basic-details/timeline"
@@ -62,8 +61,8 @@ const RecruitingDetails = () => {
 
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        microsoftTeams.getContext((context) => {
-            getQuestions(context.meetingId!)
+        app.getContext().then((context) => {
+            getQuestions(context.meeting!.id)
                 .then((res) => {
                     console.log(res)
                     const questions = res.data as IQuestionDetails[];
@@ -93,12 +92,12 @@ const RecruitingDetails = () => {
             }
         })
         const feedbackJson = JSON.stringify(feedback);
-        microsoftTeams.getContext((context) => {
+        app.getContext().then((context) => {
             const feedbackDetails: IFeedbackDetails = {
                 meetingId: questionDetails[0].meetingId,
                 candidateEmail: currentCandidateEmail,
                 feedbackJson: feedbackJson,
-                interviewer: context?.userPrincipalName!
+                interviewer: context?.user!.userPrincipalName!
             }
             saveFeedback(feedbackDetails)
                 .then((res) => {
@@ -131,10 +130,10 @@ const RecruitingDetails = () => {
     }
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
-            sethostClientType(context.hostClientType);
+        app.initialize();
+        app.getContext().then((context) => {
+            setframeContext(context.page.frameContext);
+            sethostClientType(context.app.host.clientType);
         });
         loadQuestions();
     }, [])
@@ -144,7 +143,7 @@ const RecruitingDetails = () => {
         <>
             {/* Content for stage view */}
             <Flex hidden={frameContext != "content"} gap="gap.small" padding="padding.medium" className="container">
-                <Flex column gap="gap.small" padding="padding.medium" className={hostClientType == "web" || hostClientType == "desktop"? "detailsContainer" :"detailsContainerMobile"}>
+                <Flex column gap="gap.small" padding="padding.medium" className={hostClientType == "web" || hostClientType == "desktop" ? "detailsContainer" : "detailsContainerMobile"}>
                     <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile} />
                     <Timeline />
                     <Notes currentCandidateEmail={currentCandidateEmail} />
@@ -158,7 +157,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel":"container-mobile"} column>
+            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel" : "container-mobile"} column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
@@ -171,7 +170,7 @@ const RecruitingDetails = () => {
                         {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} downloadFile={downloadFile} />}
                         {feedbackSubmitted && activeMobileMenu == 1 && <Text>Feedback submitted!</Text>}
                         {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
-                            <Flex column gap="gap.smaller"> 
+                            <Flex column gap="gap.smaller">
                                 <Flex column gap="gap.smaller" className="questionCardsMobile">
                                     <QuestionsMobile
                                         questionsSet={questionDetails}

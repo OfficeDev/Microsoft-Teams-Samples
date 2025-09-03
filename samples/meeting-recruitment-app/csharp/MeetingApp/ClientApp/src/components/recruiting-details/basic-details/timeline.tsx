@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Flex, Card, Text, NotesIcon } from '@fluentui/react-northstar'
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 import "../../recruiting-details/recruiting-details.css"
 
 const Timeline = () => {
     const [hostClientType, sethostClientType] = React.useState<any>('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            sethostClientType(context.hostClientType);
+        app.initialize();
+        app.getContext().then((context) => {
+            sethostClientType(context.app.host.clientType);
         });
     }, []);
 

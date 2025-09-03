@@ -3,7 +3,7 @@ import { Flex, Card, Button, Text, AddIcon } from '@fluentui/react-northstar'
 import { INoteDetails } from '../../../types/recruitment.types';
 import "../../recruiting-details/recruiting-details.css"
 import { getNotes, saveNote } from '../services/recruiting-detail.service';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, dialog } from "@microsoft/teams-js";
 
 export interface INotesProps {
     currentCandidateEmail: string
@@ -18,8 +18,10 @@ const Notes = (props: INotesProps) => {
     const addNotesTaskModule = () => {
         let taskInfo = {
             title: "Notes",
-            height: 300,
-            width: 400,
+            size: {
+                height: 300,
+                width: 400,
+            },
             url: `${window.location.origin}/addNote`,
         };
 
@@ -29,13 +31,13 @@ const Notes = (props: INotesProps) => {
                 return
             }
 
-            microsoftTeams.getContext((context) => {
+            app.getContext().then((context) => {
                 // The note details to save.
                 const noteDetails: INoteDetails = {
                     candidateEmail: props.currentCandidateEmail,
                     note: note,
-                    addedBy: context.userPrincipalName!,
-                    meetingId: context.meetingId!,
+                    addedBy: context.user!.userPrincipalName!,
+                    meetingId: context.meeting!.id!,
                 };
 
                 // API call to save the question to storage.
@@ -63,9 +65,9 @@ const Notes = (props: INotesProps) => {
     }
 
     React.useEffect((): any => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            sethostClientType(context.hostClientType);
+        app.initialize();
+        app.getContext().then((context) => {
+            sethostClientType(context.app.host.clientType);
         });
         loadNotes();
     }, [props.currentCandidateEmail])
