@@ -17,3 +17,5 @@ class DefaultConfig:
     TEAMS_APP_ID = os.environ.get("TeamsAppId", "<<TEAMS-APP-ID>>")
     Tab_Entity_Id = os.environ.get("Tab_Entity_Id", "<<TAB-ENTITY-ID>>")
     Channel_Entity_Id = os.environ.get("Channel_Entity_Id", "<<CHANNEL-ENTITY-ID>>")
+    APP_TYPE = os.environ.get("MicrosoftAppType", "")
+    APP_TENANTID = os.environ.get("MicrosoftAppTenantId", "")

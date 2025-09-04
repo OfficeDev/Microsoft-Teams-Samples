@@ -3,7 +3,6 @@
 
 import sys
 import traceback
-import uuid
 from datetime import datetime
 from http import HTTPStatus
 import json
@@ -11,11 +10,9 @@ from aiohttp import web
 import os
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+    TurnContext
 )
-
+from botbuilder.integration.aiohttp import CloudAdapter,ConfigurationBotFrameworkAuthentication
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 from server.bots import BotSequentialFlowAdaptiveCard
@@ -23,10 +20,11 @@ from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+# Correct authentication object
+bot_authentication = ConfigurationBotFrameworkAuthentication(CONFIG)
+
+# Create adapter
+ADAPTER = CloudAdapter(bot_authentication)
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
@@ -57,11 +55,6 @@ async def on_error(context: TurnContext, error: Exception):
 
 
 ADAPTER.on_turn_error = on_error
-
-# If the channel is the Emulator, and authentication is not in use, the AppId will be null.
-# We generate a random AppId for this case only. This is not required for production, since
-# the AppId will have a value.
-APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
 # Create the Bot
 BOT = BotSequentialFlowAdaptiveCard()
