@@ -8,14 +8,11 @@ from http import HTTPStatus
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-    TurnContext
-)
+from botbuilder.core import TurnContext
 from botbuilder.integration.aiohttp import (
     CloudAdapter,
     ConfigurationBotFrameworkAuthentication
 )
-from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 
 from bots import TeamsCommandsMenuBot
@@ -23,9 +20,12 @@ from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
+# Create the Bot Framework Authentication to be used with the Bot Adapter.
+bot_framework_authentication = ConfigurationBotFrameworkAuthentication(CONFIG)
+
 # Create adapter.
 # See https://aka.ms/about-bot-adapter to learn more about how bots work.
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+ADAPTER = CloudAdapter(bot_framework_authentication)
 
 async def on_error(context: TurnContext, error: Exception):
     """Handles errors encountered during bot operation."""
@@ -56,26 +56,34 @@ ADAPTER.on_turn_error = on_error
 # Initialize the Bot.
 teams_commands_menu_bot = TeamsCommandsMenuBot()
 
-async def handle_incoming_messages(req: Request) -> Response:
-    """Processes incoming messages and routes them to the bot."""
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+@web.middleware
+async def error_middleware(request, handler):
+    """Error handling middleware."""
+    try:
+        return await handler(request)
+    except Exception as e:
+        print(f"Error handling request: {e}")
+        traceback.print_exc()
+        return Response(status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
-    activity = Activity().deserialize(body)
+async def messages(req: Request) -> Response:
+    """Main bot message handler."""
+    body = await req.text()
     auth_header = req.headers.get("Authorization", "")
 
-    # Process the activity using the adapter and bot.
-    response = await ADAPTER.process_activity(activity, auth_header, teams_commands_menu_bot.on_turn)
-    if response:
-        return json_response(data=response.body, status=response.status)
-    
-    return Response(status=HTTPStatus.OK)
+    try:
+        response = await ADAPTER.process_activity(body, auth_header, teams_commands_menu_bot.on_turn)
+        if response:
+            return json_response(data=response.body, status=response.status)
+        return Response(status=HTTPStatus.OK)
+    except Exception as e:
+        print(f"Error processing activity: {e}")
+        traceback.print_exc()
+        return Response(status=HTTPStatus.INTERNAL_SERVER_ERROR)
 
 # Create and configure the web application to listen for bot messages.
-APP = web.Application(middlewares=[aiohttp_error_middleware])
-APP.router.add_post("/api/messages", handle_incoming_messages)
+APP = web.Application(middlewares=[error_middleware])
+APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":
     try:
