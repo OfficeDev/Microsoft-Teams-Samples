@@ -68,3 +68,12 @@ deploy:
       args: install --no-audit
       workingDirectory: bot
 
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        MicrosoftAppType: SingleTenant
+        MicrosoftAppTenantId: ${{TEAMS_APP_TENANT_ID}}
+
