@@ -3,17 +3,13 @@
 
 import sys
 import traceback
-import uuid
 from datetime import datetime
 from http import HTTPStatus
 from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
-)
+from aiohttp.web import Request, Response
+from botbuilder.core import TurnContext
 from botbuilder.core.integration import aiohttp_error_middleware
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.schema import Activity, ActivityTypes
 from jinja2 import Environment, FileSystemLoader
 from bots import BotActivityHandler
@@ -38,9 +34,9 @@ def get_translation(locale):
             import json
             return json.load(file)
 
-# Create adapter.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+
+# Create adapter using CloudAdapter and configuration-based authentication
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
@@ -66,23 +62,12 @@ async def on_error(context: TurnContext, error: Exception):
 
 ADAPTER.on_turn_error = on_error
 
-APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 BOT = BotActivityHandler()
 
 # Main bot message handler.
 async def messages(req: Request) -> Response:
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    return await ADAPTER.process(req, BOT)
 
-    activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
-
-    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if response:
-        return json_response(data=response.body, status=response.status)
-    return Response(status=HTTPStatus.OK)
 
 # Static tab route
 async def static_tab(req: Request) -> Response:

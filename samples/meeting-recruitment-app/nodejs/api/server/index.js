@@ -1,6 +1,10 @@
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter, CardFactory } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication,
+    CardFactory
+} = require('botbuilder');
 const { BotActivityHandler } = require('./bot/botActivityHandler');
 const candidateHandler = require('./data/candidate')
 const questionsHandler = require('./data/questions')
@@ -20,22 +24,11 @@ const server = express();
 // Create bot handlers
 const botActivityHandler = new BotActivityHandler();
 
-
-// Listen for incoming activities and route them to your bot main dialog.
-server.post('/api/messages', (req, res) => {
-    // Route received a request to adapter for processing
-    adapter.processActivity(req, res, async (turnContext) => {
-        // route to bot activity handler.
-        await botActivityHandler.run(turnContext);
-    });
-});
-
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. server insights.
@@ -54,6 +47,12 @@ adapter.onTurnError = async (context, error) => {
      // Uncomment below commented line for local debugging.
      // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
+
+// Listen for incoming activities and route them to your bot main dialog.
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => botActivityHandler.run(context));
+});
 
 
 
@@ -120,7 +119,8 @@ server.get('/api/Candidate/file', (req, res) => {
 
 server.post('/api/Notify', async (req, res) => {
     for (const conversationReference of Object.values(ConversationRef)) {
-        await adapter.continueConversation(conversationReference, async turnContext => {
+        const botAppId = process.env.MicrosoftAppId || process.env.AAD_APP_CLIENT_ID || '';
+        await adapter.continueConversationAsync(botAppId, conversationReference, async turnContext => {
             var actions = new Array();
             req.body.files.map((file) => {
                 actions.push({

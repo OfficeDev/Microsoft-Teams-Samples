@@ -20,9 +20,9 @@
   "dependencies": {
     "azure-storage": "^2.10.4",
     "body-parser": "^1.19.0",
-    "botbuilder": "~4.7.0",
-    "botframework-connector": "^4.13.6",
-    "botframework-schema": "^4.13.6",
+    "botbuilder": "^4.20.0",
+    "botframework-connector": "^4.20.0",
+    "botframework-schema": "^4.20.0",
     "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",

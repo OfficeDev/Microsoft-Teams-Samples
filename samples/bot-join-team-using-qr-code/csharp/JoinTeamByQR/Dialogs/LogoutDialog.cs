@@ -5,7 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Connector.Authentication;
 
 namespace JoinTeamByQR.Dialogs
 {
@@ -52,9 +54,13 @@ namespace JoinTeamByQR.Dialogs
                 // Allow logout anywhere in the command
                 if (text.IndexOf("logout") >= 0)
                 {
-                    // The bot adapter encapsulates the authentication processes.
-                    var botAdapter = (BotFrameworkAdapter)innerDc.Context.Adapter;
-                    await botAdapter.SignOutUserAsync(innerDc.Context, ConnectionName, null, cancellationToken);
+                    // Use the UserTokenClient for CloudAdapter authentication operations
+                    var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
+                    if (userTokenClient != null)
+                    {
+                        await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken);
+                    }
+                    
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
                     return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
