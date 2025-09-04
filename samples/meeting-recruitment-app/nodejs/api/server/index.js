@@ -12,8 +12,6 @@ const notesHandler = require('./data/notes')
 const feedbackHandler = require('./data/feedback')
 const { ConversationRef } = require('./bot/botActivityHandler');
 const cardHelper = require('./cards/cardHelper')
-const authStore = require('./keys');
-const authObject = new authStore();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -127,9 +125,6 @@ server.post('/api/Notify', async (req, res) => {
             req.body.files.map((file) => {
                 actions.push({
                     type: "Action.OpenUrl",
-                    title: file,
-                    url: (process.env.BlobUrl || authObject.blobUrl) + "/" + file
-Url",
                     title: file,
                     url: process.env.BlobUrl +"/" +file
                 });
