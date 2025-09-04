@@ -63,8 +63,25 @@
             "label": "Provision",
             "type": "teamsfx",
             "command": "provision",
+            "dependsOn": [
+                "Install ClientApp dependencies"
+            ],
             "args": {
                 "env": "local"
+            }
+        },
+        {
+            // Ensure ClientApp node dependencies are installed before provisioning.
+            "label": "Install ClientApp dependencies",
+            "type": "shell",
+            "command": "npm install",
+            "options": {
+                "cwd": "${workspaceFolder}/ClientApp"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
             }
         },
         {

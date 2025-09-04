@@ -27,18 +27,6 @@ This sample application [Enables the configuration](https://docs.microsoft.com/m
 * Live Share SDK
 * RSC Permissions
 
-## Interact with app - Web
-
-![Preview Image](Images/preview_web.gif)
-
-## Interact with app - Mobile
-
-![Preview Image](Images/preview_mobile.gif)
-
-## Interaction with app theme
-
-![Preview Image](Images/app-theme.gif)
-
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
@@ -139,13 +127,13 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 4) Navigate to `samples/samples/meetings-stage-view/python/ClientApp/src/components/app-in-meeting.jsx`
 
-5) On line 74, replace `<<App id>>` with `Id` obtained in step 3.
+5) Replace `<<App id>>` with `Id` obtained in step 3.
 
 6) Navigate to `samples/samples/meetings-stage-view/python/ClientApp/src/components/share-to-meeting.jsx`
 
-7) On line 25, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
+7) Replace `<Application-Base-URL>` with your application's base url where app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok-free.app` and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
-8) On line 26, replace `<<Application-ID>>` with `Id` obtained in step 3.
+8) Replace `<<Application-ID>>` with `Id` obtained in step 3.
 
 9) When the app is running, the home page will contain a `share to teams` button. Clicking it will share the page content directly to meeting. (Make sure the app's base url is added in manifest's valid domains section and app is published to store).
 
@@ -167,7 +155,7 @@ You can use this app by following the below steps:
     - Edit a meeting and select `+` icon at the top right corner.
 
 
-- Add App in Meeting.
+- Add App to a Meeting.
 
 ![Add App](Images/Add_in_meeting.png)
 
@@ -177,7 +165,7 @@ You can use this app by following the below steps:
 
 ![Side Panel](Images/Side_Panel.png)
 
-- Add Task in "To Do"
+- Add Task to a "To Do" field
 
 ![Add Task](Images/Add_Task.png)
 ![Added Task](Images/Added_Task.png)
