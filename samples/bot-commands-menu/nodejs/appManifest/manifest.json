@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
-  "version": "1.0.1",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.7",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Contoso",
@@ -36,19 +36,26 @@
           "commands":[
             {
               "title":"Help",
-              "description":"Displays this help message"
+              "description":"Displays this help message",
+              "type":"basic"
             },
             {
               "title":"Search Flights",
-              "description":"Search flights from Seattle to Phoenix May 2-5 departing after 3pm"
+              "description":"Search flights from Seattle to Phoenix May 2-5 departing after 3pm",
+              "type": "prompt",
+              "prompt": "Search flights from Seattle to Phoenix May 2-5 departing after 3pm. Please show me the best options."
             },
             {
               "title":"Search Hotels",
-              "description":"Search hotels in Portland tonight"
+              "description":"Search hotels in Portland tonight",
+              "type": "prompt",
+              "prompt": "I need to find hotels in Portland for tonight. Please show me available options with good ratings."
             },
             {
-              "title":"Best Time to Fly",
-              "description":"Best time to fly to London for a 5 day trip is summer"
+              "title": "Best Time to Fly",
+              "description": "Best time to fly to London for a 5 day trip is summer",
+              "type": "prompt",
+              "prompt": "What is the best time to fly to London for a 5 day trip? I'm looking for good weather and reasonable prices."
             }
           ]
         }
