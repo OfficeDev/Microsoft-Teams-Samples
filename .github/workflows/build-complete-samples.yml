@@ -788,7 +788,7 @@ jobs:
               name: 'outgoing-webhook'
               version: '14.x'
 
-            - project_path: 'samples/bot-proactive-messaging-teamsfx'
+            - project_path: 'samples/bot-proactive-messaging-teamsfx/nodejs'
               name: 'bot-proactive-messaging-teamsfx'
               version: '18.x'              
 
@@ -1204,6 +1204,10 @@ jobs:
 
             - project_path: 'samples/tab-deeplink/python'
               name: 'tab-deeplink'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-proactive-messaging-teamsfx/python'
+              name: 'bot-proactive-messaging-teamsfx'
               version: '3.10.x'
 
       fail-fast: false
