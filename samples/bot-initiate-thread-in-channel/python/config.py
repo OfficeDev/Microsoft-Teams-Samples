@@ -13,3 +13,5 @@ class DefaultConfig:
     PORT = 3978
     APP_ID = os.environ.get("MicrosoftAppId", "<<MICROSOFTAPP-ID>>")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "MICROSOFT-APP-PASSWORD")
+    APP_TYPE = os.environ.get("MicrosoftAppType", "")
+    APP_TENANTID = os.environ.get("MicrosoftAppTenantId", "")
