@@ -49,7 +49,7 @@
               "title":"Search Hotels",
               "description":"Search hotels in Portland tonight",
               "type": "prompt",
-              "prompt": "I need to find hotels in Portland for tonight. Please show me available options with good ratings."
+              "prompt": "Search hotels in Portland for tonight. Please show me available options with good ratings."
             },
             {
               "title": "Best Time to Fly",

@@ -21,7 +21,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Interaction with app
 
-![Preview Image](Images/Botcommandsmenu.gif)
+![Preview Image](Images/bot_commands_menu.gif)
 
 ## Prerequisites
 
@@ -110,15 +110,18 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 ![2.PromptStarters](Images/2.PromptStarters.png)
 
-![3.SearchFlights](Images/3.SearchFlights.png)
+![3.Help](Images/1.help.png)
+![3.Help](Images/2.help_reply.png)
 
-![4.SearchHotels](Images/4.SearchHotels.png)
+![4.SearchFlights](Images/3.flights.png)
+![4.SearchFlights](Images/4.flights_reply.png)
 
-![3.SearchFlightsDetails](Images/3.SearchFlightsDetails.png)
+![5.BestTime](Images/5.hotels.png)
+![5.SearchHotels](Images/6.hotels_reply.png)
 
-![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
+![6.SearchHotels](Images/7.best_time.png)
+![6.SearchHotels](Images/8.best_time_reply.png)
 
-![5.ViewPrompts](Images/5.ViewPrompts.png)
 ## Further reading
 
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
