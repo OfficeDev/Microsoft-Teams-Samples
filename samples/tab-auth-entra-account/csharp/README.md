@@ -12,9 +12,9 @@ extensions:
  createdDate: "25/07/2025 11:20:17 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-auth-entra-account-csharp
 ---
-# Sign in using a different Microsoft Entra account - C#
+# Sign in using a different Microsoft Entra account - C# (PKCE Flow)
 
-This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID (Azure AD) authentication in a Teams tab. It enables users to sign in and switch between different Entra accounts, providing secure and flexible access. The sample showcases best practices for implementing authentication and account switching in Teams tab applications.
+This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID (Azure AD) authentication in a Teams tab using the **OAuth 2.0 Authorization Code Flow with PKCE (Proof Key for Code Exchange)**. This implementation provides a **client-side only** authentication solution that enables users to sign in and switch between different Entra accounts.
 
 ## Included Features
 * External Auth
@@ -29,43 +29,39 @@ This Microsoft Teams sample app illustrates how to integrate Microsoft Entra ID 
 
 ## Authentication Flow Diagram
 
-The following diagram illustrates the Microsoft Entra ID authentication flow in this Teams tab application:
+The following diagram illustrates the Microsoft Entra ID authentication flow using OAuth 2.0 Authorization Code Flow with PKCE (Proof Key for Code Exchange) - a client-side only implementation suitable for Single Page Applications:
 
 ```mermaid
 sequenceDiagram
     participant U as User
-    participant T as Teams Tab
-    participant A as ASP.NET Core App
+    participant T as Teams Tab (JavaScript)
     participant E as Microsoft Entra ID
     participant API as Microsoft Graph API
 
-    Note over U,API: Authentication Flow for Teams Tab with Entra ID
+    Note over U,API: PKCE Authentication Flow for Teams Tab with Entra ID
 
     U->>T: Opens Teams Tab
-    T->>A: GET /Home/Index
-    A->>T: Returns main page with login option
     T->>U: Displays authentication page
     
     U->>T: Clicks "Sign In" button
-    T->>A: GET /Auth/AuthStart
-    A->>T: Returns auth start page with client config
-    T->>E: Redirect to Entra ID authorization endpoint
-    Note right of E: OAuth 2.0 Implicit Grant Flow
+    T->>T: Generate PKCE code verifier & challenge
+    T->>E: Redirect to Entra ID authorization endpoint with PKCE
+    Note right of E: OAuth 2.0 Authorization Code Flow with PKCE
     
     E->>U: Display Entra ID login page
     U->>E: Enter credentials & consent
-    E->>T: Redirect with access token (fragment)
-    T->>A: POST /Auth/AuthEnd with token
-    A->>T: Process token and return success page
+    E->>T: Redirect with authorization code
+    T->>E: Exchange code for access token using PKCE
+    E->>T: Return access token & refresh token
     
-    Note over T,API: Authenticated User Session
+    Note over T,API: Authenticated User Session (Client-side only)
     T->>API: API calls with access token
     API->>T: Return user data/resources
     T->>U: Display authenticated content
     
     Note over U,T: Account Switching
     U->>T: Click "Switch Account"
-    T->>E: Re-initiate auth flow with different account
+    T->>E: Re-initiate PKCE auth flow with different account
     E->>U: Account selection/login page
     U->>E: Select different account
     E->>T: New access token for different account
@@ -108,20 +104,29 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      * Choose the **supported account types** (any account type will work)
      * Leave **Redirect URI** empty.
      * Choose **Register**.
-  - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+  - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  
   - Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-    Set a redirect URI:
+    
+    **Configure for Single Page Application (SPA) with PKCE:**
     * Select **Add a platform**.
-    * Select **web**.
+    * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: 
          * https://<your_tunnel_domain>/Auth/AuthEnd, 
          * https://<your_tunnel_domain>/Auth/AuthStart. 
-      This will be the page where a successful implicit grant flow will redirect the user.
-    Enable implicit grant by checking the following boxes:  
+      This will be the page where a successful authorization code flow will redirect the user.
+    
+    **Enable implicit grant flows (for backward compatibility):**
     ✔ ID Token  
-    ✔ Access Token  
-  - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+    ✔ Access Token
+    
+    **Allow public client flows:** Set to **Yes**
+  
+  - Navigate to the **Certificates & secrets**. 
+    **Note:** For PKCE flow, client secrets are **not required** and **not recommended** for security reasons.
+    However, if you need them for other purposes, you can still create them:
+    In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select "Never" for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup Development Tunnel (NGROK or Dev Tunnel)
 - Run ngrok - point to port 3978
@@ -151,7 +156,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Modify the `TabAuthEntraAccount/appsettings.json` and fill in the following details:
   - `{{AzureAd:ClientId}}` - Generated from Step 1 while doing Microsoft Entra ID app registration in Azure portal.
-  - `{{AzureAd:ClientSecret}}` - Generated from Step 1, also referred to as Client secret
   - `{{AzureAd:RedirectUri}}` - Your Redirect URI. ex: `https://%ngrokDomain%.ngrok-free.app/Auth/AuthEnd`
 
 - If you are using Visual Studio
@@ -170,7 +174,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./M365Agent/appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-    
+
 ## Running the sample
 
 **Note:** 

@@ -56,7 +56,6 @@ provision:
       content:
         AzureAd:
           ClientId: ${{AAD_APP_CLIENT_ID}}
-          ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
           RedirectUri: https://${{BOT_DOMAIN}}/Auth/AuthEnd
 
   # Apply the AAD manifest to an existing AAD app. Will use the object id in

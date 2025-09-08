@@ -233,7 +233,6 @@
                     }).then((result) => {
                         resolve(result);
                     }).catch((reason) => {
-                        console.log("Authentication failed: " + reason);
                         reject(reason);
                     })
                 })
@@ -247,58 +246,26 @@
             
             AuthIdToken()
                 .then((result) => {
-                    return getAuthServerSideToken(result);
+                    // Parse the authentication result directly from PKCE flow
+                    try {
+                        const profile = JSON.parse(result);
+                        populateAllProfileData(profile);
+                        showProfileCard();
+                        showLoading(false);
+                    } catch (e) {
+                        console.error("Error parsing profile data:", e);
+                        showError("Error parsing profile data: " + e.message);
+                        showLoading(false);
+                    }
                 })
                 .catch((error) => {
-                    console.log("Authentication error:", error);
                     showError("Authentication failed: " + error);
                     showLoading(false);
                 });
         }
 
-        // Exchange token and get comprehensive profile data
-        function getAuthServerSideToken(clientSideToken) {
-            return new Promise((resolve, reject) => {
-                microsoftTeams.app.getContext().then((context) => {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/getAuthAccessToken',
-                        dataType: 'json',
-                        data: {
-                            'idToken': clientSideToken,
-                        },
-                        success: function (responseJson) {
-                            try {
-                                var profile = JSON.parse(responseJson);
-                                console.log("Received comprehensive profile data:", profile);
-                                populateAllProfileData(profile);
-                                showProfileCard();
-                                resolve(profile);
-                            } catch (e) {
-                                console.error("Error parsing profile data:", e);
-                                showError("Error parsing profile data: " + e.message);
-                            }
-                            showLoading(false);
-                        },
-                        error: function (xhr, textStatus, errorThrown) {
-                            console.log("Request failed - textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                            showError("Failed to fetch profile data. Please try again.");
-                            showLoading(false);
-                            reject(new Error(textStatus));
-                        }
-                    });
-                }).catch((error) => {
-                    console.error("Failed to get Teams context:", error);
-                    showError("Failed to get Teams context: " + error.message);
-                    showLoading(false);
-                    reject(error);
-                });
-            });
-        }
-
         // Populate ONLY personal information in the UI
         function populateAllProfileData(profile) {
-            console.log("Populating only personal information:", profile);
             
             // Helper function to safely set text content
             function setTextContent(elementId, value, emptyText = "Not specified") {
@@ -374,7 +341,6 @@
             showLoading(false);
             showSignInCard();
             hideError();
-            console.log("Loading cancelled by user");
         }
     </script>
 </head>

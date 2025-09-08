@@ -44,12 +44,14 @@ namespace TabAuthEntraAccount.Controllers
         /// <summary>
         /// Displays the authentication completion page for Microsoft Entra ID OAuth 2.0 flow.
         /// This page is shown after the user completes authentication with Microsoft and 
-        /// the authorization code is returned. It typically handles the code exchange and 
-        /// user profile retrieval process.
+        /// the authorization code is returned. It handles the code exchange using PKCE
+        /// and user profile retrieval process client-side.
         /// </summary>
-        /// <returns>AuthEnd view for handling authentication completion</returns>
+        /// <returns>AuthEnd view with Azure AD Client ID configured for PKCE token exchange</returns>
         public IActionResult AuthEnd()
         {
+            // Provide the Azure AD Client ID to the view for JavaScript PKCE token exchange
+            ViewBag.AzureClientId = _configuration["AzureAd:ClientId"];
             return View();
         }
     }

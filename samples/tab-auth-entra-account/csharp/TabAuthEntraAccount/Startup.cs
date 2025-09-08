@@ -4,8 +4,6 @@
 
 namespace TabAuthEntraAccount
 {
-    using System;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -25,12 +23,6 @@ namespace TabAuthEntraAccount
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
-            services.AddHttpContextAccessor();
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +44,6 @@ namespace TabAuthEntraAccount
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
