@@ -62,8 +62,8 @@ const MeetingTranscriptRecording = () => {
     }, [socket]);
 
     const getUpdatedData = () => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
+        return new Promise((_resolve, _reject) => {
+            microsoftTeams.app.getContext().then((_context) => {
                 fetch('/getUpdatedEvents', {
                     method: 'get',
                     headers: {
@@ -117,8 +117,8 @@ const MeetingTranscriptRecording = () => {
 
     // Get server side token and user profile.
     const getServerSideToken = (clientSideToken) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
+        return new Promise((_resolve, reject) => {
+            microsoftTeams.app.getContext().then((_context) => {
                 fetch('/GetLoginUserInformation?ssoToken=' + clientSideToken, {
                     method: 'get',
                     headers: {
@@ -140,9 +140,9 @@ const MeetingTranscriptRecording = () => {
                           setLoading(false);
                           setIsCardVisible(true);
                           setEventUpdated(false);
-                          data.map((event, index) => (
-                            getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl)
-                          ))
+                        //   data.map((event, _index) => (
+                        //     getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl)
+                        //   ))
                         } else {
                             setLoading(false);
                             reject(response.error);
@@ -157,8 +157,8 @@ const MeetingTranscriptRecording = () => {
 
     // Get server side token and user profile.
     const getMeetingTranscriptsIdRecordingId = (clientSideToken, joinUrl) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
+        return new Promise((_resolve, reject) => {
+            microsoftTeams.app.getContext().then((_context) => {
                 fetch(`/getMeetingTranscriptsIdRecordingId?joinUrl=${joinUrl}&ssoToken=${clientSideToken}`, {
                     method: 'get',
                     headers: {
@@ -183,8 +183,8 @@ const MeetingTranscriptRecording = () => {
     }
 
     const createSubscription = (clientSideToken) => {
-        return new Promise((resolve, reject) => {
-            microsoftTeams.app.getContext().then((context) => {
+        return new Promise((_resolve, _reject) => {
+            microsoftTeams.app.getContext().then((_context) => {
                 fetch('/createsubscription?ssoToken=' + clientSideToken, {
                     method: 'post',
                     headers: {
@@ -210,7 +210,7 @@ const MeetingTranscriptRecording = () => {
     // Request consent on implicit grant error.
     const requestConsent = () => {
         getToken()
-            .then(data => {
+            .then(_data => {
                 setIsConsentButtonVisible(false);
                 getClientSideToken()
                     .then((clientSideToken) => {
@@ -257,7 +257,7 @@ const MeetingTranscriptRecording = () => {
         taskInfo.title = "Recording and Transcript Form";
         taskInfo.height = 510;
         taskInfo.width = 1300;
-        submitHandler = (err, result) => {
+        submitHandler = (err, _result) => {
             console.log(`Submit handler - err: ${err}`);
         };
         microsoftTeams.tasks.startTask(taskInfo, submitHandler);

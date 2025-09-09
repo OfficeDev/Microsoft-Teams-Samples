@@ -19,6 +19,13 @@ let eventUpdated = false;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
+// Serve static files from the build directory
+app.use(express.static(path.resolve(__dirname, './build')));
+
+app.get('/tab', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './build/index.html'));
+});
+
 //This method obtains an access token and makes requests to the Microsoft Graph API to fetch events, online meetings, transcripts, and recordings.
 app.get('/GetLoginUserInformation', async (req, res) => {
   try {

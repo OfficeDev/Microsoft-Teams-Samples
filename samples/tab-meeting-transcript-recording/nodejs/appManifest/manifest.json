@@ -5,17 +5,17 @@
   "id": "5b1c0d81-94fc-4753-9e49-594a11d7f0b2",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://trout-oriented-mastodon.ngrok-free.app",
-    "privacyUrl": "https://trout-oriented-mastodon.ngrok-free.app/privacy",
-    "termsOfUseUrl": "https://trout-oriented-mastodon.ngrok-free.app/termsofuse"
+    "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app",
+    "privacyUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/privacy",
+    "termsOfUseUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/termsofuse"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Transcripts Recordings",
-    "full": "Meeting Transcripts Recordings"
+    "short": "Magic Notes",
+    "full": "Magic Notes Teams App"
   },
   "description": {
     "short": "Capture and manage meeting transcripts and recordings in Microsoft Teams.",
@@ -26,8 +26,8 @@
     {
       "entityId": "index",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://trout-oriented-mastodon.ngrok-free.app/tab",
-      "websiteUrl": "https://trout-oriented-mastodon.ngrok-free.app/tab",
+      "contentUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab",
+      "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab",
       "scopes": [
         "personal"
       ]
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "https://trout-oriented-mastodon.ngrok-free.app"
+    "https://microsoft-teams-app-782853820129.europe-west2.run.app"
   ],
   "webApplicationInfo": {
     "id": "5b1c0d81-94fc-4753-9e49-594a11d7f0b2",
-    "resource": "api://trout-oriented-mastodon.ngrok-free.app/5b1c0d81-94fc-4753-9e49-594a11d7f0b2"
+    "resource": "api://microsoft-teams-app-782853820129.europe-west2.run.app/5b1c0d81-94fc-4753-9e49-594a11d7f0b2"
   }
 }

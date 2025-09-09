@@ -17,13 +17,29 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "reactstrap": "^9.2.0",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "@azure/msal-node": "^1.4.0",
+    "axios": "^1.5.1",
+    "dotenv": "^8.2.0",
+    "esbuild": "^0.25.9",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "jwt-decode": "^2.2.0",
+    "luxon": "^3.4.3",
+    "node-fetch": "^2.6.0",
+    "socket.io": "^4.7.2",
+    "stream": "^0.0.2"
   },
   "browser": {
     "crypto": false
   },
+  "overrides": {
+    "typescript": "5.9.2"
+  },
   "scripts": {
-    "start": "set PORT=3978 HTTP=true && react-scripts --openssl-legacy-provider start",
+    "start": "node index.js",
+    "start-react": "set PORT=3000 HTTP=true && react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
