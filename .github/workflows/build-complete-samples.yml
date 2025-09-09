@@ -792,7 +792,7 @@ jobs:
               name: 'outgoing-webhook'
               version: '14.x'
 
-            - project_path: 'samples/bot-proactive-messaging-teamsfx'
+            - project_path: 'samples/bot-proactive-messaging-teamsfx/nodejs'
               name: 'bot-proactive-messaging-teamsfx'
               version: '18.x'              
 
@@ -1063,6 +1063,14 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '16.x'  
 
+            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
+              name: 'tab-adhoccalls-transcript-recording'
+              version: '18.x'
+
+            - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
+              name: 'tab-adhoccalls-transcript-recording-api-server'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
@@ -1200,6 +1208,10 @@ jobs:
 
             - project_path: 'samples/tab-deeplink/python'
               name: 'tab-deeplink'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-proactive-messaging-teamsfx/python'
+              name: 'bot-proactive-messaging-teamsfx'
               version: '3.10.x'
 
       fail-fast: false
