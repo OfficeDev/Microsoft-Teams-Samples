@@ -21,7 +21,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Interaction with app
 
-![Preview Image](Images/Botcommandsmenu.gif)
+![Preview Image](Images/bot_commands_menu.gif)
 
 ## Prerequisites
 
@@ -90,9 +90,7 @@ the Teams service needs to call into the bot.
 # Running the sample
 
 **Install App Personal**
-![image](Images/1.InstallApp.png)
-
-![2.PromptStarters](Images/2.PromptStarters.png)
+![image](Images/install.png)
 
 ![3.Help](Images/1.help.png)
 ![3.Help](Images/2.help_reply.png)
