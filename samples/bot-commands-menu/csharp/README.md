@@ -105,19 +105,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 # Running the sample
 
 **Install App Personal**
-![image](Images/install.png)
+![1.addApp](Images/1.addApp.png)
+![2.openApp](Images/2.openApp.png)
 
-![3.Help](Images/1.help.png)
-![3.Help](Images/2.help_reply.png)
+![3.DefaultView](Images/3.DefaultView.png)
 
-![4.SearchFlights](Images/3.flights.png)
-![4.SearchFlights](Images/4.flights_reply.png)
+![4.Help](Images/4.Help.png)
+![5.HelpResponse](Images/5.HelpResponse.png)
 
-![5.BestTime](Images/5.hotels.png)
-![5.SearchHotels](Images/6.hotels_reply.png)
+![6.SearchFlights](Images/6.SearchFlights.png)
+![7.SearchFlightsResponse](Images/7.SearchFlightsResponse.png)
 
-![6.SearchHotels](Images/7.best_time.png)
-![6.SearchHotels](Images/8.best_time_reply.png)
+![8.SearchHotels](Images/8.SearchHotels.png)
+![9.SearchHotelsResponse1](Images/9.SearchHotelsResponse1.png)
+![10.SearchHotelsResponse2](Images/10.SearchHotelsResponse2.png)
+
+![11.BestTimeToFly](Images/11.BestTimeToFly.png)
+![12.BestTimeToFlyResponse](Images/12.BestTimeToFlyResponse.png)
+
 
 ## Further reading
 
