@@ -61,23 +61,7 @@ BOT = TeamsMessagingExtensionsActionPreviewBot()
 
 # Listen for incoming requests on /api/messages
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-
-    activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
-
-    invoke_response = await ADAPTER.process_activity(
-        activity, auth_header, BOT.on_turn
-    )
-    if invoke_response:
-        return json_response(
-            data=invoke_response.body, status=invoke_response.status
-        )
-    return Response(status=HTTPStatus.OK)
+    return await ADAPTER.process(req, BOT)
 
 
 APP = web.Application(middlewares=[aiohttp_error_middleware])
