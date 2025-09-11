@@ -21,7 +21,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Interaction with app
 
-![Preview Image](Images/Botcommandsmenu.gif)
+![Preview Image](Images/bot_commands_menu.gif)
 
  ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
@@ -105,19 +105,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 # Running the sample
 
 **Install App Personal**
-![image](Images/1.InstallApp.png)
+![1.addApp](Images/1.addApp.png)
+![2.openApp](Images/2.openApp.png)
 
-![2.PromptStarters](Images/2.PromptStarters.png)
+![3.DefaultView](Images/3.DefaultView.png)
 
-![3.SearchFlights](Images/3.SearchFlights.png)
+![4.Help](Images/4.Help.png)
+![5.HelpResponse](Images/5.HelpResponse.png)
 
-![4.SearchHotels](Images/4.SearchHotels.png)
+![6.SearchFlights](Images/6.SearchFlights.png)
+![7.SearchFlightsResponse](Images/7.SearchFlightsResponse.png)
 
-![3.SearchFlightsDetails](Images/3.SearchFlightsDetails.png)
+![8.SearchHotels](Images/8.SearchHotels.png)
+![9.SearchHotelsResponse1](Images/9.SearchHotelsResponse1.png)
+![10.SearchHotelsResponse2](Images/10.SearchHotelsResponse2.png)
 
-![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
+![11.BestTimeToFly](Images/11.BestTimeToFly.png)
+![12.BestTimeToFlyResponse](Images/12.BestTimeToFlyResponse.png)
 
-![5.ViewPrompts](Images/5.ViewPrompts.png)
 
 ## Further reading
 
