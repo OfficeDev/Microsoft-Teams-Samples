@@ -1,0 +1,23 @@
+﻿html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+}
+
+div.panel {
+    padding: 15px;
+}
+
+button.primary {
+    background-color: #6264A7;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button.primary:hover {
+    background-color: #464775;
+}

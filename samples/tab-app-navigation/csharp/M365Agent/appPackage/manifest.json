@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab App Navigation",
+    "full": "Tab App Navigation App"
+  },
+  "description": {
+    "short": "Sample showcasing tab navigation features within a Teams application.",
+    "full": "This sample illustrates the tab navigation feature in a Microsoft Teams application, enabling smooth transitions between different tabs. Designed for use with Node.js, it highlights how users can effectively navigate within the app for an enhanced experience."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "default_tab",
+      "name": "Default Tab",
+      "contentUrl": "https://${{BOT_DOMAIN}}/default_tab",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/default_tab",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "page1",
+      "name": "Page1",
+      "contentUrl": "https://${{BOT_DOMAIN}}/page1",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/page1",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "page2",
+      "name": "Page2",
+      "contentUrl": "https://${{BOT_DOMAIN}}/page2",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/page2",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    },
+    {
+      "entityId": "page3",
+      "name": "Page3",
+      "contentUrl": "https://${{BOT_DOMAIN}}/page3",
+      "websiteUrl": "https://${{BOT_DOMAIN}}/page3",
+      "scopes": [
+        "personal",
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "localhost",
+    "${{BOT_DOMAIN}}"
+  ]
+}
