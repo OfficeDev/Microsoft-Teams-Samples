@@ -96,7 +96,7 @@
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "[nodemon] starting",
-                    "endsPattern": "Server listening on http://localhost:"
+                    "endsPattern": "Server listening on http://localhost:3978"
                 }
             }
         }
