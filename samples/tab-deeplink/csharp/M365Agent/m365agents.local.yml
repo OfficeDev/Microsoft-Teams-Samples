@@ -42,11 +42,12 @@ provision:
       target: ../DeepLinkBot/appsettings.json
       content:
         TeamsAppId: ${{TEAMS_APP_ID}}
-        MicerosoftAppType: ${{MICROSOFT_APP_TYPE}}
+        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         BaseURL: ${{BOT_DOMAIN}}
         ManifestAppId: ${{AAD_APP_CLIENT_ID}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
