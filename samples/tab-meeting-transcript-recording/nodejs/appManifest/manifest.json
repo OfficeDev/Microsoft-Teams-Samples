@@ -26,8 +26,8 @@
     {
       "entityId": "index",
       "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab",
-      "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab",
+      "contentUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab1",
+      "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab1",
       "scopes": [
         "personal"
       ]
