@@ -214,6 +214,7 @@ async function getData(accessToken) {
             Authorization: `Bearer ${accessToken}`
           }
         });
+        console.log("response: " + response.data);
     
         if (response.status === 200) {
           const responseData = response.data;

@@ -140,9 +140,9 @@ const MeetingTranscriptRecording = () => {
                           setLoading(false);
                           setIsCardVisible(true);
                           setEventUpdated(false);
-                        //   data.map((event, _index) => (
-                        //     getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl)
-                        //   ))
+                          data.map((event, _index) => (
+                            getMeetingTranscriptsIdRecordingId(clientSideToken, event.joinUrl)
+                          ))
                         } else {
                             setLoading(false);
                             reject(response.error);
@@ -260,7 +260,13 @@ const MeetingTranscriptRecording = () => {
         submitHandler = (err, _result) => {
             console.log(`Submit handler - err: ${err}`);
         };
-        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        microsoftTeams.dialog.url.open({
+            url: taskInfo.url,
+            title: taskInfo.title,
+            size: { height: taskInfo.height, width: taskInfo.width }
+        }, (result, reason) => {
+            submitHandler(reason, result);
+        });
     }
 
     return (
