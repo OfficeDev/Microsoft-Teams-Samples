@@ -25,6 +25,9 @@ const MeetingTranscriptRecording = () => {
 
     const [loading, setLoading] = useState(false);
 
+    // Capture and surface client-side errors
+    const [clientError, setClientError] = useState(null);
+
     const [loginAdminAccount, setloginAdminAccount] = useState(false);
 
     // Declare new state variables that are required to get and set the connection.
@@ -40,6 +43,24 @@ const MeetingTranscriptRecording = () => {
           clearInterval(intervalId);
         };
       }, []);
+
+    // Surface unhandled errors to the UI
+    useEffect(() => {
+        const handleWindowError = (message, _source, _lineno, _colno, error) => {
+            setClientError(error?.message || String(message));
+            setLoading(false);
+        };
+        const handleUnhandledRejection = (event) => {
+            setClientError(event?.reason?.message || String(event?.reason));
+            setLoading(false);
+        };
+        window.addEventListener('error', handleWindowError);
+        window.addEventListener('unhandledrejection', handleUnhandledRejection);
+        return () => {
+            window.removeEventListener('error', handleWindowError);
+            window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+        };
+    }, []);
 
     // Builds the socket connection, mapping it to /io
     useEffect(() => {
@@ -95,6 +116,7 @@ const MeetingTranscriptRecording = () => {
                 createSubscription(clientSideToken);
             })
             .catch((error) => {
+                setClientError(error?.message || String(error));
                 if (error === "invalid_grant") {
                     // Display an in-line button so the user can consent
                     setIsConsentButtonVisible(true);
@@ -294,6 +316,13 @@ const MeetingTranscriptRecording = () => {
                     <>
                         <div className="loadingIcon">
                             <Spinner label="Loading meetings, fetching Transcript and Recordings..." size="large" />
+                        </div>
+                    </>
+                }
+                {clientError &&
+                    <>
+                        <div className="clientError">
+                            <Text weight='semibold' as="p">Error: {String(clientError)}</Text>
                         </div>
                     </>
                 }
