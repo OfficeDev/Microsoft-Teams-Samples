@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Manifest\**" />
+    <Content Remove="Manifest\**" />
+    <EmbeddedResource Remove="Manifest\**" />
+    <None Remove="Manifest\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<LibraryRestore>false</LibraryRestore>
+	</PropertyGroup>
+
+</Project>
