@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Spinner } from '@fluentui/react-components';
+import { Spinner, Button } from '@fluentui/react-components';
 
 function RecordingTranscript() {
 
@@ -18,6 +18,9 @@ function RecordingTranscript() {
  
     // State variable to control the loading of transcripts data
     const [loadTranscriptsData, setLoadTranscriptsData] = useState(null);
+
+    // State variable to control the visibility of the send to magic notes button
+    const [CanSendToMagicNotes, setCanSendToMagicNotes] = useState(false);
 
     const [loading, setLoading] = useState(false);
 
@@ -124,10 +127,16 @@ function RecordingTranscript() {
             .then(response => response.blob())
             .then(blob => {
                 setLoadingRecording(false)
+                setCanSendToMagicNotes(true);
                 const videoUrl = URL.createObjectURL(blob);
                 videoRef.current.src = videoUrl;
             })
         });
+    }
+
+    // Send to Magic Notes
+    const sendToMagicNotes = () => {
+        alert('Sending to Magic Notes…');
     }
 
     return (
@@ -145,8 +154,22 @@ function RecordingTranscript() {
                             <div style={{ paddingTop: '20%' }}>
                                 <Spinner label="Loading Recordings..." size="small" />
                             </div>
-                        ) :
-                    <video ref={videoRef} className="videoPlay" controls />}
+                        ) : (
+                    <div>
+                        <video ref={videoRef} className="videoPlay" controls />
+                        {CanSendToMagicNotes && (
+                            <div className="magicNotesButtonRow">
+                                <Button
+                                    appearance="primary"
+                                    aria-label="Send to Magic Notes"
+                                    onClick={sendToMagicNotes}
+                                >
+                                    Send to Magic Notes
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                )}
                 </div>
                 <div className="divTranscripts">
                     <h4>Transcripts</h4>

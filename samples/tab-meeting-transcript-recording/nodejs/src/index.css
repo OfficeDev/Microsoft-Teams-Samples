@@ -107,3 +107,10 @@ code {
     align-items: center;
     height: 100%;
 }
+
+.magicNotesButtonRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
