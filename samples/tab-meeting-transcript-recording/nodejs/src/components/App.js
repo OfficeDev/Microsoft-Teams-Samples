@@ -35,7 +35,7 @@ function App() {
       <Route path="/termsofuse" element={<TermsOfUse/>} />
       <Route path="/auth-start" element={<ConsentPopup/>} />
       <Route path="/auth-end" element={<ClosePopup/>} />
-      <Route path="/tab1" element={<MeetingTranscriptRecording/>} />
+      <Route path="/start" element={<MeetingTranscriptRecording/>} />
       <Route path="/RecordingTranscript" element={<RecordingTranscript/>} />
     </Routes>
     </BrowserRouter>

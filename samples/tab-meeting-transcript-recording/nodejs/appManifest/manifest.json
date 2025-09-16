@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "id": "5b1c0d81-94fc-4753-9e49-594a11d7f0b2",
   "developer": {
-    "name": "Teams App, Inc.",
+    "name": "Beam Up Ltd.",
     "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app",
     "privacyUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/privacy",
     "termsOfUseUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/termsofuse"
@@ -18,16 +18,16 @@
     "full": "Magic Notes Teams App"
   },
   "description": {
-    "short": "Capture and manage meeting transcripts and recordings in Microsoft Teams.",
-    "full": "This sample application for Microsoft Teams allows users to capture meeting transcripts and recordings, providing an efficient way to document discussions and decisions. With easy setup and integration using Node.js, it enhances team collaboration and ensures that important meeting details are never lost."
+    "short": "Convert your Teams meetings into Magic Notes.",
+    "full": "This application allows users to capture Teams meeting transcripts and recordings, providing an efficient way to create Magic Notes from your meetings."
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
       "entityId": "index",
-      "name": "Meeting T&R Graph API Demo",
-      "contentUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab1",
-      "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/tab1",
+      "name": "Magic Notes Teams App",
+      "contentUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/start",
+      "websiteUrl": "https://microsoft-teams-app-782853820129.europe-west2.run.app/start",
       "scopes": [
         "personal"
       ]

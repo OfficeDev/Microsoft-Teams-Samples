@@ -22,12 +22,7 @@ const io = require('socket.io')(server, { cors: { origin: "*" } });
 // Serve static files from the build directory
 app.use(express.static(path.resolve(__dirname, './build')));
 
-app.get('/tab', (req, res) => {
-  res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.sendFile(path.resolve(__dirname, './build/index.html'));
-});
-
-app.get('/tab1', (req, res) => {
+app.get(['/start', '/RecordingTranscript', '/privacy', '/termsofuse'], (req, res) => {
   res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
   res.sendFile(path.resolve(__dirname, './build/index.html'));
 });
