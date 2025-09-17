@@ -25,7 +25,7 @@ namespace PeoplePicker
         /// <param name="httpClientFactory">Factory for creating HTTP clients.</param>
         /// <param name="logger">Logger for logging errors and events.</param>
         /// <param name="conversationState">Optional conversation state for handling persistent conversations.</param>
-        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
+        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<CloudAdapter> logger, ConversationState conversationState = default)
             : base(configuration, httpClientFactory, logger)
         {
             // Set up custom error handling for the bot.

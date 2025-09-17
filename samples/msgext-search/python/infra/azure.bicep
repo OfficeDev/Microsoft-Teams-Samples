@@ -6,6 +6,8 @@ param resourceBaseName string
 @description('Required when create Azure Bot service')
 param botAadAppClientId string
 
+param botAppTenantId string
+
 param botAppDomain string
 
 @maxLength(42)
@@ -23,8 +25,8 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
     displayName: botDisplayName
     endpoint: 'https://${botAppDomain}/api/messages'
     msaAppId: botAadAppClientId
-    msaAppType: 'MultiTenant'
-    msaAppTenantId: ''
+    msaAppType: 'SingleTenant'
+    msaAppTenantId: botAppTenantId
   }
   sku: {
     name: botServiceSku
