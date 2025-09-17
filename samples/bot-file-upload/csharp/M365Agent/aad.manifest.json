@@ -1,0 +1,41 @@
+{
+  "id": "${{AAD_APP_OBJECT_ID}}",
+  "appId": "${{AAD_APP_CLIENT_ID}}",
+  "displayName": "bot-file-upload-aad",
+  "signInAudience": "AzureADMyOrg",
+  "api": {
+    "requestedAccessTokenVersion": 2
+  },
+  "info": {},
+  "optionalClaims": {
+    "idToken": [],
+    "accessToken": [
+      {
+        "name": "idtyp",
+        "source": null,
+        "essential": false,
+        "additionalProperties": []
+      }
+    ],
+    "saml2Token": []
+  },
+  "publicClient": {},
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "Microsoft Graph",
+      "resourceAccess": [
+        {
+          "id": "User.Read",
+          "type": "Scope"
+        }
+      ]
+    }
+  ],
+  "web": {
+    "implicitGrantSettings": {
+      "enableIdTokenIssuance": true,
+      "enableAccessTokenIssuance": true
+    }
+  },
+  "spa": {}
+}

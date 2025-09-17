@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "showLoadingIndicator": false,
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.example.contoso",
   "developer": {
     "name": "Contoso",
     "websiteUrl": "https://www.contoso.com",

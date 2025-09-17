@@ -98,7 +98,7 @@ the Teams service needs to call into the bot.
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 

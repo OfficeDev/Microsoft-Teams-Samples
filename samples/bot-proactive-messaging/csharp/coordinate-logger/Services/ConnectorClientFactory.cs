@@ -33,7 +33,6 @@ namespace Microsoft.Teams.CoordinateLogger.Services
         /// <inheritdoc />
         public ConnectorClient GetConnectorClient(string serviceUrl)
         {
-            MicrosoftAppCredentials.TrustServiceUrl(serviceUrl);
             return this.connectorClients.GetOrAdd(serviceUrl, (url) =>
                 new ConnectorClient(new Uri(url), this.appCredentials));
         }

@@ -134,7 +134,7 @@ After running the sample, open Command Prompt, navigate to the `proactive-cmd` f
     Using the values from the Coordinate Logger for a User's conversation coordinates & Bot registration fill in the parameters to the following command.
 
     ```bash
-    # dotnet run -- sendUserMessage --app-id="{{Bot Id}}" --app-password="{{Bot Password}}" --service-url="{{ServiceUrl}}" --conversation-id="{{Conversation Id}}" --message="Send Message to a User"
+    # dotnet run -- sendUserMessage --app-id="{{Bot Id}}" --app-password="{{Bot Password}}" --tenant-id="{{TenantId}}" --service-url="{{ServiceUrl}}" --conversation-id="{{Conversation Id}}" --message="Send Message to a User"
     ```
 
     This will send a message to the 1-on-1 conversation with the user
@@ -143,7 +143,7 @@ After running the sample, open Command Prompt, navigate to the `proactive-cmd` f
     Using the values from the Coordinate Logger for a Channel Thread's conversation coordinates & Bot registration fill in the parameters to the following command.
 
     ```bash
-    # dotnet run -- sendChannelThread --app-id="{{Bot Id}}" --app-password="{{Bot Password}}" --service-url="{{ServiceUrl}}" --conversation-id="{{Conversation Id}}" --message="Send Message to a Thread"
+    # dotnet run -- sendChannelThread --app-id="{{Bot Id}}" --app-password="{{Bot Password}}" --tenant-id="{{TenantId}}" --service-url="{{ServiceUrl}}" --conversation-id="{{Conversation Id}}" --message="Send Message to a Thread"
     ```
 
     This will send a message to the thread
