@@ -1059,7 +1059,7 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '16.x'
 
-            - project_path: 'samples/bot-graph-chat-migration/nodejs'
+            - project_path: 'samples/graph-chat-migration/nodejs'
               name: 'bot-graph-chat-migration'
               version: '18.x'
 
