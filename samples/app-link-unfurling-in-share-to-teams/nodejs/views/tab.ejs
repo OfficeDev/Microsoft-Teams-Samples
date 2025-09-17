@@ -20,12 +20,20 @@
       // If outside teams, open share to teams using built in script.
       else {
         $("#stt-btn-teams").show();
-        var element = document.getElementById("stt-btn");
+        var element = document.getElementById("stt-btn-teams");
         let uri = `${window.location.origin}?linkunfurling`;
         let encoded = encodeURI(uri);
         element.setAttribute("data-href", encoded);
       }
     });
+
+
+    // Force re-render the Teams share buttons
+    setTimeout(() => {
+      if (window.shareToMicrosoftTeams) {
+        window.shareToMicrosoftTeams.renderButtons();
+      }
+    }, 500);
 
     // Custome function that calls share to teams using available sdk method.
     shareTeamsHandler = () => {

@@ -10,5 +10,9 @@ class DefaultConfig:
     """ Bot Configuration """
 
     PORT = 3978
+    APP_TYPE = os.environ.get("MicrosoftAppType", "")
     APP_ID = os.environ.get("MicrosoftAppId", "<<MICROSOFT-APP-ID>>")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "<<MICROSOFT-APP-PASSWORD>>")
+    APP_TENANTID = os.environ.get("MicrosoftAppTenantId", "")
+    BOT_ENDPOINT = os.environ.get("BaseUrl", "<<BOT-ENDPOINT>>")
+    TEAMS_APP_ID = os.environ.get("TeamsAppId", "<<TEAMS-APP-ID>>")
