@@ -14,7 +14,7 @@ namespace TabInStageView
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<CloudAdapter> logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger)
             : base(auth, logger)
         {
             OnTurnError = async (turnContext, exception) =>
