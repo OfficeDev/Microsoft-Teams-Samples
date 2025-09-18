@@ -11,8 +11,8 @@ namespace MeetingTranscription
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger)
-            : base(auth, logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication botFrameworkAuthentication, ILogger<CloudAdapter> logger)
+            : base(botFrameworkAuthentication, logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {
