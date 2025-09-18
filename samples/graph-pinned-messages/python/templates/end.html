@@ -1,0 +1,48 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>End Consent Flow</title>
+
+  <script src="https://res.cdn.office.net/teams-js/2.13.0/js/MicrosoftTeams.min.js"></script>
+  <script src="https://alcdn.msauth.net/browser/2.40.0/js/msal-browser.min.js"></script>
+</head>
+<body>
+  <h1>Consent flow complete.</h1>
+
+  <script>
+    (async () => {
+      await microsoftTeams.app.initialize();
+
+      const context = await microsoftTeams.app.getContext();
+      const clientId = "{{ microsoft_app_id }}"; 
+
+      const msalConfig = {
+        auth: {
+          clientId: clientId,
+          authority: `https://login.microsoftonline.com/${context.tid}`,
+          navigateToLoginRequestUrl: false,
+        },
+        cache: {
+          cacheLocation: "sessionStorage",
+        },
+      };
+
+      const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+      msalInstance.handleRedirectPromise()
+        .then((tokenResponse) => {
+          if (tokenResponse !== null) {
+            microsoftTeams.authentication.notifySuccess("Authentication succeeded");
+          } else {
+            microsoftTeams.authentication.notifyFailure("Get empty response.");
+          }
+        })
+        .catch((error) => {
+          microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+        });
+    })();
+  </script>
+</body>
+</html>
