@@ -11,22 +11,24 @@ const path = require('path');
 // Read botFilePath and botFileSecret from .env file.
 
 
-const restify = require('restify');
+const express = require('express');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder')
 const { MeetingNotificationBot } = require('./bots/meetingNotificationBot');
 
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -52,18 +54,20 @@ adapter.onTurnError = async (context, error) => {
 const bot = new MeetingNotificationBot();
 
 // Create HTTP server.
-var server = restify.createServer();
-server= require("express")();
+const server = express();
 const port = process.env.port || process.env.PORT || 3978;
-server.listen(port, () => 
-    console.log(`App service listening at http://localhost:${port}`)
+server.listen(port, () =>
+    console.log(`\Bot/ME service listening at http://localhost:${port}`)
 );
+server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
+server.use(express.json());
+
+
 
  // Listen for incoming requests.
-server.post('/api/messages', (req, res) =>{
-    adapter.processActivity(req, res, async (context) =>{
-        await bot.run(context);
-    });
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => bot.run(context));
 });
 
 const{contentBubbleTitles}=require('./models/contentbubbleTitle')
@@ -73,3 +77,8 @@ server.set("views", __dirname + "/views");
 server.engine('html',require('ejs').renderFile); 
 server.use(bodyParser.urlencoded({ extended:false}));
 server.get('/', (req,res)=>{res.render('index.html',{question: contentBubbleTitles.contentQuestion})});
+
+// Catch-all route - should be placed after all other routes
+server.get('*', (req, res) => {
+    res.json({ error: 'Route not found' });
+});

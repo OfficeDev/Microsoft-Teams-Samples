@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.8/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.2
+version: v1.8
 
 additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-formatting-cards-python
@@ -12,7 +12,7 @@ provision:
     with:
       name: bot-formatting-cards-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
-      signInAudience: "AzureADMultipleOrgs" # Multitenant
+      signInAudience: "AzureADMyOrg" # SingleTenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
       clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
@@ -20,6 +20,14 @@ provision:
       tenantId: AAD_APP_TENANT_ID
       authority: AAD_APP_OAUTH_AUTHORITY
       authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
+
+  # Update AAD app with manifest
+  - uses: aadApp/update
+    with:
+      # Relative path to this file. Environment variables in manifest will
+      # be replaced before apply to AAD app
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
 
   # Creates a Teams app
   - uses: teamsApp/create
@@ -53,7 +61,7 @@ provision:
       # Path to manifest template
       manifestPath: ./appManifest/manifest.json
       outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      outputFolder: ./appManifest/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
@@ -74,5 +82,9 @@ deploy:
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: SingleTenant
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        TeamsAppId: ${{TEAMS_APP_ID}}
+        BaseUrl: ${{BOT_ENDPOINT}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

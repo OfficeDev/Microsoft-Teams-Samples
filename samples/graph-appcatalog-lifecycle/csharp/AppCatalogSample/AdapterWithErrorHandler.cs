@@ -13,7 +13,7 @@ namespace AppCatalogSample.Bots
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
+        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<CloudAdapter> logger, ConversationState conversationState = default)
             : base(configuration, null, logger)
         {
             OnTurnError = async (turnContext, exception) =>

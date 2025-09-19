@@ -1,6 +1,7 @@
 const { BotFrameworkAdapter, TurnContext, TeamsInfo, MessageFactory } = require('botbuilder');
 const {ActivityTypes} = require('botframework-schema')
 const { MicrosoftAppCredentials, ConnectorClient } = require('botframework-connector');
+const fetch = require('node-fetch');
 const storeService = require('./storageService');
 const MeetingMetadata = require('../model/meetingMetadata');
 const UserToken = require('../model/userToken')
@@ -193,43 +194,51 @@ skipToken = (meetingId, participant) => {
 }
 
 postNotification = async (user, token)=>{
-    let serviceURI = storeService.storeFetch("serviceurl");
-    let conversationId = storeService.storeFetch("conversationid");
-    // const credentials = new MicrosoftAppCredentials(process.env.BotId, process.env.BotPassword);
-    // const connector = new ConnectorClient(credentials, { baseUri: serviceURI });
-    const adapter = new BotFrameworkAdapter({
-        appId: process.env.BotId,
-        appPassword: process.env.BotPassword
-    });
-    let reference = {
-        "serviceUrl" : serviceURI,
-        "channelId": 'msteams',
-        "conversation": {
-            "id": conversationId
-        }
-    }
-    await adapter.continueConversation(reference, async (context) => {
-        // console.log(context);
-        let teamsAppId = process.env.clientId
-        // let teamsAppId = process.env.BotId
-        let baseUrl = require('../../appManifest/manifest.json')['developer']['websiteUrl']
-
-        // let contentBubbleUrlWithParam = `${baseUrl}/bubble?user%3D${user}%26token%3D${token}`
-        let contentBubbleUrlWithParam = `${baseUrl}/bubble?user=${user}&token=${token}`
-        contentBubbleUrlWithParam = encode(contentBubbleUrlWithParam)
-        console.log(contentBubbleUrlWithParam);
-        let externalResourceUrl = `https://teams.microsoft.com/l/bubble/${teamsAppId}?url=${contentBubbleUrlWithParam}&height=180&width=280&title=Token Update`
-        console.log(externalResourceUrl);
-        let bubbleText = `Current Token: ${token}\nParticipant Name: ${user}`
-        const replyActivity = MessageFactory.text(bubbleText); // this could be an adaptive card instead
-        replyActivity.channelData = {
-            notification: {
-                alertInMeeting: true,
-                externalResourceUrl: externalResourceUrl
+    try {
+        let serviceURI = storeService.storeFetch("serviceurl");
+        let conversationId = storeService.storeFetch("conversationid");
+        // const credentials = new MicrosoftAppCredentials(process.env.BotId, process.env.BotPassword);
+        // const connector = new ConnectorClient(credentials, { baseUri: serviceURI });
+        const adapter = new BotFrameworkAdapter({
+            appId: process.env.BotId,
+            appPassword: process.env.BotPassword
+        });
+        let reference = {
+            "serviceUrl" : serviceURI,
+            "channelId": 'msteams',
+            "conversation": {
+                "id": conversationId
             }
-        };
-        await context.sendActivity(replyActivity);
-    });
+        }
+        await adapter.continueConversation(reference, async (context) => {
+            try {
+                // console.log(context);
+                let teamsAppId = process.env.clientId
+                // let teamsAppId = process.env.BotId
+                let baseUrl = require('../../appManifest/manifest.json')['developer']['websiteUrl']
+
+                // let contentBubbleUrlWithParam = `${baseUrl}/bubble?user%3D${user}%26token%3D${token}`
+                let contentBubbleUrlWithParam = `${baseUrl}/bubble?user=${user}&token=${token}`
+                contentBubbleUrlWithParam = encode(contentBubbleUrlWithParam)
+                console.log(contentBubbleUrlWithParam);
+                let externalResourceUrl = `https://teams.microsoft.com/l/bubble/${teamsAppId}?url=${contentBubbleUrlWithParam}&height=180&width=280&title=Token Update`
+                console.log(externalResourceUrl);
+                let bubbleText = `Current Token: ${token}\nParticipant Name: ${user}`
+                const replyActivity = MessageFactory.text(bubbleText); // this could be an adaptive card instead
+                replyActivity.channelData = {
+                    notification: {
+                        alertInMeeting: true,
+                        externalResourceUrl: externalResourceUrl
+                    }
+                };
+                await context.sendActivity(replyActivity);
+            } catch (error) {
+                console.error("Error in continueConversation callback:", error);
+            }
+        });
+    } catch (error) {
+        console.error("Error in postNotification:", error);
+    }
 }
 
 encode = (url)=>{

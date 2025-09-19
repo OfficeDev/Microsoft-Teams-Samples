@@ -1,9 +1,9 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "bot-all-cards-aad",
+    "name": "graph-proactive-installation-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADMyOrg",
+    "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,
 	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {
@@ -25,6 +25,10 @@
                 {
                     "id": "User.Read",
                     "type": "Scope"
+                },
+                {
+                    "id": "TeamsAppInstallation.ReadWriteForUser.All",
+                    "type": "Role"
                 }
             ]
         }
