@@ -110,7 +110,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 	ChannelEntityId is a unique identifier ,TabEntityId as EntityId from Manifest file ,MannifestAppId as manifest ID from manifest file,
 	generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" 
 	in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: SingleTenant, UserAssignedMSI**)
 
   - If you are using Visual Studio
     - Launch Visual Studio

@@ -124,6 +124,7 @@ const { CloudAdapter,
 const { TeamsConversationBot } = require('../bots/teamsConversationBot');
 
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
+  MicrosoftAppType: process.env.MicrosoftAppType,
   MicrosoftAppId: process.env.MicrosoftAppId,
   MicrosoftAppPassword: process.env.MicrosoftAppPassword,
   MicrosoftAppTenantId: process.env.MicrosoftAppTenantId

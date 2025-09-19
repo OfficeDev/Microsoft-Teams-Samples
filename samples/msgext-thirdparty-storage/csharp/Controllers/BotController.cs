@@ -17,7 +17,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
+        private readonly CloudAdapter Adapter;
         private readonly IBot Bot;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
         /// </summary>
         /// <param name="adapter">The Bot Framework adapter.</param>
         /// <param name="bot">The bot implementation.</param>
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public BotController(CloudAdapter adapter, IBot bot)
         {
             Adapter = adapter;
             Bot = bot;

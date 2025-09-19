@@ -1,8 +1,8 @@
 {
   "id": "${{AAD_APP_OBJECT_ID}}",
   "appId": "${{AAD_APP_CLIENT_ID}}",
-  "displayName": "msgext-action-aad",
-  "signInAudience": "AzureADandPersonalMicrosoftAccount",
+  "displayName": "msgext-message-reminder-aad",
+  "signInAudience": "AzureADMultipleOrgs",
   "api": {
     "requestedAccessTokenVersion": 2,
     "oauth2PermissionScopes": [
