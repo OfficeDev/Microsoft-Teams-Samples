@@ -1,0 +1,7 @@
+{
+	"name": "bot-conversation-python",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "Python",
+	"shutdownAction": "none",
+	"workspaceFolder": "/workspace/samples/bot-conversation/python"
+}
