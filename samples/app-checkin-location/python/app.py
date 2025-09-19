@@ -63,7 +63,7 @@ async def messages(request):
     body = await request.json()
     activity = Activity().deserialize(body)
     auth_header = request.headers.get("Authorization", "")
-    response = await ADAPTER.process_activity(activity, auth_header, bot.on_turn)
+    response = await ADAPTER.process(activity, auth_header, bot.on_turn)
     if response:
         return web.json_response(data=response.body, status=response.status)
     return web.Response(status=201)

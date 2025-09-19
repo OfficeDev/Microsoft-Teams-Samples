@@ -100,7 +100,7 @@ class RootDialog extends ComponentDialog {
         this.addDialog(new UpdateTextMsgSetupDialog(SETUPTEXTMESSAGE, this.conversationDataAccessor));
         this.addDialog(new AuthCardDialog(AUTHCARD, this.conversationDataAccessor));
         this.addDialog(new SimpleFacebookAuthDialog(FACEBOOKAUTH, this.conversationDataAccessor));
-        this.addDialog(new LogoutDialog(LOGOUT, process.env.ConnectionName || 'oauthbotsetting'));
+        this.addDialog(new LogoutDialog(LOGOUT, process.env.ConnectionName));
         this.addDialog(new UpdateCardMsgDialog(UPDATECARDMESSAGE, this.conversationDataAccessor));
         this.addDialog(new UpdateCardMsgSetupDialog(UPDATECARDSETUP, this.conversationDataAccessor));
         this.addDialog(new ProactiveMsgTo1to1Dialog(PROACTIVEMESSAGE, this.conversationDataAccessor));

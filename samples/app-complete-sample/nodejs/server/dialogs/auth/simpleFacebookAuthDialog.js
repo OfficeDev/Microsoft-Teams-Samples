@@ -11,11 +11,11 @@ const OAUTH_PROMPT = 'OAuthPrompt';
 
 class SimpleFacebookAuthDialog extends LogoutDialog {
     constructor(id, conversationDataAccessor) {
-        super(id, process.env.ConnectionName || 'oauthbotsetting');
+        super(id, process.env.ConnectionName);
         this.conversationDataAccessor = conversationDataAccessor;
 
         this.addDialog(new OAuthPrompt(OAUTH_PROMPT, {
-            connectionName: process.env.ConnectionName || 'oauthbotsetting',
+            connectionName: process.env.ConnectionName,
             text: 'Login to facebook',
             title: 'Log In',
             timeout: 300000
