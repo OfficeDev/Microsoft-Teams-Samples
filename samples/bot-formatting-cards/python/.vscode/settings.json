@@ -1,5 +1,3 @@
 {
-    "debug.onTaskErrors": "abort",
-    "python-envs.defaultEnvManager": "ms-python.python:system",
-    "python-envs.pythonProjects": []
+    "debug.onTaskErrors": "abort"
 }

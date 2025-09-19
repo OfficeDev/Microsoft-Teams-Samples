@@ -1,12 +1,8 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-
-// Load environment variables from Teams Toolkit environment files
-const TEAMSFX_ENV = process.env.TEAMSFX_ENV || 'local';
-require('dotenv').config({ path: path.join(__dirname, 'env', `.env.${TEAMSFX_ENV}`) });
-require('dotenv').config({ path: path.join(__dirname, 'env', `.env.${TEAMSFX_ENV}.user`) });
-
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 
@@ -22,18 +18,16 @@ server.use(express.static(path.join(__dirname, 'static')));
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+const { BotFrameworkAdapter } = require('botbuilder');
 
 const { TeamsBot } = require('./bots/teamsBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
+});
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -73,8 +67,9 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-server.post('/api/messages', async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => bot.run(context));
+server.post('/api/messages', (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+        await bot.run(context);
+    });
 });
 
