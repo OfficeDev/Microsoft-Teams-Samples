@@ -13,6 +13,12 @@
     },
     "botDisplayName": {
       "value": "TestBot"
+    },
+    "microsoftAppType": {
+      "value": "${{MICROSOFT_APP_TYPE}}"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{MICROSOFT_APP_TENANT_ID}}"
     }
   }
 }

@@ -329,7 +329,8 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             if (turnContext.Activity.Conversation.ConversationType == "channel")
             {
-                await turnContext.SendActivityAsync($"Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in {turnContext.Activity.Conversation.Name}");
+                var channelData = turnContext.Activity.GetChannelData<TeamsChannelData>();
+                await turnContext.SendActivityAsync($"Welcome to Microsoft Teams conversationUpdate events demo bot. This bot is configured in {channelData.Team.Name}.");
             }
             else
             {

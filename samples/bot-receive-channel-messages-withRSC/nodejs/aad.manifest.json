@@ -5,7 +5,7 @@
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADMyOrg",
     "oauth2AllowIdTokenImplicitFlow": true,
-    "oauth2AllowImplicitFlow": true,
+	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {
         "idToken": [],
         "accessToken": [

@@ -9,6 +9,9 @@ require('dotenv').config({ path: ENV_FILE });
 // Initialize Express server
 const server = express();
 
+// Add middleware to parse JSON requests
+server.use(express.json());
+
 /**
  * Set up middleware to serve static files for the frontend (client build folder).
  * This will serve the bundled static files (HTML, JS, CSS) from the frontend build directory.
