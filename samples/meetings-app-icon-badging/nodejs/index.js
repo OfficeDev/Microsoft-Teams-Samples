@@ -13,17 +13,15 @@ require('dotenv').config({ path: ENV_FILE });
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+const { BotFrameworkAdapter } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
+});
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. app insights.
@@ -49,7 +47,6 @@ const bot = new TeamsBot();
 
 // Create HTTP server.
 const server = restify.createServer();
-server.use(restify.plugins.bodyParser());
 
 const port = process.env.port || process.env.PORT || 3978;
 
@@ -59,9 +56,11 @@ server.listen(port, () => {
 });
 
 // Listen for incoming requests.
-server.post('/api/messages', async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => bot.run(context));
+server.post('/api/messages', (req, res, next) => {
+    adapter.processActivity(req, res, async (context) => {
+        await bot.run(context);
+        return next();
+    });
 });
 
 // Serve static pages from the 'pages' folder.

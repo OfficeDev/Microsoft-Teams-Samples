@@ -3,41 +3,37 @@ const express = require('express');
 
 // Import required bot services from the Bot Framework.
 // These services enable the bot to handle messages and communicate with Microsoft Teams.
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder')
+const { BotFrameworkAdapter } = require('botbuilder');
 
 // Import the bot logic from the specified file.
 const { TeamsMessagingExtensionsActionBot } = require('./bots/teamsMessagingExtensionsActionBot');
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-
 // Create an instance of the Bot Framework Adapter.
 // The adapter connects your bot to the Bot Framework Service and handles authentication.
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,          // Microsoft App ID from Azure configuration
+    appPassword: process.env.MicrosoftAppPassword // Microsoft App Password from Azure configuration
+});
 
 // Load environment variables from a .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-
 // Configure error handling for the adapter.
 // This will log errors to the console and send a trace activity for debugging.
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
     console.error(`\n [onTurnError] unhandled error: ${error}`);
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
+
+    // Send a trace activity for debugging in the Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
         `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
+
+    // Optional: Notify the user about the error during local debugging
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
 // Instantiate the bot logic that will handle Teams messaging extensions.
@@ -83,7 +79,9 @@ server.get('*', (req, res) => {
 
 // Configure the bot's endpoint to process incoming messages.
 // This endpoint is typically used by the Microsoft Bot Framework Service.
-server.post('/api/messages', async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => bot.run(context));
+server.post('/api/messages', (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+        // Delegate message handling to the bot logic.
+        await bot.run(context);
+    });
 });

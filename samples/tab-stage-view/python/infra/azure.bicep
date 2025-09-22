@@ -7,7 +7,7 @@ param resourceBaseName string
 param botAadAppClientId string
 
 param botAppDomain string
-param botAadAppTenantId string
+
 @maxLength(42)
 param botDisplayName string
 
@@ -22,8 +22,9 @@ resource botService 'Microsoft.BotService/botServices@2021-03-01' = {
   properties: {
     displayName: botDisplayName
     endpoint: 'https://${botAppDomain}/api/messages'
-    msaAppType: 'SingleTenant'
-    msaAppTenantId: botAadAppTenantId
+    msaAppId: botAadAppClientId
+    msaAppType: 'MultiTenant'
+    msaAppTenantId: ''
   }
   sku: {
     name: botServiceSku

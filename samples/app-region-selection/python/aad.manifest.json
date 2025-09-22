@@ -1,11 +1,11 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "bot-sharepoint-file-viewer-aad",
+    "name": "graph-proactive-installation-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADMultipleOrgs",
+    "signInAudience": "AzureADandPersonalMicrosoftAccount",
     "oauth2AllowIdTokenImplicitFlow": true,
-    "oauth2AllowImplicitFlow": true,
+	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {
         "idToken": [],
         "accessToken": [
@@ -22,31 +22,14 @@
         {
             "resourceAppId": "Microsoft Graph",
             "resourceAccess": [
-              {
-                "id": "User.Read",
-                "type": "Scope"
-              },
-              {
-                "id": "Files.Read",
-                "type": "Scope"
-              },
-              {
-                "id": "Files.ReadWrite",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.Manage.All",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.Read.All",
-                "type": "Scope"
-              },
-              {
-                "id": "Sites.ReadWrite.All",
-                "type": "Scope"
-              }
-
+                {
+                    "id": "User.Read",
+                    "type": "Scope"
+                },
+                {
+                    "id": "TeamsAppInstallation.ReadWriteForUser.All",
+                    "type": "Role"
+                }
             ]
         }
     ],
@@ -112,17 +95,17 @@
             ]
         }
     ],
-    "identifierUris": [
+    "identifierUris":[
         "api://botid-${{AAD_APP_CLIENT_ID}}"
     ],
-    "replyUrlsWithType": [
+    "replyUrlsWithType":[
         {
-            "url": "https://${{BOT_DOMAIN}}/auth-end.html",
-            "type": "Web"
+          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+          "type": "Web"
         },
         {
-            "url": "https://token.botframework.com/.auth/web/redirect",
-            "type": "Web"
-        }
+			"url": "https://token.botframework.com/.auth/web/redirect",
+			"type": "Web"
+		}
     ]
 }

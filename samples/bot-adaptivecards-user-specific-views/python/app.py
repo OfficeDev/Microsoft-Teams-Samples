@@ -6,11 +6,13 @@ import traceback
 import uuid
 from datetime import datetime
 from http import HTTPStatus
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
+
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
+    BotFrameworkAdapterSettings,
     TurnContext,
+    BotFrameworkAdapter,
 )
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
@@ -18,11 +20,12 @@ from botbuilder.schema import Activity, ActivityTypes
 from config import DefaultConfig
 from bots.teams_conversation_bot import BotActivityHandler
 from card_factory.card_factory import CardFactory  
-from config import DefaultConfig
+
 CONFIG = DefaultConfig()
 
 # Create adapter.
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
+ADAPTER = BotFrameworkAdapter(SETTINGS)
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
@@ -45,7 +48,7 @@ async def on_error(context: TurnContext, error: Exception):
 
 ADAPTER.on_turn_error = on_error
 
-
+APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
 
 # ✅ Use real CardFactory here
 card_factory = CardFactory()
@@ -53,8 +56,18 @@ BOT = BotActivityHandler(card_factory)
 
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
-    
-    return await ADAPTER.process(req, BOT)
+    if "application/json" in req.headers.get("Content-Type", ""):
+        body = await req.json()
+    else:
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+
+    activity = Activity().deserialize(body)
+    auth_header = req.headers.get("Authorization", "")
+
+    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+    if response:
+        return json_response(data=response.body, status=response.status)
+    return Response(status=HTTPStatus.OK)
 
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)

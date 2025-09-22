@@ -9,21 +9,22 @@ from http import HTTPStatus
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
+
 from botbuilder.core import (
+    BotFrameworkAdapter,
+    BotFrameworkAdapterSettings,
     TurnContext,
 )
 from botbuilder.schema import Activity, ActivityTypes
 
 from bots.bot import LinkUnfurlingBot 
-from config import DefaultConfig
-CONFIG = DefaultConfig()
 
 APP_ID = os.getenv("MicrosoftAppId", "")
 APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
 PORT = int(os.getenv("PORT", 3978))
 
-ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
+SETTINGS = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
+ADAPTER = BotFrameworkAdapter(SETTINGS)
 
 async def on_error(context: TurnContext, error: Exception):
     traceback.print_exc()
@@ -47,9 +48,18 @@ ADAPTER.on_turn_error = on_error
 BOT = LinkUnfurlingBot()
 
 async def messages(req: Request) -> Response:
-    
+    if "application/json" not in req.headers.get("Content-Type", ""):
+        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
 
-    return await ADAPTER.process(req, BOT)
+    body = await req.json()
+    activity = Activity().deserialize(body)
+    auth_header = req.headers.get("Authorization", "")
+    invoke_response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+
+    if invoke_response:
+        return json_response(data=invoke_response.body, status=invoke_response.status)
+
+    return Response(status=HTTPStatus.OK)
 
 async def serve_tab_page(request):
     file_path = os.path.join("templates", "tab.html")

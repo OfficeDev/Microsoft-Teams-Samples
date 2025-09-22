@@ -1,7 +1,7 @@
 {
   "id": "${{AAD_APP_OBJECT_ID}}",
   "appId": "${{AAD_APP_CLIENT_ID}}",
-  "displayName": "meetings-app-icon-badging-aad",
+  "displayName": "app-hello-world-aad",
   "signInAudience": "AzureADMyOrg",
   "api": {
     "requestedAccessTokenVersion": 2,

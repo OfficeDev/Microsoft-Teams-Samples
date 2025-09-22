@@ -1,12 +1,10 @@
-const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+const { BotFrameworkAdapter } = require('botbuilder');
 const { BotActivityHandler } = require('../bot/botActivityHandler');
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
-
-const adapter = new CloudAdapter(botFrameworkAuthentication);
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.BotId,
+    appPassword: process.env.BotPassword
+});
 
 adapter.onTurnError = async (context, error) => {
     // This check writes out errors to console log .vs. server insights.
@@ -29,9 +27,11 @@ adapter.onTurnError = async (context, error) => {
 
 // Create bot handlers
 const botActivityHandler = new BotActivityHandler();
-const botHandler = async (req, res) => {
-    // Route received a request to adapter for processing
-    await adapter.process(req, res, (context) => botActivityHandler.run(context));
+const botHandler = (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+        // Process bot activity
+        await botActivityHandler.run(context);
+    });
 }
 
 module.exports = botHandler;

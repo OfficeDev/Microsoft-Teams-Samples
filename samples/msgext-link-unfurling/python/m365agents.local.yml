@@ -20,6 +20,7 @@ provision:
       tenantId: AAD_APP_TENANT_ID
       authority: AAD_APP_OAUTH_AUTHORITY
       authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
+      
 
   # Creates a Teams app
   - uses: teamsApp/create
@@ -74,5 +75,7 @@ deploy:
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: SingleTenant
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}
