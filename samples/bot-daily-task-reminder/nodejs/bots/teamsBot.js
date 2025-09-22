@@ -80,38 +80,47 @@ class TeamsBot extends TeamsActivityHandler {
         const date = new Date(taskModuleRequest.data.dateTime);
         const cronExpression = `${date.getMinutes()} ${date.getHours()} * * ${taskModuleRequest.data.selectedDays.toString()}`;
 
-        schedule.scheduleJob(cronExpression, async function () {
-            await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
-                const userCard = CardFactory.adaptiveCard({
+        schedule.scheduleJob(cronExpression, async () => {
+            try {
+                const botAppId = process.env.MicrosoftAppId || process.env.AAD_APP_CLIENT_ID || '';
+                if (!botAppId) {
+                    console.warn('MicrosoftAppId is not set in environment. Proactive send may fail.');
+                }
+                await adapter.continueConversationAsync(botAppId, conversationReferences[currentUser], async turnContext => {
+                    const userCard = CardFactory.adaptiveCard({
                     $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
-                    body: [
-                        {
+                        body: [
+                            {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Bolder",
                             text: "Reminder for a scheduled task!"
-                        },
-                        {
+                            },
+                            {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Default",
-                            text: `Task title: ${taskDetails.title}`,
-                            wrap: true
-                        },
-                        {
+                                text: `Task title: ${taskDetails.title}`,
+                                wrap: true
+                            },
+                            {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Default",
-                            text: `Task description: ${taskDetails.description}`,
-                            wrap: true
-                        },
-                    ],
+                                text: `Task description: ${taskDetails.description}`,
+                                wrap: true
+                            }
+                        ],
                     type: "AdaptiveCard",
                     version: "1.2"
-                });
+                    });
 
-                await turnContext.sendActivity({ attachments: [userCard] });
-            });
+                    await turnContext.sendActivity({ attachments: [userCard] });
+                });
+            }
+            catch (err) {
+                console.error('Error sending proactive reminder:', err && err.stack ? err.stack : err);
+            }
         });
 
         return null;

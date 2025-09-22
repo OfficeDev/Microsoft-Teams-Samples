@@ -3,16 +3,18 @@ const express = require('express');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder');
 
 const { TeamsMessagingExtensionsActionBot } = require('./bots/teamsMessagingExtensionsActionBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
@@ -40,6 +42,7 @@ adapter.onTurnError = async (context, error) => {
 const bot = new TeamsMessagingExtensionsActionBot();
 
 const server = express();
+server.use(express.json());
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
@@ -63,8 +66,7 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
-        await bot.run(context);
-    });
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => bot.run(context));
 });

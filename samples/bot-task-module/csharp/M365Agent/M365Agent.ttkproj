@@ -4,6 +4,7 @@
     <ProjectGuid>1b4c2d04-402a-4438-9b5e-696cea3655c4</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="aad.manifest.json" />
     <None Include="m365agents.local.yml" />
     <None Include="m365agents.yml" />
   </ItemGroup>

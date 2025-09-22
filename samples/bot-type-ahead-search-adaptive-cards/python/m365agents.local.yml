@@ -12,7 +12,7 @@ provision:
     with:
       name: bot-type-ahead-search-adaptive-cards-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
-      signInAudience: "AzureADMultipleOrgs" # Multitenant
+      signInAudience: "AzureADandPersonalMicrosoftAccount" # SingleTenant
     writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
       clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
@@ -68,11 +68,21 @@ provision:
       # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
+  # manifest file to determine which AAD app to update.
+  - uses: aadApp/update
+    with:
+      # Relative path to this file. Environment variables in manifest will
+      # be replaced before apply to AAD app
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+
 deploy:
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: SingleTenant
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

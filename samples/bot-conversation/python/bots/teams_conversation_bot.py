@@ -14,13 +14,15 @@ from botbuilder.schema._connector_client_enums import ActionTypes
 ADAPTIVECARDTEMPLATE = "resources/UserMentionCardTemplate.json"
 
 class TeamsConversationBot(TeamsActivityHandler):
+    conversation_references = {}
+
     def __init__(self, app_id: str, app_password: str):
         self._app_id = app_id
         self._app_password = app_password
 
     async def on_teams_members_added(  # pylint: disable=unused-argument
         self,
-        teams_members_added: [TeamsChannelAccount],
+        teams_members_added: list[TeamsChannelAccount],
         team_info: TeamInfo,
         turn_context: TurnContext,
     ):
@@ -47,6 +49,11 @@ class TeamsConversationBot(TeamsActivityHandler):
             return
 
         if "message" in text:
+            # Save the conversation reference for proactive messaging
+            conversation_reference = TurnContext.get_conversation_reference(turn_context.activity)
+            user_id = turn_context.activity.from_property.id
+            TeamsConversationBot.conversation_references[user_id] = conversation_reference
+
             await self._message_all_members(turn_context)
             return
 
@@ -62,7 +69,6 @@ class TeamsConversationBot(TeamsActivityHandler):
         return
 
     async def _mention_adaptive_card_activity(self, turn_context: TurnContext):
-        TeamsChannelAccount: member = None
         try:
             member = await TeamsInfo.get_member(
                 turn_context, turn_context.activity.from_property.id
@@ -156,7 +162,6 @@ class TeamsConversationBot(TeamsActivityHandler):
         await turn_context.update_activity(updated_activity)
 
     async def _get_member(self, turn_context: TurnContext):
-        TeamsChannelAccount: member = None
         try:
             member = await TeamsInfo.get_member(
                 turn_context, turn_context.activity.from_property.id
@@ -173,33 +178,17 @@ class TeamsConversationBot(TeamsActivityHandler):
         team_members = await self._get_paged_members(turn_context)
 
         for member in team_members:
-            conversation_reference = TurnContext.get_conversation_reference(
-                turn_context.activity
-            )
+            user_id = member.id
+            conversation_reference = TeamsConversationBot.conversation_references.get(user_id)
+            if conversation_reference:
+                async def send_message(tc: TurnContext):
+                    await tc.send_activity(f"Hello {member.name}. I'm a Teams conversation bot.")
 
-            conversation_parameters = ConversationParameters(
-                is_group=False,
-                bot=turn_context.activity.recipient,
-                members=[member],
-                tenant_id=turn_context.activity.conversation.tenant_id,
-            )
-
-            async def get_ref(tc1):
-                conversation_reference_inner = TurnContext.get_conversation_reference(
-                    tc1.activity
+                await turn_context.adapter.continue_conversation(
+                    conversation_reference,
+                    send_message,
+                    self._app_id
                 )
-                return await tc1.adapter.continue_conversation(
-                    conversation_reference_inner, send_message, self._app_id
-                )
-
-            async def send_message(tc2: TurnContext):
-                return await tc2.send_activity(
-                    f"Hello {member.name}. I'm a Teams conversation bot."
-                )  # pylint: disable=cell-var-from-loop
-
-            await turn_context.adapter.create_conversation(
-                conversation_reference, get_ref, conversation_parameters
-            )
 
         await turn_context.send_activity(
             MessageFactory.text("All messages have been sent")

@@ -17,7 +17,7 @@ namespace PeoplePicker.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly CloudAdapter _adapter;
         private readonly IBot _bot;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace PeoplePicker.Controllers
         /// </summary>
         /// <param name="adapter">The adapter for handling the bot's HTTP request/response.</param>
         /// <param name="bot">The bot that processes the message.</param>
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public BotController(CloudAdapter adapter, IBot bot)
         {
             _adapter = adapter;
             _bot = bot;

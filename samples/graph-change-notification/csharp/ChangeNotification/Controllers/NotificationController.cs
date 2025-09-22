@@ -24,14 +24,14 @@ namespace ChangeNotification.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
-        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly CloudAdapter _adapter;
         private readonly string _appId;
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
         private ResourceData resourceData = null;
 
         public NotificationsController(IConfiguration config,
             ILogger<NotificationsController> logger,
-            IBotFrameworkHttpAdapter adapter,
+            CloudAdapter adapter,
             ConcurrentDictionary<string, ConversationReference> conversationReferences)
         {
             _config = config;
@@ -122,7 +122,7 @@ namespace ChangeNotification.Controllers
 
                 foreach (var conversationReference in _conversationReferences.Values)
                 {
-                    await ((BotAdapter)_adapter).ContinueConversationAsync(
+                    await _adapter.ContinueConversationAsync(
                         _appId,
                         conversationReference,
                         BotCallback,

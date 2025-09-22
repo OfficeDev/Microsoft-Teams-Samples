@@ -16,7 +16,10 @@ global.transcriptsDictionary = [];
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder')
 
 // This bot's main dialog.
 const { ActivityBot } = require('./bots/activityBot');
@@ -24,10 +27,8 @@ const GraphHelper = require('./helpers/graphHelper');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 // Catch-all for errors.
 adapter.onTurnError = async (context, error) => {
@@ -98,11 +99,8 @@ server.get('/home', async (req, res) => {
     res.render('./views/', { transcript: transcript });
 });
 
-
 // Listen for incoming activities and route them to your bot main dialog.
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (turnContext) => {
-        // route to main dialog.
-        await bot.run(turnContext);
-    });
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => bot.run(context));
 });
