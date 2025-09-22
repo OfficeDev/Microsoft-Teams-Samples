@@ -23,6 +23,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 * Bots
 * Adaptive Cards
 * RSC Permissions
+* Copilot Custom Engine Agents
 
 ## Interaction with app
 
@@ -163,6 +164,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 **Group chat interaction with bot without being @mentioned:**
 
 ![Group Chat](images/7.1_and_2_Command_Interaction.png) 
+
+**Copilot Custom Engine Agents**
+
+![Copilot](images/Copilot_Install.png) 
+
+![Copilot](images/Copilot_Welcome.png) 
+
+![Copilot](images/Copilot_1.png) 
+
+![Copilot](images/Copilot_2.png)
 
 **Interacting with the bot in Teams**
 

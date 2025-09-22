@@ -23,6 +23,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 * Bots
 * Adaptive Cards
 * RSC Permissions
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -149,6 +150,16 @@ The bot receives the message without being @mentioned.
 - Receives messages in group chat without being @mentioned.
 
 ![Channel messages](ReceiveMessagesWithRSC/Images/7.1_and_2_Command_Interaction.png)
+
+**Copilot Custom Engine Agents**
+
+![Copilot](ReceiveMessagesWithRSC/Images/Copilot_Install.png) 
+
+![Copilot](ReceiveMessagesWithRSC/Images/Copilot_Welcome.png) 
+
+![Copilot](ReceiveMessagesWithRSC/Images/Copilot_1.png) 
+
+![Copilot](ReceiveMessagesWithRSC/Images/Copilot_2.png)
 
 ## Deploy the bot to Azure
 
