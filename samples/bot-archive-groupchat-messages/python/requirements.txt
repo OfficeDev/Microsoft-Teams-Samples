@@ -1,0 +1,4 @@
+botbuilder-integration-aiohttp>=4.17.0
+botbuilder-dialogs>=4.16.2
+aiofiles>=24.1.0
+aiohttp>=3.9.0
