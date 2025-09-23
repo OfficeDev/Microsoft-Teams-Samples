@@ -4,6 +4,7 @@
 const { CardFactory, TeamsActivityHandler, TurnContext } = require('botbuilder');
 const FlightsDetailsCardTemplate = require('../resources/flightsDetails.json');
 const SearchHotelsCardTemplate = require('../resources/searchHotels.json');
+const BestTimeToFlyCardTemplate = require('../resources/bestTimeToFly.json');
 
 class TeamsCommandsMenuBot extends TeamsActivityHandler {
     constructor() {
@@ -25,7 +26,7 @@ class TeamsCommandsMenuBot extends TeamsActivityHandler {
                 } else if (/help/.test(text)) {
                     await context.sendActivity('Displays this help message.');
                 } else if (/best time to fly/.test(text)) {
-                    await context.sendActivity('Best time to fly to London for a 5-day trip is summer.');
+                    await this.sendBestTimeToFlyCard(context);
                 }
             } 
             // Handle hotel search details from activity value
@@ -51,6 +52,11 @@ class TeamsCommandsMenuBot extends TeamsActivityHandler {
     // Send the Hotels Details Card as a response
     async sendHotelsDetailsCard(context) {
         await context.sendActivity({ attachments: [CardFactory.adaptiveCard(SearchHotelsCardTemplate)] });
+    }
+
+    // Send the Best Time to Fly Card as a response
+    async sendBestTimeToFlyCard(context) {
+        await context.sendActivity({ attachments: [CardFactory.adaptiveCard(BestTimeToFlyCardTemplate)] });
     }
 }
 

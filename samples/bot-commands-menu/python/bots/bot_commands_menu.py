@@ -9,6 +9,9 @@ with open("resources/flightsDetails.json", "r") as flights_file:
 with open("resources/searchHotels.json", "r") as hotels_file:
     SearchHotelsCardTemplate = json.load(hotels_file)
 
+with open("resources/bestTimeToFly.json", "r") as best_time_file:
+    BestTimeToFlyCardTemplate = json.load(best_time_file)
+
 class TeamsCommandsMenuBot(ActivityHandler):
     """
     TeamsCommandsMenuBot is a bot that handles commands such as searching flights and hotels. 
@@ -44,7 +47,7 @@ class TeamsCommandsMenuBot(ActivityHandler):
                     elif 'help' in text:
                         await context.send_activity("Displays this help message.")
                     elif 'best time to fly' in text:
-                        await context.send_activity("Best time to fly to London for a 5-day trip is summer.")
+                        await self.best_time_to_fly_reader_card_async(context)
 
             elif context.activity.value:
                 # Extract hotel search details from the activity's value
@@ -85,5 +88,18 @@ class TeamsCommandsMenuBot(ActivityHandler):
         await context.send_activity(
             Activity(
                 attachments=[CardFactory.adaptive_card(SearchHotelsCardTemplate)]
+            )
+        )
+
+    async def best_time_to_fly_reader_card_async(self, context: TurnContext):
+        """
+        Sends the best time to fly Adaptive Card to the user.
+        
+        Args:
+            context (TurnContext): The context of the incoming activity.
+        """
+        await context.send_activity(
+            Activity(
+                attachments=[CardFactory.adaptive_card(BestTimeToFlyCardTemplate)]
             )
         )
