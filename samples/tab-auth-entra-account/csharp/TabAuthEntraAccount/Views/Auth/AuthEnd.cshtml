@@ -1,0 +1,114 @@
+﻿﻿@{
+ViewBag.Title = "title";
+Layout = "_Layout";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+                getAuthToken();
+        });
+
+        // Exchange authorization code for access token using PKCE
+        async function getAuthToken() {
+            const params = new URLSearchParams(window.location.search);
+            const authorizationCode = params.get('code');
+            const { authId, method, hostRedirectUrl } = JSON.parse(params.get('state'));
+            const baseUrl = hostRedirectUrl.split('authId')[0];
+
+            if (!authorizationCode) {
+                const error = params.get('error') || 'OAuth failed - no authorization code received';
+                handleAuthError(error, method, baseUrl, authId);
+                return;
+            }
+
+            try {
+                // Get the code verifier from sessionStorage
+                const codeVerifier = sessionStorage.getItem('codeVerifier');
+                if (!codeVerifier) {
+                    throw new Error('Code verifier not found in session storage');
+                }
+
+                // Exchange authorization code for access token
+                const tokenResponse = await fetch('https://login.microsoftonline.com/common/oauth2/v2.0/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        client_id: '@ViewBag.AzureClientId',
+                        code: authorizationCode,
+                        redirect_uri: window.location.origin + '/Auth/AuthEnd',
+                        grant_type: 'authorization_code',
+                        code_verifier: codeVerifier,
+                        scope: 'https://graph.microsoft.com/User.Read'
+                    })
+                });
+
+                if (!tokenResponse.ok) {
+                    const errorData = await tokenResponse.text();
+                    throw new Error(`Token exchange failed: ${errorData}`);
+                }
+
+                const tokenData = await tokenResponse.json();
+                const accessToken = tokenData.access_token;
+
+                // Fetch user profile from Microsoft Graph
+                const graphResponse = await fetch('https://graph.microsoft.com/v1.0/me', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!graphResponse.ok) {
+                    throw new Error(`Graph API call failed: ${graphResponse.status}`);
+                }
+
+                const userProfile = await graphResponse.json();
+
+                // Clean up stored code verifier
+                sessionStorage.removeItem('codeVerifier');
+
+                // Format the result for the calling application
+                const result = JSON.stringify({
+                    id: userProfile.id,
+                    displayName: userProfile.displayName,
+                    givenName: userProfile.givenName,
+                    surname: userProfile.surname,
+                    userPrincipalName: userProfile.userPrincipalName,
+                    name: userProfile.displayName,
+                    email: userProfile.mail || userProfile.userPrincipalName,
+                    accessToken: accessToken // Include access token for future API calls if needed
+                });
+
+                // Return the result to the calling application
+                if (method === 'deeplink') {
+                    window.location.href = `${baseUrl}authId=${authId}&result=${encodeURIComponent(result)}`;
+                } else {
+                    microsoftTeams.app.initialize().then(() => {
+                        microsoftTeams.authentication.notifySuccess(result);
+                    });
+                }
+
+            } catch (error) {
+                console.error('Authentication error:', error);
+                sessionStorage.removeItem('codeVerifier'); // Clean up on error
+                handleAuthError(error.message, method, baseUrl, authId);
+            }
+        }
+
+        function handleAuthError(errorMessage, method, baseUrl, authId) {
+            if (method === 'deeplink') {
+                window.location.href = `${baseUrl}authId=${authId}&error=${encodeURIComponent(errorMessage)}`;
+            } else {
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.authentication.notifyFailure(errorMessage);
+                });
+            }
+        }
+</script>
