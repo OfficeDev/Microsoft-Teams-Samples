@@ -53,9 +53,9 @@
             },
             {
               "title": "Best Time to Fly",
-              "description": "Best time to fly to London for a 5 day trip is summer",
+              "description": "Find the best time to fly to London for a 5-day trip considering weather and prices.",
               "type": "prompt",
-              "prompt": "What is the best time to fly to London for a 5 day trip? I'm looking for good weather and reasonable prices."
+              "prompt": "What is the best time to fly to London for a 5-day trip? I want good weather and reasonable prices."
             }
           ]
         }

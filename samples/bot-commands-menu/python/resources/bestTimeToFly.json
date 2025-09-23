@@ -1,0 +1,98 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.6",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "size": "Small",
+                            "url": "https://adaptivecards.io/content/airplane.png",
+                            "altText": "Airplane"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "Best Time to Fly",
+                            "weight": "Bolder",
+                            "size": "Large",
+                            "color": "Accent",
+                            "wrap": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "separator": true,
+            "spacing": "Medium",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "London Travel Recommendation",
+                    "weight": "Bolder",
+                    "size": "Medium",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "For a 5-day trip to London, **Summer** is the best time to fly!",
+                    "wrap": true,
+                    "spacing": "Small"
+                },
+                {
+                    "type": "FactSet",
+                    "facts": [
+                        {
+                            "title": "Best Season:",
+                            "value": "Summer (June - August)"
+                        },
+                        {
+                            "title": "Weather:",
+                            "value": "Warm and pleasant"
+                        },
+                        {
+                            "title": "Daylight:",
+                            "value": "Long days (up to 17 hours)"
+                        },
+                        {
+                            "title": "Temperature:",
+                            "value": "15-25°C (59-77°F)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "separator": true,
+            "spacing": "Medium",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "💡 **Tips for Summer Travel:**",
+                    "weight": "Bolder",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "• Book accommodations early as it's peak season\n• Pack light layers for varying temperatures\n• Expect higher prices but better weather\n• Perfect for outdoor attractions and festivals",
+                    "wrap": true,
+                    "spacing": "Small"
+                }
+            ]
+        }
+    ]
+}
