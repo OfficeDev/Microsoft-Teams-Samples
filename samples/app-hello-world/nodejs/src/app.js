@@ -1,50 +1,93 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import path from 'path';
-import restify from 'restify';
-import { adapter, EchoBot } from './bot';
-import tabs from './tabs';
-import MessageExtension from './message-extension';
-import { ActivityTypes } from 'botbuilder';
+import path from "path";
+import restify from "restify";
+import { EchoBot } from "./bot.js";
+import tabs from "./tabs.js";
+import MessageExtension from "./message-extension.js";
+import {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication,
+    MemoryStorage,
+    ConversationState,
+    ActivityTypes,
+} from "botbuilder";
 
-// Read environment variables from .env file for bot credentials and settings.
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
+// Load environment variables from .env (at project root)
+const ENV_FILE = path.join(__dirname, "../.env");
+require("dotenv").config({ path: ENV_FILE });
 
-// Create an HTTP server using Restify.
+// Configure authentication using environment variables
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
+// Define storage and conversation state
+const memoryStorage = new MemoryStorage();
+const conversationState = new ConversationState(memoryStorage);
+
+// Create CloudAdapter with authentication
+const adapter = new CloudAdapter(botFrameworkAuthentication);
+
+// Global error handler for the adapter
+adapter.onTurnError = async (context, error) => {
+    console.error(`[onTurnError] Unhandled error: ${error}`);
+    console.error(error.stack);
+
+    try {
+        // Clear state in case it is corrupted
+        await conversationState.delete(context);
+    } catch (err) {
+        console.error(`Error clearing conversation state: ${err}`);
+    }
+
+    // Send generic error message to user
+    await context.sendActivity("The bot encountered an error.");
+    await context.sendActivity("Please try again later.");
+};
+
+// Create HTTP server with Restify
 const server = restify.createServer({
     formatters: {
-        'text/html': (req, res, body) => body, // Return body as-is for HTML responses.
+        "text/html": (req, res, body) => body, // return HTML as-is
     },
 });
 
-// Serve static files (e.g., for web pages or resources like images).
+// Enable body parser (required for bot to process messages)
+server.use(restify.plugins.bodyParser());
+
+// Serve static files (for tabs, UI assets, etc.)
 server.get(
-    '/*',
+    "/*",
     restify.plugins.serveStatic({
-        directory: path.join(__dirname, 'static'),
+        directory: path.join(__dirname, "static"),
     })
 );
 
-// Start the server on the configured port, falling back to 3978 if not set.
+// Start the server
 server.listen(process.env.port || process.env.PORT || 3978, () => {
     console.log(`${server.name} listening to ${server.url}`);
 });
 
-// Initialize tabs and message extension functionalities.
-tabs(server); // Setup routes for tab functionality in the bot.
-const bot = new EchoBot(); // Initialize the EchoBot to handle user interactions.
-const messageExtension = new MessageExtension(); // Initialize message extension for bot.
+// Initialize bot and message extension
+tabs(server);
+const bot = new EchoBot();
+const messageExtension = new MessageExtension();
 
-server.post('/api/messages', (req, res, next) => {
-    // Process incoming activity and route to either bot or message extension based on activity type.
-    adapter.processActivity(req, res, async (context) => {
+// Handle incoming requests from Teams
+server.post("/api/messages", async (req, res) => {
+    console.log("Received request at /api/messages");
+    await adapter.process(req, res, async (context) => {
+        console.log("Inside adapter.process");
+
+        // If activity is an invoke, handle message extension
         if (context.activity.type === ActivityTypes.Invoke) {
-            await messageExtension.run(context); // Handle Invoke activities (e.g., message extensions).
+            await messageExtension.run(context);
         } else {
-            await bot.run(context); // Handle other types of activities (e.g., user messages).
+            // Otherwise, pass to bot logic
+            await bot.run(context);
         }
-        return next(); // Continue processing any other middleware.
+
+        // Save state changes
+        await conversationState.saveChanges(context, false);
     });
 });
