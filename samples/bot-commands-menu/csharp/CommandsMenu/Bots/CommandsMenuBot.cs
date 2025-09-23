@@ -14,6 +14,7 @@ namespace CommandsMenu.Bots
         // Paths to the adaptive card JSON templates
         private readonly string _flightsDetailsCardTemplate = Path.Combine(".", "Resources", "flightsDetails.json");
         private readonly string _searchHotelsCardTemplate = Path.Combine(".", "Resources", "searchHotels.json");
+        private readonly string _bestTimeToFlyCardTemplate = Path.Combine(".", "Resources", "bestTimeToFly.json");
 
         /// <summary>
         /// Handles incoming message activity.
@@ -39,7 +40,7 @@ namespace CommandsMenu.Bots
                 else if (text.Contains("help"))
                     await turnContext.SendActivityAsync(MessageFactory.Text("Displays this help message."), cancellationToken);
                 else if (text.Contains("best time to fly"))
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Best time to fly to London for a 5 day trip is summer."), cancellationToken);
+                    await SendAdaptiveCardAsync(turnContext, _bestTimeToFlyCardTemplate, cancellationToken);
             }
             else if (turnContext.Activity.Value != null)
             {
