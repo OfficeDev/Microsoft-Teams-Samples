@@ -167,13 +167,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Copilot Custom Engine Agents**
 
+**Copilot Installation Screen**  
 ![Copilot](images/Copilot_Install.png) 
 
+**Copilot Welcome Screen**  
 ![Copilot](images/Copilot_Welcome.png) 
 
+**Copilot Workflow Example – Step 1**  
 ![Copilot](images/Copilot_1.png) 
 
-![Copilot](images/Copilot_2.png)
+**Copilot Workflow Example – Step 2**  
+![Copilot](images/Copilot_2.png) 
+
 
 **Interacting with the bot in Teams**
 
@@ -192,6 +197,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-nodejs" />

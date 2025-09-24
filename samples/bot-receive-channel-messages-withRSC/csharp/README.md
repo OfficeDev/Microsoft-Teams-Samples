@@ -153,13 +153,18 @@ The bot receives the message without being @mentioned.
 
 **Copilot Custom Engine Agents**
 
+**Copilot Installation Screen**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_Install.png) 
 
+**Copilot Welcome Screen**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_Welcome.png) 
 
+**Copilot Workflow Example – Step 1**  
 ![Copilot](ReceiveMessagesWithRSC/Images/Copilot_1.png) 
 
-![Copilot](ReceiveMessagesWithRSC/Images/Copilot_2.png)
+**Copilot Workflow Example – Step 2**  
+![Copilot](ReceiveMessagesWithRSC/Images/Copilot_2.png) 
+
 
 ## Deploy the bot to Azure
 
@@ -172,6 +177,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
 
 
 
