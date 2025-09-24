@@ -38,7 +38,7 @@
           "commands":[
             {
               "title":"Help",
-              "description":"Displays this help message"
+              "description":"Help Info"
             },
             {
               "title":"Search Flights",
