@@ -18,6 +18,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Included Features
 * Bots
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -118,6 +119,29 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
 
 ![5.ViewPrompts](Images/5.ViewPrompts.png)
+
+**Copilot Custom Engine Agents**
+![Copilot](Images/CopilotInstall.png) 
+
+![Copilot](Images/Copilot1.png) 
+
+![Copilot](Images/Copilot2.png) 
+
+![Copilot](Images/Copilot3.png) 
+
+![Copilot](Images/Copilot4.png) 
+
+![Copilot](Images/Copilot5.png) 
+
+![Copilot](Images/Copilot6.png) 
+
+![Copilot](Images/Copilot7.png) 
+
+![Copilot](Images/Copilot8.png) 
+
+![Copilot](Images/Copilot9.png) 
+
+![Copilot](Images/Copilot10.png) 
 
 ## Further reading
 
