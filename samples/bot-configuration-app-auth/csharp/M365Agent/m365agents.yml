@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-configuration-app-auth-csharp
 
 environmentFolderPath: ./env
+projectId: 
