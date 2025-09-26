@@ -19,7 +19,7 @@ This sample shows the feature where user can [send suggested actions](https://le
 ## Included Features
 * Bots
 * Suggested Actions
-
+* Copilot Custom Engine Agents
 ## Interaction with app
 
 ![Bot Suggested ActionsGif](Images/BotSuggestedActionsGif.gif)
@@ -131,6 +131,17 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
 ![Action.Compose](Images/5.Action.Compose.png)
 
+## Copilot Custom Engine Agents
+
+**Step 1: Install Copilot Custom Engine**  
+![Copilot Installation](Images/Copilot_Install.png)
+
+**Step 2: Verify Copilot Hello**  
+![Copilot Hello](Images/Copilot_Hello.png)
+
+**Step 3: Welcome Screen**  
+![Copilot Welcome](Images/Copilot_Welcome.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -142,5 +153,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-nodejs" />

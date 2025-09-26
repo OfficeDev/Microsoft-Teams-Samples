@@ -22,6 +22,7 @@ The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurr
 * Adaptive Cards
 * Task Modules
 * Quartz Scheduler (for scheduling)
+* Custom Engine Agent - Copilot
 
 ## Interaction with app
 
@@ -132,6 +133,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Task reminder](Images/TaskReminder.png)
 
+**Custom Engine Agent Copilot:**  
+
+**Installation screen of Copilot Agent**  
+![Copilot Task reminder](Images/Copilot_Install.png)  
+
+**Creating a new reminder in Copilot**  
+![Copilot Task reminder](Images/Copilot_CreateReminder.png)  
+
+**Task module interface for reminders**  
+![Copilot Task reminder](Images/Copilot_TaskModule.png)  
+
+**Response after submitting a task reminder**  
+![Copilot Task reminder](Images/Copilot_TaskSubmitted_Response.png)  
+
+**Final reminder displayed in Copilot**  
+![Copilot Task reminder](Images/Copilot_Task_Reminder.png)  
+ 
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -143,5 +162,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-daily-task-reminder-nodejs" />
