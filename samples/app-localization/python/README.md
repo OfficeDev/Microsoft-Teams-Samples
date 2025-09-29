@@ -23,6 +23,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 * Tabs
 * Bots
 * Localization
+* Custome Engine Agents
 
 ## Interaction with app
 
@@ -114,6 +115,16 @@ This app has a default landing capability that determines whether the opening sc
 
 2. **Bot**: send any message to see localized 
 [image](Images/Reply.png)
+
+**Custome Engine Agents**
+Install App In Copilot
+![image](Images/CopilotInstall.png)
+
+Default Language English(USA)
+![image](Images/Copilot1.png)
+
+After Changing Language to Hindi
+![image](Images/Copilot2.png)
 
 ## Outlook on the web
 
