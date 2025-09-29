@@ -116,7 +116,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 30 | Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specifies mutual-dependency relationships between app capabilities using elementRelationshipSet. | Advanced | | [View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 31 | Streaming Bot | This sample showcases the conversational streaming token scenario for teams bot in personal scope. | Advanced | [View][botstreaming#csharp] |[View][botstreaming#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
-
+| 33 | Bot Shared Channel Events | Microsoft Teams bot can receive transitive member add and remove events in shared channels.| Intermediate | [View][bot-shared-channel-events#cs] ![toolkit-icon](assets/toolkit-icon.png) |  |  | |  |
 
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
@@ -549,6 +549,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [bot-conversation#cs]:samples/bot-conversation/csharp
 [bot-auth0-adaptivecard#cs]:samples/bot-auth0-adaptivecard/csharp
+[bot-shared-channel-events#cs]:samples/bot-shared-channel-events/csharp
 [bot-file-upload#cs]:samples/bot-file-upload/csharp
 [bot-initiate-thread-in-channel#cs]:samples/bot-initiate-thread-in-channel/csharp
 [bot-message-reaction#cs]:samples/bot-message-reaction/csharp
