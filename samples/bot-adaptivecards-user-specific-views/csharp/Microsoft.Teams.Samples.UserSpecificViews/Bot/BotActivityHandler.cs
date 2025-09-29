@@ -5,6 +5,8 @@
 namespace Microsoft.Teams.Samples.UserSpecificViews.Bot
 {
     using System;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
@@ -66,9 +68,16 @@ namespace Microsoft.Teams.Samples.UserSpecificViews.Bot
                         // Note: We remove the refresh section from the updated base card in this sample. No further refresh invoke actions will be fired for any user.
                         // You may decide to keep the refresh section and trigger auto-refresh for either all / list of users if required.
                         card = this.cardFactory.GetFinalBaseCard(actionData);
-                        var activity = MessageFactory.Attachment(card);
-                        activity.Id = turnContext.Activity.ReplyToId;
-                        await turnContext.UpdateActivityAsync(activity, cancellationToken);
+                        if (!string.IsNullOrEmpty(turnContext.Activity.ReplyToId))
+                        {
+                                var activity = MessageFactory.Attachment(card);
+                                activity.Id = turnContext.Activity.ReplyToId;
+                                await turnContext.UpdateActivityAsync(activity, cancellationToken);
+                        }
+                        else
+                        {
+                            return PrepareInvokeResponse(card);
+                        }
                         break;
 
                     case "RefreshUserSpecificView":
