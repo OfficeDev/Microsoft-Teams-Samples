@@ -96,7 +96,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
        2) `<<YOUR-MICROSOFT-APP-ID>>` - Generated from Step 1 (Application (client) ID)is the application app id
        3) `<<YOUR-MICROSOFT-APP-PASSWORD>>` - Generated from Step 6, also referred to as Client secret
        4) `<<YOUR-MICROSOFT-APP-TENANT-ID>>` - Generated from Step 1(Directory (tenant) ID) is the tenant id
-       5) `<<YOUR-CONNECTION-NAME>>` - Generated from step 7.
+       5) `<<YOUR-CONNECTION-NAME>>` - Use `oauthbotsettings` (predefined in the Azure infrastructure template)
        6) `<<userId>>` - UserId of the with copilot licence and should be part of the meeting
        7) `<<meetingJoinUrl>>` - Join url of the meeting
 
