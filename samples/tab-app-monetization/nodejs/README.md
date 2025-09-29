@@ -51,14 +51,23 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
 
-## 1) Setup for App registration
+
+2) App Registration
+
+### Register your application with Azure AD
+
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
-3. On the overview page, copy and save the **Application (client) ID**. You’ll need this later when updating your Teams application manifest.
+   * Set **name** to your app name.
+   * Choose the **supported account types** (any account type will work)
+   * Leave **Redirect URI** empty.
+   * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   * Select Add a permission
+   * Select Microsoft Graph -> Delegated permissions.
+   * `User.Read` (enabled by default)
+   * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 ## 2) Setup for SAAS offer
 1) Register a SAAS offer in market place and generate an plan id for it [Create SAAS Offer](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)

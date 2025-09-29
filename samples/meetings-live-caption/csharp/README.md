@@ -1,6 +1,15 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings.
+description: This sample application demonstrates how to utilize CART links to send 4) Open the code in Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
+
+5) Run the bot from5) Run the bot from Visual Studio:
+   - Press `F5` to run the project
+
+6) Modify Visual Studio:the `manifest.json` in the `/appPackage` folder and replace the following details:tio7) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
+
+8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")in Microsoft Teams meetings.
 products:
 - office-teams
 - office
@@ -83,13 +92,30 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-1) Clone the repository
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) Open the code in Visual Studio
+4) Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
 
@@ -100,7 +126,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - `<<AppId>>` with any GUID id value.
    - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-1) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
+7) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
 
 1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps

@@ -62,7 +62,24 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1. Setup the project.
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Setup the project.
 
    - Clone the repository:
 
@@ -77,7 +94,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     npm install
     ```
 
-2. Install a mock customer relations management (CRM) system.
+4. Install a mock customer relations management (CRM) system.
 
    - Instructions for installing and configuring a local Mockoon database are in: [Setup Mockoon Database](setup-mockoon.md).
    - If you prefer, you can use any database, either on localhost or remotely, that can (1) send a JSON payload in response to a GET request and (2) update in response to a POST request that contains a JSON payload. Read the article that is linked to in the preceding bullet to find out what CORS headers and starter data should be used. You can use any domain and port you like (except ports 3000 and 53000 which are used by other parts of the sample), but if you use anything other than `localhost:3001`, you will need to edit the calls of `fetch` in the following two files to pass the correct domain and/or port:

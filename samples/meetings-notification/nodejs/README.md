@@ -67,7 +67,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
 1) Setup for Bot
-- Register Azure AD application resource in Azure portal
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -76,7 +75,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-2) Setup NGROK  
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3) Setup NGROK  
  - Run ngrok - point to port 3978
 
    ```bash
@@ -89,7 +105,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Setup for code   
+4) Setup for code   
 - Clone the repository
 
     ```bash
@@ -117,7 +133,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm start
     ```
  
-4) Setup Manifest for Teams
+5) Setup Manifest for Teams
 
 - Modify the `manifest.json` file placed in `/appManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing Microsoft Entra ID app registration in your Azure Portal.
     - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
