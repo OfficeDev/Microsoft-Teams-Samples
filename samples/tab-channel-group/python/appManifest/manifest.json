@@ -1,0 +1,44 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.0.0",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/termsofuse"
+  },
+  "name": {
+    "short": "Channel Group Tab",
+    "full": "Channel Group Tab"
+  },
+  "description": {
+    "short": "Sample app for custom channel and group tabs using ASP.NET Core Razor pages.",
+    "full": "This quickstart guide shows how to create custom channel and group tabs for Microsoft Teams with ASP.NET Core and Razor Pages. It covers the complete setup process, including manifest configuration and local testing using tools like Ngrok and the Teams Toolkit for Visual Studio."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{TAB_DOMAIN}}/tab",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupChat",
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok-free.app",
+    "localhost"
+    
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "teams-conversation-bot",
+  "name": "ProactiveMessagesTeamsFx",
   "version": "1.0.0",
   "msteams": {
     "teamsAppId": null

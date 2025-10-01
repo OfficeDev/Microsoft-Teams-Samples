@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "developer": {
+    "name": "AdhocCalls.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "adhocCalls Transcripts & Recs",
+    "full": "adhocCalls Transcripts and Recordings"
+  },
+  "description": {
+    "short": "AdhocCalls for group call recording, transcription, and UI display.",
+    "full": "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat group call, it starts the recording or transcription. When the group call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "AdhocCalls Transcripts and Recordings",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "groupChat"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

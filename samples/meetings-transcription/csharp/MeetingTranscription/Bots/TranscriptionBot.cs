@@ -106,7 +106,22 @@ namespace MeetingTranscription.Bots
         {
             try
             {
-                var meetingId = JObject.FromObject(taskModuleRequest.Data)["meetingId"];
+                // Validate taskModuleRequest and its Data property
+                if (taskModuleRequest?.Data == null)
+                {
+                    Console.WriteLine("TaskModuleRequest or Data is null");
+                    return CreateFallbackTaskModuleResponse();
+                }
+
+                var dataObject = JObject.FromObject(taskModuleRequest.Data);
+                var meetingId = dataObject["meetingId"];
+
+                // Validate meetingId exists and is not null
+                if (meetingId == null)
+                {
+                    Console.WriteLine("MeetingId not found in task module request data");
+                    return CreateFallbackTaskModuleResponse();
+                }
 
                 return new TaskModuleResponse
                 {
@@ -125,23 +140,33 @@ namespace MeetingTranscription.Bots
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error in OnTeamsTaskModuleFetchAsync: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
 
-                return new TaskModuleResponse
-                {
-                    Task = new TaskModuleContinueResponse
-                    {
-                        Type = "continue",
-                        Value = new TaskModuleTaskInfo()
-                        {
-                            Url = this.azureSettings.Value.AppBaseUrl + "/home",
-                            Height = 350,
-                            Width = 350,
-                            Title = "Meeting Transcript",
-                        },
-                    }
-                };
+                return CreateFallbackTaskModuleResponse();
             }
+        }
+
+        /// <summary>
+        /// Creates a fallback task module response when errors occur.
+        /// </summary>
+        /// <returns>A fallback TaskModuleResponse.</returns>
+        private TaskModuleResponse CreateFallbackTaskModuleResponse()
+        {
+            return new TaskModuleResponse
+            {
+                Task = new TaskModuleContinueResponse
+                {
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo()
+                    {
+                        Url = this.azureSettings.Value.AppBaseUrl + "/home",
+                        Height = 350,
+                        Width = 350,
+                        Title = "Meeting Transcript",
+                    },
+                }
+            };
         }
     }
 }

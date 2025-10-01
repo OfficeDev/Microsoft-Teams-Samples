@@ -3,7 +3,7 @@
     "appId": "${{AAD_APP_CLIENT_ID}}",
     "name": "bot-all-cards-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADandPersonalMicrosoftAccount",
+    "signInAudience": "AzureADMyOrg",
     "oauth2AllowIdTokenImplicitFlow": true,
 	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {

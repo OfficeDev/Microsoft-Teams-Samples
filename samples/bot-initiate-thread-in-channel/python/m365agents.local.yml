@@ -7,15 +7,15 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-initiate-thread-in-channel-python
 
 provision:
-  # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
-  - uses: aadApp/create 
+  # Creates a new Azure Active Directory (AAD) app to authenticate users
+  - uses: aadApp/create
     with:
-      name: botinitiatethread-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
-      generateClientSecret: true # If the value is false, the action will not generate client secret for you
-      signInAudience: "AzureADMultipleOrgs" # Multitenant
-    writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
+      name: botinitiatethread-aad
+      generateClientSecret: true
+      signInAudience: "AzureADandPersonalMicrosoftAccount"   # single tenant only
+    writeToEnvironmentFile:
       clientId: AAD_APP_CLIENT_ID
-      clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
+      clientSecret: SECRET_AAD_APP_CLIENT_SECRET
       objectId: AAD_APP_OBJECT_ID
       tenantId: AAD_APP_TENANT_ID
       authority: AAD_APP_OAUTH_AUTHORITY
@@ -24,48 +24,47 @@ provision:
   # Creates a Teams app
   - uses: teamsApp/create
     with:
-      # Teams app name
       name: botinitiatethread${{APP_NAME_SUFFIX}}
-    # Write the information of created resources into environment file for
-    # the specified environment variable(s).
-    writeToEnvironmentFile: 
+    writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
 
-  - uses: arm/deploy # Deploy given ARM templates parallelly.
+  # Deploy ARM templates for Azure resources
+  - uses: arm/deploy
     with:
-      subscriptionId: ${{AZURE_SUBSCRIPTION_ID}} # The AZURE_SUBSCRIPTION_ID is a built-in environment variable. TeamsFx will ask you select one subscription if its value is empty. You're free to reference other environment varialbe here, but TeamsFx will not ask you to select subscription if it's empty in this case.
-      resourceGroupName: ${{AZURE_RESOURCE_GROUP_NAME}} # The AZURE_RESOURCE_GROUP_NAME is a built-in environment variable. TeamsFx will ask you to select or create one resource group if its value is empty. You're free to reference other environment varialbe here, but TeamsFx will not ask you to select or create resource grouop if it's empty in this case.
+      subscriptionId: ${{AZURE_SUBSCRIPTION_ID}}
+      resourceGroupName: ${{AZURE_RESOURCE_GROUP_NAME}}
       templates:
         - path: ./infra/azure.bicep
           parameters: ./infra/azure.parameters.json
           deploymentName: Create-resources-for-bot
-      bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+      bicepCliVersion: v0.9.1
 
-  # Validate using manifest schema
+  # Apply the AAD manifest to update the created AAD app
+  - uses: aadApp/update
+    with:
+      manifestPath: ./aad.manifest.json
+      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+
+  # Validate Teams manifest
   - uses: teamsApp/validateManifest
     with:
-      # Path to manifest template
       manifestPath: ./appManifest/manifest.json
 
-  # Build Teams app package with latest env value
+  # Build Teams app package with latest env values
   - uses: teamsApp/zipAppPackage
     with:
-      # Path to manifest template
       manifestPath: ./appManifest/manifest.json
       outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
-  # Validate app package using validation rules
+
+  # Validate the built app package
   - uses: teamsApp/validateAppPackage
     with:
-      # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
-  # Apply the Teams app manifest to an existing Teams app in
-  # Developer Portal.
-  # Will use the app id in manifest file to determine which Teams app to update.
+  # Update Teams app in Developer Portal
   - uses: teamsApp/update
     with:
-      # Relative path to this file. This is the path for built zip file.
       appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
 
 deploy:
@@ -76,3 +75,5 @@ deploy:
       envs:
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppType: SingleTenant
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

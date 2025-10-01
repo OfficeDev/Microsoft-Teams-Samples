@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App Installed Demo</title>
+
+  <!-- Microsoft Teams SDK -->
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+    crossorigin="anonymous">
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      min-height: 100vh;
+    }
+    
+    .header {
+      margin-bottom: 30px;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #323130;
+      margin-bottom: 10px;
+    }
+    
+    .add-app-section {
+      margin-bottom: 30px;
+    }
+    
+    .add-app-button {
+      background: #f8f9fa;
+      color: #323130;
+      border: 1px solid #d1d3d4;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .apps-section {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .section-header {
+      background: #f8f9fa;
+      padding: 16px 20px;
+      border-bottom: 1px solid #e1e5e9;
+    }
+    
+    .section-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #323130;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    
+    th {
+      background: #f8f9fa;
+      color: #323130;
+      font-weight: 600;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid #e1e5e9;
+      font-size: 14px;
+    }
+    
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e1e5e9;
+      vertical-align: middle;
+      font-size: 14px;
+    }
+    
+    .app-name {
+      font-weight: 500;
+      color: #323130;
+    }
+    
+    .distribution-method {
+      color: #605e5c;
+      font-size: 13px;
+    }
+    
+    .action-button {
+      background: #fff;
+      border: 1px solid #d1d3d4;
+      color: #323130;
+      padding: 6px 12px;
+      margin: 2px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    
+    .action-button.info {
+      color: #323130;
+      border-color: #d1d3d4;
+    }
+    
+    .action-button.update {
+      color: #323130;
+      border-color: #d1d3d4;
+    }
+    
+    .action-button.delete {
+      color: #323130;
+      border-color: #d1d3d4;
+    }
+    
+    .show-all-section {
+      padding: 16px 20px;
+      text-align: center;
+      background: #f8f9fa;
+      border-top: 1px solid #e1e5e9;
+    }
+    
+    .show-all-button {
+      background: transparent;
+      border: 1px solid #d1d3d4;
+      color: #323130;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 30px;
+      border: none;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 450px;
+      text-align: left;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      position: relative;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .modal-content h3 {
+      margin: 0 0 20px 0;
+      color: #323130;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .modal-content .message {
+      color: #323130;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+      padding: 0;
+    }
+    
+    .modal-content .success-message {
+      color: #323130;
+      font-weight: 500;
+    }
+    
+    .modal-content .error-message {
+      color: #323130;
+      font-weight: 500;
+    }
+    
+    .modal-content .warning-message {
+      color: #323130;
+      font-weight: 500;
+    }
+    
+    .modal-content .info-content {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    
+    .modal-content .info-content div {
+      margin-bottom: 12px;
+      color: #323130;
+      font-size: 14px;
+    }
+    
+    .modal-content .info-content strong {
+      color: #323130;
+      font-weight: 600;
+    }
+    
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .modal-content button {
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      min-width: 80px;
+    }
+    
+    .modal-content .primary-button {
+      background: #f8f9fa;
+      color: #323130;
+      border: 1px solid #d1d3d4;
+    }
+    
+    .modal-content .secondary-button {
+      background: transparent;
+      color: #323130;
+      border: 1px solid #d1d3d4;
+    }
+    
+    .modal-content .danger-button {
+      background: #f8f9fa;
+      color: #323130;
+      border: 1px solid #d1d3d4;
+    }
+    
+    .close {
+      color: #605e5c;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #605e5c;
+    }
+    
+    .empty-state h4 {
+      margin-bottom: 8px;
+      color: #323130;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .header h1 {
+        font-size: 24px;
+      }
+      
+      table {
+        font-size: 12px;
+      }
+      
+      th, td {
+        padding: 8px;
+      }
+      
+      .action-button {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+    }
+  </style>
+  </head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>App Installation Demo</h1>
+    </div>
+
+    <!-- Add App Section -->
+    <div class="add-app-section">
+      <button id="btnAddApp" class="add-app-button">Add Polly App</button>
+    </div>
+
+    <!-- Apps List Section -->
+    <div class="apps-section">
+      <div class="section-header">
+        <h3>List of apps in Teams:</h3>
+      </div>
+      <div class="table-container">
+        <table id="app-list-table">
+          <thead>
+            <tr>
+              <th>Sr No.</th>
+              <th>Name</th>
+              <th>Distribution Method</th>
+              <th>Info</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="app-list-tbody">
+          </tbody>
+        </table>
+      </div>
+      <div id="showAllApp" class="show-all-section" style="display: none;">
+        <button type="button" class="show-all-button" onclick="showAllApp()">Show all Apps</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Modal -->
+  <div id="getAppModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('getAppModal')">&times;</span>
+      <div id="modalbody">Loading...</div>
+      <div class="modal-actions">
+        <button type="button" class="primary-button" onclick="closeModal('getAppModal')">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add App Confirmation Modal -->
+  <div id="addAppModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('addAppModal')">&times;</span>
+      <div class="message">Do you really want to add Polly app to this team?</div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-button" onclick="closeModal('addAppModal')">Cancel</button>
+        <button type="button" class="primary-button" onclick="confirmAddApp()">Add App</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteAppModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('deleteAppModal')">&times;</span>
+      <div class="message">Are you sure you want to delete this App?</div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-button" onclick="closeModal('deleteAppModal')">Cancel</button>
+        <button type="button" class="danger-button" id="btndelApp" onclick="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <!-- App Logic Script -->
+  <script>
+    var token = '{{ token }}';
+    var teamAppInstallationId = '';
+
+    // Modal functions
+    function showModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function confirmDelete() {
+      closeModal('deleteAppModal');
+      deleteAppConfirmed();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!token || token === '') {
+        console.error('Token is not available');
+        document.getElementById('app-list-tbody').innerHTML = '<tr><td colspan="6" class="empty-state"><h4>Authentication Error</h4><p>Authentication token not available</p></td></tr>';
+        return;
+      }
+      
+      microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then(context => {
+          if (context && context.team && context.team.groupId) {
+            var teamId = context.team.groupId;
+            getAppsList(token, teamId, false);
+          } else {
+            console.error('Team context is not available');
+            document.getElementById('app-list-tbody').innerHTML = '<tr><td colspan="6" class="empty-state"><h4>Context Error</h4><p>Team context not available</p></td></tr>';
+          }
+        });
+      }).catch(error => {
+        console.error('Teams initialization error:', error);
+        document.getElementById('app-list-tbody').innerHTML = '<tr><td colspan="6" class="empty-state"><h4>Initialization Error</h4><p>Teams initialization failed</p></td></tr>';
+      });
+    });
+
+    function getAppsList(accessToken, teamId, showAll) {
+      fetch(`https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps?$expand=teamsAppDefinition,teamsApp`, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + accessToken,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        listInstalledApps(data, showAll);
+      })
+      .catch(error => {
+        console.error("Error fetching apps:", error);
+        document.getElementById('app-list-tbody').innerHTML = '<tr><td colspan="6" class="empty-state"><h4>Loading Error</h4><p>Error loading apps: ' + error.message + '</p></td></tr>';
+      });
+    }
+
+    function listInstalledApps(appList, showAll) {
+      if (!appList || !appList.value || !Array.isArray(appList.value)) {
+        console.error('Invalid app list data');
+        document.getElementById('app-list-tbody').innerHTML = '<tr><td colspan="6" class="empty-state"><h4>Data Error</h4><p>No valid app data found</p></td></tr>';
+        return;
+      }
+
+      var list = appList.value;
+      var end = showAll ? list.length : Math.min(list.length, 10);
+
+      // Clear existing table rows
+      var tbody = document.getElementById('app-list-tbody');
+      tbody.innerHTML = '';
+
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><h4>No apps found</h4><p>No apps are currently installed in this team</p></td></tr>';
+        return;
+      }
+
+      for (var i = 0; i < end; i++) {
+        var app = list[i];
+        if (app && app.teamsAppDefinition && app.teamsApp) {
+          var row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${i + 1}</td>
+            <td class="app-name">${app.teamsAppDefinition.displayName || 'N/A'}</td>
+            <td class="distribution-method">${app.teamsApp.distributionMethod || 'N/A'}</td>
+            <td><button class="action-button info" onclick="getAppInfo('${app.id}')">Get Info</button></td>
+            <td><button class="action-button update" onclick="upgradeApp('${app.id}', '${app.teamsApp.distributionMethod}', '${app.teamsAppDefinition.displayName}')">Update</button></td>
+            <td><button class="action-button delete" onclick="deleteApp('${app.id}', '${(app.teamsAppDefinition.displayName || 'Unknown').replace(/'/g, "\\'")}')">Delete</button></td>
+          `;
+          tbody.appendChild(row);
+        }
+      }
+
+      // Show/hide the "Show all Apps" button
+      var showAllButton = document.getElementById('showAllApp');
+      if (showAll || list.length <= 10) {
+        showAllButton.style.display = 'none';
+      } else {
+        showAllButton.style.display = 'block';
+      }
+    }
+
+    function showAllApp() {
+      microsoftTeams.app.getContext().then(context => {
+        if (context && context.team && context.team.groupId) {
+          getAppsList(token, context.team.groupId, true);
+        }
+      });
+    }
+
+    document.getElementById('btnAddApp').addEventListener('click', function(e) {
+      e.preventDefault();
+      showModal('addAppModal');
+    });
+
+    function confirmAddApp() {
+      closeModal('addAppModal');
+      
+      microsoftTeams.app.getContext().then(context => {
+        var teamId = context.team.groupId;
+        var pollyApp = {
+          "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d"
+        };
+
+        document.getElementById('modalbody').innerHTML = "<div class='message'>Adding Polly app...</div>";
+        showModal('getAppModal');
+
+        fetch(`https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps`, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(pollyApp)
+        })
+        .then(response => {
+          if (response.ok) {
+            document.getElementById('modalbody').innerHTML = "<div class='message success-message'>Polly app added successfully!</div>";
+            // Refresh the app list after adding
+            setTimeout(function() {
+              getAppsList(token, teamId, false);
+              closeModal('getAppModal');
+            }, 2000);
+          } else if (response.status === 409) {
+            document.getElementById('modalbody').innerHTML = "<div class='message warning-message'>Polly app already exists in this team</div>";
+          } else {
+            document.getElementById('modalbody').innerHTML = "<div class='message error-message'>Error adding app. Please try again.</div>";
+          }
+        })
+        .catch(error => {
+          console.error("Error adding app:", error);
+          document.getElementById('modalbody').innerHTML = "<div class='message error-message'>Error adding app. Please try again.</div>";
+        });
+      });
+    };
+
+    function getAppInfo(appId) {
+      if (!appId) {
+        document.getElementById('modalbody').innerHTML = "<div class='message error-message'>App ID not found</div>";
+        showModal('getAppModal');
+        return;
+      }
+
+      document.getElementById('modalbody').innerHTML = "<div class='message'>Loading app information...</div>";
+      showModal('getAppModal');
+
+      microsoftTeams.app.getContext().then(context => {
+        var teamId = context.team.groupId;
+        fetch(`https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps/${appId}?$expand=teamsAppDefinition`, {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.teamsAppDefinition) {
+            var infoHtml = `
+              <div class="info-content">
+                <div><strong>Name:</strong> ${data.teamsAppDefinition.displayName || 'N/A'}</div>
+                <div><strong>Description:</strong> ${data.teamsAppDefinition.description || 'N/A'}</div>
+                <div><strong>Version:</strong> ${data.teamsAppDefinition.version || 'N/A'}</div>
+              </div>
+            `;
+            document.getElementById('modalbody').innerHTML = infoHtml;
+          } else {
+            document.getElementById('modalbody').innerHTML = "<div class='message error-message'>App information not available</div>";
+          }
+        })
+        .catch(error => {
+          console.error("Error getting app info:", error);
+          document.getElementById('modalbody').innerHTML = "<div class='message error-message'>Error retrieving app information: " + error.message + "</div>";
+        });
+      });
+    }
+
+    function upgradeApp(appId, distributionMethod, appName) {
+      if (!appId) {
+        document.getElementById('modalbody').innerHTML = "<span>App ID not found</span>";
+        showModal('getAppModal');
+        return;
+      }
+
+      // Check if the app can be updated based on distribution method
+      if (distributionMethod === 'store' || distributionMethod === 'organization') {
+        // These apps might be updatable
+        document.getElementById('modalbody').innerHTML = "<div class='message'>Checking for app updates...</div>";
+        showModal('getAppModal');
+        
+        microsoftTeams.app.getContext().then(context => {
+          var teamId = context.team.groupId;
+          fetch(`https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps/${appId}/upgrade`, {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + token,
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              document.getElementById('modalbody').innerHTML = "<div class='message success-message'>App updated successfully!</div>";
+              // Refresh the app list after updating
+              setTimeout(function() {
+                getAppsList(token, teamId, false);
+                closeModal('getAppModal');
+              }, 2000);
+            } else {
+              // Get more detailed error information
+              return response.text().then(errorText => {
+                console.error("Update failed with status:", response.status, "Response:", errorText);
+                var errorMessage = "";
+                if (response.status === 400) {
+                  errorMessage = "App update not available. The app may already be at the latest version.";
+                } else if (response.status === 403) {
+                  errorMessage = "Forbidden. You don't have permission to update this app.";
+                } else if (response.status === 404) {
+                  errorMessage = "Update endpoint not found. This app doesn't support updates.";
+                } else if (response.status === 409) {
+                  errorMessage = "App is already up to date.";
+                } else {
+                  errorMessage = `Cannot update "${appName}". Status: ${response.status}`;
+                }
+                document.getElementById('modalbody').innerHTML = "<div class='message warning-message'>" + errorMessage + "</div>";
+              });
+            }
+          })
+          .catch(error => {
+            console.error("Error upgrading app:", error);
+            document.getElementById('modalbody').innerHTML = "<div class='message error-message'>Network error updating app: " + error.message + "</div>";
+          });
+        });
+      } else {
+        // Apps with other distribution methods typically cannot be updated
+        document.getElementById('modalbody').innerHTML = "<div class='message warning-message'>Cannot update \"" + appName + "\". This app type (" + distributionMethod + ") doesn't support updates via Graph API.</div>";
+        showModal('getAppModal');
+      }
+    }
+
+    function deleteApp(appId, appName) {
+      if (!appId) {
+        document.getElementById('modalbody').innerHTML = "<div class='message error-message'>App ID not found</div>";
+        showModal('getAppModal');
+        return;
+      }
+      
+      teamAppInstallationId = appId;
+      showModal('deleteAppModal');
+    }
+
+    function deleteAppConfirmed() {
+      if (!teamAppInstallationId) {
+        document.getElementById('modalbody').innerHTML = "<div class='message error-message'>App ID not found</div>";
+        showModal('getAppModal');
+        return;
+      }
+
+      microsoftTeams.app.getContext().then(context => {
+        var teamId = context.team.groupId;
+        fetch(`https://graph.microsoft.com/v1.0/teams/${teamId}/installedApps/${teamAppInstallationId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            document.getElementById('modalbody').innerHTML = "<div class='message success-message'>App deleted successfully!</div>";
+            showModal('getAppModal');
+            // Refresh the app list after deletion
+            setTimeout(function() {
+              getAppsList(token, teamId, false);
+              closeModal('getAppModal');
+            }, 2000);
+          } else {
+            document.getElementById('modalbody').innerHTML = "<div class='message warning-message'>Cannot delete this app. It may be installed by default.</div>";
+            showModal('getAppModal');
+          }
+        })
+        .catch(error => {
+          console.error("Error deleting app:", error);
+          document.getElementById('modalbody').innerHTML = "<div class='message error-message'>Cannot delete this app: " + error.message + "</div>";
+          showModal('getAppModal');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

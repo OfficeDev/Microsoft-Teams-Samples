@@ -3,8 +3,10 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.6.2
 
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -13,15 +15,15 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
     /// <summary>
     /// AdapterWithErrorHandler handles errors during bot execution.
     /// </summary>
-    public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
+    public class AdapterWithErrorHandler : CloudAdapter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdapterWithErrorHandler"/> class.
         /// </summary>
-        /// <param name="configuration">The configuration.</param>
+        /// <param name="botFrameworkAuthentication">The bot framework authentication.</param>
         /// <param name="logger">The logger.</param>
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
-            : base(configuration, logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication botFrameworkAuthentication, ILogger<AdapterWithErrorHandler> logger)
+            : base(botFrameworkAuthentication, logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {
