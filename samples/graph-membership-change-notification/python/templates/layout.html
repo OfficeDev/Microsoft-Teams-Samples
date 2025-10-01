@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph Notifications</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <!-- Microsoft Teams JavaScript SDK -->
+    <script src="https://res.cdn.office.net/teams-js/2.39.1/js/MicrosoftTeams.min.js"
+        integrity="sha384-DCaADE5ucxq02uymDGfLHqBklxuM03ZONTCmqdwEFNouwR1kHsPHVT1UYOyb3X72"
+        crossorigin="anonymous"></script>
+    <script>
+        // Ensure microsoftTeams is available as global
+        window.microsoftTeams = window.microsoftTeams || window.MicrosoftTeams;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
