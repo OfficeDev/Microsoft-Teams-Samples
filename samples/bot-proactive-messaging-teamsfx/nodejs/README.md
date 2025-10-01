@@ -18,7 +18,21 @@ urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx-n
 This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Microsoft 365 Agents Toolkit for streamlined setup and testing.
 
 ## Prerequisites
+### Register your app with Azure AD.
 
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 - [NodeJS](https://nodejs.org/en/)
 - An M365 account. If you do not have M365 account, apply one from [M365 developer program](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 - [Microsoft 365 Agents Toolkit Visual Studio Code Extension](https://aka.ms/teams-toolkit) version after 1.55 or [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teams-toolkit-cli)
