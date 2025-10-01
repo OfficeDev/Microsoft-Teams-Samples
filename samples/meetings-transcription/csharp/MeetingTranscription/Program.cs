@@ -41,7 +41,9 @@ builder.Services.AddSingleton<ConcurrentDictionary<string, string>>();
 builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
 // Create the Bot Adapter with error handling enabled.
-builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+builder.Services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
 // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
 IServiceCollection serviceCollection = builder.Services.AddTransient<IBot, TranscriptionBot>();

@@ -150,8 +150,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Select `MeetingTranscription.csproj` file
   - Press `F5` to run the project
 
-
-
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
 **NOTE: The feature is only available only be used from the desktop app*
@@ -163,6 +161,49 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
 ![Policy](MeetingTranscription/Images/Policy.png)
+
+
+# RSC Enable Configuration  
+
+To enable **Resource Specific Consent (RSC)**, please update the following configuration files:  
+
+---
+
+## 1. Update App Manifest Schema  
+
+In your `manifest.json`, update the schema version:  
+
+```json
+"$schema": "https://developer.microsoft.com/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+"manifestVersion": "1.23",
+```
+
+## Add Authorization Permissions  
+
+Add the following permissions inside the **authorization** section of your `manifest.json`:  
+
+```json
+"authorization": {
+  "permissions": {
+    "resourceSpecific": [
+      {
+        "name": "OnlineMeeting.ReadBasic.Chat",
+        "type": "Application"
+      },
+      {
+        "name": "OnlineMeetingTranscript.Read.Chat",
+        "type": "Application"
+      }
+    ]
+  }
+}
+```
+## Update `m365agents.local.yml`  
+
+- In the file `m365agents.local.yml`:  
+
+- **Comment out** the section for `aad.manifest.json` (lines **52–55**).  
+- **Comment out** the section for validating `appPackage` (lines **57–61**).
 
 
 6. Setup Manifest for Teams
