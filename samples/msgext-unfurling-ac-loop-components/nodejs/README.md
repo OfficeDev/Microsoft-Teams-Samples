@@ -63,7 +63,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
       * Leave **Redirect URI** empty.
       * Choose **Register**.
   3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
-  4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+  5.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
 
 ### 2. Setup
 

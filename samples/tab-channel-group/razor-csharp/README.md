@@ -72,23 +72,40 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2. Clone the repository
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-3. If you are using Visual Studio
+4. If you are using Visual Studio
  - Launch Visual Studio
  - File -> Open -> Project/Solution
  - Navigate to ```samples\tab-channel-group\razor-csharp``` folder
  - Select ```ChannelGroupTab.sln``` file and open the solution
 
-4. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
+5. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - <<Guid>> with any random GUID.
    - `<<Base-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-5. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+6. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.

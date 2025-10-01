@@ -97,7 +97,25 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     npm start
     ```
-### 2. Manually update the manifest.json
+
+### 2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+### 3. Manually update the manifest.json
 1. Manually update the manifest.json
     - Edit the `manifest.json` contained in the  `appManifest/` folder to replace the `<<AppId>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.com` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`

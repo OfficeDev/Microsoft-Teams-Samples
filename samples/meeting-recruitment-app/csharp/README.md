@@ -84,6 +84,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    ![ClientSecret](MeetingApp/Images/clientsecret.png) 
 
    * Copy and paste the secret somewhere safe. You will need it in a future step.
+
+   Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
    
 2. Setup for Bot
 
