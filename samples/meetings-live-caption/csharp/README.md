@@ -1,15 +1,6 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to utilize CART links to send 4) Open the code in Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
-
-5) Run the bot from5) Run the bot from Visual Studio:
-   - Press `F5` to run the project
-
-6) Modify Visual Studio:the `manifest.json` in the `/appPackage` folder and replace the following details:tio7) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
-
-8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")in Microsoft Teams meetings.
+description: This sample application demonstrates how to utilize CART links to send live captions in Microsoft Teams meetings.
 products:
 - office-teams
 - office
@@ -126,7 +117,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - `<<AppId>>` with any GUID id value.
    - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-7) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
+1) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
 
 1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
