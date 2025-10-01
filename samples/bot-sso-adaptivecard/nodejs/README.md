@@ -21,6 +21,7 @@ This sample code demonstrates how to get enable SSO authentication for your Adap
 ## Included Features
 * Teams SSO (bots)
 * Adaptive Cards
+* Custom Engine Agents - Copilot
 
 ## Interaction with app
 
@@ -185,6 +186,19 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ![InstallApp](Images/loginsuccess.png)
 
+**Copilot Custom Engine Agents:**
+**Install App In Copilot**
+
+![Welcome](Images/Copilot_Install.png)
+
+**Sign-In UI:**
+
+![SignButton](Images/Copilot_LoginCommand.png)
+
+**Welcome Universal Card:**
+
+![InstallApp](Images/Copilot_WelcomeCard.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -192,6 +206,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Universal Actions for Adaptive Cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/overview?tabs=mobile)
-
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sso-adaptivecard-nodejs" />

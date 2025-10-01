@@ -22,6 +22,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 * Bots
 * Tabs
 * Localization
+* Custome Engine Agents
 
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
@@ -142,6 +143,16 @@ To change the language in Microsoft Teams, please click your profile picture at 
 
 2. **Bot**: send any message to see localized 
 [image](Images/Reply.png)
+
+**Custome Engine Agents**
+Install App In Copilot
+![image](Images/CopilotInstall.png)
+
+Default Language English(USA)
+![image](Images/Copilot1.png)
+
+After Changing Language to Hindi
+![image](Images/Copilot2.png)
 
 ## Outlook on the web
 

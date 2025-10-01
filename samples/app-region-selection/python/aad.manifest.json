@@ -1,8 +1,11 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
-    "name": "${{CONFIG_APPNAME_SHORT}}-aad",
+    "appId": "${{AAD_APP_CLIENT_ID}}",
+    "name": "graph-proactive-installation-aad",
     "accessTokenAcceptedVersion": 2,
-    "signInAudience": "AzureADMyOrg",
+    "signInAudience": "AzureADandPersonalMicrosoftAccount",
+    "oauth2AllowIdTokenImplicitFlow": true,
+	"oauth2AllowImplicitFlow": true,
     "optionalClaims": {
         "idToken": [],
         "accessToken": [
@@ -22,6 +25,10 @@
                 {
                     "id": "User.Read",
                     "type": "Scope"
+                },
+                {
+                    "id": "TeamsAppInstallation.ReadWriteForUser.All",
+                    "type": "Role"
                 }
             ]
         }
@@ -88,13 +95,17 @@
             ]
         }
     ],
-    "identifierUris": [
-        "api://botid-${{BOT_ID}}"
+    "identifierUris":[
+        "api://botid-${{AAD_APP_CLIENT_ID}}"
     ],
-    "replyUrlsWithType": [
+    "replyUrlsWithType":[
         {
-            "url": "${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/auth-end.html",
-            "type": "Web"
-        }
+          "url": "https://${{BOT_DOMAIN}}/auth-end.html",
+          "type": "Web"
+        },
+        {
+			"url": "https://token.botframework.com/.auth/web/redirect",
+			"type": "Web"
+		}
     ]
 }

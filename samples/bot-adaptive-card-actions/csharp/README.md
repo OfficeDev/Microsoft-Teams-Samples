@@ -20,6 +20,7 @@ This sample demonstrates how to create and send Adaptive Cards with different ac
 ## Included Features
 * Bots
 * Adaptive Cards
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -132,6 +133,33 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![Runnning Sample](AdaptiveCardActions/Images/10.ToggleVisibiliyCard.png)
 
 ![Runnning Sample](AdaptiveCardActions/Images/11.VisibleOnClick.png)
+
+**Copilot Custom Engine Agents**
+
+Install App in copilot
+![Copilot](AdaptiveCardActions/Images/CopilotInstall.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot1.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot2.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot3.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot4.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot5.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot6.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot7.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot8.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot9.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot10.png) 
+
+
 
 ## Deploy the bot to Azure
 

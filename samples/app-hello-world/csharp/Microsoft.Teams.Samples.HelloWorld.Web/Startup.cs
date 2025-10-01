@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,8 +44,11 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             services.AddControllers();  // Adds controllers to the service collection
             services.AddMvc(); // Adds MVC services for handling views and routes
 
+            // Create the Bot Framework Authentication to be used with the Bot Adapter
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
             // Register Bot Framework HTTP Adapter with custom error handler
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             // Register the bot (MessageExtension) as a transient service
             services.AddTransient<IBot, MessageExtension>();

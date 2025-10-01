@@ -7,6 +7,10 @@ const config = require("./config");
 const azure = require("azure-storage");
 
 class SearchApp extends TeamsActivityHandler {
+  
+  async run(context) {
+    await super.run(context);
+  }
 
   async handleTeamsMessagingExtensionQuery(context, query) {
     const { parameters } = query;

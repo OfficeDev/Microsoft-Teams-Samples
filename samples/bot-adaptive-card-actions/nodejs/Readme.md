@@ -28,6 +28,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Included Features
 * Bots
 * Adaptive Cards
+* Custom Engine Agents
 
 ## Prerequisites
 
@@ -141,6 +142,30 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Running Sample](Images/11.VisibleOnClick.png)
 
+**Copilot Custom Engine Agents**
+
+Install App in copilot
+![Copilot](Images/CopilotInstall.png) 
+
+![Copilot](Images/Copilot1.png) 
+
+![Copilot](Images/Copilot2.png) 
+
+![Copilot](Images/Copilot3.png) 
+
+![Copilot](Images/Copilot4.png) 
+
+![Copilot](Images/Copilot5.png) 
+
+![Copilot](Images/Copilot6.png) 
+
+![Copilot](Images/Copilot7.png) 
+
+![Copilot](Images/Copilot8.png) 
+
+![Copilot](Images/Copilot9.png) 
+
+![Copilot](Images/Copilot10.png) 
 
 ## Deploy the bot to Azure
 

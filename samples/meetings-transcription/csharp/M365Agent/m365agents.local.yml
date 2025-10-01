@@ -35,7 +35,7 @@ provision:
     with:
       run:
         echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
-        "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
+        echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:

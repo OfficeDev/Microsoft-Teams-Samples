@@ -5,20 +5,29 @@ import os
 import logging
 from aiohttp import web
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter
+    TurnContext
+    
 )
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from bots.bot import AppCheckInBot 
 from botbuilder.schema import Activity
+from config import DefaultConfig
 
 logging.basicConfig(level=logging.INFO)
 
-APP_ID = os.getenv("MicrosoftAppId", "")
-APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
+CONFIG = DefaultConfig()
 
-adapter_settings = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
-adapter = BotFrameworkAdapter(adapter_settings)
+# Use direct environment variables for authentication
+AUTH_CONFIG = {
+    "MicrosoftAppType": os.environ.get("MicrosoftAppType", "SingleTenant"),
+    "MicrosoftAppId": os.environ.get("MicrosoftAppId", ""),
+    "MicrosoftAppPassword": os.environ.get("MicrosoftAppPassword", ""),
+    "MicrosoftAppTenantId": os.environ.get("MicrosoftAppTenantId", "")
+}
+
+# Create authentication configuration
+BOT_AUTHENTICATION = ConfigurationBotFrameworkAuthentication(AUTH_CONFIG)
+ADAPTER = CloudAdapter(BOT_AUTHENTICATION)
 
 async def on_error(context: TurnContext, error: Exception):
     logging.error(f"[on_turn_error] unhandled error: {error}")
@@ -30,7 +39,7 @@ async def on_error(context: TurnContext, error: Exception):
         value_type="https://www.botframework.com/schemas/error"
     )
 
-adapter.on_turn_error = on_error
+ADAPTER.on_turn_error = on_error
 
 bot = AppCheckInBot()
 
@@ -54,7 +63,7 @@ async def messages(request):
     body = await request.json()
     activity = Activity().deserialize(body)
     auth_header = request.headers.get("Authorization", "")
-    response = await adapter.process_activity(activity, auth_header, bot.on_turn)
+    response = await ADAPTER.process(activity, auth_header, bot.on_turn)
     if response:
         return web.json_response(data=response.body, status=response.status)
     return web.Response(status=201)
@@ -63,5 +72,5 @@ app.router.add_routes(routes)
 app.router.add_static('/Images/', path='./Images', name='images')
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 3978))
+    port = int(os.getenv("PORT", 3979))  # Use 3979 as default to avoid conflict
     web.run_app(app, port=port)
