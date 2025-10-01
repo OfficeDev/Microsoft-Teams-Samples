@@ -78,7 +78,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 ## Included Features
 * Bots
 * Universal Adaptive Cards
-
+* Custom Engine Agents
 ## Interaction with bot
 
 #### Me Action
@@ -297,6 +297,35 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   **Welcome intraction card**
   
   ![Meeting-scope-app](docs/24.welcome-card.png)
+
+  **Copilot Custom Engine Agents**
+
+  Install App in copilot
+  ![Copilot](docs/CopilotInstall.png) 
+
+  **Welcome Card**
+  ![Copilot](docs/Copilot1.png) 
+
+  **User Specific Card**
+  ![Copilot](docs/Copilot2.png) 
+
+  **On Click Manual Refresh**
+  ![Copilot](docs/Copilot3.png) 
+
+  **On Click Update Message**
+  ![Copilot](docs/Copilot4.png) 
+
+  ![Copilot](docs/Copilot5.png) 
+
+  **On Click All Users**
+  ![Copilot](docs/Copilot6.png) 
+
+  **On Click Manual Refresh**
+  ![Copilot](docs/Copilot7.png) 
+
+  **On Click Update Message**
+  ![Copilot](docs/Copilot8.png) 
+
   
 ## FAQ
 

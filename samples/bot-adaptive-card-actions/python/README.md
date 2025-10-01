@@ -21,6 +21,7 @@ This sample shows the feature where user can send adaptive card with different a
 ## Included Features
 * Bots
 * Adaptive Cards
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -122,6 +123,31 @@ the Teams service needs to call into the bot.
 ![Running Sample](Images/10.ToggleVisibiliyCard.png)
 
 ![Running Sample](Images/11.VisibleOnClick.png)
+
+**Copilot Custom Engine Agents**
+
+Install App in copilot
+![Copilot](Images/CopilotInstall.png) 
+
+![Copilot](Images/Copilot1.png) 
+
+![Copilot](Images/Copilot2.png) 
+
+![Copilot](Images/Copilot3.png) 
+
+![Copilot](Images/Copilot4.png) 
+
+![Copilot](Images/Copilot5.png) 
+
+![Copilot](Images/Copilot6.png) 
+
+![Copilot](Images/Copilot7.png) 
+
+![Copilot](Images/Copilot8.png) 
+
+![Copilot](Images/Copilot9.png) 
+
+![Copilot](Images/Copilot10.png) 
 
 ## Further reading
 
