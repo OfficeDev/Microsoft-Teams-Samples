@@ -1,3 +1,18 @@
+---
+page_type: sample
+description: This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+ contentType: samples
+ createdDate: "10/11/2021 23:35:25 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-teamsfx-nodejs
+---
+ 
 # How to use this Proactive message bots app
 
 This sample bot showcases proactive messaging capabilities in Microsoft Teams by storing user conversation references to send scheduled or triggered reminder notifications. The app is designed for local debugging and deployment to Azure, offering full integration with Microsoft 365 Agents Toolkit for streamlined setup and testing.
@@ -96,6 +111,26 @@ This sample provides following functionality:
 
   ![ShareMessage](./images/send-proactive-messages.gif)
 
+**Custom Engine Agent - Copilot**
+
+**Copilot Installation Screen**  
+![Copilot](./images/Copilot_Install.png)
+
+**Copilot Greeting Message**  
+![Copilot](./images/Copilot_Hello.png)
+
+**Copilot Welcome Message**  
+![Copilot](./images/Copilot_Welcome.png)
+
+**Copilot Link Notification**  
+![Copilot](./images/Copilot_Link_Notify.png)
+
+**Copilot Message Sent Confirmation**  
+![Copilot](./images/Copilot_Msg_Sent.png)
+
+**Copilot Proactive Hello Message**  
+![Copilot](./images/Copilot_Proactive_Hello_Msg.png)
+
 
 ## Further reading
 
@@ -103,5 +138,6 @@ This sample provides following functionality:
 - [Bots in Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots)
 - [Proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages?tabs=dotnet)
 - [Step by step guide to send proactive messages](https://docs.microsoft.com/en-us/microsoftteams/platform/sbs-send-proactive)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-teamsfx-Python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-proactive-messaging-teamsfx-nodejs" />
