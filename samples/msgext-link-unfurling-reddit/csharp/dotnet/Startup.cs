@@ -65,6 +65,11 @@ namespace Microsoft.Teams.Samples.LinkUnfurlerForReddit
                 appId: appId,
                 password: appPassword);
 
+            services.AddControllersWithViews(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
+
             services.Configure<RedditOptions>(options =>
             {
                 options.BotFrameworkConnectionName = this.configuration.GetValue<string>("BotFramework:ConnectionName");

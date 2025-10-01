@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/vdevpreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.graphactivityfeed",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.teams.com",
@@ -19,8 +18,8 @@
     "full": "NotifyFeedApp for Send Activity Feed"
   },
   "description": {
-    "short": "App helps to notifiy user for Task creation in Chat, Team and for custom Topic",
-    "full": "This is an Tab app which has Send notfication feed enabled for different scenarios like Chat, Team and Custom Topic"
+    "short": "Sample app that uses Graph API to send activity feed notifications in Teams.",
+    "full": "This Microsoft Teams sample app demonstrates how to send activity feed notifications using the Microsoft Graph API in a Teams Tab."
   },
   "accentColor": "#235EA5",
   "configurableTabs": [
@@ -29,7 +28,7 @@
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
-        "groupchat"
+        "groupChat"
       ],
       "context": [
         "channelTab",
@@ -61,7 +60,10 @@
       {
         "type": "taskCreated",
         "description": "Task created activity",
-        "templateText": "New created task {taskName} for you"
+        "templateText": "New created task {taskName} for you",
+        "allowedIconIds": [
+          "taskCreatedId"
+        ]
       },
       {
         "type": "deploymentApprovalRequired",
@@ -71,19 +73,64 @@
       {
         "type": "approvalRequired",
         "description": "Deployment requires your approval",
-        "templateText": "A Deployment approval Task created with {approvalTaskId}"
+        "templateText": "A Deployment approval Task created with {approvalTaskId}",
+        "allowedIconIds": [
+          "approvalRequiredId"
+        ]
       },
       {
         "type": "pendingFinanceApprovalRequests",
         "description": "Internal spending team has a pending finance approval requests",
-        "templateText": "These are count of pending request {pendingRequestCount}"
+        "templateText": "These are count of pending request {pendingRequestCount}",
+        "allowedIconIds": [
+          "pendingFinanceApprovalRequestsId"
+        ]
       },
       {
         "type": "reservationUpdated",
         "description": "You have moved up the queue",
-        "templateText": "Here is the {reservationId} with {currentSlot}"
+        "templateText": "Here is the {reservationId} with {currentSlot}",
+        "allowedIconIds": [
+          "reservationUpdatedId"
+        ]
+      }
+    ],
+    "activityIcons": [
+      {
+        "id": "taskCreatedId",
+        "iconFile": "exclaim.png"
+      },
+      {
+        "id": "approvalRequiredId",
+        "iconFile": "approvalRequired.png"
+      },
+      {
+        "id": "pendingFinanceApprovalRequestsId",
+        "iconFile": "pendingFinanceApprovalRequests.png"
+      },
+      {
+        "id": "reservationUpdatedId",
+        "iconFile": "reservationUpdated.png"
       }
     ]
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.User"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Group"
+        },
+        {
+          "type": "Application",
+          "name": "TeamsActivity.Send.Chat"
+        }
+      ]
+    }
   },
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",

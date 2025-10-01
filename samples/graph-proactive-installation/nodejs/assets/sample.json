@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-graph-proactive-installation-nodejs",
     "source": "officeDev",
     "title": "Proactive Installation Sample App",
-    "shortDescription": "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot.",
+    "shortDescription": "This sample application demonstrates proactive installation of a Teams app and sending notifications to users using Microsoft Graph APIs.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-proactive-installation/nodejs",
     "longDescription": [
-      "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs.This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs through bot."
+      "This sample app showcases proactive installation of a Microsoft Teams application, enabling notifications to users through Microsoft Graph APIs in Group Chats and Channels. It features a bot for interaction, facilitating seamless user engagement and efficient app management."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-proactive-installation/nodejs/Images/graph-proactive-installation.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-proactive-installation/nodejs/Images/ProActInstalltin.gif",
         "alt": "Solution UX showing proactive installation sample app"
       }
     ],

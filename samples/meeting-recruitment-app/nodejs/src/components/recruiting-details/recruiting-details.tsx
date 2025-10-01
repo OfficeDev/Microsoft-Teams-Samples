@@ -63,8 +63,8 @@ const RecruitingDetails = () => {
 
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        microsoftTeams.getContext((context) => {
-            getQuestions(context.meetingId!)
+        microsoftTeams.app.getContext().then(async (context) => {
+            getQuestions(context.meeting?.id!)
                 .then((res) => {
                     console.log(res);
                     const questions = res.data as IQuestionDetails[];
@@ -94,12 +94,12 @@ const RecruitingDetails = () => {
             }
         })
         const feedbackJson = JSON.stringify(feedback);
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.getContext().then(async (context) => {
             const feedbackDetails: IFeedbackDetails = {
                 MeetingId: questionDetails[0].MeetingId,
                 CandidateEmail: currentCandidateEmail,
                 FeedbackJson: feedbackJson,
-                Interviewer: context?.userPrincipalName!
+                Interviewer: context.user?.userPrincipalName!
             }
             saveFeedback(feedbackDetails)
                 .then((res) => {
@@ -116,7 +116,6 @@ const RecruitingDetails = () => {
         // API call to download.
         download()
             .then((res) => {
-                debugger
                 var link = document.createElement("a")
                 var blob = new Blob([res.data as Blob], { type: res.headers["content-type"] });
                 const blobUrl = window.URL.createObjectURL(blob)
@@ -133,12 +132,13 @@ const RecruitingDetails = () => {
     }
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
-            sethostClientType(context.hostClientType);
+        microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then(async (context) => {
+            setframeContext(context.page.frameContext);
+            sethostClientType(context.app.host.clientType);
         });
         loadQuestions();
+    });
     }, [])
 
 

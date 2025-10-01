@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
+description: This app demonstrates using bot conversation events in Microsoft Teams, supporting adaptive cards, read receipts, and message update events. It includes immersive reader support for enhanced accessibility.
 products:
 - office-teams
 - office
@@ -14,6 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-java
 ---
 
 # Teams Conversation Bot
+This sample app demonstrates how to handle various bot conversation events in Microsoft Teams, including read receipts and adaptive card interactions. It showcases capabilities such as immersive reader support and message update tracking, making it ideal for personal, group, and team chat scopes.
 
 Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
 
@@ -32,7 +33,7 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ![BotConversation](Images/BotConversation.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Conversation Bot:** [Manifest](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
 
@@ -98,17 +99,18 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message, or selecting a command from the command list. The bot will respond to the following strings. 
 
 1. **Show Welcome**
-    ![WelcomeCard](Images/2.WelcomeCard.PNG)
+    ![Prompts](Images/1.prompts.png)
+    ![Welcome](Images/2.welcome.png)
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
 
 2. **MentionMe**
-    ![MentionMe](Images/3.MentionMe.PNG)
+    ![MentionMe](Images/3.mention.png)
   - **Result:** The bot will respond to the message and mention the user
   - **Valid Scopes:** personal, group chat, team chat
 
 3. **MessageAllMembers**
-    ![MessageAllMembers](Images/4.MessageAllMembers.PNG)
+    ![MessageAllMembers](Images/4.sent.png)
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
   - **Valid Scopes:** personal, group chat, team chat
 

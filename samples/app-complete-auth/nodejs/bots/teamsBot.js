@@ -760,6 +760,16 @@ class TeamsBot extends DialogBot {
         type: 'AdaptiveCard',
         version: '1.4'
     });
+
+    async handleTeamsSigninVerifyState(context, query) {
+        console.log('Running dialog with signin/verifystate from an Invoke Activity.');
+        await this.dialog.run(context, this.dialogState);
+    }
+
+    async handleTeamsSigninTokenExchange(context, query) {
+        console.log('Running dialog with signin/tokenExchange from an Invoke Activity.');
+        await this.dialog.run(context, this.dialogState);
+    }
 }
 
 module.exports.TeamsBot = TeamsBot;

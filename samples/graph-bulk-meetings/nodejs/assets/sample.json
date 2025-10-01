@@ -2,14 +2,14 @@
   {
     "name": "officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs",
     "source": "officeDev",
-    "title": "Creating teams meetings in bulk using file upload method",
+    "title": "This sample application demonstrates bulk creation of Teams meetings using file uploads.",
     "shortDescription": "This is a sample application which demonstrates how to create meetings in bulk using file upload method through teams tab",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-bulk-meetings/nodejs",
     "longDescription": [
-      "This is an sample application which shows how to create teams meetings in bulk using file upload method through teams tab"
+      "This sample application allows users to bulk create meetings in Microsoft Teams using file uploads, leveraging the Graph API for seamless integration. It features an intuitive tab interface, interactive elements, and detailed setup instructions for smooth deployment."
     ],
     "creationDateTime": "2022-09-09",
-    "updateDateTime": "2022-09-09",
+    "updateDateTime": "2024-10-14",
     "products": [
       "Teams"
     ],

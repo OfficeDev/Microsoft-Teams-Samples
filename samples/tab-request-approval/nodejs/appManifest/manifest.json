@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.tabrequestapproval",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.teams.com",
@@ -20,7 +19,7 @@
   },
   "description": {
     "short": "App helps user to raise a request and notify manager for approve or reject it.",
-    "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection."
+    "full": "This application facilitates task approval requests in Microsoft Teams, where requesters can send notifications to their managers and track their request status. Managers can view pending requests through the activity feed and respond by approving or rejecting them, leveraging Teams SSO and Graph API for seamless interaction."
   },
   "accentColor": "#235EA5",
   "staticTabs": [

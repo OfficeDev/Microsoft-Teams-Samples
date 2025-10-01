@@ -58,8 +58,10 @@ const useStyles = makeStyles({
 });
 
 const App: React.FC = () => {
+
   const [discount, setDiscount] = useState("15");
   const [offerText, setOfferText] = useState("We are delighted to offer you a discount of");
+  const [currentOfficeTheme, setCurrentOfficeTheme] = useState(Office.context.officeTheme);
   const styles = useStyles();
 
   const handleDiscountChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,27 +128,27 @@ const App: React.FC = () => {
     addOfferToCRM(offer);
   };
 
+    const handleOfficeThemeChange = async (event: Office.OfficeThemeChangedEventArgs) => {
+      setCurrentOfficeTheme(event.officeTheme);
+  };
+
+  Office.context.mailbox.addHandlerAsync(Office.EventType.OfficeThemeChanged, handleOfficeThemeChange);
+
   /*
-    The Office.context.officeTheme object does not have a name
-    or ID property, so the theme must be inferred from one of
-    the color properties. If the foreground color (i.e., text color)
-    is off-white (f0f0f0), assume a dark Office theme. Otherwise,
-    assume a light Office theme.
+    The properties Office.context.officeTheme.themeId and 
+    Office.context.officeTheme.isDarkTheme are not supported in Outlook,
+    so the theme must be inferred from one of the color properties. 
+    If the foreground color (i.e., text color) is off-white (f0f0f0), 
+    assume a dark Office theme. Otherwise, assume a light Office theme.
   */
   const getOfficeTheme = (): string => {
-    if (Office.context.officeTheme.bodyForegroundColor === "#f0f0f0") {
+    if (currentOfficeTheme.bodyForegroundColor === "#f0f0f0") {
       return "dark";
     } else {
       return "light";
     }
   };
 
-  /*
-    The Office JavaScript Library doesn't provide a way to handle
-    the theme changed event, so if a user changes themes while the
-    add-in is open, the changes are not reflected in the task pane
-    unless the add-in is reloaded.
-  */
   const setFluentTheme = (): Theme => {
     if (getOfficeTheme() === "dark") {
       return webDarkTheme;

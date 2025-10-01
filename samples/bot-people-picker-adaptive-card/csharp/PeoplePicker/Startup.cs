@@ -15,6 +15,9 @@ using System.Collections.Concurrent;
 
 namespace PeoplePicker
 {
+    /// <summary>
+    /// Configures services for dependency injection and the HTTP request pipeline.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,46 +25,61 @@ namespace PeoplePicker
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration for the application.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Adds services to the container.
+        /// </summary>
+        /// <param name="services">The collection of services to configure.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add necessary services for controllers, including JSON serialization.
             services.AddControllers().AddNewtonsoftJson();
-
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            // Register the Bot Framework Adapter with error handling.
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
-            // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
+            // Register in-memory storage for User and Conversation state.
             services.AddSingleton<IStorage, MemoryStorage>();
 
-            // Create the Conversation state. (Used by the Dialog system itself.)
+            // Register ConversationState, which manages the state of conversations.
             services.AddSingleton<ConversationState>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+            // Register the bot as a transient service, ensuring a new instance is created per request.
             services.AddTransient<IBot, ActivityBot>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application builder to configure.</param>
+        /// <param name="env">The web hosting environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
+                // Enable detailed error pages in the development environment.
                 app.UseDeveloperExceptionPage();
             }
 
+            // Configure the app to serve static files and handle routing.
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            // Enable WebSocket support and configure routing and authorization.
             app.UseWebSockets()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+               .UseRouting()
+               .UseAuthorization()
+               .UseEndpoints(endpoints =>
+               {
+                   // Map controllers to handle requests.
+                   endpoints.MapControllers();
+               });
         }
     }
 }

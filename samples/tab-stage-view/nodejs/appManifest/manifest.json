@@ -15,8 +15,8 @@
     "full": "Tab in stage view"
   },
   "description": {
-    "short": "View Tab in stage view",
-    "full": "This sample demos the tab in stage view"
+    "short": "Microsoft Teams tab sample app showcasing stage view functionality.",
+    "full": "This sample app demonstrates the use of Teams tab in stage view using Node.js, featuring collaborative elements and interactive capabilities."
   },
   "icons": {
     "outline": "outline.png",
@@ -75,7 +75,7 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com",
+              "tabstageview.com/card",
               "${{BOT_DOMAIN}}"
             ]
           }

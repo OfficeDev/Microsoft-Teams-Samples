@@ -8,7 +8,7 @@ languages:
   - typescript
   - javascript
   - html
-description: "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)."
+description: "This sample app provides tested, high-quality UI templates to help developers understand how to create effective applications for Microsoft Teams, covering common use cases like dashboards and forms."
 extensions:
   contentType: samples
   createdDate: "12/08/2020 05:06:47 PM"
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 
 # Deploying the Microsoft Teams UI templates sample app
 
-This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
+This sample app illustrates best practices for designing applications within Microsoft Teams, featuring a collection of high-quality UI templates that have been rigorously tested for various common use cases, including dashboards and forms. By leveraging these templates, developers can create visually appealing and user-friendly applications that enhance the overall Teams experience.
 
  ## Included Features
 * Tabs
@@ -27,7 +27,7 @@ This sample app can help you better understand how apps should look and behave i
 ![Tab-page](Images/tab-ui-templates.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams UI templates:** [Manifest](/samples/tab-ui-templates/ts/demo-manifest/tab-ui-templates.zip)
 
@@ -35,8 +35,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - <a href="https://git-scm.com/" target="_blank">Install Git</a>
 - [Node.js and npm](https://nodejs.org). Run the command `node --version` to verify that Node.js is installed.
-- Set up a [Microsoft 365 developer account](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account), which allows app sideloading in Teams.
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- Set up a [Microsoft 365 developer account](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account), which allows app uploading in Teams.
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
 ## Set up your app project
 
@@ -57,18 +57,18 @@ You can find the app source code in `./src`:
 - `assets`: Includes the app assets.
 
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -120,6 +120,21 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 > [!IMPORTANT]
 > If you're using the free version of ngrok and plan to share the app with others, remember that ngrok quits if your machine shuts down or goes to sleep. When you restart ngrok, the URL also will be different. (A paid version of ngrok provides persistent URLs.)
 
+### Register your app with Azure AD.
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 ## Create the app package
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `src/appManifest` folder to replace `<<GUID_ID>>` with any GUID value.
@@ -130,7 +145,7 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
     - Add the app to personal scope.
 
 
-## Sideload the app in Teams
+## Upload the app in Teams
 
 1. In the Teams client, go to **Apps**.
 
@@ -141,16 +156,13 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 ## Running the sample
 
 - Welcome Page
-![welcome-page ](Images/tabui-welcome.png)
+![welcome-page ](Images/1.Teams_Welcome.png)
 
 - Dashboard Page
-![dashboard-page ](Images/tabui-dashboard.png)
+![dashboard-page ](Images/2.Teams_Dashboard.png)
 
 - List Page
-![list-page ](Images/tabui-list.png)
-
-- Board Page
-![board-page ](Images/tabui-board.png)
+![list-page ](Images/3.Teams_List.png)
 
 ## Outlook on the web
 
@@ -158,13 +170,17 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
-![InstallOutlook](Images/InstallOutlook.png)
+![InstallOutlook](Images/4.Outlook_App.png)
 
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
-![AppOutlook](Images/AppOutlook.png)
+![Outlook-Welcome](Images/5.Outlook_Welcome.png)
+
+![Outlook-Dashboard](Images/6.Outlook_Dashboard.png)
+
+![Outlook-List](Images/7.Outlook_List.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
@@ -174,14 +190,18 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
-![InstallOffice](Images/InstallOffice.png)
+![InstallOffice](Images/8.Office_365_SelectApp.png)
 
 **Select your app icon to launch your app in Office on the web**
 
-![AppOffice](Images/AppOffice.png) 
+![Office 365](Images/9.Office_365_Welcome.png) 
 
+![Office 365](Images/10.Office_365_Dashboard.png) 
+
+![Office 365](Images/11.Office_365_List.png)
+ 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Next steps

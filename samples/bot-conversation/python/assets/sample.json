@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-conversation-python",
     "source": "officeDev",
     "title": "Conversation Bot using Bot Framework v4",
-    "shortDescription": "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.",
+    "shortDescription": "This sample app showcases Teams bot conversation events and adaptive cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation/python",
     "longDescription": [
-      "This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope."
+      "This app demonstrates using bot conversation events in Microsoft Teams, supporting adaptive cards, read receipts, and message update events. It includes immersive reader support for enhanced accessibility."
     ],
     "creationDateTime": "2019-10-17",
-    "updateDateTime": "2022-10-01",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

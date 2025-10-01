@@ -10,6 +10,9 @@ using Microsoft.Bot.Schema;
 
 namespace AppCompleteAuth.Dialogs
 {
+    /// <summary>
+    /// LogoutDialog class to handle user logout functionality.
+    /// </summary>
     public class LogoutDialog : ComponentDialog
     {
         public LogoutDialog(string id, string connectionName)
@@ -20,8 +23,10 @@ namespace AppCompleteAuth.Dialogs
 
         protected string ConnectionName { get; }
 
-        // Called when the dialog is started and pushed onto the parent's dialog stack.
-        protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// Called when the dialog is started and pushed onto the parent's dialog stack.
+        /// </summary>
+        protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken = default)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -32,8 +37,10 @@ namespace AppCompleteAuth.Dialogs
             return await base.OnBeginDialogAsync(innerDc, options, cancellationToken);
         }
 
-        // Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.
-        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// Called when the dialog is continued, where it is the active dialog and the user replies with a new activity.
+        /// </summary>
+        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken = default)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -44,14 +51,17 @@ namespace AppCompleteAuth.Dialogs
             return await base.OnContinueDialogAsync(innerDc, cancellationToken);
         }
 
-        private async Task<DialogTurnResult> InterruptAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// Interrupts the dialog to handle logout commands.
+        /// </summary>
+        private async Task<DialogTurnResult> InterruptAsync(DialogContext innerDc, CancellationToken cancellationToken = default)
         {
             if (innerDc.Context.Activity.Type == ActivityTypes.Message)
             {
                 var text = innerDc.Context.Activity.Text.ToLowerInvariant();
 
                 // Allow logout anywhere in the command
-                if (text.IndexOf("logout") >= 0)
+                if (text.Contains("logout"))
                 {
                     // The bot adapter encapsulates the authentication processes.
                     var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();

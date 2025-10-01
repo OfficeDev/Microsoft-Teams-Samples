@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. The notifications are sent to user through bot in teams.
+description: This sample application demonstrates how to send real-time change notifications for user presence in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-csharp
 
 Bot Framework v4 ChangeNotification sample.
 
-This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+This sample application allows developers to send real-time notifications about user presence changes in Microsoft Teams, leveraging the Bot Framework and Graph API. It includes comprehensive setup instructions for Azure AD registration, bot configuration, and integration with the Teams interface, making it easy to build interactive experiences based on user presence.
 
 ## Included Features
 * Bots
@@ -26,7 +26,12 @@ This sample app demonstrates sending change notifications to user presence in Te
 
 ## Interact with app
 
-![image](ChangeNotification/Images/ChangeNotificationModule.gif)
+![image](ChangeNotification/Images/Preview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Change Notification:** [Manifest](/samples/graph-change-notification/csharp/demo-manifest/graph-change-notification.zip)
 
 ## Prerequisites
 
@@ -34,173 +39,164 @@ This sample app demonstrates sending change notifications to user presence in Te
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
-## Setup
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Manually Setup and use the sample locally.
+### Register you app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env.
+  4. Under **Manage**, select **Expose an API**. 
+  5. Select the **Set** link to generate the Application ID URI in the form of `api://botid-{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://botid-{AppID}`
+      * ex: `api://botid-00000000-0000-0000-0000-000000000000`.
+  6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+  7. Set **Who can consent?** to `Admins and users`
+  8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+      * **Admin consent title:** Teams can access the user’s profile.
+      * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+      * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+      * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+  9. Ensure that **State** is set to **Enabled**
+  10. Select **Add scope**
+      * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+          * `api://botid-00000000-0000-0000-0000-000000000000/access_as_user.
+  11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+      * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+      * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+  12. Navigate to **API Permissions**, and make sure to add the follow permissions:
+  -   Select Add a permission
+  -   Select Microsoft Graph -\> Delegated permissions.
+      - `User.Read` (enabled by default)
+      - `Presence.Read`
+      - `Presence.Read.All`
+  -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+   
+   ![ApiPermission](ChangeNotification/Images/ApiPermission.png)
+
+  13. Navigate to **Authentication**
+      If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+  - Set a redirect URI:
+      * Select **Add a platform**.
+      * Select **Web**.
+      * Enter the **redirect URI** for the app in the following format: `https://token.botframework.com/.auth/web/redirect`.
+  14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env.
+
+ 2. Setup for Bot
+    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+	**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+    
+### Instruction on setting connection string for bot authentication on the behalf of user
+   ![image](ChangeNotification/Images/BotConnection.png)
+
+   - Select Add OAuth Connection Settings.
+
+   - Complete the form as follows.
+
+    a. Enter a name for the connection. You'll use this name in your bot in the .env file. For example BotTeamsAuthADv1.
+
+    b. Service Provider. Select **Azure Active Directory**.
+
+    c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+
+    d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
+
+    e. Grant Type. Enter authorization_code.
+
+    f. Login URL. Enter https://login.microsoftonline.com.
+
+    g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
+
+    h. For Resource URL, enter https://graph.microsoft.com/
+    
+    i. Provide  Scopes like "Presence.Read, Presence.Read.All"
+
 1) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) Run ngrok - point to port 3978
+2) Run ngrok - point to port 5130
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
-3) Setup App Registration
-This step will create an Microsoft Entra ID app, it will be reused wherever it needs Microsoft Entra ID throughout this sample to simpler the steps.
-
-    - Navigate to [Azure _App Registration_ Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
-
-    - Click "New Registration" on the upper left corner
-
-    - Fill out name and select third option for supported account type 
-    - Set Redirect Uri to "https://token.botframework.com/.auth/web/redirect" and click "Register":
-
-        ![App Registration Organization](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppRegistration.png)
-
-    - Navigate to the Microsoft Entra ID app you just created, _copy and paste the Application ID(will referred as **AppId** in this document) somewhere safe_. You'll need it in a future step:
-        ![Save Application ID](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppId.png)
-
-- Create Client Secret
-
-    - Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret"
-
-    ![New Secret](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/ClientSecret.png)
-</br>
-
-    - Copy and paste the secret value somewhere safe. You'll need it in a future step
-
-- Expose API endpoint
-    - Click "_Expose an API_" in the left rail
-
-        - Set your Application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and found in your Teams Application Manifest, which is the same you create and saved in step1.1:
-        ![Application ID URI](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppIdUri.png)
-
-        - Click "_Add a scope_"
-
-            - access_as_user as the Scope name.
-
-            - Set Who can consent? to Admins and users
-
-            - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the access_as_user scope. Suggestions:
-
-                - Admin consent display name: Teams can access the user’s profile
-
-                - Admin consent description: Allows Teams to call the app’s web APIs as the current user.
-
-                - User consent display name: Teams can access your user profile and make requests on your behalf
-
-                - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
-
-            - Ensure that State is set to Enabled
-
-            - Click on Add scope button (Note: The domain part of the Scope name displayed just below the text field should automatically match the Application ID URI set in the previous step, with /access_as_user appended to the end)
-
-            ![Add Scope](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateScope.png)
-
-- Authorize client applications
-    Add the following Ids as authorized clients for your application
-
-        - 1fec8e78-bce4-4aaf-ab1b-5451cc387264 (Teams mobile/desktop application)
-        - 5e3ce6c0-2b1f-4285-8d4b-75ee78787346 (Teams web application)
-
-![Add Client Application](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddClient.png)
-
-- Add required Graph API permissions:
-
-    - Navigate to "API permissions" blade on the left hand side
-
-    - Add `Presence.Read` and `Presence.Read.All` as delegated permissions
-
-        ![Add Permissions](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
-
-- Enable implicit grant
-
-    - Navigate to "Authentication"
-
-    - Check the *Access tokens* and *ID tokens* boxes and click on Save button.
-
-4) Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
-    - Instruction on setting connection string for bot authentication on the behalf of user
-        - In the Azure portal, select your resource group from the dashboard.
-        - Select your registered Azure bot service
-        - Open the resource page and select Configuration under Settings.
-        - Select Add OAuth Connection Settings.
-![image](https://user-images.githubusercontent.com/85864414/121879805-df15cb00-cd2a-11eb-8076-1236ccb1bbfc.PNG)
-
-    - Setup Bot Service Connection (TokenStore)
-
-        a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-
-        b. Service Provider: select Microsoft Entra ID. Once you select this, the Azure AD-specific fields will be displayed.
-
-        c. Client id: enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
-
-        d. Client secret: enter the secret that you recorded for your Azure identity provider app in the steps above.
-
-        e. Grant Type: `authorization_code`
-
-        f. Login URL: https://login.microsoftonline.com
-
-        g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
-        
-        h. Resource URL: https://graph.microsoft.com/
-
-        i. Provide Scopes: "Presence.Read Presence.Read.All"
-![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
-
-5)  Open the code in Visual Studio
+3)  Open the code in Visual Studio
 
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification/csharp` folder
   - Select `ChangeNotification.sln` and open it in Visual Studio
+  
+  **Note:** In the debug dropdown menu of Visual Studio, select default startup project > **ChangeNotification**
    
-6) Setup and run the bot from Visual Studio:
+4) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
     - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing Microsoft Entra ID app registration.
     - Provide ConnectionName in appsetting that is created in Azure wile creating connect for your Azure bot.
     - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok-free.app and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
     - Press `F5` to run the project
 
-7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json`file contained in the `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your Microsoft Entra ID app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+5) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json`file contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your Microsoft Entra ID app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your tunnel Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
 
 ## Running the sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
-![image](https://user-images.githubusercontent.com/85864414/122000447-741cd080-cdcc-11eb-9833-54f87cd7567f.PNG)
-![image](https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG)
+
+![image0](ChangeNotification/Images/image0.png)
+
+![image1](ChangeNotification/Images/image1.png)
+
+![image2](ChangeNotification/Images/image2.png)
 
 - After that when the user status chagnes you will get notify about their status: 
-- user to available.
-![image](ChangeNotification/Images/BeRightBackPresence.png)
+- Change user status from available to busy like
 
-- Change user status Busy from DoNotDistrub.
- ![image](ChangeNotification/Images/BusywithstatusScreen.png)
+![image3](ChangeNotification/Images/image3.png)
 
-- Change user status DoNotDistrub from Available.
- ![image](ChangeNotification/Images/DoNotDistrub.png)
+![image4](ChangeNotification/Images/image4.png)
 
-- Change user status BeRightBack from Available.
- ![image](ChangeNotification/Images/BeRightBackPresence.png)
+![image5](ChangeNotification/Images/image5.png)
+
+![image6](ChangeNotification/Images/image6.png)
+
+![image7](ChangeNotification/Images/image7.png)
+
+![image8](ChangeNotification/Images/image8.png)
  
 ## Further reading
 - [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)

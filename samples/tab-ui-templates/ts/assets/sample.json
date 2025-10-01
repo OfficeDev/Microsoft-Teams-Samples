@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-ui-templates-ts",
     "source": "officeDev",
     "title": "Teams UI templates",
-    "shortDescription": "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)",
+    "shortDescription": "This sample app provides tested, high-quality UI templates to help developers understand how to create effective applications for Microsoft Teams, covering common use cases like dashboards and forms.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-ui-templates/ts",
     "longDescription": [
-      "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)"
+      "The Microsoft Teams UI Templates sample app serves as a comprehensive guide for developers to implement visually appealing and functional applications within Teams. It includes a variety of tested UI templates that cater to common use cases, such as dashboards and forms, ensuring a consistent user experience."
     ],
     "creationDateTime": "2020-12-08",
-    "updateDateTime": "2021-11-29",
+    "updateDateTime": "2025-01-15",
     "products": [
       "Teams"
     ],

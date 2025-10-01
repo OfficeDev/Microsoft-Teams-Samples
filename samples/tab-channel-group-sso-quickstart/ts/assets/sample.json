@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-ts",
     "source": "officeDev",
     "title": "Starter solution: Channel/Group tab with SSO in TypeScript",
-    "shortDescription": "Create React App channel/group tab in TypeScript with Azure AD Single Sign-On",
+    "shortDescription": "This sample application illustrates Microsoft Entra SSO authentication in Teams channel tabs, enabling secure access to user profiles and collaborative web content.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-sso-quickstart/ts",
     "longDescription": [
-      "Create React App channel/group tab in TypeScript with Azure AD Single Sign-On"
+      "This application showcases how to implement Microsoft Entra SSO authentication within channel tabs in Microsoft Teams, facilitating seamless user profile access and collaborative spaces."
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-04-03",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
+description: This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in the meeting chat.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-csharp
 
 # Meeting attendance report
 
-This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat.
+This sample application showcases how to utilize the Graph API to generate meeting attendance reports and deliver them through a bot in Microsoft Teams chat. Users can effortlessly manage attendance tracking, ensuring they stay informed about participant engagement during meetings.
 
 ## Included Features
 * Bots
@@ -36,6 +36,22 @@ When meeting ends, attendance report card is sent by the bot.
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -62,10 +78,13 @@ When meeting ends, attendance report card is sent by the bot.
         -   Directory (tenant) ID
     We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
-    -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-        -  OnlineMeetingArtifact.Read.All
+    -  Under left menu, navigate to  **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * OnlineMeetingArtifact.Read.All
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-    Click on Add Permissions to commit your changes.
 
     - If you are logged in as the Global Administrator, click on the Grant admin consent for %tenant-name% button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
 
@@ -130,10 +149,10 @@ When meeting ends, attendance report card is sent by the bot.
 6. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
-    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`) Also replace the <<GUID>> with any valid GUID or with your MicrosoftAppId 
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`) Also replace the <<GUID>> with any valid GUID or with your MicrosoftAppId 
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<your_tunnel_domain>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -143,19 +162,19 @@ When meeting ends, attendance report card is sent by the bot.
 
 **Schedule the meeting and add Meeting Attendance Bot from Apps section in that particular scheduled meeting:**
 
-![Install](MeetingAttendance/Images/InstallApp.png)
+![Install](MeetingAttendance/Images/1.Install.png)
 
 **Add Meeting UI:**
 
-![Add Meeting](MeetingAttendance/Images/AddMeetingAttendanceBot.png)
+![Add Meeting](MeetingAttendance/Images/2.Add_to_Meeting.png)
 
 **On installation you will get a welcome card**
 
-![Welcome Card](MeetingAttendance/Images/WelcomeCard.png)
+![Welcome Card](MeetingAttendance/Images/3.Installed.png)
 
 **Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report:** 
 
-![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png)
+![Attendance Report](MeetingAttendance/Images/4.Attendance_Report.png)
 
 ## Deploy the bot to Azure
 

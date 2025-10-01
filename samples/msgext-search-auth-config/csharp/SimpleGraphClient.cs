@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
+using Microsoft.Kiota.Abstractions.Authentication;
+using System.Threading;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -27,37 +29,54 @@ namespace Microsoft.BotBuilderSamples
         }
 
         // Searches the user's mail Inbox using the Microsoft Graph API
-        public async Task<Message[]> SearchMailInboxAsync(string search)
+        public async Task<List<Message>> SearchMailInboxAsync(string search)
         {
             var graphClient = GetAuthenticatedClient();
-            var searchQuery = new QueryOption("search", search);
-            var messages = await graphClient.Me.MailFolders.Inbox.Messages.Request(new List<Option>() { searchQuery }).GetAsync();
-            return messages.Take(10).ToArray();
+
+            var response = await graphClient
+                .Me
+                .MailFolders["Inbox"]
+                .Messages
+                .GetAsync(requestConfig =>
+                {
+                    requestConfig.QueryParameters.Search = search;
+                    requestConfig.QueryParameters.Top = 10;
+                });
+
+            return response?.Value?.ToList() ?? new List<Message>();
         }
 
         //Fetching user's profile 
         public async Task<User> GetMyProfile()
         {
             var graphClient = GetAuthenticatedClient();
-            return await graphClient.Me.Request().GetAsync();
+            return await graphClient.Me.GetAsync();
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult(_accessToken);
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
-            var graphClient = new GraphServiceClient(
-                new DelegateAuthenticationProvider(
-                    requestMessage =>
-                    {
-                        // Append the access token to the request.
-                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
+            var tokenProvider = new SimpleAccessTokenProvider(_token);
+            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-                        // Get event times in the current time zone.
-                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
-
-                        return Task.CompletedTask;
-                    }));
-            return graphClient;
+            return new GraphServiceClient(authProvider);
         }
     }
 }

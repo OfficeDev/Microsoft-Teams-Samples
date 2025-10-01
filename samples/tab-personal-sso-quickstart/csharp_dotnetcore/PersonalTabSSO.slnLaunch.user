@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "PersonalTabSSO.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (browser)",
+    "Projects": [
+      {
+        "Path": "PersonalTabSSO.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "PersonalTabSSO.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      }
+    ]
+  }
+]

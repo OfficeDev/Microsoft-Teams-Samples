@@ -1,0 +1,33 @@
+{
+  "name": "expert-finder-js",
+  "version": "1.0.0",
+  "msteams": {
+    "teamsAppId": null
+  },
+  "description": "Microsoft Teams message extension that can be used as a plugin to Search for candidates and share profiles matching a criteria.",
+  "engines": {
+    "node": "16 || 18"
+  },
+  "author": "Microsoft",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+    "dev": "nodemon --inspect=9239 --signal SIGINT ./src/index.js",
+    "start": "node ./src/index.js",
+    "watch": "nodemon ./src/index.js"
+  },
+  "dependencies": {
+    "@microsoft/adaptivecards-tools": "^1.3.3",
+    "adaptivecards": "^3.0.4",
+    "azure-storage": "^2.10.7",
+    "botbuilder": "^4.22.2",
+    "esbuild": "^0.21.5",
+    "express": "^4.18.2",
+    "restify": "^10.0.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.7"
+  }
+}

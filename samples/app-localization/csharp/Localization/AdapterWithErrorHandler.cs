@@ -5,26 +5,36 @@
 
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
-    public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
+    public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
-            : base(configuration, logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication botFrameworkAuthentication, ILogger<CloudAdapter> logger)
+            : base(botFrameworkAuthentication, logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {
-                // Log any leaked exception from the application.
+                // Log the error with additional context for better traceability.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
-                // Uncomment below commented line for local debugging.
-                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+                // Optionally, send a user-friendly message to the user.
+                // Uncomment the line below for local debugging.
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception: {exception.Message}");
 
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
-                await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+                // Attempt to send a trace activity that will be displayed in the Bot Framework Emulator.
+                try
+                {
+                    await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
+                }
+                catch (System.Exception traceEx)
+                {
+                    // Log any error that might occur during the trace activity (e.g., failed to send trace).
+                    logger.LogError(traceEx, "Error occurred while sending trace activity.");
+                }
             };
         }
     }

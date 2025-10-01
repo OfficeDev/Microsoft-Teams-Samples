@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: In-Meeting Document Signing
+description: This Microsoft Teams sample app enables users to review and sign documents in real time during meetings, facilitating seamless collaboration.
 products:
 - office-teams
 - office
@@ -14,7 +14,8 @@ urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-c
 ---
 
 # In-Meeting Document Signing
-Meeting Signing is a Teams sample app that demonstrates the scenario of enabling users to [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings making possible to review and sign documents in a single session. This sample lets users electronically sign documents with their current tenant identity. Some example documents that can be signed during meetings are Purchase Agreements and Purchase Orders. This template is also applicable, and could be adapted for other scenarios like reviewing and approving code reviews or collaborative reviewing of documents.
+
+This sample application demonstrates the in-meeting document signing functionality within Microsoft Teams, enabling users to review and [sign documents in real time](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings build-apps-for-teams-meeting-stage#build-an-in-meeting-document-signing-app) during meetings. With features like Teams SSO, adaptive cards, and programmatic content sharing, this app supports multiple personas including document creators, signers, and readers, making it suitable for various collaborative scenarios.
 
 The sample app could be customized to incorporate other kind of signatures like handwritten signatures or certificate based signatures. 
 
@@ -72,6 +73,26 @@ sequenceDiagram
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+
+- [Teams](https://teams.microsoft.com/v2/?clientexperience=t2) Microsoft Teams is installed and you have an account
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+
+##Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+
+1.Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+2.Install Microsoft 365 Agents Toolkit for Visual Studio Microsoft 365 Agents Toolkit extension
+3.In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+4.In the debug dropdown menu of Visual Studio, select default startup project > Microsoft Teams (browser)
+5.In Visual Studio, right-click your TeamsApp project and Select Microsoft 365 Agents Toolkit > Prepare Teams App Dependencies
+6.Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
+7.Select Debug > Start Debugging or F5 to run the menu in Visual Studio.
+8.In the browser that launches, select the Add button to install the app to Teams.
+
+If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 
 ## Setup
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
@@ -150,7 +171,7 @@ sequenceDiagram
     * `<<client secret>>` with the client secret you created above.
     * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AzureAD App for personal users
     * `<<msa-only-aad-client-secret>>` with the client secret from the AzureAD App for personal users that you created above
-    * `<<msa-only-scope>>` `api://<<deployment-url>>/<<msa-only-aad-client-id>>/access_as_user email openid`
+    * `<<msa-only-scope>>` with your AzureAD Application (Client) Id.
 
 - Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
 
@@ -181,10 +202,10 @@ sequenceDiagram
 
 - **This step is specific to Teams.**
 
-    - **Edit** the `manifest.json` contained in the  `Source\MeetingSigning.Web\AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the  `Source\MeetingSigning.Web\appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<your_tunnel_domain>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `Source\MeetingSigning.Web\AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `Source\MeetingSigning.Web\appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 ## Running the sample
@@ -247,7 +268,7 @@ sequenceDiagram
 ![Meeting stage with a 'Default Agreement' document and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
 
 ## Usage
-* Sideload the app to a meeting.
+* Upload the app to a meeting.
 * In the meeting group chat, add the *Meeting Signing* app as a new Tab.
 * In the pre-meeting tab, create a test document so you can test the meeting share to stage APIs.
 * Provide one-time consent to the app for Graph permissions while creating the document.

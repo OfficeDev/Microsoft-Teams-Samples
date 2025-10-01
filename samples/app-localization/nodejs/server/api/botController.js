@@ -1,37 +1,43 @@
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder');
 const { BotActivityHandler } = require('../bot/botActivityHandler');
 
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.BotId,
-    appPassword: process.env.BotPassword
-});
+// Create an instance of the Bot Framework Authentication
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
+// Create an instance of the Cloud Adapter
+const adapter = new CloudAdapter(botFrameworkAuthentication);
+
+// Error handling: Log and trace unhandled errors
 adapter.onTurnError = async (context, error) => {
-    // This check writes out errors to console log .vs. server insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       serverlication insights.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    // Log error to the console for debugging purposes (in production, consider using App Insights)
+    console.error(`\n [onTurnError] Unhandled error: ${error.message}`);
 
-    // Send a trace activity, which will be displayed in Bot Framework Emulator
+    // Send an error trace activity to the Bot Framework Emulator for debugging
     await context.sendTraceActivity(
-        'OnTurnError Trace',
-        `${ error }`,
-        'https://www.botframework.com/schemas/error',
-        'TurnError'
+        'OnTurnError Trace', // Trace activity name
+        `${error.message}`,  // Error message
+        'https://www.botframework.com/schemas/error', // Schema for error trace
+        'TurnError'           // Activity type
     );
 
-    // Uncomment below commented line for local debugging.
+     // Uncomment below commented line for local debugging.
     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-    
 };
 
-// Create bot handlers
+// Initialize bot activity handler
 const botActivityHandler = new BotActivityHandler();
-const botHandler = (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
-        // Process bot activity
-        await botActivityHandler.run(context);
-    });
-}
+
+/**
+ * This function processes incoming requests and handles bot activities.
+ * @param {object} req - The incoming HTTP request.
+ * @param {object} res - The HTTP response.
+ */
+const botHandler = async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => botActivityHandler.run(context));
+};
 
 module.exports = botHandler;

@@ -4,31 +4,32 @@
 import sys
 import traceback
 from datetime import datetime
-from http import HTTPStatus
 
 from aiohttp import web
-from aiohttp.web import Request, Response, json_response
-from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
-)
+from aiohttp.web import Request, Response
+from botbuilder.core import TurnContext
 from botbuilder.core.integration import aiohttp_error_middleware
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.schema import Activity, ActivityTypes
 from bots import TeamsTaskModuleBot
 from config import DefaultConfig
 
+# Load configuration
 CONFIG = DefaultConfig()
 
 # Create adapter.
 # See https://aka.ms/about-bot-adapter to learn more about how bots work.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
-
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
-    # This check writes out errors to console log .vs. app insights.
+    """
+    This function is called when an error occurs during a turn.
+    
+    :param context: The context object for the turn.
+    :param error: The exception that was thrown.
+    """
+    # This check writes out errors to console log vs. app insights.
     # NOTE: In production environment, you should consider logging this to Azure
     #       application insights.
     print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
@@ -53,30 +54,17 @@ async def on_error(context: TurnContext, error: Exception):
         # Send a trace activity, which will be displayed in Bot Framework Emulator
         await context.send_activity(trace_activity)
 
-
+# Set the error handler on the adapter
 ADAPTER.on_turn_error = on_error
 
 # Create the Bot
 BOT = TeamsTaskModuleBot(CONFIG)
 
-
 # Listen for incoming requests on /api/messages
 async def messages(req: Request) -> Response:
-    # Main bot message handler.
-    if "application/json" in req.headers["Content-Type"]:
-        body = await req.json()
-    else:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+    return await ADAPTER.process(req, BOT)
 
-    activity = Activity().deserialize(body)
-    auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
-
-    invoke_response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if invoke_response:
-        return json_response(data=invoke_response.body, status=invoke_response.status)
-    return Response(status=HTTPStatus.OK)
-
-
+# Create the web application
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)
 APP.router.add_static("/", path="./pages/", name="pages")

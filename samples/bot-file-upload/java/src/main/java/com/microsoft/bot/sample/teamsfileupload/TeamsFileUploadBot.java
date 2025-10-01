@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +53,8 @@ public class TeamsFileUploadBot extends TeamsActivityHandler {
 
     private static String microsoftAppId;
     private static String microsoftAppPassword;
+    private static final String FILES_DIR = "files";
+    private TurnContext context;
 
     public TeamsFileUploadBot(Configuration configuration) {
         microsoftAppId = configuration.getProperty("MicrosoftAppId");
@@ -190,50 +194,70 @@ public class TeamsFileUploadBot extends TeamsActivityHandler {
         return messageWithFileDownloadInfo;
     }
 
-    private CompletableFuture<ResultPair<String>> upload(
-        FileConsentCardResponse fileConsentCardResponse
-    ) {
+
+    private CompletableFuture<ResultPair<String>> upload(FileConsentCardResponse fileConsentCardResponse) {
         AtomicReference<ResultPair<String>> result = new AtomicReference<>();
 
         return CompletableFuture.runAsync(() -> {
-            Map<String, String> context = (Map<String, String>) fileConsentCardResponse
-                .getContext();
+            Map<String, String> context = (Map<String, String>) fileConsentCardResponse.getContext();
             File filePath = new File("files", context.get("filename"));
             HttpURLConnection connection = null;
 
-            try {
-                URL url = new URL(fileConsentCardResponse.getUploadInfo().getUploadUrl());
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("PUT");
-                connection.setDoOutput(true);
-                connection.setRequestProperty("Content-Length", Long.toString(filePath.length()));
-                connection.setRequestProperty(
-                    "Content-Range",
-                    String.format("bytes 0-%d/%d", filePath.length() - 1, filePath.length())
-                );
 
-                try (
-                    FileInputStream fileStream = new FileInputStream(filePath);
-                    OutputStream uploadStream = connection.getOutputStream()
-                ) {
-                    byte[] buffer = new byte[4096];
-                    int bytes_read;
-                    while ((bytes_read = fileStream.read(buffer)) != -1) {
-                        uploadStream.write(buffer, 0, bytes_read);
+            
+                try {
+                    URI uri = new URI(fileConsentCardResponse.getUploadInfo().getUploadUrl());
+                    URL url = uri.toURL();
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("PUT");
+                    connection.setDoOutput(true);
+                    connection.setRequestProperty("Content-Type", "image/png");
+                    connection.setRequestProperty("Content-Length", Long.toString(filePath.length()));
+                    connection.setRequestProperty(
+                        "Content-Range",
+                        String.format("bytes 0-%d/%d", filePath.length() - 1, filePath.length())
+                    );
+
+                    try (FileInputStream fileStream = new FileInputStream(filePath);
+                         OutputStream uploadStream = connection.getOutputStream()) {
+
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = fileStream.read(buffer)) != -1) {
+                            uploadStream.write(buffer, 0, bytesRead);
+                        }
+                    }
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                        result.set(new ResultPair<>(true, null));
+                        
+                    } else {
+                        result.set(new ResultPair<>(false, "Failed with HTTP error code: " + responseCode));
+                        
+                        Thread.sleep(1000); // Simple backoff before retrying
+                    }
+                } catch (IOException e) {
+                    result.set(new ResultPair<>(false, "IOException: " + e.getMessage()));
+                    
+                } catch (URISyntaxException e) {
+                    result.set(new ResultPair<>(false, "URISyntaxException: " + e.getMessage()));
+                 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // Restore interrupt status
+                    result.set(new ResultPair<>(false, "InterruptedException: " + e.getMessage()));
+                 
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
                     }
                 }
 
-                result.set(new ResultPair<String>(true, null));
-            } catch (Throwable t) {
-                result.set(new ResultPair<String>(false, t.getLocalizedMessage()));
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            }
-        })
-            .thenApply(aVoid -> result.get());
+            
+        }).thenApply(aVoid -> result.get());
     }
+
+
 
     private CompletableFuture<Void> processInlineImage(TurnContext turnContext) {
         Attachment attachment = turnContext.getActivity().getAttachments().get(0);
@@ -243,7 +267,8 @@ public class TeamsFileUploadBot extends TeamsActivityHandler {
             try {
                 // Save the inline image to Files directory.
                 String filePath = "files/imageFromUser.png";
-                URL url = new URL(attachment.getContentUrl());
+                URI uri = new URI(attachment.getContentUrl());
+                URL url = uri.toURL();
                 connection[0] = (HttpURLConnection) url.openConnection();
                 connection[0].setRequestProperty("Authorization", "Bearer " + token);
                 try (
@@ -302,7 +327,8 @@ public class TeamsFileUploadBot extends TeamsActivityHandler {
             HttpURLConnection connection = null;
 
             try {
-                URL url = new URL(fileDownload.getDownloadUrl());
+                URI uri = new URI(fileDownload.getDownloadUrl());
+                URL url = uri.toURL();
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
 

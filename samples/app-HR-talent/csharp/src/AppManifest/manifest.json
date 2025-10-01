@@ -1,0 +1,145 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Contoso Talent",
+    "full": "Contoso Talent and Recruiting App"
+  },
+  "description": {
+    "short": "Simulates a recruiting and talent management system using Microsoft Teams Bot.",
+    "full": "This sample app demonstrates integration with a simulated recruiting and talent management system, allowing users to create, manage, and search positions and candidates using Microsoft Teams' bots, tabs, and messaging extensions."
+  },
+  "icons": {
+    "outline": "outline_icon.png",
+    "color": "color_icon.png"
+  },
+  "accentColor": "#020081",
+  "staticTabs": [
+    {
+      "entityId": "candidatesTab",
+      "name": "Candidates",
+      "contentUrl": "https://<<DOMAIN-NAME>>/StaticViews/OpenPositionsPersonalTab.html",
+      "websiteUrl": "https://<<DOMAIN-NAME>>/StaticViews/OpenPositionsPersonalTab.html",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<DOMAIN-NAME>>/TeamTabConfig.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupChat",
+        "team"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "scopes": [
+        "groupChat",
+        "team",
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team",
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "help",
+              "description": "Find out what I can do"
+            },
+            {
+              "title": "candidate details",
+              "description": "Get information about a specific candidate by name"
+            },
+            {
+              "title": "new job posting",
+              "description": "Create a new job posting"
+            },
+            {
+              "title": "top candidates",
+              "description": "List the top candidates for a given req ID"
+            },
+            {
+              "title": "schedule interview",
+              "description": "Schedule an interview given the candidate name and req ID"
+            },
+            {
+              "title": "open positions",
+              "description": "Look up open positions within your organization"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "connectors": [
+    {
+      "connectorId": "0f2fd47a-3bd6-436a-932a-1ab50b3e2a34",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "commands": [
+        {
+          "id": "searchPositions",
+          "title": "Positions",
+          "initialRun": true,
+          "description": "Search open positions by keyword",
+          "parameters": [
+            {
+              "name": "keyword",
+              "title": "Keywords",
+              "description": "Position keywords"
+            }
+          ]
+        },
+        {
+          "id": "searchCandidates",
+          "title": "Candidates",
+          "initialRun": false,
+          "description": "Search candidates by name",
+          "parameters": [
+            {
+              "name": "name",
+              "title": "Name",
+              "description": "Candidate first or last name"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "teamstalentmgmtappv620240201144149.azurewebsites.net",
+    "api.botframework.com",
+    "token.botframework.com",
+    "<<DOMAIN-NAME>>"
+  ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://<<DOMAIN-NAME>>/botid-<<YOUR-MICROSOFT-APP-ID>>"
+  }
+}

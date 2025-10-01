@@ -8,6 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
+    "experimentalDecorators": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

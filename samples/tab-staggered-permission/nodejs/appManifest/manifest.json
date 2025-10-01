@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
- "manifestVersion": "1.14",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.19",
   "version": "1.0.1",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.staggeredpermission",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.teams.com",
@@ -19,8 +18,8 @@
     "full": "App to get staggered permissions"
   },
   "description": {
-    "short": "App to get staggered permissions",
-    "full": "This sample demos to get staggered graph api permissions"
+    "short": "Demo app to obtain staggered Graph API permissions in Teams tabs.",
+    "full": "This sample demonstrates how to request staggered Graph API permissions in a Microsoft Teams tab, prompting users only when specific features are accessed."
   },
   "accentColor": "#235EA5",
  "staticTabs": [

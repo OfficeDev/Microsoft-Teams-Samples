@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fluentui/react-northstar": "^0.56.0",
-    "@microsoft/teams-js": "^2.0.0",
+    "@microsoft/teams-js": "^2.35.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -18,7 +17,7 @@
   "scripts": {
     "dev:teamsfx": "npm run start",
     "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

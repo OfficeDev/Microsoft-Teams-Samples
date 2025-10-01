@@ -1,7 +1,7 @@
 <head>
-  <script src="https://res.cdn.office.net/teams-js/2.8.0/js/MicrosoftTeams.min.js"
-    integrity="sha384-/DJ9oJEFZSpGiUQx9Na5Yb5svOPPqSb3khKxJ/YgoZ2GtrkzWgSTBpESy3LvMPVk"
-    crossorigin="anonymous"></script>
+  <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+      integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+      crossorigin="anonymous"></script>
   <script defer src="https://teams.microsoft.com/share/launcher.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="./tab.css">
@@ -20,12 +20,20 @@
       // If outside teams, open share to teams using built in script.
       else {
         $("#stt-btn-teams").show();
-        var element = document.getElementById("stt-btn");
+        var element = document.getElementById("stt-btn-teams");
         let uri = `${window.location.origin}?linkunfurling`;
         let encoded = encodeURI(uri);
         element.setAttribute("data-href", encoded);
       }
     });
+
+
+    // Force re-render the Teams share buttons
+    setTimeout(() => {
+      if (window.shareToMicrosoftTeams) {
+        window.shareToMicrosoftTeams.renderButtons();
+      }
+    }, 500);
 
     // Custome function that calls share to teams using available sdk method.
     shareTeamsHandler = () => {

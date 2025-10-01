@@ -8,7 +8,9 @@
     <title>RSC Demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+            crossorigin="anonymous"></script>
 
     <style>
         #mainDeiv {
@@ -20,10 +22,15 @@
     <script>
 
         var appId;
+        var tenantId;
 
         // Initialize teams js sdk
         $(document).ready(function () {
-            microsoftTeams.app.initialize();
+            microsoftTeams.app.initialize().then(function(){
+                microsoftTeams.app.getContext().then((context) => {
+                    tenantId = context.user.tenant.id;
+                });
+            })
         });
 
         // People picker api call for selecting reciepient.
@@ -37,13 +44,14 @@
             });
         }
 
-        function sendNotification(reciepientUserId) {
+        function sendNotification(recipientUserId) {
             $.ajax({
             type: 'POST',
             url: '/sendFeedNotification',
             dataType: 'json',
             data: {
-                'reciepientUserId': reciepientUserId,
+                'recipientUserId': recipientUserId,
+                'tenantId': tenantId,
             },
             success: function (responseJson) {
                 console.log("Message send successfully");

@@ -1,56 +1,26 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import {
-    TeamsActivityHandler,
-    BotFrameworkAdapter,
-    MemoryStorage,
-    ConversationState,
-    TurnContext,
-} from 'botbuilder';
-import config from 'config';
+import { TeamsActivityHandler, TurnContext } from "botbuilder";
 
-// Create adapter.
-// See https://aka.ms/about-bot-adapter to learn more about adapters.
-export const adapter = new BotFrameworkAdapter({
-    appId: config.get('bot.appId'),
-    appPassword: config.get('bot.appPassword'),
-});
-
-adapter.onTurnError = async (context, error) => {
-    const errorMsg = error.message
-        ? error.message
-        : `Oops. Something went wrong!`;
-    // This check writes out errors to console log .vs. app insights.
-    // NOTE: In production environment, you should consider logging this to Azure
-    //       application insights.
-    console.error(`\n [onTurnError] unhandled error: ${error}`);
-
-    // Clear out state
-    await conversationState.delete(context);
-    // Send a message to the user
-    await context.sendActivity(errorMsg);
-
-    // Note: Since this Messaging Extension does not have the messageTeamMembers permission
-    // in the manifest, the bot will not be allowed to message users.
-
-    // Uncomment below commented line for local debugging.
-    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${errorMsg}`);
-};
-
-// Define state store for your bot.
-const memoryStorage = new MemoryStorage();
-
-// Create conversation state with in-memory storage provider.
-const conversationState = new ConversationState(memoryStorage);
-
+// EchoBot: simple bot that replies with "You said: <message>"
 export class EchoBot extends TeamsActivityHandler {
     constructor() {
         super();
+
+        // Handle incoming messages
         this.onMessage(async (context, next) => {
+            // Remove mention so the bot does not echo its own @mention
             TurnContext.removeRecipientMention(context.activity);
-            const text = context.activity.text.trim().toLocaleLowerCase();
-            await context.sendActivity('You said ' + text);
+
+            // Get the incoming message text safely
+            const text = context.activity.text?.trim().toLowerCase() || "";
+
+            // Echo back the same text
+            await context.sendActivity(`You said: ${text}`);
+
+            // Continue to the next middleware
+            await next();
         });
     }
 }

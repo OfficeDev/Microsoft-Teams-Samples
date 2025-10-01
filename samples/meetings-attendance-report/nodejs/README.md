@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
+description: This sample application demonstrates how to retrieve meeting attendance reports using the Graph API and send them through a bot in Microsoft Teams chat.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-nodejs
 
 # Meeting attendance report
 
-This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat using bot.
+This sample application showcases the use of the Graph API to fetch meeting attendance reports and send them through a bot in Microsoft Teams chat. With features such as automated report delivery at the end of meetings, it provides an efficient way to track participant engagement and improve meeting effectiveness.
 
 ## Included Features
 * Bots
@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. **Note**: Copy the User Id you used to granting the policy. You need while configuring the .env file.
 
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -80,8 +80,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
        -   Directory (tenant) ID
    We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
-   -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-       -  OnlineMeetingArtifact.Read.All
+   -  Under left menu, navigate to
+
+    Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * OnlineMeetingArtifact.Read.All
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
    Click on Add Permissions to commit your changes.
 
@@ -159,19 +166,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 **Schedule the meeting and add Meeting Attendance Bot from Apps section in that particular scheduled meeting:**
 
-![Install](Images/InstallApp.png)
+![Install](Images/1.Install.png)
 
 **Add Meeting UI:**
 
-![Add Bot](Images/AddMeetingAttendanceBot.png)
+![Add Bot](Images/2.Add_to_meeting.png)
 
 **On installation you will get a welcome card:**
 
-![Welcome Card](Images/WelcomeCard.png)
+![Welcome Card](Images/3.Installed.png)
 
 **Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report:**
 
-![Attendance Report](Images/MeetingAttendanceReportCard.png)
+![Attendance Report](Images/4.Attendance_report.png)
 
 ## Further reading
 - [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)

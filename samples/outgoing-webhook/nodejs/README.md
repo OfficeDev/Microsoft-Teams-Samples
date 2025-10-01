@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams.
+description: This sample demonstrates how to implement a straightforward Outgoing Webhook for Microsoft Teams, allowing users to send messages to external services without the complexity of creating a full bot.
 products:
 - office-teams
 - office
@@ -12,8 +12,13 @@ extensions:
   createdDate: "12/05/2017 06:03:13 PM"
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
+> [!IMPORTANT]
+>
+> The existing Microsoft 365 (previously called Office 365) connectors across all cloud platforms are nearing deprecation, and the creation of new Microsoft 365 connectors will soon be blocked. For more information on the schedule and how the Workflows app provides a more flexible and secure experience, see [retirement of Microsoft 365 connectors within Microsoft Teams](https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/).
 
 # Outgoing Webhook Sample Node.js
+
+The Outgoing Webhook Sample Node.js project showcases a basic implementation of an Outgoing Webhook for Microsoft Teams, allowing seamless interaction with external applications. By verifying the identity of the sender, the webhook echoes messages back to the user and supports various card types, including adaptive and hero cards, facilitating dynamic responses within Teams channels. 
 
 ## Summary
 
@@ -84,14 +89,14 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 ## Running the sample
 
 - Example screenshot to show Hero card:
-![Hero card](Images/heroCard.png)
+![Hero card](Images/1.hero-card.png)
 
 * Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
 
 * If you type anything else apart from above mentioned type, it will echo back what you typed.
 
 - Example screenshot to show Echo message:
-![Echo message](Images/echoMessage.png)
+![Echo message](Images/2.hello-bot.png)
 
 
 ## Contributing

@@ -24,9 +24,9 @@ class MeetingNotificationBot extends TeamsActivityHandler {
       if (context.activity.value == null) {
         TurnContext.removeRecipientMention(context.activity);
 
-        if (context.activity.text.trim() == "SendTargetedNotification") {
+        if (context._activity.text.trim() == "SendTargetedNotification") {
           var meetingMembers = await TeamsInfo.getPagedMembers(context);
-          let tenantId = context.activity.channelData.tenant.id;
+          let tenantId = context._activity.channelData.tenant.id;
 
           for (var member in meetingMembers.members) {
             let participantDetail = await TeamsInfo.getMeetingParticipant(context, meetingId, meetingMembers.members[member].aadObjectId, tenantId);
@@ -40,28 +40,28 @@ class MeetingNotificationBot extends TeamsActivityHandler {
           // Send and adaptive card to user to select members for sending targeted notifications.
           await context.sendActivity({ attachments: [this.createMembersAdaptiveCard(members)] });
         }
-        else if (context.activity.text.trim() == "SendContentBubble") {
+        else if (context._activity.text.trim() == "SendContentBubble") {
           await context.sendActivity({ attachments: [this.createAdaptiveCard()] });
         }
         else {
           await context.sendActivity("Please type `SendTargetedNotification` or `SendContentBubble` to send In-meeting notifications.");
         }
       }
-      else if (context.activity.value.Type == "SendTargetedMeetingNotification") {
-        var adaptiveCardChoiceSet = context.activity.value.Choice;
+      else if (context._activity.value.Type == "SendTargetedMeetingNotification") {
+        var adaptiveCardChoiceSet = context._activity.value.Choice;
         var selectedMembers = adaptiveCardChoiceSet.split(",");
         this.targetedNotification(context, meetingId, selectedMembers);
       }
       else {
-        var json = JSON.stringify(context.activity.value);
+        var json = JSON.stringify(context._activity.value);
         var out = JSON.parse(json);
-        
+
         if (out.action == 'inputselector') {
           contentBubbleTitles.contentQuestion = out.myReview;
           await this.contentBubble(context);
           await context.sendActivity({ attachments: [this.createQuestionAdaptiveCard(out.myReview)] });
         } else {
-          await context.sendActivity(context.activity.from.name + " : " + "**" + out.myReview + "**" + " for " + "'" + out.action + "'");
+          await context.sendActivity(context._activity.from.name + " : " + "**" + out.myReview + "**" + " for " + "'" + out.action + "'");
         }
       }
 
@@ -73,12 +73,12 @@ class MeetingNotificationBot extends TeamsActivityHandler {
   async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
     var review = JSON.stringify(taskModuleRequest.data);
     var reply = JSON.parse(review);
-    await context.sendActivity(context.activity.from.name + " : " + "**" + reply.myValue + "**" + " for " + "'" + reply.title + "'")
+    await context.sendActivity(context._activity.from.name + " : " + "**" + reply.myValue + "**" + " for " + "'" + reply.title + "'")
   }
 
   // Custom method for sending targeted meeting notifications.
   async targetedNotification(context, meetingId, selectedMembers) {
-    var serviceUrl = context.activity.serviceUrl;
+    var serviceUrl = context._activity.serviceUrl;
     const credentials = new MicrosoftAppCredentials(process.env.MicrosoftAppId, process.env.MicrosoftAppPassword);
     const botToken = await credentials.getToken();
 
@@ -105,7 +105,7 @@ class MeetingNotificationBot extends TeamsActivityHandler {
     }
 
     try {
-      
+
       await TeamsInfo.sendMeetingNotification(context, notificationInformation, meetingId);
     } catch (exception) {
       console.log(exception);
@@ -120,7 +120,7 @@ class MeetingNotificationBot extends TeamsActivityHandler {
         {
           itemId: 0,
           mentionType: 'person',
-          mri: context.activity.from.id,
+          mri: context._activity.from.id,
           displayname: context.activity.from.name
         }
       ],
@@ -141,7 +141,7 @@ class MeetingNotificationBot extends TeamsActivityHandler {
   createQuestionAdaptiveCard(myText) {
     var templatePayload = templateJson;
     var template = new ACData.Template(templatePayload);
-    
+
     var cardPayload = template.expand({
       $root: {
         name: myText

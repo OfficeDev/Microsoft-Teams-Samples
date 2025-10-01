@@ -20,7 +20,7 @@ namespace PeoplePicker.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         /// <summary>
-        /// Handle when a message is addressed to the bot.
+        /// Handles when a message is addressed to the bot.
         /// </summary>
         /// <param name="turnContext">The turn context.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
@@ -29,59 +29,55 @@ namespace PeoplePicker.Bots
         {
             if (turnContext.Activity.Text != null)
             {
-                if (turnContext.Activity.Conversation.ConversationType == "personal")
-                {
-                    string[] path = { ".", "Cards", "PersonalScopeCard.json" };
-                    var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
+                string[] path = turnContext.Activity.Conversation.ConversationType == "personal"
+                    ? new[] { ".", "Cards", "PersonalScopeCard.json" }
+                    : new[] { ".", "Cards", "TeamsScopeCard.json" };
 
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
-                }
-                else if (turnContext.Activity.Conversation.ConversationType != "personal")
-                {
-                    string[] path = { ".", "Cards", "TeamsScopeCard.json" };
-                    var adaptiveCardForChannelScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
+                var adaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
 
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForChannelScope), cancellationToken);
-                }
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCard), cancellationToken);
             }
             else if (turnContext.Activity.Value != null)
             {
-               // await context.sendActivity(`Task title: ${ context.activity.value.taskTitle}, \n Task description: ${ context.activity.value.taskDescription},\n Task assigned to : ${ context.activity.value.userId}` );
-                await turnContext.SendActivityAsync(MessageFactory.Text("Task details are: " + turnContext.Activity.Value), cancellationToken);
+                // Send task details as a simple text message.
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Task details are: {turnContext.Activity.Value}"), cancellationToken);
             }
         }
 
         /// <summary>
-        /// Invoked when bot (like a user) are added to the conversation.
+        /// Invoked when the bot (like a user) is added to the conversation.
         /// </summary>
         /// <param name="membersAdded">A list of all the members added to the conversation.</param>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            foreach (var member in turnContext.Activity.MembersAdded)
+            foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can see the functionality of the people-picker in an adaptive card."), cancellationToken);
                 }
             }
         }
 
-        // Get intial card.
-        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
+        /// <summary>
+        /// Gets the initial adaptive card.
+        /// </summary>
+        /// <param name="filepath">The path to the JSON file that contains the adaptive card template.</param>
+        /// <param name="name">The name of the person who created the card.</param>
+        /// <returns>The generated adaptive card attachment.</returns>
+        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name)
         {
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
-            {
-                createdById = userMRI,
-                createdBy = name
-            };
+            // Async file I/O to avoid blocking the main thread
+            var adaptiveCardJson = File.ReadAllTextAsync(Path.Combine(filepath));
 
-            //"Expand" the template -this generates the final Adaptive Card payload
+            // Expand the template with dynamic data
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson.Result);
+            var payloadData = new { createdBy = name };
+
+            // Generate the final adaptive card JSON
             var cardJsonstring = template.Expand(payloadData);
             var adaptiveCardAttachment = new Attachment()
             {

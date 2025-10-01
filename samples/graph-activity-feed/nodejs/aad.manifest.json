@@ -37,19 +37,19 @@
                     "type": "Scope"
                 },
                 {
-                    "id": "TeamsActivity.Send",
-                    "type": "Scope"
-                },
-                {
                     "id": "TeamsAppInstallation.ReadForUser",
                     "type": "Scope"
                 },
                 {
+                    "id": "Directory.Read.All",
+                    "type": "Scope"
+                },
+                {
                     "id": "TeamsActivity.Send",
                     "type": "Scope"
                 },
                 {
-                    "id": "Directory.Read.All",
+                    "id": "TeamsTab.Read.All",
                     "type": "Scope"
                 }
             ]
@@ -130,7 +130,7 @@
             "type": "Spa"
         },
         {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
+            "url": "${{TAB_ENDPOINT}}/auth-end",
             "type": "Spa"
         }
     ]

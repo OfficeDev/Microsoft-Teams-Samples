@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+description: This sample showcases a Teams meeting side panel with Mute/Unmute audio controls.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-nodejs
 
 ## Meeting Tabs Sample
 
-This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
+This sample provides an interactive demonstration of a Teams meeting side panel that allows users to easily Mute and Unmute audio during calls. It includes app stage view functionality, RSC permissions, and adapts to various Teams themes, ensuring a seamless experience across different environments.
 
 ## Included Features
 * Meeting Stage
@@ -30,7 +30,7 @@ This sample shows app stage view, Mute/Unmute Teams meeting audio call in meetin
 ![TeamsTheme](Images/TeamsThemes.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Meeting-Tabs:** [Manifest](/samples/meeting-tabs/nodejs/demo-manifest/meeting-tabs.zip)
 
@@ -38,19 +38,19 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [nodejs](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -68,21 +68,23 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2. Setup
 
-    **Register your application with Azure AD:**
+2) App Registration
 
-     - Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+### Register your application with Azure AD
 
-     - Select **New Registration** and on the *register an application page*, set following values:
-           * Set **name** to your app name.
-           * Choose the **supported account types** (any account type will work)
-           * Leave **Redirect URI** empty.
-           * Choose **Register**.
-
-     - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-
-     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+     * Set **name** to your app name.
+     * Choose the **supported account types** (any account type will work)
+     * Leave **Redirect URI** empty.
+     * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+     * Select Add a permission
+     * Select Microsoft Graph -> Delegated permissions.
+     * `User.Read` (enabled by default)
+     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 3. Clone the repository
 
@@ -136,39 +138,36 @@ You can interact with Teams Tab meeting sidepanel.
 4. **Add meeting tab**
 ![AddMeeting](Images/AddMeeting.png)
 
-5. **Join meeting**
-![JoinMeeting](Images/JoinMeeting.png)
-
-6. **Select your app**
+5. **Select your app**
 ![appAddMeeting](Images/appAddMeeting.png)
 
-7. **Add meeting tab**
+6. **Add meeting tab**
 ![appAddMeetingTabs](Images/appAddMeetingTabs.png)
 
-8. **Home page**
+7. **Home page**
 ![HomePage](Images/HomePage.png)
 
-9. **Click share To stage view**
+8. **Click share To stage view**
 ![clickShareStageView](Images/clickShareStageView.png)
 
-10. **Share To stage view**
+9. **Share To stage view**
 ![NextTenant](Images/NextTenant.png)
 
-11. **Toggle To Mute**
+10. **Toggle To Mute**
 Toggle button to mute state its looks like below.
 ![audioCall](Images/audioCall.png)
 
-12. **Toggle To Unmute**
+11. **Toggle To Unmute**
 Toggle button to Unmute state it will unmute client audio.
 ![audioCallTrue](Images/audioCallTrue.png)
 
-13. **App theme when dark**
+12. **App theme when dark**
 ![Dark](Images/dark-with-timer.PNG)
 
-14. **App theme when light**
+13. **App theme when light**
 ![Light](Images/light-with-timer.PNG)
 
-15. **App theme when contrast**
+14. **App theme when contrast**
 ![Contrast](Images/contrast-with-timer.PNG)
 
 ## Further reading

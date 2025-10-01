@@ -62,7 +62,6 @@ const AppCacheTab = () => {
 
     React.useEffect(() => {
         app.initialize().then(app.getContext).then((context: any) => {
-            app.notifySuccess();
 
             // Get default theme from app context and set app-theme
             let defaultTheme = context.app.theme;
@@ -115,6 +114,9 @@ const AppCacheTab = () => {
                 const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
                 setItems((Items) => [...Items, newItem]);
             }
+
+            // Notify success only after all handlers have been registered
+            app.notifySuccess();
 
         }).catch(function (error: any) {
             console.log(error, "Could not register handlers.");

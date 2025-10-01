@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.
+description: This Teams sample application illustrates how to use deeplinks for initiating calls, video chats, and navigating within various app tabs. It includes detailed setup instructions and supports interactions with bots and tabs to enhance user experience.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 # DeepLink
 
-Microsoft Teams sample which displays deeplinks for call, video, chat, navigate to app and navigate within tab pages which are supported for tab and bot.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
+Explore this Microsoft Teams sample app designed to demonstrate the use of deeplinks for seamless interactions, including calls, chats, and navigation across tabs and applications. Featuring bot integration and comprehensive setup guidance, this app empowers developers to create engaging and efficient communication experiences within Teams.[DeepLink](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/deep-links)
 
  ## Included Features
 * Tabs
@@ -31,26 +31,41 @@ Microsoft Teams sample which displays deeplinks for call, video, chat, navigate 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup.
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
-    
-2. Setup for Bot
+1) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+2) Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
@@ -77,6 +92,12 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
   - Update the `.env` configuration for the bot to use the `YOUR-MICROSOFT-APP-ID`, `YOUR-MICROSOFT-APP-PASSWORD` and `BASE-URL` is tunnel url eg. 124.ngrok-free.app. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+
+  - navigate to `Deeplink.html` page at line number `58` Update the `data-app-id` attribute with your application id.
+    
+    ```bash
+    data-app-id="{{Your-App-Id}}"
+    ```
 
     - In a terminal, navigate to `samples/tab-deeplink/nodejs`
 
@@ -150,42 +171,52 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 `@mention` bot in meeting chat to get an adaptive card.
 
-![Bot-Adaptive-Card](DeepLinkBot/images/BotAdaptiveCard.png)
+![Bot-Adaptive-Card](Images/BotAdaptiveCard.png)
 
 Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 **Note:** When the deeplink is opened outside meeting, it will redirect to meeting details tab.
-![Meeting-Sidepanel](DeepLinkBot/images/Sidepanel.PNG)
+![Meeting-Sidepanel](Images/Sidepanel.PNG)
 
 
 **Tab interaction:**
    
 **Deeplink to Audio Call:**
 
-![Audio-Deeplink](images/AudioCall.png)
+![Audio-Deeplink](Images/AudioCall.png)
 
 **Deeplink to Video Call:**
    
-![Video-Deeplink](images/VideoCall.png)
+![Video-Deeplink](Images/VideoCall.png)
 
 **Deeplink to Meeting schedule:**
    
-![Meeting-Schedule](images/MeetingSchedule.png)
+![Meeting-Schedule](Images/MeetingSchedule.png)
 
 **Deeplink to Polly app install dialog:**
    
-![App-Install-Dialog](images/AppInstall.png)
+![App-Install-Dialog](Images/AppInstall.png)
 
 **Deeplink to start new chat:**
    
-![Start-New-Chat](images/StartChatDeeplink.png)
+![Start-New-Chat](Images/StartChatDeeplink.png)
 
-![New-Chat](images/StartNewChat.png)
+![New-Chat](Images/StartNewChat.png)
 
 **Deeplink to channel conversation:**
    
-![Show-Channel-Conversation ](images/GroupChatDeeplink.png)
+![Show-Channel-Conversation ](Images/GroupChatDeeplink.png)
    
-![channel-Conversation](images/GroupChat.png)
+![channel-Conversation](Images/GroupChat.png)
+
+**Share To Teams Web Apps:**
+
+![Teams Button](Images/ShareToTeamWebApps.png)
+
+![Present Now Feature](Images/PresentNow_Button.png)
+   
+![OpensInNewBrowser](Images/ShareToTeams_UseWebApp.png)
+
+![SharedFromWebApp](Images/ShareToTeams_LinkSharedFromWebApp.png)
 
 ## Outlook on the web
 
@@ -193,7 +224,7 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -209,7 +240,7 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 
@@ -222,6 +253,8 @@ Click on `Side Panel Deeplink` which will redirect to the meeting side panel.
  ## Further reading
 
 - [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+
+- [Share to teams web apps](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-web-apps?branch=pr-en-us-10824&tabs=method1)
 
 
 

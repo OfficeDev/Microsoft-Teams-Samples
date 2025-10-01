@@ -19,10 +19,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-task-module-python
 [Task Modules](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules) allow you to create modal popup experiences in your Teams bot or application. This sample shows how to fetch a Task Module from a Hero Card button and receive input from an Adaptive Card in the Task Module.
 
 - **Interaction with bot**
-![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
+![bot-task-module ](Images/TaskModule.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Task Module:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 
@@ -31,11 +31,42 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) version 3.7
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Python SDK](https://www.python.org/downloads/) min version 3.11
 
-## To try this sample
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
+
+1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+1. Press **CTRL+Shift+P** to open the command box and enter **Python: Create Environment** to create and activate your desired virtual environment. Remember to select `requirements.txt` as dependencies to install when creating the virtual environment.
+1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+1. In the browser that launches, select the **Add** button to install the app to Teams.
+
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
+## Run the app (Manually Uploading to Teams)
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
+
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 1) Clone the repository
 
@@ -68,10 +99,10 @@ the Teams service needs to call into the bot.
 
 1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) Update `CustomForm.html` to replace your Microsoft App Id *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>`
+1) Update `CustomForm.html` to replace your Microsoft App Id *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}`
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
+    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `{{AAD_APP_CLIENT_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). **Note:** the Task Modules containing pages will require the deployed bot's domain in validDomains of the manifest.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
@@ -83,20 +114,51 @@ the Teams service needs to call into the bot.
 
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card with a button which will display a Task Module when clicked.  The Task Module demonstrates retrieving input from a user through a Text Block and a Submit button.
 
-Sends Adaptive Cards 
-![Adaptive Cards](Images/1.PNG)
+**Task Module running the sample**
 
-Adaptive Card Input
-![Card Input](Images/2.PNG)
+![Task Module](Images/1.Install.png)
 
-Response from the card
-![Card Form](Images/3.PNG)
+![Task Module](Images/2.Bot_Response_Cards.png)
 
-Adaptive card from input
-![Card Youtube](Images/4.PNG)
+![Task Module](Images/3.Adaptive_Card.png)
 
-Adaptive card youtube
-![Card Youtube](Images/5.PNG)
+![Task Module](Images/4.Text_Input.png)
+
+![Task Module](Images/5.Submitted.png)
+
+![Task Module](Images/6.Bot_Response_Chat.png)
+
+![Task Module](Images/7.Custom_Form_Chat.png)
+
+![Task Module](Images/8.Youtube_In_Chat.png)
+
+![Task Module](Images/9.Installing_To_GC.png)
+
+![Task Module](Images/10.Select_GC.png)
+
+![Task Module](Images/11.Bot_Response_Cards_GC.png)
+
+![Task Module](Images/12.Adaptive_Card_In_GC.png)
+
+![Task Module](Images/13.Bot_Response_GC.png)
+
+![Task Module](Images/14.Custom_Form_GC.png)
+
+![Task Module](Images/15.Youtube_GC.png)
+
+![Task Module](Images/16.Install_Team.png)
+
+![Task Module](Images/17.Select_Team.png)
+
+![Task Module](Images/18.Bot_Response_Cards_Team.png)
+
+![Task Module](Images/19.Adaptive_Card_Team.png)
+
+![Task Module](Images/20.Response_In_Team.png)
+
+![Task Module](Images/21.Custom_Form_Team.png)
+
+![Task Module](Images/22.Youtube_Team.png)
 
 ## Deploy the bot to Azure
 

@@ -12,7 +12,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.19.1" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.19.3" />
-    <PackageReference Include="Microsoft.Graph" Version="4.54.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +19,4 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectCapability Include="TeamsFx" />
-  </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample which demonstrates sending different types cards supported in teams using bot.
+description: This sample demonstrates using a bot to send multiple card types in Microsoft Teams, including Adaptive, Hero, Thumbnail, and OAuth cards. It covers setup, deployment, and app installation instructions.
 products:
 - office-teams
 - office
@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
 
 # Types of Cards
 
-This sample shows the feature where user can send different types of cards using bot.
+This Microsoft Teams bot sample demonstrates sending various card types, such as Adaptive, Hero, List, and Thumbnail cards. It includes detailed steps for setup, app deployment, and using Microsoft 365 Agents Toolkit for Visual Studio to run the app. Experience this versatile bot directly within your Teams client, complete with a manifest for easy uploading.
 
 ## Included Features
 * Bots
@@ -33,7 +33,7 @@ This sample shows the feature where user can send different types of cards using
 ![all-cards-sample ](BotAllCards/Images/allBotCardsGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Different types of cards:** [Manifest](/samples/bot-all-cards/csharp/demo-manifest/bot-all-cards.zip)
 
@@ -48,6 +48,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -71,6 +86,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ![Authentication](BotAllCards/Images/Authentication.png)
         
     4) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+    5) Navigate to **API Permissions**, and make sure to add the following permissions:
+      Select Add a permission
+         * Select Add a permission
+         * Select Microsoft Graph -\> Delegated permissions.
+         * `User.Read` (enabled by default)
+         * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
 2. Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -115,11 +137,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - **This step is specific to Teams.**
 
-1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+1) Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be `12345.devtunnels.ms`.
 
-2) Zip the contents of `AppManifest` folder into a `manifest.zip`.
+2) Zip the contents of `appPackage` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -137,26 +159,26 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
 **Install App:**
 
-![Installapp](BotAllCards/Images/Installapp.png)
+![Installapp](BotAllCards/Images/1.Install.png)
 
 **Welcome Cards:**
 
-![WelcomeCards](BotAllCards/Images/WelcomeCards.png)
+![WelcomeCards](BotAllCards/Images/2.Welcome.png)
 
 **All Cards:**
 
-![AllCards](BotAllCards/Images/AllCards.png)
+![AllCards](BotAllCards/Images/3.SelectCards.png)
 
 **Adaptive Card:**
 
-![AdaptiveCard](BotAllCards/Images/AdaptiveCard.png)
+![AdaptiveCard](BotAllCards/Images/4.AdaptiveCard.png)
 
 Add media url from sharepoint or onedrive to the text input to get media loaded to the adaptive card. For more information refer [media elements in card.](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/media-elements-in-adaptive-cards?branch=pr-en-us-8333&tabs=desktop) 
 
@@ -166,31 +188,31 @@ Add media url from sharepoint or onedrive to the text input to get media loaded 
 
 **Hero Card:**
 
-![HeroCard](BotAllCards/Images/HeroCard.png)
+![HeroCard](BotAllCards/Images/5.HeroCard.png)
 
 **OAuth Card:**
 
-![OAuthCard](BotAllCards/Images/OAuthCard.png)
+![OAuthCard](BotAllCards/Images/6.OathCard.png)
 
 **Signin Card:**
 
-![SigninCard](BotAllCards/Images/SigninCard.png)
+![SigninCard](BotAllCards/Images/7.SignInCard.png)
 
 **Thumbnail Card:**
 
-![ThumbnailCard](BotAllCards/Images/ThumbnailCard.png)
+![ThumbnailCard](BotAllCards/Images/8.ThumbnailCard.png)
 
 **List Card:**
 
-![ListCards](BotAllCards/Images/ListCards.png)
+![ListCards](BotAllCards/Images/9.ListCard.png)
 
 **Collections Card:**
 
-![CollectionsCards](BotAllCards/Images/CollectionsCards.png)
+![CollectionsCards](BotAllCards/Images/10.CollectionCard.png)
 
 **Connector Card:**
 
-![ConnectorCards](BotAllCards/Images/ConnectorCards.png)
+![ConnectorCards](BotAllCards/Images/11.ConnectorCard.png)
 
 ## Deploy the bot to Azure
 

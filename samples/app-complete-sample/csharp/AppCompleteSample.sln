@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCompleteSample", "AppCompleteSample\AppCompleteSample.csproj", "{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}"
+EndProject
+Project("{A9E3F50B-275E-4AF7-ADCE-8BE12D41E305}") = "M365Agent", "M365Agent\M365Agent.ttkproj", "{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{852DCD7F-3A45-4650-BA5C-BA97E1D8E823}"
+	ProjectSection(SolutionItems) = preProject
+		AppCompleteSample.slnLaunch.user = AppCompleteSample.slnLaunch.user
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE3FB6B-5F07-491F-9669-23B0C1CA4A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF44FFB-E372-4D0D-A9F6-65316BCAD411}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D7C6DCC-3A5C-42E6-B6E8-2E80E5342C91}
+	EndGlobalSection
+EndGlobal

@@ -14,13 +14,12 @@
 	  <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.18.1" />
 	  <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
 	  <PackageReference Include="Microsoft.Bot.Schema" Version="4.18.1" />
-	  <PackageReference Include="Microsoft.Graph" Version="4.47.0" />
-	  <PackageReference Include="Microsoft.Graph.Core" Version="2.0.14" />
+	  <PackageReference Include="Microsoft.Graph" Version="5.77.0" />
+	  <PackageReference Include="Microsoft.Graph.Core" Version="3.2.4" />
 	  <PackageReference Include="Microsoft.Identity.Web" Version="1.25.5" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
-
 </Project>

@@ -50,7 +50,7 @@
                 },
                 {
                     "id": "Directory.Read.All",
-                    "type": "Role"
+                    "type": "Scope"
                 }
             ]
         }

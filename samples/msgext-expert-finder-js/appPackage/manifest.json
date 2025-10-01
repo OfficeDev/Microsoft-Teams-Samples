@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "localizationInfo": {
+    "defaultLanguageTag": "en-us"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Expert Finder",
+    "full": "Expert Finder"
+  },
+  "description": {
+    "short": "Teams message extension for Copilot to find experts by skills and location.",
+    "full": "This sample implements a Teams message extension for Copilot, enabling users to query a database of candidates based on skills, location, and availability."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [],
+  "composeExtensions": [
+    {
+      "botId": "${{BOT_ID}}",
+      "commands": [
+        {
+          "id": "Search",
+          "type": "query",
+          "title": "General",
+          "description": "Find candidate profiles matching a certain search criteria such as their skills, location and availability.",
+          "semanticDescription": "Search for candidate profiles and return profiles that match skills, location or availiability. Search across a single or multiple parameters including skills, location and availability.",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+              "commandBox",
+              "compose",
+              "message"
+          ],
+          "parameters": [
+            {
+              "name": "Skill",
+              "title": "Skillset of candidate",
+              "description": "Skills posessed by the candidates based on which profiles will be searched. Some possible values are '.Net', 'Azure' and 'Node'.",
+              "semanticDescription": "Search for candidate profiles and return profiles that match specified skills. Some possible values of skills are '.Net', 'Azure', 'React' and 'Node.js'.",
+              "inputType": "text"
+          },
+          {
+              "name": "Location",
+              "title": "Location of candidate",
+              "description": "Location is the country of the candidate based on which profiles will be searched. Location can be any country or regions name.",
+              "semanticDescription": "Search for candidate profiles and return profiles that match the given location. Location refers to the name of country of the candidate based on which profiles will be searched.  Some possible values are 'India' and 'USA'.",
+              "inputType": "text"
+          },
+          {
+              "name": "Availability",
+              "title": "Availability of candidate",
+              "description": "Availability status of the candidate. Possible values are 'Yes', 'No'", "semanticDescription": "Search for candidate profiles and return profiles based on their availability status. Possible values of availability status are 'Yes' and 'No'.",
+              "inputType": "text"
+          }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{BOT_ID}}",
+    "resource": "api://botid-${{BOT_ID}}"
+  }
+}

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.
+description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams using Node.js and Microsoft Graph APIs, including creating chats, adding members, and deleting members.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 
 # ChatLifecycle Application
 
-This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
+This sample application showcases the management of chat lifecycles in Microsoft Teams, utilizing Microsoft Graph APIs for creating chats, adding members, and removing members in various scenarios. Developed in Node.js, it includes features such as tab integration, adaptive cards, and a welcome card, along with detailed instructions for registration, tunneling, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs
@@ -26,20 +26,25 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 ![](Images/GraphChatLifecycleGif.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Chat LifeCycle Application:** [Manifest](/samples/graph-chat-lifecycle/csharp/demo-manifest/graph-chat-lifecycle.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
@@ -164,6 +169,8 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. In Teams, Install App
 
  ![](Images/Install.png)
+ 
+ ![](Images/SelectTeams.png)
 
  ![](Images/InstallSaveTab.png)
 
@@ -191,7 +198,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/InstallOutlook.png)
 
@@ -207,7 +214,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](Images/InstallOffice.png)
 

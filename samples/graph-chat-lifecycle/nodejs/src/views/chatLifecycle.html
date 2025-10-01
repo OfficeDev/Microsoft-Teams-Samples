@@ -1,11 +1,12 @@
-<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous">
-</script>
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+  crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="../scripts/auth.js"></script>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy"
-    content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+      content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
 <style>
     #createGroupChat {
         width: 150px;
@@ -33,52 +34,51 @@
     $(document).ready(function () {
 
         microsoftTeams.app.initialize().then(() => {
-        $("#createGroupChat").on('click', function (e) {
-            e.preventDefault();
-            let baseURL = window.location.origin;
-            $.post(baseURL + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
-                let taskInfo = {
-                    title: null,
-                    height: null,
-                    width: null,
-                    url: null,
-                    card: null,
-                    fallbackUrl: null,
-                    completionBotId: null,
+            $("#createGroupChat").on('click', function (e) {
+                e.preventDefault();
+                let baseURL = window.location.origin;
+                $.post(baseURL + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
+                    let taskInfo = {
+                        title: null,
+                        height: null,
+                        width: null,
+                        url: null,
+                        card: null,
+                        fallbackUrl: null,
+                        completionBotId: null,
+                    };
+
+                    taskInfo.card = data.content;
+                    taskInfo.title = "Create Groupchat";
+
+                    // Set fallback URL
+                    taskInfo.fallbackUrl = taskInfo.url;
+                    microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                })
+                submitHandler = (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    if (result) {
+                        microsoftTeams.app.initialize().then(() => {
+                            microsoftTeams.app.getContext().then((context) => {
+                                var userId = context.user.id;
+                                var resultObject = JSON.parse(result);
+                                $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: resultObject.users, userId: userId, title: resultObject.title }).done(function (data) {
+                                    console.log(data);
+                                    $("#createGroupChat").hide();
+                                    $("#welcomeMsg").hide();
+                                    showSuccessMessage();
+                                })
+                            });
+                        });
+                    }
                 };
 
-                taskInfo.card = data;
-                taskInfo.title = "Create Groupchat";
-                taskInfo.height = "280";
-                taskInfo.width = "500";
-
-                // Set fallback URL
-                taskInfo.fallbackUrl = taskInfo.url;
-                microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                function showSuccessMessage() {
+                    document.getElementById("successMsg").innerHTML = "Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
+                }
             })
-            submitHandler = (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                if (result) {
-                    microsoftTeams.app.initialize().then(() => {
-                        microsoftTeams.app.getContext().then((context) => {
-                            var userId = context.user.id;
-                            $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
-                                console.log(data);
-                                $("#createGroupChat").hide();
-                                $("#welcomeMsg").hide();
-                                showSuccessMessage();
-                            })
-                        });
-                    });
-                }
-            };
-
-            function showSuccessMessage() {
-                document.getElementById("successMsg").innerHTML = "Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
-            }
-        })
         });
     })
 

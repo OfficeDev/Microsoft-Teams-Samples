@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab.
+description: This Teams sample app sends activity feed notifications using the Graph API within a tab.
 products:
 - office-teams
 - office
@@ -15,9 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-csharp
 
 # Activity Feed Notification
 
-Bot Framework v4 Activity Feed sample using Tab.
-
-This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
+This sample application demonstrates how to utilize the Microsoft Graph API to send activity feed notifications from a Teams Tab. It features support for Teams Single Sign-On (SSO) and allows triggering activity feed notifications across user, chat, and team scopes, seamlessly integrating with the Microsoft Teams platform. Created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), this sample shows how to trigger notifications that are sent back to conversations, enhancing user engagement within Teams.
 
 ## Included Features
 * Teams SSO (tabs)
@@ -84,8 +82,10 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadForUser.All`
     - `TeamsTab.Read.All`
+	- `ChannelSettings.Read.All`
+	- `TeamsTab.ReadWriteForTeam`
 
-     **Note** Your need to add `TeamsActivity.Send` as Application level permissions
+     Also add `TeamsActivity.Send` as Application level permissions
 
     - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
     - Navigate to **Authentication**
@@ -198,6 +198,13 @@ Teams Activity feed notification API uses activity to which user want a notifica
 
 ![image](Images/ActivityFeedNotification.png)
 
+
+**Custom Activity Icons**
+
+The app demonstrates a feature that allows developers to configure custom activity icons in personal, groupChat, channel scopes for various activities displayed in the activity feed. To test this feature, install the app in personal scope, log in with the user from whom you want to send the notification, fill out the form, and send a notification. You will observe the activity displayed with a custom icon. Also, go to the following line of code in the server.js file:
+Please make sure to replace {userId} with the ID of the user to whom you want to send the notification in HomeController file. (Object Id of user from azure portal)
+
+![team-custom-notification ](Images/custom-activity-icon.png)
 
 ## Further reading
 

@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "Microsoft Teams (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "M365 (Browser)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "M365 (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "IncomingWebhook\\IncomingWebhook.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      }
+    ]
+  }
+]

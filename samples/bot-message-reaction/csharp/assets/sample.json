@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-bot-message-reaction-csharp",
     "source": "officeDev",
     "title": "Message Reactions Bot",
-    "shortDescription": "This sample app demonstrate how to use message reactions using bot.",
+    "shortDescription": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-message-reaction/csharp",
     "longDescription": [
-      "This sample app demonstrate how to use message reactions using bot."
+      "This sample bot, built on the Bot Framework, responds to message reactions in Microsoft Teams. It showcases features such as adaptive cards and supports multiple scopes, including personal, group, and team interactions."
     ],
     "creationDateTime": "2019-12-12",
-    "updateDateTime": "2022-10-05",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/csharp/Images/bot-message-reaction.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-message-reaction/csharp/MessageReaction/Images/bot-message-reaction.gif",
         "alt": "Solution UX showing how to use message reactions bot"
       }
     ],

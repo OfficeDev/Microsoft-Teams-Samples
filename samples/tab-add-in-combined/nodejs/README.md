@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample Outlook add-in and Teams tab app.
+description: This sample app integrates an Outlook add-in with a Teams tab to streamline the creation and management of discount offers. Users can insert discounts into emails and view consolidated data within Teams, enhancing collaboration and efficiency.
 products:
 - office-teams
 - office
@@ -20,7 +20,7 @@ This sample combines, into a single app with a single manifest, an Outlook Add-i
 
 The sample illustrates a prime use case for combining a Teams Tab and an Office Add-in: Users take discrete actions on an Office document and analyze data about these discrete actions in a Teams tab.
 
-**Note:** As of 6/20/2023, Teams apps that include an Office Add-in capability are in preview and can run only on a Windows computer. You should be working on a Windows computer to run this sample.
+**Note:** As of 1/13/2025, Teams apps that include an Office Add-in capability can run only on a Windows computer. You should be working on a Windows computer to run this sample.
 
 ## Included Features
 
@@ -38,7 +38,7 @@ Interaction with the tab:
    ![Animated gif shows a discount offer being inserted into an email with the Discounts add-in](Images/interact-tab.animated.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Tab-add-in-combined:** [Manifest](/samples/tab-add-in-combined/nodejs/demo-manifest/tab-add-in-combined.zip)
 
@@ -47,11 +47,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - [NodeJS](https://nodejs.org/en/), version 16.x.x or 18.x.x.
 - [npm](https://www.npmjs.com/) (installed with NodeJS)
 
-    **Note:** This sample was developed with NodeJS version 16.13.2 and npm version 8.1.2. It should work with most NodeJS versions in the 16.x.x or 18.x.x ranges, but there are some exceptions to this. It does not work on NodeJS 16.16.0.
+    **Note:** This sample was developed with NodeJS version 16.13.2 and npm version 8.1.2. It should work with most NodeJS versions in the 16.x.x, 18.x.x, 20.x.x, and 22.x.x ranges, but there are some exceptions to this. It does not work on NodeJS 16.16.0.
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account.
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Teams Toolkit extension for Visual Studio Code](https://learn.microsoft.com/microsoftteams/platform/toolkit/install-teams-toolkit?tabs=vscode)
+- [Microsoft 365 Agents Toolkit extension for Visual Studio Code](https://learn.microsoft.com/microsoftteams/platform/toolkit/install-teams-toolkit?tabs=vscode)
 - [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 - Microsoft Office for Windows
 
@@ -62,7 +62,24 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 ## Setup
 
-1. Setup the project.
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Setup the project.
 
    - Clone the repository:
 
@@ -76,21 +93,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```bash
     npm install
     ```
-   - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/add-in`.
-   - Install modules:
 
-    ```bash
-    npm install
-    ```
-
-    - In a terminal, navigate to `samples/tab-add-in-combined/nodejs/tab`.
-    - Install modules:
-
-    ```bash
-    npm install
-    ```
-
-2. Install a mock customer relations management (CRM) system.
+4. Install a mock customer relations management (CRM) system.
 
    - Instructions for installing and configuring a local Mockoon database are in: [Setup Mockoon Database](setup-mockoon.md).
    - If you prefer, you can use any database, either on localhost or remotely, that can (1) send a JSON payload in response to a GET request and (2) update in response to a POST request that contains a JSON payload. Read the article that is linked to in the preceding bullet to find out what CORS headers and starter data should be used. You can use any domain and port you like (except ports 3000 and 53000 which are used by other parts of the sample), but if you use anything other than `localhost:3001`, you will need to edit the calls of `fetch` in the following two files to pass the correct domain and/or port:
@@ -112,7 +116,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
 1. Open the folder `samples/tab-add-in-combined/nodejs` in Visual Studio Code.
 2. First, *make sure Outlook desktop is closed.*
-3. In Visual Studio Code, open the Teams Toolkit.
+3. In Visual Studio Code, open the Microsoft 365 Agents Toolkit.
 4. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365.
 5. Select **View** | **Run** in Visual Studio Code. In the **RUN AND DEBUG** drop down menu, select the option **Launch Add-in Outlook Desktop (Edge Chromium)** and then press F5. The project builds and a Node dev-server window opens. This process may take a couple of minutes and then Outlook desktop opens.
 6. You can now work with your add-in. If your Outlook application has more than one account, be sure you're working in the Inbox of your Microsoft 365 account identity.
@@ -142,9 +146,7 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
      ![An email message with the text "We are delighted to offer you a discount of 15%".](Images/Inserted_text.JPG)
 
-14. To see the task pane match the current Office theme, [change the Office theme](https://support.microsoft.com/office/change-the-look-and-feel-of-microsoft-365-63e65e1c-08d4-4dea-820e-335f54672310) and then open a new message compose window and start the add-in. It will open in the new theme. The following shows the task pane in the Office dark gray theme.
-
-    **Note:** There isn't currently an API in the Office JavaScript Library to detect the theme changed event in Office, so the task pane cannot dynamically change to the new theme.
+14. To see the task pane match the current Office theme, [change the Office theme](https://support.microsoft.com/office/change-the-look-and-feel-of-microsoft-365-63e65e1c-08d4-4dea-820e-335f54672310). The following shows the task pane in the Office dark gray theme.
 
      ![A task pane styled to match the Office Dark Gray theme. The title bar is "Discounts". A text box labelled "Discount %" with default number 15 in it. A text box labelled "Offer text" with default text "We are delighted to offer you a discount of" in it. A button labelled "Insert Offer". A footer bar containing text "Blue Yonder Airlines".](Images/Discounts_task_pane_dark_gray_theme.JPG)
 
@@ -152,8 +154,8 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 
 ### Run the Teams tab for the first time
 
-1. In Visual Studio Code, open the Teams Toolkit.
-2. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365 and that sideloading is enabled.
+1. In Visual Studio Code, open the Microsoft 365 Agents Toolkit.
+2. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365 and that uploading is enabled.
 3. Select **View** | **Run** in Visual Studio Code.
 4. In the **RUN AND DEBUG** drop down menu, select the option, **Launch App Debug (Edge)**, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add the tab app.
 
@@ -175,11 +177,11 @@ Before running the Teams tab and Outlook add-in at the same time, it is best to 
 ### Run both the Teams tab and the Outlook add-in at the same time
 
 1. First, *make sure Outlook desktop is closed.*
-3. In Visual Studio Code, open the Teams Toolkit.
+3. In Visual Studio Code, open the Microsoft 365 Agents Toolkit.
 4. In the **ACCOUNTS** section, verify that you're signed into Microsoft 365.
 5. Select **View** | **Run** in Visual Studio Code. In the **RUN AND DEBUG** drop down menu, select the option **Launch App and Add-in Outlook Desktop (Edge Chromium)** and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
 
-   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see [Upload your app in Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
+   - Teams opens in a browser with a prompt to add your tab app. *If Teams has not opened by the time Outlook desktop opens, then automatic uploading has failed. You can manually upload it to see both the app and the add-in running at the same time. For uploading instructions, see [Upload your app in Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload).*
    - Outlook desktop opens.
 
 6. In the Teams prompt, select **Add** and the tab will open.

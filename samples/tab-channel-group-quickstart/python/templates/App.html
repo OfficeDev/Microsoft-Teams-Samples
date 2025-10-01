@@ -1,0 +1,207 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Teams Tab App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='App.css') }}">
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <nav class="navigation">
+            <h2>Microsoft Teams Tab App</h2>
+            <ul>
+                <li><a href="/tab" class="nav-link">Tab</a></li>
+                <li><a href="/config" class="nav-link">Configuration</a></li>
+                <li><a href="/privacy" class="nav-link">Privacy</a></li>
+                <li><a href="/termsofuse" class="nav-link">Terms of Use</a></li>
+            </ul>
+        </nav>        <main id="content">
+            <div class="welcome-section">
+                <h1>Welcome to Microsoft Teams Tab App</h1>
+                <p>This is the main app which handles the initialization and routing of the app.</p>
+                
+                <div class="user-info">
+                    <h4>User Context Information:</h4>
+                    <div id="contextInfo">
+                        <p>Loading user information...</p>
+                    </div>
+                </div>
+
+                <div class="routing-info">
+                    <h3>Available Routes:</h3>
+                    <ul>
+                        <li><a href="/tab">Tab Component</a> - Main tab functionality</li>
+                        <li><a href="/config">Tab Configuration</a> - Configuration options</li>
+                        <li><a href="/privacy">Privacy Statement</a> - Privacy policy</li>
+                        <li><a href="/termsofuse">Terms of Use</a> - Terms and conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>    <script>
+        // Copyright (c) Microsoft Corporation. All rights reserved.
+        // Licensed under the MIT License.
+        
+        // Initialize the Microsoft Teams SDK
+        microsoftTeams.app.initialize().then(() => {
+            console.log('Teams SDK initialized successfully');
+            
+            // Get the user context from Teams
+            microsoftTeams.app.getContext().then((context) => {
+                console.log('Teams context:', context);
+                
+                // Display context information
+                const contextInfo = document.getElementById('contextInfo');
+                contextInfo.innerHTML = `
+                    <p><strong>User:</strong> ${context?.user?.displayName || 'N/A'}</p>
+                    <p><strong>Email:</strong> ${context?.user?.userPrincipalName || 'N/A'}</p>
+                    <p><strong>Team:</strong> ${context?.team?.displayName || 'N/A'}</p>
+                    <p><strong>Channel:</strong> ${context?.channel?.displayName || 'N/A'}</p>
+                    <p><strong>Theme:</strong> ${context?.app?.theme || 'N/A'}</p>
+                    <p><strong>Locale:</strong> ${context?.app?.locale || 'N/A'}</p>
+                    <p><strong>SDK Version:</strong> 2.40.0</p>
+                `;
+                
+                // Register handlers for theme changes
+                microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
+                    console.log('Theme changed to:', theme);
+                    document.body.className = theme || '';
+                });
+                
+            }).catch((error) => {
+                console.error('Error getting context:', error);
+                document.getElementById('contextInfo').innerHTML = '<p>Ready for Teams integration</p>';
+            });
+            
+        }).catch((error) => {
+            console.error('Error initializing Teams SDK:', error);
+            // Hide the user context section when not in Teams
+            const userInfoSection = document.querySelector('.user-info');
+            if (userInfoSection) {
+                userInfoSection.style.display = 'none';
+            }
+        });
+    </script>    <style>
+        /* Copyright (c) Microsoft Corporation. All rights reserved. */
+        /* Licensed under the MIT License. */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f2f1;
+            color: #323130;
+        }
+
+        .navigation {
+            background-color: #464775;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navigation h2 {
+            margin-bottom: 1rem;
+        }
+
+        .navigation ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        #content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #0078d4;
+            margin: 2rem 0;
+        }
+
+        .routing-info {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #106ebe;
+            margin: 2rem 0;
+        }
+
+        .routing-info ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .routing-info li {
+            margin-bottom: 0.5rem;
+        }
+
+        .routing-info a {
+            color: #106ebe;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .routing-info a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #323130;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        h3 {
+            color: #605e5c;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            color: #323130;
+            margin-bottom: 0.5rem;
+        }
+
+        #contextInfo p {
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+    </style>
+</body>
+</html>

@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.botgroupchatmessages",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,8 +14,8 @@
     "full": "Fetch groupchat messages with graph api"
   },
   "description": {
-    "short": "Fetch groupchat messages.",
-    "full": "This sample demos a bot which fetch and archive groupchat messages"
+    "short": "Archive Teams group chat messages and send them as files via bot.",
+    "full": "This sample bot archives Teams group chat messages and sends them as files to users."
   },
   "icons": {
     "outline": "outline.png",
@@ -28,7 +27,7 @@
       "scopes": [
         "team",
         "personal",
-        "groupchat"
+        "groupChat"
       ],
       "isNotificationOnly": false,
       "supportsFiles": true
@@ -45,6 +44,6 @@
   ],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://botid-${{AAD_APP_CLIENT_ID}}"
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
   }
 }

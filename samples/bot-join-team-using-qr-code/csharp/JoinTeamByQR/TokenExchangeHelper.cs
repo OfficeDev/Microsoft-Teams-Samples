@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
@@ -87,12 +88,17 @@ namespace JoinTeamByQR
 
             try
             {
-                tokenExchangeResponse = await (turnContext.Adapter as IExtendedUserTokenProvider).ExchangeTokenAsync(
-                    turnContext,
-                    _oAuthConnectionName,
-                    turnContext.Activity.From.Id,
-                    new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
-                    cancellationToken).ConfigureAwait(false);
+                // Use UserTokenClient from TurnState instead of deprecated IExtendedUserTokenProvider
+                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                if (userTokenClient != null)
+                {
+                    tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(
+                        turnContext.Activity.From.Id,
+                        _oAuthConnectionName,
+                        turnContext.Activity.ChannelId,
+                        new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
+                        cancellationToken).ConfigureAwait(false);
+                }
             }
 #pragma warning disable CA1031 // Do not catch general exception types (ignoring, see comment below)
             catch

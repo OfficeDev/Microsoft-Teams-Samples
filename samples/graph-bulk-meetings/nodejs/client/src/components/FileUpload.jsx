@@ -6,7 +6,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 
-microsoftTeams.initialize();
+microsoftTeams.app.initialize();
 
 class App extends Component {
     constructor(props) {
@@ -79,34 +79,33 @@ class App extends Component {
         microsoftTeams.app.getContext().then(async (rows) => {
             var excelrows = [];
             var userId = rows.user.id;
-            var TransactionId = uuidv4();
-
             for (var i = 1; i < this.state.rows.length; i++) {
+                var TransactionId = uuidv4();
                 const obj = {
                     subject: this.state.rows[i][0],
                     body: {
                         content: this.state.rows[i][1]
+                        
                     },
                     start: {
-                        dateTime: (this.state.rows[i][2]),
-                        timeZone: 'Asia/Kolkata'
+                        dateTime: this.state.rows[i][2],
+                        timeZone: "Asia/Kolkata"
                     },
                     end: {
-                        dateTime: (this.state.rows[i][2]),
-                        timeZone: 'Asia/Kolkata'
+                        dateTime: this.state.rows[i][3],
+                        timeZone: "Asia/Kolkata"
                     },
                     location: {
-                        displayName: this.state.rows[i][1]
+                        displayName: this.state.rows[i][4]
                     },
                     attendees: [
                         {
                             emailAddress: {
-                                address: this.state.rows[i][4]
+                                address: this.state.rows[i][5]
                             },
                             type: 'required'
                         }
                     ],
-                    allowNewTimeProposals: true,
                     transactionId: TransactionId
                 }
                 excelrows.push(obj);
@@ -115,7 +114,7 @@ class App extends Component {
             var response = await axios.post(`api/meeting?userId=${userId}`, excelrows);
 
             if (response.status === 201) {
-                microsoftTeams.dialog.submit("Created successfully!");
+                microsoftTeams.dialog.url.submit("Created successfully!");
                 return response.data;
             }
         });

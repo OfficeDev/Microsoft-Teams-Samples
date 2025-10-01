@@ -13,10 +13,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace AppCompleteAuth.Bots
 {
+    /// <summary>
+    /// AuthBot class to handle authentication-related bot activities.
+    /// </summary>
     public class AuthBot<T> : ActivityBot<T> where T : Dialog
     {
         public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, bool> isSignedIn)
-            : base(configuration,conversationState, dialog, isSignedIn)
+            : base(configuration, conversationState, dialog, isSignedIn)
         {
         }
 
@@ -27,14 +30,13 @@ namespace AppCompleteAuth.Bots
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in turnContext.Activity.MembersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! Please type 'login' for initiating the authentication flow."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! Please type 'login' for initiating the authentication flow."), cancellationToken);
                 }
             }
         }
@@ -45,7 +47,6 @@ namespace AppCompleteAuth.Bots
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>A task that represents the work queued to execute.</returns>
-        /// <remarks>
         protected override async Task OnTokenResponseEventAsync(ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
             // Run the Dialog with the new Token Response Event Activity.

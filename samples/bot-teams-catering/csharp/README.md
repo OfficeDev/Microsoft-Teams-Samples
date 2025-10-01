@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Teams catering bot demonstrating how to use Universal adaptive cards in Teams
+description: Teams Catering Bot: Order food via Adaptive Cards in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -15,9 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-teams-catering-csharp
 
 # Teams Catering Bot
 
-Bot Framework v1.4 TeamsCateringBot sample.
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V2.
+This Teams Catering Bot allows users to place food and drink orders seamlessly within Microsoft Teams. It leverages Universal Adaptive Cards for dynamic interactions and supports features like recent orders and order confirmation.
 
 ## Document Manager  
 
@@ -41,44 +39,41 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+</br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+
 ## Setup
 
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+### Register your app with Azure AD.
 
-    - Go to App registrations and create a new app registration in a different tab.
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-   - Register an application.
-	* Fill out name and select third option for supported account type and click "Register".
-
-    <img src="./Assets/Images/RegisterAnApplication.png" alt="Register An Application">
-
-    **NOTE:** Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
-
-    - Create Client Secret.
-      * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
-
-     **NOTE:** Copy and paste the secret somewhere safe. You will need it in a future step:
-       <img src="./Assets/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets">
-
-2. Setup for Bot
-
-	 * Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-       * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-       * While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
-
-       * Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-       * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-       * While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.       
-
-        <img src="./Assets/Images/BotChannelConfig.png" alt="Bot Channel Reg">
-
-        **Go to the created resource, navigate to channels and add "Microsoft Teams" and “Web chat” channels:**
-
-       <img src="./Assets/Images/BotChannels.png" alt="Bot Channels">
-
-       > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.        
-
-3. Create Azure Cosoms Database account**
+1. Create Azure Cosoms Database account**
 
 	 - Create an Azure Cosmos DB account
 	   * Choose an existing resource group or create a new one.
@@ -93,28 +88,13 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 
      <img src="./Assets/Images/CosmosDbCreation.png" alt="Cosmos Db account creation">
 
-4. Get Cosmos DB enpoint `Uri` and read write `Primary Key`
+2. Get Cosmos DB enpoint `Uri` and read write `Primary Key`
    * Open your newly created Cosmos DB account. Navigate to "Keys" section.
    * Copy paste your URI and read write Primary_Key for further use.
 
     <img src="./Assets/Images/CosmosKeys.png" alt="Cosmos Db keys">
 
-
-5. Setup NGROK
-
- - Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-   s
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3978 --allow-anonymous
-   ```
-
-6. Setup for code
+3. Setup for code
 
   - Clone the repository
 
@@ -136,14 +116,10 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `samples/bot-teams-catering/csharp` folder
-  - Select `Catering.csproj` file
+  - Select `Catering.sln` file
   - Press `F5` to run the project
 
 - Update the appsettings.json files. 
-
-  - "MicrosoftAppId: `<<Your Microsoft Bot_Id>>`
-
-  - "MicrosoftAppPassword": `<<Your Microsoft Bot_Secret>>`
 
   - "CosmosEndpointUri": `<<Your Cosmos DB enpoint uri>>`
 
@@ -157,15 +133,11 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 eg: https://smba.trafficmanager.net/amer/v3 
 
 
-**7. Setup Manifest for Teams**
-- **This step is specific to Teams.**
-
-    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `websiteUrl`,`privacyUrl`,`termsOfUseUrl` inside `DeveloperTabs` . Replace `<<your_tunnel_domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+4) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage/build folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-catering/csharp/Catering/AdapterWithErrorHandler.cs#L45) line and put your debugger for local debug.
 

@@ -6,10 +6,10 @@
     "shortDescription": "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search/csharp",
     "longDescription": [
-      "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO."
+      "This C# sample demonstrates the implementation of a search-based Messaging Extension in Microsoft Teams, leveraging the Bot Framework v4. Users can initiate searches and retrieve results through a seamless integration within the Teams interface."
     ],
     "creationDateTime": "2023-11-17",
-    "updateDateTime": "2023-11-17",
+    "updateDateTime": "2024-10-15",
     "products": [
       "Teams"
     ],

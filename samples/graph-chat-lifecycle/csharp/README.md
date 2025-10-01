@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs through teams tab.
+description: This sample demonstrates how to manage the chat lifecycle in Microsoft Teams, including creating chats, adding members, and deleting members using Microsoft Graph APIs with C#.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp
 
 # Chat LifeCycle Application
 
-This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
+This sample application illustrates the lifecycle management of chats in Microsoft Teams, leveraging Microsoft Graph APIs to create chats, add and remove members, and demonstrate various scenarios. Developed in C#, it includes features such as tab integration, adaptive cards, and a welcome card, along with comprehensive setup instructions for registration, tunneling, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio.
 
 ## Included Features
 * Tabs
@@ -25,11 +25,31 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 ## Interaction with app
 ![welcome card](ChatLifecycle/Images/ChatLifeCycleModule.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Chat LifeCycle Application:** [Manifest](/samples/graph-chat-lifecycle/csharp/demo-manifest/graph-chat-lifecycle.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
+
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -128,7 +148,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
   
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://{{domain-name}}/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId.
     **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `graph-chat-lifecycle\csharp\ChatLifecycle\AppManifest_Hub` folder with the required values.
@@ -137,24 +157,28 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
-1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
+1. Install App.
+
+![InstallApp](ChatLifecycle/Images/InstallApp.png)
+
+2. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
 
 ![welcome card](ChatLifecycle/Images/welcome.png)
 
-2. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+3. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
 
   ![group chat created](ChatLifecycle/Images/groupchatbuttonclick.png) 
 
-3. created group chat Details.
-![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
-
 4. Successfully Group chat created.
 ![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
+
+5. created group chat Details.
+![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
 
 ## Outlook on the web
 
@@ -162,7 +186,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 - Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](ChatLifecycle/Images/InstallOutlook.png)
 
@@ -178,7 +202,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 - Log into office.com with test tenant credentials
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![InstallOffice](ChatLifecycle/Images/InstallOffice.png)
 

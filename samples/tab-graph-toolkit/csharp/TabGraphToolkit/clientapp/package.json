@@ -1,36 +1,39 @@
 {
-  "name": "clientapp",
+  "name": "tab-graph-toolkit",
   "version": "0.1.0",
+  "engines": {
+    "node": "16 || 18"
+  },
   "private": true,
   "dependencies": {
-    "@fluentui/react": "^8.36.5",
-    "@fluentui/react-northstar": "^0.59.0",
-    "@microsoft/mgt": "^2.3.0",
-    "@microsoft/mgt-components": "^2.3.0",
-    "@microsoft/mgt-element": "^2.3.0",
-    "@microsoft/mgt-msal2-provider": "^2.3.0",
-    "@microsoft/mgt-react": "^2.3.0",
-    "@microsoft/mgt-teams-msal2-provider": "^2.3.0",
-    "@microsoft/teams-js": "^2.5.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^12.20.29",
-    "@types/react": "^17.0.29",
-    "@types/react-dom": "^17.0.9",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.4.4",
-    "web-vitals": "^1.1.2"
+    "@fluentui/react-components": "^9.18.0",
+    "@microsoft/mgt-element": "*",
+    "@microsoft/mgt-react": "*",
+    "@microsoft/mgt-teamsfx-provider": "*",
+    "@microsoft/microsoft-graph-client": "^3.0.1",
+    "@microsoft/teams-js": "^2.35.0",
+    "@microsoft/teamsfx": "^2.2.0",
+    "@microsoft/teamsfx-react": "^3.0.0",
+    "axios": "^0.21.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "env-cmd": "^10.1.0",
+    "typescript": "^4.1.2"
   },
   "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.1"
-  }
+  "homepage": "."
 }

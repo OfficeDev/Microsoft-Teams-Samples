@@ -9,7 +9,7 @@
       "This sample app demonstrate how an Bot can use Teams authentication"
     ],
     "creationDateTime": "2019-07-10",
-    "updateDateTime": "2022-09-22",
+    "updateDateTime": "2025-07-14",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-teams-authentication/csharp/Images/TeamAuth.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-teams-authentication/python/Images/Bot_Teams_Auth_Desktop.gif",
         "alt": "Solution UX showing Teams authentication for bot using Bot Framework v4"
       }
     ],

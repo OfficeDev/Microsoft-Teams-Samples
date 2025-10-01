@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "version": "1.0.0",
-  "manifestVersion": "1.12",
+  "manifestVersion": "1.19",
   "id": "19b5d434-5d4b-47a8-800f-446b6a010ba2",
   "name": {
     "short": "GitHub account linking sample",
@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://contoso.com/tou"
   },
   "description": {
-    "short": "An example of linking a user's M365 identity with a GitHub identity",
-    "full": "An example of linking a user's M365 identity with a GitHub identity so they only need to log in once across features (bot/messaging extension/tab) and devices"
+    "short": "Sample for Azure AD & Facebook auth in Teams bot, tab, and messaging extension.",
+    "full": "This sample demonstrates authentication integration using Azure AD, Facebook, and username/password methods across bot, tab, and messaging extension functionalities in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an sample application which showcases how to invoke task module from adaptive and hero cards.
+description: This is an sample application which showcases how to invoke Dialogs (referred as task modules in TeamsJS v1.x) from adaptive and hero cards.
 products:
 - office-teams
 - office
@@ -13,49 +13,65 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-nodejs
 ---
 
-# Teams Task Module
+# Teams Dialog (referred as task modules in TeamsJS v1.x)
 
-Bot Framework Teams Task Module sample.
+Bot Framework Teams Dialog (referred as task modules in TeamsJS v1.x) sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from a Hero Card button and receive input from an Adaptive Card in the Task Module.
+This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Dialog (referred as task modules in TeamsJS v1.x) from a Hero Card button and receive input from an Adaptive Card in the Dialog (referred as task modules in TeamsJS v1.x).
 
 ## Included Features
 * Bots
 * Tabs
-* Task Modules
+* Dialogs (referred as task modules in TeamsJS v1.x)
 
 ## Interaction with botss
-![Task Module App](Images/TaskModule.gif)
+![Dialog App](Images/TeamsDialog.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Teams Task Module:** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
+**Teams Dialog (referred as task modules in TeamsJS v1.x):** [Manifest](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
-- [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+- [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
+
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 1) Run ngrok - point to port 3978
 
@@ -120,37 +136,45 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
-You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Task Module when clicked. The Task Modules demonstrate retrieving input from a user, or displaying custom web page content.
+You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Dialog (referred as task modules in TeamsJS v1.x) when clicked. The Dialogs (referred as task modules in TeamsJS v1.x) demonstrate retrieving input from a user, or displaying custom web page content.
 
 - **Personal Scope Interactions:**
 
-![ps-AddApp ](Images/ps-AddApp.png)
+![1.Install ](Images/1.Install.png)
 
-![ps-Cards ](Images/ps-Cards.png)
+![2.Interaction_with_Bot ](Images/2.Interaction_with_Bot.png)
 
-![ps-AC-TaskModule ](Images/ps-AC-TaskModule.png)
+![3.Adaptive_card_in_chat ](Images/3.Adaptive_card_in_chat.png)
 
-![ps-AC-TaskModule-Submit ](Images/ps-AC-TaskModule-Submit.png)
+![4.Adaptive_card_submitted ](Images/4.Adaptive_card_submitted.png)
+
+![5.Update_in_chat ](Images/5.Update_in_chat.png)
+
+![6.CustomForm ](Images/6.CustomForm.png)
+
+![7.CustomFormResults ](Images/7.CustomFormResults.png)
+
+- **Dialog (referred as task modules in TeamsJS v1.x) Tab:**
+
+![8.Tasks_Tab_in_chat](Images/8.Tasks_Tab_in_chat.png)
+
+![9.Youtuube_in_chat](Images/9.Youtuube_in_chat.png)
+
+![10.Powerapp_in_Tab](Images/10.Powerapp_in_Tab.png)
+
+![11.Custom_form_in_Tab](Images/11.Custom_form_in_Tab.png)
+
+![12.GroupChat](Images/12.GroupChat.png)
+
+![13.ConfigTab](Images/13.ConfigTab.png)
+
+![14.ConfigTabResults](Images/14.ConfigTabResults.png)
 
 - **Group Chat Scope Interactions:**
 
-![gc-Interaction ](Images/gc-Interaction.png)
+![15.GroupChatCard ](Images/15.GroupChatCard.png)
 
-- **Team Scope Interactions:**
-
-![ts-Interaction ](Images/ts-Interaction.png)
-
-- **Task Module Tab:**
-
-![TaskModuleTasks](Images/3.Tasks.png)
-
-![Youtube](Images/4.Youtube.png)
-
-![PowerApp](Images/5.PowerApp.png)
-
-![CustomForm](Images/6.CustomForm.png)
-
-![AdaptiveCard](Images/7.AdaptiveCard.png)
+![15.GroupChatCardResults ](Images/15.GroupChatCardResults.png)
 
 ## Deploy the bot to Azure
 
@@ -162,7 +186,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Task modules](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
+- [Dialogs (referred as task modules in TeamsJS v1.x)](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-task-module-nodejs" />

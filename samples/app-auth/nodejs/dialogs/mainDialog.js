@@ -50,6 +50,9 @@ class MainDialog extends ComponentDialog {
             else if (stepContext.context._activity.text.trim() == "facebooklogin") {
                 return await stepContext.beginDialog(FACEBOOKAUTH);
             }
+            else if (stepContext.context._activity.text.trim() == "logout") {
+                return await stepContext.beginDialog(FACEBOOKAUTH);
+            }
             else{
                 const buttons = [
                     { type: ActionTypes.ImBack, title: 'AAD SSO authentication', value: 'sso' },

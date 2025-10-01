@@ -1,9 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
   "version": "1.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.samples",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -15,17 +14,17 @@
     "full": "Microsoft Teams Action Based Messaging Extension"
   },
   "description": {
-    "short": "Sample demonstrating an Action Based Messaging Extension",
-    "full": "Sample Action Messaging Extension built with the Bot Builder SDK"
+    "short": "This sample app illustrates how to implement Action-Based Messaging Extensions.",
+    "full": "This sample demonstrates how to create Action-Based Messaging Extensions for Microsoft Teams, enabling users to interactively generate content. It features bots, message extensions, and seamless integration with user inputs for enhanced functionality."
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "commands": [
         {
           "id": "createCard",
@@ -76,6 +75,6 @@
     "identity"
   ],
   "validDomains": [
-    "{{domain-name}}"
+    "${{BOT_DOMAIN}}"
   ]
 }

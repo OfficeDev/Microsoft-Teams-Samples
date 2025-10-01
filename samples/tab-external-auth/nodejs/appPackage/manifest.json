@@ -15,8 +15,8 @@
     "full": "Tab External Auth App"
   },
   "description": {
-    "short": "Sample which showcases external authentication using OAuth providers",
-    "full": "Sample which showcases external authentication using OAuth providers"
+    "short": "API server for exchanging Teams tokens to access user profile data.",
+    "full": "This sample API server is designed to exchange access tokens provided by Microsoft Teams for Graph API access, specifically to read user profile data. It enables developers to display the logged-in user's profile picture by integrating Google OAuth for authentication."
   },
   "icons": {
     "outline": "outline.png",

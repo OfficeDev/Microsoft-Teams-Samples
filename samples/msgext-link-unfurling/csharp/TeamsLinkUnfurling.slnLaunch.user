@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "Microsoft Teams (Browser)",
+    "Projects": [
+      {
+        "Path": "TeamsLinkUnfurling.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (Browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Outlook (Browser)",
+    "Projects": [
+      {
+        "Path": "TeamsLinkUnfurling.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Outlook (browser)"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "TeamsLinkUnfurling.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      },
+      {
+        "Path": "M365Agent\\M365Agent.ttkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      }
+    ]
+  }
+]

@@ -3,13 +3,13 @@
     "name": "officedev-microsoft-teams-samples-app-task-module-nodejs",
     "source": "officeDev",
     "title": "Microsoft Teams task module",
-    "shortDescription": "A task module allows you to create modal popup experiences in your Teams application.",
+    "shortDescription": "This sample demonstrates how to launch and interact with Teams task modules from tabs and bots using Adaptive Cards and custom HTML.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-task-module/nodejs",
     "longDescription": [
-      "A task module allows you to create modal popup experiences in your Teams application."
+      "This sample shows how to launch and interact with Microsoft Teams task modules from both tabs and bots. It supports custom HTML, <iframe> widgets, and Adaptive Cards for enhanced user experiences."
     ],
     "creationDateTime": "2018-09-17",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2024-10-10",
     "products": [
       "Teams"
     ],

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
 {
+    // HomeController handles the default page request.
     public class HomeController : Controller
     {
-        [Route("")]
-        public ActionResult Index()
+        // The Index action returns the default view when accessing the root URL.
+        public IActionResult Index()
         {
             return View();
         }
