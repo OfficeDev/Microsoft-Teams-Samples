@@ -1,8 +1,10 @@
 ﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -22,7 +24,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
         /// <param name="tokenResponse">The token response.</param>
         /// <param name="chatId">The chat ID.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the chat messages collection.</returns>
-        public static async Task<IChatMessagesCollectionPage> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
+        public static async Task<List<ChatMessage>> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
         {
             if (turnContext == null)
             {
@@ -84,15 +86,16 @@ namespace FetchGroupChatMessagesWithRSC.helper
                 var serviceUrl = turnContext.Activity.ServiceUrl;
 
                 // Creates a conversation on the specified group chat and sends a file consent card in that conversation.
-                await ((BotFrameworkAdapter)turnContext.Adapter).CreateConversationAsync(
+                await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
+                    credentials.MicrosoftAppId,
                     turnContext.Activity.ChannelId,
                     serviceUrl,
-                    credentials,
+                    credentials.OAuthScope,
                     conversationParameters,
                     async (conversationTurnContext, conversationCancellationToken) =>
                     {
                         var conversationReference = conversationTurnContext.Activity.GetConversationReference();
-                        await ((BotFrameworkAdapter)turnContext.Adapter).ContinueConversationAsync(
+                        await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
                             microsoftAppId,
                             conversationReference,
                             async (conversationContext, conversationCancellation) =>

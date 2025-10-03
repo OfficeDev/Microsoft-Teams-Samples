@@ -1,0 +1,30 @@
+{
+  "name": "api-server",
+  "version": "0.0.1",
+  "description": "The API server for a Teams tab app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/msal-node": "^1.4.0",
+    "axios": "^1.5.1",
+    "dotenv": "^8.2.0",
+    "esbuild": "^0.18.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "jwt-decode": "^2.2.0",
+    "luxon": "^3.4.3",
+    "node-fetch": "^2.6.0",
+    "socket.io": "^4.7.2",
+    "stream": "^0.0.2",
+    "request": "^2.88.2",
+    "q": "^1.5.1"
+  }
+}

@@ -1,3 +1,3 @@
-from .bot_configuration_auth import BotActivityHandler
+from .bot_activity_handler import BotActivityHandler
 
 __all__ = ["BotActivityHandler"]

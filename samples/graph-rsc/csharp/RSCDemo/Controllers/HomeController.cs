@@ -39,7 +39,7 @@ namespace RSCWithGraphAPI.Controllers
         [Route("Demo")]
         public async Task<ActionResult> Demo(string tenantId, string groupId)
         {
-            GraphServiceClient graphClient = await GetAuthenticatedClient(tenantId);
+            GraphServiceClient graphClient = await GetAuthenticatedClient();
             var viewModel = new DemoViewModel()
             {
                 Channels = await GetChannelsList(graphClient, tenantId, groupId),
@@ -88,7 +88,7 @@ namespace RSCWithGraphAPI.Controllers
         /// <summary>
         /// Get Authenticated Graph Client (fixed for Graph SDK 5+)
         /// </summary>
-        private async Task<GraphServiceClient> GetAuthenticatedClient(string tenantId)
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
             var accessToken = await GetToken();
 

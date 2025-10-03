@@ -9,10 +9,9 @@ from http import HTTPStatus
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+    TurnContext
 )
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 from bots import TeamsStartThreadInChannel
@@ -23,10 +22,10 @@ CONFIG = DefaultConfig()
 
 # Adapter settings for the Bot Framework, including App ID and App Password.
 #See https://aka.ms/about-bot-adapter to learn more about how bots work.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
+# SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 
 # The Bot Framework Adapter that handles communication between the bot and the Bot Framework.
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 
 def log_error(error: Exception):
@@ -74,12 +73,8 @@ async def on_error(context: TurnContext, error: Exception):
 # Register the error handler with the adapter
 ADAPTER.on_turn_error = on_error
 
-# If the channel is the Emulator and authentication is not in use, 
-# the AppId will be null. We generate a random AppId for this case.
-APP_ID = SETTINGS.app_id if SETTINGS.app_id else uuid.uuid4()
-
 # The bot instance that will handle incoming activities.
-bot = TeamsStartThreadInChannel(CONFIG.APP_ID)
+bot = TeamsStartThreadInChannel()
 
 
 async def messages(req: Request) -> Response:
@@ -103,7 +98,7 @@ async def messages(req: Request) -> Response:
     auth_header = req.headers.get("Authorization", "")
 
     # Process the incoming activity using the Bot Framework Adapter.
-    response = await ADAPTER.process_activity(activity, auth_header, bot.on_turn)
+    response = await ADAPTER.process(req, bot)
 
     # If a response is returned, send it; otherwise, return a 200 OK status.
     return json_response(data=response.body, status=response.status) if response else Response(status=HTTPStatus.OK)

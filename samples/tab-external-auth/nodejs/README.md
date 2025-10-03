@@ -54,6 +54,23 @@ This sample API server is designed to exchange access tokens provided by Microso
    devtunnel host -p 3978 --allow-anonymous
    ```
 
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 3. Setup Manifest for App
     - **Edit** the `manifest.json` contained in the ./appManifest folder to replace placeholder `{{GUID-ID}}` with any guid id.
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app`. And if you are using dev tunnel, your URL will be https://12345.devtunnels.ms.
@@ -120,7 +137,7 @@ Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
 
 - To view your app in Outlook on the mobile.
 
-**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+**On the side bar, select More Apps. Your uploaded app title appears among your installed apps**
 
 ![InstallOutlook](Images/outlook1.jpg)
 
@@ -136,7 +153,7 @@ Not supported on Teams Mobile or on Teams, Outlook, and Office for Web.
 
 - To preview your app running in Office on the mobile.
 
-**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+**Select the Apps icon on the side bar. Your uploaded app title appears among your installed apps**
 
 ![Office1](Images/Office1.jpg)
 

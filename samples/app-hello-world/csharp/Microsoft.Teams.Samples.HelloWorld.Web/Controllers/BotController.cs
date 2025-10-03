@@ -17,7 +17,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly CloudAdapter _adapter;
         private readonly IBot _bot;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
         /// </summary>
         /// <param name="adapter">The Bot Framework HTTP adapter that processes incoming requests.</param>
         /// <param name="bot">The bot implementation that processes activities.</param>
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public BotController(CloudAdapter adapter, IBot bot)
         {
             _adapter = adapter;
             _bot = bot;

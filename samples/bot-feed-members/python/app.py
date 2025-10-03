@@ -7,10 +7,9 @@ from http import HTTPStatus
 
 from aiohttp import web
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+    TurnContext
 )
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes, InvokeResponse
 
@@ -20,8 +19,7 @@ from config import DefaultConfig
 CONFIG = DefaultConfig()
 
 # Create adapter.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 
 # Catch-all for errors.

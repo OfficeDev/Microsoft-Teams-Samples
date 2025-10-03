@@ -42,7 +42,7 @@ namespace PeoplePicker
             services.AddRazorPages();
 
             // Register the Bot Framework Adapter with error handling.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             // Register in-memory storage for User and Conversation state.
             services.AddSingleton<IStorage, MemoryStorage>();

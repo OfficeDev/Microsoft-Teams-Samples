@@ -23,10 +23,10 @@ This sample app illustrates how a bot can capture all channel messages in Micros
 
 ## Interaction with app
 
-![Bot Receive Channel MessagesWithRSCGif](images/Bot_Channel_Messenging-RSC-python.gif)
+![Bot Receive Channel MessagesWithRSCGif](Images/Bot_Channel_Messenging-RSC-python.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Receive Channel messages with RSC permissions:** [Manifest](/samples/bot-receive-channel-messages-withRSC/csharp/demo-manifest/Bot-RSC.zip)
 
@@ -45,21 +45,21 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
    Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-4. [Teams Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+4. [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Press **CTRL+Shift+P** to open the command box and enter **Python: Create Environment** to create and activate your desired virtual environment. Remember to select `requirements.txt` as dependencies to install when creating the virtual environment.
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -92,28 +92,44 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Clone the repository
+2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+3) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-3) In a terminal, navigate to `samples/bot-receive-channel-messages-withRSC/Python`
+4) In a terminal, navigate to `samples/bot-receive-channel-messages-withRSC/Python`
 
-4) Activate your desired virtual environment
+5) Activate your desired virtual environment
 
-5) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-6) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-5) Setup Manifest for Teams
+8) Setup Manifest for Teams
 
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
         `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
          Replace <<MANIFEST-ID>> with any GUID or with your MicrosoftAppId/app id
 
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
-    - **Sideload** in a team to test
+    - **Upload** in a team to test
          - Select or create a team
          - Select the ellipses **...** from the left pane. The drop-down menu appears.
          - Select **Manage Team**, then select **Apps** 
@@ -126,33 +142,33 @@ the Teams service needs to call into the bot.
 
 **Adding bot UI:**
 
-![App installation](images/1.Install_PersonalScope.png)
+![App installation](Images/1.Install_PersonalScope.png)
 
 **Hey command interaction:**
 
-![Bot Interaction](images/2.Welcome_Message.png)
+![Bot Interaction](Images/2.Welcome_Message.png)
 
-![Bot Interaction](images/3.Bot_Responds.png)
+![Bot Interaction](Images/3.Bot_Responds.png)
 
 **1 or 2 command interaction:**
 
-![Bot Interaction](images/4.Bot_Responds_1.png)
+![Bot Interaction](Images/4.Bot_Responds_1.png)
 
-![Bot Interaction](images/5.Bot_Responds_2.png)
+![Bot Interaction](Images/5.Bot_Responds_2.png)
 
 **Group Chat interaction:**
 
-![Bot Interaction](images/6.Install_Group_Scope.png)
+![Bot Interaction](Images/6.Install_Group_Scope.png)
 
-![Bot Interaction](images/7.Welcome_GC_Scope.png) 
+![Bot Interaction](Images/7.Welcome_GC_Scope.png) 
 
 **Group chat interaction with bot without being @mentioned:**
 
-![Bot Interaction](images/8.Bot_Responds_GC.png) 
+![Bot Interaction](Images/8.Bot_Responds_GC.png) 
 
-![Bot Interaction](images/9.Bot_Responds_GC_1.png) 
+![Bot Interaction](Images/9.Bot_Responds_GC_1.png) 
 
-![Bot Interaction](images/10.Bot_Responds_GC_2.png) 
+![Bot Interaction](Images/10.Bot_Responds_GC_2.png) 
 
 **Interacting with the bot in Teams**
 
@@ -160,9 +176,9 @@ Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
 
-![Bot Interaction](images/11.Install_Teams.png) 
+![Bot Interaction](Images/11.Install_Teams.png) 
 
-![Bot Interaction](images/12.Teams_Bot_Responds.png) 
+![Bot Interaction](Images/12.Teams_Bot_Responds.png) 
 
 ## Deploy the bot to Azure
 
