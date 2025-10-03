@@ -1,30 +1,15 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "resourceBaseName": {
-      "value": "bot${{RESOURCE_SUFFIX}}"
-    },
-    "botAadAppClientId": {
-      "value": "${{AAD_APP_CLIENT_ID}}"
-    },
-    "botAppDomain": {
-      "value": "${{BOT_DOMAIN}}"
-    },
-    "botDisplayName": {
-      "value": "meetings-transcription"
-    },
-    "aadAppClientId": {
-      "value": "${{AAD_APP_CLIENT_ID}}"
-    },
-    "aadAppClientSecret": {
-      "value": "${{SECRET_AAD_APP_CLIENT_SECRET}}"
-    },
-    "microsoftAppType": {
-      "value": "${{MICROSOFT_APP_TYPE}}"
-    },
-    "microsoftAppTenantId": {
-      "value": "${{MICROSOFT_APP_TENANT_ID}}"
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "resourceBaseName": {
+        "value": "bot${{RESOURCE_SUFFIX}}"
+      },
+      "webAppSKU": {
+        "value": "B1"
+      },
+      "botDisplayName": {
+        "value": "meetings-transcription"
+      }
     }
   }
-}
