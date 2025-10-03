@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="HomeController.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
+using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
@@ -13,13 +19,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static RSCDemo.Helper.GraphClient;
 
 namespace RSCWithGraphAPI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
-
         public string appId;
 
         public HomeController(IConfiguration configuration)
@@ -79,34 +85,41 @@ namespace RSCWithGraphAPI.Controllers
             return result.Value.Select(r => r.Permission).ToList();
         }
 
-
         /// <summary>
-        ///Get Authenticated Client
+        /// Get Authenticated Graph Client (fixed for Graph SDK 5+)
         /// </summary>
         public class SimpleAccessTokenProvider : IAccessTokenProvider
         {
+            var accessToken = await GetToken();
+
+            var tokenCredential = new SimpleAccessTokenCredential(accessToken);
+
+            var authProvider = new BaseBearerTokenAuthenticationProvider(new SimpleAccessTokenProvider(accessToken));
+
+            var graphClient = new GraphServiceClient(authProvider);
+
+            return graphClient;
+        }
+
+        // New helper class to return AccessToken
+        private class SimpleAccessTokenCredential : TokenCredential
+        {
             private readonly string _accessToken;
 
-            public SimpleAccessTokenProvider(string accessToken)
+            public SimpleAccessTokenCredential(string accessToken)
             {
                 _accessToken = accessToken;
             }
 
-            public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> context = null, CancellationToken cancellationToken = default)
+            public override AccessToken GetToken(TokenRequestContext requestContext, CancellationToken cancellationToken)
             {
-                return Task.FromResult(_accessToken);
+                return new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1));
             }
 
-            public AllowedHostsValidator AllowedHostsValidator => new AllowedHostsValidator();
-        }
-
-        private async Task<GraphServiceClient> GetAuthenticatedClient()
-        {
-            var accessToken = await GetToken();
-            var tokenProvider = new SimpleAccessTokenProvider(accessToken);
-            var authProvider = new BaseBearerTokenAuthenticationProvider(tokenProvider);
-
-            return new GraphServiceClient(authProvider);
+            public override ValueTask<AccessToken> GetTokenAsync(TokenRequestContext requestContext, CancellationToken cancellationToken)
+            {
+                return new ValueTask<AccessToken>(new AccessToken(_accessToken, DateTimeOffset.UtcNow.AddHours(1)));
+            }
         }
 
         /// <summary>
@@ -142,19 +155,18 @@ namespace RSCWithGraphAPI.Controllers
                     {
                         // Read and display the response content
                         string responseBody = await response.Content.ReadAsStringAsync();
-
                         var responseData = JsonConvert.DeserializeObject<ResponseData>(responseBody);
                         var installedAppList = responseData.Value;
 
-                        foreach(AppData element in installedAppList)
+                        foreach (AppData element in installedAppList)
                         {
                             if (element.TeamsAppDefinition.DisplayName == "RSC-GraphAPI ")
                             {
                                 appId = element.Id;
                             }
-                        };
+                        }
 
-                        if(appId != null)
+                        if (appId != null)
                         {
                             await SendNotification(reciepientUserId, appId);
                             return Json("Message sent successfully");
@@ -167,13 +179,13 @@ namespace RSCWithGraphAPI.Controllers
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return Json("Error occured");
+                        return Json("Error occurred");
                     }
                 }
                 catch (Exception ex)
-                {          
+                {
                     Console.WriteLine($"Error: {ex.Message}");
-                    return Json("Error occured"+ ex.Message);
+                    return Json("Error occurred: " + ex.Message);
                 }
             }
         }
@@ -230,7 +242,7 @@ namespace RSCWithGraphAPI.Controllers
                     else
                     {
                         Console.WriteLine($"Error: {response.StatusCode}");
-                        return "Notification sent";
+                        return "Notification failed";
                     }
                 }
                 catch (Exception ex)
