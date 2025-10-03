@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-adaptivecards-user-specific-views-nodejs
 
 environmentFolderPath: ./env
+projectId: ""

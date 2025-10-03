@@ -1,0 +1,114 @@
+{
+    "id": "7860c326-739b-4597-8750-81eb85d815b3",
+    "appId": "74a4e560-0be6-4ca4-9b81-457ae48c44b9",
+    "displayName": "bot-conversation-quickstart-aad",
+    "identifierUris": [
+        "api://botid-74a4e560-0be6-4ca4-9b81-457ae48c44b9"
+    ],
+    "signInAudience": "AzureADMyOrg",
+    "api": {
+        "requestedAccessTokenVersion": 2,
+        "oauth2PermissionScopes": [
+            {
+                "adminConsentDescription": "Allows Teams to call the app's web APIs as the current user.",
+                "adminConsentDisplayName": "Teams can access app's web APIs",
+                "id": "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6",
+                "isEnabled": true,
+                "type": "User",
+                "userConsentDescription": "Enable Teams to call this app's web APIs with the same rights that you have",
+                "userConsentDisplayName": "Teams can access app's web APIs and make requests on your behalf",
+                "value": "access_as_user"
+            }
+        ],
+        "preAuthorizedApplications": [
+            {
+                "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "d3590ed6-52b3-4102-aeff-aad2292ab01c",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "00000002-0000-0ff1-ce00-000000000000",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "bc59ab01-8403-45c6-8796-ac3ef710b3e3",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "0ec893e0-5785-4de6-99da-4ed124e5296c",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "4765445b-32c6-49b0-83e6-1d93765276ca",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            },
+            {
+                "appId": "4345a7b9-9a63-4910-a426-35363201d503",
+                "delegatedPermissionIds": [
+                    "b3db23e8-cb9e-4c5e-8206-c00dbd9913d6"
+                ]
+            }
+        ]
+    },
+    "info": {},
+    "optionalClaims": {
+        "idToken": [],
+        "accessToken": [
+            {
+                "name": "idtyp",
+                "source": null,
+                "essential": false,
+                "additionalProperties": []
+            }
+        ],
+        "saml2Token": []
+    },
+    "publicClient": {
+        "redirectUris": []
+    },
+    "requiredResourceAccess": [
+        {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+                {
+                    "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+                    "type": "Scope"
+                }
+            ]
+        }
+    ],
+    "web": {
+        "redirectUris": [
+            "https://235b2sxg-7130.inc1.devtunnels.ms/auth-end.html",
+            "https://token.botframework.com/.auth/web/redirect"
+        ],
+        "implicitGrantSettings": {
+            "enableIdTokenIssuance": true,
+            "enableAccessTokenIssuance": true
+        }
+    },
+    "spa": {
+        "redirectUris": []
+    }
+}

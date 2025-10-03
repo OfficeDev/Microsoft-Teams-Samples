@@ -9,7 +9,10 @@ const express = require('express');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder');
 
 // Import bot definitions
 const { UserSpecificAdaptiveCardActionBot } = require('./bots/adaptivecardActionsBot');
@@ -20,10 +23,9 @@ require('dotenv').config({ path: ENV_FILE });
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 // Handle errors that occur during bot processing
 adapter.onTurnError = async (context, error) => {
@@ -48,6 +50,8 @@ const botActivityHandler = new UserSpecificAdaptiveCardActionBot();
 const server = express();
 const port = process.env.port || process.env.PORT || 3978;
 
+server.use(express.json());
+
 server.listen(port, () => 
     console.log(`\Bot/ME service listening at http://localhost:${port}`)
 );
@@ -61,9 +65,7 @@ server.get('*', (req, res) => {
 });
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
-        // Process bot activity
-        await botActivityHandler.run(context);
-    });
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, (context) => botActivityHandler.run(context));
 });

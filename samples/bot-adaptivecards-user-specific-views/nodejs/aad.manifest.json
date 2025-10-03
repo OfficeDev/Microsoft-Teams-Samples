@@ -1,10 +1,7 @@
 {
   "id": "${{AAD_APP_OBJECT_ID}}",
   "appId": "${{AAD_APP_CLIENT_ID}}",
-  "displayName": "bot-conversation-quickstart-aad",
-  "identifierUris": [
-    "api://botid-${{AAD_APP_CLIENT_ID}}"
-  ],
+  "displayName": "bot-adaptivecards-user-specific-views-aad",
   "signInAudience": "AzureADMyOrg",
   "api": {
     "requestedAccessTokenVersion": 2,
@@ -84,9 +81,7 @@
     ],
     "saml2Token": []
   },
-  "publicClient": {
-    "redirectUris": []
-  },
+  "publicClient": {},
   "requiredResourceAccess": [
     {
       "resourceAppId": "Microsoft Graph",
@@ -99,16 +94,7 @@
     }
   ],
   "web": {
-    "redirectUris": [
-      "https://${{BOT_DOMAIN}}/auth-end.html",
-      "https://token.botframework.com/.auth/web/redirect"
-    ],
-    "implicitGrantSettings": {
-      "enableIdTokenIssuance": true,
-      "enableAccessTokenIssuance": true
-    }
+    "implicitGrantSettings": {}
   },
-  "spa": {
-    "redirectUris": []
-  }
+  "spa": {}
 }
