@@ -1,0 +1,38 @@
+@* Copyright(c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License *@
+
+@{
+    ViewData["Title"] = "Tab";
+}
+<h3>Hello World!</h3>
+<h1 id="congrats"></h1>
+<h3>This is the tab you made :-)</h3>
+<p id="username"></p>
+
+@section Scripts {
+    <script>
+        // Initializes the Microsoft Teams SDK and displays the user's principal name if available.
+        function initializeTeamsTab() {
+            if (window.microsoftTeams) {
+                microsoftTeams.app.initialize().then(() => {                   
+                    microsoftTeams.app.getContext().then(function(context) {                       
+                        var userName = context && context.user && context.user.userPrincipalName
+                            ? context.user.userPrincipalName
+                            : "";
+                        document.getElementById("congrats").innerText = "Congratulations " + userName + "!";
+                        document.getElementById("username").innerText = "User Principal Name: " + userName;
+                    }).catch(function(error) {
+                        console.error("Error getting Teams context:", error);
+                    });
+                }).catch(function(error) {
+                    console.error("Error initializing Teams SDK:", error);
+                });
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+                document.getElementById("congrats").innerText = "Microsoft Teams SDK not loaded or not running inside Teams ";
+            }
+        }
+        // Call the function on page load
+        window.onload = initializeTeamsTab;
+    </script>
+}
