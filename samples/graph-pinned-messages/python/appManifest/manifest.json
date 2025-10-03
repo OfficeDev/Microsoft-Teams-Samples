@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Graph Pin message",
+    "full": "Graph Pin message"
+  },
+  "description": {
+    "short": "Sample app for pinning chat messages in Teams using the Graph API.",
+    "full": "This sample application demonstrates how to pin and display messages in Microsoft Teams chat using the Graph API."
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupChat"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "${{BOT_DOMAIN}}"
+  ],
+  "webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+  }
+}
