@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:tab-app-navigation
 
 environmentFolderPath: ./env
+projectId:
