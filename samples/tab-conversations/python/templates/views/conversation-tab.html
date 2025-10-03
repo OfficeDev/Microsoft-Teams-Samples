@@ -1,0 +1,110 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css">
+    </link>
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css">
+    </link>
+    <script src="https://res.cdn.office.net/teams-js/2.24.0/js/MicrosoftTeams.min.js"
+            crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+        });
+
+        // Method to start a new conversation.
+        function startConversation() {
+            microsoftTeams.app.getContext().then((context) => {
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": Date.now().toString(),
+                        "entityId": context.page.id,
+                        "channelId": context.channel.id,
+                        "title": "Task Title",
+                        "onStartConversation": (conversationResponse) => onStartConversation(conversationResponse)
+                    }
+                );
+            });
+        }
+
+        // Callback function for open conversation.
+        // We should save the subEntityId and conversationId to continue an existing conversartion
+        function onStartConversation(conversationResponse) {
+                localStorage.setItem("subEntityId", conversationResponse.subEntityId);
+                localStorage.setItem("conversationId", conversationResponse.conversationId);
+        }
+
+
+        // Method to close an existing conversation.
+        function closeConversation() {
+            microsoftTeams.conversations.closeConversation();
+        }
+
+        // Method to continue an existing conversation.
+        function continueConversation() {
+            microsoftTeams.app.getContext().then((context) => {
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": localStorage.subEntityId,
+                        "entityId": context.page.id,
+                        "channelId": context.channel.id,
+                        "title": "Task Title",
+                        "conversationId": localStorage.conversationId
+                    }
+                );
+            })
+        }
+
+        // Method to execute deeplink to redirect to the subentity/conversation in the channel.
+        function deeplinkConversation() {
+            microsoftTeams.app.getContext().then((context) => {
+                microsoftTeams.app.openLink("https://teams.microsoft.com/l/message/" + context.channel.id + "/" + localStorage.conversationId + "?groupId=" + context.team.groupId + "&tenantId=" + context.user.tenant.id + "&parentMessageId=" + localStorage.conversationId);
+            })
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="font-semibold font-title">
+                <p> Sample for Conversational tabs</p>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Start Conversation</td>
+                        <td>To open a conversation</td>
+                        <td><img src="/images/start-conversation.svg" onclick="startConversation()"
+                                title="Click to start a new conversation" /></td>
+                    </tr>
+                    <tr>
+                        <td>Close Conversation</td>
+                        <td>To close the conversation view</td>
+                        <td><img src="/images/close.svg" onclick="closeConversation()"
+                                title="Click to close the conversation view" /></td>
+                    </tr>
+                    <tr>
+                        <td>Continue Conversation</td>
+                        <td>To continue a conversation.</td>
+                        <td><img src="/images/continue-conversation.svg" onclick="continueConversation()"
+                                title="Click to continue existing conversation" /></td>
+                    </tr>
+                    <tr>
+                        <td>Deeplink to conversation</td>
+                        <td>Redirect to channel conversation.</td>
+                        <td><img src="/images/link.svg" onclick="deeplinkConversation()"
+                                title="Click to redirect to conversation in chat" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

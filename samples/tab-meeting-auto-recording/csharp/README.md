@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-meeting-auto-recording-csharp
 
 ## Tab Meeting Recording and transcript with auto recording
 
-This sample application for Microsoft Teams provides an automated solution for meeting recordings and transcripts, streamlining the documentation process for users. Leveraging .NET and the Teams Toolkit, it allows for easy setup and integration, ensuring that every meeting is accurately captured for future reference and collaboration.
+This sample application for Microsoft Teams provides an automated solution for meeting recordings and transcripts, streamlining the documentation process for users. Leveraging .NET and the Microsoft 365 Agents Toolkit, it allows for easy setup and integration, ensuring that every meeting is accurately captured for future reference and collaboration.
 
 **Interaction with app**
 ![MeetingAutoRecording](MeetingAutoRecording/Images/MeetingTranscriptRecording.gif)
@@ -30,19 +30,22 @@ This sample application for Microsoft Teams provides an automated solution for m
   ```
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+- [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 
-## Run the app (Using Teams Toolkit for Visual Studio)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio.
-1. Install Visual Studio 2022 **Version 17.10 Preview 4  or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
-1. Install Teams Toolkit for Visual Studio [Teams Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
+1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
 1. In the debug dropdown menu of Visual Studio, select default startup project > **Microsoft Teams (browser)**
-1. In Visual Studio, right-click your **TeamsApp** project and **Select Teams Toolkit > Prepare Teams App Dependencies**
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps.
-1. Select **Debug > Start Debugging** or **F5** to run the menu in Visual Studio.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+1. Set `Startup Item` as `Microsoft Teams (browser)`.
+1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+    </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
+1. In the opened web browser, select Add button to install the app in Teams
+
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Manually Setup and use the sample locally
 
@@ -113,13 +116,30 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
    devtunnel host -p 2544 --allow-anonymous
    ```
 
-2. Clone the repository
+2. App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
-3. Run the app from a terminal or from Visual Studio, choose option A or B.
+4. Run the app from a terminal or from Visual Studio, choose option A or B.
 
     A) From a terminal, navigate to `samples/tab-meeting-auto-recording/csharp`
 
@@ -137,7 +157,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
     
 **Note:** In the debug dropdown menu of Visual Studio, select default startup project > **MeetingAutoRecording**
 
-4. In a terminal, navigate to `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp`
+5. In a terminal, navigate to `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp`
 
     - Inside ClientApp folder execute the below command.
 
@@ -146,13 +166,13 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
         # npm start
 
         ```
-5. Open .env file from this path folder `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp` and update:
-   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
+6. Open .env file from this path folder `samples/tab-meeting-auto-recording/csharp/MeetingAutoRecording/ClientApp` and update:
+   - `{{MicrosoftAppId}}` - Generated from Step 2 (Application (client) ID)is the application app id
    
-6. Modify the `/appsettings.json` and fill in the following details:
-   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
-   - `{{MicrosoftAppPassword}}` - Generated from Step 1.14, also referred to as Client secret
-   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+7. Modify the `/appsettings.json` and fill in the following details:
+   - `{{MicrosoftAppId}}` - Generated from Step 2 (Application (client) ID)is the application app id
+   - `{{MicrosoftAppPassword}}` - Generated from the original Azure AD setup, also referred to as Client secret
+   - `{{TenantId}}` - Generated from Step 2 (Directory (tenant) ID) is the tenant id
    - `{{BaseUrlNgrok}}` - With base Url domain. E.g. if you are using ngrok it would be 1234.ngrok-free.app and if you are using dev tunnels then your domain will be 12345.devtunnels.ms.
    > Make sure to manually update `{{BaseUrlNgrok}}` with the ngrok or dev-tunnel URL. Otherwise, notifications will not function correctly.
 

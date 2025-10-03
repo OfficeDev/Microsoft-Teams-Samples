@@ -20,7 +20,7 @@ This sample demonstrates a Teams message extension that integrates with Microsof
 
 - [Node.js 18.x](https://nodejs.org/download/release/v18.18.2/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+- [Microsoft 365 Agents Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
 - You will need a Microsoft work or school account with [permissions to upload custom Teams applications](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading). The account will also need a Microsoft Copilot for Microsoft 365 license to use the extension in Copilot.
 
 ## Setup and use the sample
@@ -89,4 +89,22 @@ This sample has a copilot agent handoff to enable users to transition from Copil
 ![Bot response](./lab/images/handoff.png)
 
 
+
 ![](https://m365-visitor-stats.azurewebsites.net/SamplesGallery/officedev-copilot-for-m365-plugins-samples-msgext-northwind-inventory-ts)
+
+## 2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+  * Set **name** to your app name.
+  * Choose the **supported account types** (any account type will work)
+  * Leave **Redirect URI** empty.
+  * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+  * Select Add a permission
+  * Select Microsoft Graph -> Delegated permissions.
+  * `User.Read` (enabled by default)
+  * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.

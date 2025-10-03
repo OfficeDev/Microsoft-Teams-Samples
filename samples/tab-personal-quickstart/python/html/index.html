@@ -1,0 +1,46 @@
+
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Tab - Microsoft Teams</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/css/fabric.min.css">
+    <script src="https://res.cdn.office.net/teams-js/2.4.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="App">
+        <header class="App-header">
+            <img src="logo192.png" class="App-logo" alt="logo" />
+            <p>
+                Hello <span id="userName">User</span>!
+            </p>
+            <p>
+                Edit <code>src/components/Tab.js</code> and save to reload.
+            </p>
+            <a
+                class="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Learn React
+            </a>
+        </header>
+    </div>
+
+    <script>
+        // Initialize Microsoft Teams SDK and get user context
+        microsoftTeams.initialize();
+        
+        // Get user context
+        microsoftTeams.getContext((context) => {
+            const userName = context.user?.displayName || context.userDisplayName || "User";
+            document.getElementById('userName').textContent = userName;
+        });
+    </script>
+</body>
+</html>

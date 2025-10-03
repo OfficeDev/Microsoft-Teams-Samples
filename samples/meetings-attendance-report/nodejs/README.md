@@ -50,7 +50,7 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
 1. **Note**: Copy the User Id you used to granting the policy. You need while configuring the .env file.
 
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
 
@@ -80,8 +80,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
        -   Directory (tenant) ID
    We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
-   -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-       -  OnlineMeetingArtifact.Read.All
+   -  Under left menu, navigate to
+
+    Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * OnlineMeetingArtifact.Read.All
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
    Click on Add Permissions to commit your changes.
 

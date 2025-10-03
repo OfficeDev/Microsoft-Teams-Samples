@@ -32,32 +32,51 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Interaction with app
 
-![bot-teams-auth ](Images/TeamAuth.gif)
+- **Bot Teams Authentication Teams Client/Web**
+![bot-teams-auth](Images/Bot_Teams_Auth_Web.gif)
+
+- **Bot Teams Authentication Teams Desktop**
+![bot-teams-auth](Images/Bot_Teams_Auth_Desktop.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Teams Auth Bot:** [Manifest](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
 
 ## Prerequisites
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Python SDK](https://www.python.org/downloads/) min version 3.11
 
-## Run the app (Using Teams Toolkit for Visual Studio Code)
+## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
-The simplest way to run this sample in Teams is to use Teams Toolkit for Visual Studio Code.
+The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Teams Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) and [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
 1. Press **CTRL+Shift+P** to open the command box and enter **Python: Create Environment** to create and activate your desired virtual environment. Remember to select `requirements.txt` as dependencies to install when creating the virtual environment.
 1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
 1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
 1. In the browser that launches, select the **Add** button to install the app to Teams.
 
-> If you do not have permission to upload custom apps (sideloading), Teams Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
+> If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Run the app (Manually Uploading to Teams)
 
@@ -122,13 +141,29 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![Add-App ](Images/1.Install.png)
 
-![Add-to-teams ](Images/2.Bot_Response.png)
+![Open Application ](Images/2.Open_App.png)
 
-![Auth-login ](Images/3.Logged_In.png)
+![Welcome Message ](Images/3.Welcome_Message.png)
 
-![Token ](Images/4.User_Token.png)
+**Login UI: OAuth Prompt**
+- The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
+- Below are sample UI captures demonstrating how the login experience appears on each:
 
-![Auth-logout ](Images/5.Logged_Out.png)
+- **Teams Desktop:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/4.Oauth_Login_Prompt.png)
+
+- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
+![auth-card ](Images/11.TeamsWeb_Oauth_AdaptiveCard.png)
+
+![Select_Account_For_Permissions ](Images/5.Select_Account_For_Permissions.png)
+
+![Accept_Consent_Permissions](Images/6.Accept_Consent_Permissions.png)
+
+![Successful_Login ](Images/7.Successful_Login.png)
+
+![Token_Block_By_Organisation ](Images/8.Token_Block_By_Organisation.png)
+
+![Auth-logout ](Images/9.Signout.png)
 
 ## Deploy the bot to Azure
 
@@ -138,7 +173,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [AzuMessagere Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Bot Authentication Basics](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/bot-sso-overview)
 

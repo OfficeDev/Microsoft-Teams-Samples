@@ -1,5 +1,6 @@
 const { MicrosoftAppCredentials, ConnectorClient } = require('botframework-connector');
 const querystring = require("querystring");
+const fetch = require('node-fetch');
 
 const accessTokenService = require('../services/accessTokenService');
 const meetingService = require('../services/meetingService')
@@ -109,21 +110,30 @@ const authToken = (req, res)=> {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
-        }
+          }
         }).then(result => {
           if (result.status !== 200) {
             result.json().then(json => {
               console.log(json);
               // TODO: Check explicitly for invalid_grant or interaction_required
               reject({"error":json.error});
+            }).catch(error => {
+              console.error("Error parsing JSON:", error);
+              reject(error);
             });
           } else {
             result.json().then(json => {
-            //   console.log(json);
-            //   let accessToken = json.access_token;
+              // console.log(json);
+              // let accessToken = json.access_token;
               resolve(json.access_token);
+            }).catch(error => {
+              console.error("Error parsing JSON:", error);
+              reject(error);
             });
           }
+        }).catch(error => {
+          console.error("Fetch error:", error);
+          reject(error);
         });
     });
 
@@ -139,26 +149,35 @@ const getUserProfile = (req, res)=> {
     console.log(req.body.accessToken);
     var oboPromise = new Promise((resolve, reject) => {
         let url = `https://graph.microsoft.com/v1.0/me/`;
-    fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${req.body.accessToken}`
-      }
-      }).then(result => {
-        if (result.status !== 200) {
-          result.json().then(json => {
-              console.log(json);
-            // TODO: Check explicitly for invalid_grant or interaction_required
-            reject({"error":json.error});
-          });
-        } else {
-          result.json().then(json => {
-            // console.log(json);
-            resolve(json);
-          });
-        }
-      });
+        fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${req.body.accessToken}`
+            }
+        }).then(result => {
+            if (result.status !== 200) {
+              result.json().then(json => {
+                  console.log(json);
+                // TODO: Check explicitly for invalid_grant or interaction_required
+                reject({"error":json.error});
+              }).catch(error => {
+                console.error("Error parsing JSON:", error);
+                reject(error);
+              });
+            } else {
+              result.json().then(json => {
+                // console.log(json);
+                resolve(json);
+              }).catch(error => {
+                console.error("Error parsing JSON:", error);
+                reject(error);
+              });
+            }
+        }).catch(error => {
+            console.error("Fetch error:", error);
+            reject(error);
+        });
     })
     oboPromise.then(function(result) {
         res.json(result);

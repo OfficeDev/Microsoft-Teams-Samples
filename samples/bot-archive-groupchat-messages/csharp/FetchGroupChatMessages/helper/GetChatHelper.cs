@@ -1,4 +1,5 @@
 ﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
@@ -85,15 +86,16 @@ namespace FetchGroupChatMessagesWithRSC.helper
                 var serviceUrl = turnContext.Activity.ServiceUrl;
 
                 // Creates a conversation on the specified group chat and sends a file consent card in that conversation.
-                await ((BotFrameworkAdapter)turnContext.Adapter).CreateConversationAsync(
+                await ((CloudAdapter)turnContext.Adapter).CreateConversationAsync(
+                    credentials.MicrosoftAppId,
                     turnContext.Activity.ChannelId,
                     serviceUrl,
-                    credentials,
+                    credentials.OAuthScope,
                     conversationParameters,
                     async (conversationTurnContext, conversationCancellationToken) =>
                     {
                         var conversationReference = conversationTurnContext.Activity.GetConversationReference();
-                        await ((BotFrameworkAdapter)turnContext.Adapter).ContinueConversationAsync(
+                        await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
                             microsoftAppId,
                             conversationReference,
                             async (conversationContext, conversationCancellation) =>

@@ -1,0 +1,61 @@
+{
+  "name": "meetings-stage-view",
+  "version": "0.3.1",
+  "private": true,
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@fluidframework/test-runtime-utils": "^2.30.0",
+    "@microsoft/live-share": "1.0.0-preview.8",
+    "@microsoft/teams-js": "^2.35.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "babel-preset-react-app": "^10.0.0",
+    "fluid-framework": "~0.59.0",
+    "jquery": "^3.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.2.2",
+    "react-scripts": "^5.0.1",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@fluidframework/test-client-utils": "^0.48.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "prettier": "^2.5.0",
+    "start-server-and-test": "^2.0.11"
+  },
+  "scripts": {
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run start",
+    "start": "set PORT=3978 HTTPS=true && react-scripts --openssl-legacy-provider start",
+    "clean": "npx shx rm -rf build",
+    "start:client": "set PORT=3978 HTTPS=true && react-scripts start",
+    "start:server": "npx @fluidframework/azure-local-service@latest",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3978"
+}
