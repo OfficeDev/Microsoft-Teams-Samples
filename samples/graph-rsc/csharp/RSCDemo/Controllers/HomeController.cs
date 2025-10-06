@@ -88,17 +88,37 @@ namespace RSCWithGraphAPI.Controllers
         /// <summary>
         /// Get Authenticated Graph Client (fixed for Graph SDK 5+)
         /// </summary>
-        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        private async Task<GraphServiceClient> GetAuthenticatedClient()
         {
             var accessToken = await GetToken();
 
-            var tokenCredential = new SimpleAccessTokenCredential(accessToken);
+            var accessTokenProvider = new SimpleAccessTokenProvider(accessToken);
 
-            var authProvider = new BaseBearerTokenAuthenticationProvider(new SimpleAccessTokenProvider(accessToken));
+            var authProvider = new BaseBearerTokenAuthenticationProvider(accessTokenProvider);
 
             var graphClient = new GraphServiceClient(authProvider);
 
             return graphClient;
+        }
+
+        /// <summary>
+        /// Simple Access Token Provider for Graph SDK
+        /// </summary>
+        public class SimpleAccessTokenProvider : IAccessTokenProvider
+        {
+            private readonly string _accessToken;
+
+            public SimpleAccessTokenProvider(string accessToken)
+            {
+                _accessToken = accessToken;
+            }
+
+            public AllowedHostsValidator AllowedHostsValidator { get; }
+
+            public async Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> additionalAuthenticationContext = null, CancellationToken cancellationToken = default)
+            {
+                return _accessToken;
+            }
         }
 
         // New helper class to return AccessToken
