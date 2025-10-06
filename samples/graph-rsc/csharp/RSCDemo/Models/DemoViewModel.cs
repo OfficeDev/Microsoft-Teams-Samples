@@ -1,8 +1,9 @@
-﻿using Microsoft.Graph;
-using System;
+﻿// <copyright file="DemoViewModel.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RSCWithGraphAPI.Models
 {
