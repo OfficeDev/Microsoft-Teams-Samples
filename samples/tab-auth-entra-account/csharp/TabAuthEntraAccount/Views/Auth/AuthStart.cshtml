@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.34.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-brW9AazbKR2dYw2DucGgWCCcmrm2oBFV4HQidyuyZRI/TnAkmOOnTARSTdps3Hwt"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+                getAuthToken();
+        });
+    
+    // PKCE helper functions
+    function generateCodeVerifier() {
+        const array = new Uint8Array(32);
+        crypto.getRandomValues(array);
+        return btoa(String.fromCharCode.apply(null, array))
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '');
+    }
+
+    async function generateCodeChallenge(codeVerifier) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(codeVerifier);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        return btoa(String.fromCharCode.apply(null, new Uint8Array(digest)))
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '');
+    }
+    
+    // Get client side token with PKCE.
+    async function getAuthToken() {
+        const params = new URLSearchParams(window.location.search);
+        const authId = params.get('authId');
+        const method = params.get('oauthRedirectMethod');
+        
+        var redirectUrl = window.location.origin + "/Auth/AuthEnd";
+        const hostRedirectUrl = params.get('hostRedirectUrl');
+
+        // Generate PKCE parameters
+        const codeVerifier = generateCodeVerifier();
+        const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+        // Store code verifier in sessionStorage for use in AuthEnd
+        sessionStorage.setItem('codeVerifier', codeVerifier);
+
+        const state = JSON.stringify({
+            authId: authId,
+            method: method,
+            hostRedirectUrl: hostRedirectUrl
+        });
+
+        const queryObj = {
+            state: encodeURIComponent(state),
+            client_id: '@ViewBag.AzureClientId',
+            response_type: 'code',
+            scope: 'https://graph.microsoft.com/User.Read offline_access',
+            prompt: 'select_account',
+            code_challenge: codeChallenge,
+            code_challenge_method: 'S256'
+        };
+
+        const query = Object.entries(queryObj)
+            .map(([k, v]) => `${k}=${v}`)
+            .join('&');
+
+        window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?redirect_uri=${redirectUrl}&${query}`;
+    }
+</script>
