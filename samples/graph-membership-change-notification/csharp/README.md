@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using Microsoft Graph and C#.
+description: This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using Microsoft Graph and C#.
 products:
 - office-teams
 - office
@@ -9,14 +9,14 @@ languages:
 - Csharp
 extensions: 
  contentType: samples
- createdDate: "08/25/2022 11:30:00 AM"
+ createdDate: "06/10/2025 11:30:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-membership-change-notification
 
 ---
 
 # Change Notifications For Team and Channel Using Microsoft Graph C#
 
-This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages C# and the Microsoft Graph API to deliver real-time notifications. Built using C# and the Microsoft Graph API, it provides detailed setup instructions, including Azure AD registration, bot configuration, and certificate management, making it easy for developers to create interactive and responsive applications.
+This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages C# and the Microsoft Graph API to deliver real-time notifications. Built using C# and the Microsoft Graph API, it provides detailed setup instructions, including Azure AD registration, and certificate management, making it easy for developers to create interactive and responsive applications.
 
 ## Included Features
 * Tabs
@@ -54,7 +54,7 @@ This sample application demonstrates how to send notifications for shared channe
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Setup for Bot
+2) Setup for Azure AD application
 
 ### Register your application with Azure AD
 
@@ -69,13 +69,6 @@ This sample application demonstrates how to send notifications for shared channe
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 4. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select Expiry date. Click "Add", Once the client secret is created, copy its value because it needs to be placed in the appsettings.json file.
-
-### Create Azure bot resource
-
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
-- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages`
 
 ### Create and install Self-Signed certificate
 
@@ -125,6 +118,43 @@ To include resource data of graph notifications, this Graph API require self-sig
 - Add the app to shared channel in team scope
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+
+## Using RSC Permissions
+
+If you prefer to use Resource-Specific Consent (RSC) permissions instead of application permissions, you can skip the "API Permissions" steps described earlier in the Azure AD registration section. Instead, update your Teams app manifest with the following properties to leverage RSC permissions:
+
+```json
+"webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": ""
+  },
+  "authorization": {
+		"permissions": {
+			"resourceSpecific": [
+				{
+					"name": "TeamsAppInstallation.Read.User",
+					"type": "Application"
+				},
+				{
+					"name": "Member.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelSettings.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.ReadWrite.Group",
+					"type": "Application"
+				}
+			]
+		}
+	}
+```
 
 ## Running the sample
 
