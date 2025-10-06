@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, and when channel is shared/unshared with a team using Node.js and the Microsoft Graph API.
+description: This sample application demonstrates how to manage notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated, and when channel is shared/unshared with a team using Node.js and the Microsoft Graph API.
 products:
 - office-teams
 - office
@@ -9,14 +9,14 @@ languages:
 - Nodejs
 extensions: 
  contentType: samples
- createdDate: "10-03-2022 11:30:15 AM"
+ createdDate: 06-10-2025 11:30:15 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-membership-change-notification-nodejs
 
 ---
 
 # Change Notifications For Team and Channel Using Microsoft Graph Node.js
 
-This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when channel is shared/unshared with a team. The application leverages Node.js and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
+This sample application demonstrates how to manage notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when channel is shared/unshared with a team. The application leverages Node.js and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs
@@ -68,7 +68,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Setup for Bot
+2) Setup for Azure AD application
 
 ### Register your application with Azure AD
 
@@ -83,12 +83,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select "Never" for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
-
-### Create Azure bot resource
-
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-
-- Ensure that you've [Enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### Create and install Self-Signed certificate
 
@@ -123,7 +117,7 @@ To include resource data of graph notifications, this Graph API require self-sig
     2. Provide the tunnel url as  "BaseUrl" in appsetting on which application is running on.
     3. You should be having Base64EncodedCertificate from *Create and install Self-Signed certificate* step.
     4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
-    **Note** : ```notificationUrl``` will be updated automatically from `teamsapp.local.yml` file when you run application by Microsoft 365 Agents Toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
+    **Note** : ```notificationUrl``` will be updated automatically from `m365agents.local.yml` file when you run application by Microsoft 365 Agents Toolkit. And when you run locally through `npm start` then your notificationUrl will be like : `https://1234.ngrok-free.app/api/notifications` and if you are using dev tunnels, your notificationUrl will be like: `https://12345.devtunnels.ms/api/notifications`.   
 
   - Install node modules
 
@@ -151,6 +145,43 @@ To include resource data of graph notifications, this Graph API require self-sig
    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     
    - Add the app to personal/team/groupChat scope (Supported scopes). 
+
+## Using RSC Permissions
+
+If you prefer to use Resource-Specific Consent (RSC) permissions instead of application permissions, you can skip the "API Permissions" steps described earlier in the Azure AD registration section. Instead, update your Teams app manifest with the following properties to leverage RSC permissions:
+
+```json
+"webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": ""
+  },
+  "authorization": {
+		"permissions": {
+			"resourceSpecific": [
+				{
+					"name": "TeamsAppInstallation.Read.User",
+					"type": "Application"
+				},
+				{
+					"name": "Member.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelSettings.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.ReadWrite.Group",
+					"type": "Application"
+				}
+			]
+		}
+	}
+```
 
 ## Running the sample
 
