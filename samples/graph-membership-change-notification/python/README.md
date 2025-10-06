@@ -5,7 +5,7 @@ products:
 languages:
 - python
 title: Microsoft Teams Python Membership change notification Sample
-description: This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using python and the Microsoft Graph API.
+description: This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated and when a channel is shared/unshared with a team, using python and the Microsoft Graph API.
 extensions:
   contentType: samples
   createdDate: 30/06/2025 10:02:21 PM
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-membership-change-notificat
 
 # Change Notifications For Indirect Membership Updates Using Microsoft Graph Node.js
 
-This sample application demonstrates how to send notifications for shared channel events in Microsoft Teams, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages Python and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
+This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated when a channel is shared/unshared with a team. The application leverages Python and the Microsoft Graph API to deliver real-time notifications. It includes comprehensive setup instructions covering Azure AD registration, bot configuration, self-signed certificate management, and deployment using the Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 ## Included Features
 * Tabs
@@ -51,6 +51,33 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID - App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the .env file.
+3. Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -> Application permissions.
+   - `Channel.ReadBasic.All`,`ChannelSettings.Read.All`,`Directory.ReadWrite.All`,`Group.ReadWrite.All`
+    `Team.ReadBasic.All`,`TeamSettings.Read.All`,`TeamSettings.ReadWrite.All`
+
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select "Never" for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+
+### Create and install Self-Signed certificate
+
+To include resource data of graph notifications, this Graph API require self-signed certificate. Follow the below steps to create and manage certificate.
+
+1. You can self-sign the certificate, since Microsoft Graph does not verify the certificate issuer, and uses the public key for only encryption.
+
+2. Use [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-whatis) as the solution to create, rotate, and securely manage certificates. Make sure the keys satisfy the following criteria:
+
+    - The key must be of type `RSA`
+    - The key size must be between 2048 and 4096 bits
+
+3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](CertificateDocumentation/README.md)
+
 ## Run the app (Manually Uploading to Teams)
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
@@ -74,22 +101,17 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Create [Azure Bot resource resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
+3) In a terminal, go to `samples\graph-indirect-membership-change-notification`
 
-4) In a terminal, go to `samples\graph-indirect-membership-change-notification`
+4) Activate your desired virtual environment
 
-5) Activate your desired virtual environment
+5) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+6) Create a key.pem file in helper folder and add your key of certificate in the file.
 
-7) Create a key.pem file in helper folder and add your key of certificate in the file.
+7) Update the `Base64EncodedCertificate` value with your base64 certificate.
 
-8) Update the `Base64EncodedCertificate` value with your base64 certificate.
-
-9) Run your app with `python app.py`
+8) Run your app with `python app.py`
 
 ### 4. Setup Manifest for Teams
 
@@ -103,6 +125,43 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `graph-indirect-membership-change-notification/python/appManifest` folder to create a `manifest.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
+
+## Using RSC Permissions
+
+If you prefer to use Resource-Specific Consent (RSC) permissions instead of application permissions, you can skip the "API Permissions" steps described earlier in the Azure AD registration section. Instead, update your Teams app manifest with the following properties to leverage RSC permissions:
+
+```json
+"webApplicationInfo": {
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": ""
+  },
+  "authorization": {
+		"permissions": {
+			"resourceSpecific": [
+				{
+					"name": "TeamsAppInstallation.Read.User",
+					"type": "Application"
+				},
+				{
+					"name": "Member.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelSettings.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.Read.Group",
+					"type": "Application"
+				},
+				{
+					"name": "ChannelMember.ReadWrite.Group",
+					"type": "Application"
+				}
+			]
+		}
+	}
+```
 
 ## Running the sample
 
