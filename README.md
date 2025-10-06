@@ -118,6 +118,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
 
 
+
 #### Additional samples
 | No. | Sample Name                      | Description                                                                                                                                                                                                 | Level         | .NET                                  | JavaScript                           |  
 |-----|:---------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:--------------------------------------|:-------------------------------------|  
@@ -186,7 +187,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 13 | Resource Specific Consent (RSC)                      | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. | Advanced     | [View][graph#rsc#cs]              | [View][graph#rsc#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)     |
 | 14 | Graph API Teams App Catalog Life Cycle               | This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot. | Advanced     | [View][graph#appctaloglifecycle#cs] | [View][graph#appcataloglifecycle#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip) |
 | 15 | Graph File Fetch| This sample demonstrates how to fetch shared files in teams group chat and team channel using graph API. | Advanced | [View][graph-file-fetch#cs] | [View][graph-file-fetch#js] | [View](samples/graph-file-fetch/csharp/demo-manifest/graph-file-fetch.zip) |
-
+| 16 | Graph chat migration bot | This sample demonstrates how to migrate external chats to teams using microsoft graph API's. | Intermediate | graph-chat-migration#cs | [View][graph-chat-migration#js] ![toolkit-icon](assets/toolkit-icon.png) | | | |
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
 
@@ -533,7 +534,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-ai-sentiment-analysis#cs]:samples/msgext-ai-sentiment-analysis/csharp
 [msgext-ai-sentiment-analysis#python]:samples/msgext-ai-sentiment-analysis/python
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
-[bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
+[graph-chat-migration#js]:samples\graph-chat-migration\nodejs
+[graph-chat-migration#cs]:samples\graph-chat-migration\csharp
+
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java
