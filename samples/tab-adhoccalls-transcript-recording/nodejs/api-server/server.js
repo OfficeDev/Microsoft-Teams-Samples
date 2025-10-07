@@ -12,7 +12,7 @@ const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const tenantIds = process.env.TENANT_ID;
 const userId = process.env.USER_ID;
-const auth = require('./auth'); 
+const auth = require('./auth');
 const { validateToken } = require('./tokenValidator');
 const baseUrl = process.env.BASE_URL;
 let eventDetails = [];
@@ -30,24 +30,24 @@ const io = require('socket.io')(server, { cors: { origin: "*" } });
  * @param {boolean} isBinary - Whether to expect binary data (for recordings) or JSON data
  * @returns {Promise<string|ArrayBuffer>} - JSON string for text data, ArrayBuffer for binary data
  */
-  async function getApiData(url, accessToken, isBinary = false) {
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        },
-        responseType: isBinary ? 'arraybuffer' : 'json'
-      });
-      
-      if (isBinary) {
-        return response.data; // Return raw binary data
-      } else {
-        return JSON.stringify(response.data);
-      }
-    } catch (error) {
-      console.error('Error fetching API data:', error);
+async function getApiData(url, accessToken, isBinary = false) {
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      responseType: isBinary ? 'arraybuffer' : 'json'
+    });
+
+    if (isBinary) {
+      return response.data; // Return raw binary data
+    } else {
+      return JSON.stringify(response.data);
     }
+  } catch (error) {
+    console.error('Error fetching API data:', error);
   }
+}
 
 /**
  * Webhook Endpoint: Handle Adhoc Call Transcript Notifications
@@ -92,25 +92,36 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
     let transcriptContent;
     for (const note of notifications) {
       if (note.resource) {
-        const match = note.resource.match(/adhocCalls\/([^/]+)\/transcripts\/([^/]+)/);
-        if (match) {
-          const callId = match[1];
-          const transcriptId = match[2];
-          console.log(`CallId: ${callId}, TranscriptId: ${transcriptId}`);
+        const parts = note.resource.split('/');
+        const ids = {};
 
-          if (accessTokenNew) {
-            try {
-              const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
-              const transcriptData = await getApiData(endpoint, accessTokenNew);
-              transcriptContent = transcriptData; // fallback to raw
-              io.emit('transcript', transcriptContent);
-              // Deduplicate storage
-              if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
-                eventDetails.push({ callId, transcriptId, content: transcriptContent });
-              }
-            } catch (err) {
-              console.error("Error fetching transcript:", err.message);
+        parts.forEach(part => {
+          const match = part.match(/(\w+)\('([^']+)'\)/);
+          if (match) {
+            const [_, key, value] = match; // match[1] = key, match[2] = value
+            ids[key] = value;
+          }
+        });
+
+        // Ensure all required IDs are present
+        const callId = ids['adhocCalls'];
+        const transcriptId = ids['transcripts'];
+        const userId = ids['users'];
+
+        console.log(`UserId: ${userId}, CallId: ${callId}, TranscriptId: ${transcriptId}`);
+
+        if (accessTokenNew) {
+          try {
+            const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
+            const transcriptData = await getApiData(endpoint, accessTokenNew);
+            transcriptContent = transcriptData; // fallback to raw
+            io.emit('transcript', transcriptContent);
+            // Deduplicate storage
+            if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
+              eventDetails.push({ callId, transcriptId, content: transcriptContent });
             }
+          } catch (err) {
+            console.error("Error fetching transcript:", err.message);
           }
         }
       }
@@ -143,60 +154,71 @@ app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
  * @param {Object} res - Express response object
  */
 app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
-    if (req.query && req.query.validationToken) {
-        return res.send(req.query.validationToken); // For Graph subscription validation
-    }
+  if (req.query && req.query.validationToken) {
+    return res.send(req.query.validationToken); // For Graph subscription validation
+  }
 
-    const notifications = req.body?.value || [];
-    // Validate authenticity using MS-Notification-Token header or body
-    const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
-    if (!notificationToken) {
-      console.warn('Missing MS-Notification-Token header or body.');
-      return res.status(400).send('Missing notification token');
-    }
+  const notifications = req.body?.value || [];
+  // Validate authenticity using MS-Notification-Token header or body
+  const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
+  if (!notificationToken) {
+    console.warn('Missing MS-Notification-Token header or body.');
+    return res.status(400).send('Missing notification token');
+  }
 
-    try {
-      const tokenPayload = await validateToken(notificationToken);
-      console.log('Notification token validated:', tokenPayload);
-    } catch (err) {
-      console.warn('Invalid notification token:', err.message);
-      return res.status(401).send('Invalid notification token');
-    }
-    const accessTokenNew = await auth.getAccessToken(tenantIds);
+  try {
+    const tokenPayload = await validateToken(notificationToken);
+    console.log('Notification token validated:', tokenPayload);
+  } catch (err) {
+    console.warn('Invalid notification token:', err.message);
+    return res.status(401).send('Invalid notification token');
+  }
+  const accessTokenNew = await auth.getAccessToken(tenantIds);
 
-    for (const note of notifications) {
-        if (note.resource) {
-            const match = note.resource.match(/adhocCalls\/([^/]+)\/recordings\/([^/]+)/);
-            if (match) {
-                const callId = match[1];
-                const recordingId = match[2];
-                console.log(`CallId: ${callId}, RecordingId: ${recordingId}`);
+  for (const note of notifications) {
+    if (note.resource) {
+      const parts = note.resource.split('/');
+      const ids = {};
 
-                if (accessTokenNew) {
-                    try {
-                        // Direct recording URL
-                    const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
-
-                    // Instead of fetching binary data, just send URL + token to client
-                    io.emit('recordingAvailable', {
-                        callId,
-                        recordingId,
-                        url: recordingUrl,
-                        token: accessTokenNew
-                    });
-                    // Store event info if you need deduplication
-                    if (!eventDetails.some(e => e.callId === callId && e.recordingId === recordingId)) {
-                        eventDetails.push({ callId, recordingId });
-                    }
-                    } catch (err) {
-                        console.error("Error fetching recordings:", err.message);
-                    }
-                }
-            }
+      parts.forEach(part => {
+        const match = part.match(/(\w+)\('([^']+)'\)/);
+        if (match) {
+          const [_, key, value] = match; // match[1] = key, match[2] = value
+          ids[key] = value;
         }
+      });
+      // Ensure all required IDs are present
+      const callId = ids['adhocCalls'];
+      const recordingId = ids['recordings'];
+      const userId = ids['users'];
+
+      console.log(`UserId: ${userId}, CallId: ${callId}, RecordingId: ${recordingId}`);
+      
+      if (accessTokenNew) {
+        try {
+          // Direct recording URL
+          const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
+
+          // Instead of fetching binary data, just send URL + token to client
+          io.emit('recordingAvailable', {
+            callId,
+            recordingId,
+            url: recordingUrl,
+            token: accessTokenNew
+          });
+          // Store event info if you need deduplication
+          if (!eventDetails.some(e => e.callId === callId && e.recordingId === recordingId)) {
+            eventDetails.push({ callId, recordingId });
+          }
+        } catch (err) {
+          console.error("Error fetching recordings:", err.message);
+        }
+      }
     }
 
-    res.sendStatus(202); // Acknowledge receipt
+  }
+
+  res.sendStatus(202); // Acknowledge receipt
 });
 
 /**
@@ -301,9 +323,9 @@ app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
  */
 app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
   try {
-    const accessToken = await auth.getAccessToken(tenantIds);
-    const resource = `/communications/adhocCalls/getAllTranscripts`;
-    const notificationUrl = baseUrl + '/handleAdhocCallTranscriptNotification';
+      const accessToken = await auth.getAccessToken(tenantIds);
+      const resource = `/communications/adhocCalls/getAllTranscripts`;
+      const notificationUrl = baseUrl + '/handleAdhocCallTranscriptNotification';
 
     let existingSubscriptions = [];
     try {
@@ -381,12 +403,12 @@ app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
 async function deleteSubscription(subscriptionId, accessToken) {
   try {
     await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
-  headers: {
-      "accept": "application/json",
-      "contentType": 'application/json',
-      "authorization": "bearer " + accessToken
-  }
-  });
+      headers: {
+        "accept": "application/json",
+        "contentType": 'application/json',
+        "authorization": "bearer " + accessToken
+      }
+    });
   } catch (error) {
     console.error('Error Deleting Subscription:', error);
   }
@@ -399,8 +421,8 @@ async function deleteSubscription(subscriptionId, accessToken) {
  * Uses environment variable PORT or defaults to 5000 for local development.
  */
 app.get('*', (req, res) => {
-    console.log("Unhandled request: ", req);
-    res.status(404).send("Path not defined");
+  console.log("Unhandled request: ", req);
+  res.status(404).send("Path not defined");
 });
 
 const port = process.env.PORT || 5000;
