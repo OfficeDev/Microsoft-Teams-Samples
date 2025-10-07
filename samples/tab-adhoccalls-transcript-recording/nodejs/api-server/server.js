@@ -16,6 +16,7 @@ const auth = require('./auth');
 const { validateToken } = require('./tokenValidator');
 const baseUrl = process.env.BASE_URL;
 let eventDetails = [];
+let transcriptContent = '';
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
@@ -50,263 +51,6 @@ async function getApiData(url, accessToken, isBinary = false) {
 }
 
 /**
- * Webhook Endpoint: Handle Adhoc Call Transcript Notifications
- * 
- * This endpoint receives webhook notifications from Microsoft Graph when new transcripts
- * become available for adhoc calls. It processes the notifications, fetches the actual
- * transcript content, and broadcasts it to connected clients via WebSocket.
- * 
- * Workflow:
- * 1. Validate webhook subscription (responds to validation token requests)
- * 2. Extract call and transcript IDs from notification payload
- * 3. Fetch transcript content from Microsoft Graph API
- * 4. Emit transcript data to connected clients via Socket.IO
- * 5. Store transcript data for deduplication
- * 
- * @route POST /handleAdhocCallTranscriptNotification
- * @param {Object} req - Express request object containing webhook payload
- * @param {Object} res - Express response object
- */
-app.post('/handleAdhocCallTranscriptNotification', async (req, res) => {
-
-  try {
-    if (req.query && req.query.validationToken) {
-      return res.send(req.query.validationToken); // For Graph subscription validation
-    }
-    const notifications = req.body?.value || [];
-    // Validate authenticity using MS-Notification-Token header or body
-    const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
-    if (!notificationToken) {
-      console.warn('Missing MS-Notification-Token header or body.');
-      return res.status(400).send('Missing notification token');
-    }
-
-    try {
-      const tokenPayload = await validateToken(notificationToken);
-      console.log('Notification token validated:', tokenPayload);
-    } catch (err) {
-      console.warn('Invalid notification token:', err.message);
-      return res.status(401).send('Invalid notification token');
-    }
-    const accessTokenNew = await auth.getAccessToken(tenantIds);
-    let transcriptContent;
-    for (const note of notifications) {
-      if (note.resource) {
-        const parts = note.resource.split('/');
-        const ids = {};
-
-        parts.forEach(part => {
-          const match = part.match(/(\w+)\('([^']+)'\)/);
-          if (match) {
-            const [_, key, value] = match; // match[1] = key, match[2] = value
-            ids[key] = value;
-          }
-        });
-
-        // Ensure all required IDs are present
-        const callId = ids['adhocCalls'];
-        const transcriptId = ids['transcripts'];
-        const userId = ids['users'];
-
-        console.log(`UserId: ${userId}, CallId: ${callId}, TranscriptId: ${transcriptId}`);
-
-        if (accessTokenNew) {
-          try {
-            const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/transcripts/${transcriptId}/content?$format=text/vtt`;
-            const transcriptData = await getApiData(endpoint, accessTokenNew);
-            transcriptContent = transcriptData; // fallback to raw
-            io.emit('transcript', transcriptContent);
-            // Deduplicate storage
-            if (!eventDetails.some(e => e.callId === callId && e.transcriptId === transcriptId)) {
-              eventDetails.push({ callId, transcriptId, content: transcriptContent });
-            }
-          } catch (err) {
-            console.error("Error fetching transcript:", err.message);
-          }
-        }
-      }
-    }
-    res.sendStatus(202);
-  } catch (err) {
-    console.error('Error in /handleAdhocCallTranscriptNotification:', err);
-    res.status(500).send('Internal server error');
-  }
-});
-
-/**
- * Webhook Endpoint: Handle Adhoc Call Recording Notifications
- * 
- * This endpoint receives webhook notifications from Microsoft Graph when new recordings
- * become available for adhoc calls. It processes the notifications, fetches the binary
- * recording data, converts it to Base64 for safe transmission, and broadcasts it to
- * connected clients via WebSocket.
- * 
- * Workflow:
- * 1. Validate webhook subscription (responds to validation token requests)
- * 2. Extract call and recording IDs from notification payload
- * 3. Fetch binary recording data from Microsoft Graph API
- * 4. Convert binary data to Base64 for JSON-safe transmission
- * 5. Emit recording data to connected clients via Socket.IO
- * 6. Store recording data for deduplication
- * 
- * @route POST /handleAdhocCallRecordingNotification
- * @param {Object} req - Express request object containing webhook payload
- * @param {Object} res - Express response object
- */
-app.post('/handleAdhocCallRecordingNotification', async (req, res) => {
-  if (req.query && req.query.validationToken) {
-    return res.send(req.query.validationToken); // For Graph subscription validation
-  }
-
-  const notifications = req.body?.value || [];
-  // Validate authenticity using MS-Notification-Token header or body
-  const notificationToken = req.headers['ms-notification-token'] || (req.body.validationTokens && req.body.validationTokens[0]);
-  if (!notificationToken) {
-    console.warn('Missing MS-Notification-Token header or body.');
-    return res.status(400).send('Missing notification token');
-  }
-
-  try {
-    const tokenPayload = await validateToken(notificationToken);
-    console.log('Notification token validated:', tokenPayload);
-  } catch (err) {
-    console.warn('Invalid notification token:', err.message);
-    return res.status(401).send('Invalid notification token');
-  }
-  const accessTokenNew = await auth.getAccessToken(tenantIds);
-
-  for (const note of notifications) {
-    if (note.resource) {
-      const parts = note.resource.split('/');
-      const ids = {};
-
-      parts.forEach(part => {
-        const match = part.match(/(\w+)\('([^']+)'\)/);
-        if (match) {
-          const [_, key, value] = match; // match[1] = key, match[2] = value
-          ids[key] = value;
-        }
-      });
-      // Ensure all required IDs are present
-      const callId = ids['adhocCalls'];
-      const recordingId = ids['recordings'];
-      const userId = ids['users'];
-
-      console.log(`UserId: ${userId}, CallId: ${callId}, RecordingId: ${recordingId}`);
-      
-      if (accessTokenNew) {
-        try {
-          // Direct recording URL
-          const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${callId}/recordings/${recordingId}/content`;
-
-          // Instead of fetching binary data, just send URL + token to client
-          io.emit('recordingAvailable', {
-            callId,
-            recordingId,
-            url: recordingUrl,
-            token: accessTokenNew
-          });
-          // Store event info if you need deduplication
-          if (!eventDetails.some(e => e.callId === callId && e.recordingId === recordingId)) {
-            eventDetails.push({ callId, recordingId });
-          }
-        } catch (err) {
-          console.error("Error fetching recordings:", err.message);
-        }
-      }
-    }
-
-  }
-
-  res.sendStatus(202); // Acknowledge receipt
-});
-
-/**
- * API Endpoint: Create Adhoc Call Recording Subscription
- * 
- * Creates a Microsoft Graph webhook subscription to receive notifications when new
- * recordings become available for adhoc calls. This endpoint handles subscription
- * management including checking for existing subscriptions and creating new ones.
- * 
- * Subscription Management Logic:
- * 1. Check for existing subscriptions with the same resource
- * 2. Delete outdated subscriptions (wrong notification URL)
- * 3. Return existing valid subscriptions without creating duplicates
- * 4. Create new subscription if none exists
- * 
- * @route POST /createAdhocCallRecordingSubscription
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @returns {Object} JSON response with subscription status and details
- */
-app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
-  try {
-    const accessToken = await auth.getAccessToken(tenantIds);
-    const resource = `/communications/adhocCalls/getAllRecordings`;
-    const notificationUrl = baseUrl + '/handleAdhocCallRecordingNotification';
-
-    let existingSubscriptions = [];
-    try {
-      const apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          authorization: "Bearer " + accessToken
-        }
-      });
-      existingSubscriptions = apiResponse.data.value || [];
-    } catch (ex) {
-      console.error("Error fetching existing subscriptions:", ex.message);
-    }
-
-    let existingSubscription = existingSubscriptions.find(
-      subscription => subscription.resource === resource
-    );
-
-    if (existingSubscription && existingSubscription.notificationUrl !== notificationUrl) {
-      console.log(`Deleting outdated subscription: ${existingSubscription.id}`);
-      await deleteSubscription(existingSubscription.id, accessToken);
-      existingSubscription = null;
-    }
-
-    if (existingSubscription) {
-      return res.json({
-        status: "already_exists",
-        message: "Subscription already exists",
-        subscription: existingSubscription
-      });
-    }
-
-    const subscription = {
-      changeType: 'created',
-      notificationUrl,
-      resource,
-      lifecycleNotificationUrl: notificationUrl,
-      expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
-      includeResourceData: true,
-      encryptionCertificate: process.env.ENCRYPTION_CERTIFICATE,
-      encryptionCertificateId: process.env.ENCRYPTION_CERTIFICATE_ID
-    };
-
-    const response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`, subscription, {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-
-    console.log('Subscription created:', response.data);
-
-    return res.json({
-      status: "created",
-      message: "Subscription created successfully",
-      subscription: response.data
-    });
-
-  } catch (error) {
-    console.error("Error creating subscription:", error.message);
-    res.status(500).json({ status: "error", message: error.message });
-  }
-});
-
-/**
  * API Endpoint: Create Adhoc Call Transcript Subscription
  * 
  * Creates a Microsoft Graph webhook subscription to receive notifications when new
@@ -323,96 +67,83 @@ app.post('/createAdhocCallRecordingSubscription', async (req, res) => {
  */
 app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
   try {
-      const accessToken = await auth.getAccessToken(tenantIds);
-      const resource = `/communications/adhocCalls/getAllTranscripts`;
-      const notificationUrl = baseUrl + '/handleAdhocCallTranscriptNotification';
+    const accessToken = await auth.getAccessToken(tenantIds);
+    
+    // Fetch all transcripts
+    const transcriptsEndpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllTranscripts(userId='${userId}')`;
+    const responseDataString = await getApiData(transcriptsEndpoint, accessToken);
+    const responseData = JSON.parse(responseDataString);
+    
+    const allTranscripts = [];
+    
+    // Process transcripts
+    for (const item of responseData.value || []) {
+      console.log('Transcript - callId:', item.callId, 'id:', item.id);
 
-    let existingSubscriptions = [];
-    try {
-      const apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          authorization: "Bearer " + accessToken
-        }
+      const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/transcripts/${item.id}/content?$format=text/vtt`;
+      const transcriptData = await getApiData(endpoint, accessToken);
+      
+      // Format the transcript content
+      const regex = /<v\s+([^>]+)>(.*?)<\/v>/g;
+      let match;
+      const formattedLines = [];
+
+      while ((match = regex.exec(transcriptData)) !== null) {
+        const speaker = match[1].trim();
+        const text = match[2].trim();
+        formattedLines.push(`<b>${speaker}</b> : ${text}`);
+      }
+
+      const formattedContent = formattedLines.join("<br/>");
+      
+      allTranscripts.push({
+        callId: item.callId,
+        id: item.id,
+        content: transcriptData,
+        formattedContent: formattedContent
       });
-      existingSubscriptions = apiResponse.data.value || [];
-    } catch (ex) {
-      console.error("Error fetching existing subscriptions:", ex.message);
     }
+    
+    // Emit all transcripts data
+    io.emit('allTranscriptsData', allTranscripts);
 
-    let existingSubscription = existingSubscriptions.find(
-      subscription => subscription.resource === resource
-    );
+    // Fetch all recordings
+    const accessTokenVideo = await auth.getAccessToken(tenantIds);
+    const transcriptsEndpointVideo = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllRecordings(userId='${userId}')`;
+    const responseDataStringVideo = await getApiData(transcriptsEndpointVideo, accessTokenVideo);
+    const responseDataVideo = JSON.parse(responseDataStringVideo);
 
-    if (existingSubscription && existingSubscription.notificationUrl !== notificationUrl) {
-      console.log(`Deleting outdated subscription: ${existingSubscription.id}`);
-      await deleteSubscription(existingSubscription.id, accessToken);
-      existingSubscription = null;
-    }
+    const allRecordings = [];
 
-    if (existingSubscription) {
-      return res.json({
-        status: "already_exists",
-        message: "Subscription already exists",
-        subscription: existingSubscription
+    // Process recordings
+    for (const item of responseDataVideo.value || []) {
+      console.log('Recording - callId:', item.callId, 'id:', item.id);
+      
+      const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/recordings/${item.id}/content`;
+      
+      allRecordings.push({
+        callId: item.callId,
+        recordingId: item.id,
+        url: recordingUrl,
+        token: accessTokenVideo
       });
     }
-
-    const subscription = {
-      changeType: 'created',
-      notificationUrl,
-      resource,
-      lifecycleNotificationUrl: notificationUrl,
-      expirationDateTime: new Date(Date.now() + 3600000).toISOString(),
-      includeResourceData: true,
-      encryptionCertificate: process.env.ENCRYPTION_CERTIFICATE,
-      encryptionCertificateId: process.env.ENCRYPTION_CERTIFICATE_ID
-
-    };
-
-    const response = await axios.post(`https://graph.microsoft.com/beta/subscriptions`, subscription, {
-      headers: { Authorization: `Bearer ${accessToken}` }
+    
+    // Emit all recordings data
+    io.emit('allRecordingsData', allRecordings);
+    
+    res.json({ 
+      status: "success", 
+      message: `Found ${allTranscripts.length} transcripts and ${allRecordings.length} recordings`,
+      transcriptsCount: allTranscripts.length,
+      recordingsCount: allRecordings.length
     });
-
-    console.log('Subscription created:', response.data);
-
-    return res.json({
-      status: "created",
-      message: "Subscription created successfully",
-      subscription: response.data
-    });
-
+    
   } catch (error) {
     console.error("Error creating subscription:", error.message);
     res.status(500).json({ status: "error", message: error.message });
   }
 });
-
-/**
- * Utility Function: Delete Microsoft Graph Subscription
- * 
- * Deletes a Microsoft Graph webhook subscription by its ID. This is used for
- * cleanup when subscriptions become outdated or need to be replaced.
- * 
- * @param {string} subscriptionId - The unique ID of the subscription to delete
- * @param {string} accessToken - Bearer token for Microsoft Graph API authentication
- * @returns {Promise<void>} - Resolves when deletion is complete or fails silently
- */
-
-async function deleteSubscription(subscriptionId, accessToken) {
-  try {
-    await axios.delete(`https://graph.microsoft.com/v1.0/subscriptions/${subscriptionId}`, {
-      headers: {
-        "accept": "application/json",
-        "contentType": 'application/json',
-        "authorization": "bearer " + accessToken
-      }
-    });
-  } catch (error) {
-    console.error('Error Deleting Subscription:', error);
-  }
-}
 
 /**
  * Server Startup Configuration
