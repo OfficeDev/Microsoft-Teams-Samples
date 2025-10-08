@@ -13,10 +13,6 @@ require('dotenv').config({ path: ENV_FILE });
 const tenantIds = process.env.TENANT_ID;
 const userId = process.env.USER_ID;
 const auth = require('./auth');
-const { validateToken } = require('./tokenValidator');
-const baseUrl = process.env.BASE_URL;
-let eventDetails = [];
-let transcriptContent = '';
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
@@ -51,21 +47,26 @@ async function getApiData(url, accessToken, isBinary = false) {
 }
 
 /**
- * API Endpoint: Create Adhoc Call Transcript Subscription
+ * API Endpoint: Fetch Adhoc Call Transcripts and Recordings
  * 
- * Creates a Microsoft Graph webhook subscription to receive notifications when new
- * transcripts become available for adhoc calls. This endpoint handles subscription
- * management including checking for existing subscriptions and creating new ones.
+ * Fetches all transcripts and recordings for a specific Microsoft Teams user
+ * using the Microsoft Graph Beta API. Transcripts are formatted into readable
+ * HTML with speaker labels, and both transcripts and recordings are emitted
+ * in real-time via Socket.IO to connected clients.
  * 
- * The logic is identical to the recording subscription endpoint but targets
- * transcript resources instead of recording resources.
+ * The endpoint handles:
+ * - Retrieving an access token for Microsoft Graph
+ * - Fetching all transcripts and recordings for the user
+ * - Formatting transcript content from VTT to HTML
+ * - Emitting data to clients using Socket.IO
+ * - Returning a summary JSON response with counts of transcripts and recordings
  * 
- * @route POST /createAdhocCallTranscriptSubscription
+ * @route POST /fetchingTranscriptsandRecordings
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
- * @returns {Object} JSON response with subscription status and details
+ * @returns {Object} JSON response containing counts of transcripts and recordings
  */
-app.post('/createAdhocCallTranscriptSubscription', async (req, res) => {
+app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
   try {
     const accessToken = await auth.getAccessToken(tenantIds);
     

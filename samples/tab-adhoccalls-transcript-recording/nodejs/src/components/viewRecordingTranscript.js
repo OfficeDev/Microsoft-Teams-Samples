@@ -122,7 +122,7 @@ function RecordingTranscript() {
         setRecordingsLoaded(false);
         
         try {
-            const response = await fetch('/createAdhocCallTranscriptSubscription', {
+            const response = await fetch('/fetchingTranscriptsandRecordings', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" }
             });
@@ -223,18 +223,20 @@ function RecordingTranscript() {
             {/* Recording & Transcript Pairs Section */}
             {(allRecordings.length > 0 || allTranscripts.length > 0) && (
                 <div style={{ marginBottom: '30px' }}>
-                    <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px' }}>
-                        Recordings & Transcripts ({Math.max(allRecordings.length, allTranscripts.length)} items)
-                    </h3>
-                    <div style={{ marginTop: '20px' }}>
-                        {(() => {
-                            // Create proper pairs by matching callId
-                            const allCallIds = new Set([
-                                ...allRecordings.map(r => r.callId),
-                                ...allTranscripts.map(t => t.callId)
-                            ]);
-                            
-                            return Array.from(allCallIds).map((callId, index) => {
+                    {(() => {
+                        // Create proper pairs by matching callId
+                        const allCallIds = new Set([
+                            ...allRecordings.map(r => r.callId),
+                            ...allTranscripts.map(t => t.callId)
+                        ]);
+                        
+                        return (
+                            <>
+                                <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px' }}>
+                                    Recordings & Transcripts
+                                </h3>
+                                <div style={{ marginTop: '20px' }}>
+                                    {Array.from(allCallIds).map((callId, index) => {
                                 const recording = allRecordings.find(r => r.callId === callId);
                                 const transcript = allTranscripts.find(t => t.callId === callId);
                                 
@@ -298,7 +300,21 @@ function RecordingTranscript() {
                                             }}>
                                                 <Spinner label="Loading recordings..." size="medium" />
                                             </div>
-                                        ) : null}
+                                        ) : (
+                                            <div style={{ 
+                                                height: '250px', 
+                                                display: 'flex', 
+                                                alignItems: 'center', 
+                                                justifyContent: 'center',
+                                                backgroundColor: '#f8f9fa',
+                                                borderRadius: '4px',
+                                                color: '#6c757d',
+                                                fontStyle: 'italic',
+                                                border: '1px solid #e9ecef'
+                                            }}>
+                                                <em>No recording available for this recording</em>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Right Side - Transcript */}
@@ -388,8 +404,11 @@ function RecordingTranscript() {
                                     </div>
                                 </div>
                             );
-                        })})()}
-                    </div>
+                        })}
+                                </div>
+                            </>
+                        );
+                    })()}
                 </div>
             )}
         </div>
