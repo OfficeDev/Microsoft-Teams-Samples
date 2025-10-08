@@ -109,9 +109,8 @@ app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
     io.emit('allTranscriptsData', allTranscripts);
 
     // Fetch all recordings
-    const accessTokenVideo = await auth.getAccessToken(tenantIds);
     const transcriptsEndpointVideo = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllRecordings(userId='${userId}')`;
-    const responseDataStringVideo = await getApiData(transcriptsEndpointVideo, accessTokenVideo);
+    const responseDataStringVideo = await getApiData(transcriptsEndpointVideo, accessToken);
     const responseDataVideo = JSON.parse(responseDataStringVideo);
 
     const allRecordings = [];
@@ -126,7 +125,7 @@ app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
         callId: item.callId,
         recordingId: item.id,
         url: recordingUrl,
-        token: accessTokenVideo
+        token: accessToken // Token needed to access the recording
       });
     }
     
