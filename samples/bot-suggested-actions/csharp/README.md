@@ -20,6 +20,7 @@ This sample shows the feature where user can [send suggested actions](https://le
 ## Included Features
 * Bots
 * Suggested Actions
+* Copilot Custom Engine Agents
 
 ## Interaction with app
 
@@ -29,6 +30,19 @@ This sample shows the feature where user can [send suggested actions](https://le
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Send Suggested Actions:** [Manifest](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
+
+## Copilot Custom Engine Agents
+
+**Step 1: Install Copilot Custom Engine**  
+![Copilot Installation](Images/Copilot_Install.png)
+
+**Step 2: Verify Copilot Hello**  
+![Copilot Hello](Images/Copilot_Hello.png)
+
+**Step 3: Welcome Screen**  
+![Copilot Welcome](Images/Copilot_Welcome.png)
+
+
 
 ## Prerequisites
 
@@ -54,7 +68,20 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
     
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 2. Setup for Bot
 	- Register a Microsoft Entra ID aap registration in Azure portal.
@@ -144,5 +171,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-csharp" />
