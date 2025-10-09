@@ -21,6 +21,7 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 * Bots
 * Azure Open AI
 * Streaming
+* Custom Engine Agent - Copilot
 
 > [!IMPORTANT]
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
@@ -70,6 +71,23 @@ the Teams service needs to call into the bot.
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+
+1) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
 1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
@@ -131,6 +149,16 @@ the Teams service needs to call into the bot.
 **Bot's Response to the User's Question:**
 ![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
 
+## Custom Engine Agent - Copilot
+**Installation of Copilot App**  
+![Installation of Copilot App](Images/install1.png)  
+**Opening the Daily Task Reminder in Copilot**  
+![Opening the Daily Task Reminder in Copilot](Images/opening1.png)  
+**Asking a question**  
+![Creating a new reminder in Copilot](Images/running1.png)  
+**Scheduling a task reminder**  
+![Scheduling a task reminder](Images/showresult1.png)  
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -140,5 +168,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api) 
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-streaming-nodejs" />
