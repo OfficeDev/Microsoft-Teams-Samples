@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample uses adhocCalls to create a subscription for recording and transcription. After joining a group call, it starts the recording or transcription. When the call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI.
+description: This sample uses adhocCalls to retrieve existing Microsoft Teams call recordings and transcripts via Microsoft Graph API, displaying them in real-time within a Teams tab using Socket.IO and React.
 products:
 - office-teams
 - office
@@ -8,15 +8,21 @@ products:
 languages:
 - nodejs
 extensions:
- contentType: samples
- createdDate: "14-08-2025 10:00:01"
+  contentType: samples
+  createdDate: "14-08-2025 10:00:01"
 urlFragment: officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recording-nodejs
-
 ---
 
-## adhoccalls Transcripts Recordings
+## adhoccalls Transcripts and Recordings Viewer
 
-This sample uses adhocCalls in Microsoft Teams to create subscriptions for recording and transcription. It initiates recording or transcription after joining a group call in a group chat, monitors call state, triggers notifications on call end, retrieves and processes recording/transcription details, and displays them in the UI.
+This sample demonstrates how to use the Microsoft Graph `adhocCalls` API in a Microsoft Teams tab to retrieve and display existing call recordings and transcripts.  
+It connects to Microsoft Graph to fetch completed call data for a user, including:
+
+- **Transcripts** – retrieved in VTT format and formatted with speaker labels.  
+- **Recordings** – securely accessed and streamed using authorization tokens.  
+
+The app uses **Express.js** on the backend for Graph API integration and **React** on the frontend to render a real-time, interactive interface via **Socket.IO**.  
+Users can view available recordings, read corresponding transcripts, and navigate large datasets with built-in pagination and live status indicators.
 
 **Interaction with app**
 ![adhoccalls-transcript-recording](Images/adhoccalls-transcript-recording.gif)
