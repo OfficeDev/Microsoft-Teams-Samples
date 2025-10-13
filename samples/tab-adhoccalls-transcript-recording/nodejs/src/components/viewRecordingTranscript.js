@@ -7,19 +7,20 @@ import io from "socket.io-client";
  * RecordingTranscript Component
  * 
  * This React component provides a user interface for viewing Microsoft Teams call recordings
- * and transcripts. It establishes a WebSocket connection to receive real-time updates about
- * call recordings and transcripts, and displays them to the user.
+ * and transcripts. It fetches existing recording and transcript data from Microsoft Graph API
+ * via Socket.IO communication and displays them to the user.
  * 
  * Features:
+ * - Fetch existing transcripts and recordings via Microsoft Graph API
  * - Real-time transcript display with speaker identification
  * - Video recording playback
- * - Automatic subscription to recording and transcript notifications
  * - Loading states and error handling
  * - Responsive UI with status messages
+ * - Pagination for large datasets
  */
 function RecordingTranscript() {
 
-    const [subscriptionMessage, setSubscriptionMessage] = useState(""); // 🔹 Store subscription status
+    const [fetchMessage, setFetchMessage] = useState(""); // Store fetch operation status
     const [allTranscripts, setAllTranscripts] = useState([]); // Store all transcript entries
     const [allRecordings, setAllRecordings] = useState([]); // Store all recording entries
     const [isLoadingAllData, setIsLoadingAllData] = useState(false);
@@ -27,6 +28,10 @@ function RecordingTranscript() {
     const [isLoadingRecordings, setIsLoadingRecordings] = useState(false);
     const [transcriptsLoaded, setTranscriptsLoaded] = useState(false);
     const [recordingsLoaded, setRecordingsLoaded] = useState(false);
+    
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(10);
 
     // Declare new state variables that are required to get and set the connection.
     const [socket, setSocket] = useState(io());
@@ -35,7 +40,7 @@ function RecordingTranscript() {
      * Effect Hook: Initialize WebSocket Connection
      * 
      * Creates a new Socket.IO connection when the component mounts.
-     * This connection is used to receive real-time transcript and recording data.
+     * This connection is used to receive fetched transcript and recording data from the API server.
      */
     useEffect(() => {
         setSocket(io());     
@@ -48,8 +53,8 @@ function RecordingTranscript() {
      * 
      * Sets up event listeners for WebSocket communication to handle:
      * 1. Connection events
-     * 2. Transcript data reception and formatting
-     * 3. Recording data reception and video blob creation
+     * 2. Transcript data reception from Microsoft Graph API
+     * 3. Recording data reception and video blob creation from Microsoft Graph API
      */
     useEffect(() => {
         if (!socket) return;
@@ -104,7 +109,7 @@ function RecordingTranscript() {
     }, [socket]);
 
     /**
-     * Function to fetch all available transcript and recording data
+     * Function to fetch all available transcript and recording data from Microsoft Graph API
      */
     const fetchAllData = async () => {
         setIsLoadingAllData(true);
@@ -120,13 +125,13 @@ function RecordingTranscript() {
             });
             
             if (response.ok) {
-                setSubscriptionMessage("Successfully fetched all transcript and recording data");
+                setFetchMessage("Successfully fetched all transcript and recording data from Microsoft Graph API");
             } else {
-                setSubscriptionMessage("Error fetching data");
+                setFetchMessage("Error fetching data from Microsoft Graph API");
             }
         } catch (err) {
             console.error(err);
-            setSubscriptionMessage("Error fetching data: " + err.message);
+            setFetchMessage("Error fetching data: " + err.message);
             setIsLoadingAllData(false);
             setIsLoadingTranscripts(false);
             setIsLoadingRecordings(false);
@@ -137,19 +142,30 @@ function RecordingTranscript() {
     useEffect(() => {
         if (transcriptsLoaded && recordingsLoaded) {
             setIsLoadingAllData(false);
+            // Hide success message after data is fully loaded
+            if (fetchMessage === "Successfully fetched all transcript and recording data from Microsoft Graph API") {
+                setTimeout(() => {
+                    setFetchMessage("");
+                }, 2000); // Hide after 2 seconds
+            }
         }
-    }, [transcriptsLoaded, recordingsLoaded]);
+    }, [transcriptsLoaded, recordingsLoaded, fetchMessage]);
+
+    // Reset pagination when data changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [allRecordings.length, allTranscripts.length]);
 
     /**
-     * Effect Hook: Automatic Subscription Creation
+     * Effect Hook: Automatic Data Fetching
      * 
      * When the component mounts and Teams context is available, this effect:
-     * 1. Creates subscriptions for both transcript and recording notifications
-     * 2. Handles the responses from both subscription requests
-     * 3. Updates the UI with subscription status messages
+     * 1. Automatically fetches existing transcript and recording data from Microsoft Graph API
+     * 2. Handles the responses from the API requests
+     * 3. Updates the UI with fetch operation status messages
      * 
-     * The subscriptions enable the server to receive webhook notifications
-     * when new recordings or transcripts become available.
+     * This provides immediate access to available call recordings and transcripts
+     * without requiring user interaction to see existing data.
      */
     useEffect(() => {
         microsoftTeams.app.getContext().then(() => {
@@ -162,11 +178,11 @@ function RecordingTranscript() {
      * Component Render Method
      * 
      * Renders the user interface with the following sections:
-     * 1. Subscription status message (success/error notification)
-     * 2. Fetch data button to manually retrieve all data
-     * 3. Welcome message (shown when no data has been received)
+     * 1. Fetch operation status message (success/error notification)
+     * 2. Fetch data button to manually retrieve all existing data from Microsoft Graph API
+     * 3. Welcome message (shown when no data has been retrieved)
      * 4. Recording and transcript display areas (shown when data is available)
-     * 5. Lists of all available recordings and transcripts
+     * 5. Paginated lists of all available recordings and transcripts
      * 
      * The UI adapts based on the current state of data availability and loading status.
      */
@@ -187,27 +203,27 @@ function RecordingTranscript() {
                 {isLoadingAllData && <Spinner size="small" style={{ marginLeft: '10px' }} />}
             </div>
 
-            {subscriptionMessage && (
+            {fetchMessage && (
                 <div style={{ 
                     marginTop: "10px", 
                     marginBottom: "20px",
                     padding: "12px 16px",
                     borderRadius: "8px",
-                    border: subscriptionMessage.includes("Error") ? "1px solid #ff4444" : "1px solid #28a745",
-                    backgroundColor: subscriptionMessage.includes("Error") ? "#ffebee" : "#e8f5e9",
-                    color: subscriptionMessage.includes("Error") ? "#c62828" : "#2e7d32",
+                    border: fetchMessage.includes("Error") ? "1px solid #ff4444" : "1px solid #28a745",
+                    backgroundColor: fetchMessage.includes("Error") ? "#ffebee" : "#e8f5e9",
+                    color: fetchMessage.includes("Error") ? "#c62828" : "#2e7d32",
                     fontWeight: "500",
                     fontSize: "14px",
                     boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
                 }}>
-                    {subscriptionMessage}
+                    {fetchMessage}
                 </div>
             )}
             
             {!allRecordings.length && !allTranscripts.length && !isLoadingAllData && (
                 <div>
                      <p className="welcome-message">
-                        Welcome to Adhoc Calls Transcript Recording! Join the group call, then click "Start Recording" or "Start Transcript" to capture video and text. After the call ends, wait a few seconds for the recording and transcript to be ready.
+                        Welcome to Adhoc Calls Transcript & Recording Viewer! This application retrieves and displays existing call recordings and transcripts from Microsoft Teams. Click "Fetch Recording & Transcript" to view available call data from your Teams meetings.
                         </p>
                 </div>
             )}
@@ -222,13 +238,32 @@ function RecordingTranscript() {
                             ...allTranscripts.map(t => t.callId)
                         ]);
                         
+                        // Convert to array and implement pagination
+                        const callIdsArray = Array.from(allCallIds);
+                        const totalItems = callIdsArray.length;
+                        const totalPages = Math.ceil(totalItems / itemsPerPage);
+                        const startIndex = (currentPage - 1) * itemsPerPage;
+                        const endIndex = startIndex + itemsPerPage;
+                        const currentItems = callIdsArray.slice(startIndex, endIndex);
+                        
                         return (
                             <>
-                                <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px' }}>
-                                    Recordings & Transcripts
-                                </h3>
+                                <div style={{ 
+                                    display: 'flex', 
+                                    justifyContent: 'space-between', 
+                                    alignItems: 'center',
+                                    marginBottom: '20px'
+                                }}>
+                                    <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px', margin: 0 }}>
+                                        Recordings & Transcripts
+                                    </h3>
+                                    <div style={{ fontSize: '14px', color: '#666' }}>
+                                        Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of {totalItems} items
+                                    </div>
+                                </div>
                                 <div style={{ marginTop: '20px' }}>
-                                    {Array.from(allCallIds).map((callId, index) => {
+                                    {currentItems.map((callId, index) => {
+                                        const globalIndex = startIndex + index;
                                 const recording = allRecordings.find(r => r.callId === callId);
                                 const transcript = allTranscripts.find(t => t.callId === callId);
                                 
@@ -258,7 +293,7 @@ function RecordingTranscript() {
                                         padding: '15px',
                                         backgroundColor: '#f9f9f9'
                                     }}>
-                                        <h4 style={{ marginTop: '0', color: '#333' }}>Recording {index + 1}</h4>
+                                        <h4 style={{ marginTop: '0', color: '#333' }}>Recording {globalIndex + 1}</h4>
                                         {recording ? (
                                             recording.videoUrl ? (
                                                 <video 
@@ -316,7 +351,7 @@ function RecordingTranscript() {
                                         padding: '15px',
                                         backgroundColor: '#f9f9f9'
                                     }}>
-                                        <h4 style={{ marginTop: '0', color: '#333' }}>Transcript {index + 1}</h4>
+                                        <h4 style={{ marginTop: '0', color: '#333' }}>Transcript {globalIndex + 1}</h4>
                                         {transcript ? (
                                             <div style={{ 
                                                 backgroundColor: 'white', 
@@ -398,6 +433,73 @@ function RecordingTranscript() {
                             );
                         })}
                                 </div>
+                                
+                                {/* Pagination Controls */}
+                                {totalPages > 1 && (
+                                    <div style={{ 
+                                        display: 'flex', 
+                                        justifyContent: 'center', 
+                                        alignItems: 'center', 
+                                        gap: '10px',
+                                        marginTop: '30px',
+                                        padding: '20px 0',
+                                        borderTop: '1px solid #e1e1e1'
+                                    }}>
+                                        <Button
+                                            onClick={() => setCurrentPage(currentPage - 1)}
+                                            disabled={currentPage === 1}
+                                            style={{
+                                                backgroundColor: currentPage === 1 ? '#f5f5f5' : '#6264a7',
+                                                color: currentPage === 1 ? '#999' : 'white',
+                                                border: 'none',
+                                                padding: '8px 16px',
+                                                borderRadius: '4px',
+                                                cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+                                            }}
+                                        >
+                                            Previous
+                                        </Button>
+                                        
+                                        <div style={{ display: 'flex', gap: '5px' }}>
+                                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
+                                                <Button
+                                                    key={pageNum}
+                                                    onClick={() => setCurrentPage(pageNum)}
+                                                    style={{
+                                                        backgroundColor: pageNum === currentPage ? '#6264a7' : 'white',
+                                                        color: pageNum === currentPage ? 'white' : '#6264a7',
+                                                        border: `1px solid ${pageNum === currentPage ? '#6264a7' : '#ddd'}`,
+                                                        padding: '8px 12px',
+                                                        borderRadius: '4px',
+                                                        minWidth: '40px',
+                                                        fontWeight: pageNum === currentPage ? 'bold' : 'normal'
+                                                    }}
+                                                >
+                                                    {pageNum}
+                                                </Button>
+                                            ))}
+                                        </div>
+                                        
+                                        <Button
+                                            onClick={() => setCurrentPage(currentPage + 1)}
+                                            disabled={currentPage === totalPages}
+                                            style={{
+                                                backgroundColor: currentPage === totalPages ? '#f5f5f5' : '#6264a7',
+                                                color: currentPage === totalPages ? '#999' : 'white',
+                                                border: 'none',
+                                                padding: '8px 16px',
+                                                borderRadius: '4px',
+                                                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
+                                            }}
+                                        >
+                                            Next
+                                        </Button>
+                                        
+                                        <div style={{ marginLeft: '20px', fontSize: '14px', color: '#666' }}>
+                                            Page {currentPage} of {totalPages}
+                                        </div>
+                                    </div>
+                                )}
                             </>
                         );
                     })()}

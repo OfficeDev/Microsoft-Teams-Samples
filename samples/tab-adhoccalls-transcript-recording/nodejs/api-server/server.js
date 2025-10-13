@@ -47,18 +47,19 @@ async function getApiData(url, accessToken, isBinary = false) {
 }
 
 /**
- * API Endpoint: Fetch Adhoc Call Transcripts and Recordings
+ * API Endpoint: Fetch Existing Adhoc Call Transcripts and Recordings
  * 
- * Fetches all transcripts and recordings for a specific Microsoft Teams user
- * using the Microsoft Graph Beta API. Transcripts are formatted into readable
+ * Retrieves all existing transcripts and recordings for a specific Microsoft Teams user
+ * using the Microsoft Graph Beta API. This endpoint fetches already completed call data
+ * rather than creating new subscriptions. Transcripts are formatted into readable
  * HTML with speaker labels, and both transcripts and recordings are emitted
- * in real-time via Socket.IO to connected clients.
+ * via Socket.IO to connected clients.
  * 
  * The endpoint handles:
- * - Retrieving an access token for Microsoft Graph
- * - Fetching all transcripts and recordings for the user
- * - Formatting transcript content from VTT to HTML
- * - Emitting data to clients using Socket.IO
+ * - Retrieving an access token for Microsoft Graph API
+ * - Fetching all existing transcripts and recordings for the user via Graph API
+ * - Formatting transcript content from VTT to HTML with speaker identification
+ * - Emitting processed data to clients using Socket.IO
  * - Returning a summary JSON response with counts of transcripts and recordings
  * 
  * @route POST /fetchingTranscriptsandRecordings
@@ -140,7 +141,7 @@ app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
     });
     
   } catch (error) {
-    console.error("Error creating subscription:", error.message);
+    console.error("Error fetching transcripts and recordings:", error.message);
     res.status(500).json({ status: "error", message: error.message });
   }
 });
