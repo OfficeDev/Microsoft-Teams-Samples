@@ -61,12 +61,8 @@ function RecordingTranscript() {
         socket.on('allTranscriptsData', (data) => {
             console.log('All transcripts received:', data);
             
-            // Remove duplicates based on callId and id combination
-            const uniqueTranscripts = data.filter((transcript, index, self) => 
-                index === self.findIndex(t => t.callId === transcript.callId && t.id === transcript.id)
-            );
-            
-            setAllTranscripts(uniqueTranscripts);
+            // Transcript IDs are unique, so no need to filter duplicates
+            setAllTranscripts(data);
             setIsLoadingTranscripts(false);
             setTranscriptsLoaded(true);
         });
@@ -76,14 +72,10 @@ function RecordingTranscript() {
             console.log('All recordings received:', data);
             setIsLoadingRecordings(true);
             
-            // Remove duplicates based on callId and recordingId combination
-            const uniqueRecordings = data.filter((recording, index, self) => 
-                index === self.findIndex(r => r.callId === recording.callId && r.recordingId === recording.recordingId)
-            );
-            
+            // Recording IDs are unique, so no need to filter duplicates
             // Process recordings to create video URLs
             const processedRecordings = [];
-            for (const recording of uniqueRecordings) {
+            for (const recording of data) {
                 try {
                     const response = await fetch(recording.url, {
                         headers: { Authorization: `Bearer ${recording.token}` }
