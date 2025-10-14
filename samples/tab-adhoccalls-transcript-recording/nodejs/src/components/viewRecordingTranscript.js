@@ -16,7 +16,7 @@ import io from "socket.io-client";
  * - Video recording playback
  * - Loading states and error handling
  * - Responsive UI with status messages
- * - Pagination for large datasets
+
  */
 function RecordingTranscript() {
 
@@ -30,8 +30,12 @@ function RecordingTranscript() {
     const [recordingsLoaded, setRecordingsLoaded] = useState(false);
     
     // Pagination state
+    const [transcriptsNextLink, setTranscriptsNextLink] = useState(null);
+    const [recordingsNextLink, setRecordingsNextLink] = useState(null);
+    const [hasMoreTranscripts, setHasMoreTranscripts] = useState(false);
+    const [hasMoreRecordings, setHasMoreRecordings] = useState(false);
+    const [isLoadingNext, setIsLoadingNext] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10);
 
     // Declare new state variables that are required to get and set the connection.
     const [socket, setSocket] = useState(io());
@@ -53,8 +57,9 @@ function RecordingTranscript() {
      * 
      * Sets up event listeners for WebSocket communication to handle:
      * 1. Connection events
-     * 2. Transcript data reception from Microsoft Graph API
-     * 3. Recording data reception and video blob creation from Microsoft Graph API
+     * 2. Transcript data reception from Microsoft Graph API (with pagination)
+     * 3. Recording data reception and video blob creation from Microsoft Graph API (with pagination)
+     * 4. Next page data handling for pagination
      */
     useEffect(() => {
         if (!socket) return;
@@ -62,25 +67,32 @@ function RecordingTranscript() {
                 socket.connect();
             });
 
-        // Listen for all transcripts data
-        socket.on('allTranscriptsData', (data) => {
-            console.log('All transcripts received:', data);
+        // Listen for transcripts data (initial load and pagination)
+        socket.on('transcriptsData', (data) => {
+            console.log('Transcripts received:', data);
             
-            // Transcript IDs are unique, so no need to filter duplicates
-            setAllTranscripts(data);
+            if (data.isNextPage) {
+                // Append to existing transcripts for next page
+                setAllTranscripts(prev => [...prev, ...data.transcripts]);
+            } else {
+                // Replace for initial load
+                setAllTranscripts(data.transcripts);
+            }
+            
+            setTranscriptsNextLink(data.nextLink);
+            setHasMoreTranscripts(data.hasNext);
             setIsLoadingTranscripts(false);
             setTranscriptsLoaded(true);
         });
 
-        // Listen for all recordings data  
-        socket.on('allRecordingsData', async (data) => {
-            console.log('All recordings received:', data);
+        // Listen for recordings data (initial load and pagination)
+        socket.on('recordingsData', async (data) => {
+            console.log('Recordings received:', data);
             setIsLoadingRecordings(true);
             
-            // Recording IDs are unique, so no need to filter duplicates
             // Process recordings to create video URLs
             const processedRecordings = [];
-            for (const recording of data) {
+            for (const recording of data.recordings) {
                 try {
                     const response = await fetch(recording.url, {
                         headers: { Authorization: `Bearer ${recording.token}` }
@@ -101,15 +113,64 @@ function RecordingTranscript() {
                 }
             }
             
-            setAllRecordings(processedRecordings);
+            if (data.isNextPage) {
+                // Append to existing recordings for next page
+                setAllRecordings(prev => [...prev, ...processedRecordings]);
+            } else {
+                // Replace for initial load
+                setAllRecordings(processedRecordings);
+            }
+            
+            setRecordingsNextLink(data.nextLink);
+            setHasMoreRecordings(data.hasNext);
             setIsLoadingRecordings(false);
             setRecordingsLoaded(true);
+        });
+
+        // Listen for next page transcripts data
+        socket.on('nextTranscriptsData', (data) => {
+            console.log('Next transcripts received:', data);
+            setAllTranscripts(prev => [...prev, ...data.transcripts]);
+            setTranscriptsNextLink(data.nextLink);
+            setHasMoreTranscripts(data.hasNext);
+        });
+
+        // Listen for next page recordings data
+        socket.on('nextRecordingsData', async (data) => {
+            console.log('Next recordings received:', data);
+            
+            // Process recordings to create video URLs
+            const processedRecordings = [];
+            for (const recording of data.recordings) {
+                try {
+                    const response = await fetch(recording.url, {
+                        headers: { Authorization: `Bearer ${recording.token}` }
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const videoUrl = URL.createObjectURL(blob);
+                        processedRecordings.push({
+                            ...recording,
+                            videoUrl: videoUrl
+                        });
+                    }
+                } catch (err) {
+                    console.error('Error processing recording:', err);
+                    processedRecordings.push(recording);
+                }
+            }
+            
+            setAllRecordings(prev => [...prev, ...processedRecordings]);
+            setRecordingsNextLink(data.nextLink);
+            setHasMoreRecordings(data.hasNext);
+            setIsLoadingNext(false);
         });
     
     }, [socket]);
 
     /**
-     * Function to fetch all available transcript and recording data from Microsoft Graph API
+     * Function to fetch initial transcript and recording data (first 10 items)
      */
     const fetchAllData = async () => {
         setIsLoadingAllData(true);
@@ -117,15 +178,23 @@ function RecordingTranscript() {
         setIsLoadingRecordings(true);
         setTranscriptsLoaded(false);
         setRecordingsLoaded(false);
+        setCurrentPage(1);
+        
+        // Reset pagination state
+        setTranscriptsNextLink(null);
+        setRecordingsNextLink(null);
+        setHasMoreTranscripts(false);
+        setHasMoreRecordings(false);
         
         try {
             const response = await fetch('/fetchingTranscriptsandRecordings', {
                 method: 'POST',
-                headers: { "Content-Type": "application/json" }
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ isNextPage: false })
             });
             
             if (response.ok) {
-                setFetchMessage("Successfully fetched all transcript and recording data from Microsoft Graph API");
+                setFetchMessage("Successfully fetched first 10 transcript and recording items from Microsoft Graph API");
             } else {
                 setFetchMessage("Error fetching data from Microsoft Graph API");
             }
@@ -135,6 +204,47 @@ function RecordingTranscript() {
             setIsLoadingAllData(false);
             setIsLoadingTranscripts(false);
             setIsLoadingRecordings(false);
+        }
+    };
+
+    /**
+     * Function to fetch next page of transcripts and recordings (10 items per page)
+     */
+    const fetchNextPage = async () => {
+        if (!hasMoreTranscripts && !hasMoreRecordings) {
+            setFetchMessage("No more data to load");
+            return;
+        }
+
+        setIsLoadingNext(true);
+        
+        try {
+            const response = await fetch('/fetchNextPage', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    transcriptsNextLink: transcriptsNextLink,
+                    recordingsNextLink: recordingsNextLink
+                })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                setCurrentPage(prev => prev + 1);
+                setFetchMessage(`Successfully loaded ${data.transcripts.count} more transcripts and ${data.recordings.count} more recordings`);
+                
+                // Hide success message after 2 seconds
+                setTimeout(() => {
+                    setFetchMessage("");
+                }, 2000);
+            } else {
+                setFetchMessage("Error fetching next page from Microsoft Graph API");
+                setIsLoadingNext(false);
+            }
+        } catch (err) {
+            console.error(err);
+            setFetchMessage("Error fetching next page: " + err.message);
+            setIsLoadingNext(false);
         }
     };
 
@@ -150,11 +260,6 @@ function RecordingTranscript() {
             }
         }
     }, [transcriptsLoaded, recordingsLoaded, fetchMessage]);
-
-    // Reset pagination when data changes
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [allRecordings.length, allTranscripts.length]);
 
     /**
      * Effect Hook: Automatic Data Fetching
@@ -238,32 +343,15 @@ function RecordingTranscript() {
                             ...allTranscripts.map(t => t.callId)
                         ]);
                         
-                        // Convert to array and implement pagination
                         const callIdsArray = Array.from(allCallIds);
-                        const totalItems = callIdsArray.length;
-                        const totalPages = Math.ceil(totalItems / itemsPerPage);
-                        const startIndex = (currentPage - 1) * itemsPerPage;
-                        const endIndex = startIndex + itemsPerPage;
-                        const currentItems = callIdsArray.slice(startIndex, endIndex);
                         
                         return (
                             <>
-                                <div style={{ 
-                                    display: 'flex', 
-                                    justifyContent: 'space-between', 
-                                    alignItems: 'center',
-                                    marginBottom: '20px'
-                                }}>
-                                    <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px', margin: 0 }}>
-                                        Recordings & Transcripts
-                                    </h3>
-                                    <div style={{ fontSize: '14px', color: '#666' }}>
-                                        Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of {totalItems} items
-                                    </div>
-                                </div>
+                                <h3 style={{ color: '#6264a7', borderBottom: '2px solid #6264a7', paddingBottom: '10px', marginBottom: '20px' }}>
+                                    Recordings & Transcripts
+                                </h3>
                                 <div style={{ marginTop: '20px' }}>
-                                    {currentItems.map((callId, index) => {
-                                        const globalIndex = startIndex + index;
+                                    {callIdsArray.map((callId, index) => {
                                 const recording = allRecordings.find(r => r.callId === callId);
                                 const transcript = allTranscripts.find(t => t.callId === callId);
                                 
@@ -293,7 +381,7 @@ function RecordingTranscript() {
                                         padding: '15px',
                                         backgroundColor: '#f9f9f9'
                                     }}>
-                                        <h4 style={{ marginTop: '0', color: '#333' }}>Recording {globalIndex + 1}</h4>
+                                        <h4 style={{ marginTop: '0', color: '#333' }}>Recording {index + 1}</h4>
                                         {recording ? (
                                             recording.videoUrl ? (
                                                 <video 
@@ -351,7 +439,7 @@ function RecordingTranscript() {
                                         padding: '15px',
                                         backgroundColor: '#f9f9f9'
                                     }}>
-                                        <h4 style={{ marginTop: '0', color: '#333' }}>Transcript {globalIndex + 1}</h4>
+                                        <h4 style={{ marginTop: '0', color: '#333' }}>Transcript {index + 1}</h4>
                                         {transcript ? (
                                             <div style={{ 
                                                 backgroundColor: 'white', 
@@ -433,76 +521,43 @@ function RecordingTranscript() {
                             );
                         })}
                                 </div>
-                                
-                                {/* Pagination Controls */}
-                                {totalPages > 1 && (
-                                    <div style={{ 
-                                        display: 'flex', 
-                                        justifyContent: 'center', 
-                                        alignItems: 'center', 
-                                        gap: '10px',
-                                        marginTop: '30px',
-                                        padding: '20px 0',
-                                        borderTop: '1px solid #e1e1e1'
-                                    }}>
-                                        <Button
-                                            onClick={() => setCurrentPage(currentPage - 1)}
-                                            disabled={currentPage === 1}
-                                            style={{
-                                                backgroundColor: currentPage === 1 ? '#f5f5f5' : '#6264a7',
-                                                color: currentPage === 1 ? '#999' : 'white',
-                                                border: 'none',
-                                                padding: '8px 16px',
-                                                borderRadius: '4px',
-                                                cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
-                                            }}
-                                        >
-                                            Previous
-                                        </Button>
-                                        
-                                        <div style={{ display: 'flex', gap: '5px' }}>
-                                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
-                                                <Button
-                                                    key={pageNum}
-                                                    onClick={() => setCurrentPage(pageNum)}
-                                                    style={{
-                                                        backgroundColor: pageNum === currentPage ? '#6264a7' : 'white',
-                                                        color: pageNum === currentPage ? 'white' : '#6264a7',
-                                                        border: `1px solid ${pageNum === currentPage ? '#6264a7' : '#ddd'}`,
-                                                        padding: '8px 12px',
-                                                        borderRadius: '4px',
-                                                        minWidth: '40px',
-                                                        fontWeight: pageNum === currentPage ? 'bold' : 'normal'
-                                                    }}
-                                                >
-                                                    {pageNum}
-                                                </Button>
-                                            ))}
-                                        </div>
-                                        
-                                        <Button
-                                            onClick={() => setCurrentPage(currentPage + 1)}
-                                            disabled={currentPage === totalPages}
-                                            style={{
-                                                backgroundColor: currentPage === totalPages ? '#f5f5f5' : '#6264a7',
-                                                color: currentPage === totalPages ? '#999' : 'white',
-                                                border: 'none',
-                                                padding: '8px 16px',
-                                                borderRadius: '4px',
-                                                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
-                                            }}
-                                        >
-                                            Next
-                                        </Button>
-                                        
-                                        <div style={{ marginLeft: '20px', fontSize: '14px', color: '#666' }}>
-                                            Page {currentPage} of {totalPages}
-                                        </div>
-                                    </div>
-                                )}
                             </>
                         );
                     })()}
+                    
+                    {/* Pagination Section */}
+                    {(allRecordings.length > 0 || allTranscripts.length > 0) && (hasMoreTranscripts || hasMoreRecordings) && (
+                        <div style={{ 
+                            marginTop: '20px', 
+                            textAlign: 'center',
+                            borderTop: '1px solid #e1e1e1',
+                            paddingTop: '20px'
+                        }}>
+                            <Button 
+                                onClick={fetchNextPage} 
+                                disabled={isLoadingNext || (!hasMoreTranscripts && !hasMoreRecordings)}
+                                style={{ 
+                                    backgroundColor: '#6264a7', 
+                                    color: 'white',
+                                    padding: '10px 20px',
+                                    fontSize: '14px'
+                                }}
+                            >
+                                {isLoadingNext ? 'Loading Next...' : 'Next'}
+                            </Button>
+                            {isLoadingNext && <Spinner size="small" style={{ marginLeft: '10px' }} />}
+                            
+                            <div style={{ 
+                                marginTop: '10px', 
+                                fontSize: '12px', 
+                                color: '#666',
+                                fontStyle: 'italic'
+                            }}>
+                                Page {currentPage} • Showing {allTranscripts.length} transcripts, {allRecordings.length} recordings
+                                {(hasMoreTranscripts || hasMoreRecordings) && " • More available"}
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
