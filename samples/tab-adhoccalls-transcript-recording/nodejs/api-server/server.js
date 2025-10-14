@@ -3,148 +3,138 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+const auth = require('./auth');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const path = require('path');
-const axios = require('axios');
-const ENV_FILE = path.join(__dirname, '.env');
-require('dotenv').config({ path: ENV_FILE });
-const tenantIds = process.env.TENANT_ID;
-const userId = process.env.USER_ID;
-const auth = require('./auth');
+
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
 
+const tenantIds = process.env.TENANT_ID;
+const userId = process.env.USER_ID;
+
 /**
- * Generic API Data Fetcher
- * 
- * Makes HTTP GET requests to Microsoft Graph API endpoints with proper authentication.
- * Supports both JSON and binary data retrieval based on the response type needed.
- * 
- * @param {string} url - The Microsoft Graph API endpoint URL
- * @param {string} accessToken - Bearer token for API authentication
- * @param {boolean} isBinary - Whether to expect binary data (for recordings) or JSON data
- * @returns {Promise<string|ArrayBuffer>} - JSON string for text data, ArrayBuffer for binary data
+ * Fetches data from a specified API endpoint using an access token for authentication.
+ *
+ * This function performs an HTTP GET request to a Microsoft Graph API (or any other API) endpoint.
+ * It supports retrieving both JSON and binary (e.g., file, recording) responses depending on the use case.
+ *
+ * @async
+ * @function getApiData
+ * @param {string} url - The API endpoint URL to fetch data from.
+ * @param {string} accessToken - The bearer token used for authorization in the request header.
+ * @param {boolean} [isBinary=false] - Optional flag indicating whether to expect binary data (true) or JSON (false).
+ * @returns {Promise<string|ArrayBuffer>} - Resolves with a JSON string for text responses, or an ArrayBuffer for binary responses.
+ * @throws {Error} Logs an error message if the request fails.
  */
 async function getApiData(url, accessToken, isBinary = false) {
   try {
     const response = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      },
+      headers: { Authorization: `Bearer ${accessToken}` },
       responseType: isBinary ? 'arraybuffer' : 'json'
     });
-
-    if (isBinary) {
-      return response.data; // Return raw binary data
-    } else {
-      return JSON.stringify(response.data);
-    }
+    return isBinary ? response.data : JSON.stringify(response.data);
   } catch (error) {
     console.error('Error fetching API data:', error);
   }
 }
 
 /**
- * API Endpoint: Fetch Existing Adhoc Call Transcripts and Recordings with Pagination
- * 
- * Retrieves existing transcripts and recordings for a specific Microsoft Teams user
- * using the Microsoft Graph Beta API with pagination support. Shows 10 items initially,
- * then 4 items per page for subsequent requests.
- * 
- * The endpoint handles:
- * - Retrieving an access token for Microsoft Graph API
- * - Fetching transcripts and recordings with pagination support
- * - Formatting transcript content from VTT to HTML with speaker identification
- * - Emitting processed data to clients using Socket.IO
- * - Returning pagination information including nextLink for both transcripts and recordings
- * 
- * @route POST /fetchingTranscriptsandRecordings
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @returns {Object} JSON response containing transcripts, recordings, and pagination info
+ * POST /fetchingTranscriptsandRecordings
+ *
+ * Fetches paginated transcript and recording data for a specific user’s adhoc calls
+ * from Microsoft Graph API. Handles pagination using @odata.nextLink and emits data
+ * in real-time to connected clients via Socket.IO.
+ *
+ * Features:
+ * - Retrieves paged transcript and recording data (default: 10 items per page)
+ * - Extracts and formats transcript content into readable text
+ * - Emits both transcript and recording data to connected clients
+ * - Supports next page loading through Graph API’s @odata.nextLink
+ *
+ * Request Body Parameters:
+ * @param {boolean} [isNextPage=false] - Indicates whether to fetch the next page of data.
+ * @param {string|null} [transcriptsNextLink=null] - Next page link for transcripts (if available).
+ * @param {string|null} [recordingsNextLink=null] - Next page link for recordings (if available).
+ *
+ * Emits:
+ * - `transcriptsData`: Formatted transcript data, pagination info.
+ * - `recordingsData`: Recording metadata with playback URLs and tokens.
+ *
+ * Response:
+ * @returns {Object} JSON response containing:
+ *  - status: "success" or "error"
+ *  - message: Summary of fetched items
+ *  - transcripts: { data, count, hasNext, nextLink }
+ *  - recordings: { data, count, hasNext, nextLink }
+ *  - pagination: { pageSize, isNextPage }
+ *
+ * Example Request:
+ * POST /fetchingTranscriptsandRecordings
+ * {
+ *   "isNextPage": false,
+ *   "transcriptsNextLink": null,
+ *   "recordingsNextLink": null
+ * }
  */
 app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
   try {
     const accessToken = await auth.getAccessToken(tenantIds);
     const { isNextPage = false, transcriptsNextLink = null, recordingsNextLink = null } = req.body;
-    
-    // Determine page size: 10 for both first page and subsequent pages
-    const pageSize = 5;
+    const pageSize = 10;
     
     let allTranscripts = [];
     let allRecordings = [];
-    let transcriptsNext = null;
-    let recordingsNext = null;
     
     // Fetch transcripts
-    let transcriptsEndpoint;
-    if (transcriptsNextLink) {
-      transcriptsEndpoint = transcriptsNextLink;
-    } else {
-      transcriptsEndpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllTranscripts(userId='${userId}')?$top=${pageSize}`;
-    }
+    const transcriptsEndpoint = transcriptsNextLink || 
+      `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllTranscripts(userId='${userId}')?$top=${pageSize}`;
     
     const responseDataString = await getApiData(transcriptsEndpoint, accessToken);
     const responseData = JSON.parse(responseDataString);
-    
-    // Store nextLink for transcripts
-    transcriptsNext = responseData['@odata.nextLink'] || null;
+    const transcriptsNext = responseData['@odata.nextLink'] || null;
     
     // Process transcripts
     for (const item of responseData.value || []) {
-      console.log('Transcript - callId:', item.callId, 'id:', item.id);
-
       const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/transcripts/${item.id}/content?$format=text/vtt`;
       const transcriptData = await getApiData(endpoint, accessToken);
       
-      // Format the transcript content
       const regex = /<v\s+([^>]+)>(.*?)<\/v>/g;
-      let match;
       const formattedLines = [];
+      let match;
 
       while ((match = regex.exec(transcriptData)) !== null) {
-        const speaker = match[1].trim();
-        const text = match[2].trim();
-        formattedLines.push(`<b>${speaker}</b> : ${text}`);
+        formattedLines.push(`<b>${match[1].trim()}</b> : ${match[2].trim()}`);
       }
-
-      const formattedContent = formattedLines.join("<br/>");
       
       allTranscripts.push({
         callId: item.callId,
         id: item.id,
         content: transcriptData,
-        formattedContent: formattedContent
+        formattedContent: formattedLines.join("<br/>")
       });
     }
 
     // Fetch recordings
-    let transcriptsEndpointVideo;
-    if (recordingsNextLink) {
-      transcriptsEndpointVideo = recordingsNextLink;
-    } else {
-      transcriptsEndpointVideo = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllRecordings(userId='${userId}')?$top=${pageSize}`;
-    }
+    const recordingsEndpoint = recordingsNextLink || 
+      `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/getAllRecordings(userId='${userId}')?$top=${pageSize}`;
     
-    const responseDataStringVideo = await getApiData(transcriptsEndpointVideo, accessToken);
+    const responseDataStringVideo = await getApiData(recordingsEndpoint, accessToken);
     const responseDataVideo = JSON.parse(responseDataStringVideo);
-    
-    // Store nextLink for recordings
-    recordingsNext = responseDataVideo['@odata.nextLink'] || null;
+    const recordingsNext = responseDataVideo['@odata.nextLink'] || null;
 
     // Process recordings
-    for (const item of responseDataVideo.value || []) {
-      console.log('Recording - callId:', item.callId, 'id:', item.id);
-      
-      const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/recordings/${item.id}/content`;
-      
+    for (const item of responseDataVideo.value || []) {      
       allRecordings.push({
         callId: item.callId,
         recordingId: item.id,
-        url: recordingUrl,
-        token: accessToken // Token needed to access the recording
+        url: `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/recordings/${item.id}/content`,
+        token: accessToken
       });
     }
     
@@ -190,16 +180,40 @@ app.post('/fetchingTranscriptsandRecordings', async (req, res) => {
   }
 });
 
+
 /**
- * API Endpoint: Fetch Next Page of Transcripts and Recordings
- * 
- * Handles pagination for transcripts and recordings using @odata.nextLink.
- * This endpoint is specifically designed for "Next" button functionality.
- * 
- * @route POST /fetchNextPage
- * @param {Object} req - Express request object with nextLinks
- * @param {Object} res - Express response object
- * @returns {Object} JSON response containing next page data and pagination info
+ * POST /fetchNextPage
+ *
+ * Fetches the next page of transcript and recording data for a specific user's adhoc calls
+ * from Microsoft Graph API using the provided @odata.nextLink URLs.
+ * This endpoint supports pagination and emits the additional data to connected clients in real-time.
+ *
+ * Features:
+ * - Retrieves paginated next-page transcript and recording data.
+ * - Formats transcript content for display.
+ * - Emits next page data to clients via Socket.IO.
+ *
+ * Request Body Parameters:
+ * @param {string|null} transcriptsNextLink - The @odata.nextLink URL for fetching the next transcripts page.
+ * @param {string|null} recordingsNextLink - The @odata.nextLink URL for fetching the next recordings page.
+ *
+ * Emits:
+ * - `nextTranscriptsData`: Contains newly fetched transcript data and pagination info.
+ * - `nextRecordingsData`: Contains newly fetched recording data and pagination info.
+ *
+ * Response:
+ * @returns {Object} JSON response containing:
+ *  - status: "success" or "error"
+ *  - message: Summary of fetched additional items
+ *  - transcripts: { data, count, hasNext, nextLink }
+ *  - recordings: { data, count, hasNext, nextLink }
+ *
+ * Example Request:
+ * POST /fetchNextPage
+ * {
+ *   "transcriptsNextLink": "https://graph.microsoft.com/beta/users/.../adhocCalls/getAllTranscripts?...",
+ *   "recordingsNextLink": "https://graph.microsoft.com/beta/users/.../adhocCalls/getAllRecordings?..."
+ * }
  */
 app.post('/fetchNextPage', async (req, res) => {
   try {
@@ -211,59 +225,44 @@ app.post('/fetchNextPage', async (req, res) => {
     let newTranscriptsNext = null;
     let newRecordingsNext = null;
     
-    // Fetch next transcripts if nextLink provided
+    // Fetch next transcripts
     if (transcriptsNextLink) {
       const responseDataString = await getApiData(transcriptsNextLink, accessToken);
       const responseData = JSON.parse(responseDataString);
-      
       newTranscriptsNext = responseData['@odata.nextLink'] || null;
       
-      // Process transcripts
       for (const item of responseData.value || []) {
-        console.log('Next Transcript - callId:', item.callId, 'id:', item.id);
-
         const endpoint = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/transcripts/${item.id}/content?$format=text/vtt`;
         const transcriptData = await getApiData(endpoint, accessToken);
         
-        // Format the transcript content
         const regex = /<v\s+([^>]+)>(.*?)<\/v>/g;
-        let match;
         const formattedLines = [];
+        let match;
 
         while ((match = regex.exec(transcriptData)) !== null) {
-          const speaker = match[1].trim();
-          const text = match[2].trim();
-          formattedLines.push(`<b>${speaker}</b> : ${text}`);
+          formattedLines.push(`<b>${match[1].trim()}</b> : ${match[2].trim()}`);
         }
-
-        const formattedContent = formattedLines.join("<br/>");
         
         allTranscripts.push({
           callId: item.callId,
           id: item.id,
           content: transcriptData,
-          formattedContent: formattedContent
+          formattedContent: formattedLines.join("<br/>")
         });
       }
     }
 
-    // Fetch next recordings if nextLink provided
+    // Fetch next recordings
     if (recordingsNextLink) {
       const responseDataStringVideo = await getApiData(recordingsNextLink, accessToken);
       const responseDataVideo = JSON.parse(responseDataStringVideo);
-      
       newRecordingsNext = responseDataVideo['@odata.nextLink'] || null;
 
-      // Process recordings
-      for (const item of responseDataVideo.value || []) {
-        console.log('Next Recording - callId:', item.callId, 'id:', item.id);
-        
-        const recordingUrl = `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/recordings/${item.id}/content`;
-        
+      for (const item of responseDataVideo.value || []) {        
         allRecordings.push({
           callId: item.callId,
           recordingId: item.id,
-          url: recordingUrl,
+          url: `https://graph.microsoft.com/beta/users/${userId}/adhocCalls/${item.callId}/recordings/${item.id}/content`,
           token: accessToken
         });
       }
@@ -306,17 +305,18 @@ app.post('/fetchNextPage', async (req, res) => {
 });
 
 /**
- * Server Startup Configuration
- * 
- * Starts the HTTP server with Socket.IO support on the configured port.
- * Uses environment variable PORT or defaults to 5000 for local development.
+ * GET *
+ *
+ * Catch-all route handler for undefined GET endpoints.
+ * Returns a 404 response with a simple message indicating that the path is not defined.
+ *
+ * This ensures that any unrecognized or invalid GET requests
+ * are gracefully handled instead of causing unexpected behavior.
  */
 app.get('*', (req, res) => {
-  console.log("Unhandled request: ", req);
   res.status(404).send("Path not defined");
 });
 
 const port = process.env.PORT || 5000;
 server.listen(port);
-
 console.log('API server is listening on port ' + port);
