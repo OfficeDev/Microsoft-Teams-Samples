@@ -90,7 +90,6 @@ app.on("message", async (context) => {
 
   // Define the mapping of card options to their handlers
   const adaptiveFormatCards = {
-    // Formatting cards from Bot Builder SDK code
     'CodeBlock': () => createAdaptiveCardAttachment(CodeBlocksCard),
     'MentionSupport': () => createAdaptiveCardAttachment(MentionSupport),
     'InfoMasking': () => createAdaptiveCardAttachment(InformationMaskingCard),
@@ -135,15 +134,13 @@ app.on("message", async (context) => {
       await context.send(`Error sending ${text} card: ${error.message}`);
     }
   } 
-  // Handle form submission (like star ratings)
+  // Handle form submission
   else if (activity.value != null && activity.text == undefined) {
     const activityValue = activity.value;
     if (activityValue.hasOwnProperty('rating1') && activityValue.hasOwnProperty('rating2')) {
       await context.send(`Ratings Feedback: ${JSON.stringify(activityValue)}`);
     }
   }
-
-  // After the bot has responded, send the suggested card options
   await sendAdaptiveCardFormats(context);
 });
 
@@ -183,7 +180,6 @@ async function sendAdaptiveCardFormats(context) {
       content: {
         title: 'Please select a card from given options.',
         buttons: [
-          // Formatting cards
           { type: 'imBack', title: 'MentionSupport', value: 'MentionSupport' },
           { type: 'imBack', title: 'InfoMasking', value: 'InfoMasking' },
           { type: 'imBack', title: 'FullWidthCard', value: 'FullWidthCard' },
