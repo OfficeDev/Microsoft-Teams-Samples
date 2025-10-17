@@ -1,37 +1,48 @@
 {
-  "name": "teams-bot",
+  "name": "msgextsearchteamsai",
   "version": "1.0.0",
-  "description": "Bot Builder v4 Bot Teams sample",
+  "description": "Microsoft 365 Agents Toolkit message extension sample",
+  "engines": {
+    "node": "20 || 22"
+  },
   "author": "Microsoft",
   "license": "MIT",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "dev:teamsfx": "npm run dev",
-    "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
-    "start": "node ./index.js",
-    "watch": "nodemon ./index.js",
-    "build": "node build.js",
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
+    "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.playground npm run dev",
+    "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.playground teamsapptester start",
+    "clean": "rimraf ./dist",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "build": "tsc --build",
+    "start": "node .",
+    "dev": "nodemon --exec node --inspect=9239 --signal SIGINT -r ts-node/register ./src/index.ts",
+    "watch": "nodemon --exec \"npm run start\""
   },
   "dependencies": {
-    "axios": "^0.21.2",
-    "botbuilder": "^4.18.0",
-    "dotenv": "^8.2.0",
-    "restify": "^10.0.0"
+    "@azure/identity": "^4.11.1",
+    "@microsoft/teams.api": "^2.0.0",
+    "@microsoft/teams.apps": "^2.0.0",
+    "@microsoft/teams.cards": "^2.0.0",
+    "@microsoft/teams.common": "^2.0.0",
+    "@microsoft/teams.dev": "^2.0.0",
+    "@microsoft/teams.graph": "^2.0.0",
+    "axios": "^1.6.0",
+    "restify": "^11.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.0.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "~2.0.4",
-    "esbuild": "^0.18.1"
+    "@types/node": "^22.5.4",
+    "@types/restify": "^8.5.12",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "env-cmd": "^11.0.0"
   }
 }

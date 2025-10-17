@@ -2,8 +2,11 @@
 env/.env.*.user
 env/.env.local
 .localConfigs
-appManifest/build
-/build
+.localConfigs.playground
+.notification.localstore.json
+.notification.playgroundstore.json
+/devTools
+appPackage/build
 
 # dependencies
 node_modules/
