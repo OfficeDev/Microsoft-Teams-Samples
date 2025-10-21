@@ -1210,6 +1210,10 @@ jobs:
               name: 'bot-proactive-messaging-teamsfx'
               version: '3.10.x'
 
+            - project_path: 'samples/bot-knowledge-hub-agent/python'
+              name: 'bot-knowledge-hub-agent'
+              version: '3.10.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
     defaults:

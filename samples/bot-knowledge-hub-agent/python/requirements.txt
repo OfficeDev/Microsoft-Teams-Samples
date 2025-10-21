@@ -1,0 +1,14 @@
+# Azure Identity for Managed Identity authentication
+azure-identity>=1.15.0
+
+# Microsoft Teams AI Library packages (v2.0 alpha)
+microsoft-teams-ai==2.0.0a2
+microsoft-teams-api==2.0.0a2
+microsoft-teams-apps==2.0.0a2
+microsoft-teams-cards==2.0.0a2
+microsoft-teams-common==2.0.0a2
+microsoft-teams-devtools==2.0.0a2
+microsoft-teams-openai==2.0.0a2
+
+# Environment variables
+python-dotenv>=1.0.0
