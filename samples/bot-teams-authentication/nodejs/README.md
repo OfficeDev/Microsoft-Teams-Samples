@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-nodejs
 ---
 # Teams Auth Bot
 
-Bot Framework v4 bot using Teams authentication
+Teams AI v2 bot using Teams authentication
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with authentication in a bot for Microsoft Teams.
 
@@ -137,29 +137,30 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 **Install app:**
 
-![add-App ](Images/9.Desktop_OpenApp.png)
+![add-App ](Images/1.OpenApp.png)
 
 **Welcome to teamsbot:**
 
-![added-App ](Images/10.Desktop_WelcomeMsg.png)
+![added-App ](Images/2.WelcomeMsg.png)
 
 **Login UI: OAuth Prompt**
 - The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
 - Below are sample UI captures demonstrating how the login experience appears on each:
 
-- **Teams Desktop:** OAuth Prompt displayed as a native popup.
-![auth-prompt ](Images/11.Desktop_OAuth_Prompt.png)
-
-- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
-![auth-card ](Images/3.Web_Teams_SignIn_Card.png)
+- **Auth Prompt:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/3.OAuth_Prompt.png)
 
 **Authentication Success And Token:**
 
-![auth-Token ](Images/13.Desktop_Login_Success_And_Token.png)
+![login-success](Images/4.Login_Success.png)
+
+**Authentication Success And Token:**
+
+![user_details](Images/5.User_Details.png)
 
 **Logout UI:**
 
-![logout ](Images/14.Desktop_Logout.png)
+![logout ](Images/6.Logout.png)
 
 ## Deploy the bot to Azure
 

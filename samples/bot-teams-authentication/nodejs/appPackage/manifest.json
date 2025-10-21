@@ -1,0 +1,71 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "My App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/privacy",
+        "termsOfUseUrl": "https://www.example.com/termofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "bot-teams-auth${{APP_NAME_SUFFIX}}",
+        "full": "full name for bot-teams-auth"
+    },
+    "description": {
+        "short": "short description for bot-teams-auth",
+        "full": "full description for bot-teams-auth"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                  "scopes": ["personal", "team", "groupChat"],
+                  "commands": [
+                      {
+                          "title": "/signin",
+                          "description": "Sign in to your account."
+                      },
+                      {
+                          "title": "/signout",
+                          "description": "Sign out from your account."
+                      },
+                      {
+                          "title": "/whoami",
+                          "description": "Get your user profile from Microsoft Graph."
+                      }
+                  ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "*.devtunnels.ms",
+        "*.botframework.com"
+    ],
+    "webApplicationInfo": {
+        "id": "${{BOT_ID}}",
+        "resource": "api://botid-${{BOT_ID}}"
+    }
+}
