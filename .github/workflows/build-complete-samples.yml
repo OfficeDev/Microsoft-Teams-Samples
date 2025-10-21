@@ -496,6 +496,10 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-knowledge-hub-agent/csharp/ContosoKnowledgeHub/ContosoKnowledgeHub.csproj'
+              name: 'bot-knowledge-hub-agent'
+              version: '8.0.0'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
