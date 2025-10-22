@@ -498,7 +498,7 @@ jobs:
 
             - project_path: 'samples/bot-knowledge-hub-agent/csharp/ContosoKnowledgeHub/ContosoKnowledgeHub.csproj'
               name: 'bot-knowledge-hub-agent'
-              version: '8.0.0'
+              version: '6.0.x'
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
@@ -1069,6 +1069,10 @@ jobs:
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
               name: 'tab-adhoccalls-transcript-recording-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/bot-knowledge-hub-agent/nodejs'
+              name: 'bot-knowledge-hub-agent'
               version: '18.x'
 
       fail-fast: false
