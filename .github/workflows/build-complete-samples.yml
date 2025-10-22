@@ -1212,7 +1212,7 @@ jobs:
 
             - project_path: 'samples/bot-knowledge-hub-agent/python'
               name: 'bot-knowledge-hub-agent'
-              version: '3.10.x'
+              version: '3.13.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
