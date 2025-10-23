@@ -11,7 +11,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: Contoso Knowledge Hub${{APP_NAME_SUFFIX}}
+      name: Agent Knowledge Hub${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -70,8 +70,8 @@ provision:
 deploy:
   - uses: cli/runDotnetCommand
     with:
-      args: publish --configuration Release ContosoKnowledgeHub.csproj
-      workingDirectory: ../ContosoKnowledgeHub
+      args: publish --configuration Release AgentKnowledgeHub.csproj
+      workingDirectory: ../AgentKnowledgeHub
   # Deploy your application to Azure App Service using the zip deploy feature.
   # For additional details, refer to https://aka.ms/zip-deploy-to-app-services.
   - uses: azureAppService/zipDeploy
@@ -83,4 +83,4 @@ deploy:
       # You can replace it with your existing Azure Resource id
       # or add it to your environment variable file.
       resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
-      workingDirectory: ../ContosoKnowledgeHub
+      workingDirectory: ../AgentKnowledgeHub

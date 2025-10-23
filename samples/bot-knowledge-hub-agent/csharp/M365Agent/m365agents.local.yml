@@ -8,7 +8,7 @@ provision:
   - uses: teamsApp/create
     with:
       # Teams app name
-      name: Contoso Knowledge Hub${{APP_NAME_SUFFIX}}
+      name: Agent Knowledge Hub${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
@@ -18,7 +18,7 @@ provision:
   - uses: aadApp/create
     with:
       # The Microsoft Entra application's display name
-      name: Contoso Knowledge Hub${{APP_NAME_SUFFIX}}
+      name: Agent Knowledge Hub${{APP_NAME_SUFFIX}}
       generateClientSecret: true
       signInAudience: AzureADMultipleOrgs
     writeToEnvironmentFile:
@@ -32,7 +32,7 @@ provision:
   # Generate runtime appsettings to JSON file
   - uses: file/createOrUpdateJsonFile
     with:
-      target: ../ContosoKnowledgeHub/appsettings.Development.json
+      target: ../AgentKnowledgeHub/appsettings.Development.json
       content:
         BOT_TYPE: 'MultiTenant'
         BOT_ID: ${{BOT_ID}}
@@ -42,7 +42,7 @@ provision:
   - uses: botFramework/create
     with:
       botId: ${{BOT_ID}}
-      name: Contoso Knowledge Hub
+      name: Agent Knowledge Hub
       messagingEndpoint: ${{BOT_ENDPOINT}}/api/messages
       description: ""
       channels:
