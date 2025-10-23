@@ -4,7 +4,7 @@
 version: v1.2
 
 additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-constoso-knowledge-hub-python
+  sampleTag: Microsoft-Teams-Samples:bot-Agent-Knowledge-Hub-python
 
 environmentFolderPath: ./env
 
@@ -12,7 +12,7 @@ environmentFolderPath: ./env
 provision:
   - uses: teamsApp/create # Creates a Teams app
     with:
-      name: bot-constoso-knowledge-hub${{APP_NAME_SUFFIX}} # Teams app name
+      name: Agent-Knowledge-Hub${{APP_NAME_SUFFIX}} # Teams app name
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       teamsAppId: TEAMS_APP_ID
@@ -79,4 +79,3 @@ publish:
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
-projectId: 7b615969-ecc3-4d93-9b45-dc001fe4e21c
