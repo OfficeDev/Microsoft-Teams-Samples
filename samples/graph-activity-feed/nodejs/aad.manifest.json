@@ -129,9 +129,9 @@
             "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
             "type": "Spa"
         },
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end",
-            "type": "Spa"
-        }
+       {
+           "url": "${{TAB_ENDPOINT}}/UserNotification",
+           "type": "Spa"
+       }
     ]
 }
