@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Academic Agent built with Teams AI Library for Python - provides educational support and career guidance.
+description: Agent Knowledge Hub - AI Academic & Career Guidance Agent
 products:
 - office-teams
 - office
@@ -9,24 +9,22 @@ languages:
 - Python
 extensions:
  contentType: samples
- createdDate: "2025-10-21"
-urlFragment: teams-ai-academic-agent-python
+ createdDate: "10/21/2025 01:38:25 PM"
+urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-python
 ---
 
-# Academic Agent - Teams AI Library Python Sample
+# Agent Knowledge Hub - AI Academic & Career Guidance Agent
 
 This sample demonstrates an AI-powered Academic Agent built with the **Microsoft Teams AI Library for Python**. The bot provides comprehensive educational support, career guidance, and course recommendations using Azure OpenAI.
 
 ## Interaction with App
-![Academic Agent](Images/Contoso_Knowledge_Hub.gif)
+![Agent knowledge Hub](Images/Agent_Knowledge_Hub.gif)
 
 ## Included Features
 * **Teams AI Library** - Microsoft Teams AI SDK for Python (`microsoft.teams.*`)
 * **Azure OpenAI Integration** - GPT-powered responses with Azure OpenAI
 * **Prompt Management** - Structured prompts system with instructions
-* **State Management** - Automatic conversation state with LocalStorage
 * **Educational Agent** - Academic guidance and course recommendations
-* **Feedback System** - Thumbs up/down feedback on AI responses
 
 ## Architecture
 
@@ -109,9 +107,19 @@ the Teams service needs to call into the bot.
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 
-4) In a terminal, navigate to `samples/bot-knowledge-hub-agent/python`
+4) In a terminal, navigate to `samples/agent-knowledge-hub/python`
 
 5) Activate your desired virtual environment
+
+1) Update the `.env` configuration for the agent to use the Microsoft App Id and App Password from the app registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+ - In the `.env` file, set:
+   - `MicrosoftAppId=<your-microsoft-app-id>`
+   - `MicrosoftAppPassword=<your-app-password>`
+   - `MicrosoftAppType=<MultiTenant|SingleTenant|UserAssignedMSI>` (MultiTenant is default)
+ - Also configure your Azure OpenAI settings:
+   - `AZURE_OPENAI_API_KEY=<your-azure-openai-key>`
+   - `AZURE_OPENAI_ENDPOINT=<your-azure-openai-endpoint>`
+   - `AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini`
 
 6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
@@ -164,8 +172,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Teams AI Library Documentation](https://microsoft.github.io/teams-ai/)
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Microsoft Teams Platform Documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/)
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-knowledge-hub-agent-python" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-python" />
