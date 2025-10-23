@@ -1210,8 +1210,8 @@ jobs:
               name: 'bot-proactive-messaging-teamsfx'
               version: '3.10.x'
 
-            - project_path: 'samples/bot-knowledge-hub-agent/python'
-              name: 'bot-knowledge-hub-agent'
+            - project_path: 'samples/agent-knowledge-hub/python'
+              name: 'agent-knowledge-hub'
               version: '3.13.x'
 
       fail-fast: false

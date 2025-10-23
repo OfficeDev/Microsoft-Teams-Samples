@@ -116,7 +116,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 30 | Requirement Targeting Mutual Dependency | Microsoft M365 RT sample app in Node.js which specifies mutual-dependency relationships between app capabilities using elementRelationshipSet. | Advanced | | [View][RequirementTargetingMutualDependency#nodejs] ![toolkit-icon](assets/toolkit-icon.png) | | |
 | 31 | Streaming Bot | This sample showcases the conversational streaming token scenario for teams bot in personal scope. | Advanced | [View][botstreaming#csharp] |[View][botstreaming#nodejs]![toolkit-icon](assets/toolkit-icon.png) | | |
 | 32 | Auth0 Bot | This sample demonstrates how to authenticate users in a Microsoft Teams bot using Auth0 login and retrieve their profile details. After authentication, the bot displays the user's name, email, and profile picture in an Adaptive Card. | Intermediate | [View][bot-auth0-adaptivecard#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-auth0-adaptivecard#python] ![toolkit-icon](assets/toolkit-icon.png) | | [View](/samples/bot-auth0-adaptivecard/csharp/demo-manifest/bot-auth0-adaptivecard.zip) |
-| 33 | Bot Knowledge Hub Agent | Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations. | Intermediate | [View][bot-knowledge-hub-agent#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-knowledge-hub-agent#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][bot-knowledge-hub-agent#python] ![toolkit-icon](assets/toolkit-icon.png) | | |
+| 33 | Agent Knowledge Hub | Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations. | Intermediate | [View][agent-knowledge-hub#cs] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#js] ![toolkit-icon](assets/toolkit-icon.png) | [View][agent-knowledge-hub#python] ![toolkit-icon](assets/toolkit-icon.png) | | |
 
 
 #### Additional samples
@@ -519,9 +519,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-context-app#python]:samples/meetings-context-app/python
 [bot-auth0-adaptivecard#python]:samples/bot-auth0-adaptivecard/python
 
-[bot-knowledge-hub-agent#js]:samples/bot-knowledge-hub-agent/nodejs
-[bot-knowledge-hub-agent#cs]:samples/bot-knowledge-hub-agent/csharp
-[bot-knowledge-hub-agent#python]:samples/bot-knowledge-hub-agent/python
+[agent-knowledge-hub#js]:samples/agent-knowledge-hub/nodejs
+[agent-knowledge-hub#cs]:samples/agent-knowledge-hub/csharp
+[agent-knowledge-hub#python]:samples/agent-knowledge-hub/python
 
 [bot-conversation#js]:samples/bot-conversation/nodejs
 [bot-auth0-adaptivecard#js]:samples/bot-auth0-adaptivecard/nodejs
