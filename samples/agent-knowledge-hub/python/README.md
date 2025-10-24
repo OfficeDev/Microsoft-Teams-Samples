@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Agent Knowledge Hub - AI Academic & Career Guidance Agent
+description: Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 products:
 - office-teams
 - office
@@ -13,12 +13,12 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-python
 ---
 
-# Agent Knowledge Hub - AI Academic & Career Guidance Agent
+# Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 
 This sample demonstrates an AI-powered Academic Agent built with the **Microsoft Teams AI Library for Python**. The bot provides comprehensive educational support, career guidance, and course recommendations using Azure OpenAI.
 
 ## Interaction with App
-![Agent knowledge Hub](Images/Agent_Knowledge_Hub.gif)
+![Contoso knowledge Hub](Images/Contoso_Knowledge_Hub.gif)
 
 ## Included Features
 * **Teams AI Library** - Microsoft Teams AI SDK for Python (`microsoft.teams.*`)
@@ -154,7 +154,7 @@ The bot responds to user messages with AI-generated educational guidance, course
 ![Personal Chat](Images/2.Open_App.png)
 
 - **AI Response with Feedback:**
-![AI Response](Images/3.Prompts_Page.png)
+![AI Response](Images/3.Prompts.png)
 
 - **Agent Recommendations:**
 ![Course Recommendations](Images/4.Response_1.png)
@@ -162,7 +162,7 @@ The bot responds to user messages with AI-generated educational guidance, course
 - **Agent Recommendations:**
 ![Group Chat](Images/5.Response_2.png)
 
-## Deploy the bot to Azure
+## Deploy the agent to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
