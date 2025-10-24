@@ -1,10 +1,10 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-knowledge-hub-agent-csharp",
+    "name": "officedev-microsoft-teams-samples-agent-knowledge-hub-csharp",
     "source": "officeDev",
     "title": "Contoso Knowledge Hub - AI Academic & Career Guidance Agent",
     "shortDescription": "Intelligent guidance agent for academic and career journeys.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-knowledge-hub-agent/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/agent-knowledge-hub/csharp",
     "longDescription": [
       "Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations."
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-knowledge-hub-agent/csharp/ContosoKnowledgeHub/Images/bot-knowledge-hub-agent.gif",
-        "alt": "Solution UX showing teams conversation bot knowledge hub agent"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/agent-knowledge-hub/csharp/AgentKnowledgeHub/Images/agent-knowledge-hub.gif",
+        "alt": "Solution UX showing teams conversation agent knowledge hub"
       }
     ],
     "authors": [

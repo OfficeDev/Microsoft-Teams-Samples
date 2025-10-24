@@ -13,14 +13,14 @@
         "color": "color.png",
         "outline": "outline.png"
     },
-    "name": {
-        "short": "Agent Knowledge Hub",
-        "full": "Agent Knowledge Hub - AI Academic & Career Guidance Agent"
-    },
-    "description": {
-        "short": "Intelligent guidance agent for academic and career journeys",
-        "full": "Agent Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations."
-    },
+  "name": {
+    "short": "Contoso Knowledge Hub",
+    "full": "Contoso Knowledge Hub - AI Academic & Career Guidance Agent"
+  },
+  "description": {
+    "short": "Intelligent guidance agent for academic and career journeys",
+    "full": "Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations."
+  },
     "accentColor": "#FFFFFF",
     "bots": [
         {

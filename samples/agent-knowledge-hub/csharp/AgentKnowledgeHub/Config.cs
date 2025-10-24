@@ -1,4 +1,4 @@
-namespace ContosoKnowledgeHub
+namespace AgentKnowledgeHub
 {
     public class ConfigOptions
     {

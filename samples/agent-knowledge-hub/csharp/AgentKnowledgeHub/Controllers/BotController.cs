@@ -2,7 +2,7 @@
 using Microsoft.Bot.Builder;
 using Microsoft.Teams.AI;
 
-namespace ContosoKnowledgeHub.Controllers
+namespace AgentKnowledgeHub.Controllers
 {
     [Route("api/messages")]
     [ApiController]

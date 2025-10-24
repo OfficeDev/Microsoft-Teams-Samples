@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "21-10-2025 13:38:26"
-urlFragment: officedev-microsoft-teams-samples-bot-knowledge-hub-agent-csharp
+urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-csharp
 ---
 
 # Contoso Knowledge Hub - AI Academic & Career Guidance Agent
@@ -18,11 +18,10 @@ Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI lib
 
 ## Included Features
 * Bots
-* Custom Engine Agents
 
 ## Interaction with app
 
-![bot-knowledge-hub-agent](Images/bot-knowledge-hub-agent.gif)
+![agent-knowledge-hub](Images/agent-knowledge-hub.gif)
 
 ## Prerequisites
 
@@ -90,8 +89,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/bot-knowledge-hub-agent/csharp` folder
-    - Select `ContosoKnowledgeHub.sln` file and open it in Visual Studio
+    - Navigate to `samples/agent-knowledge-hub/csharp` folder
+    - Select `AgentKnowledgeHub.sln` file and open it in Visual Studio
     - Press `F5` to run this project
     
   - Modify the `/appsettings.Development.json` and fill in the following details:
@@ -129,4 +128,4 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - [Microsoft 365 Agents Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-knowledge-hub-agent-csharp" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-csharp" />
