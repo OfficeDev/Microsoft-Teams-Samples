@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Agent Knowledge Hub - AI Academic & Career Guidance Agent
+description: Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 products:
 - office-teams
 - office
@@ -10,11 +10,11 @@ languages:
 extensions:
  contentType: samples
  createdDate: "10/21/2025 01:38:25 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-knowledge-hub-agent-nodejs
+urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-nodejs
 ---
 
-# Agent Knowledge Hub - AI Academic & Career Guidance Agent
-Agent Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations.
+# Contoso Knowledge Hub - AI Academic & Career Guidance Agent
+Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations.
 
 ## Included Features
 * Bots
@@ -22,7 +22,7 @@ Agent Knowledge Hub is an intelligent guidance agent built on the Teams AI libra
 
 ## Interaction with app
 
-![Preview Image](Images/bot-knowledge-hub-agent.gif)
+![Preview Image](Images/agent-knowledge-hub.gif)
 
 ## Prerequisites
 
@@ -95,7 +95,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-commands-menu/nodejs`
+1) In a terminal, navigate to `samples/agent-knowledge-hub/nodejs`
 
 1) Install modules
 
@@ -125,8 +125,6 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
-   
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-commands-menu/nodejs/index.js#L46) line and put your debugger for local debug.
 
 # Running the sample
 
@@ -149,4 +147,4 @@ the Teams service needs to call into the bot.
 - [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
 - [Microsoft 365 Agents Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-knowledge-hub-agent-nodejs" />
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/agent-knowledge-hub-nodejs" />
