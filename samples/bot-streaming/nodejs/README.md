@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app can be use to streaming scenarios in Teams using Azure Open AI and Bot Framework v4 for personal scope.
+description: This sample app can be used for streaming scenarios in Teams using Azure Open AI and Teams AI Library v2 for personal scope.
 products:
 - office-teams
 languages:
@@ -13,25 +13,26 @@ urlFragment: officedev-microsoft-teams-samples-bot-streaming-nodejs
 
 # Teams Streaming Bot Sample
 
-This bot has been created using [Bot Framework](https://dev.botframework.com) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) as a secondary/alternative option to using [Teams AI SDK](https://github.com/microsoft/teams-ai/tree/main/js/samples/04.ai-apps/i.teamsChefBot-streaming). 
+This bot has been created using [Teams AI Library v2](https://aka.ms/teams-ai-library-v2) and [Azure Open AI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal). 
 
-Its main purpose is to demonstrate how to build a bot connected to an LLM and send messages through Teams.
+Its main purpose is to demonstrate how to build a bot connected to an LLM and send streaming messages through Teams using the modern Teams AI Library v2 architecture.
 
 ## Included Features
 * Bots
 * Azure Open AI
 * Streaming
+* Teams AI Library v2
 
 > [!IMPORTANT]
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
 
 ## Interaction with bot
-![StreamingBot](Images/bot-streaming.gif)
+![StreamingBot](img/bot-streaming.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) (supported versions: 20, 22)
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 
@@ -51,8 +52,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Create an Azure Open AI service
 
 - In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
-- **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
-- Collect `AzureOpenAIEndpoint`, `AzureOpenAIKey`, `AzureOpenAIDeployment` values and save these values to update in `.env` file later.
+- **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform streaming responses.
+- Collect `AzureOpenAIEndpoint`, `AzureOpenAIKey`, `AzureOpenAIDeployment` values and save these values to update in environment variables later.
 
 ## Setup
 
@@ -78,14 +79,13 @@ the Teams service needs to call into the bot.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the environment files.
   C) Navigate to **API Permissions**, and make sure to add the following permissions:
    Select Add a permission
       * Select Add a permission
       * Select Microsoft Graph -\> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-
 
 1) Setup for Bot
 
@@ -104,7 +104,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-streaming/nodejs`
+1) In a terminal, navigate to `ai-streaming` folder
 
 1) Install modules
 
@@ -112,8 +112,13 @@ the Teams service needs to call into the bot.
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the environment configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. Update the `env/.env.local` file with:
+    - `CLIENT_ID` - Application (client) ID from the Bot Framework registration
+    - `CLIENT_PASSWORD` - Client secret from the Bot Framework registration
+    - `TENANT_ID` - Directory (tenant) ID
+    - `AzureOpenAIEndpoint` - Your Azure OpenAI endpoint URL
+    - `AzureOpenAIKey` - Your Azure OpenAI API key
+    - `AzureOpenAIDeployment` - Your Azure OpenAI deployment name (e.g., gpt-35-turbo)
 
 1) Run your bot at the command line:
 
@@ -126,27 +131,25 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported scopes)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-streaming/nodejs/index.js#L46) line and put your debugger for local debug.
-
 ## Running the sample
 
 **Install App in Teams:**
-![InstallApp ](Images/1.InstallApp.png)
+![InstallApp](img/1.InstallApp.png)
 
 **Welcome Streaming Card Displayed in Teams:**
-![2.WelcomeStreaming ](Images/2.WelcomeStreaming.png)
+![2.WelcomeStreaming](img/2.WelcomeStreaming.png)
 
 **User Asking a Question to the Bot:**
-![3.AskQuestion ](Images/3.AskQuestion.png)
+![3.AskQuestion](img/3.AskQuestion.png)
 
 **Streaming Results from the Bot in Teams:**
-![4.AskQuestion1 ](Images/4.AskQuestion1.png)
+![4.AskQuestion1](img/4.AskQuestion1.png)
 
 **Getting the information:**
-![4.GettingInformation ](Images/4.GettingInformation.png)
+![4.GettingInformation](img/4.GettingInformation.png)
 
 **Bot's Response to the User's Question:**
-![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
+![5.AskQuestionResults](img/5.AskQuestionResults.png)
 
 ## Deploy the bot to Azure
 
@@ -154,8 +157,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
+- [Teams AI Library v2](https://aka.ms/teams-ai-library-v2)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api) 
+- [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api)
+- [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-streaming-nodejs" />
