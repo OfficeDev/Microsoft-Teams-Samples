@@ -113,8 +113,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
-    - Set "MicrosoftAppType" in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `.localConfigs` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+    - Set "MicrosoftAppType" in the `.localConfigs`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot at the command line:
 
@@ -148,7 +148,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Link unfurling](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams AI Library](https://microsoft.github.io/teams-ai/welcome)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
