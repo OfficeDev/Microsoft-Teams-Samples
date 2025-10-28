@@ -1,0 +1,59 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Task Assignment (Personal Scope)"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Task title"
+    },
+    {
+      "type": "Input.Text",
+      "placeholder": "Task title",
+      "id": "taskTitle"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Task description"
+    },
+    {
+      "type": "Input.Text",
+      "placeholder": "Task description",
+      "id": "taskDescription"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Select the member to assign the task:",
+      "wrap": true,
+      "weight": "Bolder"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices": [],
+      "isMultiSelect": false,
+      "style": "expanded",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "userId"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "submitdynamic",
+      "title": "Assign"
+    }
+  ]
+}
