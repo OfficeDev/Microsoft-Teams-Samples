@@ -68,7 +68,10 @@
       {
         "type": "deploymentApprovalRequired",
         "description": "New deployment requires your approval",
-        "templateText": "New deployment requires your approval with {deploymentId}"
+        "templateText": "New deployment requires your approval with {deploymentId}",
+        "allowedIconIds": [
+          "deploymentApprovalRequiredId"
+        ]
       },
       {
         "type": "approvalRequired",
@@ -99,6 +102,10 @@
       {
         "id": "taskCreatedId",
         "iconFile": "exclaim.png"
+      },
+      {
+        "id": "deploymentApprovalRequiredId",
+        "iconFile": "deploymentApprovalRequired.png"
       },
       {
         "id": "approvalRequiredId",
