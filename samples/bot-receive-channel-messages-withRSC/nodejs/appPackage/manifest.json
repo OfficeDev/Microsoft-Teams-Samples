@@ -1,0 +1,78 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "RSC Sample",
+        "full": "Channel messages with RSC"
+    },
+    "description": {
+        "short": "Bot receives all Teams channel messages using RSC permissions.",
+        "full": "This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions."
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                  "scopes": ["personal", "team", "groupChat"],
+                  "commands": [
+                      {
+                          "title": "1",
+                          "description": "Learn about RSC permissions required"
+                      },
+                      {
+                          "title": "2", 
+                          "description": "Get documentation links"
+                      }
+                  ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "webApplicationInfo": {
+        "id": "${{BOT_ID}}",
+        "resource": "https://RscBasedStoreApp"
+    },
+    "authorization": {
+        "permissions": {
+            "resourceSpecific": [
+                {
+                    "type": "Application",
+                    "name": "ChannelMessage.Read.Group"
+                },
+                {
+                    "type": "Application", 
+                    "name": "ChatMessage.Read.Chat"
+                }
+            ]
+        }
+    },
+    "validDomains": []
+}

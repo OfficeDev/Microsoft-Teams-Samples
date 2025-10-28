@@ -1,18 +1,3 @@
----
-page_type: sample
-description: This bot can capture all channel messages in Teams using RSC permissions, without the need for @mentions.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
- contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
-urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
----
-
 # Receive Channel messages with RSC permissions
 
 This sample app illustrates how a bot can capture all channel messages in Microsoft Teams by utilizing RSC (resource-specific consent) permissions, eliminating the need for @mentions. The bot supports adaptive card responses, easy local testing with tools like ngrok or dev tunnels, and deployment to Azure, allowing it to function effectively across different channels and group chats in Teams.
@@ -38,7 +23,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
 
     ```bash
     # determine node version
@@ -46,21 +31,22 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```
 3. [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [Ngrok](https://ngrok.com/download) (For local environment testing) latest version (any other tunneling software can also be used)
 
-   If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-   Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+   If you are using Ngrok to test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine. Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 4. [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
+
+5. [Teams AI library V2](https://aka.ms/teams-ai-library-v2)
 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio Code)
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
+2. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+3. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+4. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+5. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+6. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
@@ -68,16 +54,15 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-1) Setup for Bot
+1) **Setup for Bot**
 - Register Azure AD application
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-2) Setup NGROK
+2) **Setup NGROK**
  - Run ngrok - point to port 3978
 
    ```bash
@@ -90,8 +75,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-  
+3) **Register a new application** in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ 
   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
@@ -101,17 +86,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   C) Navigate to **API Permissions**, and make sure to add the following permissions:
    Select Add a permission
       * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
+      * Select Microsoft Graph -> Delegated permissions.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-
-4) Setup for code
+4) **Setup for code**
 - Clone the repository
 
-    ```bash
+   ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+   ```
 
 - In the folder where repository is cloned navigate to `samples/bot-receive-channel-messages-withRSC/nodejs`
 
@@ -127,27 +111,26 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - Run your app
     ```bash
-    npm start
+   npm start
     ```
 - Install modules & Run the NodeJS Server
   - Server will run on PORT: 3978
   - Open a terminal and navigate to project root directory
   
-  ```bash
+ ```bash
     npm run server
   ```
 > NOTE:This command is equivalent to: npm install > npm start
 
-5) Run your app
+5) **Run your app**
 
     ```bash
     npm start
     ```
-6) Setup Manifest for Teams
-
+6) **Setup Manifest for Teams**
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
         `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-         Replace <<MANIFEST-ID>> with any GUID or with your MicrosoftAppId/app id
+         Replace `<<MANIFEST-ID>>` with any GUID or with your MicrosoftAppId/app id
 
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** in a team to test
@@ -157,7 +140,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appManifest`, and then select **Add** to add the bot to your selected team.
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -179,22 +161,25 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Group chat interaction with bot without being @mentioned:**
 
-![Group Chat](images/7.1_and_2_Command_Interaction.png) 
+![Group Chat](images/7.1_and_2_Command_Interaction.png)
 
 **Copilot Custom Engine Agents**
 
-**Copilot Installation Screen**  
+**Copilot Installation Screen** 
+
 ![Copilot](images/Copilot_Install.png) 
 
-**Copilot Welcome Screen**  
+**Copilot Welcome Screen** 
+
 ![Copilot](images/Copilot_Welcome.png) 
 
-**Copilot Workflow Example – Step 1**  
+**Copilot Workflow Example – Step 1** 
+
 ![Copilot](images/Copilot_1.png) 
 
-**Copilot Workflow Example – Step 2**  
-![Copilot](images/Copilot_2.png) 
+**Copilot Workflow Example – Step 2** 
 
+![Copilot](images/Copilot_2.png) 
 
 **Interacting with the bot in Teams**
 
@@ -208,12 +193,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Receive Channel messages with RSC](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 - [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent)
-
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-receive-channel-messages-withRSC-nodejs" />
