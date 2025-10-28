@@ -1,0 +1,6 @@
+CLIENT_ID=
+CLIENT_SECRET=
+BOT_TYPE=MultiTenant
+AzureOpenAIEndpoint=
+AzureOpenAIKey=
+AzureOpenAIDeployment=

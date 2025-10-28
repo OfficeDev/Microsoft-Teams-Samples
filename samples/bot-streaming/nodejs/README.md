@@ -112,10 +112,9 @@ the Teams service needs to call into the bot.
     npm install
     ```
 
-1) Update the environment configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. Update the `env/.env.local` file with:
+1) Update the environment configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. Update the `.localConfigs` file with:
     - `CLIENT_ID` - Application (client) ID from the Bot Framework registration
-    - `CLIENT_PASSWORD` - Client secret from the Bot Framework registration
-    - `TENANT_ID` - Directory (tenant) ID
+    - `CLIENT_SECRET` - Client secret from the Bot Framework registration
     - `AzureOpenAIEndpoint` - Your Azure OpenAI endpoint URL
     - `AzureOpenAIKey` - Your Azure OpenAI API key
     - `AzureOpenAIDeployment` - Your Azure OpenAI deployment name (e.g., gpt-35-turbo)
