@@ -98,7 +98,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.localConfigs` configuration for the bot to use the `CLIENT_ID` and `CLIENT_SECRET`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 - In a terminal, navigate to `samples/bot-suggested-actions/nodejs`
 
 - Install modules
@@ -162,7 +162,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams AI Library](https://microsoft.github.io/teams-ai/welcome)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
