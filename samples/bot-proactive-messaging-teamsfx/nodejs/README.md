@@ -59,7 +59,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
   - Executing the command `atk deploy --env local` in your project directory.
   - Executing the command `atk preview --env local --run-command "cd bot; npm run dev:atk"` in your project directory.
 
-**Note**: If deploying or provisioning the sample, please replace line 9 of file `bot/teamsBot.js` with .env.dev. (By default its set to `.env.local`)
+**Note**: 
+ Update the `config.js` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+ - Also, set MicrosoftAppType in the `config.js`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 ## Edit the manifest
 
