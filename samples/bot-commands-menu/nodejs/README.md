@@ -88,6 +88,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
+**Note:** This sample uses the [Teams AI Library](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/how-conversation-ai-core-capabilities), which provides a higher-level abstraction for building Teams bots with enhanced AI capabilities.
+
 ## Setup for code
 1) Clone the repository
 
@@ -103,8 +105,10 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `config.js` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+ - Also, set MicrosoftAppType in the `config.js`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+ 
+**Note:** This sample uses the Teams AI Library for enhanced bot capabilities.
 
 1) Run your bot at the command line:
 
@@ -165,5 +169,6 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
 
 - [Create a commands menu](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?branch=pr-en-us-10866&tabs=desktop%2Cdotnetlocalization)
 - [Create prompt suggestions](https://review.learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/prompt-suggestions?branch=pr-en-us-10866&tabs=manually-in-the-app-manifest%2Cjavascript)
+- [Teams AI Library](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/how-conversation-ai-core-capabilities)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-commands-menu-nodejs" />

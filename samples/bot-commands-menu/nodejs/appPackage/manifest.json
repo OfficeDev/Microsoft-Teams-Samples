@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "bots":[
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal",
         "copilot"
@@ -68,7 +68,7 @@
         "customEngineAgents": [
             {
                 "type": "bot",
-                "id": "${{AAD_APP_CLIENT_ID}}"
+                "id": "${{BOT_ID}}"
             }
         ]
     }
