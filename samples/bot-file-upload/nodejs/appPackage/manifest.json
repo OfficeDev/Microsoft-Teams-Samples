@@ -1,60 +1,41 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.23",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "developer": {
-        "name": "My App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/privacy",
-        "termsOfUseUrl": "https://www.example.com/termofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "bot-file-upload${{APP_NAME_SUFFIX}}",
-        "full": "full name for bot-file-upload"
-    },
-    "description": {
-        "short": "short description for bot-file-upload",
-        "full": "full description for bot-file-upload"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
-        {
-            "botId": "${{BOT_ID}}",
-            "scopes": [
-                "personal",
-                "team",
-                "groupChat"
-            ],
-            "supportsFiles": true,
-            "isNotificationOnly": false,
-            "commandLists": [
-                {
-                  "scopes": ["personal", "team", "groupChat"],
-                  "commands": [
-                      {
-                          "title": "Hi",
-                          "description": "Say hi to the bot."
-                      },
-                      {
-                          "title": "/reset",
-                          "description": "Delete conversation state."
-                      }
-                  ]
-                }
-            ]
-        }
-    ],
-    "composeExtensions": [],
-    "configurableTabs": [],
-    "staticTabs": [],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": []
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft Corp",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "name": {
+    "short": "FileUpload",
+    "full": "FileUpload"
+  },
+  "description": {
+    "short": "Upload and manage files in Teams with a bot using Bot Framework v4.",
+    "full": "This bot sample for Teams demonstrates file upload capabilities using Bot Framework v4, enabling users to upload files and view inline images within chats."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#abcdef",
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [
+        "personal"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": true
+    }
+  ],
+  "validDomains": [
+    "*.ngrok-free.app",
+    "${{BOT_DOMAIN}}"
+  ]
 }
