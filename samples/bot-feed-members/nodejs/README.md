@@ -109,8 +109,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` from the Teams AI Library registration. (Note the `MicrosoftAppPassword` is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set `MicrosoftAppType` in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `config.js` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` from the Teams AI Library registration. (Note the `MicrosoftAppPassword` is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+ - Also, set `MicrosoftAppType` in the `config.js`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot at the command line:
 
