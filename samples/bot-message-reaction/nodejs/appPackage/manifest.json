@@ -1,47 +1,59 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.19",
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
     "version": "1.0.0",
     "id": "${{TEAMS_APP_ID}}",
     "developer": {
-      "name": "MessageReactionBot",
-      "websiteUrl": "https://www.microsoft.com",
-      "privacyUrl": "https://www.teams.com/privacy",
-      "termsOfUseUrl": "https://www.teams.com/termsofuser"
+        "name": "MessageReactionBot",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuser"
     },
     "icons": {
-      "color": "color.png",
-      "outline": "outline.png"
+        "color": "color.png",
+        "outline": "outline.png"
     },
     "name": {
-      "short": "MessageReactionBot",
-      "full": "MessageReactionBot"
+        "short": "MessageReactionBot",
+        "full": "Message Reaction Bot"
     },
     "description": {
-      "short": "Sample app demonstrating bot reactions to Teams messages using Bot Framework.",
-      "full": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework."
+        "short": "Sample bot demonstrating message reactions using Teams AI Library v2.",
+        "full": "This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Teams AI Library v2."
     },
     "accentColor": "#FFFFFF",
     "bots": [
-      {
-        "botId": "${{BOT_ID}}",
-        "scopes": [
-          "groupChat",
-          "team",
-          "personal"
-        ],
-        "isNotificationOnly": false,
-        "supportsCalling": false,
-        "supportsVideo": false,
-        "supportsFiles": false
-      }
+        {
+            "botId": "${{BOT_ID}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                  "scopes": ["personal", "team", "groupChat"],
+                  "commands": [
+                      {
+                          "title": "Hello",
+                          "description": "Responds with 'Echo: Hello'"
+                      }
+                  ]
+                }
+            ]
+        }
     ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
     "permissions": [
-      "identity",
-      "messageTeamMembers"
+        "identity",
+        "messageTeamMembers"
     ],
     "validDomains": [
-      "*.ngrok-free.app",
-      "${{BOT_DOMAIN}}"
+        "*.ngrok-free.app",
+        "${{BOT_DOMAIN}}"
     ]
-  }
+}

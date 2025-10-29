@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
+description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Teams AI Library v2.
 products:
 - office-teams
 - office
@@ -15,11 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
 
 # Teams Message Reactions Bot Node.js Sample
 
-This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Teams AI Library v2. The bot responds dynamically to reactions, supporting personal, group, and team scopes. It can be run locally with Microsoft 365 Agents Toolkit or deployed to Azure for broader use.
 
 ## Included Features
 * Bots
-* Adaptive Cards
+* Teams AI Library v2
 
 ## Interaction with bot
  ![Message Reaction](Images/MessageReactions.gif)
@@ -107,8 +107,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
-- Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `config.js` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+- Also, set MicrosoftAppType in the `config.js`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot at the command line:
 
@@ -155,11 +155,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams AI Library Documentation](https://aka.ms/teams-ai-library-v2)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
 
 
-<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-message-reaction-nodejs" />
