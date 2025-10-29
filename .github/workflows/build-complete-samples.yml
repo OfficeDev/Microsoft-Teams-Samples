@@ -1061,7 +1061,11 @@ jobs:
 
             - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
               name: 'bot-auth0-adaptivecard'
-              version: '16.x'  
+              version: '16.x'
+
+            - project_path: 'samples/graph-membership-change-notification/nodejs'
+              name: 'graph-membership-change-notification'
+              version: '20.x'   
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
               name: 'tab-adhoccalls-transcript-recording'
