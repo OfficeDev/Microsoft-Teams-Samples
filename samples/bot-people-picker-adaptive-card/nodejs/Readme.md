@@ -112,7 +112,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-- Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing Microsoft Entra ID app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your Microsoft Entra ID app registrationin.
+- Open the `config.js` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing Microsoft Entra ID app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your Microsoft Entra ID app registrationin.
 
 - Run your app
 
@@ -122,7 +122,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 5) Setup Manifest for Teams
 
-    - Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
+    - Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `config.js` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
     - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 

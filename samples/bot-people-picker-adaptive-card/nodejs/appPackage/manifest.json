@@ -1,68 +1,56 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.23",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "developer": {
-        "name": "My App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/privacy",
-        "termsOfUseUrl": "https://www.example.com/termofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "PPicker${{APP_NAME_SUFFIX}}",
-        "full": "Teams People Picker Bot using Teams AI SDK v2"
-    },
-    "description": {
-        "short": "Demonstrates people picker in Adaptive Cards with Teams AI SDK v2",
-        "full": "A bot that showcases the people picker functionality in Microsoft Teams Adaptive Cards using the modern Teams AI SDK v2. Features scope-aware behavior and task assignment workflow."
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.19",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "People picker card",
+    "full": "Adaptive card with people picker."
+  },
+  "description": {
+    "short": "Bot demonstrating people picker control in Adaptive Cards for Teams.",
+    "full": "This bot showcases how to use the people picker control within Adaptive Cards on Teams."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "needsChannelSelector": false,
+      "scopes": [
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "commandLists": [
         {
-            "botId": "${{BOT_ID}}",
-            "scopes": [
-                "personal",
-                "team",
-                "groupChat"
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false,
-            "commandLists": [
-                {
-                  "scopes": ["personal", "team", "groupChat"],
-                  "commands": [
-                      {
-                          "title": "task",
-                          "description": "Show people picker card for task assignment"
-                      },
-                      {
-                          "title": "help",
-                          "description": "Show available commands and help information"
-                      },
-                      {
-                          "title": "/reset",
-                          "description": "Clear conversation state"
-                      },
-                      {
-                          "title": "/runtime",
-                          "description": "Show runtime and environment information"
-                      }
-                  ]
-                }
-            ]
+          "scopes": [
+            "personal",
+            "team",
+            "groupChat"
+          ],
+          "commands": [
+            {
+              "title": "peoplepickercard",
+              "description": "To get people picker card"
+            }
+          ]
         }
-    ],
-    "composeExtensions": [],
-    "configurableTabs": [],
-    "staticTabs": [],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": []
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ]
 }
