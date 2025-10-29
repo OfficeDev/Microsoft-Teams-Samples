@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
+description: This sample app demonstrates use of different bot conversation events available in Teams AI Library for personal and teams scope.
 products:
 - office-teams
 - office
@@ -15,9 +15,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-nodejs
 
 # Teams Conversation Bot
 
-Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
+Teams AI Library Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
 
-This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
+This bot has been created using [Teams AI Library](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/how-conversation-ai-core-capabilities). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
 ## GitHub Copilot Agent Mode
@@ -130,8 +130,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `config.js` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+ - Also, set MicrosoftAppType in the `config.js`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot at the command line:
 
@@ -291,7 +291,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Teams AI Library Documentation](https://microsoft.github.io/teams-ai/welcome/)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
