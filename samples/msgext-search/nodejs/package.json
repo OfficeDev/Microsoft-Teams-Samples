@@ -19,7 +19,7 @@
     "clean": "rimraf ./dist",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "build": "tsc --build",
+    "build": "node build.js",
     "start": "node .",
     "dev": "nodemon --exec node --inspect=9239 --signal SIGINT -r ts-node/register ./src/index.ts",
     "watch": "nodemon --exec \"npm run start\""
@@ -43,6 +43,7 @@
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
-    "env-cmd": "^11.0.0"
+    "env-cmd": "^11.0.0",
+    "esbuild": "^0.18.1"
   }
 }
