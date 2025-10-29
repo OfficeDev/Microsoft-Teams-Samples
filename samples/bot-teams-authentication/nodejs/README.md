@@ -111,12 +111,12 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
      ```bash
     npm install
     ```
-  - Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-       1) `<<YOUR-MICROSOFT-APP-TYPE>>` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-       2) `<<YOUR-MICROSOFT-APP-ID>>` - Generated from Step 1 (Application (client) ID)is the application app id
-       3) `<<YOUR-MICROSOFT-APP-PASSWORD>>` - Generated from Step 6, also referred to as Client secret
-       4) `<<YOUR-MICROSOFT-APP-TENANT-ID>>` - Generated from Step 1(Directory (tenant) ID) is the tenant id
-       5) `<<YOUR-CONNECTION-NAME>>` - Generated from step 7.
+  - Modify the `.localConfigs` file in your project folder (or in Visual Studio Code) and fill in below details:
+       1) `BOT_TYPE` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+       2) `CLIENT_ID` - Generated from Step 1 (Application (client) ID)is the application app id
+       3) `CLIENT_SECRET` - Generated from Step 6, also referred to as Client secret
+       4) `TENANT_ID` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+       5) `CONNECTION_NAME` - Generated from step 7.
 
   - Run your app
 
@@ -124,9 +124,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     npm start
     ```
 3) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace a random GUID in the place holder string `TEAMS_APP_ID` and the `BOT_ID` with your CLIENT_ID
     - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 

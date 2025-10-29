@@ -15,7 +15,8 @@
         "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "node build.js"
     },
     "dependencies": {
         "@azure/identity": "^4.11.1",
@@ -25,6 +26,7 @@
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
-        "nodemon": "^3.1.10"
+        "nodemon": "^3.1.10",
+        "esbuild": "^0.18.1"
     }
 }
