@@ -15,24 +15,24 @@
       {
         "type": "Input.Date",
         "id": "checkinDate",
-        "title": "Check-in Date"
+        "label": "Check-in Date"
       },
       {
         "type": "Input.Date",
         "id": "checkoutDate",
-        "title": "Check-out Date"
+        "label": "Check-out Date"
       },
       {
         "type": "Input.Number",
         "id": "numberOfGuests",
-        "title": "Number of Guests",
+        "label": "Number of Guests",
         "min": 1,
         "max": 10
       },
       {
         "type": "Input.Text",
         "id": "location",
-        "title": "Location",
+        "label": "Location",
         "placeholder": "City, State or Country"
       }
     ],
