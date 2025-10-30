@@ -93,14 +93,14 @@ namespace TabActivityFeed.Controllers
             if (taskDetails.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskDetails, taskDetails.access_token);
+                //var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskDetails, taskDetails.access_token);
                 var requestBody = new Microsoft.Graph.Beta.Users.Item.Teamwork.SendActivityNotification.SendActivityNotificationPostRequestBody
                 {
                     Topic = new TeamworkActivityTopic
                     {
                         Source = TeamworkActivityTopicSource.Text,
                         Value = "Deployment Approvals Channel",
-                        WebUrl = getChannelMessage.WebUrl
+                        WebUrl = "https://teams.microsoft.com/l/entity/" + _configuration["AzureAd:MicrosoftAppId"]
                     },
                     ActivityType = "taskCreated",
                     PreviewText = new ItemBody
@@ -111,15 +111,15 @@ namespace TabActivityFeed.Controllers
                     {
                         new Microsoft.Graph.Beta.Models.KeyValuePair
                         {
-                            Name = "taskId",
-                            Value = "12322",
+                            Name = "taskName",
+                            Value = taskDetails.taskName ?? "New Task",
                         },
                     },
                     IconId = "taskCreatedId"
                 };
                 try
                 {
-                    await graphClient.Users["{userId}"].Teamwork
+                    await graphClient.Users[_configuration["AzureAd:UserId"]].Teamwork
                         .SendActivityNotification.PostAsync(requestBody);
                 }
                 catch (Exception ex)
@@ -148,14 +148,14 @@ namespace TabActivityFeed.Controllers
                         new KeyValuePair
                         {
                             Name = "taskName",
-                            Value = "12322",
+                            Value = taskDetails.taskName ?? "New Task",
                         },
                     },
                     IconId = "taskCreatedId"
                 };
                 try
                 {
-                    await graphClient.Users["{userId}"].Teamwork
+                    await graphClient.Users[_configuration["AzureAd:UserId"]].Teamwork
                         .SendActivityNotification.PostAsync(requestBody);
                 }
                 catch (Exception ex)
@@ -194,7 +194,7 @@ namespace TabActivityFeed.Controllers
                     Recipient = new AadUserNotificationRecipient
                     {
                         OdataType = "microsoft.graph.aadUserNotificationRecipient",
-                        UserId = "{userId}",
+                        UserId = _configuration["AzureAd:UserId"],
                     },
                     TemplateParameters = new List<KeyValuePair>
                     {
@@ -233,7 +233,7 @@ namespace TabActivityFeed.Controllers
                     Recipient = new AadUserNotificationRecipient
                     {
                         OdataType = "microsoft.graph.aadUserNotificationRecipient",
-                        UserId = "{userid}",
+                        UserId = _configuration["AzureAd:UserId"],
                     },
                     TemplateParameters = new List<KeyValuePair>
                     {
@@ -378,7 +378,7 @@ namespace TabActivityFeed.Controllers
                     Recipient = new AadUserNotificationRecipient
                     {
                         OdataType = "microsoft.graph.aadUserNotificationRecipient",
-                        UserId = "{userId}",
+                        UserId = _configuration["AzureAd:UserId"],
                     },
                     TemplateParameters = new List<KeyValuePair>
                     {
