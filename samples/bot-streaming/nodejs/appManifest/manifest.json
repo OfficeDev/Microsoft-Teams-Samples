@@ -29,13 +29,6 @@
         "id": "${{AAD_APP_CLIENT_ID}}"
       }
     ]
-  },"copilotAgents": {
-    "customEngineAgents": [
-      {
-        "type": "bot",
-        "id": "${{AAD_APP_CLIENT_ID}}"
-      }
-    ]
   },
   "bots": [
     {
