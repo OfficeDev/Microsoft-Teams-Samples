@@ -1,20 +1,17 @@
 {
-    "name": "ttk",
+    "name": "bot-message-reaction",
     "version": "1.0.0",
     "msteams": {
       "teamsAppId": null
     },
-    "description": "Microsoft Teams Toolkit hello world Bot sample",
-    "engines": {
-        "node": "18 || 20"
-    },
+    "description": "Microsoft 365 Agents Toolkit message reaction bot sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
     "scripts": {
         "dev:teamsfx": "env-cmd --silent -f .localConfigs npm run dev",
-        "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.testTool npm run dev",
-        "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.testtool teamsapptester start",
+        "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.playground npm run dev",
+        "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.playground teamsapptester start",
         "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
@@ -22,12 +19,13 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "botbuilder": "^4.23.1",
-        "express": "^5.0.1"
+        "@azure/identity": "^4.11.1",
+        "@microsoft/teams.apps": "^2.0.0",
+        "@microsoft/teams.common": "^2.0.0"
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
-        "nodemon": "^3.1.7",
-        "esbuild": "^0.18.1"
+        "nodemon": "^3.1.10",
+        "esbuild": "^0.25.11"
     }
 }
