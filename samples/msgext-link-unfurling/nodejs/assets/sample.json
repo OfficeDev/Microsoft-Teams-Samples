@@ -9,7 +9,7 @@
       "This sample demonstrates a Node.js bot that performs link unfurling in Microsoft Teams, enhancing user interaction within messaging extensions. It includes features like search commands and can be easily deployed via Azure and Microsoft 365 Agents Toolkit."
     ],
     "creationDateTime": "2022-10-04",
-    "updateDateTime": "2024-10-15",
+    "updateDateTime": "2025-10-16",
     "products": [
       "Teams"
     ],
