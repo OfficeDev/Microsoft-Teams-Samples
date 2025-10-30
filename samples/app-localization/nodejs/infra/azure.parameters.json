@@ -5,11 +5,20 @@
     "resourceBaseName": {
       "value": "bot${{RESOURCE_SUFFIX}}"
     },
-    "webAppSKU": {
-      "value": "B1"
+    "botAadAppClientId": {
+      "value": "${{AAD_APP_CLIENT_ID}}"
+    },
+    "botAppDomain": {
+      "value": "${{BOT_DOMAIN}}"
     },
     "botDisplayName": {
-      "value": "applocalization"
+      "value": "app-localization"
+    },
+    "microsoftAppType": {
+      "value": "${{MICROSOFT_APP_TYPE}}"
+    },
+    "microsoftAppTenantId": {
+      "value": "${{MICROSOFT_APP_TENANT_ID}}"
     }
   }
 }
