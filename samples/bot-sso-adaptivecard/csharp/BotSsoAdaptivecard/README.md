@@ -20,6 +20,7 @@ This sample code demonstrates how to get enable SSO authentication for your Adap
 ## Included Features
 * Teams SSO (bots)
 * Adaptive Cards
+* Custom Engine Agents - Copilot
 
 ## Interaction with app
 
@@ -27,6 +28,7 @@ This sample code demonstrates how to get enable SSO authentication for your Adap
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
 
 **Implement SSO authentication for your Adaptive Cards.:** [Manifest](/samples/bot-sso-adaptivecard/csharp/demo-manifest/bot-sso-adaptivecard.zip)
 
@@ -201,6 +203,14 @@ Register your application with Azure AD
 
 ![InstallApp](Images/loginsuccess.png)
 
+**Copilot Custom Engine Agents:**
+**Install App In Copilot**
+![Welcome](Images/Copilot_Install.png)
+**Sign-In UI:**
+![SignButton](Images/Copilot_LoginCommand.png)
+**Welcome Universal Card:**
+![InstallApp](Images/Copilot_WelcomeCard.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -210,7 +220,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Universal Actions for Adaptive Cards](https://review.learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sso-adaptive-cards-universal-action?branch=pr-en-us-7547#add-code-to-receive-the-token)
 
 
-
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard" />

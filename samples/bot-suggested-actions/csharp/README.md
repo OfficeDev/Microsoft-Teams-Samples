@@ -20,6 +20,7 @@ This sample shows the feature where user can [send suggested actions](https://le
 ## Included Features
 * Bots
 * Suggested Actions
+* Copilot Custom Engine Agents
 
 ## Interaction with app
 
@@ -29,6 +30,19 @@ This sample shows the feature where user can [send suggested actions](https://le
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app manifest (.zip file link below) to your teams and/or as a personal app. (Uploading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
 **Send Suggested Actions:** [Manifest](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
+
+## Copilot Custom Engine Agents
+
+**Step 1: Install Copilot Custom Engine**  
+![Copilot Installation](Images/Copilot_Install.png)
+
+**Step 2: Verify Copilot Hello**  
+![Copilot Hello](Images/Copilot_Hello.png)
+
+**Step 3: Welcome Screen**  
+![Copilot Welcome](Images/Copilot_Welcome.png)
+
+
 
 ## Prerequisites
 
@@ -157,5 +171,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-csharp" />
