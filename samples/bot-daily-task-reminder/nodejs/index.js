@@ -1,7 +1,10 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { BotFrameworkAdapter } = require('botbuilder');
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication
+} = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 require('dotenv').config({ path: path.join(__dirname, '.env') }); // Load environment variables from .env file
 
@@ -19,10 +22,8 @@ server.set('view engine', 'ejs');
 server.set('views', __dirname);
 
 // Create adapter with bot credentials from environment variables
-const adapter = new BotFrameworkAdapter({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
-});
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const adapter = new CloudAdapter(botFrameworkAuthentication);
 
 // Error handling for the bot adapter
 adapter.onTurnError = async (context, error) => {
@@ -65,8 +66,9 @@ server.get('*', (req, res) => {
 /**
  * Route for handling bot messages
  */
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
+server.post('/api/messages', async (req, res) => {
+    // Route received a request to adapter for processing
+    await adapter.process(req, res, async (context) => {
         await bot.run(context);
     });
 });

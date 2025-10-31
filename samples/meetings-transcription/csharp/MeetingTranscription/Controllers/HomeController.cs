@@ -58,7 +58,6 @@ namespace MeetingTranscription.Controllers
                     }
                 }
             }
-
             return View();
         }
     }

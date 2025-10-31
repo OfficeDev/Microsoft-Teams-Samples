@@ -1,0 +1,42 @@
+{
+  "name": "graph-notification",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui/react-northstar": "^0.63.1",
+    "@microsoft/teams-js": "^2.35.0",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.2.0",
+    "date-ago-pipe": "^1.0.2",
+    "moment": "^2.29.4",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-moment": "^1.1.2",
+    "react-router-dom": "6.2.2",
+    "react-scripts": "^4.0.0"
+   
+  },
+  "scripts": {
+    "start": "npm install && react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -22,6 +22,7 @@ The Daily Task Reminder bot for Microsoft Teams enables users to schedule recurr
 * Adaptive Cards
 * Task Modules
 * Quartz Scheduler (for scheduling)
+* Custom Engine Agent - Copilot
 
 ## Interaction with app
 
@@ -83,7 +84,23 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Setup for code  
+3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+4) Setup for code  
 - Clone the repository
 
     ```bash
@@ -109,7 +126,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm start
     ```
 
-4) Setup Manifest for Teams
+5) Setup Manifest for Teams
 
     - Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Relace {{domain-name}} with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -132,6 +149,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ![Task reminder](Images/TaskReminder.png)
 
+**Custom Engine Agent Copilot:**  
+
+**Installation screen of Copilot Agent**  
+![Copilot Task reminder](Images/Copilot_Install.png)  
+
+**Creating a new reminder in Copilot**  
+![Copilot Task reminder](Images/Copilot_CreateReminder.png)  
+
+**Task module interface for reminders**  
+![Copilot Task reminder](Images/Copilot_TaskModule.png)  
+
+**Response after submitting a task reminder**  
+![Copilot Task reminder](Images/Copilot_TaskSubmitted_Response.png)  
+
+**Final reminder displayed in Copilot**  
+![Copilot Task reminder](Images/Copilot_Task_Reminder.png)  
+ 
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -143,5 +178,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-daily-task-reminder-nodejs" />

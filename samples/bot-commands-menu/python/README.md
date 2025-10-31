@@ -18,6 +18,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Included Features
 * Bots
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -67,25 +68,41 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) Create [Azure Bot resource resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
+3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+4) Create [Azure Bot resource resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Azure free account here](https://azure.microsoft.com/free/)
 
-4) In a terminal, go to `samples\bot-commands-menu`
+5) In a terminal, go to `samples\bot-commands-menu`
 
-5) Activate your desired virtual environment
+6) Activate your desired virtual environment
 
-6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+8) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+9) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-8) __*This step is specific to Teams.*__
+10) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-9) Run your bot with `python app.py`
+11) Run your bot with `python app.py`
 
 # Running the sample
 
@@ -103,6 +120,29 @@ the Teams service needs to call into the bot.
 ![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
 
 ![5.ViewPrompts](Images/5.ViewPrompts.png)
+
+**Copilot Custom Engine Agents**
+![Copilot](Images/CopilotInstall.png) 
+
+![Copilot](Images/Copilot1.png) 
+
+![Copilot](Images/Copilot2.png) 
+
+![Copilot](Images/Copilot3.png) 
+
+![Copilot](Images/Copilot4.png) 
+
+![Copilot](Images/Copilot5.png) 
+
+![Copilot](Images/Copilot6.png) 
+
+![Copilot](Images/Copilot7.png) 
+
+![Copilot](Images/Copilot8.png) 
+
+![Copilot](Images/Copilot9.png) 
+
+![Copilot](Images/Copilot10.png) 
 
 ## Further reading
 

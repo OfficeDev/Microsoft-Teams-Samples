@@ -18,6 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-ai-sentiment-analysis-node
 Explore this sample application that integrates Azure Open AI with a Teams messaging extension, enabling real-time sentiment analysis of chat messages. It categorizes sentiments as positive, negative, or neutral, providing valuable insights into team interactions and enhancing overall communication effectiveness.
 
 ## Included Features
+* Bot
 * ME
 * Azure Open AI For Sentiment Analysis
 
@@ -46,8 +47,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > Note: `Open Api key` is optional, if you dont have access to Azure Open Api Key. 
 
-`SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
-
 `CHAT_COMPLETION_MODEL_NAME=gpt-3.5-turbo`
 
 > Note: If you are deploying the code, make sure that above mentioned values are properly updated at `env/.env.dev` or `env/.env.dev.user` wherever required.
@@ -73,7 +72,24 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-1) Setup for Bot
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -117,22 +133,26 @@ the Teams service needs to call into the bot.
 ## Running the sample
 
 Install Sample to Teams
-![Add Sample ](Images/1.Add_Sample.PNG)
+![Add Sample ](Images/1.Install.png)
+
+![Welcome](Images/2.OpenInPersonalScope.png)
+
+![Welcome](Images/3.WelcomeMessage.png)
 
 Welcome Message then click on 3 dots navigate to ME sentiment analysis
-![Welcome](Images/2.Welcome_SentimentAnalysis.PNG)
-
- Click Continue 
-![Click Continue](Images/3.Click_Continue.PNG)
-
-Its shows Sentiment like(positive/negative/neutral) for messages posted in Teams chat.
-![Sentiment Analysis Reuslt](Images/4.Result.PNG)
-
-Showing Sentiment Analysis `Negative` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/5.Negative.PNG)
+![Click Continue](Images/4.Select_SentimentAnalysis.png)
 
 Showing Sentiment Analysis `Neutral` depending on Teams chat message
-![Sentiment Analysis Reuslt](Images/6.Neutral.PNG)
+![Sentiment Analysis Reuslt](Images/5.Neutral_Sentiment.png)
+
+Showing Sentiment Analysis `Positive` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/6.Positive_Sentiment.png)
+
+Showing Sentiment Analysis `Negative` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/7.Negative_Sentiment.png)
+
+Showing Sentiment Analysis `On Terminal` depending on Teams chat message
+![Sentiment Analysis Reuslt](Images/8.OnTerminal.png)
 
 ## Deploy to Azure
 
@@ -156,8 +176,6 @@ Also, make sure that below key/values are properly added to the configuration se
 `"name": "MicrosoftAppPassword", "value": "<BOT_PASSWORD>"`
 
 `"name": "CHAT_COMPLETION_MODEL_NAME", "value": "gpt-3.5-turbo"`
-
-`"name": "SECRET_AZURE_OPENAPI_KEY", "value": "<Your Azure Open API Key>"`
 
 `"name": "WEBSITE_NODE_DEFAULT_VERSION", "value": "~18"`
 

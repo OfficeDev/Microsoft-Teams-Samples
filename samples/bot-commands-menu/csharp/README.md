@@ -18,6 +18,7 @@ This sample add a command menu with a dropdown list of commands for your bot. Us
 
 ## Included Features
 * Bots
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -53,6 +54,19 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+      
     > NOTE: When you create your app registration, you will create an App ID and App password (Secret) - make sure you keep these for later.
 
 2. Setup for Bot
@@ -118,6 +132,29 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![3.SearchFlightsSearch](Images/3.SearchFlightsSearch.png)
 
 ![5.ViewPrompts](Images/5.ViewPrompts.png)
+
+**Copilot Custom Engine Agents**
+![Copilot](Images/CopilotInstall.png) 
+
+![Copilot](Images/Copilot1.png) 
+
+![Copilot](Images/Copilot2.png) 
+
+![Copilot](Images/Copilot3.png) 
+
+![Copilot](Images/Copilot4.png) 
+
+![Copilot](Images/Copilot5.png) 
+
+![Copilot](Images/Copilot6.png) 
+
+![Copilot](Images/Copilot7.png) 
+
+![Copilot](Images/Copilot8.png) 
+
+![Copilot](Images/Copilot9.png) 
+
+![Copilot](Images/Copilot10.png) 
 
 ## Further reading
 

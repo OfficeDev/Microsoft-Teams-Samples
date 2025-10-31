@@ -22,7 +22,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 * Bots
 * Tabs
 * Localization
-
+* Copilot Custome Engine Agents
 ## Interaction with app
 
 ![Preview Image](Images/Preview.gif)
@@ -55,7 +55,20 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Setup
-1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.|
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+      
     > NOTE: When you create your app registration, you will create an App ID and App password (Secret) - make sure you keep these for later.
 
 2. Setup for Bot
@@ -120,6 +133,16 @@ To change the language in Microsoft Teams, please click your profile picture at 
 ![image](Images/Reply.png)
 1. **Tab**: click on tab to see localized info.
 ![image](Images/Hindi.png)
+
+**Copilot Custome Engine Agents**
+Install App In Copilot
+![image](Images/CopilotInstall.png)
+
+Default Language English(USA)
+![image](Images/Copilot1.png)
+
+After Changing Language to Hindi
+![image](Images/Copilot2.png)
 
 ## Outlook on the web
 

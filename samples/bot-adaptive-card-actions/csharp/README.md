@@ -20,6 +20,7 @@ This sample demonstrates how to create and send Adaptive Cards with different ac
 ## Included Features
 * Bots
 * Adaptive Cards
+* Custom Engine Agents
 
 ## Interaction with app
 
@@ -63,7 +64,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-1. Run ngrok - point to port 3978
+2. Run ngrok - point to port 3978
 
    ```bash
    ngrok http 3978 --host-header="localhost:3978"
@@ -75,7 +76,23 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3. Setup For Code
+3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+4. Setup For Code
 
   - Clone the repository
     ```bash
@@ -94,7 +111,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
      - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
   - Press `F5` to run the project
      
-4. Setup Manifest for Teams
+5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{Domain-Name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -132,6 +149,33 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![Runnning Sample](AdaptiveCardActions/Images/10.ToggleVisibiliyCard.png)
 
 ![Runnning Sample](AdaptiveCardActions/Images/11.VisibleOnClick.png)
+
+**Copilot Custom Engine Agents**
+
+Install App in copilot
+![Copilot](AdaptiveCardActions/Images/CopilotInstall.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot1.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot2.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot3.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot4.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot5.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot6.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot7.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot8.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot9.png) 
+
+![Copilot](AdaptiveCardActions/Images/Copilot10.png) 
+
+
 
 ## Deploy the bot to Azure
 
