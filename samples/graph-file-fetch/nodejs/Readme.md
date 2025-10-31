@@ -109,7 +109,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-- Update the `.env` configuration file for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` from the Microsoft Entra ID app registration in Azure portal or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
+- Update the `.localConfigs` configuration file for the bot to use the `CLIENT_ID` and `CLIENT_SECRET` from the Microsoft Entra ID app registration in Azure portal or from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
     - Also, update `connectionName` as the name of your Azure Bot connection created in previous steps.
     - `connectionName` - The OAuthConnection setting from step 1, from Azure Bot SSO setup.
     - `BaseUrl` with application base url. For e.g., your ngrok url https://xxx.ngrok-free.app, your dev tunnels url https://xxx.devtunnels.ms.
@@ -121,9 +121,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
 
 3) **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{MicrosoftAppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the `appPackage` folder to replace a random GUID instead of the place holder string `TEAMS_APP_ID`
     - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
+    - Zip up the contents of the `appPackage` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
