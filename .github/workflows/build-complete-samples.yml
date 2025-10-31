@@ -558,7 +558,7 @@ jobs:
 
             - project_path: 'samples/bot-archive-groupchat-messages/nodejs'
               name: 'bot-archive-groupchat-messages'
-              version: '14.x'
+              version: '20.x'
 
             - project_path: 'samples/bot-daily-task-reminder/nodejs'
               name: 'bot-daily-task-reminder'
