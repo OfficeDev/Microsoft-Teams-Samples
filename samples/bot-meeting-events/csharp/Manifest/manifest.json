@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
+  "id": "{{MicrosoftAppId}}",
+  "version": "1.0.0",
+  "packageName": "com.microsoft.samples.meetingevents_callingbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "MeetingEvents_CallingBot",
+    "full": "MeetingEvents_CallingBot"
+  },
+  "description": {
+    "short": "MeetingEvents_CallingBot",
+    "full": "MeetingEvents_CallingBot"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#F9F9FA",
+  "configurableTabs": [
+    {
+      "configurationUrl": "{{ConfigUrl}}",
+      "canUpdateConfiguration": true,
+      "scopes": [ "groupchat" ],
+      "context": [ "meetingChatTab", "meetingDetailsTab", "meetingSidePanel" ]
+    }
+  ],
+  "staticTabs": [],
+  "bots": [
+    {
+      "botId": "{{MicrosoftAppId}}",
+      "needsChannelSelector": true,
+      "isNotificationOnly": false,
+      "supportsCalling": true,
+      "supportsVideo": true,
+      "scopes": [ "groupchat" ]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "{{MicrosoftAppId}}",
+    "resource": "https://RscPermission",
+    "applicationPermissions": [
+      "OnlineMeeting.ReadBasic.Chat"
+    ]
+  },
+  "connectors": [],
+  "composeExtensions": [],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [ "*.ngrok.io" ],
+  "showLoadingIndicator": false
+}
