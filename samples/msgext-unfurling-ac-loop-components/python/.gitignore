@@ -1,0 +1,11 @@
+# TeamsFx files
+env/.env.*.user
+.localConfigs
+appManifest/build
+
+# dependencies
+node_modules/
+
+# misc
+.deployment
+.DS_Store
