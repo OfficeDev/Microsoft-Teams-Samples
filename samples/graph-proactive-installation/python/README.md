@@ -79,6 +79,7 @@ We recommend that you copy these values into a text file, using an application l
 
 10.  Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
 -   TeamsAppInstallation.ReadWriteForUser.All
+-   User.Read
 
 Click on Add Permissions to commit your changes.
 

@@ -80,8 +80,15 @@ The simplest way to run this sample in Teams is to use Teams Toolkit for Visual 
        -   Directory (tenant) ID
    We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
-   -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-       -  OnlineMeetingArtifact.Read.All
+   -  Under left menu, navigate to
+
+    Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * OnlineMeetingArtifact.Read.All
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
    Click on Add Permissions to commit your changes.
 

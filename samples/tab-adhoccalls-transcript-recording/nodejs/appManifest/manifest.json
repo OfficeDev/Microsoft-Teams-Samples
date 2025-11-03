@@ -18,9 +18,9 @@
     "full": "adhocCalls Transcripts and Recordings"
   },
   "description": {
-    "short": "AdhocCalls for group call recording, transcription, and UI display.",
-    "full": "This sample uses adhocCalls to create a subscription for recording and transcription. After joining the group chat group call, it starts the recording or transcription. When the group call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
-  },
+  "short": "AdhocCalls for retrieving call transcripts and recordings via API.",
+  "full": "This Microsoft Teams app enables users to fetch, view, and manage Microsoft Teams adhoc call transcripts and recordings. It integrates with Microsoft Graph API to retrieve completed call data, including transcripts (formatted with speaker labels) and video recordings. The app provides a responsive React interface that displays call data in real-time using Socket.IO, allowing users to easily browse, play recordings, and read corresponding transcripts with pagination and status indicators."
+ },
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {

@@ -21,6 +21,7 @@ This sample shows the feature where user can [send suggested actions](https://le
 ## Included Features
 * Bots
 * Adaptive Cards
+* Copilot - Custom Enngine Agents
 
 ## Interaction with app
 
@@ -56,6 +57,22 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
+
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 1) Clone the repository
 
@@ -112,6 +129,17 @@ the Teams service needs to call into the bot.
 ## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
 ![Action.Compose](Images/5.Action.Compose.png)
 
+## Copilot Custom Engine Agents
+
+**Step 1: Install Copilot Custom Engine**  
+![Copilot Installation](Images/Copilot_Install.png)
+
+**Step 2: Verify Copilot Hello**  
+![Copilot Hello](Images/Copilot_Hello.png)
+
+**Step 3: Welcome Screen**  
+![Copilot Welcome](Images/Copilot_Welcome.png)
+
 ## Further reading
 
 - [Send suggested actions](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
@@ -119,5 +147,6 @@ the Teams service needs to call into the bot.
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Custom Engine Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-suggested-actions-python" />

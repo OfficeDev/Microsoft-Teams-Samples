@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
   "version": "1.0",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
@@ -28,7 +28,8 @@
       "scopes": [
         "personal",
         "team",
-        "groupChat"
+        "groupChat",
+        "copilot"
       ],
       "supportsFiles": false,
       "isNotificationOnly": false
@@ -40,5 +41,13 @@
   ],
   "validDomains": [
     "${{BOT_DOMAIN}}"
-  ]
+  ],
+  "copilotAgents": {
+    "customEngineAgents": [
+      {
+        "type": "bot",
+        "id": "${{AAD_APP_CLIENT_ID}}"
+      }
+    ]
+  }
 }

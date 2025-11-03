@@ -89,13 +89,29 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3) In a terminal, navigate to `samples/bot-formatting-cards/python`
+3) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4) Activate your desired virtual environment
 
-5) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+4) In a terminal, navigate to `samples/bot-formatting-cards/python`
 
-6) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+5) Activate your desired virtual environment
+
+6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+
+7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 **Update mentionSupport json**
 - Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
@@ -175,9 +191,9 @@ the Teams service needs to call into the bot.
       }
         ```
 
-7) Run your bot with `python app.py`
+8) Run your bot with `python app.py`
 
-8) __*This step is specific to Teams.*__
+9) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

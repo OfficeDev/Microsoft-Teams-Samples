@@ -82,7 +82,23 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-3. Setup for code
+3. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+4. Setup for code
 
   - Clone the repository
 
@@ -104,7 +120,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Select `BotConversationSsoQuickstart.sln` file and open it in Visual Studio
     - Press `F5` to run this project
     
-4.  Manually update the manifest.json
+5.  Manually update the manifest.json
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")

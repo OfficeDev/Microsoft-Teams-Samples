@@ -72,6 +72,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
       * Copy and paste the secret somewhere safe. You will need it in a future step.
 
+       Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
  
  2. Setup for Bot
     - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).

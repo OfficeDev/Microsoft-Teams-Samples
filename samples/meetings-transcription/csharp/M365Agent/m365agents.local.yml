@@ -11,7 +11,7 @@ provision:
     with:
       name: meetings-transcription-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
       generateClientSecret: true # If the value is false, the action will not generate client secret for you
-      signInAudience: "AzureADMultipleOrgs" # Multitenant
+      signInAudience: "AzureADMyOrg" # SingleTenant
     writeToEnvironmentFile:
       # Write the information of created resources into environment file for the specified environment variable(s).
       clientId: AAD_APP_CLIENT_ID
@@ -58,16 +58,16 @@ provision:
         MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
         AppBaseUrl: ${{BOT_ENDPOINT}}
 
-  - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
-    with:
-      manifestPath: ./aad.manifest.json # Relative path to teamsfx folder. Environment variables in manifest will be replaced before apply to AAD app
-      outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
+  # - uses: aadApp/update # Apply the AAD manifest to an existing AAD app. Will use the object id in manifest file to determine which AAD app to update.
+  #   with:
+  #     manifestPath: ./aad.manifest.json # Relative path to teamsfx folder. Environment variables in manifest will be replaced before apply to AAD app
+  #     outputFilePath: ./build/aad.manifest.${{TEAMSFX_ENV}}.json
 
-  # Validate using manifest schema
-  - uses: teamsApp/validateManifest
-    with:
-      # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+  # # Validate using manifest schema
+  # - uses: teamsApp/validateManifest
+  #   with:
+  #     # Path to manifest template
+  #     manifestPath: ./appPackage/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage

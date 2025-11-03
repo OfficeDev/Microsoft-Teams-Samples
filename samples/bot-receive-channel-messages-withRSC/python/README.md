@@ -92,21 +92,37 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-2) Clone the repository
+2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+3) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-3) In a terminal, navigate to `samples/bot-receive-channel-messages-withRSC/Python`
+4) In a terminal, navigate to `samples/bot-receive-channel-messages-withRSC/Python`
 
-4) Activate your desired virtual environment
+5) Activate your desired virtual environment
 
-5) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
+6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-6) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-5) Setup Manifest for Teams
+8) Setup Manifest for Teams
 
     - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
         `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.

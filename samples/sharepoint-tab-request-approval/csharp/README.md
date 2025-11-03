@@ -61,9 +61,27 @@ In this scenario, there are 2 key perspectives: Developer and Consumer. The **de
 
 ### Setup Instructions
 1. Obtain [pre-requisites](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp#prerequisites) for the original Tab Request Approval app.
-2. Complete the [setup](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp#setup) for the original Tab Request Approval app under your developer tenant for **this** repo.
-3. Complete reading the [SharePoint Embedded documentation](https://learn.microsoft.com/en-us/sharepoint/dev/embedded/overview) section for SharePoint Embedded under your developer tenant, the same one used in Step 2.
-4. Configuring app secrets
+
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Complete the [setup](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp#setup) for the original Tab Request Approval app under your developer tenant for **this** repo.
+4. Complete reading the [SharePoint Embedded documentation](https://learn.microsoft.com/en-us/sharepoint/dev/embedded/overview) section for SharePoint Embedded under your developer tenant, the same one used in Step 3.
+5. Configuring app secrets
 
     - Values to obtain from the **developer** tenant azure portal.
         - ```$TenantId``` represents the tenant id.
@@ -89,7 +107,7 @@ In this scenario, there are 2 key perspectives: Developer and Consumer. The **de
         - In the [config.cshtml](/TabRequestApproval/Views/Home/config.cshtml) file, the value to replace is the ```$BaseUrl``` which is found on the ```contentUrl``` key.
 
 
-5. Install the Teams App on your consumer tenant
+6. Install the Teams App on your consumer tenant
     - Once the Teams App is ready to be used by the consumer, upload the ```manifest.zip``` of the teams app into the [Teams Admin Center](https://admin.teams.microsoft.com/policies/manage-apps) by clicking on the **Upload new app** button
     - Once uploaded, the consumer needs to grant pemissions to the app. This is done by clicking on the **Permissions** tab. Then, clicking on the **Grant Admin Consent** button or **Review permissions** button.
 

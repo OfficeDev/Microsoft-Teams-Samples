@@ -58,23 +58,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
 - Collect `AzureOpenAIEndpoint`, `AzureOpenAIKey`, `AzureOpenAIDeployment` values and save these values to update in `.appsettings.json` file later.
 
-## Setup
-
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
-
-1) Run ngrok - point to port 3978
-
-   ```bash
-   ngrok http 3978 --host-header="localhost:3978"
-   ```  
-
-   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
-
-   ```bash
-   devtunnel host -p 3978 --allow-anonymous
-   ```
-
 ### Register your app with Azure AD.
 
   1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -91,7 +74,6 @@ the Teams service needs to call into the bot.
       * `User.Read` (enabled by default)
       * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-
 ## Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
@@ -103,6 +85,22 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
+## Setup
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+the Teams service needs to call into the bot.
+
+1) Run ngrok - point to port 3978
+
+   ```bash
+   ngrok http 3978 --host-header="localhost:3978"
+   ```  
+
+   Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
+
+   ```bash
+   devtunnel host -p 3978 --allow-anonymous
+   ```
 1) Clone the repository
 
     ```bash
