@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Bot Framework v4.
+description: This app showcases bot conversation events and messaging extensions for Microsoft Teams using the Teams AI v2 library.
 products:
 - office-teams
 - office
@@ -16,9 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 # Bots/Messaging Extension
 
-This sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Bot Framework v4. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions.
+This sample demonstrates how to build a Microsoft Teams bot that handles conversation events and messaging extensions using Teams AI v2 library. Users can interact with bots through adaptive cards, task modules, and buttons, enhancing the Teams experience with custom, interactive solutions.
 
 ## Included Features
+
 * Bots
 * Adaptive Cards
 * Teams Conversation Events
@@ -100,20 +101,20 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   -  Build
   
      `npm install`
-     
-   - Run your app 
-    
+
+* Run your app
+
       `npm start`
 
-5. Update the `.env` configuration for the bot to use the `BotId` and `BotPassword` (Note the BotId is the AppId created in step 1 (Setup for Bot), the BotPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
-
+5. Update the `config.js` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created in step 2 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 2 (Setup for Bot) and you can always create a new client secret anytime.)
+yes you were right yeh update kar skte ho kya
 
 6. Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `appManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Zip up the contents of the `appManifest/` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+* **This step is specific to Teams.**
+  * Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `config.js` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+  * Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+  * Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
@@ -124,10 +125,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ![hello response team](Images/HelloResponseInTeam.PNG)
 
 ## Deploy to Teams (Visual Studio Toolkit Only)
+
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
-
-
-
-
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-conversation-quickstart-js" />
