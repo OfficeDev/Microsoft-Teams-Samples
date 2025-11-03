@@ -31,14 +31,14 @@
     },
     "appType": {
       "type": "string",
-      "defaultValue": "MultiTenant",
+      "defaultValue": "SingleTenant",
       "allowedValues": [
         "MultiTenant",
         "SingleTenant",
         "UserAssignedMSI"
       ],
       "metadata": {
-        "description": "Type of Bot Authentication. set as MicrosoftAppType in the Web App's Application Settings. Allowed values are: MultiTenant, SingleTenant, UserAssignedMSI. Defaults to \"MultiTenant\"."
+        "description": "Type of Bot Authentication. set as MicrosoftAppType in the Web App's Application Settings. Allowed values are: MultiTenant, SingleTenant, UserAssignedMSI. Defaults to \"SingleTenant\"."
       }
     },
     "appId": {

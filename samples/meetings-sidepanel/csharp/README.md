@@ -74,17 +74,34 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 5130 --allow-anonymous
    ```
 
-2. Create Microsoft Entra ID app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3. Create Microsoft Entra ID app registration in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
         > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-3. Clone the repository
+4. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-4. If you are using Visual Studio
+5. If you are using Visual Studio
 - Launch Visual Studio
 - File -> Open -> Project/Solution
 - Navigate to ```samples\meetings-sidepanel\csharp``` folder
@@ -92,27 +109,27 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 **Note** : In the debug dropdown menu of Visual Studio, select default startup project > **SidePanel**
 
-5. Setup and run the bot from Visual Studio: 
+6. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `<<MicrosoftAppId>>` - Generated from Step 2 (Application (client) ID) is the application app id
-   - `<<MicrosoftAppPassword>>` - Generated from Step 2, also referred to as Client secret
+   - `<<MicrosoftAppPassword>>` - Generated from Step 3, also referred to as Client secret
    - `<<BaseUrl>>` - Your application's base url. E.g. https://12345.ngrok-free.app if you are using ngrok and if you are using dev tunnels, your URL will be like: https://12345.devtunnels.ms.
 
-6. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
+7. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - <<Manifest-id>> with any random GUID or your MicrosoftAppId from Microsoft Entra ID app registration.
-   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 2
+   - `<<YOUR-MICROSOFT-APP-ID>>` with Application id generated from Step 3
    - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
 
-7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
+8. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 
-8. Navigate to ```samples\meetings-sidepanel\csharp\ClientApp``` folder and execute the below command.
+9. Navigate to ```samples\meetings-sidepanel\csharp\ClientApp``` folder and execute the below command.
 
     ```bash
     npm install
     npm start
     ```
-9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+10. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.

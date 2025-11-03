@@ -26,7 +26,7 @@ provision:
     with:
       botId: ${{BOT_ID}}
       name: ${{CONFIG_APPNAME_SHORT}}-bot
-      messagingEndpoint: ${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/api/messages
+      messagingEndpoint: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/api/messages
       description: ""
       channels:
         - name: msteams
@@ -38,12 +38,12 @@ provision:
   - uses: teamsApp/zipAppPackage # Build Teams app package with latest env value
     with:
       manifestPath: ./appPackage/manifest.json # Path to manifest template
-      outputZipPath: ./build/appPackage/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./build/appPackage/manifest.${{TEAMSFX_ENV}}.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
 
   - uses: teamsApp/update # Apply the Teams app manifest to an existing Teams app in Developer Portal. Will use the app id in manifest file to determine which Teams app to update.
     with:
-      appPackagePath: ./build/appPackage/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip # Relative path to this file. This is the path for built zip file.
 
 deploy:
   # Generate runtime environment variables
@@ -59,7 +59,7 @@ deploy:
     with:
       target: ./bot/.env.teamsfx.local
       envs:
-        INITIATE_LOGIN_ENDPOINT: ${{PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT}}/auth-start.html
+        INITIATE_LOGIN_ENDPOINT: ${{PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT}}/auth-start.html
         M365_APPLICATION_ID_URI: api://botid-${{BOT_ID}}
 
   # Run npm command

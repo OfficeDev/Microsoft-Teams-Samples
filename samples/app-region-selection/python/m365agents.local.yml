@@ -74,5 +74,7 @@ deploy:
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

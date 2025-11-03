@@ -74,7 +74,9 @@ deploy:
     with:
       target: ./.env
       envs:
+        MicrosoftAppType: SingleTenant
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
         MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         TeamsAppId: ${{TEAMS_APP_ID}}
         BaseUrl: ${{BOT_ENDPOINT}}
+        MicrosoftAppTenantId: ${{AAD_APP_TENANT_ID}}

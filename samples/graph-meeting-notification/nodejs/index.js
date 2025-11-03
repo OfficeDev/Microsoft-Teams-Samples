@@ -16,19 +16,14 @@ const { DecryptionHelper } = require("./helper/decryption-helper");
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { CloudAdapter,
-    ConversationState,
+const {
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication,
     MemoryStorage,
-    ConfigurationServiceClientCredentialFactory,
-    createBotFrameworkAuthenticationFromConfiguration } = require('botbuilder');
+    ConversationState
+} = require('botbuilder')
 
-const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
-    MicrosoftAppId: process.env.MicrosoftAppId,
-    MicrosoftAppPassword: process.env.MicrosoftAppPassword,
-    MicrosoftAppTenantId: process.env.TenantId
-});
-
-const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfiguration(null, credentialsFactory);
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
 
 // Create adapter.

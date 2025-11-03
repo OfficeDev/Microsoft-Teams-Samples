@@ -16,11 +16,11 @@ namespace Localization.Controllers
     public class BotController : ControllerBase
     {
         // Read-only fields for the adapter and bot instance injected through the constructor
-        private readonly IBotFrameworkHttpAdapter _adapter;
+    private readonly CloudAdapter _adapter;
         private readonly IBot _bot;
 
         // Constructor receives instances of adapter and bot, injected via Dependency Injection (DI).
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+    public BotController(CloudAdapter adapter, IBot bot)
         {
             _adapter = adapter;
             _bot = bot;

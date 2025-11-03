@@ -91,6 +91,13 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
             };
             appPasswordOption.Argument.AddValidator(NonNullOrWhitespace);
 
+            var tenantIdOption = new Option<string>("--tenant-id") 
+            {
+                Argument = new Argument<string> { Arity = ArgumentArity.ExactlyOne },
+                Required = true
+            };
+            tenantIdOption.Argument.AddValidator(NonNullOrWhitespace);
+
             var messageOption = new Option<string>(new string[] { "--message", "-m" }) 
             {
                 Argument = new Argument<string> { Arity = ArgumentArity.ExactlyOne },
@@ -128,33 +135,36 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
             {
                 appIdOption,
                 appPasswordOption,
+                tenantIdOption,
                 serviceUrlOption,
                 conversationIdOption,
                 messageOption,
                 notifyOption
             };
-            sendUserMessageCommand.Handler = CommandHandler.Create<string, string, string, string, string>(SendToUserAsync);
+            sendUserMessageCommand.Handler = CommandHandler.Create<string, string, string, string, string, string>(SendToUserAsync);
 
             var createChannelThreadCommand = new Command("createThread", "Create a new thread in a channel")
             {
                 appIdOption,
                 appPasswordOption,
+                tenantIdOption,
                 serviceUrlOption,
                 channelIdOption,
                 messageOption
             };
-            createChannelThreadCommand.Handler = CommandHandler.Create<string, string, string, string, string>(CreateChannelThreadAsync);
+            createChannelThreadCommand.Handler = CommandHandler.Create<string, string, string, string, string, string>(CreateChannelThreadAsync);
 
             var sendChannelThreadMessageCommand = new Command("sendChannelThread", "Send a message to a channel thread")
             {
                 appIdOption,
                 appPasswordOption,
+                tenantIdOption,
                 serviceUrlOption,
                 conversationIdOption,
                 messageOption,
                 notifyOption
             };
-            sendChannelThreadMessageCommand.Handler = CommandHandler.Create<string, string, string, string, string>(SendToThreadAsync);
+            sendChannelThreadMessageCommand.Handler = CommandHandler.Create<string, string, string, string, string, string>(SendToThreadAsync);
 
             // Create a root command with some options
             var rootCommand = new RootCommand
@@ -171,7 +181,7 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
 
         /// Send a one-on-one message to a user.
         /// This method also makes the message appear in the activity feed!
-        public static async Task SendToUserAsync(string appId, string appPassword, string serviceUrl, string conversationId, string message)
+        public static async Task SendToUserAsync(string appId, string appPassword, string tenantId, string serviceUrl, string conversationId, string message)
         {
             var activity = MessageFactory.Text(message);
             activity.Summary = message; // Ensure that the summary text is populated so the toast notifications aren't generic text.
@@ -179,7 +189,10 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
 
             MicrosoftAppCredentials.TrustServiceUrl(serviceUrl); // Required or the activity will be sent w/o auth headers.
 
-            var credentials = new MicrosoftAppCredentials(appId, appPassword);
+            var credentials = new MicrosoftAppCredentials(appId, appPassword) 
+            {
+                ChannelAuthTenant = tenantId
+            };
 
             var connectorClient = new ConnectorClient(new Uri(serviceUrl), credentials);
             await SendWithRetries(async () => 
@@ -187,10 +200,13 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
         }
 
         /// Create a new thread in a channel.
-        public static async Task CreateChannelThreadAsync(string appId, string appPassword, string serviceUrl, string channelId, string message)
+        public static async Task CreateChannelThreadAsync(string appId, string appPassword, string tenantId, string serviceUrl, string channelId, string message)
         {
             // Create the connector client using the service url & the bot credentials.
-            var credentials = new MicrosoftAppCredentials(appId, appPassword);
+            var credentials = new MicrosoftAppCredentials(appId, appPassword) 
+            {
+                ChannelAuthTenant = tenantId
+            };
             var connectorClient = new ConnectorClient(new Uri(serviceUrl), credentials);
 
             // Ensure the service url is marked as "trusted" so the SDK will send auth headers
@@ -214,14 +230,18 @@ namespace Microsoft.Teams.Samples.ProactiveMessageCmd
         }
 
         /// Send a message to a thread in a channel.
-        public static async Task SendToThreadAsync(string appId, string appPassword, string serviceUrl, string conversationId, string message)
+        public static async Task SendToThreadAsync(string appId, string appPassword, string tenantId, string serviceUrl, string conversationId, string message)
         {
             var activity = MessageFactory.Text(message);
             activity.Summary = message; // Ensure that the summary text is populated so the toast notifications aren't generic text.
 
             MicrosoftAppCredentials.TrustServiceUrl(serviceUrl); // Required or the activity will be sent w/o auth headers.
 
-            var credentials = new MicrosoftAppCredentials(appId, appPassword);
+            // For SingleTenant, set the tenant-specific OAuth endpoint
+            var credentials = new MicrosoftAppCredentials(appId, appPassword) 
+            {
+                ChannelAuthTenant = tenantId
+            };
 
             var connectorClient = new ConnectorClient(new Uri(serviceUrl), credentials);
             await SendWithRetries(async () => 
