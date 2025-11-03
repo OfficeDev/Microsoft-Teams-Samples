@@ -86,6 +86,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ![Authentication](BotAllCards/Images/Authentication.png)
         
     4) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+    5) Navigate to **API Permissions**, and make sure to add the following permissions:
+      Select Add a permission
+         * Select Add a permission
+         * Select Microsoft Graph -\> Delegated permissions.
+         * `User.Read` (enabled by default)
+         * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
 2. Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).

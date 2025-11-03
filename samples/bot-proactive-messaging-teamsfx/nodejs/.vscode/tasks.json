@@ -53,8 +53,8 @@
                         "access": "public",
                         "writeToEnvironmentFile": {
                             // Keep consistency with upgraded configuration.
-                            "endpoint": "PROVISIONOUTPUT__BOTOUTPUT__SITEENDPOINT",
-                            "domain": "PROVISIONOUTPUT__BOTOUTPUT__VALIDDOMAIN"
+                            "endpoint": "PROVISIONOUTPUT_BOTOUTPUT_SITEENDPOINT",
+                            "domain": "PROVISIONOUTPUT_BOTOUTPUT_VALIDDOMAIN"
                         }
                     }
                 ],

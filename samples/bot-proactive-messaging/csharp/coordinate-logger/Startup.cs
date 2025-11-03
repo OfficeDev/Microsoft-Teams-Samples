@@ -10,6 +10,7 @@ namespace msteams_app_coordinatelogger
     using Microsoft.Bot.Connector.Authentication;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Teams.CoordinateLogger.Bot;
     using Microsoft.Teams.CoordinateLogger.Services;
 
@@ -24,7 +25,7 @@ namespace msteams_app_coordinatelogger
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="env">The hosting environment.</param>
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var cfgBuilder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -40,26 +41,23 @@ namespace msteams_app_coordinatelogger
             string appId = this.configuration.GetValue<string>("App:Id");
             string appPassword = this.configuration.GetValue<string>("App:Password");
 
-            ICredentialProvider credentialProvider = new SimpleCredentialProvider(
-                appId: appId,
-                password: appPassword);
             services
                 .AddSingleton(new MicrosoftAppCredentials(appId, appPassword));
-            services
-                .AddSingleton(credentialProvider);
             
             services
                 .AddSingleton<IConnectorClientFactory, ConnectorClientFactory>();
 
             services
-                .AddTransient<IBotFrameworkHttpAdapter, BotFrameworkHttpAdapter>();
+                .AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+            services
+                .AddTransient<CloudAdapter>();
 
             services
                 .AddTransient<IBot, CoordinateLoggerActivityHandler>();
 
             services
-                .AddMvc(options => options.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Latest);
+                .AddMvc(options => options.EnableEndpointRouting = false);
 
         }
 

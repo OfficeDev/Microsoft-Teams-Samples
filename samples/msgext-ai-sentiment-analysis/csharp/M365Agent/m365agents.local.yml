@@ -33,8 +33,7 @@ provision:
   - uses: script
     with:
       run:
-        # echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
-        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=MultiTenant";
+        echo "::set-teamsfx-env MICROSOFT_APP_TYPE=SingleTenant";
         echo "::set-teamsfx-env MICROSOFT_APP_TENANT_ID=${{AAD_APP_TENANT_ID}}";
 
   # Generate runtime appsettings to JSON file
@@ -42,8 +41,11 @@ provision:
     with:
       target: ../MEAISentimentAnalysis/appsettings.json
       content:
+        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
         MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
         ApplicationBaseUrl: ${{BOT_ENDPOINT}}
+        MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -54,6 +56,13 @@ provision:
           parameters: ./infra/azure.parameters.json
           deploymentName: Create-resources-for-bot
       bicepCliVersion: v0.9.1 # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you, will use bicep CLI in PATH if you remove this config.
+
+
+# Validate using manifest schema
+  - uses: teamsApp/validateManifest
+    with:
+      # Path to manifest template
+      manifestPath: ./appManifest/manifest.json
 
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
