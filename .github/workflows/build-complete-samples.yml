@@ -496,7 +496,7 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-shared-channel-events/csharp/SharedChannelEvents.csproj'
+            - project_path: 'samples/bot-shared-channel-events/csharp/SharedChannelEvents/SharedChannelEvents.csproj'
               name: 'bot-shared-channel-events'
               version: '6.0.x'
 
