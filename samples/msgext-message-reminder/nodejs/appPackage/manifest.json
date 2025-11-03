@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
@@ -14,8 +14,8 @@
     "full": "Message reminder setup through messaging extension action command."
   },
   "description": {
-    "short": "Node.js Messaging Extension for scheduling tasks and sending reminder cards.",
-    "full": "This sample demonstrates a Node.js Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams."
+    "short": "Teams AI v2 Messaging Extension for scheduling tasks and sending reminder cards.",
+    "full": "This sample demonstrates a Teams AI v2 Messaging Extension that allows users to schedule tasks and receive reminder cards in Microsoft Teams."
   },
   "icons": {
     "outline": "outline.png",
@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "personal",
         "team"
@@ -34,7 +34,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
