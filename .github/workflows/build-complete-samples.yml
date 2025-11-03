@@ -496,6 +496,10 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/graph-membership-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
+              name: 'graph-membership-change-notification'
+              version: '8.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -554,7 +558,7 @@ jobs:
 
             - project_path: 'samples/bot-archive-groupchat-messages/nodejs'
               name: 'bot-archive-groupchat-messages'
-              version: '14.x'
+              version: '20.x'
 
             - project_path: 'samples/bot-daily-task-reminder/nodejs'
               name: 'bot-daily-task-reminder'
@@ -1057,7 +1061,11 @@ jobs:
 
             - project_path: 'samples/bot-auth0-adaptivecard/nodejs'
               name: 'bot-auth0-adaptivecard'
-              version: '16.x'  
+              version: '16.x'
+
+            - project_path: 'samples/graph-membership-change-notification/nodejs'
+              name: 'graph-membership-change-notification'
+              version: '20.x'   
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs'
               name: 'tab-adhoccalls-transcript-recording'
@@ -1204,6 +1212,10 @@ jobs:
 
             - project_path: 'samples/tab-deeplink/python'
               name: 'tab-deeplink'
+              version: '3.10.x'
+            
+            - project_path: 'samples/graph-membership-change-notification/python'
+              name: 'graph-membership-change-notification'
               version: '3.10.x'
 
             - project_path: 'samples/bot-proactive-messaging-teamsfx/python'

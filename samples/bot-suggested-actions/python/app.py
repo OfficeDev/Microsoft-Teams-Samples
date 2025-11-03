@@ -53,18 +53,14 @@ async def on_error(context: TurnContext, error: Exception):
         # Send a trace activity, which will be displayed in Bot Framework Emulator
         await context.send_activity(trace_activity)
 
-
 ADAPTER.on_turn_error = on_error
 
 # Create the Bot
 BOT = SuggestedActionsBot()
 
-
 # Listen for incoming requests on /api/messages.
 async def messages(req: Request) -> Response:
    return await ADAPTER.process(req, BOT)
-
-
 
 APP = web.Application(middlewares=[aiohttp_error_middleware])
 APP.router.add_post("/api/messages", messages)
