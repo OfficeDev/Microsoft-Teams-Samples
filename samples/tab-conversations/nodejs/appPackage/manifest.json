@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
   "manifestVersion": "1.19",
   "version": "1.0.0",
@@ -24,7 +24,7 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-      "configurationUrl": "https://${{BOT_DOMAIN}}/configure",
+      "configurationUrl": "https://${{BOT_DOMAIN}}/tabs/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
