@@ -2,7 +2,7 @@
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.AI;
 
-namespace ContosoKnowledgeHub
+namespace AgentKnowledgeHub
 {
     public class AdapterWithErrorHandler : TeamsAdapter
     {

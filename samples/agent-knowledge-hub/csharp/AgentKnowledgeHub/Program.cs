@@ -1,5 +1,5 @@
-using ContosoKnowledgeHub;
-using ContosoKnowledgeHub.Models;
+using AgentKnowledgeHub;
+using AgentKnowledgeHub.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
