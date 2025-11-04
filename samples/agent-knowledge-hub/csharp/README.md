@@ -31,8 +31,10 @@ Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI lib
 -  [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/download) latest version or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 -  [Microsoft 365 Agents Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-- [Azure OpenAI](https://aka.ms/oai/access) resource
-
+-  [Azure OpenAI](https://aka.ms/oai/access) resource
+-  [Azure OpenAI in Azure AI Foundry Models resource](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal)
+-  [AI: Create an Azure OpenAI Resource and Deploy a Model](https://learn.microsoft.com/en-us/microsoft-cloud/dev/tutorials/openai-acs-msgraph/02-openai-create-resource)
+ 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
