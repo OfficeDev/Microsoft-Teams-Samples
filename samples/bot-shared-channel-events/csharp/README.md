@@ -93,7 +93,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
-- Navigate to `samples/meetings-events/csharp` 
+- Navigate to `samples/bot-shared-channel-events/csharp` 
     - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing Microsoft Entra ID app registration in step 1.
 
 - Run the app from a terminal or from Visual Studio, choose option A or B.
