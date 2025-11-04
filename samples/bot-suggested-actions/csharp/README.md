@@ -31,19 +31,6 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Send Suggested Actions:** [Manifest](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
 
-## Copilot Custom Engine Agents
-
-**Step 1: Install Copilot Custom Engine**  
-![Copilot Installation](Images/Copilot_Install.png)
-
-**Step 2: Verify Copilot Hello**  
-![Copilot Hello](Images/Copilot_Hello.png)
-
-**Step 3: Welcome Screen**  
-![Copilot Welcome](Images/Copilot_Welcome.png)
-
-
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -160,6 +147,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Action.Compose will @metion the user configured in the action in this case the its bot named Facilitator
 ![Action.Compose](SuggestedActions/Images/5.Action.Compose.png)
 
+## Copilot Custom Engine Agents
+
+**Step 1: Install Copilot Custom Engine**  
+![Copilot Installation](SuggestedActions/Images/Copilot_Install.png)
+
+**Step 2: Verify Copilot Hello**  
+![Copilot Hello](SuggestedActions/Images/Copilot_Hello.png)
+
+**Step 3: Welcome Screen**  
+![Copilot Welcome](SuggestedActions/Images/Copilot_Welcome.png)
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
