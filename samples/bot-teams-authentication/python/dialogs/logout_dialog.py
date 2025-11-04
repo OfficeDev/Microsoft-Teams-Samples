@@ -3,7 +3,9 @@
 
 from botbuilder.dialogs import DialogTurnResult, ComponentDialog, DialogContext
 from botbuilder.core import BotFrameworkAdapter
+from botbuilder.core.cloud_adapter_base import CloudAdapterBase
 from botbuilder.schema import ActivityTypes
+import logging
 
 class LogoutDialog(ComponentDialog):
     def __init__(self, dialog_id: str, connection_name: str):
@@ -31,7 +33,26 @@ class LogoutDialog(ComponentDialog):
         if inner_dc.context.activity.type == ActivityTypes.message:
             text = inner_dc.context.activity.text.lower()
             if text == "logout":
-                bot_adapter: BotFrameworkAdapter = inner_dc.context.adapter
-                await bot_adapter.sign_out_user(inner_dc.context, self.connection_name)
+                # Use UserTokenClient for CloudAdapter
+                adapter = inner_dc.context.adapter
+                
+                # Try BotFrameworkAdapter method first (for compatibility)
+                if hasattr(adapter, 'sign_out_user'):
+                    await adapter.sign_out_user(inner_dc.context, self.connection_name)
+                else:
+                    # CloudAdapter uses UserTokenClient
+                    token_client = inner_dc.context.turn_state.get(CloudAdapterBase.USER_TOKEN_CLIENT_KEY)
+                    if token_client:
+                        try:
+                            await token_client.sign_out_user(
+                                inner_dc.context.activity.from_property.id,
+                                self.connection_name,
+                                inner_dc.context.activity.channel_id
+                            )
+                        except Exception as ex:
+                            logging.error(f"Error signing out user: {ex}")
+                    else:
+                        logging.warning("UserTokenClient not found in turn state; cannot sign out.")
+                
                 await inner_dc.context.send_activity("You have been signed out.")
                 return await inner_dc.cancel_all_dialogs()
