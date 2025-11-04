@@ -12,3 +12,5 @@ class DefaultConfig:
     APP_ID = os.environ.get("MicrosoftAppId", "")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
     BASE_URL = os.environ.get("BASE_URL", "")
+    APP_TYPE = os.environ.get("MicrosoftAppType", "")
+    APP_TENANTID = os.environ.get("MicrosoftAppTenantId", "")

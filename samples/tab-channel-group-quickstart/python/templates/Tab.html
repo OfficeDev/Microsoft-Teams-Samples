@@ -1,0 +1,61 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Tab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='App.css') }}">
+    <script src="https://res.cdn.office.net/teams-js/2.40.0/js/MicrosoftTeams.min.js"></script>
+    <style>
+        /* Dark theme for the tab content only */
+        .dark-theme-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 30px;
+            width: 95%;
+            max-width: 1200px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+            /* Removed border-radius */
+        }
+
+        .dark-theme-container h1,
+        .dark-theme-container h3 {
+            color: #ffffff;
+        }
+
+        #userName {
+            margin-left: 8px;
+            color: #4fc3f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="dark-theme-container">
+        <h3>Hello World!</h3>
+        <h1>Congratulations<span id="userName"></span>!</h1>
+        <h3>This is the tab you made :-)</h3>
+    </div>
+
+    <script>
+        let context = {};
+
+        function componentDidMount() {
+            microsoftTeams.app.initialize();
+            microsoftTeams.app.getContext().then((contextData) => {
+                context = contextData;
+                updateUserName();
+            });
+        }
+
+        function updateUserName() {
+            let userName = Object.keys(context).length > 0 ? context?.user?.userPrincipalName || "" : "";
+            document.getElementById('userName').textContent = userName;
+        }
+
+        document.addEventListener('DOMContentLoaded', componentDidMount);
+    </script>
+</body>
+</html>

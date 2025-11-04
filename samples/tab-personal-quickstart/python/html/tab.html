@@ -1,0 +1,38 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.--><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab - Microsoft Teams</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://res-1.cdn.office.net/files/fabric-cdn-prod_20230815.002/css/fabric.min.css">
+    <script src="https://res.cdn.office.net/teams-js/2.4.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="App">
+        <div>
+            <h3>Hello World!</h3>
+            <h1>Congratulations <span id="userName"></span>!</h1>
+            <h3>This is the tab you made :-)</h3>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Microsoft Teams SDK and get user context
+        microsoftTeams.app.initialize().then(() => {
+            console.log("Teams SDK initialized successfully");
+            
+            // Get user context
+            microsoftTeams.app.getContext().then((context) => {
+                const userName = context.user?.userPrincipalName || "";
+                document.getElementById('userName').textContent = userName;
+            }).catch((error) => {
+                console.error("Error getting user context:", error);
+            });
+        }).catch((error) => {
+            console.error("Error initializing Teams SDK:", error);
+        });
+    </script>
+</body>
+</html>

@@ -77,7 +77,7 @@ class MainDialog extends LogoutDialog {
             const me = await client.getMe();
             const title = me ? me.jobTitle : 'Unknown';
             await stepContext.context.sendActivity(`You're logged in as ${me.displayName} (${me.userPrincipalName}); your job title is: ${title}; your photo is: `);
-            const photoBase64 = await client.GetPhotoAsync(tokenResponse.token);
+            const photoBase64 = await client.getPhotoAsync(tokenResponse.token);
             const card = CardFactory.thumbnailCard("", CardFactory.images([photoBase64]));
             await stepContext.context.sendActivity({ attachments: [card] });
             return await stepContext.prompt(CONFIRM_PROMPT, 'Would you like to view your token?');

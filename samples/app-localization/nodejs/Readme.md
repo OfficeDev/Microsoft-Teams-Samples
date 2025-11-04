@@ -22,6 +22,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 * Bots
 * Tabs
 * Localization
+* Custome Engine Agents
 
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
@@ -56,7 +57,19 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Setup
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+      
 2. Setup for Bot
 	
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
@@ -142,6 +155,16 @@ To change the language in Microsoft Teams, please click your profile picture at 
 
 2. **Bot**: send any message to see localized 
 [image](Images/Reply.png)
+
+**Custome Engine Agents**
+Install App In Copilot
+![image](Images/CopilotInstall.png)
+
+Default Language English(USA)
+![image](Images/Copilot1.png)
+
+After Changing Language to Hindi
+![image](Images/Copilot2.png)
 
 ## Outlook on the web
 

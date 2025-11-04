@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -24,58 +26,120 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             this._baseUrl = configuration["BaseUrl"];
         }
-
+        
         protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
-            var text = query?.Parameters?[0]?.Value as string ?? string.Empty;
-
-            switch (text)
+            var command = query.CommandId;
+            var searchQuery = query?.Parameters?[0]?.Value as string ?? string.Empty;
+            if (command == "wikipediaSearch")
             {
-                case "adaptive card":
-                    MessagingExtensionResponse response = GetAdaptiveCard();
-                    return response;
+                string wikipediaUrl = $"https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch={searchQuery}&utf8=1";
 
-                case "connector card":
-                    MessagingExtensionResponse connectorCard = GetConnectorCard();
-                    return connectorCard;
+                try
+                {
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        HttpResponseMessage response = await httpClient.GetAsync(wikipediaUrl);
+                        response.EnsureSuccessStatusCode();
 
-                case "result grid":
-                    MessagingExtensionResponse resultGrid = GetResultGrid();
-                    return resultGrid;
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        using (JsonDocument document = JsonDocument.Parse(responseBody))
+                        {
+                            JsonElement root = document.RootElement;
+                            JsonElement queryElement = root.GetProperty("query");
+                            JsonElement searchElement = queryElement.GetProperty("search");
+
+                            var attachments = new List<MessagingExtensionAttachment>();
+
+                            foreach (JsonElement result in searchElement.EnumerateArray().Take(8))
+                            {
+                                string title = result.GetProperty("title").GetString();
+                                string snippet = result.GetProperty("snippet").GetString();
+
+                                var previewCard = new ThumbnailCard
+                                {
+                                    Title = title,
+                                    Tap = new CardAction { Type = "openUrl", Value = $"https://en.wikipedia.org/wiki/{Uri.EscapeUriString(title)}" }
+                                };
+
+                                var attachment = new MessagingExtensionAttachment
+                                {
+                                    ContentType = HeroCard.ContentType,
+                                    Content = new HeroCard { Title = title, Subtitle = snippet },
+                                    Preview = previewCard.ToAttachment()
+                                };
+
+                                attachments.Add(attachment);
+                            }
+
+                            return new MessagingExtensionResponse
+                            {
+                                ComposeExtension = new MessagingExtensionResult
+                                {
+                                    Type = "result",
+                                    AttachmentLayout = "list",
+                                    Attachments = attachments
+                                }
+                            };
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error fetching Wikipedia data: " + ex.Message);
+                    return null;
+                }
             }
-
-            var packages = await FindPackages(text);
-
-            // We take every row of the results and wrap them in cards wrapped in MessagingExtensionAttachment objects.
-            // The Preview is optional, if it includes a Tap, that will trigger the OnTeamsMessagingExtensionSelectItemAsync event back on this bot.
-            var attachments = packages.Select(package =>
+            else
             {
-                var previewCard = new ThumbnailCard { Title = package.Item1, Tap = new CardAction { Type = "invoke", Value = package } };
-                if (!string.IsNullOrEmpty(package.Item5))
+                switch (searchQuery)
                 {
-                    previewCard.Images = new List<CardImage>() { new CardImage(package.Item5, "Icon") };
+                    case "adaptive card":
+                        MessagingExtensionResponse response = GetAdaptiveCard();
+                        return response;
+
+                    case "connector card":
+                        MessagingExtensionResponse connectorCard = GetConnectorCard();
+                        return connectorCard;
+
+                    case "result grid":
+                        MessagingExtensionResponse resultGrid = GetResultGrid();
+                        return resultGrid;
                 }
 
-                var attachment = new MessagingExtensionAttachment
+                var packages = await FindPackages(searchQuery);
+
+                // We take every row of the results and wrap them in cards wrapped in MessagingExtensionAttachment objects.
+                // The Preview is optional, if it includes a Tap, that will trigger the OnTeamsMessagingExtensionSelectItemAsync event back on this bot.
+                var attachments = packages.Select(package =>
                 {
-                    ContentType = HeroCard.ContentType,
-                    Content = new HeroCard { Title = package.Item1 },
-                    Preview = previewCard.ToAttachment()
+                    var previewCard = new ThumbnailCard { Title = package.Item1, Tap = new CardAction { Type = "invoke", Value = package } };
+                    if (!string.IsNullOrEmpty(package.Item5))
+                    {
+                        previewCard.Images = new List<CardImage>() { new CardImage(package.Item5, "Icon") };
+                    }
+
+                    var attachment = new MessagingExtensionAttachment
+                    {
+                        ContentType = HeroCard.ContentType,
+                        Content = new HeroCard { Title = package.Item1 },
+                        Preview = previewCard.ToAttachment()
+                    };
+
+                    return attachment;
+                }).ToList();
+
+                // The list of MessagingExtensionAttachments must we wrapped in a MessagingExtensionResult wrapped in a MessagingExtensionResponse.
+                return new MessagingExtensionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "result",
+                        AttachmentLayout = "list",
+                        Attachments = attachments
+                    }
                 };
-
-                return attachment;
-            }).ToList();
-
-            // The list of MessagingExtensionAttachments must we wrapped in a MessagingExtensionResult wrapped in a MessagingExtensionResponse.
-            return new MessagingExtensionResponse
-            {
-                ComposeExtension = new MessagingExtensionResult
-                {
-                    Type = "result",
-                    AttachmentLayout = "list",
-                    Attachments = attachments
-                }
-            };
+            }
         }
         protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject query, CancellationToken cancellationToken)
         {

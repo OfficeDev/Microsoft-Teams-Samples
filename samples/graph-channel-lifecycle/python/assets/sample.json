@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-channel-lifecycle-python",
+    "source": "officeDev",
+    "title": "Channel life cycle using Python",
+    "shortDescription": "This sample demonstrates how to manage the lifecycle of channels in Microsoft Teams using the Graph API with Python.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-channel-lifecycle/python",
+    "longDescription": [
+      "This sample application showcases the full lifecycle management of channels in Microsoft Teams, including creating, updating, and deleting channels through the Graph API. Built with Python, it offers seamless integration within Teams and provides clear setup instructions."
+    ],
+    "creationDateTime": "2025-07-16",
+    "updateDateTime": "2025-07-16",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-channel-lifecycle/python/Images/GraphChannelLifeCycleModule.gif",
+        "alt": "Solution UX showing channel life cycle using node js"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]

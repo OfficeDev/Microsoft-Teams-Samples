@@ -1,0 +1,320 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.-->
+<!-- Licensed under the MIT License.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App in Meeting</title>
+    <script src="https://unpkg.com/@microsoft/teams-js@2.4.0/dist/MicrosoftTeams.min.js"></script> <!-- Teams SDK -->
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #app {
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Light theme */
+        .theme-light {
+            background-color: white;
+            color: black;
+        }
+
+        /* Dark theme */
+        .theme-dark {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        /* High contrast theme */
+        .theme-contrast {
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Button styles */
+        .btn {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+            border: none;
+            background-color: #5558AF;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #464775;
+        }
+
+        /* High Contrast Button Styles */
+        .theme-contrast .btn {
+            background-color: #5558AF;
+            color: white;
+        }
+
+        .theme-contrast .btn:hover {
+            background-color: #464775;
+            color: white;
+        }
+
+        /* Container styles */
+        .container {
+            margin-bottom: 20px;
+        }
+
+        .break {
+            margin-top: 10px;
+        }
+
+        /* Timer Count Styles for Different Themes */
+        /* Dark Theme Timer */
+        .timerCount-dark {
+            padding: 20vh;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Light Theme Timer */
+        .timerCount-light {
+            padding: 20vh;
+            text-align: center;
+            background-color: white;
+            color: #242424;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* High Contrast Theme Timer */
+        .timerCount-contrast {
+            padding: 20vh;
+            text-align: center;
+            background-color: black;
+            color: yellow;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Enhanced Theme Styles with Additional Properties */
+        /* Dark Theme */
+        .theme-dark {
+            margin: 0.5rem;
+            margin-right: 0px;
+            border-radius: 2px;
+            padding: 0.3rem;
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        /* Light Theme */
+        .theme-light {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: white;
+            color: #242424;
+        }
+
+        /* High Contrast Theme */
+        .theme-contrast {
+            margin: 0.5rem;
+            margin-right: 10px;
+            border-radius: 2px;
+            padding: 0.9rem;
+            background-color: black;
+            color: yellow;
+        }
+
+        /* Body background adjustments for different themes */
+        body.theme-dark {
+            background-color: #2c2c2c;
+        }
+
+        body.theme-contrast {
+            background-color: #000000;
+        }
+
+        body.theme-light {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="theme-light">
+        <div class="container">
+            <h3>Share To Stage View</h3>
+            <button id="shareButton" class="btn">Share</button>
+        </div>
+
+        <div class="container">
+            <h3>Mute/Unmute Audio Call</h3>
+            <button id="toggleButton" class="btn">Mute/Un-Mute</button>
+            <li class="break">Mute State: <b id="muteState">Loading...</b></li>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let app = microsoftTeams.app;
+            let resultElement = document.getElementById('muteState');
+            let shareButton = document.getElementById('shareButton');
+            let toggleButton = document.getElementById('toggleButton');
+            let appElement = document.getElementById('app');
+            let appTheme = "theme-light"; // Default theme
+
+            // Callback for handling Teams SDK results
+            const callback = (errcode, bln) => {
+                if (errcode) {
+                    resultElement.innerText = JSON.stringify(errcode);
+                } else {
+                    resultElement.innerText = JSON.stringify(bln);
+                }
+            };
+
+            // Get the current audio state
+            const ClientAudioState = () => {
+                try {
+                    if (microsoftTeams.meeting && microsoftTeams.meeting.getIncomingClientAudioState) {
+                        microsoftTeams.meeting.getIncomingClientAudioState(callback);
+                    } else {
+                        console.log("Audio state API not available in this context");
+                        resultElement.innerText = "Audio controls not available outside meeting";
+                    }
+                } catch (error) {
+                    console.error("Error getting audio state:", error);
+                    resultElement.innerText = "Audio state not accessible";
+                }
+            };
+
+            // Toggle mute/unmute audio state
+            const toggleState = () => {
+                try {
+                    if (microsoftTeams.meeting && microsoftTeams.meeting.toggleIncomingClientAudio) {
+                        microsoftTeams.meeting.toggleIncomingClientAudio(callback);
+                    } else {
+                        console.log("Audio toggle API not available in this context");
+                        resultElement.innerText = "Audio controls not available outside meeting";
+                    }
+                } catch (error) {
+                    console.error("Error toggling audio state:", error);
+                    resultElement.innerText = "Error: Audio toggle not accessible";
+                }
+            };
+
+            // Share content to the meeting stage
+            const shareSpecificPart = () => {
+                let appContentUrl = "";
+                microsoftTeams.app.getContext().then((context) => {
+                    appContentUrl = `${window.location.origin}/shareview?meetingId=${context.meeting.id}`;
+                    microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                        if (result) {
+                            console.log("Shared successfully!");
+                        }
+                        if (err) {
+                            alert(JSON.stringify(err));
+                        }
+                    }, appContentUrl);
+                });
+            };
+
+            // Initialize the app and handle theme changes
+            app.initialize().then(app.getContext).then((context) => {
+                // Set initial theme based on the app context
+                switch (context.app.theme) {
+                    case 'dark':
+                        appTheme = "theme-dark";
+                        break;
+                    case 'contrast':
+                        appTheme = "theme-contrast";
+                        break;
+                    case 'default':
+                        appTheme = 'theme-light';
+                        break;
+                    default:
+                        appTheme = 'theme-dark';
+                        break;
+                }
+                appElement.className = appTheme;
+                document.body.className = appTheme;
+
+                // Register theme change handler
+                microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+                    switch (theme) {
+                        case 'dark':
+                            appTheme = 'theme-dark';
+                            break;
+                        case 'default':
+                            appTheme = 'theme-light';
+                            break;
+                        case 'contrast':
+                            appTheme = 'theme-contrast';
+                            break;
+                        default:
+                            appTheme = 'theme-light';
+                            break;
+                    }
+                    appElement.className = appTheme;
+                    document.body.className = appTheme;
+                });
+
+                // Attach event listeners to buttons
+                shareButton.addEventListener('click', shareSpecificPart);
+                toggleButton.addEventListener('click', toggleState);
+
+                // Check if we're in a meeting context before trying to get audio state
+                if (context.meeting && context.meeting.id) {
+                    console.log("Meeting context detected, audio controls available");
+                    // Only try to get audio state if we're actually in a meeting
+                    ClientAudioState();
+                } else {
+                    console.log("Not in meeting context, audio controls disabled");
+                    resultElement.innerText = "Audio controls only available during meetings";
+                }
+            }).catch(function (error) {
+                console.log(error, "Could not register handlers.");
+                resultElement.innerText = "Teams SDK initialization failed";
+            });
+        });
+    </script>
+</body>
+</html>

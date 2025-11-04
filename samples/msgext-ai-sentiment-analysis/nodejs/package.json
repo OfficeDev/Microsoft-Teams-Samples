@@ -1,36 +1,41 @@
 {
-  "name": "msgext-ai-sentiment-analysis",
-  "version": "1.0.0",
-  "msteams": {
-    "teamsAppId": null
-  },
-  "description": "Sentiment analysis of Teams chat messages using message extension and Azure Open AI",
-  "engines": {
-    "node": "16 || 18"
-  },
-  "author": "Microsoft",
-  "license": "MIT",
-  "main": "index.js",
-  "scripts": {
-    "dev:teamsfx": "npm run start",
-    "start": "node ./index.js",
-    "watch": "nodemon ./index.js",
-    "build": "node build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "@microsoft/adaptivecards-tools": "^1.0.0",
-    "botbuilder": "^4.18.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.9",
-    "esbuild": "^0.19.2",
-    "express": "^4.18.2",
-    "openai": "^3.3.0",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {
-    "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.7"
-  }
+    "name": "teams-bot",
+    "version": "1.0.0",
+    "description": "Bot Builder v4 Bot Teams sample",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "dev:teamsfx": "npm run dev",
+        "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "lint": "eslint .",
+        "build": "node build.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
+    },
+    "dependencies": {
+        "botbuilder": "^4.18.0",
+        "botbuilder-dialogs": "^4.18.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.8",
+        "express": "^4.17.1",
+        "openai": "^5.7.0",
+        "restify": "^11.1.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.18.1",
+        "eslint": "^7.0.0",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "nodemon": "~2.0.4"
+    }
 }

@@ -7,3 +7,4 @@ additionalMetadata:
   sampleTag: Microsoft-Teams-Samples:bot-task-module-python
 
 environmentFolderPath: ./env
+projectId: 

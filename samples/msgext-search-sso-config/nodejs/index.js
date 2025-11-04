@@ -16,28 +16,18 @@ const restify = require('restify');
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const {
   CloudAdapter,
-  ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
   UserState, 
   MemoryStorage,
 } = require("botbuilder");
 const { TeamsMessagingExtensionsSearchAuthConfigBot } = require('./bots/teamsMessagingExtensionsSearchAuthConfigBot');
+const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
-const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
-  MicrosoftAppId: process.env.MicrosoftAppId,
-  MicrosoftAppPassword: process.env.MicrosoftAppPassword,
-  MicrosoftAppType: "MultiTenant"
-});
-
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
-  {},
-  credentialsFactory
-);
-
 const adapter = new CloudAdapter(botFrameworkAuthentication);
 
+// Catch-all for errors.
 adapter.onTurnError = async (context, error) => {
   // This check writes out errors to console log .vs. app insights.
   // NOTE: In production environment, you should consider logging this to Azure
@@ -81,10 +71,8 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 });
 
 // Listen for incoming requests.
-server.post("/api/messages", async (req, res) => {
-  await adapter.process(req, res, async (context) => {
-    await bot.run(context);
-  });
+server.post('/api/messages', async (req, res) => {
+    await adapter.process(req, res, (context) => bot.run(context));
 });
 
 // Serve up static files in the public directory (namely: searchSettings.html)

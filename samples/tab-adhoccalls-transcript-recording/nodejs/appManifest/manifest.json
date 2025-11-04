@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.22",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-id}}",
+  "developer": {
+    "name": "AdhocCalls.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "adhocCalls Transcripts & Recs",
+    "full": "adhocCalls Transcripts and Recordings"
+  },
+  "description": {
+  "short": "AdhocCalls for retrieving call transcripts and recordings via API.",
+  "full": "This Microsoft Teams app enables users to fetch, view, and manage Microsoft Teams adhoc call transcripts and recordings. It integrates with Microsoft Graph API to retrieve completed call data, including transcripts (formatted with speaker labels) and video recordings. The app provides a responsive React interface that displays call data in real-time using Socket.IO, allowing users to easily browse, play recordings, and read corresponding transcripts with pagination and status indicators."
+ },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "AdhocCalls Transcripts and Recordings",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "groupChat"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

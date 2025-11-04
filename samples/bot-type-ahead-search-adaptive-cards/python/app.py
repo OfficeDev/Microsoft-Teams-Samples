@@ -6,12 +6,9 @@ import traceback
 from http import HTTPStatus
 
 from aiohttp import web
-from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
-)
+from botbuilder.core import TurnContext
 from botbuilder.core.integration import aiohttp_error_middleware
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.schema import Activity, ActivityTypes, InvokeResponse
 
 from bots import TeamsBot
@@ -19,9 +16,8 @@ from config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
-# Create adapter.
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+# Create the adapter
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 
 # Catch-all for errors.
@@ -48,22 +44,7 @@ BOT = TeamsBot()
 
 
 async def messages(request: web.Request) -> web.Response:
-    if "application/json" in request.headers["Content-Type"]:
-        body = await request.json()
-    else:
-        return web.Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
-
-    activity = Activity().deserialize(body)
-    auth_header = request.headers.get("Authorization", "")
-
-    try:
-        response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-        if response:
-            return web.json_response(data=response.body, status=response.status)
-        return web.Response(status=HTTPStatus.OK)
-    except Exception as e:
-        print(f"Exception in messages: {e}", file=sys.stderr)
-        return web.Response(status=HTTPStatus.INTERNAL_SERVER_ERROR)
+    return await ADAPTER.process(request, BOT)
 
 
 APP = web.Application(middlewares=[aiohttp_error_middleware])

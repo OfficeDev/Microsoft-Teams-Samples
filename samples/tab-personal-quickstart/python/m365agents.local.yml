@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
+# Visit https://aka.ms/teamsfx-actions for details on actions
+version: v1.2
+
+additionalMetadata:
+  sampleTag: Microsoft-Teams-Samples:tab-personal-quickstart-python
+
+provision:
+  # Creates a new Azure Active Directory (AAD) app to authenticate users if the environment variable that stores clientId is empty
+  - uses: aadApp/create 
+    with:
+      name: tab-personal-quickstart-aad # Note: when you run aadApp/update, the AAD app name will be updated based on the definition in manifest. If you don't want to change the name, make sure the name in AAD manifest is the same with the name defined here.
+      generateClientSecret: true # If the value is false, the action will not generate client secret for you
+      signInAudience: "AzureADMultipleOrgs" # Multitenant
+    writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
+      clientId: AAD_APP_CLIENT_ID
+      clientSecret: SECRET_AAD_APP_CLIENT_SECRET # Environment variable that starts with `SECRET_` will be stored to the .env.{envName}.user environment file
+      objectId: AAD_APP_OBJECT_ID
+      tenantId: AAD_APP_TENANT_ID
+      authority: AAD_APP_OAUTH_AUTHORITY
+      authorityHost: AAD_APP_OAUTH_AUTHORITY_HOST
+
+  # Creates a Teams app
+  - uses: teamsApp/create
+    with:
+      # Teams app name
+      name: tab-personal-quickstart${{APP_NAME_SUFFIX}}
+    # Write the information of created resources into environment file for
+    # the specified environment variable(s).
+    writeToEnvironmentFile: 
+      teamsAppId: TEAMS_APP_ID
+
+  - uses: script 
+    with:
+      run:
+        echo "::set-teamsfx-env TAB_DOMAIN=localhost:3978";
+        echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:3978";
+
+  # Validate using manifest schema
+  - uses: teamsApp/validateManifest
+    with:
+      # Path to manifest template
+      manifestPath: ./appManifest/manifest.json
+
+  # Build Teams app package with latest env value
+  - uses: teamsApp/zipAppPackage
+    with:
+      # Path to manifest template
+      manifestPath: ./appManifest/manifest.json
+      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+  # Validate app package using validation rules
+  - uses: teamsApp/validateAppPackage
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+
+  # Apply the Teams app manifest to an existing Teams app in
+  # Developer Portal.
+  # Will use the app id in manifest file to determine which Teams app to update.
+  - uses: teamsApp/update
+    with:
+      # Relative path to this file. This is the path for built zip file.
+      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+
+deploy:
+# Install development tool(s)
+  - uses: devTool/install
+    with:
+      devCert:
+        trust: true
+    # Write the information of installed development tool(s) into environment
+    # file for the specified environment variable(s).
+    writeToEnvironmentFile:
+      sslCertFile: SSL_CRT_FILE
+      sslKeyFile: SSL_KEY_FILE
+
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
+    with:
+      target: ./.env
+      envs:
+        MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
+        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+        TeamsAppId: ${{TEAMS_APP_ID}}

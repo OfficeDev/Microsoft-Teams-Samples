@@ -60,6 +60,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
+1) App Registration
+
+### Register your application with Azure AD
+
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - Select **New Registration** and on the *register an application page*, set following values:

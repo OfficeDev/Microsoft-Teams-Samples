@@ -10,12 +10,11 @@ from http import HTTPStatus
 from flask import Flask, request, render_template, redirect, url_for, jsonify
 from aiohttp import web
 from botbuilder.core import (
-    BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
     MemoryStorage,
     UserState,
+    TurnContext
 )
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
 from botbuilder.schema import Activity
 from botbuilder.core.integration import aiohttp_error_middleware
 from bots import RegionSelectionTab
@@ -28,8 +27,7 @@ CONFIG = DefaultConfig()
 app = Flask(__name__)
 
 # Bot Adapter
-SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
-ADAPTER = BotFrameworkAdapter(SETTINGS)
+ADAPTER = CloudAdapter(ConfigurationBotFrameworkAuthentication(CONFIG))
 
 # Error Handling
 async def on_error(context: TurnContext, error: Exception):

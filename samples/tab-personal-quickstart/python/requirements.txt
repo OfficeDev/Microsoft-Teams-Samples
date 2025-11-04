@@ -1,0 +1,7 @@
+Flask==2.3.3
+pyOpenSSL==23.2.0
+Werkzeug==2.3.7
+cryptography==41.0.4
+cffi==1.15.1
+pycparser==2.21
+six==1.16.0

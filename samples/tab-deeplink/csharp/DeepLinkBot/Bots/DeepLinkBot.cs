@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
@@ -185,7 +186,9 @@ namespace Microsoft.BotBuilderSamples.Bots
                                         }
                                     }
                                 }
-                            },
+                            }
+                        }.Concat(!string.IsNullOrEmpty(sidePanelLink) ? new[]
+                        {
                             new AdaptiveColumnSet()
                             {
                                 Columns = new List<AdaptiveColumn>()
@@ -212,7 +215,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                                     }
                                 }
                             }
-                        }
+                        } : new AdaptiveElement[0]).ToList()
                     }
                 }
             };

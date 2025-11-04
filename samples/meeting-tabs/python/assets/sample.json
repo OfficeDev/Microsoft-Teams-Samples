@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-meeting-tabs-python",
+    "source": "officeDev",
+    "title": "Meeting-Tabs",
+    "shortDescription": "This sample showcases a Teams meeting side panel with Mute/Unmute audio controls.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-tabs/python",
+    "longDescription": [
+      "This sample illustrates a Teams meeting side panel that enables users to Mute and Unmute audio during meetings. It features an interactive app stage view and supports Teams themes for enhanced user experience."
+    ],
+    "creationDateTime": "2025-06-30",
+    "updateDateTime": "2025-06-30",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "python"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab, meeting"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-tabs/python/Images/MeetingTabsGif.gif",
+        "alt": "Solution UX showing Meeting Tab with different features."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/community/videos/m365powerplatform"
+      }
+    ]
+  }
+]
