@@ -9,7 +9,7 @@
       "This sample shows how to build a Microsoft Teams bot using the Bot Framework SDK that responds to transitive member changes in shared channels. When a member is added to or removed from a parent team that shares a channel, Teams automatically updates the membership of the shared channel. The bot receives these transitive member add and remove events and can process them to track membership changes, maintain rosters, or trigger custom workflows."
     ],
     "creationDateTime": "2025-10-09",
-    "updateDateTime": "2024-10-09",
+    "updateDateTime": "2025-10-09",
     "products": [
       "Teams"
     ],
