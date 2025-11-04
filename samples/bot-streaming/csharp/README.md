@@ -21,6 +21,7 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 * Bots
 * Azure Open AI
 * Streaming
+* Custom Engine Agent - Copilot
 
 > [!IMPORTANT]
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
@@ -41,14 +42,14 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio.
 1. Install Visual Studio 2022 **Version 17.14 or higher** [Visual Studio](https://visualstudio.microsoft.com/downloads/)
-1. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
-1. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
-1. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
-1. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
-1. Set `Startup Item` as `Microsoft Teams (browser)`.
-1. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
+2. Install Microsoft 365 Agents Toolkit for Visual Studio [Microsoft 365 Agents Toolkit extension](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/install-teams-toolkit-vs?pivots=visual-studio-v17-7)
+3. In the debug dropdown menu of Visual Studio, select Dev Tunnels > Create A Tunnel (set authentication type to Public) or select an existing public dev tunnel.
+4. Right-click the 'M365Agent' project in Solution Explorer and select **Microsoft 365 Agents Toolkit > Select Microsoft 365 Account**
+5. Sign in to Microsoft 365 Agents Toolkit with a **Microsoft 365 work or school account**
+6. Set `Startup Item` as `Microsoft Teams (browser)`.
+7. Press F5, or select Debug > Start Debugging menu in Visual Studio to start your app
 </br>![image](https://raw.githubusercontent.com/OfficeDev/TeamsFx/dev/docs/images/visualstudio/debug/debug-button.png)
-1. In the opened web browser, select Add button to install the app in Teams
+8. In the opened web browser, select Add button to install the app in Teams
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
 ## Create an Azure Open AI service
@@ -56,6 +57,33 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - In Azure portal, create an [Azure Open AI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal).
 - **Deploy Azure Open AI model:** Deploy the `gpt-35-turbo` model in your created Azure Open AI service for the application to perform translation.
 - Collect `AzureOpenAIEndpoint`, `AzureOpenAIKey`, `AzureOpenAIDeployment` values and save these values to update in `.appsettings.json` file later.
+
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+## Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 ## Setup
 
@@ -73,17 +101,6 @@ the Teams service needs to call into the bot.
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
-1) Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
-
 1) Clone the repository
 
     ```bash
@@ -128,6 +145,18 @@ the Teams service needs to call into the bot.
 **Bot's Response to the User's Question:**
 ![5.AskQuestionResults ](Images/5.AskQuestionResults.png)
 
+
+## Custom Engine Agent - Copilot
+**Installation of Copilot App**  
+![Installation of Copilot App](Images/install.png)  
+**Opening the Daily Task Reminder in Copilot**  
+![Opening the Daily Task Reminder in Copilot](Images/opening.png)  
+**Asking a question**  
+![Creating a new reminder in Copilot](Images/running.png)  
+**Scheduling a task reminder**  
+![Scheduling a task reminder](Images/showresult.png)  
+
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -137,5 +166,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Stream message through REST API](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/streaming-ux?branch=pr-en-us-10850&tabs=csharp#stream-message-through-rest-api) 
+- [Custom Engine Agent-Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-custom-engine-agent?utm_source=chatgpt.com)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-streaming-csharp" />

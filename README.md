@@ -186,6 +186,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 13 | Resource Specific Consent (RSC)                      | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. | Advanced     | [View][graph#rsc#cs]              | [View][graph#rsc#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)     |
 | 14 | Graph API Teams App Catalog Life Cycle               | This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot. | Advanced     | [View][graph#appctaloglifecycle#cs] | [View][graph#appcataloglifecycle#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip) |
 | 15 | Graph File Fetch| This sample demonstrates how to fetch shared files in teams group chat and team channel using graph API. | Advanced | [View][graph-file-fetch#cs] | [View][graph-file-fetch#js] | [View](samples/graph-file-fetch/csharp/demo-manifest/graph-file-fetch.zip) |
+| 16 | Membership Change Notification       | This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated, using Node.js and the Microsoft Graph API.  | Advanced     | [View][graph#membershipchangenotification#cs] | [View][graph#graph#appcataloglifecycle#js#js] ![toolkit-icon](assets/toolkit-icon.png) |  |
 
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
@@ -465,6 +466,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph#chatlifecycle#js]:samples/graph-chat-lifecycle/nodejs
 [graph#appctaloglifecycle#cs]:samples/graph-appcatalog-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
+[graph#membershipchangenotification#cs]:samples/graph-membership-change-notification/csharp
+[graph#membershipchangenotification#js]:samples/graph-membership-change-notification/nodejs
 [graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
 [graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp

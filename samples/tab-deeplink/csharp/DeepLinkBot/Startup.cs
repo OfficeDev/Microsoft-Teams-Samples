@@ -30,7 +30,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddControllers().AddNewtonsoftJson();
 
             // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             services.AddRazorPages();
             

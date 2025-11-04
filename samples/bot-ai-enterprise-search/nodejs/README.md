@@ -92,7 +92,23 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-1) Setup for Bot
+2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  
+  A) Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  C) Navigate to **API Permissions**, and make sure to add the following permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
+3) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -104,21 +120,21 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
-1) Clone the repository
+4) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-ai-enterprise-search/nodejs`
+5) In a terminal, navigate to `samples/bot-ai-enterprise-search/nodejs`
 
-1) Install modules
+6) Install modules
 
     ```bash
     npm install
     ```
 
-6. Update the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
+7. Update the `env/.env.local` or `env/.env.local.user` file, fill all the required values for below and other values will be generated automatically once you debug/start the app.
 
 
 `SECRET_AZURE_OPENAPI_KEY=<Azure OpenAI Service Key>`
@@ -133,13 +149,13 @@ the Teams service needs to call into the bot.
 
 **Note:** Update the Azure Open API version from 2023-03-15-preview to any specific or public version in all the files whereever applicable.
 
-7) Run your bot at the command line:
+8) Run your bot at the command line:
 
     ```bash
     npm start
     ```
 
-8) __*This step is specific to Teams.*__
+9) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appManifest` folder (`appManifest.admin` and `appManifest.user` folders) to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<BOT_ID>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Also, update the <TEAMS_APP_ID> with unique Guid for both the `manifest.json` stored in (`appManifest.admin` and `appManifest.user`) as this app has 2 roles: Admin and User.
 
