@@ -14,3 +14,5 @@ class DefaultConfig:
     APP_ID = os.environ.get("MicrosoftAppId", "")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
     CONNECTION_NAME = os.environ.get("ConnectionName", "")
+    APP_TENANTID = os.environ.get("MicrosoftAppTenantId", "")
+    APP_TYPE = os.environ.get("MicrosoftAppType", "SingleTenant")

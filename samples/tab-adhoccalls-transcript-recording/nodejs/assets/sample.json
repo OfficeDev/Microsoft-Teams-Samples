@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-tab-adhoccalls-transcript-recording-nodejs",
     "source": "officeDev",
     "title": "AdhocCalls for group call recording, transcription, and displaying results in UI.",
-    "shortDescription": "Use adhocCalls to record/transcribe group calls, send notifications, and show results.",
+    "shortDescription": "Use adhocCalls to record and transcribe group calls, receive notifications, and view results in Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-adhoccalls-transcript-recording/nodejs",
     "longDescription": [
-      "This sample uses adhocCalls to create a subscription for recording and transcription. After joining a group call in a group chat, it starts the recording or transcription. When the group call ends or you leave, it triggers notifications, retrieves the recording and transcription details, and displays them in the UI."
+      "This sample demonstrates how to use the Microsoft Graph `adhocCalls` API to manage call recordings and transcriptions within Microsoft Teams. After joining a group call in a group chat, the app initiates a recording or transcription session. When the call ends or the user leaves, it triggers notifications, retrieves the associated recording and transcription details from Microsoft Graph, and displays them in the Teams tab UI.The backend uses Express.js to interact with Microsoft Graph API, while the frontend (built with React and Socket.IO) renders real-time updates, formatted transcripts with speaker labels, and embedded recording playback."
     ],
     "creationDateTime": "2025-08-14",
     "updateDateTime": "2025-08-14",

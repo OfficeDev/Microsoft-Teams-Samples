@@ -76,34 +76,22 @@ class DialogBot(TeamsActivityHandler):
             await turn_context.send_activity("An error occurred handling your message.")
 
     async def on_invoke_activity(self, turn_context: TurnContext):
-        # Handles invoke activities such as token exchange or state verification.
+        # Handles invoke activities - OAuthPrompt handles signin/* activities automatically
         try:
             logging.info(f"Incoming activity type: {turn_context.activity.type}")
             logging.info(f"Activity name: {turn_context.activity.name}")
     
-            if turn_context.activity.name == "signin/tokenExchange":
-                logging.info("Handling signin/tokenExchange")
-    
-                # Token exchange success, continue with dialog
-                await DialogHelper.run_dialog(
-                    self.dialog,
-                    turn_context,
-                    self.conversation_state.create_property("DialogState"),
-                )
-                return InvokeResponse(status=200)
-    
-            elif turn_context.activity.name == "signin/verifyState":
-                logging.info("Handling signin/verifyState")
-    
-                await DialogHelper.run_dialog(
-                    self.dialog,
-                    turn_context,
-                    self.conversation_state.create_property("DialogState"),
-                )
-    
-                return InvokeResponse(status=200)
-    
-            return await super().on_invoke_activity(turn_context)
+            # Let OAuthPrompt handle signin activities by running the dialog
+            # OAuthPrompt will automatically handle signin/tokenExchange and signin/verifyState
+            await DialogHelper.run_dialog(
+                self.dialog,
+                turn_context,
+                self.conversation_state.create_property("DialogState"),
+            )
+            
+            # If the dialog handled it, return success
+            # OAuthPrompt will handle the invoke response internally
+            return InvokeResponse(status=200)
     
         except Exception as e:
             logging.error(f"Error in on_invoke_activity: {e}")
