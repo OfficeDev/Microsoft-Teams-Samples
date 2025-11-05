@@ -1,6 +1,19 @@
 ---
 page_type: sample
-description: This sample demonstrates how to create a Python Messaging Extension in Microsoft Teams that enables users to perform searches and retrieve results seamlessly.
+description: This sample demonstrates how to create a Python Messaging Extensio4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
+
+5) Act5) Activate your desired virtual environment
+
+6) Install dependencies by running ```pip install -r requivate your desired virtual environmentrements.txt``` in6) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.the project folder.
+
+7) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password 7) Update the `config.py` configuration for the bot to use the Mis referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)crosoft App Id and App Password from the Bot Framework 8) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Micregistration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+
+8) __*This step is specific to Teams.*__osoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{AAD_APP_CLIENT_ID}}` and `${{TEAMS_APP_ID}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+9) Run your bot with `python app.py` Teams that enables users to perform searches and retrieve results seamlessly.
 products:
 - office-teams
 - office
@@ -79,12 +92,29 @@ the Teams service needs to call into the bot.
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-1) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
+2) App Registration
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+3) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running the tunnelling application. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
      - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
 
-1) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
+4) Bring up a terminal, navigate to `Microsoft-Teams-Samples\samples\msgext-search\python` folder
 
 1) Activate your desired virtual environment
 
