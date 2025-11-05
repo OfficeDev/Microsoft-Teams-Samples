@@ -15,20 +15,20 @@ urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-python
 
 # Contoso Knowledge Hub - AI Academic & Career Guidance Agent
 
-This sample demonstrates an AI-powered Academic Agent built with the **Microsoft Teams AI Library for Python**. The bot provides comprehensive educational support, career guidance, and course recommendations using Azure OpenAI.
+This sample demonstrates an AI-powered Academic Agent built with the **Microsoft Teams SDK for Python**. The bot provides comprehensive educational support, career guidance, and course recommendations using Azure OpenAI.
 
 ## Interaction with App
 ![Contoso knowledge Hub](Images/Contoso_Knowledge_Hub.gif)
 
 ## Included Features
-* **Teams AI Library** - Microsoft Teams AI SDK for Python (`microsoft.teams.*`)
+* **Teams SDK** - Microsoft Teams SDK for Python (`microsoft.teams.*`)
 * **Azure OpenAI Integration** - GPT-powered responses with Azure OpenAI
 * **Prompt Management** - Structured prompts system with instructions
 * **Educational Agent** - Academic guidance and course recommendations
 
 ## Architecture
 
-Uses **Microsoft Teams AI Library for Python** (v2.0 alpha):
+Uses **Microsoft Teams SDK for Python** (v2.0 alpha):
 - `App` class for bot creation and HTTP server
 - `ChatPrompt` for AI-powered conversations
 - `OpenAICompletionsAIModel` for Azure OpenAI integration
@@ -39,7 +39,8 @@ Uses **Microsoft Teams AI Library for Python** (v2.0 alpha):
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [Python SDK](https://www.python.org/downloads/) min version 3.8
+- [UV version](https://docs.astral.sh/uv/getting-started/installation/) is >= 0.8.11. Install or upgrade.
+- [Python Version](https://www.python.org/downloads/) Install or upgrade min version >= 3.12.
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
 - [Microsoft 365 Agents Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) or [TeamsFx CLI](https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-cli?pivots=version-one)
 - [Azure OpenAI in Azure AI Foundry Models resource](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal)
@@ -169,8 +170,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Teams AI Library for Python - Getting Started](https://microsoft.github.io/teams-ai/python/getting-started)
-- [Teams AI Library Documentation](https://microsoft.github.io/teams-ai/)
+- [Teams SDK for Python - Getting Started](https://microsoft.github.io/teams-ai/python/getting-started)
+- [Teams SDK Documentation](https://microsoft.github.io/teams-ai/)
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Microsoft Teams Platform Documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
