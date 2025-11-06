@@ -1,0 +1,38 @@
+﻿@* Copyright(c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License *@
+
+<div class="font-semibold font-title">
+    Hello, World
+</div>
+<p>
+    Welcome to the Microsoft Teams Sample App!
+    this is a sample Microsoft Teams app built with ASP.NET Core MVC.
+    It demonstrates how to create a simple tab that can be added to a team or group chat.
+    The app uses the Microsoft Teams JavaScript SDK to initialize and interact with the Teams environment.
+    You can customize this app further by adding more features and functionality as needed.  
+</p>
+<div id="congrats" class="text-green-500 font-semibold">
+    
+</div>
+
+@section Scripts {
+    <script>
+        function handleLoadMicrosoftTeamsSDK() {
+            if (window.microsoftTeams) {
+                microsoftTeams.app.initialize().then(() => {     
+                    // Additional logic to run once the SDK is initialized can be added here.
+                    // Example: Load user data or other settings.
+                    document.getElementById("congrats").innerText = "Microsoft Teams SDK loaded successfully!";
+
+                }).catch(function(error) {
+                    console.error("Error initializing Teams SDK:", error);
+                });
+            } else {
+                console.error("Microsoft Teams SDK not loaded or not running inside Teams.");
+                document.getElementById("congrats").innerText = "Microsoft Teams SDK not loaded or not running inside Teams ";
+            }
+        }
+        // Call the function on page load
+        window.onload = handleLoadMicrosoftTeamsSDK;
+    </script>
+}
