@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 using Microsoft.Teams.Samples.AccountLinking.OAuth;
 using Microsoft.Teams.Samples.AccountLinking.GitHub;
+using Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail;
+using Microsoft.Teams.Samples.AccountLinking.Sample.Services.OAuth;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Teams.Samples.AccountLinking.Dialogs;
 
@@ -18,15 +21,21 @@ public sealed class MainDialog: LogoutDialog
 {
     private readonly ILogger<MainDialog> _logger;
     private readonly GitHubServiceClient _githubServiceClient;
+    private readonly GmailServiceClient _gmailServiceClient;
+    private readonly ExternalAuthParameters _externalAuthParameters;
 
     public MainDialog(
         ILogger<MainDialog> logger,
         AccountLinkingPrompt accountLinkingPrompt,
         GitHubServiceClient githubServiceClient, 
-        OAuthTokenProvider oauthTokenProvider): base(oauthTokenProvider, nameof(MainDialog))
+        GmailServiceClient gmailServiceClient,
+        OAuthTokenProvider oauthTokenProvider,
+        IOptions<ExternalAuthParameters> externalAuthParameters): base(oauthTokenProvider, nameof(MainDialog))
     {
         _logger = logger;
         _githubServiceClient = githubServiceClient;
+        _gmailServiceClient = gmailServiceClient;
+        _externalAuthParameters = externalAuthParameters.Value;
 
         AddDialog(accountLinkingPrompt);
         AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new []
@@ -56,10 +65,20 @@ public sealed class MainDialog: LogoutDialog
         {
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
-        var repos = await _githubServiceClient.GetRepositoriesAsync(tokenResponse.AccessToken);
-        await stepContext.Context.SendActivityAsync(
-            MessageFactory.Text(JsonConvert.SerializeObject(repos)),
-            cancellationToken: cancellationToken);
+        if (_externalAuthParameters.Service == ExternalServiceConstants.GMAIL)
+        {
+            var gmailProfiles = await _gmailServiceClient.GetUserProfile(tokenResponse.AccessToken);
+            await stepContext.Context.SendActivityAsync(
+                MessageFactory.Text(JsonConvert.SerializeObject(gmailProfiles)),
+                cancellationToken: cancellationToken);
+        }
+        else
+        {
+            var repos = await _githubServiceClient.GetRepositoriesAsync(tokenResponse.AccessToken);
+            await stepContext.Context.SendActivityAsync(
+                MessageFactory.Text(JsonConvert.SerializeObject(repos)),
+                cancellationToken: cancellationToken);
+        }
         return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
     }
 }

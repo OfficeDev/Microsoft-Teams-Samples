@@ -18,6 +18,8 @@ using Microsoft.Teams.Samples.AccountLinking.UserTokenStorage;
 using Microsoft.Teams.Samples.AccountLinking.Bots;
 using Microsoft.Teams.Samples.AccountLinking.Dialogs;
 using Microsoft.Teams.Samples.AccountLinking.State;
+using Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail;
+using Microsoft.Teams.Samples.AccountLinking.Sample.Services.OAuth;
 
 var builder = WebApplication.CreateBuilder(args);
 var useAzure = builder.Configuration.GetValue<bool>("UseAzure");
@@ -39,10 +41,16 @@ services.AddOptions<OAuthOptions>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
+services.AddOptions<ExternalAuthParameters>()
+    .BindConfiguration("ExternalAuthParameters")
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
 services.AddOptions<KeyringConfiguration>()
     .BindConfiguration("Keyring")
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
 services.AddOptions<AccountLinkingPromptOptions>()
     .BindConfiguration("AccountLinkingPrompt")
     .ValidateDataAnnotations()
@@ -172,6 +180,10 @@ services.AddHttpClient<GitHubServiceClient>(cfg => {
     cfg.DefaultRequestHeaders.UserAgent.Add(productValue);
 });
 
+services.AddHttpClient<GmailServiceClient>(cfg => {
+    var productValue = new ProductInfoHeaderValue("GithubTeamsSSOintegrationSample", "1.0");
+    cfg.DefaultRequestHeaders.UserAgent.Add(productValue);
+});
 
 services.AddControllers();
 
