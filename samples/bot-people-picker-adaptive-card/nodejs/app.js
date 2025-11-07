@@ -73,9 +73,6 @@ app.on("install.add", async (context) => {
           type: 'message',
           text: 'Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card. Send any message to see the people picker in action.'
         });
-        
-        // Send initial help information
-        await sendHelpMessage(context);
       }
     }
   } else {
@@ -84,9 +81,6 @@ app.on("install.add", async (context) => {
       type: 'message',
       text: 'Hello and welcome! With this sample you can see the functionality of people-picker in adaptive card. Send any message to see the people picker in action.'
     });
-    
-    // Send initial help information
-    await sendHelpMessage(context);
   }
 });
 

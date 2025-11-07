@@ -67,18 +67,30 @@ the Teams service needs to call into the bot.
    ```
 2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
-  A) Select **New Registration** and on the *register an application page*, set following values:
-      * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
-      * Leave **Redirect URI** empty.
-      * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
-   Select Add a permission
-      * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
-      * `User.Read` (enabled by default)
-      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+     A) Select **New Registration** and on the *register an application page*, set following values:
+
+        * Set **name** to your app name.
+
+        * Choose the **supported account types** (any account type will work)
+
+         * Leave **Redirect URI** empty.
+
+        * Choose **Register**.
+
+    B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest.
+
+    C) Navigate to **API Permissions**, and make sure to add the following permissions:
+
+        Select Add a permission
+
+            * Select Add a permission
+
+            * Select Microsoft Graph -\> Delegated permissions.
+
+            * `User.Read` (enabled by default)
+
+            * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
 
 
 ## Setup for bot
@@ -117,13 +129,13 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope (Supported app scope)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-file-upload/nodejs/index.js#L46) line and put your debugger for local debug.
+
 
 ## Running the sample
 
