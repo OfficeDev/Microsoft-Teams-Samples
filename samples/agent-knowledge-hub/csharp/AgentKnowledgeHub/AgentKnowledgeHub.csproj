@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Prompts\chat\skprompt.txt">
+    <Content Include="Prompts\chat\instructions.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

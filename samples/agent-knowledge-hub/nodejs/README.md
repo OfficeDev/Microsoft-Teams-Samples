@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-agent-knowledge-hub-nodejs
 ---
 
 # Contoso Knowledge Hub - AI Academic & Career Guidance Agent
-Contoso Knowledge Hub is an intelligent guidance agent built on the Teams AI library, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations.
+Contoso Knowledge Hub is an intelligent guidance agent built on the Teams SDK, designed to empower students in their academic and career journeys. It offers personalized course recommendations, career-aligned planning, institutional insights, and expert-endorsed AI course recommendations.
 
 ## Included Features
 * Bots
@@ -145,7 +145,7 @@ the Teams service needs to call into the bot.
 
 ## Further reading
 
-- [Teams AI library V2](https://aka.ms/teams-ai-library-v2)
+- [Teams SDK V2](https://aka.ms/teams-ai-library-v2)
 - [Microsoft 365 Agents Toolkit Documentations](https://docs.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals)
 - [Microsoft 365 Agents Toolkit CLI](https://aka.ms/teamsfx-toolkit-cli)
 - [Microsoft 365 Agents Toolkit Samples](https://github.com/OfficeDev/TeamsFx-Samples)
