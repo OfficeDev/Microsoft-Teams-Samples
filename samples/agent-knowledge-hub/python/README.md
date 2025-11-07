@@ -138,7 +138,7 @@ the Teams service needs to call into the bot.
 
 **Using Teams AI SDK for Python:**
 
-The bot responds to user messages with AI-generated educational guidance, course recommendations, and career advice based on the instructions in `prompts/chat/skprompt.txt`.
+The bot responds to user messages with AI-generated educational guidance, course recommendations, and career advice based on the instructions in `prompts/chat/instructions.txt`.
 
 **Key Features:**
 - AI-powered responses using Azure OpenAI (gpt-4o-mini)

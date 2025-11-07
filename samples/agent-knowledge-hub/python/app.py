@@ -24,9 +24,9 @@ from microsoft.teams.devtools import DevToolsPlugin
 
 
 def load_instructions() -> str:
-    """Load agent instructions from skprompt.txt file for AI context"""
+    """Load agent instructions from instructions.txt file for AI context"""
     # Construct path to the instructions file
-    instructions_path = Path(__file__).parent / "prompts" / "chat" / "skprompt.txt"
+    instructions_path = Path(__file__).parent / "prompts" / "chat" / "instructions.txt"
     # Read and return the instructions as a string
     return instructions_path.read_text(encoding="utf-8").strip()
 
