@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-nodejs
 ---
 # Teams Auth Bot
 
-Teams AI v2 bot using Teams authentication
+A sample bot demonstrating authentication in Microsoft Teams using the Teams SDK
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with authentication in a bot for Microsoft Teams.
 
@@ -124,14 +124,11 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     npm start
     ```
 3) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace a random GUID in the place holder string `TEAMS_APP_ID` and the `BOT_ID` with your CLIENT_ID
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace a ClientID in the place holder string `TEAMS_APP_ID` and the `BOT_ID`.
     - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
-
-**Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 
@@ -168,7 +165,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
