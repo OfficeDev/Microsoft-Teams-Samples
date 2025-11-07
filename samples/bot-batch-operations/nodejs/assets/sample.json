@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-batch-operations-nodejs",
+    "source": "officeDev",
+    "title": "Batch Operations Bot using Bot Framework v4",
+    "shortDescription": "This sample app demonstrates the different batch operations available from Bot Framework v4 for use in personal and teams scope.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-batch-operations/nodejs",
+    "longDescription": [
+      "This sample app demonstrates the different batch operations available from Bot Framework v4 for use in personal and teams scope."
+    ],
+    "creationDateTime": "2023-24-08",
+    "updateDateTime": "2023-24-08",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "`https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-batch-operations/nodejs/Images/GetFailedEntries.png",
+        "alt": "Image showing one of the Batch Operations (Get Failed Entries) available from Bot Framework v4"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]
