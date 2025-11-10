@@ -156,7 +156,7 @@ You can use this tab by following the below steps:
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Further reading
-- [Teams AI Library Documentation](https://microsoft.github.io/teams-ai/welcome/)
+- [Teams SDK Documentation](https://microsoft.github.io/teams-ai/welcome/)
 -[Create conversational tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/conversational-tabs)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/tab-conversations-nodejs" />

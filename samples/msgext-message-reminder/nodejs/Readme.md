@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates a Node.js Messaging Extension built with Teams AI v2 library that allows users to schedule tasks and receive reminder cards in Microsoft Teams.
+description: This sample demonstrates a Node.js Messaging Extension built with Teams SDK that allows users to schedule tasks and receive reminder cards in Microsoft Teams.
 products:
 - office-teams
 - office
@@ -151,9 +151,9 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 ## Further reading
 
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Teams AI v2 Library Documentation](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/overview)
-- [Teams AI v2 Getting Started](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/getting-started)
-- [Teams AI v2 Messaging Extensions](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/in-depth-guides/messaging-extensions/overview)
+- [Teams SDK Documentation](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/overview)
+- [Teams SDK Getting Started](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/getting-started)
+- [Teams SDK Messaging Extensions](https://learn.microsoft.com/microsoftteams/platform/teams-ai-library/typescript/in-depth-guides/messaging-extensions/overview)
 - [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/microsoftteams/platform/toolkit/teams-toolkit-fundamentals)
 
 

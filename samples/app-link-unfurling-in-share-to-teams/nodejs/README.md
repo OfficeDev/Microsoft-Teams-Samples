@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-app-link-unfurling-in-share-to-te
 
 ## Link unfurling Share to teams sample
 
-This sample demonstrates the Share to Teams feature, which allows users to seamlessly share site content directly to contacts or groups in Microsoft Teams, leveraging link unfurling to provide rich previews and context for shared links. Built with Microsoft Teams AI v2 and Microsoft 365 Agents Toolkit, it includes comprehensive setup instructions for easy integration and testing within your Teams environment.
+This sample demonstrates the Share to Teams feature, which allows users to seamlessly share site content directly to contacts or groups in Microsoft Teams, leveraging link unfurling to provide rich previews and context for shared links. Built with Teams SDK and Microsoft 365 Agents Toolkit, it includes comprehensive setup instructions for easy integration and testing within your Teams environment.
 
 ## Interaction with app
 
@@ -105,7 +105,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-4) Update the `config.js` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url or your dev tunnels url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+4) Update the `.localConfigs` file with your app credentials:
+    ```
+    CLIENT_ID=<your-microsoft-app-id>
+    CLIENT_SECRET=<your-microsoft-app-password>
+    ```
+    (Note: The CLIENT_ID is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the CLIENT_SECRET is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 5) Run your app
 
@@ -142,8 +147,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Microsoft Teams AI Library v2 Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
-- [Teams AI SDK for JavaScript](https://github.com/Microsoft/teams-ai)
+- [Teams SDK Documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview)
+- [Teams SDK for JavaScript](https://github.com/Microsoft/teams-ai)
 - [Microsoft 365 Agents Toolkit](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/teams-toolkit-fundamentals)
 - [Share to Teams](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/share-to-teams-from-personal-app-or-tab)
 - [Link Unfurling in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling)
