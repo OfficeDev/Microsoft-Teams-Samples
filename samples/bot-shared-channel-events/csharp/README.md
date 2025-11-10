@@ -26,7 +26,7 @@ The feature shown in this sample is currently available in public developer prev
 
 ## Interaction with app
 
-![Meetings Events](SharedChannelEvents/Images/SharedChannelEvents.gif)
+![Shared Channel Events](SharedChannelEvents/Images/SharedChannelEvents.gif)
 
 ## Prerequisites
 
@@ -115,7 +115,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 4) Setup Manifest for Teams
 
-Modify the `manifest.json` in the `/appPackage` folder and replace the following details
+   Modify the `manifest.json` in the `/appPackage` folder and replace the following details
 
    - `<<App-ID>>` with your Microsoft Entra ID app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
@@ -126,52 +126,122 @@ Modify the `manifest.json` in the `/appPackage` folder and replace the following
          - Then select the `manifest.zip` file from `appPackage`.
          - Install the App in Teams Channels.
 
+5) Update your App Manifest for Developer Preview
+
+   To enable member events for shared channels, update your `manifest.json` with the following:
+   
+   - Update the manifest schema and version:
+   ```json
+   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
+   "manifestVersion": "devPreview"
+   ```
+   
+   - Add the `supportsChannelFeatures` property to enable tier 1 channel support:
+   ```json
+   "supportsChannelFeatures": "tier1"
+   ```
+
 ## Running the sample
 
 **Shared Channel Events:**   
 
+**1. Install the app:** Upload and install the bot application in Microsoft Teams.
+
 ![Shared Channel Events](SharedChannelEvents/Images/1.Install.png)
+
+**2. Select Teams:** Choose the team where you want to add the bot and create a shared channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/2.Select_Teams.png)
 
+**3. Add Channel:** Click on the option to add a new channel to the selected team.
+
 ![Shared Channel Events](SharedChannelEvents/Images/3.Add_Channel.png)
+
+**4. Create Shared Channel:** Configure and create a new shared channel with the appropriate settings.
 
 ![Shared Channel Events](SharedChannelEvents/Images/4.Create_Channel.png)
 
+**5. Select Members for Shared Channel:** Choose the members or teams that will have access to the shared channel.
+
 ![Shared Channel Events](SharedChannelEvents/Images/5.SelectMember_For_ShareChannel.png)
+
+**6. Manage Created Shared Channel:** View and manage the settings of the newly created shared channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/6.Manage_Created_Shared_Channel.png)
 
+**7. Select Apps Tab:** Navigate to the Apps tab within the shared channel.
+
 ![Shared Channel Events](SharedChannelEvents/Images/7.Select_Apps_Tab.png)
+
+**8. Add App to Channel:** Select and add the bot application to the shared channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/8.Select_App_Add_To_Channel.png)
 
+**9. Add Member to Channel:** Add a new member directly to the shared channel.
+
 ![Shared Channel Events](SharedChannelEvents/Images/9.Add_Member_To_Channel.png)
+
+**10. Member Added Notification:** The bot receives and displays a notification when a member is added to the channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/10.Member_Added.png)
 
+**11. Remove Member from Channel:** Remove a member from the shared channel.
+
 ![Shared Channel Events](SharedChannelEvents/Images/11.Removing_Member_From_Channel.png)
+
+**12. Member Removed Notification:** The bot receives and displays a notification when a member is removed from the channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/12.Member_Removed.png)
 
+**13. Share Channel with Team:** Initiate the process to share the channel with another team.
+
 ![Shared Channel Events](SharedChannelEvents/Images/13.Share_Channel_Team.png)
+
+**14. Select Team for Sharing:** Choose the team with which you want to share the channel.
 
 ![Shared Channel Events](SharedChannelEvents/Images/14.Select_Team_For_Sharing.png)
 
+**15. Channel Shared with Team:** Confirmation that the channel has been successfully shared with the selected team.
+
 ![Shared Channel Events](SharedChannelEvents/Images/15.Channel_Shared_With_Team.png)
+
+**16. Unshare Channel with Team:** Begin the process to unshare the channel from a team.
 
 ![Shared Channel Events](SharedChannelEvents/Images/16.Channel_UnShare_With_Team.png)
 
+**17. Remove Channel from Team:** Remove the shared channel from the team.
+
 ![Shared Channel Events](SharedChannelEvents/Images/17.Removing_Channel_From_Team.png)
 
+**18. Channel Unshared Notification:** The bot receives and displays a notification when the channel is unshared from a team.
+
 ![Shared Channel Events](SharedChannelEvents/Images/18.Channel_UnShared_Notification.png)
+
+**Transitive Member Events**
+
+**19. Add Member to Parent Team (Step 1):** Begin adding a new member to the parent team that has a shared channel.
+
+![Transitive Member Events](SharedChannelEvents/Images/19.Adding_Member_To_Team_D_For_Transitive_Event_1.png)
+
+**20. Select Member to Add (Step 2):** Choose the member to add to the parent team.
+
+![Transitive Member Events](SharedChannelEvents/Images/20.Select_Member_To_Add_For_TeamD_For_Transitive_Event_2.png)
+
+**21. Transitive Member Added Event:** The bot receives a transitive member added event when a member is added to the parent team and automatically becomes a member of the shared channel.
+
+![Transitive Member Events](SharedChannelEvents/Images/21.Transitive_Member_Added_Removed_Event_Triggered.png)
+
+**22. Transitive Member Removed Event:** The bot receives a transitive member removed event when a member is removed from the parent team and is automatically removed from the shared channel.
+
+![Transitive Member Events](SharedChannelEvents/Images/22.Transitive_Member_Added_Removed_Event_Triggered.png)
+
+
 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
-
-- To be included once the release is completed.
+- [Build-Apps-For-Shared-Private-Channels](https://learn.microsoft.com/en-us/microsoftteams/platform/build-apps-for-shared-private-channels?tabs=tabs%2Cexternal-users%2Csharedchannel).
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-shared-channel-events/csharp" />
