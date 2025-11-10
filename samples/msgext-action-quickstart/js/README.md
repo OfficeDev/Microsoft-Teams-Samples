@@ -103,7 +103,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 - Build
   `npm install`
   
-- Update the `config.js` configuration for the bot to use the `CLIENT_ID` and `CLIENT_PASSWORD`. (Note the MicrosoftAppId is the CLIENT_ID created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "CLIENT_PASSWORD" in step 1 (Setup for Bot) and you can always create a new client secret anytime.
+- Update the `.localConfigs` configuration for the bot to use the `CLIENT_ID` and `CLIENT_PASSWORD`. (Note the MicrosoftAppId is the CLIENT_ID created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "CLIENT_PASSWORD" in step 1 (Setup for Bot) and you can always create a new client secret anytime.
 
 6) Run your app
 
@@ -117,7 +117,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-action-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
 ## Running the sample
 
