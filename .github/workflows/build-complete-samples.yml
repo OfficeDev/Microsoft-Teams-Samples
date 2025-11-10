@@ -496,6 +496,10 @@ jobs:
               name: 'bot-auth0-adaptivecard'
               version: '6.0.x'
 
+            - project_path: 'samples/agent-knowledge-hub/csharp/AgentKnowledgeHub/AgentKnowledgeHub.csproj'
+              name: 'agent-knowledge-hub'
+              version: '8.0.x'
+              
             - project_path: 'samples/bot-shared-channel-events/csharp/SharedChannelEvents/SharedChannelEvents.csproj'
               name: 'bot-shared-channel-events'
               version: '6.0.x'
@@ -1077,6 +1081,10 @@ jobs:
 
             - project_path: 'samples/tab-adhoccalls-transcript-recording/nodejs/api-server'
               name: 'tab-adhoccalls-transcript-recording-api-server'
+              version: '18.x'
+
+            - project_path: 'samples/agent-knowledge-hub/nodejs'
+              name: 'agent-knowledge-hub'
               version: '18.x'
 
       fail-fast: false
