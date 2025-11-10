@@ -136,7 +136,7 @@ Start debugging the project by hitting the `F5` key or click the debug icon in V
 ## Further reading
 
 - [Messaging Extension](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command)
-- [Teams AI Library Documentation](https://microsoft.github.io/teams-ai/welcome/)
+- [Teams SDK Documentation](https://microsoft.github.io/teams-ai/welcome/)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 
