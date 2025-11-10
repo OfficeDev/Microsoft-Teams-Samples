@@ -2,7 +2,6 @@
 env/.env.*.user
 env/.env.local
 .localConfigs.playground
-.localConfigs
 .notification.localstore.json
 .notification.playgroundstore.json
 appPackage/build

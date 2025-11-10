@@ -95,8 +95,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. 
-(**Note:** The MicrosoftAppId is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.localConfigs` file with your app credentials:
+    ```
+    CLIENT_ID=<your-microsoft-app-id>
+    CLIENT_SECRET=<your-microsoft-app-password>
+    ```
+    (Note: The CLIENT_ID is the AppId created in step 1 (Setup Microsoft Entra ID app registration in your Azure portal), the CLIENT_SECRET is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
   - In a terminal, navigate to `samples/bot-adaptive-card-actions/nodejs`
 
@@ -123,8 +127,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptive-card-actions/nodejs/index.js#L44) line and put your debugger for local debug.
  
 
 ## Running the sample
