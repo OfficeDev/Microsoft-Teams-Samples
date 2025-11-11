@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Teams AI Library v2.
+description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Teams SDK.
 products:
 - office-teams
 - office
@@ -15,11 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
 
 # Teams Message Reactions Bot Node.js Sample
 
-This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Teams AI Library v2. The bot responds dynamically to reactions, supporting personal, group, and team scopes. It can be run locally with Microsoft 365 Agents Toolkit or deployed to Azure for broader use.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Teams SDK. The bot responds dynamically to reactions, supporting personal, group, and team scopes. It can be run locally with Microsoft 365 Agents Toolkit or deployed to Azure for broader use.
 
 ## Included Features
 * Bots
-* Teams AI Library v2
+* Teams SDK
 
 ## Interaction with bot
  ![Message Reaction](Images/MessageReactions.gif)
@@ -155,7 +155,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Teams AI Library Documentation](https://aka.ms/teams-ai-library-v2)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
