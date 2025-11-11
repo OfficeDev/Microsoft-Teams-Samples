@@ -1,7 +1,30 @@
-import { TeamsActivityHandler, CardFactory } from 'botbuilder';
+import { ActivityHandler, CardFactory, StatusCodes } from '@microsoft/agents-hosting';
 import faker from 'faker';
 
-export default class MessageExtension extends TeamsActivityHandler {
+export default class MessageExtension extends ActivityHandler {
+
+    async onInvokeActivity(context) {
+        switch (context.activity.name) {
+            case 'composeExtension/query': {
+                const response = await this.handleTeamsMessagingExtensionQuery(context, context.activity.value);
+                if (!response) {
+                    return { status: StatusCodes.NOT_IMPLEMENTED };
+                }
+
+                return { status: StatusCodes.OK, body: response };
+            }
+            case 'composeExtension/selectItem': {
+                const response = await this.handleTeamsMessagingExtensionSelectItem(context, context.activity.value);
+                if (!response) {
+                    return { status: StatusCodes.NOT_IMPLEMENTED };
+                }
+
+                return { status: StatusCodes.OK, body: response };
+            }
+            default:
+                return await super.onInvokeActivity(context);
+        }
+    }
 
     /**
      * Handles messaging extension queries such as retrieving random text and images.
@@ -14,7 +37,7 @@ export default class MessageExtension extends TeamsActivityHandler {
         // Default title from user input or fallback to a randomly generated title.
         const title = query.parameters?.[0]?.name === 'cardTitle' ? query.parameters[0].value : faker.lorem.sentence();
 
-        const randomImageUrl = "https://loremflickr.com/200/200"; // Using random image generator (fallback URL)
+    const randomImageUrl = "https://picsum.photos/200"; // Using Lorem Picsum for random placeholder images
 
         switch (query.commandId) {
             case 'getRandomText':
