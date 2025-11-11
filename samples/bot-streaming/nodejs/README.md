@@ -27,7 +27,7 @@ Its main purpose is to demonstrate how to build a bot connected to an LLM and se
 > This bot doesn't save any context calls. Therefore, each interaction is individual and unique.
 
 ## Interaction with bot
-![StreamingBot](img/bot-streaming.gif)
+![StreamingBot](Images/bot-streaming.gif)
 
 ## Prerequisites
 
@@ -133,22 +133,22 @@ the Teams service needs to call into the bot.
 ## Running the sample
 
 **Install App in Teams:**
-![InstallApp](img/1.InstallApp.png)
+![InstallApp](Images/1.InstallApp.png)
 
 **Welcome Streaming Card Displayed in Teams:**
-![2.WelcomeStreaming](img/2.WelcomeStreaming.png)
+![2.WelcomeStreaming](Images/2.WelcomeStreaming.png)
 
 **User Asking a Question to the Bot:**
-![3.AskQuestion](img/3.AskQuestion.png)
+![3.AskQuestion](Images/3.AskQuestion.png)
 
 **Streaming Results from the Bot in Teams:**
-![4.AskQuestion1](img/4.AskQuestion1.png)
+![4.AskQuestion1](Images/4.AskQuestion1.png)
 
 **Getting the information:**
-![4.GettingInformation](img/4.GettingInformation.png)
+![4.GettingInformation](Images/4.GettingInformation.png)
 
 **Bot's Response to the User's Question:**
-![5.AskQuestionResults](img/5.AskQuestionResults.png)
+![5.AskQuestionResults](Images/5.AskQuestionResults.png)
 
 ## Custom Engine Agent - Copilot
 **Installation of Copilot App**  
