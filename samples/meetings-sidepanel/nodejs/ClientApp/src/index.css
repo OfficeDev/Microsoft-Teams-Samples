@@ -28,3 +28,49 @@ code {
     background-color: black;
     color: chartreuse;
 }
+
+/* Side Panel Styles */
+.agendaTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+#agendaButton, #addAgendaButton, #publishAgendaButton {
+    background-color: #6264a7;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    min-height: 32px;
+    pointer-events: auto;
+}
+
+#agendaButton:hover, #addAgendaButton:hover, #publishAgendaButton:hover {
+    background-color: #464775;
+}
+
+#agendaButton:active, #addAgendaButton:active, #publishAgendaButton:active {
+    background-color: #3c3e63;
+}
+
+#agendaInput {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+#agendaList {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+#agendaButtonDiv, #agendaInputDiv {
+    margin: 0.5rem;
+}

@@ -1,4 +1,4 @@
-import {axios} from 'axios';
+import axios from 'axios';
 
 // API to save meeting context.
 export function setMeetingContext(userData) {
@@ -7,7 +7,7 @@ export function setMeetingContext(userData) {
 
 // API to add meeting agenda.
 export function addAgendaTask(taskInfo) {
-  return axios.post(`${window.location.origin}/Home/AddNewAgendaPoint`, taskInfo);
+  return axios.post(`${window.location.origin}/api/addAgendaPoint`, taskInfo);
 }
 
 // API to post agenda in meeting chat.
