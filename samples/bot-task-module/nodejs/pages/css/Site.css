@@ -1,8 +1,6 @@
-html, body, div.surface, div.panel {
-    height: 100%;
-    margin: 0;
-}
-
-div.panel {
-    padding: 15px;
+/* Site-wide styles */
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 1rem;
 }
