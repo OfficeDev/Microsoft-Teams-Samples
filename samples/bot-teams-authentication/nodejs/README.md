@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-nodejs
 ---
 # Teams Auth Bot
 
-Bot Framework v4 bot using Teams authentication
+A sample bot demonstrating authentication in Microsoft Teams using the Teams SDK
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with authentication in a bot for Microsoft Teams.
 
@@ -111,12 +111,12 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
      ```bash
     npm install
     ```
-  - Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-       1) `<<YOUR-MICROSOFT-APP-TYPE>>` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-       2) `<<YOUR-MICROSOFT-APP-ID>>` - Generated from Step 1 (Application (client) ID)is the application app id
-       3) `<<YOUR-MICROSOFT-APP-PASSWORD>>` - Generated from Step 6, also referred to as Client secret
-       4) `<<YOUR-MICROSOFT-APP-TENANT-ID>>` - Generated from Step 1(Directory (tenant) ID) is the tenant id
-       5) `<<YOUR-CONNECTION-NAME>>` - Generated from step 7.
+  - Modify the `.localConfigs` file in your project folder (or in Visual Studio Code) and fill in below details:
+       1) `BOT_TYPE` (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+       2) `CLIENT_ID` - Generated from Step 1 (Application (client) ID)is the application app id
+       3) `CLIENT_SECRET` - Generated from Step 6, also referred to as Client secret
+       4) `TENANT_ID` - Generated from Step 1(Directory (tenant) ID) is the tenant id
+       5) `CONNECTION_NAME` - Generated from step 7.
 
   - Run your app
 
@@ -124,42 +124,40 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     npm start
     ```
 3) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the MicrosoftAppId may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace a ClientID in the place holder string `TEAMS_APP_ID` and the `BOT_ID`.
     - **Edit** the `manifest.json` for `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
-
-**Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-teams-authentication/nodejs/index.js#L52) and put your debugger for local debug.
 
 ## Running the sample
 
 **Install app:**
 
-![add-App ](Images/9.Desktop_OpenApp.png)
+![add-App ](Images/1.OpenApp.png)
 
 **Welcome to teamsbot:**
 
-![added-App ](Images/10.Desktop_WelcomeMsg.png)
+![added-App ](Images/2.WelcomeMsg.png)
 
 **Login UI: OAuth Prompt**
 - The OAuth Prompt behavior differs between Teams Desktop and Teams Web (Browser) clients.
 - Below are sample UI captures demonstrating how the login experience appears on each:
 
-- **Teams Desktop:** OAuth Prompt displayed as a native popup.
-![auth-prompt ](Images/11.Desktop_OAuth_Prompt.png)
-
-- **Teams Web (Browser):** OAuth Prompt shown within an Adaptive Card.
-![auth-card ](Images/3.Web_Teams_SignIn_Card.png)
+- **Auth Prompt:** OAuth Prompt displayed as a native popup.
+![auth-prompt ](Images/3.OAuth_Prompt.png)
 
 **Authentication Success And Token:**
 
-![auth-Token ](Images/13.Desktop_Login_Success_And_Token.png)
+![login-success](Images/4.Login_Success.png)
+
+**Authentication Success And Token:**
+
+![user_details](Images/5.User_Details.png)
 
 **Logout UI:**
 
-![logout ](Images/14.Desktop_Logout.png)
+![logout ](Images/6.Logout.png)
 
 ## Deploy the bot to Azure
 
@@ -167,7 +165,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
