@@ -1,7 +1,7 @@
 {
     "name": "echobot",
     "version": "1.0.0",
-    "description": "Bot Builder v4 echo bot sample",
+    "description": "Microsoft 365 Agents SDK echo bot sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
@@ -19,15 +19,15 @@
         "url": "https://github.com"
     },
     "dependencies": {
+        "@microsoft/agents-hosting": "^1.0.15",
+        "@microsoft/agents-hosting-extensions-teams": "^1.0.15",
         "@microsoft/teams-js": "^2.35.0",
         "adaptive-expressions": "^4.18.0",
         "adaptivecards-templating": "^2.3.1",
-        "botbuilder": "^4.18.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.6",
-        "express": "^4.18.0",
-        "restify": "~8.5.1"
+        "express": "^4.18.0"
     },
     "devDependencies": {
         "eslint": "^7.0.0",
