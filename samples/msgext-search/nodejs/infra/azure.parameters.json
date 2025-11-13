@@ -3,22 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "resourceBaseName": {
-      "value": "bot${{RESOURCE_SUFFIX}}"
+      "value": "ME${{RESOURCE_SUFFIX}}"
     },
-    "botAadAppClientId": {
-      "value": "${{AAD_APP_CLIENT_ID}}"
-    },
-    "botAppDomain": {
-      "value": "${{BOT_DOMAIN}}"
+    "webAppSKU": {
+      "value": "B1"
     },
     "botDisplayName": {
-      "value": "msgext-search"
-    },
-    "microsoftAppType": {
-      "value": "${{MICROSOFT_APP_TYPE}}"
-    },
-    "microsoftAppTenantId": {
-      "value": "${{MICROSOFT_APP_TENANT_ID}}"
+      "value": "msgext-search-teamsai"
     }
   }
 }
