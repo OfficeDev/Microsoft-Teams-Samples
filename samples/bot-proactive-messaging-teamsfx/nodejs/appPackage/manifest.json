@@ -1,42 +1,56 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.23",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "developer": {
-        "name": "Microsoft Corporation",
-        "websiteUrl": "https://www.microsoft.com",
-        "privacyUrl": "https://privacy.microsoft.com/privacystatement",
-        "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/terms-of-use"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "ProactiveBot",
-        "full": "Teams Proactive Messaging Bot Sample"
-    },
-    "description": {
-        "short": "Bot that demonstrates proactive messaging capabilities",
-        "full": "A Microsoft Teams bot sample that demonstrates how to send proactive messages to users who have previously interacted with the bot. Features a web dashboard for triggering and managing proactive communications."
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "developer": {
+    "name": "Microsoft Corporation",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://privacy.microsoft.com/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/terms-of-use"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Proactive Messaging Bot Sample",
+    "full": "Teams Proactive Messaging Bot Sample"
+  },
+  "description": {
+    "short": "Bot sample for proactive notifications",
+    "full": "This bot sends proactive reminders by saving conversation references in Teams."
+  },
+  "accentColor": "#FFFFFF",
+  "copilotAgents": {
+    "customEngineAgents": [
+      {
+        "type": "bot",
+        "id": "${{BOT_ID}}"
+      }
+    ]
+  },
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [
+        "copilot",
+        "personal",
+        "team",
+        "groupChat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
         {
-            "botId": "${{BOT_ID}}",
-            "scopes": [
-                "personal",
-                "team",
-                "groupChat"
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false,
-            "commandLists": [
-                {
-                  "scopes": ["personal", "team", "groupChat"],
-                  "commands": [
-                      {
+          "scopes": [
+            "copilot",
+            "personal",
+            "team",
+            "groupChat"
+          ],
+          "commands": [
+            {
               "title": "welcome",
               "description": "Resend welcome card of this Bot"
             },
@@ -44,17 +58,17 @@
               "title": "learn",
               "description": "Learn about Adaptive Card and Bot Command"
             }
-                  ]
-                }
-            ]
+          ]
         }
-    ],
-    "composeExtensions": [],
-    "configurableTabs": [],
-    "staticTabs": [],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": []
+      ]
+    }
+  ],
+  "composeExtensions": [],
+  "configurableTabs": [],
+  "staticTabs": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
 }
