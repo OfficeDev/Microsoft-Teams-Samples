@@ -88,4 +88,3 @@ deploy:
         BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
         MicrosoftAppType: SingleTenant
         MicrosoftAppTenantId: ${{TEAMS_APP_TENANT_ID}}
-
