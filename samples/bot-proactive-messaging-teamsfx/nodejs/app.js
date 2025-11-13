@@ -171,7 +171,7 @@ function addCustomRoutes(server) {
   });
   
   // Add conversations endpoint
-  app.http.get('/api/conversations', async (req, res) => {
+  server.get('/api/conversations', async (req, res) => {
     try {
       const conversationReferences = app.getConversationReferences();
       const history = app.getProactiveMessageHistory();
@@ -475,6 +475,11 @@ async function getAccessToken() {
 // Method to get proactive message history
 app.getProactiveMessageHistory = () => {
   return app.proactiveMessages || [];
+};
+
+// Method to setup custom routes after app starts
+app.setupCustomRoutes = () => {
+  return app.addCustomHttpHandler();
 };
 
 module.exports = app;
