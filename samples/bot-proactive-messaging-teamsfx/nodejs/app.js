@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const { stripMentionsText } = require("@microsoft/teams.api");
 const { App } = require("@microsoft/teams.apps");
 const { LocalStorage } = require("@microsoft/teams.common");
@@ -42,7 +45,7 @@ const tokenCredentials = {
   token: createTokenFactory(),
 };
 
-// Create proper credentials for Teams AI v2
+// Create proper credentials for Teams SDK
 let appOptions = { storage };
 
 if (config.MicrosoftAppType === "UserAssignedMsi") {
@@ -70,7 +73,7 @@ let routesAdded = false;
 // Add custom HTTP processing function
 app.addCustomHttpHandler = function() {
   // Try multiple approaches to add custom routes
-  // Approach 1: Use Teams AI's http property if available
+  // Approach 1: Use Teams SDK's http property if available
   if (this.http && typeof this.http.get === 'function') {
 
     addCustomRoutes(this.http);
@@ -140,7 +143,7 @@ function addCustomRoutes(server) {
           const lastMessageData = lastMessages[conversationReference.conversation.id];
           const messageToSend = lastMessageData ? 
             `Proactive ${lastMessageData.message} from the bot!` : 
-            "Proactive hello from the Teams AI v2 bot!";
+            "Proactive hello from the Teams SDK bot!";
           
           const result = await app.sendProactiveMessage(conversationReference, messageToSend);
           results.push(result);
@@ -193,7 +196,7 @@ function addCustomRoutes(server) {
             <h2>Actions</h2>
             <p><a href="/api/notify">Send Proactive Messages</a></p>
             
-            <p><em>Teams AI v2 Pure Implementation - Dev Tunnel Access</em></p>
+            <p><em>Teams SDK Pure Implementation - Dev Tunnel Access</em></p>
           </body>
         </html>
       `);
@@ -208,7 +211,7 @@ function addCustomRoutes(server) {
 }
 
 if (!routesAdded) {
-  console.log('Teams AI custom routes not available');
+  console.log('Teams SDK custom routes not available');
 }
 
 const getConversationState = (conversationId) => {
@@ -266,7 +269,7 @@ app.on("message", async (context) => {
   if (text === "/runtime") {
     const runtime = {
       nodeversion: process.version,
-      sdkversion: "2.0.0", // Teams AI v2
+      sdkversion: "2.0.0", // Teams SDK
     };
     await context.send(JSON.stringify(runtime));
     return;
@@ -278,7 +281,7 @@ app.on("message", async (context) => {
     // Always use localhost for development (no dev tunnel needed)
     let baseUrl = `http://localhost:${port}`;
     
-    await context.send(`**Proactive Messaging Endpoints (Teams AI v2 Pure):**\n\n• Send Messages: ${baseUrl}/api/notify\n• View Dashboard: ${baseUrl}/api/conversations\n\n*Note: This implementation uses localhost - no dev tunnel needed*`);
+    await context.send(`**Proactive Messaging Endpoints (Teams SDK Pure):**\n\n• Send Messages: ${baseUrl}/api/notify\n• View Dashboard: ${baseUrl}/api/conversations\n\n*Note: This implementation uses localhost - no dev tunnel needed*`);
     return;
   }
 
@@ -314,7 +317,7 @@ app.on("membersAdded", async (context) => {
       // Always use localhost for development (no dev tunnel needed)
       let baseUrl = `http://localhost:${port}`;
       
-      const welcomeMessage = `Welcome to the **Teams AI v2 Proactive Bot** sample!\n\n• Dashboard: ${baseUrl}/api/conversations\n• Send Proactive Messages: ${baseUrl}/api/notify\n• Use \`/notify\` command for more info\n\n*Pure Teams AI v2 implementation - localhost only*`;
+      const welcomeMessage = `Welcome to the **Teams SDK Proactive Bot** sample!\n\n• Dashboard: ${baseUrl}/api/conversations\n• Send Proactive Messages: ${baseUrl}/api/notify\n• Use \`/notify\` command for more info\n\n*Pure Teams SDK implementation - localhost only*`;
       await context.send(welcomeMessage);
     }
   }
@@ -324,9 +327,9 @@ app.on("membersAdded", async (context) => {
 app.getConversationReferences = () => conversationReferences;
 app.getLastMessages = () => lastMessageStore;
 
-// Method to access Teams AI v2 internal adapter
+// Method to access Teams SDK internal adapter
 app.getInternalAdapter = () => {
-  // Try to access the internal adapter from Teams AI v2
+  // Try to access the internal adapter from Teams SDK
   const possibleAdapterPaths = [
     app._adapter,
     app.adapter, 
@@ -349,7 +352,7 @@ app.sendProactiveMessage = async (conversationReference, message) => {
   try {
     
     
-    // Direct Bot Framework API call - completely bypass Teams AI v2 internal mechanisms
+    // Direct Bot Framework API call - completely bypass Teams SDK internal mechanisms
     const serviceUrl = conversationReference.serviceUrl;
     const conversationId = conversationReference.conversation.id;
     

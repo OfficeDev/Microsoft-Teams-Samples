@@ -14,8 +14,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Proactive Messaging Bot Sample",
-    "full": "Teams Proactive Messaging Bot Sample"
+    "short": "Proactive Messaging Teamsfx",
+    "full": "Teams Proactive Messaging Teamsfx"
   },
   "description": {
     "short": "Bot sample for proactive notifications",
