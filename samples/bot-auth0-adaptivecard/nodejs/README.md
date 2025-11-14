@@ -21,6 +21,7 @@ This sample demonstrates how to authenticate users in a Microsoft Teams bot usin
 * Bots
 * Adaptive Cards
 * Auth0 authentication
+* Teams SDK
 
 ## Interaction with bot
 ![Conversation Bot](Images/bot-auth.gif)
@@ -43,11 +44,11 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 The simplest way to run this sample in Teams is to use Microsoft 365 Agents Toolkit for Visual Studio Code.
 
 1. Ensure you have downloaded and installed [Visual Studio Code](https://code.visualstudio.com/docs/setup/setup-overview)
-1. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
-1. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
-1. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
-1. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
-1. In the browser that launches, select the **Add** button to install the app to Teams.
+2. Install the [Microsoft 365 Agents Toolkit extension](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension)
+3. Select **File > Open Folder** in VS Code and choose this samples directory from the repo
+4. Using the extension, sign in with your Microsoft 365 account where you have permissions to upload custom apps
+5. Select **Debug > Start Debugging** or **F5** to run the app in a Teams web client.
+6. In the browser that launches, select the **Add** button to install the app to Teams.
 
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
@@ -67,20 +68,16 @@ the Teams service needs to call into the bot.
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
+
 2) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-  
-  A) Select **New Registration** and on the *register an application page*, set following values:
+   
+   A) Select **New Registration** and on the *register an application page*, set following values:
       * Set **name** to your app name.
       * Choose the **supported account types** (any account type will work)
       * Leave **Redirect URI** empty.
       * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
-   Select Add a permission
-      * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
-      * `User.Read` (enabled by default)
-      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+   
+   B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest.
 
 
 ## Setup for bot
@@ -94,24 +91,24 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 ## Setup Auth0 Application
-__*Create an Auth0 Application:*__
-    - Go to [Auth0 Dashboard](https://manage.auth0.com/).
-    - Navigate to `Applications > Applications`, then click `Create Application`.
-    - Choose Regular Web Applications and give it a name (e.g., Teams Bot App)
 
-__*Configure Application Settings:*__
-    - Under `Settings`, set the following:
-    
-    **Allowed Callback URLs:**
+**Create an Auth0 Application:**
+- Go to [Auth0 Dashboard](https://manage.auth0.com/).
+- Navigate to `Applications > Applications`, then click `Create Application`.
+- Choose Regular Web Applications and give it a name (e.g., Teams Bot App)
 
-    ```bash
-    Allowed Callback URLs:https://<your-domain>/api/auth/callback
-    ```
-    Replace <your-domain> with your bot's public URL (e.g., dev tunnel or Azure URL).
-    
-    **Get Your Auth0 Credentials:**
-    - Copy the Domain, Client ID, and Client Secret from the application settings.
-    - Add them to your project configuration (appsettings.json or IConfiguration).
+**Configure Application Settings:**
+- Under `Settings`, set the following:
+  
+  **Allowed Callback URLs:**
+  ```
+  https://<your-domain>/api/auth/callback
+  ```
+  Replace `<your-domain>` with your bot's public URL (e.g., dev tunnel or Azure URL).
+
+**Get Your Auth0 Credentials:**
+- Copy the Domain, Client ID, and Client Secret from the application settings.
+- You'll add these to your environment configuration files in the next section.
 
 
 ## Setup for code
@@ -121,31 +118,35 @@ __*Configure Application Settings:*__
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-auth0-adaptivecard/nodejs`
+2) In a terminal, navigate to `samples/bot-auth0-adaptivecard/nodejs`
 
-1) Install modules
+3) Install modules
 
     ```bash
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
- - Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
- - In addition, add your Auth0 configuration details:
-   AUTH0_CLIENT_ID: Found in your Auth0 application settings.
-   AUTH0_CLIENT_SECRET: Found in your Auth0 application settings.
-   AUTH0_DOMAIN: Your Auth0 domain (e.g., your-tenant.auth0.com)
+4) Update the `.localConfigs` configuration with the following values:
+   - `CLIENT_ID`: Your Microsoft App ID (Application/Client ID from Entra ID registration)
+   - `CLIENT_SECRET`: Your Microsoft App secret (from Entra ID registration)
+   - `AUTH0_DOMAIN`: Your Auth0 domain (e.g., your-tenant.auth0.com)
+   - `AUTH0_CLIENT_ID`: Found in your Auth0 application settings
+   - `AUTH0_CLIENT_SECRET`: Found in your Auth0 application settings
+   - `APP_URL`: Your bot's public URL (e.g., https://your-domain)
+   
 
-1) Run your bot at the command line:
+5) Run your bot at the command line:
 
     ```bash
     npm start
     ```
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+6) __*This step is specific to Teams.*__
+    - The `appPackage/manifest.json` uses environment variables that are automatically replaced during provisioning. If manually deploying, update the following placeholders:
+      - `${{TEAMS_APP_ID}}`: Your Teams App ID
+      - `${{BOT_ID}}`: Your Bot's Microsoft App ID (Application/Client ID)
+      - `${{BOT_DOMAIN}}`: Your bot's domain (e.g., your-tunnel-url.devtunnels.ms or your-ngrok-url.ngrok-free.app)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contain any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -168,11 +169,8 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Teams SDK](https://aka.ms/teams-ai-library-v2)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
 - [Auth0 Documentation](https://auth0.com/docs)
 
 <img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/bot-auth0-adaptivecard-nodejs" />

@@ -1,6 +1,6 @@
-const {CardFactory } = require('botbuilder');
 const ACData = require("adaptivecards-templating");
 const fs = require('fs');
+
 const createAdaptiveCard = (fileName, taskInfo, percentOption1, percentOption2) => {
     const jsonContentStr = fs.readFileSync(`resources/${fileName}`, 'utf8');
     const cardJson = JSON.parse(jsonContentStr);
@@ -15,7 +15,8 @@ const createAdaptiveCard = (fileName, taskInfo, percentOption1, percentOption2) 
             percentoption2: percentOption2       
         }
     }); 
-    return CardFactory.adaptiveCard(cardPayload);
+    // Return raw card JSON for Teams AI v2
+    return cardPayload;
   }
   module.exports ={
     createAdaptiveCard

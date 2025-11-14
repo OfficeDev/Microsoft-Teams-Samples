@@ -50,7 +50,8 @@
         "Id": "${Id}",
         "msteams": {
           "type": "task/fetch"
-        }
+        },
+        "opendialogtype": "simple_form"
       }
     }
   ]
