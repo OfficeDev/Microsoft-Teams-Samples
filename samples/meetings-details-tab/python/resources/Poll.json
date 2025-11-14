@@ -1,0 +1,43 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Poll",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${title}"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "Feedback",
+      "style": "expanded",
+      "isMultiSelect": false,
+      "wrap": true,
+      "choices": [
+        {
+          "title": "${option1}",
+          "value": "option1_${option1}"
+        },
+        {
+          "title": "${option2}",
+          "value": "option2_${option2}"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit",
+      "data": {
+        "Type": "SubmitFeedback",
+        "Choice": "${Id}"
+      }
+    }
+  ]
+}

@@ -13,7 +13,7 @@ namespace Microsoft.BotBuilderSamples
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<CloudAdapter> logger, ConversationState conversationState = null)
             : base(auth, logger)
         {
             OnTurnError = async (turnContext, exception) =>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error - Graph Installation App Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .error-container {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .error-icon {
+            color: #dc3545;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #721c24;
+            word-wrap: break-word;
+        }
+        .suggestions {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 4px;
+            padding: 15px;
+            color: #0c5460;
+        }
+        .suggestions h3 {
+            margin-top: 0;
+            color: #0c5460;
+        }
+        .suggestions ul {
+            margin-bottom: 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h1>Application Error</h1>
+        
+        <div class="error-message">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        
+        <div class="suggestions">
+            <h3>Possible Solutions:</h3>
+            <ul>
+                <li>Check if the Azure AD app is properly configured</li>
+                <li>Verify the client secret is correct and not expired</li>
+                <li>Ensure the tenant ID is valid</li>
+                <li>Check if the app has the required permissions</li>
+                <li>Review the application logs for more details</li>
+            </ul>
+        </div>
+        
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>

@@ -8,6 +8,9 @@
       "botAadAppClientId": {
         "value": "${{AAD_APP_CLIENT_ID}}"
       },
+      "botAppTenantId": {
+        "value": "${{AAD_APP_TENANT_ID}}"
+      },
       "botAppDomain": {
         "value": "${{BOT_DOMAIN}}"
       },

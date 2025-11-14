@@ -80,6 +80,13 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
  - When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
 
+ - Navigate to **API Permissions**, and make sure to add the follow permissions:
+    * Select Add a permission
+    * Select Microsoft Graph -> Delegated permissions.
+    * `User.Read` (enabled by default)
+    * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+
  -  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
 
  -  Once the client secret is created, copy its  **Value**, please take a note of the secret as it will be required later.
@@ -150,8 +157,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   - Select `MeetingTranscription.csproj` file
   - Press `F5` to run the project
 
-
-
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
 **NOTE: The feature is only available only be used from the desktop app*
@@ -163,6 +168,49 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
 ![Policy](MeetingTranscription/Images/Policy.png)
+
+
+# RSC Enable Configuration  
+
+To enable **Resource Specific Consent (RSC)**, please update the following configuration files:  
+
+---
+
+## 1. Update App Manifest Schema  
+
+In your `manifest.json`, update the schema version:  
+
+```json
+"$schema": "https://developer.microsoft.com/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+"manifestVersion": "1.23",
+```
+
+## Add Authorization Permissions  
+
+Add the following permissions inside the **authorization** section of your `manifest.json`:  
+
+```json
+"authorization": {
+  "permissions": {
+    "resourceSpecific": [
+      {
+        "name": "OnlineMeeting.ReadBasic.Chat",
+        "type": "Application"
+      },
+      {
+        "name": "OnlineMeetingTranscript.Read.Chat",
+        "type": "Application"
+      }
+    ]
+  }
+}
+```
+## Update `m365agents.local.yml`  
+
+- In the file `m365agents.local.yml`:  
+
+- **Comment out** the section for `aad.manifest.json` (lines **52–55**).  
+- **Comment out** the section for validating `appPackage` (lines **57–61**).
 
 
 6. Setup Manifest for Teams

@@ -17,12 +17,12 @@ namespace BotWithSharePointFileViewer.Controllers
     [ApiController]
     public class BotController : ControllerBase
     {
-        private readonly IBotFrameworkHttpAdapter Adapter;
+        private readonly CloudAdapter _adapter;
         private readonly IBot Bot;
 
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public BotController(CloudAdapter adapter, IBot bot)
         {
-            Adapter = adapter;
+            _adapter = adapter;
             Bot = bot;
         }
 
@@ -31,7 +31,7 @@ namespace BotWithSharePointFileViewer.Controllers
         {
             // Delegate the processing of the HTTP POST to the adapter.
             // The adapter will invoke the bot.
-            await Adapter.ProcessAsync(Request, Response, Bot);
+            await _adapter.ProcessAsync(Request, Response, Bot);
         }
     }
 }

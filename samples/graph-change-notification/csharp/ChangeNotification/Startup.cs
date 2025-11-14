@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,8 +22,11 @@ namespace ChangeNotification
         {
             services.AddControllers().AddNewtonsoftJson();
 
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            // Add BotFrameworkAuthentication for CloudAdapter
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+            // Create the Cloud Adapter with error handling enabled.
+            services.AddSingleton<CloudAdapter, AdapterWithErrorHandler>();
 
             // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
             services.AddSingleton<IStorage, MemoryStorage>();

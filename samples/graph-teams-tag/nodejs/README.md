@@ -83,6 +83,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
   -   Select Add a permission
   -   Select Microsoft Graph -\> Delegated permissions.
       - `TeamworkTag.ReadWrite.All` (enabled by default)
+      - `User.Read` (enabled by default)
   -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.

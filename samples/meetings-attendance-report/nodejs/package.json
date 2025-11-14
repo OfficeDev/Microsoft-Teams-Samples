@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^3.0.4",
+        "adaptive-expressions": "^4.23.3",
         "adaptivecards-templating": "^2.3.1",
         "axios": "^0.27.2",
         "botbuilder": "^4.23.2",
@@ -31,13 +32,13 @@
         "path": "^0.12.7"
     },
     "devDependencies": {
+        "esbuild": "^0.18.1",
         "eslint": "^7.0.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "^2.0.7",
-        "esbuild": "^0.18.1"
+        "nodemon": "^2.0.7"
     }
 }

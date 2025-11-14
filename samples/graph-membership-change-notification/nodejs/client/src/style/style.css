@@ -1,0 +1,76 @@
+.container {
+    padding: 1rem;
+}
+
+.tag-container {
+    margin: 0.5rem;
+    border-radius: 8px;
+    padding: 0.9rem;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.manage-icons {
+    cursor: pointer;
+}
+
+.text-fields-label {
+    width: 130px;
+}
+
+.input-fields-label {
+    width: 160px;
+}
+.headColor {
+    color: #5b5fc7;
+}
+
+.statusColor {
+    color: seagreen;
+}
+
+.deleteStatus {
+    color: crimson;
+}
+
+/* New styles for member list and enhanced notifications */
+.members-section {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.headcolor {
+    color: #5b5fc7;
+}
+
+.error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.member-item {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 3px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.notification-enhanced {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.member-list-status {
+    font-style: italic;
+    color: #6c757d;
+}

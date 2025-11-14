@@ -60,6 +60,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 -   Select Add a permission
 -   Select Microsoft Graph -> Application permissions.
    - `OnlineMeetings.Read.All`
+   - `User.Read`
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
