@@ -21,6 +21,7 @@ This sample demonstrates how to extend Microsoft Teams meetings by implementing 
 * Tabs
 * Bots
 * Adaptive Cards
+* Teams SDK
 
 ## Interaction with app
 
@@ -58,9 +59,7 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 ## Setup
 
-2) App Registration
-
-### Register your application with Azure AD
+### 1. Register your application with Azure AD
 
 1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -75,16 +74,18 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     * `User.Read` (enabled by default)
     * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-3. Setup for Bot
-	- Register a Microsoft Entra ID aap registration in Azure portal.
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-	- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
+### 2. Setup for Bot
+
+- Register a Microsoft Entra ID aap registration in Azure portal.
+- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_tunnel_domain>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
- - Run ngrok - point to port 3978
+### 3. Setup NGROK
+
+- Run ngrok - point to port 3978
 
    ```bash
    ngrok http 3978 --host-header="localhost:3978"
@@ -96,53 +97,59 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    devtunnel host -p 3978 --allow-anonymous
    ```
 
-4. Clone the repository
+### 4. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-    -Modfiy the Go to .env file  and add ```BotId``` ,  ```BotPassword``` and ```BaseUrl as tunnel URL``` information.
+- In the `.localConfigs` file add the following:
 
-    - In a terminal, navigate to `samples/meetings-details-tab/nodejs`
+    ```
+    CLIENT_ID=<Your-Bot-App-ID>
+    CLIENT_SECRET=<Your-Bot-App-Secret>
+    BaseURL=<Your-Tunnel-URL>
+    ```
 
-        ```bash
-        cd samples/meetings-details-tab/nodejs
-        ```
+- In a terminal, navigate to `samples/meetings-details-tab/nodejs`
 
-    - Install modules and Start the bot
-    - Server will run on PORT:  `4001`
+    ```bash
+    cd samples/meetings-details-tab/nodejs
+    ```
 
-        ```bash
-        npm run server
-        ```
+- Install modules and Start the bot
+- Server will run on PORT:  `4001`
 
-        > **This command is equivalent to:**
-        _npm install > npm run build-client > npm start_
+    ```bash
+    npm run server
+    ```
 
-    - Start client application
-    - Client will run on PORT:  `3978`
+    > **This command is equivalent to:**
+    _npm install > npm run build-client > npm start_
 
-        ```bash
-        npm run client
-        ```
-        
-        > **This command is equivalent to:**
-         _cd client > npm install > npm start_
+- Start client application
+- Client will run on PORT:  `3978`
 
-5. Setup Manifest for Teams
+    ```bash
+    npm run client
+    ```
+    
+    > **This command is equivalent to:**
+     _cd client > npm install > npm start_
+
+### 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./appManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace:
+      - `${{TEAMS_APP_ID}}` with your Teams App ID
+      - `${{BOT_ID}}` with your Microsoft App ID (from step 2)
+      - `${{BOT_DOMAIN}}` with your tunnel domain (e.g., `1234.ngrok-free.app` or `12345.devtunnels.ms`)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appManifest folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-details-tab/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
