@@ -1,6 +1,6 @@
-// index.js is used to setup and configure your bot
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
-// Import required packages
 const express = require("express");
 
 // Import required bot services.
@@ -26,9 +26,7 @@ adapter.onTurnError = async (context, error) => {
   //       configuration instructions.
   console.error(`\n [onTurnError] unhandled error: ${error}`);
 
-  // Only send error message for user messages, not for other message types so the bot doesn't spam a channel or chat.
   if (context.activity.type === "message") {
-    // Send a message to the user
     await context.sendActivity(`The bot encountered an unhandled error:\n ${error.message}`);
     await context.sendActivity("To continue to run this bot, please fix the bot source code.");
   }
@@ -52,7 +50,6 @@ expressApp.post("/api/messages", async (req, res) => {
   });
 });
 
-// Gracefully shutdown HTTP server
 ["exit", "uncaughtException", "SIGINT", "SIGTERM", "SIGUSR1", "SIGUSR2"].forEach((event) => {
   process.on(event, () => {
     server.close();

@@ -136,3 +136,12 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 12. Completed Migration Channel
 ![AppInstalled](GraphChatMigration/Images/11.CompleteMigrationChannel.png)
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+
+<img src="https://pnptelemetry.azurewebsites.net/microsoft-teams-samples/samples/graph-chat-migration-csharp" />

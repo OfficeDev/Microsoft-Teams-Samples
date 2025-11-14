@@ -6,7 +6,6 @@ var request = require('request');
 var Q = require('q');
 
 const axios = require('axios'); 
-// The auth module object.
 var auth = {}; 
 
 // Function to obtain an access token using the tenant ID.

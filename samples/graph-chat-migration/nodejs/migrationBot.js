@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 const { 
   ActivityHandler, 
   TeamsInfo,
@@ -12,10 +15,8 @@ class MigrationBot extends ActivityHandler {
   constructor() {
     super();
 
-    // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
     this.onMessage(async (context, next) => {
       await this.handleMessage(context);
-      // By calling next() you ensure that the next BotHandler is run.
       await next();
     });
 
@@ -25,11 +26,8 @@ class MigrationBot extends ActivityHandler {
     });
   }
 
-  // Helper function to get access token for Microsoft Graph using existing auth module
   async getGraphAccessToken() {
     try {
-      // Use the existing auth module to get access token
-      // Using the tenant ID from environment variables
       const tenantId = process.env.MicrosoftAppTenantId;
       const accessToken = await auth.getAccessToken(tenantId);
       return accessToken;
@@ -39,12 +37,10 @@ class MigrationBot extends ActivityHandler {
     }
   }
 
-  // Helper function to detect conversation type and get appropriate IDs
   getConversationInfo(context) {
     const conversationId = context.activity.conversation?.id;
     const channelData = context.activity.channelData;
 
-    // Check if it's a Teams channel (contains @thread.tacv2)
     if (conversationId && conversationId.includes('@thread.tacv2')) {
       return {
         type: 'channel',
@@ -53,7 +49,6 @@ class MigrationBot extends ActivityHandler {
         conversationId: conversationId
       };
     }
-    // Check if it's a group chat (starts with 19: but no @thread.tacv2)
     else if (conversationId && conversationId.startsWith('19:')) {
       return {
         type: 'groupchat',
@@ -61,7 +56,6 @@ class MigrationBot extends ActivityHandler {
         conversationId: conversationId
       };
     }
-    // Default fallback
     else {
       return {
         type: 'unknown',
@@ -70,7 +64,6 @@ class MigrationBot extends ActivityHandler {
     }
   }
 
-  // Helper function to call Microsoft Graph API
   async callGraphAPI(endpoint, method = 'POST', data = null) {
     try {
       const accessToken = await this.getGraphAccessToken();
@@ -95,7 +88,6 @@ class MigrationBot extends ActivityHandler {
     }
   }
 
-  // Helper function to handle adaptive card form submission
   async handlePostMessageSubmission(context, data) {
     try {
       console.log('Handling post message submission with data:', JSON.stringify(data, null, 2));
@@ -113,11 +105,9 @@ class MigrationBot extends ActivityHandler {
           return;
         }
 
-        // Combine date and time for Graph API
         const combinedDateTime = `${messageDate}T${messageTime}:00`;
         const formattedTimestamp = new Date(combinedDateTime).toISOString();
         
-        // Detect conversation type and get appropriate IDs
         const conversationInfo = this.getConversationInfo(context);
         
         if (conversationInfo.type === 'unknown' || !conversationInfo.conversationId) {
@@ -125,7 +115,6 @@ class MigrationBot extends ActivityHandler {
           return;
         }
         
-        // Prepare message data for Graph API
         const chatMessage = {
           createdDateTime: formattedTimestamp,
           from: {
@@ -145,10 +134,8 @@ class MigrationBot extends ActivityHandler {
 
 
         if (conversationInfo.type === 'groupchat') {
-          // Use chats API for group chats
           graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/messages`;
         } else if (conversationInfo.type === 'channel') {
-          // Use teams/channels API for Teams channels
           if (!conversationInfo.teamId) {
             await context.sendActivity('Unable to retrieve team information for this channel.');
             return;
@@ -157,7 +144,6 @@ class MigrationBot extends ActivityHandler {
           graphEndpoint = `https://graph.microsoft.com/beta/teams/${teamsDetails.aadGroupId}/channels/${conversationInfo.teamId}/messages`;
         }
 
-        // Call Microsoft Graph API using HTTP
         const result = await this.callGraphAPI(graphEndpoint, 'POST', chatMessage);
 
         if (result && result.data.id) {
@@ -175,15 +161,12 @@ class MigrationBot extends ActivityHandler {
   async handleMessage(context) {
     let userMessage = context.activity.text?.trim() || '';
 
-    // Check if this is an adaptive card submission
     if (context.activity.value && context.activity.value.action) {
       console.log('Adaptive card submission received in message handler');
       await this.handlePostMessageSubmission(context, context.activity.value);
       return;
     }
 
-    // Remove @mention from the beginning of the message
-    // Pattern: <at>BotName</at> command -> command
     userMessage = userMessage.replace(/<at>.*?<\/at>\s*/i, '').trim().toLowerCase();
 
     switch (userMessage) {
@@ -213,7 +196,6 @@ class MigrationBot extends ActivityHandler {
 
   async handleStartMigration(context) {
     try {
-      // Detect conversation type and get appropriate IDs
       const conversationInfo = this.getConversationInfo(context);
 
       if (conversationInfo.type === 'unknown' || !conversationInfo.conversationId) {
@@ -224,10 +206,8 @@ class MigrationBot extends ActivityHandler {
       let graphEndpoint;
 
       if (conversationInfo.type === 'groupchat') {
-        // Use chats API for group chats
         graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/startMigration`;
       } else if (conversationInfo.type === 'channel') {
-        // Use teams/channels API for Teams channels
         if (!conversationInfo.teamId) {
           await context.sendActivity(`Unable to retrieve team information for this channel.`);
           return;
@@ -250,7 +230,6 @@ class MigrationBot extends ActivityHandler {
 
   async handlePostMessage(context) {
     try {
-      // Create adaptive card for timestamp and message input
       const adaptiveCard = {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -327,7 +306,6 @@ class MigrationBot extends ActivityHandler {
 
   async handleCompleteMigration(context) {
     try {
-      // Detect conversation type and get appropriate IDs
       const conversationInfo = this.getConversationInfo(context);
 
       if (conversationInfo.type === 'unknown' || !conversationInfo.conversationId) {
@@ -339,10 +317,8 @@ class MigrationBot extends ActivityHandler {
 
 
       if (conversationInfo.type === 'groupchat') {
-        // Use chats API for group chats
         graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}/completeMigration`;
       } else if (conversationInfo.type === 'channel') {
-        // Use teams/channels API for Teams channels
         if (!conversationInfo.teamId) {
           await context.sendActivity(`Unable to retrieve team information for this channel.`);
           return;
@@ -386,7 +362,6 @@ I can help you start the chat migration process. Type "startMigration" to begin,
       if (member.id !== context.activity.recipient.id) {
         await context.sendActivity(welcomeText);
 
-        // Get conversation information when bot is added
         try {
           const conversationInfo = this.getConversationInfo(context);
 
@@ -394,7 +369,6 @@ I can help you start the chat migration process. Type "startMigration" to begin,
             let graphEndpoint;
 
             if (conversationInfo.type === 'groupchat') {
-              // Use chats API for group chats
               graphEndpoint = `https://graph.microsoft.com/beta/chats/${conversationInfo.chatId}`;
             } else if (conversationInfo.type === 'channel') {
               const teamsDetails = await TeamsInfo.getTeamDetails(context);
@@ -402,7 +376,6 @@ I can help you start the chat migration process. Type "startMigration" to begin,
               return;
             }
 
-            // Call Microsoft Graph API to get conversation details (for group chats)
             if (graphEndpoint) {
               const conversationDetails = await this.callGraphAPI(graphEndpoint, 'GET');
 

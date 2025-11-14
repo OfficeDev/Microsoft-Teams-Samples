@@ -1,9 +1,7 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Net.Http;
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.Agents.Builder;
 
 namespace GraphChatMigration.GraphClient
