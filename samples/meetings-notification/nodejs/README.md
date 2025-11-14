@@ -124,8 +124,10 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     npm install
     ```
 
-- Go to .env file in your project folder and update `MicrosoftAppId`, `MicrosoftAppPassword` with the values received from your Microsoft Entra ID app registration.
-  - Update `BaseUrl` as per your domain like ngrok url: https://1234.ngrok-free.app 
+- Go to `.localConfigs` file in your project folder and update the following values:
+  - `CLIENT_ID` - Your Microsoft App Id received from Microsoft Entra ID app registration
+  - `CLIENT_SECRET` - Your Microsoft App Password/Secret
+  - `BOT_ENDPOINT` - Your domain endpoint (e.g., `https://1234.ngrok-free.app`)
 
 - Start the bot
 
@@ -144,7 +146,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
          - Then select the `manifest.zip` file from `appManifest`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/nodejs/index.js#L45) line and put your debugger for local debug.
 
 ## Running the sample
 
