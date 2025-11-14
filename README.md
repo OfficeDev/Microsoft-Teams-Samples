@@ -188,6 +188,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 | 14 | Graph API Teams App Catalog Life Cycle               | This sample demonstrates how to manage the lifecycle of Teams apps in the app catalog using Microsoft Graph APIs through a bot. | Advanced     | [View][graph#appctaloglifecycle#cs] | [View][graph#appcataloglifecycle#js] ![toolkit-icon](assets/toolkit-icon.png) | [View](samples/graph-appcatalog-lifecycle/csharp/demo-manifest/graph-appcatalog-lifecycle.zip) |
 | 15 | Graph File Fetch| This sample demonstrates how to fetch shared files in teams group chat and team channel using graph API. | Advanced | [View][graph-file-fetch#cs] | [View][graph-file-fetch#js] | [View](samples/graph-file-fetch/csharp/demo-manifest/graph-file-fetch.zip) |
 | 16 | Membership Change Notification       | This sample application demonstrates how to manage/handle membership change notification for shared channel, such as users being added, removed, or having their membership updated, using Node.js and the Microsoft Graph API.  | Advanced     | [View][graph#membershipchangenotification#cs] | [View][graph#graph#appcataloglifecycle#js#js] ![toolkit-icon](assets/toolkit-icon.png) |  |
+| 17 | Graph chat migration bot | This sample demonstrates how to migrate external chats to teams using microsoft graph API's. | Intermediate | graph-chat-migration#cs | [View][graph-chat-migration#js] ![toolkit-icon](assets/toolkit-icon.png) | | | |
 
 
 ## [Calls and online meetings bots](https://docs.microsoft.com/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
@@ -541,7 +542,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-ai-sentiment-analysis#cs]:samples/msgext-ai-sentiment-analysis/csharp
 [msgext-ai-sentiment-analysis#python]:samples/msgext-ai-sentiment-analysis/python
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
-[bot-teams-authentication#nodejs]:samples/bot-teams-authentication/nodejs
+[graph-chat-migration#js]:samples\graph-chat-migration\nodejs
+[graph-chat-migration#cs]:samples\graph-chat-migration\csharp
+
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java
