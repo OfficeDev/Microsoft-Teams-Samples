@@ -1,0 +1,157 @@
+﻿{
+  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Persona Set",
+      "weight": "bolder",
+      "size": "large"
+    },
+    {
+      "type": "TextBlock",
+      "text": "This card demonstrates how to display multiple user personas.",
+      "wrap": true,
+      "spacing": "medium",
+      "isSubtle": true
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "JD",
+              "horizontalAlignment": "center",
+              "size": "large",
+              "weight": "bolder",
+              "color": "dark"
+            }
+          ],
+          "style": "emphasis",
+          "verticalContentAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "John Doe",
+              "weight": "bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Software Engineer",
+              "isSubtle": true,
+              "spacing": "none",
+              "wrap": true
+            }
+          ],
+          "verticalContentAlignment": "center",
+          "spacing": "medium"
+        }
+      ],
+      "spacing": "medium"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "JS",
+              "horizontalAlignment": "center",
+              "size": "large",
+              "weight": "bolder",
+              "color": "dark"
+            }
+          ],
+          "style": "accent",
+          "verticalContentAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Jane Smith",
+              "weight": "bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Product Manager",
+              "isSubtle": true,
+              "spacing": "none",
+              "wrap": true
+            }
+          ],
+          "verticalContentAlignment": "center",
+          "spacing": "medium"
+        }
+      ],
+      "spacing": "medium"
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "BJ",
+              "horizontalAlignment": "center",
+              "size": "large",
+              "weight": "bolder",
+              "color": "dark"
+            }
+          ],
+          "style": "good",
+          "verticalContentAlignment": "center"
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Bob Johnson",
+              "weight": "bolder",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "UX Designer",
+              "isSubtle": true,
+              "spacing": "none",
+              "wrap": true
+            }
+          ],
+          "verticalContentAlignment": "center",
+          "spacing": "medium"
+        }
+      ],
+      "spacing": "medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Multiple personas displayed with initials as placeholders.",
+      "wrap": true,
+      "size": "small",
+      "isSubtle": true,
+      "spacing": "large"
+    }
+  ]
+}
