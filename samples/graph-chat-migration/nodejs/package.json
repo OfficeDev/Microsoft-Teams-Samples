@@ -1,5 +1,5 @@
 {
-    "name": "testmigrationapp",
+    "name": "graphchatmigration",
     "version": "1.0.0",
     "msteams": {
       "teamsAppId": null
@@ -16,6 +16,7 @@
         "dev:teamsfx:testtool": "env-cmd --silent -f .localConfigs.testTool npm run dev",
         "dev:teamsfx:launch-testtool": "env-cmd --silent -f env/.env.testtool teamsapptester start",
         "dev": "nodemon --inspect=9239 --signal SIGINT ./index.js",
+        "build": "node build.js",
         "start": "node ./index.js",
         "watch": "nodemon ./index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,6 +31,7 @@
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
-        "nodemon": "^3.1.7"
+        "nodemon": "^3.1.7",
+        "esbuild": "^0.18.1"
     }
 }

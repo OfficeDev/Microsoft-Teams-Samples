@@ -508,6 +508,10 @@ jobs:
               name: 'graph-membership-change-notification'
               version: '8.0.x'
 
+            - project_path: 'samples/graph-chat-migration/csharp/GraphChatMigration/GraphChatMigration.csproj'
+              name: 'graph-chat-migration'
+              version: '8.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
