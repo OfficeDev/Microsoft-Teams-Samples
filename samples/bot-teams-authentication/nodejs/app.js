@@ -59,13 +59,4 @@ app.on('message', async ({ send, activity, isSignedIn }) => {
   }
 });
 
-app.message('/signout', async ({ send, signout, isSignedIn }) => {
-  if (!isSignedIn) {
-    await send('you are not signed in! please type **/signin** to sign in.');
-    return;
-  }
-  await signout(); // call signout for your auth connection...
-  await send('you have been signed out!');
-});
-
 module.exports = app;

@@ -43,15 +43,6 @@ app.event('signin', async ({ send, token }) => {
   console.log('Sign-in successful.');
 });
 
-app.message('/signout', async ({ send, signout, isSignedIn }) => {
-  if (!isSignedIn) {
-    await send('you are not signed in! please type **/signin** to sign in.');
-    return;
-  }
-  await signout(); // call signout for your auth connection...
-  await send('you have been signed out!');
-});
-
 // Handle messages with attachments
 app.on('message', async ({ send, activity, isSignedIn }) => {
   // Skip if this is a command
