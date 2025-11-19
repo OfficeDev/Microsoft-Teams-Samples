@@ -1,6 +1,6 @@
 {
-    "id": "${{AAD_APP_OBJECT_ID}}",
-    "appId": "${{AAD_APP_CLIENT_ID}}",
+    "id": "${{BOT_OBJECT_ID}}",
+    "appId": "${{BOT_ID}}",
     "name": "bot-archive-groupchat-messages-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADandPersonalMicrosoftAccount",
@@ -100,7 +100,7 @@
         }
     ],
     "identifierUris":[
-        "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
+        "api://${{BOT_DOMAIN}}/botid-${{BOT_ID}}"
     ],
     "replyUrlsWithType":[
         {

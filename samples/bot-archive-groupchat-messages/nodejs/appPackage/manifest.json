@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
@@ -23,7 +23,7 @@
   },
   "bots": [
     {
-      "botId": "${{AAD_APP_CLIENT_ID}}",
+      "botId": "${{BOT_ID}}",
       "scopes": [
         "team",
         "personal",
@@ -43,7 +43,7 @@
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://${{BOT_DOMAIN}}/botid-${{AAD_APP_CLIENT_ID}}"
+    "id": "${{BOT_ID}}",
+    "resource": "api://${{BOT_DOMAIN}}/botid-${{BOT_ID}}"
   }
 }
