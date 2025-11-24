@@ -1,38 +1,32 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {
-    TurnContext,
-    MessageFactory,
-    TeamsActivityHandler,
-    CardFactory,
-    ActionTypes
-} = require('botbuilder');
+const { CardFactory } = require('@microsoft/agents-hosting');
+const { TeamsActivityHandler } = require('@microsoft/agents-hosting-extensions-teams');
+const axios = require('axios');
+const querystring = require('querystring');
+
+/* Building a messaging extension search command is a two step process.
+    (1) Define how the messaging extension will look and be invoked in the client.
+        This can be done from the Configuration tab, or the Manifest Editor.
+        Learn more: https://aka.ms/teams-me-design-search.
+    (2) Define how the bot service will respond to incoming search commands.
+        Learn more: https://aka.ms/teams-me-respond-search.
+    
+    NOTE:   Ensure the bot endpoint that services incoming messaging extension queries is
+            registered with Bot Framework.
+            Learn more: https://aka.ms/teams-register-bot. 
+*/
 
 class BotActivityHandler extends TeamsActivityHandler {
     constructor() {
         super();
     }
 
-    /* Building a messaging extension search command is a two step process.
-        (1) Define how the messaging extension will look and be invoked in the client.
-            This can be done from the Configuration tab, or the Manifest Editor.
-            Learn more: https://aka.ms/teams-me-design-search.
-        (2) Define how the bot service will respond to incoming search commands.
-            Learn more: https://aka.ms/teams-me-respond-search.
-        
-        NOTE:   Ensure the bot endpoint that services incoming messaging extension queries is
-                registered with Bot Framework.
-                Learn more: https://aka.ms/teams-register-bot. 
-    */
-
-    // Invoked when the service receives an incoming search query.
+    // handleTeamsMessagingExtensionQuery: search command -> help (empty), sample results, or error card
     async handleTeamsMessagingExtensionQuery(context, query) {
-        const axios = require('axios');
-        const querystring = require('querystring');
-
         const searchQuery = query.parameters[0].value;
-        const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${ querystring.stringify({ text: searchQuery, size: 8 }) }`);
+        const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
 
         const attachments = [];
         response.data.objects.forEach(obj => {
@@ -63,8 +57,8 @@ class BotActivityHandler extends TeamsActivityHandler {
         };
     }
 
-    /* Messaging Extension - Unfurling Link */
-    handleTeamsAppBasedLinkQuery(context, query) {
+    // handleTeamsAppBasedLinkQuery: link unfurl -> adaptive card + preview (fallback to "Unknown URL")
+    async handleTeamsAppBasedLinkQuery(context, query) {
         const attachment = CardFactory.thumbnailCard('Thumbnail Card',
             query.url,
             ['https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png']);
@@ -75,12 +69,10 @@ class BotActivityHandler extends TeamsActivityHandler {
             attachments: [attachment]
         };
     
-        const response = {
+        return {
             composeExtension: result
         };
-        return response;
-        }
-    /* Messaging Extension - Unfurling Link */
+    }
 }
 
 module.exports.BotActivityHandler = BotActivityHandler;
