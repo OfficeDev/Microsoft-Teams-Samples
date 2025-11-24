@@ -13,7 +13,7 @@
  */
 
 import path from "path";
-import restify from "restify";
+import express from "express";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { EchoBot } from "./bot.js";
@@ -54,27 +54,25 @@ adapter.onTurnError = async (context, error) => {
     await context.sendActivity("The agent encountered an error. Please try again later.");
 };
 
-// Create and configure the HTTP server using Restify
-const server = restify.createServer({
-    formatters: {
-        "text/html": (req, res, body) => body, // Return HTML responses as-is
-    },
-});
+// Create and configure the HTTP server using Express
+const server = express();
 
-// Enable body parsing middleware
-server.use(restify.plugins.bodyParser());
+// Enable JSON and URL-encoded body parsing middleware
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 // Serve static files such as tab pages or assets
-server.get(
-    "/*",
-    restify.plugins.serveStatic({
-        directory: path.join(__dirname, "static"),
-    })
-);
+server.use(express.static(path.join(__dirname, "static")));
+
+// Simple health check endpoint for diagnostics
+server.get('/healthz', (req, res) => {
+    res.json({ status: 'ok', time: new Date().toISOString() });
+});
 
 // Start the web server
-server.listen(process.env.PORT || 3978, () => {
-    console.log(`${server.name} listening to ${server.url}`);
+const port = process.env.PORT || 3978;
+server.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
 });
 
 // Initialize bot logic (now includes message extension support)
@@ -86,20 +84,35 @@ tabs(server);
 // Handle incoming Teams or Copilot activities
 server.post("/api/messages", async (req, res) => {
     await adapter.process(req, res, async (context) => {
-        // Handle message extension invokes
-        if (context.activity.type === "invoke") {
-            const invokeResponse = await bot.run(context);
-            
-            // Set invoke response on context for adapter to send
-            if (invokeResponse) {
-                context.turnState.set('invokeResponse', invokeResponse);
+        const originalSendActivity = context.sendActivity.bind(context);
+        let replied = false;
+        context.sendActivity = async (...args) => {
+            replied = true;
+            return originalSendActivity(...args);
+        };
+
+        let invokeResponse;
+        try {
+            invokeResponse = await bot.run(context);
+        } catch (err) {
+            console.error('[bot] run error', err);
+            if (context.activity.type === 'invoke') {
+                invokeResponse = { status: 200, body: { composeExtension: { type: 'result', attachmentLayout: 'list', attachments: [] } } };
+            } else {
+                await context.sendActivity('The agent encountered an error handling your message.');
             }
-        } else {
-            // Handle normal conversation messages
-            await bot.run(context);
         }
 
-        // Save conversation state
+        if (context.activity.type === 'invoke') {
+            if (invokeResponse) {
+                context.turnState.set('invokeResponse', invokeResponse);
+            } else {
+                context.turnState.set('invokeResponse', { status: 200, body: { composeExtension: { type: 'result', attachmentLayout: 'list', attachments: [] } } });
+            }
+        } else if (context.activity.type === 'message' && !replied) {
+            await context.sendActivity('Echo active (diagnostic fallback)');
+        }
+
         await conversationState.saveChanges(context, false);
     });
 });

@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 import AgentsHosting from "@microsoft/agents-hosting";
+import * as TeamsExtensions from "@microsoft/agents-hosting-extensions-teams";
 import faker from 'faker';
 
-const { ActivityHandler, CardFactory } = AgentsHosting;
+const { CardFactory } = AgentsHosting;
+const { TeamsActivityHandler } = TeamsExtensions;
 
 // Helper function to remove bot mentions from a message
 function removeRecipientMention(activity) {
@@ -18,7 +20,7 @@ function removeRecipientMention(activity) {
 }
 
 // Bot class that handles messages and messaging extension queries
-export class EchoBot extends ActivityHandler {
+export class EchoBot extends TeamsActivityHandler {
     constructor() {
         super();
 
@@ -46,57 +48,50 @@ export class EchoBot extends ActivityHandler {
         });
     }
 
-    // Override run method to handle invoke activities for message extensions
-    async run(context) {
-        // Handle messaging extension query
-        if (context.activity.type === 'invoke') {
-            if (context.activity.name === 'composeExtension/query') {
-                const query = context.activity.value;
-                const response = await this.handleTeamsMessagingExtensionQuery(context, query);
-                return { status: 200, body: response };
-            } 
-            // Handle messaging extension item selection
-            else if (context.activity.name === 'composeExtension/selectItem') {
-                const item = context.activity.value;
-                const response = await this.handleTeamsMessagingExtensionSelectItem(context, item);
-                return { status: 200, body: response };
-            }
-        }
-        
-        // Process other activity types through the base handler
-        await super.run(context);
-    }
-
     // Generate 5 random cards for messaging extension query
     async handleTeamsMessagingExtensionQuery(context, query) {
-        const title = query?.parameters?.[0]?.value || query?.commandId || faker.lorem.sentence();
-        const randomImageUrl = "https://loremflickr.com/200/200";
+        try {
+            const title = query?.parameters?.[0]?.value || query?.commandId || faker.lorem.sentence();
+            const randomImageUrl = "https://loremflickr.com/200/200";
 
-        if (query.commandId === 'getRandomText') {
-            const attachments = [];
-
-            // Create 5 thumbnail cards with random text and images
-            for (let i = 0; i < 5; i++) {
-                const text = faker.lorem.paragraph();
-                const images = [`${randomImageUrl}?random=${i}`];
-
-                // Create main card and preview card
-                const thumbnailCard = CardFactory.thumbnailCard(title || faker.lorem.words(3), text, images);
-                const preview = CardFactory.thumbnailCard(title || faker.lorem.words(3), text, images);
-
-                attachments.push({ ...thumbnailCard, preview });
+            if (query?.commandId === 'getRandomText') {
+                const attachments = [];
+                for (let i = 0; i < 5; i++) {
+                    const text = faker.lorem.paragraph();
+                    const images = [`${randomImageUrl}?random=${i}`];
+                    const cardTitle = title || faker.lorem.words(3);
+                    const thumbnailCard = CardFactory.thumbnailCard(cardTitle, text, images);
+                    const preview = CardFactory.thumbnailCard(cardTitle, text, images);
+                    attachments.push({ ...thumbnailCard, preview });
+                }
+                return {
+                    composeExtension: {
+                        type: 'result',
+                        attachmentLayout: 'list',
+                        attachments
+                    }
+                };
             }
 
+            // Return an empty list instead of null to avoid "Unable to reach app" UI
             return {
                 composeExtension: {
                     type: 'result',
                     attachmentLayout: 'list',
-                    attachments: attachments
+                    attachments: []
+                }
+            };
+        } catch (err) {
+            console.error('[msgext] query error', err);
+            // Graceful failure response for Teams client
+            return {
+                composeExtension: {
+                    type: 'result',
+                    attachmentLayout: 'list',
+                    attachments: []
                 }
             };
         }
-
-        return null;
     }
 
     // Handle selected item from messaging extension results
