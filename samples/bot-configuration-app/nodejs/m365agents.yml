@@ -1,35 +1,21 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.2/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/m365-agents-toolkits/v1.9/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.2
-
-additionalMetadata:
-  sampleTag: Microsoft-Teams-Samples:bot-configuration-app-nodejs
+version: v1.9
 
 environmentFolderPath: ./env
 
-# Triggered when 'teamsfx provision' is executed
+# Triggered when 'teamsapp provision' is executed
 provision:
-  # Creates a Teams app
+  # Creates an app
   - uses: teamsApp/create
     with:
-      # Teams app name
+      # app name
       name: nodejs${{APP_NAME_SUFFIX}}
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
       teamsAppId: TEAMS_APP_ID
-
-  # Create or reuse an existing Azure Active Directory application for bot.
-  - uses: botAadApp/create
-    with:
-      # The Azure Active Directory application's display name
-      name: nodejs${{APP_NAME_SUFFIX}}
-    writeToEnvironmentFile:
-      # The Azure Active Directory application's client id created for bot.
-      botId: BOT_ID
-      # The Azure Active Directory application's client secret created for bot.
-      botPassword: SECRET_BOT_PASSWORD
 
   - uses: arm/deploy # Deploy given ARM templates parallelly.
     with:
@@ -51,40 +37,41 @@ provision:
           # variable before ARM deployment.
           parameters: ./infra/azure.parameters.json
           # Required when deploying ARM template
-          deploymentName: Create-resources-for-tab
+          deploymentName: Create-resources-for-bot
       # Microsoft 365 Agents Toolkit will download this bicep CLI version from github for you,
       # will use bicep CLI in PATH if you remove this config.
       bicepCliVersion: v0.9.1
 
   # Validate using manifest schema
-  # - uses: teamsApp/validateManifest
-  #   with:
+  - uses: teamsApp/validateManifest
+    with:
       # Path to manifest template
-  #    manifestPath: ./appManifest/manifest.json
-  # Build Teams app package with latest env value
+      manifestPath: ./appPackage/manifest.json
+  # Build app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appManifest/manifest.json
-      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-  # Apply the Teams app manifest to an existing Teams app in
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+  # Apply the app manifest to an existing app in
   # Developer Portal.
-  # Will use the app id in manifest file to determine which Teams app to update.
+  # Will use the app id in manifest file to determine which app to update.
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
 
-# Triggered when 'teamsfx deploy' is executed
+# Triggered when 'teamsapp deploy' is executed
 deploy:
   # Run npm command
   - uses: cli/runNpmCommand
+    name: install dependencies
     with:
       args: install --production
   # Deploy your application to Azure App Service using the zip deploy feature.
@@ -101,38 +88,40 @@ deploy:
       # or add it to your environment variable file.
       resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
 
-# Triggered when 'teamsfx publish' is executed
+# Triggered when 'teamsapp publish' is executed
 publish:
   # Validate using manifest schema
-  # - uses: teamsApp/validateManifest
-  #  with:
+  - uses: teamsApp/validateManifest
+    with:
       # Path to manifest template
-  # manifestPath: ./appManifest/manifest.json
+      manifestPath: ./appPackage/manifest.json
+  # Build app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appManifest/manifest.json
-      outputZipPath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./appManifest/build/manifest.${{TEAMSFX_ENV}}.json
+      manifestPath: ./appPackage/manifest.json
+      outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputFolder: ./appPackage/build
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
-  # Apply the Teams app manifest to an existing Teams app in
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
+  # Apply the app manifest to an existing app in
   # Developer Portal.
-  # Will use the app id in manifest file to determine which Teams app to update.
+  # Will use the app id in manifest file to determine which app to update.
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
   # Publish the app to
   # Teams Admin Center (https://admin.teams.microsoft.com/policies/manage-apps)
   # for review and approval
   - uses: teamsApp/publishAppPackage
     with:
-      appPackagePath: ./appManifest/build/appManifest.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
     # Write the information of created resources into environment file for
     # the specified environment variable(s).
     writeToEnvironmentFile:
       publishedAppId: TEAMS_APP_PUBLISHED_APP_ID
+projectId: ""
