@@ -1,7 +1,7 @@
-# yaml-language-server: $schema=https://aka.ms/teams-toolkit/v1.7/yaml.schema.json
+# yaml-language-server: $schema=https://aka.ms/m365-agents-toolkits/v1.11/yaml.schema.json
 # Visit https://aka.ms/teamsfx-v5.0-guide for details on this file
 # Visit https://aka.ms/teamsfx-actions for details on actions
-version: v1.7
+version: v1.11
 
 provision:
   # Creates a Teams app
@@ -20,6 +20,7 @@ provision:
       # The Microsoft Entra application's display name
       name: MessageReaction${{APP_NAME_SUFFIX}}
       generateClientSecret: true
+      generateServicePrincipal: true
       signInAudience: AzureADMultipleOrgs
     writeToEnvironmentFile:
       # The Microsoft Entra application's client id created for bot.
@@ -34,9 +35,10 @@ provision:
     with:
       target: ../MessageReaction/appsettings.Development.json
       content:
-        BOT_TYPE: 'MultiTenant'
-        BOT_ID: ${{BOT_ID}}
-        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        Teams:
+          ClientId: ${{BOT_ID}}
+          ClientSecret: ${{SECRET_BOT_PASSWORD}}
+          TenantId: ${{TEAMS_APP_TENANT_ID}}
 
   # Create or update the bot registration on dev.botframework.com
   - uses: botFramework/create
