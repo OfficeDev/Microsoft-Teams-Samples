@@ -278,7 +278,7 @@ jobs:
 
             - project_path: 'samples/bot-message-reaction/csharp/MessageReaction/MessageReaction.csproj'
               name: 'bot-message-reaction'
-              version: '8.0.x'
+              version: '10.0.x'
 
             - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
               name: 'bot-suggested-actions'
