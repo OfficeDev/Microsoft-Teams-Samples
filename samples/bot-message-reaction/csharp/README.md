@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates how to use message reactions in Microsoft Teams with a bot built on the Bot Framework.
+description: This sample app demonstrates how to use message reactions in Microsoft Teams SDK.
 products:
 - office-teams
 - office
@@ -15,10 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-csharp
 
 # Teams Message Reactions Bot C# Sample
 
-This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Bot Framework. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Teams SDK. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
 
 ## Included Features
-* Bots
+* Teams SDK (Teams AI Library)
 * Adaptive Cards
 
 ## Interaction with bot
@@ -49,6 +49,33 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 1. In the opened web browser, select Add button to install the app in Teams
 > If you do not have permission to upload custom apps (uploading), Microsoft 365 Agents Toolkit will recommend creating and using a Microsoft 365 Developer Program account - a free program to get your own dev environment sandbox that includes Teams.
 
+### Register your app with Azure AD.
+
+  1. Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+      * Set **name** to your app name.
+      * Choose the **supported account types** (any account type will work)
+      * Leave **Redirect URI** empty.
+      * Choose **Register**.
+  3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
+  4. Navigate to **API Permissions**, and make sure to add the follow permissions:
+   Select Add a permission
+      * Select Add a permission
+      * Select Microsoft Graph -\> Delegated permissions.
+      * `User.Read` (enabled by default)
+      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+      
+### Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
+
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
@@ -64,31 +91,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    ```bash
    devtunnel host -p 3978 --allow-anonymous
    ```
-1) Register a new application in the [Microsoft Entra ID – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-  
-  A) Select **New Registration** and on the *register an application page*, set following values:
-      * Set **name** to your app name.
-      * Choose the **supported account types** (any account type will work)
-      * Leave **Redirect URI** empty.
-      * Choose **Register**.
-  B) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You'll need those later when updating your Teams application manifest and in the appsettings.json.
-  C) Navigate to **API Permissions**, and make sure to add the following permissions:
-   Select Add a permission
-      * Select Add a permission
-      * Select Microsoft Graph -\> Delegated permissions.
-      * `User.Read` (enabled by default)
-      * Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-      
-1) Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Microsoft Entra ID beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running the tunneling application. Append with the path `/api/messages`
 
 1) Clone the repository
 
@@ -103,8 +105,8 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
    - Select `MessageReaction.csproj` file
    - Press `F5` to run the project 
 
-1) Update the `appsettings.json` configuration for the bot to use the BOT_ID, BOT_PASSWORD, BOT_TENANT_ID generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set BOT_TYPE in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `appsettings.Development.json` configuration for the bot to use the ClientId, ClientSecret, BotType, TenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set BotType in the `appsettings.Development.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -114,8 +116,6 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
-
-**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-message-reaction/csharp/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
 
 ## Running the sample
 
@@ -146,8 +146,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Teams SDK (Teams AI Library)](https://learn.microsoft.com/en-us/microsoftteams/platform/teams-ai-library/)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
