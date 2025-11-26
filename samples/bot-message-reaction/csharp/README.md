@@ -15,11 +15,13 @@ urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-csharp
 
 # Teams Message Reactions Bot C# Sample
 
-This sample app demonstrates the implementation of message reactions in Microsoft Teams using the Teams SDK. The bot responds dynamically to reactions, supporting personal, group, and team scopes, and is compatible with adaptive cards. It can be run locally with .NET SDK and tunneling solutions or deployed to Azure for broader use.
+This sample app demonstrates the implementation of message reactions in Microsoft Teams using the **Microsoft Teams SDK v2.0** (Teams AI Library). The bot responds dynamically to reactions, supporting personal, group, and team scopes.
 
 ## Included Features
-* Teams SDK (Teams AI Library)
-* Adaptive Cards
+* Microsoft Teams SDK v2.0 (Teams AI Library)
+* Message Reaction Events
+* Bot Framework
+* Multi-scope support (Personal, Group Chat, Team)
 
 ## Interaction with bot
 ![bot-message-reaction ](MessageReaction/Images/bot-message-reaction.gif)
@@ -32,8 +34,9 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [.NET SDK](https://dotnet.microsoft.com/download) version 10.0 or higher
 - [dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) or [ngrok](https://ngrok.com/) latest version or equivalent tunnelling solution
+- [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) version 17.14 or higher (for Microsoft 365 Agents Toolkit)
 
 ## Run the app (Using Microsoft 365 Agents Toolkit for Visual Studio)
 
@@ -80,16 +83,16 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 5130 (default port for the application)
 
    ```bash
-   ngrok http 3978 --host-header="localhost:3978"
+   ngrok http 5130 --host-header="localhost:5130"
    ```  
 
    Alternatively, you can also use the `dev tunnels`. Please follow [Create and host a dev tunnel](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started?tabs=windows) and host the tunnel with anonymous user access command as shown below:
 
    ```bash
-   devtunnel host -p 3978 --allow-anonymous
+   devtunnel host -p 5130 --allow-anonymous
    ```
 
 1) Clone the repository
@@ -99,24 +102,24 @@ The simplest way to run this sample in Teams is to use Microsoft 365 Agents Tool
     ```
 
 1) If you are using Visual Studio
-   - Launch Visual Studio
+   - Launch Visual Studio 2022 (version 17.14 or higher)
    - File -> Open -> Project/Solution
-   - Navigate to `samples/bot-message-reaction/csharp/MessageReaction` folder
-   - Select `MessageReaction.csproj` file
+   - Navigate to `samples/bot-message-reaction/csharp` folder
+   - Select `MessageReaction.slnx` file (or open the `MessageReaction.csproj` in the MessageReaction folder)
    - Press `F5` to run the project 
 
-1) Update the `appsettings.Development.json` configuration for the bot to use the ClientId, ClientSecret, BotType, TenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Update the `appsettings.Development.json` configuration in the `MessageReaction` folder for the bot to use the ClientId, ClientSecret, BotType, TenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Also, set BotType in the `appsettings.Development.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the  `M365Agent/appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `${{BOT_ID}}` or `${{TEAMS_APP_ID}}`
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. Replace `${{BOT_DOMAIN}}` with your tunnel domain. E.g. if you are using ngrok it would be `https://1234.ngrok-free.app` then your domain-name will be `1234.ngrok-free.app` and if you are using dev tunnels then your domain will be like: `12345.devtunnels.ms`.
+    - **Zip** up the contents of the `M365Agent/appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
-
+    
 ## Running the sample
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
